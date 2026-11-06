@@ -10,6 +10,7 @@
 import { walkExpr } from './expr.js';
 import { ScriptError } from './util.js';
 import { statDef, voiceDef, GENDERS, PERSON_FIELDS, FLAG_KINDS, PRONOUN_KEYS } from './content.js';
+import { checkCall } from './systems/index.js';
 
 const PERSON_FIELD_RE = new RegExp(`^([A-Za-z_][A-Za-z0-9_]*)\\.(${PERSON_FIELDS.join('|')})$`);
 const WHO_FNS = new Set(['pro', 'pg', 'name', 'alias', 'surname', 'gender']);
@@ -155,6 +156,7 @@ export function checkChapterContent(chapter, { stats, content, dev = false }) {
         }
       }
       if (n.t !== 'call') return;
+      if (content.systems) for (const m of checkCall('fn', n.name, n.args, content)) err(line, m);
       const a0 = lit(n.args[0]);
       if (n.name === 'has' && typeof a0 === 'string' && !knownVar(a0, ctx)) unknown(a0, line, 'checked with has()');
       if (n.name === 'variant') {
@@ -197,7 +199,10 @@ export function checkChapterContent(chapter, { stats, content, dev = false }) {
       switch (op.op) {
         case 'text': checkText(op.parts, line); break;
         case 'jf': checkExpr(op.ast, line); break;
-        case 'do': op.args.forEach((a) => checkExpr(a, line)); break;
+        case 'do':
+          op.args.forEach((a) => checkExpr(a, line));
+          if (content.systems) for (const m of checkCall('command', op.name, op.args, content)) err(line, m);
+          break;
         case 'choices':
           for (const o of op.options) { checkText(o.parts, o.line ?? line); if (o.cond) checkExpr(o.cond, line); }
           break;

@@ -44,10 +44,10 @@
     "wealth": {
       "label": "Fortune",
       "bands": [
-        { "id": "poor", "upTo": 100, "short": "poor", "say": "your purse is thin", "status": "Your purse is thin. Collis is a name and little more." },
-        { "id": "comfortable", "upTo": 1000, "short": "comfortable", "say": "you have money enough to be careless with it", "status": "Collis keeps you comfortable, with a little set aside." },
-        { "id": "rich", "upTo": 10000, "short": "rich", "say": "your coffers are deep", "status": "Collis is rich, and its name opens doors." },
-        { "id": "fortune", "upTo": 100000, "short": "a fortune", "say": "you command a fortune", "status": "Collis commands a fortune that bankers whisper about." },
+        { "id": "poor", "upTo": 200, "short": "poor", "say": "your purse is thin", "status": "Your purse is thin. Collis is a name and little more." },
+        { "id": "comfortable", "upTo": 2000, "short": "comfortable", "say": "you have money enough to be careless with it", "status": "Collis keeps you comfortable, with a little set aside." },
+        { "id": "rich", "upTo": 25000, "short": "rich", "say": "your coffers are deep", "status": "Collis is rich, and its name opens doors." },
+        { "id": "fortune", "upTo": 500000, "short": "a fortune", "say": "you command a fortune", "status": "Collis commands a fortune that bankers whisper about." },
         { "id": "empire", "short": "an empire", "say": "your wealth could buy a crown", "status": "Your fortune could buy a crown, and some say it already has." }
       ]
     },
@@ -107,6 +107,15 @@
         { "id": "lost", "upTo": 25, "short": "lost", "say": "this century baffles you", "status": "This century baffles you, and everyone can tell." },
         { "id": "catching_up", "upTo": 60, "short": "catching up", "say": "you are catching up with the times", "status": "You are catching up with the times, mostly." },
         { "id": "at_home", "short": "at home", "say": "you move through this age like a native", "status": "You move through this age like a native, old habits aside." }
+      ]
+    },
+    "injury": {
+      "label": "Wounds",
+      "bands": [
+        { "id": "whole", "upTo": 10, "short": "whole", "say": "your body is whole", "status": "Your body is whole. Not a mark on you." },
+        { "id": "bruised", "upTo": 35, "short": "bruised", "say": "your wounds are already closing", "status": "You carry a few wounds, already closing." },
+        { "id": "wounded", "upTo": 65, "short": "wounded", "say": "your wounds slow you", "status": "You are wounded. The healing pulls at your hunger and slows your hands." },
+        { "id": "broken", "short": "badly hurt", "say": "you are badly hurt and every movement costs you", "status": "You are badly hurt. You need blood and rest before you face anyone." }
       ]
     },
     "loyalty.*": {

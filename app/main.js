@@ -237,8 +237,12 @@ function showPreviously(entries, onDone, doneLabel = 'Back') {
       if (title) story.append(h('h3', {}, title));
       lastBook = e.book;
     }
-    if (e.title && e.title !== game.manifest.books.find((b) => b.id === e.book)?.title) story.append(h('h4', {}, e.title));
-    for (const para of String(e.text).split(/\n+/)) story.append(h('p', {}, inline(para)));
+    const box = e.kind === 'velati' ? h('section', { class: 'velati' }) : story;
+    if (box !== story) story.append(box);
+    if (e.title && e.title !== game.manifest.books.find((b) => b.id === e.book)?.title) box.append(h('h4', {}, e.title));
+    // Velati journal entries keep their paragraph kinds (quotes from the watchers' records).
+    const paras = e.paragraphs ?? String(e.text).split(/\n+/).map((text) => ({ text, kind: 'p' }));
+    for (const p of paras) box.append(p.kind === 'quote' ? h('blockquote', {}, inline(p.text)) : h('p', {}, inline(p.text)));
   }
   const btn = h('button', { class: 'primary', onclick: () => onDone() }, doneLabel);
   app.replaceChildren(story, h('div', { class: 'actions' }, btn));

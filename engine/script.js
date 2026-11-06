@@ -6,6 +6,7 @@
 
 import { parseExpr, parseTags, ExprError, BUILTIN_FNS } from './expr.js';
 import { CONTENT_FN_NAMES, SHORTHAND_KEYS, PRONOUN_KEYS, VARIANT_GROUPS } from './content.js';
+import { SYSTEM_FN_NAMES } from './systems/index.js';
 import { ScriptError, fnv1a } from './util.js';
 
 const NAME_RE = /^[A-Za-z_][A-Za-z0-9_]*$/;
@@ -27,7 +28,7 @@ export function parseChapter(source, { file = '<memory>', fnNames = null } = {})
   const errors = [];
   const warnings = [];
   const err = (line, msg) => errors.push(new ScriptError(msg, { file, line }));
-  const callNames = new Set([...Object.keys(BUILTIN_FNS), ...CONTENT_FN_NAMES, ...(fnNames ?? [])]);
+  const callNames = new Set([...Object.keys(BUILTIN_FNS), ...CONTENT_FN_NAMES, ...SYSTEM_FN_NAMES, ...(fnNames ?? [])]);
   const expr = (src, line, opts = {}) => {
     try {
       return parseExpr(src, { callNames: opts.anyCall ? null : callNames });

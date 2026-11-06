@@ -10,6 +10,7 @@ import { WAIT_OPS } from './script.js';
 import { assign } from './state.js';
 import { CONTENT_FNS, CONTENT_COMMANDS, EMPTY_CONTENT, recordSet } from './content.js';
 import { EngineError, nextRandom } from './util.js';
+import { SYSTEM_FNS, SYSTEM_COMMANDS } from './systems/index.js';
 
 const MAX_STEPS = 50000;
 
@@ -30,8 +31,8 @@ export class Runner {
       warn: () => {},
       ...env,
     };
-    this.fns = { ...BUILTIN_FNS, ...CONTENT_FNS, ...this.env.fns };
-    this.commands = { log: (ctx, ...a) => this.env.warn(`log: ${a.join(' ')}`), ...CONTENT_COMMANDS, ...this.env.commands };
+    this.fns = { ...BUILTIN_FNS, ...CONTENT_FNS, ...SYSTEM_FNS, ...this.env.fns };
+    this.commands = { log: (ctx, ...a) => this.env.warn(`log: ${a.join(' ')}`), ...CONTENT_COMMANDS, ...SYSTEM_COMMANDS, ...this.env.commands };
   }
 
   get frame() {

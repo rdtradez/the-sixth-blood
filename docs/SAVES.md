@@ -45,7 +45,7 @@ To change it: bump `SCHEMA` in `engine/state.js` and add `SCHEMA_MIGRATIONS[oldV
 **Content version (`contentVersion`)** is the story. Change it when an edit would break old saves: renaming a flag, changing what a stat means, splitting a variable.
 To change it: bump `contentVersion` in `content/manifest.json` and add `{ version, note, up(state) }` to `content/migrations.js`. The note is shown to the player once, after upgrading.
 
-Schema history: 1 (session 1). 2 (session 2) adds `decisions`, `journal` and `booksDone`; old saves get empty lists, and a save sitting at a book end counts that book as finished.
+Schema history: 1 (session 1). 2 (session 2) adds `decisions`, `journal` and `booksDone`; old saves get empty lists, and a save sitting at a book end counts that book as finished. 3 (session 3) adds `sys`, the game systems (engine/systems/sys-state.js); old saves get empty systems.
 
 Opening a save runs, in order: every schema migration after the save's format, then every content migration after the save's content version. Migrations are plain functions, run only when a save is opened, and tested by writing a save with the old version and loading it.
 

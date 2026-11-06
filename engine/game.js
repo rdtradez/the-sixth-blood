@@ -11,8 +11,19 @@ import { createState, applyStatDefaults, assign, SCHEMA, SCHEMA_MIGRATIONS } fro
 import { checkContentMigrations } from './versioning.js';
 import { makeContent, CONTENT_FNS, CONTENT_COMMAND_NAMES, voiceDef } from './content.js';
 import { EngineError, clone } from './util.js';
+import { SYSTEM_FILES, SYSTEM_COMMAND_NAMES, buildCatalog, createSys, quickSystems, systemsView } from './systems/index.js';
 
-export const CONTENT_FILES = ['flags', 'voice', 'people', 'origins'];
+export const CONTENT_FILES = ['flags', 'voice', 'people', 'origins', ...SYSTEM_FILES];
+
+/** Build the content object (registry, voice, people, origins and the system catalogs) from loaded files. */
+export function assembleContent(files, stats, manifest) {
+  const content = makeContent({ ...files, stats, manifest });
+  content.systems = buildCatalog(files);
+  return content;
+}
+
+/** Every command a chapter may use. */
+export const COMMAND_NAMES = ['log', ...CONTENT_COMMAND_NAMES, ...SYSTEM_COMMAND_NAMES];
 
 export class Game {
   /**
@@ -44,7 +55,7 @@ export class Game {
 
     const files = {};
     for (const name of CONTENT_FILES) files[name] = (this.loader.json ? await this.loader.json(name) : null) ?? {};
-    this.content = makeContent({ ...files, stats: this.statDefs, manifest: this.manifest });
+    this.content = assembleContent(files, this.statDefs, this.manifest);
 
     this.chapterMeta = {};
     for (const book of this.manifest.books) {
@@ -218,6 +229,7 @@ export class Game {
     state.decisions ??= [];
     state.journal ??= [];
     state.booksDone ??= [];
+    state.sys ??= createSys();
     state.book = id;
     state.stack = [];
     state.pos = null;
@@ -279,6 +291,7 @@ export class Game {
       }
       if (earlier.recap) state.journal.push({ book: earlier.id, chapter: null, title: earlier.title, text: earlier.recap });
     }
+    quickSystems(state, this.content, state.booksDone);
     for (const [name, value] of Object.entries(book.quickstart?.vars ?? {})) assign(state, this.statDefs, name, value);
     state.vars.quick_start = true;
     return state;
@@ -299,6 +312,61 @@ export class Game {
     return out;
   }
 
+  /** The game systems as plain lists (circle, people, ventures, village, originals learned of, collection). */
+  systems(state = this.state) {
+    return state ? systemsView(state, this.content) : null;
+  }
+
+  // ---- The Velati journal ---------------------------------------------------------------------
+
+  /**
+   * Write the Velati journal entry for a finished book. The book's "journal" in the manifest
+   * names a script (same format as a chapter, no choices). It runs on a copy of the state, so
+   * its conditions read every choice made; its paragraphs become one journal entry. Run again
+   * (a second ending of the same book), it replaces that book's entry.
+   */
+  async composeJournal(bookId, state = this.state) {
+    const book = this.#book(bookId);
+    if (!book.journal) return null;
+    const chapter = await this.#journalScript(book.journal);
+    const sandbox = clone(state);
+    sandbox.stack = [];
+    const runner = new Runner(chapter, sandbox, this.#env());
+    runner.start();
+    const paragraphs = [];
+    for (let guard = 0; guard < 1000; guard++) {
+      const f = sandbox.frame;
+      paragraphs.push(...f.paragraphs);
+      if (f.wait === 'page') { runner.continue(); continue; }
+      if (f.wait === 'choices') throw new EngineError(`${book.journal}: a journal script cannot offer choices`);
+      break;
+    }
+    let title = book.journalTitle ?? 'From the Velati archive';
+    if (paragraphs[0]?.kind === 'h') title = paragraphs.shift().text;
+    const entry = {
+      book: bookId,
+      chapter: null,
+      kind: 'velati',
+      title,
+      text: paragraphs.map((p) => p.text).join('\n'),
+      paragraphs: paragraphs.map((p) => ({ text: p.text, kind: p.kind })),
+    };
+    state.journal ??= [];
+    state.journal = state.journal.filter((e) => !(e.kind === 'velati' && e.book === bookId));
+    state.journal.push(entry);
+    return entry;
+  }
+
+  async #journalScript(file) {
+    const key = `journal:${file}`;
+    if (this.chapters.has(key)) return this.chapters.get(key);
+    const source = await this.loader.chapterSource(file);
+    const { chapter, errors } = parseChapter(source, { file, fnNames: Object.keys(this.fns) });
+    if (errors.length) throw new EngineError(errors.map((e) => e.message).join('\n'));
+    this.chapters.set(key, chapter);
+    return chapter;
+  }
+
   // ---- Chapters -------------------------------------------------------------------
 
   async getChapter(id) {
@@ -311,7 +379,7 @@ export class Game {
     if (chapter.id !== id) throw new EngineError(`${meta.file}: header says "@chapter ${chapter.id}" but the manifest lists "${id}"`);
     const report = validateChapter(chapter, {
       chapterIds: new Set(Object.keys(this.chapterMeta)),
-      commandNames: new Set(['log', ...CONTENT_COMMAND_NAMES, ...Object.keys(this.commands)]),
+      commandNames: new Set([...COMMAND_NAMES, ...Object.keys(this.commands)]),
       variantIds: this.content.variantIds,
     });
     if (report.errors.length) throw new EngineError(report.errors.map((e) => e.message).join('\n'));
@@ -391,6 +459,7 @@ export class Game {
     st.stack = [];
     st.booksDone ??= [];
     if (!st.booksDone.includes(meta.bookId)) st.booksDone.push(meta.bookId);
+    try { await this.composeJournal(meta.bookId); } catch (e) { this.warn(`journal: ${e.message}`); }
     const next = this.nextBook(meta.bookId);
     st.frame = { wait: 'book_end', paragraphs: [], book: meta.bookId, nextBook: next?.id ?? null };
     this.#checkpoint(false);

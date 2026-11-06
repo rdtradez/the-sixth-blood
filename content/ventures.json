@@ -1,0 +1,50 @@
+{
+  "note": "Collis ventures by book (the design doc's table). cost buys level 1 (level n costs cost x n), income is coin per rest per level, maxLevel defaults to 3. dark ventures cost humanity and velati (Velati regard) per rest per level. Prices are in each era's money, already scaled. Ventures keep paying until he sleeps; then they fold into the fortune. Names in New Orleans and Chicago follow the company name the story settles on.",
+  "ventures": {
+    "rome.wine": { "book": "burning-city", "name": "Wine and olive oil from Collesanto", "cost": 30, "income": 4 },
+    "rome.shipping": { "book": "burning-city", "name": "Shipping through Ostia", "cost": 60, "income": 7 },
+    "rome.insulae": { "book": "burning-city", "name": "Insulae on burned land", "cost": 120, "income": 14 },
+    "rome.lending": { "book": "burning-city", "name": "Money lending", "cost": 80, "income": 9 },
+    "rome.gladiators": { "book": "burning-city", "name": "A gladiator school", "cost": 90, "income": 14, "dark": true, "humanity": 2, "velati": 1 },
+    "rome.slaves": { "book": "burning-city", "name": "The slave trade", "cost": 100, "income": 18, "dark": true, "humanity": 4, "velati": 2 },
+
+    "florence.banking": { "book": "blood-and-gold", "name": "Banking and letters of credit", "cost": 900, "income": 110 },
+    "florence.wool": { "book": "blood-and-gold", "name": "Wool cloth", "cost": 500, "income": 55 },
+    "florence.patronage": { "book": "blood-and-gold", "name": "Art patronage", "cost": 600, "income": 40 },
+    "florence.mercenaries": { "book": "blood-and-gold", "name": "Funding mercenary armies", "cost": 800, "income": 140, "dark": true, "humanity": 3, "velati": 2 },
+
+    "paris.printing": { "book": "crown-of-ashes", "name": "Printing presses", "cost": 2500, "income": 260 },
+    "paris.wine": { "book": "crown-of-ashes", "name": "The wine trade", "cost": 2000, "income": 220 },
+    "paris.land": { "book": "crown-of-ashes", "name": "Seized church and noble land", "cost": 4000, "income": 420 },
+    "paris.america": { "book": "crown-of-ashes", "name": "Investing in the young American nation", "cost": 3000, "income": 200 },
+    "paris.grain": { "book": "crown-of-ashes", "name": "Hoarding grain in the famine", "cost": 2500, "income": 500, "dark": true, "humanity": 5, "velati": 3 },
+    "paris.arms": { "book": "crown-of-ashes", "name": "Arms dealing", "cost": 3500, "income": 520, "dark": true, "humanity": 3, "velati": 2 },
+
+    "nola.steamboats": { "book": "house-divided", "name": "Steamboats", "cost": 7000, "income": 700 },
+    "nola.banking": { "book": "house-divided", "name": "Banking", "cost": 9000, "income": 850 },
+    "nola.sugar": { "book": "house-divided", "name": "Sugar", "cost": 6000, "income": 600 },
+    "nola.schools": { "book": "house-divided", "name": "Land and schools for freed families", "cost": 5000, "income": 150 },
+    "nola.cotton": { "book": "house-divided", "name": "Cotton and the slave economy", "cost": 8000, "income": 1500, "dark": true, "humanity": 7, "velati": 4 },
+
+    "london.shipping": { "book": "whitechapel-hunt", "name": "Shipping", "cost": 12000, "income": 1200 },
+    "london.railways": { "book": "whitechapel-hunt", "name": "Railways", "cost": 18000, "income": 1800 },
+    "london.insurance": { "book": "whitechapel-hunt", "name": "Insurance", "cost": 10000, "income": 1000 },
+    "london.medical": { "book": "whitechapel-hunt", "name": "Medical supplies", "cost": 9000, "income": 800 },
+    "london.opium": { "book": "whitechapel-hunt", "name": "The opium trade", "cost": 14000, "income": 2600, "dark": true, "humanity": 5, "velati": 3 },
+
+    "chicago.banks": { "book": "relics-lost-god", "name": "Banks bought after the crash", "cost": 40000, "income": 4200 },
+    "chicago.stockyards": { "book": "relics-lost-god", "name": "The stockyards", "cost": 25000, "income": 2500 },
+    "chicago.jazz": { "book": "relics-lost-god", "name": "Jazz clubs", "cost": 20000, "income": 2000 },
+    "chicago.realestate": { "book": "relics-lost-god", "name": "Real estate", "cost": 35000, "income": 3300 },
+    "chicago.bronzeville": { "book": "relics-lost-god", "name": "Community investment in Bronzeville", "cost": 20000, "income": 900 },
+    "chicago.bootlegging": { "book": "relics-lost-god", "name": "Bootlegging", "cost": 30000, "income": 6000, "dark": true, "humanity": 3, "velati": 2 },
+    "chicago.gambling": { "book": "relics-lost-god", "name": "Gambling", "cost": 25000, "income": 4500, "dark": true, "humanity": 3, "velati": 2 },
+
+    "ny.realestate": { "book": "unchained", "name": "Real estate", "cost": 150000, "income": 15000 },
+    "ny.equity": { "book": "unchained", "name": "Private equity", "cost": 200000, "income": 21000 },
+    "ny.biotech": { "book": "unchained", "name": "Biotech and blood clinics", "cost": 180000, "income": 16000 },
+    "ny.security": { "book": "unchained", "name": "Data security", "cost": 120000, "income": 12000 },
+    "ny.surveillance": { "book": "unchained", "name": "Surveillance data", "cost": 160000, "income": 30000, "dark": true, "humanity": 4, "velati": 3 },
+    "ny.defense": { "book": "unchained", "name": "Defense contracts", "cost": 250000, "income": 42000, "dark": true, "humanity": 5, "velati": 3 }
+  }
+}

@@ -1,7 +1,9 @@
 // Game state: one plain JSON object. Everything the game needs to resume lives here.
 
-export const SCHEMA = 2; // bump when the shape of state changes, and add a schema migration
-export const ENGINE_VERSION = '0.2.0';
+import { createSys } from './systems/sys-state.js';
+
+export const SCHEMA = 3; // bump when the shape of state changes, and add a schema migration
+export const ENGINE_VERSION = '0.3.0';
 
 /**
  * state = {
@@ -15,6 +17,7 @@ export const ENGINE_VERSION = '0.2.0';
  *   decisions: [{ name, value, book, chapter }]   major decisions from the flag registry, latest last
  *   journal:   [{ book, chapter, title, text }]   entries for the Previously screen
  *   booksDone: [bookId]                           books this playthrough has finished, in order
+ *   sys:   { ... }                                the game systems (engine/systems/sys-state.js)
  *   frame: { wait, paragraphs, choices?, next? }   what the player is looking at
  * }
  */
@@ -32,6 +35,7 @@ export function createState({ book = null, vars = {}, seed } = {}) {
     decisions: [],
     journal: [],
     booksDone: [],
+    sys: createSys(),
     frame: null,
   };
 }
@@ -54,6 +58,11 @@ export const SCHEMA_MIGRATIONS = {
     state.journal ??= [];
     state.booksDone ??= [];
     if (state.frame?.wait === 'book_end' && state.book && !state.booksDone.includes(state.book)) state.booksDone.push(state.book);
+    return state;
+  },
+  // 2 -> 3 (session 3): the game systems (phases, Collis, Collesanto, coven, originals, sleep...).
+  2(state) {
+    state.sys ??= createSys();
     return state;
   },
 };

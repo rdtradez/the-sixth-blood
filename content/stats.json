@@ -1,5 +1,5 @@
 {
-  "note": "Declared stats. min/max clamp every change, start is the value in a new game, int rounds to whole numbers. A name like \"loyalty.*\" applies to every variable that starts with \"loyalty.\" (per person stats). Ranges are engine defaults and can be tuned in later sessions. Story text never prints these as numbers: use voice() and band() with content/voice.json. secrecy is how well hidden the hero is (higher is safer); cunning_brutal runs from -100 (cunning) to 100 (brutal).",
+  "note": "Declared stats. min/max clamp every change, start is the value in a new game, int rounds to whole numbers. A name like \"loyalty.*\" applies to every variable that starts with \"loyalty.\" (per person stats). Ranges are engine defaults and can be tuned in later sessions. Story text never prints these as numbers: use voice() and band() with content/voice.json. secrecy is how well hidden the hero is (higher is safer); cunning_brutal runs from -100 (cunning) to 100 (brutal). wealth is coin in each era's money (see content/rules.json scale). injury rises in lost fight exchanges and heals with $ do heal() or a long sleep. loyalty.keepers is the Valerius keeper family's loyalty as a whole (stewards in the long sleep).",
   "stats": {
     "cunning_brutal": {
       "min": -100,
@@ -63,6 +63,18 @@
       "min": 0,
       "max": 100,
       "start": 0,
+      "int": true
+    },
+    "injury": {
+      "min": 0,
+      "max": 100,
+      "start": 0,
+      "int": true
+    },
+    "loyalty.keepers": {
+      "min": 0,
+      "max": 100,
+      "start": 50,
       "int": true
     },
     "loyalty.*": {

@@ -9,9 +9,9 @@ import { createNodeLoader } from '../engine/node-loader.js';
 import { parseChapter } from '../engine/script.js';
 import { validateChapter } from '../engine/validate.js';
 import { checkContentMigrations } from '../engine/versioning.js';
-import { makeContent, CONTENT_COMMAND_NAMES } from '../engine/content.js';
 import { checkContentFiles, checkChapterContent } from '../engine/content-check.js';
-import { CONTENT_FILES } from '../engine/game.js';
+import { CONTENT_FILES, COMMAND_NAMES, assembleContent } from '../engine/game.js';
+import { checkCatalog } from '../engine/systems/index.js';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const loader = createNodeLoader(root);
@@ -27,7 +27,7 @@ try {
   stats = await loader.stats();
   const files = {};
   for (const name of CONTENT_FILES) files[name] = (await loader.json(name)) ?? {};
-  content = makeContent({ ...files, stats, manifest });
+  content = assembleContent(files, stats, manifest);
 } catch (e) {
   error(e.message);
   process.exit(1);
@@ -44,8 +44,9 @@ for (const problem of checkContentMigrations(await loader.migrations(), manifest
 const files = checkContentFiles({ manifest, stats, content });
 files.errors.forEach(error);
 files.warnings.forEach(warning);
+checkCatalog(content.systems, { bookIds: new Set(manifest.books.map((b) => b.id)) }).forEach(error);
 
-const commandNames = new Set(['log', ...CONTENT_COMMAND_NAMES]);
+const commandNames = new Set(COMMAND_NAMES);
 for (const book of manifest.books) {
   for (const meta of book.chapters ?? []) {
     if (!existsSync(join(root, 'content', meta.file))) {
@@ -62,6 +63,24 @@ for (const book of manifest.books) {
     const deep = checkChapterContent(chapter, { stats, content, dev: Boolean(book.dev) });
     deep.errors.forEach((e) => error(e.message));
     deep.warnings.forEach((w) => warning(w.message));
+  }
+}
+
+// Velati journal scripts: chapter format, run at the end of each book, no choices allowed.
+for (const book of manifest.books) {
+  if (!book.journal) continue;
+  if (!existsSync(join(root, 'content', book.journal))) { error(`${book.id}: journal "${book.journal}" does not exist`); continue; }
+  const { chapter, errors: parseErrors } = parseChapter(await loader.chapterSource(book.journal), { file: book.journal });
+  parseErrors.forEach((e) => error(e.message));
+  if (!chapter) continue;
+  const report = validateChapter(chapter, { chapterIds: ids, commandNames, variantIds: content.variantIds });
+  report.errors.forEach((e) => error(e.message));
+  report.warnings.forEach((w) => warning(w.message));
+  const deep = checkChapterContent(chapter, { stats, content, dev: Boolean(book.dev) });
+  deep.errors.forEach((e) => error(e.message));
+  deep.warnings.forEach((w) => warning(w.message));
+  for (const scene of Object.values(chapter.scenes)) {
+    for (const op of scene.ops) if (op.op === 'choices') error(`${book.journal}:${op.line}: a journal script cannot offer choices`);
   }
 }
 

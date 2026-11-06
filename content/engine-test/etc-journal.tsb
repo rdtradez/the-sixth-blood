@@ -1,0 +1,22 @@
+// The Velati journal for the systems engine test. Runs at the end of the book on a copy of
+// the state; its paragraphs become one journal entry. No choices allowed.
+@chapter etc_journal
+@title Velati Journal: Engine Test
+@book engine-test-c
+@version 1
+
+# start
+## From the Velati archive, a test entry
+> The watchers record what the man of the hill has done.
+?if owns("rome.wine")
+  He trades in wine now, under the name {collis()}.
+?end
+?if in_circle("et_fledgling")
+  He has given the Dark Gift. We count one more of them.
+?else
+  We know of no one he has turned.
+?end
+?if romance_ending("et_love") == "parted"
+  The one he loved walked away from him, and lives.
+?end
+=> endbook

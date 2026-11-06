@@ -166,8 +166,8 @@ test('status() describes stats in story voice and leaves hidden ones out', async
   assert.deepEqual(game.status(), [{ stat: 'hunger', label: 'Hunger', text: 'You are fed.' }]);
 });
 
-test('schema 1 saves upgrade to schema 2 with a decision log, journal and finished books', async () => {
-  assert.equal(SCHEMA, 2);
+test('schema 1 saves upgrade with a decision log, journal and finished books', async () => {
+  assert.ok(SCHEMA >= 2);
   const storage = new MemoryStorage();
   const game = await makeGame(seriesLoader(), { storage });
   await game.startBook('one', { from: 'new' });
@@ -175,7 +175,7 @@ test('schema 1 saves upgrade to schema 2 with a decision log, journal and finish
   // Rewrite the autosave as a session 1 save: no decisions, journal or booksDone.
   const old = JSON.parse(storage.getItem('tsb:slot:auto'));
   const state = JSON.parse(old.payload);
-  delete state.decisions; delete state.journal; delete state.booksDone;
+  delete state.decisions; delete state.journal; delete state.booksDone; delete state.sys;
   const payload = JSON.stringify(state);
   storage.setItem('tsb:slot:auto', JSON.stringify({ ...old, format: SAVE_FORMAT, schema: 1, payload, checksum: fnv1a(payload) }));
 
@@ -186,6 +186,7 @@ test('schema 1 saves upgrade to schema 2 with a decision log, journal and finish
   assert.deepEqual(fresh.state.decisions, []);
   assert.deepEqual(fresh.state.journal, []);
   assert.deepEqual(fresh.state.booksDone, ['one']);
+  assert.deepEqual(fresh.state.sys.circle, {});
   assert.ok(fresh.startSaves('two').some((s) => s.slot === 'auto'));
   assert.deepEqual(SCHEMA_MIGRATIONS[1]({ frame: null }), { frame: null, decisions: [], journal: [], booksDone: [] });
 });

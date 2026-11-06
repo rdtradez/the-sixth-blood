@@ -1,0 +1,11 @@
+{
+  "note": "Pieces for the Collis Collection, the New York museum. Book sessions add pieces as the story invents them (id, book, name). These come from the design doc.",
+  "items": {
+    "gladius": { "book": "burning-city", "name": "A gladius" },
+    "florence_portrait": { "book": "blood-and-gold", "name": "The Florence portrait" },
+    "press_pamphlet": { "book": "crown-of-ashes", "name": "A pamphlet from his press" },
+    "doctors_instruments": { "book": "whitechapel-hunt", "name": "The doctor's instruments" },
+    "lost_love_letter": { "book": "house-divided", "name": "A letter from a lost love" },
+    "god_relic": { "book": "relics-lost-god", "name": "A relic of the god" }
+  }
+}

@@ -1,0 +1,70 @@
+// Engine test (session 3): every game system in one short chapter. Not part of the story.
+// Developer books may print raw numbers; story chapters use voice() instead.
+@chapter etc1
+@title Engine Test: Systems
+@book engine-test-c
+@version 1
+
+# start
+## Day and night
+$ wealth = 500
+$ do phase("day")
+Day phase with {actions_left()} actions. Collis here is {collis()}.
+* Invest in wine and oil ?if can_invest("rome.wine")
+  $ do invest("rome.wine")
+  $ do act()
+  Collis owns the wine trade at level {venture_level("rome.wine")}.
+* Rebuild the village houses ?if can_build("rebuilt_houses")
+  $ do build("rebuilt_houses")
+  $ do act()
+  Collesanto rebuilt: {built("rebuilt_houses")}.
+:day_done
+$ do act(1, true)
+Midday cost hunger. {actions_left()} action(s) left. In phase: {in_phase()}.
+---
+-> night
+
+# night
+$ do phase("night", 2)
+$ do feed("animal")
+Fed on animal blood ({fed("animal")} time). Hunger is now {hunger}.
+$ do choose_path("coven")
+$ do sire("et_fledgling", "scout", true)
+Sired: {in_circle("et_fledgling")}, power {member_power("et_fledgling")}, daywalker {daywalker("et_fledgling")}.
+$ do keeper("et_keeper", "steward")
+$ do send("et_fledgling", "scout", 1)
+On a mission: {on_mission("et_fledgling")}. Coven {coven_size()}, circle {circle_size()}.
+$ do meet("et_love")
+$ do romance("et_love")
+Romance: {romance_status("et_love")}, partner {partner()}.
+$ do obtain("gladius")
+Items: {item_count()}.
+$ do awaken("general", "bloodline")
+The General is {original("general")}, woken by {original("general", "by")}. Awake: {awake_count()}.
+---
+-> fight
+
+# fight
+$ do fight("human", 3)
+:exchange
+* Feint
+  $ do strike("cunning")
+* Overpower
+  $ do strike("brutal")
+?if not fight_over()
+  Exchange: {last_strike()}.
+  -> :exchange
+?end
+The fight ended: {fight_result()}.
+---
+-> rest
+
+# rest
+$ do rest()
+Rested. Income {rested("income")}, missions back {rested("missions")}.
+Mission report: {mission("et_fledgling")}.
+$ do debrief("et_fledgling")
+$ do romance_end("et_love", "parted")
+The romance ended: {romance_ending("et_love")}.
+---
+=> endbook

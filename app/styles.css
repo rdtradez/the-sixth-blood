@@ -95,3 +95,6 @@ dialog .num { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: upperc
 .journal { background: #1c1813; border: 1px solid #4a3d2c; border-radius: 0.5rem; padding: 1rem 1.1rem; color: #e6dcc7; }
 .journal h3 { font-weight: normal; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.95rem; margin: 1rem 0 0.4rem; }
 .journal h4 { font-weight: normal; font-style: italic; color: #d8cdb8; margin: 0.6rem 0 0.3rem; }
+.journal .velati { background: #e9dcc0; color: #2b2116; border-radius: 0.35rem; padding: 0.8rem 1rem; margin: 0.6rem 0; }
+.journal .velati h4 { color: #5a4424; }
+.journal .velati blockquote { border-left: 2px solid #8a6d3b; margin: 0.5rem 0; padding-left: 0.8rem; font-style: italic; }

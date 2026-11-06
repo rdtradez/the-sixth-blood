@@ -253,7 +253,11 @@ Changing a registered name or what a value means still needs a content migration
 
 ## The journal
 
-`$ do journal("text", "optional title")` adds an entry to the Previously screen shown when a book begins. Session 3 builds the Velati journal entries on top of this.
+`$ do journal("text", "optional title")` adds an entry to the Previously screen shown when a book begins. Each book's Velati journal entry is written by a journal script at the end of the book; see [docs/SYSTEMS.md](SYSTEMS.md#the-velati-journal).
+
+## Game systems
+
+Phases, feeding, combat, Collis, Collesanto, the coven and missions, bonds, the originals, the collection and the long sleep are functions and `$ do` commands documented in [docs/SYSTEMS.md](SYSTEMS.md).
 
 ## Adding new systems (for later sessions)
 

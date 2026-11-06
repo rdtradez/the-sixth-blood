@@ -1,0 +1,16 @@
+{
+  "note": "Collesanto's buildings (the design doc's growth line). book is the earliest book it can be built in; cost is in Rome's coin and multiplied by rules.scale for the current book; prosperity adds to the collesanto stat; defense protects the village (and him, if he sleeps there). requires lists buildings that must come first.",
+  "buildings": {
+    "rebuilt_houses": { "book": "burning-city", "name": "Houses rebuilt from the ashes", "cost": 40, "prosperity": 8, "defense": 0 },
+    "farms": { "book": "burning-city", "name": "Farms and terraces", "cost": 30, "prosperity": 6, "defense": 0, "requires": ["rebuilt_houses"] },
+    "well": { "book": "burning-city", "name": "A deep well", "cost": 20, "prosperity": 4, "defense": 1 },
+    "chapel": { "book": "blood-and-gold", "name": "The chapel", "cost": 20, "prosperity": 5, "defense": 0 },
+    "vineyard": { "book": "blood-and-gold", "name": "The vineyard", "cost": 25, "prosperity": 7, "defense": 0, "requires": ["farms"] },
+    "walls": { "book": "blood-and-gold", "name": "Village walls", "cost": 40, "prosperity": 2, "defense": 4 },
+    "school": { "book": "crown-of-ashes", "name": "A school", "cost": 20, "prosperity": 6, "defense": 0 },
+    "refuge": { "book": "crown-of-ashes", "name": "A refuge for those fleeing the Terror", "cost": 25, "prosperity": 4, "defense": 1 },
+    "winery": { "book": "whitechapel-hunt", "name": "The winery", "cost": 20, "prosperity": 8, "defense": 0, "requires": ["vineyard"] },
+    "shelters": { "book": "unchained", "name": "Hidden cellars and shelters", "cost": 10, "prosperity": 1, "defense": 3 },
+    "wine_label": { "book": "unchained", "name": "The Collesanto wine label", "cost": 10, "prosperity": 6, "defense": 0, "requires": ["winery"] }
+  }
+}

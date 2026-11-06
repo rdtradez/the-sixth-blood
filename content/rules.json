@@ -1,0 +1,160 @@
+{
+  "note": "Tuning for the game systems (engine/systems). Every value has a default in code, so a key can be removed safely. scale is the cost multiplier per book (holdings, village buildings, send_home, earn and sleep protections are priced in Rome's coin and multiplied by it; ventures are priced per era in ventures.json). See docs/SYSTEMS.md.",
+  "scale": [
+    1,
+    8,
+    30,
+    80,
+    150,
+    400,
+    1500
+  ],
+  "phases": {
+    "actions": {
+      "day": 3,
+      "night": 3
+    },
+    "sunHunger": [
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0
+    ]
+  },
+  "hunger": {
+    "mustFeedAt": 85,
+    "unfedLimit": 5
+  },
+  "feeding": {
+    "human": {
+      "hunger": -45,
+      "humanity": -2
+    },
+    "human_kill": {
+      "hunger": -70,
+      "humanity": -6,
+      "kill": true
+    },
+    "animal": {
+      "hunger": -25
+    },
+    "donor": {
+      "hunger": -40,
+      "humanity": -1
+    },
+    "bank": {
+      "hunger": -40
+    }
+  },
+  "power": {
+    "minor": 4,
+    "major": 10,
+    "great": 20
+  },
+  "raids": {
+    "alarmAt": 3,
+    "secrecyCost": 5,
+    "standingCost": 3
+  },
+  "rest": {
+    "hunger": 8,
+    "witnessSecrecy": 3,
+    "killSecrecy": 2,
+    "quietSecrecy": 2,
+    "killHumanity": 3
+  },
+  "combat": {
+    "lossHunger": 3,
+    "tiers": {
+      "human": {
+        "difficulty": 4,
+        "injury": 5
+      },
+      "fledgling": {
+        "difficulty": 7,
+        "injury": 10
+      },
+      "elder": {
+        "difficulty": 11,
+        "injury": 18
+      },
+      "lictor": {
+        "difficulty": 12,
+        "injury": 20
+      },
+      "ancient": {
+        "difficulty": 15,
+        "injury": 25
+      },
+      "original": {
+        "difficulty": 99,
+        "injury": 35
+      }
+    }
+  },
+  "collis": {
+    "names": {
+      "burning-city": "Collis Trading",
+      "blood-and-gold": "Banca del Colle",
+      "crown-of-ashes": "Maison Colline",
+      "whitechapel-hunt": "Collins & Hale",
+      "unchained": "Collins Group",
+      "default": "Collis"
+    }
+  },
+  "village": {
+    "coinPerProsperity": 20
+  },
+  "coven": {
+    "sireFromBook": 2,
+    "sirePerBook": 2,
+    "cap": 10,
+    "sireHunger": 30,
+    "sireVelati": 5,
+    "actsAloneBelow": 30,
+    "questLoyalty": {
+      "approve": 8,
+      "refuse": -10,
+      "join": 12
+    },
+    "questDoneLoyalty": 10
+  },
+  "sleep": {
+    "baseDanger": 6,
+    "bankSkill": 4,
+    "bankGrowth": 0.8,
+    "paperTrail": 1,
+    "ventureValue": 20,
+    "wakeHunger": 60,
+    "wakeAdjustment": 10,
+    "orders": {
+      "safe": {
+        "risk": 0,
+        "growth": 1
+      },
+      "aggressive": {
+        "risk": 1,
+        "growth": 1.5
+      },
+      "dark": {
+        "risk": 2,
+        "growth": 2.2,
+        "humanity": 12,
+        "velati": 10
+      }
+    },
+    "protections": {
+      "traps": 1,
+      "bribes": 1,
+      "guardians": 2
+    },
+    "protectionCost": {
+      "traps": 10,
+      "bribes": 20,
+      "guardians": 30
+    }
+  }
+}

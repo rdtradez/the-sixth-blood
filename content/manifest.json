@@ -11,7 +11,9 @@
       "accent2": "#3a1a10",
       "quickstart": {
         "vars": {
-          "age": 1
+          "age": 1,
+          "wealth": 20,
+          "collesanto": 15
         }
       },
       "chapters": []
@@ -26,7 +28,9 @@
       "accent2": "#1f4d3a",
       "quickstart": {
         "vars": {
-          "age": 2
+          "age": 2,
+          "wealth": 3500,
+          "collesanto": 30
         }
       },
       "chapters": []
@@ -41,7 +45,9 @@
       "accent2": "#8a8a8a",
       "quickstart": {
         "vars": {
-          "age": 3
+          "age": 3,
+          "wealth": 40000,
+          "collesanto": 45
         }
       },
       "chapters": []
@@ -56,7 +62,9 @@
       "accent2": "#f2efe6",
       "quickstart": {
         "vars": {
-          "age": 4
+          "age": 4,
+          "wealth": 120000,
+          "collesanto": 55
         }
       },
       "chapters": []
@@ -71,7 +79,9 @@
       "accent2": "#8c8f94",
       "quickstart": {
         "vars": {
-          "age": 5
+          "age": 5,
+          "wealth": 300000,
+          "collesanto": 65
         }
       },
       "chapters": []
@@ -86,7 +96,9 @@
       "accent2": "#6b3fa0",
       "quickstart": {
         "vars": {
-          "age": 6
+          "age": 6,
+          "wealth": 700000,
+          "collesanto": 72
         }
       },
       "chapters": []
@@ -101,7 +113,9 @@
       "accent2": "#7f8c99",
       "quickstart": {
         "vars": {
-          "age": 7
+          "age": 7,
+          "wealth": 3000000,
+          "collesanto": 82
         }
       },
       "chapters": []
@@ -137,6 +151,22 @@
           "id": "etb1",
           "file": "engine-test/etb1.tsb",
           "title": "Engine Test: Voices, Names, Variants"
+        }
+      ]
+    },
+    {
+      "id": "engine-test-c",
+      "dev": true,
+      "asBook": 2,
+      "title": "Engine Test: Systems",
+      "city": "Test",
+      "era": "session 3",
+      "journal": "engine-test/etc-journal.tsb",
+      "chapters": [
+        {
+          "id": "etc1",
+          "file": "engine-test/etc1.tsb",
+          "title": "Engine Test: Systems"
         }
       ]
     }

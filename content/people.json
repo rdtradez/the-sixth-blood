@@ -23,6 +23,9 @@
     "aelia": { "gender": "f", "name": "Aelia" },
     "felix": { "gender": "m", "name": "Felix" },
     "cassian": { "gender": "m", "name": "Cassian" },
-    "prisca": { "gender": "f", "name": "Prisca" }
+    "prisca": { "gender": "f", "name": "Prisca" },
+    "et_fledgling": { "gender": "f", "name": "Test Fledgling" },
+    "et_keeper": { "gender": "m", "name": "Test Keeper" },
+    "et_love": { "gender": "opposite:hero", "names": { "f": "Test Beloved", "m": "Test Beloved", "x": "Test Beloved" } }
   }
 }

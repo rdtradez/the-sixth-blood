@@ -23,10 +23,11 @@ Source of truth for story and design is the "Daywalker Series Design Notes" doc 
 | `engine/saves.js` | Slots, autosave support, backups, export and import, profile. |
 | `engine/content.js` | Flag registry, stats in story voice, pronouns and names, era aliases, origin variants, journal command. |
 | `engine/content-check.js` | Registry, voice, people and variant checks used by `npm run check`. |
-| `engine/game.js` | Controller: loading chapters, chapter flow, autosave, load with repair, library and the three start options. |
+| `engine/game.js` | Controller: loading chapters, chapter flow, autosave, load with repair, library and the three start options, the Velati journal at each book's end. |
+| `engine/systems/` | Game systems: day and night, feeding, combat, Collis, Collesanto, coven and missions, bonds, originals, collection, sleep and steward (docs/SYSTEMS.md). |
 | `engine/fetch-loader.js`, `node-loader.js` | Content loaders for browser and Node. |
 | `app/` | Reader UI: library, book start options, Previously screen, story view, menu (status and saves). |
-| `content/` | `manifest.json` (all seven books), `stats.json`, `flags.json`, `voice.json`, `people.json`, `origins.json`, `migrations.js`, chapters. |
+| `content/` | `manifest.json` (all seven books), `stats.json`, `flags.json`, `voice.json`, `people.json`, `origins.json`, `migrations.js`, chapters, and the system catalogs: `rules.json`, `ventures.json`, `village.json`, `holdings.json`, `originals.json`, `collection.json`, `sleep.json`. |
 | `tests/` | `node --test` suites. |
 | `tools/check.js` | Content checker (`npm run check`). |
 
@@ -40,7 +41,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 
 - [x] Session 1: engine core, script format, saves, save versioning
 - [x] Session 2: flags, story voice stats, pronouns and names, origin variants, library screen
-- [ ] Session 3: game systems
+- [x] Session 3: game systems
 - [ ] Session 4: player features, developer tools, look and feel, sample chapter
 
 ### Session 1 notes (for the next session)
@@ -63,3 +64,15 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Each book's `recap` (one spoiler light paragraph shown only to players who quick start past it) and `quickstart.vars` (stat levels at the start of the book: age is a placeholder 1 to 7) should be written when the book before is finished.
 - `content/voice.json` bands and the placeholder stat ranges in `stats.json` should be retuned when the session 3 systems decide real numbers (wealth especially). secrecy now starts at 70 and higher means better hidden; cunning_brutal runs negative for cunning, positive for brutal.
 - Settings, fonts and the full look and feel are still session 4. The library cards already use each book's accent colors.
+
+### Session 3 notes (for the next session)
+
+- Schema is 3: state has `sys`. Every system is documented in docs/SYSTEMS.md with script examples; chapters use functions and `$ do` commands, and `npm run check` rejects misspelled ids and values in them.
+- `$ do rest()` closes each chapter's play (income, missions, hunger, Secrecy and Humanity). Book chapters should call it before `=> next`.
+- New stat: `injury` (wounds, with story voice). Wealth bands were retuned for era prices; quick start sets age, wealth and collesanto per book in the manifest. All numbers live in `content/rules.json` and the catalogs and can be retuned after playtesting.
+- Company names for New Orleans and Chicago were left blank in the design doc, so `collis()` says "Collis" there until the story names them in `content/rules.json`.
+- Quick start defaults for the originals in `content/originals.json` are placeholders for the book sessions to retune.
+- Each book's Velati journal is a script named by `"journal"` in the manifest (see the engine-test-c book). Book sessions write theirs in `content/journal/` at the end of the book. Journal scripts have no choices.
+- `game.systems()` is the data for session 4's People screen, codex and coven panel. Achievements can read `fed()`, `coven_size()`, `lone()` and `awake_count()` style functions.
+- Coven members, keepers and love interests must be added to `content/people.json` (pronouns, and the checker's id checks).
+- Developer book `engine-test-c` (Book Two rules via `"asBook": 2`) plays every system in one chapter; `tests/systems.test.js` covers them.

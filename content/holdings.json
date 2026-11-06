@@ -1,0 +1,17 @@
+{
+  "note": "What he spends on besides ventures and the village (the design doc's Spending section). cost is in Rome's coin, multiplied by rules.scale. path: any, coven or lone. scope: city (left behind when he sleeps; buy again in the next city) or lasting. effects: hide (a harder to find sleeping place), defense (the haven and its guards), fortune (protects a share of wealth from losses in the long sleep, 10 = 90 percent at most), training (his fledglings grow faster). Chapters can test holds(id) for anything else.",
+  "holdings": {
+    "vaults": { "name": "Vaults", "path": "any", "scope": "lasting", "cost": 60, "effects": { "fortune": 3 } },
+    "escape_tunnels": { "name": "Escape tunnels", "path": "any", "scope": "city", "cost": 40, "effects": { "defense": 1 } },
+    "hidden_chamber": { "name": "A hidden sleeping chamber", "path": "any", "scope": "city", "cost": 50, "effects": { "hide": 2 } },
+    "front_business": { "name": "A front business", "path": "any", "scope": "city", "cost": 40, "effects": { "hide": 1 } },
+    "blood_network": { "name": "A blood supply network", "path": "any", "scope": "city", "cost": 50, "effects": {} },
+    "informants": { "name": "Informants", "path": "any", "scope": "city", "cost": 30, "effects": { "defense": 1 } },
+    "coven_house": { "name": "The coven house", "path": "coven", "scope": "city", "cost": 100, "effects": { "defense": 2, "hide": 1 } },
+    "training_hall": { "name": "Training for fledglings", "path": "coven", "scope": "lasting", "cost": 60, "effects": { "training": 1 } },
+    "safehouses": { "name": "A network of safehouses", "path": "lone", "scope": "city", "cost": 70, "effects": { "hide": 2, "defense": 1 } },
+    "keeper_oath": { "name": "The sworn Valerius keepers", "path": "lone", "scope": "lasting", "cost": 40, "effects": { "defense": 1 } },
+    "relic_vault": { "name": "A vault for relics", "path": "lone", "scope": "lasting", "cost": 60, "effects": { "fortune": 1 } },
+    "shell_identities": { "name": "Shell identities and hidden fortunes", "path": "lone", "scope": "lasting", "cost": 80, "effects": { "fortune": 4, "hide": 1 } }
+  }
+}
