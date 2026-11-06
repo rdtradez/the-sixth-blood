@@ -1,0 +1,18 @@
+{
+  "note": "Declared stats. min/max clamp every change, start is the value in a new game, int rounds to whole numbers. A name like \"loyalty.*\" applies to every variable that starts with \"loyalty.\" (per person stats). Ranges are engine defaults and can be tuned in later sessions.",
+  "stats": {
+    "cunning_brutal": { "min": -100, "max": 100, "start": 0, "int": true },
+    "humanity": { "min": 0, "max": 100, "start": 80, "int": true },
+    "hunger": { "min": 0, "max": 100, "start": 10, "int": true },
+    "age": { "min": 1, "max": 10, "start": 1, "int": true },
+    "wealth": { "min": 0, "start": 0 },
+    "collesanto": { "min": 0, "max": 100, "start": 0, "int": true },
+    "secrecy": { "min": 0, "max": 100, "start": 0, "int": true },
+    "standing": { "min": -100, "max": 100, "start": 0, "int": true },
+    "velati_regard": { "min": -100, "max": 100, "start": 0, "int": true },
+    "defiance": { "min": 0, "max": 100, "start": 0, "int": true },
+    "adjustment": { "min": 0, "max": 100, "start": 0, "int": true },
+    "loyalty.*": { "min": 0, "max": 100, "int": true },
+    "bond.*": { "min": -100, "max": 100, "int": true }
+  }
+}

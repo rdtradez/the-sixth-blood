@@ -1,0 +1,11 @@
+// Engine test chapter 2. Proves chapters chain and a book can end.
+@chapter et2
+@title Engine Test: Ending
+@book engine-test
+@version 1
+
+# start
+The second chapter began with cunning_brutal at {cunning_brutal}.
+:ending_point
+---
+=> endbook

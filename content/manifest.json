@@ -1,0 +1,14 @@
+{
+  "contentVersion": 1,
+  "books": [
+    {
+      "id": "engine-test",
+      "title": "Engine Test",
+      "dev": true,
+      "chapters": [
+        { "id": "et1", "file": "engine-test/et1.tsb", "title": "Engine Test: Basics" },
+        { "id": "et2", "file": "engine-test/et2.tsb", "title": "Engine Test: Ending" }
+      ]
+    }
+  ]
+}

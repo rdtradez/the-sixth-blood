@@ -1,0 +1,11 @@
+{
+  "name": "the-sixth-blood",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The Sixth Blood: a choice game engine and story, played as a PWA.",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\"",
+    "check": "node tools/check.js"
+  }
+}

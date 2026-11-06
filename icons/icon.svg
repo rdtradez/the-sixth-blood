@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="The Sixth Blood">
+  <rect width="512" height="512" rx="96" fill="#0d0b0b"/>
+  <g stroke="#c9a24b" stroke-width="24" stroke-linecap="round">
+    <line x1="381" y1="256" x2="451" y2="256"/>
+    <line x1="318.5" y1="364.3" x2="353.5" y2="424.9"/>
+    <line x1="193.5" y1="364.3" x2="158.5" y2="424.9"/>
+    <line x1="131" y1="256" x2="61" y2="256"/>
+    <line x1="193.5" y1="147.7" x2="158.5" y2="87.1"/>
+  </g>
+  <line x1="318.5" y1="147.7" x2="353.5" y2="87.1" stroke="#b3201f" stroke-width="24" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="84" fill="#c9a24b"/>
+</svg>
