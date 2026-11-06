@@ -1,0 +1,31 @@
+{
+  "note": "Achievements, stored in the profile so they outlive a playthrough. when is an expression using the same functions as chapters. at: \"book\" (default) checks when a book ends, \"chapter\" at every chapter end; book limits it to the end of one book. Never awarded to a quick start (developer jumps use one). secret: true hides the text until earned. The et_ ones are for the developer sample chapter.",
+  "achievements": {
+    "alone": {
+      "title": "A Lone Road",
+      "text": "Finish a book without a coven.",
+      "at": "book",
+      "when": "lone()"
+    },
+    "no_human_blood": {
+      "title": "Clean Hands",
+      "text": "Finish the whole story without ever drinking human blood.",
+      "at": "book",
+      "book": "unchained",
+      "when": "fed(\"human\") + fed(\"human_kill\") + fed(\"donor\") + fed(\"bank\") == 0"
+    },
+    "all_freed": {
+      "title": "No Locked Doors",
+      "text": "Set free every original who was kept locked away.",
+      "at": "book",
+      "when": "original(\"general\", \"fate\") == \"loosed\" and original(\"priestess\", \"fate\") == \"loosed\" and original(\"sixth\", \"fate\") == \"loosed\""
+    },
+    "et_sample": {
+      "title": "Sample Finished",
+      "text": "Developer: finish the player features sample chapter.",
+      "at": "book",
+      "book": "engine-test-d",
+      "when": "discovered(\"et_place\")"
+    }
+  }
+}

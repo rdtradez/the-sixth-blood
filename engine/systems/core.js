@@ -30,6 +30,8 @@ export const EMPTY_CATALOG = {
   holdings: {},
   originals: {},
   items: {},
+  codex: {},
+  kin: {},
   gaps: {},
   investments: {},
   tiers: { human: {}, fledgling: {}, elder: {}, lictor: {}, ancient: {}, original: {} },
@@ -94,7 +96,7 @@ export function logDecision(ctx, name, value) {
 // ---- Argument specs ------------------------------------------------------------------------
 //
 // A spec is a list of argument kinds. A kind is a catalog name ('person', 'venture',
-// 'building', 'holding', 'original', 'item', 'investment', 'steward'), a plain type
+// 'building', 'holding', 'original', 'item', 'investment', 'steward', 'codex', 'kin'), a plain type
 // ('text', 'number', 'bool', 'any'), or an array of allowed strings. A trailing '?' makes an
 // argument optional.
 
@@ -105,6 +107,8 @@ const CATALOG_KINDS = {
   original: ['originals', 'original', 'content/originals.json'],
   item: ['items', 'collection item', 'content/collection.json'],
   investment: ['investments', 'sleep investment', 'content/sleep.json'],
+  codex: ['codex', 'codex entry', 'content/codex.json'],
+  kin: ['kin', 'family member', 'content/family.json'],
   tier: ['tiers', 'enemy tier', 'content/rules.json (combat.tiers)'],
 };
 

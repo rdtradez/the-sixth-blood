@@ -23,7 +23,7 @@ export const EXPORT_FORMAT = 'tsb-export';
 const CARRY_RE = /^carry:[A-Za-z0-9_-]+$/;
 export const carrySlot = (bookId) => `carry:${bookId}`;
 const validSlot = (slot) => ALL_SLOTS.includes(String(slot)) || CARRY_RE.test(String(slot));
-const PROFILE_DEFAULTS = () => ({ v: 1, completedBooks: {}, reached: {}, settings: {} });
+const PROFILE_DEFAULTS = () => ({ v: 1, completedBooks: {}, reached: {}, settings: {}, achievements: {} });
 
 export class MemoryStorage {
   constructor() { this.map = new Map(); }
@@ -165,7 +165,7 @@ export class SaveManager {
       const raw = this.storage.getItem(`${this.prefix}profile`);
       if (raw) {
         const p = { ...PROFILE_DEFAULTS(), ...JSON.parse(raw) };
-        p.completedBooks ??= {}; p.reached ??= {}; p.settings ??= {};
+        p.completedBooks ??= {}; p.reached ??= {}; p.settings ??= {}; p.achievements ??= {};
         return p;
       }
     } catch { /* fall through */ }
@@ -246,7 +246,12 @@ export class SaveManager {
       const mine = this.getProfile();
       const reached = { ...mine.reached };
       for (const [id, n] of Object.entries(data.profile.reached ?? {})) reached[id] = Math.max(reached[id] ?? -1, n);
-      this.setProfile({ ...mine, completedBooks: { ...data.profile.completedBooks, ...mine.completedBooks }, reached });
+      // Achievements are unioned (the earlier date wins). Settings: this device's choices win, and
+      // developer mode is never imported.
+      const achievements = { ...(mine.achievements ?? {}) };
+      for (const [id, at] of Object.entries(data.profile.achievements ?? {})) achievements[id] = Math.min(achievements[id] ?? Infinity, at);
+      const { dev: _dev, ...theirSettings } = data.profile.settings ?? {};
+      this.setProfile({ ...mine, completedBooks: { ...data.profile.completedBooks, ...mine.completedBooks }, reached, achievements, settings: { ...theirSettings, ...mine.settings } });
     }
     return report;
   }

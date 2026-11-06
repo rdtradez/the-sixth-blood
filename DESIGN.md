@@ -42,7 +42,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 1: engine core, script format, saves, save versioning
 - [x] Session 2: flags, story voice stats, pronouns and names, origin variants, library screen
 - [x] Session 3: game systems
-- [ ] Session 4: player features, developer tools, look and feel, sample chapter
+- [x] Session 4: player features, developer tools, look and feel, sample chapter
 
 ### Session 1 notes (for the next session)
 
@@ -76,3 +76,15 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - `game.systems()` is the data for session 4's People screen, codex and coven panel. Achievements can read `fed()`, `coven_size()`, `lone()` and `awake_count()` style functions.
 - Coven members, keepers and love interests must be added to `content/people.json` (pronouns, and the checker's id checks).
 - Developer book `engine-test-c` (Book Two rules via `"asBook": 2`) plays every system in one chapter; `tests/systems.test.js` covers them.
+
+### Session 4 notes (for the next session)
+
+- Schema is 4: state has `sys.lore` (codex entries found, family members known). Profile now holds `achievements` and `settings`. See docs/SAVES.md.
+- Player screens live in the menu (tabs You, People, Family, Codex, Achievements, Settings, Saves, and Dev in developer mode). Data comes from `engine/screens.js`, drawn by `app/panels.js`.
+- Settings (text size, theme night, dusk or parchment, font, content notes, rewind, developer mode) are defined in `engine/settings.js` and applied by `app/settings-ui.js`. Rewind is off by default and keeps one snapshot in memory only.
+- Content files added: `codex.json`, `family.json`, `notes.json`, `achievements.json`. Formats are in docs/SYSTEMS.md. Book sessions fill them in as they write; `discover()` and `kin()` unlock entries from the script.
+- Chapters can list content note ids in the manifest (`notes`); they show once before the chapter when the setting is on.
+- Developer tools: `app/devpanel.js` and `engine/dev.js` (jump to a chapter, set flags and stats, snapshots, branch explorer). `npm run walk` runs the explorer from the command line.
+- Quick starts and developer jumps earn no achievements.
+- Fonts are in `fonts/` (all open licence, see fonts/README.md). The title art and icons are drawn in `app/art.js` and `icons/`.
+- Sample content is the developer book `engine-test-d`.

@@ -26,12 +26,13 @@ import { bonds } from './bonds.js';
 import { originals, quickOriginals, originalRecord } from './originals.js';
 import { collection } from './collection.js';
 import { sleep, quickSleep } from './sleep.js';
+import { lore, quickLore } from './lore.js';
 import { EngineError } from '../util.js';
 import { createSys } from './sys-state.js';
 
 export { createSys };
 
-export const SYSTEMS = { life, combat, collis, village, circle, bonds, originals, collection, sleep };
+export const SYSTEMS = { life, combat, collis, village, circle, bonds, originals, collection, sleep, lore };
 
 const REST_FIELDS = ['income', 'kills', 'witnesses', 'missions'];
 
@@ -85,7 +86,7 @@ export const SYSTEM_COMMAND_NAMES = Object.keys(SYSTEM_COMMANDS);
 // ---- Catalogs ---------------------------------------------------------------------------------
 
 /** Content files the systems read, by loader name. */
-export const SYSTEM_FILES = ['rules', 'ventures', 'village', 'holdings', 'originals', 'collection', 'sleep'];
+export const SYSTEM_FILES = ['rules', 'ventures', 'village', 'holdings', 'originals', 'collection', 'sleep', 'codex', 'family'];
 
 const entries = (file, key) => {
   const raw = file?.[key] ?? {};
@@ -110,6 +111,9 @@ export function buildCatalog(files = {}) {
     holdings: entries(files.holdings, 'holdings'),
     originals: entries(files.originals, 'originals'),
     items: entries(files.collection, 'items'),
+    codex: entries(files.codex, 'entries'),
+    codexCategories: files.codex?.categories ?? {},
+    kin: entries(files.family, 'members'),
     gaps,
     investments,
     tiers,
@@ -144,6 +148,20 @@ export function checkCatalog(catalog, { bookIds }) {
     book(`sleep: ${g.id}`, g.from);
     book(`sleep: ${g.id}`, g.to);
     if (!(g.growth > 0)) errors.push(`sleep: ${g.id} needs a positive growth`);
+  }
+  const KIN = ['living', 'dead', 'unknown'];
+  for (const e of Object.values(catalog.codex)) {
+    book(`codex: ${e.id}`, e.book);
+    if (!e.title || !e.text) errors.push(`codex: ${e.id} needs a title and text`);
+    if (e.category && !Object.hasOwn(catalog.codexCategories ?? {}, e.category)) errors.push(`codex: ${e.id} has unknown category "${e.category}" (see categories in content/codex.json)`);
+    if (e.original && !catalog.originals[e.original]) errors.push(`codex: ${e.id} is tied to unknown original "${e.original}"`);
+  }
+  for (const k of Object.values(catalog.kin)) {
+    book(`family: ${k.id}`, k.book);
+    if (!k.book) errors.push(`family: ${k.id} has no book`);
+    for (const p of k.parents ?? []) if (!catalog.kin[p]) errors.push(`family: ${k.id} has unknown parent "${p}"`);
+    if (k.partner && !catalog.kin[k.partner]) errors.push(`family: ${k.id} has unknown partner "${k.partner}"`);
+    if (typeof k.quick === 'string' && !KIN.includes(k.quick)) errors.push(`family: ${k.id} quick status must be one of ${KIN.join(', ')}`);
   }
   const seenInv = new Set();
   for (const g of Object.values(catalog.gaps)) for (const id of Object.keys(g.investments ?? {})) {
@@ -187,6 +205,7 @@ export function quickSystems(state, content, skippedBookIds) {
   state.sys ??= createSys();
   quickOriginals(ctx, skippedBookIds);
   quickSleep(ctx, skippedBookIds);
+  quickLore(ctx, skippedBookIds);
 }
 
 // ---- A summary for screens (session 4's people screen, codex, coven panel) --------------------

@@ -1,0 +1,56 @@
+// Sample chapter (session 4): a short chapter that uses every player feature, so the codex, the
+// People screen, the family tree, content notes, achievements, rewind and the look of the reader
+// can all be tested at once. Developer book only; it is not part of the story.
+@chapter etd1
+@title Sample Chapter: The Test Hill
+@book engine-test-d
+@version 1
+
+# start
+## Dawn on the Test Hill
+The road climbs out of the sleeping city in the last of the dark. {name} walks it alone, as {they} {have} walked a hundred like it, and the first grey of morning finds the hilltop before {they} arrive{s}.
+Below, the city is still lit: thousands of small lamps, each one a room where someone is not yet ready to sleep. The sky behind the far ridge turns the color of old brass.
+> *The best view of any city is the one you see just before you must leave it.*
+$ do discover("et_place")
+$ do meet("et_love")
+?if not in_circle("et_keeper")
+  $ do keeper("et_keeper", "steward")
+?end
+---
+Someone has been here before you. A cloak lies folded on the wall, and beside it a note in a careful hand. It says only that the morning belongs to those who are patient with it.
+:the_hill
+* Wait for the sun on the hill
+  $ flag et.mark
+  $ et.hill = "stayed"
+  The light climbs the ridge a finger's width at a time. You are in no hurry. You have never been in a hurry, not in all the years you can count.
+  $ do discover("et_lore")
+* Go down and find who left the cloak
+  $ et.hill = "climbed"
+  You take the cloak with you and follow the road back toward the lamps.
+-> family
+
+# family
+$ do kin("hero")
+$ do kin("et_child")
+$ do kin("et_grandchild")
+## Those who came after
+The names come back to you in the order you taught them to others: first the child, then the child's child, both of whom you would gladly have kept in sight a little longer.
+:the_second_choice
+* Remember them kindly
+  $ do awaken("general", "hero")
+  Your memory is gentler than the years were. Somewhere in the same hour, an old and patient thing opens its eyes.
+* Remember them as they were
+  $ do kin("et_grandchild", "dead")
+  Memory does not soften for you. You hold each of them exactly as they stood.
+---
+-> ending
+
+# ending
+## Morning
+?if et.mark
+  Because you waited, the whole hill is gold, and you see the cloak's owner standing at the edge of the road, watching you with a smile.
+?else
+  You are halfway down when the sun finally clears the ridge, and the lamps go out street by street as though a hand were passing over them.
+?end
+The Test Hill keeps its secrets. The day begins, and you are, for now, only a traveler on the road.
+=> endbook

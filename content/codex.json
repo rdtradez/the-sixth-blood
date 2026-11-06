@@ -1,0 +1,37 @@
+{
+  "note": "The codex: lore entries the hero unlocks as he discovers them. $ do discover(\"id\") unlocks one; an entry with original or person is unlocked by learning of that original or meeting that person. category must be in categories. text is plain paragraphs separated by blank lines (or a list of paragraphs). quick: true means a quick start that skips its book already knows it. hidden: true keeps a locked entry from showing even as an undiscovered row. Book sessions add entries as the story invents lore; the originals the hero has learned of also appear on their own from content/originals.json. The et_ entries are for the developer sample chapter.",
+  "categories": {
+    "bloodlines": "Bloodlines",
+    "originals": "The Originals",
+    "people": "People",
+    "places": "Places",
+    "lore": "Lore"
+  },
+  "entries": {
+    "et_bloodlines": {
+      "category": "bloodlines",
+      "title": "Test Lineage",
+      "book": "engine-test-d",
+      "text": "A developer entry that shows how a bloodline is described once the hero has learned of it.\n\nA second paragraph checks that long entries wrap and keep their spacing."
+    },
+    "et_place": {
+      "category": "places",
+      "title": "The Test Hill",
+      "book": "engine-test-d",
+      "text": "A developer entry for a place. It unlocks the moment the sample chapter shows the hill."
+    },
+    "et_lore": {
+      "category": "lore",
+      "title": "A Rule of Testing",
+      "book": "engine-test-d",
+      "text": "A developer entry in the Lore category. The sample chapter unlocks it only on one branch, so the codex shows both a found entry and an undiscovered one."
+    },
+    "et_person": {
+      "category": "people",
+      "title": "The Test Beloved",
+      "book": "engine-test-d",
+      "person": "et_love",
+      "text": "A developer entry that unlocks by itself when the hero meets the test beloved."
+    }
+  }
+}

@@ -45,7 +45,7 @@ To change it: bump `SCHEMA` in `engine/state.js` and add `SCHEMA_MIGRATIONS[oldV
 **Content version (`contentVersion`)** is the story. Change it when an edit would break old saves: renaming a flag, changing what a stat means, splitting a variable.
 To change it: bump `contentVersion` in `content/manifest.json` and add `{ version, note, up(state) }` to `content/migrations.js`. The note is shown to the player once, after upgrading.
 
-Schema history: 1 (session 1). 2 (session 2) adds `decisions`, `journal` and `booksDone`; old saves get empty lists, and a save sitting at a book end counts that book as finished. 3 (session 3) adds `sys`, the game systems (engine/systems/sys-state.js); old saves get empty systems.
+Schema history: 1 (session 1). 2 (session 2) adds `decisions`, `journal` and `booksDone`; old saves get empty lists, and a save sitting at a book end counts that book as finished. 3 (session 3) adds `sys`, the game systems (engine/systems/sys-state.js); old saves get empty systems. 4 (session 4) adds `sys.lore`, the codex entries found and family members known; old saves get empty lore.
 
 Opening a save runs, in order: every schema migration after the save's format, then every content migration after the save's content version. Migrations are plain functions, run only when a save is opened, and tested by writing a save with the old version and loading it.
 
@@ -82,7 +82,7 @@ Export writes one JSON file holding every readable slot (including carry records
 
 ## The profile
 
-`tsb:profile` holds progress across games: which books are finished (unlocks books in order), the furthest chapter reached in each book (shown on the library cards), and settings (`dev` for developer mode). It travels in exports and is merged on import (finished books are unioned, furthest chapters take the maximum).
+`tsb:profile` holds progress across games: which books are finished (unlocks books in order), the furthest chapter reached in each book (shown on the library cards), achievements earned (with the date), and settings (text size, theme, font, content notes, rewind, and `dev` for developer mode). It travels in exports and is merged on import (finished books are unioned, furthest chapters take the maximum, achievements are unioned keeping the earlier date, settings keep the local values, and `dev` is never imported).
 
 ## Storage keys
 

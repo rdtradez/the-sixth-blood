@@ -11,14 +11,20 @@ import { createState, applyStatDefaults, assign, SCHEMA, SCHEMA_MIGRATIONS } fro
 import { checkContentMigrations } from './versioning.js';
 import { makeContent, CONTENT_FNS, CONTENT_COMMAND_NAMES, voiceDef } from './content.js';
 import { EngineError, clone } from './util.js';
+import { readSettings, checkSetting } from './settings.js';
+import { peopleView, codexView, familyView, achievementsView } from './screens.js';
+import { evaluateAchievements } from './achievements.js';
 import { SYSTEM_FILES, SYSTEM_COMMAND_NAMES, buildCatalog, createSys, quickSystems, systemsView } from './systems/index.js';
 
-export const CONTENT_FILES = ['flags', 'voice', 'people', 'origins', ...SYSTEM_FILES];
+export const CONTENT_FILES = ['flags', 'voice', 'people', 'origins', 'achievements', 'notes', ...SYSTEM_FILES];
 
 /** Build the content object (registry, voice, people, origins and the system catalogs) from loaded files. */
 export function assembleContent(files, stats, manifest) {
   const content = makeContent({ ...files, stats, manifest });
   content.systems = buildCatalog(files);
+  const named = (file, key) => Object.fromEntries(Object.entries(file?.[key] ?? {}).filter(([id]) => id !== 'note').map(([id, def]) => [id, { id, ...def }]));
+  content.achievements = named(files.achievements, 'achievements');
+  content.notes = named(files.notes, 'notes');
   return content;
 }
 
@@ -45,6 +51,9 @@ export class Game {
     this.statDefs = {};
     this.content = null;
     this.lastSaveError = null;
+    this.undo = null; // the state before the last choice, for rewind (kept in memory only)
+    this.newAchievements = []; // earned at the last chapter or book end; the UI shows then clears them
+    this.devSnaps = new Map(); // developer branch snapshots (engine/dev.js)
   }
 
   async init() {
@@ -77,11 +86,16 @@ export class Game {
   get frame() { return this.state?.frame ?? null; }
   get profile() { return this.saves.getProfile(); }
 
-  /** Change a profile setting (for example "dev" for developer mode). */
+  /** All settings with defaults filled in (engine/settings.js). */
+  get settings() { return readSettings(this.profile.settings); }
+
+  /** Change a profile setting ("textSize", "theme", "font", "contentNotes", "rewind", "dev"). */
   setSetting(key, value) {
+    checkSetting(key, value);
     const p = this.saves.getProfile();
     p.settings[key] = value;
     this.saves.setProfile(p);
+    if (key === 'rewind' && !value) this.undo = null;
   }
 
   get devMode() { return Boolean(this.profile.settings.dev); }
@@ -406,6 +420,7 @@ export class Game {
   async startChapter(id, scene) {
     const chapter = await this.getChapter(id);
     const st = this.state;
+    this.undo = null;
     st.chapter = id;
     st.chapterVersion = chapter.version;
     st.book = this.chapterMeta[id].bookId;
@@ -436,15 +451,44 @@ export class Game {
   }
 
   async choose(index) {
+    const before = clone(this.state);
     this.runner.choose(index);
+    this.undo = before;
     this.#checkpoint(false);
     return this.state.frame;
   }
+
+  /** True when the Rewind setting is on and the last choice in this chapter can be taken back. */
+  canRewind() {
+    return Boolean(this.settings.rewind && this.undo && this.state && this.undo.chapter === this.state.chapter && this.state.frame?.wait !== 'book_end');
+  }
+
+  /**
+   * Take back the last choice: the story returns to that choice with everything as it was,
+   * including the random seed, so choosing the same way again gives the same result.
+   * Only the most recent choice can be taken back, and not across a chapter.
+   */
+  async rewind() {
+    if (!this.settings.rewind) throw new EngineError('Rewind is turned off in the settings.');
+    if (!this.canRewind()) throw new EngineError('There is no choice to take back.');
+    const state = this.undo;
+    this.undo = null;
+    this.state = state;
+    const chapter = await this.getChapter(state.chapter);
+    this.runner = new Runner(chapter, state, this.#env());
+    this.runner.resume();
+    this.#checkpoint(false);
+    return state.frame;
+  }
+
+  /** The environment the runner uses (for developer tools that run chapters on copies of the state). */
+  runnerEnv() { return this.#env(); }
 
   async #endChapter(target) {
     const st = this.state;
     const chapter = this.chapters.get(st.chapter);
     const meta = this.chapterMeta[st.chapter];
+    this.#achievements('chapter', meta.bookId);
     let nextId = null;
     if (target === 'next') {
       nextId = chapter.next ?? this.#book(meta.bookId).chapters[meta.index + 1]?.id ?? null;
@@ -460,6 +504,7 @@ export class Game {
     st.booksDone ??= [];
     if (!st.booksDone.includes(meta.bookId)) st.booksDone.push(meta.bookId);
     try { await this.composeJournal(meta.bookId); } catch (e) { this.warn(`journal: ${e.message}`); }
+    this.#achievements('book', meta.bookId);
     const next = this.nextBook(meta.bookId);
     st.frame = { wait: 'book_end', paragraphs: [], book: meta.bookId, nextBook: next?.id ?? null };
     this.#checkpoint(false);
@@ -468,6 +513,55 @@ export class Game {
     } catch (e) { this.lastSaveError = e; }
     return st.frame;
   }
+
+  // ---- Achievements, content notes and the player's screens ------------------------------------
+
+  #achievements(scope, bookId) {
+    if (this.state?.vars?.quick_start) return; // default histories (and developer jumps, which use one) earn nothing
+    try {
+      const got = evaluateAchievements(this, scope, bookId);
+      if (got.length) this.newAchievements.push(...got);
+    } catch (e) { this.warn(`achievements: ${e.message}`); }
+  }
+
+  /** Achievements earned since the UI last asked; clears the list. */
+  takeNewAchievements() {
+    const out = this.newAchievements;
+    this.newAchievements = [];
+    return out;
+  }
+
+  achievements() { return achievementsView(this.profile, this.content); }
+
+  /** The notes a chapter carries (manifest "notes": ["violence", ...]) as { id, label, text }. */
+  notesFor(chapterId = this.state?.chapter) {
+    const ids = this.chapterMeta[chapterId]?.notes ?? [];
+    return ids.map((id) => ({ id, label: this.content.notes[id]?.label ?? id, text: this.content.notes[id]?.text ?? '' }));
+  }
+
+  /** Notes to show now: the setting is on, this is the first screen of a chapter that has notes, and they were not shown yet. */
+  pendingNotes() {
+    const st = this.state;
+    if (!st || !this.settings.contentNotes || !st.frame?.opening) return [];
+    if (st.once?.[`notes:${st.chapter}`]) return [];
+    return this.notesFor(st.chapter);
+  }
+
+  ackNotes() {
+    if (this.state) this.state.once[`notes:${this.state.chapter}`] = true;
+  }
+
+  /** The state the Menu screens read: the game in progress, else the newest readable save (upgraded), else null. */
+  viewState() {
+    if (this.state) return this.state;
+    const latest = this.saves.latest();
+    if (!latest) return null;
+    try { return this.saves.load(latest.slot).state; } catch { return null; }
+  }
+
+  people(state = this.viewState()) { return state ? peopleView(state, this.content) : []; }
+  codex(state = this.viewState()) { return codexView(state, this.content); }
+  family(state = this.viewState()) { return state ? familyView(state, this.content) : []; }
 
   // ---- Saving ---------------------------------------------------------------------------
 
@@ -504,6 +598,7 @@ export class Game {
     const { state, notices } = this.saves.load(slot);
     applyStatDefaults(state, this.statDefs); // stats added since the save was made
     this.state = state;
+    this.undo = null;
 
     if (state.frame?.wait === 'book_end') {
       this.runner = null;

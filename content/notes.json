@@ -1,0 +1,11 @@
+{
+  "note": "Content notes: themes a chapter can carry so the player is told before a heavy one begins (Settings, Content notes). A chapter lists them in the manifest: \"notes\": [\"violence\"]. Keep the text short and free of plot.",
+  "notes": {
+    "violence": { "label": "Violence", "text": "Scenes of combat and killing." },
+    "blood": { "label": "Blood and feeding", "text": "Drinking blood, sometimes from the unwilling." },
+    "grief": { "label": "Grief and loss", "text": "The death of loved ones and the long aftermath." },
+    "war": { "label": "War and atrocity", "text": "Wars, burnings and the suffering of civilians." },
+    "slavery": { "label": "Slavery and racism", "text": "Slavery, segregation and prejudice, as they were lived in their times." },
+    "et_test": { "label": "Test theme", "text": "A developer theme used by the sample chapter." }
+  }
+}

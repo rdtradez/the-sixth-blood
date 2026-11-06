@@ -10,7 +10,9 @@
 import { walkExpr } from './expr.js';
 import { ScriptError } from './util.js';
 import { statDef, voiceDef, GENDERS, PERSON_FIELDS, FLAG_KINDS, PRONOUN_KEYS } from './content.js';
-import { checkCall } from './systems/index.js';
+import { checkCall, SYSTEM_FNS } from './systems/index.js';
+import { BUILTIN_FNS, parseExpr, ExprError } from './expr.js';
+import { CONTENT_FNS } from './content.js';
 
 const PERSON_FIELD_RE = new RegExp(`^([A-Za-z_][A-Za-z0-9_]*)\\.(${PERSON_FIELDS.join('|')})$`);
 const WHO_FNS = new Set(['pro', 'pg', 'name', 'alias', 'surname', 'gender']);
@@ -26,6 +28,39 @@ export function checkContentFiles({ manifest, stats, content }) {
     bookIds.add(b.id);
     for (const name of Object.keys(b.quickstart?.vars ?? {})) {
       if (!knownVar(name, { stats, content })) errors.push(`manifest: ${b.id} quickstart sets "${name}", which is not registered`);
+    }
+    for (const c of b.chapters ?? []) {
+      for (const n of c.notes ?? []) if (!content.notes?.[n]) errors.push(`manifest: chapter ${c.id} has unknown content note "${n}" (see content/notes.json)`);
+    }
+  }
+
+  // Content notes, codex and family files, achievements.
+  for (const n of Object.values(content.notes ?? {})) {
+    if (!n.label || !n.text) errors.push(`notes: "${n.id}" needs a label and text`);
+  }
+  for (const e of Object.values(content.systems?.codex ?? {})) {
+    if (e.person && !Object.hasOwn(content.people, e.person)) errors.push(`codex: ${e.id} is tied to unknown person "${e.person}" (content/people.json)`);
+  }
+  for (const k of Object.values(content.systems?.kin ?? {})) {
+    if (k.person && !Object.hasOwn(content.people, k.person)) errors.push(`family: ${k.id} names unknown person "${k.person}" (content/people.json)`);
+    if (!k.person && !k.name) errors.push(`family: ${k.id} needs a person or a name`);
+  }
+  const callable = new Set([...Object.keys(BUILTIN_FNS), ...Object.keys(CONTENT_FNS), ...Object.keys(SYSTEM_FNS)]);
+  for (const a of Object.values(content.achievements ?? {})) {
+    const where = `achievements: "${a.id}"`;
+    if (!a.title || !a.text) errors.push(`${where} needs a title and text`);
+    if (a.at && !['book', 'chapter'].includes(a.at)) errors.push(`${where} has unknown "at" (use book or chapter)`);
+    if (a.book && !bookIds.has(a.book)) errors.push(`${where} names unknown book "${a.book}"`);
+    if (typeof a.when !== 'string') { errors.push(`${where} needs a "when" expression`); continue; }
+    try {
+      walkExpr(parseExpr(a.when), (n) => {
+        if (n.t === 'var' && !knownVar(n.name, { stats, content })) errors.push(`${where} reads "${n.name}", which is not registered`);
+        if (n.t !== 'call') return;
+        if (!callable.has(n.name)) errors.push(`${where} calls unknown function "${n.name}"`);
+        else for (const m of checkCall('fn', n.name, n.args, content)) errors.push(`${where}: ${m}`);
+      });
+    } catch (e) {
+      errors.push(`${where}: ${e instanceof ExprError ? e.message : `cannot read "when" (${e.message})`}`);
     }
   }
 
