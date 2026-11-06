@@ -1,0 +1,242 @@
+// Book One prologue (session 5). Plays after character creation.
+// Variants: origin voice in the square and at the table, role memory and ending, path lines.
+@chapter b1p
+@title The Last Quiet Day
+@book burning-city
+@version 1
+
+# start
+## Collesanto
+$ do meet("spouse")
+$ do meet("aelia")
+$ do meet("felix")
+$ do kin("hero")
+$ do kin("spouse")
+$ do kin("aelia")
+$ do kin("felix")
+$ do discover("collesanto")
+The wheat is in, and the whole hill has gone the color of old bread. From the doorway of your house you can see the village stacked below you on the slope like a handful of dropped tiles, and above it, at the very top, the shuttered villa that nobody in Collesanto talks about.
+The children are already running. Aelia, old enough to think herself too old to be called back, leads the way through the stubble with her arms out like a bird. Felix, small enough to run at everything with his whole body, comes after her, shrieking and losing a sandal every few steps.
+{spouse.name}, your {pg("spouse", "husband", "wife")}, comes to stand beside you with two cups of watered wine. {spouse.They} {spouse.have} lived in Collesanto all {spouse.their} life, and still look{spouse.s} up at the hill each morning as though checking that it is still there.
+"They will sleep like the dead tonight," {spouse.they} say{spouse.s}.
+You drink, and say nothing, and let the morning be as long as it wants to be.
+---
+In the water trough by the door your own face looks back at you, the way it has every morning of the life you built here.
+{look_sentence()}
+~> memory_of_work [role]
+~> how_you_came
+-> the_day
+
+# memory_of_work
+Your hands remember a life before this one. They go on remembering it without being asked.
+<~
+
+# memory_of_work_gladiator
+On a peg inside the door hangs a wooden practice sword, the one you kept when you walked out of the arena for the last time. Aelia uses it to fight the bean rows. You do not stop her. Your hands, when they are idle, still find the shape of a guard, and the village dogs go quiet when you cross the yard, as though they know.
+<~
+
+# memory_of_work_legionary
+Your old sword lies wrapped in oiled cloth in the roof beam, where a soldier hides what he cannot bear to sell. The land you farm was given to you for the years you gave the legion. You still wake before dawn, listening for a horn that no one else can hear.
+<~
+
+# memory_of_work_merchant
+Your ledgers sleep in a chest under the bed, and you still tally the village in your head out of habit: whose barley is thin, whose wine will sell, whose debts will come due before the winter. You have never told anyone how often you are right.
+<~
+
+# memory_of_work_physician_aide
+Half the village has come to your door at one time or another with a cut, a cough, a baby that would not turn. You do not call it medicine. You call it paying attention. A bundle of herbs dries from the beam, and the oldest woman in Collesanto swears by your poultices and will hear nothing against them.
+<~
+
+# memory_of_work_house_slave
+You learned to move through a room without being noticed, and you have never quite unlearned it. The village thinks you are quiet. Only you know it is a skill you practiced for years, because a servant who is noticed is a servant in trouble.
+<~
+
+# how_you_came
+[born_in_rome] You were raised on stones that stayed warm after sunset and rang with other people's lives. You came here to hear yourself think.
+[captured] The chains are years behind you now. You still count the doors when you enter a room, and you still sit facing the way out.
+[freed] The day your freedom was written down, you did not feel free. That came later and slowly, as the village stopped asking whose you were.
+[auxiliary] Years of service bought you the right to be called a citizen, and the right to stop. You took both gladly.
+[hostage] You were raised in a house that fed you well and never let you forget that you were a pledge. The habit of watching your words has outlived the house.
+[trader] You came down these roads for profit. It was the one bad bargain of your life that you have never regretted.
+[exile] You left a place that wanted you gone, carrying very little. Here nobody asks what you carried.
+[wanderer] You came for the sake of seeing, and you saw. Most travelers keep walking. Something in this hill made you set your bag down.
+<~
+
+# the_day
+:the_day
+## The morning is yours
+The harvest is done and the day is empty, which in Collesanto is a rare gift. The sun is still low.
+* Chase the children through the stubble
+  $ bond.aelia += 8
+  $ bond.felix += 8
+  $ prologue.day = "children"
+  You are not a graceful runner anymore, and they have noticed. Felix catches your ankle and brings you down like a hunter bringing down a stag, and the three of you lie in the stubble laughing at the sky until {spouse.name} calls from the house that if you mean to sleep in the field you may do it alone.
+* Work the last of the barley with {spouse.name}
+  $ bond.spouse += 10
+  $ prologue.day = "fields"
+  You cut the late barley side by side and say very little, which is how the two of you talk best. At some point you notice that your hands have been working in the same row for an hour and neither of you remembers deciding it. {spouse.They} murmur{spouse.s} that the children will remember this summer, and you hold the words carefully, as though they might spill.
+* Walk the boundary of your land alone
+  $ defiance += 2
+  $ prologue.day = "boundary"
+  You walk the fence line the way you walk it every week, touching each post. At the far corner, where your land runs up toward the old villa's wall, you stop. The shutters are closed, as they have been for as long as anyone can remember. The shepherds drive their flocks around that wall in a wide, nervous curve, and nobody has ever said why. Today, for no reason you can name, you stand there a long time with the feeling of being watched, and not unkindly.
+---
+-> the_square
+
+# the_square
+## The square
+By afternoon you have walked down to the village with a basket for the market stalls. The square is small: one fountain, one tree, one wall of old men. Today it has a visitor, a thickset man in a good cloak, who is explaining to a boy of twelve or so, in a voice pitched for the whole square to overhear, that his family's goat now belongs to a man in Rome who does not need it.
+Nobody moves. The old men study the fountain. A woman begins very carefully to sort lentils. You have lived long enough to know this silence. It is the sound of a village deciding that the goat is not worth the trouble.
+[roman] You know the law the man is quoting. That is the worst of it. He is probably right.
+[gaul briton] You have seen this before, in another country. First comes the man with the tally. Then come the men who collect what the tally says.
+[north_african] Your grandmother used to say that Rome was only the latest ship to tie up in a harbor that had seen many. Ships, at least, eventually leave.
+[egyptian] You think of the scribes on the Nile, who counted every measure of grain a thousand years before Rome learned to count. The numbers were never the problem. The hands that held them were.
+[judean] You think of the tax collectors in the cities of your own country, and of what they cost the people who paid them, and of the quiet anger that cost bought.
+[parthian] In your country a rider can leave a lord he does not respect. These people have nowhere to ride, and the man in the cloak knows it.
+[silk_road] Taxes follow the roads, everywhere you have traveled. They are the only traveler who always arrives.
+It is not the goat. Something in you objects, quietly and completely, the way a limb objects to being held at the wrong angle. It has done this all your life. You have always been able to ignore it. You have never once been able to make it stop.
+:the_stand
+* Pay the man what he claims, and walk the boy home
+  $ cunning_brutal -= 5
+  $ defiance += 1
+  $ prologue.stand = "paid"
+  The man weighs your coin the way he weighed the goat, and finds you cheaper. He leaves satisfied. The boy does not thank you. He looks at the money leaving your hand as if it were an insult, and he is not wrong.
+* Step between the man and the boy
+  $ cunning_brutal += 5
+  $ defiance += 5
+  $ prologue.stand = "stood"
+  You do not raise your voice. You do not need to. You simply stand where the boy was, and the man discovers, a little late, how much of the sky you take up.
+  [gladiator legionary] Something in the way you hold your weight tells him what you were, and for a moment he is no longer sure which of you is the collector.
+  He leaves with a promise to remember your face. The old men go on studying the fountain. The boy keeps the goat, and does not look at you either, but he walks a little straighter.
+* Look away with the others
+  $ defiance += 3
+  $ prologue.stand = "looked_away"
+  You study the fountain with the rest of them. When the boy finally turns his face toward the square it finds each of you in turn, and forgives none of you. You tell yourself it is only a goat. The part of you that disagrees is patient.
+---
+-> the_evening
+
+# the_evening
+## Evening
+You eat outside, under the fig tree, because the night is warm and because Felix has declared that the house is too small for a day like this. Bread, lentils, the last of the early figs, wine for the grown ones and water for the others.
+When the plates are empty Felix climbs into your lap with the solemn air of a small magistrate. "Tell the one about before," he says. "Before here."
+You have told it often, and never twice the same way.
+[roman] You tell him about the city: the noise of it, the smell of bread at dawn, the way a crowd breathes. He listens with his mouth open. A place with so many people in it sounds to him like a made up thing.
+[gaul] You tell him about the hills of your first home, and the words your mother sang over the washing. You sing one now, quietly, in a language no one else at this table speaks. He asks you to do it again.
+[briton] You tell him about the island: the grey sky, the green so deep it hurt to look at, the sea on every side. You leave out what came after. He is too young for what came after.
+[north_african] You tell him about the coast, the harbors, the ships with painted eyes, and the markets where six languages were bargaining at once. He is delighted to learn that people can shout in six ways about a single fish.
+[egyptian] You tell him about the river, how it rose every year on schedule like a patient creditor, and how a whole country held its breath until it did. He wants to know what happens if it forgets. You tell him it never has.
+[judean] You tell him about the city you can name street by street, and the festivals, and the long walk up to the hill at dusk. You do not tell him what is said about that city now, at tables like yours, in low voices.
+[parthian] You tell him about the horses: the plains that went on until the sky began, and a ride at dawn with the wind in your teeth. He wants to know if you can still ride that fast. You say you have grown too wise to find out.
+[silk_road] You tell him about the road: the deserts, the caravans, the mountains with snow on them in summer. He decides, with total authority, that you are making it up. You let him believe it.
+Aelia has been pretending not to listen. Now she looks at you over the rim of her cup, with the terrible directness of the very young.
+"Do you ever want to go back?"
+:aelia_asks
+* Tell her the truth: sometimes
+  $ bond.aelia += 3
+  $ humanity += 1
+  "Sometimes," you say. "Not to live. Only to see it once more, the way it was." She nods slowly, the way she does when she is filing something away, and moves a little closer to you on the bench.
+* Tell her this is home
+  $ bond.aelia += 5
+  $ bond.felix += 2
+  "This is home," you say, and discover as you say it that it is true. Felix, half asleep on your shoulder, mumbles agreement without knowing what he is agreeing to. Aelia looks satisfied, which is the highest mark she gives.
+* Tell her it is a story for another night
+  $ secrecy += 2
+  $ bond.aelia -= 2
+  "That is a story for another night," you say. She gives you a look that says she knows exactly what a closed door is, and has already decided to find the key.
+Later, when the children are asleep in a heap, {spouse.name} sits beside you on the step with a blanket over both your shoulders and the cool of the night on your faces. Neither of you speaks. Below you the village lights go out one by one, and above you the villa on the hill is only a darker shape against the stars.
+?if prologue.stand == "looked_away"
+  You find, to your annoyance, that you are still thinking of the boy in the square.
+?elif prologue.stand == "stood"
+  You find that your hands are not quite steady, and that you do not regret it.
+?else
+  You find that the day has settled in you well, and that you are grateful for it.
+?end
+"Whatever comes," {spouse.name} says, "we have this."
+{spouse.They} say{spouse.s} it the way people do when nothing is wrong.
+---
+-> the_end [role]
+
+# the_end
+$ hero.death = "fever"
+The season turns, and the fever comes up from the river fields with the last of the harvest. It reaches you before it reaches anyone else.
+-> the_stranger
+
+# the_end_gladiator
+$ hero.death = "arena"
+It is a debt that brings you back to the arena in the end: an old master's agent, a festival in the market town, a purse too large for a family with winter coming. You tell {spouse.name} it is one fight. You have won every fight that mattered.
+The sand is the same sand. The crowd is the same crowd. You are not the same fighter. Your opponent is twenty years younger and has the one thing you have lost, which is hunger. The blade goes in under your ribs where your guard used to be, and the noise of the crowd goes very far away, like the sea heard from the top of a hill.
+-> the_stranger
+
+# the_end_legionary
+$ hero.death = "execution"
+The charge is read in the market town on a morning so bright it feels like an insult. A neighbor who wanted your land has sworn to something you did not do, and a magistrate who owed him a favor has decided not to look too closely. A soldier knows how a sentence ends.
+You ask only that someone tell {spouse.name} and the children that you were not afraid. You are afraid. The stone is cold under your cheek, and the last thing you see is a swallow cutting across the white sky.
+-> the_stranger
+
+# the_end_house_slave
+$ hero.death = "execution"
+A man died in your old master's house, and an heir with a grudge found it convenient to say that a slave had done it, and that a freed slave is only a slave who has not yet been caught.
+[freed] The paper that made you free is in a chest in Collesanto, where nobody will read it in time.
+The magistrate does not argue. The charge is read in the market town on a morning so bright it feels like an insult. You ask only that someone tell {spouse.name} and the children that you were not afraid. You are afraid. The stone is cold under your cheek, and the last thing you see is a swallow cutting across the white sky.
+-> the_stranger
+
+# the_end_merchant
+$ hero.death = "fever"
+The fever comes up from the river fields with the last of the harvest, and it comes for you first. You count the days the way you once counted debts: three, four, five, each costing more than the one before. By the sixth day {spouse.name} has stopped pretending. By the seventh the room has gone gold and strange, and you are doing sums in your head that will never be paid.
+-> the_stranger
+
+# the_end_physician_aide
+$ hero.death = "fever"
+You know the signs before anyone else does, and that is the cruelest part: the cough, the color of the nails, the way the fever refuses the cool cloths. You mix your own poultice with steady hands and you know, even as you swallow it, that it is only a way of passing time.
+{spouse.name} sits beside you through the nights, and you spend your strength teaching {spouse.them} what to do for the children's coughs when you are gone.
+-> the_stranger
+
+# the_stranger
+## The question
+The dying is quieter than you expected. The noise goes. The pain goes last, like a guest who is reluctant to leave.
+Then someone is there. You did not see him arrive, and in a place that should be full of people there is no one else. He is dressed for a journey and not for a deathbed: a plain dark cloak with dust on the hem, hands very still. His face is hard to hold in your mind even as you look at it, the way a word slips away when you are too tired to chase it.
+He looks at you the way physicians do, and men at the gaming tables: like someone who has already decided what he will do and is only waiting to be polite about it.
+?if prologue.stand == "looked_away"
+  You think, absurdly, of a boy and a goat.
+?elif prologue.stand == "stood"
+  You think, absurdly, that you would do it again.
+?else
+  You think, absurdly, of the coin leaving your hand.
+?end
+"You have until the next breath," he says, "and a little longer than that, if I choose." His voice is warm and unhurried. "I will ask you one question. I would like you to think before you answer, because most of the people I ask do not."
+He bends a little closer.
+"Do you want to see what comes after Rome?"
+:the_answer
+* "Yes."
+  $ prologue.answer = "yes"
+  $ defiance += 3
+  The word comes out of you with the last of your air. It is not a considered answer. It is the oldest part of you speaking, the part that has always disagreed with the way things are.
+* "What would it cost?"
+  $ prologue.answer = "asked"
+  $ defiance += 1
+  $ cunning_brutal -= 3
+  He smiles for the first time, small and genuinely pleased. "Everything, eventually," he says. "But not today." It is not an answer, and you both know it. It is somehow enough.
+* "Leave me with them."
+  $ prologue.answer = "refused"
+  $ humanity += 3
+  He is quiet for a moment. "Most say yes," he says. "The ones who say no are the ones I most want." It is not an answer to what you asked, and it is not quite a promise either.
+He lays two fingers against your throat, as a physician would, and the world goes out like a lamp.
+---
+-> the_waking
+
+# the_waking
+## The villa
+You wake in the dark on a floor of cold mosaic, with dust in your mouth. The room smells of old wine and older stone. Above you, on a ceiling painted so long ago that it has almost faded back into the plaster, a hunt is in progress: figures running through trees after something the artist never finished.
+Nothing hurts. That is the first wrong thing.
+?if prologue.answer == "yes"
+  You said yes. You remember saying it, and you remember meaning it, and you do not yet know what you meant.
+?elif prologue.answer == "asked"
+  You asked what it would cost. You are beginning to suspect the answer.
+?else
+  You said no. It seems that this was not the kind of question that waits for an answer.
+?end
+The second wrong thing is that you can hear a heartbeat. It is not yours. It is far below, small and quick, and then there are more of them, dozens, the whole slow chorus of a village going to sleep. You have lived among those sounds all your life. You have never heard them like this.
+The third wrong thing is the hunger. It arrives all at once, like a door opening on a room you did not know the house had.
+// The hero starts Book One as the quick start does: a small fortune and a village in its first prosperity.
+$ wealth = 20
+$ collesanto = 15
+=> next

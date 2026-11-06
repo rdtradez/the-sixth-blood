@@ -9,6 +9,8 @@
 //   originals   the six originals tracker
 //   collection  pieces for the New York museum
 //   sleep       sleep and steward resolution, the wake report
+//   lore        the codex and the family tree
+//   looks       the hero's chosen appearance in the story's words
 //
 // `$ do rest()` closes a chapter: hunger rises, Secrecy and Humanity settle, ventures pay,
 // missions come home. rested("income") and friends read what that rest did.
@@ -27,12 +29,14 @@ import { originals, quickOriginals, originalRecord } from './originals.js';
 import { collection } from './collection.js';
 import { sleep, quickSleep } from './sleep.js';
 import { lore, quickLore } from './lore.js';
+import { looks } from './looks.js';
+import { lookCatalog } from '../looks.js';
 import { EngineError } from '../util.js';
 import { createSys } from './sys-state.js';
 
 export { createSys };
 
-export const SYSTEMS = { life, combat, collis, village, circle, bonds, originals, collection, sleep, lore };
+export const SYSTEMS = { life, combat, collis, village, circle, bonds, originals, collection, sleep, lore, looks };
 
 const REST_FIELDS = ['income', 'kills', 'witnesses', 'missions'];
 
@@ -86,7 +90,7 @@ export const SYSTEM_COMMAND_NAMES = Object.keys(SYSTEM_COMMANDS);
 // ---- Catalogs ---------------------------------------------------------------------------------
 
 /** Content files the systems read, by loader name. */
-export const SYSTEM_FILES = ['rules', 'ventures', 'village', 'holdings', 'originals', 'collection', 'sleep', 'codex', 'family'];
+export const SYSTEM_FILES = ['rules', 'ventures', 'village', 'holdings', 'originals', 'collection', 'sleep', 'codex', 'family', 'looks'];
 
 const entries = (file, key) => {
   const raw = file?.[key] ?? {};
@@ -114,6 +118,7 @@ export function buildCatalog(files = {}) {
     codex: entries(files.codex, 'entries'),
     codexCategories: files.codex?.categories ?? {},
     kin: entries(files.family, 'members'),
+    looks: lookCatalog(files.looks),
     gaps,
     investments,
     tiers,

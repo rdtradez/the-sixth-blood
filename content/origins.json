@@ -1,30 +1,327 @@
 {
-  "note": "Hero origins, mortal roles and the paths that brought the hero to Rome. Ids are unique across all three lists; they are the tags used in scripts: [briton gaul] lines, ?if [gladiator], and -> scene [origin]. names are suggestions by gender. roles and paths list the fitting suggestions for an origin; most combinations stay allowed.",
+  "note": "Hero origins, mortal roles and the paths that brought the hero to Rome. Ids are unique across all three lists; they are the tags used in scripts: [briton gaul] lines, ?if [gladiator], and -> scene [origin]. names are suggestions by gender. roles and paths list the fitting suggestions for an origin; most combinations stay allowed. blurb is the line shown on the creation screen. A role may list the paths that fit it (paths) and origins it is not for (notFor); a path may list origins it is not for. The creation screen only offers combinations that fit; scripts accept any.",
   "origins": [
-    { "id": "roman", "label": "Roman citizen", "names": { "m": ["Gaius", "Lucius", "Titus", "Quintus"], "f": ["Julia", "Cornelia", "Claudia", "Octavia"] }, "roles": ["legionary", "merchant"], "paths": ["born_in_rome", "freed"] },
-    { "id": "gaul", "label": "Gaul", "names": { "m": ["Dumnorix", "Brennus", "Litavicus"], "f": ["Cintugena", "Banona", "Sacrilla"] }, "roles": ["gladiator", "legionary"], "paths": ["auxiliary", "captured", "trader"] },
-    { "id": "briton", "label": "Briton", "names": { "m": ["Segovax", "Cunobel", "Tasciovanus"], "f": ["Brica", "Senua", "Catia"] }, "roles": ["gladiator", "house_slave"], "paths": ["captured", "hostage"] },
-    { "id": "north_african", "label": "North African (Carthage or Numidia)", "names": { "m": ["Hanno", "Bomilcar", "Adherbal"], "f": ["Arishat", "Batbaal", "Sapanbaal"] }, "roles": ["merchant", "legionary"], "paths": ["trader", "auxiliary", "born_in_rome"] },
-    { "id": "egyptian", "label": "Egyptian", "names": { "m": ["Petosiris", "Pamonthes", "Harpocras"], "f": ["Neferet", "Thermouthis", "Tasheret"] }, "roles": ["physician_aide", "merchant"], "paths": ["wanderer", "trader", "freed"] },
-    { "id": "judean", "label": "Judean", "names": { "m": ["Eleazar", "Shimon", "Yochanan"], "f": ["Miriam", "Shelamzion", "Salome"] }, "roles": ["physician_aide", "merchant", "house_slave"], "paths": ["exile", "captured", "trader"] },
-    { "id": "parthian", "label": "Parthian or Persian", "names": { "m": ["Artavan", "Mihrdat", "Sinatruk"], "f": ["Aryazate", "Rhodogune", "Musa"] }, "roles": ["merchant", "gladiator"], "paths": ["hostage", "trader", "exile"] },
-    { "id": "silk_road", "label": "Silk Road traveler (Han China or India)", "names": { "m": ["Jian", "Shou", "Varun"], "f": ["Lan", "Ying", "Amrita"] }, "roles": ["merchant", "physician_aide"], "paths": ["wanderer", "trader"] }
+    {
+      "id": "roman",
+      "label": "Roman citizen",
+      "names": {
+        "m": [
+          "Gaius",
+          "Lucius",
+          "Titus",
+          "Quintus"
+        ],
+        "f": [
+          "Julia",
+          "Cornelia",
+          "Claudia",
+          "Octavia"
+        ]
+      },
+      "roles": [
+        "legionary",
+        "merchant"
+      ],
+      "paths": [
+        "born_in_rome",
+        "freed"
+      ],
+      "blurb": "A citizen. The law, the roads and the eagles were yours before you understood them, and you have never had to ask whether you belong."
+    },
+    {
+      "id": "gaul",
+      "label": "Gaul",
+      "names": {
+        "m": [
+          "Dumnorix",
+          "Brennus",
+          "Litavicus"
+        ],
+        "f": [
+          "Cintugena",
+          "Banona",
+          "Sacrilla"
+        ]
+      },
+      "roles": [
+        "gladiator",
+        "legionary"
+      ],
+      "paths": [
+        "auxiliary",
+        "captured",
+        "trader"
+      ],
+      "blurb": "From the lands the legions took within living memory. You know what Rome built there, and what it broke."
+    },
+    {
+      "id": "briton",
+      "label": "Briton",
+      "names": {
+        "m": [
+          "Segovax",
+          "Cunobel",
+          "Tasciovanus"
+        ],
+        "f": [
+          "Brica",
+          "Senua",
+          "Catia"
+        ]
+      },
+      "roles": [
+        "gladiator",
+        "house_slave"
+      ],
+      "paths": [
+        "captured",
+        "hostage"
+      ],
+      "blurb": "From the island at the edge of the world, where a great revolt was crushed only a year or two ago. Few in Rome can even say the name of your tribe."
+    },
+    {
+      "id": "north_african",
+      "label": "North African (Carthage or Numidia)",
+      "names": {
+        "m": [
+          "Hanno",
+          "Bomilcar",
+          "Adherbal"
+        ],
+        "f": [
+          "Arishat",
+          "Batbaal",
+          "Sapanbaal"
+        ]
+      },
+      "roles": [
+        "merchant",
+        "legionary"
+      ],
+      "paths": [
+        "trader",
+        "auxiliary",
+        "born_in_rome"
+      ],
+      "blurb": "From the old Punic coast or the Numidian hills, where traders and horsemen have dealt with Rome for generations."
+    },
+    {
+      "id": "egyptian",
+      "label": "Egyptian",
+      "names": {
+        "m": [
+          "Petosiris",
+          "Pamonthes",
+          "Harpocras"
+        ],
+        "f": [
+          "Neferet",
+          "Thermouthis",
+          "Tasheret"
+        ]
+      },
+      "roles": [
+        "physician_aide",
+        "merchant"
+      ],
+      "paths": [
+        "wanderer",
+        "trader",
+        "freed"
+      ],
+      "blurb": "From the Nile, where Rome is only the latest ruler of a country that was ancient before it began. You grew up among physicians, scribes and temples."
+    },
+    {
+      "id": "judean",
+      "label": "Judean",
+      "names": {
+        "m": [
+          "Eleazar",
+          "Shimon",
+          "Yochanan"
+        ],
+        "f": [
+          "Miriam",
+          "Shelamzion",
+          "Salome"
+        ]
+      },
+      "roles": [
+        "physician_aide",
+        "merchant",
+        "house_slave"
+      ],
+      "paths": [
+        "exile",
+        "captured",
+        "trader"
+      ],
+      "blurb": "From a province uneasy under Roman rule, where talk of war is heard at every table. You carry your law and your city with you."
+    },
+    {
+      "id": "parthian",
+      "label": "Parthian or Persian",
+      "names": {
+        "m": [
+          "Artavan",
+          "Mihrdat",
+          "Sinatruk"
+        ],
+        "f": [
+          "Aryazate",
+          "Rhodogune",
+          "Musa"
+        ]
+      },
+      "roles": [
+        "merchant",
+        "gladiator"
+      ],
+      "paths": [
+        "hostage",
+        "trader",
+        "exile"
+      ],
+      "blurb": "From the empire Rome has fought for generations and never beaten. To some you are a rival, to others a useful curiosity."
+    },
+    {
+      "id": "silk_road",
+      "label": "Silk Road traveler (Han China or India)",
+      "names": {
+        "m": [
+          "Jian",
+          "Shou",
+          "Varun"
+        ],
+        "f": [
+          "Lan",
+          "Ying",
+          "Amrita"
+        ]
+      },
+      "roles": [
+        "merchant",
+        "physician_aide"
+      ],
+      "paths": [
+        "wanderer",
+        "trader"
+      ],
+      "blurb": "A traveler from Han China or India who followed the trade roads to the far end of the world. Everything here is strange to you, and you are strange to it."
+    }
   ],
   "roles": [
-    { "id": "gladiator", "label": "Gladiator" },
-    { "id": "legionary", "label": "Legionary" },
-    { "id": "merchant", "label": "Merchant" },
-    { "id": "physician_aide", "label": "Physician's aide" },
-    { "id": "house_slave", "label": "Slave in a noble house" }
+    {
+      "id": "gladiator",
+      "label": "Gladiator",
+      "blurb": "You fought for your life before crowds. The arena taught you what a body can bear and how to read an opponent.",
+      "paths": [
+        "captured",
+        "freed",
+        "born_in_rome",
+        "exile"
+      ]
+    },
+    {
+      "id": "legionary",
+      "label": "Legionary",
+      "blurb": "You marched under the eagles. You know drill, discipline and what an order costs the one who gives it.",
+      "paths": [
+        "born_in_rome",
+        "auxiliary",
+        "hostage",
+        "exile"
+      ]
+    },
+    {
+      "id": "merchant",
+      "label": "Merchant",
+      "blurb": "You made your living between buyers and sellers. You read people the way others read letters.",
+      "paths": [
+        "born_in_rome",
+        "freed",
+        "trader",
+        "exile",
+        "wanderer"
+      ]
+    },
+    {
+      "id": "physician_aide",
+      "label": "Physician's aide",
+      "blurb": "You worked at a healer's side. You know wounds and fevers, and how little most cures matter.",
+      "paths": [
+        "born_in_rome",
+        "freed",
+        "captured",
+        "wanderer",
+        "exile",
+        "hostage"
+      ]
+    },
+    {
+      "id": "house_slave",
+      "label": "Slave in a noble house",
+      "blurb": "You served in a noble house. You know how the powerful speak when they think no one is listening.",
+      "paths": [
+        "captured",
+        "born_in_rome",
+        "freed",
+        "exile"
+      ],
+      "notFor": [
+        "roman"
+      ]
+    }
   ],
   "paths": [
-    { "id": "born_in_rome", "label": "Born in Rome" },
-    { "id": "captured", "label": "Captured in war" },
-    { "id": "freed", "label": "Freed slave" },
-    { "id": "auxiliary", "label": "Auxiliary soldier" },
-    { "id": "hostage", "label": "Hostage" },
-    { "id": "trader", "label": "Merchant or trader" },
-    { "id": "exile", "label": "Exile or refugee" },
-    { "id": "wanderer", "label": "Wanderer or scholar" }
+    {
+      "id": "born_in_rome",
+      "label": "Born in Rome",
+      "blurb": "A citizen or the child of immigrants. Roman by upbringing."
+    },
+    {
+      "id": "captured",
+      "label": "Captured in war",
+      "blurb": "Enslaved after Rome conquered your people.",
+      "notFor": [
+        "roman"
+      ]
+    },
+    {
+      "id": "freed",
+      "label": "Freed slave",
+      "blurb": "Free now, but Rome still sees what you were."
+    },
+    {
+      "id": "auxiliary",
+      "label": "Auxiliary soldier",
+      "blurb": "A non citizen who served Rome for the promise of citizenship.",
+      "notFor": [
+        "roman"
+      ]
+    },
+    {
+      "id": "hostage",
+      "label": "Hostage",
+      "blurb": "A noble's child sent to guarantee your family's loyalty. Raised among Roman elites, never one of them.",
+      "notFor": [
+        "roman"
+      ]
+    },
+    {
+      "id": "trader",
+      "label": "Merchant or trader",
+      "blurb": "You came to Rome by choice, chasing profit."
+    },
+    {
+      "id": "exile",
+      "label": "Exile or refugee",
+      "blurb": "You fled war, famine or enemies, and Rome was where you landed."
+    },
+    {
+      "id": "wanderer",
+      "label": "Wanderer or scholar",
+      "blurb": "A traveler drawn to Rome by curiosity."
+    }
   ]
 }

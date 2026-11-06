@@ -14,7 +14,14 @@ import { EngineError, clone } from './util.js';
 import { readSettings, checkSetting } from './settings.js';
 import { peopleView, codexView, familyView, achievementsView } from './screens.js';
 import { evaluateAchievements } from './achievements.js';
+import { creationOptions, fitHero, lookChoices, compatiblePaths } from './creation.js';
+import { describeLook, lookFromVars, lookVars, seededRandom } from './looks.js';
 import { SYSTEM_FILES, SYSTEM_COMMAND_NAMES, buildCatalog, createSys, quickSystems, systemsView } from './systems/index.js';
+
+/** A complete look for the origin, role and path: the player's choices, gaps filled by fitting defaults. */
+function normalizeHeroLook(content, hero, look) {
+  return look ? fitHero(content, { ...hero, look }).look : fitHero(content, hero).look;
+}
 
 export const CONTENT_FILES = ['flags', 'voice', 'people', 'origins', 'achievements', 'notes', ...SYSTEM_FILES];
 
@@ -69,7 +76,12 @@ export class Game {
     this.chapterMeta = {};
     for (const book of this.manifest.books) {
       book.chapters ??= [];
-      book.chapters.forEach((c, index) => { this.chapterMeta[c.id] = { ...c, bookId: book.id, bookTitle: book.title, index }; });
+      // A prologue is not numbered; the chapters after it count from 1.
+      let numbered = 0;
+      book.chapters.forEach((c, index) => {
+        if (!c.prologue) numbered++;
+        this.chapterMeta[c.id] = { ...c, bookId: book.id, bookTitle: book.title, index, number: c.prologue ? null : numbered };
+      });
     }
     this.saves = new SaveManager({
       storage: this.storage,
@@ -160,8 +172,10 @@ export class Game {
         accent: b.accent ?? null,
         accent2: b.accent2 ?? null,
         dev: Boolean(b.dev),
-        chapterCount: b.chapters.length,
+        chapterCount: b.chapters.filter((c) => !c.prologue).length,
+        reachedNumber: this.chapterMeta[b.chapters[prof.reached[b.id] ?? -1]?.id]?.number ?? 0,
         written: b.chapters.length > 0,
+        incomplete: Boolean(b.incomplete),
         completed: Boolean(prof.completedBooks[b.id]),
         unlocked: this.isUnlocked(b.id),
         reached: prof.reached[b.id] ?? -1,
@@ -185,7 +199,7 @@ export class Game {
       if (s.empty || s.corrupt || s.newer) continue;
       try {
         const { state } = this.saves.load(s.slot);
-        if (state.frame?.wait === 'book_end' && state.book === prev.id) out.push({ slot: s.slot, savedAt: s.savedAt, meta: s.meta, carry: false });
+        if (state.frame?.wait === 'book_end' && !state.frame.pending && state.book === prev.id) out.push({ slot: s.slot, savedAt: s.savedAt, meta: s.meta, carry: false });
       } catch { /* unreadable slots are simply not offered */ }
     }
     return out;
@@ -221,7 +235,7 @@ export class Game {
       if (!prev) throw new EngineError('The first book starts fresh or with a quick start.');
       const source = from === 'carry' ? carrySlot(prev.id) : slot;
       const { state, notices } = this.saves.load(source);
-      if (!(state.frame?.wait === 'book_end' && state.book === prev.id)) {
+      if (!(state.frame?.wait === 'book_end' && !state.frame.pending && state.book === prev.id)) {
         throw new EngineError(`That save is not at the end of "${prev.title}".`);
       }
       return this.#beginBook(state, id, notices);
@@ -232,7 +246,7 @@ export class Game {
   /** At the end of a book, carry straight on into the next one. */
   async continueToNextBook() {
     const st = this.state;
-    if (st?.frame?.wait !== 'book_end') throw new EngineError('the book has not ended');
+    if (st?.frame?.wait !== 'book_end' || st.frame.pending) throw new EngineError('the book has not ended');
     const next = this.nextBook(st.book);
     if (!next || !next.chapters.length) throw new EngineError('the next book is not written yet');
     return this.#beginBook(clone(st), next.id, []);
@@ -282,8 +296,40 @@ export class Game {
     const path = pick('path', hero.path, origin?.paths);
     if (role) vars['hero.role'] = role;
     if (path) vars['hero.path'] = path;
+    // Appearance: whatever the player chose, with any gap or unknown value filled by a fitting default.
+    Object.assign(vars, lookVars(normalizeHeroLook(this.content, { origin: origin?.id, role, path }, hero.look)));
     return vars;
   }
+
+  // ---- Character creation (session 5) ----------------------------------------------------------
+
+  /** Everything the creation screen draws: origins, roles, paths and appearance fields, as plain data. */
+  creationOptions() { return creationOptions(this.content); }
+
+  /** Arrival paths that fit an origin and mortal role, best suggestion first. */
+  compatiblePaths(origin, role) { return compatiblePaths(this.content.origins, origin, role); }
+
+  /** The look options offered to an origin, by field (skin tones depend on the origin). */
+  lookChoices(origin) { return lookChoices(this.content, origin); }
+
+  /**
+   * Make creation choices consistent and complete: a role and path that fit the origin, and a look.
+   * A look in `hero` is kept (unknown values repaired); without one a look is suggested. Pass
+   * `random` (a generator in [0, 1), or a seed number) for quick create's varied suggestion;
+   * without it the most fitting look is used. Returns { gender, name, origin, role, path, look }.
+   */
+  suggestHero(hero = {}, random = null) {
+    const rand = typeof random === 'number' ? seededRandom(random) : random;
+    const fitted = fitHero(this.content, hero, rand);
+    if (!fitted.name) fitted.name = this.suggestNames(fitted.origin, fitted.gender)[0] ?? '';
+    return fitted;
+  }
+
+  /** The hero's appearance as words, for a creation preview or the You screen. */
+  describeLook(look) { return describeLook(this.content.systems.looks, look); }
+
+  /** The look stored in the current game (empty before creation or in an old save). */
+  heroLook(state = this.state) { return lookFromVars(this.content.systems.looks, state?.vars ?? {}); }
 
   /**
    * A state for starting a book with a default history: every earlier book counts as
@@ -497,6 +543,16 @@ export class Game {
     }
     if (nextId) return this.startChapter(nextId);
 
+    // A book that is still being written (manifest "incomplete") pauses here instead of ending,
+    // so finishing its last written chapter neither finishes the book nor unlocks the next one.
+    // A save at this point carries on by itself once the next chapter exists (see loadSlot).
+    if (this.#book(meta.bookId).incomplete) {
+      st.stack = [];
+      st.frame = { wait: 'book_end', pending: true, paragraphs: [], book: meta.bookId, nextBook: null };
+      this.#checkpoint(false);
+      return st.frame;
+    }
+
     const profile = this.saves.getProfile();
     profile.completedBooks[meta.bookId] = this.now();
     try { this.saves.setProfile(profile); } catch (e) { this.lastSaveError = e; }
@@ -600,6 +656,16 @@ export class Game {
     this.state = state;
     this.undo = null;
 
+    if (state.frame?.wait === 'book_end' && state.frame.pending) {
+      const meta = this.chapterMeta[state.chapter];
+      const next = meta ? this.#book(meta.bookId).chapters[meta.index + 1]?.id ?? null : null;
+      if (next) {
+        notices.push('The story has grown since you saved here, so it carries on.');
+        return { frame: await this.startChapter(next), notices };
+      }
+      this.runner = null;
+      return { frame: state.frame, notices };
+    }
     if (state.frame?.wait === 'book_end') {
       this.runner = null;
       state.frame.nextBook = this.manifest.books.some((b) => b.id === state.book) ? this.nextBook(state.book)?.id ?? null : null;

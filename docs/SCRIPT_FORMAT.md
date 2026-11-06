@@ -161,6 +161,7 @@ There is no way to run arbitrary code. Functions available everywhere:
 | `voice("stat")` `voice("stat", "short")` `band("stat")` | Stats in story voice, below. |
 | `name("who")` `alias("who")` `surname("who")` `pro("who", "their")` `g(m, f, x)` `pg("who", m, f, x)` `gender("who")` | Pronouns and names, below. |
 | `variant("tag", ...)` or `[tag tag]` | Origin variants, below. |
+| `look("field")` `marked()` `look_sentence()` | The hero's appearance, see Appearance. |
 
 Randomness is seeded per game and saved with it, so reloading a save does **not** reroll a roll.
 
@@ -254,6 +255,10 @@ Changing a registered name or what a value means still needs a content migration
 ## The journal
 
 `$ do journal("text", "optional title")` adds an entry to the Previously screen shown when a book begins. Each book's Velati journal entry is written by a journal script at the end of the book; see [docs/SYSTEMS.md](SYSTEMS.md#the-velati-journal).
+
+## Appearance
+
+`{look("hair")}`, `{look("mark")}`, `marked()` and `{look_sentence()}` give the words for the hero's chosen look. See [docs/CREATION.md](CREATION.md).
 
 ## Game systems
 

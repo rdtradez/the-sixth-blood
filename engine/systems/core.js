@@ -10,6 +10,7 @@ import { EngineError } from '../util.js';
 import { assign } from '../state.js';
 import { statDef } from '../content.js';
 import { toNum } from '../expr.js';
+import { EMPTY_LOOKS } from '../looks.js';
 
 /** The systems part of the state, created on first use (tests may run without it). */
 export function sysOf(ctx) {
@@ -32,6 +33,7 @@ export const EMPTY_CATALOG = {
   items: {},
   codex: {},
   kin: {},
+  looks: EMPTY_LOOKS,
   gaps: {},
   investments: {},
   tiers: { human: {}, fledgling: {}, elder: {}, lictor: {}, ancient: {}, original: {} },
