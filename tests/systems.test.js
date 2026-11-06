@@ -363,8 +363,8 @@ test('systems state survives a save and load mid mission', async () => {
   assert.equal(texts(frame)[0], 'Back: yes.');
 });
 
-test('schema 2 saves upgrade to schema 3 with empty systems', async () => {
-  assert.equal(SCHEMA, 3);
+test('schema 2 saves upgrade to the current schema with empty systems', async () => {
+  assert.equal(SCHEMA, 4);
   assert.deepEqual(SCHEMA_MIGRATIONS[2]({ vars: {} }).sys, createSys());
   const storage = new MemoryStorage();
   const src = { t1: `${H('t1')}\n# start\nOne.\n---\nTwo {coven_size()}.\n---\n=> endbook\n` };
@@ -398,7 +398,7 @@ test('the checker rejects misspelled ids, wrong values and wrong argument counts
 
 test('the real catalogs pass their own checks and every command is reachable', async () => {
   const game = await sysGame({});
-  const bookIds = new Set(game.manifest.books.map((b) => b.id));
+  const bookIds = new Set((await real.manifest()).books.map((b) => b.id));
   assert.deepEqual(checkCatalog(game.content.systems, { bookIds }), []);
   assert.deepEqual(checkCall('command', 'fight', [{ t: 'lit', v: 'lictor' }], game.content), []);
   assert.ok(SYSTEM_COMMAND_NAMES.includes('rest'));

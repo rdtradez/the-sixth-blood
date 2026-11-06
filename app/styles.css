@@ -1,72 +1,170 @@
-/* Minimal reading UI. The full look and feel (fonts, book accents, art) comes in a later session. */
+/* The Sixth Blood: reader look and feel.
+   Palette: black and deep charcoal grounds, blood red for choices, aged gold for titles and borders,
+   parchment for the Velati journals and the codex. Each book sets --accent / --accent2 while it is read.
+   Settings (Menu, Settings) switch data-theme, data-size and data-font on <html>. */
+
+@font-face { font-family: 'Cinzel'; font-weight: 400; font-display: swap; src: url('../fonts/cinzel-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Cinzel'; font-weight: 600; font-display: swap; src: url('../fonts/cinzel-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'EB Garamond'; font-weight: 400; font-style: normal; font-display: swap; src: url('../fonts/eb-garamond-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'EB Garamond'; font-weight: 400; font-style: italic; font-display: swap; src: url('../fonts/eb-garamond-latin-400-italic.woff2') format('woff2'); }
+@font-face { font-family: 'EB Garamond'; font-weight: 600; font-style: normal; font-display: swap; src: url('../fonts/eb-garamond-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Pinyon Script'; font-weight: 400; font-display: swap; src: url('../fonts/pinyon-script-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'OpenDyslexic'; font-weight: 400; font-style: normal; font-display: swap; src: url('../fonts/opendyslexic-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'OpenDyslexic'; font-weight: 400; font-style: italic; font-display: swap; src: url('../fonts/opendyslexic-latin-400-italic.woff2') format('woff2'); }
+@font-face { font-family: 'OpenDyslexic'; font-weight: 700; font-style: normal; font-display: swap; src: url('../fonts/opendyslexic-latin-700-normal.woff2') format('woff2'); }
+
 :root {
+  /* Night (the default) */
   --bg: #0d0b0b;
   --panel: #1a1616;
+  --panel-hi: #231c1b;
   --line: #3a2f2a;
   --text: #e8e0d4;
   --muted: #9a8f84;
   --gold: #c9a24b;
   --blood: #9b1c1c;
   --blood-hi: #c0392b;
+  --on-blood: #fff4ee;
+  --choice-line: #5a2a2a;
+  --choice-hi: #261515;
+  --paper: #e9dcc0;
+  --paper-ink: #2b2116;
+  --paper-line: #8a6d3b;
+  --paper-head: #5a4424;
+  --paper-bg: #1c1813;
+  --accent: var(--gold);
+  --accent2: var(--line);
   --maxw: 40rem;
-  --size: 1.125rem;
+  --font-title: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --font-story: 'EB Garamond', Garamond, 'Palatino Linotype', Georgia, serif;
+  --font-script: 'Pinyon Script', 'Snell Roundhand', cursive;
+  --fscale: 1.14;  /* Garamond runs small, so it is scaled up */
+  --tscale: 1;
+  --lh: 1.62;
+  --ls: 0;
+  --size: calc(1.0625rem * var(--fscale) * var(--tscale));
+  color-scheme: dark;
 }
+:root[data-theme='dusk'] {
+  --bg: #1d1a19;
+  --panel: #2a2524;
+  --panel-hi: #342d2b;
+  --line: #4d423c;
+  --text: #efe7da;
+  --muted: #b0a498;
+  --choice-line: #6e3a37;
+  --choice-hi: #3a2523;
+  --paper-bg: #29231d;
+}
+:root[data-theme='parchment'] {
+  --bg: #efe4cb;
+  --panel: #f6edd8;
+  --panel-hi: #fbf4e3;
+  --line: #c7b38b;
+  --text: #2b2116;
+  --muted: #6b5a43;
+  --gold: #7a5a14;
+  --blood: #8f1d1d;
+  --blood-hi: #b32424;
+  --choice-line: #b08a6a;
+  --choice-hi: #f1e0c4;
+  --paper: #e6d5ae;
+  --paper-ink: #2b2116;
+  --paper-line: #7a5a14;
+  --paper-head: #5a4424;
+  --paper-bg: #f3e7cb;
+  color-scheme: light;
+}
+:root[data-size='small'] { --tscale: 0.9; }
+:root[data-size='large'] { --tscale: 1.2; }
+:root[data-size='xlarge'] { --tscale: 1.45; }
+:root[data-font='serif'] { --font-story: Georgia, 'Times New Roman', serif; --fscale: 1; }
+:root[data-font='sans'] { --font-story: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; --fscale: 0.98; --lh: 1.6; }
+:root[data-font='dyslexic'] { --font-story: 'OpenDyslexic', 'Comic Sans MS', sans-serif; --fscale: 0.8; --lh: 1.85; --ls: 0.02em; }
+
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--text); }
 body {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-story);
   font-size: var(--size);
-  line-height: 1.65;
+  line-height: var(--lh);
+  letter-spacing: var(--ls);
   min-height: 100vh;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  -webkit-text-size-adjust: 100%;
 }
 #app { max-width: var(--maxw); margin: 0 auto; padding: 1rem 1.1rem 4rem; }
-h1, h2 { font-weight: normal; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
-h1 { font-size: 1.9rem; text-align: center; margin: 3rem 0 0.25rem; }
-.sub { text-align: center; color: var(--muted); margin: 0 0 2.5rem; font-style: italic; }
-h2.story-h { font-size: 1.15rem; margin: 1.6rem 0 0.8rem; }
+h1, h2, h3 { font-family: var(--font-title); font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+h1 { font-size: 1.7em; text-align: center; margin: 1.2rem 0 0.25rem; }
+h2 { font-size: 1.05em; }
+h2.story-h { font-size: 0.95em; margin: 1.8rem 0 0.8rem; text-align: center; }
+.sub { text-align: center; color: var(--muted); margin: 0 0 1.8rem; font-style: italic; }
 p { margin: 0 0 1rem; }
-blockquote { margin: 0 0 1rem; padding: 0.2rem 0 0.2rem 1rem; border-left: 2px solid var(--gold); color: #d8cdb8; font-style: italic; }
+a { color: var(--gold); }
+blockquote { margin: 0 0 1rem; padding: 0.2rem 0 0.2rem 1rem; border-left: 2px solid var(--accent); color: var(--muted); font-style: italic; }
+:root[data-theme='night'] blockquote, :root:not([data-theme]) blockquote { color: #d8cdb8; }
 
 button {
-  font: inherit; color: var(--text); background: var(--panel); border: 1px solid var(--line);
+  font: inherit; letter-spacing: inherit; color: var(--text); background: var(--panel); border: 1px solid var(--line);
   border-radius: 0.5rem; padding: 0.75rem 1rem; cursor: pointer; text-align: left; width: 100%;
   margin: 0 0 0.6rem; min-height: 2.75rem;
+  transition: border-color 0.15s, background-color 0.15s;
 }
 button:hover, button:focus-visible { border-color: var(--gold); outline: none; }
 button:focus-visible { box-shadow: 0 0 0 2px var(--gold); }
-button.choice { border-color: #5a2a2a; }
-button.choice:hover, button.choice:focus-visible { background: #261515; border-color: var(--blood-hi); }
-button.primary { background: var(--blood); border-color: var(--blood-hi); text-align: center; }
+button.choice { border-color: var(--choice-line); border-left: 4px solid var(--accent); }
+button.choice:hover, button.choice:focus-visible { background: var(--choice-hi); border-color: var(--blood-hi); border-left-color: var(--accent); }
+button.primary { background: var(--blood); border-color: var(--blood-hi); color: var(--on-blood); text-align: center; font-family: var(--font-title); letter-spacing: 0.08em; font-size: 0.9em; }
 button.primary:hover, button.primary:focus-visible { background: var(--blood-hi); }
-button.small { width: auto; padding: 0.35rem 0.8rem; margin: 0 0.4rem 0 0; min-height: 2.2rem; font-size: 0.9rem; text-align: center; }
-button.danger:hover { border-color: var(--blood-hi); color: #f0a09a; }
+button.small { width: auto; padding: 0.35rem 0.8rem; margin: 0 0.4rem 0 0; min-height: 2.2rem; font-size: 0.85em; text-align: center; }
+button.danger:hover { border-color: var(--blood-hi); color: var(--blood-hi); }
+button.ghost { background: transparent; color: var(--muted); border-style: dashed; text-align: center; }
 button:disabled { opacity: 0.4; cursor: default; }
 
 .bar { display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; border-bottom: 1px solid var(--line); padding-bottom: 0.5rem; margin-bottom: 1.25rem; }
-.bar .title { color: var(--muted); font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar .title { color: var(--accent); font-family: var(--font-title); font-size: 0.7em; letter-spacing: 0.14em; text-transform: uppercase; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .bar button { width: auto; margin: 0; }
 .actions { margin-top: 1.5rem; }
-.tag { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 1rem; padding: 0.05rem 0.5rem; margin-left: 0.5rem; }
+.tag { font-size: 0.7em; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 1rem; padding: 0.05rem 0.5rem; margin-left: 0.5rem; }
 
-dialog { background: var(--bg); color: var(--text); border: 1px solid var(--gold); border-radius: 0.75rem; padding: 1.1rem; width: min(36rem, 94vw); max-height: 90vh; overflow: auto; }
+/* ---- Story page ---- */
+.chapter-head { text-align: center; margin: 0.4rem 0 1.6rem; }
+.chapter-head .kicker { font-family: var(--font-title); font-size: 0.7em; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin: 0; }
+.chapter-head h1 { font-size: 1.45em; margin: 0.3rem 0 0.6rem; line-height: 1.25; }
+.ornament { display: block; width: 9rem; height: 0.7rem; margin: 0 auto; color: var(--accent); }
+#story p { hyphens: auto; -webkit-hyphens: auto; }
+#story.opening > p:first-of-type::first-letter {
+  font-family: var(--font-title); float: left; font-size: 3.3em; line-height: 0.85; padding: 0.08em 0.1em 0 0; color: var(--accent);
+}
+:root[data-font='dyslexic'] #story.opening > p:first-of-type::first-letter { font-size: 2.4em; }
+#story.fade { animation: fade-in 0.35s ease-out; }
+@keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* ---- Title screen ---- */
+.title-art { margin: 0.4rem -1.1rem 0; border-bottom: 1px solid var(--gold); position: relative; overflow: hidden; background: #0a0807; }
+.title-art svg { display: block; width: 100%; height: auto; max-height: 15rem; }
+.title-art::after { content: ''; position: absolute; inset: auto 0 0 0; height: 2.5rem; background: linear-gradient(to bottom, transparent, var(--bg)); opacity: 0.6; pointer-events: none; }
+.title-block h1 { font-size: 1.9em; margin-top: 1.1rem; letter-spacing: 0.16em; }
+
+dialog { background: var(--bg); color: var(--text); border: 1px solid var(--gold); border-radius: 0.75rem; padding: 1.1rem; width: min(38rem, 95vw); max-height: 92vh; overflow: auto; font-family: var(--font-story); font-size: var(--size); line-height: var(--lh); letter-spacing: var(--ls); }
 dialog::backdrop { background: rgba(0, 0, 0, 0.75); }
-dialog h2 { margin-top: 0; font-size: 1.1rem; }
+dialog h2 { margin-top: 1.2rem; font-size: 0.95em; }
+dialog h2:first-child { margin-top: 0; }
 .slot { border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.6rem 0.75rem; margin-bottom: 0.6rem; background: var(--panel); }
 .slot .name { color: var(--gold); }
-.slot .info { color: var(--muted); font-size: 0.9rem; margin: 0.1rem 0 0.5rem; }
-.slot.warn .info { color: #d9886f; }
+.slot .info { color: var(--muted); font-size: 0.9em; margin: 0.1rem 0 0.5rem; }
+.slot.warn .info { color: var(--blood-hi); }
 textarea { width: 100%; min-height: 6rem; background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.5rem; font: 0.8rem ui-monospace, monospace; }
 .row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0; }
 .row button { width: auto; margin: 0; }
 
-#toast { position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%); max-width: 92vw; background: #2a2020; border: 1px solid var(--gold); border-radius: 0.5rem; padding: 0.6rem 0.9rem; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 10; font-size: 0.95rem; }
+#toast { position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%); max-width: 92vw; background: var(--panel-hi); color: var(--text); border: 1px solid var(--gold); border-radius: 0.5rem; padding: 0.6rem 0.9rem; opacity: 0; pointer-events: none; transition: opacity 0.2s; z-index: 10; font-size: 0.9em; }
 #toast.show { opacity: 1; }
 #toast.err { border-color: var(--blood-hi); }
-.error-box { border: 1px solid var(--blood-hi); border-radius: 0.5rem; padding: 0.8rem 1rem; white-space: pre-wrap; font: 0.85rem ui-monospace, monospace; background: #1f1212; margin-bottom: 1rem; }
-@media (prefers-reduced-motion: reduce) { #toast { transition: none; } }
+.error-box { border: 1px solid var(--blood-hi); border-radius: 0.5rem; padding: 0.8rem 1rem; white-space: pre-wrap; font: 0.85rem ui-monospace, monospace; background: var(--panel); margin-bottom: 1rem; }
+@media (prefers-reduced-motion: reduce) { #toast, button { transition: none; } #story.fade { animation: none; } }
 
-/* ---- Library (session 2). Fonts and the full look arrive in session 4. ---- */
+/* ---- Library ---- */
 .shelf { display: grid; gap: 0.75rem; margin: 1.5rem 0; }
 @media (min-width: 34rem) { .shelf { grid-template-columns: 1fr 1fr; } }
 button.book {
@@ -76,25 +174,109 @@ button.book {
   background: linear-gradient(135deg, color-mix(in srgb, var(--accent2) 22%, var(--panel)), var(--panel) 70%);
 }
 button.book:hover, button.book:focus-visible { border-color: var(--accent); }
-button.book .num { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-button.book .btitle { font-size: 1.2rem; color: var(--text); letter-spacing: 0.03em; }
-button.book .where { font-size: 0.9rem; color: var(--muted); font-style: italic; }
-button.book .progress { font-size: 0.85rem; color: var(--muted); margin-top: 0.35rem; }
+button.book .num { font-family: var(--font-title); font-size: 0.65em; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+button.book .btitle { font-family: var(--font-title); font-size: 1em; color: var(--text); letter-spacing: 0.05em; }
+button.book .where { font-size: 0.9em; color: var(--muted); font-style: italic; }
+button.book .progress { font-size: 0.85em; color: var(--muted); margin-top: 0.35rem; }
 button.book.done .progress { color: var(--accent); }
 button.book.locked { opacity: 0.55; }
-dialog .num { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0; }
-.hint { display: block; font-size: 0.85rem; color: var(--muted); font-style: italic; margin-top: 0.15rem; }
+dialog .num { font-family: var(--font-title); font-size: 0.7em; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.hint { display: block; font-size: 0.85em; color: var(--muted); font-style: italic; margin-top: 0.15rem; }
 .row.center { justify-content: center; align-items: center; }
-.field { display: block; margin: 0 0 0.8rem; color: var(--muted); font-size: 0.9rem; }
+.field { display: block; margin: 0 0 0.8rem; color: var(--muted); font-size: 0.9em; }
 .field select, .field input { display: block; width: 100%; margin-top: 0.25rem; font: inherit; font-size: 1rem; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.55rem 0.6rem; }
 .field .inline { display: flex; gap: 0.4rem; align-items: stretch; margin-top: 0.25rem; }
 .field .inline input { margin-top: 0; flex: 1; }
 .field .inline button { margin: 0; }
 .status p { margin: 0 0 0.55rem; }
-.status .label { display: block; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
-.journal { background: #1c1813; border: 1px solid #4a3d2c; border-radius: 0.5rem; padding: 1rem 1.1rem; color: #e6dcc7; }
-.journal h3 { font-weight: normal; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.95rem; margin: 1rem 0 0.4rem; }
-.journal h4 { font-weight: normal; font-style: italic; color: #d8cdb8; margin: 0.6rem 0 0.3rem; }
-.journal .velati { background: #e9dcc0; color: #2b2116; border-radius: 0.35rem; padding: 0.8rem 1rem; margin: 0.6rem 0; }
-.journal .velati h4 { color: #5a4424; }
-.journal .velati blockquote { border-left: 2px solid #8a6d3b; margin: 0.5rem 0; padding-left: 0.8rem; font-style: italic; }
+.status .label { display: block; font-family: var(--font-title); font-size: 0.65em; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); }
+
+/* ---- Velati journal and the codex: parchment ---- */
+.journal, .codex .entry { background: var(--paper-bg); border: 1px solid var(--paper-line); border-radius: 0.5rem; color: var(--text); }
+.journal { padding: 1rem 1.1rem; }
+:root[data-theme='parchment'] .journal, :root[data-theme='parchment'] .codex .entry { background: var(--paper-bg); }
+.journal h3 { color: var(--gold); letter-spacing: 0.1em; font-size: 0.9em; margin: 1rem 0 0.4rem; }
+.journal h4 { font-weight: normal; font-style: italic; color: var(--muted); margin: 0.6rem 0 0.3rem; }
+.journal .velati { background: var(--paper); color: var(--paper-ink); border-radius: 0.35rem; padding: 0.8rem 1rem; margin: 0.6rem 0; box-shadow: inset 0 0 18px rgba(90, 68, 36, 0.25); }
+.journal .velati h4 { font-family: var(--font-script); font-style: normal; font-size: 1.7em; line-height: 1.1; color: var(--paper-head); margin: 0 0 0.5rem; }
+:root[data-font='dyslexic'] .journal .velati h4 { font-family: var(--font-story); font-size: 1.1em; }
+.journal .velati blockquote { border-left: 2px solid var(--paper-line); color: var(--paper-ink); margin: 0.5rem 0; padding-left: 0.8rem; }
+
+/* ---- Menu tabs ---- */
+.tabs { display: flex; gap: 0.35rem; overflow-x: auto; margin: -0.2rem -0.2rem 1rem; padding: 0.2rem; border-bottom: 1px solid var(--line); scrollbar-width: thin; }
+.tabs button.tab { width: auto; flex: none; margin: 0; padding: 0.4rem 0.75rem; min-height: 2.3rem; font-family: var(--font-title); font-size: 0.68em; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 0.4rem 0.4rem 0 0; border-bottom-color: transparent; background: transparent; color: var(--muted); text-align: center; }
+.tabs button.tab[aria-selected='true'] { color: var(--gold); border-color: var(--gold); border-bottom-color: var(--bg); background: var(--panel); }
+.empty { color: var(--muted); font-style: italic; text-align: center; margin: 1.5rem 0; }
+.count { color: var(--muted); font-size: 0.85em; margin: 0 0 0.8rem; }
+
+/* ---- Settings ---- */
+.setting { margin: 0 0 1.2rem; }
+.setting .name { display: block; font-family: var(--font-title); font-size: 0.68em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.35rem; }
+.setting .help { display: block; font-size: 0.85em; color: var(--muted); font-style: italic; margin-top: 0.3rem; }
+.seg { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.seg button { width: auto; margin: 0; flex: 1 1 auto; min-width: 4.5rem; text-align: center; padding: 0.5rem 0.7rem; }
+.seg button[aria-pressed='true'] { border-color: var(--gold); background: var(--panel-hi); box-shadow: inset 0 -3px 0 var(--gold); }
+.preview { border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.7rem 0.9rem; margin: 0 0 1.2rem; background: var(--panel); }
+.preview p { margin: 0; }
+
+/* ---- People, family tree, codex, achievements ---- */
+.person, .ach { border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.65rem 0.85rem; margin: 0 0 0.6rem; background: var(--panel); }
+.person .who { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.1rem 0.6rem; }
+.person .pname { color: var(--text); font-family: var(--font-title); font-size: 0.85em; letter-spacing: 0.06em; }
+.person .ptitle { color: var(--accent); font-style: italic; font-size: 0.9em; }
+.person .notes { color: var(--muted); font-size: 0.88em; margin-top: 0.15rem; }
+.person .bio { margin: 0.35rem 0 0; font-size: 0.95em; }
+.person.gone { opacity: 0.72; }
+.person.gone .pname::before { content: '\2020\00a0'; color: var(--blood-hi); }
+.ach .atitle { font-family: var(--font-title); font-size: 0.82em; letter-spacing: 0.08em; color: var(--gold); }
+.ach .atext { margin: 0.15rem 0 0; font-size: 0.92em; color: var(--muted); }
+.ach.locked { opacity: 0.65; border-style: dashed; }
+.ach.locked .atitle { color: var(--muted); }
+.ach .earned { font-size: 0.78em; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; font-family: var(--font-title); }
+
+.codex details.entry { margin: 0 0 0.5rem; padding: 0; }
+.codex summary { cursor: pointer; padding: 0.6rem 0.85rem; font-family: var(--font-title); font-size: 0.85em; letter-spacing: 0.06em; list-style: none; display: flex; justify-content: space-between; gap: 0.5rem; align-items: baseline; }
+.codex summary::-webkit-details-marker { display: none; }
+.codex summary::after { content: '\002B'; color: var(--gold); }
+.codex details[open] summary::after { content: '\2212'; }
+.codex summary:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; border-radius: 0.5rem; }
+.codex .body { padding: 0 0.85rem 0.5rem; border-top: 1px dashed var(--paper-line); padding-top: 0.6rem; }
+.codex .body p { font-size: 0.97em; }
+.codex .src { font-size: 0.78em; color: var(--muted); font-style: italic; margin: 0 0 0.5rem; }
+.codex .entry.locked { background: transparent; border-style: dashed; border-color: var(--line); color: var(--muted); padding: 0.6rem 0.85rem; font-style: italic; font-size: 0.9em; margin: 0 0 0.5rem; }
+.codex h3 { margin: 1.2rem 0 0.5rem; font-size: 0.8em; }
+
+.family { margin: 0.5rem 0; }
+.family ul { list-style: none; margin: 0 0 0 0.9rem; padding: 0 0 0 1.1rem; border-left: 1px solid var(--line); }
+.family > ul { margin-left: 0; padding-left: 0; border-left: 0; }
+.family li { position: relative; margin: 0.7rem 0; }
+.family ul ul > li::before { content: ''; position: absolute; left: -1.1rem; top: 1.3rem; width: 0.9rem; border-top: 1px solid var(--line); }
+.family .couple { display: flex; flex-wrap: wrap; align-items: stretch; gap: 0.35rem; }
+.family .member { border: 1px solid var(--line); border-radius: 0.5rem; background: var(--panel); padding: 0.4rem 0.7rem; min-width: 7rem; }
+.family .member.you { border-color: var(--gold); }
+.family .member .mname { font-family: var(--font-title); font-size: 0.8em; letter-spacing: 0.06em; display: block; }
+.family .member .mlabel { color: var(--accent); font-size: 0.82em; font-style: italic; }
+.family .member .mbook { color: var(--muted); font-size: 0.72em; display: block; }
+.family .member.dead { opacity: 0.7; }
+.family .member.dead .mname::before { content: '\2020\00a0'; color: var(--blood-hi); }
+.family .member.unknown .mname::after { content: '\00a0?'; color: var(--muted); }
+.family .join { align-self: center; color: var(--gold); font-size: 0.7em; }
+
+/* ---- Content notes screen ---- */
+.notes-screen { text-align: center; margin-top: 2rem; }
+.notes-screen ul { list-style: none; padding: 0; margin: 1.2rem auto; max-width: 28rem; text-align: left; }
+.notes-screen li { border-left: 3px solid var(--accent); padding: 0.4rem 0.8rem; margin: 0 0 0.6rem; background: var(--panel); border-radius: 0 0.4rem 0.4rem 0; }
+.notes-screen li strong { font-family: var(--font-title); font-size: 0.8em; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); font-weight: 400; }
+
+/* ---- Developer panel ---- */
+.dev { font-size: 0.9em; }
+.dev h3 { font-size: 0.75em; margin: 1.1rem 0 0.4rem; }
+.dev code, .dev .mono { font: 0.8rem ui-monospace, monospace; }
+.dev table { width: 100%; border-collapse: collapse; margin: 0.4rem 0; }
+.dev td, .dev th { border-bottom: 1px solid var(--line); padding: 0.2rem 0.3rem; text-align: left; vertical-align: middle; }
+.dev th { font-weight: normal; color: var(--muted); font-size: 0.8em; }
+.dev td input { width: 100%; font: 0.8rem ui-monospace, monospace; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 0.3rem; padding: 0.2rem 0.3rem; }
+.dev .kind { color: var(--muted); font-size: 0.75em; }
+.dev .bad { color: var(--blood-hi); }
+.dev .ok { color: #6aa56a; }
+.dev .report { background: var(--panel); border: 1px solid var(--line); border-radius: 0.4rem; padding: 0.5rem 0.7rem; margin: 0.5rem 0; font: 0.78rem ui-monospace, monospace; white-space: pre-wrap; }

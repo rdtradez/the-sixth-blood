@@ -23,6 +23,7 @@ export function createSys() {
     originals: {}, // id -> { state, by, fate, name, book }
     items: {}, // id -> { book, displayed, lost }
     sleep: { plan: null, wake: null, history: [] },
+    lore: { codex: {}, kin: {} }, // id -> { book, chapter } / id -> { book, status } (session 4)
     lastRest: null,
   };
 }

@@ -169,6 +169,24 @@
           "title": "Engine Test: Systems"
         }
       ]
+    },
+    {
+      "id": "engine-test-d",
+      "dev": true,
+      "asBook": 2,
+      "title": "Engine Test: Player Features",
+      "city": "Test",
+      "era": "session 4",
+      "chapters": [
+        {
+          "id": "etd1",
+          "file": "engine-test/etd1.tsb",
+          "title": "Sample Chapter: The Test Hill",
+          "notes": [
+            "et_test"
+          ]
+        }
+      ]
     }
   ]
 }

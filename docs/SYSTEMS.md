@@ -185,3 +185,20 @@ Skipped books get the originals' `quick` defaults from `content/originals.json`,
 ## Screens
 
 `game.systems()` returns a plain summary for the menus (Collis, ventures, holdings, village, circle, people met, originals the hero has learned of, the collection, the last wake report). Session 4's People screen and codex read it.
+
+## Codex, family, notes and achievements
+
+Four content files feed the player screens.
+
+`content/codex.json` holds `categories` and `entries`. An entry has an id, category, title and text, and may link an `original` or a `person`. It unlocks when the script runs `$ do discover("id")`, when its linked original is known, or when its linked person is met. Locked entries show as a closed row unless marked `hidden`. Functions: `discovered("id")`, `codex_count()`.
+
+`content/family.json` lists the Valerius family. A member has an id, name, optional `person`, `spouse`, `parent` and a `book` it first appears in. `$ do kin("id")` makes a member known and `$ do kin("id", "dead")` sets a status (`living`, `dead` or `unknown`). A `quick` status on a member sets it for skipped books on a quick start. Functions: `kin_known("id")`, `kin_status("id")`.
+
+`content/notes.json` holds content notes by id. A manifest chapter can list them in `notes`. They are shown once before the chapter opens, when the player has notes turned on.
+
+`content/achievements.json` holds achievements: id, title, text, `at` (`book` or `chapter`), optional `book`, and a `when` expression using the usual script functions. They are checked at chapter or book end and stored in the profile. Quick starts and developer jumps earn none. `npm run check` validates the expressions.
+
+## Developer tools
+
+Developer mode (`?dev`) adds a Dev tab: jump to any chapter or scene, view and set flags and stats, take and restore snapshots, and run the branch explorer, which plays every choice path of a chapter and reports unreached scenes and errors. `npm run walk -- <chapter>` runs the explorer from the command line.
+

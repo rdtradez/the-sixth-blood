@@ -1,49 +1,27 @@
-// Reader UI: library screen, book start options, Previously screen, story view, and the
-// menu (story voice status and saves). All game logic lives in engine/.
-// Settings and the full look and feel arrive in session 4.
+// Reader UI: title screen and library, book start options, Previously screen, story view, content
+// notes, and the menu (status, people, family, codex, achievements, settings, saves, developer).
+// All game logic lives in engine/; this file only draws it.
 
 import { Game } from '../engine/game.js';
 import { createFetchLoader } from '../engine/fetch-loader.js';
 import { MemoryStorage, MANUAL_SLOTS } from '../engine/saves.js';
+import { h, inline, svg, toast } from './dom.js';
+import { titleSvg, ornamentSvg } from './art.js';
+import { applySettings, settingsPanel } from './settings-ui.js';
+import { youPanel, peoplePanel, familyPanel, codexPanel, achievementsPanel } from './panels.js';
+import { devPanel } from './devpanel.js';
 
 const app = document.getElementById('app');
 const dialog = document.getElementById('dialog');
-const toastEl = document.getElementById('toast');
 
 // ---- helpers -----------------------------------------------------------------------------
 
-function h(tag, attrs = {}, ...kids) {
-  const el = document.createElement(tag);
-  for (const [k, v] of Object.entries(attrs)) {
-    if (v === false || v == null) continue;
-    if (k === 'class') el.className = v;
-    else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
-    else el.setAttribute(k, v === true ? '' : v);
-  }
-  for (const kid of kids.flat()) {
-    if (kid == null || kid === false) continue;
-    el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
-  }
-  return el;
-}
-
-/** Turn *italic* and **bold** into elements. Everything else stays plain text (never HTML). */
-function inline(text) {
-  const frag = document.createDocumentFragment();
-  for (const part of text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/)) {
-    if (part.startsWith('**') && part.endsWith('**') && part.length > 4) frag.append(h('strong', {}, part.slice(2, -2)));
-    else if (part.startsWith('*') && part.endsWith('*') && part.length > 2) frag.append(h('em', {}, part.slice(1, -1)));
-    else frag.append(part);
-  }
-  return frag;
-}
-
-let toastTimer;
-function toast(message, isError = false) {
-  toastEl.textContent = message;
-  toastEl.className = `show${isError ? ' err' : ''}`;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { toastEl.className = ''; }, isError ? 6000 : 3200);
+/** Each book sets its accent colors while it is read (and the library resets them). */
+function applyBookTheme(bookId) {
+  const book = bookId ? game.manifest.books.find((b) => b.id === bookId) : null;
+  const root = document.documentElement.style;
+  if (book?.accent) { root.setProperty('--accent', book.accent); root.setProperty('--accent2', book.accent2 ?? book.accent); }
+  else { root.removeProperty('--accent'); root.removeProperty('--accent2'); }
 }
 
 function pickStorage() {
@@ -100,8 +78,12 @@ function progressText(b) {
 }
 
 function showLibrary() {
+  applyBookTheme(null);
   const latest = game.saves.latest();
-  const kids = [h('h1', {}, 'The Sixth Blood'), h('p', { class: 'sub' }, 'Two thousand years. Seven cities. One bloodline.')];
+  const kids = [
+    h('div', { class: 'title-art' }, svg(titleSvg())),
+    h('div', { class: 'title-block' }, h('h1', {}, 'The Sixth Blood'), h('p', { class: 'sub' }, 'Two thousand years. Seven cities. One bloodline.')),
+  ];
   if (latest) {
     kids.push(h('button', { class: 'primary', onclick: () => guard(() => loadAndShow(latest.slot)) },
       `Continue${latest.meta?.chapterTitle ? `: ${latest.meta.chapterTitle}` : ''}`));
@@ -122,7 +104,7 @@ function showLibrary() {
     shelf.append(card);
   }
   kids.push(shelf);
-  const row = h('div', { class: 'row center' }, h('button', { class: 'small', onclick: () => openMenu() }, 'Saves'));
+  const row = h('div', { class: 'row center' }, h('button', { class: 'small', onclick: () => openMenu() }, 'Menu'));
   if (game.devMode) row.append(h('span', { class: 'tag' }, 'developer mode'));
   kids.push(row);
   app.replaceChildren(...kids);
@@ -260,8 +242,23 @@ async function loadAndShow(slot) {
 
 function showFrame() {
   const frame = game.frame;
+  applyBookTheme(game.state.book);
+  const earned = game.takeNewAchievements();
+  if (earned.length) toast(`Achievement: ${earned.map((x) => x.title).join(', ')}`);
+  const notes = game.pendingNotes();
+  if (notes.length) { showNotes(notes); return; }
+
   const meta = game.chapterMeta[game.state.chapter];
-  const story = h('main', { id: 'story' });
+  const book = game.manifest.books.find((b) => b.id === game.state.book);
+  const story = h('main', { id: 'story', class: `fade${frame.opening ? ' opening' : ''}` });
+  if (frame.opening && meta && frame.wait !== 'book_end') {
+    const orn = svg(ornamentSvg());
+    orn.setAttribute('class', 'ornament');
+    story.append(h('header', { class: 'chapter-head' },
+      h('p', { class: 'kicker' }, meta.index >= 0 ? `Chapter ${meta.index + 1}` : (book?.title ?? '')),
+      h('h1', {}, meta.title),
+      orn));
+  }
   for (const p of frame.paragraphs) {
     if (p.kind === 'h') story.append(h('h2', { class: 'story-h' }, inline(p.text)));
     else if (p.kind === 'quote') story.append(h('blockquote', {}, inline(p.text)));
@@ -277,9 +274,9 @@ function showFrame() {
       actions.append(b);
     });
   } else if (frame.wait === 'book_end') {
-    const book = game.manifest.books.find((b) => b.id === frame.book);
+    const endBook = game.manifest.books.find((b) => b.id === frame.book);
     const next = frame.nextBook ? game.manifest.books.find((b) => b.id === frame.nextBook) : null;
-    story.append(h('h2', { class: 'story-h' }, `The end of ${book?.title ?? 'this book'}`));
+    story.append(h('h2', { class: 'story-h' }, `The end of ${endBook?.title ?? 'this book'}`));
     story.append(h('p', { class: 'info' }, 'Your story is kept so the next book can carry it on. Save to a slot from the menu to keep this ending as well.'));
     if (next?.chapters?.length) {
       first = h('button', { class: 'primary', onclick: () => guard(async () => { await game.continueToNextBook(); const j = game.state.journal ?? []; if (j.length) showPreviously(j, () => showFrame(), 'Begin'); else showFrame(); }) }, `Continue to ${next.title}`);
@@ -292,36 +289,104 @@ function showFrame() {
     first = h('button', { class: 'primary', onclick: () => guard(async () => { await game.continue(); showFrame(); }) }, 'Continue');
     actions.append(first);
   }
+  actions.append(h('div', { id: 'rewind-slot' }));
 
   app.replaceChildren(
     h('div', { class: 'bar' },
-      h('span', { class: 'title' }, frame.wait === 'book_end' ? '' : meta?.title ?? ''),
+      h('span', { class: 'title' }, frame.wait === 'book_end' ? '' : book?.title ?? ''),
       h('button', { class: 'small', onclick: () => openMenu() }, 'Menu')),
     story,
     actions,
   );
+  updateRewind();
   window.scrollTo(0, 0);
   first?.focus({ preventScroll: true });
   if (game.lastSaveError) toast(game.lastSaveError.message, true);
 }
 
-// ---- saves dialog --------------------------------------------------------------------------------
+/** The "take back" button, shown only when Rewind is on and there is a choice to take back. */
+function updateRewind() {
+  const slot = document.getElementById('rewind-slot');
+  if (!slot) return;
+  slot.replaceChildren();
+  if (game.canRewind()) {
+    slot.append(h('button', { class: 'ghost', onclick: () => guard(async () => { await game.rewind(); showFrame(); }) }, 'Take back your last choice'));
+  }
+}
 
-function openMenu() {
-  renderSaves();
+/** Heads up about heavy themes, shown before a chapter that has content notes (Settings, Content notes). */
+function showNotes(notes) {
+  const go = h('button', { class: 'primary', onclick: () => { game.ackNotes(); showFrame(); } }, 'Continue');
+  app.replaceChildren(
+    h('div', { class: 'notes-screen' },
+      h('h1', {}, 'Before you read'),
+      h('p', { class: 'sub' }, 'This chapter deals with:'),
+      h('ul', {}, ...notes.map((n) => h('li', {}, h('strong', {}, n.label), n.text ? h('div', {}, n.text) : null)))),
+    h('div', { class: 'actions' },
+      go,
+      h('button', { onclick: () => showLibrary() }, 'Back to the library'),
+      h('button', { class: 'ghost', onclick: () => { game.setSetting('contentNotes', false); game.ackNotes(); showFrame(); } }, 'Stop showing content notes')),
+  );
+  window.scrollTo(0, 0);
+  go.focus({ preventScroll: true });
+}
+
+// ---- menu ------------------------------------------------------------------------------------------
+
+const inStory = () => Boolean(game.state && game.frame && app.querySelector('#story'));
+
+function menuTabs() {
+  return [
+    { id: 'you', label: 'You', show: inStory() },
+    { id: 'people', label: 'People' },
+    { id: 'family', label: 'Family' },
+    { id: 'codex', label: 'Codex' },
+    { id: 'deeds', label: 'Achievements' },
+    { id: 'settings', label: 'Settings' },
+    { id: 'saves', label: 'Saves' },
+    { id: 'dev', label: 'Dev', show: game.devMode },
+  ].filter((t) => t.show !== false);
+}
+
+let menuTab = 'saves';
+
+function openMenu(tab) {
+  const tabs = menuTabs();
+  menuTab = tabs.some((t) => t.id === tab) ? tab : tabs.some((t) => t.id === menuTab) ? menuTab : tabs[0].id;
+  if (!tab && inStory() && menuTab === 'saves') menuTab = 'you';
+  renderMenu();
   if (!dialog.open) dialog.showModal();
   dialog.scrollTop = 0;
 }
 
-function statusSection() {
-  const lines = game.status();
-  if (!lines.length) return [];
-  return [h('h2', {}, 'How you are'), h('div', { class: 'status' }, ...lines.map((l) => h('p', {}, h('span', { class: 'label' }, l.label), l.text)))];
+function renderMenu(keepScroll = false) {
+  const tabs = menuTabs();
+  const top = dialog.scrollTop;
+  const bar = h('div', { class: 'tabs', role: 'tablist' }, ...tabs.map((t) => h('button', {
+    class: 'tab', role: 'tab', type: 'button', 'aria-selected': String(t.id === menuTab),
+    onclick: () => { menuTab = t.id; renderMenu(); dialog.scrollTop = 0; },
+  }, t.label)));
+  const panels = {
+    you: () => youPanel(game),
+    people: () => peoplePanel(game),
+    family: () => familyPanel(game),
+    codex: () => codexPanel(game),
+    deeds: () => achievementsPanel(game),
+    settings: () => settingsPanel(game, () => renderMenu(true)),
+    saves: () => savesPanel(),
+    dev: () => devPanel(game, { redraw: () => renderMenu(), showFrame, closeMenu: () => dialog.close(), toast }),
+  };
+  const body = h('div', { role: 'tabpanel' }, ...(panels[menuTab] ?? panels.saves)());
+  dialog.replaceChildren(bar, body, h('div', { class: 'row' },
+    h('button', { class: 'small', onclick: () => { dialog.close(); showLibrary(); } }, 'Library'),
+    h('button', { class: 'small', onclick: () => dialog.close() }, 'Close')));
+  if (keepScroll) dialog.scrollTop = top;
 }
 
-function renderSaves() {
-  const inStory = Boolean(game.state && game.frame);
-  const playing = inStory; // saving at the end of a book keeps that ending for starting the next one
+dialog.addEventListener('close', () => updateRewind());
+
+function savesPanel() {
+  const playing = inStory(); // saving at the end of a book keeps that ending for starting the next one
   const rows = game.saves.list().map((s) => {
     const canSave = playing && (s.slot === 'quick' || MANUAL_SLOTS.includes(s.slot));
     let info = 'Empty';
@@ -336,19 +401,18 @@ function renderSaves() {
       h('div', { class: 'info' }, info),
       canSave ? h('button', { class: 'small', onclick: () => doSave(s.slot) }, 'Save here') : null,
       !s.empty && !s.corrupt && !s.newer ? h('button', { class: 'small', onclick: () => { dialog.close(); guard(() => loadAndShow(s.slot)); } }, 'Load') : null,
-      !s.empty ? h('button', { class: 'small danger', onclick: () => { if (confirm(`Delete ${slotName(s.slot)}?`)) { game.saves.delete(s.slot); renderSaves(); } } }, 'Delete') : null);
+      !s.empty ? h('button', { class: 'small danger', onclick: () => { if (confirm(`Delete ${slotName(s.slot)}?`)) { game.saves.delete(s.slot); renderMenu(true); } } }, 'Delete') : null);
   });
 
   const area = h('textarea', { placeholder: 'Paste exported save text here to import', 'aria-label': 'Import save text' });
   const fileInput = h('input', { type: 'file', accept: '.json,.txt,application/json', hidden: true,
     onchange: async (e) => { const f = e.target.files[0]; if (f) doImport(await f.text()); } });
 
-  dialog.replaceChildren(
-    ...(inStory && app.querySelector('#story') ? statusSection() : []),
+  return [
     h('h2', {}, 'Saves'),
     ...rows,
     h('h2', {}, 'Backup'),
-    h('p', { class: 'info' }, 'Export all saves to a file you can keep or move to another device.'),
+    h('p', { class: 'hint' }, 'Export all saves, achievements and settings to a file you can keep or move to another device.'),
     h('div', { class: 'row' },
       h('button', { class: 'small', onclick: () => doExport() }, 'Export to file'),
       h('button', { class: 'small', onclick: () => doCopy() }, 'Copy to clipboard'),
@@ -356,17 +420,14 @@ function renderSaves() {
       fileInput),
     area,
     h('div', { class: 'row' }, h('button', { class: 'small', onclick: () => doImport(area.value) }, 'Import pasted text')),
-    h('div', { class: 'row' },
-      h('button', { class: 'small', onclick: () => { dialog.close(); showLibrary(); } }, 'Library'),
-      h('button', { class: 'small', onclick: () => dialog.close() }, 'Close')),
-  );
+  ];
 }
 
 function doSave(slot) {
   try {
     game.saveToSlot(slot);
     toast(`Saved to ${slotName(slot)}.`);
-    renderSaves();
+    renderMenu(true);
   } catch (e) {
     toast(e.message, true);
   }
@@ -395,7 +456,8 @@ function doImport(text) {
     const report = game.saves.importText(text);
     const skipped = report.skipped.length ? ` ${report.skipped.length} skipped (${report.skipped.map((s) => s.reason).join(', ')}).` : '';
     toast(`Imported ${report.imported.length} save(s).${skipped}`);
-    renderSaves();
+    applySettings(game);
+    renderMenu(true);
   } catch (e) {
     toast(e.message, true);
   }
@@ -422,6 +484,7 @@ async function boot() {
     return;
   }
   applyDevParam();
+  applySettings(game);
   showLibrary();
   if (!persistent) toast('Saving is blocked in this browser, so progress will be lost when you close the page.', true);
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {

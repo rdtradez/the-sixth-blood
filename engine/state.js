@@ -2,8 +2,8 @@
 
 import { createSys } from './systems/sys-state.js';
 
-export const SCHEMA = 3; // bump when the shape of state changes, and add a schema migration
-export const ENGINE_VERSION = '0.3.0';
+export const SCHEMA = 4; // bump when the shape of state changes, and add a schema migration
+export const ENGINE_VERSION = '0.4.0';
 
 /**
  * state = {
@@ -63,6 +63,11 @@ export const SCHEMA_MIGRATIONS = {
   // 2 -> 3 (session 3): the game systems (phases, Collis, Collesanto, coven, originals, sleep...).
   2(state) {
     state.sys ??= createSys();
+    return state;
+  },
+  // 3 -> 4 (session 4): the codex and the family tree (sys.lore).
+  3(state) {
+    if (state.sys) state.sys.lore ??= { codex: {}, kin: {} };
     return state;
   },
 };

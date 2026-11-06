@@ -8,7 +8,20 @@
   <title>The Sixth Blood</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preload" href="fonts/cinzel-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/eb-garamond-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="app/styles.css">
+  <script>
+    // Apply saved reading settings before the first paint so the page never flashes the wrong colors.
+    try {
+      var s = (JSON.parse(localStorage.getItem('tsb:profile') || '{}').settings) || {};
+      var r = document.documentElement;
+      if (['night', 'dusk', 'parchment'].indexOf(s.theme) >= 0) r.dataset.theme = s.theme;
+      if (['small', 'normal', 'large', 'xlarge'].indexOf(s.textSize) >= 0) r.dataset.size = s.textSize;
+      if (['garamond', 'serif', 'sans', 'dyslexic'].indexOf(s.font) >= 0) r.dataset.font = s.font;
+    } catch (e) { /* storage blocked: the defaults apply */ }
+  </script>
 </head>
 <body>
   <div id="app" aria-live="polite"></div>

@@ -45,7 +45,9 @@ export class Runner {
   start(scene = this.chapter.start) {
     this.state.stack = [];
     this.#enterScene(scene);
-    return this.#run();
+    const frame = this.#run();
+    frame.opening = true; // the first screen of the chapter (drop cap, content notes)
+    return frame;
   }
 
   /** Re-attach to a loaded state that is sitting at a wait point. Executes nothing. */

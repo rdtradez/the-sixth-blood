@@ -38,6 +38,22 @@
       "major": true,
       "default": "left",
       "note": "Developer test: the door taken in the engine test"
+    },
+    "et.hill": {
+      "kind": "enum",
+      "values": [
+        "climbed",
+        "stayed"
+      ],
+      "book": "engine-test-d",
+      "major": true,
+      "default": "climbed",
+      "note": "Developer test: what the sample chapter did at the hill"
+    },
+    "et.mark": {
+      "kind": "flag",
+      "book": "engine-test-d",
+      "note": "Developer test: set on one branch of the sample chapter"
     }
   }
 }
