@@ -10,6 +10,7 @@ import { titleSvg, ornamentSvg } from './art.js';
 import { applySettings, settingsPanel } from './settings-ui.js';
 import { youPanel, peoplePanel, familyPanel, codexPanel, achievementsPanel } from './panels.js';
 import { devPanel } from './devpanel.js';
+import { creationScreen } from './creation.js';
 
 const app = document.getElementById('app');
 const dialog = document.getElementById('dialog');
@@ -73,7 +74,9 @@ function progressText(b) {
   if (!b.written) return 'Being written';
   if (!b.unlocked) return `Finish ${b.previous?.title ?? 'the book before'} to unlock`;
   if (b.completed) return 'Finished';
-  if (b.reached >= 0) return `Chapter ${b.reached + 1} of ${b.chapterCount}`;
+  if (b.incomplete) return b.reachedNumber > 0 ? `Chapter ${b.reachedNumber}, more to come` : b.reached >= 0 ? 'Begun, more to come' : 'Being written, a first part is ready';
+  if (b.reachedNumber > 0) return `Chapter ${b.reachedNumber} of ${b.chapterCount}`;
+  if (b.reached >= 0) return 'Begun';
   return b.chapterCount === 1 ? '1 chapter' : `${b.chapterCount} chapters`;
 }
 
@@ -128,7 +131,8 @@ function openBook(id) {
       kids.push(h('button', { class: 'primary', onclick: go(() => loadAndShow(b.latest.slot)) }, `Continue: ${b.latest.meta?.chapterTitle ?? 'your save'}`));
     }
     if (!b.previous) {
-      kids.push(h('button', { onclick: go(() => begin(b.id, { from: 'new' })) }, b.latest || b.completed ? 'Begin again' : 'Begin'));
+      kids.push(h('button', { onclick: () => { dialog.close(); showCreation(b); } }, b.latest || b.completed ? 'Begin again' : 'Begin',
+        h('span', { class: 'hint' }, 'Create your hero')));
     } else {
       if (b.carry) {
         kids.push(h('button', { class: b.latest ? '' : 'primary', onclick: go(() => begin(b.id, { from: 'carry' }, game.journalIn(b.carry.slot))) },
@@ -163,6 +167,16 @@ function pickSave(b, saves) {
     h('div', { class: 'row' }, h('button', { class: 'small', onclick: () => openBook(b.id) }, 'Back')));
 }
 
+/** Character creation for a first book, then the story. */
+function showCreation(b) {
+  applyBookTheme(b.id);
+  creationScreen({
+    game, app, book: b,
+    onCancel: () => { applyBookTheme(null); showLibrary(); openBook(b.id); },
+    onBegin: (hero) => guard(() => begin(b.id, { from: 'new', hero }, null)),
+  });
+}
+
 function quickStartForm(b) {
   const origins = game.content.origins.origin;
   const state = { gender: 'm', origin: origins[0]?.id ?? '' };
@@ -187,7 +201,7 @@ function quickStartForm(b) {
     h('div', { class: 'row' },
       h('button', { class: 'small primary', onclick: () => {
         dialog.close();
-        guard(() => begin(b.id, { from: 'quick', hero: { ...state, name: nameInput.value } }, null));
+        guard(() => begin(b.id, { from: 'quick', hero: game.suggestHero({ ...state, name: nameInput.value }, Math.random) }, null));
       } }, 'Start'),
       h('button', { class: 'small', onclick: () => openBook(b.id) }, 'Back')));
 }
@@ -255,7 +269,7 @@ function showFrame() {
     const orn = svg(ornamentSvg());
     orn.setAttribute('class', 'ornament');
     story.append(h('header', { class: 'chapter-head' },
-      h('p', { class: 'kicker' }, meta.index >= 0 ? `Chapter ${meta.index + 1}` : (book?.title ?? '')),
+      h('p', { class: 'kicker' }, meta.prologue ? 'Prologue' : meta.number ? `Chapter ${meta.number}` : (book?.title ?? '')),
       h('h1', {}, meta.title),
       orn));
   }
@@ -276,8 +290,13 @@ function showFrame() {
   } else if (frame.wait === 'book_end') {
     const endBook = game.manifest.books.find((b) => b.id === frame.book);
     const next = frame.nextBook ? game.manifest.books.find((b) => b.id === frame.nextBook) : null;
-    story.append(h('h2', { class: 'story-h' }, `The end of ${endBook?.title ?? 'this book'}`));
-    story.append(h('p', { class: 'info' }, 'Your story is kept so the next book can carry it on. Save to a slot from the menu to keep this ending as well.'));
+    if (frame.pending) {
+      story.append(h('h2', { class: 'story-h' }, 'To be continued'));
+      story.append(h('p', { class: 'info' }, `${endBook?.title ?? 'This book'} is still being written. Your story is saved here, and it will carry on from this point when the next part is ready.`));
+    } else {
+      story.append(h('h2', { class: 'story-h' }, `The end of ${endBook?.title ?? 'this book'}`));
+      story.append(h('p', { class: 'info' }, 'Your story is kept so the next book can carry it on. Save to a slot from the menu to keep this ending as well.'));
+    }
     if (next?.chapters?.length) {
       first = h('button', { class: 'primary', onclick: () => guard(async () => { await game.continueToNextBook(); const j = game.state.journal ?? []; if (j.length) showPreviously(j, () => showFrame(), 'Begin'); else showFrame(); }) }, `Continue to ${next.title}`);
       actions.append(first);

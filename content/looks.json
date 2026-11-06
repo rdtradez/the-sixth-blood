@@ -1,0 +1,128 @@
+{
+  "note": "Character appearance, chosen at creation and fixed forever once the hero is turned. Each field lists options with an id, a label (shown on the creation screen) and text (the words the story uses, see look() and look_sentence() in docs/CREATION.md). skin_by_origin limits the skin tones offered for each origin; the first listed is the default. suggest lists the fitting picks for an origin or a mortal role, first listed is the default and quick create chooses among them. The hero's choices are stored as hero.look.<field>. Ids are lowercase letters, digits and underscore.",
+  "order": ["height", "build", "age", "hair", "hairstyle", "eyes", "skin", "mark"],
+  "fields": {
+    "height": {
+      "label": "Height",
+      "options": [
+        { "id": "short", "label": "Short", "text": "short" },
+        { "id": "average", "label": "Average", "text": "of middle height" },
+        { "id": "tall", "label": "Tall", "text": "tall" },
+        { "id": "very_tall", "label": "Very tall", "text": "very tall" }
+      ]
+    },
+    "build": {
+      "label": "Build",
+      "options": [
+        { "id": "lean", "label": "Lean", "text": "a lean frame" },
+        { "id": "average", "label": "Average", "text": "a frame that draws no attention" },
+        { "id": "athletic", "label": "Athletic", "text": "an athlete's frame" },
+        { "id": "broad", "label": "Broad", "text": "a broad frame" },
+        { "id": "heavyset", "label": "Heavyset", "text": "a heavy frame" }
+      ]
+    },
+    "age": {
+      "label": "Age at turning",
+      "note": "He looks this age for two thousand years. sentence is the whole line used by look_sentence().",
+      "options": [
+        { "id": "young", "label": "Young adult", "text": "young", "sentence": "You look young, with the road still ahead of you." },
+        { "id": "prime", "label": "Prime of life", "text": "in the prime of life", "sentence": "You look to be in the prime of life." },
+        { "id": "older", "label": "Older", "text": "older", "sentence": "You look older, with the years plain in your face." }
+      ]
+    },
+    "hair": {
+      "label": "Hair color",
+      "options": [
+        { "id": "black", "label": "Black", "text": "black" },
+        { "id": "dark_brown", "label": "Dark brown", "text": "dark brown" },
+        { "id": "brown", "label": "Brown", "text": "brown" },
+        { "id": "chestnut", "label": "Chestnut", "text": "chestnut" },
+        { "id": "auburn", "label": "Auburn", "text": "auburn" },
+        { "id": "red", "label": "Red", "text": "red" },
+        { "id": "blond", "label": "Fair", "text": "fair" },
+        { "id": "grey", "label": "Iron grey", "text": "iron grey" }
+      ]
+    },
+    "hairstyle": {
+      "label": "Hair style",
+      "options": [
+        { "id": "cropped", "label": "Cropped", "text": "cropped close" },
+        { "id": "short", "label": "Short", "text": "kept short" },
+        { "id": "curled", "label": "Short and curled", "text": "short and curled" },
+        { "id": "shoulder", "label": "Shoulder length", "text": "worn to the shoulder" },
+        { "id": "long", "label": "Long", "text": "worn long" },
+        { "id": "tied", "label": "Tied back", "text": "tied back" },
+        { "id": "braided", "label": "Braided", "text": "braided" },
+        { "id": "shaved", "label": "Shaved", "text": "shaved to the skin" }
+      ]
+    },
+    "eyes": {
+      "label": "Eyes",
+      "options": [
+        { "id": "dark_brown", "label": "Dark brown", "text": "dark brown" },
+        { "id": "brown", "label": "Brown", "text": "brown" },
+        { "id": "hazel", "label": "Hazel", "text": "hazel" },
+        { "id": "green", "label": "Green", "text": "green" },
+        { "id": "grey", "label": "Grey", "text": "grey" },
+        { "id": "blue", "label": "Blue", "text": "blue" },
+        { "id": "amber", "label": "Amber", "text": "amber" }
+      ]
+    },
+    "skin": {
+      "label": "Skin tone",
+      "options": [
+        { "id": "fair", "label": "Fair", "text": "fair" },
+        { "id": "light", "label": "Light", "text": "light" },
+        { "id": "olive", "label": "Olive", "text": "olive" },
+        { "id": "golden", "label": "Golden", "text": "golden" },
+        { "id": "tan", "label": "Tan", "text": "tanned" },
+        { "id": "bronze", "label": "Bronze", "text": "bronze" },
+        { "id": "brown", "label": "Brown", "text": "brown" },
+        { "id": "deep_brown", "label": "Deep brown", "text": "deep brown" }
+      ]
+    },
+    "mark": {
+      "label": "A mark",
+      "note": "none means no mark. text is a phrase that follows \"You carry\".",
+      "options": [
+        { "id": "none", "label": "None", "text": "" },
+        { "id": "scar_arena", "label": "Arena scar", "text": "a pale scar from the arena down your ribs" },
+        { "id": "scar_war", "label": "Battle scar", "text": "an old battle scar across your forearm" },
+        { "id": "scar_face", "label": "Scar on the face", "text": "a thin scar that pulls at one corner of your mouth" },
+        { "id": "scar_burn", "label": "Burn scar", "text": "the shiny skin of an old burn along your shoulder" },
+        { "id": "brand", "label": "Old brand", "text": "an old brand on your shoulder, from the years you were owned" },
+        { "id": "tattoo", "label": "Tattoo of your people", "text": "your people's old pattern inked around your arm" },
+        { "id": "birthmark", "label": "Birthmark", "text": "a birthmark the color of weak wine at your throat" }
+      ]
+    }
+  },
+  "skin_by_origin": {
+    "roman": ["olive", "light", "tan"],
+    "gaul": ["fair", "light", "tan"],
+    "briton": ["fair", "light", "tan"],
+    "north_african": ["bronze", "olive", "brown", "deep_brown"],
+    "egyptian": ["tan", "olive", "bronze", "brown"],
+    "judean": ["olive", "tan", "bronze", "brown"],
+    "parthian": ["olive", "light", "tan", "bronze"],
+    "silk_road": ["golden", "light", "tan", "brown", "deep_brown"]
+  },
+  "suggest": {
+    "origin": {
+      "roman": { "hair": ["dark_brown", "black", "brown"], "eyes": ["brown", "dark_brown", "hazel"], "hairstyle": ["short", "curled", "cropped"], "height": ["average", "tall"], "mark": ["scar_war"] },
+      "gaul": { "hair": ["chestnut", "auburn", "blond", "brown"], "eyes": ["blue", "grey", "green", "brown"], "hairstyle": ["long", "braided", "tied"], "height": ["tall", "average"], "mark": ["tattoo", "scar_war"] },
+      "briton": { "hair": ["red", "auburn", "blond", "brown"], "eyes": ["green", "blue", "grey"], "hairstyle": ["long", "braided", "tied"], "height": ["tall", "average"], "mark": ["tattoo", "scar_burn"] },
+      "north_african": { "hair": ["black", "dark_brown"], "eyes": ["dark_brown", "brown", "amber"], "hairstyle": ["curled", "cropped", "short"], "height": ["average", "tall"], "mark": ["scar_war", "birthmark"] },
+      "egyptian": { "hair": ["black", "dark_brown"], "eyes": ["dark_brown", "brown", "amber"], "hairstyle": ["shaved", "cropped", "short"], "height": ["average", "short"], "mark": ["birthmark", "tattoo"] },
+      "judean": { "hair": ["black", "dark_brown", "brown"], "eyes": ["dark_brown", "brown", "hazel"], "hairstyle": ["curled", "short", "shoulder"], "height": ["average", "tall"], "mark": ["scar_burn", "birthmark"] },
+      "parthian": { "hair": ["black", "dark_brown"], "eyes": ["dark_brown", "hazel", "amber"], "hairstyle": ["shoulder", "braided", "curled"], "height": ["tall", "average"], "mark": ["scar_war", "tattoo"] },
+      "silk_road": { "hair": ["black", "dark_brown"], "eyes": ["dark_brown", "brown"], "hairstyle": ["tied", "long", "short"], "height": ["average", "short"], "mark": ["birthmark", "scar_burn"] }
+    },
+    "role": {
+      "gladiator": { "build": ["athletic", "broad"], "mark": ["scar_arena"], "height": ["tall", "very_tall"] },
+      "legionary": { "build": ["athletic", "broad", "lean"], "mark": ["scar_war"] },
+      "merchant": { "build": ["average", "lean", "heavyset"], "mark": ["none"] },
+      "physician_aide": { "build": ["lean", "average"], "mark": ["none", "scar_burn"] },
+      "house_slave": { "build": ["lean", "average", "athletic"], "mark": ["brand", "none"] }
+    }
+  }
+}

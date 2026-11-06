@@ -280,3 +280,18 @@ dialog .num { font-family: var(--font-title); font-size: 0.7em; letter-spacing: 
 .dev .bad { color: var(--blood-hi); }
 .dev .ok { color: #6aa56a; }
 .dev .report { background: var(--panel); border: 1px solid var(--line); border-radius: 0.4rem; padding: 0.5rem 0.7rem; margin: 0.5rem 0; font: 0.78rem ui-monospace, monospace; white-space: pre-wrap; }
+
+/* ---- Character creation (session 5) ---- */
+.creation h3 { font-family: var(--font-title); font-size: 0.8em; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 1.4rem 0 0.5rem; }
+.creation .info { color: var(--muted); }
+.steps { display: flex; flex-wrap: wrap; gap: 0.3rem 0.9rem; list-style: none; margin: 0.4rem 0 1.2rem; padding: 0; font-family: var(--font-title); font-size: 0.62em; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.steps li { padding-bottom: 0.2rem; border-bottom: 2px solid transparent; }
+.steps li.done { color: var(--text); }
+.steps li.on { color: var(--gold); border-bottom-color: var(--accent, var(--gold)); }
+.chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 0.7rem; }
+.chip { font: inherit; font-size: 0.92em; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 999px; padding: 0.45rem 0.95rem; cursor: pointer; min-height: 2.5rem; }
+.chip[aria-pressed='true'] { color: var(--bg); background: var(--accent, var(--gold)); border-color: var(--accent, var(--gold)); }
+.chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.blurb { font-style: italic; color: var(--muted); margin: 0.2rem 0 0.8rem; }
+.look-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: 0 0.9rem; margin: 0.5rem 0 0.6rem; }
+.portrait { border-left: 2px solid var(--accent, var(--gold)); padding-left: 0.9rem; margin: 1.1rem 0; }

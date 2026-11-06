@@ -24,6 +24,53 @@
       "book": "burning-city",
       "note": "Appearance chosen at creation: height, build, age, hair, eyes, skin, mark"
     },
+    "hero.death": {
+      "kind": "enum",
+      "values": [
+        "arena",
+        "execution",
+        "fever"
+      ],
+      "book": "burning-city",
+      "default": "fever",
+      "note": "Set by the prologue"
+    },
+    "prologue.day": {
+      "kind": "enum",
+      "values": [
+        "children",
+        "fields",
+        "boundary"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "children",
+      "note": "Prologue choice"
+    },
+    "prologue.stand": {
+      "kind": "enum",
+      "values": [
+        "paid",
+        "stood",
+        "looked_away"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "looked_away",
+      "note": "Prologue choice"
+    },
+    "prologue.answer": {
+      "kind": "enum",
+      "values": [
+        "yes",
+        "asked",
+        "refused"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "yes",
+      "note": "Prologue choice"
+    },
     "quick_start": {
       "kind": "flag",
       "note": "Set when a book was begun with a quick start (default history)"

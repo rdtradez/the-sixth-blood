@@ -16,7 +16,19 @@
           "collesanto": 15
         }
       },
-      "chapters": []
+      "chapters": [
+        {
+          "id": "b1p",
+          "file": "burning-city/prologue.tsb",
+          "title": "The Last Quiet Day",
+          "prologue": true,
+          "notes": [
+            "violence",
+            "grief"
+          ]
+        }
+      ],
+      "incomplete": true
     },
     {
       "id": "blood-and-gold",

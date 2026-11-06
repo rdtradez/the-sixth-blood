@@ -8,6 +8,13 @@
     "lore": "Lore"
   },
   "entries": {
+    "collesanto": {
+      "category": "places",
+      "title": "Collesanto",
+      "book": "burning-city",
+      "quick": true,
+      "text": "A village on a hill in the middle of Italy, three days' ride from Rome on a good road. The name means holy hill, though no one in the village can say what made it holy.\n\nIt grows wheat, barley, figs and a thin red wine. Its people are farmers and shepherds who keep to themselves, pay what the tax collectors ask and say little to strangers. At the top of the hill stands an old villa with its shutters closed, which the village avoids and does not discuss."
+    },
     "et_bloodlines": {
       "category": "bloodlines",
       "title": "Test Lineage",

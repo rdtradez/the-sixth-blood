@@ -1,11 +1,11 @@
 // Service worker: lets the game open and play offline after the first visit.
 // Network first, so a new release is picked up as soon as the device is online;
 // the cache is only the fallback. Bump VERSION to force old caches to be dropped.
-const VERSION = 'tsb-4';
+const VERSION = 'tsb-5';
 
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',
-  'app/styles.css', 'app/main.js', 'app/dom.js', 'app/art.js', 'app/settings-ui.js', 'app/panels.js', 'app/devpanel.js',
+  'app/styles.css', 'app/main.js', 'app/dom.js', 'app/art.js', 'app/settings-ui.js', 'app/panels.js', 'app/devpanel.js', 'app/creation.js',
   'fonts/cinzel-latin-400-normal.woff2', 'fonts/cinzel-latin-600-normal.woff2', 'fonts/eb-garamond-latin-400-normal.woff2',
   'fonts/eb-garamond-latin-400-italic.woff2', 'fonts/eb-garamond-latin-600-normal.woff2', 'fonts/pinyon-script-latin-400-normal.woff2',
   'engine/util.js', 'engine/expr.js', 'engine/state.js', 'engine/script.js', 'engine/validate.js',
@@ -14,12 +14,12 @@ const SHELL = [
   'engine/systems/index.js', 'engine/systems/core.js', 'engine/systems/sys-state.js',
   'engine/systems/life.js', 'engine/systems/combat.js', 'engine/systems/collis.js', 'engine/systems/village.js',
   'engine/systems/circle.js', 'engine/systems/bonds.js', 'engine/systems/originals.js', 'engine/systems/collection.js',
-  'engine/systems/sleep.js', 'engine/systems/lore.js',
+  'engine/systems/sleep.js', 'engine/systems/lore.js', 'engine/systems/looks.js', 'engine/looks.js', 'engine/creation.js',
   'content/manifest.json', 'content/stats.json', 'content/migrations.js',
   'content/flags.json', 'content/voice.json', 'content/people.json', 'content/origins.json',
   'content/rules.json', 'content/ventures.json', 'content/village.json', 'content/holdings.json',
   'content/originals.json', 'content/collection.json', 'content/sleep.json',
-  'content/codex.json', 'content/family.json', 'content/achievements.json', 'content/notes.json',
+  'content/looks.json', 'content/codex.json', 'content/family.json', 'content/achievements.json', 'content/notes.json',
 ];
 
 self.addEventListener('install', (event) => {

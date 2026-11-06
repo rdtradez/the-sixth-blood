@@ -13,6 +13,8 @@ import { statDef, voiceDef, GENDERS, PERSON_FIELDS, FLAG_KINDS, PRONOUN_KEYS } f
 import { checkCall, SYSTEM_FNS } from './systems/index.js';
 import { BUILTIN_FNS, parseExpr, ExprError } from './expr.js';
 import { CONTENT_FNS } from './content.js';
+import { compatiblePaths, rolesFor } from './creation.js';
+import { LOOK_FIELDS, EMPTY_LOOKS, optionIds, suggestLook } from './looks.js';
 
 const PERSON_FIELD_RE = new RegExp(`^([A-Za-z_][A-Za-z0-9_]*)\\.(${PERSON_FIELDS.join('|')})$`);
 const WHO_FNS = new Set(['pro', 'pg', 'name', 'alias', 'surname', 'gender']);
@@ -77,6 +79,70 @@ export function checkContentFiles({ manifest, stats, content }) {
     for (const r of o.roles ?? []) if (!content.variantIds.role.has(r)) errors.push(`origins: ${o.id} suggests unknown role "${r}"`);
     for (const p of o.paths ?? []) if (!content.variantIds.path.has(p)) errors.push(`origins: ${o.id} suggests unknown path "${p}"`);
     for (const g of ['m', 'f']) if (!o.names?.[g]?.length) warnings.push(`origins: ${o.id} has no suggested ${g === 'm' ? 'male' : 'female'} names`);
+  }
+
+  // Character creation: which roles and paths fit which origins, and the appearance options.
+  const originIds = new Set(content.origins.origin.map((o) => o.id));
+  for (const r of content.origins.role) {
+    for (const p of r.paths ?? []) if (!content.variantIds.path.has(p)) errors.push(`origins: role ${r.id} lists unknown path "${p}"`);
+    for (const o of r.notFor ?? []) if (!originIds.has(o)) errors.push(`origins: role ${r.id} is not for unknown origin "${o}"`);
+  }
+  for (const p of content.origins.path) {
+    for (const o of p.notFor ?? []) if (!originIds.has(o)) errors.push(`origins: path ${p.id} is not for unknown origin "${o}"`);
+  }
+  for (const o of content.origins.origin) {
+    const roles = rolesFor(content.origins, o.id);
+    if (!roles.length) errors.push(`origins: no mortal role fits ${o.id}`);
+    for (const role of roles) {
+      if (!compatiblePaths(content.origins, o.id, role).length) errors.push(`origins: no arrival path fits ${o.id} as ${role}`);
+    }
+    for (const r of o.roles ?? []) if (!roles.includes(r)) errors.push(`origins: ${o.id} suggests role "${r}", which is not offered to it`);
+    const firstRole = roles[0];
+    for (const p of o.paths ?? []) {
+      if (firstRole && !compatiblePaths(content.origins, o.id, firstRole).includes(p) && !roles.some((r) => compatiblePaths(content.origins, o.id, r).includes(p))) {
+        errors.push(`origins: ${o.id} suggests path "${p}", which fits none of its roles`);
+      }
+    }
+    if (!o.blurb) warnings.push(`origins: ${o.id} has no blurb for the creation screen`);
+  }
+  for (const group of ['role', 'path']) for (const x of content.origins[group]) if (!x.blurb) warnings.push(`origins: ${group} ${x.id} has no blurb for the creation screen`);
+
+  const looks = content.systems?.looks ?? EMPTY_LOOKS;
+  if (looks !== EMPTY_LOOKS) {
+    const idRe = /^[a-z_][a-z0-9_]*$/;
+    for (const f of LOOK_FIELDS) if (!looks.fields[f]) errors.push(`looks: field "${f}" is missing`);
+    for (const f of looks.order) {
+      const seenIds = new Set();
+      for (const opt of looks.fields[f].options) {
+        if (!idRe.test(opt.id ?? '')) errors.push(`looks: bad option id "${opt.id}" in ${f}`);
+        if (seenIds.has(opt.id)) errors.push(`looks: ${f} lists "${opt.id}" twice`);
+        seenIds.add(opt.id);
+        if (!opt.label) errors.push(`looks: ${f}/${opt.id} needs a label`);
+        if (!opt.text && !(f === 'mark' && opt.id === 'none')) errors.push(`looks: ${f}/${opt.id} needs text`);
+        if (f === 'age' && !opt.sentence) errors.push(`looks: age/${opt.id} needs a sentence`);
+      }
+    }
+    if (looks.fields.mark && !looks.fields.mark.options.some((o) => o.id === 'none')) errors.push('looks: mark needs a "none" option');
+    for (const o of content.origins.origin) {
+      const allowed = looks.skinByOrigin[o.id];
+      if (!allowed?.length) errors.push(`looks: no skin tones listed for ${o.id}`);
+      for (const id of allowed ?? []) if (!looks.fields.skin?.options.some((x) => x.id === id)) errors.push(`looks: ${o.id} lists unknown skin tone "${id}"`);
+    }
+    for (const id of Object.keys(looks.skinByOrigin)) if (!originIds.has(id)) errors.push(`looks: skin_by_origin names unknown origin "${id}"`);
+    for (const [kind, ids] of [['origin', originIds], ['role', content.variantIds.role]]) {
+      for (const [who, picks] of Object.entries(looks.suggest[kind])) {
+        if (!ids.has(who)) errors.push(`looks: suggestions for unknown ${kind} "${who}"`);
+        for (const [f, list] of Object.entries(picks)) {
+          if (!looks.fields[f]) { errors.push(`looks: ${kind} ${who} suggests for unknown field "${f}"`); continue; }
+          for (const id of list) if (!looks.fields[f].options.some((x) => x.id === id)) errors.push(`looks: ${kind} ${who} suggests unknown ${f} "${id}"`);
+        }
+      }
+    }
+    // Every combination the creation screen offers gets a complete, valid look.
+    for (const o of content.origins.origin) for (const role of rolesFor(content.origins, o.id)) {
+      const look = suggestLook(looks, { origin: o.id, role });
+      for (const f of looks.order) if (!optionIds(looks, f, o.id).includes(look[f])) errors.push(`looks: ${o.id} as ${role} gets no valid ${f}`);
+    }
   }
 
   // Story voice.

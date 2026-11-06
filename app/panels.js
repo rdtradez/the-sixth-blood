@@ -9,10 +9,12 @@ export function youPanel(game) {
   const lines = game.status();
   const hero = game.state?.vars?.['hero.name'];
   const book = game.manifest.books.find((b) => b.id === game.state?.book);
+  const look = game.describeLook(game.heroLook());
   if (!lines.length) return [empty('Begin a story to see how you are.')];
   return [
     h('h2', {}, hero ? `How ${hero} is` : 'How you are'),
     book ? h('p', { class: 'count' }, `${book.title}${book.city ? `, ${book.city}` : ''}`) : null,
+    look ? h('p', { class: 'portrait' }, look) : null,
     h('div', { class: 'status' }, ...lines.map((l) => h('p', {}, h('span', { class: 'label' }, l.label), l.text))),
   ];
 }

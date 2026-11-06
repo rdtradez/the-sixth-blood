@@ -23,10 +23,11 @@ Source of truth for story and design is the "Daywalker Series Design Notes" doc 
 | `engine/saves.js` | Slots, autosave support, backups, export and import, profile. |
 | `engine/content.js` | Flag registry, stats in story voice, pronouns and names, era aliases, origin variants, journal command. |
 | `engine/content-check.js` | Registry, voice, people and variant checks used by `npm run check`. |
+| `engine/looks.js`, `engine/creation.js` | Appearance options, suggestions and descriptions; which roles and paths fit which origins; the data the creation screen draws (docs/CREATION.md). |
 | `engine/game.js` | Controller: loading chapters, chapter flow, autosave, load with repair, library and the three start options, the Velati journal at each book's end. |
 | `engine/systems/` | Game systems: day and night, feeding, combat, Collis, Collesanto, coven and missions, bonds, originals, collection, sleep and steward (docs/SYSTEMS.md). |
 | `engine/fetch-loader.js`, `node-loader.js` | Content loaders for browser and Node. |
-| `app/` | Reader UI: library, book start options, Previously screen, story view, menu (status and saves). |
+| `app/` | Reader UI: library, character creation, book start options, Previously screen, story view, menu. |
 | `content/` | `manifest.json` (all seven books), `stats.json`, `flags.json`, `voice.json`, `people.json`, `origins.json`, `migrations.js`, chapters, and the system catalogs: `rules.json`, `ventures.json`, `village.json`, `holdings.json`, `originals.json`, `collection.json`, `sleep.json`. |
 | `tests/` | `node --test` suites. |
 | `tools/check.js` | Content checker (`npm run check`). |
@@ -88,3 +89,13 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Quick starts and developer jumps earn no achievements.
 - Fonts are in `fonts/` (all open licence, see fonts/README.md). The title art and icons are drawn in `app/art.js` and `icons/`.
 - Sample content is the developer book `engine-test-d`.
+
+### Session 5 notes (for the next session)
+
+- Character creation is a five step screen (`app/creation.js`): who you are, name, life before, face, begin. Rules and data are in `engine/creation.js`, `engine/looks.js`, `content/looks.json` and `content/origins.json`; see docs/CREATION.md. Quick start now gets a varied suggested look too.
+- Appearance is stored as `hero.look.*`. Story text reads it with `look()`, `marked()` and `look_sentence()`, and the You screen shows it. Use `hero.look.age` for the young looking and older looking gags.
+- Book One is a work in progress: its manifest entry has `"incomplete": true` and its only chapter is the prologue (`"prologue": true`, chapter id `b1p`). The game pauses on "To be continued" after the last written chapter and carries on by itself when more is added. Session 7 adds chapters after the prologue (the prologue's `=> next` then leads into chapter 1) and the last Book One session removes `"incomplete"`.
+- The prologue sets `wealth` and `collesanto` to the same values the Book One quick start uses, so a new game and a quick start begin chapter 1 alike. Retune both together.
+- Prologue flags (`prologue.day`, `prologue.stand`, `prologue.answer`) and `hero.death` are registered with quick start defaults. `content/family.json` has no quick start status for the family yet: the Book One sessions set it when they know how each relative's story stands at the end of the book.
+- The prologue plan is in `SPOILERS/`. Session 6 (Rome map) is next.
+- Session 4 lives on the `session-4` branch and session 5 is built on top of it. Merge `session-5` to `main` to get both.

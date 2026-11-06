@@ -37,7 +37,7 @@ async function sysGame(chapters, { book = 'burning-city', byBook = null, warn = 
       ...realManifest,
       books: realManifest.books.filter((b) => !b.dev).map((b) => {
         const ids = Object.keys(chapters).filter((id) => (byBook?.[id] ?? book) === b.id);
-        return { ...b, chapters: ids.map((id) => ({ id, file: `t/${id}.tsb`, title: id })), ...(journal && b.id === book ? { journal: 't/journal.tsb' } : {}) };
+        return { ...b, incomplete: false, chapters: ids.map((id) => ({ id, file: `t/${id}.tsb`, title: id })), ...(journal && b.id === book ? { journal: 't/journal.tsb' } : {}) };
       }),
     }),
     chapterSource: async (file) => files[file] ?? real.chapterSource(file),

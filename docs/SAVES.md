@@ -22,6 +22,8 @@ Each write keeps the previous copy as a backup. A damaged slot falls back to its
 
 Saving to a slot is allowed on the end of book screen, so several endings can be kept and any of them used to begin the next book.
 
+A book still being written (manifest `"incomplete"`) ends its last written chapter on a `book_end` frame with `pending: true`. That is a pause, not an ending: it makes no carry record, is not offered as the start of the next book, and loading it moves on into the next chapter as soon as one exists (docs/CREATION.md).
+
 ## Starting a book (the library)
 
 | Option | Where the state comes from |
