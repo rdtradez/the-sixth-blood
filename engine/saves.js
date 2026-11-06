@@ -5,6 +5,8 @@
 //          "quick"    the quick save
 //          "1".."5"   manual slots
 //
+//          "carry:<bookId>"  the state at the end of a finished book, used to begin the next one
+//
 // Every write keeps the previous version as a backup, and every save carries a checksum, so a
 // damaged slot falls back to its backup instead of being lost.
 
@@ -18,6 +20,10 @@ export const MANUAL_SLOTS = ['1', '2', '3', '4', '5'];
 export const ALL_SLOTS = [AUTO_SLOT, CHAPTER_SLOT, QUICK_SLOT, ...MANUAL_SLOTS];
 
 export const EXPORT_FORMAT = 'tsb-export';
+const CARRY_RE = /^carry:[A-Za-z0-9_-]+$/;
+export const carrySlot = (bookId) => `carry:${bookId}`;
+const validSlot = (slot) => ALL_SLOTS.includes(String(slot)) || CARRY_RE.test(String(slot));
+const PROFILE_DEFAULTS = () => ({ v: 1, completedBooks: {}, reached: {}, settings: {} });
 
 export class MemoryStorage {
   constructor() { this.map = new Map(); }
@@ -35,7 +41,9 @@ export class SaveManager {
     contentMigrations = [],
     now = () => Date.now(),
     prefix = 'tsb:',
+    bookIds = [],
   }) {
+    this.bookIds = bookIds;
     this.storage = storage;
     this.schema = schema;
     this.contentVersion = contentVersion;
@@ -58,7 +66,7 @@ export class SaveManager {
 
   /** Save state into a slot. `meta` is small display info (book, chapter title, etc). */
   save(slot, state, meta = {}) {
-    if (!ALL_SLOTS.includes(String(slot))) throw new SaveError('bad_slot', `Unknown save slot "${slot}".`);
+    if (!validSlot(slot)) throw new SaveError('bad_slot', `Unknown save slot "${slot}".`);
     const payload = JSON.stringify(state);
     const envelope = {
       format: SAVE_FORMAT,
@@ -131,6 +139,18 @@ export class SaveManager {
     });
   }
 
+  /** Carry records (end of book states) for the given books, or every known book. */
+  listCarries(bookIds = this.bookIds) {
+    const out = [];
+    for (const id of bookIds) {
+      const found = this.readEnvelope(carrySlot(id));
+      if (!found) continue;
+      const e = found.envelope;
+      out.push({ slot: carrySlot(id), bookId: id, savedAt: e.savedAt, meta: e.meta, newer: e.schema > this.schema || e.contentVersion > this.contentVersion });
+    }
+    return out;
+  }
+
   /** The most recently written readable slot, for a Continue button. */
   latest() {
     return this.list()
@@ -143,9 +163,13 @@ export class SaveManager {
   getProfile() {
     try {
       const raw = this.storage.getItem(`${this.prefix}profile`);
-      if (raw) return { v: 1, completedBooks: {}, settings: {}, ...JSON.parse(raw) };
+      if (raw) {
+        const p = { ...PROFILE_DEFAULTS(), ...JSON.parse(raw) };
+        p.completedBooks ??= {}; p.reached ??= {}; p.settings ??= {};
+        return p;
+      }
     } catch { /* fall through */ }
-    return { v: 1, completedBooks: {}, settings: {} };
+    return PROFILE_DEFAULTS();
   }
 
   setProfile(profile) {
@@ -155,7 +179,7 @@ export class SaveManager {
   // ---- Export and import ------------------------------------------------------------
 
   /** One text file holding every slot plus the profile. Pass slots to export only some. */
-  exportText(slots = ALL_SLOTS) {
+  exportText(slots = [...ALL_SLOTS, ...this.bookIds.map(carrySlot)]) {
     const out = {};
     for (const slot of slots) {
       const found = this.readEnvelope(slot);
@@ -194,7 +218,8 @@ export class SaveManager {
     const free = () => MANUAL_SLOTS.find((s) => !this.storage.getItem(this.#key(s)));
 
     for (const [slot, envelope] of Object.entries(data.slots ?? {})) {
-      if (envelope.format !== SAVE_FORMAT || envelope.checksum !== fnv1a(envelope.payload)) {
+      if (!validSlot(slot)) { report.skipped.push({ slot, reason: 'unknown slot' }); continue; }
+      if (!envelope || envelope.format !== SAVE_FORMAT || envelope.checksum !== fnv1a(envelope.payload)) {
         report.skipped.push({ slot, reason: 'damaged' });
         continue;
       }
@@ -204,7 +229,11 @@ export class SaveManager {
       }
       let target = slot;
       const taken = Boolean(this.storage.getItem(this.#key(slot)));
-      if (taken && !overwrite) {
+      if (taken && !overwrite && CARRY_RE.test(slot)) {
+        // A carry record is kept per book: keep whichever is newer.
+        const mine = this.readEnvelope(slot);
+        if (mine && mine.envelope.savedAt >= envelope.savedAt) { report.skipped.push({ slot, reason: 'already have a newer copy' }); continue; }
+      } else if (taken && !overwrite) {
         if (!MANUAL_SLOTS.includes(slot)) { report.skipped.push({ slot, reason: 'slot in use' }); continue; }
         target = free();
         if (!target) { report.skipped.push({ slot, reason: 'no free slot' }); continue; }
@@ -215,7 +244,9 @@ export class SaveManager {
 
     if (data.profile) {
       const mine = this.getProfile();
-      this.setProfile({ ...mine, completedBooks: { ...data.profile.completedBooks, ...mine.completedBooks } });
+      const reached = { ...mine.reached };
+      for (const [id, n] of Object.entries(data.profile.reached ?? {})) reached[id] = Math.max(reached[id] ?? -1, n);
+      this.setProfile({ ...mine, completedBooks: { ...data.profile.completedBooks, ...mine.completedBooks }, reached });
     }
     return report;
   }

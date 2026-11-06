@@ -1,0 +1,28 @@
+{
+  "note": "Named characters for the pronoun and name system. gender is m, f or x, or \"opposite:<id>\". A variable <id>.gender or <id>.name set by the story overrides these. names picks a name by gender. aliases and surnames are per book id (\"default\" applies to any book not listed). Love interests are added with the books they appear in; their gender is set by the player with $ <id>.gender = \"f\".",
+  "people": {
+    "hero": {
+      "gender": "m",
+      "name": "Gaius",
+      "aliases": {
+        "blood-and-gold": "Signor del Colle",
+        "crown-of-ashes": "Monsieur Colline"
+      },
+      "surnames": {
+        "burning-city": "Valerius",
+        "blood-and-gold": "Valerio",
+        "crown-of-ashes": "Valère",
+        "house-divided": "Valère",
+        "whitechapel-hunt": "Valer",
+        "relics-lost-god": "Valer",
+        "unchained": "Valer",
+        "default": "Valerius"
+      }
+    },
+    "spouse": { "gender": "opposite:hero", "names": { "f": "Livia", "m": "Marcus", "x": "Livia" } },
+    "aelia": { "gender": "f", "name": "Aelia" },
+    "felix": { "gender": "m", "name": "Felix" },
+    "cassian": { "gender": "m", "name": "Cassian" },
+    "prisca": { "gender": "f", "name": "Prisca" }
+  }
+}

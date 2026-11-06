@@ -19,6 +19,22 @@ export class ExprError extends Error {
 const WORD_OPS = { and: '&&', or: '||', not: '!' };
 const TWO_CHAR = ['==', '!=', '<=', '>=', '&&', '||'];
 const ONE_CHAR = '+-*/%<>!?:(),';
+const TAG_RE = /^[a-z_][a-z0-9_]*$/;
+
+/**
+ * Read the inside of a variant tag group: "briton gaul", "not roman", "!roman".
+ * Tags are lowercase ids of origins, roles or arrival paths (content/origins.json).
+ */
+export function parseTags(inner, col = 0) {
+  let body = inner.trim();
+  let neg = false;
+  if (body.startsWith('!')) { neg = true; body = body.slice(1).trim(); }
+  else if (/^not\s/.test(body)) { neg = true; body = body.slice(4).trim(); }
+  const tags = body.split(/[\s,|]+/).filter(Boolean);
+  if (tags.length === 0) throw new ExprError('empty variant tag "[ ]"', col);
+  for (const t of tags) if (!TAG_RE.test(t)) throw new ExprError(`bad variant tag "${t}" (lowercase letters, digits, underscore)`, col);
+  return { neg, tags };
+}
 
 function tokenize(src) {
   const toks = [];
@@ -55,6 +71,14 @@ function tokenize(src) {
       if (Object.hasOwn(WORD_OPS, word)) toks.push({ k: 'op', v: WORD_OPS[word], p: i });
       else toks.push({ k: 'id', v: word, p: i });
       i += word.length;
+      continue;
+    }
+    if (c === '[') {
+      const j = src.indexOf(']', i);
+      if (j < 0) throw new ExprError('unclosed "["', i);
+      const { neg, tags } = parseTags(src.slice(i + 1, j), i);
+      toks.push({ k: 'tags', neg, tags, p: i });
+      i = j + 1;
       continue;
     }
     const two = src.slice(i, i + 2);
@@ -130,6 +154,13 @@ export function parseExpr(src, { callNames = null } = {}) {
     if (!t) throw new ExprError('unexpected end of expression', src.length);
     if (t.k === 'num') { p++; return { t: 'lit', v: t.v }; }
     if (t.k === 'str') { p++; return { t: 'lit', v: t.v }; }
+    if (t.k === 'tags') {
+      // [briton gaul] is shorthand for variant("briton", "gaul"); [not roman] negates it.
+      p++;
+      if (callNames && !callNames.has('variant')) throw new ExprError('variant tags need the origin variant system', t.p);
+      const call = { t: 'call', name: 'variant', args: t.tags.map((v) => ({ t: 'lit', v })) };
+      return t.neg ? { t: 'un', op: '!', a: call } : call;
+    }
     if (t.k === 'id') {
       p++;
       if (t.v === 'true') return { t: 'lit', v: true };
@@ -161,6 +192,16 @@ export function parseExpr(src, { callNames = null } = {}) {
   return ast;
 }
 
+/** Visit every node of an AST (used by the content checker). */
+export function walkExpr(ast, fn) {
+  if (!ast) return;
+  fn(ast);
+  if (ast.t === 'un') walkExpr(ast.a, fn);
+  else if (ast.t === 'bin') { walkExpr(ast.a, fn); walkExpr(ast.b, fn); }
+  else if (ast.t === 'cond') { walkExpr(ast.c, fn); walkExpr(ast.a, fn); walkExpr(ast.b, fn); }
+  else if (ast.t === 'call') ast.args.forEach((a) => walkExpr(a, fn));
+}
+
 function toNum(v) {
   if (typeof v === 'number') return v;
   if (typeof v === 'boolean') return v ? 1 : 0;
@@ -179,6 +220,8 @@ function looseEquals(a, b) {
  * ctx: { vars, fns, rand(), visited(name), unknown?(name) }
  * Variables that were never set read as 0 (so an unset flag is false).
  */
+export { toNum };
+
 export function evaluate(ast, ctx) {
   switch (ast.t) {
     case 'lit': return ast.v;

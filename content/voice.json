@@ -1,0 +1,132 @@
+{
+  "note": "Stats in the story's voice. Each stat has ordered bands; a band covers values up to and including upTo (the last band has no upTo). Forms: say (a clause for mid sentence: {voice(\"hunger\")}), short (one or two words: {voice(\"hunger\", \"short\")}), status (a full sentence for the menu). id is used in conditions: ?if band(\"hunger\") == \"starving\". hidden stats never appear in the menu. Write from the hero's side, in second person, without gendered words.",
+  "stats": {
+    "hunger": {
+      "label": "Hunger",
+      "bands": [
+        { "id": "sated", "upTo": 15, "short": "sated", "say": "your hunger lies quiet", "status": "You are fed. The hunger sleeps, for now." },
+        { "id": "stirring", "upTo": 35, "short": "stirring", "say": "your hunger stirs", "status": "The hunger stirs at the back of your throat." },
+        { "id": "hungry", "upTo": 60, "short": "hungry", "say": "your hunger gnaws at you", "status": "Hunger gnaws at you. Every heartbeat in the room is loud." },
+        { "id": "starving", "upTo": 80, "short": "starving", "say": "your hunger claws at your thoughts", "status": "You are starving. It is getting hard to think of anything but blood." },
+        { "id": "ravenous", "short": "ravenous", "say": "your hunger is a roaring thing that wants control", "status": "The hunger is close to taking you. Feed, or it will choose for you." }
+      ]
+    },
+    "humanity": {
+      "label": "Humanity",
+      "bands": [
+        { "id": "monster", "upTo": 20, "short": "lost", "say": "little of the person you were remains", "status": "When you look for the person you were, you find almost nothing." },
+        { "id": "cold", "upTo": 40, "short": "cold", "say": "you feel colder than the grave", "status": "Mortal grief and joy reach you from far away, like voices through a wall." },
+        { "id": "fraying", "upTo": 60, "short": "fraying", "say": "your humanity is fraying", "status": "You still feel for the living, but it takes effort now." },
+        { "id": "holding", "upTo": 80, "short": "holding", "say": "you still remember what it is to be mortal", "status": "You remember what it is to be mortal, and you hold on to it." },
+        { "id": "human", "short": "human", "say": "your heart is as human as it ever was", "status": "Whatever you have become, your heart is still your own." }
+      ]
+    },
+    "cunning_brutal": {
+      "label": "Nature",
+      "bands": [
+        { "id": "very_cunning", "upTo": -61, "short": "a schemer", "say": "you are patience and misdirection to the bone", "status": "Others call you a spider. You have never had to raise your voice." },
+        { "id": "cunning", "upTo": -21, "short": "cunning", "say": "you favor the knife in the dark over the open blow", "status": "You prefer to win before the fight begins." },
+        { "id": "balanced", "upTo": 20, "short": "unreadable", "say": "no one can say yet whether you are the fox or the wolf", "status": "You are neither fox nor wolf yet, and that keeps enemies guessing." },
+        { "id": "brutal", "upTo": 60, "short": "brutal", "say": "you settle things with strength and fear", "status": "People step aside when you enter a room, and they are right to." },
+        { "id": "very_brutal", "short": "a terror", "say": "your name is spoken the way people speak of plague", "status": "Your reputation does your killing for you now." }
+      ]
+    },
+    "age": {
+      "label": "Age",
+      "bands": [
+        { "id": "fledgling", "upTo": 1, "short": "newly turned", "say": "you are barely more than newly turned", "status": "You are new to the night, and every elder can smell it on you." },
+        { "id": "young", "upTo": 2, "short": "young", "say": "you are young as your kind count years", "status": "You are young as your kind count years, strong but not yet feared." },
+        { "id": "elder", "upTo": 4, "short": "an elder", "say": "the weight of centuries sits on you", "status": "Centuries sit on you. Younger vampires feel it when you enter a room." },
+        { "id": "ancient", "upTo": 6, "short": "ancient", "say": "you are ancient, older than most kingdoms", "status": "You are ancient. Few still walk who are older than you." },
+        { "id": "eldest", "short": "eldest", "say": "you are among the eldest things that walk the night", "status": "You are among the eldest of your kind, and the night knows it." }
+      ]
+    },
+    "wealth": {
+      "label": "Fortune",
+      "bands": [
+        { "id": "poor", "upTo": 100, "short": "poor", "say": "your purse is thin", "status": "Your purse is thin. Collis is a name and little more." },
+        { "id": "comfortable", "upTo": 1000, "short": "comfortable", "say": "you have money enough to be careless with it", "status": "Collis keeps you comfortable, with a little set aside." },
+        { "id": "rich", "upTo": 10000, "short": "rich", "say": "your coffers are deep", "status": "Collis is rich, and its name opens doors." },
+        { "id": "fortune", "upTo": 100000, "short": "a fortune", "say": "you command a fortune", "status": "Collis commands a fortune that bankers whisper about." },
+        { "id": "empire", "short": "an empire", "say": "your wealth could buy a crown", "status": "Your fortune could buy a crown, and some say it already has." }
+      ]
+    },
+    "collesanto": {
+      "label": "Collesanto",
+      "bands": [
+        { "id": "hamlet", "upTo": 20, "short": "struggling", "say": "Collesanto barely holds on", "status": "Collesanto is a handful of houses on a hill, barely holding on." },
+        { "id": "village", "upTo": 45, "short": "a village", "say": "Collesanto gets by", "status": "Collesanto gets by: a well, a chapel, fields that feed it." },
+        { "id": "thriving", "upTo": 70, "short": "thriving", "say": "Collesanto thrives", "status": "Collesanto thrives. Travelers stop there on purpose now." },
+        { "id": "town", "upTo": 90, "short": "a prosperous town", "say": "Collesanto has grown proud and prosperous", "status": "Collesanto is a proud little town that owes you more than it knows." },
+        { "id": "jewel", "short": "a jewel", "say": "Collesanto shines like a jewel in the hills", "status": "Collesanto is the jewel of its hills, and it has your protection in its bones." }
+      ]
+    },
+    "secrecy": {
+      "label": "Secrecy",
+      "bands": [
+        { "id": "exposed", "upTo": 20, "short": "exposed", "say": "too many eyes have found you", "status": "Too many people know your face. Someone is coming." },
+        { "id": "watched", "upTo": 40, "short": "watched", "say": "you are being watched", "status": "You are being watched. You feel it in the street like a draft." },
+        { "id": "noticed", "upTo": 60, "short": "noticed", "say": "rumors follow you", "status": "There are rumors. Nothing that can be proven, yet." },
+        { "id": "hidden", "upTo": 85, "short": "hidden", "say": "you move unseen", "status": "You move unseen. The rumors that exist point elsewhere." },
+        { "id": "ghost", "short": "a ghost", "say": "you are a ghost to the world", "status": "You are a ghost. Even your enemies are not sure you exist." }
+      ]
+    },
+    "standing": {
+      "label": "Standing",
+      "bands": [
+        { "id": "outcast", "upTo": -60, "short": "an outcast", "say": "the covens treat you as an outcast", "status": "The covens shut their doors to you. Some would pay to see you burn." },
+        { "id": "distrusted", "upTo": -20, "short": "distrusted", "say": "other vampires distrust you", "status": "Other vampires watch you with open distrust." },
+        { "id": "unknown", "upTo": 20, "short": "unknown", "say": "your name means little among the covens", "status": "Among the covens your name means little, for good or ill." },
+        { "id": "respected", "upTo": 60, "short": "respected", "say": "the covens respect you", "status": "The covens respect you, and some seek your favor." },
+        { "id": "feared", "short": "renowned", "say": "your name carries weight in every haven", "status": "Your name carries weight in every haven, and elders choose their words with you." }
+      ]
+    },
+    "velati_regard": {
+      "label": "The Velati",
+      "bands": [
+        { "id": "hunted", "upTo": -60, "short": "hunted", "say": "the Velati hunt you", "status": "The Velati have marked you as a threat to be ended." },
+        { "id": "threat", "upTo": -20, "short": "a threat", "say": "the Velati count you a danger", "status": "The Velati count you a danger and keep a thick file." },
+        { "id": "unknown", "upTo": 20, "short": "unknown", "say": "the Velati barely know your name", "status": "If the Velati know of you, they have not decided what you are." },
+        { "id": "curious", "upTo": 60, "short": "curious", "say": "the Velati are curious about you", "status": "The Velati are curious. They watch, but they do not strike." },
+        { "id": "ally", "short": "an uneasy ally", "say": "the Velati treat you as an uneasy ally", "status": "Some among the Velati treat you as an uneasy ally." }
+      ]
+    },
+    "defiance": {
+      "label": "Defiance",
+      "hidden": true,
+      "bands": [
+        { "id": "quiet", "upTo": 25, "short": "quiet", "say": "something old in your blood is quiet", "status": "Something old in your blood is quiet." },
+        { "id": "restless", "upTo": 60, "short": "restless", "say": "something in your blood bristles at the order of things", "status": "Something in your blood bristles at the order of things." },
+        { "id": "burning", "short": "burning", "say": "your blood burns against every throne and chain", "status": "Your blood burns against every throne and chain." }
+      ]
+    },
+    "adjustment": {
+      "label": "Times",
+      "hidden": true,
+      "bands": [
+        { "id": "lost", "upTo": 25, "short": "lost", "say": "this century baffles you", "status": "This century baffles you, and everyone can tell." },
+        { "id": "catching_up", "upTo": 60, "short": "catching up", "say": "you are catching up with the times", "status": "You are catching up with the times, mostly." },
+        { "id": "at_home", "short": "at home", "say": "you move through this age like a native", "status": "You move through this age like a native, old habits aside." }
+      ]
+    },
+    "loyalty.*": {
+      "label": "Loyalty",
+      "bands": [
+        { "id": "disloyal", "upTo": 20, "short": "disloyal", "say": "their loyalty is gone", "status": "Their loyalty is gone." },
+        { "id": "wavering", "upTo": 45, "short": "wavering", "say": "their loyalty wavers", "status": "Their loyalty wavers." },
+        { "id": "steady", "upTo": 75, "short": "steady", "say": "they are loyal to you", "status": "They are loyal to you." },
+        { "id": "devoted", "short": "devoted", "say": "they would die for you", "status": "They would die for you." }
+      ]
+    },
+    "bond.*": {
+      "label": "Bond",
+      "bands": [
+        { "id": "hostile", "upTo": -50, "short": "hostile", "say": "there is only bitterness between you", "status": "There is only bitterness between you." },
+        { "id": "cool", "upTo": -10, "short": "cool", "say": "things are cool between you", "status": "Things are cool between you." },
+        { "id": "acquainted", "upTo": 20, "short": "acquainted", "say": "you are still finding each other out", "status": "You are still finding each other out." },
+        { "id": "close", "upTo": 60, "short": "close", "say": "you have grown close", "status": "You have grown close." },
+        { "id": "devoted", "short": "devoted", "say": "you are bound to each other", "status": "You are bound to each other." }
+      ]
+    }
+  }
+}

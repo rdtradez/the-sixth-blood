@@ -2,12 +2,142 @@
   "contentVersion": 1,
   "books": [
     {
+      "id": "burning-city",
+      "number": 1,
+      "title": "The Burning City",
+      "city": "Rome",
+      "era": "62 to 64 AD",
+      "accent": "#d9622b",
+      "accent2": "#3a1a10",
+      "quickstart": {
+        "vars": {
+          "age": 1
+        }
+      },
+      "chapters": []
+    },
+    {
+      "id": "blood-and-gold",
+      "number": 2,
+      "title": "Blood and Gold",
+      "city": "Florence",
+      "era": "1474 to 1478",
+      "accent": "#c9a24b",
+      "accent2": "#1f4d3a",
+      "quickstart": {
+        "vars": {
+          "age": 2
+        }
+      },
+      "chapters": []
+    },
+    {
+      "id": "crown-of-ashes",
+      "number": 3,
+      "title": "Crown of Ashes",
+      "city": "Paris",
+      "era": "1788 to 1794",
+      "accent": "#4a6fc4",
+      "accent2": "#8a8a8a",
+      "quickstart": {
+        "vars": {
+          "age": 3
+        }
+      },
+      "chapters": []
+    },
+    {
+      "id": "house-divided",
+      "number": 4,
+      "title": "A House Divided",
+      "city": "New Orleans",
+      "era": "1859 to the late 1860s",
+      "accent": "#2a9c9c",
+      "accent2": "#f2efe6",
+      "quickstart": {
+        "vars": {
+          "age": 4
+        }
+      },
+      "chapters": []
+    },
+    {
+      "id": "whitechapel-hunt",
+      "number": 5,
+      "title": "The Whitechapel Hunt",
+      "city": "London",
+      "era": "1887 to 1889",
+      "accent": "#e0a040",
+      "accent2": "#8c8f94",
+      "quickstart": {
+        "vars": {
+          "age": 5
+        }
+      },
+      "chapters": []
+    },
+    {
+      "id": "relics-lost-god",
+      "number": 6,
+      "title": "Relics of the Lost God",
+      "city": "Chicago",
+      "era": "the 1920s to the early 1930s",
+      "accent": "#b5a05a",
+      "accent2": "#6b3fa0",
+      "quickstart": {
+        "vars": {
+          "age": 6
+        }
+      },
+      "chapters": []
+    },
+    {
+      "id": "unchained",
+      "number": 7,
+      "title": "Unchained",
+      "city": "New York",
+      "era": "modern day",
+      "accent": "#3fd0ff",
+      "accent2": "#7f8c99",
+      "quickstart": {
+        "vars": {
+          "age": 7
+        }
+      },
+      "chapters": []
+    },
+    {
       "id": "engine-test",
-      "title": "Engine Test",
       "dev": true,
+      "title": "Engine Test",
+      "city": "Test",
+      "era": "session 1",
       "chapters": [
-        { "id": "et1", "file": "engine-test/et1.tsb", "title": "Engine Test: Basics" },
-        { "id": "et2", "file": "engine-test/et2.tsb", "title": "Engine Test: Ending" }
+        {
+          "id": "et1",
+          "file": "engine-test/et1.tsb",
+          "title": "Engine Test: Basics"
+        },
+        {
+          "id": "et2",
+          "file": "engine-test/et2.tsb",
+          "title": "Engine Test: Ending"
+        }
+      ],
+      "recap": "The engine test ran its basics and reached an ending."
+    },
+    {
+      "id": "engine-test-b",
+      "dev": true,
+      "title": "Engine Test: Voices",
+      "city": "Test",
+      "era": "session 2",
+      "chapters": [
+        {
+          "id": "etb1",
+          "file": "engine-test/etb1.tsb",
+          "title": "Engine Test: Voices, Names, Variants"
+        }
       ]
     }
   ]

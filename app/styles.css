@@ -65,3 +65,33 @@ textarea { width: 100%; min-height: 6rem; background: var(--panel); color: var(-
 #toast.err { border-color: var(--blood-hi); }
 .error-box { border: 1px solid var(--blood-hi); border-radius: 0.5rem; padding: 0.8rem 1rem; white-space: pre-wrap; font: 0.85rem ui-monospace, monospace; background: #1f1212; margin-bottom: 1rem; }
 @media (prefers-reduced-motion: reduce) { #toast { transition: none; } }
+
+/* ---- Library (session 2). Fonts and the full look arrive in session 4. ---- */
+.shelf { display: grid; gap: 0.75rem; margin: 1.5rem 0; }
+@media (min-width: 34rem) { .shelf { grid-template-columns: 1fr 1fr; } }
+button.book {
+  --accent: var(--gold); --accent2: var(--line);
+  display: flex; flex-direction: column; gap: 0.15rem; margin: 0; padding: 0.9rem 1rem 0.85rem;
+  border: 1px solid var(--line); border-left: 4px solid var(--accent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent2) 22%, var(--panel)), var(--panel) 70%);
+}
+button.book:hover, button.book:focus-visible { border-color: var(--accent); }
+button.book .num { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+button.book .btitle { font-size: 1.2rem; color: var(--text); letter-spacing: 0.03em; }
+button.book .where { font-size: 0.9rem; color: var(--muted); font-style: italic; }
+button.book .progress { font-size: 0.85rem; color: var(--muted); margin-top: 0.35rem; }
+button.book.done .progress { color: var(--accent); }
+button.book.locked { opacity: 0.55; }
+dialog .num { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.hint { display: block; font-size: 0.85rem; color: var(--muted); font-style: italic; margin-top: 0.15rem; }
+.row.center { justify-content: center; align-items: center; }
+.field { display: block; margin: 0 0 0.8rem; color: var(--muted); font-size: 0.9rem; }
+.field select, .field input { display: block; width: 100%; margin-top: 0.25rem; font: inherit; font-size: 1rem; color: var(--text); background: var(--panel); border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.55rem 0.6rem; }
+.field .inline { display: flex; gap: 0.4rem; align-items: stretch; margin-top: 0.25rem; }
+.field .inline input { margin-top: 0; flex: 1; }
+.field .inline button { margin: 0; }
+.status p { margin: 0 0 0.55rem; }
+.status .label { display: block; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.journal { background: #1c1813; border: 1px solid #4a3d2c; border-radius: 0.5rem; padding: 1rem 1.1rem; color: #e6dcc7; }
+.journal h3 { font-weight: normal; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.95rem; margin: 1rem 0 0.4rem; }
+.journal h4 { font-weight: normal; font-style: italic; color: #d8cdb8; margin: 0.6rem 0 0.3rem; }

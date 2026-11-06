@@ -1,7 +1,7 @@
 // Game state: one plain JSON object. Everything the game needs to resume lives here.
 
-export const SCHEMA = 1; // bump when the shape of state changes, and add a schema migration
-export const ENGINE_VERSION = '0.1.0';
+export const SCHEMA = 2; // bump when the shape of state changes, and add a schema migration
+export const ENGINE_VERSION = '0.2.0';
 
 /**
  * state = {
@@ -12,6 +12,9 @@ export const ENGINE_VERSION = '0.1.0';
  *   once:  { key: true }               [once] choices already taken
  *   visited: { "chapter.scene": n }    scene entry counts
  *   rng:   uint32                      seeded random state
+ *   decisions: [{ name, value, book, chapter }]   major decisions from the flag registry, latest last
+ *   journal:   [{ book, chapter, title, text }]   entries for the Previously screen
+ *   booksDone: [bookId]                           books this playthrough has finished, in order
  *   frame: { wait, paragraphs, choices?, next? }   what the player is looking at
  * }
  */
@@ -26,6 +29,9 @@ export function createState({ book = null, vars = {}, seed } = {}) {
     once: {},
     visited: {},
     rng: (seed ?? Math.floor(Math.random() * 4294967296)) >>> 0,
+    decisions: [],
+    journal: [],
+    booksDone: [],
     frame: null,
   };
 }
@@ -41,7 +47,16 @@ export function applyStatDefaults(state, defs) {
  * Upgrades for the shape of state, keyed by the version they upgrade FROM.
  * When SCHEMA goes from 1 to 2, add: SCHEMA_MIGRATIONS[1] = (state) => { ...; return state; }
  */
-export const SCHEMA_MIGRATIONS = {};
+export const SCHEMA_MIGRATIONS = {
+  // 1 -> 2 (session 2): decision log, journal, and the list of finished books.
+  1(state) {
+    state.decisions ??= [];
+    state.journal ??= [];
+    state.booksDone ??= [];
+    if (state.frame?.wait === 'book_end' && state.book && !state.booksDone.includes(state.book)) state.booksDone.push(state.book);
+    return state;
+  },
+};
 
 /**
  * Set a variable, clamping declared stats to their range. A stat definition named

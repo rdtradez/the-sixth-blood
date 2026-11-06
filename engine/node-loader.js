@@ -13,6 +13,13 @@ export function createNodeLoader(root) {
       return s.stats ?? s;
     },
     chapterSource: (file) => read(`content/${file}`),
+    /** Optional content files (flags, voice, people, origins). Missing files read as null. */
+    async json(name) {
+      try { return JSON.parse(await read(`content/${name}.json`)); } catch (e) {
+        if (e.code === 'ENOENT') return null;
+        throw new Error(`content/${name}.json: ${e.message}`);
+      }
+    },
     async migrations() {
       try {
         const mod = await import(pathToFileURL(join(root, 'content/migrations.js')).href);

@@ -20,6 +20,8 @@ The owner plays the game and wants to be surprised by chapter level choices and 
 
 - Engine code in `engine/` must not touch the DOM, `window` or `localStorage`. Browser code lives in `app/`.
 - Changing the shape of game state: bump `SCHEMA` and add a schema migration (docs/SAVES.md).
+- Every story variable is registered: a stat in `content/stats.json`, an entry in `content/flags.json`, a person field from `content/people.json`, or an `_scratch` name. Give decision flags a `book`, `major: true` if later chapters or journals care, and a quick start `default`.
+- Stats are written in the story's voice (`voice()`, `band()`), never printed as numbers.
 - Renaming or repurposing a flag or stat: bump `contentVersion` in `content/manifest.json` and add a content migration.
 - Editing a released chapter: bump its `@version`.
 - Every path through a scene ends in `->`, `<~` or `=>`. The checker warns about scenes that can run off their end.

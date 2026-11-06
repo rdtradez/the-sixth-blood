@@ -63,9 +63,9 @@ The city opens ahead.
 
 ### Inserting values: `{expression}`
 
-`Your gold is {gold}.` `{he}` and friends arrive with the pronoun system. Use `\{` and `\}` for literal braces. A true or false value prints as yes or no. An unset variable reads as `0`.
+`Gold is {_gold}.` Use `\{` and `\}` for literal braces. A true or false value prints as yes or no. An unset variable reads as `0`. Pronouns and names have shorthand, see [Pronouns and names](#pronouns-and-names).
 
-Per the design doc, stats are described in the story's voice rather than printed as raw numbers. Prefer `{hunger > 60 ? "a fist in your gut" : "quiet"}` to `{hunger}`. Session 2 adds a helper for this.
+Stats are never printed as numbers in story text (the checker warns about `{hunger}`). Describe them with [story voice](#stats-in-story-voice): `{voice("hunger")}`.
 
 ## Commands (`$`)
 
@@ -81,6 +81,8 @@ $ do name(arg, arg)             call a command the game registered (new systems 
 Declared stats (see `content/stats.json`) are clamped to their range on every change and start at their declared value. A name like `loyalty.*` there covers every variable starting `loyalty.`, so `$ loyalty.livia += 10` is clamped 0 to 100. Variables that are not declared are free: set them any time.
 
 Flag and variable names: letters, digits, underscore, dots. `__proto__`, `constructor` and `prototype` are not allowed.
+
+**Every variable must be registered** so typos are caught by `npm run check`: a declared stat (`content/stats.json`), an entry in the flag registry (`content/flags.json`), a person field (`livia.name`, `spouse.gender`, from `content/people.json`), or a scratch variable whose name starts with `_` (`$ _tries += 1`). See [The flag registry](#the-flag-registry).
 
 ## Conditions
 
@@ -156,8 +158,102 @@ There is no way to run arbitrary code. Functions available everywhere:
 | `roll(6)` | A whole number from 1 to 6. |
 | `visited("scene")` | How many times a scene in this chapter was entered. `visited("chapter.scene")` for another chapter. |
 | `lower(s)` `upper(s)` `cap(s)` | Text case. |
+| `voice("stat")` `voice("stat", "short")` `band("stat")` | Stats in story voice, below. |
+| `name("who")` `alias("who")` `surname("who")` `pro("who", "their")` `g(m, f, x)` `pg("who", m, f, x)` `gender("who")` | Pronouns and names, below. |
+| `variant("tag", ...)` or `[tag tag]` | Origin variants, below. |
 
 Randomness is seeded per game and saved with it, so reloading a save does **not** reroll a roll.
+
+## Stats in story voice
+
+`content/voice.json` gives every stat ordered bands, each with an `id`, an `upTo` (inclusive, left out on the last band) and its texts:
+
+| Write | Result (hunger 45) |
+| --- | --- |
+| `Right now {voice("hunger")}.` | Right now your hunger gnaws at you. |
+| `{voice("hunger", "short")}` | hungry |
+| `?if band("hunger") == "starving"` | condition on the band, never the number |
+
+`say` is the default form (a clause for mid sentence), `short` is a word or two, `status` is the sentence shown in the menu's "How you are" section. Stats marked `hidden` (defiance, adjustment) never appear in the menu. Per person stats share bands: `{voice("loyalty.prisca")}`. Write your own lines with `band()` when the stock phrasing does not fit the moment.
+
+## Pronouns and names
+
+People live in `content/people.json`: a `gender` (`m`, `f`, `x`, or `opposite:hero`), a `name` or `names` by gender (the spouse is Livia or Marcus), and for the hero `aliases` and `surnames` by book. The story can override any of these: `$ spouse.gender = "m"`, `$ hero.name = "Brica"`, `$ hero.alias = "Signor del Colle"`.
+
+Pronoun words are the **"they" words**, because they are never ambiguous ("his" could be "her" or "hers"):
+
+| Shorthand | he / she / they |
+| --- | --- |
+| `{they}` | he / she / they |
+| `{them}` | him / her / them |
+| `{their}` | his / her / their |
+| `{theirs}` | his / hers / theirs |
+| `{themself}` | himself / herself / themself |
+| `{are}` `{were}` `{have}` | is, was, has / are, were, have |
+| `{s}` `{es}` | `walk{s}`: walks / walk |
+
+Capitalize the word to capitalize the result: `{They} {are} here.` Put a person id in front for anyone else: `{cassian.They} {cassian.are} pale.`, `{spouse.their} cup`. Capitalize the word, not the person (`{spouse.They}`).
+
+| Shorthand | Result |
+| --- | --- |
+| `{name}` `{livia.name}` `{Name}` | the hero's or a person's name |
+| `{alias}` | the hero's business alias in this book's era, or the name if none |
+| `{surname}` | the family name in this book's era (Valerius, Valerio, Valère, Valer) |
+| `{g("man", "woman")}` | a word by the hero's gender (an optional third for they) |
+| `{pg("spouse", "husband", "wife")}` | a word by anyone's gender |
+
+These words are reserved in `{}`: a variable named `they` or `name` cannot be printed directly.
+
+## Origin variants
+
+The hero's origin, mortal role and arrival path (`hero.origin`, `hero.role`, `hero.path`) are tags, listed in `content/origins.json`: `roman gaul briton north_african egyptian judean parthian silk_road`, `gladiator legionary merchant physician_aide house_slave`, `born_in_rome captured freed auxiliary hostage trader exile wanderer`.
+
+**A line for some origins only.** Start any line with tags in square brackets. Several tags mean any of them; `not` (or `!`) means none of them.
+
+```
+The legion marches past.
+[briton gaul] You know those eagles. You watched them burn your home.
+[roman] You grew up cheering them.
+[not roman gaul briton] To you they are just another empire's soldiers.
+[gladiator] $ standing += 2
+```
+
+A plain paragraph that really starts with lowercase words in brackets needs a backslash: `\[sic] ...`.
+
+**Tags in conditions** work anywhere an expression does: `?if [judean] and humanity > 50`, or on a choice: `* Answer in Aramaic ?if [judean]`.
+
+**A whole alternate version of a key moment.** Write the shared scene, then versions named `scene_<tag>`. Jump with the group in brackets; the hero's version is used if it exists, otherwise the shared one:
+
+```
+-> the_arrest [origin]      uses the_arrest_judean for a Judean hero, else the_arrest
+~> memory_of_home [origin]  also works with calls
+-> first_fight [role]       [role] and [path] work the same way
+```
+
+The shared scene is required. Variant scenes count as reachable for the checker.
+
+## The flag registry
+
+`content/flags.json` lists every story variable that is not a stat, a person field or an `_scratch` variable:
+
+```json
+"spared_igniferi": { "kind": "flag", "book": "burning-city", "major": true, "default": false },
+"prisca_fate": { "kind": "enum", "values": ["stayed", "left"], "book": "burning-city", "major": true, "default": "stayed" },
+"met.*": { "kind": "flag" }
+```
+
+- `kind`: `flag` (set with `$ flag`, true or unset), `enum` (one of `values`; `"@origins"`, `"@roles"`, `"@paths"` pull them from origins.json), `number`, or `text`.
+- `book`: where it is decided. `major: true` puts it in the **decision log** (`state.decisions`), which journals and cross book callbacks read.
+- `default`: what a **quick start** uses for this flag when it skips that book. A flag default of `false` simply stays unset.
+- A name ending in `.*` covers a family (`met.prisca`, `met.cassian`).
+
+`npm run check` rejects unregistered variables (a typo like `spared_igniferri` becomes an error instead of a silent `0`), enum values that are not listed (in `$` lines and `==` comparisons), `$ flag` on a non flag, unknown variant tags, unknown people, and `voice()` on a stat without bands. At play time an unlisted enum value logs a warning.
+
+Changing a registered name or what a value means still needs a content migration (docs/SAVES.md).
+
+## The journal
+
+`$ do journal("text", "optional title")` adds an entry to the Previously screen shown when a book begins. Session 3 builds the Velati journal entries on top of this.
 
 ## Adding new systems (for later sessions)
 

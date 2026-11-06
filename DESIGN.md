@@ -21,19 +21,25 @@ Source of truth for story and design is the "Daywalker Series Design Notes" doc 
 | `engine/state.js` | State shape, stat clamping, `SCHEMA` and schema migrations. |
 | `engine/versioning.js` | Upgrades old saves (schema and content migrations). |
 | `engine/saves.js` | Slots, autosave support, backups, export and import, profile. |
-| `engine/game.js` | Controller: loading chapters, chapter flow, autosave, load with repair. |
+| `engine/content.js` | Flag registry, stats in story voice, pronouns and names, era aliases, origin variants, journal command. |
+| `engine/content-check.js` | Registry, voice, people and variant checks used by `npm run check`. |
+| `engine/game.js` | Controller: loading chapters, chapter flow, autosave, load with repair, library and the three start options. |
 | `engine/fetch-loader.js`, `node-loader.js` | Content loaders for browser and Node. |
-| `app/` | Minimal reader UI (start screen, story view, saves dialog). |
-| `content/` | `manifest.json`, `stats.json`, `migrations.js`, chapters. |
+| `app/` | Reader UI: library, book start options, Previously screen, story view, menu (status and saves). |
+| `content/` | `manifest.json` (all seven books), `stats.json`, `flags.json`, `voice.json`, `people.json`, `origins.json`, `migrations.js`, chapters. |
 | `tests/` | `node --test` suites. |
 | `tools/check.js` | Content checker (`npm run check`). |
+
+## Books
+
+The manifest lists the seven books in order with city, era and accent colors. The Lost Centuries interludes are written as chapters at the end of The Burning City, and The Long Watch as chapters at the start of Unchained, so each stays inside its book's saves and unlock order. Developer books (`"dev": true`) appear only in developer mode (`?dev` in the address).
 
 ## Build plan progress
 
 Engine, 4 sessions, then books. The full 85 session checklist with commands is in the "The Sixth Blood Build Sessions" doc.
 
 - [x] Session 1: engine core, script format, saves, save versioning
-- [ ] Session 2: flags, story voice stats, pronouns and names, origin variants, library screen
+- [x] Session 2: flags, story voice stats, pronouns and names, origin variants, library screen
 - [ ] Session 3: game systems
 - [ ] Session 4: player features, developer tools, look and feel, sample chapter
 
@@ -46,3 +52,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Systems from session 3 plug in through `fns` and `commands` on the `Game` constructor, so they need no parser changes.
 - Rewind last choice (a player feature) is not built. The state is one plain object, so keeping the previous state before each choice is straightforward.
 - Hosting: turn on GitHub Pages for the repo (Settings, Pages, deploy from the `main` branch root). All paths are relative, so the project page URL works.
+
+### Session 2 notes (for the next session)
+
+- Schema is 2: state now has `decisions`, `journal` and `booksDone`. Library start options and carries are described in docs/SAVES.md.
+- Systems plug in the same way as before (`fns`, `commands`), and `engine/content.js` shows the pattern for content driven functions that read `ctx.content`.
+- `$ do journal(text, title)` is a placeholder Previously feed. Session 3's Velati journal should write its entries into `state.journal` so the Previously screen picks them up.
+- Hero fields are `hero.name`, `hero.gender`, `hero.origin`, `hero.role`, `hero.path`, and `hero.look.*` for appearance. Session 5's character creation sets them; `game.heroVars()` and `game.suggestNames()` already fill defaults and name suggestions from `content/origins.json`.
+- Love interests are added to `content/people.json` with their book; set their gender from the player's choice with `$ <id>.gender = "f"`.
+- Each book's `recap` (one spoiler light paragraph shown only to players who quick start past it) and `quickstart.vars` (stat levels at the start of the book: age is a placeholder 1 to 7) should be written when the book before is finished.
+- `content/voice.json` bands and the placeholder stat ranges in `stats.json` should be retuned when the session 3 systems decide real numbers (wealth especially). secrecy now starts at 70 and higher means better hidden; cunning_brutal runs negative for cunning, positive for brutal.
+- Settings, fonts and the full look and feel are still session 4. The library cards already use each book's accent colors.

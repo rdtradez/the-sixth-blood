@@ -1,0 +1,30 @@
+{
+  "note": "Hero origins, mortal roles and the paths that brought the hero to Rome. Ids are unique across all three lists; they are the tags used in scripts: [briton gaul] lines, ?if [gladiator], and -> scene [origin]. names are suggestions by gender. roles and paths list the fitting suggestions for an origin; most combinations stay allowed.",
+  "origins": [
+    { "id": "roman", "label": "Roman citizen", "names": { "m": ["Gaius", "Lucius", "Titus", "Quintus"], "f": ["Julia", "Cornelia", "Claudia", "Octavia"] }, "roles": ["legionary", "merchant"], "paths": ["born_in_rome", "freed"] },
+    { "id": "gaul", "label": "Gaul", "names": { "m": ["Dumnorix", "Brennus", "Litavicus"], "f": ["Cintugena", "Banona", "Sacrilla"] }, "roles": ["gladiator", "legionary"], "paths": ["auxiliary", "captured", "trader"] },
+    { "id": "briton", "label": "Briton", "names": { "m": ["Segovax", "Cunobel", "Tasciovanus"], "f": ["Brica", "Senua", "Catia"] }, "roles": ["gladiator", "house_slave"], "paths": ["captured", "hostage"] },
+    { "id": "north_african", "label": "North African (Carthage or Numidia)", "names": { "m": ["Hanno", "Bomilcar", "Adherbal"], "f": ["Arishat", "Batbaal", "Sapanbaal"] }, "roles": ["merchant", "legionary"], "paths": ["trader", "auxiliary", "born_in_rome"] },
+    { "id": "egyptian", "label": "Egyptian", "names": { "m": ["Petosiris", "Pamonthes", "Harpocras"], "f": ["Neferet", "Thermouthis", "Tasheret"] }, "roles": ["physician_aide", "merchant"], "paths": ["wanderer", "trader", "freed"] },
+    { "id": "judean", "label": "Judean", "names": { "m": ["Eleazar", "Shimon", "Yochanan"], "f": ["Miriam", "Shelamzion", "Salome"] }, "roles": ["physician_aide", "merchant", "house_slave"], "paths": ["exile", "captured", "trader"] },
+    { "id": "parthian", "label": "Parthian or Persian", "names": { "m": ["Artavan", "Mihrdat", "Sinatruk"], "f": ["Aryazate", "Rhodogune", "Musa"] }, "roles": ["merchant", "gladiator"], "paths": ["hostage", "trader", "exile"] },
+    { "id": "silk_road", "label": "Silk Road traveler (Han China or India)", "names": { "m": ["Jian", "Shou", "Varun"], "f": ["Lan", "Ying", "Amrita"] }, "roles": ["merchant", "physician_aide"], "paths": ["wanderer", "trader"] }
+  ],
+  "roles": [
+    { "id": "gladiator", "label": "Gladiator" },
+    { "id": "legionary", "label": "Legionary" },
+    { "id": "merchant", "label": "Merchant" },
+    { "id": "physician_aide", "label": "Physician's aide" },
+    { "id": "house_slave", "label": "Slave in a noble house" }
+  ],
+  "paths": [
+    { "id": "born_in_rome", "label": "Born in Rome" },
+    { "id": "captured", "label": "Captured in war" },
+    { "id": "freed", "label": "Freed slave" },
+    { "id": "auxiliary", "label": "Auxiliary soldier" },
+    { "id": "hostage", "label": "Hostage" },
+    { "id": "trader", "label": "Merchant or trader" },
+    { "id": "exile", "label": "Exile or refugee" },
+    { "id": "wanderer", "label": "Wanderer or scholar" }
+  ]
+}

@@ -4,7 +4,8 @@
 // operations with numeric jump targets. A flat list means the story position is
 // just (scene, pc), which is what makes mid-scene saves simple and reliable.
 
-import { parseExpr, ExprError, BUILTIN_FNS } from './expr.js';
+import { parseExpr, parseTags, ExprError, BUILTIN_FNS } from './expr.js';
+import { CONTENT_FN_NAMES, SHORTHAND_KEYS, PRONOUN_KEYS, VARIANT_GROUPS } from './content.js';
 import { ScriptError, fnv1a } from './util.js';
 
 const NAME_RE = /^[A-Za-z_][A-Za-z0-9_]*$/;
@@ -13,6 +14,10 @@ const RESERVED = new Set(['__proto__', 'constructor', 'prototype']);
 const badVarName = (n) => !VAR_RE.test(n) || RESERVED.has(n) || n.split('.').some((p) => RESERVED.has(p));
 export const WAIT_OPS = new Set(['page', 'choices', 'chapter_end']);
 const TERMINATORS = new Set(['goto', 'ret', 'chapter_end', 'jmp']);
+const capFirst = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+// "[briton gaul] text" shows the line only for those origins, roles or paths.
+const TAG_LINE_RE = /^\[((?:not\s+|!)?[a-z_][a-z0-9_]*(?:[\s,|]+[a-z_][a-z0-9_]*)*)\]\s+(.+)$/;
+const JUMP_RE = new RegExp(`^([A-Za-z_][A-Za-z0-9_]*)\\s*\\[(${VARIANT_GROUPS.join('|')})\\]$`);
 
 /**
  * Parse and compile one chapter.
@@ -22,7 +27,7 @@ export function parseChapter(source, { file = '<memory>', fnNames = null } = {})
   const errors = [];
   const warnings = [];
   const err = (line, msg) => errors.push(new ScriptError(msg, { file, line }));
-  const callNames = new Set([...Object.keys(BUILTIN_FNS), ...(fnNames ?? [])]);
+  const callNames = new Set([...Object.keys(BUILTIN_FNS), ...CONTENT_FN_NAMES, ...(fnNames ?? [])]);
   const expr = (src, line, opts = {}) => {
     try {
       return parseExpr(src, { callNames: opts.anyCall ? null : callNames });
@@ -84,6 +89,21 @@ export function parseChapter(source, { file = '<memory>', fnNames = null } = {})
     err(header.start?.line ?? 1, `start scene "${chapter.start}" does not exist`);
   }
 
+  // ---- Text shorthand: {they} {Their} {livia.them} {name} {cassian.name} {alias} {surname} ----
+  // Pronoun keys are the "they" words. A capital first letter capitalizes the result.
+  function shorthand(src) {
+    const m = /^\s*(?:([A-Za-z_][A-Za-z0-9_]*)\.)?([A-Za-z]+)\s*$/.exec(src);
+    if (!m) return null;
+    const key = m[2].toLowerCase();
+    if (!SHORTHAND_KEYS.has(key)) return null;
+    if (m[2] !== key && m[2] !== capFirst(key)) return null;
+    const who = { t: 'lit', v: m[1] ?? 'hero' };
+    const call = PRONOUN_KEYS.has(key)
+      ? { t: 'call', name: 'pro', args: [who, { t: 'lit', v: key }] }
+      : { t: 'call', name: key, args: [who] };
+    return m[2] === key ? call : { t: 'call', name: 'cap', args: [call] };
+  }
+
   // ---- Text with {expressions} ---------------------------------------------
   function compileText(raw, line) {
     const parts = [];
@@ -107,8 +127,9 @@ export function parseChapter(source, { file = '<memory>', fnNames = null } = {})
         if (j >= raw.length) { err(line, 'unclosed "{" in text (use \\{ for a literal brace)'); return { text: raw, parts: null }; }
         if (buf) parts.push(buf);
         buf = '';
-        const ast = expr(raw.slice(i + 1, j), line);
-        parts.push({ expr: ast, src: raw.slice(i + 1, j) });
+        const src = raw.slice(i + 1, j);
+        const ast = shorthand(src) ?? expr(src, line);
+        parts.push({ expr: ast, src });
         hasExpr = true;
         i = j + 1;
         continue;
@@ -205,8 +226,22 @@ export function parseChapter(source, { file = '<memory>', fnNames = null } = {})
       if (t === '<~') return { kind: 'ret', line: no };
       let m;
       if ((m = /^:([A-Za-z_][A-Za-z0-9_]*)$/.exec(t))) return { kind: 'label', name: m[1], line: no };
-      if ((m = /^->\s*(.+)$/.exec(t))) return { kind: 'goto', target: m[1].trim(), line: no };
-      if ((m = /^~>\s*(.+)$/.exec(t))) return { kind: 'call', target: m[1].trim(), line: no };
+      if ((m = /^->\s*(.+)$/.exec(t))) return jump('goto', m[1].trim(), no);
+      if ((m = /^~>\s*(.+)$/.exec(t))) return jump('call', m[1].trim(), no);
+      if ((m = TAG_LINE_RE.exec(t))) {
+        let cond = null;
+        try {
+          const { neg, tags } = parseTags(m[1]);
+          const call = { t: 'call', name: 'variant', args: tags.map((v) => ({ t: 'lit', v })) };
+          cond = neg ? { t: 'un', op: '!', a: call } : call;
+        } catch (e) {
+          if (e instanceof ExprError) err(no, e.message); else throw e;
+        }
+        const inner = parseSimple({ ...L, text: m[2].trim() });
+        if (!inner) return null;
+        if (inner.kind === 'label') { err(no, 'a label cannot be shown only for some origins'); return null; }
+        return { kind: 'if', branches: [{ cond, body: [inner], line: no }], elseBody: null, line: no };
+      }
       if ((m = /^=>\s*(.+)$/.exec(t))) return { kind: 'chapter_end', target: m[1].trim(), line: no };
       if (t.startsWith('$ ') || t === '$') return parseCommand(t.slice(1).trim(), no);
       if (t.startsWith('\\')) return { kind: 'text', raw: t.slice(1), tk: 'p', line: no };
@@ -214,6 +249,15 @@ export function parseChapter(source, { file = '<memory>', fnNames = null } = {})
       if (t.startsWith('> ')) return { kind: 'text', raw: t.slice(2), tk: 'quote', line: no };
       if (/^[-=~<]>|^<~/.test(t) || /^\$/.test(t)) { err(no, `could not read line "${t}"`); return null; }
       return { kind: 'text', raw: t, tk: 'p', line: no };
+    }
+
+    // "-> arrival [origin]" goes to "arrival_briton" for a Briton if that scene exists, else "arrival".
+    function jump(kind, target, no) {
+      if (target.startsWith(':')) return { kind, target, line: no };
+      const vm = JUMP_RE.exec(target);
+      if (vm) return { kind, target: vm[1], by: vm[2], line: no };
+      if (/\[/.test(target)) { err(no, `bad variant jump "${target}" (use [${VARIANT_GROUPS.join('], [')}])`); return null; }
+      return { kind, target, line: no };
     }
 
     function parseCommand(body, no) {
@@ -284,9 +328,12 @@ export function parseChapter(source, { file = '<memory>', fnNames = null } = {})
             if (n.target.startsWith(':')) {
               const at = emit({ op: 'jmp', to: -1, label: n.target.slice(1) }, n.line);
               labelJumps.push({ at, label: n.target.slice(1), line: n.line });
-            } else emit({ op: 'goto', scene: n.target }, n.line);
+            } else emit({ op: 'goto', scene: n.target, ...(n.by ? { by: n.by } : {}) }, n.line);
             break;
-          case 'call': emit({ op: 'call', scene: n.target }, n.line); break;
+          case 'call':
+            if (n.target.startsWith(':')) { err(n.line, '"~>" needs a scene name, not a label'); break; }
+            emit({ op: 'call', scene: n.target, ...(n.by ? { by: n.by } : {}) }, n.line);
+            break;
           case 'chapter_end': emit({ op: 'chapter_end', target: n.target }, n.line); break;
           case 'if': {
             const endJumps = [];

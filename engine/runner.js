@@ -8,6 +8,7 @@
 import { evaluate, BUILTIN_FNS } from './expr.js';
 import { WAIT_OPS } from './script.js';
 import { assign } from './state.js';
+import { CONTENT_FNS, CONTENT_COMMANDS, EMPTY_CONTENT, recordSet } from './content.js';
 import { EngineError, nextRandom } from './util.js';
 
 const MAX_STEPS = 50000;
@@ -16,20 +17,21 @@ export class Runner {
   /**
    * @param chapter  compiled chapter from parseChapter
    * @param state    plain game state (mutated in place)
-   * @param env      { statDefs, fns, commands, warn, onUnknown }
+   * @param env      { statDefs, content, fns, commands, warn, onUnknown }
    */
   constructor(chapter, state, env = {}) {
     this.chapter = chapter;
     this.state = state;
     this.env = {
       statDefs: {},
+      content: EMPTY_CONTENT,
       fns: {},
       commands: {},
       warn: () => {},
       ...env,
     };
-    this.fns = { ...BUILTIN_FNS, ...this.env.fns };
-    this.commands = { log: (ctx, ...a) => this.env.warn(`log: ${a.join(' ')}`), ...this.env.commands };
+    this.fns = { ...BUILTIN_FNS, ...CONTENT_FNS, ...this.env.fns };
+    this.commands = { log: (ctx, ...a) => this.env.warn(`log: ${a.join(' ')}`), ...CONTENT_COMMANDS, ...this.env.commands };
   }
 
   get frame() {
@@ -108,10 +110,19 @@ export class Runner {
       fns: this.fns,
       state: st,
       chapter: this.chapter,
+      content: this.env.content,
       rand: () => nextRandom(st),
       visited: (name) => st.visited[name.includes('.') ? name : `${chapterId}.${name}`] ?? 0,
       unknown: this.env.onUnknown ? (n) => this.env.onUnknown(n, this.#where()) : undefined,
     };
+  }
+
+  /** "-> arrival [origin]": use "arrival_<hero's origin>" if this chapter has it. */
+  #target(op) {
+    if (!op.by) return op.scene;
+    const v = this.state.vars[`hero.${op.by}`];
+    const alt = `${op.scene}_${v}`;
+    return typeof v === 'string' && v && Object.hasOwn(this.chapter.scenes, alt) ? alt : op.scene;
   }
 
   #where() {
@@ -168,6 +179,7 @@ export class Runner {
             for (const n of op.names) {
               if (op.value) st.vars[n] = true;
               else delete st.vars[n];
+              recordSet(ctx, n, op.value ? true : undefined, this.env.warn);
             }
             st.pos.pc++;
             break;
@@ -180,11 +192,12 @@ export class Runner {
           }
           case 'jf': st.pos.pc = evaluate(op.ast, ctx) ? st.pos.pc + 1 : op.to; break;
           case 'jmp': st.pos.pc = op.to; break;
-          case 'goto': this.#enterScene(op.scene); break;
+          case 'goto': this.#enterScene(this.#target(op)); break;
           case 'call': {
             const next = scene.ops[st.pos.pc + 1];
+            const target = this.#target(op);
             st.stack.push({ scene: st.pos.scene, pc: st.pos.pc + 1, fp: next?.fp ?? '' });
-            this.#enterScene(op.scene);
+            this.#enterScene(target);
             break;
           }
           case 'ret': {
@@ -228,6 +241,7 @@ export class Runner {
       next = op.how === '+=' ? a + b : op.how === '-=' ? a - b : op.how === '*=' ? a * b : a / b;
     }
     assign(st, this.env.statDefs, op.name, next);
+    recordSet(ctx, op.name, st.vars[op.name], this.env.warn);
   }
 }
 

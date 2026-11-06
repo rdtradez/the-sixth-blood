@@ -1,6 +1,6 @@
 {
   "name": "the-sixth-blood",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "The Sixth Blood: a choice game engine and story, played as a PWA.",

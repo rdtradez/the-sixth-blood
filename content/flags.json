@@ -1,0 +1,43 @@
+{
+  "note": "The flag registry: every story variable that is not a declared stat (stats.json), a person field (<id>.name, .gender, .alias, .surname from people.json), or a scratch variable starting with an underscore. kind is flag (true or unset), enum (one of values), number, or text. book is where it is decided. major: true records it in the decision log for journals and callbacks. default is the value a quick start uses when it skips that book. A name ending in .* covers a family of variables. npm run check rejects variables that are not registered, so misspellings are caught.",
+  "flags": {
+    "hero.origin": {
+      "kind": "enum",
+      "values": "@origins",
+      "book": "burning-city",
+      "note": "Homeland, chosen at creation"
+    },
+    "hero.role": {
+      "kind": "enum",
+      "values": "@roles",
+      "book": "burning-city",
+      "note": "Mortal role, chosen at creation"
+    },
+    "hero.path": {
+      "kind": "enum",
+      "values": "@paths",
+      "book": "burning-city",
+      "note": "How the hero came to Rome"
+    },
+    "hero.look.*": {
+      "kind": "text",
+      "book": "burning-city",
+      "note": "Appearance chosen at creation: height, build, age, hair, eyes, skin, mark"
+    },
+    "quick_start": {
+      "kind": "flag",
+      "note": "Set when a book was begun with a quick start (default history)"
+    },
+    "et.door": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "right"
+      ],
+      "book": "engine-test",
+      "major": true,
+      "default": "left",
+      "note": "Developer test: the door taken in the engine test"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+// Engine test (session 2): story voice, pronouns and names, origin variants,
+// the decision log and journal, and carrying a save into a second book. Not part of the story.
+@chapter etb1
+@title Engine Test: Voices, Names, Variants
+@book engine-test-b
+@version 1
+
+# start
+## Who you are
+?if quick_start
+  This book began with a quick start.
+?end
+?if et.door == "left" or et.door == "right"
+  Last book you took the {et.door} door.
+?else
+  This test was started without the first engine test.
+?end
+---
+$ _h = hunger
+You are {name}, {alias} to the city, of the {surname} family.
+{They} {are} ready. {They} wait{s} at the gate, {their} hand on the latch.
+Your {pg("spouse", "husband", "wife", "spouse")}, {spouse.name}, watches {them}. {spouse.They} {spouse.are} worried.
+Right now {voice("hunger")}, and {voice("humanity")}.
+[roman] As a citizen, you know these streets.
+[gaul briton] Rome still feels like a conqueror's city to you.
+[not roman gaul briton] You came to Rome from far away.
+[gladiator] Your arena scar itches.
+---
+~> homeland [origin]
+$ hunger += 50
+Now {voice("hunger")}. In a word: {voice("hunger", "short")}.
+?if band("hunger") == "hungry" or band("hunger") == "starving" or band("hunger") == "ravenous"
+  The hunger band check works.
+?end
+$ hunger = _h
+$ do journal("The engine test reached its second book.", "Engine Test")
+* Greet the stranger in Brittonic ?if [briton]
+  $ standing += 5
+  The stranger answers you gladly.
+* Nod and move on
+  You nod and move on.
+:end_choice
+---
+=> endbook
+
+# homeland
+You think of home, wherever it was.
+<~
+
+# homeland_roman
+You think of the Seven Hills.
+<~
+
+# homeland_briton
+You think of grey seas and the island's mists.
+<~

@@ -1,23 +1,24 @@
 // Engine test chapter 1. Exercises text, expressions, stats, flags, conditions,
 // choices (with [once] and conditions), calls, and chapter flow. Not part of the story.
+// Version 2: scratch variables renamed with a leading underscore (the flag registry rule).
 @chapter et1
 @title Engine Test: Basics
 @book engine-test
-@version 1
+@version 2
 @next et2
 
 # start
 ## Basics
 This is a plain line of text.
-Interpolation works: gold is {gold} and hunger is {hunger}.
-$ gold = 5
-$ gold += 3
-$ flag seen_intro
-Now gold is {gold}, and the flag reads {seen_intro}.
+Interpolation works: gold is {_gold} and hunger is {hunger}.
+$ _gold = 5
+$ _gold += 3
+$ flag _seen_intro
+Now gold is {_gold}, and the flag reads {_seen_intro}.
 ---
-?if gold >= 8 and seen_intro
+?if _gold >= 8 and _seen_intro
   Condition passed.
-?elif gold >= 5
+?elif _gold >= 5
   Middle branch.
 ?else
   Condition failed.
@@ -29,27 +30,29 @@ Hunger was clamped to {hunger}.
 # doors
 Two doors stand ahead.
 * Take the left door
+  $ et.door = "left"
   $ cunning_brutal -= 10
   You went left.
 * Take the right door [once]
+  $ et.door = "right"
   $ cunning_brutal += 10
   You went right.
   -> doors
-* Open the secret door ?if gold > 100
+* Open the secret door ?if _gold > 100
   This should never appear.
 Both paths rejoin here.
 ~> helper
-Back from the helper. Counter is {counter}.
+Back from the helper. Counter is {_counter}.
 :before_finale
 ---
 -> finale
 
 # helper
-$ counter += 1
-Inside the helper, counter is {counter}.
+$ _counter += 1
+Inside the helper, counter is {_counter}.
 <~
 
 # finale
-$ roll_result = roll(6)
-A seeded roll gave {roll_result}. The doors scene ran {visited("doors")} time(s).
+$ _roll_result = roll(6)
+A seeded roll gave {_roll_result}. The doors scene ran {visited("doors")} time(s).
 => next
