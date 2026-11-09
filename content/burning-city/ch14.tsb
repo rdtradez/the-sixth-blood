@@ -1,0 +1,483 @@
+// Book One, Chapter 14 (session 13). The night on the hill: the column comes, Flavus comes, and Collesanto is held or it is not.
+// One night phase of three actions out of four places, then the well. Ends with rest() and the news from Rome.
+@chapter b1c14
+@title Oak and Ash
+@book burning-city
+@version 1
+
+# start
+## The lights on the ridge
+$ do phase("night", 3)
+$ b1.hill_stand = "square"
+$ b1.flavus_end = "hero"
+$ b1.remnant = "spared"
+$ b1.hill_toll = "light"
+$ b1.survivor = "none"
+$ _held = 0
+$ _harm = 0
+$ _bridge = 0
+$ _row = 0
+$ _square = 0
+$ _gate = 0
+$ _sworn = 0
+$ do discover("the_igniferi")
+They come down the north road at the second hour of the night, in a long thin file, with the lamps held low. It is the most beautiful thing that you have ever seen, and you know it, and you hate it. The whole of the dark country is full of small white lights moving between the trees, steady as stars, without a flicker, without a sound, like a procession at a festival for a god that nobody has told you about.
+?if b1.column == "stopped"
+  There are fewer of them than there ought to be. You have counted, from the ridge. A good many of the ones you saw in the hollow have not come. It is not a thing that you will ever learn the cause of. It is not a comfort, either, because those who are left are the ones who were sure.
+?elif b1.column == "counted"
+  You count them from the wall of the sheepfold. There are twenty two, as the shepherd said, and a few more who must have joined on the road. There is a lame man at the head. It takes you the better part of a minute to bring yourself to look at him.
+?else
+  You do not know how many there are. You have only the lights, and the dark between them, and your own heartbeat, which is a thing that you did not expect to have in your ears.
+?end
+?if b1.company == "hunters"
+  The captain with the scarred jaw is at your shoulder. She has put her four in the oaks above the road, in a half circle, with their hoods up, and she has not said a word since the dusk. She says now, very low, "Give me the word." She means it as a question. It is not one.
+?elif b1.company == "aulus"
+  Aulus is not here. He is on the road with a mule, somewhere in the dark behind you, going as fast as a man can go who has the sense to be afraid, and you find that you are listening for him.
+?end
+You have the length of a breath, and a village at your back, and one decision to make about where to stand.
+-> stance
+
+# stance
+## Where to stand
+:stance
+* Meet them at the bridge and the ridge, before they reach the roofs
+  $ b1.hill_stand = "ridge"
+  $ _held += 1
+  $ _bridge += 1
+  You go out to meet them. It is the oldest instinct there is: to keep the fire from the thatch by being, for as long as you can be, in the way of it. You tell Sextus that you will hold the bridge, and that the horns are to blow once and not twice. You go up the road alone, in the starlight, with your hands bare.
+* Hold the square, with the village behind you
+  $ b1.hill_stand = "square"
+  $ _held += 1
+  $ _square += 1
+  You stay where you are. It is the harder thing and you know it, to wait with your hands on the well and let the dark come to you. You tell the men to keep to their doors, and the women to keep the children quiet, and you stand in the middle of the square in the starlight with the whole of the village at your back and a hot wind in your face.
+* Hold the villa, and the children
+  $ b1.hill_stand = "villa"
+  $ _held += 1
+  $ _gate += 1
+  You go up the hill. It is a hard thing to do and you do it. You set Domitia at the cellar door with a hook and Aelia and Felix behind her and the little ones and the old, and you say to Sextus that he is to keep the square if he can. There is no heroism in it. It is the thing that you care about most, and you are not ashamed of that.
+-> night
+
+# night
+## The first watch
+:night
+?if actions_left() == 3
+  It is the beginning. The lamps are still a long way off, and the village is very quiet, and you can hear a child crying somewhere in the lower houses, a thin, small, ordinary sound that makes the whole of the night seem enormous.
+?elif actions_left() == 2
+  It is the middle of it. There is a smell of oil on the wind, and of something sweeter under it, resin, and pitch, and burning tow. A horn has gone, once, from the ridge, a flat brass sound that is cut off short.
+?else
+  It is very late. The east has not begun to lighten, but you can feel that it will. You have a wound that you have not looked at, and a thirst that you have not mentioned, and the lamps have come very near.
+?end
+* Hold the bridge and the north road, and meet the column's head [once] ?if actions_left() > 0
+  ~> bridge
+  $ do act()
+* Hold the north row, where the first lamps will be thrown [once] ?if actions_left() > 0
+  ~> row
+  $ do act()
+* Hold the square, and the old men at the well [once] ?if actions_left() > 0
+  ~> square
+  $ do act()
+* Hold the villa gate and the cellar door [once] ?if actions_left() > 0
+  ~> gate
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> well
+?end
+-> :night
+
+# bridge
+## The bridge
+$ _bridge += 1
+The stone bridge is very small and very old. It crosses a stream that is nearly dry at this time of the year, a bed of white pebbles with a thread of water in it that murmurs, and it is the one place on the north road where a column of men must go in single file. You stand in the middle of it, in the dark, with the lamps coming.
+The first of them is a boy of seventeen. He has a jar in one hand and a lamp in the other and he is whispering something over and over under his breath, and he comes on without seeing you, until he is nearly at your chest. He stops. He looks up. He has an open freckled face and a look of great, fixed, appalled courage.
+"Strix," he says. It is hardly a word. It is a breath.
+$ do fight("human", 2)
+:bridge_exchange
+* Take the lamp out of his hand, and put it in the stream
+  $ do strike("power")
+* Go through them, and hold the bridge as a wall is held
+  $ do strike("brutal")
+* Tell him that the village is not what he was told
+  $ do strike("talk")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    The boy goes back into the line with a cry, and the white flame goes into the stream with a hiss, and the lamps behind him waver.
+  ?else
+    A jar goes by your head, and breaks, and there is a quick bright bloom of heat on the stones that makes you step back.
+  ?end
+  -> :bridge_exchange
+?end
+?if fight_result() == "talked"
+  $ humanity += 1
+  $ _held += 2
+  $ _sworn += 1
+  The boy stares. He says, very low, "The master said that it was a den." He looks past you at the roofs, at the thin lines of smoke, at a light in a window. "There are children," he says. "I did not know." He does not put the lamp down. But he does not come on, either, and the man behind him, and the one behind that, hang back, in a long uneven line along the road, with their lamps lowered. It is not a victory. It is a hesitation, and it is the best that you can give.
+?elif fight_result() == "won"
+  $ _held += 2
+  $ do witness(1)
+  The bridge is a wall. They come on, one at a time, and you take each lamp, and each jar, and break them on the stones, and the line backs up along the road in the dark until the whole of the column is a long standing rank of white lights with a vampire in the road in front of it. You do not know how long it lasts. When it is over there is a heap of broken clay on the bridge, and a dark smell of oil, and the first grey of the dawn has not come.
+?elif fight_result() == "fled"
+  $ _held += 0
+  $ _harm += 1
+  You go back over the bridge before they can close, and the column pours across behind you, and you know that you have not held it.
+?else
+  $ injury += 6
+  $ _harm += 2
+  They put you down in the stream. It is a cold small thing, a handbreadth of water, and the flame from a broken jar goes over you like a hand, and you smell your own hair burning. You are dragged up the bank by somebody, whose face you do not see, and left. You lie there for a long time. By the time that you are on your feet the column is a long file of lights going up through the oaks toward the roofs.
+?end
+<~
+
+# row
+## The north row
+$ _row += 1
+The north row has been stripped to the rafters, and the rest of it is a dark wet crust of old thatch and a smell of earth and water. It does not look like a village any more. It looks like something that has been got ready.
+?if b1.hill_ready == "full"
+  It was well done. You see it clearly now. It is a thing that was done by a great many people with their whole hearts. There are cisterns at every corner, and buckets in lines, and old women on every roof with wet sacks and long poles, and Sextus's men on the walls with their hooks, and a boy at every well, and no one, as far as you can see, is afraid.
+  $ _held += 2
+?elif b1.hill_ready == "some"
+  It is a good deal less than it might have been, and a good deal more than it was. There are cisterns, and buckets, and some of the roofs are wet. Some are not.
+  $ _held += 1
+  $ _harm += 1
+?else
+  It was not enough. You see that in a moment. There are roofs that are dry, and a row of old thatch at the end that nobody had the time to strip, and a pile of hay behind a cart. The thing is going to be a matter of speed.
+  $ _harm += 2
+?end
+The first lamps come over the wall of the end house in a long slow arc, as they came two summers ago, like a flight of burning birds. You see them go up. You see them come down. You are running before the first of them has landed.
+$ do power("minor")
+:row_choice
+* Go along the roofs, and take the lamps before they catch
+  $ _held += 1
+  $ do witness(2)
+  $ standing += 1
+  You run the whole length of the row on the roof trees, in the dark, with the lamps coming down all round you, and you take them out of the air as a man takes apples from a tree. It is a thing that nobody should be able to do. You do it twice, and thrice, and the old women on the wet roofs below stare up with their mouths open. It is not hidden. It is not meant to be.
+* Pull down the burning end of the row before it spreads
+  $ _held += 1
+  $ injury += 2
+  $ do power("major")
+  You put your shoulder to the end wall of the last house and bring it down across the path of the fire. It is a thing that takes all of your strength, and a good deal of your hide. The thatch goes up like a torch. It does not spread. When the smoke clears there is a gap in the north row where a house was, and a hot wind, and no further fire.
+* Shout for the water, and stand where it will be needed
+  $ _held += 1
+  $ bond.sextus += 1
+  You do not do anything clever. You put yourself where the roofs are, and shout, and the old men on the walls hear you and pass the buckets. It is slower than the other things. It is quite enough. The first roof is drenched before it can take, and the second, and when the third lamp lands on the soaked straw it lies there smouldering, and goes out.
+-> :row_end
+:row_end
+$ do village_harm(1 + _harm)
+<~
+
+# square
+## The square
+$ _square += 1
+The square is a quiet place. It is a patch of beaten earth with a well in it, a bench, an ash tree that was struck by lightning in the spring, and a stone trough, and it has a wall of old men around it, in their working tunics, with hooks and pitchforks, standing about as farmers stand at a market when something very odd is going on.
+Sextus is at the front. He has a long hay knife, and a bad knee, and the look of a man who has been waiting for this since the day he was born. He says, as you come up, "I told them." He says it with a certain heavy satisfaction. "I told them that I saw a ghost."
+There is a smell of oil. It comes down the lane from the north row, and with it a sound, of a great many people walking carefully. It is the sound of a column coming into a village in the dark. The old men shift. Someone coughs. In the doorways behind them there are women, with their hands on their children's shoulders, and not one of them is crying.
+$ bond.sextus += 1
+:square_choice
+* Put the old men at the back, and stand in front of them
+  $ _held += 2
+  $ _sworn += 1
+  $ do witness(2)
+  Sextus says something rude. You do not listen. You stand at the mouth of the lane with your hands open, and the first of the grey cloaks comes round the corner of the north row with a lamp in his hand, and finds, in the dark, a figure with a pale face and a smile that is not a smile, and stops as though he had walked into a wall. The old men behind you have not moved. It is not at all clear which of you is the more frightening.
+* Stand with the old men, in the line, as one of them
+  $ _held += 1
+  $ standing += 2
+  $ humanity += 1
+  You take a hook from a man who is too old to hold it. You stand in the line, in the dark, with the smell of woodsmoke and old tobacco and sweat, shoulder to shoulder with the men who have known this square for sixty years. It is not a thing that will make any difference to the fighting. It is a thing that will make a very great deal of difference afterward.
+* Wait until the first of them is in the square, and then show them what you are
+  $ _held += 2
+  $ do power("major")
+  $ do witness(3)
+  $ secrecy -= 2
+  You let them come. You let the first of them come out of the lane into the square, with his lamp, in the starlight, and see an empty place, and a well, and nothing else. Then you let the dark go out of your face. It is a thing that you have not done to the living. It is a very small movement, a kind of unfolding, and the lamps go out. Not all of them. A great many.
+-> :square_end
+:square_end
+<~
+
+# gate
+## The villa gate
+$ _gate += 1
+The gate of the villa is shut. The wall above it is white, and high, and warm to the touch even at night, as a wall is that has soaked up the sun all day, and the oaks behind it stand up black against the stars. There is a light in the cellar window. It is a very small and ordinary lamp, a woman's, with a flame that moves in the draught.
+Domitia is at the door. She has not moved from it since dusk. She has a hay hook across her knees, and a shawl, and in the little vaulted room behind her there are twenty people sitting on benches in the lamplight with their blankets round them, old men and mothers and small children, and Aelia, and Felix, in the corner on a pile of sacks with his eyes enormous.
+?if b1.hill_ready == "none"
+  There are fewer here than there should be. You can hear the others in the lower village, behind their own doors, in their beds, a good many people who were not told, or were told and did not believe it.
+  $ _harm += 1
+?end
+Felix is looking at you. He says, in a very small clear voice, "Are they going to burn us?" Domitia says, "Felix." Aelia says nothing. Her hand has found her brother's.
+$ do meet("felix")
+:gate_choice
+* Tell him no, and let him believe it
+  $ _held += 2
+  $ bond.felix += 3
+  $ humanity += 1
+  "No," you say. It is the one lie that you have never been sorry for. You say it with your hand on the doorpost, and the whole of the room looks at you, and the small boy nods, and puts his thumb in his mouth. It is a thing that is easy to say and very hard to have said. You bar the door from the outside. You stand with your back to it, in the courtyard, with the wall behind you, and no one passes.
+* Tell him the truth: that you are going to stop them
+  $ _held += 2
+  $ bond.felix += 2
+  $ bond.aelia += 2
+  You kneel. You say that there are men with fire, and that you do not mean to let them come. You say that it will not be easy and that you are not sure of it, and that you would rather he heard it from you than from the dark. He looks at you for a long time. "All right," he says, and it is the voice of a boy who has decided to be brave. You bar the door. You stand with your back to it.
+* Tell Aelia to keep the door, and to open it for no one but you
+  $ _held += 1
+  $ bond.aelia += 3
+  $ standing += 1
+  You say it to her, and to no one else. She nods. She does not look frightened any more. She has the look of a person who has been given something to do, and she stands up with her grandmother's hook in her hands and plants her feet. "I will not open it," she says. It is a thing that you will remember. It is a thing that you will carry, when you have forgotten a good many others.
+-> :gate_end
+:gate_end
+$ do power("minor")
+<~
+
+# well
+## The well
+$ do discover("collesanto")
+?if _bridge == 0
+  $ _harm += 1
+?end
+?if _row == 0
+  $ _harm += 2
+?end
+?if _square == 0
+  $ _harm += 2
+?end
+?if _gate == 0
+  $ _harm += 2
+?end
+The dark does not break. It goes grey, and thin, and the smoke hangs low in the square in long bands. There are roofs burning in the north row, and roofs not burning, and all across the village there is a shouting, a great ragged sound of buckets and voices and dogs, and the horn on the ridge going at last, twice, a flat despairing note.
+And into the square, quite slowly, with a limp, a man comes out of the smoke.
+He is not what you expected. You have seen him once, or twice, in a lamp seller's shop, a gentle lame man with kind eyes, and you have heard him described in the cellar and in the quarry and in the mouths of men who were afraid of him. He is none of those. He is a man of perhaps sixty, in a grey cloak that is torn at the hem, with a clay lamp in his hand and a white scar across the knuckles, and he walks up to the well and puts his free hand on it, as a traveller does, and looks about him with an expression of great peace.
+?if b1.flavus == "struck"
+  "We have met," he says. It is a thing that is said as one says it to a friend. He touches his own cheek, very lightly, where you struck him. "I told you that I should remember your face. I do. I have had a great deal of time to look at it." He smiles a little. "It is a better face than I had been told."
+?elif b1.flavus == "spoke"
+  "We have talked," he says, "of fire." He seems pleased. "I said that it would be a very bright summer. I find that I was a little mistaken. It has been a very long one." He has a quiet, friendly, ordinary voice, such as one hears in a market. "I did not think that you would be a person of this place. It is the sort of coincidence that one is taught to look for."
+?elif b1.flavus_night == "faced" or b1.flavus_night == "heard"
+  "I saw you on the ridge," he says, "in Rome. I have not forgotten the face." He looks at you with a sort of gentle puzzlement. "I thought that you were a great evil. I find that I do not know what you are." He sighs. "It is a thing that I have found, with age, that most of the evils are not as great as one has been told."
+?else
+  "I do not know you," he says. He says it as a courtesy. "I am sorry. I think that I am meant to. It is a poor thing, in a man of my years, to forget a face." He looks round at the square, at the burning roofs, at the old men with their hooks, at the woman at the cellar door. "But I know this place. I was here before."
+?end
+Behind him, out of the smoke, come the rest. There are not many. They stand in a half ring at the edge of the square, in the grey light, with their lamps lowered. They do not look at you. They look at the man who is leading them, with the dumb steady gaze of people who have decided to believe.
+?if _sworn > 0
+  There is a freckled boy among them, at the back, who looks at you, and looks quickly away.
+?end
+"It was not finished," says Flavus. He says it almost to himself. "I said to them, it was not finished. They said that it was a village. I said that it was a village with a house above it." He looks up, toward the hill, where the white wall of the villa is just beginning to show in the dawn. "I have been told all my life that a fire which is not finished is a fire that has been lied to."
+He is not mad. That is the thing that you will keep. He is quite perfectly sane. He speaks as a man speaks who has found out what a thing is for.
+:the_well
+* Ask him why he has come back to a place that has already burned
+  $ cunning_brutal -= 1
+  He looks at you for a long moment. "Because we did not find what we were looking for," he says. "We went through the whole of the hill. We found a house with an open gate, and a cellar with a bar on the inside, and nothing in it. I have thought of that bar for two years." He frowns, very slightly. "A man does not keep a door like that for nothing."
+  -> :the_well_end
+* Tell him that you are what he has come for, and that the village is nothing to do with it
+  $ humanity += 1
+  $ defiance += 1
+  "That is a thing that a great many people say," says Flavus, almost kindly. "It is never true." He looks past you at the stripped roofs, at Sextus and his men, at the woman at the cellar door. "The village is where it comes from. The fire does not forget where it has been."
+  -> :the_well_end
+* Say nothing
+  $ cunning_brutal += 1
+  He waits. He is a man who has waited a great deal in his life. When he sees that you will not speak, he nods slowly, as though it were an answer.
+  -> :the_well_end
+:the_well_end
+He lifts the lamp.
+-> end_flavus
+
+# end_flavus
+## The lamp
+It is a very small thing, the lamp. You have seen a hundred of them, and a thousand, and it is a plain clay shape such as a child could make, with a spout, and a wick, and a pale clear flame that does not flicker. You can feel it across the whole of the square, as a hot cheek is felt in the dark, and you know that it is not meant to be thrown. It is meant to be carried, slowly, to the thatch of a house, to the roof beam of a villa, to the door of a cellar with a woman in it, and to be set down, gently, as one sets down a thing that has been a long time on the road.
+He walks toward the stair of the hill. The village does not move. The old men with their hooks have all gone quite still, as if they had been turned to something.
+$ do fight("human", 2)
+:flavus_exchange
+* Take him by the arm, and the lamp out of it
+  $ do strike("brutal")
+* Step in front of him, and stop him with the whole of what you are
+  $ do strike("power")
+* Speak to him, once, as to a man who has been lied to
+  $ do strike("talk")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    He is turned aside, with a gasp, and the lamp swings wide. He does not let go of it.
+  ?else
+    The flame goes by your face, and you feel it in your teeth.
+  ?end
+  -> :flavus_exchange
+?end
+?if fight_result() == "talked"
+  $ humanity += 1
+  He stops. It is a strange thing to see. He stops at the foot of the stair with the lamp in his hand and his lame foot in the dust, and he looks at you, and for a moment his face is an old man's face, tired, and clear. "It was a very long way," he says. "I did not think that it would be so long." He looks down at the lamp. "I think that I did not know what I was carrying."
+?elif fight_result() == "won"
+  He goes down in the dust with a grunt, with the lamp under him, and for a moment there is a white ring of fire in the earth. It does not catch. It goes out as it was taught to, as a thing goes out that is not wanted.
+?else
+  $ injury += 6
+  He passes you. The lamp goes by your shoulder and you smell yourself burning, and he is on the stair, with his lame step, going up, with the white flame in his hand, and you are on your knees in the dust of the square, and the whole of the village is watching.
+?end
+It is the end of it. Everyone in the square knows. There is a silence in which you can hear the burning roofs, and the horn on the ridge, and the old men's breathing, and a very small sound, like a bird, from the cellar window.
+:the_end
+* End it yourself, quickly, and without making him afraid
+  $ b1.flavus_end = "hero"
+  $ do kill("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  $ do witness(2)
+  You do it as cleanly as you know how. It takes no time at all. He does not cry out. He is a light man, an old man, a lame one, and he sits down against the well with his hand on your sleeve, and says, quite clearly, "Ah. I see." The lamp rolls out of his fingers. It does not go out. You put your foot on it. It is a long time before it does.
+  -> remnant
+* Let the village do what it will, and stand aside
+  $ b1.flavus_end = "village"
+  $ humanity -= 1
+  $ standing += 1
+  You stand aside. It is a thing that takes all of your strength. There is no sound for a long moment, and then Sextus says, in his flat country voice, "That is the one." And then, quite slowly, the old men put down their hooks, one by one, and go forward. You turn your face away. You hear it, and you do not look. When it is over there is a man at the foot of the well in a torn grey cloak, and an old woman standing over him with her ladle, and the lamp, crushed flat, in the dust.
+  -> remnant
+* Do nothing. Let him go up the stair with his lamp
+  $ b1.flavus_end = "fire"
+  $ humanity += 0
+  You do not stop him. It is a thing that you cannot explain, then or afterward. He goes up the stair alone, the whole length of it, in the grey light, with the lamp held before him, and the village watches him go. At the top he stops. He turns, and looks down at the roofs, and the oaks, and the white road, and at you. Then he opens his hand. It is a very small flame. It runs up the old man's sleeve as a cat runs up a tree.
+  He does not scream. He stands in it, in the grey light, quite upright, a man in a cloak that is on fire, and the villa wall behind him is white and warm and perfectly clean, and the fire does not reach it. It goes down in the end, as a candle goes down, and there is only a black shape on the stair, and the smell, and a clay lamp, whole, still burning.
+  -> fire_stair
+
+# fire_stair
+:the_stair
+* Run up the stair, and put out the lamp
+  $ injury += 3
+  $ humanity += 1
+  You do it. You go up the stair three steps at a time and put your hand over the flame, and it goes into you like a nail, and the lamp goes out. It is too late for anything but that. You sit on the top step with your hand against your chest, and you do not look at what is beside you.
+* Leave it. Let it burn down
+  $ humanity -= 1
+  You leave it. It burns for the best part of an hour, on the stair, in the sun, a small hard clean flame on a black place, and in the end it goes out of its own accord, and nobody touches it.
+-> remnant
+
+# remnant
+## The rest of them
+$ do discover("the_igniferi")
+There are eleven left. You count them as the light comes. They have not moved. They stand in a half ring at the edge of the square in their grey cloaks, with their lamps in their hands, and they are looking, all of them, at the place where the man is who led them. They do not look afraid. They look like children who have been told that a house was haunted, and have gone into it, and found it empty.
+Domitia comes across the square with her ladle. Aelia is behind her. She has come out of the cellar, in the end. She has her hook. She has the whole of her grandmother's face.
+$ do meet("domitia")
+?if b1.company == "hunters"
+  The captain steps out of the oaks, with her four, and she is looking at you, not at them. She says, "Terms?" It is a word that has a great deal in it. She has a hand on her blade. It is a question that she has asked in a great many fields, and she wants, it seems, to be told.
+?elif b1.company == "aulus"
+  There is a sound on the road. It is a mule, blowing hard, and a man on its back with his cloak awry, and he comes into the square at a stumbling trot, and slides off, and stands with his hand on its neck. It is Aulus. He looks at the half ring of lamps, and he does not say anything. He has gone quite white.
+?end
+:the_rest
+* Tell them to put the lamps down, and go home, and not to come back
+  $ b1.remnant = "spared"
+  $ humanity += 3
+  $ velati_regard += 2
+  You say it to them as you would say it to a boy who has been sent to the wrong house. They stare. They do not move. You say it again, more gently, and one of them, a young woman with a child's face, bends down and sets her lamp in the dust. Then another. It goes round the ring like a ripple on a pool, and in the end the whole row of little white lights is lying on the ground in the grey dawn, in a heap, going out. They go. They go up the north road without looking back, a long grey file, and nobody tries to stop them.
+  ?if b1.company == "hunters"
+    The captain watches them go. She does not say anything for a long time. "The council said that it would not go well," she says at last, "if I let them. I think that I will say that I did not see them." She turns away.
+  ?end
+* Give them to Sextus and the village, and let the village decide
+  $ b1.remnant = "given"
+  $ standing += 1
+  $ humanity += 0
+  You say that they are the village's. It is a thing that you have no right to say, and everyone knows it, and the old men take it as a gift. They take them, one by one, by the sleeve, and walk them across the square to the sheepfold, and the gate closes. It will be a long day. It is not a thing that will be written down. It is the one verdict that is the village's own.
+* Finish it, while they are standing there
+  $ b1.remnant = "slain"
+  $ do kill("human")
+  $ humanity -= 5
+  $ cunning_brutal += 3
+  $ do witness(3)
+  $ secrecy -= 3
+  It is a thing that you cannot afterward remember doing. It is as though a cloth had been drawn over a window. When it is over there is a ring of grey cloaks on the ground in the dawn, and eleven little white lamps, and the old men with their mouths open, and a boy of fourteen at the corner of the lane with a ram's horn in his hand, who has seen the whole of it.
+  ?if b1.company == "hunters"
+    The captain nods, very slightly. It is the nod of a soldier who has been spared an argument. She does not look pleased. She looks, if anything, relieved. Behind her, in the oaks, her four have turned away.
+  ?end
+:the_survivor
+* Take the youngest of them, the freckled boy, with you ?if b1.remnant != "slain"
+  $ b1.survivor = "kept"
+  $ velati_regard += 2
+  $ humanity += 1
+  You find him at the end of the ring, if he is still alive to be found, a boy of seventeen with a smear of ash on his cheek and a look of dazed disbelief. You say that you are going to take him to Rome, to a station of the vigiles on the Aventine, to a man called Rufus. You say that he is to be asked questions and that he is to answer them. He says nothing. He lets you take his arm.
+* Leave them as they are
+  You do not look back.
+-> dawn
+
+# dawn
+## Morning on the hill
+$ do discover("collesanto")
+$ _total = _harm - _held
+?if b1.hill_ready == "full"
+  $ _total -= 2
+?elif b1.hill_ready == "none"
+  $ _total += 2
+?end
+?if _total >= 3
+  $ b1.hill_toll = "terrible"
+?elif _total >= 0
+  $ b1.hill_toll = "heavy"
+?else
+  $ b1.hill_toll = "light"
+?end
+The sun comes up over the eastern oaks in a pure clean light, and shines, as it did two summers ago, on a village that has been burned.
+?if b1.hill_toll == "light"
+  It is not much. It is a few roofs of the north row, a black patch in the ashes of the road, and a wall that fell, and a boy with a scorched arm, and the whole of the rest of the place is standing, with the smoke going straight up in the still dawn, and the old women on their roofs in their wet sacks, staring about them like people who have been woken from a dream. There are a great many more people alive than there ought to be.
+  $ do village_harm(2)
+?elif b1.hill_toll == "heavy"
+  It is a good deal. Half of the north row is gone, and a number of the lower houses, and the roof of the granary, and Sextus's byre, and the trough, and there are people sitting in the road in their nightclothes with their children, and the smell of burned thatch over everything. There are four dead. It is a number that you will carry a long time. It is a great deal less than it might have been.
+  $ do village_harm(8, "rebuilt_houses")
+?else
+  It is very bad. It is a great black scar through the whole of the north of the village, and the granary and half of the square, and the smell is the same smell that you knew in the night of the first fire. There are a good many dead, and a good many more in the road with burns, and the whole of the place has the look of a thing that is going to take a long time to forget. You did what you could. It was not enough. It was a good deal more than nothing.
+  $ do village_harm(16, "rebuilt_houses")
+?end
+The old men are standing in the square in the light. They have put down their hooks. They are looking at you. It is not a thing that you can read. It is a look that is half the look of a man at an animal that he has been afraid of and half the look of a man at a dog that has come home. There is no fear in it. It is only a very great, very simple weight.
+?if b1.hill_stand == "ridge"
+  Quintus comes down from the ridge. He has got the horn in both hands. He is limping. He says, "I saw you on the bridge." It is all that he says. He puts it into your hands, the horn, and it is warm, and he goes away.
+  $ bond.quintus += 2
+?elif b1.hill_stand == "villa"
+  Aelia comes down from the cellar, with the whole of the long line of the old and small behind her, blinking in the light, and the first thing that she does is to look at you, up and down, and to see that you are standing. She says, "I kept the door." It is the whole of what she says. It is quite enough.
+  $ bond.aelia += 2
+?else
+  Sextus comes across the square. He has a bleeding scalp, and his hay knife, and he looks at you for a very long time. "I will not say that I was not afraid," he says. "I will say that I would do it again." It is the longest speech that he has ever made.
+  $ bond.sextus += 2
+?end
+It is not over. It is the beginning of the long business of what is told. In a week the village will have a story. It will be of a guardian, a lord of the hill, a thing in a hood that stood in the square at the dawn and the lamps went out. It will be a good story. It will be quite untrue in every particular, and it will be very, very close to the truth, and it will be told in this square, in the evenings, for a thousand years.
+$ do kin("aelia")
+$ do kin("felix")
+-> farewell
+
+# farewell
+## The grave under the oak
+The place where your spouse is buried is under the big oak at the top of the lower village, a mound of dark earth with a flat stone on it and a few late flowers in a jar. It was Domitia who put them there. You do not go at once. It is evening before you can bring yourself to, and the village is quiet, and there are women still at their doors with the smell of the fire in their hair.
+$ do meet("domitia")
+?if b1.saw_marks
+  You sit down by the stone with your hand flat on the earth. You do not know what you are looking for. You think of a light on a thatch, and a dead face, and two small dark marks at the throat that you put down, at the time, to the fire. You turn it over. It is not a thing that will be answered here. It is only that you have not been able, for two years, not to ask.
+?else
+  You sit down by the stone with your hand flat on the earth. You say nothing. There is nothing in you to say. It is an ordinary grave, with an ordinary stone, in an ordinary place, and it has been a long time since anything has been simple.
+?end
+?if b1.flavus_end == "hero"
+  It is done. You find that it does not feel like a thing that is done. It feels like the first of a great many.
+?elif b1.flavus_end == "village"
+  It is done, by hands that were not yours. It is the village's. You find that you are glad of that, and that you are not sure that you ought to be.
+?else
+  It is done. It was not by your hand. You do not know what you would have done if it had been, and it is a thing that you are going to wonder at for a very long time.
+?end
+Domitia finds you there. She has a lantern, and a cloak, and she sits down beside you on the grass without a word, like a woman sitting down on a bench at the end of a day.
+"It is the Sabine custom," she says, "to tell the dead what has happened." She does not look at you. "I have been doing it. I told them that you were dead. I told them that you were not." She says, in her hard flat voice, "I will tell them now that it is over."
+:the_leaving
+* Tell her that you will have to go, and that it is not the last of it
+  $ bond.domitia += 2
+  $ humanity += 1
+  "I know," says Domitia. It is a thing that she has known for a long time. "There is a thing in the way that you stand, that is not a man who is going to stay. I have known a few." She does not turn her head. "You will come back."
+* Tell her that you will stay, for a while
+  $ bond.domitia += 3
+  $ collesanto += 2
+  She says nothing for a long time. She says, at last, "A week. I would not ask for more." It is a thing that is said in kindness. It is not a thing that is believed.
+* Say nothing. Let it be quiet
+  $ bond.domitia += 1
+  $ _quiet = 1
+  You say nothing. It is the oldest thing that there is between people, a bench, a grave, a lantern. After a long time she puts her hand over yours on the grass, and takes it away again, and the two of you sit there until the lantern burns down.
+?if b1.aelia_talk == "truth"
+  Aelia comes in the end, in the dark, with her brother asleep in her arms, and sits down on the other side of you, and says, "Is it going to be all right?" You say that you do not know. She says, "That is the most honest thing that anybody has said all night." She puts her head against your arm.
+  $ bond.aelia += 3
+?elif b1.aelia_talk == "kept"
+  Aelia comes in the end, in the dark, with her brother asleep in her arms, and sits down on the other side of you, and says nothing. After a long time she says, "You said that you would tell me when I was older." She looks at the stars. "I think that I am a bit older." You say that you will.
+  $ bond.aelia += 1
+?else
+  Aelia comes in the end, in the dark, and stands at the edge of the lantern light with her arms folded. She says, "I want to know." You say that you will tell her. She says, "When?" You say, "Soon." It is not an answer. It is a very small mercy, and she accepts it.
+?end
+-> news
+
+# news
+## The runner
+It is a little before the dawn when the boy comes up the road. It is not a boy of the village. It is a small, quick, ragged one, with a flat cap and a brown mare that is white with lather, and he stops in the square with his chest heaving and holds out a scrap of wax. It is in Prisca's hand. It is very short.
+It says that the covens are meeting in the old quarry again, tonight, at the second watch. It says that this is not about the Igniferi. It says that there has been a thing in the quarry, in the last three nights, that nobody has been able to speak of. It says that the General's line have not left the cliff, and that Theron has not slept, and that Meritamun has been sitting for two days in front of a door.
+?if b1.felt_below
+  It says: *You put your hand on it. I thought that you would wish to know.*
+?else
+  It says: *I thought that you would wish to be told, by me, before you were told by anyone else.*
+?end
+And at the bottom, in smaller letters, in the dry exact hand, there is one line more. It says that the door has begun to knock.
+$ do rest()
+=> next

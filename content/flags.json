@@ -806,6 +806,125 @@
       "kind": "flag",
       "book": "burning-city",
       "note": "Chapter 12: he knows the lamp seller has gone north toward Collesanto"
+    },
+    "b1.company": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "hunters",
+        "aulus"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "alone",
+      "note": "Chapter 13: who went north with him"
+    },
+    "b1.hill_warned": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "runner",
+        "self"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "self",
+      "note": "Chapter 13: how Collesanto learned of the column before it came"
+    },
+    "b1.column": {
+      "kind": "enum",
+      "values": [
+        "unknown",
+        "counted",
+        "stopped"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "counted",
+      "note": "Chapter 13: what he learned of the column on the road"
+    },
+    "b1.hill_ready": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "some",
+        "full"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "some",
+      "note": "Chapter 13: how ready Collesanto was at dusk"
+    },
+    "b1.aelia_talk": {
+      "kind": "enum",
+      "values": [
+        "truth",
+        "kept",
+        "none"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 13: what he told Aelia about what he is"
+    },
+    "b1.hill_stand": {
+      "kind": "enum",
+      "values": [
+        "ridge",
+        "square",
+        "villa"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "square",
+      "note": "Chapter 14: where he made his stand"
+    },
+    "b1.flavus_end": {
+      "kind": "enum",
+      "values": [
+        "hero",
+        "fire",
+        "village"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "hero",
+      "note": "Chapter 14: how Flavus died"
+    },
+    "b1.remnant": {
+      "kind": "enum",
+      "values": [
+        "slain",
+        "spared",
+        "given"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "spared",
+      "note": "Chapter 14: what became of the rest of the column"
+    },
+    "b1.hill_toll": {
+      "kind": "enum",
+      "values": [
+        "light",
+        "heavy",
+        "terrible"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "light",
+      "note": "Chapter 14: what Collesanto paid"
+    },
+    "b1.survivor": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "kept"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 14: one of the sect kept alive, for the vigiles to find"
     }
   }
 }

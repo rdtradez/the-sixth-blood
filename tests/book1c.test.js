@@ -14,12 +14,12 @@ const root = join(fileURLToPath(import.meta.url), '../..');
 const real = createNodeLoader(root);
 const HERO = { gender: 'm', origin: 'roman', role: 'legionary', path: 'born_in_rome' };
 
-async function playBook(hero, wants = [], seed = 3) {
+async function playBook(hero, wants = [], seed = 3, stopAt = null) {
   const game = new Game({ loader: real, storage: new MemoryStorage(), warn: () => {}, now: () => 5000 });
   await game.init();
   let { frame } = await game.startBook('burning-city', { from: 'new', hero, seed });
   const pages = [];
-  for (let i = 0; i < 1200 && frame.wait !== 'book_end'; i++) {
+  for (let i = 0; i < 1200 && frame.wait !== 'book_end' && !(stopAt && game.state.chapter === stopAt); i++) {
     pages.push(...texts(frame));
     if (frame.wait === 'choices') {
       let at = 0;
@@ -141,8 +141,8 @@ test('the widow can be told, helped or paid', async () => {
     const run = await playBook(HERO, [...KIN, want]);
     assert.equal(run.vars['b1.vibia'], value);
   }
-  const told = await playBook(HERO, [...KIN, /Tell her the truth/]);
-  const paid = await playBook(HERO, [...KIN, /Give her coin/]);
+  const told = await playBook(HERO, [...KIN, /Tell her the truth/], 3, 'b1c07');
+  const paid = await playBook(HERO, [...KIN, /Give her coin/], 3, 'b1c07');
   assert.ok(told.vars.humanity > paid.vars.humanity, 'the truth is worth more to him than coin');
   assert.ok(told.vars.secrecy < paid.vars.secrecy, 'and costs more in secrecy');
 });

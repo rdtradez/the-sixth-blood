@@ -1,0 +1,497 @@
+// Book One, Chapter 13 (session 13). The race north to Collesanto: three nights on the road, a morning in the village, a day of getting ready.
+// One night phase of three actions (the road), then a day phase of three (the hill). The night is not closed here: no rest() until chapter 14.
+@chapter b1c13
+@title The Road to the Hill
+@book burning-city
+@version 1
+
+# start
+## The Via Salaria
+$ do phase("night", 3)
+$ b1.company = "alone"
+$ b1.hill_warned = "none"
+$ b1.column = "unknown"
+$ b1.hill_ready = "none"
+$ b1.aelia_talk = "none"
+$ _lead = 0
+$ _lamps = 0
+$ _saw = 0
+$ _word = 0
+$ _prep = 0
+$ _watch = 0
+$ do discover("collesanto")
+You do not go at once. That is the thing that you will be ashamed of, afterward, a little, though it is also the thing that keeps you alive: you stand for the length of a breath in the street under the Caelian with the runner's wax in your hand and the whole of Rome going on around you, the ash, the carts, the women with their bundles, and you make yourself think.
+It is a hundred and some miles to the Sabine hills by the Via Salaria. A man on foot, with a lame leg and twenty behind him, in grey cloaks, who cannot go by day without being asked what they are, takes six nights, perhaps seven. A man who does not tire, and does not care what he is asked, and is not afraid of the dark between the milestones, might do it in three. A vampire who runs flat out will go a good deal faster than that, and will arrive starving, with nothing in him, at the foot of a hill where he is going to be needed.
+?if band("hunger") == "starving"
+  You are starving already. It is not a thing that you can pretend about. You have been awake for the whole of a night of war, and you have fed on whatever came to hand, and it has been a long while since that was enough.
+?end
+It is the one decision that cannot be put off. You will not be going alone, or you will.
+-> company
+
+# company
+## Who goes with you
+:company
+* Go alone, and fast
+  $ b1.company = "alone"
+  $ _lead += 1
+  There is a sort of cleanness in it. You will be quicker alone, and nobody will have to be told what you are, and nobody will have to be waited for, and nobody will have to be kept from the thing that is done to a camp in the dark when a vampire is hungry and the people in it are the enemy. You put the wax in your belt. You find that you are quite calm.
+  -> road
+* Go with the captain and her hunters ?if b1.cell == "theron" or b1.war_terms == "total" or bond.theron >= 3
+  $ b1.company = "hunters"
+  $ bond.theron += 1
+  The captain with the scarred jaw is standing at the end of the street, as though she had known where you would be. She has four of hers behind her, in plain cloaks, with their hoods up, and she does not ask. She says that the General's line has been looking for the lamp seller for a good deal longer than you have. She says that it is her own wish to be there. She says, with a small dry twist of the mouth, that it will be very much quicker if she does not have to argue with you about the terms.
+  You do not argue. It is not quite agreement.
+  -> road
+* Go with Aulus, who knows the sect's ways ?if b1.boy == "vigiles"
+  $ b1.company = "aulus"
+  $ bond.rufus += 1
+  Rufus brings him to the gate of the Aventine station in the grey of the morning, with a bundle and a good cloak and a borrowed mule. Aulus is pale and steady. He says that he knows how they will go, because he has gone that way himself, in the spring, with a lamp, to a place that he did not understand. He says that he will be a day behind you on the road, because he is a man and has a mule. He says that he would like to be there.
+  Rufus does not say anything. He puts out his hand, and you take it.
+  -> road
+* Go with whom you can find ?if b1.cell == "house" or b1.coven == "stayed"
+  $ b1.company = "alone"
+  $ _lead += 1
+  There are people who would come. You think of them, one by one, at the corner of a street, and you find that each of them has a reason that is better than the reason that you would have given them. Hanno has a ledger. Prisca has a house to hold. Tiro is not there to be asked. You go alone, in the end, with the name of each of them in your pocket, like a coin that you have not yet been told the value of.
+  -> road
+
+# road
+## Three nights
+:road
+?if actions_left() == 3
+  The gates of the city are behind you, and the Salaria runs out ahead, white under the moon, between the tombs. It is a road that is used to being walked on by people who are in a hurry. It does not care.
+?elif actions_left() == 2
+  The second night. The hills have begun. You have the Tiber to your right, and the road is a long pale ribbon in the dark, and there are lights in the farmhouses that you pass, small and kind and quite unaware.
+?else
+  The third night, and the last. The Sabine hills stand up ahead of you in a blue line, with the first thin edge of the dawn behind them, and you are a good deal nearer than you had any right to be.
+?end
+* Run the Via Salaria flat out, and ask at every milestone what has gone by [once] ?if actions_left() > 0
+  ~> run
+  $ do act()
+* Go round by the river, to the ferry at Eretum, where there is an inn [once] ?if actions_left() > 0
+  ~> ferry
+  $ do act()
+* Cut over the hills by the shepherds' track, where no road goes [once] ?if actions_left() > 0
+  ~> track
+  $ do act()
+* Send word ahead by Collis's couriers [once] ?if actions_left() > 0 and wealth > 5
+  ~> courier
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :road
+
+# run
+## The milestones
+You run. It is an odd thing to say about it, after so long, that it is a pleasure: the long clean stride of a body that has been made to do things that bodies are not made to do, the air in the face, the whole dark country slipping past as a river slips past a boat. The first hour is joy, and the second is the beginning of the hunger, and by the third you are counting the stones.
+There is a good deal to learn from them. There are the carters' inns, which are shut, and the shepherds' fires on the slopes, which are not. You stop at each. You are, in the dark, a tall figure out of the road with a cloak and a question, and it takes a certain patience to be asked nothing in return.
+A shepherd at the seventh milestone has seen them go by. He says it in the voice of a man who has been told that he is mad. It was three nights ago, at the second watch. There was a lame man at the head of a column, in grey, with a clay lamp, and he thanked the shepherd for a drink of water and gave him a copper coin. He says that he counted them for the sheer foolishness of it. He says that there were twenty two.
+?if b1.company == "aulus"
+  Aulus is not with you. You know what he would have said. You say it to yourself, in his voice, on the road: that twenty two is the number of a cell and a half, that the sect never sent fewer than twenty to a place that it meant to finish, and that a column that size is carrying nothing but jars.
+?end
+$ _saw = 1
+$ _lead += 1
+$ do power("minor")
+:the_run
+* Take the shepherd's ewe, which is lame, and old, and nearly his only one, and pay him double for it
+  $ do feed("animal")
+  $ do earn(-2)
+  $ humanity += 1
+  He does not ask what you want it for. He is, very likely, past asking. You do it in the dark behind the fold with your hand on the animal's eye, and it is quick and not a thing to dwell upon, and you leave on the stone by the gate a good deal more than the ewe was worth.
+* Go on hungry. There will be something later
+  $ _lead += 1
+  You thank him, and you go on, and you keep to the road. It is a decision, and you can feel the weight of it, like a coin in the gut.
+* Ask him, instead, what he thinks that they were going to do
+  $ humanity += 1
+  He looks at you for a long moment. "They were going to a place that they thought they knew," he says. "I could tell by the way they walked. People walk like that when they are going to a house where they have already decided what is going to happen." He scratches under his hat. "I should have said something. I thought, it is not my road."
+-> :the_run_end
+:the_run_end
+<~
+
+# ferry
+## The ferry at Eretum
+The ferry at Eretum is a flat black barge on a rope, in a bend of the river, with a lamp at each end and a fat sleeping boatman, and an inn on the bank above it that has a thatch roof and a very low door. There are two cloaks hanging on pegs in the porch. They are grey.
+You stand a long time in the dark, with the river talking to itself behind you. You can hear them in there: two men, one asleep and one awake, a long way from anyone. The awake one is saying something over and over in the old Latin, in a low flat voice, like a boy at his lessons.
+They are stragglers. They have been left behind by the column with a fever, or a sore foot, or a word that was said, and they are waiting for the ferryman to open at dawn. They are not a thing that anyone would be afraid of. They are two young men in an inn with a pair of clay lamps on the table, and the lamps are alight, and the white flame in them does not flicker.
+:the_inn
+* Go in, and ask them where the column was going
+  ~> inn_ask
+  -> :the_inn_end
+* Wait until they sleep, and take the lamps, and the cloaks, and go
+  $ _lamps += 1
+  $ cunning_brutal -= 1
+  You wait. It takes the best part of an hour. You do it in the end with a great deal of care, in the dark, and you do not wake either of them. You carry the lamps out onto the bank with your sleeves over your hands, because you can feel the flame in them across the whole of the room, and you pour out the oil into the river, a little at a time, and watch it spread on the black water in a thin rainbow skin. You take their cloaks. You will not need them. It is a thing for the sake of doing it.
+  $ _lead += 1
+  -> :the_inn_end
+* Do what the war says
+  $ do kill("human")
+  $ _lamps += 1
+  $ humanity -= 3
+  $ do feed("human_kill")
+  $ do witness(1)
+  It is not a fight. It is the worst thing about it, that it is not a fight at all. The awake one gets as far as the table, with a small bright flame in his hand, and then he does not. You do it very quickly. You tell yourself, in the cold porch afterward, with the blood in you and the river going by, that it was exactly what it was said in the quarry that it would be. You are not wrong. It makes no difference at all.
+  -> :the_inn_end
+:the_inn_end
+<~
+
+# inn_ask
+$ do fight("human", 1)
+You go in. It is a low room with a table and a smell of lamp oil and onions and the awake one stands up so fast that the bench goes over. He has a knife, and a flame, and a look on his face that you have seen before, on boys at the wharf, on a roof, in a barn: not hatred, a sort of appalled readiness. The sleeper does not wake.
+:inn_exchange
+* Tell him that you do not mean to hurt him, and that you want one answer
+  $ do strike("talk")
+* Take the knife out of his hand
+  $ do strike("brutal")
+* Put out the lamp with your fingers
+  $ do strike("power")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    He is thrown back against the wall and the bench rolls under his feet.
+  ?else
+    The flame comes up across the table, and you feel it, a quick hot line across your arm.
+  ?end
+  -> :inn_exchange
+?end
+?if fight_result() == "talked"
+  $ humanity += 1
+  $ _lead += 1
+  He puts the lamp down. He is crying, a little, without any fuss. He tells you in a low voice that they were going to a hill in the oaks, to a village, to finish something that was begun there two summers ago. He says that the master has said that this time the house above it will be done properly, because the master has found out that it was not done the first time. He says that the master says that the thing in the house is not dead.
+  $ _saw = 1
+?elif fight_result() == "won"
+  $ _lead += 1
+  $ _lamps += 1
+  He is not hurt more than he has to be. You hold him against the wall with the lamp at arm's length from you, in a corner, and he tells you, in a stream, with his teeth chattering, what he has been told. It is a hill, in the oaks. It is a village. It is the house above the village. He says that the master has been saying for a month that it was not finished.
+  $ _saw = 1
+?else
+  $ injury += 5
+  $ _lead -= 1
+  The lamp catches your sleeve and for a moment you are a thing that is on fire. You put it out against the floor. By the time you have done it he is gone, through the low door and into the dark, and the barge is moving on its rope. You hear the sleeper wake, and shout. You stand in the inn in the dark, burned, with a smell of cloth and skin, and what you have learned is that they are not afraid of you at all.
+?end
+<~
+
+# track
+## The shepherds' track
+There is a way over the hills that no cart goes by. It is a goat's way, a white thread up the scree and across the high pasture and down again through the oaks, and the shepherds use it in the summer, and it saves a night and a half.
+You take it. The moon is down behind the ridge and the dark is thick, and you find that you have a use for the dark that you did not know you had. You go through the oak wood as a thing goes through water, without a sound, from shadow to shadow, with the leaves moving over you. It is not a thing that you were taught. It is not a thing that you did before the cup. It is as though some part of you has been waiting a long time to be asked.
+$ do power("minor")
+$ _lead += 2
+$ cunning_brutal -= 1
+You come out above a high pasture at the end of the second hour, with the whole of the Sabine country below you in the first grey, and a fire burning in a hollow. It is a very small fire. It is a camp, with no tents, and men asleep in a ring with their hoods over their faces, and one awake by the flame with a long clay lamp across his knees. He does not see you. You are above him, in the oaks, and the wind is at your back.
+There are fourteen. You count them. There ought to be twenty two.
+$ _saw = 1
+:the_hollow
+* Go down, and put out the lamps before they wake
+  ~> hollow_fight
+  -> :the_hollow_end
+* Go round them, and keep the lead you have
+  $ _lead += 1
+  It costs a long hour to go round. You do it through the brambles on the north slope, with your teeth set, with the wind carrying their smell. You will think about it later. You will think that you could have stopped them, and that you did not, and that there was a reason. It is not a very good reason. It is only that there is a village a few miles ahead that does not know, and that you cannot stay for the ones who are behind you.
+  -> :the_hollow_end
+* Wake the one on watch, and tell him to take them home
+  $ humanity += 1
+  $ b1.column = "stopped"
+  $ do witness(1)
+  It is a mad thing to do. You do it in a quiet voice, on the edge of the firelight, with your hands open, and the man on watch turns his head and sees a figure in the oaks with a cloak and a pale face and he does not scream. He lifts the lamp. He says nothing at all. The flame is perfectly steady. After a long time he says, in the old Latin, "The master said that you would come." He says it as a man says a thing that he has been told to say. "He said that you would try to make us put them down." He shakes his head. "He said that we should be sorry for you."
+  You go on. You will not forget the voice. There is nothing to do with it but carry it.
+  -> :the_hollow_end
+:the_hollow_end
+<~
+
+# hollow_fight
+$ do fight("human", 2)
+You go down through the oaks with the wind at your back, and the first lamp goes out before the man who is holding it has opened his eyes.
+:hollow_exchange
+* Go through them, hard, before they can light
+  $ do strike("brutal")
+* Move behind them in the shadow, and take the lamps from the ring
+  $ do strike("power")
+* Speak, once, in a voice that makes them stop
+  $ do strike("talk")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    A man goes down in the bracken with the lamp under him, and the white flame goes out in the damp.
+  ?else
+    A jar breaks on a stone and there is a bloom of heat that makes you turn your face away.
+  ?end
+  -> :hollow_exchange
+?end
+?if fight_result() == "won" or fight_result() == "talked"
+  $ _lamps += 3
+  $ _lead += 1
+  $ do witness(1)
+  When it is done there are eleven of them left, in the grey light, on their knees, with their hands open and the lamps in the grass. You do not know how it was done. You are standing in the middle of the ring with ash on your cloak and a smell of oil. You take the jars away, one by one, and break them on the rocks, and you are very careful where you stand.
+  $ _saw = 1
+?else
+  $ injury += 6
+  $ _lead -= 1
+  They put you down in the bracken in a wash of heat, and when you can see again the ring is empty, and the fire is out, and there is only a smell of burned grass and a patch of black earth where you were lying. They have gone on. You get up. It is very quiet.
+?end
+<~
+
+# courier
+## The courier
+Collis keeps a stable at the Porta Collina, as a firm keeps a stable, for no reason that anyone could have given until now: a dozen fast horses, and a man who knows the roads, and a boy who can be sent. You do not go to the stable. You send for it, from the first inn that you pass, by a coin to a muleteer, and by the next evening a boy of fourteen with a flat cap and a brown mare is sitting in the courtyard saying that he is to take a letter to the Sabine country, to a woman called Domitia, in a place called Collesanto, and that he is not to be told what is in it.
+You write it on a wax tablet, at a tavern table, by a lamp. It is very hard to write. You have never found anything harder.
+:the_letter
+* Tell her plainly what is coming, and when
+  $ b1.hill_warned = "runner"
+  $ _word += 2
+  You say that there are men on the Via Salaria with lamps. You say that they will come at night, from the north, and fire the thatch first. You say what the signs of them are: grey cloaks, a lame man at the head of a column, a flame that does not flicker. You say to get the children into the villa on the hill. You say to take the old with them, and to bar the door, and to wet the roofs. You write, at the bottom, your name, and then you scrape it off with the edge of the stylus, and you write the one that she knew you by.
+* Say only that it is a bad time, and that they should go to the villa
+  $ b1.hill_warned = "runner"
+  $ _word += 1
+  It is not much. It is a letter from a ghost, or from a dream, or from the sort of person that a village has heard of and does not mention. You say that there is a danger. You say that it is the same one as before. You say that the villa has a cellar, and that she knows it, and that it is the only safe place that there is. You do not sign it.
+* Do not write. She will not believe it
+  $ b1.hill_warned = "none"
+  $ _word -= 1
+  You put the tablet down, blank. It is a thing that you can imagine very clearly: the courier at the door, the old woman with a hard face, the paper that will come from nowhere, from a person who is dead. You do not know that she would think of you at all. You send the boy back to the stable with a coin.
+-> :the_letter_end
+:the_letter_end
+$ do earn(-3)
+<~
+
+# dawn
+## The foot of the hill
+$ do discover("collesanto")
+?if _saw > 0 and b1.column == "unknown"
+  $ b1.column = "counted"
+?end
+?if _lead >= 3
+  You are in the oak wood at the foot of the hill when the sun comes up, and there is a long clear morning ahead of you, and no sign of anyone but a boy with two goats on the track.
+  $ _day_start = 2
+?elif _lead >= 1
+  You come to the foot of the hill in the last of the dark, with the first light beginning to colour the oaks behind it, and there are lamps at the villa wall that were not there before. They are not the sect's. They are a woman's, with a hard flame and a hand on them, and you do not know why you are so glad of them.
+  $ _day_start = 1
+?else
+  You come to the foot of the hill at sunrise. The column is nowhere that you can see. It is a quiet morning, and the smoke from the village chimneys is going straight up, and you do not know that the lead you have has been a day or an hour or nothing at all.
+  $ _day_start = 0
+?end
+The village is as you left it, and it is not. The roofs are new in places, the black timbers of the burned row have been cleared and patched with raw pale wood, and there is a new wall of stakes round the well. It is smaller than you remember. It is the oak trees, you think, that have grown. The square has a bench in it that was not there. There are children playing a game with sticks in the road, who stop when they see you, and stare, and then run.
+-> arrival
+
+# arrival
+## Collesanto
+It is not Domitia who sees you first. It is a boy on the wall of the well, a lanky one of fourteen, with long arms and a stubborn mouth, who has been looking at the north road with the face of someone who has been told to watch it, and who sees a tall figure come out of the oaks in a hood in the morning sun, and does not run, and does not shout, and slides down off the wall and comes across the square very fast.
+It is Quintus. He has grown. He has a knife in his belt, a small one, such as a boy carries to cut bread. He stops a pace away and looks up into your face.
+?if b1.goat == "freed"
+  "The goat came back," he says. It is the first thing that he says. "It came back on its own, the day after the fire. It is a good goat. It has got fat." He swallows, and his mouth goes crooked. "I always knew it was you. I said so. Nobody listens."
+?elif b1.warning == "warned" or b1.fire_seen == "seen"
+  "It was you," he says. "At the fire. It was you at the well, and on the stair, and the thing in the smoke that pulled the old man out. They said that it was a god, or a demon, or Sextus, drunk. I said that it was not." He looks at you with eyes that are very bright. "I said that I knew what it was. Nobody listens to me."
+?else
+  "You are him," says Quintus. It is not a question. "You are the one that they said was dead. I saw you on the hill. I saw you in the dark, at the wall, when I was supposed to be asleep. I did not tell." His mouth goes crooked. "Nobody listens to me, anyway."
+?end
+He does not ask what you are. He does not seem to want to know. He takes your sleeve, as a child does, and pulls you across the square, toward the house at the end of the row, and he says, over his shoulder, in a rush, that there is a thing that you have to see.
+?if b1.hill_warned == "runner"
+  "A boy came," he says. "A boy on a horse, with a letter. Domitia has been reading it for two days. She has not said a word. She has had the men bring the old hay out of the loft, and she has had the shepherds up on the ridge with horns, and she has had the whole of the north row watered, every night, from the well, like a garden, and nobody understands why." He stops. "She said that there is a thing coming, and that it is the same thing as before, and that if anyone asked, she had it from the Lord of the Hill."
+  $ b1.hill_ready = "some"
+?end
+The door of the house is open. There is a woman standing in it, in a plain dark gown, with a ladle in her hand, with her grey hair pulled back from a face that has gone harder, and thinner, and has not forgotten anything. She does not say your name. She does not say anything. She looks at you for a very long time, with her mouth set in a line, and then she puts the ladle down on the step.
+?if b1.farewell == "promise"
+  "You said that you would come back," says Domitia. Her voice is steady. It is a thing that she has had a great deal of practice in. "I did not believe it. I want you to know that I did not believe it, for two years, and that I laid a place at the table every night." She stops. "Come in. You will be hungry. Felix! Aelia!"
+?elif b1.farewell == "truth"
+  "You told me the truth," says Domitia. "I have not told anyone. I have said that you died at the villa, and I have said that you did not, and I have let them think what they like." She looks at your hands. They are not shaking. "I thought that I would be afraid. I find that I am only angry. Come in. You will want to see them."
+?else
+  "You said nothing," says Domitia. "You went away in the night with the silver, and you said nothing, and I have been two years deciding whether to forgive you." She does not smile. "I find that it is a good deal easier to decide when you are standing in front of me. Come in. The children will want to see you. Felix! Aelia!"
+?end
+They come out of the house together, down the stair, quite slowly. They are a good deal taller. Felix has grown into a sturdy brown boy with a gap in his teeth and a scab on one knee, who stops three steps from the bottom and looks at you with a perfectly open face, as at a stranger. Aelia has her mother's mouth. She is very still. She does not say a word. She stands behind her brother with one hand on his shoulder, and her eyes do not leave your face.
+$ do meet("domitia")
+$ do meet("quintus")
+:the_reunion
+* Kneel down, and let them come to you
+  $ bond.aelia += 2
+  $ bond.felix += 3
+  $ humanity += 1
+  You kneel in the road. It is the only thing that you can think of, and you are too tired and too frightened for anything cleverer. Felix comes down the last three steps all at once and walks into your arms like a calf. He smells of hay and woodsmoke and boy. He says nothing, and he does not let go. Aelia does not move. Over his head you see her face, and it is working very hard to do nothing.
+* Say their names, and nothing else
+  $ bond.aelia += 3
+  $ bond.felix += 1
+  You say them. "Aelia," you say. "Felix." It is all you have. Aelia lets out a long breath that she seems to have been holding since the spring. "You are late," she says. It is the thing that you have been waiting to hear, and you did not know it.
+* Tell them that there is not much time
+  $ bond.aelia += 1
+  $ standing += 1
+  They look at you. It is not what they were waiting for. Aelia's mouth goes thin, and Felix looks up at his grandmother, and then at you, and then he says, politely, that he supposes you had better come in.
+-> :the_reunion_end
+:the_reunion_end
+It is the longest morning that you have ever known. It is, in its way, a very ordinary one. There is bread. There is a bowl of something with barley in it that you cannot eat, and that Domitia sets in front of you anyway, and that you eat a little of, so as not to be asked. Felix talks the whole time. Aelia watches you.
+?if b1.reveal == "aelia" or b1.fire_seen == "seen"
+  She has seen you before. She does not say so, and you do not say so, and it is there on the table between you like a third bowl.
+?end
+The sun comes in at the door. It is a clear bright day, high summer, and it falls across the floor in a long bar, and across your hands. It does not burn. It is a weight, and a fever, a thing that you carry as one carries a coat in a hot country, and the children, if they notice, do not mention it.
+-> day
+
+# day
+## The day before
+$ do phase("day", 3)
+$ _prep = 0
+$ _watch = 0
+?if _day_start >= 2
+  You have a clear day. You have a morning, and an afternoon, and a dusk, and it is not nothing.
+?elif _day_start == 1
+  You have a day. It is not a long one. You can already feel the evening in it, like a draught under a door.
+?else
+  You have the day. It is all that you have. You know it, and so does Domitia, who has been watching you across the room with her mouth set for the better part of an hour, and who now says, in a very flat voice, "Tell me what to do."
+?end
+Domitia puts it plainly, at the table, with her ladle in her hand. She says that she does not want to know what you are. She says that she has had two years of not wanting to, and a fire, and she has found that it makes very little difference to the thatch. She says that there will be men coming, with lamps, from the north, tonight or the next. She says that you have until the dusk. She says that the whole of the village is in the house, or will be, and that it is for you to say what they are to do.
+There are four things that you could do, and a day in which to do three. It is a great deal less than a village.
+:day_hub
+?if actions_left() == 3
+  It is early. The morning is still cool in the shade of the walls, and the dew is on the thatch, and you can hear a cock somewhere in the lower village, announcing a fact.
+?elif actions_left() == 2
+  It is the middle of the day. The sun is overhead, and the stones are hot, and the village has the stillness of a place in which everybody is working very hard and no one is talking.
+?else
+  It is the afternoon, and the light is beginning to go long and yellow across the oak woods. It is the best part of the day. You have the feeling of a man who has been given a coin and is spending it as it falls.
+?end
+* Go with Sextus and the men, and strip the thatch from the north row, and wet what is left [once] ?if actions_left() > 0
+  ~> thatch
+  $ do act()
+* Go up to the ridge with Quintus, and set a watch [once] ?if actions_left() > 0
+  ~> ridge_watch
+  $ do act()
+* Sit down with Aelia, who has been waiting by the well [once] ?if actions_left() > 0
+  ~> aelia
+  $ do act()
+* Go up to the villa, and open the cellar [once] ?if actions_left() > 0
+  ~> villa
+  $ do act(1, true)
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dusk
+?end
+-> :day_hub
+
+# thatch
+## The north row
+Sextus is exactly as you remember him, except older. He has the same bad knee and the same good ear. He is standing at the end of the north row with a hay hook and a crowd of twenty men and boys, and he is saying to them, in a loud flat country voice, that if it comes to be a matter of burning a man's roof or pulling it down, he would sooner pull it down himself and have the beams to build with.
+?if b1.first_blood == "forced"
+  He sees you. He puts down the hook, quite deliberately, and the men behind him go very quiet. He has an old man's long steady look. He says, "You were on the hill." You say that you were. He nods slowly. "I told them that I saw a ghost, and they said I had been at the wine." He picks up the hook. "I was not at the wine."
+  $ bond.sextus += 2
+?else
+  He gives you a nod, as a man nods to a neighbour that he has not seen in a month. It is a thing that is done in this village. It is a great deal more than it looks.
+?end
+It is hard, plain, dirty work, and you are, God help you, rather good at it. You can lift a roof beam as a man lifts a stick. You can climb to the ridge of a thatch without a ladder. You can run along the top of a wall that a man would have to creep along. You do it for most of the morning, in the sun, with the sweat of fever on you and the whole of the village watching, and by noon the north row is a row of bare black rafters under a wet brown crust, and the old men are standing in the road, with their arms folded, quite silent.
+$ _prep += 2
+$ do witness(2)
+$ do send_home(8)
+:the_thatch
+* Bring up the water from the well, and keep on bringing it, until the cisterns are full
+  $ _prep += 1
+  $ standing += 1
+  $ do power("minor")
+  You do it yourself, with two great yokes and four buckets, up and down the lane, for the best part of an hour, until the cisterns are brimming and the ground is dark with spilled water. It is a thing that nobody has been asked to see, and everybody sees. It is nothing at all to what you could do. It is the most that you will ever be allowed.
+* Let the men do it, and keep your strength
+  $ _watch += 1
+  You stand at the corner, and give orders, and the men do as they are told, and it is done in a good deal longer. It is easier on you. It is not a thing that you will be thanked for, and you do not mind.
+-> :the_thatch_end
+:the_thatch_end
+<~
+
+# ridge_watch
+## The ridge
+The ridge above the village is a long rock spine with a few twisted oaks on it, and a view of the whole of the north road for ten miles, a pale scar through the dark wood, going down to a bend and a stream and a very small stone bridge. It is the place where Sextus's sheep are folded in summer. It is the place where you stood, two years ago, and watched eleven grey cloaks make their camp.
+Quintus has brought his goats up with him, as an excuse, and a horn made of a ram's horn that he has had since he was eight. He says that he will blow it once if he sees a lamp, twice if he sees more than ten, and not at all if it is only the moon.
+?if b1.goat == "freed"
+  "That one is the goat," he says, quite casually, of a stout, grey, evil looking animal. "It knows you. It has not forgotten."
+?end
+You set the watch together. Three boys on the ridge, two at the bridge, one on the oak by the well, a chain of horns and shouts that will carry a warning from the north road to the square in the time that it takes to count to forty. You make Quintus say it back to you.
+$ _watch += 2
+$ _prep += 1
+$ bond.quintus += 3
+:the_ridge
+* Tell him that if he sees them, he is to come down at once, and not to try to be brave
+  $ bond.quintus += 1
+  $ humanity += 1
+  He looks at you for a long moment. He says, with enormous dignity, that he is not a child. You say that you know. You say that it is exactly because he is not that you are asking. He looks away at the north road, and at the goats, and he swallows. "I will blow the horn," he says. "And I will come down. I promise."
+* Tell him to blow it and stay, and that you will hold the road
+  $ bond.quintus += 3
+  $ defiance += 1
+  His whole face lights up. It is a very bad thing to have done, and you know it as you say it, and you cannot make yourself take it back. He says "yes" with a grin like a fox's. You find that you are afraid for him in a way that you did not know that you could be.
+-> :the_ridge_end
+:the_ridge_end
+<~
+
+# aelia
+## At the well
+She has been waiting by the well for some time. She has her arms folded, and her chin up, and she has not been crying. She says, without any preamble, that her grandmother has told her not to ask, and that she has decided to ask anyway.
+$ do meet("aelia")
+She asks, "What are you?"
+?if b1.farewell == "truth"
+  You have told her once already, at the door, in a night of fire, in as few words as you could. You find that she remembers all of them.
+?end
+$ _aelia = 0
+:the_answer
+* Tell her the truth, all of it
+  $ b1.aelia_talk = "truth"
+  $ bond.aelia += 5
+  $ secrecy -= 2
+  $ humanity += 2
+  You tell her. You do it badly. You do it in the order in which it happened, because you do not know any other, and you leave out the parts that you cannot say, and she listens with her mouth set and her eyes fixed on the water in the bucket. When you have finished she says that it is not as bad as she thought. She says that it is a good deal worse. She says that she does not think that she is afraid of you, and she does not know why that is. "You never stood still when you were alive, either," she says, and she laughs, once, very oddly.
+* Tell her that there are things that you cannot say, and that you will tell her when she is older
+  $ b1.aelia_talk = "kept"
+  $ bond.aelia += 1
+  She looks at you. She looks at you for a long time. She says, "That is what the grown ups say." Then she shrugs. It is a gesture of her mother's. "All right," she says. "But I will remember that you said it."
+* Tell her that you are her father, or her mother, and that is enough
+  $ b1.aelia_talk = "kept"
+  $ bond.aelia += 2
+  $ cunning_brutal -= 1
+  She does not say anything. She puts her hand in yours, quite quickly, and takes it away again, as though she had been caught at something. "That is all I wanted," she says. "I only wanted somebody to say it."
+-> :the_answer_end
+:the_answer_end
+She goes back to the house. At the corner she turns, and says, quite loudly, in the voice of a child who is making a point, that the thatch is wet, and the cisterns are full, and that she has been in charge of the hens.
+$ _prep += 1
+<~
+
+# villa
+## The villa
+It is a long climb in the noon sun, up the old path through the oaks, with the white stone of the wall blinding on the ridge and the cicadas going like a thousand little saws. The sun lies on you, like a hand. You do not slow down. You have a great deal that you wish to do, and a limited time in which to do it.
+$ do discover("the_villa")
+The villa is as you left it. It is shut. The great gate hangs a little open, as it did on the first night, and the courtyard is full of dry leaves, and the fountain has a skin of green on it. The door to the cellar room is where it was. The bar is still on the inside. You stand in front of it for a long time with your hand flat on the wood, and it is not a thing that you can explain, even to yourself, why you do not go in.
+?if b1.felt_below
+  You think of a green bronze door in a cliff, behind a ring of backs. You think of a heartbeat that you did not mean to hear. It is, you find, a thing that does not leave you. It is as if the whole of the ground under Rome had a pulse, and you have been given, for the length of a few days, a very small ear.
+?end
+You make it ready. You sweep the leaves. You clear the cellar of its cobwebs and its wine jars, and you set a bench in it, and a barrel of water, and a pile of the old blankets from the upper rooms. It is a room with a stone vault and a door, and a bar on the inside, and a drain in the floor. It is the safest room for fifty miles, and nobody knows it, and that is, you think, very much the point.
+$ _prep += 2
+$ _watch += 1
+:the_villa
+* Bring the old and the small up here, at dusk, and bar the door
+  $ b1.hill_ready = "some"
+  $ _prep += 1
+  It is a thing that you will have to ask of Domitia, who will not like it. It is a thing that you can see, as clear as a picture, the whole file of them going up the hill at the end of the day with blankets and bread, and the villa door closing, and the bar going down.
+* Leave the cellar open, and tell them where it is
+  $ _prep += 0
+  You do not ask. You tell Sextus, and Sextus tells the shepherds, and it goes round. It will be used or it will not. It is not a thing that you can order.
+-> :the_villa_end
+:the_villa_end
+<~
+
+# dusk
+## Dusk
+$ do discover("collesanto")
+?if _prep >= 7
+  $ b1.hill_ready = "full"
+?elif _prep >= 4
+  $ b1.hill_ready = "some"
+?else
+  $ b1.hill_ready = "none"
+?end
+?if must_feed()
+  The light is going. You have not eaten since the sheep, if you ate then, and the hunger has come up in you slowly through the day, like a tide in a harbour, and you are aware of the heartbeat of every living thing on the hill, the dog in the yard, the hens in their house, the old woman at her fire, the two small hearts in the children's room.
+  It is the sort of thing that you cannot put off. It is not a thing that you can do in the village.
+  * Go down to the fold, and take a ewe, and bury what is left
+    $ do feed("animal")
+    $ humanity += 1
+    Sextus finds you at it. He says nothing. He leans on the hurdle and watches you with his great slow eyes, and when it is done he picks up the animal and carries it away, and in the morning there is a new ewe in the fold, and no one mentions it.
+  * Go to Sextus, and ask for his wrist
+    $ do feed("donor")
+    $ bond.sextus += 3
+    $ humanity -= 1
+    He thinks about it. He holds out his arm. "It is not much," he says, "but it is what I have," and you take it, and he does not look away.
+  * Go on hungry, and meet them as you are
+    $ _watch += 1
+    $ cunning_brutal += 1
+    You go on hungry. It will be a thing that you will pay for.
+?end
+The sun goes down behind the western oaks in a red haze, as it did on the night of the fire. The shadows come across the square. You stand at the well with your hands on the cold stone, and the whole of the village behind you, with its stripped roofs and its full cisterns and its women waiting at their doors, and the horns in the dark.
+Domitia comes and stands by you. She does not say anything for a long time. She says, at last, "They will come." She says it very quietly. She says, "I find that I am not afraid. It is a very strange thing."
+And on the ridge to the north, small and white and perfectly steady, in the first of the dark, there is a light.
+=> next
