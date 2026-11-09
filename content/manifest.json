@@ -118,6 +118,27 @@
             "violence",
             "grief"
           ]
+        },
+        {
+          "id": "b1c11",
+          "file": "burning-city/ch11.tsb",
+          "title": "The Old Quarry",
+          "notes": [
+            "grief",
+            "violence",
+            "war"
+          ]
+        },
+        {
+          "id": "b1c12",
+          "file": "burning-city/ch12.tsb",
+          "title": "What the Lamp Remembers",
+          "notes": [
+            "blood",
+            "violence",
+            "war",
+            "grief"
+          ]
         }
       ],
       "incomplete": true

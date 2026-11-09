@@ -1,0 +1,479 @@
+// Book One, Chapter 11 (session 12). The days after the fire, then the covens of Rome in the old quarry on the Esquiline, and the decision about the reckoning.
+// Two day actions of four, dusk, the council, the hunt chosen. Ends with rest().
+@chapter b1c11
+@title The Old Quarry
+@book burning-city
+@version 1
+
+# start
+## The third day
+$ do phase("day", 2)
+$ b1.tiro_keep = "kept"
+$ b1.refuge = "none"
+$ b1.rufus_told = "unmet"
+$ unflag b1.rebuilt
+$ unflag b1.felt_below
+$ b1.council_voice = "limits"
+$ b1.war_terms = "limited"
+$ b1.theron_fear = "ignored"
+$ b1.cell = "alone"
+$ _ruling = ""
+$ do discover("the_old_quarry")
+The fire burns for the better part of a week, and then it does not so much go out as lose interest. By the third day there is no flame left to speak of, only a long low smoulder in the cellars of the Aventine and a pall over the whole city the colour of an old bruise. The ash falls like grey snow. It lies in the gutters of the Forum and on the steps of the temples and on the backs of the people who walk about in it with their mouths covered, looking for the places where their houses were.
+?if b1.fire_toll == "light"
+  It is not as bad as it might have been. You hear the sentence said in the street, in the tone of people who are trying to believe it, and you know the exact number of the nights and the stairs that it cost to make it true.
+?elif b1.fire_toll == "heavy"
+  It is bad. It is the kind of bad that a city does not walk away from, and does not stop talking about, and that will be, for the rest of the lives of the people in it, a date.
+?else
+  It is as bad as a thing can be and still be a city afterward. They are still bringing them out of the Subura in carts. The carters have stopped speaking to each other. You have walked past them twice, and both times you have found that you could not do the sum.
+?end
+You have not slept, in the way that you sleep. You have lain down at dawn in the cellar of the house with the others and looked at the dark, and at dusk you have got up again. The sun does not warm you. It has not warmed you since the night, and you have stopped expecting it to.
+?if b1.tiro_end == "avenged"
+  Nobody in the house has said a word to you about the roof. They know. It is in the way that the carters step aside from you on the stair, and the way that Hanno, passing you with a ledger, inclines his head half an inch lower than before. It is not a reproach. It is the care that people take with a thing that has been made sharp.
+?elif b1.tiro_end == "carried"
+  The house knows that you ran with him to the river. It was seen by a hundred people, and one of them was a boy who works the wharf for the house, and by the second dawn it was the only thing anyone could tell you. They tell it very kindly. You wish that they would not.
+?else
+  The house knows that you stayed with him. It was Hanno who found you, afterward, in the street, with the cloak still in your hands, and he did not say anything. He took one end of it, and the two of you folded it, between you, as one folds a flag.
+?end
+There is a runner's wax from Prisca on the table in your room, and it says what the other one said. The covens of Rome are to meet tonight, at moonrise, in the old quarry on the Esquiline. The house would like to know what you think.
+It is a long time until moonrise. The city, in its ruin, still has a good many things to say to you.
+-> hub
+
+# hub
+## The days after
+:hub
+?if actions_left() == 2
+  There is the whole grey day before you, and a good deal of it to spend.
+?else
+  The light is going yellow in the smoke. There is one more thing that you could do with it.
+?end
+* Go to Tiro's room, in the house [once] ?if actions_left() > 0
+  ~> tiro_room
+  $ do act()
+* Walk the burned quarters, and the road the soldiers are using [once] ?if actions_left() > 0
+  ~> edict
+  $ do act(1, true)
+* Go to the Aventine station, where Rufus has sent for you [once] ?if actions_left() > 0
+  ~> rufus_talk
+  $ do act()
+* Go to the counting house, and the firm [once] ?if actions_left() > 0
+  ~> firm
+  $ do act()
+* Let the day go
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :hub
+?end
+-> dusk
+
+# tiro_room
+## Tiro's room
+It is the smallest room in the house, under the stair, and it is exactly as untidy as a man who has been dead for three days would have left it, if he had had no idea. There is a cot that has not been slept in for the whole of the night's hours, because he did not sleep at the proper times either. There is a clay cup with a chip out of the rim. There is a wax tablet with a bad drawing on it, scratched with a stylus and then smoothed, and scratched again, of Prisca as a heron.
+There is a ledger, the house's plainest, bound in cheap boards. It is open on the table to a page of sums, and it is all in his round hand, and it is wrong. It is wrong in a number of ways that you can follow, step by step, like a man who has gone out of a door and into a wall and then into another door. At the bottom of each page, in the margin, in smaller writing, are the things that he meant to say to someone. *Ask about the cat on the Via Lata.* *Do not tell Hanno that I know what is in the third cask.* *Tell him: the first month is the worst, and then it is only strange.*
+There is no name after that last one. There does not have to be.
+Hanno is at the door. You did not hear him come, and you never do. He does not come in. He is carrying a lamp, held a long way off, in a stiff old arm, as a man holds a thing that he has had to learn to be careful of.
+?if b1.tiro_end == "held"
+  "I am told," he says, in the slow old Punic accent that has outlasted three languages, "that he did not die alone."
+?elif b1.tiro_end == "carried"
+  "I am told," he says, "that he was alive when he reached the water."
+?else
+  "I am told," he says, "what was done on the roof afterward. I do not ask. I only say that he would not have wished it, and that I know it was not done for him."
+?end
+He looks at the ledger.
+"It is the house's custom," he says, "that what a person leaves is burned with the lamps on the seventh night. I do not think it is a good custom. It has never been asked of me to say so." He looks at you, with his black deep old eyes. "You may have it, if you like. It is the only thing in the building that he made."
+:the_ledger
+* Take it
+  $ b1.tiro_keep = "kept"
+  $ humanity += 1
+  $ bond.prisca += 1
+  You put it under your arm. It weighs nothing. Hanno nods, once, very slowly, and for a moment his old face does something that is not a smile and has the same shape. "Do not try to add it up," he says. "I have tried. It cannot be done." He goes away along the passage with his lamp, and you sit down on the dead man's cot, for the length of time that it takes to read all of the margins, and then you read them again.
+* Let the house burn it with the rest, on the seventh night
+  $ b1.tiro_keep = "burned"
+  $ defiance -= 1
+  "It is the custom," says Hanno. He bows his head. "It will be done properly." You find that you were wrong about what you wanted. You wanted someone to tell you that you did not have to carry it. It is a relief, and a loss, and they are the same, and you do not take anything but the chipped cup. It is the only thing that you can bear to touch. You put it in your tunic, where it knocks against your ribs, and you walk out of the house into the ash.
+<~
+
+# edict
+## The road the soldiers are using
+The edict is up by noon, on the posts of the Forum and the doors of the baths, in clear, flat, official Latin, and by afternoon it has been read aloud at every crossroads by men who were paid to do it. The fire was lit by a sect. It is a sect from the East, from Judea, a sect of people who hate mankind and meet at night and eat a thing that they call a body. Anyone who is a follower of it is to be taken up and brought before the Prefect. It is not stated what will happen after that. It does not need to be.
+You have heard the words before. You heard them from Galerius, on the Palatine stair, in the red light, in a gentle dry voice, as a thing that he had been told to say.
+The soldiers are using the road down from the Subura to the Tiber, because it is wide, and has been cleared. They are taking people along it in twos and threes, with their hands bound, in the dust, and the neighbours stand at their doors in their ash covered tunics and watch them go by, and some of them are crying and most are not. You see an old woman spit at a man with a bleeding mouth. You see a girl of ten hold a baby up to see.
+?if b1.fire_toll == "terrible"
+  It is not a hard thing to see why. They have lost the whole of their lives in a night, and here is something to put the blame on, and it has a face.
+?end
+You are in the lane behind Naevia's shop when it comes to you. It is her. She has come out of her doorway in her scorched apron with a broom, and she takes you by the sleeve. She has not wept, and she does not now.
+"The cobbler," she says. "Onesimus. The Greek, at the end of the lane. He is one of them. He is not one of anything, he mends my shoes, he has two girls and a wife who coughs." She is whispering fiercely. "They meet in a loft on the first day of the week and they say something about love, I have heard it through the wall, it is the dullest thing in the world. He did not light anything. He could not light a lamp. The Prefect's men will be at his door by dusk, because someone on this lane has told them, and I know who, and it is a man who owed him money." She lets go. "I do not know why I am telling you. Something about the way that you looked at those men in the fire."
+You go down the lane with her. The cobbler's shop is as small as a cupboard and quite undamaged, and it smells of leather and of a kind of stew that is made of nothing at all. He is a short grey man with a very straight back. His wife is on a stool, wrapped in a shawl, and his two girls, fifteen and eleven, are sitting on the floor with their arms round each other and their eyes on the door.
+[judean] He greets you in Aramaic, a poor, careful, labouring Aramaic, a Greek's idea of a Galilean's. It is a courtesy. You have not heard it spoken to you in a Roman street for a very long time.
+[not judean] He greets you in good Latin, with a slight Greek lilt, and a bow. He is entirely calm. It is the calm of a man who has already settled it with someone else.
+"It is very kind," he says, "but you must not." He says it quite gently. "You do not know what you would be doing."
+You know exactly what you would be doing.
+:the_cobbler
+* Take them to the house's cellars, and hide them there until it is over
+  $ b1.refuge = "hid"
+  $ secrecy -= 2
+  $ standing -= 1
+  $ humanity += 3
+  It is not clever, and it is not safe, and it is what you do. You wait until the dusk comes on, and the lane is quiet, and you take them through the burned back ways, one by one, with their shawls over their heads and the small girl's hand in yours, down to the cellar grate and the long cool dark of the Emporium. The house sees them come. It says nothing. Hanno brings a lamp, and then he seems to think better of the lamp, and brings bread instead. The younger girl looks at you over the rim of a cup, with her eyes very wide, and says, in a perfectly clear voice, that you are very cold. Her mother hushes her. You tell her that it is the cellar, and she nods, with the grave good sense of the very young, and does not believe it at all.
+* Pay for a berth, and put them on a ship at Ostia
+  ?if wealth >= 10
+    $ b1.refuge = "shipped"
+    $ do earn(-10)
+    $ humanity += 2
+    $ standing += 1
+    It costs a good deal of silver, and a bribe to a harbour clerk, and the use of a name that you had hoped to keep out of Ostia, and it costs no secrets. They go in the dark, in the hold of a grain ship bound for Alexandria, with a bundle of tools and a loaf and the cobbler's last pair of boots. He looks back from the gangplank. He has the same straight back. He says, in a low voice, a thing in Greek, that you do not understand, and his wife says, in Latin, "He says that he will pray for you." You tell her that it is not necessary. She says that she knows. It is only that it is the one thing that they have to give.
+  ?else
+    You do not have the silver. It is a plain, dull, shameful thing, and it is a thing that has not happened to you in a month, and you stand in the cobbler's shop with your purse in your hand and your face getting slowly hot, and you cannot buy a berth on a grain ship for a family of four. You take them, in the end, to the cellars, because it is the only place that you have. It is not what you meant.
+    $ b1.refuge = "hid"
+    $ secrecy -= 2
+    $ humanity += 3
+  ?end
+* Tell him that you are sorry, and walk away
+  $ b1.refuge = "none"
+  $ humanity -= 2
+  $ defiance -= 1
+  You tell him that you are sorry. It is true, and it is no use. He says that it is quite all right. He says it as one says it to a child that has dropped a cup. You go out into the lane, and Naevia is standing by the door with her broom, looking at you with her old unfooled face, and she does not say anything at all, and it is the worst thing that she could have done. At dusk you hear the soldiers on the lane. You do not hear anything else. You have very good ears, and it is a thing that you would give a great deal not to have had.
+?if b1.refuge == "none"
+  You do not go back along that lane again for a long time.
+?end
+<~
+
+# rufus_talk
+## The Aventine station
+The station of the Aventine has lost its roof. It has not lost its men. They are sitting about in the yard in the ash, a hundred of them, grey to the eyebrows, eating bread from a basket, with their hooks and buckets laid out in rows, like soldiers after a battle who have not been told that it is over. Rufus is on an upturned bucket by the wall with a scrap of papyrus on his knee, writing very slowly with a reed. He looks up as you come in. He does not smile.
+He has a number of very small, very neat lines. He has been writing them for three nights. He has not yet looked at what he has written.
+?if b1.rufus_saw == "mercy"
+  "I want to ask you a thing," he says, "and I want you to know before I ask it that I have been telling myself for three days that I will not mind the answer."
+?elif b1.rufus_saw == "slaughter"
+  "I want to ask you a thing," he says, "and I want you to know that I have a hook in my hand, and that I do not at all expect to use it."
+?elif b1.rufus_saw == "both"
+  "I want to ask you a thing," he says, "and I want you to know that I have two sets of lines in this book, and that I do not know yet which of them is the truth."
+?else
+  "I want to ask you a thing," he says, "and I want you to know that I have told everyone that I remember nothing, and that it is the only lie that I have ever told that did not feel like one."
+?end
+He turns the papyrus over.
+"There are six men dead in the Velabrum," he says. "They were found this morning in a lamp seller's yard. They had their throats opened. They did not have much blood left in them, and what there was had a grey look. They were grey cloaks. They were the men that I have been looking for since the spring." He draws a long breath. "I did not do it. The Prefect did not do it. I do not think that a man did it. And I want to know what you are."
+It is as simple as that. It is as simple as a question put by a plain, tired man on a bucket in the ash.
+:the_answer
+* Tell him the truth
+  $ b1.rufus_told = "told"
+  $ velati_regard += 3
+  $ secrecy -= 3
+  You tell him. You have not told anyone, not in this way, not a mortal, not once, and you find that it is a very short thing to say. You tell him what you are, and what the night is, and that you do not burn, and that it is not a thing that he should write down. He listens as he listens to a fire. When you have finished he is quite still for a long time, and then he says, "Ah," in the voice of a man who has been told a sum that he had already done. He takes up the reed. He puts it down. "I will have to write it," he says. "I am sorry. I think it is the only thing that I am good for." You say that you know. He says, very low, "Thank you for not lying." It is a most peculiar thing to be thanked for.
+* Tell him that he saw a man in a great fire, and that it is enough
+  $ b1.rufus_told = "lied"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  "I am a man," you say. "I was there, and I was frightened. So were you." It is a smooth, good, usable lie, and he looks at you for a very long time, with his tired, kind, merciless eyes, and does not say that it is one. He nods. He writes something down, and it is very short. You do not need to read it to know what it says. It is not a good thing to have done to a man who is the nearest thing that you have to a friend in the daylight.
+* Ask him what he would do with the answer
+  $ b1.rufus_told = "deflected"
+  $ velati_regard += 1
+  "That is a very good question," says Rufus, after a moment. "It is the one that I have been asking myself." He rubs the back of his neck. "I would write it down. And then I would try to be somebody who could be trusted with it." He gives a short dry breath, almost a laugh. "I do not think that I am, yet. I think I am only a man who has seen a good deal and has a roll of paper." He does not press you. It is the kindest thing that he could have done, and it is not an answer, and you both know it.
+He puts the papyrus away inside his tunic.
+"There is something else," he says. "The Prefect's men have been through the cells at the Esquiline gate. They have been taking out the ones who were taken in the fire, the grey cloaks, the real ones, and I do not know where they are going. I have two of mine who say they have heard nothing. I have one who says that the Prefect has been told to be quiet about them." He looks at the ash on his knuckles. "I should like to know why a man who set the city alight should be quiet."
+It is a good question. You are going to carry it for some time.
+$ do discover("the_vigiles")
+<~
+
+# firm
+## The counting house
+The counting house of Collis has not burned. It is a modest set of rooms over a rope seller's shop near the Forum Boarium, on a street that the wind happened to skip, and it is full of the smell of wet ash and cold tallow. Pollio, who is your clerk, and who is the first man that you ever hired without any sense of what you were doing, is at the long table with a pile of tablets, in a tunic that he has not changed for three days, with his eyes red. He gets up as you come in. He is a man who does not know what to do with his hands, and he puts them behind his back.
+"It is a bad week," he says. "It is a very odd week. I have sold more oil than in the last two months." He does not look at you. "I have sold more rope. I have sold lamp wicks that I had in the cellar since the spring, to a man who did not want to be seen to buy them. Everything that a city needs, when it has burned, is a thing that a firm like this has got in a cellar. I should like it to be known that I do not like it."
+?if b1.collis_start == "insulae" or b1.collis_start == "lending"
+  You have more of the burned city on your books than you would wish. It sits on the long table in the shape of a heap of wax tablets, each with a name and a debt and a roof that is not there. A great many of them will not be paid. A few of them are paid already, in advance, by people who are paying for the privilege of a name that does not know them.
+?elif b1.collis_start == "shipping"
+  The ships are all late. Every one of them is carrying something that the city wants more than it did a week ago, and the factors in Ostia have raised the price by a third, and by the end of the month it will be a half.
+?elif b1.collis_start == "gladiators" or b1.collis_start == "slaves"
+  The school has been taking in the people who have been put out of their homes, at a fee that is called a contract, and the ledger is very careful about the wording. You read it for a long time. It is entirely legal. Pollio, beside you, looks at his boots.
+?else
+  The wine came through unburned. It is a tidy, sordid little miracle, and it is the only part of the books that does not make you feel unwell.
+?end
+"You will want to know what to do with it," says Pollio. "It is a great deal of money, in a week, and it is not honest, though it is not dishonest. It is only that we have the right things."
+There is a bad, practical, human idea that sits on the table between you. A firm of this size, in a burned city, has it in its power to put a roof on a street.
+:the_purse
+* Put a part of the week's takings into rebuilding the lanes of the Subura ?if wealth >= 12
+  $ flag b1.rebuilt
+  $ do earn(-12)
+  $ standing += 2
+  $ humanity += 1
+  $ collesanto += 1
+  Pollio does not say anything. He draws the tablet toward him, and he writes a figure, and then, after a moment, another one under it that is a little smaller, and he looks up with a face from which something has gone quite suddenly out. "I shall have to find the timber," he says. "I have a man in Ostia. I will not pay him what he asks." He takes a breath. "I am very glad that you said it. I did not know how to." By the spring there are roofs on four of the lanes below the Esquiline, and over every door is a small neat sign painted by a man who was told not to, a six petaled flower, in a red that has not quite dried.
+* Let the firm take the week's profit, and keep it quiet
+  $ secrecy += 1
+  $ humanity -= 1
+  Pollio nods. He does it as he does everything, thoroughly. He writes the figure down and he locks the tablets in the chest. "It is only wise," he says, in a flat voice, "not to be seen to be generous this week." He says it as a man says a thing that has been said to him in an office. You say that you agree. You both know that it is not the only reason, and you do not discuss the other one.
+<~
+
+# dusk
+## Dusk
+$ do phase("night", 1)
+The day goes out in a long copper smear behind the smoke. You go up through the Esquiline in the grey light, in a road that is full of people going the other way, with bundles, and a handcart, and a donkey with a bird cage tied to its pack, and they do not look at you.
+?if must_feed()
+  Hunger comes up in you on the road like water in a cellar. You cannot go into the quarry with it. You turn aside, to the lane behind a butcher's, where the house keeps an arrangement for such things, and it is done quickly, and quietly, and without a word.
+  ?if b1.vow == "animal"
+    $ do feed("animal")
+  ?else
+    $ do feed("donor")
+  ?end
+?end
+Hanno comes with you. He has a stick, and a cloak with the hood up, and he does not talk. Prisca is already ahead of you. She has gone up alone, before the sun was down, in her plain brown cloak and her good shoes, with her hands folded, as she goes up to every difficult room in Rome, and you are the last of the house to follow.
+?if b1.coven == "stayed"
+  "You will not be asked to speak for the house," says Hanno. It is the longest thing that he has said to you in a month. "You will be asked to speak for yourself. I should like you to know that it is the same thing, now." He walks on a few paces. "It was so for the boy."
+  $ bond.hanno += 1
+?else
+  "You are not of the house," says Hanno, "and you are going to the quarry as the house's friend. It is a very particular thing to be. I should think carefully about what it is that a friend owes." He does not say more. He seems to feel that he has said a good deal.
+?end
+The old quarry is on the far side of the hill, on land that nobody owns, where the city's builders cut the soft yellow stone for the first walls, and where nobody has dug for four hundred years. It is a long ragged hollow in the hillside with a rim of broken brush, open to the sky, and a mouth in the cliff at the far end, black as a lamp wick, with the dark of the old galleries behind it. There is no light. Nobody has brought a flame. It has not been discussed, and it has not needed to be.
+-> quarry
+
+# quarry
+## The old quarry
+:quarry
+The moon is late. It has not yet come over the rim of the hill, and the sky above the quarry is the grey pearl of a sky that has had a fire in it, and in the grey, at the bottom of the hollow, in the broken yellow stone, there are forty people standing in the dark.
+They have not drawn together. That is the first thing that you see. They have come from every quarter of the city, from the Palatine and the Egyptian quarter and the river and the Greek temples, from the old houses and the old lines, and they are standing in the quarry in their groups, as people stand at a funeral where there has been a quarrel. Each of them is very still. You can feel them, as you come over the rim, as you feel the heat of a furnace through a wall. It is a hundred and fifty years of living for every ten of them. It is more than that, in some.
+The Senate counts five lines in Rome. The five stand in the hollow. You can tell them by their way of standing. The Merchant house, round Prisca, is a close dark huddle like a group of clerks who have been called to the master's office. The Priestess line has come with its veils, and the Physician line with its quiet bags, and they have kept very much to themselves. And at the far end, between two broken walls of yellow stone, with their backs to the cliff, there are two others, and they do not stand together at all.
+The first is a knot of very big, very scarred men and women, in the old plain leather of the legions, with their cloaks pinned, and at their head, with a hand resting on a short sword that he does not need, a broad grizzled man with half an ear and a face like a worked field. He is laughing. It is a short, flat, unhappy laugh, and he is looking at the sky. That is the General's line. That is the one that the Senate uses when it needs a thing to be done. He is called Theron, and he is the oldest soldier in Rome.
+The second is a small, upright woman in a plain linen robe and a great deal of very old gold, with a long dark face and her arms folded, and she is looking at everything, and she is not looking at anyone. That is the Scribe line. Her name is Meritamun, and she has the air of a woman who is waiting for a lecture to be over so that she may correct it.
+There are no Lictors. There is only Galerius. He has come alone, in his grey cloak, with his tablet, and he is standing at the edge of the hollow, a little apart, as a witness stands. He inclines his head to you as you come down the slope.
+?if b1.galerius == "hostile"
+  It is quite a friendly nod. That is what is so difficult about it.
+?elif b1.galerius == "wary"
+  It is the nod of a man who has been told that you are dangerous and has not yet decided to believe it.
+?else
+  It is the nod of an old acquaintance, who has seen a good deal that evening and is a little tired.
+?end
+$ do discover("general_house")
+$ do discover("scribe_house")
+$ do meet("theron")
+$ do meet("meritamun")
+?if b1.coven == "alone"
+  Nobody has asked you where you are standing. You go down into the hollow by yourself, and stand alone at the edge of the stone, and it is a long moment, and a man behind you in a Priestess veil says something quiet and dry, and somebody laughs, and then Prisca turns her head and sees you, and stops it with one look.
+?else
+  You go down into the hollow with the house, and you stand with it. It is a plain thing, and it is a warm one, and it is, you realise, as you take your place at Prisca's elbow, the first time that you have been glad of it since the roof.
+?end
+Between the walls at the far end, at the very back of the quarry, there is a door. You did not see it at first. It is set into the living cliff, bronze, green with age, taller than two men, with a great ring in the middle of it and a drain at the foot, and it has no handle. The General's line has put itself in front of it, without looking round, as one sits with one's back against a thing in the dark. Theron's left hand, at his side, has come to rest on the bronze. He does not seem to know it.
+There are a few minutes before the moon. You have a little time. It is a thing that you can spend.
+:the_door
+* Go close to the bronze door and listen
+  $ flag b1.felt_below
+  ~> below
+* Keep with the house, and watch the others
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  You stay at Prisca's side with your hands folded and let the hollow come to you. It is a long cold clear interval, and you use it, as a hunter uses the minutes at a pool. You see Meritamun look at Theron's hand on the door. You see Theron take it away. You see Galerius write nothing at all.
+Then the moon comes over the rim of the quarry, huge and pale and lopsided, and lays a white stripe down the broken wall, and Prisca walks out into the middle of the stone.
+-> heads
+
+# below
+## The door
+You cross the floor of the quarry in the grey light, slowly, as a man goes across a room where somebody sleeps. Two of the General's people shift. They do not stop you. It is not an order. It is a thing that is done among soldiers, to let a stranger have a look at the colours. You stand before the bronze. It is as cold as a well. It is green and gold in the moon, and there are marks all over it, small and old and very deep, the marks that a man makes who has been left a very long time with something to do, and a nail.
+You put your hand flat on it.
+There is nothing, for a moment. Then there is the stone. It is the sound that you have been hearing all your life, without knowing, under every sound, the way that you hear your own blood, and now, in the dark, with your palm on the bronze, you hear what it is. It is slow. It is slower than any heart that you have heard, slower than a sleeping old man's, slower than a winter animal's. It comes up through the cliff, through the ground, through your feet. It goes by, like a great wheel turning in a cellar a mile deep, and then you wait, and you wait, and you do not breathe, because you have no need to, and then it comes again.
+It is not a heartbeat that you are meant to have heard.
+Somebody has put a hand on your shoulder. It is Theron. He is much quicker than he looks. He has a face like a closed door, and his eyes are very pale, and he says, in a perfectly polite, pleasant voice, quite low, "I should not do that, young man." He takes the hand away. "It is only that it is an old door, and it is a long way down, and it makes people feel things." He smiles at you with half of his face. "We have a custom, my people. We do not stand there."
+You go back to the house. You can feel his eyes on your back all the way across the quarry. You can feel the other thing too, which is nothing at all so definite as an eye. It is the beat, the long slow one, still going on, below the floor, under all of you, patient as a tide.
+$ do discover("the_old_quarry")
+<~
+
+# heads
+## The covens of Rome
+:heads
+"I will begin," says Prisca, "since nobody else will."
+She does not raise her voice. She does not need to. In the great hollow of the stone, in the grey, the whole quarry bends toward her, like a field in a wind.
+"The city has been burned. We all know it. It was done by a few hundred people with jars and a very good plan, and it was done in our sight, and it was done, as we also all know, with the Senate's leave." There is a silence, in which somebody draws breath. "I do not say that it was an order. I say that the Senate had nine days, and that it considered. It is a thing that the Senate is very good at." She looks round the hollow, from face to face, dry and patient. "Fourteen of my house have been killed. A boy of mine, who was nineteen, and who was bad at sums. I do not say it for pity. I say it so that you will know that I am not speaking idly."
+She does not look at you.
+"The sect is at large. It is very much hurt, and very much angry, and it has a leader who has not been found. There are a few hundred of them, in the city, in the villages, and they know what we are. I propose that we hunt them. I propose that it be done at once, and quietly, and with discipline. I propose the leaders, the makers of the jars, and the men who were seen to carry them. I propose that we leave the rest."
+"Leave the rest," says Theron.
+He has not moved, and it is quite loud. His voice is an old camp voice, a gravel and gristle sound, that has been shouting across fields for a very long time.
+"I have a thing to say about the rest, Prisca." He comes out from the cliff, with the hand on the sword, and the whole line of the General's people comes out with him, quite quietly, like a wall deciding to move. "I am a soldier. I do not understand a house that does its sums over a funeral. They came for us with fire. Do you know what that is? It is the thing that we cannot get out of. It is the only thing there is." He laughs, short and flat. "It is the only thing in the world that can kill the whole of a coven in a night, with the doors shut, in its sleep. They know it. They have always known. You may not leave the rest. The rest are the ones that bring them water, and the ones who carry the bread, and the old women who sit up with the jars. If you leave one of them, you leave the whole of it, and it is a seed. I have seen it. I have been to war. It is a thing that you may only do once."
+"What do you propose?"
+"All of it," says Theron. "Every one. Every one, and the houses, and the farms where they are hiding, and the children if it comes to that, so that there is not a cloak left in Italy that could light a lamp. A clean thing." He looks round the hollow, and he is not shouting, and his scarred face is as plain as bread. "I do not say that I like it. I say that I am old, and that I have seen the other way, and I did not like that more."
+There is a murmur. It is not a murmur of horror. You hear that very distinctly, and it is more frightening than a shout would have been. It is a murmur of an assembly that has heard something that it had already thought.
+"The Scribe line," says Prisca, steadily, "has not spoken."
+"The Scribe line," says Meritamun, "has been waiting."
+She comes forward. She is rather small, and she holds herself as if she were rather tall, and her long dark Egyptian face is quite without expression. She does not look at Theron. She looks at the sky, as though it were a document.
+"I would like to ask a very simple thing," she says, in a cool, clear, perfectly accented Latin, "which is how it is that a few hundred people in grey cloaks, with clay jars, were able to buy forty thousand pounds of pitch, and tow, and resin, in a single summer, without anyone in this city asking what it was for."
+She lets it lie.
+"It is a question that has occurred to me," she says. "I am a great reader of ledgers. I am only a woman who finds, when a thing has been paid for, that there is a person that it was paid to." She smiles, very slightly, at nothing. "I should like to know, before I am asked to kill a farm of old women, whether there is somebody else that I ought to be looking for."
+Nobody says a word. In the grey, at the edge of the hollow, Galerius lifts his head, and looks at her, and she looks back. It is the look of two old scholars who have read the same book, and who both know which page it was.
+"The Senate," says Galerius, "has asked me to say a few things."
+-> senate
+
+# senate
+## The Senate's witness
+Galerius does not come forward. He stands where he is, at the edge of the stone, and the moon makes a small hard silver of his tablet, and he speaks in the mild exact voice that he uses for everything, and every head in the quarry turns.
+"I am the Senate's witness, and not its voice. I will say it as I was told. The Commander of the Lictors, who has the honour to speak for the Senate in this matter, wishes the covens of Rome to know three things. That the Senate has noted the loss of life. That the Senate will not forbid any coven to defend itself against a threat to the Veil. And that the Senate will not, in this case, command." He turns the tablet over. "It is the Commander's view that a matter so entirely within the covens' own competence ought to be left to the covens."
+It is a lovely piece of work. You have to admire it. It lets every one of them off, and puts every one of them on a rope. If they hunt, and it goes wrong, it was theirs. If they do not, and the sect comes again, it was theirs. If they are loud, the Senate may find that there has been a breach of the Veil, and is very sorry. It is the voice of a body that is entirely willing to see a thing done, and does not want to have been present.
+"I am bidden to add one matter," says Galerius. "It touches the fire, though I will confess that I do not at all see how." He looks at his tablet. "On the second night after, a party of the Commander's officers went up to the hills above the village of Collesanto. It was the place where the sect's first torches were seen in the spring, and where the first of the burnings was done, and it seemed proper to look. There is a villa above the village. It is shuttered. It is deeded to nobody. It has not been entered by a Roman in twenty years."
+The air changes. You feel it. It is a small thing, as when a window is opened in another part of the house.
+"The officers entered. They found a hall, and a mosaic, and a cellar. In the lowest room of the cellar there is a door. It is a very good door, of oak, bound with iron, and it has a bar." He pauses, with an exquisite sense of the exact length of a pause. "The bar is on the inside."
+?if b1.maker_answer == "truth"
+  He does not look at you. He does not need to. You told him, in the atrium of the Merchant house, in a fit of honesty that you are only now beginning to understand the price of, that the one who made you was a man whose face would not stay in your mind. It is in his file. He has not said so. He lets it hang, over the quarry, like a bell on a very thin rope.
+?elif b1.maker_answer == "lie"
+  He does not look at you. He does not need to. You gave him a name, in the atrium, and the name was a dead man's, and Prisca paid for it, and a lie of that sort is a thing that a file does not forget. He lets it hang. It is quite plain that a scholar who has been given one answer and finds another in a cellar knows exactly where to put his finger on the join.
+?elif b1.maker_answer == "refuse"
+  He does not look at you. He does not need to. You gave him nothing, in the atrium, and a nothing is a very fine thing to have on file. It leaves such a lot of room for a cellar to fill.
+?else
+  He does not look at you. He does not need to. You gave him a little, in the atrium, and a little is a thing that a cellar can finish.
+?end
+"I am not a man for theories," says Galerius. "I only say that the room was recently inhabited. That there was a cloak. That the wine on the floor, I am told, had been brought up again." He looks at the moon. "And that it seems an odd house to have burned a village for."
+There is a sound in the quarry like a hundred people deciding not to say a thing.
+It is a great, grey, heavy, listening silence, and it comes to rest on you, one head at a time. It is the Priestess veils. It is the Physician quiet bags. It is the Merchant house, in front of and behind and at both your elbows, who have all just done a sum.
+And then there is another sound, and it is a small one, and it is a thing that you have never heard in your life.
+It is Theron.
+He has taken a step back. It is the only thing he has done. It is a very small step, a step such as a man takes when a floor has moved under him, and his hand has come away from his sword, and he has put it, flat, against his own chest, and it is shaking. He is looking at Galerius. He has gone the colour of a very old candle. The old soldier, with his half an ear and his four hundred years, who has just proposed the killing of a farm of children without a change of voice, has the look of a man who has seen something come up out of the ground.
+"Describe the bar," says Theron.
+His voice is quite level, and it is not his own.
+"Oak," says Galerius, "as thick as a man's thigh. In iron brackets. Set to be dropped by a person standing inside the door." He looks at him curiously. "You will forgive me. It is not an uncommon arrangement."
+"It is not," says Theron. "No." He laughs. It is the wrong sound, a very short wrong one, like the crack of a green stick. "A man may bar a door from the inside for a great many reasons." His captains have turned their heads. They are looking at him, with their hands at their belts, and they have not the slightest idea what to do, and it is the only time that the General's line has ever looked like a flock of sheep. "I knew a man once who did it. It does not matter. He is dead." He takes a breath. It shudders. "Go on with the war, Prisca. I withdraw nothing. Only," and he turns, and for the first time he looks straight at you, with his pale terrible eyes, and there is something in them that is not at all anger, "I should be glad, when this is over, to have a few words, in private, with the one that woke in that room."
+Meritamun has not moved. Her arms are folded. She is looking at the old soldier, with the clear, cold, slightly pleased attention of a naturalist who has seen a rare bird do the thing that she said it would, and she does not look at you at all. It is somehow a good deal worse.
+:the_fear
+* Ask him, now, in front of all of them, what he knows of the man who barred the door
+  $ b1.theron_fear = "pressed"
+  $ bond.theron -= 1
+  $ standing -= 1
+  $ defiance += 1
+  Your voice goes out in the stone, a good deal clearer than you meant. "What do you know of him?" you say. "Tell me. Tell them. He is the reason that my village is ash." The old soldier's face closes. It closes like a hand. "I know nothing," says Theron, quite pleasantly. "I told you so. It was a long time ago, and I was young, and I was drunk, and I will thank you not to cross-examine me in front of my captains." There is a ripple, in the dark, of people who have been told that they are not to look. You have learned that he is afraid, and what it is that he is afraid of is not for the moment going to be given to you. It is a very expensive way to learn the first thing.
+* Say that you will speak to him afterward, privately, and look to Prisca
+  $ b1.theron_fear = "private"
+  $ bond.theron += 1
+  Theron breathes out. It is a very small sound, and the whole line of his shoulders loosens by an inch. "Afterward," he says, hoarsely, "and alone." He gives you a short stiff bow, a soldier's bow, to an equal. It is the first time that anyone of the General's line has done so. You find, with a slight shock, that you have done him a kindness, and that he is aware of it, and that he is not at all happy about it.
+* Say nothing, and let it pass
+  $ b1.theron_fear = "ignored"
+  You let it pass. It is the cleverest thing, and the safest, and it is the one that sits in your stomach afterward like a cold stone. You have a thing now that you did not have a minute ago. You have a man in the quarry who is afraid of the thing that made you. It is not a weapon. It is only a place that you may press, later, if you wish to, and you do not know yet whether you wish to.
+Then Prisca has her hand up, and the quarry turns, with a great dry rustle of cloaks, toward her again, as a field turns toward a wind that has changed.
+"We have heard the war," she says. "We have heard the limits. We have heard from the scribes, and from the Senate. I should like to hear one voice more." She looks across the hollow, at last, directly at you. "He was on the hill. He was in the fire. He has lost a village, and a wife or a husband, and a friend of mine. There is nobody here who has paid more for it. I should like him to say what he thinks."
+-> voice
+
+# voice
+## What you think
+:voice
+The whole quarry is turned to you. It is forty faces in the moon, white as a row of plates, and there are no heartbeats in the entire hollow but your own, and the old one under the floor.
+You have it ready. You have had it ready, as a man has a coin, for three days. It is only that you have not yet been asked to spend it.
+?if b1.fire_toll == "terrible"
+  You think of the carts. You think of the carters who do not speak to each other.
+?end
+?if b1.tiro_end == "avenged"
+  You think of a boy of nineteen on a roof, with a jar on a cord, whom you took by the throat, and did not let go of for a very long time. It is not a thing that you have been able to put down.
+?end
+* Stand with Theron. All of them, every one, so that there is not a lamp left in Italy
+  $ b1.council_voice = "war"
+  $ b1.war_terms = "total"
+  $ cunning_brutal += 3
+  $ humanity -= 2
+  $ standing += 1
+  $ bond.theron += 2
+  $ bond.prisca -= 1
+  "He is right," you say. Your voice is very steady. "They came to my village with torches. They came for a house on a hill, and they burned the hill. They will come again, and they will not ask whose it is." You say it as plainly as you can, so that it will not have to be said twice. "I say that he is right. I would not choose it. I do not think that the dead are going to be consulted."
+  The General's people make no sound at all. Theron looks at you with his terrible pale eyes, and nods, slowly, like a man who has been waiting a long time for somebody to say so. Prisca does not look at you. She has folded her hands, one in the other, very carefully, and you know that you have lost something, and that it will not be given back by the morning.
+* Back Prisca. The leaders, the makers, and the ones who carried the jars, and no more
+  $ b1.council_voice = "limits"
+  $ b1.war_terms = "limited"
+  $ standing += 1
+  $ bond.prisca += 1
+  $ bond.theron -= 1
+  "She is right," you say. You find that you are standing a little straighter. "It was a few hundred who did it, and they had a plan, and a man to lead them. There are people in those farms who did nothing but carry bread. You may kill every one of them, and it will not undo the fire, and it will not be a Rome that I want to wake up in." You look across at the old soldier. "I am not asking for him to be gentle. I am asking him to be exact."
+  There is a stir. Theron smiles, very slightly, without any amusement. "Exact," he says. "It is a word for people who have not been at the end of a thing." But he says it without anger, and he does not move. Prisca, beside you, inclines her head, once. It is all the thanks that you will get, and it is a good deal.
+* Argue for mercy. Anyone who yields should live, even the ones who carried the jars
+  $ b1.council_voice = "mercy"
+  $ humanity += 3
+  $ cunning_brutal -= 2
+  You say it. It is a hard thing to say in that place, to those people, with the ash still on your tunic, and you say it as plainly as you can. That a man with a jar is a man, and has a mother. That the fire is the thing that they all despise, and that if they answer it with the same fire, in the dark, in the farms, they will have made a Rome in which that is what is done. That there is a sect in this city called the vigiles, who carried buckets all night, and who will write down what they saw. That somebody will remember. "I do not ask for it to be easy," you say. "I ask for it to be a thing that we can say we did."
+  ?if humanity >= 50 or b1.rufus_saw == "mercy" or b1.rufus_saw == "both"
+    It is a long silence, in the stone. And then, from the Scribe line, in the flat cool Latin, a small dry voice says, "I think that I should like that to be noted." It is Meritamun. She has unfolded her arms. "It is the first sensible thing that has been said at this meeting by anyone who had not been told what to say beforehand." It breaks the silence. A veil in the Priestess ranks moves, and then another. Prisca, slowly, says that the house will join it. It is not a vote. There are no votes. It is only that, after a time, it becomes clear that it has been decided.
+    $ b1.war_terms = "mercy"
+    $ bond.prisca += 1
+    $ bond.meritamun += 2
+  ?else
+    It is a long silence, in the stone. It does not go your way. You hear it fail, like a rope parting, a strand at a time, and somebody laughs in the Physician ranks, and somebody else, kindly, says that it is the sort of speech that one makes at twenty, and that he had made it himself. You have not the standing. You have not, you understand, quite the right sort of past. It is a quiet bitter small thing, and nobody is cruel about it. Prisca puts a hand on your sleeve. It is a very light hand. "It will be limited," she says, low. "It is the best that could be had." You find that it is a great deal more than you had a right to expect, and it is no use at all.
+    $ b1.war_terms = "limited"
+    $ standing -= 1
+    $ bond.prisca += 1
+  ?end
+* Ask who is glad ?if b1.flavus_night == "heard" or b1.blame == "named" or b1.blame == "pressed"
+  $ b1.council_voice = "glad"
+  $ b1.war_terms = "limited"
+  $ cunning_brutal -= 3
+  $ standing -= 1
+  $ secrecy += 1
+  You do not say any of the things that you had ready. You say, instead, in a perfectly quiet voice, that there were no Lictors at the Circus, and no watch at the gate of the Emporium. You say that a man on a hill, with a jar, who had every reason to lie, told you to be careful of the ones who are glad. "I should like to know who is glad," you say. "I think the Scribe line has been asking it. I think that it would be a great mistake to kill a farm of old women, and then find that it was the wrong question." There is a silence, of a most peculiar kind. Galerius has lowered his tablet. He is looking at you for the first time with a sort of grave, startled, appalled respect, and you realise that you have said, aloud, in a quarry, in front of forty of the most dangerous people in Rome, the exact thing that he has been told to prevent. Meritamun smiles. It is a very small, very satisfied smile. It is the smile of a woman who has been waiting a very long time for somebody to ask the right question, and who is not at all sure that she is pleased.
+  The council does not decide anything on that account. It cannot. It goes round and round for a long while and arrives, as such things do, at what Prisca first said. It will be limited. It will be done with discipline. You have made a number of people in that hollow wish that you had been less clever, and one of them, a very old one, wish that you had been more.
+* Say nothing. Let them decide it without you
+  $ b1.council_voice = "silent"
+  $ b1.war_terms = "limited"
+  $ standing -= 1
+  $ secrecy += 1
+  You do not speak. You stand in the moon, with the dead of the house at your back and the whole quarry waiting, and you find that you cannot say it, either of them. It is not cowardice. It is a lack of any sentence that is true. Prisca waits for a very long time. Then she says, in a voice that is perfectly steady, that the house will propose what it has proposed, and that it will be glad of the Scribe line's advice. Theron makes a short noise in his nose. It is not scorn. It is a kind of disappointment, and it is a good deal harder to bear.
+-> ruling
+
+# ruling
+## The terms
+:ruling
+It takes the better part of an hour. It is not an argument. It is the long slow settling of a great many old people who have all agreed beforehand to be reasonable, and it ends, as such things do, in a form of words.
+?if b1.war_terms == "total"
+  The covens will hunt the sect. All of it. Every cell in the city and every farm and house in the villages round it, to the Sabine hills and the sea, wherever a grey cloak or a lamp is found. There will be no quarter. The General's line will lead. The others will give what they have. It is Theron's war, and it is said, in the quarry, in the end, in the flat voice of an old soldier who has got what he came for and does not enjoy it.
+  Prisca says nothing. She stands with her hands folded and her face closed, and when the word is given she bows her head to it, once, as one bows to a very bad weather. She does not look at you.
+?elif b1.war_terms == "mercy"
+  The covens will hunt the sect, and they will take anyone who yields. The ones who carried the jars may live, if they put them down, and be taken to a place that the house will name, and held, and asked what they know. The ones who will not put them down will not be asked twice. There will be no killing of the unlit, and none of the old, and none of the young. It is a thing that is very close to the thing that you said, and you hear it come out of the mouths of forty people in the dark, in their dry cool official voices, with a feeling that you do not know how to name.
+  Theron says, in the end, with the air of a man who is eating something that he does not like, that it is a bad plan, and that he will do it exactly. It is a most extraordinary thing, and it is a promise.
+?else
+  The covens will hunt the sect. The leaders, the makers, and the ones who carried the jars. Not the old, not the unlit, not those who only brought the bread. Anyone who yields may be taken, and held by the house that took them, and asked what they know. It is Prisca's plan. It is a thing a great deal narrower than Theron's, and a great deal wider than Meritamun's, and it satisfies nobody, and it is the only one that all of them can sign.
+  Theron says that he will keep to it, and he says it the way a man says he will walk on a bad leg.
+?end
+"And the lamp seller," says Meritamun, suddenly. "The one they call Flavus."
+"He is gone," says Prisca. "From the hill. I have had it from three of the house."
+"He is a man who has a great deal of paper," says the Scribe. She says it to nobody. "I should like it very much if somebody could bring me some of it."
+Galerius closes his tablet. "The Senate," he says, courteously, "has been grateful for the covens' counsel." And then, as he turns to go, in an entirely level and quite different voice, very low, to you, as he passes: "I should be extremely careful, if I were you, of whichever of them is kind to you tonight."
+He goes up the slope in his grey cloak into the dark, without looking back.
+:the_hunt
+The hunt is to begin tomorrow, at dusk. The covens will go out in their cells, and each of them will take the ground that it knows. It is the custom, among them, that a stranger who has stood up in the quarry may choose where to stand. It is both an honour and a trap, and you know it.
+* Go with the house. The ledgers, the paper trail, the men who bought the jars ?if b1.coven == "stayed"
+  $ b1.cell = "house"
+  $ bond.prisca += 1
+  $ cunning_brutal -= 1
+  "Good," says Prisca. She says it very low. It is the thing that she wanted. "We shall be quiet about it. It is what we do." She does not say that she is afraid that you will not be. You hear it anyway.
+* Go with Theron's people, in the field, wherever the sect has gone to ground
+  $ b1.cell = "theron"
+  $ bond.theron += 2
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  Theron's face does something complicated. "I will not say that I am glad," he says, gruffly. "I will say that I have a place for you." He claps you on the shoulder, like a man at a legion's mess. His hand is as heavy as a spade. "Bring a warm cloak. It is going to be a long road." Behind him, one of the captains, a woman with a scarred jaw, is looking at you steadily, and measuring you, as for a coffin or a command.
+* Go with the Scribe line, and find out who paid
+  $ b1.cell = "meritamun"
+  $ bond.meritamun += 2
+  $ cunning_brutal -= 2
+  "That," says Meritamun, "is the most intelligent decision that anyone has made in this quarry." She says it without warmth, as she might remark that the sky was a particular colour. "Come to the Egyptian quarter at the second hour. Bring nothing. Tell nobody where you are going." She turns her long dark face to look at you for a moment. "That includes the house."
+* Go alone, and do it your own way
+  $ b1.cell = "alone"
+  $ defiance += 2
+  $ standing -= 1
+  There is a stir. It is not hostile. It is the stir of a number of very old people reminding themselves that it is, after all, in the traditions of the hunt. Prisca looks at you for a moment as a woman looks at a child that is going out into a storm, and then she says, in her dry way, that the house will leave a lamp in the cellar, and that nobody will ask where you have been.
+-> aftermath
+
+# aftermath
+## After the quarry
+The covens go out of the quarry as they came in, in their groups, up the slope, one at a time, into the pale. The moon is high now, and quite white, and the broken yellow stone is the colour of old bone. Meritamun is gone before you have turned. The Priestess veils go in a body, without speaking. The Physician bags are gone. Prisca goes up the slope with Hanno at her elbow and her hands folded.
+Theron stays. He has been waiting, at the back of the quarry, by the bronze door, in the shadow of the broken wall, with his sword across his knees. He has not asked his people to wait. They have gone, and he is alone, and the old moon lies on the great green door at his back like a hand.
+?if b1.theron_fear == "private"
+  You go to him. It is a long walk, across the whole floor of the quarry, in the white light, and he does not get up. He looks at the sword. He turns it over.
+  "I do not know," he says, "what you are going to think of me." He gives the short flat laugh. "I have been a soldier since before there was a Rome. I am afraid of very little. I was afraid of a door tonight, and I should like to tell you why, if I can, in a way that will not make me a fool."
+  "A very long time ago," says Theron, "on a river that I will not name, in a city that is not there any more, I knew a man who barred his door from the inside, every night. I thought at first that it was to keep something out. It is the usual reason. I was very young, and I was a good deal in awe of him, and one night, for a jest, I listened at the door." He does not move. "It was not that he was keeping something out. I want you to understand that. I have thought about it every night for a very long time, and I do not think that I was wrong. A door that is barred from the inside is not always made to keep a thing from coming in."
+  He looks up. "The man asked me one night if I wanted to see what came after. It is the kind of thing that is said, by a man in a doorway, at the end of a long night. I said that I did not. I have wondered ever since whether he was disappointed." He stands up, rather stiffly. "I think that you were asked the same."
+  It is not a question. You do not answer it. You find that you cannot.
+  "I will not say more," says Theron. "I do not know more. I know that I was right to be afraid, and I know that I should be afraid again tonight, if I had any sense, and I know that I have been in this world for a very long time and I do not believe in coincidence." He puts the sword back into its sheath. "Do not stand at that door again. I mean it kindly. It is not a thing that you want to know yet." He goes away across the quarry, an old broad soldier with half an ear, walking carefully, as a man walks on a floor that he has just discovered to be thin.
+  $ bond.theron += 2
+  ?if b1.felt_below
+    You do not need to be told what it is that he means by the door. You stand on the broken floor, for a long time, after he has gone, and you can feel it under your feet, very slow, very far down. It is going on.
+  ?end
+?elif b1.theron_fear == "pressed"
+  He does not look up as you pass. He has the cold closed face that you left him with. It is a very clear message. You go out of the quarry by the long way, past the green door, and you do not stop. You can feel it behind you for the whole length of the slope.
+?else
+  He looks up as you pass, and it is a long look, pale and blank, and he does not say anything. You do not stop. You go up the long slope in the white light with the sense of an invitation that has been left open, and that you have not taken, and that is waiting.
+?end
+At the rim of the quarry, you look back once. It is a great yellow hollow in the moon, quite empty. The bronze door at the end is shut. There is a small, very tired noise in the stone.
+It is not a noise that anyone has told you not to hear. It is only that it is going on.
+$ do rest()
+=> next

@@ -283,8 +283,8 @@ test('finishing the written part of an unfinished book pauses it instead of endi
   const book = game.library().find((b) => b.id === 'burning-city');
   assert.equal(book.completed, false, 'the book is not finished');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 10, 'the prologue is not counted as a chapter (chapters 1 to 10 are written)');
-  assert.equal(book.reachedNumber, 10);
+  assert.equal(book.chapterCount, 12, 'the prologue is not counted as a chapter (chapters 1 to 12 are written)');
+  assert.equal(book.reachedNumber, 12);
   assert.equal(game.library().find((b) => b.id === 'blood-and-gold').unlocked, false, 'the next book stays locked');
   assert.deepEqual(game.saves.listCarries(['burning-city']), [], 'no carry save is made');
   assert.deepEqual(game.state.booksDone, []);

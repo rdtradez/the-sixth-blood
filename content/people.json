@@ -135,6 +135,18 @@
       "name": "Flavus",
       "title": "A lamp seller of the Velabrum",
       "bio": "A lame freedman with kind eyes and a clean shop, devoted to Vesta, who has never had to lie about anything."
+    },
+    "theron": {
+      "gender": "m",
+      "name": "Theron",
+      "title": "Head of a General line coven",
+      "bio": "A Greek ancient turned in Macedon who marched with Alexander's armies. Battle scarred, half an ear, a great many war stories, some of which may be true."
+    },
+    "meritamun": {
+      "gender": "f",
+      "name": "Meritamun",
+      "title": "Head of a Scribe line coven",
+      "bio": "An Egyptian coven head who treats Romans as clever children playing with a civilization older than their city. Learned, proud, and dangerous in debate."
     }
   }
 }

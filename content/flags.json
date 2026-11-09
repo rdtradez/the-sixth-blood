@@ -632,6 +632,180 @@
       "default": "silent",
       "book": "burning-city",
       "note": "Chapter 10: what he said to Galerius on the Palatine stair about who the Senate would blame"
+    },
+    "b1.tiro_keep": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "burned"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 11: whether he kept Tiro's ledger or let the house burn it"
+    },
+    "b1.refuge": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "hid",
+        "shipped"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 11: what he did for the cobbler's family the edict named"
+    },
+    "b1.rufus_told": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "told",
+        "lied",
+        "deflected"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "deflected",
+      "note": "Chapter 11: what he told the vigil Rufus about what he is"
+    },
+    "b1.rebuilt": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 11: Collis paid to rebuild lanes of the Subura"
+    },
+    "b1.felt_below": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 11: he put his hand on the bronze door in the old quarry and heard what is beneath it"
+    },
+    "b1.council_voice": {
+      "kind": "enum",
+      "values": [
+        "war",
+        "limits",
+        "mercy",
+        "glad",
+        "silent"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "limits",
+      "note": "Chapter 11: what he said to the covens of Rome in the quarry"
+    },
+    "b1.war_terms": {
+      "kind": "enum",
+      "values": [
+        "total",
+        "limited",
+        "mercy"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "limited",
+      "note": "Chapter 11: the terms the covens agreed for the hunt of the Igniferi"
+    },
+    "b1.theron_fear": {
+      "kind": "enum",
+      "values": [
+        "pressed",
+        "private",
+        "ignored"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "ignored",
+      "note": "Chapter 11: what he did when the General's old soldier showed fear at the villa"
+    },
+    "b1.cell": {
+      "kind": "enum",
+      "values": [
+        "house",
+        "theron",
+        "meritamun",
+        "alone"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "house",
+      "note": "Chapter 11: whose hunt he joined"
+    },
+    "b1.farm": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "joined",
+        "sorted",
+        "stopped",
+        "stood_aside"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "sorted",
+      "note": "Chapter 12: what he did at the farm on the Appian Way"
+    },
+    "b1.clerk": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "kept",
+        "freed",
+        "dead"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "freed",
+      "note": "Chapter 12: what became of the sect's clerk"
+    },
+    "b1.boy": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "vigiles",
+        "freed",
+        "dead"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "vigiles",
+      "note": "Chapter 12: what became of the young prisoner in the vigiles' cell"
+    },
+    "b1.scribe": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "hint",
+        "deal"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 12: what passed between him and the Scribe line's head"
+    },
+    "b1.reckoning": {
+      "kind": "enum",
+      "values": [
+        "slaughter",
+        "mixed",
+        "mercy"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "mixed",
+      "note": "Chapter 12: what the first night of the hunt came to"
+    },
+    "b1.ledger": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 12: the sect's book of jars, money and donors is in his hands or his keeping"
+    },
+    "b1.hill_known": {
+      "kind": "flag",
+      "book": "burning-city",
+      "note": "Chapter 12: he knows the lamp seller has gone north toward Collesanto"
     }
   }
 }

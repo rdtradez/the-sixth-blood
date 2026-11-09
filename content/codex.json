@@ -117,6 +117,24 @@
       "title": "The Great Fire",
       "book": "burning-city",
       "text": "It began in the shops about the Circus Maximus on the night of the full moon of Julius, and the wind from the river carried it up the Aventine and into the old quarters. It burned for the better part of a week, and by the end of it more than half the city lay in ashes.\\n\\nThe Senate of Blood had known the date for nine days. What the Senate said afterward was a good deal more careful than what it knew."
+    },
+    "the_old_quarry": {
+      "category": "places",
+      "title": "The old quarry",
+      "book": "burning-city",
+      "text": "A hollow on the far side of the Esquiline where the first walls of Rome were cut, abandoned for four hundred years. The covens meet there when a matter is too large for any one house. At its far end a bronze door is set into the cliff, green with age, and the General's line keeps its back to it."
+    },
+    "general_house": {
+      "category": "bloodlines",
+      "title": "The General line",
+      "book": "burning-city",
+      "text": "The line of brute strength and war, and the one the Senate uses when it needs a thing done. Its coven in Rome is led by Theron, who marched with Alexander. It answers to Tarrax, the Commander of the Lictors."
+    },
+    "scribe_house": {
+      "category": "bloodlines",
+      "title": "The Scribe line",
+      "book": "burning-city",
+      "text": "The line of memory and secrets. Its keepers hold the records of the Senate, of the lines and of the dead, and they have long since noticed what the records leave out. Its coven in Rome meets in the Egyptian quarter under Meritamun."
     }
   }
 }

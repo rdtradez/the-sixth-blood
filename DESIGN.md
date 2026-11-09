@@ -150,3 +150,15 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Chapter 10 is a hub of four places where only three can be reached. What he did not reach is decided by the flags and the fire, and the dawn scene reads them. Later chapters and the Velati journal should read the flags (`b1.saved_*`, `b1.fire_toll`, `b1.rufus_saw`, `b1.blame`) rather than recompute them.
 - `tests/book1e.test.js` plays chapters 9 and 10 down their branches, and the `burned lots` offer is tested with a developer jump. `tests/creation.test.js` now expects ten written chapters: update that count each session. `tests/book1.test.js` gained a `stopAt` option so its wound test can stop as chapter 3 opens, since later chapters add wounds of their own.
 - Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 12 notes (for the next session)
+
+- Book One, chapters 11 and 12 are built (`content/burning-city/ch11.tsb` and `ch12.tsb`, chapter ids `b1c11` and `b1c12`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 12 and carries on by itself when chapter 13 is added to the manifest.
+- Session 12 is built on the `session-11` branch (which sits on sessions 6 to 10; none of them are on `main` yet). Merge `session-7`, `session-8`, `session-9`, `session-10`, `session-11` and then `session-12` to get everything.
+- Chapter 11 spends two day actions, then a dusk and the council, and ends with `rest()`. Chapter 12 opens a fresh night phase of three actions and ends with `rest()`. Chapter 13 should read hunger, injury, standing and secrecy as chapter 12 left them.
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New people (`content/people.json`): Theron, Meritamun. New codex entries: the old quarry, the General line, the Scribe line. Content notes: chapter 11 carries `grief`, `violence` and `war`, chapter 12 carries `blood`, `violence`, `war` and `grief`.
+- Later chapters should read `b1.war_terms`, `b1.cell`, `b1.reckoning`, `b1.farm`, `b1.clerk`, `b1.boy`, `b1.scribe`, `b1.ledger` and `b1.hill_known` rather than recompute them.
+- `tests/book1f.test.js` plays chapters 11 and 12 down their branches, including the fights, with developer jumps for the paths that depend on earlier choices. `tests/creation.test.js` now expects twelve written chapters: update that count each session.
+- Two script gotchas found while building: a `?if ... ?end` block wrapped around one choice of a set splits the set into two prompts (put the condition on the choice line instead: `* Text ?if cond`), and a `:label` placed directly before `?else` lets a jump into that label run the else branch. Avoid both.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
