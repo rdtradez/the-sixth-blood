@@ -1,0 +1,477 @@
+// Book One, Chapter 16 (session 14). The night of the bronze door: the cordon, the captains, the count, the door, and the waking.
+// One night phase of three actions out of four places, then the stand he chose, then the waking. Ends with rest().
+// The General is awake at the end (awaken() is called with who woke him). What the hero does about it is chapter 17's choice.
+@chapter b1c16
+@title The Bronze Door
+@book burning-city
+@version 1
+
+# start
+## The last light
+$ do phase("night", 3)
+$ b1.cordon = "slipped"
+$ _hold = 0
+$ _bloodline = 0
+$ _lore = 0
+$ _door = 0
+$ _cordon_hit = 0
+$ _roster = 0
+$ _pegs = 0
+Rome is very still at dusk the next day. It is a thing that the living do not notice, and that you do: the whole city drawing in its breath. The market stalls are being taken down early. A woman is calling her children off the street in the Subura. A dog is lying in a doorway with its head on its paws and its ears flat, and when you pass it, it does not lift its eyes.
+?if b1.door_side == "theron"
+  You go up the Esquiline with Theron's people. There is no ceremony in it. They go in twos and threes, in plain grey, without arms, and they do not speak, and every one of them has the same slightly strained look, as of men walking toward a noise.
+?elif b1.door_side == "tarrax"
+  You go to the Caelian at the red end of the day, and Galerius meets you in the courtyard and gives you a long red stake of cedar without looking at your face. It is a good deal heavier than it ought to be. You carry it up the hill among forty others, in a column, and the Lictors do not speak, and the whetstones have gone quiet.
+?elif b1.door_side == "alone"
+  You go early. You go while the sun is a hand's breadth above the Janiculum, by the old drains, and you will have an hour in the dark under the Esquiline before anyone is awake to see you go.
+?else
+  You go up the hill alone, between the two of them. There is a grey rank of the General's line on the left of the path, and a red rank of the Lictors on the right, and neither will look at the other, and you walk between with your hands empty. It is not a position that the sane would choose.
+?end
+The sound is louder. It has not stopped since the quarry. It comes up through the hill in a slow rolling pulse, so low that you feel it in your teeth, and the whole of the hill seems to be breathing it back.
+It is going to be a long night, and the sun is not yet gone, and there are four places that you might be.
+-> night
+
+# night
+## The first watch
+:night
+?if actions_left() == 3
+  The last of the light is going. The cliff path is dim, and the lines are forming up on it, and the knock is going on, steadily, behind everything, like a man hammering in another room.
+?elif actions_left() == 2
+  It is full dark. You can hear men breathing, a great many of them, who do not need to. Somewhere below there is the scrape of cedar on stone.
+?else
+  It is very late. The knock has changed. It is no longer a series of strokes. It has become one long ringing note, with a beat in it, like the sound of a very large bell that has been struck once and has never stopped.
+?end
+* Go to the cordon on the cliff path [once] ?if actions_left() > 0
+  ~> cordon
+  $ do act()
+* Go to Theron's captains, on the rim above the door [once] ?if actions_left() > 0
+  ~> captains
+  $ do act()
+* Go to Meritamun's table, in the quarry [once] ?if actions_left() > 0
+  ~> table
+  $ do act()
+* Go to the door itself [once] ?if actions_left() > 0
+  ~> door
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> midnight
+?end
+-> :night
+
+# cordon
+## The cliff path
+$ _cordon_hit += 1
+?if b1.door_side == "tarrax"
+  They let you through. It is as easy as that. Galerius, at the first post, lifts a hand, and the file of men on the path steps aside with a clatter of cedar. You walk between them with a stake over your shoulder and the whole of the line looks at you with the great flat unfriendly curiosity of men who have been told that you are on their side.
+  $ b1.cordon = "passed"
+  $ standing += 1
+  $ _hold += 1
+  A boy of perhaps a hundred and fifty, with a streaming cold, at the third post, says, "Are you the one?" He sniffs. "Sir." You say that you are. He says, with deep feeling, "I have never been so glad of anything in my life." It is the most frightening thing that anyone has said to you all night.
+  <~
+?end
+The cordon is forty men in four files on a path that was cut for goats. The cedar is laid across it in a long red barrier, and behind it, in the dark, the Lictors stand with their backs to the cliff and their faces to the road, like men who have been told what to guard against and not what is being guarded.
+* Go through them. Take the path by force
+  -> cordon_fight
+* Take the shadow, and go round, along the quarry wall
+  $ do power("major")
+  $ b1.cordon = "slipped"
+  $ _hold += 1
+  You do not know that you can until you do it. It is a very small thing, and a very old one. You think of a dark so complete that it is a kind of place, and you go into it, and the lamps of the Lictors go by you like a string of small suns on the far side of a window. Your skin is cold, and you do not want to think what it costs. Nobody sees you. You come out on the far side of the path with your heart not beating, and a thread of new thirst along your throat.
+* Show the boy at the third post that you know his name ?if b1.galerius_aid
+  $ b1.cordon = "passed"
+  $ _roster += 1
+  $ _hold += 1
+  "Placidus," you say, quietly, at the narrow place, and the boy with the cold turns his head, appalled. "I am told that you have a cold." He stares at you. After a very long moment he steps back off the path and bends to blow his nose in great detail, and you go past him as if you were a man on an errand, and none of the rest of them stirs.
+* Go back
+  You go back down the path. It is not a thing that is needed, tonight.
+<~
+
+# cordon_fight
+## The red line
+$ do fight("lictor", 2)
+:cordon_exchange
+* Break the stakes, and go over the line
+  $ do strike("brutal")
+* Go low and fast, and take the ankles
+  $ do strike("cunning")
+* Let the blood loose, and be through
+  $ do strike("power")
+* Tell them that the one at the door is not what the Senate has said
+  $ do strike("talk")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    The line gives, a pace. A file of ten breaks and re forms behind. There is the clash and splinter of cedar on cedar.
+  ?else
+    A stake comes round and takes you across the ribs, iron point first, and a rolling pain goes through you, hot and dry, like a splinter of the sun.
+  ?end
+  -> :cordon_exchange
+?end
+?if fight_result() == "talked"
+  $ b1.cordon = "passed"
+  $ standing -= 1
+  $ _hold += 1
+  The nearest of the Lictors lowers his stake. He is not sure why. He says, "Commander says there is nothing behind it." He says, "Then why is the Commander so very careful?" It is not a question that he was meant to say aloud. He steps back, and the man beside him steps back, and you walk through a gap in the red line with forty pairs of eyes on your back.
+?elif fight_result() == "won"
+  $ b1.cordon = "fought"
+  $ standing -= 2
+  $ secrecy -= 1
+  $ _hold += 1
+  You go through them. It is not a pretty thing. It is a matter of speed and of the fact that you are older than any of them, and they are doing what they are told, and you are not. There are no dead. There are a good many sore men on the path, and a boy at the third post with his cedar in two pieces, who says in a bewildered voice, "Sir?" and sits down.
+?elif fight_result() == "fled"
+  $ _hold -= 1
+  You go back down the path before they can close, and stand in the dark with a pain in your side, and the sound of the knock coming down through the rock to your boots.
+?else
+  $ injury += 4
+  $ _hold -= 1
+  They put you off the path. You fall a long way into a thicket of thorn and old stones, and lie for some time looking at a sky full of stars. When you climb back there is blood in your hair and a sullen, throbbing dullness in your ribs, and the cordon is a long red line in the dark above you that has not moved at all.
+?end
+<~
+
+# captains
+## The rim above the door
+$ _bloodline += 1
+The rim of the quarry is a long ragged lip of rock thirty feet above the cliff face, and the General's captains are lying flat along it, in the dark, with their hands over the edge. They have iron bars, and wedges, and a coil of rope as thick as a man's wrist. They do not look like a mutiny. They look like men at the bottom of a hill, getting ready to climb.
+?if b1.door_side == "tarrax"
+  You come on them from behind, and the stocky captain with the scar through his lip is up before you have taken three steps, with a bar in his hand, and an expression that is, quite simply, grief.
+  "You carry their cedar," he says. "It is a thing that I might have expected."
+  $ do fight("fledgling", 1)
+  :captain_exchange
+  * Talk. Tell him that nobody will be better for the door being open
+    $ do strike("talk")
+  * Take the bar from him
+    $ do strike("brutal")
+  * Go for the lines of the rope, and cut them
+    $ do strike("cunning")
+  ?if not fight_over()
+    -> :captain_exchange
+  ?end
+  ?if fight_result() == "talked"
+    $ _hold += 2
+    $ humanity += 1
+    He stands for some time with the bar hanging from his hand. "It is not that we think that it is good," he says. "It is that we cannot not." He does not put the bar down. He does not lift it. The others on the rim have gone quite still, and you understand, in the long uneasy hush, that you have bought some time, and nothing at all besides.
+  ?elif fight_result() == "won"
+    $ _hold += 2
+    $ bond.theron -= 1
+    $ standing += 1
+    You take the bar out of his hand and put him down on the rock, and two of his men come at you, and you put them down as well, and the rest of them watch you with an expression that you will not soon forget. They do not make a sound. It is a thing that you have done to people who were not enemies, and there are a good many things that you will say to yourself about it afterward.
+  ?else
+    $ injury += 3
+    $ _bloodline += 1
+    You are put down on the rock with a bar across your throat. It is not a killing. He holds it there for a very long moment and then lifts it, and says, in a voice thick with something that is nearly shame, "I will not."
+  ?end
+?elif b1.door_side == "theron"
+  They make room for you, silently. The stocky captain with the scar through his lip puts a rope in your hands without a word. "We are at the second hour," he says. "It is a matter of the wedges. It is not a thing that needs more than a few of us." He looks at your face. "It is not a thing that I would ask."
+  * Take the rope, and lay it round the lintel
+    $ _bloodline += 2
+    $ bond.theron += 1
+    $ humanity -= 1
+    It is the work of a quarter of an hour. You pass the rope round the lintel stone, in a long loop, and make it fast to a bolt that was driven into the cliff before the Republic, and the captains do the rest, in silence, in a great and absorbed concentration. It is the quietest piece of rebellion that you have ever been part of.
+  * Hold your hand. Say that it is not time
+    $ _hold += 1
+    $ bond.theron -= 1
+    The captain looks at you with an old dry patience. "It is not a question of time," he says. But he lays the bar down.
+?else
+  They look up at you as you come, and the stocky one with the scar says, in a perfectly level voice, "Valerius." He says it as a statement of fact. "It is a very bad place to stand."
+  * Tell them that the Lictors are coming, and that they will be put down at the rim
+    $ b1.theron_door = "warned"
+    $ _hold += 1
+    $ bond.theron += 1
+    "We know," says the captain. It seems to settle something. He signals, with two fingers, and the whole of the long line along the rim withdraws six feet, like a wave.
+  * Say nothing. Lie down on the rock beside them
+    $ _bloodline += 1
+    $ bond.theron += 1
+    You lie down on the rock. It is a thing that you have not done since you were a boy. It is, you find, extremely restful, and the sound of the door comes up through your ribs, and you listen to it with the thirty of them, and nobody says a word.
+?end
+<~
+
+# table
+## The Scribe's table
+$ _lore += 1
+Meritamun has set up her table in the open, in the middle of the quarry floor, a dozen paces from the door, with a lamp of green glass that gives no light that you can see by, and her water clock, and her ruled sheets. She is sitting on a stool. She is writing. She looks, in that great floor of pale stone, like a very small bird in a very large temple.
+She does not look up. "Thirty one in the minute," she says. "It has been thirty one for an hour. I would say that it has found its pace." She dips her reed. "It is not that it has stopped quickening. It is that it has arrived."
+:table_ask
+* Ask her what happens when it opens [once]
+  "I have no idea," says Meritamun, with an air of great satisfaction. "That is why I am here." She makes a note. "I will tell you what I think, which is not the same thing. I think that it is a man who has been lying very still for a very long time with a great weight on him, and who has been called by name by thirty people for three weeks. I think that he will be very hungry, and very weak, and very angry. I think that the first person that he looks at will be the one that he is loyal to." She smiles, thinly. "It is an interesting position for a hero."
+  $ _lore += 1
+  -> :table_ask
+* Ask her for a little of the cedar, in case it is ever wanted again [once] ?if b1.door_read
+  She looks up, then. She looks at you, for a long moment, with an expression that is almost respect. "It is a thought that I had had," she says. "I did not think that anyone else would." She opens a flat box. In the box there are nine small pegs of dark red wood, each no longer than a finger, and she puts them in your hand one by one. "They came out of the lintel when I took the rubbing. They have not been cut since the first night. I do not say that they will do anything. I say that I should not like to be the person who needed them and did not have them."
+  $ b1.cedar = true
+  $ _pegs += 1
+  $ _lore += 1
+  $ bond.meritamun += 2
+  -> :table_ask
+* Ask her to put her stylus down, and stand with you at the door [once]
+  Meritamun laughs. It is a light dry sound, like a reed breaking. "I am a clerk," she says. "A clerk does not stand. A clerk sits. It is the only reason that clerks survive." She says, with a sudden unexpected softness, "If it opens, I will be the one that you will see writing it down. I should like you to know that I will have been on your side."
+  $ bond.meritamun += 1
+  -> :table_ask
+* That is enough. Take your leave
+  She lifts one hand without looking up.
+  ~> table_out
+  <~
+-> :table_ask
+
+# table_out
+You leave her at her table with her lamp and her stylus. She does not look up again. She is already writing.
+<~
+
+# door
+## The bronze
+$ _door += 1
+It is very close to the door. You had not thought that it would feel like a thing that was alive. The green bronze is as tall as three men and as wide as two, in two leaves, with a bar of cedar in each of six brackets across it, and in the whole of the surface there is nothing that you could call a design. It is a plain dark wall. At this distance, it hums.
+You put your hand on it. It is warm.
+?if b1.felt_below
+  You know the sound. It is not slow now. It is the same beat that you felt two weeks ago with your hand flat on the cold bronze, and it has not changed, except that it is no longer a single heart a very long way down. It is a good deal closer. It is, you think, about the distance that a man would be on the other side of a door.
+  $ _lore += 1
+?else
+  You do not know what you are feeling. It is a sort of slow pressure, like a hand on the other side of a thin wall, flat against the bronze, matching your own.
+?end
+:door_ask
+* Speak to it. Say your name [once]
+  $ _door += 1
+  $ humanity += 1
+  You say it. You say it in a low voice, with your forehead against the metal. There is no answer. There is a change in the rhythm of the beat, that is all, like a person turning a head. It is not a thing that you will be able to describe to anyone.
+  -> :door_ask
+* Strike the bronze, once, with the flat of your hand [once]
+  $ _door += 1
+  $ cunning_brutal += 2
+  The sound goes round the quarry like a pebble round a bowl. Every vampire on the rim turns a head. And, slowly, from inside, there is an answer: a single stroke, exactly where your hand was.
+  -> :door_ask
+* Press your ear to it, and listen for what is said [once]
+  $ _door += 2
+  $ _lore += 1
+  You listen. There is a beat, and under the beat, so quiet that you are not sure that you have heard it, there is something that might be a voice. It is not a voice that has ever been used for speech. It is saying a word, over and over. You cannot catch it. You think that it might be a name, and you think that it might be yours.
+  $ humanity -= 1
+  -> :door_ask
+* Take your hand away
+  You take your hand away. It is a very long time before the warmth leaves it.
+  ~> door_out
+  <~
+-> :door_ask
+
+# door_out
+You step back from the door. Nobody on the rim says anything. They are all looking at you.
+<~
+
+# midnight
+## The second hour
+The knock stops.
+It is the worst thing that has happened all night. It stops quite suddenly, between one stroke and the next, and the silence is so enormous that you can hear a stone settle on the rim, and the creak of cedar in a Lictor's hand, and the small high breathing of a boy at the third post with a cold. Nobody speaks. The whole of the hollow is as still as a held breath.
+Then, from below, from the other side of the bronze, in a voice that you will hear in your sleep for a great many years, there comes a single word. It is a very quiet word. It is a name. It is not yours.
+It is the name of Theron.
+You see him on the rim. He has stood up. His face has gone completely blank, and his hand is on the stump of his ear, and he is saying, very low, "Yes," like a man who has been spoken to by his mother.
+The Lictors on the path have lifted their stakes. The captains have got to their knees. And you have, perhaps, a minute.
+?if b1.door_side == "theron"
+  -> side_theron
+?elif b1.door_side == "tarrax"
+  -> side_tarrax
+?elif b1.door_side == "alone"
+  -> side_alone
+?else
+  -> side_seal
+?end
+
+# side_theron
+## The line answers
+The captains go down the face of the cliff on their ropes in a long grey wave, without a sound. At the same moment the whole of the red line breaks over the lip of the quarry like a tide of cedar. You hear a Lictor shout. You hear the clash of stake on iron, and the thick short grunt of a man struck in the body, and over it all, very calmly, Galerius's voice, saying, "Hold the path, hold the path."
+You are between them. It is a thing that you have chosen. You take the lip of the path, where it comes down into the quarry, and the first file of the Lictors comes at you with the cedar levelled.
+$ do fight("lictor", 2)
+:theron_exchange
+* Hold the lip, and break the stakes as they come
+  $ do strike("brutal")
+* Go through the line, and take them from the side
+  $ do strike("cunning")
+* Let the blood loose, and be a wall
+  $ do strike("power")
+* Shout that the Commander has lied to them
+  $ do strike("talk")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    The file shatters against you. Cedar flies. A man goes back into the next man with a cry.
+  ?else
+    A stake takes you in the shoulder, and the iron comes out through the back, and for a moment you hang on it, quite still, like a moth on a pin.
+  ?end
+  -> :theron_exchange
+?end
+?if fight_result() == "talked"
+  $ _hold += 1
+  There is a hesitation. It runs through the file like a shiver. The nearest man looks at his stake, and at the cliff, and at Galerius, who is at the back with his face turned away, and he does not come on.
+?elif fight_result() == "won"
+  $ _hold += 1
+  $ standing -= 1
+  You hold the lip. It is the longest quarter of an hour that you have ever spent. By the end of it the Lictors have drawn back along the path in the dark with their wounded, and the only sound in the quarry is the scrape of iron on bronze.
+?else
+  $ injury += 5
+  They go past you. They go over you, rather, and you lie on the rock with a wound in your shoulder and watch them go down into the hollow in a long red stream.
+?end
+Below you, the captains have the lintel rope tight. There are a dozen men on it, hauling, with their feet braced against the cliff, and Theron is in front of the door with his arms at his sides, and he has not moved. He is looking at the bronze like a man looking at a very old friend across a very wide room.
+He puts his hand on the first of the six cedar bars.
+"I do not do this willingly," he says, to nobody. "I do it because the alternative is that I should know that I did not."
+The bar comes away in his hand like a rotten branch. It is, you see, only a piece of wood.
+$ do awaken("general", "bloodline")
+-> waking
+
+# side_tarrax
+## The cedar
+The Lictors close ranks on the quarry floor in four files with a tread like a landslide, and Tarrax is at their head. He has not drawn his sword. He is walking, very evenly, toward the door, with the whole of the stakes of the Senate at his back, and the General's captains are at the foot of the cliff in a grey line, between him and it, with their empty hands at their sides.
+It is Theron who steps out. He is quite alone. He stands in the middle of the floor, at the edge of the dead space in front of the door, and says, clearly, "Commander. I will not move."
+"I know," says Tarrax.
+You see the stake go back in his hand. It is a very old movement, quick and hard, and Theron, who is a great deal older and a great deal better, does not even try to turn it. It takes him in the body. He goes down on one knee in the dust, with the cedar through him, and looks up at the Commander of the Lictors with an expression of faint reproach.
+It is the moment that you have chosen to be in. You are at the edge of the floor, with a stake of your own, and a file of the Lictors on either side of you.
+$ do fight("fledgling", 2)
+:tarrax_exchange
+* Strike the captain who comes for the Commander's back
+  $ do strike("brutal")
+* Slip in, and pull Theron clear
+  $ do strike("cunning")
+* Tell the Commander that he is killing the only man who could have stopped this
+  $ do strike("talk")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    You hold the line. It is a very bad moment. The captain staggers back.
+  ?else
+    A grey shape comes out of the dark, with a bar, and you go down under it.
+  ?end
+  -> :tarrax_exchange
+?end
+?if fight_result() == "talked"
+  $ _hold += 1
+  $ bond.theron += 1
+  Tarrax looks at you. It is a long look, and not unkind, and there is nothing in it that you can use. "The only man who could have stopped it," he says, "has just stopped trying." But he does not strike again. He steps back, and the stake comes out of Theron with a long wet sound, and the old soldier falls forward on his hands, and is alive.
+?elif fight_result() == "won"
+  $ _hold += 1
+  $ bond.theron -= 1
+  The captain goes down. It is the stocky one, with the scar, and he lies in the dust and looks up at you with eyes in which there is not even hatred, only a great sad bewilderment. "You too," he says.
+?else
+  $ injury += 4
+  You are put out of it. You lie against the rock, with the whole of the quarry spinning, and watch the grey line break.
+?end
+Tarrax has gone on, past all of it, as if it were weather. He is at the door. He puts out his left hand and lays it on the first bar, and in his right there is a long straight sword of black iron. He says, quite gently, to the bronze, "You will not know me."
+He lifts the bar himself.
+It is a very strange thing. It comes away like cloth. The door does not open. It *sighs*. It goes out from its frame, an inch, two, three, on a long breath of cold air that smells of earth and bronze and very old blood, and Tarrax, with the sword raised, steps toward the gap.
+$ do awaken("general", "faction")
+-> waking
+
+# side_alone
+## The bar
+You go down alone. It is the oldest instinct there is, and the stupidest, and you do it with your eyes open. The Lictors and the captains are still on the rim, facing one another across the dark of the quarry, and nobody sees you go. You cross the dead space in front of the door. You put your hands on the first of the six cedar bars.
+There is a sudden roar from above. Somebody has seen you. You hear the captains going down their ropes, and the tread of the stakes on the path, and a voice, very clear and cold, that you have heard once before, saying, "Stop him."
+It is Tarrax. He is coming down the path at a pace that you would not have thought he had, with the whole of the red line at his back.
+$ do fight("fledgling", 2)
+:alone_bar
+* Lift the bar. Do it now
+  $ do strike("power")
+* Hold the door, and face them
+  $ do strike("brutal")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    The bar shifts in its bracket. It is an inch. It is enough.
+  ?else
+    A stake goes into the cliff beside your head, in a shower of sparks, and the splinters sting your face.
+  ?end
+  -> :alone_bar
+?end
+?if fight_result() == "won"
+  $ _hold += 1
+  The first bar comes away in your hands, and the second, and a long groan goes up from the door as the bronze, for the first time in a very great number of years, takes its own weight.
+?else
+  $ injury += 4
+  You get one bar free before they reach you. It is the first. There are five more, and a hand like iron on your collar, and an enormous sound behind you in the dark, as of a very large animal waking up.
+?end
+Tarrax is at your shoulder. His sword is out. He does not strike you. He is looking at the door, and for the first time that you have seen, there is something in his face that is not control.
+You stand side by side with the Commander of the Lictors, and the door opens.
+$ do awaken("general", "hero")
+-> waking
+
+# side_seal
+## Between
+You stand in the middle of the floor, with the door at your back. The captains come down their ropes on the left, and the Lictors in their red files from the path on the right, and you are between them, with your hands out, in front of a thing that none of you understand.
+It is not a position that has a name. It is the position of a man who stands between two armies and says that nobody is to pass. It has the great merit of being obvious and the great defect of being impossible.
+$ do fight("lictor", 1)
+:seal_exchange
+* Hold the Lictors off the door
+  $ do strike("brutal")
+* Move between them, and shove the lines apart
+  $ do strike("cunning")
+* Raise your voice. Tell them that the door is not theirs to open or to keep
+  $ do strike("talk")
+?if not fight_over()
+  -> :seal_exchange
+?end
+?if fight_result() == "talked"
+  $ _hold += 2
+  $ humanity += 2
+  There is a pause. It is only a little one. In it you hear a captain say, in a small wondering voice, "It is not, is it?" and a Lictor say, "I do not know." For about the time that it takes to say so, neither line moves.
+?elif fight_result() == "won"
+  $ _hold += 1
+  The Lictors fall back. It buys you a little room.
+?else
+  $ injury += 4
+  You are knocked down, and the Lictors go past you, and the captains go past you, and for a long minute you lie on the floor of the quarry with the feet of both armies on either side of your head.
+?end
+?if b1.cedar
+  You have nine pegs of cedar in your sleeve. You take them out, one at a time, and drive them into the brackets of the bronze with the heel of your hand. It is a ridiculous thing to do. It is, you know, the only thing that you can do. They go in as easily as nails into butter, and where they go a thin line of pale frost runs out across the metal, like ice across a pond.
+  $ unflag b1.cedar
+  For a moment the knocking stops.
+  It does not stop for long. The line of frost cracks, from top to bottom, with a noise like a great bell split in half, and the bronze goes out of its frame in a gust of cold air and a long low groan, and there is nothing in the world that you or anyone could do about it.
+?else
+  You put your shoulder against the bronze, like a man against a barn door in a gale. It is warm. It is moving. It is, you feel, not being opened. It is *opening*, of its own accord, in great slow shudders, and the bars drop out of their brackets one by one, like teeth.
+?end
+$ do awaken("general", "bloodline")
+-> waking
+
+# waking
+## What came after Rome
+The door goes back on its hinges, and the dark behind it is not a cave.
+It is a stair. It is a low broad stair of black stone going down, much further than the light reaches, and at the bottom of it there is a smell. It is a smell that nobody in the quarry has any word for. It is dust, and iron, and old oil, and under both of them something warm and living and a great deal too large.
+Nobody moves. The whole of the quarry stands still, the captains on their ropes, the Lictors on the path, Meritamun at her table with her stylus raised. The only sound in the whole of Rome is a slow, slow tread on the stair.
+He comes up out of the dark one step at a time.
+He is a very big man. That is the first thing. He is a head taller than the tallest of the Lictors and wide in the shoulder, with the bones showing through him like the ribs of a ship, and his skin has the colour of old parchment, and there is a collar of black iron at his throat with a broken length of chain trailing from it that rings on the stone. He has no hair. He has no clothes but a rag of some pale stuff round his loins. And he is the most completely alive thing that you have ever seen. It is not a matter of vigour. He is hardly able to stand. It is a matter of attention, as if the whole of a vast, patient, ancient mind had been turned on the world, the way that a lantern is turned.
+He stops at the top. He looks at the sky. It is a thing that he does for a long time.
+"Ah," he says. His voice is a rasp, a sound like a rope on a stone. "It is still the same one."
+?if original("general", "by") == "bloodline"
+  The captains are on their knees. All of them, in a long grey line. They have put their foreheads in the dust, and Theron, with the wound in him closing slowly, is on his knees at the very front, and he is weeping, silently, like a man who has been let out of a very long prison. The General does not look at them. He puts out a hand, very slowly, and lays it for a moment on Theron's bare grey head. It is a blessing. It is also a claim.
+  $ bond.theron += 1
+?elif original("general", "by") == "faction"
+  There is the ring of a blade. Tarrax has come up the last of the steps with his black iron sword in both hands, and has put it, with a very great and absolute precision, to the General's throat. It does not break the skin. It could.
+  "Be still," says Tarrax. His voice is perfectly level. His hands are shaking.
+  The General looks at him. It is a look of the most extraordinary gentleness. He lifts one huge, white, wasted hand, and closes it on the blade. There is a thin hiss, like water on a hot pan, and he does not seem to notice that it is burning him. He turns the sword aside as a man might turn aside a branch.
+  "Hold, little one," he says, in a voice like a father's. Tarrax's hands open. The sword falls on the stone with a clang. And the Commander of the Lictors, who has not knelt to a living thing in two thousand years, goes down on both knees in the dust of the quarry and puts his face in his hands.
+  $ bond.tarrax -= 1
+?else
+  He sees you. It is not that he looks. It is that his attention comes down on you like a hand.
+  He is a long time looking. It is a look that you will not forget as long as you live, and it has in it a very great weariness and a sort of terrible humour, as of a man who has been waiting a long while for a particular guest and finds that he has sent a child. "You," he says. "You opened it." And then, with sudden, whimsical, ugly cheerfulness, "I did not think that it would be one of the *late* ones."
+?end
+He sways. He takes a step, and the whole of him tilts, and for a moment it seems that he will fall. Nobody goes to him. Nobody dares. It is Meritamun who, very quietly, rises from her table, with her lamp, and goes across the dead space with her small steady steps, and offers him her arm, as a servant might to a very old master.
+He takes it. It is a very small hand, and a huge one, and he leans on it with enormous care.
+"What is the year?" he says.
+Meritamun tells him. She tells him in the old count and the new, in a dry, precise little voice, and when she has finished the General is quiet for so long that you think that something has gone wrong. Then he begins, quite slowly, to laugh. It is a creaking, breaking, helpless sound, like a door that has been closed for a thousand years. It goes on for some time.
+"They built it on me," he says at last, wiping his eyes. "They built the whole thing on me. I thought that it would be a *village*."
+He looks round the quarry. He looks at the Lictors with their stakes, and the captains in the dust, and Prisca, who has come to the edge of the rim with her hands pressed to her mouth, and Tarrax on his knees, and Galerius, at the back, with his face the colour of ash. He looks at you again. And in the great ruined face, with the whole of the night in it, he smiles.
+"Is there," he says, almost politely, "anything to drink?"
+-> dawn
+
+# dawn
+## The grey hour
+The sun comes up, as it does. The quarry is empty. It has been empty for some time, and it is not a thing that you can remember happening: the covens going, one by one, in the dark, like water into sand, and the Lictors gone with their wounded, and a cart brought, by someone, with a curtain across it, that went off down the Via Labicana at a walking pace toward the Merchant house. It is Prisca's. It is a decision that she has made quicker than anyone, and she has made it, you think, with her eyes shut.
+The green bronze door stands open on its stair. There is nothing in the black of it now but dust.
+?if b1.door_read
+  Meritamun comes up the cliff path in the first grey, with her stylus behind her ear and a very odd expression. She stops beside you. She says, "He asked me not to write it down." She is quite pale. "He said, in the old tongue, that I would have a great deal of time to write it down later." She is looking at the door. "I find that I believe him."
+?else
+  Meritamun comes up the cliff path in the first grey, with her stylus behind her ear and a very odd expression. She stops beside you. She says, "He asked me not to write it down." She is quite pale. "I have not been asked that since before the Library."
+?end
+?if original("general", "by") == "hero"
+  She says, after a pause, "It will be said that you did it. It will be said very loudly, and by very powerful people, and some of them will say it with love." She looks at you. "It is a thing that I would think about carefully, before the sun is quite up."
+  $ standing -= 1
+  $ secrecy -= 2
+?elif original("general", "by") == "faction"
+  She says, after a pause, "It will be said that the Commander did it. It will not be said by the Commander." She turns a dry page. "It is a very interesting situation for a man who has just been forgiven."
+?else
+  She says, after a pause, "It will be said that it was the line. It will be quite true. It will not be the whole of the truth." She looks at the cedar in the dust. "It never is."
+?end
+You stand in the doorway of the quarry for a long time. The sun is clean and cold. Below you, on the white road, a line of workmen is going down to the new streets with their tools on their shoulders, and a boy is whistling.
+You think that you have never been so tired in your life. You think, also, with a dreadful clarity, that you have not made up your mind about a single thing that is going to matter.
+You will have to decide what to do with him. It is not a thing that you will be able to put off.
+$ do rest()
+=> next

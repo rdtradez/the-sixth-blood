@@ -147,6 +147,12 @@
       "name": "Meritamun",
       "title": "Head of a Scribe line coven",
       "bio": "An Egyptian coven head who treats Romans as clever children playing with a civilization older than their city. Learned, proud, and dangerous in debate."
+    },
+    "tarrax": {
+      "gender": "m",
+      "name": "Tarrax",
+      "title": "Commander of the Lictors",
+      "bio": "Firstborn of the General line and the Senate's iron fist. Tall, grey and perfectly kept. He is said to fear one thing, and it is not a living thing."
     }
   }
 }
