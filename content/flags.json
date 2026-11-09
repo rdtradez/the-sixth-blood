@@ -71,6 +71,143 @@
       "default": "yes",
       "note": "Prologue choice"
     },
+    "b1.tablet": {
+      "kind": "enum",
+      "values": [
+        "keep",
+        "scrape"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "keep",
+      "note": "Chapter 1: what he did with the tablet in the villa"
+    },
+    "b1.first_blood": {
+      "kind": "enum",
+      "values": [
+        "animal",
+        "forced",
+        "drained",
+        "killed"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "animal",
+      "note": "Chapter 1: how he first fed"
+    },
+    "b1.collector": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "spared",
+        "drained",
+        "fled",
+        "killed"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "unmet",
+      "note": "Chapter 1: the tax collector's man at the crossroads"
+    },
+    "b1.goat": {
+      "kind": "enum",
+      "values": [
+        "freed",
+        "tied"
+      ],
+      "book": "burning-city",
+      "default": "tied",
+      "note": "Chapter 1: the boy's goat"
+    },
+    "b1.warning": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "followed",
+        "warned"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 1: what he did about the strangers in the wood"
+    },
+    "b1.reveal": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "aelia",
+        "spouse"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 2: who in the family saw him before the fire"
+    },
+    "b1.spouse_told": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "truth",
+        "lie",
+        "silence"
+      ],
+      "book": "burning-city",
+      "default": "none",
+      "note": "Chapter 2: what he told his spouse, if he showed himself"
+    },
+    "b1.spouse_fire": {
+      "kind": "enum",
+      "values": [
+        "went_in",
+        "held_back"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "went_in",
+      "note": "Chapter 2: whether he went into the burning house"
+    },
+    "b1.saw_marks": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 2: he saw the marks at his spouse's throat (a later clue; never explained in Book One)"
+    },
+    "b1.fire_seen": {
+      "kind": "enum",
+      "values": [
+        "seen",
+        "glimpsed",
+        "unseen"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "glimpsed",
+      "note": "Chapter 2: how much of the village saw him in the fire"
+    },
+    "b1.prisoner": {
+      "kind": "enum",
+      "values": [
+        "village",
+        "killed",
+        "fed"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "village",
+      "note": "Chapter 2: what he did with the captured torchman"
+    },
+    "b1.farewell": {
+      "kind": "enum",
+      "values": [
+        "promise",
+        "truth",
+        "silent"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "promise",
+      "note": "Chapter 2: what he said to Aelia"
+    },
     "quick_start": {
       "kind": "flag",
       "note": "Set when a book was begun with a quick start (default history)"

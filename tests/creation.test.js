@@ -192,11 +192,12 @@ async function playPrologue(hero, picks = []) {
   let { frame } = await game.startBook('burning-city', { from: 'new', hero, seed: 3 });
   const pages = [];
   let n = 0;
-  for (let i = 0; i < 80 && frame.wait !== 'book_end'; i++) {
+  // The prologue hands over to chapter 1, so stop at the first page that belongs to another chapter.
+  for (let i = 0; i < 80 && frame.wait !== 'book_end' && game.state.chapter === 'b1p'; i++) {
     pages.push(...texts(frame));
     frame = frame.wait === 'choices' ? await game.choose(picks[n++] ?? 0) : await game.continue();
   }
-  pages.push(...texts(frame));
+  if (game.state.chapter === 'b1p') pages.push(...texts(frame));
   return { game, frame, pages, text: pages.join('\n') };
 }
 
@@ -275,15 +276,15 @@ test('finishing the written part of an unfinished book pauses it instead of endi
   const game = await realGame({ storage });
   let { frame } = await game.startBook('burning-city', { from: 'new', hero: { origin: 'roman', role: 'legionary', path: 'born_in_rome' }, seed: 3 });
   assert.equal(game.chapterMeta.b1p.number, null, 'a prologue is not numbered');
-  for (let i = 0; i < 80 && frame.wait !== 'book_end'; i++) frame = frame.wait === 'choices' ? await game.choose(0) : await game.continue();
+  for (let i = 0; i < 400 && frame.wait !== 'book_end'; i++) frame = frame.wait === 'choices' ? await game.choose(0) : await game.continue();
   assert.equal(frame.wait, 'book_end');
   assert.equal(frame.pending, true);
   assert.equal(frame.nextBook, null);
   const book = game.library().find((b) => b.id === 'burning-city');
   assert.equal(book.completed, false, 'the book is not finished');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 0, 'the prologue is not counted as a chapter');
-  assert.equal(book.reachedNumber, 0);
+  assert.equal(book.chapterCount, 2, 'the prologue is not counted as a chapter (chapters 1 and 2 are written)');
+  assert.equal(book.reachedNumber, 2);
   assert.equal(game.library().find((b) => b.id === 'blood-and-gold').unlocked, false, 'the next book stays locked');
   assert.deepEqual(game.saves.listCarries(['burning-city']), [], 'no carry save is made');
   assert.deepEqual(game.state.booksDone, []);

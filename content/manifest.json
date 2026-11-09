@@ -26,6 +26,24 @@
             "violence",
             "grief"
           ]
+        },
+        {
+          "id": "b1c01",
+          "file": "burning-city/ch01.tsb",
+          "title": "Dust and Heartbeats",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b1c02",
+          "file": "burning-city/ch02.tsb",
+          "title": "What the Village Keeps",
+          "notes": [
+            "violence",
+            "grief",
+            "blood"
+          ]
         }
       ],
       "incomplete": true

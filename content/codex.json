@@ -15,6 +15,30 @@
       "quick": true,
       "text": "A village on a hill in the middle of Italy, three days' ride from Rome on a good road. The name means holy hill, though no one in the village can say what made it holy.\n\nIt grows wheat, barley, figs and a thin red wine. Its people are farmers and shepherds who keep to themselves, pay what the tax collectors ask and say little to strangers. At the top of the hill stands an old villa with its shutters closed, which the village avoids and does not discuss."
     },
+    "the_villa": {
+      "category": "places",
+      "title": "The villa above Collesanto",
+      "book": "burning-city",
+      "text": "A great house at the top of the hill, shuttered for as long as anyone alive can remember. The shepherds drive their flocks around its wall in a wide curve and will not say why.\n\nInside, it is dry and clean and strangely empty of small living things. A windowless room in the cellar has a bar on the inside of its door and a bed made up for one who sleeps through the day. There is no name anywhere in the house."
+    },
+    "the_hunger": {
+      "category": "lore",
+      "title": "The hunger",
+      "book": "burning-city",
+      "text": "It is not like appetite. It is a second pulse, patient and enormous, that rises as the night goes on and every time you use what you have become.\n\nAnimal blood quiets it, but only for a while. Human blood quiets it far better, and costs something that is harder to name. A starving creature does not choose, and the hunger, if it is left long enough, will choose for you."
+    },
+    "the_sun": {
+      "category": "lore",
+      "title": "The sun",
+      "book": "burning-city",
+      "text": "Every story says that the sun kills the dead. You have stood in it, and it has not killed you.\n\nIt does hurt. The light lies on you like a fever, and at midday you are weaker and the hunger runs hotter. But you are not ash, and you have no explanation for it. You have learned only that you should not tell anyone."
+    },
+    "strix": {
+      "category": "lore",
+      "title": "Strix",
+      "book": "burning-city",
+      "text": "In Roman folklore the strix is a night bird that feeds on the blood of sleepers, and the word is used for anything that drinks the living in the dark.\n\nThe men who came to Collesanto with torches used it of you, and they cried it like a hymn."
+    },
     "et_bloodlines": {
       "category": "bloodlines",
       "title": "Test Lineage",

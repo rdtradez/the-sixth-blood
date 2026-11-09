@@ -44,6 +44,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 2: flags, story voice stats, pronouns and names, origin variants, library screen
 - [x] Session 3: game systems
 - [x] Session 4: player features, developer tools, look and feel, sample chapter
+- [x] Sessions 5 to 7: character creation and the prologue, the Rome map, Book One chapters 1 and 2 (Book One is in progress)
 
 ### Session 1 notes (for the next session)
 
@@ -99,3 +100,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Prologue flags (`prologue.day`, `prologue.stand`, `prologue.answer`) and `hero.death` are registered with quick start defaults. `content/family.json` has no quick start status for the family yet: the Book One sessions set it when they know how each relative's story stands at the end of the book.
 - The prologue plan is in `SPOILERS/`. Session 6 (Rome map) is next.
 - Session 4 lives on the `session-4` branch and session 5 is built on top of it. Merge `session-5` to `main` to get both.
+
+### Session 7 notes (for the next session)
+
+- Book One, chapters 1 and 2 are built (`content/burning-city/ch01.tsb` and `ch02.tsb`, chapter ids `b1c01` and `b1c02`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 2 and carries on by itself when chapter 3 is added to the manifest.
+- Both chapters use the day and night loop from docs/SYSTEMS.md (`phase`, `act`, `end_phase`, `rest`), the fight system and `send_home`. Chapter 1 ends with `rest()` and chapter 2 with `rest()` in its closing scene; chapter 3 should read hunger, injury and wealth as the player left them rather than reset them.
+- New decision flags use the prefix `b1.` and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. Later chapters and the Velati journal read them from `state.decisions`.
+- New people (`content/people.json`): Domitia, Sextus, Quintus, Fuscus. New codex entries: the villa, the hunger, the sun, strix. Chapters 1 and 2 carry the content notes `blood`, `violence` and `grief`.
+- `content/family.json` now has quick start statuses for the spouse and the children, so a quick start into Book Two finds the family as the chapters leave it.
+- Scratch variables (`_fed`, `_vis`, `_early` and so on) only live inside a chapter. Anything a later chapter needs is a registered flag.
+- `tests/book1.test.js` plays both chapters for every mortal role and down the branches that later chapters depend on. `tests/creation.test.js` now stops its prologue helper at the end of the prologue, and its pause test expects two written chapters. Update that count each session.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.

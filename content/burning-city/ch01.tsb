@@ -1,0 +1,344 @@
+// Book One, Chapter 1 (session 7). Picks up from the last paragraph of the prologue.
+// Night in the villa (feed, test, listen), the first sun, a day in the open, dusk.
+@chapter b1c01
+@title Dust and Heartbeats
+@book burning-city
+@version 1
+
+# start
+## The villa
+$ hunger = 78
+You do not decide to stand. You are simply upright, with the mosaic cold under your bare feet and the dust of years rising around your ankles, and the first thing you understand is that you can see.
+There is no lamp in the room and the shutters are barred. Yet every flake of fallen plaster is there for you, every crack in the painted hunt above, every tile in the floor with its small chip of lost color. The dark has not gone anywhere. It has only stopped hiding things.
+?if hero.death == "arena"
+  Your hand goes to the place under your ribs where the blade went in. There is nothing there. Not a scar, not a seam, only skin as smooth as a child's.
+?elif hero.death == "execution"
+  Your hand goes to your throat before you have decided to lift it. It is whole. You press it, and press it again, and it stays whole.
+?else
+  The fever is gone. For a week your skin burned, and now it is as cool as the stone beneath you, and you cannot tell whether that is a mercy or the opposite.
+?end
+You are not breathing. You notice it only because you try to, out of habit, and the air does nothing for you. After a moment you find that you can breathe if you like, the way you can hold a coin in your fist. It is a courtesy, not a need.
+---
+The door at the end of the room is not locked. Beyond it a short passage opens into a smaller room, and in that room the dust has been disturbed. There is a clean rectangle on a table, as if something had been set there an hour ago.
+Three things lie in it. A plain dark traveling cloak, folded, of a size that will fit you. A leather purse, heavy for its size, that clinks when you lift it. And a wax tablet, closed, with a few lines scratched into the wax in a hand that is neat, unhurried and not quite Roman.
+> Eat before the sun. Do not go down the hill hungry. You will be wanted, and you will want, and the second is the more dangerous.
+?if prologue.answer == "yes"
+  > You said yes. Remember that it was your word, and that I did not put it in your mouth.
+?elif prologue.answer == "asked"
+  > You asked what it would cost. It is not yet due. Think about that when you are able to think.
+?else
+  > You said no. I am sorry that I am not one who can take no for an answer.
+?end
+There is no name at the bottom. There does not need to be. You see a dust colored cloak and a face you cannot hold in your mind, and you know who wrote it.
+:the_tablet
+* Keep the tablet
+  $ b1.tablet = "keep"
+  You wrap it in the cloak and tuck it under your arm. You do not know why. A message from the man who pulled you out of your own death is an odd thing to treasure, and you suspect you will be asked why you did.
+* Scrape the wax smooth
+  $ b1.tablet = "scrape"
+  $ defiance += 2
+  You drag your thumbnail along the wax until the words are only a shine. It costs you nothing to do it. It is the first thing you have done since waking that was wholly yours, and you notice that your hand is not quite steady.
+The hunger moves behind your ribs like a living thing turning over in its sleep.
+$ do phase("night")
+-> night
+
+# night
+## The first night
+:night
+?if actions_left() == 3
+  The shutters stand open an inch, and the stars through them are thick. Below the hill the whole village is breathing, slowly and all together, a sound as large as the sea. {cap(voice("hunger"))}.
+?elif actions_left() == 2
+  The night has a long way to go yet. {cap(voice("hunger"))}.
+?else
+  The stars are beginning to pale in the east. {cap(voice("hunger"))}.
+?end
+* Go through the villa [once] ?if actions_left() > 0
+  ~> search_villa
+  $ do act()
+* Find out what your body can do [once] ?if actions_left() > 0
+  ~> test_strength
+  $ do act()
+* Listen to the village [once] ?if actions_left() > 0
+  ~> listen_village
+  $ do act()
+* Hunt in the oak wood ?if actions_left() > 0
+  ~> hunt_wood
+  $ do act()
+* Go down to the crossroads, where the smoke is [once] ?if actions_left() > 0
+  ~> road_camp
+  $ do act()
+* Wait for the dawn
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :night
+?end
+-> dawn
+
+# search_villa
+You go through the villa the way a stranger goes through a house, touching nothing, then touching everything.
+The atrium has a basin where the rain once gathered and where now only dust does. There is a dining room with three couches whose cushions have rotted to ribbons, and on the walls, behind the damp, painted gardens: peach trees and peacocks and a small blue fountain, the work of someone who loved color. Nobody has dined here in your lifetime. Yet there is not a mouse dropping, not a web, not a beetle in the corners. Whatever sleeps in this house, the small living things have decided to leave it alone.
+In the cellar you find the room. It has no window and an oak door as thick as your hand, with a bar on the inside. The walls have been mortared more recently than anything else in the house, and in the middle stands a long low bed with a plain wool cover. You do not know how you know, but you know: this is where you are meant to lie when the sun is up.
+In the last room off the atrium a row of wine jars stands sealed with pitch. You break one open and the smell of it fills the room, rich and dark and old. You drink, because you have always been able to drink, and your body gives it back with a violence that leaves you braced against the wall. Whatever you have become, it is not a thing that drinks wine.
+There is no seal, no signet, no name scratched into any plaster. Whoever lives here has been careful for a very long time.
+$ do discover("the_villa")
+<~
+
+# test_strength
+You stand in the courtyard under a sky of stars you can count one by one, and you decide to find out what you are.
+* Lift the fallen column drum by the well
+  $ cunning_brutal += 3
+  $ do power("minor")
+  It would have taken four men and a lever. You get your hands under its lip and it comes up like a loaf of bread. You hold it at arm's length until you are sure, and then you set it down gently, because the thought of breaking something frightens you more than the thought of lifting it.
+* Walk the terrace wall without a sound
+  $ cunning_brutal -= 3
+  $ do power("minor")
+  The wall is a hand's width across, with a drop to the road below. You walk it. The gravel that should slide holds, the loose stone that should rock stays still, and you turn at the end and walk it back without a whisper from under your feet. You understand that stealth is going to be the easiest thing you have ever learned, and that this ought to worry you more than it does.
+Afterward {voice("hunger")}. Each of these gifts has a price, and the price is paid in the same place.
+<~
+
+# listen_village
+You close your eyes and let the sound come up the hill.
+It is not hard. It is the opposite of hard. Heartbeats, dozens of them, each one a little different, the slow ones of the old and the quick light ones of children. You find the baker's house by the pair that argue even in their sleep. You find the stable. You find, near the top of the lane, the house you built.
+Four nights, says the quiet voice of the village, though you cannot say how you know. Four nights since the cart brought you home. The vigil was kept in your own front room, as it should be. In the grey before the second dawn, the bier was empty.
+Nobody speaks of this aloud. Doors are barred. But a village cannot keep a thing like that in its mouth, and you hear it moving from house to house like a draft: the cloth folded neatly, the lamps still burning, no sign of a hand. And a second thing, murmured lower: that on the night after, a light was seen in the shutters of the old villa, where no light has burned in living memory.
+In your house, {spouse.name} is awake. You know {spouse.their} heartbeat the way you know your own name, and tonight it is very slow and very steady, the heartbeat of someone holding still on purpose. Beside the bed two smaller hearts are tangled together. A third voice, an older woman's, is murmuring in the kitchen. It is Domitia, {spouse.their} mother, who has come to stay.
+$ do meet("spouse")
+$ do meet("domitia")
+Then Aelia's breathing changes, the way it does when she is awake and pretending not to be. In the dark, very quietly, she asks the room where Papa went.
+:the_listening
+* Hear it through
+  $ humanity += 2
+  $ bond.aelia += 3
+  $ bond.spouse += 3
+  No one answers her. After a long time {spouse.name} says only that {spouse.they} do not know, and that it does not mean {spouse.they} love you any less. You stay where you are until the last breath has gone quiet, though it costs you something you did not know you had left to spend.
+* Shut it out
+  $ defiance += 1
+  $ secrecy += 2
+  You press the sound back down the hill with the flat of your will, the way you once learned to shut a door on a room full of people you could not help. Silence returns. You are not proud of how easy it is, or of how much easier it will be the second time.
+<~
+
+# hunt_wood
+?if _fed == 0
+  The oak wood begins at the end of the terrace and goes on to the far ridge. The shepherds will not bring their flocks near it, and so it is full of things that are not afraid of men.
+  You smell the boar before you hear it. A big sow, rooting in the leaf mold, her whole body one long warm pulse. You are on her before she can lift her head, and what you do next you do not choose and will not forget.
+  Her blood is hot and thin, and there is nothing in it of the person you were. It is food. It tastes of acorns and old earth. It quiets the hunger, but only partway, and you come up out of it with your face wet and your hands shaking and a sorrow you cannot place. The animal is a smaller thing than the one that lives in you now. It will not be enough for long.
+?else
+  You go back into the oak wood, and this time you do not wait to be afraid. A young stag, bedded down in the bracken, lifts its head too late. It is quicker, and easier, and the ease is the part that troubles you. The blood is thin and warm and not enough, and it takes the edge off the hunger the way a drink of water takes the edge off a fever.
+?end
+$ do feed("animal")
+?if _fed == 0
+  $ b1.first_blood = "animal"
+?end
+$ _fed += 1
+<~
+
+# road_camp
+## The crossroads
+You smell the woodsmoke long before you see the fire.
+Where the cart road meets the hill track there is a small roadside shrine, a lamp niche and a rain worn stone, and beside it a two wheeled cart and a banked fire. A man sleeps on a pile of blankets with his cloak pulled up to his ears. His heart is slow and loud with wine. It is the thickset man from the square, with the good cloak and the tally: Fuscus, who takes things for a man in Rome who does not need them.
+$ do meet("fuscus")
+?if prologue.stand == "stood"
+  You think of the promise he made to remember your face. He is a man who keeps promises of that sort. He is sleeping on his back, with his throat bare to the stars.
+?elif prologue.stand == "paid"
+  You think of his hand weighing your coin. He is sleeping well tonight. He always does.
+?else
+  You think of the boy, and of the goat, and of how you studied the fountain.
+?end
+?if prologue.stand == "looked_away"
+  A goat is tethered to the cart. It lifts its head and looks at you, and you know it. It is the boy's goat.
+?end
+:the_road
+* Drink from the sleeping man, and leave him breathing
+  $ do feed("human")
+  $ b1.collector = "drained"
+  ?if _fed == 0
+    $ b1.first_blood = "drained"
+  ?end
+  $ _fed += 1
+  It is the first time, and you will remember every second of it. His blood is warm, and rich, and it tastes of wine and of years, and the whole world narrows to a single bright sound. The hunger stops being a hunger. It becomes a warm weight, like a hand on your chest, and you do not want to stop. You do stop. You never know how.
+  ?if chance(0.35)
+    His eyes open while your mouth is still on his throat. For a moment he looks at you with perfect, simple recognition, and then the fear catches up. He is on his feet and running into the dark before you can reach for him, shouting a name that is not yours. You hear him all the way to the ford.
+    $ b1.collector = "fled"
+    $ do witness(1)
+  ?else
+    He sighs and turns over. In the morning he will have a thick head and a strange dream. You lay his cloak straight over him before you go, which is absurd.
+  ?end
+* End it
+  $ do feed("human_kill")
+  $ b1.collector = "killed"
+  ?if _fed == 0
+    $ b1.first_blood = "killed"
+  ?end
+  $ _fed += 1
+  You do not wake him. It takes longer than it should, because you do not know what you are doing, and then it does not take long at all. When you let him go there is no heartbeat in the clearing but the goat's, and your own mouth is full of a taste you will spend a long time not describing.
+  The cart holds a locked strongbox, heavy with the tallies of a dozen villages, Collesanto's among them.
+  * Take it
+    $ do earn(15)
+    $ defiance += 1
+    You break the lock with your hands, and take what is in it. Rome has taken from these hills for years. It is a small thing to take back.
+  * Leave it
+    $ humanity += 1
+    You leave the box where it is. You are not a thief. You are only what comes next.
+  You roll the cart off the track into the ravine, and the body with it. The night closes over it, and you feel almost nothing, which is the part that frightens you.
+* Take nothing from him
+  $ b1.collector = "spared"
+  $ humanity += 2
+  You stand in the firelight for a long time with the sound of his heart in your ears, and you do not take a step. It is not mercy. It is something closer to stubbornness, the old part of you that has never been able to leave an unfair thing alone. Hunger is a patient creditor. It will be there when you come back.
+?if prologue.stand == "looked_away" and b1.collector != "killed"
+  ?if true
+    * Slip the goat's rope and send it up the hill
+      $ b1.goat = "freed"
+      $ humanity += 1
+      It does not need telling twice. It goes up the track on its small hooves like a thing that has been waiting for permission, and you hope the boy is still awake to hear it knocking.
+    * Leave it tied
+      The goat watches you go.
+  ?end
+?end
+<~
+
+# dawn
+?if _fed == 0
+  ~> hunger_takes_you
+?end
+## First light
+The east goes the color of a bruise, then of a peach. You are back in the villa, in a room with a shutter, with an hour left and no idea what the light will do.
+You have heard every story. You have heard that the sun is the one thing in the world that no dead thing can bear, and you have lived your whole life in the knowledge that if you ever found yourself where you are now you would only have to wait. The sun will rise, and the rest will follow.
+:the_light
+* Hide in the cellar room, and bar the door
+  $ _sun = "hid"
+  You lie on the low bed in the windowless room with the bar across the door, and you wait. The darkness is perfect, and it is unbearable. You listen to the hill waking up. Somewhere below, a door opens, and a cock crows, and a woman starts to scold someone about boots.
+  It is almost noon when you hear the voice. It is close, much closer than it should be, and it is small and fierce and out of breath. It is Aelia, daring someone to touch the villa wall. She is on the hill. She is a hundred paces from a house that has no reason to stay shut against her, and the old men say that it is a place where children disappear.
+  You are through the bar and up the stair and out the door before you have decided anything at all.
+* Put your hand into the light
+  $ _sun = "hand"
+  You open the shutter one finger's width. The light lies across the mosaic in a single hard line, as white as a blade. You put out one finger and then, because you must, the whole hand.
+  It hurts. It is the hurt of a fever, of a hot brick against bare skin, and your whole arm shakes with the effort of holding it there. But it does not burn.
+* Walk out into it
+  $ _sun = "walked"
+  $ defiance += 1
+  You throw the shutters wide and step through the door onto the terrace. You have never been so afraid, and you have never been so awake. The sun hits you like a closed fist.
+?if _sun == "hid"
+  The sun is on your face and shoulders before you have thought to cover them, and you stop in the doorway with your hands up, waiting for the end. It does not come. A child's voice is still calling, near the wall, and the light is hot and heavy and very bright.
+?end
+Something is wrong, and it is wonderful, and it is not what you were promised.
+You are weak, and the light is a fever laid over your whole body. Your knees do not want to hold you and your eyes stream and your skin prickles as though it has been rubbed with sand. But you are standing in the open under a full sky, and you are not ash. There is not a wisp of smoke. Someone who has been told all their life that the sun kills the dead stands in it and is only tired.
+You do not know what this means. You know only that something has gone wrong in the way the world works, and that it has gone wrong in your favor. {cap(voice("hunger"))}.
+?if _sun == "hid"
+  Aelia is not on the wall. You find her tracks at the foot of it: two small bare feet and one larger pair of boots, a fierce little argument that ended, you hope, in a run for home. You do not go after her. You are not sure of what you would say.
+?end
+$ do discover("the_sun")
+$ do phase("day", 2)
+-> day
+
+# hunger_takes_you
+## The hunger
+You have not fed. You have put it off all night, the way anyone puts off a letter, and now the dawn is coming and the hunger has stopped asking.
+It takes you the way a wave takes a swimmer. One moment you are standing on the terrace, composed, and the next there is nothing in your head but a single bright line, and the line is a heartbeat, and the heartbeat is climbing the hill.
+It is Sextus, the old shepherd, driving his flock up to the high pasture at the hour when no one else is about. He has a limp, a stick, and a bad knee, and he is humming a tune you know. He is the only man in Collesanto who has ever dared to take sheep this close to the villa wall, and he did it because a ewe strayed in the night.
+You do not remember crossing the terrace. You remember the sound he makes, which is small and very surprised. You remember his hand on your sleeve, and the smell of sheep, and the heat of him. Then you are on your knees in the wet grass with him lying across your lap, breathing, and the sun is almost up, and the thing that was in charge of you has gone back to sleep.
+He is alive. You hold your fingers to his throat for a very long time to make sure of it.
+$ do feed("human")
+$ b1.first_blood = "forced"
+$ _fed += 1
+$ do meet("sextus")
+$ do witness(1)
+He opens his eyes. He looks at your face for a long moment, and his mouth moves, and what comes out is your name. Then he closes them again and does not wake, and you carry him down to the edge of the pasture and lay him in the shade of a wall. When he comes to he will think he has seen a dead man. It is only the truth, and nobody will believe it.
+<~
+
+# day
+## The morning is yours
+:day
+?if actions_left() == 2
+  The morning is high and white, and the hill is nothing like the one you remember. Every stone is edged. Every sound arrives separately. The sun is a hand on the back of your neck.
+?else
+  The day tilts toward noon, and you can feel the sun leaning on you.
+?end
+* Walk the old boundary of your land, in the open [once] ?if actions_left() > 0
+  ~> boundary_walk
+* Watch the village from the ridge [once] ?if actions_left() > 0
+  ~> ridge_watch
+* Rest in the cellar until dusk
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :day
+?end
+-> dusk
+
+# boundary_walk
+You go down the slope by the goat path, with the cloak's hood over your head and your hands in your sleeves, to the fence line you have walked every week of the life you built.
+It is all here. The posts, the barley stubble, the ditch where the water stands in spring. It is all here and none of it is yours any longer, because you have not walked here for four days, and in those four days it has stopped being land and become a place where someone is dead.
+$ do act(1, true)
+~> relic [role]
+The sun is a hand on your back. {cap(voice("hunger"))}.
+?if b1.goat == "freed"
+  At the far corner a boy of twelve or so is sitting on the fence with a goat on a rope, scratching its ears with the absentminded, total attention of a child who has been given something back and does not yet believe it. He looks up. He sees a hooded figure at the end of the field. He does not run. He stares at you for a very long time, and then he lifts one hand, and goes on scratching the goat.
+  $ do meet("quintus")
+  $ bond.quintus += 5
+?else
+  Farther along, a boy of twelve or so is mending a fence with a face that does not match his hands. It is the boy from the square. He is not looking at the hill. He is, you think, very carefully not looking at the hill.
+  $ do meet("quintus")
+?end
+<~
+
+# relic
+You stand for a moment at the corner post, with the line of your own land running away from you. It is your land, and you are dead. It will be ordinary to say so, to yourself, in a day or two.
+<~
+
+# relic_gladiator
+Leaning against the post is the wooden practice sword, the one Aelia fights the bean rows with. She has left it where she was called in. You pick it up, and your hands know the weight of it, and you put it back exactly where she left it.
+<~
+
+# relic_legionary
+The cloth wrapped sword is not here. It is in the roof beam, where it has always been, and you stand a long time with your eyes on the house and your hand on the empty place at your hip, and think of a horn that no one else can hear.
+<~
+
+# relic_merchant
+Your whole body thinks of the ledger under the bed. You are already doing the sums: the barley, the wine, the debts that were owed to you, and who will remember them, and who will not. You are dead, and your accounts are open.
+<~
+
+# relic_physician_aide
+Along the fence the herbs you planted are in flower, the yarrow and the little blue plant the old women swear by. There are four of them to pull for a poultice and you stand and look at them, and you cannot make your hands go down to them.
+<~
+
+# relic_house_slave
+You pass through the field without disturbing a stalk, the way you once crossed a room in a house that was not yours. Nobody sees you. It is your oldest skill, and you notice for the first time that it was never really a skill. It was only fear, put to use.
+<~
+
+# ridge_watch
+There is a ledge behind the villa where the hill falls away, and from it the whole of Collesanto lies open under the sun like a handful of tiles.
+$ do act(1, true)
+You can see the square, the fountain, the tree. You can see the black of the women at the well and the empty bier that someone has set outside your door because nobody knows what else to do with it. You can see the smoke of a dozen hearths. It is a village in grief, and it is going about its work, and it is the loveliest thing you have ever seen.
+Then you see the others.
+They are on the north road, where it comes out of the oak wood, a column of eleven men in plain grey cloaks, with no banners and no armor. There is a mule train behind them, loaded with long bundles and wicker baskets that clink. They are not soldiers, and they are not pilgrims, and they are not traders. They look like men who have come to do one thing and have prayed over it.
+They halt beyond the stream, in the shade of the wood, and make no fire in the ordinary way. One of them kneels and sets a small clay lamp on a flat stone. The flame in it does not flicker. He tends it the way a priest tends an altar.
+Something in you goes very still. It is the part of you that has never been able to leave an unfair thing alone. It is telling you what the lamp is for.
+:the_strangers
+* Follow them, unseen
+  $ b1.warning = "followed"
+  $ cunning_brutal -= 3
+  $ do act(1, true)
+  You go down through the wood by a way no living soul could have found, and you are close enough, by the end, to hear them. There is not much to hear. They do not talk. They kneel in rows and murmur the name of Vesta, goddess of the hearth, the way people say a name when they mean something else by it. Their leader, a lean man in a grey hood, tells them that the beast on the hill is not yet awake. They will wait for a night without a moon. They will come from the north, and take the thatch first. The word they use for what they are hunting is one you have heard in nursery stories: strix.
+  You go back up the hill with your skin crawling, and the sun feels like nothing at all.
+* Go down and warn them
+  $ b1.warning = "warned"
+  $ do witness(1)
+  There is a boy at the well. He is the only living person who will see you, and you choose him because he is twelve and nobody listens to him. You pull your hood forward and tell him, as quietly as you can, that men with torches are coming, from the north, in the dark, and that the elders must set a watch. He stares at you with wide eyes and asks who you are, and you do not answer. You are gone before he can ask again.
+  $ do meet("quintus")
+* Say nothing
+  $ b1.warning = "none"
+  You cannot be sure of what you saw. You tell yourself that. You tell yourself that you are not the kind of person who would be believed, even by yourself. It is a very Roman excuse, and you do not like how well it fits.
+<~
+
+# dusk
+## Dusk
+$ do rest()
+The sun goes down in the long gold way of the end of harvest, and you find you are sorry to see it go. You have not been so tired since the fever.
+$ do discover("the_hunger")
+The villa grows dark around you. When it is dark enough that you can no longer see the painted hunt above your head, you pull the cloak around your shoulders and walk out through the door and down the long hill toward the lights of the village, as you have walked it a thousand times, and as you will never walk it again.
+=> next
