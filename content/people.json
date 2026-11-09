@@ -219,6 +219,24 @@
       "name": "Fra Ambrogio",
       "title": "A Dominican of Santa Maria Novella",
       "bio": "A lean, courteous friar with a good Latin hand and a reputation for finding out what is true. The Archbishop sends him when a miracle needs looking at."
+    },
+    "gualtiero": {
+      "gender": "m",
+      "name": "Gualtiero",
+      "title": "Prince of Florence",
+      "bio": "A small gray man of the Priestess line with a scholar's face and pale eyes, who sits on a plain chair because a plain chair is more alarming than a throne. He knows the debts of every vampire in the city and is patient about using them."
+    },
+    "ottaviano": {
+      "gender": "m",
+      "name": "Messer Ottaviano",
+      "title": "Seneschal of the Prince",
+      "bio": "A tall, correct vampire in black with a silver ring and a pouch of blue leather. He is cleverer than his master and a good deal more frightened."
+    },
+    "vieri": {
+      "gender": "m",
+      "name": "Vieri Salimbeni",
+      "title": "A young vampire of the court",
+      "bio": "Twenty three for some years now, with a good coat, a gold chain and a handsome sneer. He tests strangers in alleys, and he tells the story afterward."
     }
   }
 }

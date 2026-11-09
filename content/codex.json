@@ -209,6 +209,30 @@
       "title": "San Custode",
       "book": "blood-and-gold",
       "text": "The guardian saint of the hill, who never ages, put out a fire at the mill and walked in the plague. He sleeps, they say, in a cellar under the shrine, and wakes when the hill is in danger. Nobody can say where the story began."
+    },
+    "blood_licence": {
+      "category": "lore",
+      "title": "The licence of the Purse",
+      "book": "blood-and-gold",
+      "text": "Within the walls of Florence no vampire may feed on a citizen without a numbered brass licence from the Purse. It is one citizen a month, taken with consent or without harm, and the fee goes to the bank. The Prince keeps the peace and the Purse keeps the tally."
+    },
+    "pazzi_medici": {
+      "category": "lore",
+      "title": "The Medici and the Pazzi",
+      "book": "blood-and-gold",
+      "text": "Two great banking houses and a quarrel that grows each year over alum, a will and a Pisan archbishopric. Some in the court find it useful to keep it warm."
+    },
+    "priestess_line": {
+      "category": "bloodlines",
+      "title": "The Priestess line",
+      "book": "blood-and-gold",
+      "text": "Old, proud and unhurried. Its princes hold courts rather than senates and rule by knowing what everyone owes."
+    },
+    "the_purse": {
+      "category": "places",
+      "title": "The bank of the Merchant house",
+      "book": "blood-and-gold",
+      "text": "A plain door and a bronze ring, with a counting floor of forty tables, a licence office and a strong room under the street. It is one of the six great houses of Florence and has never been seen to fail."
     }
   }
 }

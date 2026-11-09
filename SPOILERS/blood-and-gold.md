@@ -19,3 +19,25 @@ Day phase, two of three: the square (what the village says), the walls with Tomm
 Hooks for later chapters: Fiammetta's request (a Florentine thread), the friar's report to the Archbishop (the court reads the same reports), the saint's image (a face to be recognised), the shrine's candles (money to Collesanto).
 
 Flagged to the owner (spoiler light): the guardian saint legend is now a recognised thing the Church has an opinion about.
+
+## Chapter 3, "The Hall of the Prince" (`b2c03`, session 19)
+
+Three nights between the invitation and the audience. The court of Florence is the third list item of the design doc ("his strength draws stares"). The Prince is Gualtiero, of the Priestess line (people id `gualtiero`), with Messer Ottaviano as his seneschal (`ottaviano`). Prisca keeps the purse (the licences of blood within the walls), so the court has two centres, and the chapter shows both.
+
+Night phase, three of four: Prisca's door (she asked to be seen first; the short briefing, `b2.prisca_brief`: heeded, scoffed, skipped, and a promise that the real talk waits until after the Prince, which is chapter 4); the street test (a young Salimbeni vampire, Vieri, tries the stranger in an alley; `b2.test`: bested, shown, declined; `fight("fledgling")`); the Licence Office (Benedetto walks him through the purse's blood licences, `b2.licence`: bought, refused, poached); the Ponte Vecchio at night (rumors of the Medici against the Pazzi and a vampire faction that likes the quarrel; flag `b2.pazzi_heard`). Hunger scene if `must_feed()`.
+
+The audience: the hall behind the Bargello, sixty vampires, the Prince on a plain chair. Old blood is felt (the stares, the elder who goes silent). Three choices: the oath (`b2.oath`: sworn, courteous, refused), who made him (`b2.sire_answer`: unknown, lied, deflected; the Prince knows a lineage that "was supposed to have ended" and says only that a line like his was struck from the roll, which seeds the first answer, chapter 7), and a seat (`b2.seat`: sword or none; the Captain of the Night is offered, which would set him against the Purse and so feeds chapter 4). Ends with `rest()` and `=> next`.
+
+Hooks: the Prince's wish for the Captaincy; Vieri (a recurring young face at court); the licence ledger (Prisca's leverage); the Pazzi rumor (the conspiracy of chapter 9).
+
+## Chapter 4, "The Purse" (`b2c04`, session 19)
+
+Prisca: partner or rival, the fourth list item. The long talk postponed in chapter 3, the night after the court. She reads him by what he did at court (`b2.oath`, `b2.seat`) and what he did at Rome's end (`lc.collis`, `b1.coven`, `b2.prisca_reply`).
+
+Night phase, three of four: the strong room (the books of the bank, the real figures; Prisca shows him what the hill's money became; he may take it all at face value or press her; `b2.prisca_books`: pressed or taken), the counting floor after dark with Benedetto (what daytime dealings could mean for a man who can stand in the sun; `b2.prisca_sun`: she asks him to be the house's daylight, he agrees, bargains, or keeps it back), Prisca's private rooms (the personal scene: Rome, the fire, what she did in the fourteen centuries; `b2.prisca_past`: she tells it, he asks her not to, he asks for the truth). Fourth option, not taken in one pass: walk to the river alone.
+
+Dawn: the decision `b2.prisca_deal`: partner (one house, one seal, shared risk), rival (the Banca del Colle stands as a separate firm and she lets it), quiet (her credit, his own books). Flag `b2.prisca_asked` records whether he agreed to find out who inside the court is moving against the Medici (the thread of chapter 9). Ends with `rest()` and `=> next`.
+
+Does not decide Prisca's fate or her bloodline (the design doc leaves "Firstborn of the Merchant" open); she is written so that either reading holds.
+
+Flagged to the owner (spoiler light): nothing that changes the big picture.

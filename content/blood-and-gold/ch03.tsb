@@ -1,0 +1,370 @@
+// Book Two, Chapter 3 (session 19). The court of Florence: three nights in the city, then the audience before the Prince.
+// One night phase of three actions out of four (Prisca's door, the alley, the licence office, the bridge), then the hall: the oath, who made him, and the seat.
+// Ends with rest() and => next. Reads b2.prisca_reply, b2.friar, b2.saint and wake(). The real talk with Prisca is chapter 4, so she keeps the briefing short here.
+// Later chapters read b2.prisca_brief, b2.test, b2.licence, b2.oath, b2.sire_answer, b2.seat and b2.pazzi_heard.
+@chapter b2c03
+@title The Hall of the Prince
+@book blood-and-gold
+@version 1
+
+# start
+## Three nights
+$ b2.prisca_brief = "skipped"
+$ b2.test = "declined"
+$ b2.licence = "refused"
+$ b2.oath = "courteous"
+$ b2.sire_answer = "deflected"
+$ b2.seat = "none"
+$ _vieri = 0
+$ do meet("ottaviano")
+?if wake("place") == "collesanto"
+  You leave the hill the way you came to it, which is to say in the dark, on a good gray horse, with a family standing on the wall behind you pretending that they are not watching.
+?else
+  You come down from the hill in the gray before dawn, on a good gray horse that you have decided to keep, with the whole village still asleep in its wax and wine behind you.
+?end
+Messer Ottaviano has not waited for an answer. He has, you gather, been told that the answer is a matter of form. He rode ahead in the night with a very straight back, and left behind him on the road a faint smell of cloves and cold stone, and, on the gatepost, nailed with a small neat nail, a card with the name of an inn.
+The inn is called the Three Doves, and it is not an inn. It is a house with a good cellar and a bad sign, three doors from the Bargello, and it is kept by a woman who has been told that a guest will arrive after dark and sleep through the day, and who has decided, with the sublime tact of her trade, that she has not been told anything at all. You are shown to a room without a window. It is the best room that you have been offered in fourteen centuries, and it has been chosen, you realize, by someone who knows exactly what you are.
+You have three nights. You have a Prince who is waiting, and a friend who has asked that she be seen first, and a city that has changed so much since you last saw one that you have had to stop yourself, twice, from walking into a door that was in the wrong place.
+It is a good city for a man with an appetite. It is also, you think, not a bad one for a man with enemies.
+$ do phase("night", 3)
+?if must_feed()
+  ~> hungry
+?end
+-> night
+
+# hungry
+## The hunger
+The road has not been kind. You have been two nights in company, and one in the saddle, and you have been polite for most of it, and the politeness has run through your reserve like water through a basket. You have, you think, about an hour in which you may decide how to be a civilized man.
+* Go down to the stable, and take a mule, and be done
+  $ do feed("animal")
+  $ humanity += 1
+  It is not a noble animal and it does not make a noble supper. It is warm, and it is patient, and it is a mule. When you come back up the stair you feel like a person, which is all that you asked of it.
+* Ask the landlady, who has been told nothing at all, if the house keeps a donor ?if wealth >= 40
+  $ do feed("donor")
+  $ do earn(-4)
+  She does not so much as blink. She says that the house has an arrangement with a girl from the wool district, who is very discreet and very expensive, and she names a sum, and the sum is paid. The girl is brisk and bored and has a cold. It is all done as one buys candles, and you find that you are grateful for it beyond reason.
+* Take a drunk from the alley behind the Bargello, who will not remember
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  $ secrecy -= 1
+  It is the oldest way, and it works. He wakes in a doorway an hour before the bells with a very bad head and a feeling that he has had a visit from his mother. You go back through the dark and notice, for the first time, the lantern burning over the door of the Officers of the Night, a hundred paces off, and that it has, for some time, been turned to face your way.
+<~
+
+# night
+## The first night
+:night
+?if actions_left() == 3
+  Florence at night is a city that has agreed to be quiet. The bells have gone to bed, the shutters are closed, and the whole of the long stone town lies in the dark like a ship at anchor, with here and there a lamp swinging in a doorway and a watchman's rattle going in the distance. The court expects you at the end of three nights. Between now and then there are four things that you might do, and time for three.
+?elif actions_left() == 2
+  A day has gone over the city, and you have slept through it in a windowless room with the sense of being, quite carefully, kept. The bells are going again, for the night offices, and the light on the river is the color of old pewter. Two more nights, and two things in them.
+?else
+  The third night. The city has put on its best clothes, and you can hear a thing that you have not heard since Rome: the soft, particular murmur of a great many people who are not asleep and are not going to be seen. There is time for one thing more before the hour at which you are expected.
+?end
+* Go to Prisca's door, as she asked [once] ?if actions_left() > 0
+  ~> prisca_door
+  $ do act()
+* Walk the lanes behind the Bargello, and see who walks them [once] ?if actions_left() > 0
+  ~> alley
+  $ do act()
+* Let Benedetto show you the Licence Office [once] ?if actions_left() > 0
+  ~> licence
+  $ do act()
+* Cross the Ponte Vecchio, and listen [once] ?if actions_left() > 0
+  ~> bridge
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> hall
+?end
+-> :night
+
+# prisca_door
+## The bank
+$ do chart("florence.prisca")
+It is a plain door in a plain street, with a bronze ring and a brass plate that says nothing. It is opened by a boy in the blue of the Merchant house, who looks at your face, goes pale, and takes you up two flights of stairs without a word. At the top there is a room with a very large table, and on the table there are a great many papers, and at the end of the table, with her sleeves turned back and her hands in the ink, there is a woman who looks as if she might be forty, and might be four hundred, and is neither.
+She does not get up. She looks at you for a long time over the top of a ledger, and her face does the thing that you remember, which is to remain exactly as it was while something goes on behind it.
+?if b2.prisca_reply == "warm"
+  "You wrote me a letter," says Prisca. "I have read it nine times. It is a very bad letter. I would not change a word." She puts the pen down. Her voice is quite steady, and her hands are not, and she puts them under the table, with great dignity, as one hides a thing that has slipped. "Sit down. You look like a man who has been told to be polite for a week."
+?elif b2.prisca_reply == "formal"
+  "You wrote me a very correct letter," says Prisca. "I admired the grammar." She puts the pen down, with a click. "It was just such a letter as I should have written to a Lictor. I have had a hundred and fifty years to get used to that, and I find that I have not." She indicates a chair. "Sit. You are standing like a man who is going to be formal at me, and I should like to be spared."
+?else
+  "You did not write," says Prisca, and it is said so evenly that for a moment you hardly hear it. "I do not complain. I had a letter ready, in case you did not write, and I have had it ready for a week." She puts the pen down. "Sit. I am going to be very brief, because I have not the right to be anything else."
+?end
+She is brief. She talks for the better part of a quarter of an hour, in a level, rapid, pleasant voice that never rises and never rests, and she tells you more about the court of Florence than you could have learned in a month of asking.
+The Prince is called Gualtiero. He is of the Priestess line, which is old, and proud, and unhurried, and he is a better ruler than he looks. He holds the court at the hour after midnight in a hall behind the Bargello, and he sits on a plain chair, because a plain chair is more alarming than a throne. There are sixty or so of the blood in the city, and he knows every one of them by name and every one of their debts. He is not stupid. He is not cruel, quite. He is a man who has decided that the best way to keep an unruly city is to know its secrets and to be patient about using them.
+"He has a seneschal," says Prisca, "Ottaviano, who is cleverer than he, and a good deal more frightened. You have met him. He did not like what he saw. Do not make him like it less." She counts on her fingers. "Do not say anything to the Prince that he could repeat to a stranger. Do not speak of the sun. Do not mention the bank, or the hill. And do not, on any account, accept a thing that he offers you tonight. Not a cup, not a chair, and not a title."
+You ask what he might offer.
+"A great deal," says Prisca, "if he is the man I think he is. And he is." She does not smile. "You will be stared at. It is not an insult. You are, to put it plainly, very old, and very strong, and you have walked into a room full of the young. They will feel it, whether you wish them to or not. I would let them."
+There is a pause. You say that there is a good deal more to be said.
+"There is," says Prisca. "It will keep until after he has had his turn. Come to me tomorrow night, when it is over, and I shall tell you the rest, and I shall tell it properly." She takes up the pen again. "Tonight I only want you to live through the day after tomorrow."
+:the_brief
+* Say that you will be careful, and thank her
+  $ b2.prisca_brief = "heeded"
+  $ bond.prisca += 2
+  She nods, once, without looking up. It is the nod of a woman who has been given a small thing that she was afraid she would not get, and has decided not to make anything of it. "That is all that I ask," she says. Her pen, you notice, has not moved.
+* Say that you are older than his house, and will take what is offered if it suits you
+  $ b2.prisca_brief = "scoffed"
+  $ bond.prisca -= 2
+  $ defiance += 1
+  $ cunning_brutal += 1
+  She looks up. It is a long look and a quite empty one. "I know how old you are," she says. "I watched you grow into it. It is the one thing in the city that I am entirely certain of." She goes back to her ledger. "Be old, then. But be old quietly."
+* Ask her plainly what she wants from you
+  $ b2.prisca_brief = "heeded"
+  $ secrecy += 1
+  "Nothing that I could say before dawn," says Prisca, and for the first time she smiles, and it does not suit her, because it is real. "That is a very good question. I would not have asked it, in your place. I should have sent a clerk." She waves the pen at the door. "Go. Eat something. You look famished, and it is making my clerks nervous."
+<~
+
+# alley
+## The lanes
+$ do meet("vieri")
+$ _vieri = 1
+The lanes behind the Bargello are narrow and dark and as full of small noises as a hive, and you walk them with your hood back, because it is a very long time since you have been afraid of a street. They smell of tanning and bread and wet stone. There is a smell, here and there, that is neither, and that you know better than any other, and it tells you that you are not alone.
+He is waiting where the lane bends, leaning on a wall with his arms crossed and his hat pushed back. He is perhaps twenty-three by the look of him, and has been that for some years. He has a good coat and a gold chain and a face of such brilliant, aggressive handsomeness that it is almost a pity to see it wasted on a sneer. He has a friend with him, a smaller one, who is trying to look as if it were a coincidence.
+"You are the Signor del Colle," says the young man, and gives the name an accent that makes it sound like a disease. "I am Vieri Salimbeni, of the household of the Prince. I should like to know whether you are as old as they say." He smiles. "My grandfather did not think that you existed."
+It is perfectly plain what he wants. It has been wanted by young men in alleys since there were alleys, and it is, you reflect, an excellent way of learning a stranger's measure, and not a very expensive one.
+:the_test
+* Let him come, and break his guard
+  ~> alley_fight
+* Take a step toward him, and let the old blood show for a moment
+  ~> alley_show
+* Walk on, and let him think what he likes
+  $ b2.test = "declined"
+  $ standing -= 1
+  $ secrecy += 1
+  You walk past him at an easy pace, with your hands where he can see them, and he lets you, which is not at all the same as being willing. He says something to his friend, quite loud, about men who are very old and very careful. You hear the friend laugh, a short unwilling note. It is a thing that will be told at court tomorrow, with improvements.
+<~
+
+# alley_show
+## What a thousand years can do
+It is not a thing that you do. It is a thing that you stop not doing. You have been holding it down, as one holds down a hand that wants to rise, for the whole of your time in this city, and you let it go, a very little, for as long as it takes to say a short word.
+The lane changes. It does not grow darker. It grows more still, as a pond is still before a storm, and the stones seem to lean, and the lantern on the next corner gives a tiny sound and goes out. The young man's friend has gone back three paces without noticing that he moved. Vieri has not moved. He has gone white, which in his case is a considerable distance, and has put one hand flat on the wall behind him, as a man does who has felt the street tilt.
+$ b2.test = "shown"
+$ do power("minor")
+$ standing += 2
+$ secrecy -= 1
+"Signore," he says, after a time, in a voice that has lost a good deal of its accent, "I beg your pardon. I was told that there was a great deal of gossip." He swallows. "I find that it understated the case."
+He bows. It is a good bow, a deep one, with the cap held out, and it is done a little too fast. You tell him that there is nothing to forgive, and that it is a very good coat. He says that it was his grandfather's. He is, you think, going to be a great deal more careful of strangers in future, and a great deal less careful of the truth when he is asked what he saw.
+<~
+
+# alley_fight
+## The bend in the lane
+$ do fight("fledgling", 2)
+:alley_exchange
+* Go under his arm, and take the wall
+  $ do strike("cunning")
+* Break his guard with a blow that would crack a pillar
+  $ do strike("brutal")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Say his grandfather's name, and ask him what the old man would think
+  $ do strike("talk")
+?if not fight_over()
+  -> :alley_exchange
+?end
+?if fight_result() == "won"
+  $ b2.test = "bested"
+  $ standing += 2
+  $ cunning_brutal += 1
+  He goes into the wall with a sound that carries, and slides down it, and sits in the gutter with his chain in his lap and his hat gone. It was not a long fight. It was not meant to be one. His friend has not moved, and now moves quite quickly, and is not seen again. Vieri puts a hand to his jaw and looks up at you with an expression that you have not seen for a very long time, the expression of a boy who has met, quite suddenly, the first thing in the world that is bigger than he is. "Madonna," he says, "they were right."
+  You give him a hand up. He takes it, as if it might burn.
+?elif fight_result() == "talked"
+  $ b2.test = "shown"
+  $ standing += 1
+  You say it quite softly, and with no great emphasis, and he stops with his fist an inch from your face. It is the name of his grandfather, which you had from the landlady of the Three Doves, who did not tell you anything at all. There is a long silence. He lowers his hand. He says, quite slowly, that the old man would have thought it a very low thing to know. You say that it is the only kind that is any use.
+?else
+  $ b2.test = "lost"
+  $ injury += 4
+  $ hunger += 4
+  $ standing -= 2
+  He is a good deal quicker than you expected, and a good deal stronger. You have been asleep for a great many years. There is a blow that you do not see, and a wall that comes up to meet you, and for a moment the whole of the lane is a bright and noisy ring. When you can see again he is standing over you with his hat in his hand, quite breathless, and he does not look as pleased as he had hoped to be. "I think," he says, "that you were out of practice, Signore." He bows. It is the bow of a young man who has had his luck, and knows it.
+?end
+<~
+
+# licence
+## The Licence Office
+$ do discover("blood_licence")
+Benedetto takes you there himself, with a lantern, and a roll of paper under his arm, and the nervous pride of a man who has been waiting a very long time to show a stranger the best thing in the house.
+It is a small clean room on the ground floor of the bank, with a high desk, and a ledger as thick as a Bible, and a row of little brass tags on hooks. Each tag has a number. Each number, Benedetto explains, is a vampire of Florence. The tags are given out by the Purse, and by no one else, and they are the law of the city.
+You ask what the law is.
+"It is very simple," says Benedetto, and his eyes shine. "Within the walls, no one of the blood may feed on the citizens of Florence unless he holds a licence, and the licence is a number, and the number is a fee, and the fee goes to the Purse. The Prince keeps the peace, and the Purse keeps the tally. It is a very old arrangement. The old ones say that it began as a way of preventing a plague, and the new ones say that it began as a way of preventing a quarrel, and Madonna Prisca says that it began as a way of preventing the Prince from raising the taxes." He coughs. "Each licence is one citizen a month, to be taken with consent or without harm. A man who breaks the terms is fined. A man who breaks them twice is a matter for the Officers of the Night."
+It is, you reflect, perhaps the most civilized thing that you have ever heard of, and it is also, quite plainly, a very efficient way of knowing where every one of the blood in Florence is on any night of the month.
+He opens the ledger. There are names in it, in a clear brown hand. There is a column for the date, and one for the person, and one, narrow and ruled in red, for the hour.
+:the_licence
+* Buy a licence, and put your name in the ledger ?if wealth >= 100
+  $ b2.licence = "bought"
+  $ do earn(-10)
+  $ standing += 1
+  $ secrecy -= 1
+  Benedetto writes it down. He writes it with a flourish, in a very good hand, and takes a little brass tag off a hook, and hands it to you as if it were a relic. It has a number on it. It is, you note with some interest, the number one hundred and four, and it is hot from his hand. "The house is honored," he says. "It is, I may say, the first licence that the house has issued to a person of your age. The ledger has had a good many pages added since the old days."
+* Say that you will answer to no ledger
+  $ b2.licence = "refused"
+  $ cunning_brutal += 1
+  $ standing -= 1
+  Benedetto closes the book very gently, as if it might take offense. He says that he understands, in the voice of a man who has been told that he understands a great deal more than he does. He adds, in a quite different voice, that it is the Prince who enforces the law and the Purse that keeps the tally, and that in the matter of a very old guest the Prince would no doubt prefer to be asked. He does not say what happens if he is not.
+* Say that you will take what you need, and let the Purse find out
+  $ b2.licence = "poached"
+  $ defiance += 2
+  $ humanity -= 1
+  $ cunning_brutal += 2
+  $ secrecy -= 1
+  Benedetto stares. It is the stare of a man who has been waiting all his life to be asked to do something extraordinary, and has just been asked to witness it. He does not write anything down. After a long moment he says, in a very small voice, that the Purse is generally very quick to find out, and that the Officers of the Night are generally very slow to forgive. Then he says, almost inaudibly, that he will not be the one to tell.
+Benedetto walks you to the door. At the foot of the stair he stops, and says that Madonna Prisca has asked him to say that he is to be trusted in all matters that concern the house. He says it very fast. You have the feeling that it was the first thing she told him, and the last.
+<~
+
+# bridge
+## The bridge
+$ do discover("pazzi_medici")
+The Ponte Vecchio is a street built on a bridge, and by night it is a street with its shutters closed and a river going under it in the dark, and a smell of blood and sawdust from the butchers' stalls that is, to you, the smell of a very comfortable home. There are lamps at the middle. There are two men under them, wrapped in good cloaks, and a third at a little distance who is not wrapped in anything and has not got a shadow that is quite his own.
+You know them at once by the way that they stand, and by the fact that none of them is cold.
+They are talking about the Medici. It is not quite gossip. It is a very old kind of conversation, between men who have long ago stopped being surprised, and it has the delicate, appreciative, malicious tone of connoisseurs. The young Medici, they say, is clever, and rich, and has too many friends. The Pazzi, who are a great bank and an older house, have been very much put out. The Pope's nephew has bought a town that the Medici wanted, and the Pope's friend wishes to be Archbishop of Pisa, which the Medici will not allow. There has been a quarrel about alum, and one about a will, and a third, that nobody quite likes to name, about a girl. It is a very good quarrel. It is growing. It is, says one of the cloaks, in a tone of the purest relish, the best thing that has happened to the city since the Ciompi, and it would be a great pity if anyone were so foolish as to settle it.
+"The Prince does not mind it," says the second. "It keeps the families watching each other."
+"The Prince," says the first, "has not been asked."
+There is a pause. The third figure, who has not spoken, moves very slightly, as a hound does when it has heard something that it likes.
+:the_bridge
+* Stay in the shadow of the stalls, and listen to the end
+  $ b2.pazzi_heard = true
+  $ secrecy += 1
+  You do not hear very much more. You hear that it has been said, at a table that none of them will name, that a quarrel kept warm for long enough will one day boil over, and that a house with enough friends in the right places might be able to see to it that when it does, it boils over in the right direction. You hear a short laugh. You hear a great deal of interest in the Medici's habits of worship. When they separate, you have not been seen, and you have a feeling like a man who has put his hand into a drawer and found that there is something in the back.
+* Walk up to them, and ask if the court is always so well informed
+  $ b2.pazzi_heard = true
+  $ standing += 1
+  $ secrecy -= 1
+  They stop. They are very civil. One of them bows, and says that it is a pleasure, and gives a name that you do not catch. The third has gone. They are, they say, only idle men, who like to talk, and who would not dream of troubling the Signore with talk. You say that you would be glad to be troubled. They look at each other. There is the quick, bright, cautious silence of men who have been caught at a thing that is not a crime and are working out whether it is a mistake. "The Signore will find," says the first, "that Florence is a city of very great conversation." It is, you think, the most careful sentence that you have ever heard.
+* Buy a cup of wine from a half asleep boy at the end, and walk on
+  $ do earn(-1)
+  The wine is thin and sour, and the boy is as sleepy as a dormouse. You drink it leaning on the parapet, with the river going by black and silver beneath you and the voices going dimly on at your back. It is not the part of a prudent man. It is, however, a very good night for it, and the river, which is the same river that you saw once, from a window, in a year that you cannot name, is neither more nor less beautiful for what it carries.
+<~
+
+# hall
+## The hour after midnight
+$ do chart("florence.court")
+$ do meet("gualtiero")
+$ do discover("priestess_line")
+The hall is behind the Bargello, in a house that has the face of a rich man's dwelling and the bones of something much older. It is a long room, with a ceiling painted in dark blue and sown with gold stars, and a floor of black and white marble that has been worn to a shine by a great many quiet feet. There are no windows. There are a hundred candles, in iron stands, and every one of them has been lit by hand.
+There are sixty of the blood in it, or near it. They stand in groups and in lines, along the walls, in the good cloth and the old cloth, and in the long hush that falls as you come in at the end of Messer Ottaviano's arm, you hear what you have not heard for a thousand years: the small, particular sound of sixty people who have not breathed for a long time all drawing breath at once.
+They stare. Prisca had told you that they would, and she had not told you what it would be like. It is not a hostile stare. It goes through you like cold water. It is the stare of children at the edge of the sea, who have been told that it is very large, and have not believed it. A woman in a headdress of the old Byzantine kind, with a face like a coin, goes entirely still. A man with a long gray beard lets his goblet fall, and does not look to see where it went. At the back, a young one sinks without noticing it to one knee, as a person kneels who has stepped into a church in the dark, and then is hauled up by the arm of a friend, and stands scarlet and furious, and does not look at anyone.
+?if b2.test == "bested"
+  Vieri Salimbeni is by the third pillar, with a cloth to his jaw and a new gold chain. He catches your eye, and bows, very low, with a most careful absence of expression. There is a small stir about him, of men who have heard.
+?elif b2.test == "shown"
+  Vieri Salimbeni is by the third pillar, in a very quiet coat. He bows to you. It is a deep bow, and it has the sound of a story that has already begun to be told.
+?elif b2.test == "lost"
+  Vieri Salimbeni is by the third pillar, with a small satisfied air. He bows to you, with a very correct extravagance. It is a bow that says a good deal.
+?elif _vieri == 1
+  Vieri Salimbeni is by the third pillar, in his grandfather's coat, with the face of a man who has a story and is saving it. He bows to you, with a half smile, as to a person who has been very sensible.
+?end
+Prisca is at the Prince's left, at a small table of her own with a ledger on it. She does not look at you. She is a very still woman, in a gown of the Merchant blue, and the only sign that she knows that you are there is that her pen has stopped.
+?if b2.prisca_brief == "skipped"
+  She has not seen you since the night that you wrote. She looks, you think, a little tired. She is making a very great effort not to be anything else.
+?end
+The Prince sits on a plain chair at the end of the hall. It is a good chair, of dark wood, with a leather seat that has taken the shape of him, and he is a smaller man than you had expected, with a gray close beard and a long plain scholar's face and a pair of the palest eyes that you have ever seen in a human head. He is dressed in black, with a ring, and nothing else. He gets up as you come to the foot of the dais. It is a courtesy, and it has cost him something, and he has, you see, decided to pay it. The hall goes very still.
+"Signor del Colle," says Gualtiero. His voice is dry and quiet and rather beautiful. "I have waited for you for two hundred and fifty years, and it is a remarkably unpleasant thing to find that the waiting was reasonable."
+There is a faint ripple of laughter, and a faint ripple of relief, and a longer silence behind it.
+He takes his time. He asks after your journey, and your lodging, and the health of the hill. He says that he has had the pleasure of a report from a Dominican of Santa Maria Novella, who is, he understands, in some doubt about a saint.
+?if b2.friar == "charmed"
+  "He tells me that the shrine is a poor man's devotion, and a good one," says the Prince, "and that the owner of the land is a man of unusual candor. It is a rare report. I have been wondering what it cost."
+?elif b2.friar == "paid"
+  "He tells me that the shrine is a very proper foundation, and that the owner of the land has given it a hospice," says the Prince. "It is a most generous report. I have been wondering how much of it the friar believes."
+?elif b2.friar == "cowed"
+  "He tells me that he spent a most edifying night," says the Prince, "and he is sleeping rather badly since. I am told that he touches his forehead a great deal. I should be glad to know what he is looking for."
+?else
+  "He tells me that the shrine is a hermit's tomb," says the Prince, "and that the owner of the land has been most helpful to the Church. It is a very neat report. It has, if I may say so, the faint air of a tidied room."
+?end
+He does not wait for an answer. He looks at you for a long time, and you have the feeling of being read, line by line, in a very clear hand, by someone who is not unkind.
+"I do not ask a man for much, on the night that he comes," says Gualtiero. "I ask only three things. I will ask them in order, and you will answer as you think best, and I shall know a good deal by the answers, and so will the court. Do you consent?"
+You say that you do.
+-> oath
+
+# oath
+## The first thing
+:the_oath
+"The first," says the Prince, "is the oldest, and the simplest. In this city there is one peace, and I keep it. A man who comes into the city is a guest, and a man who stays is a subject, and a man who is old enough to be either is, I am afraid, asked which." He opens one hand. "Will you kneel?"
+* Kneel, and give him the oath of the court
+  $ b2.oath = "sworn"
+  $ standing += 2
+  $ secrecy -= 1
+  $ defiance -= 1
+  It is a very old form, and you know it. It is older than Florence, and it is not quite the one that you learned, because the Senate of Blood is no longer called that and the words have been worn smooth. You say them. You say them in the Latin of the hill, and there is a faint, delighted murmur from the old ones along the wall, who have not heard it spoken so since the days of their own makers. The Prince takes your hand. His is dry and cold and very strong, and he holds it for rather longer than the form requires. "I did not think," he says, so quietly that only you can hear it, "that I should live to hear it said right."
+* Bow, as a guest bows, and give him your word and nothing else
+  $ b2.oath = "courteous"
+  You bow. It is a Roman bow, from the waist, with the chin level, and it is the bow of an equal who has chosen to be civil. You say that you are a guest in his city, and that you will keep his peace as long as it is kept for you. It is a very exact statement. The Prince inclines his head. There is a murmur in the hall, in which you catch the word "careful," and the word "Roman," and, from a long way off, a single dry laugh like a stick breaking.
+* Say that you have not knelt to any man in fourteen hundred years, and will not begin tonight
+  $ b2.oath = "refused"
+  $ standing -= 2
+  $ defiance += 2
+  $ cunning_brutal += 2
+  It is very quiet. It is the quiet in which sixty people decide where to look. The Prince does not move. He is, you see, a man who has been refused before, and has learned to wait for the second thing before he decides what the first one means. "That is an honest answer," he says, at last. "I have always preferred them. I am obliged to tell you that it will be remembered." He sits down. It is the first time that you have seen anything in his face that was not under his own control, and what it is, you are almost certain, is relief.
+-> whose
+
+# whose
+## The second thing
+:the_second
+"The second," says Gualtiero, "is a matter of courtesy, and I ask it of every one of the blood who comes into my house. Whose blood are you?"
+It is a very ordinary question, and it falls into the hall like a stone into a well. You see it ripple. You see Prisca's pen move, and stop. You see the old man with the beard lean forward a very little, with the whole of his attention.
+It is a thing you do not know. It is the thing that you have never been able to answer, in a thousand years, to any Lictor or any Senator or any friend. You woke in a ditch, in a burning city, with a thirst, and a maker who had gone. You have a name for him, which is not a name, and a face for him, which is a shadow, and a feeling for him that you have never quite been able to identify, which is somewhere between fear and recognition.
+* Say that you do not know
+  $ b2.sire_answer = "unknown"
+  $ humanity += 1
+  $ secrecy -= 1
+  There is a sound in the hall like the shifting of a great many silks. It is not contempt. It is the sound of people who have been told something that they were not prepared for and are looking for a way to say that they are not surprised. "I was woken in the fire," you say. "I did not see his face. I have looked for fourteen hundred years, and I have not found him." You say it without a tremor, and it is, you find, rather a relief.
+* Give him a name, and a good one, of a line that is long dead
+  $ b2.sire_answer = "lied"
+  $ secrecy += 2
+  $ humanity -= 1
+  $ cunning_brutal += 1
+  You say that you were made in Constantinople by a Greek of the Scribe line, in the last days of an old emperor, and that he went into the east and was not seen again. It is a very good story. It has a sense of place, and a small gap where a name should be, and a sad and dignified ending. There is a rustle of respect. You are quite sure, as you say it, that there is one person in the hall who has not been taken in, and you do not look to see who.
+* Say that it is a poor sort of court that asks a guest his mother's name
+  $ b2.sire_answer = "deflected"
+  $ standing += 1
+  $ secrecy += 1
+  It is a thing that was said in Rome by a man who is very likely dead, and it has lost none of its edge. There is a quick, appreciative laugh, which goes round the hall like a spark. The Prince smiles, very slightly. "It is a poor court," he says, "that cannot take a rebuke. I withdraw the question. I will say this only, since it is mine to say." He looks at you for a long time, and his voice drops. "There was a line of the old Roman blood which the rolls say was ended in the time of the Goths. I should be sorry to learn that the rolls were wrong."
+?if b2.sire_answer != "deflected"
+  The Prince says nothing for a time. Then he says, so quietly that you are not sure that it was meant for anyone, "There was a line of the old Roman blood, which the rolls say was ended in the time of the Goths." He does not finish the sentence. He lifts his hand, instead, a very little, and lets it fall.
+?end
+The hall is very still. The old man with the gray beard has turned to the woman in the headdress, and is speaking in her ear, and she is not moving at all.
+-> seat
+
+# seat
+## The third thing
+:the_seat
+"The third," says Gualtiero, "is a gift, and you may refuse it. The court has a great many offices, and most of them are a nuisance. There is one that is not." He lifts a hand, and a figure comes out from behind the dais, in a black coat with a white collar, bearing a very small, very plain sword on a cushion. It is the lean, correct figure of Messer Ottaviano. His face is quite blank. "The Captain of the Night," says the Prince, "is the one who keeps my peace by dark. He commands the Officers, who are, by day, a magistracy of honest men who inquire into the morals of the city and by night are something else. He has the right to go anywhere in Florence at any hour and be told the truth. The last Captain died of impatience." There is a faint laugh. "I should like it to be you."
+It is the thing that Prisca told you not to take. It is also, you see, a great deal: a seat at the Prince's hand, a name in the hall, a right of entry to every house in Florence, and a power that the Purse has never had. The old man with the beard is staring at the sword as if it were a snake. Prisca has put down her pen. She is not looking at you at all.
+* Take the sword
+  $ b2.seat = "sword"
+  $ standing += 3
+  $ secrecy -= 1
+  $ bond.prisca -= 3
+  $ defiance += 1
+  The sword is very light. It is not a weapon so much as a warrant, and it has the warm weight of a thing that has been held by many hands. There is a roar in the hall, quickly muffled, a sound of sixty people who have all, at the same moment, remembered the interests of their houses. The Prince is smiling. It is a small smile, and a satisfied one, and quite without cruelty. "You have made some of them very uncomfortable," he says, under cover of the noise. "I think that is rather the point." At his left, quite suddenly, a chair is pushed back, and Prisca has risen, and is speaking in a low voice to a clerk, and has not looked at you.
+* Thank him, and say that you would sooner see the city by day before you take the city's peace upon you
+  $ b2.seat = "none"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  It is a thing that you can say, in the right voice, and you say it. There is a ripple, at the word "day," that you do not like. It is quickly covered. The Prince nods, slowly. "A man who wishes to look before he leaps," he says. "It is the best kind. The offer will stand." He does not say for how long. Messer Ottaviano takes the sword away, and there is a very faint sound in the hall, which you recognize, after a moment, as sixty people letting go of a breath.
+* Refuse it, and say that you came to be a guest
+  $ b2.seat = "none"
+  $ standing -= 1
+  $ bond.prisca += 1
+  $ secrecy += 1
+  "A guest," says Gualtiero. He turns the word over. He seems pleased with it, and quite unconvinced. "It is a very old and honorable thing to be. I trust that it will last." He gives a short bow. Ottaviano takes the sword away on its cushion with the carefulness of a man who has had it in his hands too long. At the Prince's left, you notice, Prisca's pen has started to move again.
+-> close
+
+# close
+## The steps
+The court breaks up, as a court does, in small knots and slow waves, with a great deal of low conversation in which your name goes round like a coin. You are presented. You are bowed to. You are given a cup, and decline it, and are given another, and take it. You are told, by a lady with a face like a moon and a smile like a sharp knife, that she knew a man who had a scar just like yours. You say that it is a very common scar. She says that it is the only one that she has ever seen on a living face.
+?if _vieri == 1
+  Vieri Salimbeni brings you a message. It is on very thin paper, folded very small, and it is not from him.
+?else
+  A page in the Merchant blue brings you a message. It is on very thin paper, folded very small, and he does not look at your face.
+?end
+It is in a hand as quick and level as an adding machine.
+> *Tomorrow, an hour after dark. The strong room, not the parlor. Come alone.*
+> *P.*
+?if b2.seat == "sword"
+  There is, underneath, in the same hand, a smaller line, written afterwards, in a different ink. *I did ask you not to.*
+?end
+You go out, at last, by the long stair, with Ottaviano beside you in an attentive silence. At the foot of it, in the street, with the sky already turning the color of a drowned slate, he stops, and says very gravely that the Prince is grateful for the Signore's presence. He says it as one reads from a card. Then he adds, in a different voice, very low, that the Prince does not as a rule rise to greet a guest, and that in the whole of his time he has seen him do it twice.
+You ask who the other was.
+"I am not at liberty to say," says Ottaviano. He is very white. He looks at your hands. "But he was not so tall."
+$ do rest()
+=> next

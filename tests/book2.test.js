@@ -57,11 +57,11 @@ const WAKES = [
   { place: 'haven', steward: 'hanno' },
 ];
 
-test('Book Two is listed as incomplete with two chapters', async () => {
+test('Book Two is listed as incomplete with four chapters', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 2);
+  assert.equal(book.chapterCount, 4);
 });
 
 test('chapter 1 plays through for every kind of waking and reaches chapter 2', async () => {
@@ -73,10 +73,10 @@ test('chapter 1 plays through for every kind of waking and reaches chapter 2', a
   }
 });
 
-test('chapter 2 plays through, pauses because Book Two is incomplete, and is free of dashes and braces', async () => {
+test('chapter 2 plays through, reaches chapter 3, and is free of dashes and braces', async () => {
   for (const wake of WAKES) {
-    const run = await play('b2c02', wake, { 'b1.keepers': 'sworn', wealth: 500 }, []);
-    assert.notEqual(run.frame.wait, 'choices');
+    const run = await play('b2c02', wake, { 'b1.keepers': 'sworn', wealth: 500 }, [], { stopAt: 'b2c03' });
+    assert.equal(run.game.state.chapter, 'b2c03');
     assert.doesNotMatch(run.text, /[–—]/);
     assert.doesNotMatch(run.text, /[{}]/);
     assert.doesNotMatch(run.text, /\$ do /);
@@ -85,12 +85,12 @@ test('chapter 2 plays through, pauses because Book Two is incomplete, and is fre
 
 test('chapter 2 records each decision', async () => {
   for (const [key, re] of [['kept', /Say nothing, and let the story stand/], ['curbed', /quietly ended/], ['shaped', /let it grow/]]) {
-    const run = await play('b2c02', {}, { 'b1.keepers': 'spared' }, [/Climb to the shrine/, re]);
+    const run = await play('b2c02', {}, { 'b1.keepers': 'spared' }, [/Climb to the shrine/, re], { stopAt: 'b2c03' });
     assert.equal(run.vars['b2.saint'], key);
   }
-  const friar = await play('b2c02', {}, { 'b1.keepers': 'spared', wealth: 3000 }, [/Make the shrine a great gift/]);
+  const friar = await play('b2c02', {}, { 'b1.keepers': 'spared', wealth: 3000 }, [/Make the shrine a great gift/], { stopAt: 'b2c03' });
   assert.equal(friar.vars['b2.friar'], 'paid');
-  const family = await play('b2c02', {}, { 'b1.keepers': 'spared' }, [/Tell him the truth|Tell her the truth/, /Say yes/]);
+  const family = await play('b2c02', {}, { 'b1.keepers': 'spared' }, [/Tell him the truth|Tell her the truth/, /Say yes/], { stopAt: 'b2c03' });
   assert.equal(family.vars['b2.valerii'], 'sworn');
   assert.equal(family.vars['b2.fiammetta'], 'allowed');
 });
