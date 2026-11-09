@@ -11,6 +11,7 @@ import { assign } from '../state.js';
 import { statDef } from '../content.js';
 import { toNum } from '../expr.js';
 import { EMPTY_LOOKS } from '../looks.js';
+import { siteKnown } from '../maps.js';
 
 /** The systems part of the state, created on first use (tests may run without it). */
 export function sysOf(ctx) {
@@ -130,6 +131,7 @@ export function argProblem(kind, value, content) {
     const [key, label, file] = CATALOG_KINDS[k];
     return Object.hasOwn(systems[key], value) ? null : `unknown ${label} "${value}" (see ${file})`;
   }
+  if (k === 'site') return siteKnown(value) ? null : `unknown map site "${value}" (use map.site, see engine/maps.js)`;
   if (k === 'number') return typeof value === 'number' && Number.isFinite(value) ? null : `expected a number, got ${JSON.stringify(value)}`;
   if (k === 'bool') return typeof value === 'boolean' ? null : `expected true or false, got ${JSON.stringify(value)}`;
   if (k === 'text') return typeof value === 'string' ? null : `expected text, got ${JSON.stringify(value)}`;
