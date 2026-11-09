@@ -1,0 +1,406 @@
+// Book One, Chapter 5 (session 9). Collis begins: a deal struck in daylight starts the fortune.
+// Prisca's offer at dusk, a day out in the sun with three leads, and a name for the firm.
+@chapter b1c05
+@title A Name in the Sun
+@book burning-city
+@version 1
+
+# start
+## The offer
+$ _lead = 0
+$ _deals = 0
+$ _factor_seen = 0
+$ b1.collis_start = "none"
+$ b1.factor = "unmet"
+Prisca does not send for you the next night. She comes down to the vaults herself, an hour after dusk, with a lamp in one hand and the abacus in the other, and stands at the foot of your niche as though she were checking the level of an oil jar.
+"Walk with me," she says.
+She takes you up the stair and through the counting room and out onto the roof of the warehouse, where the whole river lies below in the dark, and the barges ride at their ropes like sleeping cattle. She sets the lamp on the parapet and does not speak for a while. You have learned that this is how she begins.
+"The house is rich," says Prisca. "You may have wondered how. It is rich because a great many people owe it a very little, and none of them know whom they owe. It is a good way to be rich. It has one flaw."
+"The sun," you say.
+"The sun." She turns a bead. "Everything that is truly valuable happens by day. The wharves are loaded by day. The granaries open by day. A man signs his name by day, and shakes your hand by day, and says yes or no with the light on his face. We do it all through mortal hands, and mortal hands are not honest. Hanno has shown you the book."
+You remember it: the names, and beside each, the day he will begin to steal.
+?if b1.sun_known == "prisca"
+  "I have been thinking," says Prisca, "about what you are."
+  She says it quite calmly. She does not look at you, and that is how you know she has thought of little else.
+  "A man who sleeps among the dead, and wakes with the light on his hands, and is not hurt. I have not seen it. I have heard it spoken of, in the way a very old person hears of a country they have never visited. I do not want to know how. I want to know what it is worth."
+  She looks at you now. The little dry smile has gone. What is in its place is much more serious, and rather more like hunger.
+  "It is worth a very great deal, to a house like mine. I would like to be the first to say so."
+?elif b1.sun_known == "tiro"
+  Tiro has been at the foot of the roof stair for a quarter of an hour, pretending to polish a lamp. He has the look of a man who has told nobody anything and would like that on the record.
+  "I have a mortal problem," says Prisca, "and you are the only one in my house who is not wholly a vampire's problem. I will not ask what you are. I have noticed what you are not. You are not asleep at dawn."
+  She says it so lightly that it takes you a moment to understand that she has just put her whole hand on the table.
+  "I did not hear it from Tiro," she adds. "He is a very poor liar, and he has not slept properly since the night the Lictors came."
+  A small anguished noise comes from the foot of the stair.
+?else
+  "I am going to make you a proposal," says Prisca, "and I am going to ask you to consider that you are, among the made, the one least bound to the night. You are a stranger to Rome. You have no sponsor but me. You have a good head for a ledger, which is unusual, and you have, I think, a very ordinary mortal face."
+  She smiles, a little.
+  "I have noticed that you do not sleep quite as the rest of us do. I do not ask why. I would like to put it to use."
+?end
+She sets down the abacus.
+"Collis Trading," says Prisca. "A new firm, with a new name, and a man at its head who can walk into a counting house at noon. I would stake it. I would take a share. And I would very much like it never to be traced to this roof."
+She waits.
+:the_terms
+* Take her stake, and her share
+  $ b1.collis_terms = "partner"
+  $ do earn(110)
+  $ bond.prisca += 3
+  $ standing += 1
+  "A fair share," says Prisca. "Not a large one. I am only taking enough to make sure I am listened to." She names the number, and it is a perfectly decent one, and you suspect that it has been decent for four hundred years. She does not smile again. She has no need to.
+* Borrow what you need, and pay it back
+  $ b1.collis_terms = "loan"
+  $ do earn(60)
+  $ bond.prisca += 1
+  $ cunning_brutal -= 1
+  "A debt," says Prisca, with real approval. "It is the cleanest way. I shall write it in a very small hand." She does. "You will find that I am a patient lender, and that I never forget the figure."
+* Go alone ?if can_invest("rome.wine") or can_invest("rome.shipping")
+  $ b1.collis_terms = "alone"
+  $ defiance += 2
+  $ standing -= 1
+  $ cunning_brutal += 1
+  "On your own purse," says Prisca. "And your own name. And the sun, and the risk." She is quiet a moment, and then she inclines her head, which for her is a good deal. "It is, I notice, what I would have done. I shall not help you. I shall not hinder you. When you have made a mistake I shall tell you the price of it afterward."
+---
+It is Hanno who sees you out, an hour before dawn. He has not said a word during the whole of the evening. He puts a small bronze token in your hand, stamped with a six petaled flower, and he closes your fingers on it with his dry old ones.
+"This opens a door in Ostia," he says. "It opens another in the Subura. It does not open the third, which is in the Argiletum. You will want to open the third."
+He lets go.
+"Be home before the sun is high," says Hanno, who is the only one in the house who knows that you will not need to be.
+?if b1.sun_known == "prisca"
+  Prisca watches from the stair. She says nothing at all. It is the loudest thing that anyone has ever said to you.
+?end
+-> dawn
+
+# dawn
+## Morning
+The house sleeps. It is the best of its habits, you think: a hundred and some years of it, in the vaults under the Emporium, with the door barred and the wine jars stacked like a wall.
+?if b1.sun_known == "prisca"
+  There is a bar on the cellar grate that has not been there before. It is on the inside, and when you lift it, it moves without a sound. You do not ask who oiled it.
+?elif b1.sun_known == "tiro"
+  There is a lamp left burning on the cellar stair, which nobody does by day. Under it, on a sack of lentils, Tiro has left a clean tunic, a cloth hat, and a note that says only: GOOD LUCK, DO NOT DIE, I AM NOT HERE. You find that you are smiling.
+?else
+  You wait until the last of the sleepers has turned his face to the wall. Then you go up the cellar stair as quietly as a held breath, and the grate gives, and the sun lays its hand upon your neck.
+?end
+It is a very bright morning. It stings like fever, as it always does, and it weakens you in a thin steady way that you have begun to learn the cost of. But it does not burn, and the street is full of people who have no idea that a dead man is walking among them in a clean tunic with a bronze token in his fist.
+[roman born_in_rome] You know these streets. You grew up in the noise of them, and the smell of bread and wet stone is a thing you had not known you missed.
+[merchant trader] You find that your eyes go, without being told, to the shopfronts: what they sell, what it costs, what is not being sold that should be. It is the one gift of your old life that death has not troubled.
+[legionary] You walk like a man on a march, and nobody stops you. A veteran's stride is a better pass than a document.
+[gladiator] People move out of your way. You have the shoulders for it, and a look in the eye that has been trained to be remembered. It is not helpful. You pull the cloth hat lower.
+[house_slave freed] You have never walked this city as a free man in daylight, with money in your belt and nobody's leave to ask. You find, a little to your surprise, that it makes your hands shake.
+[physician_aide] You notice, as you walk, who is limping, who is yellow, who has the beginning of a cough. It is not a cheerful habit. It is, however, a way of seeing a city that no merchant ever learns.
+$ do phase("day", 3)
+-> day
+
+# day
+## Three leads
+:day
+?if actions_left() == 3
+  The morning is yours. Three doors, by Hanno's count, and the day is long enough for most of them.
+?elif actions_left() == 2
+  The sun is nearly overhead. The streets have gone quiet and white.
+?else
+  The afternoon is leaning on the roofs. If there is to be a deal, it will be made now.
+?end
+* Go down to the Subura, to a wine shop with a woman's name on the door [once] ?if actions_left() > 0
+  ~> naevia
+  $ do act()
+* Take the road to Ostia, at noon, and look at the ships [once] ?if actions_left() > 0
+  ~> ostia
+  $ do act(1, true)
+* Follow the grain factor from Hanno's book [once] ?if actions_left() > 0
+  ~> lucrio
+  $ do act()
+* Walk the burned lots below the Esquiline, where a man is selling land [once] ?if actions_left() > 0
+  ~> burned_lots
+  $ do act()
+* Go home before the light turns
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :day
+?end
+-> dusk
+
+# naevia
+There is a wine shop in the Subura with a woman's name painted over the door in red, and a bench outside, and three old men on the bench arguing about the Games. Inside it smells of vinegar and lamp oil, and behind the counter, with a wax tablet and a cup of something thin, sits a freedwoman of fifty with arms like a baker's and a face that has never been fooled twice.
+"You're Prisca's," says Naevia, without looking up. "Hanno said you would come. He said you were polite. I told him that polite men in good tunics are the first to ask me for credit."
+$ do meet("naevia")
+$ bond.naevia += 1
+You do not ask for credit. You ask her what she cannot get.
+She looks up then. It is a slow look, and at the end of it she sets the cup down.
+"Oil," she says. "Good oil. Not the Spanish rubbish that comes up the river in skins. Oil from the hills, from small presses, where somebody still cares. There is a man in Etruria who used to send me three jars a season, and he is dead, and his sons have sold the grove. I have forty customers who will pay twice the Spanish price and not complain. I cannot find a single jar."
+?if collesanto >= 10
+  Something turns over under your ribs. Collesanto has oil. Collesanto has always had oil, and a press in the old Ennian barn that the village was too poor to fire, and a hill of trees that nobody had the money to harvest properly.
+  "I know a hill," you say. "I know a press."
+  Naevia's eyes narrow. "Do you."
+?end
+You tell her a little of it, not the dead and not the fire: only that there is a village on a hill with good trees, and nobody to carry the oil to market. She listens without interrupting, and when you have finished she pushes the tablet across the counter and says, "Write me a price."
+:the_wine
+* Write her an honest price, and promise to send the best of the pressing
+  $ bond.naevia += 3
+  $ _lead = 1
+  ?if can_invest("rome.wine")
+    $ do invest("rome.wine")
+    $ _deals += 1
+    ?if b1.collis_start == "none"
+      $ b1.collis_start = "wine"
+    ?end
+    $ do send_home(8)
+    $ humanity += 1
+    She reads it twice, and she does not argue the figure, which in a Roman shopkeeper is a form of love. "Done," says Naevia. "If it is half as good as you say, I will tell every cook on the Palatine." She shakes your hand across the counter. Hers is hard and warm and entirely alive. You think of the hill, and the barn, and the trees, and for the first time since the fire you let yourself think of Collesanto as a place that might be something other than a grave.
+  ?else
+    She reads it twice. "I like it," says Naevia. "I cannot take it from a man who has not got the jars. Come back when you have a press that works, and a purse that can fill it." It is a fair answer. It is also, you notice, an invitation.
+  ?end
+* Tell her the truth: you can only promise to try
+  $ bond.naevia += 2
+  $ humanity += 1
+  $ _lead = 1
+  She laughs, a short rough bark. "Then try," she says. "I have been promised oil by better men and received water." She pushes a cup toward you, and when you shake your head, she drinks it herself, and does not take offense. You leave with her blessing and no contract, and you understand that this is the better outcome, and the more dangerous.
+* Leave, and think about it
+  She shrugs. It is the shrug of a woman who has seen a great many young men leave to think about it. "The shop is here," she says. "It has been here since before you were born."
+<~
+
+# ostia
+The road to Ostia is a long white band in the glare, and the sun on it is something you have to carry. It is the first time you have walked in the full height of noon, with no wall to lean on, and it is nothing like the mornings. It presses. It leans. By the fifth milestone you have begun to move in short careful sentences, in your head, one step to each. You think: nobody will see. You think: this is what the others cannot do.
+$ do power("minor")
+$ secrecy -= 1
+The port itself is another noise: ropes and gulls and a hundred hammers. You find the shipowner by asking at the third wharf for the man who has not got a ship. He is Vettius, forty, big, sunburned, sitting on an upturned crate with a cup of water and a face like a wet cloth. Behind him the hull of a grain barge rides at the quay, low in the water, going nowhere.
+"My partner is dead," says Vettius, to a stranger, because he has said it to everyone else. "He took the other half of the money to Puteoli to buy a cargo, and a fever took him on the road, and the cargo has gone to someone who did not have to look at his widow. I have a ship. I have a crew. I have no capital and a month's wages owing and a note on the hull." He drinks. "If you are here to buy it at a third, you can sit down. Every vulture in Ostia has already told me they are my friend."
+He is, you think, the first honest man you have met in a week.
+?if band("hunger") == "starving"
+  You become aware, while he speaks, that the veins in his sunburned throat are very large, and very close, and that the sun has made you terribly thirsty. You step back a pace without being asked, and pretend to examine the ropes.
+?end
+[merchant trader] You walk the length of the barge's deck. The caulking is good, the mast sound, the crew's quarters clean. He is not lying about the ship. He is lying only about how bad the debt is, and you can see it in the way he keeps his hand on the hatch, like a man who does not want to lose a dog.
+[legionary] You note the crew: six hands, three of them old soldiers, steady, quiet, and unpaid. They are the kind of men who will stay a month on promises, and that is the whole of the secret.
+[gladiator house_slave physician_aide] You do not know ships. You know men, and you watch his crew, and you see they have not left. Men do not stay on a sinking boat for a stranger. They stay for the man.
+:the_ship
+* Buy half his barge, and pay the wages
+  $ _lead = 1
+  ?if can_invest("rome.shipping")
+    $ do invest("rome.shipping")
+    $ _deals += 1
+    ?if b1.collis_start == "none"
+      $ b1.collis_start = "shipping"
+    ?end
+    $ standing += 1
+    Vettius does not weep, which is to his credit, and does not embrace you, which is to yours. He signs where you tell him. The crew, when he calls them up, give a ragged cheer, and the nearest, a man with a scar through one eyebrow, says to you in a very low voice, "We'd have gone the end of the month, sir. We'd not have gone the next." You shake his hand. It is the first ship you have ever owned half of.
+  ?else
+    Vettius hears the figure, and gently, with great politeness, says that he is sorry. "I would be a fool to take your charity," he says, "and a worse fool to refuse it, and I do not know which is worse." You leave a small sum anyway, to cover the wages for a week, and he thanks you in a voice that is no longer quite steady.
+  ?end
+* Tell him you will lend him the wages and nothing more
+  $ cunning_brutal -= 1
+  $ do earn(-6)
+  $ _lead = 1
+  Vettius takes it, with a look of a man who has been given a plank in a flood. "I'll pay it," he says. "A month. Two. Come and find me." He says it as though he means it. You suspect he does, and also suspect it may be more than he can do.
+* Walk back to Rome without making an offer
+  The road home is long, and the sun is not through with you yet. You get half way before you have to sit down in the shade of a milestone and wait for your hands to stop trembling. It is not a wasted trip. You can see why Prisca wants a man in the day.
+<~
+
+# lucrio
+Lucrio the grain factor is a handsome heavy man in his forties, with a good ring, a better cloak, and the walk of a person who has not paid for anything in years. He is on Hanno's book with a small mark beside his name, and the mark says he is beginning, and that Hanno does not yet know how much.
+You follow him from his house to the Horrea Galbae, which is a granary the size of a small town. You stay at a distance. You are, you find, extremely good at it: nobody looks at a man in a cloth hat in the sun.
+$ do meet("lucrio")
+$ _factor_seen = 1
+He goes in by the east door, and three carts later he comes out by the west, with a boy carrying a sack that he does not want the world to see. The sack goes into a cart that does not belong to the house, and the cart goes down a side street, and the boy comes back for a coin, which he receives, and for a second coin, which he does not.
+He is not stealing much. That is the clever part. It is perhaps a tenth of a cart a day, which in a year is a house, and nobody is hurt but the Merchant line, which is in no position to object.
+He goes to a tavern for lunch, and you go in after him, and you sit on the next bench, and he does not notice you at all until you put a small brass token on the table between you, a six petaled flower, and he looks down at it, and the color goes out of his face like a plug pulled from a basin.
+"Sit down," you say, "Lucrio."
+:the_factor
+* Take it to Prisca's house: the man is a thief and she should know
+  $ b1.factor = "exposed"
+  $ standing += 1
+  $ cunning_brutal += 1
+  $ bond.prisca += 1
+  You do not threaten him. You tell him what you saw, and what you will do, and you watch him understand it. He does not argue. He does not plead, either, which you had expected. He says, in a quiet, hollow voice, "She will not ask me to explain." And you realize, with a small cold shock, that he has been afraid of this for years, and is almost relieved.
+  Hanno handles it. You do not ask how. You are told, the next evening, that the house has found a new factor, and that Lucrio has retired to a farm in Campania, and that a man who retires to a farm in Campania generally stays there.
+* Offer him a choice: work for you, in the open, and stop stealing
+  $ b1.factor = "bound"
+  $ cunning_brutal -= 2
+  $ _lead = 1
+  $ do meet("lucrio")
+  You say it plainly. You will not tell Prisca, and you will not tell Hanno, so long as the book stops growing, and Lucrio carries a share of the work of a firm that does not yet exist. He listens. He is a clever man, and he sees what he is being sold: a rope, and a ladder, in one.
+  "And if I take it?" he says.
+  "Then you have a better job than the one you have," you say, "and a friend who has not told the Merchant house about the east door."
+  He laughs, a short astonished laugh, and puts out his hand. You take it. It is warm and damp and shaking a little, and it belongs, you think, to the first man who will ever work for Collis.
+  ?if can_invest("rome.lending")
+    He knows a great many debts. Half of them are bad, and the other half are not, and he offers, at once, with the eagerness of a man who has found a use for his talents, to show you which. You listen.
+  ?end
+* Say nothing, and let him go
+  $ b1.factor = "spared"
+  $ humanity += 1
+  $ standing -= 1
+  You put the token back in your tunic. You rise. You say, "I think you have somewhere to be." He stares at you. You walk out into the glare, and you hear, behind you, the sound of a man who has just been given a second chance and does not yet believe it.
+  It will cost the house a tenth of a cart a day, for some time. You decide that you can live with it.
+?if b1.factor == "bound"
+  :the_lending
+  * Buy the good debts, and the right to collect them
+    ?if can_invest("rome.lending")
+      $ do invest("rome.lending")
+      $ _deals += 1
+      ?if b1.collis_start == "none"
+        $ b1.collis_start = "lending"
+      ?end
+      $ secrecy -= 1
+      Lucrio goes through his memory like a priest through a prayer book, and by dusk you have bought eleven debts at fair prices and four at very fair ones, and a list of seventeen men who will, if all goes well, be grateful to you.
+    ?else
+      You cannot afford the price he names. You thank him and ask him to keep the list.
+    ?end
+  * Leave it for another day
+    He bows, with a flourish that is only slightly ironic.
+?end
+<~
+
+# burned_lots
+Four months ago a fire took a whole block of tenements in the low ground under the Esquiline. Nobody died, or nobody that anyone counted. The ruin is still there: black beams, tumbled brick, children picking through it, a donkey tied to a post. At the edge, with a tablet and an assistant, stands a bald auctioneer with a voice like a trumpet.
+He is selling the land in lots. It is not, he calls out to the little crowd, an opportunity for the timid. A burned block is a clean block. Any fool can see that when a man builds again on ashes, he builds for the next fifty years.
+You think, without wishing to, of the thatch at Collesanto going up in the dark. It is not a kind thought. It is also, perhaps, a good business.
+Rome burns. It does not burn all at once, but it burns constantly, a street, a block, a wing, and it is rebuilt again, bigger, by someone who has money to do it. You have heard the old ones speak of it as a kind of weather.
+?if b1.prisca_terms == "defied"
+  You feel Prisca's eye on you as though she were standing at your shoulder. She told you once, with perfect calm, what a man in your position is for. She was right, and you are annoyed.
+?end
+:the_lot
+* Bid for a lot, and build on it
+  ?if can_invest("rome.insulae")
+    $ do invest("rome.insulae")
+    $ _deals += 1
+    ?if b1.collis_start == "none"
+      $ b1.collis_start = "insulae"
+    ?end
+    $ standing += 1
+    The hammer comes down on a plot the shape of a boot, and the auctioneer calls the name of the buyer for the record, and you have to think for an instant before you can say it. You say it. It is the first time you have heard it said aloud in the sun. It sounds, you think, like a promise.
+  ?else
+    You bid, and the figure runs away from you. The lot goes to a senator's freedman, who looks at you with a sort of bland sympathy. You note his name.
+  ?end
+* Ask about the other kind of property
+  $ _lead = 1
+  The auctioneer looks at you with the first real interest he has shown. He takes you by the elbow and walks you to a little shed behind the lots, where a second man, thin and pale and perfectly pleasant, sits at a table with a ledger.
+  "Strong young men," says the second man. "Trained. From the East. From the Rhine. They need a house, and a master, and a roof. There is a school in Capua that will take a partner. Or, if you prefer, I deal in a more direct sort of labor. At a very good rate."
+  He does not say the word. He does not have to. You have been sold in this market, or you know someone who was, or you will not pretend that you do not know what it is.
+  [gladiator] You know exactly what a gladiator school costs, in money, and in the other thing. You know the smell of the cells. You know the faces of the ones who do not come back.
+  [house_slave freed] You know how it feels to be priced. You know the particular sound of a man being measured. Your throat has gone tight, and you do not trust your voice.
+  :the_dark
+  * Buy a share in the school
+    ?if can_invest("rome.gladiators")
+      $ do invest("rome.gladiators")
+      $ _deals += 1
+      ?if b1.collis_start == "none"
+        $ b1.collis_start = "gladiators"
+      ?end
+      $ humanity -= 2
+      $ velati_regard -= 1
+      $ cunning_brutal += 2
+      It is the fastest money you have seen all day. It is also, you will remember, the first money of Collis that anyone had to bleed for. The thin man shakes your hand. It is dry and cool, and you are quite sure he knows exactly what he has bought.
+    ?else
+      You cannot afford the share, and you are, absurdly, ashamed of how relieved you are.
+    ?end
+  * Buy the other thing
+    ?if can_invest("rome.slaves")
+      $ do invest("rome.slaves")
+      $ _deals += 1
+      ?if b1.collis_start == "none"
+        $ b1.collis_start = "slaves"
+      ?end
+      $ humanity -= 4
+      $ velati_regard -= 2
+      $ cunning_brutal += 3
+      $ standing += 1
+      You sign. The thin man pushes the ledger back with a smile that does not reach his eyes. It will make you a great deal of money. It will not make you anything else. You do not look at the people in the yard behind the shed on your way out. You are very careful not to.
+    ?else
+      You cannot afford it. You leave quickly, before you can wonder whether you would have signed.
+    ?end
+  * Refuse, and make sure he knows why
+    $ humanity += 2
+    $ defiance += 1
+    $ standing -= 1
+    $ cunning_brutal += 1
+    "I will not do business with you," you say, "now or ever." The thin man looks politely puzzled. "A principle," he says, "is a very expensive thing, for a young man." You say that you know. He says that he will remember you. You do not doubt it.
+  * Say nothing, and walk away
+    You do not say a word. You do not look back. It is the safest thing, and the quietest, and you carry the weight of it for the rest of the afternoon.
+* Walk the lots, and buy nothing
+  You come away with a handful of cold ash and a number, written in your head, of a plot that you will not forget.
+<~
+
+# dusk
+## Dusk
+The sun goes down behind the Janiculum as if it had a ship to catch, and you go back to the warehouse at a walk, with the dust of the day on your tunic, and your hands steady again, and the sound of the city in your ears like a very large tired animal.
+?if b1.collis_start == "none"
+  You have come home with nothing. You are quite aware of it.
+  Hanno is waiting at the foot of the cellar stair. He regards you for a long moment, and then he holds out a small tablet and a sealed jar.
+  "Oil," he says. "From Etruria. Old stock. A woman in the Subura will buy all you can find, and I told her you would." It is not an accusation. It is possibly the kindest thing he has ever done.
+  $ do earn(-4)
+  ?if can_invest("rome.wine")
+    $ do invest("rome.wine")
+    $ _deals += 1
+    $ b1.collis_start = "wine"
+  ?end
+?end
+?if must_feed()
+  ~> feed_tonight
+?end
+-> naming
+
+# feed_tonight
+The day has taken more than you knew. You become aware of the hunger as a kind of fog, thickening along the edges of the lamp.
+?if b1.cup == "accepted"
+  The cup room is empty at this hour, but the laundress is there, as if she had been waiting. She holds out her arm without speaking.
+  $ do feed("donor")
+?elif b1.cup == "refused"
+  You go to the river and the cattle pens, and it is a dull and thin meal. You eat it anyway.
+  $ do feed("animal")
+?else
+  You go out in the dark and find a drunk asleep behind a wine shop, and you do not take long about it, and you do not leave him to die.
+  $ do feed("human")
+  $ secrecy -= 1
+?end
+<~
+
+# naming
+## A name
+Prisca is in the counting room. She has a tablet with a blank face and a lamp turned down, and Hanno beside her with the stylus ready. They have set a table, which none of them will eat from. She does not ask how the day went. She asks only one question.
+"What is the firm's name?"
+$ do discover("collis")
+You have been carrying it all day. You have known it, in a way, since the road to Ostia. You do not remember deciding.
+"Collis," you say.
+"A hill," says Prisca.
+"A hill," you say. "A small one."
+She looks at you for a moment longer than she needs to. Then she picks up the tablet, and sets it down again without writing.
+?if b1.prisca_terms == "defied"
+  "A hill with a village on it," says Prisca. "Which is a very short walk for an enemy, when the enemy has an hour and a sharp mind."
+?else
+  "A hill with a village on it," says Prisca, gently. "Which is a short walk for an enemy who is patient."
+?end
+"I will not ask you to change it," she says. "I will ask you to decide what you want it to be."
+:the_name
+* Keep the name, and let the link stand
+  $ b1.collis_name = "tribute"
+  $ humanity += 1
+  $ secrecy -= 1
+  $ bond.prisca += 1
+  "Then keep it," says Prisca. "It is yours. If it is traced, it is traced. I would rather have a name that means something than a name that is safe." She writes it in a firm square hand, and Hanno blots it, and it is done: Collis Trading, of the Argiletum, dealers in oil and wine and other things. It sounds, you think, like a family that has been in business for a hundred years.
+  You think of the hill, and the barn, and the old press. You think: let them come.
+* Hide the link: a different name on the door, and the village stays a secret
+  $ b1.collis_name = "hidden"
+  $ do hide_collis(true)
+  $ standing -= 2
+  $ cunning_brutal -= 2
+  $ secrecy += 3
+  "Then we shall be a firm with no story," says Prisca, "and a firm with no story is a firm with a secret. It will cost us a little trust in the Forum. I have found that trust is cheaper than blood." She nods to Hanno, and he writes a different name, a bland one, with the village folded out of it like a fold in a letter.
+  It is the safest thing. It is also the first lie you have told with a ledger.
+---
+$ do rest()
+Hanno reads you the first day's figures in his dry slow voice. They are not large. They are, he says, the right shape.
+?if rested("income") > 0
+  There is a small purse on the table the next evening, the first coin of the business to come in. You put your hand on it and do not know what to say.
+?end
+Then he lays down the stylus, and for the first time since you have known him, he smiles. It is a very small smile. It is a smile that, you realize, has been waiting a very long time for something to be pleased about.
+There is a letter on the table. It has been delivered by hand, in the afternoon, by a man in a plain grey cloak who did not wait for an answer. The wax has no seal. The hand is small and quick and perfectly clear.
+?if b1.galerius == "hostile"
+  > I understand that a new firm has opened in the Argiletum, and that it is managed with remarkable energy by day. I had not known that the Merchant house had mortal agents of such vigor. I shall make a note of it. I make a note of everything. G.
+?elif b1.galerius == "wary"
+  > I hear that the Merchant house has found a mortal man of business. I am happy for it. I will, of course, wish to meet him. I shall call, at an hour convenient to him. G.
+?else
+  > A note of congratulation, from the Senate's census: I hear the Merchant house has opened a trading firm. Such enterprise in the made is rare, and I shall follow it with interest. It is, of course, only an interest. G.
+?end
+Prisca reads it over your shoulder. She says nothing for a time. Then she says, quite lightly, "He has noticed that the man of business is not a man who has ever been seen at the house." She picks up the abacus. "We shall have to be very careful."
+She turns it over in her hands.
+"But that, I think, is a very good problem to have."
+=> next

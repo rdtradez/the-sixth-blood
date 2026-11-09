@@ -87,6 +87,18 @@
       "title": "The Lictors",
       "book": "burning-city",
       "text": "The Senate's enforcers take their name from the officers who walk before a Roman magistrate with rods bound in red cord. They are patient, they are old, and they are polite until the moment they are not."
+    },
+    "collis": {
+      "category": "lore",
+      "title": "Collis",
+      "book": "burning-city",
+      "text": "The name of the firm, from the Latin for a hill. It deals in oil, wine, ships and debts, and it is run in the daylight by a man the dead cannot match.\n\nA firm leaves a paper trail, and a paper trail leads somewhere. Hide the link and the firm is safer and trusted less. Keep it and the name carries the hill with it."
+    },
+    "the_lesser_cup": {
+      "category": "lore",
+      "title": "The lesser cup",
+      "book": "burning-city",
+      "text": "Animal blood will keep a vampire alive, and keep him close to what he was. It leaves him slower, hungrier and weaker in a fight, and some of the old ones say a little sad.\\n\\nThe made have gone over to it for as long as there have been the made. A great many of them have gone back. It is not a vow that anybody keeps once and is done with."
     }
   }
 }

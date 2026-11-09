@@ -31,6 +31,9 @@
     "tiro": { "gender": "m", "name": "Tiro", "title": "A younger member of the Merchant coven", "bio": "A bookkeeper's son turned at nineteen, who was never good at sums and is very good at people. He talks when he is afraid, and he is afraid quite often." },
     "galerius": { "gender": "m", "name": "Galerius", "title": "Lictor of the Senate of Blood", "bio": "An officer of the Senate's enforcers, polite, patient and very old. He has been told to watch you." },
     "hanno": { "gender": "m", "name": "Hanno", "title": "Keeper of the Merchant house ledgers", "bio": "A Carthaginian who has kept accounts for three hundred years and has said perhaps nine hundred words in that time." },
+    "naevia": { "gender": "f", "name": "Naevia", "title": "Keeper of a wine shop in the Subura", "bio": "A freedwoman of fifty with a baker's arms and a face that has never been fooled twice. She is the first customer you did not frighten." },
+    "lucrio": { "gender": "m", "name": "Lucrio", "title": "A grain factor of the Merchant house", "bio": "A handsome heavy man with a good ring who has been taking a tenth of a cart a day. He knows a great many debts." },
+    "vibia": { "gender": "f", "name": "Vibia", "title": "A woman of the Subura", "bio": "A thin tired woman with a mended dress and a husband who is not coming home. She came to ask a stranger for help." },
     "et_fledgling": { "gender": "f", "name": "Test Fledgling" },
     "et_keeper": { "gender": "m", "name": "Test Keeper", "title": "Test keeper" },
     "et_love": { "gender": "opposite:hero", "names": { "f": "Test Beloved", "m": "Test Beloved", "x": "Test Beloved" }, "title": "Test beloved", "bio": "A developer person who shows how the People screen lists someone you have met." }

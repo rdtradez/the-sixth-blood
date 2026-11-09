@@ -323,6 +323,102 @@
       "default": "watching",
       "note": "Chapter 4: how the Lictor stands toward him",
       "book": "burning-city"
+    },
+    "b1.collis_terms": {
+      "kind": "enum",
+      "values": [
+        "partner",
+        "loan",
+        "alone"
+      ],
+      "major": true,
+      "default": "partner",
+      "note": "Chapter 5: how he took Prisca's backing for the firm",
+      "book": "burning-city"
+    },
+    "b1.collis_start": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "wine",
+        "shipping",
+        "lending",
+        "insulae",
+        "gladiators",
+        "slaves"
+      ],
+      "major": true,
+      "default": "wine",
+      "note": "Chapter 5: the first deal that started the fortune",
+      "book": "burning-city"
+    },
+    "b1.collis_name": {
+      "kind": "enum",
+      "values": [
+        "tribute",
+        "hidden"
+      ],
+      "major": true,
+      "default": "tribute",
+      "note": "Chapter 5: whether the firm keeps the link back to Collesanto",
+      "book": "burning-city"
+    },
+    "b1.factor": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "exposed",
+        "bound",
+        "spared"
+      ],
+      "major": true,
+      "default": "unmet",
+      "note": "Chapter 5: what he did about the grain factor who was skimming",
+      "book": "burning-city"
+    },
+    "b1.breaking": {
+      "kind": "enum",
+      "values": [
+        "kin",
+        "drained",
+        "clean"
+      ],
+      "major": true,
+      "default": "clean",
+      "note": "Chapter 6: what brought him to his breaking point",
+      "book": "burning-city"
+    },
+    "b1.vow": {
+      "kind": "enum",
+      "values": [
+        "animal",
+        "donor",
+        "human"
+      ],
+      "major": true,
+      "default": "animal",
+      "note": "Chapter 6: what he swore about feeding on the living",
+      "book": "burning-city"
+    },
+    "b1.relapse": {
+      "kind": "flag",
+      "major": true,
+      "book": "burning-city",
+      "note": "Chapter 6: he broke his vow in the days after he made it"
+    },
+    "b1.vibia": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "told",
+        "helped",
+        "paid",
+        "met"
+      ],
+      "major": true,
+      "default": "none",
+      "note": "Chapter 6: what he did about the woman whose husband he fed on",
+      "book": "burning-city"
     }
   }
 }

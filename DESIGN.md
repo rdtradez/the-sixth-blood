@@ -44,7 +44,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 2: flags, story voice stats, pronouns and names, origin variants, library screen
 - [x] Session 3: game systems
 - [x] Session 4: player features, developer tools, look and feel, sample chapter
-- [x] Sessions 5 to 8: character creation and the prologue, the Rome map, Book One chapters 1 to 4 (Book One is in progress)
+- [x] Sessions 5 to 9: character creation and the prologue, the Rome map, Book One chapters 1 to 6 (Book One is in progress)
 
 ### Session 1 notes (for the next session)
 
@@ -120,4 +120,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New people (`content/people.json`): Tiro, Galerius, Hanno, plus a title and bio for Prisca. New codex entries: the Merchant line, the Veil, the Senate of Blood, the Lictors. Content notes: chapter 3 carries `blood` and `slavery`, chapter 4 carries `violence`.
 - Nobody is recruited or sired in these chapters (coven timing: Book One only takes the hero in). Coven members are plain people with `bond.*` values until the stay or go decision near the end of the book.
 - `tests/book1b.test.js` plays chapters 3 and 4 down their branches. `tests/creation.test.js` now expects four written chapters: update that count each session.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 9 notes (for the next session)
+
+- Book One, chapters 5 and 6 are built (`content/burning-city/ch05.tsb` and `ch06.tsb`, chapter ids `b1c05` and `b1c06`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 6 and carries on by itself when chapter 7 is added to the manifest.
+- Session 9 is built on the `session-8` branch (which sits on `session-7`; none of sessions 6 to 8 are on `main` yet). Merge `session-7`, `session-8` and then `session-9` to get everything.
+- Chapter 5 starts Collis (the first venture is bought through `invest()` and the firm is named). Chapter 6 uses the feeding system and the vow about what he drinks; later chapters should read `animal_diet()` for fights rather than a flag. Both chapters use the day and night loop and end with `rest()`; chapter 5 ends with `=> next`.
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New people (`content/people.json`): Naevia, Lucrio, Vibia. New codex entries: Collis, the lesser cup. Content notes: chapter 5 carries `blood` and `slavery`, chapter 6 carries `blood`, `violence` and `grief`.
+- Venture prices are fixed in `content/ventures.json`, so how much a hero can buy in chapter 5 depends on his purse and Prisca's backing. Retune the stakes in the chapter if the venture prices change.
+- `tests/book1c.test.js` plays chapters 5 and 6 from the prologue down their branches, including each way chapter 6 can be reached. `tests/creation.test.js` now expects six written chapters: update that count each session.
 - Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.

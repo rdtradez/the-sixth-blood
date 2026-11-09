@@ -61,6 +61,25 @@
           "notes": [
             "violence"
           ]
+        },
+        {
+          "id": "b1c05",
+          "file": "burning-city/ch05.tsb",
+          "title": "A Name in the Sun",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
+        },
+        {
+          "id": "b1c06",
+          "file": "burning-city/ch06.tsb",
+          "title": "The Price of the Cup",
+          "notes": [
+            "blood",
+            "violence",
+            "grief"
+          ]
         }
       ],
       "incomplete": true
