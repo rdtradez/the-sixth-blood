@@ -286,7 +286,26 @@
           "collesanto": 30
         }
       },
-      "chapters": []
+      "chapters": [
+        {
+          "id": "b2c01",
+          "file": "blood-and-gold/ch01.tsb",
+          "title": "A Great Deal of Interest",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b2c02",
+          "file": "blood-and-gold/ch02.tsb",
+          "title": "The Saint of the Hill",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        }
+      ],
+      "incomplete": true
     },
     {
       "id": "crown-of-ashes",

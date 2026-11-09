@@ -1,0 +1,411 @@
+// Book Two, Chapter 2 (session 18). Collesanto, on the eve of the saint's feast: the Valerio family and the guardian saint legend.
+// A day phase of two actions out of three (the square, the walls, the shrine), a dusk table with the family, a night phase of two actions out of three
+// (the vigil, the cellar, the wood), then the examiner's visit at midnight and dawn. Ends with rest() and => next. Reads wake(), b1.keepers, lc.sleeper_1348, lc.hill, lc.village_1348.
+// The Archbishop's examiner, Fra Ambrogio, is the climax. Nothing in this chapter reads the examiner's outcome again; later chapters read b2.friar.
+@chapter b2c02
+@title The Saint of the Hill
+@book blood-and-gold
+@version 1
+
+# start
+## The gate
+$ b2.saint = "kept"
+$ b2.valerii = "trusted"
+$ b2.fiammetta = "promised"
+$ b2.friar = "charmed"
+$ _city = 0
+$ _heat = 1
+$ _hidden = 0
+$ _seen = 0
+$ _fed = 0
+?if wake("place") == "haven"
+  $ _city = 1
+?end
+$ do meet("ginevra")
+$ do meet("tommaso")
+$ do meet("fiammetta")
+$ do kin("ginevra")
+$ do kin("tommaso")
+$ do kin("fiammetta")
+?if in_circle("aelia")
+  $ do member_fate("aelia", "dead")
+?end
+?if in_circle("felix")
+  $ do member_fate("felix", "dead")
+?end
+?if b1.keepers == "sworn"
+  $ b2.valerii = "sworn"
+  $ do keeper("ginevra", "matriarch of the hill", 70)
+  $ do keeper("tommaso", "factor of the hill", 70)
+?end
+?if _city == 1
+  You take the road south, and you take it as the owner of a good deal of it, which is to say slowly and with a hood. It is two nights. It is a country of long yellow hills with a village on every one of them, and a tower in every village, and a mule on every road who will not give way. Benedetto's two grooms keep their eyes politely on the horizon whenever you ride into the light, and you are grateful, and do not mention it.
+  The hill comes up out of the morning like a thing that has been waiting to be noticed. It is the same hill. It is not at all the same hill. There is a wall, now, round the whole crown of it, in gray stone with a red tile cap, and a gate with a lantern, and a bell tower over the gate that you do not think was in anybody's plans. It is the most beautiful thing that you have seen in a very long time, and you are surprised to find that it makes your throat tight.
+?else
+  Tommaso has arranged it. It is, he explains, a very small difficulty, but it is the kind that grows. The Signor del Colle, who owns the hill, and has owned it for longer than anybody's grandmother can say, has been a name on the rents and a candle in the family prayers for as long as anyone remembers. It would be strange if he were to be found in the cellar. It would be much less strange if he came in by the gate.
+  So you ride round the hill by the back road, on a good gray horse that has been lent to you by a man who does not ask why, and come up to the front of it in the clear morning, as an owner should. The hill is walled. There is a gate with a lantern, and a bell tower over the gate. It is the most beautiful thing that you have seen in a very long time, and you are surprised to find that it makes your throat tight.
+?end
+The man at the gate is old, with a white moustache and a halberd that he has plainly been polishing all week. He looks at you for a long time. Then he takes off his cap, and goes down on one knee on the road in front of the whole of the village.
+"Signor del Colle," he says, in a voice that carries. "My grandfather said that you would come back. I said that he was a fool. I will tell him so, when I see him."
+It is, you reflect, a good deal to put on a horse.
+$ do phase("day", 2)
+-> day
+
+# day
+## The morning
+:day
+?if actions_left() == 2
+  The village is awake and in its best clothes. There are banners, and a smell of woodsmoke and roasting, and a great many people in the lanes who are not looking at you in a manner that has been rehearsed. The feast is tomorrow night. Everything is being got ready, and you are, plainly, a part of it.
+?else
+  The sun has gone round, and the village is busier than before, with carts and ladders and a great deal of shouting. You have the one more thing in you that you will have time for, before the light begins to fail.
+?end
+* Walk the square, and listen [once] ?if actions_left() > 0
+  ~> square
+  $ do act()
+* Go round the walls with Tommaso [once] ?if actions_left() > 0
+  ~> walls
+  $ do act()
+* Climb to the shrine on the ridge [once] ?if actions_left() > 0
+  ~> shrine
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dusk
+?end
+-> :day
+
+# square
+## The square
+$ do discover("san_custode")
+The square is paved now, and there is a fountain in it with a lion that has lost an ear, and a loggia with a good new roof where the old men play at dice. The women are at the well, though the well has a pump. There are stalls going up under the plane tree, wax, bread, ribbons, small lead badges on a string, and a smell of rosemary.
+The badges are the same badge. It is a flat little man in lead, lying down, with his hands folded and a ring of tiny lamps round his head. You buy one from a girl of about twelve, who tells you that it is a penny, and that it is a very good one, because it has been blessed. It has been blessed, she says, by a priest who has been blessed by a bishop who has been blessed by the saint.
+You ask who the saint was.
+?if lc.sleeper_1348 == "denied"
+  She frowns. She is, you gather, a member of a quarrel that has been going on for a hundred and twenty years. "The old people say that he was a gentleman, who never grew old, and kept the hill. The young ones say that it is a story. My grandmother says that somebody once tried to put the story out, and the saint came to her in a dream and said it was not for the likes of them to decide." She shrugs. "I think it is a good story."
+?elif lc.sleeper_1348 == "embraced"
+  She does not frown. She lights up, and tells you, at length, without once stopping for breath. He was a gentleman who never grew old, she says, and kept the hill, and laid his hand on the sick in the year of the great death, and they got up. He sleeps in the cellar of the shrine, and wakes when the hill is in danger. There is a sister at Arezzo who was cured by him as a baby. There was a cripple who walked. A man was struck by lightning on the hill and lived. The girl has a list. "Do you want to hear about the leg?" she says.
+?else
+  "He was a gentleman," she says, "who never grew old, and kept the hill." She has been taught it. She says it like a lesson, quite fast. "He walked in the year of the great death and he carried water, and he is asleep in the cellar of the shrine, and he will wake if the hill is in danger. That is the story."
+?end
+?if lc.hill == "defended"
+  An old man at the loggia, who has been listening, puts in a word. It is also said, he says, that a hundred Goths once came to the gate in the days of the old kings, and a single man stood in front of it and they went away. Nobody can say how long ago. He tells it as a thing that one would not say to a child, with his thumb on his chin, and a look of great satisfaction.
+?elif lc.hill == "parleyed"
+  An old man at the loggia, who has been listening, puts in a word. It is also said, he says, that a hundred Goths once came to the gate in the days of the old kings, and that a gentleman went out and spoke to them in their own tongue, and that they went away laughing. He tells it with his thumb on his chin, as a thing that one would not say to a child.
+?else
+  An old man at the loggia, who has been listening, puts in a word. It is also said, he says, that in the days of the old kings a mist came down on the hill, and a whole army of Goths went past the foot of it and never saw it, and that was the saint's doing too. He tells it with his thumb on his chin, as a thing that one would not say to a child.
+?end
+* Join the old men, and tell the story wrong, to see if they correct it
+  $ humanity += 1
+  $ secrecy -= 1
+  You say that the saint was a Greek, and had a beard. They are on you at once, all five of them, with a joy that is quite horrible. He was not a Greek. He was a Roman. He had no beard, and he had a scar, and he was a good deal taller. One of them has a grandfather who saw the hair. You find that you are being given, in great detail, with gestures, a very accurate description of yourself.
+* Ask who owns the hill, and see what they say of him
+  $ secrecy += 1
+  They are very glad to be asked. The Signor del Colle, they tell you, is a miser, or a ghost, or a bishop, or the saint's cousin, and he has not been seen in the memory of living man. Rents are paid to a family in the tower, who pay them to a bank in Florence, who pay them, so far as anyone knows, to nobody. One of them says that the Signor is very ugly. Another that he is very beautiful. They are fond of him, you realize, as one is fond of the weather.
+* Buy another badge, and hold the two of them side by side
+  $ do earn(-1)
+  $ cunning_brutal -= 1
+  They are not the same, quite. The first is a little man with a long nose. The second, which was made on another street, has a jaw that you know. You hold it for a long time. It is not so much that it looks like you. It is that someone, somewhere, with a lump of lead and a thumbnail, has been trying for a hundred years to get it right.
+<~
+
+# walls
+## The walls
+Tommaso walks you round the whole of it, with his hands behind his back, in the manner of a man who has done it every morning for twenty years and is, today, seeing it for the first time. The wall is rubble and mortar, with a good coping, and it is higher than it looks. He built the north curtain himself, he says, with the help of three cousins. The south wall is older. It was put up in the plague years by those who survived, on the principle that the thing that came down the road could not be walked round, and might, possibly, be kept out.
+There are terraces below the wall, and vines on all of them, and the vines have a new green on them, and there is a smell of wet earth and sulphur and a kind of heavy sweetness that is the valley in spring. It is a hill that is, in every way that a hill can be, looked after. You are, you find, extremely proud of people who are not you.
+"It is enough," says Tommaso, slowly, "for a bad year. It would not be enough for a war." He turns his hat in his hands. "There are things that we should like to do. If the Signore was willing."
+:the_building
+* Raise the walls properly, with towers ?if can_build("walls")
+  $ do build("walls")
+  $ loyalty.keepers += 2
+  He is quite unable to speak. He takes your hand, which he should not do, and bends over it, which he certainly should not, and says that his father would have wept. Then he goes off to find the mason.
+* Build the chapel properly, with a bell and a priest's house ?if can_build("chapel")
+  $ do build("chapel")
+  $ humanity += 1
+  $ loyalty.keepers += 2
+  "The shrine would want a proper house for the saint," says Tommaso. He has the grace to blush at what he has just said, and to look away, and you are not sure which of you is the more embarrassed.
+* Put in the vineyard on the south slope ?if can_build("vineyard")
+  $ do build("vineyard")
+  $ loyalty.keepers += 2
+  It is a long way from olives, and he knows it, and says that the people of the hill have always had a thirst. You say that you had noticed. He laughs, which he does with his whole chest.
+* Say that you will think about it, and ask what the hill most needs
+  Tommaso looks at you for a moment, and then, quite slowly, he says that it is a wall. He says it like a man who has made up his mind to speak. The family would feel safer. The village would feel safer. A great many things would be easier to say, he adds, if they were said behind a wall. You say that you will think about it. He nods, and writes it down.
+<~
+
+# shrine
+## The shrine
+It is a small plain building on the crown of the ridge, with a white front and a bell, and a porch with a bench on it where the pilgrims sit to take off their shoes. Inside it is dim and cool and smells of old wax. There is a rail, and a candle stand, and a great many small things hung on the wall in the manner of every shrine that you have seen in a thousand years: wax hands, and wax feet, and a tin heart, and a crutch, and a baby's cap.
+?if lc.sleeper_1348 == "denied"
+  There is not so much of it as there might be. It is a shrine that has had to apologize, and has done so in a small tidy way. There is one candle stand, and one panel over the altar, and a notice, in a priest's hand, saying that the Church makes no claim.
+?elif lc.sleeper_1348 == "embraced"
+  There is a great deal of it. There are rows of candles, and a rail of polished chestnut worn pale by knees, and a whole side wall of votive things in tin and wax and silver that go back as far as the roof. There is a priest's chair, and a donation box with three locks. It is a shrine of the first rank, and nobody in a position to say so has said so.
+?else
+  There is a decent amount of it. There are candles, and a rail, and a good many votive things on the wall, and a small painted panel over the altar. It is a shrine of the second rank, a place with a reputation but no papers.
+?end
+The panel is the thing. It is a man standing in a plain brown cloak, with his eyes lowered and one hand open, and a ring of small gold lamps behind his head. He has not been made handsome. He has been made very still. And the face, you see, quite plainly, from a long way off, is yours. It is not an exact likeness. It is a likeness made by people who were looking at you through a hundred and twenty years of not looking, from a description given to a painter by a grandmother, and it has the jaw, and the set of the head, and a way of holding the shoulders that you did not know you had.
+A very old woman is kneeling at the rail. She has her back to you. After a moment she says, without turning, "It is a poor likeness, Signore. I have always said so." It is Ginevra. She gets up, with difficulty, and lets you give her an arm, and looks at the panel. "They will say," she says, "that it is a miracle that the Signor del Colle has the saint's face. There is nothing that can be done. I thought that you should know that I had thought of it."
+:the_saint
+* Say nothing, and let the story stand
+  $ b2.saint = "kept"
+  $ humanity += 1
+  You say that it has done no harm. She says that it has done a great deal of good, which is not at all the same. You stand together in the cool for some time and do not argue about it, and it is, in its way, a settlement.
+* Tell her that it should be quietly ended, before it grows
+  $ b2.saint = "curbed"
+  $ _heat = 0
+  $ standing += 1
+  $ secrecy += 2
+  $ loyalty.keepers -= 3
+  She is silent for so long that you think that she has not heard. "It is the only thing that we have had," she says at last, "that was ours." She does not say it as a reproach. She says it as a fact, in the voice of a woman reading a figure from a book, and you have a very clear sense of having taken something away from a people who had kept it very carefully for a very long time.
+* Tell her to let it grow, and that you will see that it is paid for
+  $ b2.saint = "shaped"
+  $ _heat = 2
+  $ secrecy += 3
+  $ do earn(-5)
+  $ cunning_brutal -= 1
+  She looks at you for a long moment, and the look is so shrewd and so unastonished that you almost laugh. "A saint is a very good place to hide a man," she says. "My grandmother said that you would think of it." She does not say whether she approves. She turns, and goes to light another candle, and does it with the air of a woman who has bought something that she does not like and intends to use.
+<~
+
+# dusk
+## The table
+?if must_feed()
+  ~> hungry
+?end
+It is a long table, in the great room of the tower, which has been, in the old days, the villa's dining room, and is hung with banners and bunches of dried herbs, and has a fire in it large enough to cook a calf. There are twenty people at it, and a great many more in the kitchen who keep coming in to look at the Signor, and then retreating to tell the rest.
+You are given the chair at the head. It is a thing that you did not ask for, and cannot refuse. You are given a plate, which you push about in a convincing manner, and a cup, which you drink from, and which is the best wine that you have tasted since Rome. Ginevra, at your right, tells a story of a goat. Tommaso, at your left, tells a story of the goat's owner. Down the table, a girl is looking at you.
+She is about seventeen. She has a quick dark face and a lot of dark hair held back with a ribbon that is not behaving, and she is, plainly, not paying the slightest attention to the goat. When you meet her eyes she does not look away. She looks at the cup, and at the plate, and at the cup again, and then back at you, and you have a cold little moment of knowing that you have been counted.
+"Fiammetta," says Ginevra, without turning her head. "Eat."
+?if b1.keepers == "sworn"
+  After the cheese, Ginevra gets up, and the table goes silent as if a knife had been laid on it. She goes to a chest, and brings out a book. It is a plain thick book, bound in gray, with a name on the spine that is only the word *Custodia*. She lays it in front of you, open at the first page. The first entry is in a hand that you do not know, in a very old Latin, and the second is in Aelia's.
+  It is a chronicle. It is the list of every Valerio who has kept the hill, one to a page, in their own hand, with the year, and the name, and a line, and a seal. *I have kept it. I have seen it grow. I have not told.* They go on, one to a page, for a thousand years, and the hands change, and the Latin turns into the Tuscan, and the last page has Ginevra's name, and a blank one beside it.
+  "It is for the next one," she says. "She does not know what is in it."
+  You look at the girl. She looks at the book as if it were an animal that might still be alive.
+  :the_oath
+  * Take the girl's oath as well, and let her see the whole of it
+    $ b2.valerii = "sworn"
+    $ do keeper("fiammetta", "keeper in the making", 60)
+    $ loyalty.keepers += 3
+    Ginevra nods, once, and Tommaso, who has been very still, lets out a breath. Fiammetta does not flinch. She says the words, which she has plainly been taught by somebody who thought she would never need them, in a clear flat voice that goes round the whole of the room, and then she looks at you and says, quite politely, "I wondered." It is all that she says. It is enough.
+  * Spare her, for a while, and let her be told in her own time
+    $ b2.valerii = "trusted"
+    $ humanity += 1
+    $ loyalty.keepers += 1
+    Ginevra's mouth tightens. It is very nearly a protest, and she swallows it. She says that it is the Signore's will, and shuts the book. The girl is excused, and goes, with her back very straight, and you hear the stair creak as she stops on the third step to listen.
+?else
+  After the cheese, Ginevra rises, and the table goes silent as if a knife had been laid on it. She says that the Signore will wish to see the family's papers, and that the family have kept them as they were told. She says it in the voice of a woman who has been waiting to say something else for a very long time. Then she takes you by the sleeve, quite without ceremony, and walks you out of the room and into a little parlor with a bad fire, and shuts the door.
+  "I do not know what you are, Signore," she says. "I have decided that I do not need to. But I know what my grandmother told me about the man in the cellar. She said that he would wake, and that when he did, we should have to ask." She sits down, abruptly. She is a very old woman. "I have been afraid of the question all my life. I find that I am not afraid of it now."
+  :the_oath_b
+  * Tell her the truth, and take the family's oath
+    $ b2.valerii = "sworn"
+    $ do keeper("ginevra", "matriarch of the hill", 70)
+    $ do keeper("tommaso", "factor of the hill", 70)
+    $ do keeper("fiammetta", "keeper in the making", 60)
+    $ loyalty.keepers += 5
+    $ secrecy -= 2
+    You tell her. It is shorter than you expected, and a great deal harder. She listens with her hands folded, and her eyes on the fire, and at the end she says nothing for a while. Then she says, "I see," in the voice of a woman who has been told that the roof is not quite sound, and has always known, and sends for her son. It is a long night. The oath, when it is taken, is taken in the parlor, with the door shut, on a book that is not the Bible, by three people who say it as if it had always been theirs.
+  * Tell her that the saint is real, and that the hill is his charge, and no more
+    $ b2.valerii = "trusted"
+    $ do keeper("ginevra", "matriarch of the hill", 60)
+    $ loyalty.keepers += 2
+    She takes it with the grim calm of a woman who has been given the smaller half of a loaf. "That is a great deal," she says. "It is not all. I shall not ask for the rest." She does not say whether she believes it is not all. She does not need to. It is in the set of her mouth. "It will do, for a while."
+  * Tell her that you are the Signor del Colle, and nothing else
+    $ b2.valerii = "distant"
+    $ secrecy += 2
+    $ loyalty.keepers -= 3
+    She studies you for a very long time. Then she says, "As you wish," in the tone in which one tells a physician that one is quite well. She gets up. She goes to the door. At the door she says, over her shoulder, without any heat at all, "My grandmother said that you would do this, too."
+?end
+Afterward, in the passage, in the dark, a hand takes your sleeve.
+It is Fiammetta. She has put on a cloak and she is carrying a lantern that she has not lit. She says that she must ask, and that she will not ask twice. Her voice is very low and very quick.
+"I want to see Florence," she says. "Everyone has been to Florence but me. My father says that it is not the place for a girl, and my grandmother says that it is not the place for a Valerio. I can read. I can write. I can count better than my father. I have been reading the priest's books since I was nine." A breath. "I am not asking to be a saint. I am asking for a place at the bank."
+You think of a girl in a courtyard in Rome with an Aelia's chin. You think of the chronicle, and of a name in a hand that is not hers, and of a girl who has been told that she will one day keep a hill. It is a very strange thing to be asked to open a door for someone who is, at best, a hundred generations removed from you, and has your jaw.
+:the_asking
+* Promise her a place, when the feast is over and the hill has settled
+  $ b2.fiammetta = "promised"
+  $ bond.fiammetta += 2
+  She says nothing. She puts out her hand, as a man does, and you shake it. It is a very small hard hand, and it is quite steady. "I will remember that," she says. "Everybody in this house remembers everything."
+* Say no. It is not safe, and she is wanted here
+  $ b2.fiammetta = "refused"
+  $ bond.fiammetta -= 3
+  Her face closes like a door. She says, very politely, that she understands, and that it was impertinent of her to ask. She does it so well that you nearly believe it. She goes up the stair with her unlit lantern. On the third step she stops, and you think that she is going to say something, and she does not.
+* Say yes. Tommaso can be made to see sense, and the bank can use a clever clerk
+  $ b2.fiammetta = "allowed"
+  $ bond.fiammetta += 4
+  $ secrecy -= 1
+  She does not cheer. She goes quite white, and then red, and her hands shake on the lantern, and she says in a rapid whisper that she will be no trouble, and that she will work like a mule, and that she will not tell anyone what she saw at dinner. You say that you had not been aware that there was anything to tell. She gives you a small crooked smile, and it is, for the first time, a girl's.
+A messenger is waiting at the foot of the stair, with a lantern and a cap in his hand. He says that Fra Ambrogio of Santa Maria Novella has come up from Florence this afternoon with two lay brothers, and is lodged in the priest's house. He is sent by the Archbishop to see whether the shrine is lawful. He asks, with great respect, if the Signor del Colle, who owns the cellar, would meet him at the shrine at midnight, after the procession.
+?if b2.saint == "shaped"
+  Ginevra, behind you, makes a very small sound, like a woman who has just remembered an open window.
+?end
+$ do phase("night", 2)
+-> night
+
+# hungry
+## The hunger
+The wine has not helped. It was a long day, and you have been using the old trick of being near people for as long as it will bear, and the old trick has run out. You have about an hour in which you may choose how it is done.
+* Take a kid from the pen, and be gone before it is noticed
+  $ do feed("animal")
+  $ humanity += 1
+  It is a very quiet thing, and a fast one, and you go back to the table with your cuff clean and a faint sour taste in your mouth that has nothing to do with the goat.
+* Ask Tommaso for a willing arm, in the pantry ?if b2.valerii == "sworn" or b1.keepers == "sworn"
+  $ do feed("donor")
+  $ loyalty.keepers += 1
+  He gives it without a word, and turns away as it is done, and says afterward that he has been told that it does not hurt. It does not. It is, nevertheless, a very peculiar thing for a mason to have done in a pantry.
+* Take a drover from the road, who is drunk and will not mind
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  It is a short thing. He does not wake until the sun is high, and will remember that he had a very good dream. You find that you are able to go back to the feast.
+<~
+
+# night
+## The eve
+:night
+?if actions_left() == 2
+  The village has gone up the hill. There are lamps in every window and torches on every wall and the whole of the slope is moving, slowly, upward, with a murmur like a river. Bells are going. From the shrine on the ridge there is a sound of singing that has not yet begun, but is clearly going to.
+?else
+  The procession has gone in. The bells have stopped. The village has the stillness of a great crowd waiting for a thing to begin, and you have, by your own reckoning, a very small time before midnight.
+?end
+* Go up with the procession, in the lamps [once] ?if actions_left() > 0
+  ~> vigil
+  $ do act()
+* Go down to the cellar, to see where you slept [once] ?if actions_left() > 0
+  ~> cellar
+  $ do act()
+* Slip out by the postern, and hunt in the wood [once] ?if actions_left() > 0
+  ~> wood
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> friar
+?end
+-> :night
+
+# vigil
+## The procession
+You go up in the middle of them, in the dark of a good coat, and nobody looks. They are carrying lamps, and some of them are carrying children, and one old man is carrying a very large wooden saint on a pole, so badly made and so much beloved that you could weep. It is the saint of the hill, in a long robe, with his hands folded. He has no face. He has a lump of wood where a face should be, and a thumbprint, and he has been carried up this slope on this night by every grandfather in the village for a hundred years.
+They sing. It is not a hymn that you know. It is in the speech of the hill, and the tune is older than the words, and you recognize it, with a sort of cold prickle, as something that the old women of the village sang over a bed of sick children, fourteen hundred years ago, when you were still mortal and had no idea what was coming.
+A woman has stopped you. She is young and tired, with a baby in her arms who is hot, and flushed, and whimpers when it breathes. She says that she has asked every man on the hill and that none of them would touch him, because they thought that it was only the croup, and that she thought, because you are tall, that perhaps the saint had sent you.
+* Put a hand on the child's head, and say what you half remember of a prayer
+  $ humanity += 2
+  $ secrecy -= 1
+  You do not heal him. You are not at all sure that you could, and you are quite sure that you must not try. You lay your hand on his hot head, and say a thing that your own mother said, in a language that has been dead for a thousand years. He quiets. It is a coincidence, or it is the cool of a very old hand, or it is something that you do not understand. The woman weeps. She says that she will tell nobody. You know that by dawn the whole hill will have heard.
+* Give her money for a physician in the town, and tell her to go tonight
+  $ do earn(-3)
+  $ humanity += 1
+  She looks at the coin for a moment as if it were an insult. Then she looks at your face, and takes it. You say that the saint helps those who help themselves, which is a thing you have heard said, and which sounds, as you say it, very much like a thing that a landlord would say. She is gone down the slope in the dark, quick and low, and you do not know whether you have done right.
+* Take her to the priest, and see that the baby has a bed and a fire
+  $ humanity += 1
+  $ loyalty.keepers += 1
+  It is not a miracle. It is a bed, and a fire, and a pot of broth, and a priest who has seen croup before and says at once what it is. By the time you leave, the baby is breathing a good deal more quietly. Nobody will make a story of it. It is, you think, the better kind of saint.
+<~
+
+# cellar
+## Where you slept
+You go down by the back stair, which is behind a curtain in the sacristy, and was never meant for the eyes of anyone who was not family. It is a long way down, and dry, and the air changes as you go, into the cold, dusty, patient smell that you know better than the smell of any house.
+It has been looked after. There is a lamp that has been kept burning in an iron cup for a hundred years. There is a stone bed in a niche, with a lid beside it, and the lid has a carved face. It is, again, not quite yours. There is a silver case on a shelf, and in it, under glass, a small square of brown wool, a sleeve, or the part of a sleeve. It has been kissed by so many mouths that the glass has a cloud on it. It is, you realize with a sort of horror, the cuff of the cloak that you lay down in, which somebody cut off at some time in the plague, and has been selling the blessing of ever since.
+You stand a long time. It is not dignified.
+* Have the bed hidden behind a wall, and leave only an empty niche
+  $ _hidden = 1
+  $ secrecy += 2
+  $ cunning_brutal -= 1
+  You do not ask Tommaso. You do it yourself, with a lamp, in the still of the night, with six loose stones and a pot of lime that the mason has left for the morning. It takes an hour. By the end of it there is a niche, and a lid, and a lamp, and nothing else. It is a poor sort of tomb. It is, you think, exactly the kind that a friar would accept.
+* Leave it as it is. The family have kept it well
+  $ humanity += 1
+  $ loyalty.keepers += 1
+  It is the first time in your life that you have been left a place exactly as you slept in it, and you find that you would not change a stone. You stand a while, and touch the lid, and say something to it that you would not like to have overheard. Then you go up.
+<~
+
+# wood
+## The wood
+The oaks begin at the foot of the north wall, and the wood is old and dark and dense, and as it closes round you, you feel, quite suddenly, like yourself. It is the oldest of the freedoms. There are deer, and a sounder of pigs, and a great deal of small furtive life, and the smell of wet leaves, and a night that is blessedly without a crowd.
+You take a boar. It is a hard, quick thing, and not at all noble, and it is exactly what you needed.
+$ do feed("animal")
+$ humanity += 1
+You are wiping your mouth on a handful of leaves when you become aware that you are not alone.
+There is a small figure at the edge of the trees, a long way off, with a lantern that has just been put out. It is not moving. It is very good at not moving.
+* Pretend not to have noticed
+  $ _seen = 1
+  $ secrecy -= 1
+  You pick up your cloak, and walk away through the trees in the other direction at an unhurried pace, and you do not look back. It is a thing that you have done a hundred times. You have never before had the sense, as you went, of being very carefully, and very kindly, not called by your name.
+* Go and say her name
+  $ _seen = 1
+  $ bond.fiammetta += 1
+  $ secrecy -= 1
+  She does not run. She is standing perfectly straight with her hands at her sides and her lantern cold in one fist, and she says, at once, before you can open your mouth, that she did not follow you. She came to the wood for the herbs. She says it with so much dignity that you cannot answer. You say that it is a very good wood for herbs. She says that it is. She says that she will go home now. She goes, and does not look back, and you stand in the dark for some time with the knowledge that you have just been lied to in a most beautiful manner.
+<~
+
+# friar
+## Midnight
+The shrine is full. They have gone in two by two, and out again, and in, and the porch is thick with those who could not get through the door, and on the grass outside the whole slope is a field of small flames. It is not a loud night. It is a night of low voices, and the creak of boots, and the particular hush of a great many people who are all, simultaneously, trying not to be the first to speak.
+Fra Ambrogio is waiting in the porch. He is a lean, brown man in a black and white habit, with a long clever face and a limp that he has plainly decided not to mention, and he has with him two young lay brothers who are carrying lanterns and trying to look as though they were not in awe of him. He has a little book in his hand. It is not a breviary. He does not put it away.
+"Signor del Colle," he says, in a quiet Tuscan that is, at once, beautifully accurate and not at all unkind. "You are very kind to come. I had understood that you did not."
+You say that the shrine is on your land. He says that that is, indeed, the whole of the difficulty.
+He walks you through the whole of it, as he might lead a stranger through a house that he had been told was haunted. He looks at the candle stand. He looks at the wax hands, and reads the little paper tags on them, one by one. He asks Ginevra, who has appeared at your elbow with the air of a woman that cannot be dismissed, how long the family has kept the shrine, and she says, "Since before the bell," and he writes it down. He asks the priest, who is shaking, whether he has ever seen the saint, and the priest says, "Only in the panel, Father," in a voice like a mouse's.
+He stops, at last, in front of the panel. He stands very still, and looks from it to you, and back again, and he does not say anything about the likeness at all.
+"I have been asked," he says, "to find out what is true. It is a thing that I am rather good at, and it has made me a good many enemies. The Archbishop does not wish to suppress a devotion that does good. He does not wish, either, to sanction a thing that is a fraud, or a heresy, or a delusion, or a trick. I do not know which this is." He closes the little book. "I will tell you what I have learned. In the Archbishop's register, in the year 1348, there is a letter from the priest of this parish, who has not been a good writer, and who says that in the time of the sickness a gentleman came to the hill whom nobody could name. And in a register that is older still, that I found in a chest in the Badia, there is a note in a hand of about the year 700, that a gentleman, long dead, was said to lie in a cave in the hills of the Valdarno, and to be waiting."
+?if _heat == 2
+  He turns the little book over once in his hand. "The Signor has been, I am told, a good patron of the shrine this season," he says, in the mildest voice in the world. "It is a very noticeable season."
+?elif _heat == 0
+  He looks round at the dim, tidy, half empty little room with its notice about the Church's silence. "It is a quiet devotion," he says, "and a modest one. It is a very odd thing that it has lasted."
+?end
+"I should like to ask you a thing, Signore," he says, "which I ask all those I have doubts of. It is not a cruel one. Will you say the Pater Noster?"
+You say it. You say it as you were taught to say it, as a boy, by a man who had it from a man who had it from the Jews of Rome, in a Latin that is rather older than the Church's, and rather crisper, and that has not been heard on any tongue in Italy since Cicero was alive. When you finish there is a silence in the porch. One of the young lay brothers has dropped his lantern.
+Fra Ambrogio looks at you for a long time. He says, very quietly, "Humanists in Florence would give their eyes for that accent." Then he says, "It is not a crime, Signore, to have learned your Latin from a very good master." He is smiling. It is not a comfortable smile.
+It is plain that you have to decide what to do with him, and that it will have to be now.
+:the_friar
+* Be honest with him about what you can: the hill, the family, the people who have kept faith here
+  ?if humanity >= 50
+    $ b2.friar = "charmed"
+    $ standing += 2
+    $ humanity += 1
+    You speak, and you do not lie, which is a thing that you do not often do, and you find that it is not at all difficult. You talk of the hill, and of the people who have kept it, and of the family that has stood on a wall for a hundred years to keep a candle burning. You say that it is a poor man's saint, and a good one, and that it has done a great deal more good than harm. He listens with his head on one side, and he asks, at the end, quite gently, if the Signore believes. You say that you believe in the people. It is the truest thing that you have said in a long time. He nods, and writes, and does not look up.
+  ?else
+    $ b2.friar = "charmed"
+    $ standing -= 1
+    $ secrecy -= 2
+    You speak, and you try to be honest, and it comes out wrong. There is something in your voice that has gone cold in the long sleep and has not yet warmed. He listens with great attention, and does not interrupt, and at the end he says, with courtesy, that he is obliged to the Signore, and that he will pray for him. It is, you know, the kindest possible way of saying that he has not been convinced of anything at all.
+  ?end
+* Make the shrine a great gift, and a hospice for the pilgrims, and a Mass for the dead ?if wealth >= 400
+  $ b2.friar = "paid"
+  $ do earn(-30)
+  $ secrecy += 2
+  $ humanity -= 1
+  He is not at all offended. He is, you think, almost amused. "The Church has been bought before, Signore," he says, "and I had hoped that it might still be asked." He takes the gift, and the paper, and says that it will be a very proper hospice, and that the Archbishop will be most grateful. He writes a favorable note. It is exactly what you have paid for, and he knows it, and so do you, and neither of you says anything of the kind.
+* Look at him, and take the night from him ?if wealth >= 0
+  $ b2.friar = "cowed"
+  $ do power("minor")
+  $ humanity -= 3
+  $ cunning_brutal += 3
+  $ secrecy += 1
+  It is not hard. He is a good man, and a good man has a door, and you have been walking through doors for fourteen hundred years. You look at him, and think, quite carefully, of the shape of a quiet night, and a long walk, and a small good shrine. His eyes go a little soft. He blesses the panel, and the family, and the hill, and has the lay brothers put out their lanterns. He does not know why he is doing it. He is happy. You stand quite still while he does it, and are not.
+* Tell him it is a hermit's tomb, and no saint's, and let the devotion end
+  $ b2.friar = "hidden"
+  $ b2.saint = "curbed"
+  $ standing += 1
+  $ secrecy += 3
+  $ humanity += 1
+  $ loyalty.keepers -= 4
+  "It is a hermit's grave," you say, "and a gentleman's land, and a poor village's long wish for a saint. There is nothing in the cellar but a stone. I will see that the Church's wishes are obeyed." You say it very firmly, and do not look at Ginevra. He studies you for a moment, and then he sighs, as a man does who has been spared a great deal of work and is not sure that he is pleased. "It is the wise course," he says. He writes. It takes a long time. Behind you, in the doorway, someone gives a short, dry sound, as of a stick breaking.
+?if b2.friar == "hidden"
+  ?if _hidden == 0
+    He asks, at the end, to see the cellar, and you take him down. It is a stone bed and a lamp and a lid. He looks at it for a long time. He says nothing. When he comes up his face is grave, and he does not ask any more.
+  ?end
+?end
+-> dawn
+
+# dawn
+## First light
+The vigil ends at dawn, when the sun comes up over the ridge and finds a hill full of tired people and burned out candles and the beautiful ugly smell of wax and wine and wet wool. They sing the last verse, and then everyone is talking at once.
+?if b2.friar == "charmed"
+  Fra Ambrogio says Mass at sunrise on the porch, in the plain light, and you stay for it, because it seems rude not to. You stand in the sun, in the open, in a crowd of people who are all looking at you with the faint appalled devotion of those who have seen a likeness come to life, and the light on your hands is only light. He sees it. He does not say so. He bows to you at the end, with great correctness, like a man closing a door very gently on a room that he has decided to look into another day.
+?elif b2.friar == "paid"
+  Fra Ambrogio takes his leave at sunrise, with a handsome purse and a note for the Archbishop, and a faint look about the eyes of a man who has done a thing that he will have to say a prayer about. He thanks you, at the saddle, and says that he hopes that they will meet again in more candid circumstances. You say that you hope so too. It is a very civil lie, and you both know it.
+?elif b2.friar == "cowed"
+  Fra Ambrogio takes his leave at sunrise with a light step and a vague, contented face, and tells the priest that it is the most edifying night he has ever spent. He does not remember most of it. He keeps touching his temple, as if there were something there that he has mislaid. You watch him go down the road, and you know, as surely as you know the hour, that a man whose will you have bent once has a way of coming back to the place where it was bent.
+?else
+  Fra Ambrogio takes his leave at sunrise, and the village, who have been told, take it in silence. A woman is crying in the porch, quietly, with her apron over her face. Ginevra stands in the doorway and does not move. Tommaso says that it was well done, in a flat voice. Nobody agrees with him, and nobody contradicts him either, and the bell, which should have rung, does not.
+?end
+There is a rider on the road.
+He comes up the long white slope at a good pace, in the new light, a tall figure on a black horse, in a gray cloak, and he does not look in the least like a man who has been riding all night. He halts at the gate. He is much too pale, in the early sun, and much too composed, and he has a ring of silver on one hand, and a small pouch of blue leather at his belt. He asks, very civilly, of the old man with the halberd, for the Signor del Colle.
+He gives his name as Messer Ottaviano, of the household of the Prince. He says, bowing, that he has the honor to carry a letter, and that he is to wait for an answer. It is on thick paper, with a seal in black wax that you have never seen, and it asks, in a very beautiful hand, in the politest of Latin, whether the Signor del Colle would care to wait upon His Excellence at the Palace, at his earliest convenience, which is to say, at three nights' time, at the first hour after dark.
+It is not a request, and it was not written as one. It is also, you note, in a hand that is not Prisca's, and Prisca has asked that you come to her first.
+You say that you will give the matter your attention. Messer Ottaviano smiles. He has a very nice smile. It does not, by any means, reach anywhere near his eyes.
+$ do rest()
+=> next

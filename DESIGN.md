@@ -230,3 +230,11 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Aelia and Felix are now `"quick": "dead"` in `content/family.json`, so a quick start into Book Two finds the whole first family gone. Book Two's opening should read the chained `wake()`.
 - `tests/interlude-b.test.js` covers the chain end and the chapter order; `tests/book1.test.js` first night checks use `stopAt: 'lc01'`.
 - Plans are in `SPOILERS/lost-centuries.md`.
+
+### Session 18 notes (Book Two, chapters 1 and 2)
+
+- Book Two ("blood-and-gold") begins. Chapters `b2c01` and `b2c02` are in `content/blood-and-gold/` (`ch01.tsb`, `ch02.tsb`). The manifest entry is `"incomplete": true`, so the book pauses after chapter 2 until the next session adds more.
+- Chapter 1 reads the chained `wake()` report (place, steward, outcome) and works for every combination, including the quick start report. Chapter 2 spends two day actions out of three and two night actions out of three, and reads `b1.keepers`, `lc.sleeper_1348`, `lc.hill` and `lc.village_1348`.
+- New flags use the `b2.` prefix and are registered in `content/flags.json` with `book`, `major` where later chapters care, and a quick start `default`. New people, family members and codex entries are registered. Content notes: chapter 2 carries `blood` and `violence`.
+- `tests/book2.test.js` covers every waking variant, the recorded decisions, and the no dashes and no braces rules.
+- Plans are in `SPOILERS/blood-and-gold.md`.

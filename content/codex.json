@@ -191,6 +191,24 @@
       "title": "The Great Church",
       "book": "burning-city",
       "text": "Justinian's church of the Holy Wisdom, finished in five years on the ashes of the one that burned in the riots. Its dome is lit from forty windows at its foot, so that it seems to hang by a chain from heaven. The court cannot go near it between dawn and dusk."
+    },
+    "florence": {
+      "category": "places",
+      "title": "Florence, 1474",
+      "book": "blood-and-gold",
+      "text": "A republic of bankers under the shadow of a very great family, with a dome that nobody had thought could be built and a river that smells of tanning. It lends to kings, and it keeps the ledgers."
+    },
+    "the_court": {
+      "category": "bloodlines",
+      "title": "The Court of Florence",
+      "book": "blood-and-gold",
+      "text": "The vampires of the city sit as a court under a Prince, not a Senate. The Prince keeps the peace and the Merchant house keeps the purse, and neither says out loud which of the two is the more important."
+    },
+    "san_custode": {
+      "category": "lore",
+      "title": "San Custode",
+      "book": "blood-and-gold",
+      "text": "The guardian saint of the hill, who never ages, put out a fire at the mill and walked in the plague. He sleeps, they say, in a cellar under the shrine, and wakes when the hill is in danger. Nobody can say where the story began."
     }
   }
 }

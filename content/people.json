@@ -189,6 +189,36 @@
       "name": "Ioannes",
       "title": "A mason at the Great Church",
       "bio": "A mason of Constantinople with plaster in his beard, who has been laying gold on the dome for five years and does not intend to stop."
+    },
+    "ginevra": {
+      "gender": "f",
+      "name": "Ginevra",
+      "title": "Matriarch of the Valerio family",
+      "bio": "A very old, very small woman in a white cap who has the chin of every Valerio there has ever been, and runs the hill as a general would, with the difference that she is obeyed."
+    },
+    "tommaso": {
+      "gender": "m",
+      "name": "Tommaso",
+      "title": "Factor of Collesanto",
+      "bio": "Ginevra's son, a heavy dark mason of forty who keeps the walls, the books and the keys. He is honest in a way that makes liars uncomfortable."
+    },
+    "fiammetta": {
+      "gender": "f",
+      "name": "Fiammetta",
+      "title": "A young woman of the Valerio family",
+      "bio": "Tommaso's daughter, seventeen, quick, curious, and too clever for the hill. She has been told that she will one day keep it."
+    },
+    "benedetto": {
+      "gender": "m",
+      "name": "Benedetto",
+      "title": "A clerk of Prisca's bank",
+      "bio": "Benedetto Orlandini, a thin young correspondent with ink on his cuffs and an iron nerve. He has been waiting all his life to be asked to do something extraordinary."
+    },
+    "ambrogio": {
+      "gender": "m",
+      "name": "Fra Ambrogio",
+      "title": "A Dominican of Santa Maria Novella",
+      "bio": "A lean, courteous friar with a good Latin hand and a reputation for finding out what is true. The Archbishop sends him when a miracle needs looking at."
     }
   }
 }

@@ -1329,6 +1329,126 @@
       "major": true,
       "default": "passed",
       "note": "Lost Centuries 4 (1348): what he did on the north road"
+    },
+    "b2.trouble": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "fled",
+        "fought",
+        "talked"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 1: how he got out of being woken early (none if he was not)"
+    },
+    "b2.first_feed": {
+      "kind": "enum",
+      "values": [
+        "animal",
+        "donor",
+        "human",
+        "none"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "animal",
+      "note": "Chapter 1: how he first fed in Florence"
+    },
+    "b2.emperor": {
+      "kind": "enum",
+      "values": [
+        "bluffed",
+        "asked",
+        "blustered"
+      ],
+      "book": "blood-and-gold",
+      "default": "bluffed",
+      "note": "Chapter 1: how he asked after the emperor (a comedy beat)"
+    },
+    "b2.books": {
+      "kind": "enum",
+      "values": [
+        "trusted",
+        "audited"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "trusted",
+      "note": "Chapter 1: whether he trusted the steward's accounts or checked them"
+    },
+    "b2.street": {
+      "kind": "enum",
+      "values": [
+        "watched",
+        "spoke",
+        "printed"
+      ],
+      "book": "blood-and-gold",
+      "default": "watched",
+      "note": "Chapter 1: what he did on his first night out in Florence or on the hill"
+    },
+    "b2.prisca_reply": {
+      "kind": "enum",
+      "values": [
+        "warm",
+        "formal",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "formal",
+      "note": "Chapter 1: how he answered Prisca's letter"
+    },
+    "b2.saint": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "curbed",
+        "shaped"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 2: what he did about the village belief in the guardian saint"
+    },
+    "b2.valerii": {
+      "kind": "enum",
+      "values": [
+        "sworn",
+        "trusted",
+        "distant"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "trusted",
+      "note": "Chapter 2: how far the Valerio family are told the truth"
+    },
+    "b2.fiammetta": {
+      "kind": "enum",
+      "values": [
+        "promised",
+        "refused",
+        "allowed"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "promised",
+      "note": "Chapter 2: what he told Fiammetta Valerio when she asked to see Florence"
+    },
+    "b2.friar": {
+      "kind": "enum",
+      "values": [
+        "charmed",
+        "paid",
+        "cowed",
+        "hidden"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "charmed",
+      "note": "Chapter 2: how he met the Archbishop's examiner at the shrine"
     }
   }
 }
