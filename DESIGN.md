@@ -210,3 +210,15 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Because Book One now ends, the older Book One tests no longer stop at a pause: they play the whole book. `tests/creation.test.js` has the end of Book One test (twenty chapters, journal, Book Two unlocked) and the other pause tests use synthetic books. `tests/book1c.test.js` and `tests/book1i.test.js` use `stopAt` for stat comparisons that later chapters would change. The `tests/book1.test.js` through `book1i.test.js` pause assertions are now "the book ends".
 - `tests/book1j.test.js` plays chapters 19 and 20 and the journal down their branches (every place, steward, order, protection and the keepers' oath).
 - Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Interlude session A notes (for the next session)
+
+- The Lost Centuries interludes begin. Three unnumbered chapters follow chapter 20 in the manifest, flagged `"interlude": true`: `lc01`, `lc02`, `lc03` (`content/lost-centuries/`). They are not counted in `chapterCount`, show "The Lost Centuries" as the kicker, and Book One now ends after `lc03`.
+- Chapter 20 is `@version 2`: it now sleeps only the first segment (`rome_to_sack`). The old umbrella gap `rome_to_florence` is kept untouched for quick starts, which skip split gaps.
+- Engine: sleep gaps can carry a `chain`. `applySleep` accumulates years, events and a `segments` count across a chain, so `wake()` reports the whole sleep. Book Two's opening should read the chained `wake()`.
+- Engine: chapters may declare their own `journal` and `journalTitle` in the manifest. `composeChapterJournal` writes the entry at chapter end, after the book entry for the same book. `tools/check.js` validates chapter journals.
+- New gaps in `content/sleep.json`: `rome_to_sack`, `sack_to_byzantium`, `byzantium_to_florence`. Interlude B should split the last one into two segments (532 to 1348, then 1348 to Florence).
+- New flags use the `lc.` prefix, all registered with `major` and a quick start default (`lc.mason` is not major). New people, codex entries and one collection item are registered.
+- Chapter journals: `content/journal/lc-410.tsb` and `lc-537.tsb`.
+- `tests/interlude-a.test.js` covers the chain report, chapter journals, ordering and flags. `tests/book1j.test.js` uses `stopAt: 'lc01'` for chapter 20 checks.
+- Plans for these chapters are in `SPOILERS/lost-centuries.md`.

@@ -216,10 +216,44 @@
             "slavery",
             "grief"
           ]
+        },
+        {
+          "id": "lc01",
+          "interlude": true,
+          "file": "lost-centuries/lc01.tsb",
+          "title": "The Salarian Gate",
+          "notes": [
+            "violence",
+            "blood",
+            "war"
+          ]
+        },
+        {
+          "id": "lc02",
+          "interlude": true,
+          "file": "lost-centuries/lc02.tsb",
+          "title": "The Third Day",
+          "notes": [
+            "violence",
+            "war"
+          ],
+          "journal": "journal/lc-410.tsb",
+          "journalTitle": "From the book of the Aventine watch"
+        },
+        {
+          "id": "lc03",
+          "interlude": true,
+          "file": "lost-centuries/lc03.tsb",
+          "title": "The Second Rome",
+          "notes": [
+            "blood"
+          ],
+          "journal": "journal/lc-537.tsb",
+          "journalTitle": "A letter to the Aventine watch"
         }
       ],
       "journal": "journal/burning-city.tsb",
-      "recap": "Rome burned, and you were in it. You were taken in by a house of the Merchant line and made a name in its ledgers; you learned what the Igniferi meant to do, and what a city does when it is on fire, and what it costs to answer. A very old thing under the hill was woken, and the Senate of Blood had to decide what to make of you and of it. Then you went home to Collesanto, put your affairs in other hands, and lay down in the dark to wait out the centuries."
+      "recap": "Rome burned, and you were in it. You were taken in by a house of the Merchant line and made a name in its ledgers; you learned what the Igniferi meant to do, and what a city does when it is on fire, and what it costs to answer. A very old thing under the hill was woken, and the Senate of Blood had to decide what to make of you and of it. Then you went home to Collesanto, put your affairs in other hands, and lay down in the dark to wait out the centuries. You were woken twice before the end of them, once for the night the Goths took Rome and once for a winter in the Emperor's new city, and both times you lay down again."
     },
     {
       "id": "blood-and-gold",

@@ -76,11 +76,12 @@ export class Game {
     this.chapterMeta = {};
     for (const book of this.manifest.books) {
       book.chapters ??= [];
-      // A prologue is not numbered; the chapters after it count from 1.
+      // A prologue or an interlude is not numbered; the chapters after a prologue count from 1.
       let numbered = 0;
       book.chapters.forEach((c, index) => {
-        if (!c.prologue) numbered++;
-        this.chapterMeta[c.id] = { ...c, bookId: book.id, bookTitle: book.title, index, number: c.prologue ? null : numbered };
+        const unnumbered = c.prologue || c.interlude;
+        if (!unnumbered) numbered++;
+        this.chapterMeta[c.id] = { ...c, bookId: book.id, bookTitle: book.title, index, number: unnumbered ? null : numbered };
       });
     }
     this.saves = new SaveManager({
@@ -172,8 +173,15 @@ export class Game {
         accent: b.accent ?? null,
         accent2: b.accent2 ?? null,
         dev: Boolean(b.dev),
-        chapterCount: b.chapters.filter((c) => !c.prologue).length,
-        reachedNumber: this.chapterMeta[b.chapters[prof.reached[b.id] ?? -1]?.id]?.number ?? 0,
+        chapterCount: b.chapters.filter((c) => !c.prologue && !c.interlude).length,
+        // The furthest numbered chapter reached (an interlude counts as the chapter before it).
+        reachedNumber: (() => {
+          for (let i = prof.reached[b.id] ?? -1; i >= 0; i--) {
+            const n = this.chapterMeta[b.chapters[i]?.id]?.number;
+            if (n) return n;
+          }
+          return 0;
+        })(),
         written: b.chapters.length > 0,
         incomplete: Boolean(b.incomplete),
         completed: Boolean(prof.completedBooks[b.id]),
@@ -384,11 +392,36 @@ export class Game {
    * names a script (same format as a chapter, no choices). It runs on a copy of the state, so
    * its conditions read every choice made; its paragraphs become one journal entry. Run again
    * (a second ending of the same book), it replaces that book's entry.
+   *
+   * An interlude chapter can have an entry of its own: a chapter's "journal" in the manifest
+   * is written the same way when that chapter ends (see composeChapterJournal).
    */
   async composeJournal(bookId, state = this.state) {
     const book = this.#book(bookId);
     if (!book.journal) return null;
-    const chapter = await this.#journalScript(book.journal);
+    const entry = await this.#journalEntry(book.journal, state, { book: bookId, chapter: null, title: book.journalTitle });
+    state.journal ??= [];
+    // The book's entry is the oldest record, so it sits before the interludes' entries of the same book.
+    state.journal = state.journal.filter((e) => !(e.kind === 'velati' && e.book === bookId && !e.chapter));
+    const firstInterlude = state.journal.findIndex((e) => e.kind === 'velati' && e.book === bookId && e.chapter);
+    if (firstInterlude < 0) state.journal.push(entry);
+    else state.journal.splice(firstInterlude, 0, entry);
+    return entry;
+  }
+
+  /** Write the Velati journal entry for a chapter that has a "journal" in the manifest (interludes). */
+  async composeChapterJournal(chapterId, state = this.state) {
+    const meta = this.chapterMeta[chapterId];
+    if (!meta?.journal) return null;
+    const entry = await this.#journalEntry(meta.journal, state, { book: meta.bookId, chapter: chapterId, title: meta.journalTitle });
+    state.journal ??= [];
+    state.journal = state.journal.filter((e) => !(e.kind === 'velati' && e.chapter === chapterId));
+    state.journal.push(entry);
+    return entry;
+  }
+
+  async #journalEntry(file, state, { book, chapter: chapterId, title: fallbackTitle }) {
+    const chapter = await this.#journalScript(file);
     const sandbox = clone(state);
     sandbox.stack = [];
     const runner = new Runner(chapter, sandbox, this.#env());
@@ -398,23 +431,19 @@ export class Game {
       const f = sandbox.frame;
       paragraphs.push(...f.paragraphs);
       if (f.wait === 'page') { runner.continue(); continue; }
-      if (f.wait === 'choices') throw new EngineError(`${book.journal}: a journal script cannot offer choices`);
+      if (f.wait === 'choices') throw new EngineError(`${file}: a journal script cannot offer choices`);
       break;
     }
-    let title = book.journalTitle ?? 'From the Velati archive';
+    let title = fallbackTitle ?? 'From the Velati archive';
     if (paragraphs[0]?.kind === 'h') title = paragraphs.shift().text;
-    const entry = {
-      book: bookId,
-      chapter: null,
+    return {
+      book,
+      chapter: chapterId,
       kind: 'velati',
       title,
       text: paragraphs.map((p) => p.text).join('\n'),
       paragraphs: paragraphs.map((p) => ({ text: p.text, kind: p.kind })),
     };
-    state.journal ??= [];
-    state.journal = state.journal.filter((e) => !(e.kind === 'velati' && e.book === bookId));
-    state.journal.push(entry);
-    return entry;
   }
 
   async #journalScript(file) {
@@ -535,6 +564,9 @@ export class Game {
     const chapter = this.chapters.get(st.chapter);
     const meta = this.chapterMeta[st.chapter];
     this.#achievements('chapter', meta.bookId);
+    if (meta.journal) {
+      try { await this.composeChapterJournal(st.chapter); } catch (e) { this.warn(`journal: ${e.message}`); }
+    }
     let nextId = null;
     if (target === 'next') {
       nextId = chapter.next ?? this.#book(meta.bookId).chapters[meta.index + 1]?.id ?? null;

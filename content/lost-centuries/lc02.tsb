@@ -1,0 +1,237 @@
+// The Lost Centuries, chapter 2 (interlude session A). 410 AD: the three days, the archive on the Flaminian Way, the watchers of the Aventine, and the second sleep.
+// Reads lc.court, lc.gate and b1.velati_seed from earlier. Ends with rest() and sleep("sack_to_byzantium"), the second segment of the Lost Centuries chain, then => next.
+// The chapter's own Velati journal entry is written by content/journal/lc-410.tsb when the chapter ends.
+@chapter lc02
+@title The Third Day
+@book burning-city
+@version 1
+
+# start
+## The sun, and the road
+$ lc.road = "none"
+$ lc.watchers = "silent"
+$ lc.seat = "none"
+$ _wag = 0
+$ do discover("the_sack")
+The sun comes up on the sack of Rome, and nobody tells it to stop.
+It is a strange thing to walk in. You are, you suppose, the only one of your kind in the whole of Rome who can: the others, the ones who go down at sunrise, have gone down. They are in cellars, and sealed rooms, and wagons, behind walls and drawn blinds, in the dark, listening to the sound of Goths on the stair. You walk out in the white light, on the Aventine, in a plain cloak, and the Gothic soldiers going past with their loot look at you and see a man, and a man is a man.
+?if must_feed()
+  You are very hungry. It is a thing that the day does not help.
+?end
+?if lc.court == "held" or lc.court == "bargained"
+  There is a wagon at the Flaminian gate, with a tarpaulin and a driver and a mule, and you have a manifest in your hand.
+  -> escort
+?else
+  There are no wagons waiting. You spend the first of the three days as the city does, in the doorway, with your hands in your sleeves, learning what it is to be one man in a place that is changing hands.
+  -> city
+?end
+
+# escort
+## A merchant with a cart
+The first wagon is a plain one. It carries what looks like a load of lentils and what is, under the lentils, in a space cut out in the bed of the cart, seven large iron chests, a Lictor, and the Commander's own tablet case. The rest of the wagons are behind it, in a line, ten at a time. Each has a driver who has been paid to be incurious. Each has a number of unhappy passengers under the sacks, wrapped in wool, and in their own thoughts, who have been asked not to say anything for twelve hours, and who are, on the whole, not saying it.
+You walk beside the first wagon. It is a thing that you have never done, at the head of an institution: you hold a mule's bridle, in the sun, and whistle. The road north out of Rome, on the Flaminian Way, is full of what the sack has loosed. A man with a bundle. A woman with a bundle. A priest, carrying a large wooden cross like a spade. A gang of Gothic horsemen, going the other way, with the loose happy swing of people who have come from somewhere that was good.
+The patrol is at the Milvian bridge. It is not a large one, nine men and an officer, with a barrel across the road. The officer is a young one, and bored, and has the look of a man who has been given a minor post and a major disaster, and is very glad of the one.
+?if lc.gate == "fought"
+  He looks at you for rather longer than you would like. He has, you gather, been told about a man at a baker's door.
+?elif lc.gate == "sheltered"
+  One of the soldiers, a heavy fair man at the back, looks at your face, and then away, and then back. You do not know him. He does not know you. It does not matter.
+?end
+He wants to see in the wagons.
+* "Church goods. For the basilica of the Apostle. Which I think, captain, is one of yours." ?if lc.gate != "unmet"
+  $ lc.road = "clean"
+  $ cunning_brutal -= 1
+  $ standing += 1
+  It is all in the delivery. It is the one thing that you learned last night, at the gate, from a tired man in a mail shirt: that the Goths have a rule about churches, and keep it. You say *basilica* and *Apostle* and *church goods* in the flat grey voice of a clerk, and the officer's eyes go to the barrel, and the cart, and the priest with the spade-cross on the road behind you, and he says, "Pass them." And then, a little uncertainly, "Say a prayer for me." You say that you will. It is the oldest trick in the world, and it works because it is true, in a way, of everyone.
+* Pay him. A good deal, and with an air of reluctance
+  $ lc.road = "paid"
+  $ do earn(-4)
+  $ cunning_brutal += 1
+  It takes some time. It takes, to be exact, nineteen coins, and a ring, and a long speech about the hardship of the age. The officer counts it twice. He looks at the wagon, and at the money, and at his men, and at the barrel. Then he opens his hand and puts the lot in his pouch and waves them through, with a look of such burning virtue that you almost admire him.
+  It is a very bad price. It is, you think, about what the empire has been paying for some time.
+* Take the barrel off the road, and stand in the road
+  $ lc.road = "fought"
+  $ do fight("human", 2)
+  $ do kill("human")
+  $ do witness(1)
+  $ cunning_brutal += 3
+  $ standing += 1
+  You do not make a speech. You pick up the barrel, in the sun, with both hands, in front of nine men, and put it in the ditch. The officer says something. You do not need to know the language. You hold the mule, and wait, and the nine men look at you, and at the barrel, and at the thing that you are not saying.
+  ?if fight_result() == "won"
+    It is over in less time than it takes to say. It is not clean. It is very quick. Two of the nine are down, and the officer has found a reason to be somewhere else, and the first wagon, with the lentils, goes through the gap at a walk.
+  ?else
+    It is not as quick as you would have liked. You take a spear in the side, a clumsy one, and fall against the barrel, and get up. They go. They have, you think, remembered something else that they had to do.
+  ?end
+~> bridge
+-> city
+
+# bridge
+## The bridge at dusk
+You see the wagons across the bridge, one by one, into the long shadow of the arches, where the road bends towards Etruria and the trees begin. It is the end of the day, and the first of the others are coming up, out of the wool, out of the dark, into the dusk, one by one, as though from a long way down.
+Galerius comes out last. He gets down from the first wagon with an old man's dignity, which he has had for a great many centuries, and straightens his tunic, and brushes a lentil from his sleeve. He looks, for a moment, at the road behind you, and at the great dim mass of the city, with the smoke going up from it in three places, and he says nothing at all for as long as it takes the sun to go.
+"It is a strange thing," he says at last, "to leave a place. I was told it would be like a death. It is not at all like that. It is like being told that a thing that was always there has been a decision." He turns. "The Senate is grateful. It will not say so. I am saying it for the record."
+He has a roll under his arm, a plain strip of vellum, with names on it in a good fine hand, and a number of seals. It is, you gather, the roll of the Senate of Blood, as it leaves Rome. It has, at the foot, a space.
+"There is a seat," he says. "It is not at all a grand one. It is an ear, and a name, and a chair at the foot of the table that will be, in time, in a room that I cannot describe to you. It comes with a debt, and a protection, and a good many things that you will not like." He is quite perfectly gentle. "It is the only way that the Senate has of knowing where a thing is, and where it stands."
+?if lc.court == "bargained"
+  "It is also," he adds, "a part of what was agreed."
+?end
+* Take the seat
+  $ lc.seat = "taken"
+  $ standing += 2
+  $ bond.galerius += 1
+  $ cunning_brutal -= 1
+  $ velati_regard -= 1
+  You sign. The pen is a bone one, and does not scratch. Galerius sands the ink, and rolls the vellum, and seals it, and bows. "Welcome," he says, and means it, with great gravity, and a good deal of regret. "It will be an odd thing to have you in the room."
+* Decline it, courteously
+  $ lc.seat = "declined"
+  $ cunning_brutal += 1
+  $ bond.galerius += 1
+  "I thought that you would." Galerius is not at all put out. He lowers the roll. "It was asked, and it is written down that it was asked. It is, you will find, a very good thing to have on file." He pauses. "The Senate has a long memory. It would like you to know that it has a short temper, too, and that the second is a thing that it keeps for those who do not return its courtesies."
+~> bridge_end
+<~
+
+# bridge_end
+It is the last that you see of the court for a hundred and twenty years and more. The wagons go on into the dark, a long creaking line, and you turn, and go back down the road, in the dusk, to a city that is, for the second night, in the hands of someone else.
+<~
+
+# city
+## The Aventine
+It is a plain little building at the back of a plain little lane, between a baker and a shut temple, and it still has a lamp over the door. It is not a station any longer. It is the meeting house of a burial society, a *collegium*, whose members pay a small sum every month so that they shall be decently put in the earth, and who have, since the days of the old vigiles, met in the same room, on the same evenings, in a manner that nobody has remarked on in three centuries.
+A man comes out to the door. He is perhaps fifty, a little stooped, in a notary's grey, with an ink stain on his thumb and the look of one who has not quite decided how to feel about the day. He says that his name is Rufinus. He says that the society is shut. He says it with the care of one who has said it to a great many people in the last two days, and has, perhaps, been believed.
+?if b1.velati_seed == "told"
+  He is not surprised by the question that you ask. It is the thing that you had hoped. He lets you into the back, where there is a lamp, and a long table, and a chest, and on the table a thing that you have not seen in a long time: a book, bound in old calf, with a number of ribbons.
+  "We keep it," says Rufinus. "It is not a large society. We are eleven, and a boy. We write down what we are told, and what we see, and what we think that we saw, in two columns." He puts a dry hand on the cover. "It was begun by a vigil called Rufus. It says so in the first line. I am not related, and I have always been rather sorry."
+  You find that you cannot speak. It has been written down. It has been written down, in a chest, in a back room, for three hundred and forty-six years, by people who did not stop.
+?elif b1.velati_seed == "buried"
+  Rufinus lets you into the back. He does so with the manner of one who is not sure that he is doing the right thing and is doing it anyway. There is a lamp, and a table, and a chest, and on the table a thing like a book: two wax tablets, very old, bound face to face with a leather thong.
+  "It was my grandfather's," he says. "It came with the chest. It is not the record of the society. It is a thing that someone kept for himself. It says, among a good deal else, that on a night when the city burned, a man was seen in the smoke who was not at all in it." He has the manner of a man who has read the tablet a great many times, and does not think that he believes it. "I have never shown it to a soul. I do not know why I am showing it to you."
+?else
+  Rufinus does not let you in. He stands on the step, in the last of the light, and says the society is shut, and asks if you are a friend of the dead. It is the formula. It is what the *collegium* says when somebody it does not know comes to the door. You say that you are.
+  "Then you may sit on the step," he says, "and listen." He sits down himself, with an old man's care. "There is a story that we tell the new ones. It is not much of a story. It is about a fire, and a man in a cloak, and a watchman who could not afterwards say what he had seen." He looks at his hands. "I have never been sure whether it is true. We tell it, because we always have."
+?end
+There is a thing that you could do. It is a small thing, and the whole of the rest of the story depends on it.
+* Give them a purse, and ask them to go on
+  $ lc.watchers = "funded"
+  $ do earn(-5)
+  $ secrecy -= 1
+  $ velati_regard += 2
+  You give them the purse. It is a heavy one, as purses go, and Rufinus looks at it, and at you, and at the lamp over the door, for a very long time. "We are not rich," he says. "We have never wanted to be." He takes it. "We are going to have a great many more years of this, are we not?" You say that you think so. "Then we shall need a larger chest," says Rufinus.
+  It is not a thing that the Senate will be glad of. It is very possible that it is the best investment that you will ever make.
+* Warn them: burn the book, and be forgotten
+  $ lc.watchers = "warned"
+  $ secrecy += 1
+  $ humanity += 1
+  You tell him the plain truth: that there are people, and they are not at all kind, who do not care to be written down, and that a record in a chest is a thing that can be found. You tell him what a Lictor looks like. You tell him what a coffin looks like from the inside. It is the most honest thing that you have done in a week.
+  Rufinus listens to the end. He thanks you gravely. He does not, you notice, promise a thing. "We shall be careful," he says. It is what a man says who has been told to stop a river.
+* Say nothing. Thank him, and go
+  $ lc.watchers = "silent"
+  $ cunning_brutal += 1
+  You do not say what you are. You do not say what you were there for. You thank him for his time, and for the step, and he says that it was no trouble, and you go down the lane in the failing light, with your hands in your sleeves, and the feeling of a man who has stood in front of a door and chosen, for reasons that he will never be able to give, not to knock.
+~> city_end
+-> settle
+
+# city_end
+It is the second night. There is a fire in the Forum. You do not go to it.
+<~
+
+# settle
+## The second lying down
+The third day is the last of it. The Goths go out of Rome in the morning, long lines of them, on the Appian Way, with their wagons full, and their horses tired, and their king in the middle of it, grey and silent, on a grey horse. They go south. They are going to Campania, and Sicily, and the sea. In a little over three months, he will die, in a town in Calabria, and they will turn a river aside to bury him, and kill the men who dug the grave.
+Rome is, by the afternoon, a city again. It is a very quiet one.
+It is the end of your waking, and it is not a thing that can last. You can feel the hunger in it, the way that you feel the weight of a blanket. There is a hill to the north. There are people, in a great many places, whom you have, for the second time, to leave in the care of someone else, and there are the four lines on a paper.
+You have done this once. It is a good deal harder the second time.
+~> place
+~> steward
+~> orders
+~> guard
+-> bed
+
+# place
+## Where you will lie
+* The cellar on the hill, under the old villa
+  $ do rest_place("collesanto")
+  $ bond.aelia += 1
+  The hill is where you go. It is the one thing that you are quite sure of. It has a bar on the inside of a door, and a family that says a sentence every year, and a graveyard under the olives, and a bell.
+* A haven in the city, among people who could help
+  $ do rest_place("haven")
+  $ secrecy -= 1
+  You will find a house, on a hill, in a quarter that has not yet been burned. It is a thing that has to be done quickly, and you do it, and you pay a good deal too much, and you do not at all like having a Christian picture over the door.
+* The tomb in the rock
+  $ do rest_place("tomb")
+  $ humanity -= 1
+  $ cunning_brutal -= 1
+  There are a great many tombs in the Roman hills, and a good many of them are empty. You choose one a day's walk from the road, and pay a mason from the next village, who does not ask what it is for, to build up the door. It will be a long time before it is opened.
+<~
+
+# steward
+## Who will hold what is yours
+?if wake("outcome") == "woken_early"
+  Your steward, you are aware, was not at all what you would have wished. It is a thing that you have to put right.
+?end
+* The Merchant house's successor, as a bank and a trust
+  $ do steward("bank")
+  $ bond.prisca += 1
+  It is a thing that does not depend on a heart. It has not, in three hundred years, failed to answer a letter.
+* Prisca, in her own person ?if in_circle("prisca") and member("prisca", "status") == "active"
+  $ do steward("prisca")
+  $ bond.prisca += 3
+  $ standing += 1
+  She does not look up from her abacus. "I shall be exact," she says. "I said so. It is not at all a thing that I enjoy repeating." She pauses. "It was a good night's work, I think, yesterday." It is as near to a compliment as she has ever come.
+* Hanno, who has kept the ledgers ?if in_circle("hanno") and member("hanno", "status") == "active"
+  $ do steward("hanno")
+  $ bond.hanno += 3
+  He takes the paper, and reads it, and puts it down. "I shall be exact," he says, as Prisca did, and then, for the third time in your acquaintance, he says a second sentence. "It is a great honour, and it is not a thing that I ever wished." Then, quite fast, "I shall not fail you."
+* Tiro, who is young and quick ?if in_circle("tiro") and member("tiro", "status") == "active"
+  $ do steward("tiro")
+  $ bond.tiro += 3
+  Tiro has not stopped talking since you gave him the paper. He has listed, in order, in the course of twenty minutes, all the reasons that he should not be trusted, and has then, quite calmly, said that he will do it. He has a gift for it. It has never been a gift for numbers.
+* The Valerii of the hill, the keepers, and the family after them ?if b1.keepers == "sworn"
+  $ do steward("keepers")
+  $ bond.aelia += 2
+  $ bond.felix += 2
+  Valeria reads it, in the lamplight, with her lips moving. Her boy, who is ten, looks at the stole. "It is what we do," she says. She says it as a thing that she has been told, and has decided, a little to her own surprise, to believe. "It is a great deal to ask of a family. It is what a family is for."
+<~
+
+# orders
+## What is to be done with it
+* Play it safe: land, grain, honest rents
+  $ do orders("safe")
+  $ humanity += 1
+  It is what a careful man would do, in an age that is going to get a good deal less careful. It is not at all exciting.
+* Grow it aggressively: shipping, loans, trade
+  $ do orders("aggressive")
+  $ cunning_brutal += 1
+  The money is going east, where the Emperor is going, and the grain, and the ships. It is a good deal more exposed.
+* The dark ventures, which pay the most, and ask nothing
+  $ do orders("dark")
+  $ cunning_brutal += 3
+  $ humanity -= 3
+  $ velati_regard -= 2
+  It is a thing that you do not enjoy writing. It is the largest return that there is, in an age that is going to be a great deal darker.
+<~
+
+# guard
+## What stands between
+There is the last thing, and it costs. It is what stands between a man in a cellar and a world that will wake long before him. You have been robbed once already, by the age, in the matter of three hundred years, and you find that it concentrates the mind.
+:guard
+* Lay traps in the ways in [once] ?if wealth >= 10
+  $ do protection("traps")
+  It is a cheap and nasty piece of work, and you are quite sure that it will outlive you.
+* Pay the people who would otherwise ask questions [once] ?if wealth >= 20
+  $ do protection("bribes")
+  $ secrecy += 2
+  It is the oldest protection there is. It is also, in the long run, the most expensive.
+* Hire guardians: men of the hill, paid and sworn [once] ?if wealth >= 30
+  $ do protection("guardians")
+  They are not at all the sort of men that you would have chosen, and there is not a better sort to be had.
+* That will do
+  <~
+-> :guard
+
+# bed
+## Down again
+You lie down, as you did before. It is not a thing that you can get used to. There is a lamp, and a cup, and the dry smell of old stone. The sun is, you judge, setting, somewhere beyond the walls, in a world that you have already, in your mind, left.
+$ do rest()
+$ do sleep("sack_to_byzantium")
+You close your eyes.
+It is not like sleep. It is like the second descent of a long stair, when you know how many steps there are. Rome goes. The city goes, and the hill, and the noise of the Goths, and the little sounds of people in the dark. There is a time when you can still hear, very faintly, in the far rooms of the world, a sound as of someone shutting a very large door.
+=> next

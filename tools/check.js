@@ -66,21 +66,26 @@ for (const book of manifest.books) {
   }
 }
 
-// Velati journal scripts: chapter format, run at the end of each book, no choices allowed.
+// Velati journal scripts: chapter format, run at the end of each book (and of any interlude chapter
+// that names one), no choices allowed.
+const journals = [];
 for (const book of manifest.books) {
-  if (!book.journal) continue;
-  if (!existsSync(join(root, 'content', book.journal))) { error(`${book.id}: journal "${book.journal}" does not exist`); continue; }
-  const { chapter, errors: parseErrors } = parseChapter(await loader.chapterSource(book.journal), { file: book.journal });
+  if (book.journal) journals.push({ owner: `${book.id}`, file: book.journal, dev: Boolean(book.dev) });
+  for (const c of book.chapters ?? []) if (c.journal) journals.push({ owner: `${book.id}/${c.id}`, file: c.journal, dev: Boolean(book.dev) });
+}
+for (const j of journals) {
+  if (!existsSync(join(root, 'content', j.file))) { error(`${j.owner}: journal "${j.file}" does not exist`); continue; }
+  const { chapter, errors: parseErrors } = parseChapter(await loader.chapterSource(j.file), { file: j.file });
   parseErrors.forEach((e) => error(e.message));
   if (!chapter) continue;
   const report = validateChapter(chapter, { chapterIds: ids, commandNames, variantIds: content.variantIds });
   report.errors.forEach((e) => error(e.message));
   report.warnings.forEach((w) => warning(w.message));
-  const deep = checkChapterContent(chapter, { stats, content, dev: Boolean(book.dev) });
+  const deep = checkChapterContent(chapter, { stats, content, dev: j.dev });
   deep.errors.forEach((e) => error(e.message));
   deep.warnings.forEach((w) => warning(w.message));
   for (const scene of Object.values(chapter.scenes)) {
-    for (const op of scene.ops) if (op.op === 'choices') error(`${book.journal}:${op.line}: a journal script cannot offer choices`);
+    for (const op of scene.ops) if (op.op === 'choices') error(`${j.file}:${op.line}: a journal script cannot offer choices`);
   }
 }
 

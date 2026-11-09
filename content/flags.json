@@ -1144,6 +1144,156 @@
       "major": true,
       "default": "both",
       "note": "Chapter 20: who he spent the last night on the hill with"
+    },
+    "lc.collis": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "saved",
+        "burned",
+        "sold"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "saved",
+      "note": "Lost Centuries 1 (410): what he did with the Emporium house on the night the Goths came"
+    },
+    "lc.gate": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "watched",
+        "sheltered",
+        "fed",
+        "fought"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "watched",
+      "note": "Lost Centuries 1 (410): what he did at the Salarian Gate and in the streets below it"
+    },
+    "lc.court": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "held",
+        "bargained",
+        "refused"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "held",
+      "note": "Lost Centuries 1 (410): his answer when the Commander of the Lictors asked him to escort the Senate's archive by day"
+    },
+    "lc.hill": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "defended",
+        "parleyed",
+        "hidden"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "parleyed",
+      "note": "Lost Centuries 1 (410): how Collesanto met the Gothic foragers"
+    },
+    "lc.road": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "clean",
+        "paid",
+        "fought"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "clean",
+      "note": "Lost Centuries 2 (410): how the archive wagons passed the Gothic patrols on the Flaminian Way"
+    },
+    "lc.watchers": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "funded",
+        "warned",
+        "silent"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "silent",
+      "note": "Lost Centuries 2 (410): what he did about the Aventine watchers and their book"
+    },
+    "lc.seat": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "declined",
+        "taken"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "declined",
+      "note": "Lost Centuries 2 (410): whether he took a seat on the Senate of Blood's roll when it left Rome"
+    },
+    "lc.answer": {
+      "kind": "enum",
+      "values": [
+        "humble",
+        "bargained",
+        "defiant"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "bargained",
+      "note": "Lost Centuries 3 (537): how he answered the Senate of Blood in the cistern"
+    },
+    "lc.sunwalk": {
+      "kind": "enum",
+      "values": [
+        "shown",
+        "refused"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "refused",
+      "note": "Lost Centuries 3 (537): whether he walked into the Great Church at noon where the court could see"
+    },
+    "lc.hill_537": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "sent",
+        "guarded",
+        "ignored"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "sent",
+      "note": "Lost Centuries 3 (537): what he did about the letter from Collesanto while the Goths besieged Rome"
+    },
+    "lc.court_537": {
+      "kind": "enum",
+      "values": [
+        "allied",
+        "wary",
+        "hostile"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "wary",
+      "note": "Lost Centuries 3 (537): where the court at Constantinople stands with him when he lies down again"
+    },
+    "lc.mason": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "helped",
+        "left"
+      ],
+      "book": "burning-city",
+      "default": "unmet",
+      "note": "Lost Centuries 3 (537): the mason at the Great Church"
     }
   }
 }

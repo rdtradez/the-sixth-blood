@@ -1,10 +1,32 @@
 {
-  "note": "The long sleeps between books (none between Chicago and New York). from and to are book ids; growth multiplies his fortune (before orders and steward); village is how much Collesanto grows; events are the history the sleep passes through, each adding risk. investments are orders tied to one gap ($ do sleep_invest): growth multiplies, risk adds danger, humanity is lost on waking, flag notes what a later book reads. A gap marked split is played as several sleeps by interlude chapters and skipped by quick start.",
+  "note": "The long sleeps between books (none between Chicago and New York). from and to are book ids; growth multiplies his fortune (before orders and steward); village is how much Collesanto grows; events are the history the sleep passes through, each adding risk. investments are orders tied to one gap ($ do sleep_invest): growth multiplies, risk adds danger, humanity is lost on waking, flag notes what a later book reads. A gap marked split is one segment of a longer sleep played by interlude chapters, and is skipped by quick start (which uses the whole gap, listed first, instead). Segments with the same chain add up in the wake report: wake(\"years\") and wake_event() cover the whole chain. rome_to_florence is the whole Lost Centuries sleep for quick starts; its three segments are what Book One plays: rome_to_sack (chapter 20), sack_to_byzantium and byzantium_to_florence (the interludes). Years and growth of the segments add up to the whole gap.",
   "gaps": {
     "rome_to_florence": {
       "from": "burning-city", "to": "blood-and-gold", "years": 1410, "growth": 6, "village": 10,
       "events": [
         { "id": "sack_of_rome", "name": "The sack of Rome, 410", "risk": 1 },
+        { "id": "plague_of_justinian", "name": "The Plague of Justinian", "risk": 1 },
+        { "id": "black_death", "name": "The Black Death, 1348", "risk": 2 }
+      ]
+    },
+    "rome_to_sack": {
+      "chain": "lost_centuries", "split": true,
+      "from": "burning-city", "to": "burning-city", "years": 346, "growth": 1.8, "village": 4,
+      "events": [
+        { "id": "sack_of_rome", "name": "The sack of Rome, 410", "risk": 1 }
+      ]
+    },
+    "sack_to_byzantium": {
+      "chain": "lost_centuries", "split": true,
+      "from": "burning-city", "to": "burning-city", "years": 127, "growth": 1.35, "village": 2,
+      "events": [
+        { "id": "fall_of_the_west", "name": "The last western emperor, 476", "risk": 0 }
+      ]
+    },
+    "byzantium_to_florence": {
+      "chain": "lost_centuries", "split": true,
+      "from": "burning-city", "to": "blood-and-gold", "years": 937, "growth": 2.5, "village": 4,
+      "events": [
         { "id": "plague_of_justinian", "name": "The Plague of Justinian", "risk": 1 },
         { "id": "black_death", "name": "The Black Death, 1348", "risk": 2 }
       ]

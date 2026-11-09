@@ -6,6 +6,7 @@
     "press_pamphlet": { "book": "crown-of-ashes", "name": "A pamphlet from his press" },
     "doctors_instruments": { "book": "whitechapel-hunt", "name": "The doctor's instruments" },
     "lost_love_letter": { "book": "house-divided", "name": "A letter from a lost love" },
-    "god_relic": { "book": "relics-lost-god", "name": "A relic of the god" }
+    "god_relic": { "book": "relics-lost-god", "name": "A relic of the god" },
+    "great_church_tessera": { "book": "burning-city", "name": "A gold tessera from the Great Church" }
   }
 }

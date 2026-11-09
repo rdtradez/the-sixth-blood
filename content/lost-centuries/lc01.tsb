@@ -1,0 +1,344 @@
+// The Lost Centuries, chapter 1 (interlude session A). 410 AD: the first waking, the night the Salarian Gate is opened.
+// Reads the wake report from chapter 20's sleep (rome_to_sack): outcome, by, steward, place. A night phase of two actions out of four places, then the dawn.
+// Does not call rest() (chapter 2 does, and then sleeps again). Closes with => next.
+@chapter lc01
+@title The Salarian Gate
+@book burning-city
+@version 1
+
+# start
+## Up from the dark
+$ lc.collis = "unmet"
+$ lc.gate = "unmet"
+$ lc.court = "unmet"
+$ lc.hill = "unmet"
+$ _fed = 0
+$ _pick = 0
+$ do kin("aelia", "dead")
+$ do kin("felix", "dead")
+~> waking
+?if must_feed()
+  ~> hunger
+?end
+---
+It is the twenty-fourth of August, in the eleven hundred and sixty-third year from the founding of the city, and you have been dead, or something with the same hours, for three hundred and forty-six years. You have a good deal of catching up to do. You have, by the look of the sky through the nearest window, until about dusk.
+~> news
+---
+$ do phase("night", 2)
+Dusk comes up the Tiber like a bruise. You have the night. It is a night with four places in it that cannot wait, and a good many that will have to.
+-> night
+
+# waking
+?if wake("outcome") == "woken_early"
+  ?if wake("by") == "hunters"
+    You do not wake. You are interrupted. There is a crowbar in the dark, and torchlight, and the bright thin sound of someone being very quiet and doing it badly, and a voice that says "Quick" in the bad Latin of the age. There are six of them, men and a woman, with sacks and hooks and a list, and they have come down the stair for what they have been told is a hoard. They have found a sleeper instead. The woman has the sense to scream. The men have the sense to run. You have, from the moment that you open your eyes, one thought, and it is not a clever one.
+    You are so hungry that the room has edges.
+    $ _pick = 1
+  ?elif wake("by") == "government"
+    You wake to the smell of lamp oil and a courteous cough. Galerius is standing at the foot of the cot with his hands folded, exactly as old, and exactly as polite, as he was when he was told to watch you. He has brought two Lictors, who are looking at the walls, and a cup, which he does not offer.
+    "The Senate regrets the hour," he says. "It also regrets the three centuries. I am afraid that it regrets a number of things this evening, and that you are among the smaller ones." He says it kindly. It is the kindest threat that you have ever been given.
+    "You will be hungry," he says. "That, too, we regret."
+  ?else
+    Somebody you trusted has woken you, and has not done it well. There is a hand on your shoulder that shakes, and a voice that says your name three times and then your title, and a smell that you know and cannot place until you do: it is the smell of a person who has made a decision in the night and is about to find out what it cost.
+    You open your eyes. You are very hungry. The person is not at all safe to be in a room with.
+  ?end
+?elif wake("steward") == "prisca"
+  The lid comes up, and it is Prisca. She has opened it herself. She is in a travelling cloak, with her abacus in her sleeve, and the expression of a woman who has run a sum three times and has not liked it once.
+  "I said that I would be exact," she says. "I am being exact. It is the twenty-fourth of August and the Goths are at the Salarian Gate. I have the figures. I do not have an answer." She looks at you, and for the length of a breath, something goes across her face that is not arithmetic. "I thought that you would want to be told."
+?elif wake("steward") == "hanno"
+  There is a knock. It is an ordinary knock, a plain one, three taps, and it is so much the knock of a bookkeeper who does not want to be a nuisance that you are awake before you have decided to be. The door opens. Hanno is standing in it, in a brown tunic exactly like the old one, with his tablets under his arm.
+  "A steward is not a bookkeeper," he says. "I said that. I have been one for three hundred and forty-six years, and I find that it is a great deal of work." He swallows. "There is a sum that I cannot make come out. It is the city."
+?elif wake("steward") == "tiro"
+  It is Tiro. He has not aged by a day, and he has aged by about four centuries, and he is crying and talking at the same time, which he has always been able to do. "I am sorry," he is saying, "I am so sorry, I did look at the other options, there weren't any, I was very good, I want you to know that I was good, I kept the books and I did not once lie to anybody, and now they are at the gate and I don't, I don't know what is, I am not good at what comes next." He draws breath. "Hello. You look well."
+?elif wake("steward") == "keepers"
+  There is a lamp, and it is held by a woman you have never seen, with Aelia's way of standing and Felix's nose, and a stole round her shoulders with a small cross sewn on the end of it, as a courtesy to the age. Behind her, a boy of ten holds the bar of the door as though it might bite.
+  "My name is Valeria," she says, in a Latin that has gone soft at the edges. "We were told what to say. I have said it to my daughter, and she to hers, for eleven generations, and I have never believed a word. I am going to say it now." She takes a breath. "*The sky over Rome has gone red.* I am sorry. It is, I think, a thing that you wanted to hear."
+?else
+  There is a clerk. He is in a good Greek cloak, and he has the manner of a man who has been given an instruction by another man who was given it by another man, in a sealed packet, with a procedure that has a name. He holds the packet in both hands. He has not, he says, the honour of your acquaintance. He has the honour of a seal.
+  "I am to wake you," he says, "if the city is threatened. It is. I have the instruction. I am sorry that I cannot tell you more. I was not told it."
+?end
+?if wake("outcome") != "woken_early"
+  It was never in the four lines on Hanno's paper. There are things that nobody writes down, and *wake me if Rome falls* is one of them. It is a thing that a steward, if she is any good, knows.
+?end
+?if wake("place") == "collesanto"
+  You are in the cellar on the hill. The bar of the door is lifted. The wine racks are gone and a stack of grain sacks has come, and the beaten earth floor is, you find, a good deal harder than you remembered, and a good deal cleaner.
+?elif wake("place") == "haven"
+  You are in the haven, in the city, in a room that has been sealed, and papered over, and sealed again, by a long line of owners who did not know what was behind the paper. Somebody has hung a Christian picture on the wall above the door. It is, you reflect, an excellent piece of camouflage.
+?else
+  The stone has been moved. It must have been quite a labour. The tomb in the rock is open, the air is cool and smells of nothing, and somebody has put down a mat, and a lamp, and a cup of water that you do not drink.
+?end
+?if wake("outcome") == "woken_early"
+  Your fortune, you will learn, has had a hard time. You are not at all sure that anyone was looking after it.
+?elif wake("richer")
+  Your fortune has grown while you lay there, as a fortune does when nobody is looking at it. It is some comfort.
+?else
+  Your fortune is much as you left it, or perhaps a little worse. It has not been a good three centuries to be rich, and it is a better one than most.
+?end
+<~
+
+# hunger
+## The first thing
+It is not a matter of choosing. It is a matter of what you choose to be while it is happening, and you have, perhaps, a minute.
+* Find something warm and four legged, and make do
+  $ do feed("animal")
+  $ humanity += 1
+  There is a goat in the yard, as there is a goat in every yard in Italy. It does not at all care for the arrangement. It is not what the hunger wanted. It is, you find, enough to be going on with, and you are rather more sorry for the goat than you thought you would be.
+* Ask for a willing arm ?if wake("by") != "hunters"
+  $ do feed("donor")
+  $ do earn(-2)
+  It is, you gather, a thing that has been arranged. There is somebody, in the next room, with a sleeve rolled and a face turned carefully to the wall, who has been told what is wanted and has been paid, or has been asked, or has simply been brought up to it. It is quick and it is clean, and you are very much ashamed of how well it works.
+* Go after the one who ran ?if _pick == 1
+  $ do feed("human")
+  $ humanity -= 3
+  $ cunning_brutal += 3
+  You are on the stair before the thought is finished. You catch him at the turn, in the dark, with his sack, and he does not even scream. It is a thing that you do not afterwards remember as having decided. It is not quite murder. It is the next thing to it, and he is alive, at the end, and cannot say how.
+* Go without, and see what the hunger makes of the night
+  $ cunning_brutal += 2
+  $ humanity += 1
+  You do not feed. It is a bad choice, and a stubborn one, and you will pay for it before morning. The room has edges, and you keep your hands in your sleeves.
+<~
+
+# news
+## What the age has done
+It is a world that you have to be told, in pieces, over a lamp, by a person who has more to say and less time to say it than you would like.
+Rome is not what it was. It is still very large. It is still, in a way, the city, in the way that a great house is still a house after the family has moved to the country. The Emperor does not live here, and has not, in anyone's memory, for the better part of a hundred years. He lives at Ravenna, behind marshes and a very thick wall, and keeps chickens, and has been, you gather, a disappointment. The Senate of men sits on and passes the resolutions that it is allowed to. The old gods have been shut out of the temples, and the temples have been shut. There are crosses on the Capitol.
+The Goths have been outside for three summers. They came in the first as a threat, and went away on a ransom: five thousand pounds of gold, and thirty thousand of silver, and three thousand scarlet skins, and a good deal of pepper. They came in the second as a negotiation, and went away. They have come in the third as a king of the Goths named Alaric, who has been promised a great deal by a great many people and given none of it, and is, from the sound of it, tired. He took the port a year ago, and the grain with it. Rome has been eating, by now, what Rome can find.
+"And tonight?" you say.
+Tonight, the person says, someone will open the Salarian Gate. It is not known who. There are three stories, and the one that is told most is that it is a great lady's household, out of pity for the starving, and the one that is told next is that it is slaves, and the one that is told in the quarter where such things are known is that it does not matter. It will be at the third watch. It will be a very quiet thing. The city has been waiting for it so long that it will, when it comes, feel almost like a relief.
+~> circle
+<~
+
+# circle
+?if in_circle("prisca") and member("prisca", "status") == "active" and wake("steward") != "prisca"
+  You ask after Prisca. She is, you are told, in the Emporium house, and has been there since noon, and is making a great deal of noise about the arrangement of a number of chests.
+?end
+?if wake("steward") == "keepers"
+  You ask about the hill. "We are well," says Valeria, a little too fast. "It is a good hill. There are some Goths on the Via Salaria, foraging. It is not near." She glances at the boy. "It is not very near."
+?end
+?if b1.senate_peace == "charter"
+  You think of a paper that will stop a clerk and not a hunter. You think of the Goths, and of what they know about clerks.
+?end
+<~
+
+# night
+## The night of the gate
+:night
+?if actions_left() == 2
+  The light is going. Down in the city, the cooking fires are out, because there is nothing to cook, and the streets have the held, listening hush of a house where somebody is dying in the next room. The dusk is a very long one.
+?else
+  It is full dark, and the held breath is over. Somewhere to the north there is shouting, and it is not at all loud, and it is coming nearer by the hour.
+?end
+* Go to the Emporium house, where Collis has kept its books for three hundred years [once] ?if actions_left() > 0
+  ~> house
+  $ do act()
+* Go to the Salarian Gate, and the streets below it [once] ?if actions_left() > 0
+  ~> gate
+  $ do act()
+* Go up to the old quarry, where the Lictors are packing the Senate's chests [once] ?if actions_left() > 0
+  ~> court
+  $ do act()
+* Run for the hill, and Collesanto [once] ?if actions_left() > 0
+  ~> hill
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# house
+## The Emporium
+$ do meet("hanno")
+The house on the river is not the house you remember. It has been added to, and added to, and a fifth floor put on, and a granary, and a Christian chapel in the old atrium, with a plain wooden altar where the shrine to the lares used to be. The name over the door, in a good square hand, still says COLLIS, and it has been touched up, you suspect, once a generation, by a man with a pot of red lead who did not know why.
+There is a great confusion. There are clerks on the stairs with bundles of tablets, and porters with strongboxes, and a freedwoman of sixty in the counting room, sitting on the floor with her skirt full of papers and a look on her face of such perfect, resigned fury that you know at once that she is the head of the establishment. Nobody has told them what to do. Everybody knows what is going to happen.
+You have an hour, and the choice is a simple one, and not at all easy.
+* Get the books out: wagons, the north road, every strongbox, and every clerk who will go
+  $ lc.collis = "saved"
+  $ do earn(-4)
+  $ standing += 1
+  $ humanity += 1
+  It is not an elegant thing. It is a great many porters and a good deal of shouting and four wagons that have to be paid for in advance at a price that you would call extortionate in a better year. The freedwoman, whose name is Verecunda, takes the ledgers herself, one by one, and counts them onto the cart, and will not be hurried. You stand at the door and say "Faster" until you are hoarse. At the last she looks at you, and at the name over the door, and says, "Who are you?" and you say that you are a client, and she says, "Of course," in the tone of a woman who has met a great many clients and is not going to ask.
+  The wagons go out by the Flaminian gate, before the Goths have thought of it. It is a very small victory, and it will pay for itself in about two hundred years.
+* Burn what cannot be carried, and the paper trail with it
+  $ lc.collis = "burned"
+  $ do hide_collis(true)
+  $ secrecy += 2
+  $ do earn(-2)
+  You do it with your own hands, in the atrium, in the chapel, with the lamp oil that the clerks have been hoarding for a siege. It takes about an hour. It is an old and very careful fire, and you stand over it, and you keep the Christian altar well back, and the whole three hundred years of Collis, its leases and its bonds and its crooked early partners, goes up the flue in a long thin column and is gone.
+  When it is done there is nothing in Rome with your name on it, and nothing in Rome that points to the hill. It is a very good thing to have done. It is not at all a good thing to have to do, and Verecunda, with her skirt of papers, looks at you for a long time, and says, "It was the best accounting I ever saw. I shall not say so to anybody."
+* Strip the house of what the Goths will take anyway, and sell the rest to whoever will pay
+  $ lc.collis = "sold"
+  $ do earn(14)
+  $ humanity -= 1
+  $ cunning_brutal += 2
+  It is a perfectly good bargain, and you do not like it. The house on the river has a cellar full of plate and wine and good bronze, and a great many men on the street who will pay a ruinous price for a place to put their families, and you take the money, and you hand over the keys, and you do not look at the faces. The clerks are left to the mercy of the incoming age. You tell yourself that the Goths will take everything, and it is true, and you are a little less than you were.
+  Verecunda says nothing at all. She goes on counting, with her skirt full of papers, and when you pass her at the door she does not look up.
+~> house_end
+<~
+
+# house_end
+A stair above you creaks. It is a small, dry, precise sound, and you know who it is before the door opens.
+?if in_circle("prisca") and member("prisca", "status") == "active"
+  "I am going to Ravenna," says Prisca, from the landing. She has put on the cloak and the look. "The money is going east. It always goes where the Emperor goes, and the Emperor is going to be a long way off, I am afraid, in a world that is going to be a great deal smaller." She does not ask you to come. She looks at the name over the door. "You did what I should have done," she says, "if I had been fonder of it."
+?else
+  A man you do not know is standing there, a Greek in a good cloak, with a ledger. "I am the factor," he says. "I have had your name in the book for eleven years and have never seen it." He looks at you, and then at the door. "The house is closing. The money is going east. I am sorry. It is, I think, going to be a long while before the house opens again."
+?end
+<~
+
+# gate
+## The Salarian Gate
+The Salarian Gate is on the north side of the city, where the road to the Sabine hills comes in under the wall, and it is, tonight, the most important door in the world. It is a plain double gate, in a plain old wall, with a tower on either side, and the Gothic fires burn all about it, in the dark, in a great half circle, like a lit necklace.
+You do not go near. You go up on the wall, on the stretch above the Gardens of Sallust, where the great old villas stand empty and the shadows are heavy, and you wait, with a number of people who are waiting for what you are, and have no more idea what to do about it than you.
+At the third watch the bar goes up. You do not see who does it. There is no cry, no fight; there is the long slow groan of timber on iron that you can hear in your teeth, and a sound from the other side of the wall like the sea coming in.
+It is a thing that you will think about, afterwards, for a very long time. The city does not fall like a statue. It simply stops being a place where a thing is not allowed to happen.
+There is a Gothic captain on the near bank of the gate, in a mail shirt that has seen a great many summers, a man with a thick yellow beard and a very tired face, giving orders in his own tongue in the voice of a man who has given them every day for two years. You catch the word for *church*. You catch it three times. It is, you gather, the one rule of the night: that whatever happens in Rome, the churches, and the people in them, are not to be touched.
+$ do meet("wisand")
+It is the most Christian thing that you will see all night, and it is done by a man who does not know what the word means.
+You have a few minutes before the first of the soldiers is through the gate, and there is more than one thing that you could do with them.
+* Watch it, and learn what is to be learned
+  $ lc.gate = "watched"
+  $ cunning_brutal -= 1
+  You stay on the wall and you watch the Goths come in, in their hundreds, through the dark, with their horses and their cooking pots and their stolen torches, and you learn what a sack looks like at the beginning, before it has a name. It is not a rush. It is not a flood. It is a tired army, in a strange city, doing what it was told it might, in a very ordinary way, and some of it is quite bad, and some of it is very bad, and some of it is a man in a mail shirt who stops to hold a door for a woman with a child.
+  You count the doors. You count the lamps. It is not heroism; it is bookkeeping. It is, you find, what you have.
+* Take people in: the old vaults, the Emporium cellars, anywhere that has a good door
+  $ lc.gate = "sheltered"
+  $ humanity += 2
+  $ standing += 1
+  You go down off the wall and into the lane under the Sallustian hill, and you start knocking on doors. It is a good deal harder than it sounds. They have heard the gate, and they are afraid, and a stranger knocking at midnight, in the dark, saying *Come with me* is the oldest trick in the world. You say it anyway. You say it forty times. You get, in the end, nineteen people: three families, an old priest, a boy with a goat, and a very fat man who insists on bringing his lyre. You take them by lane after lane to a cellar under the river wall, and shut them in, and tell them not to open the door to anyone until the sun is well up.
+  "Who shall we say?" says the old priest, at the last, in the dark, with his hand on the bar.
+  "A neighbour," you say. It is not at all a lie.
+* Go down among it, and feed
+  $ lc.gate = "fed"
+  $ do feed("human")
+  $ humanity -= 3
+  $ cunning_brutal += 3
+  $ _fed = 1
+  You are, you reflect, very hungry, and it is the first night in three hundred years that nobody will count. It is a dreadful thing to know. It is a worse thing to find that it is true. You go down the lane behind the gate, where the first of the houses are burning, and you find what a sack leaves behind: the dying, in doorways, in ones and twos, with nobody coming. You do not take the living. You do not kill. You kneel in the ash and you take what is going to be taken anyway, from the ones who are past it, and you say nothing at all. It is not murder. It is not mercy. It is the plain and terrible thing that it is.
+  It is also, you find, the first time in a long while that you have been entirely full. You do not at all enjoy it, and you remember it very clearly.
+* Stand at the head of the lane, and stop a few of them
+  $ lc.gate = "fought"
+  $ do kill("human")
+  $ do witness(1)
+  $ standing += 1
+  $ cunning_brutal += 3
+  There is a little knot of soldiers, perhaps eight, with a ram, at the door of a house with a lamp in the window. It is not a church. They have, you gather, been told that it is a rich man's house. It is, in fact, a baker's, and the baker is behind the door, and his wife is behind the baker, and a small girl with a bread peel is behind her.
+  You do not fight well. You have not done it in three hundred years. You do it, instead, very quickly. When it is over, there are three of them on the ground, and the rest have run, and the baker opens the door and sees you, standing in the lane with their blood on you, in the light of a burning house, with a face like a very old saint. He does not say anything. He shuts the door.
+  It is the right thing to have done. It will be, you think, in a rather peculiar way, the thing for which you are remembered.
+~> gate_end
+<~
+
+# gate_end
+The sound has not stopped. It will not for three days.
+<~
+
+# court
+## The quarry
+$ do meet("tarrax")
+$ do meet("galerius")
+You go up the Aventine road, as you went once, in a different life, with a lamp, and a Lictor ahead of you, and a great deal more to be afraid of. The old quarry is a ragged black mouth in the hill, with a long lane of wagons drawn up in front of it, and the horses are blinkered, and the drivers are hooded, and every wagon has, on its tail, a small plain mark in white chalk that you know.
+It is the Senate, packing. It does not do it with any noise. It does it with the swift and silent efficiency of a great and ancient institution that has known for a long time that it would have to, and has made lists. There are about forty wagons, all of them heavy, and the heaviest are the plainest. They are the archives. They are the three hundred years of what the Senate of Blood has chosen to remember.
+Tarrax is at the mouth of the quarry, in the plain grey cloak, with the stillness of a man who is holding a door shut with his back. Galerius is at his elbow, a pace behind, with a tablet. Neither of them is surprised to see you. It is a thing that you notice, and do not like.
+?if original("general", "fate") == "sealed"
+  "He is still there," says Tarrax, before you can speak. He does not say who. He nods, once, at the black mouth behind him, and the long dry smell of old stone and older cedar comes out of it, and you know quite well what he means. "Sixty beams, and we have counted them every year. The Goths have not been told. If they are told, they will come in for the lead, and the bronze, and what the bronze is hiding." His voice is perfectly level. "I am to take the court to Ravenna by the first light, and the sea by the second. I cannot take it, and leave that unwatched. And I cannot watch it, and take the court."
+?elif original("general", "fate") == "loosed"
+  "He has not written in a hundred years," says Tarrax, when you ask. He says it with a very great carefulness. "I find that I do not know whether that is a good sign." He looks at the empty quarry, and at the empty seal, and it is the look of a man who has spent three centuries guarding a door that has since been shown to open from the other side. "I am to take the court to Ravenna by the first light, and the sea by the second. It is, I think, a relief to be moving."
+?elif original("general", "fate") == "bargain"
+  "He sent word," says Tarrax, very quietly. "Last winter. A letter, on very good paper, brought by a man who would not say where he had come from. It said that the Goths were amateurs, and that the Senate should go east, and that he would see to the rest." He folds his hands. "I do not at all like it, and it was perfectly good advice. I am to take the court to Ravenna by the first light, and the sea by the second."
+?else
+  "He has not come," says Tarrax. He does not say who. He does not have to. There is a look about his mouth that you have seen on men who have a debt to a very large creditor, and are waiting for the knock. "I am to take the court to Ravenna by the first light, and the sea by the second. I should like to be a good deal further off, by then, than I am."
+?end
+He turns, at last, and looks at you. It is the old look, the one that is not at all unkind, and sees too much.
+"The court knows what you are," he says. "It has known for three hundred years, and has had the manners not to say. I am going to ask you to be of use." He lets it stand. "The roads north are full of Goths, and the nights are not safe, and the Senate cannot move in the day. You can."
+It is the thing that you were afraid of. It is quite simply put. They want an escort by daylight, a single man, in the sun, who will walk beside the first wagon, with the archive, up the Flaminian Way, in plain sight of everybody, and be, to all the world, a merchant with a cart. It is not at all a difficult thing to do. It is a very great thing to be asked.
+* "I will do it."
+  $ lc.court = "held"
+  $ standing += 2
+  $ bond.galerius += 2
+  $ cunning_brutal -= 1
+  Tarrax inclines his head. It is, you think, a very long way for him to bend. "Dawn," he says. "At the Flaminian gate. Galerius will have the manifest." Galerius gives you a tablet. His hand, as he does it, is perfectly steady. His eyes are the eyes of a man who is being a great deal more grateful than he is going to say.
+* "What is it worth?"
+  $ lc.court = "bargained"
+  $ cunning_brutal += 2
+  $ standing += 1
+  Tarrax does not seem to mind. He looks as a man looks who has been asked a fair question by a fair man in a hard hour. "A seat in Ravenna," he says. "A letter of passage under the Senate's seal, to anywhere the court goes. A name in the book of the friends of the Senate, and an ear at the court's table." He pauses. "And a debt. I do not forget them." It is the most generous offer that the Senate has ever made, and you are quite sure that you are paying for it. Galerius writes it all down.
+* "I am not your Lictor."
+  $ lc.court = "refused"
+  $ standing -= 2
+  $ cunning_brutal += 1
+  $ bond.galerius -= 2
+  It is not a kind thing to say, and it is true. You say it very gently. Tarrax does not move. Galerius's pen stops. "No," says Tarrax, after a very long moment, as a man says it who has been refused a great many things in his life and has not enjoyed any of them. "You are not." He turns away. "I shall remember that you were asked."
+~> court_end
+<~
+
+# court_end
+The wagons begin to roll, one at a time, in the dark, with the soft heavy sound of iron tyres on stone. You watch them go out, a long creaking line, under the hill, and into the night. It is the end of something. You are not quite sure what.
+<~
+
+# hill
+## The hill
+You do not ride. You run. It is the only way to get there before the dawn. It is not at all a thing that you did, in the old days; you were younger, and nobody had a name for it, and it has a cost.
+$ do power("major")
+The road north is empty, and full. It is empty of travellers, and full of everything that travellers leave behind: a cart on its side, a shoe, a dead mule, a very small cooking pot. You pass a Gothic foraging party, a dozen horsemen asleep round a fire, and go round them by a quarter mile. You go up through the dark olives, and you are on the hill.
+It is the same hill. You would know it blind. It has grown. There is a second wall, and a gate, and a bell tower on the old villa, quite small, with a bronze bell and a rope. The houses stretch down the lane for a quarter mile. There are, you would say, about two hundred people.
+There is a light in the square. It is a torch, and there are a great many people round it, and in the middle of the people is a tall woman with a stole, and a boy, and a number of armed men with the look of farmers who have been given swords and have not liked it.
+$ do meet("valeria")
+?if wake("steward") == "keepers"
+  "You came," says Valeria. She does not ask how. She is out of breath, and her voice is a good deal higher than it was in the cellar, and the boy has hold of her sleeve. "There are Goths on the Salarian road. A big party. They want the grain. They sent a man to ask what we had, and I said, nothing, and he did not believe me."
+?else
+  A tall woman with a stole, who has Aelia's way of standing and Felix's nose, looks at you across the torches. She has never seen you in her life. She is a Valeria of the hill, she says, and she is not at all sure who you are, or by what right, and there are Goths on the Salarian road. She says it in the tone of a person who has been awake for two days.
+?end
+The Goths have sent a man ahead, a young one, to the square, with a message and a very bad temper. The village does not know what to do. It is a thing that you are able to do something about.
+* Meet the Goths on the road, and make them go round
+  $ lc.hill = "defended"
+  $ do fight("human", 2)
+  $ cunning_brutal += 2
+  $ standing += 1
+  You go down the hill in the dark, in your plain cloak, and stand in the road by the old boundary stone, and wait. The Goths come up it in a long loose line, with torches. You say, in a voice that they can hear, in their own tongue, which you have had no cause to learn, and say very badly, a word that you picked up from a captain, three hours ago, at the gate: *church*. You say it, and point up the hill. They stop. They do not know why. There is a very long silence.
+  What follows is not a battle. It is a quarrel that is settled by a certain quantity of fear. You are, in the dark, with the light behind you, a very large and very quiet thing. The Goths go round. They take what they can, from a farm on the next hill, and they leave Collesanto alone.
+  ?if fight_result() == "won"
+    You do not even have to hit anyone. It is a good thing, and you are surprised to find how tired it makes you.
+  ?else
+    One of them cuts you across the shoulder before the rest decide to go round. It heals in a quarter of an hour. It is a poor thing to have done.
+  ?end
+* Pay them off with grain, and the village's goodwill
+  $ lc.hill = "parleyed"
+  $ do earn(-5)
+  $ do send_home(5)
+  $ humanity += 1
+  It is a long and awkward business, in the square, with the young Goth sitting on a mounting block with a mug of the thin red wine that Valeria's wife has brought him, and Valeria translating, in a mixture of Latin and a kind of sign language. You name a number of sacks. He names a larger number. In the end it is a great deal less than the village would have lost, and a great deal more than it can afford. You write a draft on the Merchant house, in the torchlight, on a sheet of the parish's best paper, and he reads it, with his lips moving, and puts it in his boot.
+  It will be redeemed, in a manner of speaking. It will not be by Goths.
+* Hide them: the cellar, the old quarry, the sheep paths
+  $ lc.hill = "hidden"
+  $ do send_home(3)
+  $ standing += 1
+  It is not a thing that the hill has done for three hundred years, and it knows exactly how. There is a plan. It has been written down, and handed down, in a family, with the stole and the lamp: the old cellar for the old, the quarry for the young, the sheep paths for the men with swords. By dawn the village is empty. It is, you reflect, a good plan, and it is not a thing that a village should have to know.
+  The Goths find a hill with nobody on it, and a number of cold hearths. They take what they can. They burn one barn, out of temper, and the roof of one house. They go.
+  $ do village_harm(4)
+~> hill_end
+<~
+
+# hill_end
+Before you go, Valeria takes you round the back of the villa, with a lamp, to a small enclosure under the wall where the old olive grove stops. There is a low stone, and another, and a row of plain graves under the cypresses, that the village has looked after.
+"Aelia," she says, "and Felix." She says it as a family says a name that it has been told every year for three hundred years and has never had to say to its owner. "We did what she said. She said it was a thing she was good at." She holds the lamp a little higher. "She was very old. She sat on the wall every evening. They say that she was never wrong about a road."
+You stand there for a time. It is not a good time. It is not the worst. You find that you are not able to say any of the things that you had thought to. You put your hand on the stone. It is a long way, and you are very late.
+<~
+
+# dawn
+## The first light
+The sky over the city has the colour of a bad bruise, and it is going yellow at the edges. You stand on the Aventine, in the first of the light, and look down at Rome.
+It is still there. It is the thing that surprises you. There is smoke, a good deal of it, over the Gardens of Sallust, where the great villa is burning, and over the old Forum, and over a number of quarters that you do not know. There is shouting. There is the dull sound of a great many people doing what they have been told that they may. And there is, behind it all, very plain and very enormous, the shape of the city that you helped to rebuild: the long roofs, and the arcades, and the domes, and the walls. It has been struck. It has not fallen.
+It will, you think, never be quite the same again. It will, you think, go on being Rome for a very long time, and it will not be at all what it was.
+?if lc.collis == "unmet"
+  Somewhere down by the river, the Emporium house is, you gather, being taken apart. You did not go. It is a thing that you will have to ask about, when you can bear to.
+?end
+?if lc.gate == "unmet"
+  You did not see the gate. It is, you will learn, the thing that everybody who did will say that they saw.
+?end
+?if lc.court == "unmet"
+  The wagons went out under the hill without you. You do not know if the court has reached the Flaminian way. You do not know if it will.
+?end
+?if lc.hill == "unmet"
+  You did not go to the hill. It is two nights away on foot. You tell yourself that it is far enough from the road, and you do not believe it.
+?end
+The light is not quite on the roofs yet. You have, you judge, a little under an hour.
+=> next

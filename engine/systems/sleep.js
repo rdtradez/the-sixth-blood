@@ -17,6 +17,11 @@
 //   wake("years")       years asleep (a number; fine to print: it is history, not a stat)
 //   wake_event("black_death")  true if that event happened during the sleep (from the gap's events)
 //
+// A long sleep can be played as several short ones. Gaps that share a "chain" in content/sleep.json
+// (each marked "split": true so a quick start skips them) are the segments of one sleep: each segment
+// is resolved with its own $ do sleep("segment_id"), and the wake report after the last one reads as
+// the whole sleep (years and events add up; "richer" compares with where the chain began).
+//
 // Results depend on the steward's loyalty and skill, the protections, where he sleeps, what
 // he ordered, and the history the gap passes through. What he built keeps working: ventures
 // fold into the fortune, the village grows, and Collesanto's walls guard him if he sleeps there.
@@ -106,7 +111,7 @@ export function resolveSleep(ctx, gapId) {
 
   const by = outcome === 'woken_early' ? (p.corrupt ? 'steward' : roll(ctx, 2) === 1 ? 'hunters' : 'government') : '';
   return {
-    gap: id, from: gap.from, to: gap.to, years: gap.years ?? 0, place, steward, orders, outcome, by,
+    gap: id, chain: gap.chain ?? '', from: gap.from, to: gap.to, years: gap.years ?? 0, place, steward, orders, outcome, by,
     before, after, richer: after > before, events: (gap.events ?? []).map((e) => e.id),
     invest: p.invest.slice(), humanity: (o.humanity ?? 0) + invest.reduce((n, i) => n + (i.humanity ?? 0), 0), velati: o.velati ?? 0,
     village: outcome === 'woken_early' ? 0 : (gap.village ?? 5) + (steward === 'keepers' ? 5 : 0) + (place === 'collesanto' ? 2 : 0),
@@ -135,6 +140,18 @@ function applySleep(ctx, r) {
   s.recent = [];
   s.unfed = 0;
   const { margin, ...report } = r;
+  if (!report.chain) delete report.chain;
+  else {
+    // A segment of a longer sleep: the report reads as the whole sleep so far.
+    const prior = s.sleep.history.filter((h) => h.chain === report.chain);
+    const last = prior.at(-1);
+    if (last) {
+      report.years += last.years;
+      report.events = [...new Set([...last.events, ...report.events])];
+      report.richer = report.after > prior[0].before;
+    }
+    report.segments = prior.length + 1;
+  }
   s.sleep.history.push(report);
   s.sleep.wake = report;
   s.sleep.plan = null;

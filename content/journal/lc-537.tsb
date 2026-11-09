@@ -1,0 +1,41 @@
+// Velati journal for the Lost Centuries, 537 AD (interlude session A). Written when chapter lc03 ends, on a copy of the state. No choices.
+// A letter to the Aventine book from a bearer in the Chamberlain's household at Constantinople, who has been writing to Rome for twelve years. Reads decisions, never recomputes them.
+@chapter lc_journal_537
+@title Velati Journal: Constantinople, 537
+@book burning-city
+@version 1
+
+# start
+## A letter to the Aventine watch, from a bearer of the western door
+> Copied into the book at Rome in the spring, after the siege, from a letter that came by a Greek captain and was meant to be burned.
+To the keepers of the book, from one who carries the Chamberlain's chair and has done so for twelve years, health.
+I write on the night of the feast of the Great Church, and I do not know whether this will reach you, or whether there will be a Rome for it to reach. I will be brief. I have been told that a short letter is a thing that is not read, and so is safe.
+You asked me, in the winter of the year of the riots, to watch for a certain man. I have seen him. I will say it plainly, because I have had the habit of saying it plainly to myself, in the dark, for many years: he is exactly as you said, and I did not believe you.
+?if lc.seat == "taken"
+  He came to the cistern in the character of one of the roll, which surprised me, since I had heard that he was not at all one for rolls.
+?elif lc.seat == "declined"
+  He came to the cistern as a guest, which is a thing that the court does not say of people it likes.
+?else
+  He came to the cistern as a man who has been sent for, which is a thing that the court does not say of people it likes.
+?end
+?if lc.answer == "humble"
+  I carried the lamp for the Chamberlain, and I heard what he said when he was asked what he wished. He said that he wished to be left alone. It was the plainest thing that I have heard said in that room, and the room has a long memory for plain things.
+?elif lc.answer == "bargained"
+  I carried the lamp for the Chamberlain, and I heard what he said. He asked the court its price. It was done with more coolness than I have seen in a petitioner. The terms were made in an hour. I saw the Chamberlain smile once, which I had not seen in nine years.
+?else
+  I carried the lamp for the Chamberlain, and I heard what he said. He spoke of the sun, and of leave. I have not seen the platform so quiet. I do not think that I shall ever forget the sound of that one drip.
+?end
+?if lc.sunwalk == "shown"
+  At the dedication I stood at the carriers' heads at the western door, with the curtains drawn, and a great deal of the court behind them, and I saw him come across the forecourt at noon, in the open, with the whole city going up the steps beside him, and not so much as a shadow about him that he did not have from his own cloak. The litters were very quiet. I have never heard a litter so quiet. When he had gone in, somebody inside the second one began, very softly, to say a prayer.
+?else
+  At the dedication I stood at the carriers' heads at the western door, with the curtains drawn, and the court behind them waited for a thing that did not come. He went in by the side, with the silversmiths, and was not seen to cross the open light. I heard the Chamberlain say, quite gently, that it was a very prudent young man. It was not at all a compliment.
+?end
+?if lc.mason == "helped"
+  I will add one thing that you will not think is to the purpose. The night before, a mason on the dome, a man called Ioannes, who is a friend of my wife's cousin, was found by the guard asleep on a barrow at the foot of the scaffold, with a cut hand, tidily bound, and a tessera missing from his pocket. He said that a stranger had sat with him. He said that it was the best conversation that he had had in a year. He could not say what the man looked like.
+?end
+I have nothing more to say. I do not know what he is. I know that he stood in the sun, and was not burned, and did not look at us.
+?if lc.hill_537 == "ignored"
+  I have heard, since, that there was a letter from Italy that he did not answer. It is the only thing that I have against him.
+?end
+I commend the book to you. Write that I was here.
+=> endbook
