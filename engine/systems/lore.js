@@ -4,6 +4,8 @@
 //   discovered("bloodlines")         true once unlocked, whether by discover() or because the
 //                                    entry is tied to an original or a person the hero has met
 //   codex_count()                    entries unlocked so far
+//   $ do chart("rome.warehouse")  add a place to a city map (engine/maps.js); safe to repeat
+//   charted("rome.warehouse")     true once added
 //   $ do kin("aelia")                the family tree learns of a relative (content/family.json)
 //   $ do kin("aelia", "dead")        and their status: living, dead or unknown
 //   kin_known("aelia"), kin_status("aelia") ("" if not known yet)
@@ -12,6 +14,8 @@
 // when the hero learns of that original or meets that person.
 
 import { sysOf, cat, opt } from './core.js';
+import { siteKnown } from '../maps.js';
+import { EngineError } from '../util.js';
 
 export const KIN_STATUS = ['living', 'dead', 'unknown'];
 
@@ -20,6 +24,7 @@ export function loreOf(s) {
   s.lore ??= { codex: {}, kin: {} };
   s.lore.codex ??= {};
   s.lore.kin ??= {};
+  s.lore.sites ??= {};
   return s.lore;
 }
 
@@ -50,6 +55,10 @@ export const lore = {
         return Object.entries(cat(ctx).codex).filter(([id, def]) => entryUnlocked(s, id, def)).length;
       },
     },
+    charted: {
+      spec: ['site'],
+      fn: (ctx, ref) => Object.hasOwn(loreOf(sysOf(ctx)).sites, ref),
+    },
     kin_known: { spec: ['kin'], fn: (ctx, id) => Object.hasOwn(loreOf(sysOf(ctx)).kin, id) },
     kin_status: { spec: ['kin'], fn: (ctx, id) => loreOf(sysOf(ctx)).kin[id]?.status ?? '' },
   },
@@ -59,6 +68,13 @@ export const lore = {
       fn(ctx, id) {
         const codex = loreOf(sysOf(ctx)).codex;
         codex[id] ??= { book: ctx.state.book, chapter: ctx.state.chapter };
+      },
+    },
+    chart: {
+      spec: ['site'],
+      fn(ctx, ref) {
+        if (!siteKnown(ref)) throw new EngineError(`unknown map site "${ref}" (see engine/maps.js)`);
+        loreOf(sysOf(ctx)).sites[ref] ??= { book: ctx.state.book, chapter: ctx.state.chapter };
       },
     },
     kin: {

@@ -2,7 +2,7 @@
 
 import { createSys } from './systems/sys-state.js';
 
-export const SCHEMA = 4; // bump when the shape of state changes, and add a schema migration
+export const SCHEMA = 5; // bump when the shape of state changes, and add a schema migration
 export const ENGINE_VERSION = '0.4.0';
 
 /**
@@ -68,6 +68,11 @@ export const SCHEMA_MIGRATIONS = {
   // 3 -> 4 (session 4): the codex and the family tree (sys.lore).
   3(state) {
     if (state.sys) state.sys.lore ??= { codex: {}, kin: {} };
+    return state;
+  },
+  // 4 -> 5 (session 6): the maps (sys.lore.sites, the places the hero has charted).
+  4(state) {
+    if (state.sys) { state.sys.lore ??= { codex: {}, kin: {} }; state.sys.lore.sites ??= {}; }
     return state;
   },
 };

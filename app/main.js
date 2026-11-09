@@ -8,7 +8,7 @@ import { MemoryStorage, MANUAL_SLOTS } from '../engine/saves.js';
 import { h, inline, svg, toast } from './dom.js';
 import { titleSvg, ornamentSvg } from './art.js';
 import { applySettings, settingsPanel } from './settings-ui.js';
-import { youPanel, peoplePanel, familyPanel, codexPanel, achievementsPanel } from './panels.js';
+import { youPanel, peoplePanel, familyPanel, mapPanel, codexPanel, achievementsPanel } from './panels.js';
 import { devPanel } from './devpanel.js';
 import { creationScreen } from './creation.js';
 
@@ -358,6 +358,7 @@ function menuTabs() {
   return [
     { id: 'you', label: 'You', show: inStory() },
     { id: 'people', label: 'People' },
+    { id: 'map', label: 'Map', show: inStory() },
     { id: 'family', label: 'Family' },
     { id: 'codex', label: 'Codex' },
     { id: 'deeds', label: 'Achievements' },
@@ -388,6 +389,7 @@ function renderMenu(keepScroll = false) {
   const panels = {
     you: () => youPanel(game),
     people: () => peoplePanel(game),
+    map: () => mapPanel(game),
     family: () => familyPanel(game),
     codex: () => codexPanel(game),
     deeds: () => achievementsPanel(game),

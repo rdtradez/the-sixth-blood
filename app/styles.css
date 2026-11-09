@@ -295,3 +295,5 @@ dialog .num { font-family: var(--font-title); font-size: 0.7em; letter-spacing: 
 .blurb { font-style: italic; color: var(--muted); margin: 0.2rem 0 0.8rem; }
 .look-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr)); gap: 0 0.9rem; margin: 0.5rem 0 0.6rem; }
 .portrait { border-left: 2px solid var(--accent, var(--gold)); padding-left: 0.9rem; margin: 1.1rem 0; }
+
+.citymap { width: 100%; height: 70vh; min-height: 22rem; border: 1px solid var(--paper-line); border-radius: 0.5rem; background: #120e0c; }

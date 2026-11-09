@@ -51,6 +51,19 @@ export function familyPanel(game) {
   return [h('h2', {}, 'The Valerius family'), h('div', { class: 'family' }, h('ul', {}, ...tree.map(treeItem)))];
 }
 
+export function mapPanel(game) {
+  const maps = game.maps();
+  if (!maps.length) return [h('h2', {}, 'Map'), empty('Begin a story to see its city.')];
+  const visible = maps.flatMap((m) => m.sites);
+  const fire = maps.some((m) => m.fire.some((s) => visible.includes(s)));
+  const frame = h('iframe', { class: 'citymap', src: `app/maps/${maps[0].page}.html?embed=1`, title: `Map of ${maps.map((m) => m.title).join(' and ')}` });
+  const send = () => frame.contentWindow?.postMessage({ type: 'map', visible, fire }, '*');
+  frame.addEventListener('load', send);
+  const onReady = (e) => { if (!frame.isConnected && e.source !== frame.contentWindow) { window.removeEventListener('message', onReady); return; } if (e.source === frame.contentWindow && e.data?.type === 'map-ready') send(); };
+  window.addEventListener('message', onReady);
+  return [h('h2', {}, 'Map'), frame];
+}
+
 export function codexPanel(game) {
   const view = game.codex();
   if (!view.groups.length) return [h('h2', {}, 'Codex'), empty('Nothing discovered yet. Lore you uncover is kept here.')];
