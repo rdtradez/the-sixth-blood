@@ -56,3 +56,34 @@ Collesanto: the fire, his family, his first bond with the village.
 - `b1.reveal` and `b1.spouse_told`: who knew he was alive before the fire. Aelia's promise or truth (`b1.farewell`) can echo in Book Two's Valerio family.
 - `b1.fire_seen` seeds the guardian saint legend. `b1.prisoner` is the first Igniferi man he has met: "others in the cities, and the fire does not forget" is all he learns.
 - Hunger, injury and wealth leave chapter 2 as the player made them. Chapter 3 (Rome by night, Prisca's coven) has to deal with a hero who may be wounded, hungry, poor or flush.
+
+## Chapter 3: "The Merchant's House" (session 8, `content/burning-city/ch03.tsb`, chapter id `b1c03`)
+
+Rome by night: taken in by Prisca's Merchant line coven. Three night actions, then the house, then dawn. Reads hunger, injury and wealth as chapter 2 left them.
+
+- Arrival: night, the city of wheels (wagons are only allowed in the streets after dark), a hundred thousand heartbeats. Origin and role lines for first impressions.
+- Night hub (3 actions): feed (`b1.rome_feed` = market / drunk / hunted: the cattle pens by the river, a sleeper in a doorway, a man leaving a gambling den); find a roof before dawn (cost depends on wealth; a poor hero sleeps under a bridge and is found); follow the feeling of being watched (Tiro on the rooftops).
+- Tiro finds him in every path: young, funny, a house slave's son turned at nineteen, a bookkeeper who was never any good at it. If the hero is starving he stops a killing and steers him to a safer meal (fail forward). Tiro says Prisca felt a new one in the city "like a bell rung in the wrong key". `bond.tiro` rises with warmth.
+- The house: a wine and oil warehouse in the Emporium by the Tiber; the counting rooms above, the sleeping vaults below. Hanno (very old, Carthaginian, keeps the ledgers and says almost nothing). Codex: the Merchant house, the Veil.
+- Prisca interviews him in the counting room (patient, dry, buys everything; does not give her age). She asks who made him. `b1.maker_told` = told (he cannot describe the face, only the question) / withheld / lied. She goes still on "told", and says to tell no one else.
+- Her terms: keep the Veil; no kill inside the walls without her leave; present himself to the Senate's census when the Lictors come. `b1.prisca_terms` = accepted / bargained (cunning, standing) / defied (brutal, defiance; she keeps him anyway: "an unregistered one is a dead one").
+- Dawn: the coven sleeps. `b1.sun_known` = none (he lies down with them and lies awake) / tiro (Tiro sees him awake at the grate with the light on his hands) / prisca (he tells her or lets her see). Tiro keeps the secret if he likes the hero.
+- Ends with `rest()`. Chapter 4 follows after some nights.
+
+## Chapter 4: "The Senate's Eye" (session 8, `content/burning-city/ch04.tsb`, chapter id `b1c04`)
+
+The Lictor, Galerius, and the question: who made you.
+
+- Opens some nights later. Night hub (3 actions): learn the rooftops and the rules with Tiro (the Veil in practice, Tiro's comic dread of the Senate, bond); Hanno's ledgers (the Merchant house moves money through men who work by day and have no faces, and Hanno lets slip that they lack a mortal with the nerve to deal: the seed for Collis in chapter 5); the cup (the coven keeps willing donors, `b1.cup` = accepted / refused / hunts alone; humanity and secrecy); the Senate's quarter (the Forum at night, the Lictors' red cords; codex the Senate of Blood and the Lictors).
+- The summons: Galerius arrives with two Lictors, fasces tied with red cord. Courteous, scholarly, patient menace; assigned to watch him. Prisca receives him in the atrium and sponsors the hero.
+- The question: name, when he died, who made him, who gave leave. `b1.maker_answer` = truth (a stranger whose face will not stay in the mind; Galerius goes completely still and writes nothing) / vague / lie (names a dead vampire; Prisca covers it at a cost) / refuse. Refusing in a brutal way opens a short `fight("lictor")` that cannot be won cleanly: a win earns Galerius's cold respect and a long enmity, a loss is Prisca paying for him (standing down).
+- `b1.galerius` = watching (courteous default) / wary / hostile. "I am to watch you. It is not personal. Everything is personal."
+- If `b1.sun_known` is prisca or tiro, whoever knows keeps it from the Lictors; Prisca names the price. A daywalker is proof the Senate's history is a lie (the Lictors must never learn it).
+- Dawn debrief with Prisca. Ends with `rest()` and `=> next` (chapter 5: Collis begins, a daytime deal).
+
+## Threads left open (session 8)
+
+- `b1.maker_told` and `b1.maker_answer` are what Prisca and Galerius each believe about Cassian. They can disagree and the story can use it. The fear reaction to the maker is saved for the end of the book.
+- `b1.sun_known`: Prisca knowing makes her the one who will want him in daylight (Collis, chapter 5). Tiro knowing makes Tiro the friend who dies in the Great Fire holding a secret.
+- `b1.prisca_terms` pays off at the coven's offer (stay or go alone).
+- Galerius's file on him begins here and runs to Paris.

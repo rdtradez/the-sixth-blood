@@ -238,6 +238,91 @@
       "kind": "flag",
       "book": "engine-test-d",
       "note": "Developer test: set on one branch of the sample chapter"
+    },
+    "b1.rome_feed": {
+      "kind": "enum",
+      "values": [
+        "market",
+        "drunk",
+        "hunted"
+      ],
+      "major": true,
+      "default": "market",
+      "note": "Chapter 3: how he first fed in Rome",
+      "book": "burning-city"
+    },
+    "b1.maker_told": {
+      "kind": "enum",
+      "values": [
+        "told",
+        "withheld",
+        "lied"
+      ],
+      "major": true,
+      "default": "withheld",
+      "note": "Chapter 3: what he told Prisca about his maker",
+      "book": "burning-city"
+    },
+    "b1.prisca_terms": {
+      "kind": "enum",
+      "values": [
+        "accepted",
+        "bargained",
+        "defied"
+      ],
+      "major": true,
+      "default": "accepted",
+      "note": "Chapter 3: how he took the terms of Prisca's house",
+      "book": "burning-city"
+    },
+    "b1.sun_known": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "tiro",
+        "prisca"
+      ],
+      "major": true,
+      "default": "none",
+      "note": "Chapter 3: who in the coven knows he walks in daylight",
+      "book": "burning-city"
+    },
+    "b1.cup": {
+      "kind": "enum",
+      "values": [
+        "accepted",
+        "refused",
+        "alone"
+      ],
+      "major": true,
+      "default": "accepted",
+      "note": "Chapter 4: whether he feeds from the coven's willing donors",
+      "book": "burning-city"
+    },
+    "b1.maker_answer": {
+      "kind": "enum",
+      "values": [
+        "truth",
+        "vague",
+        "lie",
+        "refuse"
+      ],
+      "major": true,
+      "default": "vague",
+      "note": "Chapter 4: what he told the Lictor about his maker",
+      "book": "burning-city"
+    },
+    "b1.galerius": {
+      "kind": "enum",
+      "values": [
+        "watching",
+        "wary",
+        "hostile"
+      ],
+      "major": true,
+      "default": "watching",
+      "note": "Chapter 4: how the Lictor stands toward him",
+      "book": "burning-city"
     }
   }
 }

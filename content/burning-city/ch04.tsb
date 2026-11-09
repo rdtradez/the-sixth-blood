@@ -1,0 +1,358 @@
+// Book One, Chapter 4 (session 8). The Senate's eye: a Lictor comes to count the new one.
+// Nights in the house, a lesson on the rooftops, and the question that everyone asks.
+@chapter b1c04
+@title The Senate's Eye
+@book burning-city
+@version 1
+
+# start
+## The house
+$ do phase("night", 3)
+$ _noticed = 0
+$ _ledger = 0
+You have been in the Merchant house for nine nights, and you have learned that it is a household, which is a thing you had forgotten could exist among the dead.
+There is a routine. The warehouse wakes at dusk with a long indrawn breath, and the porters go home, and the vaults begin to stir. There is bread on the table in the counting room, which none of them eat, because Prisca says that a house that does not set a table forgets what it is for. There is Hanno, turning pages. There is Tiro, who has appointed himself your guide to everything, and who talks even in his sleep.
+?if b1.prisca_terms == "defied"
+  Prisca has not mentioned the third night, or the argument, or the word you used. She has, however, moved your sleeping niche to the one beside the stair, where she can hear it. You suspect she has done it kindly.
+?elif b1.prisca_terms == "bargained"
+  You have a small private understanding with Prisca now, spoken twice and never written, and you are quite sure that she has a tablet somewhere with a column for it.
+?else
+  You keep her rules. They are not hard, once you stop listening for the catch.
+?end
+Tonight, Tiro tells you at the foot of the stair, as he has told you every night this week, the Lictors are going to come.
+"They are going to come," he says, "and look at you, and write you in a book, and go away again. Most of the time. They've never done anything but write me in a book. It's very ordinary. It's like a census. A census with rods."
+He is more cheerful than he has any reason to be. You note that he has also washed his hair.
+-> night
+
+# night
+## Before the Lictors
+:night
+?if actions_left() == 3
+  The night is young. The lamps are lit in the arches, and the river is a sheet of black glass.
+?elif actions_left() == 2
+  The hour has turned. The warehouse creaks as it cools.
+?else
+  You know, without anyone saying, that they are close.
+?end
+* Walk the rooftops with Tiro [once] ?if actions_left() > 0
+  ~> rooftops
+  $ do act()
+* Sit with Hanno and the ledgers [once] ?if actions_left() > 0
+  ~> ledgers
+  $ do act()
+* Go down to the cup room [once] ?if actions_left() > 0
+  ~> cup
+  $ do act()
+* Walk to the Forum and look at the Senate's quarter [once] ?if actions_left() > 0
+  ~> senate_quarter
+  $ do act()
+* Wait in the counting room
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :night
+?end
+-> summons
+
+# rooftops
+Tiro takes you up by the water cistern, and then up again, and the city lies below the two of you like a spill of lamps.
+"First lesson," he says, and sits down on a chimney as though it were a stool. "Rome has a hundred thousand windows and every one of them has an eye in it. You can't be too careful about windows. Don't be seen on a roof by anyone with a lit lamp behind them. Don't be seen in a window by anyone with a lit lamp in front. And never, never run across a courtyard where a dog is sleeping, because the dog will see you and the dog will remember."
+He ticks the rules off on his fingers, and they are, you see, very good rules. They are what a person might work out who had spent years being afraid and wanted the next person to be afraid a little less.
+"The Veil," says Tiro. "Everyone says it as though it were a god. It isn't. It's just the habit of not being noticed. Do it for a century and you forget it's a rule."
+:the_lesson
+* Ask him to teach you how to move unseen
+  $ cunning_brutal -= 2
+  $ bond.tiro += 3
+  $ do power("minor")
+  He is a good teacher, bad at everything he is meant to be good at, and astonishingly good at the rest. By the end of an hour you can cross three roofs without a tile shifting, and slide down a wall into an alley with no more sound than a cat. He lies on his back on the tiles, panting from laughing and not from breath, and says that you are going to be dreadful at this and that he hopes the Senate never meets you.
+* Race him across the roofs
+  $ cunning_brutal += 2
+  $ bond.tiro += 4
+  $ do power("minor")
+  He gives you a head start and then beats you by four roofs. He has been doing it for eleven years and has every route by heart. You beat him on the last stretch, a long flat run along the Emporium's arcade, and he sits down on the parapet and clutches his chest and announces that he has been murdered by a farmer. It is the first time in a fortnight that you have heard yourself laugh.
+* Ask him what it was like, being made
+  $ bond.tiro += 5
+  $ humanity += 1
+  He is quiet for a little while, which is rare. "I was ill," he says. "A cough, in the winter. Prisca had a house that bought from my master's house, and she came to see the books, and she stayed at the bedside for two nights. I thought she was a ghost. She asked me if I wanted to be useful for longer." He grins, and it wobbles slightly at the edges. "I said yes. Everyone does. It's a very persuasive question."
+  You think of another voice, in another room, that asked you a question of its own. You do not say so.
+<~
+
+# ledgers
+Hanno does not look up when you come in. He is sitting at the long table with six wax tablets in a row, each one scored with figures, and he is moving a bead on a counting frame with one finger at the speed of a man who has all the time in the world.
+You sit on the other side of the table. You do not speak. After a time he pushes a tablet across to you, without comment, and you look at it.
+It is a list of names, and beside each name a sum, and beside each sum a little mark you do not at first understand. Then you do. They are not debts. They are men. Every one of them is a mortal who works for the house in daylight: a grain factor, a shipper, a clerk, a magistrate's freedman. Each of them carries a piece of the house's money, and each of them is marked, in Hanno's careful numerals, with the day he will begin to steal.
+"They all steal," says Hanno. He says it to the table, in a dry, unhurried voice with a Carthaginian edge. It is the first thing you have heard him say. "Sooner, or later. Or they are afraid. And the afraid are worse."
+He moves a bead.
+"We are a house that cannot do business in the sun. We have mortal faces and no mortal trust. A man who could stand in the day with our money in his hands, and deal, and not flinch..." He pauses, and turns his old eyes on you for the first time. "That would be a rare man."
+He says nothing more. He has said, for him, a great deal.
+:the_ledger
+* Say that you would like to learn how the money moves
+  $ _ledger = 1
+  $ standing += 1
+  $ cunning_brutal -= 2
+  Hanno looks at you for a very long time. Then he nods, once, and slides another tablet across the table, and for the rest of the night the only sound in the room is the click of the bone beads, and the occasional, grudging, almost affectionate sound of a very old man correcting a young one's arithmetic.
+* Say nothing, and thank him
+  $ bond.prisca += 1
+  You thank him. He inclines his head a very small distance. You have a clear impression that you have failed a test and passed another, and that he will remember both.
+<~
+
+# cup
+There is a room at the end of the cellar with a door that Tiro calls the kitchen. It is lined with cedar, and there is a bench and a basin and a lamp. Three people are sitting on the bench: a freedman with a scarred hand, a woman in the grey dress of a laundress, and a boy of sixteen or so with a bandage on his arm. They look up when you come in, and there is nothing in their faces but a tired, practical calm.
+"The cup," says Tiro, from the door, with unusual gravity. "The house keeps them. They come once a week and they get paid, more than they'd make in a month on the river, and they go home and eat meat and sleep well. Nobody dies. Nobody is hurt. It is the best bargain in Rome, and the house is very proud of it. Nobody has to hunt."
+You can hear the three hearts. They are steady and slow and a little tired. They are the sound of people who have made a decision, and it is not the sound of fear.
+:the_cup
+* Take the cup
+  $ b1.cup = "accepted"
+  $ do feed("donor")
+  $ humanity += 2
+  $ secrecy += 1
+  The laundress holds out her arm without a word. It is quick, and quiet, and the blood is warm and plain, and it fills you in a way that the cattle never did. When you are done she presses a cloth to the cut and says, "Thank you, sir," in a voice with no mockery in it, and you realize that she means it. It is the oddest thing you have ever been thanked for.
+* Refuse, and hunt animals
+  $ b1.cup = "refused"
+  $ do feed("animal")
+  $ humanity += 1
+  You thank them, and decline. The boy looks relieved, and then ashamed of looking relieved. You go out into the lane by the river, and down to the cattle, and it is a dull, thin meal, and it is yours. You tell yourself that it is a principle. You are aware that some part of it is only fear.
+* Refuse, and hunt on your own
+  $ b1.cup = "alone"
+  $ do feed("human")
+  $ defiance += 2
+  $ secrecy -= 2
+  $ cunning_brutal += 2
+  You thank them. You say that you will find your own. Tiro's face does something complicated and then goes very smooth. You go out into the dark and find a river man sleeping by his boat, and you take what you need, and you leave him whole. It is a small thing. It is also the first time you have made a rule for yourself that the house did not give you.
+<~
+
+# senate_quarter
+It takes you an hour to walk to the Forum by the back lanes. You go bareheaded, in your plainest cloak, and you try to walk like a man who has business there.
+By night, the Forum is not at all as the living know it. The great porticoes are shuttered, and the temples stand dark, and the steps of the Curia are empty. But the empty places are not empty. You can feel them, a prickle along the skin, a pressure under the pavement, like a very large sleeper turning over. Somewhere underneath you, below the stones that the censors walk on by day, a second Senate sits, and it does not keep the hours of the first.
+$ do discover("senate_of_blood")
+A small procession is crossing the open ground between the temple of Castor and the Basilica. There are four of them, tall and plain and without lamps, and each carries a bundle of rods tied with red cord. Between the rods, bound and hooded, walks a fifth figure, quite young, quite small, stumbling a little on the cobbles.
+Nobody speaks. The only sound is the rods being carried, a small dry whisper, like a man walking in autumn leaves.
+$ do discover("lictors")
+They take the hooded one down a flight of steps behind the Rostra. A door shuts. You wait, and you do not hear a sound, and you are more afraid of that than of anything you could have heard.
+:the_forum
+* Memorize everything about them
+  $ cunning_brutal -= 2
+  $ _noticed = 1
+  You stay in the shadow of a column for a full hour and you learn them: the spacing, the hand signs, the way the leader checks the corners twice, the second man who never looks anywhere but the ground. It is the most useful hour you have spent in Rome. It is also, you will find, one that someone else spent watching you.
+* Slip away before anyone sees you
+  $ secrecy += 1
+  You go back the way you came, quickly and quietly, with your heart not beating. You do not stop until you can smell the river, and then you walk for a long time in the lanes behind the warehouses, because you are not yet willing to go in.
+* Follow them down the steps
+  $ cunning_brutal += 3
+  $ secrecy -= 3
+  $ _noticed = 1
+  The door is not locked. The stair beyond it is very long and very narrow, and the walls are cut stone, and somewhere far below there is a faint light. You go down four flights before you hear a voice saying, very softly and very close, "That is far enough." A hand is laid on your arm. It is not harsh. It leads you gently back up the stairs, and out into the night, and a calm voice says, "Go home. Say that Galerius advised it." Then the door shuts. You have not seen the face. You have been seen.
+<~
+
+# summons
+## The Lictors
+The knock comes at the third hour of the night.
+Nobody on the street would have heard it. It is three taps, evenly spaced, on the door of the warehouse, like a man who has called at many doors in many centuries and has never been in a hurry at any of them. Hanno rises, and sets down his ledger, and goes to open it. Tiro stops talking in the middle of a sentence.
+The three of them who come in do not look like a threat. That is the first thing you notice. Two are tall and plain and dressed in grey, each with a bundle of rods wrapped in red cord, and they take up places on either side of the door with a stillness that is more frightening than any posture. The third walks into the middle of the hall, and takes off his hood, and looks around him at the amphorae as though they were something he is mildly pleased to see.
+He is a man of fifty or so, with close grey hair and a long dry face, in a plain tunic and a soldier's belt. He looks like a schoolmaster. He looks like a man who has spent a long life reading, and who has been disappointed by most of it.
+"I am Galerius," he says, in a pleasant voice. "I am a Lictor of the Senate. May I come in?"
+$ do meet("galerius")
+$ do discover("lictors")
+He is already in. The courtesy is the threat, and you see that every person in the room understands it.
+?if _noticed == 1
+  His eyes find yours across the hall, and they stay there a moment too long. "Ah," says Galerius, gently. "The young man from the Forum. You have a good eye for a hand sign. Please do not do it again."
+?end
+Prisca has come down the stairs. She wears the same plain fillet, and a grey stole you have not seen before, and she walks the length of the hall with her hands folded, as she might walk to the head of a table. "Galerius," she says. "You do my house an honor."
+"I do your house a duty, Prisca. The honor is incidental." He smiles. "A new one has come into Rome, without a leave and without a sponsor. It is on the book of the Senate that every made one is counted. I am to count him."
+:the_counting
+* Step forward, and give your name
+  $ standing += 1
+  $ bond.prisca += 1
+  "{name}," you say. "Of Collesanto." Galerius writes it on a little wax tablet in a quick small hand, and glances at the surname, and nods, as if the word has told him something.
+* Wait to be asked
+  $ cunning_brutal -= 1
+  Galerius lets the silence stretch for a moment, and then, with the faintest approval, he turns to the tablet in his hand. "{name}," he says, reading it aloud, for you. "Of Collesanto. Is that right?" It is a courtesy and a lesson, and you take both.
+---
+"When did you die?" says Galerius.
+[gladiator] "Fourteen nights before I woke," you say. "In the arena. A good sword, a bad day." Galerius looks at the shape of your hands, and nods slowly. "A pity," he says. "Most of them are wasted."
+[legionary] "On the field behind the camp," you say. "By the verdict of a tribune. I was not guilty." Galerius hears this without comment. "Most of them were not," he says. "That is the usual thing with a verdict."
+[house_slave] "In a courtyard, at dawn," you say. "By the master's word. I had not done it." Galerius looks at you, and for a moment the schoolmaster goes out of his face. "You are not the first," he says, quietly.
+[merchant physician_aide] "In my bed, of a fever," you say. "Quite slowly. I had time to be afraid." Galerius says, "That is the best way, and nobody believes it."
+His pen moves, a little scratch in the wax. Then he raises his eyes, and they are very mild, and very patient, and entirely without warmth.
+"And now," says Galerius, "the question that every member of the Senate will ask you, in one form or another, for the whole of your life. Who made you?"
+---
+Nobody in the hall moves. Tiro has gone quite white. Prisca stands with her hands folded, and her face is as smooth as the bone of the abacus. Behind her, in the dark of the stair, you see Hanno very slightly shift his weight.
+?if b1.maker_told == "told"
+  You told Prisca, and she told you to tell no one. You can feel her not looking at you.
+?elif b1.maker_told == "lied"
+  You gave Prisca a name, and she wrote it down. You can feel her not looking at you.
+?else
+  You gave Prisca a half answer. You can feel her not looking at you.
+?end
+:the_answer
+* Tell him the truth, as far as you know it
+  $ b1.maker_answer = "truth"
+  $ b1.galerius = "wary"
+  $ secrecy -= 3
+  $ standing -= 1
+  You tell him: a stranger, a single question, a face that will not stay, a voice that will. You do not know a name. You do not know where he went.
+  Galerius does not write anything down. He does not do anything at all. He stands in the middle of the hall with his stylus raised and his eyes on the wax, and you realize, slowly, that he has stopped, entirely, as a clock stops. It lasts only a moment. When it ends he looks up with his schoolmaster's face, perfectly composed, and says only, "I see."
+  Behind him, one of the Lictors has turned his head, and is looking at his master.
+  ?if b1.maker_told == "lied"
+    $ bond.prisca -= 3
+    Prisca's gaze comes to you at last, level and cold, and you understand that the name you gave her in the counting room has just cost you something you cannot yet count.
+  ?end
+* Say that you were dying, and remember nothing
+  $ b1.maker_answer = "vague"
+  $ b1.galerius = "watching"
+  $ cunning_brutal -= 2
+  "I was dying," you say. "Someone came. I do not remember a face, and I do not remember a name. I woke in a place I did not know, and I was this." It has the great merit of being almost true. Galerius considers you for a long moment. "That is common enough," he says, "and I am not a man who disbelieves the common."
+* Give him the name of a dead stranger
+  $ b1.maker_answer = "lie"
+  $ b1.galerius = "watching"
+  $ cunning_brutal -= 3
+  $ secrecy += 2
+  You give him a name, and it comes out smooth and easy. It is the name of a dead man, a mercenary with a scarred lip, a name that no living person could contradict. Galerius writes it down without a flicker.
+  ?if b1.maker_told == "lied"
+    It is the same name you gave Prisca, and you are quite proud of the consistency. Prisca's face does not change at all.
+  ?elif b1.maker_told == "told"
+    Prisca does not look at you. You know that she knows, and you know, from the very faint tightening of her hands, that she approves.
+  ?else
+    $ standing -= 2
+    Prisca lowers her eyes, and says nothing, and you feel her pay for it: a small sum, quietly, in a coin you do not yet understand.
+  ?end
+  "I will look into him," says Galerius, closing the tablet. "I am sure he was a remarkable man."
+* Refuse to answer
+  $ b1.maker_answer = "refuse"
+  $ defiance += 3
+  $ cunning_brutal += 2
+  "That is my business," you say. "And the house I stand in has already offered me its protection. I do not owe an answer to a man with a bundle of sticks."
+  The silence in the hall becomes something else. Galerius sighs, very softly, like a schoolmaster who has seen this lesson go wrong many times. He lifts one hand a few inches from his side. The Lictors by the door step forward together, and the rods in their hands, which you took for ornaments, are suddenly a good deal more than that.
+  -> refusal
+-> sponsor
+
+# refusal
+:the_refusal
+* Let them take your arms
+  $ b1.galerius = "wary"
+  $ standing -= 2
+  You stand still. The rods come down on your shoulders, hard and cold, and a Lictor takes each of your arms in a grip that has no cruelty in it and no mercy either. It is over very quickly, and it is very humiliating, and Prisca does not speak. Galerius waits. After a while he says, in the same gentle voice, "Now. I will ask again."
+  ~> the_second_asking
+  -> sponsor
+* Break away
+  $ cunning_brutal += 3
+  $ do fight("lictor", 2)
+  -> exchange
+
+# exchange
+:exchange
+* Feint toward the stair
+  $ do strike("cunning")
+* Break his guard
+  $ do strike("brutal")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Talk them down
+  $ do strike("talk")
+* Run
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    The nearer Lictor gives ground, a step, and does not seem to mind.
+  ?else
+    The rod catches you under the ribs, and the breath goes out of a chest that does not need it.
+  ?end
+  -> :exchange
+?end
+?if fight_result() == "won"
+  $ b1.galerius = "hostile"
+  $ standing += 3
+  $ secrecy -= 3
+  You have both of them on the floor, with their rods across the hall and their hoods askew. Galerius has not moved. He has not so much as reached for his belt. After a long moment he begins, quite slowly, to clap, three times. "That," he says, "was very well done. It was also the most expensive thing you will ever do." He sets his tablet on an amphora. "I will remember it. I remember everything."
+?elif fight_result() == "talked"
+  $ b1.galerius = "wary"
+  $ standing += 1
+  You find the words, and they work. Galerius lifts a hand, and the Lictors stop, and for a moment you see something in the old man's eyes that is almost amusement. "A talker," he says. "Rare, in the young. Sit down."
+?else
+  $ b1.galerius = "wary"
+  $ standing -= 3
+  $ do heal()
+  The Lictors are older than you, and quieter, and there are two of them. They put you down on the hall floor without any particular effort, with a knee between your shoulder blades, and the rods across your neck. Prisca steps forward at last, and says, "Enough," in a voice that costs her something, and Galerius, who has not raised his own, lets you up.
+  "A debt," he says, to Prisca, pleasantly. "I shall add it to the others."
+?end
+~> the_second_asking
+-> sponsor
+
+# the_second_asking
+"Who made you?" says Galerius. It is the same question. It is put with exactly the same gentleness.
+:the_second
+* Tell him a short version of the truth
+  $ secrecy -= 2
+  You tell him of the stranger, the question, the face that will not stay. He listens, and when you have finished he is quite still for an instant. Then he says "I see," and does not write.
+* Say you do not remember
+  $ cunning_brutal -= 1
+  "I do not remember," you say, between your teeth. Galerius studies you, and it is clear that he does not believe it, and also that he is not going to press it tonight. "Another time, then," he says.
+<~
+
+# sponsor
+Galerius closes his tablet.
+"The Merchant house has taken you in," he says, to Prisca, and not to you. "It will stand surety for his conduct, until the Senate has had time to consider him."
+"It will," says Prisca. She says it with no hurry and no weight, but the whole room hears the price of it.
+?if b1.prisca_terms == "defied"
+  $ standing -= 2
+  She does not look at you as she says it. You know, with a very cold certainty, that you have just been sponsored by a woman you told to her face that you would not be ruled, and that she has done it without a murmur.
+?elif b1.prisca_terms == "accepted"
+  $ standing += 2
+  She does not look at you as she says it, but you feel it all the same, like a hand set briefly on your back.
+?end
+-> the_watch
+
+# the_watch
+## The watch
+Galerius puts his tablet inside his tunic. He goes to the door, with the Lictors falling in behind him, and there he turns, and looks at you for a last time with his pleasant, bookish, tired old eyes.
+"I will tell you what I am," he says. "I am the man who is to watch you. The Senate does not like a vampire without a maker, and it likes a vampire with an unusual maker still less. I am not going to hurt you. I am going to see you, again and again, for as long as the Senate wishes. It is not personal."
+He pauses.
+"Everything is personal. I have found that it is best to be honest about that."
+?if b1.sun_known != "none"
+  ~> sun_question
+?end
+"Good night," says Galerius. He bows, to Prisca, and not at all to you. "I will see you, I think, very soon."
+He goes. The door shuts. The Lictors' footsteps do not echo in the lane, because there are none.
+For a long moment nobody in the hall breathes, which is a habit they have all kept up for the benefit of the room. Then Tiro lets out a long, shaking whoop, and sits down on a sack of lentils, and says, "I told you. A census. Just a census, with rods."
+-> debrief
+
+# debrief
+## Prisca
+$ do rest()
+Prisca sends for you an hour before dawn.
+She is in the counting room, at the table, with the abacus and a tablet, and she does not look up for a while. When she does, she is smiling the little dry smile, and it has a great deal in it.
+?if b1.maker_answer == "truth"
+  "You told him," she says. "I asked you to hold your tongue, and you told a Lictor of the Senate, in my hall, in front of my people." She puts the stylus down. "It was the most dangerous thing you could have said, and I am not sure it was not the best. I did not see his face do that in a very long time. I will think about it. I would think about it, if I were you, for the rest of your life."
+?elif b1.maker_answer == "lie"
+  "A dead man with a scarred lip," says Prisca. "He will find that he never lived. And then he will wonder who you are, and what you are afraid of, and he will wonder it very patiently." She turns a bead. "It was clever. I would not do it twice."
+?elif b1.maker_answer == "refuse"
+  "You will not," says Prisca, "do that again. Not because it was wrong. Because it was loud. The Senate counts noise, and you have made a great deal of it in a very short time, and I will be paying for it for some years." She does not seem angry. She seems like a merchant looking at a cargo that has turned out to be more trouble than the invoice said.
+?else
+  "You told him very little," says Prisca, "and you told it well. It will do for tonight. It will not do for always. A man like Galerius does not mind waiting."
+?end
+?if b1.sun_known == "prisca"
+  She waits until the door is shut, and the footsteps on the stair have gone quiet. "And you," she says, "will say nothing about the light to anyone, ever, and I will say nothing to anyone, ever, and we shall see what we make of it. I will be thinking of the day, I think, a good deal." Her eyes rest on you with the kind of warmth that you suspect is a form of arithmetic.
+?end
+She rises, and goes to the shutter, and opens it a hand's width on the sleeping city.
+"You are counted now," says Prisca. "You are a name in the Senate's book. It is a leash, and it is a shield, and the difficulty with both is that they are the same object." She turns. "Go and sleep. Tomorrow, I think, you and I will talk about what a man can do in the sun."
+She closes the shutter. The lamp burns on the table, and the abacus shines, and you go down to the vaults with the sky beginning to pale, and with the odd feeling that you have been taken into someone's household and someone's ledger on the same night.
+=> next
+
+# sun_question
+?if b1.sun_known == "prisca"
+  Prisca says, in the same level voice, "He sleeps in my vaults. You may see for yourself, if you like." She says it so lightly that it takes you a moment to understand that you have just been asked to lie, in the dark, with a Lictor looking on.
+?else
+  Tiro says, a little too loudly, "He sleeps like the dead, Galerius. Snores like a farmer. Doesn't wake for anything." It is the worst lie you have ever heard, and it is the bravest.
+?end
+:the_lie
+* Let them do the talking
+  $ standing += 1
+  $ bond.prisca += 1
+  Galerius looks from one of them to the other. He looks at you last. He does not say what he thinks. "I am sure," he says, "that it is true."
+* Add a lie of your own
+  $ cunning_brutal -= 2
+  $ secrecy += 2
+  "I sleep," you say, "and I dream of food." It is the kind of thing that a man says who has nothing to hide. Galerius almost smiles. "Of course you do," he says.
+<~

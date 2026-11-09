@@ -63,6 +63,30 @@
       "book": "engine-test-d",
       "person": "et_love",
       "text": "A developer entry that unlocks by itself when the hero meets the test beloved."
+    },
+    "merchant_house": {
+      "category": "bloodlines",
+      "title": "The Merchant line",
+      "book": "burning-city",
+      "text": "One of the five bloodlines that hold real power in the Senate of Blood. It does not rule by sword or by pulpit. It lends, and it keeps ledgers, and every throne in Rome owes it something.\n\nIts houses hide in plain sight as warehouses, banks and shipping offices. A coven of the Merchant line is a family business with very old partners."
+    },
+    "the_veil": {
+      "category": "lore",
+      "title": "The Veil",
+      "book": "burning-city",
+      "text": "The first law of the dead: no human may know. Every other law grows from it. A witness is silenced or mistaken, and a hunter is a danger to everyone.\n\nThe Veil is not kept by fear alone. Most of the old ones keep it because they remember what the living do to what they cannot understand."
+    },
+    "senate_of_blood": {
+      "category": "lore",
+      "title": "The Senate of Blood",
+      "book": "burning-city",
+      "text": "The Senatus Sanguinis mirrors the Senate of the living. Five bloodlines hold its real power. There were once six, and the sixth is not named.\n\nIt settles quarrels between covens, and it keeps the census of the made. It does not forgive a vampire who was never registered."
+    },
+    "lictors": {
+      "category": "lore",
+      "title": "The Lictors",
+      "book": "burning-city",
+      "text": "The Senate's enforcers take their name from the officers who walk before a Roman magistrate with rods bound in red cord. They are patient, they are old, and they are polite until the moment they are not."
     }
   }
 }

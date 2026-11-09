@@ -44,6 +44,23 @@
             "grief",
             "blood"
           ]
+        },
+        {
+          "id": "b1c03",
+          "file": "burning-city/ch03.tsb",
+          "title": "The Merchant's House",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
+        },
+        {
+          "id": "b1c04",
+          "file": "burning-city/ch04.tsb",
+          "title": "The Senate's Eye",
+          "notes": [
+            "violence"
+          ]
         }
       ],
       "incomplete": true

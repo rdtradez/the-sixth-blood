@@ -1,0 +1,274 @@
+// Book One, Chapter 3 (session 8). Rome by night, and the house that takes you in.
+// A city of wheels and heartbeats, a friend on the rooftops, and a woman with an abacus.
+@chapter b1c03
+@title The Merchant's House
+@book burning-city
+@version 1
+
+# start
+## Rome
+$ do phase("night", 3)
+$ _fed = 0
+$ _tiro = 0
+$ _roof = 0
+You walk for three nights, because the days are no friend of yours, and you come to Rome on the fourth with the stars thinning at the edges and the road gone to noise.
+You hear it before you see it. It is not the noise of a village, which is made of separate sounds, a dog and a door and a voice. It is a single enormous sound, like the sea heard from inside a shell, and when you stand still at the last milestone you understand that it is made of people. Hundreds of thousands of them. Every one has a pulse, and every pulse is a small bright thread, and together they make a weave so thick that you cannot find the edge of it.
+[roman] You were born to this noise, or to a quieter part of it, and it is strange to come back to it a stranger.
+[gaul briton] You have heard Rome described by men who hated it, and by men who feared it, and by men who had only ever sold it grain. None of them told you how loud it would be.
+[north_african egyptian] You have seen great cities. You have never seen one that seemed to be holding its breath and shouting at the same time.
+[judean parthian silk_road] You were told that all roads end here. Standing at the end of one, you are not at all sure that this is a recommendation.
+The guards at the gate are bored and half asleep, and they wave you through with the rest of the night's traffic. It is the law, you remember, that wheeled carts may not use the streets by day. So Rome saves its wagons for the dark. They come in a long creaking river, loaded with stone and wine and timber and live pigs, and the drivers curse each other in six languages, and the whole city shakes on its foundations.
+It is the loveliest thing you have ever seen. It is also the loneliest.
+?if band("injury") != "whole"
+  You carry the fire with you. {cap(voice("injury"))}, and the cloak hides the worst of it, and nobody looks at you twice, which is the great mercy of a big city.
+?end
+{cap(voice("hunger"))}. A hundred thousand heartbeats go past you in the dark, and every one of them is a door you could open.
+-> city
+
+# city
+## The first night
+:city
+?if actions_left() == 3
+  Dawn is some hours off. You stand in the shadow of an arch with the cloak held close, and you have no idea where you are going to spend the day.
+?elif actions_left() == 2
+  The night is half spent. The carts are thinner now, and the wine shops are putting up their shutters.
+?else
+  There is a paleness at the bottom of the sky, behind the hills, that you do not like at all.
+?end
+* Hunt ?if actions_left() > 0 and _fed == 0
+  ~> hunt_rome
+  $ do act()
+* Hunt again ?if actions_left() > 0 and _fed > 0
+  ~> hunt_rome
+  $ do act()
+* Find a roof before the sun [once] ?if actions_left() > 0
+  ~> roof
+  $ do act()
+* Follow the feeling of being watched [once] ?if actions_left() > 0
+  ~> watched
+  $ do act()
+* Walk until the sky begins to pale
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :city
+?end
+-> tiro
+
+# hunt_rome
+You go down toward the river, where the smell of the city changes from smoke to water and mud and animals.
+:the_hunt
+* Go to the cattle pens by the river
+  $ do feed("animal")
+  $ b1.rome_feed = "market"
+  $ _fed += 1
+  The Forum Boarium is a field of sleeping cattle under the lamps of the night drovers, and nobody gives the shape in the dark a second glance. You pick an old heifer that has already been marked for the knife and you take what you need from her, quickly and without cruelty. It is thin, warm, dull blood, and it does very little. But when you stand again with your cloak over your mouth, the thing inside you has gone quiet, and there is not a mark on you that you will have to explain.
+* Take a drunk asleep in a doorway
+  $ do feed("human")
+  $ b1.rome_feed = "drunk"
+  $ _fed += 1
+  $ humanity -= 2
+  He is lying across the step of a wine shop with one sandal off, snoring in a cloud of his own breath. His blood is sour and warm and astonishingly alive, and it is not at all the same as the heifer's. You take a mouthful and then a few more, and you are very careful about the rest. You close the wound with your thumb. You settle his cloak around his shoulders as you might a child's.
+  ?if chance(0.3)
+    $ do witness(1)
+    A woman on a balcony across the lane is looking down at you. You hold her gaze for a long time, and she goes inside and bolts her shutters. You have been seen, and nobody will ever believe her, and the truth is that both things are going to matter.
+  ?end
+* Wait for a man leaving a gambling den
+  $ do feed("human_kill")
+  $ b1.rome_feed = "hunted"
+  $ _fed += 1
+  $ cunning_brutal += 5
+  $ humanity -= 6
+  $ do earn(8)
+  You do not choose him for anything he has done. You choose him because the den's door is dark and the alley beside it is deeper, and because he is staggering home with his winnings and nobody is expecting him anywhere. It is over in a few breaths. The hunger sings, and goes slack, and for a little while you feel more alive than you have since the arena or the fever or the field. Then you look at the thing in the alley, and the feeling goes.
+  His purse is heavy. You take it, because he does not need it anymore.
+<~
+
+# roof
+Dawn is not a thing you can argue with, and you need to be under something solid before it comes.
+?if wealth >= 8
+  $ _roof = 1
+  $ do earn(-6)
+  There is an insula in the lane behind the Sublician bridge that rents cots by the day to carters and fishermen, and the landlord is a yawning man who does not ask your name when he sees the coin. The room is a cupboard with a shuttered window and a sleeping mat that smells of other people's feet. It is not a vault, but it is dark, and it has a bolt.
+  You lie on the mat and listen to the whole building breathe, forty families to a floor and each one with its own small heart, and you think that you have never been so alone in such good company.
+?else
+  $ _roof = 2
+  You have no money for a room, and no friend in this city to ask. So you do what the poor of Rome have always done, and you go outside the walls, along the old road, where the tombs stand in a row like a street of tiny houses. The dead do not mind a visitor. You find a family vault with a loose slab, and you squeeze in among the urns, and the dust of other people's grandparents settles on your shoulders.
+  It is dark, and it is very quiet, and the oddest part is that it feels like the first place in Rome where you are not in anybody's way.
+?end
+<~
+
+# watched
+$ _tiro = 1
+It begins as an itch between your shoulder blades, as though a finger has been drawn there. You turn and nothing is behind you. You turn the other way and there is nothing there, either. Then you look up.
+Someone is walking along the ridgepole of the roof across the lane, balanced on the tiles with their arms out like a boy on a wall, and when you look at them they stop and wave.
+It is a young man, or the shape of one. He has an unruly head of dark hair and a face made for laughing, and an expression of such cheerful alarm that for a moment you forget he is not alive.
+"Oh good," he calls down, in a loud whisper. "You do see me. I've been up here for an hour and I was beginning to think I had lost my touch."
+:the_roof
+* Call up to him, and ask what he wants
+  $ bond.tiro += 4
+  "I'm a messenger," he says, and begins to climb down the wall as if it were a ladder. "A very small one. You made a noise, you see, when you came through the gate. Not a loud one. It's like a bell rung in the wrong key, and the lady who owns the key would like to know who rang it." He drops the last few feet to the street and lands lightly in front of you, grinning. "I'm Tiro. You're having a dreadful night. I can tell. Come and meet her, and I promise it gets better, or at least it gets warmer."
+* Go up the wall after him
+  $ bond.tiro += 2
+  $ cunning_brutal -= 2
+  You are on the roof before he has finished the sentence. It is easy. It is so easy that it frightens you, and it seems to delight him. He claps his hands softly and says, "A climber! Oh, she'll like that. Most of the new ones fall off the first roof and need to be scraped." He sticks out a hand. "Tiro. I'm to bring you to a lady who would very much like to know who rang the bell at the gate. Not a loud bell, mind. Just the wrong one."
+* Throw a roof tile at him
+  $ bond.tiro -= 3
+  $ cunning_brutal += 3
+  The tile goes past his ear by an inch and breaks on the wall behind him. He looks at the fragments, and at you, and he does not look afraid. He looks a little hurt. "That," he says, "was a very good throw, and I'd like it noted that I came in peace. I'm Tiro. I'm here to take you to a lady who wants to know who made you. I would prefer, if it's all the same to you, that you didn't throw anything else."
+<~
+
+# tiro
+## A friend
+?if _tiro == 0
+  You are standing in the lane with the sky going pale when someone sits down on the step beside you, as if they had been there all along.
+  "You're slow," he says. "I've followed you for half the night. I followed you from the gate. You do know you are leaving a trail you could follow with a blindfold on? You're thinking very loudly."
+  He is young, or looks it. He has an unruly head of dark hair and a face made for laughing, and an expression of anxious good cheer that does not quite match the fact that he is dead. He puts out a hand.
+  "Tiro. I'm a messenger. A lady in the Emporium felt you come through the gate like a bell rung in the wrong key, and she would like to know who rang it."
+  ?if must_feed() and _fed == 0
+    Before you can answer, the hunger takes the street. It comes up out of you in a wave, and you are on your feet, and there is a woman at the corner with a basket, and you can hear her blood like a river.
+    A hand clamps on your wrist. It is much stronger than it looks. "No," says Tiro, perfectly calm. "No, no. Not that one. She's got four children and a very good singing voice and I like her." He is already walking you the other way. "Cattle pens. Three streets. Look at me. Hold your breath and think about cows."
+    $ do feed("animal")
+    $ b1.rome_feed = "market"
+    $ _fed += 1
+    $ bond.tiro += 5
+    You do not remember much of the cattle pens afterward. You remember a heifer with a rope round her neck and a very long arm patting your back. You remember a voice saying, over and over, "That's it. That's it. Lovely. Nobody ever has to know."
+    When you stand up again the hunger has gone down to something you can hold. Tiro is looking at you with an odd expression that is not quite pity.
+    "I did that too," he says. "The first week. It's the worst week. After this, it only gets complicated."
+  ?end
+?else
+  Tiro has not left your elbow. He has talked the whole way, about cheese and the price of lamp oil and a woman in the Subura who sells wine that he swears has no wine in it whatever, and you realize slowly that this is a kindness, and that he has done it on purpose, to keep you from hearing the city.
+?end
+He walks beside you now toward the river, with his hands in his sleeves and his head cocked.
+"I'll tell you what I tell everyone," he says. "I'm a bookkeeper. Was. My father was a freedman's slave who got his mother's name and a stool in a counting house, and he taught me my letters and told me to be useful. I was never any good at the sums. I was good at the people, which is not the same, and which the house of the Emporium happens to need a great deal more." He shrugs. "I was nineteen. I'm older now. Never mind how much. It's rude."
+:the_walk
+* Ask him what he is
+  $ bond.tiro += 3
+  "Dead," he says, brightly. "Mostly. It's like being a wine that never quite turns to vinegar. You'll find there are rules. Don't be frightened of the rules. They're mostly sensible, and the ones that aren't are interesting."
+* Ask him what the lady wants
+  $ cunning_brutal -= 1
+  $ standing += 1
+  "That depends," says Tiro. "If you're a fool, she wants to make you less of one. If you're a danger, she wants to know before anyone else does. And if you're useful, she wants to know that, too, and she'll be nicer than you expect, and you must be careful of that." He glances at you sidelong. "She's not unkind. She's just not in a hurry. Don't mistake the one for the other."
+* Say nothing, and listen to the river
+  $ defiance += 1
+  He lets the silence run for a hundred paces, which is clearly an achievement. Then he says, in a smaller voice than before, "It does get better. I'm not just saying it."
+-> the_house
+
+# the_house
+## The Emporium
+The river is black and wide and smells of mud and rope and spice. Along its bank, below the Aventine, stand the warehouses of the Emporium, long arcaded halls where the grain of Egypt and the oil of Spain are weighed and stacked and weighed again. Lamps burn in the arches. Porters carry sacks past you in a slow line.
+Tiro leads you through all of this without a word to anyone, and nobody says a word to him. He goes down an alley between two storehouses, and up a flight of steps, and through a door that looks like all the others. It is only when it closes behind you that you notice there is no latch on the outside.
+Inside it is warm and dry and smells of old wine and cedar. A long hall runs back between ranks of amphorae, tall as children, each stamped with a mark you do not know. At the far end a staircase goes up, and another goes down.
+"Counting rooms upstairs," says Tiro. "Sleeping vaults down below. You can have a corner of the vaults if she says yes. Don't touch the amphorae. Half of them are wine and the other half are things she says are wine."
+$ do meet("tiro")
+$ do discover("merchant_house")
+$ do meet("hanno")
+Someone is sitting at the foot of the stairs with a ledger across his knees. He is old in a way that Tiro is not, in a way that goes past the face and into the stillness of the hands, and he looks up at you once, slowly, and down again.
+"Hanno," says Tiro. "He keeps the books. He talks once a year and he's saving it. Hanno, this is the one she felt."
+Hanno turns a page. He says nothing. But he moves the lamp an inch, so that its light falls on your face.
+---
+The counting room is on the upper floor. It is a long, low, well kept room, with a table covered in wax tablets and an abacus with beads of polished bone. Behind it, in a chair that does not look comfortable and does not need to be, sits a woman who might be forty or four hundred.
+She has the sort of face you cannot describe a moment after looking away: handsome, composed, unremarkable, the face of a person who has never been surprised in a bargain. Her hair is bound back in a plain fillet. Her hands lie on the table, one over the other, very still.
+"Tiro," says the woman. "Thank you. Go and find something to be busy with."
+"I'll go and be busy at the door," says Tiro, and does so, loudly.
+She watches you for a time without speaking. It is not a hostile look. It is the look of a merchant who has been handed a coin from a country she does not know, and is turning it over in the light.
+"I am Prisca," she says. "You are standing in my house, and you are not yet its guest. You may sit."
+$ do meet("prisca")
+:the_chair
+* Sit
+  $ bond.prisca += 3
+  You sit. The chair is hard and the room is silent. She nods, very slightly, as a woman does at a sum that has come out right.
+* Stand
+  $ defiance += 2
+  $ bond.prisca -= 2
+  "As you like," says Prisca, and makes a small note on a wax tablet. You are quite certain that it concerns you.
+* Take the chair, and put your feet up
+  $ cunning_brutal += 2
+  $ bond.prisca -= 1
+  $ standing += 1
+  Her mouth moves very slightly at the corner. "That is the first time in two hundred years," she says, "that anyone has done that in this room. I am not sure I mind."
+?if band("injury") != "whole"
+  Her eyes go to your hands, and the burns, and she says, "You have been near a fire, and not long ago." It is not a question. "We will see to that."
+?end
+"You came to Rome with nothing," says Prisca. "No sire at your side. No coven. No letter. You came through my gate at the hour when the gate is quietest, and you made no effort to hide what you are, which means either that you do not know what you are, or that you do not care. I would like to know which."
+She lifts one finger from the table.
+"Before I ask you anything else, I will ask the question that everyone in this city will ask you, and some of them will not ask it kindly. Who made you?"
+---
+You think of the stranger at the end of the bed, with the cold hand and the voice like a door opening in another room. You can remember the question he asked. You cannot remember his face. You reach for it, now, in the lamplight, and it slides away from you as a fish slides from a hand.
+:the_maker
+* Tell her everything, as plainly as you can
+  $ b1.maker_told = "told"
+  $ bond.prisca += 3
+  $ secrecy -= 2
+  You tell her. A stranger. A single question about what comes after Rome. A face that will not stay in the mind, and a voice that will, and no name at all. When you stop, the beads of the abacus are very still under her hand.
+  She does not move for a long time. Then she says, in a voice you have not heard her use before, quite level and a little lower, "You will not tell that to anyone else. Not in this house. Not in this city. Not until I have had time to think." She turns a bead, once. "Do you understand me?"
+  You say you do. You do not, but you understand that she is afraid, a very little, and that she is a woman who has not been afraid for a very long time.
+* Say you do not know
+  $ b1.maker_told = "withheld"
+  $ cunning_brutal -= 2
+  "I do not remember," you say, which is not quite a lie. "I was dying. Someone came. I woke and I was this."
+  Prisca looks at you for a long time. You have the clear sense of being weighed on a scale that does not make mistakes. "A true thing, told short," she says at last. "I know the sort. Very well. You will be asked again, and not by me."
+* Name a dead stranger
+  $ b1.maker_told = "lied"
+  $ cunning_brutal -= 4
+  $ secrecy += 2
+  You give a name. It is the name of a man you once saw die by the roadside, a mercenary with a scarred lip, and you give it with an easy face. It is the best lie you have ever told, and the least it deserves is a witness.
+  Prisca listens to all of it without a flicker. Then she says, "That is a name I do not know," and writes it on a tablet with a very neat hand, and you understand at once that she knows precisely what you have just done.
+---
+"I will tell you what you are," says Prisca. "A new one, in a house that has not asked for you. By the law of the Senate, a made vampire without a maker's leave is a crime, and the crime belongs to both of you. By custom, a new one with no maker has no protector. By my judgment, you are an interesting problem, and I like problems."
+She taps the abacus once.
+"Here is what I offer. A corner of my vaults. A place at the table. A teacher in the rules of this city, which are many, and a friend or two who will not stab you for sport. In return, three things."
+She counts them on her fingers.
+"You will keep the Veil. No human is to know, not by your word nor your carelessness. You will not kill within the walls without my leave. And when the Lictors of the Senate come to look at you, as they will, you will present yourself and be counted, and I will stand beside you."
+:the_terms
+* Accept the terms
+  $ b1.prisca_terms = "accepted"
+  $ bond.prisca += 4
+  $ standing += 3
+  $ defiance -= 1
+  "I accept," you say, and she inclines her head, and a weight you did not know you were carrying settles a little. It is not warmth. It is the sound of a door being shut behind you against the weather.
+* Bargain over them
+  $ b1.prisca_terms = "bargained"
+  $ cunning_brutal -= 3
+  $ standing += 2
+  "The first and the third," you say. "The second, I would like to understand. What if a killing is needed?" She tilts her head, and for the first time she smiles, a small, dry thing. "Then you will ask," she says, "and I will say yes, and it will cost you a favor. That is how it is done. Welcome to the Merchant house."
+* Refuse to be ruled
+  $ b1.prisca_terms = "defied"
+  $ cunning_brutal += 4
+  $ defiance += 4
+  $ bond.prisca -= 3
+  "I have buried my own household," you say. "I will not be told by anyone who I may feed on in this city." The room is very quiet. Prisca looks at you without anger. "I understand," she says. "I buried mine, too, a long time ago. Here is the difficulty. A new one who is not registered is a dead one. The Senate does not need to be cruel. It only needs to be patient. You may be as free as you like, and you will be so for about a month." She moves a bead on the abacus. "I will keep you anyway. Think of it as the first loan."
+Prisca rises. The interview, it appears, is over, and it has cost you almost nothing, and you have the profoundly uncomfortable feeling that you have just been entered in a ledger under a heading that you have not been shown.
+-> dawn
+
+# dawn
+## The vaults
+The sleeping vaults are a long arched cellar under the warehouse, cool and dry, with niches cut in the walls like the shelves of a library, each one big enough for a body and a blanket. There are nine niches in use. They are closing now, one after another, in the quiet of a household whose day is ending.
+Tiro finds you a place at the end, beside his own. He lies down on his back in the dark with his hands folded on his chest, and the effect is so comic and so touching that you almost laugh.
+"Don't worry," he says. "It isn't like dying. It's more like being put in a drawer."
+Then his breathing, which is only a habit, stops.
+You are not tired. You should be. You can feel the sun coming as a weight at the top of the sky, a pressure behind your eyes and in your bones, and the others have gone under it as stones go under water. But you are awake, and you lie in the dark and listen to the warehouse tick as the day heats it.
+There is a grate at the end of the vault, an iron lattice for air, and through it a thin bar of gray light has begun to climb the wall.
+:the_dawn
+* Lie still, and let the others believe you sleep
+  $ b1.sun_known = "none"
+  $ secrecy += 2
+  You close your eyes, and you do the thing you have done all your life, which is to keep a secret. Over the next hours the light moves across the far wall and you do not look at it. You hold your breath as though you were asleep, and your hands on your chest, and a little before noon you drift into an odd, thin, restless sleep, with your whole body listening.
+* Go and put your hand in the bar of light
+  $ b1.sun_known = "tiro"
+  $ bond.tiro += 3
+  $ secrecy -= 4
+  You cannot help it. You go to the grate and hold your palm out, and the light lies on it, a thin warm bar, and the skin does not smoke. It aches like a fever. It does not burn.
+  There is a small sound behind you. Tiro is sitting up in the niche, his hair on end, staring at your hand with an expression of purest horror. It goes on for a long time. Then it changes into something that is almost joy. "I am going to pretend," he says in a whisper, "that I did not see that. And you are going to buy me a great deal of wine, which I cannot drink, as a gesture. And neither of us is ever going to mention it to anyone." He lies back down. "Oh, my gods. Oh, my gods. Good night."
+* Go up and tell Prisca, while the house sleeps
+  $ b1.sun_known = "prisca"
+  $ bond.prisca += 3
+  $ secrecy -= 3
+  She is awake. You are not at all surprised. She sits at her table in the counting room with the lamp lit and the shutters open to the first gray light, which does not trouble her as much as it should, and she watches you come in as if she has been expecting a coin and not yet seen it.
+  You tell her. You stand in the window with your face to the dawn and the light on it, and you let her see. For a long time she says nothing at all. She looks at the light on your skin, and then, very slowly, she smiles, and it is not the dry little smile of the evening. It is the look of a woman who has just found a great deal of money in a coat she thought was empty.
+  "Well," says Prisca. "Well. Now we have something to discuss."
+Whatever else the city holds, it will not be dull.
+$ do rest()
+=> next
