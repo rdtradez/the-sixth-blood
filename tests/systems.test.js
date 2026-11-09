@@ -364,7 +364,7 @@ test('systems state survives a save and load mid mission', async () => {
 });
 
 test('schema 2 saves upgrade to the current schema with empty systems', async () => {
-  assert.equal(SCHEMA, 4);
+  assert.equal(SCHEMA, 5);
   assert.deepEqual(SCHEMA_MIGRATIONS[2]({ vars: {} }).sys, createSys());
   const storage = new MemoryStorage();
   const src = { t1: `${H('t1')}\n# start\nOne.\n---\nTwo {coven_size()}.\n---\n=> endbook\n` };
