@@ -71,6 +71,143 @@
       "default": "yes",
       "note": "Prologue choice"
     },
+    "b1.tablet": {
+      "kind": "enum",
+      "values": [
+        "keep",
+        "scrape"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "keep",
+      "note": "Chapter 1: what he did with the tablet in the villa"
+    },
+    "b1.first_blood": {
+      "kind": "enum",
+      "values": [
+        "animal",
+        "forced",
+        "drained",
+        "killed"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "animal",
+      "note": "Chapter 1: how he first fed"
+    },
+    "b1.collector": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "spared",
+        "drained",
+        "fled",
+        "killed"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "unmet",
+      "note": "Chapter 1: the tax collector's man at the crossroads"
+    },
+    "b1.goat": {
+      "kind": "enum",
+      "values": [
+        "freed",
+        "tied"
+      ],
+      "book": "burning-city",
+      "default": "tied",
+      "note": "Chapter 1: the boy's goat"
+    },
+    "b1.warning": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "followed",
+        "warned"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 1: what he did about the strangers in the wood"
+    },
+    "b1.reveal": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "aelia",
+        "spouse"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 2: who in the family saw him before the fire"
+    },
+    "b1.spouse_told": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "truth",
+        "lie",
+        "silence"
+      ],
+      "book": "burning-city",
+      "default": "none",
+      "note": "Chapter 2: what he told his spouse, if he showed himself"
+    },
+    "b1.spouse_fire": {
+      "kind": "enum",
+      "values": [
+        "went_in",
+        "held_back"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "went_in",
+      "note": "Chapter 2: whether he went into the burning house"
+    },
+    "b1.saw_marks": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 2: he saw the marks at his spouse's throat (a later clue; never explained in Book One)"
+    },
+    "b1.fire_seen": {
+      "kind": "enum",
+      "values": [
+        "seen",
+        "glimpsed",
+        "unseen"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "glimpsed",
+      "note": "Chapter 2: how much of the village saw him in the fire"
+    },
+    "b1.prisoner": {
+      "kind": "enum",
+      "values": [
+        "village",
+        "killed",
+        "fed"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "village",
+      "note": "Chapter 2: what he did with the captured torchman"
+    },
+    "b1.farewell": {
+      "kind": "enum",
+      "values": [
+        "promise",
+        "truth",
+        "silent"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "promise",
+      "note": "Chapter 2: what he said to Aelia"
+    },
     "quick_start": {
       "kind": "flag",
       "note": "Set when a book was begun with a quick start (default history)"
@@ -101,6 +238,574 @@
       "kind": "flag",
       "book": "engine-test-d",
       "note": "Developer test: set on one branch of the sample chapter"
+    },
+    "b1.rome_feed": {
+      "kind": "enum",
+      "values": [
+        "market",
+        "drunk",
+        "hunted"
+      ],
+      "major": true,
+      "default": "market",
+      "note": "Chapter 3: how he first fed in Rome",
+      "book": "burning-city"
+    },
+    "b1.maker_told": {
+      "kind": "enum",
+      "values": [
+        "told",
+        "withheld",
+        "lied"
+      ],
+      "major": true,
+      "default": "withheld",
+      "note": "Chapter 3: what he told Prisca about his maker",
+      "book": "burning-city"
+    },
+    "b1.prisca_terms": {
+      "kind": "enum",
+      "values": [
+        "accepted",
+        "bargained",
+        "defied"
+      ],
+      "major": true,
+      "default": "accepted",
+      "note": "Chapter 3: how he took the terms of Prisca's house",
+      "book": "burning-city"
+    },
+    "b1.sun_known": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "tiro",
+        "prisca"
+      ],
+      "major": true,
+      "default": "none",
+      "note": "Chapter 3: who in the coven knows he walks in daylight",
+      "book": "burning-city"
+    },
+    "b1.cup": {
+      "kind": "enum",
+      "values": [
+        "accepted",
+        "refused",
+        "alone"
+      ],
+      "major": true,
+      "default": "accepted",
+      "note": "Chapter 4: whether he feeds from the coven's willing donors",
+      "book": "burning-city"
+    },
+    "b1.maker_answer": {
+      "kind": "enum",
+      "values": [
+        "truth",
+        "vague",
+        "lie",
+        "refuse"
+      ],
+      "major": true,
+      "default": "vague",
+      "note": "Chapter 4: what he told the Lictor about his maker",
+      "book": "burning-city"
+    },
+    "b1.galerius": {
+      "kind": "enum",
+      "values": [
+        "watching",
+        "wary",
+        "hostile"
+      ],
+      "major": true,
+      "default": "watching",
+      "note": "Chapter 4: how the Lictor stands toward him",
+      "book": "burning-city"
+    },
+    "b1.collis_terms": {
+      "kind": "enum",
+      "values": [
+        "partner",
+        "loan",
+        "alone"
+      ],
+      "major": true,
+      "default": "partner",
+      "note": "Chapter 5: how he took Prisca's backing for the firm",
+      "book": "burning-city"
+    },
+    "b1.collis_start": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "wine",
+        "shipping",
+        "lending",
+        "insulae",
+        "gladiators",
+        "slaves"
+      ],
+      "major": true,
+      "default": "wine",
+      "note": "Chapter 5: the first deal that started the fortune",
+      "book": "burning-city"
+    },
+    "b1.collis_name": {
+      "kind": "enum",
+      "values": [
+        "tribute",
+        "hidden"
+      ],
+      "major": true,
+      "default": "tribute",
+      "note": "Chapter 5: whether the firm keeps the link back to Collesanto",
+      "book": "burning-city"
+    },
+    "b1.factor": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "exposed",
+        "bound",
+        "spared"
+      ],
+      "major": true,
+      "default": "unmet",
+      "note": "Chapter 5: what he did about the grain factor who was skimming",
+      "book": "burning-city"
+    },
+    "b1.breaking": {
+      "kind": "enum",
+      "values": [
+        "kin",
+        "drained",
+        "clean"
+      ],
+      "major": true,
+      "default": "clean",
+      "note": "Chapter 6: what brought him to his breaking point",
+      "book": "burning-city"
+    },
+    "b1.vow": {
+      "kind": "enum",
+      "values": [
+        "animal",
+        "donor",
+        "human"
+      ],
+      "major": true,
+      "default": "animal",
+      "note": "Chapter 6: what he swore about feeding on the living",
+      "book": "burning-city"
+    },
+    "b1.relapse": {
+      "kind": "flag",
+      "major": true,
+      "book": "burning-city",
+      "note": "Chapter 6: he broke his vow in the days after he made it"
+    },
+    "b1.vibia": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "told",
+        "helped",
+        "paid",
+        "met"
+      ],
+      "major": true,
+      "default": "none",
+      "note": "Chapter 6: what he did about the woman whose husband he fed on",
+      "book": "burning-city"
+    },
+    "b1.coven": {
+      "kind": "enum",
+      "values": [
+        "stayed",
+        "alone"
+      ],
+      "major": true,
+      "default": "stayed",
+      "note": "Chapter 7: whether he took the house's offer or went alone",
+      "book": "burning-city"
+    },
+    "b1.oath": {
+      "kind": "enum",
+      "values": [
+        "full",
+        "reserved",
+        "none"
+      ],
+      "major": true,
+      "default": "full",
+      "note": "Chapter 7: the oath he swore to the Merchant house",
+      "book": "burning-city"
+    },
+    "b1.rufus": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "trusted",
+        "wary"
+      ],
+      "major": true,
+      "default": "none",
+      "note": "Chapter 8: how the vigil at the burned warehouse stands toward him",
+      "book": "burning-city"
+    },
+    "b1.flavus": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "spoke",
+        "struck"
+      ],
+      "major": true,
+      "default": "unmet",
+      "note": "Chapter 8: what passed between him and the lamp seller in daylight",
+      "book": "burning-city"
+    },
+    "b1.plan": {
+      "kind": "enum",
+      "values": [
+        "full",
+        "partial"
+      ],
+      "major": true,
+      "default": "full",
+      "note": "Chapter 8: how much of the Igniferi's plan he learned in the cellar",
+      "book": "burning-city"
+    },
+    "b1.igni_warned": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "house",
+        "lictors",
+        "both"
+      ],
+      "major": true,
+      "default": "house",
+      "note": "Chapter 8: whom he told about the plan",
+      "book": "burning-city"
+    },
+    "b1.vigiles_ready": {
+      "kind": "flag",
+      "major": true,
+      "book": "burning-city",
+      "note": "Chapter 9: the Aventine vigiles were told, and stood ready with hooks and buckets"
+    },
+    "b1.evacuated": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "some",
+        "many"
+      ],
+      "major": true,
+      "default": "some",
+      "book": "burning-city",
+      "note": "Chapter 9: how many of the Subura's people he got out before the fire"
+    },
+    "b1.vaults": {
+      "kind": "enum",
+      "values": [
+        "stayed",
+        "moved"
+      ],
+      "major": true,
+      "default": "stayed",
+      "book": "burning-city",
+      "note": "Chapter 9: whether the house's sleepers were moved out of the Emporium vaults"
+    },
+    "b1.posts": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "all"
+      ],
+      "default": "all",
+      "book": "burning-city",
+      "note": "Chapter 9: whether he learned where each cell of lamp bearers would stand"
+    },
+    "b1.fire_stance": {
+      "kind": "enum",
+      "values": [
+        "stop",
+        "survive",
+        "use"
+      ],
+      "major": true,
+      "default": "survive",
+      "book": "burning-city",
+      "note": "Chapter 9: what he meant to do on the night of the fire"
+    },
+    "b1.circus": {
+      "kind": "enum",
+      "values": [
+        "stopped",
+        "burned",
+        "let"
+      ],
+      "major": true,
+      "default": "burned",
+      "book": "burning-city",
+      "note": "Chapter 9: how the Circus went up, checked in part, burning at full strength, or watched"
+    },
+    "b1.saved_foot": {
+      "kind": "flag",
+      "major": true,
+      "book": "burning-city",
+      "note": "Chapter 10: he saved the people of the insula at the Aventine foot"
+    },
+    "b1.saved_house": {
+      "kind": "flag",
+      "major": true,
+      "book": "burning-city",
+      "note": "Chapter 10: he saved the Merchant house at the Emporium"
+    },
+    "b1.saved_subura": {
+      "kind": "flag",
+      "major": true,
+      "book": "burning-city",
+      "note": "Chapter 10: he saved Naevia's stair and the Subura lanes"
+    },
+    "b1.flavus_night": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "heard",
+        "faced"
+      ],
+      "major": true,
+      "default": "unmet",
+      "book": "burning-city",
+      "note": "Chapter 10: what passed between him and Flavus on the hill on the night of the fire"
+    },
+    "b1.tiro_end": {
+      "kind": "enum",
+      "values": [
+        "held",
+        "carried",
+        "avenged"
+      ],
+      "major": true,
+      "default": "held",
+      "book": "burning-city",
+      "note": "Chapter 10: how he spent Tiro's last minutes"
+    },
+    "b1.rufus_saw": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "mercy",
+        "slaughter",
+        "both"
+      ],
+      "major": true,
+      "default": "mercy",
+      "book": "burning-city",
+      "note": "Chapter 10: what the vigil Rufus saw him do on the night of the fire"
+    },
+    "b1.fire_toll": {
+      "kind": "enum",
+      "values": [
+        "light",
+        "heavy",
+        "terrible"
+      ],
+      "major": true,
+      "default": "heavy",
+      "book": "burning-city",
+      "note": "Chapter 10: how many the Great Fire killed in the quarters he stood in"
+    },
+    "b1.blame": {
+      "kind": "enum",
+      "values": [
+        "named",
+        "pressed",
+        "silent"
+      ],
+      "major": true,
+      "default": "silent",
+      "book": "burning-city",
+      "note": "Chapter 10: what he said to Galerius on the Palatine stair about who the Senate would blame"
+    },
+    "b1.tiro_keep": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "burned"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 11: whether he kept Tiro's ledger or let the house burn it"
+    },
+    "b1.refuge": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "hid",
+        "shipped"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 11: what he did for the cobbler's family the edict named"
+    },
+    "b1.rufus_told": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "told",
+        "lied",
+        "deflected"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "deflected",
+      "note": "Chapter 11: what he told the vigil Rufus about what he is"
+    },
+    "b1.rebuilt": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 11: Collis paid to rebuild lanes of the Subura"
+    },
+    "b1.felt_below": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 11: he put his hand on the bronze door in the old quarry and heard what is beneath it"
+    },
+    "b1.council_voice": {
+      "kind": "enum",
+      "values": [
+        "war",
+        "limits",
+        "mercy",
+        "glad",
+        "silent"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "limits",
+      "note": "Chapter 11: what he said to the covens of Rome in the quarry"
+    },
+    "b1.war_terms": {
+      "kind": "enum",
+      "values": [
+        "total",
+        "limited",
+        "mercy"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "limited",
+      "note": "Chapter 11: the terms the covens agreed for the hunt of the Igniferi"
+    },
+    "b1.theron_fear": {
+      "kind": "enum",
+      "values": [
+        "pressed",
+        "private",
+        "ignored"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "ignored",
+      "note": "Chapter 11: what he did when the General's old soldier showed fear at the villa"
+    },
+    "b1.cell": {
+      "kind": "enum",
+      "values": [
+        "house",
+        "theron",
+        "meritamun",
+        "alone"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "house",
+      "note": "Chapter 11: whose hunt he joined"
+    },
+    "b1.farm": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "joined",
+        "sorted",
+        "stopped",
+        "stood_aside"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "sorted",
+      "note": "Chapter 12: what he did at the farm on the Appian Way"
+    },
+    "b1.clerk": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "kept",
+        "freed",
+        "dead"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "freed",
+      "note": "Chapter 12: what became of the sect's clerk"
+    },
+    "b1.boy": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "vigiles",
+        "freed",
+        "dead"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "vigiles",
+      "note": "Chapter 12: what became of the young prisoner in the vigiles' cell"
+    },
+    "b1.scribe": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "hint",
+        "deal"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 12: what passed between him and the Scribe line's head"
+    },
+    "b1.reckoning": {
+      "kind": "enum",
+      "values": [
+        "slaughter",
+        "mixed",
+        "mercy"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "mixed",
+      "note": "Chapter 12: what the first night of the hunt came to"
+    },
+    "b1.ledger": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 12: the sect's book of jars, money and donors is in his hands or his keeping"
+    },
+    "b1.hill_known": {
+      "kind": "flag",
+      "book": "burning-city",
+      "note": "Chapter 12: he knows the lamp seller has gone north toward Collesanto"
     }
   }
 }

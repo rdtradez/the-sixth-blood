@@ -44,6 +44,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 2: flags, story voice stats, pronouns and names, origin variants, library screen
 - [x] Session 3: game systems
 - [x] Session 4: player features, developer tools, look and feel, sample chapter
+- [x] Sessions 5 to 9: character creation and the prologue, the Rome map, Book One chapters 1 to 6 (Book One is in progress)
 
 ### Session 1 notes (for the next session)
 
@@ -99,3 +100,65 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Prologue flags (`prologue.day`, `prologue.stand`, `prologue.answer`) and `hero.death` are registered with quick start defaults. `content/family.json` has no quick start status for the family yet: the Book One sessions set it when they know how each relative's story stands at the end of the book.
 - The prologue plan is in `SPOILERS/`. Session 6 (Rome map) is next.
 - Session 4 lives on the `session-4` branch and session 5 is built on top of it. Merge `session-5` to `main` to get both.
+
+### Session 7 notes (for the next session)
+
+- Book One, chapters 1 and 2 are built (`content/burning-city/ch01.tsb` and `ch02.tsb`, chapter ids `b1c01` and `b1c02`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 2 and carries on by itself when chapter 3 is added to the manifest.
+- Both chapters use the day and night loop from docs/SYSTEMS.md (`phase`, `act`, `end_phase`, `rest`), the fight system and `send_home`. Chapter 1 ends with `rest()` and chapter 2 with `rest()` in its closing scene; chapter 3 should read hunger, injury and wealth as the player left them rather than reset them.
+- New decision flags use the prefix `b1.` and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. Later chapters and the Velati journal read them from `state.decisions`.
+- New people (`content/people.json`): Domitia, Sextus, Quintus, Fuscus. New codex entries: the villa, the hunger, the sun, strix. Chapters 1 and 2 carry the content notes `blood`, `violence` and `grief`.
+- `content/family.json` now has quick start statuses for the spouse and the children, so a quick start into Book Two finds the family as the chapters leave it.
+- Scratch variables (`_fed`, `_vis`, `_early` and so on) only live inside a chapter. Anything a later chapter needs is a registered flag.
+- `tests/book1.test.js` plays both chapters for every mortal role and down the branches that later chapters depend on. `tests/creation.test.js` now stops its prologue helper at the end of the prologue, and its pause test expects two written chapters. Update that count each session.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 8 notes (for the next session)
+
+- Book One, chapters 3 and 4 are built (`content/burning-city/ch03.tsb` and `ch04.tsb`, chapter ids `b1c03` and `b1c04`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 4 and carries on by itself when chapter 5 is added to the manifest.
+- Session 8 is built on the `session-7` branch (chapters 1 and 2 are not on `main` yet). Merge `session-7` and then `session-8` to get everything.
+- Both chapters use the day and night loop (`phase`, `act`, `end_phase`, `rest`), the donor feeding type, the fight system and the codex. Chapter 4 ends with `rest()` and `=> next`; chapter 5 should read hunger, injury, wealth and standing as the player left them.
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New people (`content/people.json`): Tiro, Galerius, Hanno, plus a title and bio for Prisca. New codex entries: the Merchant line, the Veil, the Senate of Blood, the Lictors. Content notes: chapter 3 carries `blood` and `slavery`, chapter 4 carries `violence`.
+- Nobody is recruited or sired in these chapters (coven timing: Book One only takes the hero in). Coven members are plain people with `bond.*` values until the stay or go decision near the end of the book.
+- `tests/book1b.test.js` plays chapters 3 and 4 down their branches. `tests/creation.test.js` now expects four written chapters: update that count each session.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 9 notes (for the next session)
+
+- Book One, chapters 5 and 6 are built (`content/burning-city/ch05.tsb` and `ch06.tsb`, chapter ids `b1c05` and `b1c06`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 6 and carries on by itself when chapter 7 is added to the manifest.
+- Session 9 is built on the `session-8` branch (which sits on `session-7`; none of sessions 6 to 8 are on `main` yet). Merge `session-7`, `session-8` and then `session-9` to get everything.
+- Chapter 5 starts Collis (the first venture is bought through `invest()` and the firm is named). Chapter 6 uses the feeding system and the vow about what he drinks; later chapters should read `animal_diet()` for fights rather than a flag. Both chapters use the day and night loop and end with `rest()`; chapter 5 ends with `=> next`.
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New people (`content/people.json`): Naevia, Lucrio, Vibia. New codex entries: Collis, the lesser cup. Content notes: chapter 5 carries `blood` and `slavery`, chapter 6 carries `blood`, `violence` and `grief`.
+- Venture prices are fixed in `content/ventures.json`, so how much a hero can buy in chapter 5 depends on his purse and Prisca's backing. Retune the stakes in the chapter if the venture prices change.
+- `tests/book1c.test.js` plays chapters 5 and 6 from the prologue down their branches, including each way chapter 6 can be reached. `tests/creation.test.js` now expects six written chapters: update that count each session.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 10 notes (for the next session)
+
+- Book One, chapters 7 and 8 are built (`content/burning-city/ch07.tsb` and `ch08.tsb`, chapter ids `b1c07` and `b1c08`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 8 and carries on by itself when chapter 9 is added to the manifest.
+- Session 10 is built on the `session-9` branch (which sits on sessions 6 to 8; none of them are on `main` yet). Merge `session-7`, `session-8`, `session-9` and then `session-10` to get everything.
+- Chapter 7 sets the coven or lone path (`choose_path`) and recruits the house into the circle when he stays, so later chapters can read `in_circle("prisca")`, `coven_path()` and `lone()`. Chapter 8 uses the day and night loop, the fight system and two codex entries; each ends with `rest()` (chapter 8 plays one `rest()` at its close, chapter 9 should read hunger, injury and standing as the player left them).
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New people (`content/people.json`): Rufus, Flavus. New codex entries: the vigiles, the Igniferi. Content notes: chapter 7 carries `blood` and `violence`, chapter 8 carries `blood`, `violence` and `grief`.
+- `tests/book1d.test.js` plays chapters 7 and 8 down their branches. `tests/creation.test.js` now expects eight written chapters: update that count each session.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 11 notes (for the next session)
+
+- Book One, chapters 9 and 10 are built (`content/burning-city/ch09.tsb` and `ch10.tsb`, chapter ids `b1c09` and `b1c10`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 10 and carries on by itself when chapter 11 is added to the manifest.
+- Session 11 is built on the `session-10` branch (which sits on sessions 6 to 9; none of them are on `main` yet). Merge `session-7`, `session-8`, `session-9`, `session-10` and then `session-11` to get everything.
+- These two chapters break the usual shape on purpose: chapter 9 closes its phase with `end_phase()` and does not call `rest()`, chapter 10 opens a new night phase and calls `rest()` once at its close, so the tally of kills and witnesses for both lands together. Chapter 11 should read hunger, injury, standing and secrecy as chapter 10 left them.
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New codex entry: the Great Fire (places). Content notes: chapter 9 carries `blood` and `violence`, chapter 10 carries `blood`, `violence` and `grief`. No new people were needed.
+- Chapter 10 is a hub of four places where only three can be reached. What he did not reach is decided by the flags and the fire, and the dawn scene reads them. Later chapters and the Velati journal should read the flags (`b1.saved_*`, `b1.fire_toll`, `b1.rufus_saw`, `b1.blame`) rather than recompute them.
+- `tests/book1e.test.js` plays chapters 9 and 10 down their branches, and the `burned lots` offer is tested with a developer jump. `tests/creation.test.js` now expects ten written chapters: update that count each session. `tests/book1.test.js` gained a `stopAt` option so its wound test can stop as chapter 3 opens, since later chapters add wounds of their own.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 12 notes (for the next session)
+
+- Book One, chapters 11 and 12 are built (`content/burning-city/ch11.tsb` and `ch12.tsb`, chapter ids `b1c11` and `b1c12`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 12 and carries on by itself when chapter 13 is added to the manifest.
+- Session 12 is built on the `session-11` branch (which sits on sessions 6 to 10; none of them are on `main` yet). Merge `session-7`, `session-8`, `session-9`, `session-10`, `session-11` and then `session-12` to get everything.
+- Chapter 11 spends two day actions, then a dusk and the council, and ends with `rest()`. Chapter 12 opens a fresh night phase of three actions and ends with `rest()`. Chapter 13 should read hunger, injury, standing and secrecy as chapter 12 left them.
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New people (`content/people.json`): Theron, Meritamun. New codex entries: the old quarry, the General line, the Scribe line. Content notes: chapter 11 carries `grief`, `violence` and `war`, chapter 12 carries `blood`, `violence`, `war` and `grief`.
+- Later chapters should read `b1.war_terms`, `b1.cell`, `b1.reckoning`, `b1.farm`, `b1.clerk`, `b1.boy`, `b1.scribe`, `b1.ledger` and `b1.hill_known` rather than recompute them.
+- `tests/book1f.test.js` plays chapters 11 and 12 down their branches, including the fights, with developer jumps for the paths that depend on earlier choices. `tests/creation.test.js` now expects twelve written chapters: update that count each session.
+- Two script gotchas found while building: a `?if ... ?end` block wrapped around one choice of a set splits the set into two prompts (put the condition on the choice line instead: `* Text ?if cond`), and a `:label` placed directly before `?else` lets a jump into that label run the else branch. Avoid both.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+

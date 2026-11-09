@@ -15,6 +15,30 @@
       "quick": true,
       "text": "A village on a hill in the middle of Italy, three days' ride from Rome on a good road. The name means holy hill, though no one in the village can say what made it holy.\n\nIt grows wheat, barley, figs and a thin red wine. Its people are farmers and shepherds who keep to themselves, pay what the tax collectors ask and say little to strangers. At the top of the hill stands an old villa with its shutters closed, which the village avoids and does not discuss."
     },
+    "the_villa": {
+      "category": "places",
+      "title": "The villa above Collesanto",
+      "book": "burning-city",
+      "text": "A great house at the top of the hill, shuttered for as long as anyone alive can remember. The shepherds drive their flocks around its wall in a wide curve and will not say why.\n\nInside, it is dry and clean and strangely empty of small living things. A windowless room in the cellar has a bar on the inside of its door and a bed made up for one who sleeps through the day. There is no name anywhere in the house."
+    },
+    "the_hunger": {
+      "category": "lore",
+      "title": "The hunger",
+      "book": "burning-city",
+      "text": "It is not like appetite. It is a second pulse, patient and enormous, that rises as the night goes on and every time you use what you have become.\n\nAnimal blood quiets it, but only for a while. Human blood quiets it far better, and costs something that is harder to name. A starving creature does not choose, and the hunger, if it is left long enough, will choose for you."
+    },
+    "the_sun": {
+      "category": "lore",
+      "title": "The sun",
+      "book": "burning-city",
+      "text": "Every story says that the sun kills the dead. You have stood in it, and it has not killed you.\n\nIt does hurt. The light lies on you like a fever, and at midday you are weaker and the hunger runs hotter. But you are not ash, and you have no explanation for it. You have learned only that you should not tell anyone."
+    },
+    "strix": {
+      "category": "lore",
+      "title": "Strix",
+      "book": "burning-city",
+      "text": "In Roman folklore the strix is a night bird that feeds on the blood of sleepers, and the word is used for anything that drinks the living in the dark.\n\nThe men who came to Collesanto with torches used it of you, and they cried it like a hymn."
+    },
     "et_bloodlines": {
       "category": "bloodlines",
       "title": "Test Lineage",
@@ -39,6 +63,78 @@
       "book": "engine-test-d",
       "person": "et_love",
       "text": "A developer entry that unlocks by itself when the hero meets the test beloved."
+    },
+    "merchant_house": {
+      "category": "bloodlines",
+      "title": "The Merchant line",
+      "book": "burning-city",
+      "text": "One of the five bloodlines that hold real power in the Senate of Blood. It does not rule by sword or by pulpit. It lends, and it keeps ledgers, and every throne in Rome owes it something.\n\nIts houses hide in plain sight as warehouses, banks and shipping offices. A coven of the Merchant line is a family business with very old partners."
+    },
+    "the_veil": {
+      "category": "lore",
+      "title": "The Veil",
+      "book": "burning-city",
+      "text": "The first law of the dead: no human may know. Every other law grows from it. A witness is silenced or mistaken, and a hunter is a danger to everyone.\n\nThe Veil is not kept by fear alone. Most of the old ones keep it because they remember what the living do to what they cannot understand."
+    },
+    "senate_of_blood": {
+      "category": "lore",
+      "title": "The Senate of Blood",
+      "book": "burning-city",
+      "text": "The Senatus Sanguinis mirrors the Senate of the living. Five bloodlines hold its real power. There were once six, and the sixth is not named.\n\nIt settles quarrels between covens, and it keeps the census of the made. It does not forgive a vampire who was never registered."
+    },
+    "lictors": {
+      "category": "lore",
+      "title": "The Lictors",
+      "book": "burning-city",
+      "text": "The Senate's enforcers take their name from the officers who walk before a Roman magistrate with rods bound in red cord. They are patient, they are old, and they are polite until the moment they are not."
+    },
+    "collis": {
+      "category": "lore",
+      "title": "Collis",
+      "book": "burning-city",
+      "text": "The name of the firm, from the Latin for a hill. It deals in oil, wine, ships and debts, and it is run in the daylight by a man the dead cannot match.\n\nA firm leaves a paper trail, and a paper trail leads somewhere. Hide the link and the firm is safer and trusted less. Keep it and the name carries the hill with it."
+    },
+    "the_lesser_cup": {
+      "category": "lore",
+      "title": "The lesser cup",
+      "book": "burning-city",
+      "text": "Animal blood will keep a vampire alive, and keep him close to what he was. It leaves him slower, hungrier and weaker in a fight, and some of the old ones say a little sad.\\n\\nThe made have gone over to it for as long as there have been the made. A great many of them have gone back. It is not a vow that anybody keeps once and is done with."
+    },
+    "the_vigiles": {
+      "category": "lore",
+      "title": "The vigiles",
+      "book": "burning-city",
+      "text": "Rome's night watch, freedmen and slaves in cohorts, who carry buckets and hooks and put out the fires that a city of timber and thatch is forever starting. They are underpaid, underloved and the only people in Rome who walk its streets in the small hours with their eyes open."
+    },
+    "the_igniferi": {
+      "category": "lore",
+      "title": "The Igniferi",
+      "book": "burning-city",
+      "text": "A sect devoted to Vesta, the goddess of the hearth, who hold that fire cleans what the dark has made. They wear grey, they carry a flame in a clay jar that is said never to go out, and they are very patient. They believe the strix, the night bird that drinks blood, is a thing to be burned out of Rome."
+    },
+    "the_great_fire": {
+      "category": "places",
+      "title": "The Great Fire",
+      "book": "burning-city",
+      "text": "It began in the shops about the Circus Maximus on the night of the full moon of Julius, and the wind from the river carried it up the Aventine and into the old quarters. It burned for the better part of a week, and by the end of it more than half the city lay in ashes.\\n\\nThe Senate of Blood had known the date for nine days. What the Senate said afterward was a good deal more careful than what it knew."
+    },
+    "the_old_quarry": {
+      "category": "places",
+      "title": "The old quarry",
+      "book": "burning-city",
+      "text": "A hollow on the far side of the Esquiline where the first walls of Rome were cut, abandoned for four hundred years. The covens meet there when a matter is too large for any one house. At its far end a bronze door is set into the cliff, green with age, and the General's line keeps its back to it."
+    },
+    "general_house": {
+      "category": "bloodlines",
+      "title": "The General line",
+      "book": "burning-city",
+      "text": "The line of brute strength and war, and the one the Senate uses when it needs a thing done. Its coven in Rome is led by Theron, who marched with Alexander. It answers to Tarrax, the Commander of the Lictors."
+    },
+    "scribe_house": {
+      "category": "bloodlines",
+      "title": "The Scribe line",
+      "book": "burning-city",
+      "text": "The line of memory and secrets. Its keepers hold the records of the Senate, of the lines and of the dead, and they have long since noticed what the records leave out. Its coven in Rome meets in the Egyptian quarter under Meritamun."
     }
   }
 }

@@ -1,0 +1,224 @@
+// Book One, Chapter 7 (session 10). The dark of the moon: the Merchant house asks whether he stays or goes alone.
+// Two nights of talk, then the vault, then a word at dawn that leads into chapter 8.
+@chapter b1c07
+@title The Dark of the Moon
+@book burning-city
+@version 1
+
+# start
+## Two nights
+$ do phase("night", 2)
+$ b1.coven = "stayed"
+$ b1.oath = "full"
+$ _heard = 0
+Two nights is not long. It is, you find, long enough to learn how many ways a question can be asked.
+Prisca has not said another word about it. Nobody has. The house goes about its business with a scrupulous, careful courtesy, and every door that opens for you opens very slowly, so that you can see what is behind it. You are being shown the house. You are being shown, you think, what you would be leaving.
+?if b1.prisca_terms == "defied"
+  You remember the night you told her no. She kept you anyway, and she has never once reminded you of it, which is a very effective way of reminding you.
+?elif b1.prisca_terms == "bargained"
+  You remember the night you bargained, and how she gave you three parts of what you asked, and how she watched you take them. She has been waiting ever since to see what a man does who knows his price.
+?else
+  You remember the terms you took on the first night, and how easily you took them. You were very new. You wonder, now, whether the ease was the point.
+?end
+-> hub
+
+# hub
+## The house
+:hub
+?if actions_left() == 2
+  The first night is warm, and the warehouse is full of the sound of rats and the smell of oil.
+?else
+  The second night is darker. There is already a thinness in the sky, as if the moon had been rubbed away with a thumb.
+?end
+* Go up to the roof, where Tiro keeps his watch [once] ?if actions_left() > 0
+  ~> tiro_roof
+  $ do act()
+* Go down to Hanno, and the open ledger [once] ?if actions_left() > 0
+  ~> hanno_ledger
+  $ do act()
+* Walk the city alone, as a man who might have no house [once] ?if actions_left() > 0
+  ~> the_walk
+  $ do act()
+* Go to Prisca, and ask her plainly why she wants you [once] ?if actions_left() > 0
+  ~> prisca_why
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :hub
+?end
+-> moon
+
+# tiro_roof
+Tiro is on the roof with his feet over the edge and a pot of something that he is pretending to drink. He does not turn round. He says, "You have the walk of a man doing sums," and then, a little too quickly, "I am not going to say anything. I have promised myself. I have been promising since noon."
+You sit down beside him. Rome goes on below, a hundred thousand hearts, and the long dark loop of the river.
+"I will tell you what it is like," says Tiro, "since nobody else will. It is a good house. It is the best I have seen. It is boring, and it is safe, and when it goes wrong it goes wrong very slowly and with a great many letters." He stops. "I was a slave's son. I did not think I should ever belong to anything that would keep me. It is very difficult not to love that."
+?if b1.sun_known == "tiro"
+  Then, much more quietly: "And you would go on keeping my secret. I know. That is not a thing I was going to say either."
+?end
+"And if I go?" you say.
+"Then I shall come and see you in whatever hole you have found," says Tiro, "and I shall tell you that it is damp." He looks at you at last, sidelong. "I shall be very worried. That is all. It is not a speech. Do what you want."
+$ bond.tiro += 3
+$ _heard += 1
+<~
+
+# hanno_ledger
+The page Hanno has left open is not a page of money. It is a page of names. They are written in a very small hand, in four colors of ink, and each is followed by a short row of marks that you take at first for numbers.
+"The house," says Hanno, after a long time. He does not look up. "Fourteen of us, in this city. A Senate census, which we pay. A Lictor who sleeps lightly, whom we feed. Walls. A name that opens doors." The pen touches a column. "You would be the fifteenth. A voice at the table. A share of what you make, which the house holds in trust and does not touch. The house's debts and the house's friends. And the house's enemies."
+?if b1.collis_terms == "partner"
+  "You are the house's partner already, in the daylight. It would be only the dark you were adding. Is that so very much?"
+?elif b1.collis_terms == "loan"
+  "The debt would be forgiven, of course. It is not usual to keep an account with a brother."
+?else
+  "You took nothing from us. It makes the offer simpler. You owe us nothing, and so we have nothing to forgive, and you may only choose."
+?end
+"And the other road?" you say.
+Hanno turns a leaf. "Registered with the census, as unattached. The Senate looks in on the unattached. They do not look in on the house." He closes the ledger. "I shall say it once. A man alone in Rome is not free. He is merely unwatched by friends."
+$ _heard += 1
+<~
+
+# the_walk
+You go out by the grate, in the dark, and you walk without a plan, as you did in your first nights, only now you are known. A beggar on the Via Sacra nods to you. A girl in a doorway counts the money you have put in her hand and calls you the master of Collis. You are a man with a name.
+You find, after an hour, that you are being followed. It is not a skilled following. A mortal, a thin clerk in a brown cloak, with the look of a man who has been paid to remember where you go and not why.
+:the_follower
+* Lose him, and watch him hunt
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  It is a pleasure, of a small cold kind. You go through a fuller's yard, and across a roof, and down into a lane that smells of urine and vinegar, and you stand in the shadow of the arch and watch him go by, three arm lengths from you, with his lips moving. He is counting turnings. You let him go. You wonder who he reports to, and you do not wonder very hard.
+* Let him follow you home
+  $ secrecy -= 1
+  $ standing += 1
+  You walk home slowly, by the lit streets, and the clerk follows you as far as the Emporium and stops in the dark across the road to see which door you go in. You take care to go in by the front. You hold it open a moment, politely, as for a guest. When you look again he has gone.
+* Turn on him
+  $ cunning_brutal += 2
+  $ defiance += 1
+  You have him against a wall before he has finished being frightened. You do not hurt him. You hold him there, with your face a hand from his, and you ask who sends him, and he says, very fast, that it is the Lictor, the courteous one, who pays on the first of the month and asks only whether the master of Collis ever comes out by day.
+  "Tell him I do," you say. "Tell him I am very hard to miss."
+  He runs. You wonder, a minute too late, whether that was wise.
+The point is made without a word. Alone, you are a thing for the Senate to look at. In the house you would be a thing for the Senate to look at through a wall.
+$ _heard += 1
+<~
+
+# prisca_why
+She is in the counting room, as she always is, with the abacus and the small lamp. She does not stop moving the beads.
+"You may ask," says Prisca. "I should have thought it would be obvious. You are young, and strong, and clever, and a stranger in my city who has made a very good deal in his first season. I like to have good men at my table."
+"That is not all of it."
+"No." The beads stop. "It is not."
+?if b1.sun_known == "prisca"
+  She says it at last without dressing it. "You walk in the day. I have thought of little else since I knew. I am very old, and I have been afraid of the morning for all of those years, and you walk out in it with your hat on and buy olive oil. I do not know what you are. I know that if the house had one of you, it would be a different house."
+?elif b1.sun_known == "tiro"
+  "I know that you are not asleep at dawn," she says, "and that Tiro did not tell me, and that he has been agonizing in the stair for a month as though I were a cat and he were a very poor mouse. I did not ask. I would rather like not to have to." She looks at you evenly. "A house that has you in it is a house that can do business in the sun."
+?else
+  "I know you do not sleep quite as the rest do," she says. "I have chosen not to ask why. I should like very much for it to be a thing you tell me one day because you are among friends."
+?end
+She folds her hands.
+"I will tell you what I will not do. I will not hold you. If you go, you go, and I shall note it in the book and send you your cloak. I shall be very sorry. I shall not be your enemy." She smiles, a little tiredly. "I find it is almost always a mistake to make an enemy of a man who may have made a good deal of money."
+$ bond.prisca += 2
+$ _heard += 1
+<~
+
+# moon
+## The dark of the moon
+:the_moon
+?if must_feed()
+  The house sees it in your face before you have spoken. A cup is put into your hand at the foot of the stair, without a word.
+  ?if b1.vow == "animal"
+    It is a bowl of ox blood, warmed, from the pens by the river. Tiro, behind a pillar, looks fixedly at the ceiling.
+    $ do feed("animal")
+  ?else
+    It is a good cup, from a willing arm, and the girl who gave it is already being paid and thanked at the door.
+    $ do feed("donor")
+  ?end
+?end
+There is no moon. There is a stillness in the city on the night of the dark of the moon, a held breath, and the house keeps it as a custom older than anyone in it. The lamps in the vaults are put out. The only light is a single small flame in a dish of oil on the great table, and it makes the vaulted brick roof seem to breathe.
+They are all there. Hanno, with the ledger. Tiro, who has put on a clean tunic and is trying not to look at you. A dozen others of the house whose names you only half know, the carters and the factors and the ones who have never come up to the roof, drawn up in a half ring in the dark with their faces very still. And Prisca, at the head of the table, with her hands flat on it.
+There is one more. He has come in late, by the stair, and he stands apart from the ring in a plain grey cloak with a red cord at his belt, and a tablet that he has not yet opened. Galerius inclines his head to you, gravely, as to a man he is delighted to see.
+?if b1.galerius == "hostile"
+  "I am here as the Senate's witness," he says, "and as an old acquaintance. I find I should not like to miss this."
+?elif b1.galerius == "wary"
+  "A witness only," he says, in the mild voice. "It is the custom."
+?else
+  "It is the custom," he says, "that the census be present when a house takes a man in. Or when it does not. Please do not mind me."
+?end
+"I will say it plainly," says Prisca, "and once. The house offers you a place. The oath is old, and it is not heavy, and it is this. You put your hand in the oil, and you say your name, and you say that the house's friends are yours. You are in the book. You are of the house, and the house stands behind you, in the dark and in the sun."
+She lifts her hands.
+"Or you may go. With my blessing, and my cloak, and my very sincere good will. The door is that way."
+:the_oath
+* Put your hand in the oil, and swear it all
+  $ b1.coven = "stayed"
+  $ b1.oath = "full"
+  $ do choose_path("coven")
+  $ do recruit("prisca", "merchant", 3, "head of the house", 60)
+  $ do recruit("hanno", "merchant", 3, "keeper of the ledgers", 55)
+  $ do recruit("tiro", "merchant", 1, "runner", 70)
+  $ bond.prisca += 4
+  $ standing += 2
+  $ defiance -= 1
+  The oil is warm, which you had not expected, and it smells of the lamps of your first house. You say your name. You say it to a vault of listening faces, and it is a very odd feeling, like laying a stone you have carried for years. You say that the house's friends are yours. You hear, as you say it, the whole room breathe out.
+  Tiro makes a sound that he turns, rather badly, into a cough.
+  "Welcome," says Prisca. She says it, for the first time in your hearing, in the voice of someone who is not at all sure of her ground. "Welcome home."
+* Swear it, and keep one thing back in your own mind
+  $ b1.coven = "stayed"
+  $ b1.oath = "reserved"
+  $ do choose_path("coven")
+  $ do recruit("prisca", "merchant", 3, "head of the house", 45)
+  $ do recruit("hanno", "merchant", 3, "keeper of the ledgers", 50)
+  $ do recruit("tiro", "merchant", 1, "runner", 70)
+  $ bond.prisca += 1
+  $ defiance += 2
+  $ cunning_brutal -= 1
+  You put your hand in the oil. You say your name, and you say that the house's friends are yours, and you say it quite steadily. You have kept back one thing. It is a small thing, and you do not name it even to yourself. You hold it, in the dark, like a coin in the cheek.
+  Prisca takes your wrist, wet as it is, in her dry cool fingers. She looks at you for a moment. "That," she says, so low that only you can hear it, "is the only honest kind. Welcome."
+* Thank her, and go alone
+  $ b1.coven = "alone"
+  $ b1.oath = "none"
+  $ do choose_path("lone")
+  $ defiance += 3
+  $ standing -= 1
+  $ cunning_brutal += 1
+  You say it as courteously as you can. You say that the house has been kind beyond anything, and that there is a thing in you that cannot be a house's, and that you do not know yet what it is. It sounds, aloud, like very little. It is very quiet in the vault.
+  Nobody moves. Then Prisca says, gently, "Yes," and takes a cloak from the back of a chair, and puts it round your shoulders with her own hands. It is heavy and fine and smells of cedar. "That is the house's gift," she says. "It is not a leash. Go well."
+  Tiro does not look at you. He looks at the dish of oil. After a moment you see that he is smiling, in a very strained way, at nothing.
+?if b1.coven == "alone"
+  ?if can_acquire("hidden_chamber")
+    $ do acquire("hidden_chamber")
+    You have already bought a sleeping place, in the cellar of a dyer's shop in the Subura, with a door in the floor and a rope for the way out. It is not much. It is yours.
+  ?else
+    You have no money for a hidden place, and no need to say so. Hanno, at the foot of the stair, as you go, says merely that the counting house cellar has a door that locks from the inside and that nobody comes into it. You thank him. You do not ask why he looked at his ledger as he said it.
+  ?end
+?end
+Galerius has not moved. He has opened his tablet, and written a line, and closed it.
+?if b1.coven == "alone"
+  "Unattached," he says, with real regret. "I shall enter it in the census. I should like you to know that I shall look in. It is only courtesy." He smiles very slightly. "You will find that I am a great deal more patient than the house."
+  $ secrecy -= 1
+?elif b1.oath == "reserved"
+  "Of the house," he says. "A beautiful oath." And his eyes rest, for a very long moment, on your closed hand.
+?else
+  "Of the house," says Galerius, "and entered." He bows to Prisca. "I shall remember to say the Senate was glad."
+?end
+-> dawn
+
+# dawn
+## Before the light
+$ do rest()
+The vault empties. The lamps are lit again, one by one, and the house goes back to being a house, with its clerks and its rats and its smell of oil. You stand a while in the quiet.
+?if b1.coven == "alone"
+  Tiro comes down the stair with a bundle under his arm. "A tunic," he says. "In case yours is damp. And a pot of that awful fish sauce. And I have put a note in the bundle with the name of a girl who does very good laundry." He puts it in your arms. "I shall come and tell you the hole is damp."
+  $ bond.tiro += 2
+?else
+  Tiro is waiting at the foot of the stair, white and delighted and quite unable to say anything. He claps you on the shoulder, three times. It is the most formal thing he has ever done.
+  $ bond.tiro += 2
+?end
+It is Hanno who comes last. He has a tablet in his hand, and the look of a man who has been putting off a sentence.
+"I would have waited," he says, "until tomorrow. It will not wait." He sets the tablet down. "Three nights since the new moon, a warehouse by the Circus has burned. A lender of the house had his strongbox in it. The watch put it out. A fortnight before, a cloth dealer's yard under the Aventine, and before that, a stable in the Velabrum. All three owed the house money." He pauses. "A watchman says he saw a man in a grey cloak, with a lamp in a jar. A very steady flame. A flame that did not flicker when he ran."
+Prisca has come to the door. She has her hands folded, and her face is very still.
+"I should like to know what that is," she says. "I should like to know quietly. Not by night, I think. Whoever they are, they are a great deal better at the dark than at the day."
+?if b1.coven == "alone"
+  She looks at you. "I cannot ask it of you. You are no longer mine to ask. I am asking it nonetheless."
+  $ bond.prisca += 1
+?else
+  She looks at you. "You are of the house. I am asking it."
+?end
+You think, quite unbidden, of a hill, and a line of torches, and a village whose roofs went up from the north.
+=> next

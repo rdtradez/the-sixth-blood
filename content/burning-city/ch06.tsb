@@ -1,0 +1,476 @@
+// Book One, Chapter 6 (session 9). The price of the cup: a breaking point, and the choice of what he will drink.
+// A day of Collis business, a dusk that depends on how he has fed so far, and a vow, or none.
+@chapter b1c06
+@title The Price of the Cup
+@book burning-city
+@version 1
+
+# start
+## Weeks
+$ do phase("day", 2)
+$ _day = 0
+$ _vow_scene = 0
+$ b1.breaking = "clean"
+$ b1.vow = "human"
+$ b1.vibia = "none"
+$ unflag b1.relapse
+Six weeks go by like a ledger being turned.
+You have learned the shape of the work. You go out by the grate before the sleepers stir, and you come back at dusk with the sun in your clothes, and in between you are a man named for a hill, in a good tunic, with a brass token in his belt and a door in the Argiletum that opens when he knocks. The house has stopped asking how. It has begun to ask how much.
+?if b1.collis_terms == "partner"
+  Hanno reads you the figures each evening in his dry slow voice, and at the end of each reading he sets one finger on the column that belongs to the house, and says nothing. It is a very pointed silence. It is also, you think, a fond one.
+?elif b1.collis_terms == "loan"
+  Prisca has not mentioned the debt. She does not need to. It sits on the table of the counting room, each night, in a very small hand, and every night it is a very little smaller.
+?else
+  Nobody helps you, and nobody hinders you. You have never been so alone in a crowd, and you have never been so free. You find that you do not know which of the two you value more.
+?end
+You have found, too, that the day is not a rest. It is a second life, with its own hunger, and the sun takes a little of you at every noon, a thin steady tithe that you pay in the evening.
+{cap(voice("hunger"))}.
+-> day
+
+# day
+## The firm
+:day
+?if actions_left() == 2
+  The morning is clear, and the counting house is already full of voices.
+?else
+  The afternoon has gone a little gold. The shutters on the Argiletum are going up one by one.
+?end
+* Open the books with the clerks [once] ?if actions_left() > 0
+  ~> books
+  $ do act()
+* Walk the firm's ground, and watch the work [once] ?if actions_left() > 0
+  ~> the_work
+  $ do act()
+* Stay in the shop, and listen to the street [once] ?if actions_left() > 0
+  ~> the_street
+  $ do act()
+* Close the shutters, and let the day end
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :day
+?end
+-> dusk
+
+# books
+The counting house of Collis Trading is a long narrow room with a window on the Argiletum, a bench of clerks, and a smell of ink, lamp oil and warm wax. It was a stationer's. It has become, in six weeks, the busiest room in the street.
+?if b1.factor == "bound"
+  Lucrio is at the head of the bench. He has a new ring, a modest one, and a way of looking up when you come in that is half a salute and half an apology. He works like a man who has found his talent at last and cannot believe nobody had put a price on it. He has not stolen so much as a lentil. You know, because you check, and he knows you check, and neither of you has ever spoken of it.
+?elif b1.factor == "exposed"
+  The factor who replaced Lucrio is thin and anxious and honest. He is also, you are fairly sure, afraid of you. You are not certain what has been said to him.
+?else
+  The clerks are young and quick and cheap. They do not skim. They are not yet tempted. You note it, and you note also that it is a state of affairs that does not last.
+?end
+?if b1.collis_start == "wine"
+  The first jars of oil have come down from Collesanto by cart, sealed with a pine resin that you remember the smell of with a violence that surprises you. Naevia has sent word that her forty customers have each asked for a second jar. There is a letter in the bundle. It has been written by a hand that has not written many.
+  ?if b1.farewell == "promise"
+    > Aelia says you promised to come home. She says it twice. Domitia does not know I am writing. The goat has had a kid. Come when you can. A.
+  ?elif b1.farewell == "truth"
+    > Aelia says she is not afraid of what you are. She says it very large, as though to convince herself. The goat has had a kid. Write to me. A.
+  ?else
+    > Aelia says you did not say goodbye, and she is not cross, and she is. The goat has had a kid. A.
+  ?end
+  You read it three times. You put it inside your tunic, against nothing, since there is no pulse there to feel it.
+?elif b1.collis_start == "shipping"
+  Vettius's barge has made two runs to Puteoli and one to Ostia, and the crew has been paid in full. He has sent a jar of fish sauce, a very bad drawing of a ship, and a message that says he is in your debt for life. You do not tell him how long that might be.
+?elif b1.collis_start == "lending"
+  The debts are coming in. Not all of them. The honest ones come in with a bow, and the dishonest ones come in with a lawyer, and you have learned to tell which is which by the way a man holds his hat.
+?elif b1.collis_start == "insulae"
+  The first beams have gone up on the boot shaped plot. It will be a tall house, and a plain one, and it will have a well, because you insisted. The foreman says that a well is a waste of the space. You say that a house without water is a house that waits to burn. He gives you a look. He builds the well.
+?elif b1.collis_start == "gladiators"
+  The school in Capua sends a report every ten days. It is courteous, and accurate, and it does not mention any names. The money is steady. You have stopped reading the lists of the injured.
+?elif b1.collis_start == "slaves"
+  The yard behind the shed produces a monthly figure, and the figure is very large. You have never been to the yard. You have not asked what is in it. You have noticed that you do not, now, look at the clerk who brings the figure.
+?end
+$ standing += 1
+$ do send_home(4)
+<~
+
+# the_work
+?if b1.collis_start == "insulae"
+  The boot shaped plot is a clamor of masons and mules. You stand at the edge of it with your hat low, in the full gold of the afternoon, and watch the walls come up. It is the first thing you have built. It is brick, and it will outlast you, if you are careful, and it will shelter two hundred strangers who will never learn your name. The thought pleases you more than it should.
+?elif b1.collis_start == "shipping"
+  You go down to the Tiber and stand on the quay at the Emporium, in the sun, with the smell of tar and wet rope around you. Vettius's barge is unloading, and the crew have the loose limbed ease of men who are paid. The man with the scarred eyebrow lifts a hand. You lift one back.
+?elif b1.collis_start == "gladiators" or b1.collis_start == "slaves"
+  You tell yourself you will look at the place. You tell yourself it is only due diligence. You go as far as the gate, which is a plain gate in a plain wall on the Via Appia, and you stand there for a long time in the sun, and you do not go in.
+  $ humanity -= 1
+  Somewhere beyond the wall someone is singing, in a language you have not heard since the arena. It is a very ordinary tune. It is the worst thing you have heard in months.
+?else
+  You walk to Naevia's shop, and sit on the bench with the old men, who tell you at length what is wrong with the Games. Naevia brings you a cup of something that you do not drink. A girl of about eight is sweeping the doorway, and she looks at you with the unembarrassed curiosity of a child who has not yet learned to be polite. You find, to your surprise, that you do not look away.
+  $ bond.naevia += 2
+  $ humanity += 1
+?end
+<~
+
+# the_street
+The window of the counting house looks on the Argiletum, which is a street of booksellers and cobblers and small loud people who are all in a hurry. You sit at the clerk's desk with a tablet you are not reading, and you listen.
+It is a very particular sort of pleasure. Every one of them has a pulse, and every pulse is going about its business: a girl running with a basket, a man arguing with a cobbler over a heel, an old woman with a stick. You can tell them apart, now, by their hearts, the way a sailor tells weather. A nervous heart. A glad one. A heart that has just heard good news and has not yet told its owner.
+There is one, at the corner, that is not like the rest. It is very slow, and very faint, and it belongs to a young man of perhaps nineteen, leaning on the wall of the baker's with his hand pressed to his side. His face is the color of tallow.
+:the_boy
+* Go out and ask if he needs a physician
+  $ humanity += 2
+  ?if [physician_aide]
+    You know what you are looking at before you have crossed the street: the swelling under the ribs, the heat, the way he breathes in short shallow pulls. It is a rupture in the gut, and a bad one, and you know the one sign that can be done something about, and you do it. It takes an hour. You pay a carter to take him to the physician on the Vicus Tuscus, with a note, and a coin, and an instruction that is not to be disobeyed.
+    He lives. You find that out a week later, and it is the most pleasing piece of news that the firm ever brings you.
+  ?else
+    You get him a stool, and a cup of water, and a boy to run for the physician. It is not much. It is what a decent man would do, and you do it, and he looks up at you with the vague gratitude of someone who has no idea what has just been done for him. You find that you are shaking a little, which is not a thing that happens, and you put it down to the sun.
+  ?end
+* Watch from the window
+  You watch. After some time a woman comes out of the bakery and takes him by the arm and leads him off. He goes, leaning on her. You think, with the clear cold logic of a hunter: that was a heart that was slowing, and I did not do a thing. It is an odd thought. You do not know why you thought it.
+<~
+
+# dusk
+## Dusk
+The sun goes down behind the Janiculum. The clerks put away their tablets, and one by one the lamps are lit along the Argiletum, and the light that was golden on the wall turns brown, and then blue, and then the color of a bruise.
+You are alone in the counting house. It is the hour when the day's hunger and the night's come together and it is hard to tell which is the worse.
+:the_hunger
+?if fed("human_kill") > 0
+  -> kin
+?elif fed("human") > 0
+  -> drained
+?else
+  -> clean
+?end
+
+# kin
+## A woman at the door
+$ b1.breaking = "kin"
+$ do meet("vibia")
+There is a knock at the door, which is not a customer's knock, and you are surprised that it is not locked. A woman comes in. She is perhaps thirty, thin, in a dress that has been mended, with a baby on her hip and a child of four hanging on her skirt. She looks about the room as though looking for someone to be afraid of, and finds only you.
+"They said," she says. "At the shop. They said the master of Collis finds things. They said that if a person is missing, in the river or the dens, you have the men to look."
+?if b1.rome_feed == "hunted"
+  "My husband," says Vibia. "He plays dice. He is not good at it. He went out on the night of the festival to a house on the Via Sacra, and he said he would be back before the third hour. That is five weeks. The men at the house say he left with a fat purse. He did not have a fat purse." She swallows. "He was a fool. He was not a bad man."
+  You remember the house. You remember the light on the stair, and the man in the shadow of the arch who leaned against the wall to count his coin. You remember the sound he made.
+  $ _dead = 1
+?elif b1.collector == "killed"
+  "My husband," says Vibia. "Fuscus. He was a collector's man. He was not a good man. You will have heard that of him; everyone has. He went out to the crossroads on the road to the hills, to a shrine, and he did not come back." She lifts her chin. "I came to tell you that I know what he was. I know what they say. I know that someone may have had a reason. I do not care. I have two children and no husband and no body."
+  You remember the shrine. You remember the strongbox, and the lamp, and the breath of a man in his sleep.
+  $ _dead = 2
+?else
+  "My husband," says Vibia. "A river man, a porter, at the Emporium. He did a night's work on the wharf three weeks ago and did not come home. The foreman says he took his pay and went. His pay is in his box. I have looked." She says it flatly, like a person who has said it to a good many doors. "He has a mother in Ostia. I do not know how to write to her."
+  You remember a dark wharf, and a bale of hides, and a man who turned his head too late.
+  $ _dead = 3
+?end
+She does not know. You see it plainly: she has no idea. She has come to the one man in Rome who knows exactly where her husband is, and she is asking him for help.
+The baby begins to cry. She puts her hand on its head without looking.
+"I do not want him back," says Vibia. "I know he is dead. I want to know where. I want to put a coin in his hand and say his name. Is that very much?"
+:the_woman
+* Tell her the truth
+  $ secrecy -= 4
+  $ humanity += 3
+  $ b1.vibia = "told"
+  You say it. You say it quite slowly, and you do not leave out the details that matter. You tell her that it was you. You tell her where. You say that you are sorry, and you hear how small it is, and you say it again.
+  She does not scream. She stares. After a very long time she says, in a perfectly level voice, "You are a liar. You are a very kind liar." She picks up the child. "I will not forget your face," she says. "Whatever you are." And she goes out into the Argiletum with her head up, and she does not look back, and you hear the door close, and you sit for a long while with your hands flat on the table, and you do not move.
+  ?if _dead == 1
+    You tell her the house on the Via Sacra, and the arch, and the river. You tell her that he did not feel it. It is a lie. It is the one lie you do not regret.
+  ?end
+* Say that you will have the river searched, and pay for a burial
+  $ b1.vibia = "helped"
+  $ do earn(-10)
+  $ standing += 1
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  You say that you will find him. You take her hand, which is cold and rough, and you press a purse into it, and she tries to give it back, and you do not let her. You send Lucrio to the river with a boat. The men dredge for two days and find a body that is, as it happens, not him, and a stranger is buried decently at the firm's cost, and Vibia, who has been told it is her husband, comes to the funeral and weeps. You are standing at the back, with your hat low. It is the kindest lie, and the most terrible, and you do not know which you are guilty of.
+* Give her coin, and send her away
+  $ b1.vibia = "paid"
+  $ do earn(-5)
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  You count it into her hand. She looks at it, and then at you, and she understands that she has been dismissed. "Thank you," she says, in a different voice, and she takes the children and goes. It is, by any ordinary measure, generous. You stand in the doorway and watch her go down the street, and you see that she does not walk as though she has been helped.
+-> the_dark_hour
+
+# drained
+## A man on the quay
+$ b1.breaking = "drained"
+$ do meet("vibia")
+You take the long way home, along the quay, because the sun has done something to your head and you want the air.
+It is the hour when the porters are going off, and a knot of them stand about by the Emporium steps with their pay in their fists. There is a man at the edge of the knot, apart from the others. He is perhaps thirty, and he is thin, and he has a bandage on his neck that has been changed too often. He is arguing with the foreman, in a voice that is very quiet and very tired.
+"I can't do the nights," he says. "I can't. I've tried. I get to the second bale and I see spots. It's not the drink, I don't drink. It's just..."
+"It's just you've gone soft," says the foreman, not unkindly. "Go home, Marcus. Take a month. Come back when you're right."
+The man says that he has not got a month. The foreman looks away.
+You know him. You do not know his name. You know the color of his coat, and the line of his neck, and the sound he made when you took his arm in the dark, behind the boats, on a night that you have been telling yourself was nothing. You left him whole. You had been quite sure of that.
+He is not whole. He is gray. He walks like a man carrying something very heavy and invisible, and when the lamps are lit along the quay he flinches from the light, and then from the shadows between the lamps, and then, with an odd involuntary movement, from the dark itself, as though he can feel it looking.
+A woman comes down the steps, thin and tired, and takes his arm. She is not young. She says his name, and he says hers: Vibia. She says that it is time to go home.
+$ b1.vibia = "met"
+:the_porter
+* Hire him, and say nothing of why
+  $ b1.vibia = "helped"
+  $ humanity += 3
+  $ standing += 1
+  $ do earn(-4)
+  You go after them. You say that you are looking for a man to watch a warehouse by day, which is true, since Collis has three, and that the pay is good and the work is quiet and it is done in the sun. The woman looks at you with a warm flat suspicion. The man looks at you with something quite different. He knows you. He does not know why. He puts out his hand, and it is damp, and he says that he is much obliged.
+  It is a small thing. It is also, you realize, an apology to a man who will never know what it is for.
+* Walk past, and do not look back
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  You walk past. It takes a great effort to make your legs go on at an ordinary pace. When you have turned the corner you lean against a wall and breathe, which you do not need to do, and which does not help.
+* Follow them home
+  $ secrecy -= 1
+  $ b1.vibia = "met"
+  $ humanity += 1
+  You follow at a distance, in the dark. They live in a room above a cobbler's, at the end of an alley, and you stand across the way and watch the lamp. You watch for an hour. A child is put to bed. A man sits up late with a woman, and she says something, and he says something, and neither of them laughs. At the end of the hour the lamp goes out. You go home. You do not sleep.
+-> the_dark_hour
+
+# clean
+## The alley
+$ b1.breaking = "clean"
+You leave the counting house after the lamps are lit, with Tiro, who has come to fetch you, and who has talked for ten minutes without drawing breath about a girl at the baths. It is a fine night. You are, in the way of things, rather tired: the sun has been long and the cattle blood is thin, and you have had a month of being slightly hungry without admitting it.
+It happens in the alley behind the Basilica. There are four of them, and they are not Lictors. They are thieves, or the kind of thing that Rome produces when it needs a thief, and they have a plan, and the plan is for the two lads in the good tunics.
+You are not strong, tonight. You find it out too late. Your hand does not do what you ask it, and the first man's knife goes into your side with a sound like a wet cloth, and you have time to think, with a very clear indignation, that you have forgotten how it feels. It is the first time you have been hurt in weeks.
+$ injury += 25
+You throw one of them into the wall. You break another one's arm. But the third has Tiro by the hair, and the fourth, a big man with a scar, has a blade at Tiro's ribs, and Tiro says, in a very small voice, quite unlike his own, "Please, I haven't got anything."
+$ _thief = 1
+:the_alley
+* Drop the knife, and give them the purse
+  $ cunning_brutal -= 2
+  $ standing -= 1
+  $ do earn(-8)
+  They take it, and the third man hits Tiro once, hard, across the temple, for the sheer ease of it, and they are gone. Tiro slides down the wall with blood in his hair, grinning vaguely, saying that it is nothing, that he is fine, that he has had worse from a laundress. He is not fine. He is bleeding quite steadily, and it is the one sort of bleeding that you cannot sit beside without some part of you leaning in.
+* Fight on, with what is left
+  $ cunning_brutal += 3
+  $ do fight("human", 2)
+  -> scuffle
+-> the_alley_after
+
+# scuffle
+:the_scuffle
+* Take the knife man low
+  $ do strike("brutal")
+* Feint, and drag Tiro clear
+  $ do strike("cunning")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+?if not fight_over()
+  -> :the_scuffle
+?end
+?if fight_result() == "won"
+  You put them down. It is quick, and ugly, and you do not kill. The last one runs, with his arm held to his chest, and leaves a knife in the cobbles.
+?else
+  $ injury += 10
+  They get away with Tiro's purse and half of yours. The big man spits at you from the mouth of the alley.
+?end
+-> the_alley_after
+
+# the_alley_after
+## What is left
+Tiro is sitting against the wall with his legs stuck out in front of him like a child. There is blood on his collar. He looks up at you with a sort of dazed pride.
+"I didn't scream," he says. "I want that known. I did not scream."
+One of the thieves has been left in the dark, at the end of the alley. He is the one with the broken arm. He has crawled a few feet and given up, and he lies with his face against the stone, groaning, and there is a good deal of blood. He is not dying. But he is bleeding, and you are hungry, and you are hurt, and you have a month of thin blood in you, and the man is lying in the lamplight as if he had been laid out for you.
+He smells, you realize, like the first meal you ever had.
+{cap(voice("injury"))}.
+:the_thief
+* Drink from him
+  $ _took = 1
+  $ do feed("human")
+  $ do heal()
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  It is nothing like the cattle. It is hot and thick and rich, and it goes through you like a drink of fire in a cold house, and you feel the knife wound in your side close up like a mouth. It is, quite simply, wonderful. You drink until he stops moaning. You stop before he stops breathing, with a great effort, and you sit back on your heels with your hands trembling and look at Tiro. Tiro is looking at you, and his face is very still.
+  "Oh," says Tiro. "I see."
+  $ bond.tiro -= 2
+* Bind his arm, and send for the watch
+  $ humanity += 3
+  $ b1.breaking = "clean"
+  $ bond.tiro += 2
+  You tear a strip from your own tunic and bind the broken arm. The man opens his eyes and looks at you with the plain bewilderment of someone who has been robbed by his own victim. You say that the watch will be here directly. You say it in a perfectly kind voice. It costs you nearly everything you have.
+  The hunger goes on, a bright thin wire, all the way home.
+* Walk away
+  $ cunning_brutal += 1
+  You help Tiro to his feet and the two of you leave, quickly, with the thief's groans behind you in the dark. You tell yourself it is the safest thing. You do not tell yourself the other reason.
+?if _took == 1
+  $ b1.breaking = "clean"
+?end
+-> the_dark_hour
+
+# the_dark_hour
+## After
+You do not remember getting to the roof. You find yourself on it, in the last of the dark, sitting on the parapet where Prisca once set down the lamp, with the river below you black and slow.
+You are not alone, which you know without turning. Tiro has come up the stair with a lamp. He has a bandage on his head. He sits on the parapet, a little way off, with his knees drawn up.
+"Most of us never decide," says Tiro, after a long silence. It is not what you were expecting. "I thought about that. When Prisca made me. I thought: now I will be a good one, or a bad one, and I will have to choose. And then I did not choose, and I did not choose, and a hundred and some years. I mean eleven. It feels like a hundred. I just kept doing what I did the first night."
+$ do discover("the_lesser_cup")
+He rubs his bandage.
+"You can, though. That's what I wanted to say. The old ones do it. They go over to cattle. It is a thin life, and it makes you slow, and it makes you hungry, and some of them say it makes you a little sad. And some of them say it is the only way to stay a person." He glances at you. "I would not know. I have only tried it once, and it was dreadful, and I was sick on a priest."
+You almost laugh.
+Down on the river a barge goes by, with a lamp at its stern, and a man humming. You think of a stranger's voice in the dark. You think of a question.
+?if prologue.answer == "yes"
+  You said yes. You said it at once, in the dark, with your death still on you. You did not know that it was a question about this.
+?elif prologue.answer == "asked"
+  You asked what it would cost. He said everything, in time. It is a very odd thing to be proved right, on a roof, at dawn, by a bandaged man.
+?else
+  You refused him. You woke up anyway. It is the kind of thing that only a very patient creature could find funny, and you think that he may have found it funny, wherever he is.
+?end
+:the_vow
+* Swear it off: no more of the living, only beasts
+  $ b1.vow = "animal"
+  $ humanity += 4
+  $ cunning_brutal -= 3
+  $ defiance += 1
+  $ bond.tiro += 3
+  "I will not drink from the living again," you say. You say it to the river, and to the dead, and to a man in a bandage who looks both ashamed and proud. It does not sound like much. It sounds, you think, like the kind of thing a person says when they are not sure they can keep it.
+  Tiro says nothing. He puts a hand on your shoulder, briefly, which is not a thing he does, and takes it away.
+* Swear off the killing: only the willing, and only the cup
+  $ b1.vow = "donor"
+  $ humanity += 2
+  $ bond.prisca += 1
+  "I will not take what is not given," you say. "And I will not take it to the end." It is a smaller vow than the first. It is also a harder one, in its way, for it needs a hundred small refusals, and a house that keeps a cup. You say it to Tiro, and Tiro nods, and says that it is a very Merchant sort of vow, with a column for the loss.
+* Swear nothing. Take what you need, and own it
+  $ b1.vow = "human"
+  $ humanity -= 2
+  $ cunning_brutal += 3
+  $ defiance += 2
+  $ do heal()
+  You say that you will not make a promise you may not keep. You say that you are what you are, and you will be honest about it. Tiro looks at you for a long time. Then he nods, slowly, as though you have said something he had half expected. "That's honest," he says. "I'll say that. It is a thing I might not say of the other two."
+  He does not smile. You do not ask him to.
+---
+$ do phase("night", 2)
+-> lean
+
+# lean
+## The lean nights
+?if b1.vow == "animal"
+  The first night is the worst. The hunger is a different animal, longer and thinner, and it sits behind your eyes like a lamp turned too low.
+?elif b1.vow == "donor"
+  The first night is simple enough. The cup is where it always was. It is the second that is hard.
+?else
+  The first night is easy. It is the following ones you are not sure of.
+?end
+:lean
+* Go to the cattle pens by the river [once] ?if actions_left() > 0
+  ~> pens
+  $ do act()
+* Take Tiro hunting, and see what happens [once] ?if actions_left() > 0
+  ~> tiro_hunt
+  $ do act()
+* Report to Prisca [once] ?if actions_left() > 0
+  ~> prisca_word
+  $ do act()
+* Let the night pass
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :lean
+?end
+-> test
+
+# pens
+?if b1.vow == "animal"
+  The Forum Boarium is a rough, wet, bellowing place at that hour. You buy the blood of three heifers from a butcher who does not ask why, and who is paid in good coin, which is the best reason there is for not asking. You drink it standing in the yard. It is thin and flat and cold, and it fills you the way water fills a stomach. You are not quite satisfied. You are, however, still a person.
+  $ do feed("animal")
+  $ do earn(-3)
+  $ humanity += 1
+?elif b1.vow == "donor"
+  The cup room is lit, and the laundress sits on the bench with her sleeve already rolled. She is cheerful. She tells you about her daughter. You take what you need, and you do not take more, and when you are done she pats your hand as though you were a nervous horse.
+  $ do feed("donor")
+  $ bond.prisca += 1
+?else
+  You go to a part of the city that you know a little better than you would like, and you find what you need. It is quick, and it is quiet, and you walk home afterward through the dark with the whole of your body singing. It is a very good feeling. You are quite aware of what you are going to have to answer for.
+  $ do feed("human")
+  $ secrecy -= 1
+?end
+<~
+
+# tiro_hunt
+?if b1.vow == "animal"
+  Tiro has never hunted an animal in his life. He insists on it being a surprise. It is a very small surprise, and it is a hen, and it is in the yard of a tavern on the Via Lata. He goes in with a profound, theatrical caution, and a dozen outraged birds come up in a cloud, and he comes out with a feather in his hair and a look of extreme dignity. "I got one," he says, and he has. You both agree that it is the worst thing either of you has ever eaten. You do not stop laughing till dawn.
+  $ bond.tiro += 3
+  $ do feed("animal")
+  $ humanity += 1
+?elif b1.vow == "donor"
+  Tiro comes to the cup room with you, and sits on the bench, and watches with a candid, uneasy interest. "I never go," he says. "I do not like the way they look at you." The boy with the bandaged arm, who has been there all month, says, quite gently, "They look at you because you are the one who comes." Tiro does not say anything for a while.
+  $ bond.tiro += 2
+  $ do feed("donor")
+?else
+  Tiro does not come. He has said that he will not, with a rueful, flat politeness that you cannot argue with. He wants to know where you are going, and when you will be back, and he wants you to know that he has asked. It is a very small thing. It feels like a door being closed a little way.
+  $ bond.tiro -= 2
+  $ do feed("human")
+?end
+<~
+
+# prisca_word
+Prisca receives you in the counting room with her tablets in front of her. She has already been told. She has, you suspect, been told by three different people, and she is not surprised by any of them.
+?if b1.vow == "animal"
+  "A house that drinks from cattle," says Prisca, in her dry, unhurried voice, "is a house of farmers. I have no objection. I have been a farmer. It is a good life, and nobody comes to your door at midnight." She turns a bead. "I will tell you what it costs. You will be slower. You will be hungrier. You will be, I am quite sure, a worse fighter, for as long as you keep it, and the Senate counts fighters. If it is a thing you can bear, I will say that I admire it. I will not say that I understand it."
+  $ standing -= 1
+  $ bond.prisca += 2
+?elif b1.vow == "donor"
+  "The cup," says Prisca, "is the house's oldest bargain, and I am glad to see it used. It is the best arrangement the made have found. It will cost you a little, in the matter of looking over your shoulder at the people who are fond of you." She smiles, very slightly. "I do not say it is easy. I say that it is sustainable. That is a better word."
+  $ bond.prisca += 2
+  $ standing += 1
+?else
+  "I will not tell you what to eat," says Prisca. "I have never told anybody. I will tell you what it costs. Every man you take is a man the city may notice. Every one that you do not hide is a sum on the Senate's book, and the Senate keeps a long memory, and a good clerk." She looks at you. "You will be strong, I grant you. Strength is a debt that is paid in noise."
+  $ secrecy -= 1
+  $ bond.prisca -= 1
+?end
+She says no more of it. She asks about the firm instead, and Hanno, who has been sitting very still in the corner, supplies the figures, and for a few minutes it is as though it were an ordinary night in an ordinary counting house. It is, you think, the kindest thing she could do.
+<~
+
+# test
+## The test
+$ hunger += 25
+$ unflag b1.relapse
+?if b1.vow == "human"
+  -> the_house_watches
+?end
+It is the fourth night. You have been careful, and the hunger has been careful too, a thin coiled thing that waits at the edge of the lamp. You are walking home across the Forum Boarium at a very late hour with your hands in your sleeves.
+The city is not empty. A man comes out of an alley ahead of you, quite suddenly, with one arm held across his chest. He is a drover, or a porter, or something of the kind, in a heavy tunic, and a thing has gone wrong with him: a fall, perhaps, or a fight. There is a long deep cut down the inside of his arm, and it is bleeding, quite fast, onto the stones.
+He sees you. He holds out the good hand. "Please," he says. "Please. I can't make it stop."
+There is nobody else on the street. There is nobody for a hundred paces. The smell of him comes to you like a hand on the face.
+:the_drover
+* Bind the arm, and take him to a physician
+  $ humanity += 3
+  $ standing += 1
+  $ unflag b1.relapse
+  You do it. You do it with your own cloak, and a belt, and a will you did not know you had. You half carry him to a physician in the Vicus Tuscus, who wakes in a temper and softens when he sees the arm, and you stand in the lamplit doorway while the man is stitched, and every drop of blood on the floor is a small bright wound in your own head. You do not take it. You do not take a single drop. When you go out, the dawn is paling, and you are shaking all over, and you have never in your life been so proud, or so tired, or so hungry.
+* Drink
+  $ b1.relapse = true
+  $ do feed("human")
+  $ humanity -= 3
+  $ secrecy -= 1
+  It is quick. It is almost easy. It is the easiest thing you have done in a month, and it is the worst, because it is the one that tells you how little your will is worth. You stop before the end, and you bind the arm, and you leave him sitting in the lamplight in a daze. You walk home. You tell yourself that it will not happen again. You are, you notice, no longer very good at telling yourself things.
+* Cross the street, and walk on
+  $ humanity -= 1
+  $ cunning_brutal += 1
+  You cross the street. His voice follows you, small and desperate, until the corner. You do not look back. You know that someone will find him. You know that someone probably will. It is not a thing you will tell anyone, and it is not a thing you will forget.
+-> ending
+
+# the_house_watches
+## A word from Hanno
+You are crossing the cellar in the small hours when Hanno steps out of the dark by the stair. He has not made a sound. He has a tablet in one hand and a small lamp in the other.
+"A river man," he says, "on the quay at the Emporium. And a drover at the cattle market. And a woman who sells cabbages in the Subura, who has a bite on her neck, and who is not at all sure how it came there." He sets the lamp on a jar. "I do not ask. I note. I would ask you to consider that the Lictors can count, too."
+He says it quite gently. It is the longest speech he has made to you since the ledgers.
+$ secrecy -= 1
+$ standing -= 1
+:the_note
+* Promise to be more careful
+  $ secrecy += 2
+  $ cunning_brutal -= 1
+  He inclines his head, with great dignity, and goes on up the stair.
+* Tell him that it is your business
+  $ defiance += 1
+  $ bond.prisca -= 1
+  "It is," says Hanno. "I merely note that it is also the house's." He does not look angry. He looks like a man marking a figure in a column he intends to return to.
+-> ending
+
+# ending
+## Before the dark of the moon
+$ do rest()
+?if b1.vow == "animal" and not b1.relapse
+  Weeks pass, and the hunger does not go away. It becomes something you carry, like a stone in a boot, a thing that you learn to walk on. You are slower. You are thinner, in some way that does not show. You are, quite oddly, calmer, and Tiro says that you smile more than you did.
+?elif b1.vow == "animal" and b1.relapse
+  Weeks pass, and you do not speak of the drover. Tiro does not ask. You keep your vow, in the sense that you make it again every dawn, and some mornings you believe it a little less, and some mornings you believe it more. It is a very odd kind of faith, and you have begun to think that it may be the only kind there is.
+?elif b1.vow == "donor" and not b1.relapse
+  The cup becomes a habit, and then a custom, and then, rather to your surprise, a friendship. The laundress's daughter has been brought to the counting house, to learn her letters, and she is very quick.
+?elif b1.vow == "donor"
+  You go on with the cup. You do not go to the Forum Boarium after dark, and Tiro goes with you, as if by accident, every night.
+?else
+  You go on as before. The Forum Boarium sees you less than it did. The rest of Rome sees you rather more, and you walk through it with a lighter step and a heavier name, and you do not often look at what is behind you.
+?end
+It is the day before the dark of the moon when Prisca sends for you. She does not ask you to the roof this time. She asks you to the counting room, with the shutters closed, the lamp turned low, and Hanno at the table with the ledger open to a page you have not seen.
+"The house has been very patient with you," says Prisca. "I have been very patient. I should like, I think, to ask you now what you mean to be."
+She says it without any weight at all.
+"Think about it. The dark of the moon is in two nights. I shall want your answer then."
+=> next

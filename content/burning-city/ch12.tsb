@@ -1,0 +1,480 @@
+// Book One, Chapter 12 (session 12). The first night of the hunt: three places out of four, and what the reckoning is going to be.
+// One night phase of three actions. Ends with rest().
+@chapter b1c12
+@title What the Lamp Remembers
+@book burning-city
+@version 1
+
+# start
+## The first night of the hunt
+$ do phase("night", 3)
+$ b1.farm = "unmet"
+$ b1.clerk = "unmet"
+$ b1.boy = "unmet"
+$ b1.scribe = "none"
+$ b1.reckoning = "mixed"
+$ unflag b1.ledger
+$ unflag b1.hill_known
+$ _spared = 0
+$ _slain = 0
+$ _hunters = 0
+$ do discover("the_igniferi")
+The hunt begins at dusk, as it was said that it would, with no horn and no word. There is nothing in the streets to show it. The city, under its pall of ash, goes about the business of burying itself, and the covens of Rome go out through it in ones and twos, quite silently, with their hoods up, like people who have remembered an appointment.
+?if b1.cell == "house"
+  The house hunts as it hunts everything, from the ledger outward. Hanno has the first of it laid out on the table in the counting room, a list of forty names in his small black hand, with a line drawn under four of them. Prisca does not come down. She has sent, instead, a very short note, which says that you will know what to do, and that it would be better if you were quiet about it.
+?elif b1.cell == "theron"
+  The General's line makes its camp, as it makes everything, in a tidy square, in the dark behind the Capena gate, in a ruined temple with the roof gone, and there is a smell of oiled leather and of men who have been a long time in the field. The captain with the scarred jaw gives you a cloak, a short blade, and nothing at all by way of welcome. She says that she is called a name that you will not be able to say, and that you may call her Captain. She says that a cell of hers has found a farm.
+?elif b1.cell == "meritamun"
+  The Egyptian quarter does not hunt. It reads. You come to a door in a street of tanners, at the second hour, as you were told, and are taken down a stair by a silent girl with a lamp that is not lit, into a long low room full of the smell of cedar and old papyrus, where Meritamun is sitting cross legged on a chest in the middle of a hundred scrolls. She says that it is a very good thing that you have come, and that it is a pity about the lamp. She says that she has had the great misfortune to find out where a number of things are.
+?else
+  You go alone. It is both the simplest and the most dangerous thing that you can do, and you find, at the cellar grate, in the last of the light, that you are perfectly calm. There is a lamp left burning on the sill, as Prisca said. It is very small. You put it out with your fingers, and the smell of the wick goes with you for a long way.
+?end
+?if b1.war_terms == "total"
+  It is Theron's war, and everyone knows it, and the streets feel it the way a stable feels a fire in the next yard. The word is that nothing is to be left standing. It is said quietly, in many places at once, and it has already begun to be believed.
+?elif b1.war_terms == "mercy"
+  It is a war with a rule in it. You know the rule, because you made it, and you are aware, as the dusk comes down, of how very much it is going to depend on the people who have to keep it.
+?else
+  It is a war with a limit, and every cell in the city has been told where the limit is, and every cell has its own idea of how far it extends.
+?end
+There are four places that you could go, and a night in which to go to three. It is a good deal less than the whole of a city.
+-> hub
+
+# hub
+## The night
+:hub
+?if actions_left() == 3
+  It is early. The darkness has a clean look, and a number of the shutters in the Velabrum have not yet been put up, and you can still hear the market in the next street counting its dead.
+?elif actions_left() == 2
+  It is the middle of the night. The ash has stopped falling, and the stars, in the gaps between the smoke, have the dull wet look of coins that have been in a river.
+?else
+  It is very late. The light in the east is not yet anything but a thought, and you have a good deal still to carry, and the night is getting short.
+?end
+* Go to the lamp seller's shop in the Velabrum [once] ?if actions_left() > 0
+  ~> shop
+  $ do act()
+* Go out the Appian Way, where a cell has found a farm [once] ?if actions_left() > 0
+  ~> farm
+  $ do act()
+* Go to the Aventine station, where Rufus is holding a man [once] ?if actions_left() > 0
+  ~> station
+  $ do act()
+* Go to the Egyptian quarter, to the Scribe line's rooms [once] ?if actions_left() > 0
+  ~> scribe
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :hub
+
+# shop
+## The lamp seller's shop
+The shop is at the bottom of a narrow lane in the Velabrum, between a cheesemonger and a shuttered temple of a god that nobody has worshipped since the Republic. It is shut. The sign over the door is a clay lamp, painted white, with a small neat flame. The yard behind it, where they found the six men, has been swept, by someone who knew no one would come to look at what was left, and there is a dark stain in the corner that is not the colour of rust.
+?if b1.flavus == "struck"
+  You have been here before, by day. You remember a gentle lame man with kind eyes, who sold you a lamp, and said that it would be a very bright summer, and whom you struck across the face. He promised to remember yours. It is not a thing that you think of with much pride, and it is not a thing that you are able to forget.
+?elif b1.flavus == "spoke"
+  You have been here before, by day. You remember a gentle lame man with kind eyes, who talked to you for a quarter of an hour about the nature of fire, as a man talks about a friend, and who sold you a lamp. The lamp is still in a cupboard in the house. You have not been able to bring yourself to light it.
+?else
+  You have not been in this lane before. It is a clean, narrow, respectable place, and it smells of lamp oil and mice. It is hard to believe that anything has ever been decided here.
+?end
+There is somebody in the loft. You hear him before you reach the stair. It is a small, quick, terrified heartbeat, as of a creature in a wall, and the sound of a reed on papyrus, scratching very fast.
+He is a thin stooped man of fifty in a clerk's tunic, with ink on his fingers and a cloth tied round his head, and he has made himself a nest of scrolls in the angle of the roof. He has been there for three days. He has a bottle of water and the end of a loaf. He looks up as you come through the trap, and he does not scream. He has the extraordinary face of a man who has been expecting you for so long that it is a relief.
+"Ah," says the clerk. "It is you. I had thought that it would be somebody older."
+He holds up his hands. They are shaking. They are full of ink.
+"My name is Decimus," he says. "I kept the book. I want you to understand that I did not light anything. I do not hold with it. I have said so to the master, many times, in the proper manner, and he has said that I was a very useful man, and that it was a blessing that the work had need of one who did not." He swallows. "It is the book that you want. It has every jar, and every wick, and every coin, and every name. I have been copying it. I thought, if I did not stop, that I should not have to think about the thing at the end."
+?if b1.cell == "theron" or b1.war_terms == "total"
+  There is a sound on the stair. It is a very light, very careful one, such as is made by two people who have been taught to climb in the dark, and you know the step. You have heard it all evening, in the camp. It is the General's young hunters, the two that came into the temple at dusk, bright eyed, fresh turned, who did not wait to be told.
+  They come up through the trap together. They are twenty or so, in their way, and eager, and one of them has a knife. They look at the clerk, and then at you, and they smile, a little shyly, as dogs smile at a person who has been set to keep an eye on them.
+  "The captain said that you would be here," says the elder of them. "It is quite all right. We will see to it."
+  $ _hunters = 1
+?end
+He has the book on his knees, in a satchel, with both hands on the strap.
+:the_clerk
+?if _hunters > 0
+  * Stand between them and the clerk, and tell them that you are taking him
+    -> shop_fight
+  * Step aside, and let them do what they came to do
+    $ b1.clerk = "dead"
+    $ _slain += 1
+    $ humanity -= 3
+    $ standing += 1
+    $ flag b1.ledger
+    You step aside. It is a plain thing, and a very small one, a foot and a half of floor. Decimus looks at you. He does not say anything. He has the face of a man who has just been told the answer to a sum that he already knew, and it is a very quiet moment, and it is over very quickly. The elder hunter hands you the book with a little bow. It is a good book. It is exactly as neat as he said.
+    -> clerk_end
+?else
+  * Take him, and the book, and bring them to Meritamun
+    ~> clerk_kept
+    -> clerk_end
+  * Take the book, and put him on the road with silver in his hand
+    ~> clerk_freed
+    -> clerk_end
+  * Take the book, and do what the war says
+    $ b1.clerk = "dead"
+    $ _slain += 1
+    $ humanity -= 4
+    $ do kill("human")
+    $ cunning_brutal += 2
+    $ flag b1.ledger
+    He does not try to run. That is the thing that you keep. He sits with his hands in his lap and the ink on his fingers and he looks, with great attention, at the wall, and he says, as you come across the loft, in a small hoarse voice, that it was a very good book. It is over in a moment. The loft is very quiet afterward, with the lamplight on the scattered scrolls. You pick up the satchel. It is warm.
+    -> clerk_end
+?end
+-> clerk_end
+
+# shop_fight
+$ do fight("fledgling", 1)
+:exchange
+* Put him behind you and meet them, hard
+  $ do strike("brutal")
+* Make it a matter of the captain's own word
+  $ do strike("talk")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    The elder of them goes back against the wall with a grunt, and the knife rattles on the boards.
+  ?else
+    The younger one is quicker than he looks, and you feel the edge across your forearm.
+  ?end
+  -> :exchange
+?end
+?if fight_result() == "won" or fight_result() == "talked"
+  $ standing -= 1
+  $ bond.theron -= 1
+  They go. They do not say a word. They go down the stair together with the exact, offended dignity of the very young, and you know that they will tell the captain, and that the captain will not be pleased. It is something that you will have to pay for. You have bought a man's life, and you have, quite precisely, no idea yet what it was worth.
+  -> clerk_his
+?else
+  $ injury += 6
+  They get the clerk. It is done quickly, in the corner of the loft, with a small wet sound, and a scatter of papyrus that goes up like a flock of birds. The book falls out of the satchel. You are on one knee against the wall, with your arm open, and one of them, quite kindly, picks the book up and offers it to you. He is sorry about the mess. It is the cruellest thing that has been said to you tonight.
+  $ b1.clerk = "dead"
+  $ _slain += 1
+  $ flag b1.ledger
+  -> clerk_end
+?end
+
+# clerk_his
+## The clerk
+:clerk_his
+?if b1.war_terms == "total"
+  There is nowhere in a war like this to take a man who has done nothing. You say so to yourself, as you lead him down the stair, and it is not a comforting thing to hear.
+?end
+* Take him, and the book, and bring them to Meritamun
+  ~> clerk_kept
+  -> clerk_end
+* Take the book, and put him on the road with silver in his hand
+  ~> clerk_freed
+  -> clerk_end
+
+# clerk_kept
+$ b1.clerk = "kept"
+$ flag b1.ledger
+$ flag b1.hill_known
+$ _spared += 1
+$ humanity += 2
+$ velati_regard += 2
+"You are quite sure?" says Decimus. He says it with great politeness. He is looking at you as if you were a very odd, very rare animal. "I should like to point out that I am of the sect." He does not seem able to leave it alone. "I should like to say that I do not at all know what to do with myself, now, and that I am very much obliged." He takes his satchel. He puts his hand on the stair rail. He stops. "I should tell you," he says, "since I am in your hands. The master has gone north. Flavus. He left three nights ago, by the Via Salaria, with the best of them. He did not say where. But I wrote the book, and I know what he bought for the journey, and there is a good deal of pitch in it, and a thing that he said once, in the shop, when he thought that I was not listening, which was that the first fire on the hill had not finished. He said that the one that they were looking for was not burned, and that the hill is a house that has been left with its door open." He closes his mouth. He looks at the floor. "I am very sorry," he says. "I think that it is your hill."
+It sits in you like a stone dropped into a very deep well. You hear it go all the way down.
+<~
+
+# clerk_freed
+$ b1.clerk = "freed"
+$ flag b1.ledger
+$ flag b1.hill_known
+$ _spared += 1
+$ humanity += 1
+$ defiance += 1
+You give him twenty denarii and the name of a woman in Ostia who will ask no questions. He holds the coins as though they were hot. "It is not that I do not want to be taken," he says, "I do very much. It is only that I think that I should be of no use." He draws a breath, and he says what he has to say very fast, so as to be rid of it. "The master has gone north. Flavus. Three nights ago, by the Via Salaria, with the best of them. I wrote what he bought. There is a good deal of pitch. He said once that the first fire on the hill had not finished, and that the one they were looking for was not burned." He is shaking. "I should not like to be on the Via Salaria. I think that it is yours, the hill." He goes down the stair, a thin stooped figure, with the cloth round his head, and he does not look back, and you hear his steps in the lane for a long time, going very quickly, and then not.
+<~
+
+# clerk_end
+## The book
+:clerk_end
+The book is a roll of papyrus, as thick as your arm, closely written, in a small clear, tireless hand, and it is exactly what he said that it was. It has a column for the jars and a column for the wicks and a column for the pitch, and the pitch is the thing. It is a very long column. It goes back to the spring of the year before, and every line of it has a date, and a quantity, and the name of a seller, and a sum, and in the right hand margin, a small neat letter that is not the name of anyone you know.
+There are four letters, repeated. You read them over and over, in the dark. They are an *M*, and a *T*, and a *P*, and an *L*, and the sums against them are very large.
+$ do discover("the_igniferi")
+?if b1.clerk != "dead"
+  You turn to the last pages of the book. They are in a different ink. They are the clerk's own, and they are not about jars. They are a list of names, a long one, of the people who gave money to the sect, in small amounts, from a great many houses, who had thought that they were paying for a hearth.
+?end
+You roll it up. It weighs, you think, rather less than a man.
+<~
+
+# farm
+## The farm on the Appian Way
+It is beyond the third milestone, in a fold of the land, a long low steading of the old kind, whitewashed, with a row of umbrella pines along the road, and an orchard, and a pen with a number of sleeping sheep. There is a light in the barn. It is a small, steady, yellow one, the colour of a lamp that does not go out, and you can see it for a good half mile, from the road, across the black fields. It is the loveliest thing that you have seen in a week.
+There are eight of the General's line in the pine shadow, with their hoods up, and the captain with the scarred jaw is at the head of them. She has been there for an hour, and she has the look of a woman who has been told to wait and has not liked it.
+?if b1.cell == "theron"
+  She nods, shortly, as you come up. "Good," she says. "I did not think you would come." It is not a compliment. It is a note in a book.
+?else
+  She looks at you, and at your hood, and she says, in a voice entirely without warmth, "I was not told to expect a visitor." She does not tell you to go. It is the custom, of the hunt.
+?end
+"There are thirty in the barn," she says. "I have counted heartbeats. Eleven of them are men, and have jars. The rest are women, and the old, and some who are small." She does not say it with any feeling at all. She says it as a woman says the number of a legion's wagons. "They have been there four days. They are waiting for the master. They are praying, I think. I can hear it. It is a kind of low talking."
+She looks at you.
+?if b1.war_terms == "total"
+  "The council's word was all," she says. "You were there. I do not like it more than you do. I will say it plain: I have a son's age in that barn, and I have seen what is done with a thing that is left alone. I do not intend to leave it." She does not draw her blade. "There is a door at the back. It is yours if you want it."
+?elif b1.war_terms == "mercy"
+  "The council's word was that those who yield may live," she says. "I have kept to it. I have kept to it for the whole of the night, on the road, and I should like it noted that it is the first time in four hundred years that I have been asked to." She turns her hard face to the light in the barn. "They will not yield. I have heard them. It is that kind of praying. But you made the rule, and it is for you to ask them."
+?else
+  "The council's word was the ones who carried the jars," she says. "I do not know which of them are the ones. I have been trying to decide for an hour. I will say that a man who has put his hand to a jar is a man who has put his hand to a jar, and that I do not at all know what to do about the rest." She looks at you. "You were on the hill. It is for you to say where the line is."
+?end
+The pines move overhead, and a long way off a dog barks, and it is a perfectly ordinary night in the country, with the smell of sheep and wood smoke and a barn full of hay.
+:the_barn
+* Go in with the hunters, and finish it
+  $ b1.farm = "joined"
+  $ _slain += 6
+  $ humanity -= 5
+  $ cunning_brutal += 4
+  $ standing += 1
+  $ bond.theron += 1
+  $ do feed("human_kill")
+  You do not tell this part. You tell it to nobody, then or afterward, not to Prisca, not to the dark, and you find that it will not stay in the order that it happened in. There is the door. There is the light, the white still flame in the jars, that you can feel across a room on your skin like a hand on a hot stove. There is a woman at the door with a ladle. There is the low talking, that does not stop, even when it ought to, and then does. There is the smell of hay. You are very fast, and very strong, and entirely without any feeling, as if you were a thing that had been wound up and set down, and when it is done you are standing in the orchard under the pines with blood to the elbow, and your hunger, that has been with you for a week, is gone. It is the worst thing that has ever happened to you, and you are not sorry for it, and you do not know which of those is the more terrible.
+  The captain does not look at you for a long time. When she does, there is something in her face that is not approval, and is not contempt. It is respect, of a kind that one gives to a thing that has been very thoroughly used.
+* Sort them at the door: the jars first, and then the rest
+  ?if b1.war_terms == "total"
+    "It is not what the council said," says the captain. She says it flatly, without heat. She looks at the barn, and then at the sky, and at the long dark rim of the world, and something seems to go out of her shoulders. "I will give you ten minutes," she says. "It is what I have." She does not say that it is a mercy. She says, "Make it count."
+  ?end
+  ~> farm_sort
+  -> farm_end
+* Go round to the back door, open it, and tell them to run
+  $ b1.farm = "stopped"
+  $ standing -= 3
+  $ defiance += 3
+  $ secrecy -= 1
+  ~> farm_open
+  -> farm_end
+* Stand aside, and do nothing
+  $ b1.farm = "stood_aside"
+  $ humanity -= 2
+  $ defiance -= 1
+  ?if b1.war_terms == "total"
+    $ _slain += 6
+    You stand under the pines and you do not move. You are not required to. It is, in the oldest sense of the phrase, nothing to do with you. You hear it. You have very good ears. You hear the door, and the low talking, and the light going out, one by one, in a sequence like somebody putting out a row of lamps, and you stand quite still with your hands at your sides and your eyes on the road. The captain comes back, afterward, with a cut across the back of her hand. She does not say anything. She sits down on the verge, and takes a long breath, and she looks, for the first time, very old.
+  ?elif b1.war_terms == "mercy"
+    $ _slain += 2
+    $ _spared += 24
+    They keep to the rule, because the captain keeps to it. She goes in with two of hers, to the door, and asks, as she was told to, in a flat parade ground Latin that the old and the small do not follow, whether anyone wishes to yield. A good many do. They come out of the barn in a long grey file, with their hands open, with their eyes on the ground, and the old men lean on the women, and the small ones are carried. Seven of the men with jars do not. You do not watch what is done about it. You stand under the pines with your hands at your sides, and you are not at all certain that it was not a way of watching.
+  ?else
+    $ _slain += 4
+    $ _spared += 18
+    They do it as they decide it, and it is not well decided. You hear the captain go in. You hear her sort, by the door, in her flat voice, by what is in their hands, and it is as rough as a road. The men go to one side and the rest to another, and a number of the men who had no jar in their hands are among the men, because they are grown, and it is a thing that is easier to say than to unsay. You stand under the pines and let it be done, and it is a thing that you think about, for a good while, on the way back to the city, with the dust on your shoes.
+  ?end
+-> farm_end
+
+# farm_sort
+$ b1.farm = "sorted"
+$ humanity += 1
+You go to the barn door. The light is behind it, in the cracks of the boards, thin and white and steady, and you can feel it on your skin like the heat of a face that is very near to your own. You knock. It is an absurd thing, a vampire in the dark at a barn door, knocking, and it is the only thing that you can think of. The low talking stops.
+"I am the one who was on the hill," you say. You say it through the boards. "I want to speak to whoever is the oldest."
+It is a long time before anyone answers. Then the bar goes up, and the door opens a hand's breadth, and a very old woman is standing there in a grey shawl with a little clay lamp in her two hands, and her eyes are quite clear, and she looks up at you with a fierce, tired, unfrightened scorn.
+"Strix," she says. She says it quite calmly. "Is it you that they sent?"
+You say that you are not a thing that she has been told about. You say that you have come to ask her to send out every man who is holding a jar, one at a time, and to let the others go. You say that she may stay, with the rest, and that nobody will touch them if the jars are put down in the yard, in a row, in the grass. You say it as steadily as you can. It is not the thing that you would say, if you were a better liar. It is the thing that is true.
+She looks at you for a very long time.
+?if b1.war_terms == "mercy"
+  "It is more than the last ones said," says the old woman. She does not seem to think that it is very much. "I will ask them." She turns. She says something low, in the barn, in the old Latin that the Igniferi use, and there is a kind of rustle, and a murmur, and a young voice, quite a boy's, cries out sharply and is hushed. The first man comes out. He puts down the jar in the grass without a word, and holds his hands open, and looks at the stars. Then the second. It is slow. It takes the better part of an hour. Of the eleven, six put down their jars. Five do not, and go back into the barn, and the old woman closes the door, very gently, on their faces. It is not what you hoped. It is a great deal more than you feared, and the captain, behind you, has not drawn her sword.
+  $ _slain += 1
+  $ _spared += 28
+  $ flag b1.hill_known
+  $ velati_regard += 1
+?else
+  "I will ask them," says the old woman, at last. It is not a promise. She turns, and she says something low, in the barn, in the old Latin that the Igniferi use, and there is a rustle, and a murmur, and then a long and dreadful silence. When she turns back, she is not looking at you. "They say that they will not put them down," she says. "They say that it is the only thing that they have. I have told them that I will not be the one to tell them otherwise." She draws herself up. "You may take the old. You may take the little ones. I will not leave."
+  You get them out. It is the thing that you can do, and you do it, in a long file, in the dark, past the captain, with the old woman's hand on the doorpost and her face turned to the light. You take twenty. You take every one who is not holding a jar and will go. And then the captain walks forward, with two of hers, to the barn door, and you do not follow her. You walk the old and the small down the road to the pines, and the youngest of them, a girl, asks you in a clear voice, with great interest, whether you are going to eat them.
+  $ _slain += 3
+  $ _spared += 20
+  $ flag b1.hill_known
+  $ humanity += 1
+?end
+Behind you, in the barn, the white light goes out. It does not go out all at once.
+<~
+
+# farm_open
+## The back door
+The back of the barn is a great black wall of sagging boards, with a low door in it, barred on the outside, and an orchard beyond. You go along it in the dark, under the apple trees, with the fallen fruit going soft under your feet. You lift the bar. It is very quiet. The people inside have gone still, and you can hear thirty hearts, some of them very small, beating like moths in a lamp.
+You open the door. You say, into the dark and the white light, in a low voice, that they are to go out the back, through the orchard, and run. You say that they are to run until they are out of sight of the road. You say that they are to keep going.
+Nobody moves. And then a woman, a young one, with a child on her hip, goes out past you into the apple trees without a word. She does not look at you. She is gone. Another goes. And another, and the old, and the small, in a long grey rustle, like a flock of birds going up, and the men with the jars go last, very slowly, with their lamps in front of them and their eyes on you, and the white light moves through the orchard like a drowned moon.
+Behind you, at the front of the barn, you hear the captain say, in a voice of ice, "What is the meaning of this?"
+She comes round the end of the barn with four of hers, quite fast, and she stops. She has seen the door. She looks at the orchard, where the last of the grey cloaks is going over the wall, and she looks at you.
+"I will give you the choice," says the captain, quite softly, "of the only two things that I can think of."
+?if b1.war_terms == "total" or b1.cell == "theron"
+  -> farm_fight
+?else
+  The captain looks at the orchard for a long moment. She sighs, and puts her blade away. "It is not what the council said," she says, "and it is not what I would have done. But it is a good deal nearer what the council said than the other." She has a small bitter look. "I will say that I could not find the door. It is a most unfortunate thing, in the dark." She turns and goes back round the barn, and her people go after her, and you stand under the apple trees by yourself, with the white lamplight going away across the fields.
+  $ _spared += 20
+  $ _slain += 1
+?end
+$ flag b1.hill_known
+<~
+
+# farm_fight
+$ do fight("fledgling", 2)
+:exchange
+* Hold the door against them
+  $ do strike("brutal")
+* Tell her that she has a son's age in that barn, and let it be
+  $ do strike("talk")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Go over the orchard wall after them
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    The nearest of them goes back into the fallen apples with a curse.
+  ?else
+    A blade opens your shoulder, from collar to blade, with a cold bright line.
+  ?end
+  -> :exchange
+?end
+?if fight_result() == "talked"
+  $ bond.theron += 1
+  $ _spared += 14
+  The captain stops. It is a very long moment. She looks at the orchard, and the dark trees, and the small figures that are very nearly out of sight, and her face does something that you would not have believed of it. "I did not see a door," she says. "It is a very bad night to see anything." She turns her back. It is the nearest thing to a blessing that you will ever have from a soldier, and you do not stop to thank her.
+?elif fight_result() == "won"
+  $ standing -= 1
+  $ _spared += 14
+  You hold the door. They are very good, and you are better than you had any right to be, and when it is over the captain is on one knee in the apples, holding her side, and looking up at you with a perfectly sober respect. "It was not the council's word," she says. "I will have to say so." She does not move to stop you. By the time that she has got up, there is nobody left in the orchard to run after.
+?elif fight_result() == "fled"
+  $ _spared += 8
+  $ _slain += 4
+  You go over the orchard wall, after the lamps, and you do not look back. You run beside them, through the dark fields, for a quarter of a mile, until you can hear the captain's people stop, and then you stop, too. It is not a victory. You have saved some, and you have lost others, in the dark, and you will never know how many of each, and it is a mean kind of success.
+?else
+  $ injury += 8
+  $ _spared += 6
+  $ _slain += 6
+  They put you down in the fallen apples with a knee on your chest, and they do not hurt you more than they must, and you lie and look at the stars through the branches while the rest of it happens. The captain stands over you. She says, "I am sorry," in a very flat voice, and it is not clear which of you she is saying it to. By the time that they let you get up it is a good deal later, and there is a long, quiet place in the barn where the light has been.
+?end
+$ flag b1.hill_known
+<~
+
+# farm_end
+:farm_end
+The sheep have not woken. They are lying in their pen with their heads on their knees, as sheep do, in the white of the moon, and it has been a perfectly ordinary night for them.
+?if b1.farm == "joined"
+  The hunters go back along the road to the city. You go with them, a little apart.
+?elif b1.farm == "stopped"
+  You walk back to the city alone. You do not hurry. There is nobody behind you, and you cannot tell whether that is mercy or only distance.
+?else
+  You walk back to the city with the captain, and neither of you says a word. At the third milestone she stops, and takes something out of her cloak, and puts it into your hand. It is a small clay lamp. It is not lit. "It was by the door," she says. "I do not know why I took it." She turns, and goes on. You do not know why she gave it to you, either.
+?end
+$ do discover("the_igniferi")
+?if not b1.hill_known
+  There was a thing that an old woman said, in the barn, in a low voice, with her eyes on the light, and that you did not at the time attend to. She said it was a pity that the master had gone north so soon. She said that it was a pity that he would not see the end. You turn it over, now, on the road, and it is not a thing that you like.
+  $ flag b1.hill_known
+?end
+<~
+
+# station
+## The Aventine station
+The station of the Aventine has been given a roof, of a sort. It is of planks and ox hides and a good many ropes, and under it the vigiles are sleeping in rows, as they sleep after a fire, with their boots on. A small lamp is burning at the end. Rufus is sitting by it, on the bucket, with the papyrus on his knee, and he is not writing. He has the look of a man who is waiting for a person to come in and take a thing off his hands.
+?if b1.rufus_told == "told"
+  "I knew that you would come," he says. "It is a strange thing to be able to say it." He puts the papyrus away. "Come. I will show you."
+?elif b1.rufus_told == "lied"
+  "I thought that you might," he says. His voice is perfectly level. It is the voice of a man who has been lied to kindly and does not hold it against you. "Come. I will show you."
+?else
+  "I thought that you might," says Rufus, quite simply. "It is a thing that I did not know that I knew. Come. I will show you."
+?end
+He takes you to the cells, under the old wall, down a stair that smells of damp and of lamp oil. There is a row of them, and four are empty. The Prefect's men, he says, took the others, at the second hour, in a covered cart. He says it without any expression. In the last cell, on a bench, with his back to the wall and his hands between his knees, there is a young man.
+He is perhaps twenty two. He has a pleasant open face, an unremarkable one, such as one sees in a baker's shop, and a bruise on his cheekbone, and his grey cloak has been taken from him, and he is in his tunic, and he has been crying and has stopped. He looks up when the light comes. He looks at Rufus, and then at you, with a sort of exhausted mildness.
+?if b1.saved_house
+  You know him. You have not met, but you know him, as one knows a man who has passed one in a doorway in a fire. He is the one from the quay at the Emporium, the young one, with the kind face, who said Vesta, Vesta, until he was in the river. He does not know you, and you do not say.
+?else
+  "He was one of nine at the wharf of the Emporium," says Rufus, low. "I fished him out of the river myself. He had a lamp. He had let it go, I think, to save himself. He has asked me three times whether the lamp seller is safe."
+?end
+"They are coming for him at dawn," says Rufus. "The Prefect's men. I have been told not to know. I do not know what is done with the ones that they take. I know that I do not see them again." He rubs his face. "I did not take him out of the fire to hand him to that. I think that I would sooner give him to you, if there is a thing that you do."
+The young man says, in a small pleasant voice, "Are you the strix?"
+?if b1.tiro_end == "avenged"
+  You think of a freckled boy on a roof. He was nineteen. He had a jar on a cord. You took him by the throat and you did not let go for a very long time, and you have not been able to put it down. This one is not he. It is only that he is very like.
+?end
+:the_boy
+* Tell Rufus that the man is in his keeping, and that he should keep him
+  $ b1.boy = "vigiles"
+  $ _spared += 1
+  $ humanity += 2
+  $ velati_regard += 3
+  Rufus looks at you for a long time. Then he looks at the young man on the bench, and at the bruise on his cheek, and at the little clay lamp on the shelf outside the cell, the one he took from the cistern, with its steady white flame. "I have a good many questions," he says. "He may be able to answer them." He turns to the young man. "What is your name?" "Aulus," says the young man, after a moment. "My name is Aulus." "Well, Aulus," says Rufus, "I think that you had better sit up straight. It is going to be a long night, and there is bread." It is not an act of great courage, on either side. It is the beginning of something that nobody in the cell has a name for yet.
+* Let him go, by the back stair, with silver and a warning
+  $ b1.boy = "freed"
+  $ _spared += 1
+  $ humanity += 1
+  $ defiance += 1
+  You give him silver. You tell him to go and not to go to the hill. He takes the coins and looks at them in his open palm, as though he had been given a small bird. "I will not be able to stay away from it," he says, simply. "You do know that." You say that you do. He nods. He goes up the stair into the dark, a young man in a tunic with a bruise, and Rufus stands at the bottom with his hands at his sides, and says nothing at all, and does not look at you.
+* Take him to Theron's people, and let the war have him
+  $ b1.boy = "dead"
+  $ _slain += 1
+  $ humanity -= 3
+  $ velati_regard -= 2
+  $ bond.theron += 1
+  You take him up the stair. He goes quite quietly. He asks nothing, and he does not struggle, and at the top, in the grey lane under the wall, one of the General's young hunters is waiting, as if by arrangement, and takes him by the arm. Rufus has stopped in the doorway. He does not say a word. He stands with the little lamp in his hand and the white flame on his face, and the look in his eyes is the look of a man who is making, at last, a very long list.
+<~
+
+# scribe
+## The Egyptian quarter
+:scribe
+The room where Meritamun keeps her records is a long low undercroft, cut into the rock, and every wall of it is shelves. There are ten thousand scrolls. There are tablets of clay and wax, rolls of papyrus in jars, and sheets of a strange pale stuff that you take at first for cloth. A single tame ibis walks up and down on the floor with its hands behind its back, in the manner of a clerk, and takes no notice of you at all.
+She has been waiting. She does not say so.
+"You have a very great deal to learn," says Meritamun, "and I am not the person to teach you. I am only the person who has the books."
+She does not ask you to sit. She does not stand. She goes on writing.
+"The pitch," she says. "I told them in the quarry that it was a very large sum. It was more than that. It was paid over a year, in small parcels, by three freedmen and a temple treasury, to a lamp seller, who was a man with a good character. I have followed it back as far as I can. It comes out of a pool of money that is kept by the Senate's treasurer for purposes that are not stated." She turns the papyrus. "It is a very old pool. I did not make the discovery that it was there. I made the discovery that nobody had asked."
+?if b1.ledger
+  "You have the book," she says. She does not look at the satchel. "I can feel it from here. It is a thing like a heat." She holds out her hand. It is long and dry and perfectly steady. "May I?"
+  :the_ledger
+  * Give it to her
+    $ b1.scribe = "deal"
+    $ bond.meritamun += 2
+    $ velati_regard -= 1
+    She takes it. She unrolls it on the chest in a single long white sweep and reads, with her lips not moving, at a speed that you can hardly follow, down the margins, to the four letters, and then down the last pages, in the other ink, to the names. She reads it twice. She reads the last page a third time. When she looks up her face has not changed, and her eyes are the eyes of a woman at a window who has seen the sea. "Ah," she says. "That is what it is." She puts a long finger on the page. "I shall want it for a month. I shall give you back a copy. I will not tell you what is in it, because I should like you to be alive in a month." She smiles very faintly. "In return, I shall tell you something that nobody in this city knows that I know."
+  * Keep it, and tell her that it is not for sale
+    $ b1.scribe = "none"
+    $ cunning_brutal -= 1
+    $ standing += 1
+    She withdraws her hand. She is not offended. She looks at you with the expression of a scholar who has been refused a manuscript by someone who does not at all know what it is. "As you please," she says. "It is a good instinct, and a poor judgment." She picks up her reed. "I shall find it. It is only that it will take a little longer." You have the feeling that you have been a great deal cleverer than you have been wise.
+?else
+  "You have not got the book," says Meritamun. It is not an accusation. "Nor has anyone that I could trust. It is a pity." She taps the reed on the chest. "I would pay a good deal for it. I will not say what."
+  $ b1.scribe = "hint"
+?end
+?if b1.scribe == "deal"
+  She is silent for a moment. The ibis stops, and turns its head.
+  "Rome counts five lines," she says. "I keep the records of the Senate, and of the lines, and of the dead, and in all of them there is a gap. It is not a large one. It is the width of a name. It is so exactly the width of a name that a person who had been counting all her life could not fail to see it." She lifts the long dark eyes. "I will not tell you whose it is. I do not know. It is a thing that has been very carefully taken out. But I can tell you that, in the oldest of the records that I keep, there is a note, in a hand that is not Roman, about a man who bars his door from the inside. It is a joke, I think. It is an old joke. It is made by people who do not think that anyone will ever read it." She shrugs, a tiny, dry movement. "The cellar of your villa has a bar. I thought that you ought to know that you were not the first person to be a joke."
+  It is not, you realise, an answer. It is a door, a very small one, and it has been opened just wide enough for a hand.
+  $ do discover("scribe_house")
+?elif b1.scribe == "hint"
+  She puts down the reed.
+  "I will give you something for nothing," says Meritamun, "so that you will know I am a woman who does." She looks at the ibis. "Rome counts five lines. It has always been five. If you go into the records, and you read them through, carefully, as I have, you will find that there is a place in every one of them where the sixth is not. It is not a gap. It is a removal. It is as clean as a surgeon's." She turns back. "I mention it because you have a room with a bar on the inside. I should be very careful, if I were you, whom you told."
+  $ do discover("scribe_house")
+?else
+  She does not say any more. She goes on writing, and after a while the ibis resumes its walk, and the room settles to its old patient quiet.
+?end
+You are dismissed. It is done, by Meritamun, without a word, as a library dismisses a visitor, by the simple process of ceasing to be interested in the question. The silent girl takes you up the stair. The dawn has not come, but the air has a grey taste, and somewhere in the quarter a cock is making a mistake.
+<~
+
+# dawn
+## The end of the night
+?if _slain >= 6
+  $ b1.reckoning = "slaughter"
+?elif _slain <= 2
+  $ b1.reckoning = "mercy"
+?else
+  $ b1.reckoning = "mixed"
+?end
+The dawn comes up through the smoke the colour of a dull blade, and you are in a street that you do not know the name of, somewhere on the long slope under the Caelian, with your back against a wall and your hands in your lap. You have been sitting there for some time.
+?if b1.reckoning == "slaughter"
+  It is the thing that you are going to remember. You have not decided yet what that will mean. There is a fact, which is that a good many people who were alive at dusk are not alive now, and that you had a hand in it, or you stood at a door and let it be done, and that there is a place in you that will not stop saying their number. You have been told that it is a war. It was said in the quarry in the voice of a man who had seen the other way. You find that you have no idea how you would have known the difference.
+  $ humanity -= 1
+?elif b1.reckoning == "mercy"
+  It is not a thing to be proud of. It is not, in any proper sense, a victory. But there are people who were frightened at dusk and are only tired now, on roads, in the dark, with bundles, and there is a young man in a station cell with a bruise, or a thin clerk on the road to Ostia, or an old woman in a barn with a lamp, and the war has been very much hurt by you, and you cannot at all say that you are sorry.
+  $ humanity += 1
+?else
+  It is neither one thing nor the other. It is a night of the sort that most nights in a war are: a number of things done and not done, a number of people who are alive and are not, a great many small, plain, bad decisions, and no clear line that you can draw round the whole of it and say, there, that was what it was. You sit and look at the ash on your hands. It does not tell you.
+?end
+A runner comes up the street in the grey light. He is a small, quick, ragged boy, with a scrap of wax, and he stops in front of you with his chest heaving and holds it out. It is in Prisca's hand. It is very short.
+It says that Flavus has been seen. That he was on the Via Salaria three nights ago, with some twenty of the sect, going north. That he was seen by a carter, who thought nothing of it, and by a shepherd, who thought a good deal. That he was not leading a rout. He was walking at the head of a column, in a grey cloak, with a lame step, and a clay lamp, and he was at peace.
+It says, at the bottom, in the dry exact hand: *The Via Salaria goes to the Sabine hills. I thought that you would wish to know what else is in that direction.*
+You know. You have known for a long time. It is the thing that you have been saying to yourself since the barn. It is a small high village on a hill, in the oaks, with a well and a square and a shuttered villa above it, and a woman with a hard face and a soft kitchen, and a girl and a boy.
+?if b1.farewell == "promise"
+  You told her that you would come back.
+?elif b1.farewell == "truth"
+  You told her the truth, and she has kept it.
+?else
+  You said nothing to her. You have been a long time sorry for it.
+?end
+The first fire on the hill did not finish.
+$ flag b1.hill_known
+$ do discover("collesanto")
+$ do rest()
+=> next

@@ -116,6 +116,8 @@ After the choices.         NOT indented: where all options rejoin
 - An empty body is fine and also rejoins.
 - If no option is visible, the game logs a warning and continues past the set rather than getting stuck.
 - Modifiers combine in this order: `* Text [once] ?if cond`. The `[once]` goes before the `?if`.
+- Put a condition on the choice line, not around it. A `?if ... ?end` block wrapped around one choice splits the set into two separate prompts.
+- Do not put a `:label` directly before `?else` or `?elif` and jump to it: the jump can run the else branch.
 
 ## Moving around
 

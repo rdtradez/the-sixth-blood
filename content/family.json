@@ -2,9 +2,9 @@
   "note": "The Valerius family tree. A relative appears once the story calls $ do kin(\"id\") (and $ do kin(\"id\", \"dead\") to change their status). person ties a member to content/people.json for names and pronouns. parents and partner list other member ids. label is a word or a table by gender. quick sets the status a quick start gives them when it skips their book (a status word, or true for living); book sessions set it. The et_ members are for the developer sample chapter.",
   "members": {
     "hero": { "person": "hero", "book": "burning-city", "you": true, "label": "You" },
-    "spouse": { "person": "spouse", "book": "burning-city", "partner": "hero", "label": { "m": "Husband", "f": "Wife", "x": "Spouse" } },
-    "aelia": { "person": "aelia", "book": "burning-city", "parents": ["hero", "spouse"], "label": "Daughter" },
-    "felix": { "person": "felix", "book": "burning-city", "parents": ["hero", "spouse"], "label": "Son" },
+    "spouse": { "person": "spouse", "book": "burning-city", "partner": "hero", "label": { "m": "Husband", "f": "Wife", "x": "Spouse" }, "quick": "dead" },
+    "aelia": { "person": "aelia", "book": "burning-city", "parents": ["hero", "spouse"], "label": "Daughter", "quick": true },
+    "felix": { "person": "felix", "book": "burning-city", "parents": ["hero", "spouse"], "label": "Son", "quick": true },
     "et_grandchild": { "name": "Test Grandchild", "book": "engine-test-d", "parents": ["et_child"], "label": "Grandchild" },
     "et_child": { "name": "Test Child", "book": "engine-test-d", "parents": ["hero"], "label": "Child" }
   }

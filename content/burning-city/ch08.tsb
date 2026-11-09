@@ -1,0 +1,289 @@
+// Book One, Chapter 8 (session 10). The grey cloaks: a daylight investigation, a cellar under the Aventine, and a warning.
+// Three day actions, then the night under the hill, then the dawn question of whom to tell.
+@chapter b1c08
+@title The Steady Flame
+@book burning-city
+@version 1
+
+# start
+## Nine days
+$ do phase("day", 3)
+$ b1.rufus = "none"
+$ b1.flavus = "unmet"
+$ b1.plan = "partial"
+$ b1.igni_warned = "none"
+$ _leads = 0
+$ _knows_cellar = 0
+$ _felt = 0
+It is nine days to the full moon, though nobody in the house has said so. Prisca says only that she would like to know, and Hanno has begun to leave a lamp burning in the counting room all day, which has never been done.
+?if b1.coven == "alone"
+  You go out through the Subura in the early light, a man who answers to himself. It is lonelier than you remembered, and also, to your annoyance, a great deal easier to think.
+?else
+  You go out by the cellar grate at dawn, with the house's name behind you like a hand on your back. It is a very odd weight. You are not sure yet that you dislike it.
+?end
+The sun is a thin tithe, and you pay it. {cap(voice("hunger"))}.
+-> day
+
+# day
+## The day
+:day
+?if actions_left() == 3
+  The morning has the pale bright look of a city that has not yet started to sweat.
+?elif actions_left() == 2
+  Noon is a hammer. The shadows have drawn in under the eaves.
+?else
+  The light has gone long and gold. There is smoke somewhere, a cook's or a smith's, and you find that you notice every thread of it.
+?end
+* Go to the burned warehouse by the Circus [once] ?if actions_left() > 0
+  ~> warehouse
+  $ do act()
+* Sit with the clerks over the pitch and the lamp oil [once] ?if actions_left() > 0
+  ~> ledgers
+  $ do act()
+* Ask in the Subura, among the people who know everything [once] ?if actions_left() > 0
+  ~> subura
+  $ do act()
+* Go to the lamp seller in the Velabrum, at noon [once] ?if actions_left() > 0
+  ~> velabrum
+  $ do act(1, true)
+* Let the day end
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :day
+?end
+-> dusk
+
+# warehouse
+The warehouse by the Circus is a black cavity between a baker and a tanner. The roof has gone, and the walls, in the way of brick that has been very hot, have cracked in long curving lines like a dry riverbed. The smell is the usual smell. It is not only the usual smell. Under the char there is something resinous and sweet, something that does not belong in a lender's strongbox room.
+A man is poking in the ash with a long iron hook. He is a vigil, one of the night watch who put out Rome's fires, a plain square man of thirty with a leather bucket on his back and ash to the elbows. He looks at you, in your good tunic, in the sun, and does not like it.
+$ do meet("rufus")
+$ do discover("the_vigiles")
+"Not safe," he says. "Beam might come down. And it's not for looking."
+:the_vigil
+* Tell him the truth, that the house lent money here and you want to know who did it
+  $ b1.rufus = "trusted"
+  $ bond.rufus += 2
+  He stops poking. He looks at you for a long time. "Rufus," he says. "Aventine station, second cohort. The truth, is it? That is not a thing I have heard this week." He sits down on a fallen lintel, and offers you the other end. It is a kindness you did not expect.
+* Say you are a surveyor, for the insurers
+  $ b1.rufus = "none"
+  $ cunning_brutal -= 1
+  "Insurers," says Rufus. "In Rome." He laughs, shortly, and then, since it was a very good lie, he answers it. He does not ask your name. You note, with a small warm pleasure, that he does not remember to.
+* Press him hard for what he saw
+  $ b1.rufus = "wary"
+  $ cunning_brutal += 2
+  He gives it, in the end. He is not a man who is afraid of a body in a good tunic. But he gives it the way he would give a coin to a man with a knife, and he watches you all the while, and when you turn away you feel him fix your face in his mind like a pin in a map.
+He tells it flatly, as a man tells what he has told a captain and been laughed at for. The fire came up on three roofs at once, the baker's and the tanner's and this one, in the same quarter hour, in the small hours. No lamp had been left. No spark could have crossed that gap. There were men in the street, in grey cloaks, three or four, and one of them carried a lamp in a clay jar, and the flame in it stood up straight and white as the wind blew, and did not shake.
+"And they did not run," says Rufus. "That was the thing. They stood in the street and watched it, as if it were a rite. I have seen fire, and I have seen the men who start fire. They run." He spits in the ash. "These ones prayed."
+$ _leads += 1
+$ _felt += 1
+<~
+
+# ledgers
+The counting house of Collis smells of ink and warm wax, and the clerks are very glad to see you, in the way of clerks who have found something and are afraid it will be nothing.
+"It was only the volume," says the young one, whose name is Pollio. He has a tablet and a very serious frown. "Pitch and tow and resin, forty jars a week, and a hundred clay jars with seals, bought through a freedman, always in coin. Not by us. By someone we sell to, by the way of someone we sell to."
+?if b1.collis_start == "wine"
+  It was the wine that showed it. A customer of Naevia's, a lamp merchant, has been buying double his oil for a month, and paying, and not selling a single lamp.
+?elif b1.collis_start == "shipping"
+  It was Vettius's quay clerk who counted it: casks of pitch off the Ostia boats, thrice what Rome burns in a season, going up the Tiber to a single door.
+?elif b1.collis_start == "lending"
+  It was a debtor's list that did it. A small man owes the firm eleven coins and has paid in full in a week, which is how a man pays who has found a patron he did not expect to find.
+?elif b1.collis_start == "insulae"
+  It was the burned lots. A bidder has been taking every plot that burns, in every quarter, and paying cash, and building nothing on them. Pollio finds this the most interesting thing he has ever seen. You find it faintly sick.
+?elif b1.collis_start == "gladiators" or b1.collis_start == "slaves"
+  It was a man you do not like to think of, from the other end of the firm, who said in passing that a certain lamp seller had been asking after strong young men with no families. You do not ask what he answered. You have a clear and very cold sense that you will have to.
+?else
+  It was Hanno's book, not yours. You read over the old man's cramped hand the long list of small debtors, and find in it a name that does not belong.
+?end
+The name is Flavus. A freedman, a lamp seller, in the Velabrum, with a shop that sells nothing but oil and wicks and, it seems, an unusual number of sealed jars. He gives a great deal to the temple of Vesta. He has never, in all that time, been late with a payment.
+$ _leads += 1
+$ _knows_cellar += 1
+$ do discover("the_igniferi")
+<~
+
+# subura
+Naevia's shop is full of the afternoon, and of old men who are telling each other what is wrong with the Games. She puts a cup in front of you that you do not drink. She has learned not to mind.
+"Grey," she says, before you have asked. "That is what the girl who sweeps says. A dozen men in grey cloaks, walking in at night by the north gate, with a box between two of them on a pole. They take the old road under the Aventine. They do not stop at the inns. They do not spit. A man who does not spit is a man who is up to something."
+?if b1.vibia == "told" or b1.vibia == "helped"
+  There is someone at the door. It is Vibia, with the baby on her hip, and she does not come in. She stands just inside the threshold and says, very evenly, "My husband's brother drives a cart. A lamp seller pays him double to go out at night and ask nothing. They go down under the hill, to a cistern, below a yard that has been shut all summer." She looks at you, in the light. "I did not say a word to anybody. I thought you would want it. I do not know what I think of you." She goes.
+  $ _knows_cellar += 1
+  $ humanity += 1
+?end
+Naevia lowers her voice, which she does not do.
+"I have been a slave," she says. "I know what a house looks like when it is being burned on purpose. You think I'm daft, I know. I only say: the way the girl says it, they are a very patient sort of men."
+$ bond.naevia += 1
+$ _leads += 1
+$ _knows_cellar += 1
+<~
+
+# velabrum
+The Velabrum at noon is a swamp of dust and noise, and the shop of Flavus is at the end of the lane. It is a clean, narrow place, with a hundred lamps hung in rows and a smell of oil as sweet as an altar, and the man at the counter is not at all what you expected.
+He is fifty, lame in one leg, with kind creased eyes and a wiry beard, and he is polishing a clay lamp with great gentleness. He looks up and smiles. It is a good smile. It is the smile of a man who has never in his life had to lie about anything.
+$ do meet("flavus")
+"A lamp?" says Flavus. "For a house? A temple? We have everything."
+There is a jar on the counter, a plain clay jar with a seal of wax. Inside it a small flame stands up as straight as a nail. You feel it from across the room, a dry and faintly unbearable heat against the skin of your hands, as the sun does not. It is not the sun's heat. It is the heat of a thing that knows what you are.
+You put the thought away. You are, you tell yourself, a man of business, buying a lamp.
+"That one," says Flavus gently, "is not for sale. It has burned for eleven years. It was lit at the altar of Vesta, from the hearth that does not die." He turns the lamp in his fingers. "The strix comes into houses by night, you know. Out of the dark, in the form of an owl. It drinks. They say it drinks from the very young." The kind eyes rest on you. "I have seen the places where they live. Have you, perhaps?"
+:the_lamp_seller
+* Keep your face, and ask him where
+  $ b1.flavus = "spoke"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  "A village on a hill," says Flavus, "north of here, above a stream. A beautiful valley. There was a house up above it that was not what it seemed. We were thorough." He says it as a man says he has finished a good piece of carpentry. "That is only the beginning. Rome is a very large house. I have made a promise to the goddess for the month of Julius, and I do not break a promise." He smiles, at you, with all the kindness in the world. "It will be a very bright summer."
+  Your hands are very quiet on the counter. You have never been so quiet.
+* Hit him
+  $ b1.flavus = "struck"
+  $ cunning_brutal += 4
+  $ defiance += 2
+  $ do witness(1)
+  $ secrecy -= 3
+  You do not decide. The counter is between you, and then it is not, and the lamp has gone to the floor in a bright spray of oil and clay, and you have him by the front of his tunic against the wall. The jar with the flame in it rocks and does not fall. Somewhere in the lane a woman screams.
+  "There," says Flavus, almost tenderly. He has not struggled. There is blood at the corner of his mouth, and his eyes are very bright. "I will remember your face. We always do. We remember what the fire has not yet taught." You let go. You have to. There are seven people in the door, and two of them are running for the watch.
+  You go out into the sun, quickly, and it is only afterward that you notice your hands are shaking.
+* Say nothing, and leave at once
+  $ b1.flavus = "spoke"
+  $ humanity -= 1
+  $ secrecy += 1
+  You find that you cannot speak. You thank him, in a voice not at all like your own, and you go out into the blaze of the lane with the smell of oil in your nose and a dull roaring in your head. You walk to the end of the Velabrum. You stand against a wall in the sun. You do not move for a quarter of an hour.
+$ _leads += 1
+$ _knows_cellar += 1
+$ _felt += 1
+<~
+
+# dusk
+## Dusk
+The sun goes down behind the Janiculum, and the Velabrum shuts its shutters, and you are alone in the quiet with what you know.
+?if _leads == 0
+  You have found nothing. You walk, tired, up to the roof, and Tiro is there, with a face like a man who has been sitting very still, and he says, "I followed the smell." He has found the place himself, in the way of a runner who knows every cellar in the city. You find that you are very fond of him.
+  $ _knows_cellar += 1
+  $ bond.tiro += 2
+?end
+?if must_feed()
+  Hunger is a hand at your throat. You take what the house keeps for the purpose, and you do not think about it.
+  ?if b1.vow == "animal"
+    $ do feed("animal")
+  ?else
+    $ do feed("donor")
+  ?end
+?end
+?if b1.coven == "alone"
+  Tiro is at the grate when you go down. He does not say that he has come to help. "I was passing," he says. He has a rope, and a very bad knife, and a look of grim happiness.
+  $ bond.tiro += 1
+?else
+  Tiro is at the foot of the stair with a rope on his shoulder. He has decided to come, and has not told Prisca, and has told Hanno, which comes to the same thing.
+  $ bond.tiro += 1
+?end
+-> cellar
+
+# cellar
+## Under the hill
+The yard is a locked yard in a quiet lane at the foot of the Aventine. Over the wall it is a rubble of old amphorae and a dead fig tree. Under it, down a shaft you find by the smell of oil, is a very old cistern, a barrel vault of black brick that held the water for a long forgotten house.
+The roof has a grating. You lie on it, in the dark, with your cheek on the cold iron, and you look down.
+They have turned it into a temple. There are two hundred clay jars on racks, with wax seals, and every one has a wick. There is pitch in tubs, and tow in bales, and ropes of oiled flax, and the smell of it is thick as honey. There is a small altar at the far end, with a single flame on it, and a white cloth. There are forty men in grey cloaks, with their hoods back, kneeling in rows, and a man in the center whom you know.
+He is not speaking loudly. He does not need to.
+:the_grate
+* Watch from the grate, and listen
+  $ b1.plan = "full"
+  $ cunning_brutal -= 1
+  -> speech
+* Slip down into the dark between the jars, and read the wall
+  $ cunning_brutal += 1
+  ?if chance(0.5)
+    $ b1.plan = "full"
+    You go down the shaft like a shadow down a drain, and across the floor, and you press yourself against the cool brick behind the racks, and you are not seen. It is a very nearly intolerable pleasure.
+    -> speech
+  ?else
+    A man by the altar turns his head, and a lamp swings round, and you hear him say in a quite ordinary voice, "There is something at the rack."
+    -> seen
+  ?end
+* Take a man alone at the stair, and make him talk
+  $ cunning_brutal += 2
+  You wait. In an hour, one of them goes up the shaft to relieve himself, and you take him in the dark by the dead fig, with a hand across his mouth.
+  -> seen
+
+# speech
+Flavus does not preach. He tells it like a man reading the stores for a long winter.
+?if b1.flavus == "struck"
+  His lip is cut and swollen, and there is a bruise coming up on his cheek, and he touches it once as he speaks, almost with affection. "A man came into my shop today," he says. "A tall one. He struck me. I have prayed for him. He was very warm." You do not move. Somewhere in the vault a man laughs, softly, and does not stop.
+?end
+"The month of Julius," says Flavus. "The night of the full moon. The wind is from the river. The shops at the Circus are timber and awnings, and the Subura is timber and thatch, and the Emporium is oil. They sleep under all of it, the strix. They have slept there for as long as the city has stood." He moves a hand over a wall, and you see now that there is a map on it, drawn in charcoal, with red marks. "At the Circus first. Then the Aventine foot. Then the Emporium. We shall go at the hour of the second watch, and every one of us will carry a lamp, and the lamps will not go out."
+Nobody says anything. It is not necessary.
+"I have said it before," says Flavus. "The fire does not forget. It has not forgotten the hill. It will not forget this." He lifts the clay jar from the altar, and holds it up, and the small steady flame lights his creased kind face from underneath. "Vesta keeps the hearth of Rome. Tonight she asks it to be clean."
+You have seen the map. You have seen the date. You are lying on an iron grating with your heart, which is not beating, trying to climb out of your throat.
+-> out
+
+# seen
+$ do fight("human", 2)
+:exchange
+* Feint toward the shaft
+  $ do strike("cunning")
+* Break through them
+  $ do strike("brutal")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Talk your way out
+  $ do strike("talk")
+* Run
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    The nearest cloak goes down with a grunt, and the lamp in his hand rolls.
+  ?else
+    A jar comes up, with its flame, and the heat of it takes you across the arm like a hot iron.
+  ?end
+  -> :exchange
+?end
+?if fight_result() == "won"
+  $ b1.plan = "full"
+  $ standing += 1
+  They break. They are not soldiers, only zealots, and when it comes to blood they are not good at it. You see the map as you go, and the date under it, and you are up the shaft before the first of them has the courage to follow.
+?elif fight_result() == "talked"
+  $ b1.plan = "partial"
+  You find the words. It is the oddest thing: a drunk, a lost man, looking for a friend's yard. They let you go, with a look at your good tunic. You do not see the wall.
+?elif fight_result() == "fled"
+  $ b1.plan = "partial"
+  You go up the shaft like a rat, with the jar's heat still alive on your arm, and a shout behind you, and the sound of a great many feet. You have seen the altar and the jars and the men. You have not seen the wall.
+?else
+  $ b1.plan = "partial"
+  They have you down. A jar comes close, and the heat in it is the heat of every fear you have ever had, and you know in your bones, as you know nothing else, that this is what could finish you. Tiro comes down the shaft like a cat and hauls you out by the collar. You have seen the altar. You have seen a date, on the nearest bale, in a hurried hand. It is not enough.
+  $ secrecy -= 1
+?end
+-> out
+
+# out
+## The warning
+You are on the roof of the dyer's shop before the first light, with Tiro beside you, and the whole of Rome stretched out under you in gray. It is a very quiet morning. It is the quietest, you think, you will ever see.
+?if b1.rufus == "trusted"
+  A man is leaning on the wall at the foot of the lane, in a leather cap, with a bucket on his back. It is Rufus. He gives you a long look. "I thought," he says, "that you would be about, on a night like this." He does not ask where from. "If the Circus goes up, there is a man at the Aventine station who knows which cisterns are good. I am telling you in case." He goes on his way, a plain square back, humming. You do not forget him.
+  $ bond.rufus += 1
+?end
+Tiro is shivering. He looks younger than you have ever seen him.
+"We have to tell someone," he says. "We have to. Who? Who do we tell?"
+:the_warning
+* Go to Prisca, and the house
+  $ b1.igni_warned = "house"
+  $ bond.prisca += 2
+  $ standing += 1
+  Prisca listens in her counting room with the shutters closed, and she does not interrupt, and at the end she sets down the abacus very gently. "A rite," she says. "A date, and a place, and a wind." She looks at Hanno, who is already writing. "The house will have its own watch by tonight. The Senate will hear of it from somebody. It will not hear of it from us. I should like to know what it does when it hears." It is a very odd thing to say. You do not ask.
+* Go to Galerius, and the Senate
+  $ b1.igni_warned = "lictors"
+  $ standing += 2
+  $ secrecy -= 1
+  You find him in the Forum, at the hour before sunrise, in a corner of the Basilica, with his tablet. He listens to it all with his head a little on one side, courteously. He is not surprised. That is the thing you will remember. He writes it down, slowly, and says, "I have a file on a certain lamp." He closes the tablet. "The Senate will consider it. I do not wish to alarm you. The Senate considers a great deal. A fire in the old quarters is not, you understand, a misfortune to every one of us." He says it very gently, and goes back to writing.
+* Go to both, one after the other
+  $ b1.igni_warned = "both"
+  $ standing += 3
+  $ secrecy -= 1
+  $ bond.prisca += 1
+  You go to Prisca first, and she says nothing against it, and gives you three lines for Galerius in her own hand. You carry them to the Forum. He reads them twice, and puts the tablet away, and gives you a long look, in which something very dry and something very sad are mixed. "She is very good," he says. "She has not said it, but she has told me what she wants." Then he does not say what the Senate will do.
+* Tell no one, and keep it
+  $ b1.igni_warned = "none"
+  $ defiance += 2
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  You tell Tiro that you will think. You do not tell him what. You walk home across the waking city, with its bakers and its carters, and you look at the thatch, and the awnings, and the long dry wooden stairs of the insulae, and every one of them looks like a match. You think: a rite. A date. A wind. You think: if I tell the Senate, they will do nothing. If I tell the house, the house bleeds. You think about the hill.
+It is nine days. It is going to be a very long nine days.
+$ do rest()
+=> next

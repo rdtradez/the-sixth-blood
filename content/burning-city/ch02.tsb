@@ -1,0 +1,399 @@
+// Book One, Chapter 2 (session 7). The village, the fire, the family.
+// An evening among the living, a night of fire, a dawn of ash.
+@chapter b1c02
+@title What the Village Keeps
+@book burning-city
+@version 1
+
+# start
+## Collesanto
+$ b1.reveal = "none"
+$ do phase("night", 2)
+You come down the hill the way you have gone up and down it all your life, by the goat path behind the last fig tree, and the village lies below you with its lamps coming on.
+It is supper time. Every window has a small yellow square in it, and every square has a heartbeat behind it, and you can hear them all. You can hear the bread being broken. You can hear a man in the third house from the well complaining about his knee and his wife telling him that the knee has been complaining for eleven years and has never once been right.
+It is the sound of a place that does not know it is being watched, and you have never been so sure of anything as that you do not belong in it. You belong in it more than anyone alive. That is the difficulty.
+At the top of the lane the shutters of your own house are closed, and a thread of lamplight lies under the door.
+-> evening
+
+# evening
+## The evening
+:evening
+?if actions_left() == 2
+  You stand in the shadow of the last fig tree, with the hood forward and the cloak close, and the night begins around you.
+?else
+  The night has settled. A few windows have gone dark.
+?end
+* Look in at your own window [once] ?if actions_left() > 0
+  ~> window
+  $ do act()
+* Knock at your own door [once] ?if actions_left() > 0
+  ~> door
+  $ do act()
+* Go down to the square [once] ?if actions_left() > 0
+  ~> square
+  $ do act()
+* Wait in the dark for the night to deepen
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :evening
+?end
+-> fire
+
+# window
+You go up the lane without a sound and stand where the lamplight falls across the dust, with your back to the wall and your face an inch from the shutter.
+There is a gap in it the width of a finger, which you have meant to mend for three years. Through it you can see the whole of the front room. The table. The hearth. The bench where you sit.
+They are eating, or they are not eating. Domitia ladles lentils into the bowls with a face like a closed door, and nobody lifts a spoon. {spouse.name} sits very straight with {spouse.their} hands flat on the table, looking at nothing. Felix has been put on the bench with his legs swinging, and he is the only one of them eating, steadily and without joy, in the dogged way of a child who has been told something he cannot understand and has decided to be good.
+Aelia has taken your place. She is sitting in the one chair at the end of the table with her feet not quite touching the floor, and she has her hands wrapped around your cup.
+?if prologue.day == "children"
+  She has a stick laid across her knees, the one she fights the bean rows with. You showed her the grip yourself, in the stubble, on the last good day.
+?elif prologue.day == "fields"
+  She has a sprig of last season's barley tucked behind her ear. You cut it for her, the day the two of you worked the rows.
+?else
+  She keeps looking at the door, as though it might open, and then at the wall, as though the wall might know something.
+?end
+Then, as though she has felt the weight of your eyes, she turns her head, very slowly, and looks directly at the gap in the shutter.
+:the_window
+* Step back into the dark
+  She looks at the place where your face was for a long time. Then she looks down at the cup, and says nothing to anyone, and her small mouth sets in a line that you know. It is your own. You have the feeling that you have been entered in some kind of ledger.
+* Let her see you
+  $ b1.reveal = "aelia"
+  $ bond.aelia += 6
+  $ secrecy -= 3
+  You put your face into the gap, and let the lamp fall on it. Aelia does not scream. She does not move. Her eyes go very wide, and for one moment you see her decide something. Then she lowers them, deliberately, and takes a spoonful of her lentils, and swallows it, and looks at you again from under her lashes. Her mouth moves around a single word that you cannot hear, and the word is *later*.
+  You step back into the dark, with something in your chest that is very like a heartbeat.
+<~
+
+# door
+You knock, one knock, as a stranger would.
+You hear the whole room go still. You hear the bench scrape, and a spoon set down, and the footsteps coming across the floor. You know the weight of them. You know it as you know your own pulse, which you no longer have.
+{spouse.name} opens the door and looks up into your face.
+$ b1.reveal = "spouse"
+Nothing happens for a very long time. The lamp behind {spouse.them} makes a halo of {spouse.their} hair. Then {spouse.they} lift{spouse.s} one hand and lay{spouse.s} it flat on your cheek, and the expression of {spouse.their} face changes in a way that you will carry with you for a very long time.
+"You are cold," {spouse.they} say{spouse.s}.
+"Yes," you say.
+"You are cold, and you are standing in my door." The hand does not move. The voice does not rise. "They told me you were dead. I washed you myself."
+:the_door
+* Tell the truth
+  $ b1.spouse_told = "truth"
+  $ secrecy -= 6
+  $ bond.spouse += 10
+  You tell {spouse.them} as much as you know, which is not much. That you died. That there was a stranger. That you woke on a cold floor in the dark with a hunger you cannot describe, and that the hill is the only place you can be tonight. {spouse.name} listens to all of it without a word. When you stop, {spouse.they} say{spouse.s} only, "That is the least likely thing anyone has ever said to me," and then, very quietly, "and I believe every word."
+* Tell a gentler lie
+  $ b1.spouse_told = "lie"
+  $ bond.spouse += 4
+  $ secrecy += 2
+  You say that it was only the fever. That you went into the wood in your sleep and woke there, three days later, weak and ashamed and terribly sorry. {spouse.name} looks at you with the patient eyes of someone who has lived with you for years and can hear the exact weight of a lie. {spouse.They} do{spouse.es} not say so. {spouse.They} say{spouse.s}, "All right," in a voice that is kind and does not believe it.
+* Say nothing, and hold {spouse.them}
+  $ b1.spouse_told = "silence"
+  $ bond.spouse += 8
+  You cannot speak. You do not try. You take {spouse.them} in your arms in the doorway, and the lamp gutters, and {spouse.name} lets out a sound that is not a word, and holds on with a strength that surprises you. Neither of you says anything for a very long while. Behind {spouse.them} in the front room somebody has begun to cry, and it is not the child you would have expected.
+Over {spouse.their} shoulder you see Domitia at the hearth with the ladle in her hand and a face the color of tallow. She has not moved. She looks at you the way you look at a thing that you have dreaded for a long time and are not sure is real.
+"You cannot stay," {spouse.name} says, against your shoulder. It is not a question. {spouse.They} {have} always known, with a knowledge you never understood, what you would do before you did it.
+"No," you say. "Not tonight."
+"But you will come back."
+"Yes."
+"Then I will not tell the children," {spouse.they} say{spouse.s}, "until you are ready to be looked at." And {spouse.they} close{spouse.s} the door, and you stand on the step with your hand on the wood, and the lamp goes on shining under it.
+<~
+
+# square
+## The square
+The square is nearly empty. There is a lamp in the niche by the fountain, a little oil lamp of the kind a household sets out when someone has died, to guide him home. It is lit for you. There are nine or ten of them in the niche already, in a row, in each of which someone has set a flower or a coin or a scrap of bread. You did not know there would be so many.
+You stand in the shadow of the fig tree and look at them for a long time.
+?if b1.first_blood == "forced"
+  ~> square_sextus
+?else
+  ~> square_quintus
+?end
+<~
+
+# square_sextus
+## The square
+$ do meet("sextus")
+On the rim of the fountain sits old Sextus the shepherd, bandaged at the neck, with a scarf wound over it like a man hiding a bruise. A little knot of men is gathered around him. He is telling them something, and they are being kind to him, in the way that the old are kind to the old. He says he saw {name} on the hill at dawn. He says it twice.
+"The fever got into your head, Sextus," says one of them. "Hush."
+"I know what I saw."
+"You saw a dead man's grief, is what you saw," says another, not unkindly, and the group breaks up and goes home. Sextus is left alone by the lamps, with his stick across his knees.
+He does not look up. He says, to the dark, in a level voice, "I know you are there."
+:the_shepherd
+* Step out of the shadow
+  $ _sextus = 1
+  $ bond.sextus += 10
+  $ secrecy -= 3
+  $ do witness(1)
+  He does not flinch. He looks at your face for a long time, and at the cloak, and at the place where the stick lies across his knee, and he takes the scarf from his neck and shows you the mark. It is already nearly gone.
+  "I thought so," he says. "I will not say it again. They will not believe me, and I am too old to be put in the ditch for saying it." He is quiet a moment. "If you are what I think, you will want a friend who is not afraid of you. I am too old to be afraid of much."
+* Stay where you are
+  You do not move. After a long time Sextus sighs, and gets up, and stumps away across the square. He does not look back. You will never know if you were wise.
+<~
+
+# square_quintus
+## The square
+$ do meet("quintus")
+There is a boy sitting on the rim of the fountain with his chin on his knees. It is the boy of the goat, twelve or so, with the long arms and the stubborn mouth of someone who is going to be tall.
+?if b1.goat == "freed"
+  The goat is with him, tethered to the fountain, chewing on a flower from the offerings. He lets it. He is looking at the lamp in the niche that is lit for you, and his face is very still.
+?else
+  He is alone. He is looking at the lamp in the niche that is lit for you, and his face is very still.
+?end
+?if b1.warning == "warned"
+  He has told the elders what you told him. You can hear them, in the house with the green door, arguing about whether to believe a boy. One of the voices says that a watch costs nothing.
+?end
+:the_boy
+* Trim the wick of the lamp
+  $ humanity += 1
+  $ collesanto += 1
+  $ bond.quintus += 4
+  You step out far enough to reach the niche and trim your own lamp, so that it burns clean. The boy watches your hand do it. He says nothing, and neither do you. When you step back, he looks at the lamp, and then at the dark where you are, and then he gets up and goes home. He will tell no one. He is a boy who has learned already what it costs to speak.
+* Leave it be
+  The boy stays until the lamp burns low. Then he trims it himself, with a quick, practiced, absentminded movement. You think that he has done this before.
+<~
+
+# fire
+## The smoke
+$ do phase("night", b1.warning == "followed" ? 4 : 3)
+You smell it first. It is faint, and sweet, and wrong, like a kitchen fire with something other than wood in it. It is pitch, and it is coming from the north.
+Down in the village a dog begins to bark, and then all the dogs. A door opens and does not shut. Somebody calls a name, and somebody else answers, and then, high up and thin from the end of the north lane, a woman is screaming that the thatch is alight.
+?if b1.warning == "followed"
+  You were ready for it. You saw them in the oak wood and you heard them say it, from the north, in the dark, the thatch first. It does not make the sound easier to hear. It only means that you know exactly how much time you have.
+?elif b1.warning == "warned"
+  There is a horn. It is a dreadful, flat, brazen note, and it comes from the north end of the village where the elders posted a watch, and it is the best sound you have ever heard. Doors are flying open. Men are running with buckets. The village has been given a few minutes it would not otherwise have had.
+?end
+Men in grey cloaks are coming down the north lane at a run, with torches in both fists, and they are calling out a word. They are calling it with the whole of their lungs, like a hymn.
+*Strix.*
+$ do discover("strix")
+:the_fire
+?if actions_left() == 3 or actions_left() == 4
+  The thatch of the north row is burning, and the fire is running from roof to roof faster than any man can run.
+?else
+  The fire has the whole of the north row now, and it is climbing toward your own lane.
+?end
+* Run for your house ?if actions_left() > 0
+  $ _early = 1
+  $ _vis += 1
+  -> the_house
+* Carry the old and the sick out of the burning row [once] ?if actions_left() > 0
+  ~> rescue
+  $ do act()
+* Break the torchmen's line [once] ?if actions_left() > 0
+  ~> torchmen
+  $ do act()
+* Put the villagers into a line to the well [once] ?if actions_left() > 0
+  ~> bucket_line
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :the_fire
+?end
+-> the_house
+
+# rescue
+The north row is a street of fire. You go into it with the cloak over your head, and the heat falls on you like a hand, and every instinct you have, every muscle and every tooth, tells you to turn around. There is a word for what is under the instincts. It is older than fear, and it is only one syllable.
+You go in anyway. In the second house a bedridden grandfather is calling for water. In the fourth a woman is lying across the threshold with a beam across her legs, and a baby is screaming somewhere you cannot see it. You lift the beam off her like a plank off a stack of boards. You carry the grandfather on your back and the woman in your arms, and you come out into the lane with your hood burning and a baby in the crook of your elbow.
+$ injury += 12
+$ humanity += 2
+$ _vis += 1
+$ _saved += 3
+$ do witness(1)
+People see you. They cannot help it. A man with a bucket stops dead in the lane and stares at your face in the light of the burning thatch, and he sees something there that he does not understand and will tell, one day, to his grandchildren.
+<~
+
+# torchmen
+There are four of them in the lane, standing shoulder to shoulder with their torches held out like a line of spears. They are young and old, thin and fat. They have the look of men who have come a long way, and been afraid for the whole of it, and have found a kind of peace in the fear. They are singing.
+$ _vis += 1
+$ do fight("human", 2)
+:exchange
+* Feint toward the thatch, and strike when they look
+  $ do strike("cunning")
+* Go through them
+  $ do strike("brutal")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Tell them what you are, and let the fear do it
+  $ do strike("talk")
+* Run
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    One of them goes down in the dust, and the line gives ground.
+  ?else
+    A torch comes down across your shoulder and you smell your own cloak burning. You roll under it and come up hurt.
+  ?end
+  -> :exchange
+?end
+?if fight_result() == "won"
+  The last of them drops his torch and goes down on his knees. The others are running. You stand over him with your hands shaking, and you think, for a second, that you will not be able to stop. Then you do.
+  $ _prisoner = 1
+  $ _saved += 1
+  Two of the others are down in the road, and will not get up. You did not decide that. You will have to decide, later, what it means.
+  $ do kill("human", 2)
+?elif fight_result() == "talked"
+  They hear it. You do not know what they hear, but you see it arrive in their faces, a kind of dreadful recognition. Then the torches drop, and the line breaks, and the song stops.
+  $ secrecy -= 4
+  $ _saved += 1
+?elif fight_result() == "fled"
+  You break away from them, and you are in the dark between two houses before the first of them has turned his head.
+?else
+  They have beaten you back. You lie in the dust with your own blood in your mouth, and you hear the line move on without you.
+  $ injury += 10
+?end
+<~
+
+# bucket_line
+The well is at the top of the lane, and a handful of villagers have already reached it. They are not doing anything useful. They are running between the well and the burning houses with one pail apiece, and every pail is spilled before it is thrown.
+You step out of the dark, put your hood back, and speak in a voice that they have heard every day of their lives.
+"A line," you say. "Well to the thatch. Pass them, do not run them. Wet the roofs next to the fire, not the roofs that are burning. Quickly."
+Nobody argues. It is the strangest thing you have ever seen. They know the voice, and they do not look at the face. They form a line out of pure obedience, the way people do when a voice that they trust tells them what to do in the middle of the worst night of their lives. The buckets begin to move. The roofs next to the fire begin to darken.
+$ _vis += 2
+$ _saved += 2
+$ secrecy -= 3
+?if _sextus == 1
+  Old Sextus is at the head of the line with his stick laid across the well, passing buckets like a man a third his age, and he gives you a look that says that he is not surprised. Somebody has to know.
+  $ _saved += 1
+?end
+$ collesanto += 1
+<~
+
+# the_house
+## Your house
+?if _early == 1
+  You come up the lane at a run, faster than any living man could, and you reach the house as the first of the eaves catches.
+  The door is barred from the inside. You put your shoulder to it and it comes off its hinges like a leaf. Inside, the smoke is a solid thing, and it is full of coughing. Domitia is on her knees in the front room with Felix clamped under one arm, and Aelia is standing on the bench with her hands pressed over her mouth, absolutely silent, waiting to be told what to do.
+  You take them both. You take Felix under one arm and Aelia under the other, and you put Domitia in front of you with your hand in the small of her back, and you drive the three of them out through the door into the cold air of the lane. Behind you the roof begins to come down.
+  $ bond.aelia += 8
+  $ bond.felix += 8
+  $ _carried = 1
+?else
+  By the time you reach your own lane the roof of the house is burning, and the whole of the lane is a bright and terrible day.
+  The children are outside. You see them before anything else, in the arms of the neighbors in the lane, and a great wave of relief goes through you that is almost a sickness. Domitia is on her knees in the road, with Felix clamped to her, and Aelia beside her with her face blackened with smoke and her eyes wide.
+  "{spouse.name}!" Domitia is screaming. "{spouse.name} went back! For the household gods, for the little ones, I told {spouse.them}, I told {spouse.them}..."
+  The neighbors are holding the children and not looking at the house. They are not looking at the house, and you have never understood the full meaning of that until now.
+?end
+The house is a lantern. It is burning from the roof and from the back wall, and the door of the back room is standing open, full of orange light.
+Somewhere in there, you know, is {spouse.name}.
+:the_fire_choice
+* Go in through the fire
+  $ b1.spouse_fire = "went_in"
+  $ injury += 40
+  $ _vis += 1
+  The wall of heat stands in the doorway like a thing alive. Every part of you that is dead understands, with perfect clarity, that this will kill you. It is the only fear you have ever felt that is entirely fair. You go through it with your arm over your face.
+  The back room is small and low and bright with fire, and {spouse.name} is on the floor beside the little shrine of the household gods, with the painted doors still open and the clay figures standing in their row. {spouse.They} {are} not burned. There is not a mark of the flames on {spouse.them}. {spouse.They} {were} lying very straight, with one hand open, and {spouse.their} face is quite calm.
+  You take {spouse.them} up in your arms. {spouse.They} {are} lighter than you remember.
+  In the red light of the burning thatch, as the roof beam above you begins to groan, you see two small dark marks at the side of {spouse.their} throat, very close together. They are only a trick of the heat. They must be. You do not let yourself look at them again.
+  $ flag b1.saw_marks
+  You carry {spouse.them} out through the wall of fire with your cloak alight and your hands burning, and you lay {spouse.them} in the road in front of the whole village. Somebody takes the cloak off you. Somebody screams. Domitia comes across the road on her knees.
+  {spouse.name} is dead. {spouse.They} {have} been dead for some time. You knew it as you lifted {spouse.them}. You went in anyway, and you will not be sorry, and it will not be enough.
+* Hold back
+  $ b1.spouse_fire = "held_back"
+  $ humanity -= 2
+  You stand in the road and look at the door. The fire is a wall, and the wall is a living thing, and you are, in the end, only a dead thing that has been given a little while longer. Something older than thought will not let you walk into it. You stand there with every muscle shouting, and you cannot, and you cannot, and you cannot.
+  It is a neighbor who goes in. He is a big, slow man named Lucan, who owes you a debt of barley, and he goes in with a wet blanket over his head, and he comes out with {spouse.name} over his shoulder and his beard singed off. He lays {spouse.them} in the road in front of the whole village.
+  Domitia comes across the road on her knees. {spouse.name} is dead. You know it before Lucan has set {spouse.them} down. You are the only one in the road who has not run toward {spouse.them}, and you will carry that for as long as you carry anything.
+$ do fate("spouse", "dead")
+$ do kin("spouse", "dead")
+$ do meet("felix")
+$ do meet("aelia")
+Domitia is saying {spouse.name}'s name over and over in a voice that has stopped being a voice. Aelia has come across the road on her own and is standing beside the body with her fists clenched at her sides and her mouth shut, not crying. Felix is crying for both of them.
+The smoke lies in the lane like a blanket. The shouting has gone to the far end of the village, and the fire is going out, roof by roof, because there is nothing left in the north row to burn.
+Up the hill a line of torches has climbed as far as the villa wall. It stops there. After a while it turns and goes back down, a few at a time, and then there are no more torches.
+---
+?if b1.spouse_fire == "went_in"
+  {cap(voice("injury"))}. The pain is a distant thing, like weather in another country. The hunger is not distant.
+?else
+  {cap(voice("hunger"))}. {cap(voice("injury"))}.
+?end
+-> aftermath
+
+# aftermath
+## The prisoner
+The village does not sleep. Nobody has any thought of it. They go about the work of the dead, which is the work of the living: the water, the blankets, the roofs that can be saved, the roofs that cannot. Domitia sits in the road with {spouse.name}'s head in her lap. The children sit with her, close, as though the three of them have been fastened together.
+They have taken one of the torchmen alive.
+?if _prisoner == 1
+  It is the man you left on his knees in the lane, and they have bound him to the fountain with a plow rope. The men who bound him are not gentle about it. Nobody has said what they will do with him at dawn. Everybody knows.
+?else
+  The men of the village caught him in the confusion by the north well, a lean, dazed man with a scorched beard, and they have bound him to the fountain with a plow rope. Nobody has said what they will do with him at dawn. Everybody knows.
+?end
+When the square empties you go down to him in the dark. He has the face of a man who has already made his peace. He does not look afraid. He looks at you, and the peace goes out of his face.
+"Strix," he says.
+:the_prisoner
+* Ask him who sent him, and leave him to the village
+  $ b1.prisoner = "village"
+  $ cunning_brutal -= 2
+  You crouch in front of him and you ask, in a level voice, who sent him and what he wanted of the hill. He tells you, because it is not in him to lie. The fire is Vesta's, and the hearth must be kept pure, and the thing in the house on the hill had been walking the night for years. He does not say who gave the orders. He says only that there are others who are sworn to the work, in the cities, and that the fire does not forget.
+  When he has finished you stand, and leave him. You have learned very little, and you have shown him your face. The village will have its justice in the morning, and you will not be there.
+* End it quietly
+  $ b1.prisoner = "killed"
+  $ cunning_brutal += 4
+  $ do kill("human")
+  It takes a moment. He does not cry out, and you are not proud of how easily the cold goes through you. The village will find him in the morning and wonder who has robbed them of their justice. Some of them will be glad.
+* Feed
+  $ b1.prisoner = "fed"
+  $ cunning_brutal += 6
+  $ do feed("human_kill")
+  $ do heal()
+  The hunger has been waiting for this all night, and it does not ask permission. When it is over you are on your knees in the dust of the square with his blood on your face, and your burns are closing like a tide going out. You do not feel clean. You do not expect to again.
+-> dawn
+
+# dawn
+## Ash
+$ do rest()
+Morning comes up gray over the hill.
+?if _vis >= 3
+  $ b1.fire_seen = "seen"
+  $ secrecy -= 8
+  The village has seen you, and that is the whole of the truth. A dozen of them saw a figure in a hooded cloak go into the burning row and come out with a child in its arms. Some of them saw the face. Nobody can agree what they saw, and everybody is certain. By noon they will be saying that it was {name}, come back from the dead, and by nightfall they will be saying that {name} was a saint, and by the next harvest it will be a thing that nobody remembers having begun.
+?elif _vis >= 1
+  $ b1.fire_seen = "glimpsed"
+  $ secrecy -= 3
+  A few of them glimpsed you, in the red dark, and they are not sure what they glimpsed. A shape that went into the fire. A pair of hands. A voice. The village is already arguing about it in low voices, over the ruins, and nobody has been quite willing to say a name.
+?else
+  $ b1.fire_seen = "unseen"
+  Nobody saw you. In the confusion, in the smoke, with every eye on the fire and every mind on its own dead, you passed through the night unnoticed, as a shadow does. The village will tell the tale of the burning for a hundred years, and you will not be in it.
+?end
+?if b1.fire_seen != "unseen" and b1.first_blood == "forced"
+  Old Sextus is the only one who does not argue. He stands at the edge of the ruins with his stick, saying nothing, and every so often he looks up at the hill.
+?end
+$ do village_harm(b1.warning == "warned" ? 6 : 9)
+The north row is ash. Eleven houses are gone, and the thatch of four more. Eleven families sit in the road with what they could carry. {spouse.name} is laid out on a door in the shade of the fig tree, with the lamps in the niche still burning beside the body.
+They carry {spouse.them} to the pyre outside the village at noon. You are not at the pyre. You are in the olive grove above it, in the shade of a trunk as wide as a door, with the hood forward and the sun heavy on your shoulders, and you watch the whole of it from a hundred paces. {spouse.name} burns very quickly. You will never be able to remember how it smelled, and you will remember everything else.
+Domitia holds the children. They stand in the smoke in a row, Aelia and Felix, in the black of their mourning, and a good half of the village stands around them in a ring.
+---
+When it is done the crowd goes slowly down the hill. Aelia does not go with them. She stands by the ashes, a small stubborn shape in black, looking up the slope at the olive grove, and you know with a cold certainty that she can see you.
+$ do kin("aelia")
+$ do kin("felix")
+:the_farewell
+* Go down to her, and promise to watch over them
+  $ b1.farewell = "promise"
+  $ bond.aelia += 8
+  $ secrecy -= 3
+  You go down through the trees, bareheaded, in the full light of the sun, with your shadow short beneath you. She waits for you. She does not run. When you kneel she puts her small hand against your cheek, and then on your chest, where the heart is not.
+  "You are cold," she says. It is what {pg("spouse", "her father", "her mother")} said, and it undoes you.
+  "I cannot stay," you say. "But I will watch. I will always watch. Nothing will hurt you or your brother while I am anywhere in the world. That is a promise." She looks at you for a long time. She nods, once, and goes back down the hill to her grandmother with her chin up, and you are left kneeling in the ashes.
+* Tell her the truth
+  $ b1.farewell = "truth"
+  $ secrecy -= 6
+  $ humanity += 1
+  $ bond.aelia += 4
+  You tell her what you can, in the plainest words you have. That you are not what you were. That you cannot be with them, in the day or the night, and that it is not because you do not want to. She listens with the terrible attention of the very young. When you have finished she says, "Is it the villa?" You say yes. She says, "I thought so," and takes her hand away from yours, and walks down the slope to the others.
+* Watch, and say nothing
+  $ b1.farewell = "silent"
+  $ defiance += 2
+  $ humanity -= 2
+  You stay where you are, in the shade. You are afraid that if you go to her you will not be able to leave. After a time Aelia turns away, and goes slowly down to the village to the people who will raise her, and you do not move until she is out of sight.
+---
+There is the matter of the purse. Domitia has buried a child, and she has two grandchildren and no roof, and the village around her is a ruin. You have in your hands, in a place no one will think to look, the only money you have in the world.
+:the_purse
+* Leave all of it on Domitia's doorstep
+  $ do send_home(wealth)
+  You go down in the dusk, and you set the purse on the stone step of a house that no longer has a door, and you walk away before the lamp is lit. It is the right thing, and it is also, you will think later, the end of any chance you had to begin again with something in your hand.
+* Leave half
+  $ do send_home(floor(wealth / 2))
+  You split the purse by the light of the fading sky, and leave half where it will be found. The rest you keep, because you do not know what kind of world you are about to walk into, and because you are a practical {g("man", "woman")} at heart, and the practical part of you is the part that is still alive.
+* Keep it
+  You turn the purse over in your hands. It is a poor thing to be responsible for. The village has its own hands. It will rebuild. You will need what you have to survive what comes next, and you tell yourself that is not an excuse.
+The villa stands against the sky at the top of the hill, dark and shuttered, with the sun going down behind it. Whatever you are now, and whatever you will become, you can no longer stay in Collesanto. Rome is three days south, and it is full of people who do not know your name.
+=> next
