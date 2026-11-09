@@ -48,6 +48,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 17: the Florence and Collesanto (1474) maps for Book Two
 - [x] Sessions 18 and 19: Book Two chapters 1 to 4
 - [x] Session 20: Book Two chapters 5 and 6
+- [x] Session 21: Book Two chapters 7 and 8
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -272,4 +273,16 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Chapter 4 is now `@version 2`: one passage uses the watcher's pronouns instead of a fixed "she".
 - The painter's portrait from chapter 5 gives the collection piece `florence_portrait` only if he sat as himself (`b2.portrait` is `sat`).
 - `tests/book2c.test.js` plays both chapters down their branches (every deal and sun bargain, both genders, hunger and an empty purse, each decision flag). `tests/book2.test.js` and `tests/book2b.test.js` now expect six chapters, and the chapter 4 test stops as chapter 5 begins.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 21 notes (Book Two, chapters 7 and 8)
+
+- Book Two chapters 7 and 8 are built (`content/blood-and-gold/ch07.tsb` and `ch08.tsb`, chapter ids `b2c07` and `b2c08`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 8 and carries on by itself when chapter 9 is added.
+- Session 21 is built on the `session-20` branch, which is not merged to `main` yet. Merge `session-20` first and then `session-21`.
+- Chapter 7 opens with a supper (no phase), then a night phase of three actions out of four, then a long closing scene and the dawn; it ends with `rest()` and `=> next`. Chapter 8 is a day phase of three actions out of four and then the dusk; it ends with `rest()` and `=> next`, which pauses until chapter 9 exists. Chapter 9 should read hunger, injury, standing and secrecy as chapter 8 left them.
+- New decision flags keep the `b2.` prefix and are registered in `content/flags.json` with `book`, `major` where later chapters care, and a quick start `default`. Decision flags a later chapter should read: `b2.supper`, `b2.roll`, `b2.prisca_sixth`, `b2.elder_witness`, `b2.answer`, `b2.berengaria_debt`, `b2.roll_told`, `b2.pazzi_paper`, `b2.trader_ledger`, `b2.trader_regard` and `b2.trader_coin`, with `b2.trader_loan`, `b2.trader_scale` and `b2.trader_answer` as smaller notes. A flag that can be skipped has an `unseen` value (or `refused` or `silent`) that its default uses.
+- New people (`content/people.json`): Berengaria and Nanni. New codex entries: the roll of the lines, Berengaria and Nanni. New collection pieces: `remembrancers_tally` and `merchants_token`. Content notes: both chapters carry `blood`.
+- `b2.trader_regard` is computed at the end of chapter 8 from this chapter's choices and from `b2.wool_wages`, `b2.captain` (and `b2.pazzi_paper`). Later chapters and the Velati journal should read the flag rather than recompute it.
+- Script gotcha found while building: a scratch variable that is set by more than one action of a night phase also leaks into every later `?if` that reads it, so give each fact its own `_name`.
+- `tests/book2d.test.js` plays both chapters down their branches (every earlier oath, seat, sire answer and Velati terms; both genders; hunger; each decision flag and gift; the hidden verdict in three bands). `tests/book2c.test.js` now stops chapter 6 as chapter 7 begins, and `tests/book2.test.js`, `tests/book2b.test.js` and `tests/book2c.test.js` expect eight chapters.
 - Plans are in `SPOILERS/blood-and-gold.md`.

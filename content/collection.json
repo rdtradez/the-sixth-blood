@@ -7,6 +7,8 @@
     "doctors_instruments": { "book": "whitechapel-hunt", "name": "The doctor's instruments" },
     "lost_love_letter": { "book": "house-divided", "name": "A letter from a lost love" },
     "god_relic": { "book": "relics-lost-god", "name": "A relic of the god" },
-    "great_church_tessera": { "book": "burning-city", "name": "A gold tessera from the Great Church" }
+    "great_church_tessera": { "book": "burning-city", "name": "A gold tessera from the Great Church" },
+    "remembrancers_tally": { "book": "blood-and-gold", "name": "The Remembrancer's tally" },
+    "merchants_token": { "book": "blood-and-gold", "name": "A copper balance" }
   }
 }

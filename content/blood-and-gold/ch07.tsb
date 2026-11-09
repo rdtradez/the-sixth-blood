@@ -1,0 +1,381 @@
+// Book Two, Chapter 7 (session 21). The first answer: an elder of the court hears the description of the maker.
+// A supper at the Prince's house, then one night phase of three actions out of four (the roll, Prisca, the clerk, Vieri), then the house in the Via dei Pecori, then the dawn.
+// Ends with rest() and => next. Reads b2.prisca_asked, b2.seat, b2.oath, b2.sire_answer, b2.loan, b2.pazzi_heard, b2.watcher_terms, b2.watcher_bond, b2.vieri_watch, b1.maker_told, b1.tablet, lc.sunwalk and b2.daylight.
+// The book is incomplete, so play pauses after this chapter until chapter 9 is added.
+// Later chapters read b2.supper, b2.roll, b2.prisca_sixth, b2.elder_witness, b2.answer, b2.berengaria_debt and b2.roll_told.
+@chapter b2c07
+@title The Scraped Page
+@book blood-and-gold
+@version 1
+
+# start
+## The Thursday table
+$ b2.supper = "watched"
+$ b2.roll = "asked"
+$ b2.prisca_sixth = "withheld"
+$ b2.elder_witness = "absent"
+$ b2.answer = "closed"
+$ b2.roll_told = "none"
+$ _seen = 0
+$ do chart("florence.court")
+$ do meet("berengaria")
+?if b2.prisca_asked == "agreed"
+  Messer Ottaviano's letter said Thursday, and it is Thursday, and the house of the Prince is lit from cellar to roof like a lantern that has been told it is Christmas. It stands in the shadow of the Bargello, a tall narrow house of dark stone with iron rings in the wall and a door that opens before you have knocked. Prisca has been as good as her word. Of all the places in Florence in which a man might learn who is keeping a quarrel warm, a supper at the Prince's table is the one where the fuel is passed from hand to hand.
+?else
+  You did not ask to be asked. Messer Ottaviano's letter came anyway, in the small prim hand, and said that the Prince's household would be honored, and that the Prince remembered a refusal, and was generally pleased to be given the opportunity to forget it. It is the sort of invitation that a sensible man accepts. You have come, and the house of the Prince is lit from cellar to roof, and the door opens before you have knocked.
+?end
+?if b2.seat == "sword"
+  You are put at the Prince's right hand. It is the seat that goes with the little plain sword that you wear under your cloak, and there is a stir along the table as you take it, the soft sound of a dozen persons discovering that they have strong feelings about furniture.
+?else
+  You are put halfway down the table, on the left, between a stout vampire in a fur-trimmed gown and an empty chair. It is a good seat. It is the seat of a man whom the house has not yet decided about, and it has an excellent view.
+?end
+?if b2.oath == "sworn"
+  The Prince greets you in the old form, very softly, as a man might use a private word. There is a sound along the wall that you recognize as satisfaction, and one that you recognize as the opposite.
+?elif b2.oath == "refused"
+  The Prince greets you with perfect courtesy and no form at all. It is a courtesy so precise that it amounts to a measurement.
+?else
+  The Prince greets you as a guest, and a guest you are, and you are very careful to look like one.
+?end
+It is not, of course, a supper. The blood does not sup. There are cups of a dark, thick, spiced wine, which is mostly wine, and in the middle of the table there is a great silver dish with a lid, which no one lifts, and which every one of the guests watches with the polite attention of a company that has agreed not to be hungry in front of strangers. At the foot of the table there are three of the Medici quarter, as promised: a plump old vampire called Ser Cione, who has been of the Medici party since before there were any Medici, a pale young one in good black called Messer Guccio, whose family lends to the Pazzi and does not say so, and a woman who says nothing and eats nothing and smiles at everything.
+At the far end, in a high chair with a back like a gable, sits the woman in the headdress. She is very small. She is dressed in a gown of an old pattern, dark green, with sleeves to the floor, and a wimple of white linen under a stiff folded coif, so that her face looks out of it like a stone from a wall. She has a cup in front of her that has not been touched. She has not looked at you once. You have never been so conscious of not being looked at.
+-> table
+
+# table
+## The quarrel
+:the_table
+The talk goes round the board in the old way, politely, from person to person, like a dish. It goes to the price of grain, and to the Pope's new chapel, and to the quarrel of the Archbishop with the Signoria over a man called Salviati, and it is a very short step from that to the quarrel between Ser Cione and Messer Guccio, which arrives in the middle of a sentence about a wool contract and fills the room like smoke.
+It is a small matter. It is a debt, owed by a Pazzi cousin to a Medici agent, for a cargo of alum that went a little bad, and it has become the whole of the history of two families. Ser Cione says that the thing is a matter of simple honesty. Messer Guccio says that it is a matter of simple arithmetic. Ser Cione says that he is not surprised that a Pazzi should confuse the two. There is a silence of the kind that falls on a room when a plate drops, and every face turns, like flowers to a window, to the Prince, and then, with a very small hesitation, to you.
+?if b2.loan == "both"
+  They look at you because you carry both of their houses' paper, and you are, at this moment, the only person in the room who has a stake in each side of the cargo of alum.
+?elif b2.loan == "medici"
+  They look at you because the Medici side has your credit, and the Pazzi side has noticed.
+?elif b2.loan == "pazzi"
+  They look at you because the Pazzi side has your credit, and the Medici side has noticed.
+?else
+  They look at you because you are new, and because it is not known whose you are, and a quarrel is always so much more comfortable with a witness who might yet be won.
+?end
+?if b2.pazzi_heard
+  You have heard this tune before, on the Ponte Vecchio, in the dark, in the voices of persons who did not know you were listening. It was a very different arrangement of the same notes. There it was said that the quarrel was a useful thing, and that a number of the old blood would be sorry to see it mended.
+?end
+* Smooth it. Offer to carry the matter of the alum to the Banca, and settle it by the book
+  $ b2.supper = "smoothed"
+  $ standing += 2
+  $ secrecy -= 1
+  $ humanity += 1
+  You say it lightly, as one makes an offer of salt, that a bank is only a place where a quarrel is turned into a column of figures, and that the figures do not care whose cousin one is. There is a sound like a sigh, in which you can hear the ease of two men who have been told that they may stop. Ser Cione, rather red, says that it is handsome. Messer Guccio says nothing, and bows, and the look he gives you is a good deal shrewder than the bow. It is Ottaviano, at the Prince's elbow, who has the expression of a man who has just had a debt forgiven. The Prince himself does not smile. But he does, very slightly, lift the cup.
+* Say nothing, and watch what each of them does with the silence
+  $ b2.supper = "watched"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  It is a very old trick, and it has never failed. You lean back. You look at the dish with the lid. You let them go on. In a quarter of an hour Ser Cione has said four things that he ought not, and Messer Guccio has said one, and the woman who eats nothing has stopped smiling, and everyone at the table has remembered something that they had meant to forget. It ends in the usual way, in a bow, and a change of subject, and a general determination to be gracious. But you have the sum of it. You could set it down, in a column, and it would not come to what either of them thinks.
+* Say, with great gravity, that the Pazzi have always been the more honest house, and see what it does
+  $ b2.supper = "stoked"
+  $ cunning_brutal += 2
+  $ standing -= 1
+  $ humanity -= 1
+  It is a thing that you say because you wish to know what is under the table. It goes into the room like a spark into a barn. Ser Cione goes the color of old brick. Messer Guccio, to his credit, does not smile, though the effort is visible. A third voice, from the middle of the board, says in a dry whisper that this is the sort of thing that one would not have expected from the house of the Banca del Colle, and a fourth says that, on the contrary, it is exactly what one would have expected. By the time the Prince has restored the peace, with two words and a gesture, it is plain that you have made two friends, and nine enemies, and learned a good deal that nobody wished you to know.
+The Prince restores the peace, or has it restored for him, and the talk goes on to horses. It is nearly the end of the evening. The cups have been refilled, and the silver dish has not been lifted, and the smaller guests have begun to rise, with the little noise of cloth that means that they would be glad to be told to go.
+:the_summons
+She comes down the length of the table without seeming to move. It is, you decide, a gift of the very old, to be somewhere else without having traveled. She is a head shorter than you, and she stops very close, and speaks in a voice like a page being turned.
+"I am Berengaria," she says. "I keep the roll for the Prince. It is a poor sort of office. It consists of remembering what everybody else is anxious to forget." She has pale, watery, ancient eyes, of a color that has gone out of the world, and they do not blink. "I should like you to come to my house tonight, after Matins, when the Badia has rung and the street is empty. It is the one with the blue door in the Via dei Pecori. I should not like you to come before, and I should not like you to come with anyone I have not been told of."
+?if b2.sire_answer == "unknown"
+  "You told the Prince that you did not see your maker's face," says Berengaria. "I do not believe you did. I believe that you saw it very well, and have never been able to hold it. They are different things. I should like to know what you saw."
+?elif b2.sire_answer == "lied"
+  "You told the Prince that you were made by a Greek of the Scribe line, in Constantinople," says Berengaria. "I knew the Scribe's fledglings, and the Scribe's friends, and I did not know a Greek. I should be very glad to be told the truth. I shall not tell him what it was."
+?else
+  "You declined to say whose blood you are," says Berengaria. "It was neatly done. I do not ask you to answer it. I ask only for a conversation, with no one to listen, and no one to be rude to."
+?end
+?if lc.sunwalk == "shown"
+  She says, almost in passing, that there is a story in the court that a Roman once walked into the great church at Constantinople at noon, in front of the Emperor's own household, and that nothing happened. She says that it has been told her three times by three persons who had not met. She says that she has not decided what she thinks of it.
+?end
+She does not wait for an answer. She goes back up the table, and the dark green of her gown goes with her, and by the time the Prince has called for the lamps you are not at all sure that she was ever there.
+You have the night. You have a number of hours before the bell of Matins, and a long list of persons who may or may not be of use to you, and the beginning of a good deal of fear.
+$ do phase("night", 3)
+?if must_feed()
+  ~> hungry
+?end
+-> night
+
+# hungry
+## The silver dish
+The dish was not lifted. You have, you find, thought of very little else since you left the house, and the street is long, and the warm smell of the Ponte is a good deal too near.
+* Go to Benedetto's back room, where the cup is kept
+  $ do feed("bank")
+  It is warm and clean and quiet. You drink it standing, in the dark, with your hand on the cold edge of the shelf, and it does all that is asked of it. There is a very small comfort in an arrangement that works.
+* Find an animal in the stable yard behind the Badia
+  $ do feed("animal")
+  The mule is still philosophical. It does not do much for you, but it is honest, and it has seen a great many suppers.
+* Pay a donor from the wool district
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She is quick and shy and her price is fair. It is a clean arrangement, and you wish, as you always do, that it were rather less clean.
+<~
+
+# night
+## Before Matins
+:night
+?if actions_left() == 3
+  The bells of the Duomo ring the first hour of the night, and the streets of the city begin to thin. There is a smell of woodsmoke and of rain that has not yet decided to fall. You are alone, and you have a little over four hours.
+?elif actions_left() == 2
+  The great bell strikes the middle of the night. The lanes are empty. A watchman goes by under a lantern, singing very quietly, and does not look at the doorways, because he has been paid not to.
+?else
+  The Badia has begun, very faintly, the long note of the hour before Matins. You will have to go in a quarter of an hour. The thing that you have been carrying all night is a good deal heavier than it was.
+?end
+* Go to the Bargello and ask Messer Ottaviano for the roll [once] ?if actions_left() > 0
+  ~> archive
+  $ do act()
+* Go to Prisca, who will be at the strong room [once] ?if actions_left() > 0
+  ~> prisca
+  $ do act()
+* Find the clerk, who will have heard the whole of the supper from the street [once] ?if actions_left() > 0
+  ~> clerk
+  $ do act()
+* Walk the Ponte Vecchio, where Vieri has been waiting to be asked [once] ?if actions_left() > 0
+  ~> vieri
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> house
+?end
+-> :night
+
+# archive
+## The roll of the lines
+$ do chart("florence.court")
+Messer Ottaviano keeps the archive of the court in the cellar of the Bargello, in a long vaulted room that smells of vellum and wax and of something faintly alive. There are presses, and ladders, and a table with a lamp in a green shade. He is at it when you come in. He has the air of a man who has been at it since the morning of the world.
+He rises with a good deal of grace, and he is plainly afraid. It is not a fear that is directed at you. It is a very well bred, very settled fear, of the sort that a man has who has read all the papers, and has a good idea of what they will cost.
+"The roll of the houses is in the third press," he says, before you have asked. "I should say that I expected you. The Prince remarked, at the end of the evening, that you would very likely want to see it." He smiles, without any joy. "He did not say that I was to let you."
+?if b2.seat == "sword"
+  There is the little plain sword at your side, and the old right that goes with it: to go anywhere in Florence at any hour and be told the truth. You do not touch it. You do not need to. Ottaviano's eyes go to the hilt and back, and a very faint, very tired flicker crosses his face, like a man who has been waiting for a bill and is glad that it has come.
+?end
+:the_roll
+* Ask him, plainly, to let you read it, and say that you will put it back as you found it
+  $ b2.roll = "read"
+  $ _seen = 1
+  $ standing += 1
+  $ secrecy -= 1
+  He takes a long time to decide. Then, with the care of a man handling a relic, he takes down the great book, and lays it on the table, and turns the lamp. "It is the roll of the lines," he says, "which is to say the roll of the blood. It was begun in Rome, and carried here, and copied nine times, each time by a hand that I would not trust with a letter." He opens it. "I shall go and see to the lamps in the passage. It may take me the length of a short prayer."
+  He goes. You read.
+* Wait until the Seneschal is called away, and copy the page yourself
+  $ b2.roll = "copied"
+  $ _seen = 1
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ humanity -= 1
+  It does not take long. There is a boy at the door of the passage with a message about a dispute among the Officers, and Ottaviano goes, and says over his shoulder that he will be a minute, and that you will not, of course, disturb anything. You do not disturb anything. You take the great book down, and open it to the page, and copy it out in a small fast hand on a clean sheet, with every flourish and every gap, and you have put it back before the footsteps are at the end of the passage.
+* Sit down, and ask him what he thinks the roll will say
+  $ b2.roll = "asked"
+  $ bond.ottaviano += 1
+  $ humanity += 1
+  He stares at you. Then, quite slowly, he sits down, in the second chair, with his hands together on the table, and says nothing for so long that the lamp gutters. "I think," he says at last, "that it will say what it has always said. I think that it is a very good roll, and that I have kept it for sixty years, and that I have never in all that time asked myself why a book of six lines should have a table of contents that lists five." He looks at his hands. "I was told that it was a scribe's error. I have been told so by every Prince that I have served."
+?if _seen == 1
+  The roll is not long. It is a great flat book of vellum, bound in boards, in a very beautiful square black hand, and it lists the lines of the blood in order, each with its name, its mark and its first maker, in gilt and in vermilion. There is the General, with a sword. There is the Merchant, with a balance in a circle. There is the Priestess, and the Physician, and the Scribe, each in a panel of their own, and in each panel a column of names, great and small, going back to the first.
+  There is a sixth panel. It has a frame, in the same gilt, and a ruled space, and at the top of it a line of black ink that has been very carefully drawn across a name. That is all. The rest of the panel is vellum, and it is thinner than the rest of the page. It has been scraped. It has been scraped so many times, and so long ago, that it is nearly as pale as skin.
+  You tilt the lamp. In the raking light there is the ghost of a ridge, where a pen has once pressed, a long curving tail, and the faint shadow of a stroke, and nothing that you could read. At the foot of the page, in a different, plainer hand, are five seals, in wax, in a row. Each is a small thing. One is a sword, and one a balance in a circle, and one a closed hand, and one a cup, and one a pen. Beneath them is a line of writing, in the old Latin, which says that the sixth line is ended, by the consent of the five, in the time of the Goths, and that its name shall not be spoken or written, and that the roll of it be struck out.
+  The balance is Prisca's. It is the seal of her house. It is on the page. It does not say whose hand pressed it, and there is no way, from the page alone, to know whether the hand was hers.
+  $ do discover("the_roll")
+?else
+  There is nothing to see but the man, and the table, and the long sad room full of the memory of paper. You have the very odd feeling that you have been told as much as you were going to be told, and that it was a good deal more than he had meant to say. He gets up at last, and sees you to the stair, and at the door he says, in a voice that is not much more than breath, "There are five seals on that page. I should not, if I were you, ask whose they are in the Prince's hearing." He shuts the door.
+  $ do discover("the_roll")
+?end
+<~
+
+# prisca
+## The strong room
+$ do chart("florence.prisca")
+She is at the strong room, as the boy said, with a lamp and an abacus and no sign of having been there more than a moment. It is the very quiet hour. The counting floor is in darkness above her, and the long dim vault of the cellar smells of iron and cold stone and the good clean smell of money that has not been spent.
+"You have come to ask about the supper," says Prisca, without looking up. "Or about the clerk. You have the face of someone with two questions who has not yet decided which is the more frightening."
+She does not wait. She puts down the bead.
+"The clerk, then. I looked at the seal. I have had a Velati at the house, off and on, since before there was a house." She almost smiles. "I will say this. It is the first time that one of them has been seen by a person who was not trying to put out its eyes."
+?if b2.watcher_terms == "open"
+  "You have told it that it may write down everything," says Prisca. "That is either the stupidest thing you have ever done, or the first sensible one. I have not yet decided." She taps the abacus. "I should have liked it to be the second. It seldom is."
+?elif b2.watcher_terms == "bargained"
+  "You have struck a bargain with it," says Prisca. "To see the pages that go to Rome. It is very neat. It is exactly the sort of thing that I should have done, in the year that I was your age, and it will turn out to have a flaw that you will find in about six years." There is a certain approval in it. "Do keep a copy of the terms."
+?else
+  "You sent it away," says Prisca. "And so they will send another, who will be older, and a great deal better at it, and who will not have the least reason to like you." She says it without reproach. It is the plain statement of a woman who has done this sum before. "It is the sort of thing that a person does once."
+?end
+?if b2.watcher_bond == "begun"
+  "And you have taken to it," she adds, so dryly that you can hardly tell whether she is teasing. "I saw the bread. A baker in the Calzaiuoli has been telling the whole of the street. I should merely mention that it is exceedingly difficult to love a thing that is writing you down." She turns back to the beads. "It is not impossible. I have known it done."
+?end
+There is a pause. The cold of the vault goes a little deeper. She has not looked up.
+"And the other thing," says Prisca. "The thing that Gualtiero said in the hall, which was not meant for the hall." She sets the abacus aside. "It was said to you. I should be very much obliged if you would tell me what it means, because I have been trying to see it all evening, and I have not."
+?if b1.maker_told == "told"
+  You told her once, in Rome, in a room that smelled of burnt thatch, what you knew about your maker. She remembers it. It is in her face. She does not remind you. She waits, with the gentle, relentless patience of a woman who has already been told, and who would like very much to be told again, in better light.
+?elif b1.maker_told == "lied"
+  You gave her, once, in Rome, a very good lie about your maker. She remembers it. It is in her face, as clearly as if it were written there, and it is not reproach. It is the look of a person who has kept a thing in a drawer for fourteen hundred years, and has just been given leave to take it out.
+?else
+  You did not tell her, in Rome, about your maker. She has not asked again. She has, you see now, simply waited, like a woman at a river, with the great steady unhurried patience of the very old, and she is waiting now.
+?end
+:the_telling
+* Tell her all of it: the cloak, the purse, the tablet, the three nights, the name you were told not to give
+  $ b2.prisca_sixth = "told"
+  $ bond.prisca += 3
+  $ secrecy -= 2
+  $ humanity += 1
+  You tell her. It takes a long time, and it is the first time that you have said it aloud in order, and it sounds, as you say it, both smaller and stranger than you had feared. She does not interrupt. She sits with her hands folded and her eyes on the middle distance, and when you have done she is silent so long that you hear the water in the pipe. "There were six lines on the roll when I was young," she says at last. "There were five when I was old. I did not ask. It was not the sort of thing that a girl in my position asked." She says it without self-pity. It is the plainest sentence that you have ever heard her say. "I think that it is time that somebody did."
+* Say that it is a matter of an old fear, and that you will tell her when you know more
+  $ b2.prisca_sixth = "withheld"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  $ bond.prisca -= 1
+  She looks at you for a long moment. It is a perfectly kind look, and a perfectly level one, and it holds you very still. "That is a sentence that I have said myself," says Prisca, "a good many times, and to a good many people, who were right to believe it, and wrong to take it for an answer." She turns the abacus a quarter turn. "I will wait. I am good at it. But I should like you to know that I know the difference."
+?if _seen == 1
+  You do not have to say what is on the page. She has seen your face. "You have been in the cellar," says Prisca, very low. "You have seen the seal." She has gone quite still, and in the lamp the lines of her face have a look that you do not recognize, and have never seen. "The balance is my house's," she says. "It was pressed in the time of the Goths. I was in Ravenna that year, and in Rome the next, and I have not the least memory of having been asked." She looks at her hands. "I should like very much to think that is because I was never asked. I find, when I try to be honest, that I cannot tell."
+  It is the first time that you have seen her without the ledger, and it does not last. She closes the abacus, and says that it is late, and that the house will want its lamps trimmed, and that it is a very great thing, in an old woman, to be afraid of a piece of vellum.
+?end
+<~
+
+# clerk
+## What was heard in the street
+$ do chart("florence.rooms")
+The window of the rooms over the stationer's is open. It has been left open for you, a hand's breadth, as a person leaves a door ajar for a cat. The lamp is lit. The clerk is at the table, with the little book, in the very upright shorthand, and does not look round.
+"I was in the street," says {watcher.they}. "I heard none of the supper, and I heard all of it. There is a sound that a company makes when it has been told a thing that it did not want to be told, and it came out through the shutters like a draught." {watcher.They} write{watcher.s} a line, and stop. "I am not to say what I think. I am only to say what I saw. I saw the old woman come down the table. I saw her go back."
+?if b2.watcher_bond == "begun"
+  There is, on the table beside the lamp, half a loaf, wrapped in a cloth, with a knife laid across it. It is plainly for you. You take a piece. {watcher.They} do not remark on it. You both find it very difficult not to.
+?end
+"You will be going to her house," says the clerk. "Tonight. It is, I am afraid, the only thing in the book that has ever surprised me by being exactly what I expected."
+{watcher.They} lay{watcher.s} the lead across the page, and turn{watcher.s}, and look{watcher.s} at you for the first time. It is the plain, level look of someone who has made a decision, and is a little ashamed of how long it took.
+"I should like to come," says the clerk. "Not in the room. At the door. I should like to write down what is said. I have no right to ask, and I know that you have every right to refuse, and I know also that the one who made the rule is dead, and that the rule was made for a good reason, and that I should still like to come."
+:the_witness
+* Say that they may come to the door, and write what they hear
+  $ b2.elder_witness = "present"
+  $ bond.watcher += 2
+  $ secrecy -= 2
+  $ velati_regard += 2
+  The clerk lets out a breath. It is a long one, and it has the sound in it of a very small thing being set free. "I will stand in the lane," says {watcher.they}. "I will write it in the shorthand, and I will not show it to anyone until you have read it." It is a promise that nobody has told {watcher.them} to give. "I thank you. I am not sure what for."
+* Say that the matter is not for the book, and that they must stay away
+  $ b2.elder_witness = "absent"
+  $ secrecy += 1
+  $ velati_regard -= 1
+  $ bond.watcher -= 2
+  The clerk takes it with a very small bow. There is, for a moment, in the narrow face, something that looks like pain, and which is gone before you are certain of it. "Then I will not," says {watcher.they}. "I will be here. I will have the lamp lit." {watcher.They} turn{watcher.s} back to the table, with the lead in hand. "It is only that it is the first time in three years that I have been told to stay away from a thing that I most wished to see. I find that I do not enjoy it."
+* Say nothing, and let them come or not as they like
+  $ b2.elder_witness = "present"
+  $ cunning_brutal += 1
+  $ bond.watcher -= 1
+  The clerk waits. It is a good wait. It is very nearly insolent. When you have said nothing for the length of a long breath, {watcher.they} nod{watcher.s}, very gravely, and take{watcher.s} up the lead again. "I take that for leave," says {watcher.they}. "You will not be sorry. I write very well." It is an odd reply, and you cannot, in the end, decide whether to be amused.
+<~
+
+# vieri
+## The Ponte Vecchio
+$ do chart("florence.haven")
+He is on the bridge, as the whole of the quarter has known for an hour. He is leaning on the parapet over the dark water, in a good coat and a very bad temper, with the air of a person who has been standing in one place for a long time on purpose, and who would like it to be thought that it was an accident.
+"You are going to the old woman," says Vieri Salimbeni, without a greeting. "I know. Half the hall knows. She has not asked anyone to her house since the year the Duomo's lantern was set up, and she asked you with her own mouth in front of the Prince." He gives a short, scornful laugh, with a good deal of envy in it. "They call her the Mother of the Roll. She knows the debts of every one of us, and the name of every house we were ever born into, and the day we were made. She has a head like a cellar. I should not like to go there."
+He is a good deal younger than he looks. It comes out in the hands, which do not know what to do with themselves, and in the quick, hungry, too-bright look, which is the look of a boy who is not at all sure that he is wanted.
+?if b2.vieri_watch == "shielded"
+  "I have not forgotten the lane," he says, abruptly, and in a lower voice. "In the Proconsolo. I was a fool. I should like you to know that I know it." He looks at the water. "She asked me about you, you know. A fortnight ago. She wished to know how you walked."
+?elif b2.vieri_watch == "claimed"
+  "Your clerk is very well, I trust," says Vieri, with a smile that has no malice in it at all, and a good deal of care. "I shall not ask. I should only like you to know that I have not said a word, in all the hall, and that it has been a very great strain." He looks down the river. "She asked me about you, you know. A fortnight ago. She wished to know how you walked."
+?else
+  He does not speak of the lane. He does not look at you while he does not speak of it, and the quality of the silence is of a grudge that has been polished for some time. When he does speak it is in the flat, careless, offhand voice of someone who has decided to sell a thing rather than give it. "She asked me about you, you know. A fortnight ago. I told her a number of things. I do not suppose you would care to know which."
+?end
+:the_bridge
+* Give him a coin, and ask what else she has asked
+  $ do earn(-2)
+  $ cunning_brutal += 1
+  He takes it with an elaborate carelessness, and a small, bitter, pleased smile, and tells you. It is not much. She asked how you took the sun. She asked whether you had been seen to flinch, or hurry, or look at the sky. She asked, in a very odd voice, whether you had ever spoken of a man in a gray cloak. He does not know what any of it means, and says so, with a certain pride, and goes on to say a good deal about the Pazzi that you were not asking about.
+* Tell him, kindly, that he should come to the Banca, and learn to count
+  $ bond.vieri += 3
+  $ humanity += 1
+  $ standing += 1
+  He stares as if you had slapped him. Then, quite suddenly, he laughs, a real laugh, and wipes his eyes with the back of a very good glove. "I am a Salimbeni," he says. "We do not count. We are counted." He is still laughing. "I will think of it. I will not come. But I will think of it." He pushes himself off the parapet, and says, quite gently, "Be careful of her, Signore. She is not unkind. It is a great deal worse."
+* Tell him that it is none of his affair, and walk on
+  $ cunning_brutal += 1
+  $ bond.vieri -= 2
+  He does not follow. He does not call. You hear him say, to the river, in a small and savage whisper, a word in the Tuscan that he would not have used before a lady, and then there is only the sound of the water under the stones.
+<~
+
+# house
+## The house with the blue door
+$ do chart("florence.court")
+The Badia has rung for Matins. It has rung it slowly, in the single dull voice that it keeps for the dead hour of the night, and the echo has gone down the length of the Via dei Pecori and not come back. The street is empty. It is narrow, and high, and cold, and it smells of wet stone and of a mouse that has made a great mistake.
+The blue door is the color of a fading bruise. It has no knocker. It opens as you reach it, a hand's breadth, on a hall as dark as a wine cellar, and a voice that is not a voice says, from the end of it, *Come.*
+?if b2.elder_witness == "present"
+  Behind you in the lane there is the smallest sound: a shoe, set down very carefully on a wet stone, and then no sound at all. You do not look round. The door, before it closes, admits a very faint scrape of lead on paper.
+?end
+There is a room at the end of the hall. It is low, and square, and very old. It has no hangings, and no fire, and no furniture to speak of: a table of dark wood with a single candle on it, and two chairs, and a great chest of black oak with a lid that has been worn smooth by a hand. On the walls, up to the ceiling, in the bad light, there are small carved marks, thousands of them, in rows, neat as the stitches in a hem. They are tallies. They go all round the room, and over the door, and up the beams.
+Berengaria is in the farther chair, with her sleeves folded, and she is not wearing the coif. Her hair is very white. It is cropped close to her skull, like a monk's, and she looks, in the candle, a good deal older, and a good deal less formidable, and a great deal more like a woman who has been up all night with a thing that she does not like to be alone with.
+"Sit," says Berengaria. "I do not offer wine. It is not a house that has any." She looks at the marks on the wall. "I shall tell you what they are, when you have told me what I wish to know. It is the only fair way."
+The candle burns. In the wall the tallies run on into the dark.
+"The Prince asked whose blood you are," she says. "You answered him, in the way that you did. I should like to be answered differently. I should like you to tell me what you saw, on the night that you were made. All of it. I do not ask for a name. I ask for what a man would see, who had not been told what to look for." She leans forward a very little. "You will not tell me that you have forgotten. You have never forgotten a thing in your life."
+:the_description
+* Tell her all of it: the stranger in the fire, the cloak, the purse, the tablet, and what it said
+  $ b2.answer = "told"
+  $ humanity += 1
+  $ secrecy -= 2
+  $ bond.berengaria += 3
+  You tell it as it was. The fire, and the hand that put you down in the dark, and the long fall of a gray cloak, and a voice that was courteous and a face that your mind slid off like water from a stone. The folded cloak. The purse of silver. The tablet, with its eight plain words that said to eat before the sun. You say that he taught you three nights, and was gone. You say that he told you not to say who had made you. You say it as plainly as you can.
+  ?if b1.tablet == "scrape"
+    You say that you scraped the tablet clean. You say it with a certain shame. She does not seem to find it strange.
+  ?else
+    You say that you kept the tablet, and have it still. You say it with a certain defiance. She does not seem to find that strange, either.
+  ?end
+* Say that you will trade: that she shall tell you what she knows, and you will tell her what you can
+  $ b2.answer = "traded"
+  $ cunning_brutal += 1
+  $ b2.berengaria_debt = true
+  $ bond.berengaria += 1
+  "Ah," says Berengaria, and for the first time there is warmth in the dry voice, as when a person at last meets someone who shares the rules of a game. "Of course. That is the proper way, and I am an old fool." She folds her hands. "Very well. I shall give you something, and you will owe me a thing. I shall tell you what it is in due course. It will not be unreasonable. It will be exact." She nods, slowly, as if setting a seal. "You may begin. Tell me what you choose. I shall tell you what I choose. We shall see who has the better of it."
+  You tell her a part of it: the fire, the cloak, the three nights. You do not say anything of the tablet, or the words that were on it, or the thing that he said about not telling them. It is, you think, a perfectly fair account. She nods through it, as one nods at a bill that has been honestly drawn.
+* Say that it is not a matter that you can speak of
+  $ b2.answer = "closed"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  $ bond.berengaria -= 1
+  The candle does not move. She does not move. She sits looking at you, in the dim, without any visible anger, and the minutes go by like a procession of very quiet mourners. "Then we are two old things in a dark room," says Berengaria, "each waiting for the other to be careless." She smiles, and it is the most terrible thing that you have seen all night, for there is nothing in it whatever but a profound and perfectly well bred patience. "I am the elder. I have more practice. I shall not be the first."
+?if b2.answer == "closed"
+  It is a long time before either of you speaks. You sit. She sits. The wick of the candle grows a small red bloom, and the dark between the tallies crowds a little closer. There is an old clock somewhere in the house that ticks. It ticks for the whole of a quarter of an hour. At the end of it she says, in the plain gentle voice of someone closing a book, that you may go if you wish, and that it is the proper thing, and that she will not think the worse of you.
+  You do not go. You find, to your own surprise, that you do not wish to. She waits a moment longer. Then she says, as if to herself, "I shall tell you a little, all the same. I am an old woman, and it is late."
+?end
+She sits back. Her face has gone quite still, and she looks at the candle for a long time, and when she speaks it is in a different voice, a very low, very steady one, like a person reading a verse that she has said every day for a very long time.
+"There was a man who made his pupils in the dark, and taught them three nights, and left them," says Berengaria. "I was told of him when I was new. I was made in Ravenna, in the king's time, in the house of a lady who is dust. I was told of him as one tells children of the one who comes in the night to leave a coin in the shoe, and takes the shoe." She stops. "It was not a story that anyone took seriously. It was a story that the old ones told, to keep us from wandering. It was said that he belonged to a line that is not on the roll."
+You do not move.
+"It is on the roll," she says. "It is the sixth. You have seen it, or you will have been told. It is a space and a stroke of ink. The five struck it out, in the time of the Goths, and the men who sealed the decree are gone, and the book was copied, and the copyists were told to leave it as it lay." She looks at the wall of tallies. "I was a girl. I was set to copy the roll in my house, in the very week that the thing was done, because I had a good hand. I copied the names of the sixth line. I wrote them out on a long sheet, as they were read, one hundred and twelve of them, and a man came, in a gray coat, and took the sheet from my table, and burned it in front of me." Her voice does not change. "I have never told anyone that I remember them. I have never been asked. I have said them over, every night, for nine hundred years. It is the one thing that I have ever done that I am sure was right."
+She lifts one hand, and it touches the wall, very gently, at the nearest row of the marks. "These are not for counting," she says. "They are for them."
+The candle gutters. It is very quiet. It seems to you that you can hear, in the stillness of the room, the small sound of a great many names being held.
+:the_rolls_lie
+"You are not of the five," says Berengaria. "I do not say it because of the sun.{lc.sunwalk == 'shown' or b2.daylight == 'open' ? ' I have heard about the sun, and it is nothing to me, for I am an old woman and I have heard of stranger things.' : ''} I say it because of the way in which you were made, and because of the man who made you, and because you were told not to speak of him, which is the one thing that a man tells a pupil whom he intends should live." She leans in. "If the rolls are right, you cannot be. If you are, the rolls are wrong. I have kept the rolls for nine hundred years. I do not enjoy the choice."
+?if b2.answer == "told"
+  She looks at you for some time. "You were honest," she says. "It has cost you something. I am obliged to give you a thing in return." She rises, with the stiffness of the very old, and goes to the great chest of black oak, and opens it with a key from her girdle. She takes from it a small, worn, flat piece of wood, as long as her hand, notched down both edges, six times, with the sixth notch cut deeper than the rest, and the wood scraped smooth where a thumb has lain. "It is a tally," says Berengaria. "It is mine. It is the oldest thing I own. There are six lines, and it has six notches, and I have kept the sixth sharper than the rest, in case." She lays it in your hand. "If you ever find the sixth, or it finds you, give it this, and say that Berengaria of the Ravenna house kept faith with the roll. It will understand."
+  $ do obtain("remembrancers_tally")
+  You take it. It is very light. It has a faint, dry, ancient smell, of old wood and of ash, and it is warm from her hand.
+?elif b2.answer == "traded"
+  "I owe you something," says Berengaria. "I shall pay it. I do not say that it is the whole of what I know, only that it is a fair price for what you have told me." She leans closer. "There is one living person who has seen the sixth panel before it was scraped, and who was not of the five. He will not come to Florence. He has been in the Pope's service, and then in no one's, for a very long time, and he is called Brother Anselm, and he is at the abbey of San Miniato." She sits back. "I should go by day, if I were you. He will talk to you. He has not talked to anyone in thirty years, because no one has asked him the right question. It is not a very complicated one. It is only that you will have to be the sort of man who can ask it."
+  She smiles, very faintly. "And you owe me a thing. You will know it when it comes."
+?else
+  "You have told me nothing," says Berengaria. "I shall tell you nothing more. It is a perfectly proper arrangement, and I do not complain of it." She rises. "I will say only that you should be careful of the persons who are kind to you in this city. I have known three persons in my life who told the truth about the sixth line, and all of them were dead by the end of the year, and they had all of them been kind to someone." She goes to the door, which opens before she reaches it. "Good night, Signore. I hope that you are wise. It is a very difficult thing to be, when one is also afraid."
+?end
+?if b2.elder_witness == "present"
+  The door closes behind you. It does not quite shut. There is a little crack of dark, at the jamb, through which the lane is visible, and the wet stones, and the thin gray light that has begun to come. Something moves in it. It is a very small movement, as of a person who has been standing perfectly still for a long time and is about to be sick or to sing. A lead is put away in a pocket. It is the clerk.
+  The shorthand is, you know, an old one, and nobody in Florence can read it but you.
+?end
+-> dawn
+
+# dawn
+## The first gray
+The sky over the Via dei Pecori has the dull gray color of a coin that has been in a pocket a long time. It is not yet dawn. The street is the color of the sky, and the stones are wet, and the only sound in the world is the tick of the water from the eaves.
+You stand in it for a good while. It is a thing that you have done for a very long time, in a good many streets: to stand, in the stillness before a day, and let the weight of what you have been told settle where it will. You know a number of things that you did not know at sunset. You know that there was a line. You know that it was struck out. You know that a hundred and twelve names are being said, every night, in a cold room, by an old woman in a green gown. And you know, as surely as you know your own hand, that someone in the city is looking at you, and has been for some time, and that it is not the old woman, and it is not the Velati.
+There are three doors that you could go to before the sun comes up. It is not quite true that you must choose. It is only that you have the habit of acting on what you know, and it is very difficult, in the gray, to stand still.
+:the_telling_of_it
+* Go to the Prince, and tell him what you have learned
+  $ b2.roll_told = "prince"
+  $ standing += 2
+  $ secrecy -= 2
+  $ bond.prisca -= 1
+  The house behind the Bargello is dark, except for one small yellow window on the third floor, where a small gray man in a plain chair is reading by a single candle, as he has done every night of his life. He does not look surprised. He lays the book on his knee. You tell him, in the plainest words you have, what you saw in the roll, and what an old woman said in a room with no fire. He listens without a sound. "I have sat in this chair for two hundred years," says Gualtiero, when you have done, "and I have never once asked the question that you have just put to me." He is quiet for a time. "I should be grateful if you would not put it to anyone else. And I should be grateful, I think, if you would put it to me again."
+  There is, in his face, in the first of the light, an expression that you cannot place. It is not fear. It is something rather like the relief of a man who has been carrying a very small, very hard stone in his shoe for two centuries, and has just been allowed to take off the shoe.
+* Go to Prisca, and tell her what you have learned
+  $ b2.roll_told = "prisca"
+  $ bond.prisca += 3
+  $ secrecy -= 1
+  $ standing -= 1
+  The strong room is lit. She has not been to bed. She is sitting where you left her, with her hands in her lap and the abacus pushed aside, and she looks up as you come in with the face of a woman who has been rehearsing a very difficult sentence. You tell her. She hears it without a movement. When you speak of the hundred and twelve, and the hand in the gray coat, she shuts her eyes. "I should like," says Prisca, with great precision, "to go to the house with the blue door, and I should like to be told that it is not true." She opens her eyes. "I will not go. Not today. I shall want to be a good deal more certain what I am going to say." She puts out a hand, and for the first time since Rome she lays it, lightly, on yours. "Thank you for coming here first."
+* Tell no one, and go home to the day
+  $ b2.roll_told = "none"
+  $ secrecy += 3
+  $ cunning_brutal += 1
+  $ defiance += 1
+  You walk home. You walk the whole way, by the river and the long wall and the dim, blurred, pearl colored streets, and nobody sees you, and nobody speaks. By the time that you have reached the house the sun is a pale line on the hills, and the first of the bakers is raising his shutter, and the whole of the city is going about its day in perfect ignorance of the thing that you have in your coat. It is a great, cold, private weight. It is yours. You find, as you climb the stair, that you are not sure that you are glad of it.
+$ do rest()
+=> next

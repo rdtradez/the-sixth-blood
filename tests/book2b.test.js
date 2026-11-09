@@ -60,11 +60,11 @@ const WAKES = [{}, { place: 'collesanto', steward: 'keepers' }, { place: 'tomb',
 const REPLIES = ['warm', 'formal', 'silent'];
 const FRIARS = ['charmed', 'paid', 'cowed', 'hidden'];
 
-test('Book Two now lists six chapters and still pauses after the last', async () => {
+test('Book Two now lists eight chapters and still pauses after the last', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 6);
+  assert.equal(book.chapterCount, 8);
 });
 
 test('chapter 3 plays through to chapter 4 for every waking, reply and friar outcome', async () => {

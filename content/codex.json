@@ -245,6 +245,26 @@
       "title": "The Velati",
       "book": "blood-and-gold",
       "text": "The Veiled Watch, begun by a vigil of the Aventine who wrote down what he saw. They keep a book, in a shorthand passed from hand to hand, and send agents to watch the old blood. Their rule is to see, to write and not to interfere. They mark their letters with a closed eye."
+    },
+    "the_roll": {
+      "category": "lore",
+      "title": "The roll of the lines",
+      "book": "blood-and-gold",
+      "text": "The court's great book of the blood. Five lines are set out in gilt, each with its mark and its names. After them is a sixth panel, framed, with a name struck through and the vellum scraped thin. Five seals stand at the foot of the page, and a line of Latin says the sixth is ended, by the consent of the five, in the time of the Goths."
+    },
+    "berengaria": {
+      "category": "people",
+      "title": "Berengaria",
+      "book": "blood-and-gold",
+      "person": "berengaria",
+      "text": "The Prince's Remembrancer. She is the oldest vampire at the Florentine court that you have met, and says that her office is remembering what everyone else is anxious to forget."
+    },
+    "nanni": {
+      "category": "people",
+      "title": "Nanni",
+      "book": "blood-and-gold",
+      "person": "nanni",
+      "text": "A seller of thread in the Mercato Vecchio who has been a small customer of the Merchant house for longer than the books go back. He does not look at you quite the way other people do, and you cannot afterward say why."
     }
   }
 }

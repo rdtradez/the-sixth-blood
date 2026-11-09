@@ -281,6 +281,18 @@
       },
       "title": "Maestro Berto's senior apprentice",
       "bio": "Mixes the greens. Has a very direct way of looking at people and does not stop working to do it."
+    },
+    "berengaria": {
+      "gender": "f",
+      "name": "Berengaria",
+      "title": "Remembrancer of the court",
+      "bio": "A very small, very old vampire in a dark green gown, who keeps the Prince's roll in her head. She was made in Ravenna in the Gothic king's time, lives in a house with a blue door and no fire, and has said a hundred and twelve names over every night for nine hundred years."
+    },
+    "nanni": {
+      "gender": "m",
+      "name": "Nanni",
+      "title": "A seller of thread",
+      "bio": "A small bent brown old man with a handcart of colored hanks and indigo on the ends of his fingers. He has dealt with the Merchant house in a small way for as long as anyone has kept books. Nobody can say afterward what color his eyes were."
     }
   }
 }

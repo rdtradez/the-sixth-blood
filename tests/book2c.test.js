@@ -48,7 +48,7 @@ async function play(chapter, vars, wants = [], { stopAt = null, seed = 3, wake =
   game.state.sys.sleep.wake = { quick: true, place: 'haven', steward: 'bank', outcome: 'on_schedule', years: 1410, ...wake };
   for (const [k, v] of Object.entries({ wealth: 50000, ...vars })) dev.setVar(game, k, v);
   const frame = await dev.jump(game, chapter, { keep: true });
-  return drive(game, frame, wants, stopAt);
+  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c06' ? 'b2c07' : null));
 }
 
 const clean = (text) => {
@@ -60,11 +60,11 @@ const clean = (text) => {
 const DEALS = ['partner', 'rival', 'quiet'];
 const SUNS = ['agreed', 'bargained', 'kept'];
 
-test('Book Two lists six chapters and still pauses after the last', async () => {
+test('Book Two lists eight chapters and still pauses after the last', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 6);
+  assert.equal(book.chapterCount, 8);
 });
 
 test('chapter 5 plays through to chapter 6 for every deal and bargain about the sun', async () => {
@@ -160,12 +160,11 @@ test('chapter 5 reads each deal, and the court letter only when he agreed to loo
   assert.doesNotMatch(declined.text, /offers the Signor del Colle a seat at a dinner/);
 });
 
-test('chapter 6 plays through and then pauses, because Book Two is incomplete', async () => {
+test('chapter 6 plays through and reaches chapter 7 for every sun and watchers history', async () => {
   for (const daylight of ['open', 'shaded', 'deputy']) {
     for (const watchers of ['funded', 'warned', 'silent', 'none']) {
       const run = await play('b2c06', { 'b2.daylight': daylight, 'lc.watchers': watchers });
-      assert.notEqual(run.frame.wait, 'choices', JSON.stringify([daylight, watchers]));
-      assert.equal(run.game.state.chapter, 'b2c06');
+      assert.equal(run.game.state.chapter, 'b2c07', JSON.stringify([daylight, watchers]));
       clean(run.text);
     }
   }
@@ -173,11 +172,11 @@ test('chapter 6 plays through and then pauses, because Book Two is incomplete', 
 
 test('chapter 6 plays through when very hungry and for a woman', async () => {
   const hungry = await play('b2c06', { hunger: 95 }, [/Take the cup/]);
-  assert.notEqual(hungry.frame.wait, 'choices');
+  assert.equal(hungry.game.state.chapter, 'b2c07');
   clean(hungry.text);
   const woman = await play('b2c06', {}, [], { hero: { ...HERO, gender: 'f' } });
   assert.match(woman.text, /Matteo Bonsi/);
-  assert.notEqual(woman.frame.wait, 'choices');
+  assert.equal(woman.game.state.chapter, 'b2c07');
   clean(woman.text);
   const man = await play('b2c06', {});
   assert.match(man.text, /Allegra Bonsi/);
