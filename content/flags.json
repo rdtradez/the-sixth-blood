@@ -1329,6 +1329,261 @@
       "major": true,
       "default": "passed",
       "note": "Lost Centuries 4 (1348): what he did on the north road"
+    },
+    "b2.trouble": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "fled",
+        "fought",
+        "talked"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 1: how he got out of being woken early (none if he was not)"
+    },
+    "b2.first_feed": {
+      "kind": "enum",
+      "values": [
+        "animal",
+        "donor",
+        "human",
+        "none"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "animal",
+      "note": "Chapter 1: how he first fed in Florence"
+    },
+    "b2.emperor": {
+      "kind": "enum",
+      "values": [
+        "bluffed",
+        "asked",
+        "blustered"
+      ],
+      "book": "blood-and-gold",
+      "default": "bluffed",
+      "note": "Chapter 1: how he asked after the emperor (a comedy beat)"
+    },
+    "b2.books": {
+      "kind": "enum",
+      "values": [
+        "trusted",
+        "audited"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "trusted",
+      "note": "Chapter 1: whether he trusted the steward's accounts or checked them"
+    },
+    "b2.street": {
+      "kind": "enum",
+      "values": [
+        "watched",
+        "spoke",
+        "printed"
+      ],
+      "book": "blood-and-gold",
+      "default": "watched",
+      "note": "Chapter 1: what he did on his first night out in Florence or on the hill"
+    },
+    "b2.prisca_reply": {
+      "kind": "enum",
+      "values": [
+        "warm",
+        "formal",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "formal",
+      "note": "Chapter 1: how he answered Prisca's letter"
+    },
+    "b2.saint": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "curbed",
+        "shaped"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 2: what he did about the village belief in the guardian saint"
+    },
+    "b2.valerii": {
+      "kind": "enum",
+      "values": [
+        "sworn",
+        "trusted",
+        "distant"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "trusted",
+      "note": "Chapter 2: how far the Valerio family are told the truth"
+    },
+    "b2.fiammetta": {
+      "kind": "enum",
+      "values": [
+        "promised",
+        "refused",
+        "allowed"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "promised",
+      "note": "Chapter 2: what he told Fiammetta Valerio when she asked to see Florence"
+    },
+    "b2.friar": {
+      "kind": "enum",
+      "values": [
+        "charmed",
+        "paid",
+        "cowed",
+        "hidden"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "charmed",
+      "note": "Chapter 2: how he met the Archbishop's examiner at the shrine"
+    },
+    "b2.prisca_brief": {
+      "kind": "enum",
+      "values": [
+        "heeded",
+        "scoffed",
+        "skipped"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "skipped",
+      "note": "Chapter 3: whether he went to Prisca before the court, and how he took her advice"
+    },
+    "b2.test": {
+      "kind": "enum",
+      "values": [
+        "bested",
+        "shown",
+        "declined",
+        "lost"
+      ],
+      "book": "blood-and-gold",
+      "default": "declined",
+      "note": "Chapter 3: how he met the young vampire who tested him in the lane"
+    },
+    "b2.licence": {
+      "kind": "enum",
+      "values": [
+        "bought",
+        "refused",
+        "poached"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 3: whether he took a licence of the Purse to feed in Florence"
+    },
+    "b2.oath": {
+      "kind": "enum",
+      "values": [
+        "sworn",
+        "courteous",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "courteous",
+      "note": "Chapter 3: what he swore to the Prince of Florence"
+    },
+    "b2.sire_answer": {
+      "kind": "enum",
+      "values": [
+        "unknown",
+        "lied",
+        "deflected"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "deflected",
+      "note": "Chapter 3: what he told the court when asked whose blood he was"
+    },
+    "b2.seat": {
+      "kind": "enum",
+      "values": [
+        "sword",
+        "none"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 3: whether he took the Captaincy of the Night"
+    },
+    "b2.pazzi_heard": {
+      "kind": "flag",
+      "book": "blood-and-gold",
+      "default": false,
+      "note": "Chapter 3: whether he overheard the court talk about keeping the Medici and Pazzi quarrel warm"
+    },
+    "b2.prisca_books": {
+      "kind": "enum",
+      "values": [
+        "taken",
+        "pressed",
+        "demanded"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "taken",
+      "note": "Chapter 4: whether he took Prisca's accounts of the hill on trust, pressed her on the tribute, or demanded it back"
+    },
+    "b2.prisca_sun": {
+      "kind": "enum",
+      "values": [
+        "agreed",
+        "bargained",
+        "kept"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 4: whether he agreed to be the house's daylight"
+    },
+    "b2.prisca_past": {
+      "kind": "enum",
+      "values": [
+        "asked",
+        "spared",
+        "shared"
+      ],
+      "book": "blood-and-gold",
+      "default": "spared",
+      "note": "Chapter 4: what he did when Prisca offered to tell him her history"
+    },
+    "b2.prisca_deal": {
+      "kind": "enum",
+      "values": [
+        "partner",
+        "rival",
+        "quiet"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "quiet",
+      "note": "Chapter 4: partner, rival or quiet: the terms he settled with Prisca"
+    },
+    "b2.prisca_asked": {
+      "kind": "enum",
+      "values": [
+        "agreed",
+        "declined"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "agreed",
+      "note": "Chapter 4: whether he agreed to find out who is keeping the Medici and Pazzi quarrel warm"
     }
   }
 }

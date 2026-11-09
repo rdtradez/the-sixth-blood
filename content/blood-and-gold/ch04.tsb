@@ -1,0 +1,252 @@
+// Book Two, Chapter 4 (session 19). Prisca: partner or rival. The night after the court, in her house and her bank.
+// One night phase of three actions out of four (the strong room, the counting floor, her rooms, the river), then the terms at dawn.
+// Ends with rest() and => next. Reads b2.seat, b2.oath, b2.books, b2.pazzi_heard, b2.prisca_reply, lc.collis and lc.sunwalk. The book is incomplete, so play pauses after this chapter until chapter 5 is added.
+// Later chapters read b2.prisca_deal, b2.prisca_asked, b2.prisca_books, b2.prisca_sun and b2.prisca_past.
+@chapter b2c04
+@title The Purse
+@book blood-and-gold
+@version 1
+
+# start
+## The strong room
+$ b2.prisca_books = "taken"
+$ b2.prisca_sun = "kept"
+$ b2.prisca_past = "spared"
+$ b2.prisca_deal = "quiet"
+$ b2.prisca_asked = "agreed"
+$ _river = 0
+$ do chart("florence.bank")
+Benedetto is waiting at the street door, with a lantern, and he does not say anything at all. He has, it is plain, been told to say nothing, and is doing it with great energy. He takes you down a long stair, past the room with the high desk and the brass tags, and past a second door, and a third, until you are standing in front of a plate of black iron the size of a barn door, with three locks, and no handle, and a very small brass bell.
+He rings it. It is a very ordinary little bell. The door swings inward on silent hinges, and you see the room.
+It is long, and low, and cool, and lined to the vault with dressed stone. It smells of ink and cloves and a good deal of very old paper. There are shelves, from the floor to the ceiling, on both sides, and every shelf is full of ledgers, in bindings of every kind, calf and vellum and plain boards, and the ledgers on the farthest shelves are so old that the writing on their spines has gone brown. In the middle there is a table, and a single lamp, and Prisca.
+She has changed out of the court gown. She is in a plain dark dress with her sleeves turned back, and her hair is up in a net, and she has the look, after the hall, of a woman who has taken off a very heavy hat.
+?if b2.seat == "sword"
+  She does not get up. She does not look at the abacus either, and that is how you know. "You took the sword," says Prisca. It is said very evenly, in the voice that she would use to read out a sum. "I asked you not to, and I did not think that you would. I was wrong. It is, I suppose, an interesting thing to be wrong about, after so many years." She turns the pen once between her fingers. "Sit down. I am not going to shout. I do not think that I could, in this room."
+?else
+  She gets up when you come in. It is a small thing, and she does it quite stiffly, like a person who is not used to it. "You did well," says Prisca. "I did not think that you would. I had thought you would take the thing that he offered, because it was a very good thing, and because you are old enough to be sure that you can always put it down again." She tries a smile, and does not quite manage it. "Sit. I have a great deal to say, and none of it in the hall."
+?end
+?if b2.oath == "sworn"
+  "And you knelt," she says. "I have not seen that done in the Roman form in a hundred years. It was very beautiful. It made my skin crawl."
+?elif b2.oath == "refused"
+  "And you refused him," she says. "You have made yourself very interesting, you know. It is the most dangerous thing that anyone can be, in this city, and the only thing that Gualtiero cannot forgive in a guest."
+?end
+Benedetto brings a cup. It is blue glass, with a little gold in the rim, and it is full, and it is warm, and he sets it down at your elbow with a bow and retires, quite fast, with the air of a man who has been given a task and has done it before anyone could change his mind.
+?if must_feed()
+  ~> hungry
+?end
+Prisca has laid a hand flat on the table. It is a small hand, with ink on the second finger, and it does not move.
+"I have three things to show you," she says, "and I have time for three, because I do not intend to be interrupted, and I have told the house that if I am I shall have someone's head. After that I have a question to ask. You will answer it when you are ready, and not before. I think that is fair."
+You say that it is.
+$ do phase("night", 3)
+-> night
+
+# hungry
+## The cup
+The cup is quite plain, and what is in it is perfectly clean, and it comes, you do not doubt, from a person who has been paid a very fair price and has not been asked what it was for. It smells of copper and cloves and a faint, sweet, bready warmth. You are, you find, a good deal hungrier than you thought.
+* Drink it, and say nothing about it
+  $ do feed("bank")
+  Prisca watches you with a perfectly open face. It is, you realize, the first time since you came in that she has looked at you as if you were a friend. "The house keeps a supply," she says. "It is not very romantic. It is, however, a great deal quieter than the alternative, and it has not once been the subject of a complaint to the Officers."
+* Push it away, and say that you will hunt
+  $ cunning_brutal += 1
+  $ standing -= 1
+  She does not take offense. She takes the cup, and drinks it herself, in three small sips, with a very straight back, and sets it down. "I thought you might," she says. "You are not the only one of us who has a pride about it." It is a very odd moment, and neither of you remarks on it. You will, you think, find something in the lanes before dawn.
+<~
+
+# night
+## The long night
+:night
+?if actions_left() == 3
+  There is a fine, dry, rustling silence in the room, like the silence in a library when someone has just closed a door. Prisca has her hands folded. She is waiting, you see, to be asked.
+?elif actions_left() == 2
+  The lamp has been trimmed. Somewhere above, a long way off, the great bell of the Duomo has struck the second hour, and the sound has come down through the stone as a faint, dry hum. There is time for two things more, and the night is a good deal less cold than it was.
+?else
+  The lamp is low. There is only one thing left that you can do before the sky begins to pale, and you both know it, and neither of you has said so.
+?end
+* Ask to see the books of the house [once] ?if actions_left() > 0
+  ~> books
+  $ do act()
+* Go up to the counting floor with Benedetto [once] ?if actions_left() > 0
+  ~> floor
+  $ do act()
+* Ask Prisca to take you to her own rooms [once] ?if actions_left() > 0
+  ~> rooms
+  $ do act()
+* Go out to the river, alone [once] ?if actions_left() > 0
+  ~> river
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> terms
+?end
+-> :night
+
+# books
+## The ledgers
+$ do discover("the_purse")
+She does not make you ask twice. She takes down a book from a shelf behind her, without looking, as one takes a loaf from a familiar bin, and lays it open on the table in front of you.
+It is the account of the hill. It begins in the year 1313, in a hand that is not hers, and goes on in a series of hands that you do not know, and at the end of it, in the last, a firm, quick, level script that you do, it comes to the day before yesterday. The rents of Collesanto, the sales of oil and wine, the building of the north wall, the new bell, the sums sent up from the bank and the sums sent down. It is the history of a village, set out in columns of figures, with the plague in it as a dark band, as a flood leaves a mark on a wall.
+She does not hurry you. You read for a long time. It is a very good book. It is a book that has been kept, line by line, for a hundred and sixty years, by a number of people who were not paid to love the hill, and who did.
+?if b2.books == "audited"
+  There is a line that you have seen before. It is in the year 1349, and again in 1350, and in every year after, and it says, in a very neat hand, *to the Prince, by custom, from the keeping of the hill*. You found it, in the first night, in Benedetto's copy, and you asked him what it meant, and he had gone the color of tallow and said that it was a matter for Madonna.
+?else
+  There is a line that you would, in the ordinary way, have passed by. It is in the year 1349, and again in 1350, and in every year after, in a very neat hand, and it says *to the Prince, by custom, from the keeping of the hill*. It is the same sum each time. It is not very large. You have the faint, uneasy feeling of a man who has put his hand on a stair in the dark and found that there is one more step than he had counted.
+?end
+Prisca has not moved. Her eyes are on your face. She is, you see, waiting to find out what sort of reader you are.
+:the_books
+* Close the book, and say that it is a very good account, and that you trust her
+  $ b2.prisca_books = "taken"
+  $ bond.prisca += 2
+  $ cunning_brutal -= 1
+  She lets out a very small breath. It is a thing that she would not have done in front of anyone else. "I did not expect it," she says. "I am not sure that I deserve it, and I am quite sure that I should not have given it, in your place." She takes the book back, and does not put it on the shelf. She holds it a little while in her lap, like a person holding a cat.
+* Put your finger on the line, and ask what it is
+  $ b2.prisca_books = "pressed"
+  $ cunning_brutal += 1
+  She does not look at the finger. She looks at your face. "It is a tribute," she says. "It was paid to the Prince, from the first year of the plague, for as long as the hill has been walled. It was his price for not asking what was in the cellar." She says it without any expression at all. "I paid it from the hill's own money, because I could not pay it from mine. If I had paid it from mine he would have known that I valued it. This way, it was a custom, and a custom is a thing that a Prince can forget."
+  "I could have told you," she says. "I did not know how. I wrote you nine letters, and I did not put it in any of them."
+  * Say that it was well done, and that you would have done the same
+    $ bond.prisca += 3
+    $ humanity += 1
+    It is a thing that you know to be true, and a thing that costs you nothing to say, and you see it go into her like a hand into a glove. She nods, very slowly. She says that it is the kindest thing that anyone has said to her in a hundred years, and that it is a most extraordinary comment on the hundred years.
+  * Say that you want it back, with the interest
+    $ b2.prisca_books = "demanded"
+    $ bond.prisca -= 3
+    $ do earn(30)
+    $ cunning_brutal += 1
+    She says nothing for some time. Then she writes a figure on a scrap of paper, and pushes it across the table, and it is a good deal more than you would have thought to ask. "That is with the interest," says Prisca. "At the rate that the house would have charged a stranger." She sits back. She does not say that she is hurt. She says, quite gently, that she is very glad that you are the sort of man who will say it to her face.
+<~
+
+# floor
+## The counting floor
+$ do discover("the_purse")
+The counting floor is on the first story, and it is very large, and by night it is very dark. There are forty tables in it, in rows, each with its own lamp that is not lit, and its own stool, and its own abacus, and its own little brass inkwell with a cork in it. There are great pigeonholed cabinets all round the walls, stuffed with the letters of correspondents in Lyon and Bruges and Venice and London and Constantinople, where the Turk has been for twenty years and the house, says Benedetto, is still owed.
+He lights one lamp, and stands beside it with his hands clasped like a boy at a recitation, and tells you what the house does.
+It lends. It takes deposits, and lends them out again, and moves money by letter from one city to another so that nobody need carry it. It does a good deal of cloth, and a little alum, and a great deal of paper. It has an interest in a ship, and a larger one in a quarrel in Flanders. It is, says Benedetto, one of the six great houses of Florence, and the only one that has never been seen to fail.
+"We do not close in the daytime, of course," he says. "The house is open from the third hour to the ninth. That is when the business is done. There are forty clerks and eleven factors and a great many people with letters, and it is all done in the sun, because the world is not run by night." He drops his voice. "I am, Signore, if I may say so, the only person on the floor who knows what it is that the house is. The rest of them think that the Madonna is an invalid."
+He does not say the rest of it. He has plainly been told not to. It is Prisca who says it, from the door, in a small dry voice, and you do not know how long she has been standing there.
+"It is a quarter of the business," says Prisca. "That is what it costs me. Every dealing that matters, every contract that is to be signed in daylight, in a room with windows, I must do through a man. The man must be human. He must be honest, or he must be loyal, and he is very seldom both. He takes his share, and he talks in his sleep, and he dies." She comes in, and puts her hand on the back of a stool. "I have been losing a quarter of every bargain in this city for a hundred and fifty years, Signore, for the want of a person who could be in the room."
+She has known since Rome. She has never once said so in public.
+?if lc.sunwalk == "shown"
+  "The Prince does not know," says Prisca. "Nor does the court, whatever the court may say about Constantinople. They saw you stand in a church at noon, and they have told themselves that it was a very good trick. I should like them to go on telling it."
+?else
+  "The Prince does not know," says Prisca. "Nor does the court. I should like it to go on."
+?end
+:the_sun
+* Say that you will be the house's daylight, and gladly
+  $ b2.prisca_sun = "agreed"
+  $ bond.prisca += 3
+  $ secrecy -= 2
+  $ standing += 1
+  She has to look away. It is only for a moment, and she does it at a pigeonhole, with great concentration, as if she had just remembered what was in it. "I did not ask," she says, to the pigeonhole. "I wish it to be clear that I did not ask." Then she turns round, and her face is quite composed, and she says that the Banca del Colle will need a counter, and a name on the door, and a chair for the owner in a room with windows. She says that she has, it so happens, a chair.
+* Say that you will do it, and that the price is a share of the house
+  $ b2.prisca_sun = "bargained"
+  $ cunning_brutal += 1
+  $ bond.prisca -= 1
+  $ do earn(20)
+  She laughs. It is a short, genuine, startled sound, and it is the first time that you have heard it, and it makes Benedetto drop his pen. "A share," says Prisca. "Of course." She is delighted. She is delighted, you realize, because it is the first time in a century that a person has dealt with her as an equal, and she has been starved of it. "A fifth," she says. "You will say a third, and I shall say a quarter, and we shall make a great deal of noise, and we shall end where I have already decided."
+* Say that the sun is yours, and you will think about what to do with it
+  $ b2.prisca_sun = "kept"
+  $ secrecy += 2
+  $ bond.prisca -= 1
+  It is not an unkind thing to say, and she does not take it as an unkind one. She is, you see, a good deal too old to be wounded by a prudent answer. "That is very sensible," says Prisca. "It is, in fact, what I should have said." She looks, for the first time since you came in, genuinely tired. "I shall not ask again. I shall only say that the offer does not expire."
+<~
+
+# rooms
+## Her rooms
+$ do discover("the_purse")
+She takes you up. It is a narrow back stair, behind a panel, with a rope instead of a rail, and at the top there is a small door, with a very plain lock, and when she opens it you stand on the threshold for a moment without going in.
+It is a small room. You had expected something else. It is a room in which a person has lived for a very long time without being seen, and has furnished it as a hiding place and then, by degrees, as a home. There is a bed that is not slept in. There is a table with a lamp of old Roman glass on it, a green one, with a chipped lip. There is a shelf of books, a good many of them, with the bindings gone soft with handling. There is a window, tightly shuttered, with a vase of dried flowers set in front of it as if to keep the shutters company. There is a saucer of cloves.
+?if lc.collis == "saved"
+  "You saved the house," says Prisca. She is standing with her back to you, folding something that does not need folding. "In the year that the Goths came. I was told afterward by three separate people. It is the only time in my life that I have been told by three separate people that anyone had done me a kindness. I did not know what to do with it. I have been trying to find out ever since."
+?elif lc.collis == "burned"
+  "You burned the house," says Prisca. She says it without any heat. She is standing with her back to you, folding something that does not need folding. "In the year that the Goths came. I knew why. It was the right thing, and it was the cheapest, and I did not forgive it for fifty years. I have since decided that I have. I should like you to know that it took the whole of the fifty."
+?elif lc.collis == "sold"
+  "You sold the house," says Prisca. She is standing with her back to you, folding something that does not need folding. "In the year that the Goths came. It was a very good price. I know, because I bought it back, in four parts, from four different people, over the next two hundred years. It was the best investment that I ever made, and I made it out of spite."
+?else
+  "It is not much," says Prisca. She is standing with her back to you, folding something that does not need folding. "It is where I have lived since the house came north. It has had a good many leases."
+?end
+She turns. She puts the cloth down on the table, and her hands are quite steady, and her voice is quite steady, and she is looking at the lamp.
+"I should like to tell you what I have done," she says. "I think that you are entitled to it. I have not told anyone. I have only had it to myself, which is a very poor way to keep a thing, and a very good way to lose it." She stops. "But I do not know that you wish to hear it. I should not blame you."
+:the_past
+* Ask her to tell you, all of it
+  $ b2.prisca_past = "asked"
+  $ bond.prisca += 3
+  $ humanity += 1
+  She tells it. It takes a long time. It is not a dramatic story, and she does not tell it as if it were. She tells you of the second century and the third, and the long, stupid, careful years in which the Merchant house moved a little at a time out of a falling city into a rising one, with its money sewn into the hems of its coats. She tells you of a winter in Ravenna. She tells you of a hospital in Pisa that she paid for, and burned, and paid for again. She tells you, at the end, of the night in the year 1348, when she stood at this window, with the shutters closed, and counted the dead of the city on an abacus, and knew that she was going to be rich. "I did not forgive it," says Prisca. "I only decided to be useful. It is not the same, but it is the nearest that I can get."
+  You do not say anything. There is nothing in the room to say it with. After a time she touches the green lamp, quite lightly, with one finger, and tells you that it was the only thing she kept out of the fire.
+* Say that she does not have to, and that you would rather have her as she is
+  $ b2.prisca_past = "spared"
+  $ bond.prisca += 2
+  $ secrecy += 1
+  She looks at you for a long moment. It is not at all the look that you were expecting. It is a look of simple, helpless, fierce gratitude, and it passes at once, and she says that it is very well, and that she will not press it, and that it will keep. "It is only," she says, and stops. She takes a breath. "It is only that I have been wishing for fourteen hundred years that someone would say that. And now that you have, I find that I am a little disappointed."
+* Tell her about your own sleep first
+  $ b2.prisca_past = "shared"
+  $ bond.prisca += 4
+  $ humanity += 2
+  $ secrecy -= 1
+  You tell it. You tell it badly, and out of order, and with a good deal that you had not meant to say. You tell her of the waking, and the room that was not yours, and the people who were gone, and the one that you had not expected to find still alive, and the ones whom you had. You tell her about the wall of the hill, and the face on the lead badge, and the thing that you felt in the cellar, which has no name. She does not interrupt. She sits down, at the end, on the bed that nobody sleeps in, quite suddenly, like a person whose strings have been cut. "Thank you," she says. "That is a very fair exchange. I will tell you mine when it is not so much of a hurry." She is not, you notice, quite steady. Neither are you.
+<~
+
+# river
+## The Arno
+$ _river = 1
+You do not say where you are going. You say that you will be back before the lamp goes, and Prisca nods, as if she had expected it, and does not ask. Benedetto lets you out by a small door in a very large wall.
+The Arno at night is a wide, dark, slow, glittering thing, between two embankments of old stone, with the black arches of the bridges standing across it at intervals like the ribs of a drowned ship. There are lights on the water, a good many of them, from the lamps of the dyers, who work all night and throw their waste into the stream, so that the river runs yellow and blue and a strange dim red, in long slow ribbons, like the ghosts of a procession.
+It is very cold. It is the kind of cold that goes through a cloak as through a net, and you do not mind it at all. You walk along the wall for a long time. It is a very odd sensation, after so many years, to have the whole of a great city to yourself, and to know, quite simply, that it is yours to take or to leave.
+On the other bank there is a figure.
+She is standing at the water's edge, where the stair goes down, with a small shuttered lantern at her feet, and she is writing in a book. It is a little book, no bigger than a hand, and she writes in it with a stub of lead, very fast, in short, neat strokes, looking up from time to time at the river and down again at the page. She is a young woman, or looks it, in a plain brown cloak, with her hair under a cap. She is quite alone. She is not moving as a person moves who has come to the river to be alone.
+She looks up, and sees you, and goes still.
+It is a long way across the water. You cannot hear anything. You see her eyes for a moment, quite clearly, in the light of the dyers' lamps, and you see her do the thing that a very good clerk does when a customer says something unexpected, which is to go on writing, steadily, as if nothing had happened, and to write one word more than she meant to.
+Then she shuts the book, and picks up the lantern, and goes up the stair, not hurrying. She does not look back. It is very well done, and she does it, you think, just a little too well.
+<~
+
+# terms
+## Dawn
+$ do chart("florence.prisca")
+Benedetto brings the cup again, and this time it is bread, and good wine, and a knife, and a plate of the small green olives of the hill, with a note beside it in Tommaso's hand that says only *from the press*. It is the first thing that you have eaten in a good many years that tasted of a place.
+It is nearly the hour before dawn. The sky over the Duomo will be, you know, the color of a pearl, and there is the faint chill in the stone that comes just before the light, and the three bells of the city have begun to talk to each other in the dark. Prisca is at the table in the strong room, with the lamp turned low, and a clean sheet of paper in front of her, and she has not touched it.
+"I have a question," she says. "I told you I would."
+She does not make it a speech. She says it quite quickly, as if she had been practicing it, and had decided that it would be easiest if it were not a performance.
+"I have kept the house for fourteen hundred years, and the hill, and your name on both of them. I kept them for you in the beginning, and afterward for myself, and I have honestly lost track of the point at which one became the other. You are a very large thing in my city. You are larger than the Prince, and I do not think that you know it. You will do what you like, and I shall not stop you. But I should like to know, before you do it, what it is that I am to you. I should like to know whether I am to be a partner, or a rival, or something that you have not yet decided." She lays her hands on the table. "I would much sooner be your partner. I will not be your hostage. I should like you to choose, and I should like you to know that I shall be quite honest about what each of them costs."
+She puts it plainly, on the paper, in three short lines.
+:the_deal
+* Partner. One house, one seal, and the risk shared between us
+  $ b2.prisca_deal = "partner"
+  $ bond.prisca += 4
+  $ standing += 1
+  $ secrecy -= 1
+  $ do earn(25)
+  "One house," says Prisca. She writes it. Her hand does not shake, and she has the air of a woman who is concentrating on not letting it. "The Banca del Colle, under the Merchant seal and your own, in the Via Porta Rossa. I shall have the nights, and you shall have the days. The profit will be divided, and the losses, and the secrets." She blots the paper. "It means that I shall be in your hands, Signore, in a way that I have not been in anyone's for a very long time. I have decided that I should like to be. It is not at all the sort of decision that I have ever made."
+* Rival. The Banca del Colle stands on its own, and she may do as she likes about it
+  $ b2.prisca_deal = "rival"
+  $ bond.prisca -= 2
+  $ defiance += 2
+  $ cunning_brutal += 1
+  $ standing += 1
+  She sits quite still. She puts down the pen. After a time, rather to your surprise, she smiles, and it is a smile with a good deal of respect in it, and a great deal of pain. "That is the answer that I should have given," says Prisca, "at your age, and at your size." She folds her hands. "I shall not stop you. I shall not help you, either. I will say only that a man who competes with the Purse in Florence will find that it has a very long memory, and a very small sense of humor." She holds out her hand, across the table, in the old way, palm up. "I should like us to be rivals as well as we were friends. It is a great waste if we are not."
+* Quiet. Take her credit, and keep your own books
+  $ b2.prisca_deal = "quiet"
+  $ do earn(10)
+  $ secrecy += 2
+  $ bond.prisca -= 1
+  "That is very careful," says Prisca, after a moment. She does not say it unkindly, and she does not say it kindly either. "It is also very like what I should have done, in the old days, and it is what I did do, to the Prince, for a hundred and fifty years. I think that you will find, Signore, that it is a very lonely way to live." She writes it down. "The credit is yours. It is an honest line, at an honest rate. I shall not look at the books. I shall only, I think, always know that they are there."
+She sits for a long moment with her hand on the paper. Then she lifts her eyes, and she is, quite suddenly, the other Prisca, the one in the court gown, with the pen and the face that does not move. She says that there is a second thing, and that it is not about the house.
+"There is a thing in the court," says Prisca, "that I do not like. It is not a thing that I can name. It is a feeling. It is the feeling that a banker has in a good year, when the bills are all paid on time, and he knows that someone is arranging that they should be." She looks at the abacus. "The Medici and the Pazzi are quarreling. It is a quarrel that I have watched for a long time. I have the feeling, and I have had it for two years, that it is being kept warm. I do not know by whom."
+?if b2.pazzi_heard
+  You tell her what you heard on the bridge. You tell it quite shortly. She listens with her chin on her fist, and when you have finished she is silent for some time, and she is a good deal paler than she was. "I had hoped," she says, "that I was imagining it."
+?end
+"I should like you to find out," she says. "I cannot. I am the Purse. Every person in the court would see me ask, and would know what it was that I wanted to find. You are new. You are old, and you are strong, and you are, which is more to the point, a stranger. They will talk to you. They will want to see what you are." She looks at you. "I am not asking for a thing that I shall not repay."
+:the_asking
+* Say that you will find out who is keeping it warm
+  $ b2.prisca_asked = "agreed"
+  $ bond.prisca += 2
+  $ secrecy -= 1
+  "Thank you," says Prisca. She says it quite simply. It is not a word that she uses a great deal, and she uses it as a person takes out a very good tool that has been in a drawer for a very long time. "You will want a way to be at court without being at court. I shall think of one. Benedetto will have a letter for you in a day or two."
+* Say that the court's quarrels are not yours
+  $ b2.prisca_asked = "declined"
+  $ bond.prisca -= 2
+  $ secrecy += 1
+  She takes it with a very small nod, as one accepts a bill that one had expected to be returned. "Then I shall do it myself," she says, "and do it badly, and with a good deal of money. I wish you every comfort in your quarrels." It is not a reproach. It is the reverse of one. It is a woman setting something down that she had hoped to be allowed to share, and picking up the weight of it again, quite steadily, as she has done for a very long time.
+The bells begin. It is the great bell of the Duomo first, deep and slow, and then the small bells of the Baptistery, and then all of them together, in the gray light, with the clamor of a city that has decided that it is morning. You can feel the sun coming. It is not a thing that hurts. It is a thing like the beginning of a tune.
+Prisca gets up. She goes to the door of the strong room, and stops, with one hand on the iron, and she says, without turning round, in a voice that is a very long way down, that she has been alone in it for a great many years, and that she had not noticed how much until the door opened.
+$ do rest()
+=> next

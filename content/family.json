@@ -53,6 +53,24 @@
         "hero"
       ],
       "label": "Child"
+    },
+    "ginevra": {
+      "person": "ginevra",
+      "book": "blood-and-gold",
+      "label": "Descendant",
+      "quick": "dead"
+    },
+    "tommaso": {
+      "person": "tommaso",
+      "book": "blood-and-gold",
+      "label": "Descendant",
+      "quick": "dead"
+    },
+    "fiammetta": {
+      "person": "fiammetta",
+      "book": "blood-and-gold",
+      "label": "Descendant",
+      "quick": "dead"
     }
   }
 }

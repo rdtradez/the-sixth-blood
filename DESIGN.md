@@ -46,6 +46,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 4: player features, developer tools, look and feel, sample chapter
 - [x] Sessions 5 to 9: character creation and the prologue, the Rome map, Book One chapters 1 to 6
 - [x] Session 17: the Florence and Collesanto (1474) maps for Book Two
+- [x] Sessions 18 and 19: Book Two chapters 1 to 4
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -239,3 +240,22 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The Rome map tab from session 6 had never been merged into `main`; session 17 merged it first, then added the Florence map.
 - `app/maps/florence.html` draws Florence and Collesanto as it stands in 1474 (walled, unburned). `engine/maps.js` now gives each map a `page` (`city` or `florence`); the Map tab loads the page of the book the hero is in. New maps: `florence` (`bank`, `prisca`, `wool`, `bottega`, `haven`, `court`, `rooms`, `roadhome`) and `collesanto2` (`farm`, `square`, `villa`, `press`, `gate`, `crypt`, `road`), both for book `blood-and-gold`. Book Two chapters chart sites with `$ do chart("florence.bank")`.
 - `sw.js` caches the new page (`VERSION` is `tsb-7`). Later city maps follow the same pattern: copy the page, list the sites in `engine/maps.js`.
+
+### Session 18 notes (Book Two, chapters 1 and 2)
+
+- Book Two ("blood-and-gold") begins. Chapters `b2c01` and `b2c02` are in `content/blood-and-gold/` (`ch01.tsb`, `ch02.tsb`). The manifest entry is `"incomplete": true`, so the book pauses after chapter 2 until the next session adds more.
+- Chapter 1 reads the chained `wake()` report (place, steward, outcome) and works for every combination, including the quick start report. Chapter 2 spends two day actions out of three and two night actions out of three, and reads `b1.keepers`, `lc.sleeper_1348`, `lc.hill` and `lc.village_1348`.
+- New flags use the `b2.` prefix and are registered in `content/flags.json` with `book`, `major` where later chapters care, and a quick start `default`. New people, family members and codex entries are registered. Content notes: chapter 2 carries `blood` and `violence`.
+- `tests/book2.test.js` covers every waking variant, the recorded decisions, and the no dashes and no braces rules.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 19 notes (Book Two, chapters 3 and 4)
+
+- Book Two chapters 3 and 4 are built (`content/blood-and-gold/ch03.tsb` and `ch04.tsb`, chapter ids `b2c03` and `b2c04`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 4 and carries on by itself when chapter 5 is added.
+- Session 19 is built on the `session-18-book-two-ch1-2` branch. Merge that branch first and then `session-19`.
+- Chapter 3 is a night phase of three actions out of four and then the audience, and ends with `rest()` and `=> next`. Chapter 4 is a night phase of three actions out of four and then the terms at dawn, and ends with `rest()` and `=> next`, which pauses until chapter 5 exists. Chapter 5 should read hunger, injury, standing and secrecy as chapter 4 left them.
+- New flags keep the `b2.` prefix and are registered in `content/flags.json` with `book`, `major` where later chapters care, and a quick start `default`. Decision flags a later chapter should read: `b2.oath`, `b2.sire_answer`, `b2.seat`, `b2.licence`, `b2.prisca_deal`, `b2.prisca_asked`, `b2.prisca_sun`, `b2.prisca_books`, with `b2.prisca_brief`, `b2.test`, `b2.prisca_past` and `b2.pazzi_heard` as smaller notes.
+- New people (`content/people.json`): Gualtiero, Ottaviano, Vieri. New codex entries: the licence of the Purse, the Medici and the Pazzi, the Priestess line, the bank of the Merchant house. Content notes: chapter 3 carries `blood` and `violence`, chapter 4 carries `blood`.
+- Chapter 3 starts a fight with `fight("fledgling", 2)` in its own scene and calls it with `~>`; `strike()` must never run before the fight starts (found while testing).
+- `tests/book2b.test.js` plays both chapters down their branches, including the fight over eight seeds, every hunger variant and each earlier decision the chapters read. `tests/book2.test.js` now expects four chapters and stops chapter 2 at the start of chapter 3.
+- Plans are in `SPOILERS/blood-and-gold.md`.
