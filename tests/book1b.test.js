@@ -14,12 +14,12 @@ const root = join(fileURLToPath(import.meta.url), '../..');
 const real = createNodeLoader(root);
 const HERO = { gender: 'm', origin: 'roman', role: 'legionary', path: 'born_in_rome' };
 
-async function playBook(hero, wants = [], seed = 3) {
+async function playBook(hero, wants = [], seed = 3, stopAt = null) {
   const game = new Game({ loader: real, storage: new MemoryStorage(), warn: () => {}, now: () => 5000 });
   await game.init();
   let { frame } = await game.startBook('burning-city', { from: 'new', hero, seed });
   const pages = [];
-  for (let i = 0; i < 900 && frame.wait !== 'book_end'; i++) {
+  for (let i = 0; i < 900 && frame.wait !== 'book_end' && !(stopAt && game.state.chapter === stopAt); i++) {
     pages.push(...texts(frame));
     if (frame.wait === 'choices') {
       let at = 0;
@@ -76,8 +76,8 @@ test('who learns that the hero walks in daylight depends on the dawn he chooses'
 });
 
 test('the cup is a real choice with different costs', async () => {
-  const cup = await playBook(HERO, [/Go down to the cup room/, /Take the cup/]);
-  const alone = await playBook(HERO, [/Go down to the cup room/, /hunt on your own/]);
+  const cup = await playBook(HERO, [/Go down to the cup room/, /Take the cup/], 3, 'b1c05');
+  const alone = await playBook(HERO, [/Go down to the cup room/, /hunt on your own/], 3, 'b1c05');
   assert.equal(cup.vars['b1.cup'], 'accepted');
   assert.equal(alone.vars['b1.cup'], 'alone');
   assert.ok(cup.vars.secrecy > alone.vars.secrecy, 'feeding alone leaves a trail');

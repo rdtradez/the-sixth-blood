@@ -139,6 +139,27 @@
             "war",
             "grief"
           ]
+        },
+        {
+          "id": "b1c13",
+          "file": "burning-city/ch13.tsb",
+          "title": "The Road to the Hill",
+          "notes": [
+            "violence",
+            "blood",
+            "war"
+          ]
+        },
+        {
+          "id": "b1c14",
+          "file": "burning-city/ch14.tsb",
+          "title": "Oak and Ash",
+          "notes": [
+            "violence",
+            "blood",
+            "war",
+            "grief"
+          ]
         }
       ],
       "incomplete": true

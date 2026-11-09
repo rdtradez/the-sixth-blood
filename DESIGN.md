@@ -162,3 +162,12 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Two script gotchas found while building: a `?if ... ?end` block wrapped around one choice of a set splits the set into two prompts (put the condition on the choice line instead: `* Text ?if cond`), and a `:label` placed directly before `?else` lets a jump into that label run the else branch. Avoid both.
 - Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
 
+### Session 13 notes (for the next session)
+
+- Book One, chapters 13 and 14 are built (`content/burning-city/ch13.tsb` and `ch14.tsb`, chapter ids `b1c13` and `b1c14`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 14 and carries on by itself when chapter 15 is added to the manifest.
+- Session 13 is built on `main` (sessions 4 to 12 are merged), on the `session-13` branch.
+- Chapter 13 is a night phase of three actions (the road) and then a day phase of three (the hill) and closes with `end_phase()` and `=> next`, with no `rest()`. Chapter 14 opens a new night phase of three actions and ends with `rest()`. Chapter 15 should read hunger, injury, standing and secrecy as chapter 14 left them.
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b1.company`, `b1.hill_warned`, `b1.column`, `b1.hill_ready`, `b1.aelia_talk`, `b1.hill_stand`, `b1.flavus_end`, `b1.remnant`, `b1.hill_toll`, `b1.survivor`. No new people or codex entries were needed. Content notes: chapter 13 carries `violence`, `blood` and `war`, chapter 14 carries `violence`, `blood`, `war` and `grief`.
+- Chapter 14 can damage Collesanto (`village_harm`, scaled by `b1.hill_toll`) and calls `kin()` for Aelia and Felix, so later chapters and books can read `collesanto` and the family as the hill left them.
+- `tests/book1g.test.js` plays chapters 13 and 14 down their branches, including the fights across several seeds. `tests/creation.test.js` now expects fourteen written chapters: update that count each session. `tests/book1b.test.js` and `tests/book1c.test.js` gained a `stopAt` argument, because their stat comparisons are clamped once later chapters run.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
