@@ -99,6 +99,25 @@
             "violence",
             "grief"
           ]
+        },
+        {
+          "id": "b1c09",
+          "file": "burning-city/ch09.tsb",
+          "title": "A Very Bright Summer",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        },
+        {
+          "id": "b1c10",
+          "file": "burning-city/ch10.tsb",
+          "title": "The Night That Did Not End",
+          "notes": [
+            "blood",
+            "violence",
+            "grief"
+          ]
         }
       ],
       "incomplete": true

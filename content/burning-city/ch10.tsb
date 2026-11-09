@@ -1,0 +1,481 @@
+// Book One, Chapter 10 (session 11). The night that does not end: three places out of four, Tiro, a dawn the colour of rust, and the Senate's quiet.
+// Three night actions of four places. Where he does not go, the fire decides. Ends with rest().
+@chapter b1c10
+@title The Night That Did Not End
+@book burning-city
+@version 1
+
+# start
+## The Aventine foot
+$ do phase("night", 3)
+$ unflag b1.saved_foot
+$ unflag b1.saved_house
+$ unflag b1.saved_subura
+$ b1.flavus_night = "unmet"
+$ b1.tiro_end = "held"
+$ b1.rufus_saw = "unseen"
+$ b1.fire_toll = "heavy"
+$ b1.blame = "silent"
+$ _saved = 0
+$ _blood = 0
+$ _last = ""
+$ do discover("the_great_fire")
+The second watch passes, and the third, and the night does not get any darker. That is the thing you will remember, afterward, out of everything. It is the middle of the night and the sky has gone the colour of the inside of a forge, and you can see the veins in the back of your own hand, and the swifts have not gone to roost. They wheel over the smoke, screaming, as in the middle of a hot afternoon.
+?if b1.circus == "stopped"
+  The Circus is burning as a thing burns that has been argued with. It is not out. It will not be out. But the wind has less to carry than the lamp bearers wanted it to, and the flame has a ragged and stuttering look, and in the lull between the gusts you can hear the vigiles shouting to each other over the roar, like men in a very bad storm who have, nevertheless, found something to hold.
+?elif b1.circus == "let"
+  The Circus is a furnace. It went up as it was meant to, all at once, and you watched it go from a roof with a cup in your hand, and you can still feel, in your cold fingers, the exact weight of the cup. The wind has taken it. It is a very good wind, for the purpose. It carries whole planks of burning awning over the roofs of the Aventine foot like a flight of angry crows.
+?else
+  The Circus is a furnace. It went up as it was meant to, all at once, in three places in the same breath, and there was nothing between it and the wind. The tiers have fallen in. The roar has a sound under it of something very large breathing in. A shower of sparks has gone up over the river, a thousand feet high, and come down on the Aventine foot like rain.
+?end
+Tiro is at your shoulder. He is black to the eyebrows and his tunic has been scorched along one sleeve, and he looks, for the first time since you met him, entirely sober.
+?if b1.fire_stance == "use"
+  He has not said anything to you since the roof. He says, now, very flatly, "Where?" It is the whole of what he says, and it is the first thing in an hour that has felt like forgiveness.
+  $ bond.tiro += 1
+?else
+  "It is going to the hill," he says. "It is going to the hill and the Subura and the wharf, and we have three hands between us, and a bad knife." He wipes his face with a blackened wrist. "Where?"
+?end
+There are four places that need you. You can see all of them from here, in the red dark, like four doors on a burning corridor. You can be at three.
+$ do meet("galerius")
+-> hub
+
+# hub
+## The night
+:hub
+?if actions_left() == 3
+  The first hour. The fire is still, in its way, a thing that can be seen the shape of.
+?elif actions_left() == 2
+  The second hour. The shape has gone. There is no longer a fire and a city; there is only a city with fire in it, and then, as you look, only fire.
+?else
+  The third hour, or the thirtieth. It does not feel like a part of the night. It feels like a place you have been standing in for a very long time.
+?end
+* Go to the foot of the hill, where the insulae are going up [once] ?if actions_left() > 0
+  ~> foot
+  $ do act()
+* Go to the Emporium, and the house [once] ?if actions_left() > 0
+  ~> emporium
+  $ do act()
+* Go into the Subura, where Naevia's stair is [once] ?if actions_left() > 0
+  ~> subura_night
+  $ do act()
+* Go up the hill, to the lamp bearers and the man who leads them [once] ?if actions_left() > 0
+  ~> ridge
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> tiro_end
+?end
+-> :hub
+
+# foot
+$ _last = "foot"
+## The foot of the hill
+The insula at the foot of the Aventine is six storeys of timber over a baker's oven, and the top three are alight. It is a thing you have walked past a hundred times without seeing. The stair is a tower of smoke. People have come out of the doors in their night clothes with their arms full of the stupid small things that people carry, a lamp, a sleeping cat, a statue of a household god, and they are standing in the street looking up. On the fourth floor, at a window, a woman is holding two children out over the sill and screaming at the street to catch them.
+?if b1.vigiles_ready
+  The vigiles are here. You see the line before you see anything else, a chain of men in their shirts passing leather buckets from the fountain hand to hand in a rhythm like men rowing, and at the head of it, hook in his fist, face black and furious, Rufus. He looks at you across the street and does not stop working. He lifts his chin, once, in the smallest of nods. It is the most honest thing anybody has said to you all night.
+  $ bond.rufus += 1
+?else
+  There is a cohort of the vigiles at the corner, and they are doing what the vigiles do, which is the best that can be done with too few buckets, and the men are shouting to each other in the confusion, and nobody has a ladder.
+?end
+[gladiator] You know the weight of a load that is trying to fall on you. You do not like to know it.
+[physician_aide] You see the burns on the ones in the street, in a glance, the way you see a splinter. Most of them are not the kind that matter.
+:the_foot
+* Go up the burning stair for the children
+  $ flag b1.saved_foot
+  $ _saved += 2
+  $ injury += 12
+  $ humanity += 1
+  $ do witness(2)
+  You go in through the baker's door and up. The stair is a funnel. The heat is a hand on your face, and then on your chest, and then everywhere, and you are, in the dark and the smoke, for the first time in your life afraid in the correct way, for the right reason, with all of your body. You do not stop. You find the fourth landing by the sound. You take them one under each arm, a girl and a boy, the boy bitten with burns, and you come down through a stair that is going to pieces under your feet, and you come out into the street in a rush of sparks with a child in each arm and the sleeve of your tunic alight. The street makes a sound. It is not a cheer. It is the sound of a great many people who had expected to watch someone die and have been, for a moment, disappointed in the best possible way.
+* Put your shoulders under the failing beam, and hold the stair open
+  $ flag b1.saved_foot
+  $ _saved += 3
+  $ do power("major")
+  $ secrecy -= 4
+  $ do witness(3)
+  There is a beam, as thick as a man, across the foot of the stair, and it is going. You hear it go. You go under it. You do not think. It comes down on your back and your shoulders, burning, and it should have broken you, and you are not broken. You hold it. You stand in the doorway of a burning house with a beam on your back, and the people come out beneath you, one at a time, in the smoke, a baker, a slave, an old woman with a basket, a boy with a dog, and you do not look at their faces. You hear someone shout. You hear a great many people stop shouting at once. You feel your own strength go through the floor of the world like a thing you have been lending. When the last of them is out you let the beam go, and it drops on the stone with a sound like the end of a war.
+* Work the bucket line with Rufus's men, and say nothing of what you are
+  ?if b1.vigiles_ready
+    $ flag b1.saved_foot
+    $ _saved += 2
+    $ humanity += 1
+    $ secrecy += 1
+    You take a place in the line, between a freedman with a squint and a boy of fifteen, and you pass the buckets, and you do not make a thing of it. It is the best work you have done all night. It is a plain line of plain men, and when the roof of the baker's oven comes in, they are the ones who have the stair wet, and the children come down it on their own feet, crying, in the arms of a vigil who is crying himself and swearing at the smoke. Nobody asks you who you are. You are just a man who passed buckets.
+  ?else
+    $ _saved += 1
+    $ cunning_brutal -= 1
+    There is no line. There are twenty men and four buckets, and a fountain thirty yards off. You and Tiro make a line of the crowd, shouting, with a voice you did not know you had, and you get them passing. It does not save the stair. It saves the street. It saves, perhaps, the next house, and the next, and it takes the whole of an hour, and when you look up the children are gone from the window, and you do not know whether they came down or fell.
+  ?end
+<~
+
+# emporium
+$ _last = "emporium"
+## The Emporium
+The Emporium wharf is a long quay under a row of warehouses, with the river on one side and the glow on the other, and the whole stretch of it is brilliant. The water is red. The warehouses stand in a row like black teeth against the burning sky, and the one with the shuttered door, and the barred windows, and the oil, is the third from the end.
+There are men on the quay, in grey cloaks, with their hoods back, in a line along the river wall. They are very patient. They are lighting their lamps from one another, quietly, one flame from another, like men at a feast passing a light down a table.
+?if b1.vaults == "moved"
+  The house is not at home. The vaults are empty, and the niches are bare, and the sleepers lie in the old quarry on the Esquiline in the dark, with eleven carts' worth of Prisca's patience, quite safe. Hanno is on the quay with a handful of clerks and a face of grey wax. He does not look pleased. He looks like a man who has been told that he was wrong to be afraid, and who has realised, with a kind of weary joy, that he was right.
+?else
+  The house is at home. They are down in the vaults, in the stone, fourteen sleepers in a long dark gallery, with the old sand laid and the doors sealed. Hanno is at the head of the stair with a face of grey wax. He sees you, and he says, in a voice you have never heard, "It is the smoke."
+?end
+The lamp bearers have seen you. There are nine of them. One of them, a young man with a clean, kind face, lifts his lamp, very slightly, as a man lifts a cup to a guest.
+:the_wharf
+* Take the wharf from them
+  ~> wharf_fight
+* Go down into the vaults and bring them out, one by one ?if b1.vaults == "stayed"
+  $ flag b1.saved_house
+  $ _saved += 3
+  $ do power("major")
+  $ injury += 15
+  $ bond.prisca += 3
+  You do not remember the stair. You remember the gallery. It is black, and hot, and the smoke lies along the floor like a flood, and the sleepers are in their niches with their faces slack, and the first one you lift is as heavy and as cold as a thing of stone. You carry them up one at a time. You do not count. Hanno takes each from you at the head of the stair, with a clerk's care, and passes it to a carter, and the carter, with a grimace, passes it to the dark. The smoke has got into your eyes. It has got into everything. On the ninth trip you meet Prisca on the stair, with her hands, for once, unfolded, carrying one in her arms, and she looks at you and she does not say anything. She does not need to.
+* Roll the oil into the river, with the clerks and the carters
+  ?if b1.vaults == "moved"
+    $ flag b1.saved_house
+    $ _saved += 2
+    $ cunning_brutal -= 1
+    It is the cleverest thing that anybody does all night, and it is done by a clerk. His name is Pollio. He has a tablet and a very serious frown, and he suggests, in a quiet voice, that the oil would burn better in a warehouse than in a river. You and Hanno and fifty men roll four hundred jars down the ramp into the black, shining Tiber, and they go out on the current in a long slick, and the lamp bearers on the wharf stop and look at it. It is a thing that none of them has planned for. They have come to burn a house, and there is no longer anything in it that will burn.
+  ?else
+    $ _saved += 1
+    $ cunning_brutal -= 1
+    You roll the oil. You and the clerks and the carters, a hundred jars, two hundred, into the river, in a rush, with the wharf alight on the far side. It is the right thing, and it takes all the time that you have, and you do not get to the vaults. Smoke goes down the stair. You hear Hanno, from below, calling in a thin dry voice. You do not hear what he is calling.
+  ?end
+<~
+
+# wharf_fight
+$ do fight("human", 2)
+:exchange
+* Feint along the river wall
+  $ do strike("cunning")
+* Break through them
+  $ do strike("brutal")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Talk to the young one with the kind face
+  $ do strike("talk")
+* Run
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    A man goes over the wall with a grunt, into the black water, and his lamp goes in after him with a hiss.
+  ?else
+    A jar comes round on a rope, and the heat of it takes you across the arm like a hot iron.
+  ?end
+  -> :exchange
+?end
+?if fight_result() == "won"
+  $ flag b1.saved_house
+  $ _saved += 2
+  $ _blood += 1
+  $ standing += 1
+  $ do witness(1)
+  They break at the wall. It is not a battle. It is a long, brutal hour of lamps going into the river one by one, and men going in after them, and the quiet voice of the young man with the kind face, saying "Vesta. Vesta." until he is in the water, too. The warehouse door holds. The quay is yours. You stand on it with your arm cooked from wrist to elbow, in a stink of oil and hot river, and Hanno comes up from the dark with his lamp held well away from him and looks at you for a very long time.
+?elif fight_result() == "talked"
+  $ flag b1.saved_house
+  $ _saved += 1
+  The young man listens. It is an extraordinary thing, that he listens. He has a lamp in one hand and a face like a boy at a festival, and you say, in the middle of the smoke, that there are people asleep in this house, that they are not what he has been told, that they are only old and tired. He says, "They are strix." You say that he has never seen one. He says, slowly, "No." He does not put the lamp down. He turns, and walks away along the quay with it, and nine men go after him. It is not a victory. It is a postponement. Hanno looks at you across the planks and nods.
+?elif fight_result() == "fled"
+  You go back along the quay at a run, with the shouting behind you, and the long red shine on the water. You have saved yourself. You have not saved anything else.
+?else
+  They have you down on the stones. The jar comes close, and the heat of it is every terror you have ever had, and Tiro comes out of the smoke with the bad knife and a skin of water and douses the lamp and hauls you out by the collar. You lie on the planks of the wharf with the world burning over you, and you cannot get up, and there is a place on your arm that does not hurt, because it has stopped being a thing that hurts. Behind you, on the quay, the first of the shutters of the Emporium goes up in a long yellow sheet.
+  $ injury += 10
+  $ secrecy -= 1
+?end
+<~
+
+# subura_night
+$ _last = "subura"
+## The Subura
+The Subura is the worst of it. It is not the hottest. It is simply the closest, a hundred streets of stacked timber with the washing still out between the windows, going up in a long ripple that you can follow with your eye from lane to lane like a sheet of flame passing through a field of dry wheat.
+?if b1.evacuated == "many"
+  And it is empty. It is almost empty. There are bundles in the doorways, and mattresses in the middle of the street, and people sitting out on the cobbles in the dark in ragged rows with their children on their laps, watching their own homes burn, with the dull, enormous patience of the dispossessed. A man sees you and calls out. It is the man who threw the shoe. He is holding it now, in both hands, like a man who does not know what to do with it. "I did not believe you," he says. "I did not believe you at all." He is alive. His whole street is alive.
+  $ humanity += 1
+?elif b1.evacuated == "some"
+  It is half empty. There are people in the street with bundles, who have been told, and there are people in the windows, who have not, or who did not wish to hear it, leaning out into the heat with their mouths open. The sparks come down on the washing, and on the awnings, and on the sleeping children on the roofs, who had been put up there to catch the breeze.
+?else
+  It is not empty. Nobody was told. Nobody knew. They are in their beds, in the heat, in the crowded rooms, and the first they know of it is a smell, and then a light, and then a roof coming in. It is a rushing, tumbling river of people in nightshirts, with their mouths open and no sound coming out, in the narrow lanes, running into each other, and the fire running with them.
+?end
+Naevia's shop is at the end of the lane, and the roof of it is alight. She is in the doorway with a baby in her arms that is not hers, and her face is the colour of paper, and the girl who sweeps is on the step behind her with a broom, sweeping. She does not stop. She is sweeping the street of sparks, like a girl who has been told to keep it clean, and she is crying.
+?if b1.vibia == "told" or b1.vibia == "helped"
+  Vibia is there too. She is on the far side of the lane with her two children and her baby, and when she sees you she does not call out. She stands very straight, and she looks at your face in the red light, and she does not look away.
+?end
+:the_stair
+* Go in through the burning door, and bring the stair out
+  $ flag b1.saved_subura
+  $ _saved += 2
+  $ injury += 10
+  $ bond.naevia += 3
+  $ do power("minor")
+  $ do witness(2)
+  There are nine people on the stair of that insula, and four of them cannot walk. You go in with a wet cloak over your head, and come out with an old man across your shoulders and a child by the hair of its head, and go in again. It is the third time that the lintel comes down. The fourth time you do not go through the door. You go through the wall. It is not a wall that was meant to be gone through, and the plaster comes down in a white cloud, and the people on the other side of it scream and then, one by one, stop. You count. You have nine. You hand the last of them to Naevia, who has put down the baby, and she holds your face in both her hands, in the red light, and says nothing, and you are glad of it.
+* Lead the street out by the one way the fire has not closed
+  $ flag b1.saved_subura
+  $ _saved += 2
+  $ cunning_brutal -= 2
+  ?if owns("rome.insulae")
+    You know the lanes. You have walked them for the firm, and you know which of the stairs are brick, and which of the courts have a well, and which of the alleys the fire cannot cross because it has been a stone wall since the time of Sulla. You also know, because you insisted on it, where Collis put in a well. You lead them there. You lead them, two hundred strong, down a lane that the fire cannot find, with a cloak over your head and a child on your hip, with Tiro in the rear shouting in a good strong confident bellow that he is, in fact, quite sure.
+  ?else
+    You do not know the lanes. You know the old stone wall by the Argiletum, and that it has stood in every fire since the Gauls, and you know that fire does not like a courtyard. You lead them there. You go from door to door, and from stair to stair, shouting, as a man shouts at a flock of birds, and they come. They are not wise. They are only frightened. It is enough to be led by.
+  ?end
+* Pull down the wooden stair with your hands, and make a gap for the fire to die in
+  $ flag b1.saved_subura
+  $ _saved += 1
+  $ do power("major")
+  $ secrecy -= 3
+  $ cunning_brutal += 2
+  $ do witness(2)
+  It is the oldest thing in the world, and it is the right one. You take the long outside stair of the third house from the corner, the one with the rotten balcony and the swinging door, in both hands, and you pull it out of the wall. It comes with a scream of nails. It is the length of a boat. You throw it down the lane, behind you, into the street, and the whole of a building comes with it in a tumble of beams, and a gap opens in the Subura, thirty feet wide, black and ugly and empty, with a pile of smoking rubble at its heart. The fire comes up to it, and stops, and hesitates, as a dog hesitates at a river. It is not a victory. It is a very large and a very ugly hole. Behind it two hundred people sit on the stones with their mouths open, looking at you.
+<~
+
+# ridge
+$ _last = "ridge"
+## The hill
+The ridge of the Aventine, above the old cistern yard, is quiet. It is the quietest place in Rome. It is a plain hilltop with a few cypress trees, and a small altar to Vesta, and beneath it, on every side, as far as you can see, the city is burning, in a long ring, like a bowl of coals. And on the steps of the altar, with his back to the fire, with a clay lamp in both hands, is a lame man with a kind creased face, saying, very quietly, a prayer.
+Flavus does not turn. He knows, as the kind do, that someone has come.
+"It is a very bright summer," he says. "I said that it would be."
+There are twenty of the grey cloaks kneeling behind him on the grass, in rows, with their faces to the fire. They do not look round. They have the look of men at a service. It is the most terrible thing that you have seen all night.
+?if b1.flavus == "struck"
+  "The tall one," says Flavus, gently. He turns. The bruise has gone green on his cheek. "I said that I would remember. I do not forget a face that has been struck in anger. I have heard a name, since, from a freedman who sells wine. Collis. A house that does not exist, at the end of an oil jar from a village on a hill." He smiles. He knows. "We were thorough. We were not thorough enough. It is a thing that I shall be sorry for."
+  $ secrecy -= 3
+?else
+  "You were in my shop," says Flavus. "You asked after the village." He smiles. It is a good smile. "I have thought about your face for nine days. It is a face I should not like to forget. It looks like the face of a man who has already lost something, and has not yet decided to be angry."
+?end
+He lifts the jar. The flame in it is small and white and perfectly steady, and you feel it in your teeth.
+:the_ridge
+* Go for him
+  ~> ridge_fight
+* Say nothing, and let him speak
+  $ b1.flavus_night = "heard"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  He speaks. He is not afraid of you. It would not be worth his while. "It is very quiet down there at the gates," he says, mildly. "Have you noticed? A great fire is never quite as great as it ought to be. It needs a great many men not to put it out." He looks at the burning city. "There were no Lictors at the Circus tonight. There was no watch at the Emporium gate. I have prayed to the goddess every night for a year, and I have never been so well answered." He turns the lamp in his fingers. "Someone else has wanted it for a great deal longer than I have. I think that you know that. You are not a stupid man." He closes his eyes. "I would be careful, if I were you, of the ones who are glad."
+<~
+
+# ridge_fight
+$ do fight("human", 2)
+:exchange
+* Feint across the grass
+  $ do strike("cunning")
+* Break through the kneeling men
+  $ do strike("brutal")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Talk to him
+  $ do strike("talk")
+* Run
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    A grey cloak goes down on the grass, and the lamp in his hand rolls, and goes out against a stone.
+  ?else
+    A jar comes up, with its flame, and the heat of it takes you across the chest like a hot iron.
+  ?end
+  -> :exchange
+?end
+$ b1.flavus_night = "faced"
+?if fight_result() == "won"
+  $ _blood += 1
+  $ standing += 1
+  $ do witness(1)
+  You reach him. It is, for a long moment, quite simple: a lame man on a step, and a man with his hands on the front of his tunic, and a face of perfect, terrible, patient kindness, six inches from yours. "You will not do it," says Flavus, gently. You do not. You do not know why. You take the jar from his hands, and the flame in it goes out against your palm with a sound like a hiss, and a dreadful sick weakness takes you through the arm to the heart. And then the grey cloaks are on you, all twenty, with their lamps, in the dark, and you are forced back, and back, and when you reach the edge of the grass the old man is gone. There is nothing on the step but a smear of oil, and a clay lamp, still burning.
+?elif fight_result() == "talked"
+  He listens. It is a courtesy that he extends to all things, and you cannot find a way to answer it. You say whatever you say. It is not enough. He bows his head, very slightly, in the red light, and you know in your bones that he has heard you, and that it has made no difference at all.
+?elif fight_result() == "fled"
+  You go down off the hill like a man leaving a pit, in the dark, with the shouting behind you and the roar of the fire in your teeth. You do not look back. You do not need to. You will be seeing that face for a long time.
+?else
+  They have you down on the grass. A jar comes close, and the heat of it is the heat of every fear you have ever had, and Tiro comes up over the lip of the hill with the bad knife in his hand and a skin of water on his shoulder and douses the flame in a single gesture, like a man putting out a candle at the end of a long dinner. He hauls you up by the collar. Behind you the old man is saying, very softly, "Vesta."
+  $ injury += 12
+  $ secrecy -= 1
+?end
+<~
+
+# tiro_end
+## The roof
+?if _last == "foot"
+  You come out of the last of the insulae at the foot of the hill with a child on your hip and the whole sky going over you in banners, and you cross the street to put her in the arms of a vigil. You hear Tiro behind you. He is shouting. He is not shouting a word.
+?elif _last == "emporium"
+  You come up the ramp from the wharf with the black of the river to your knees and the roar of the burning warehouse at your back, and you stop to breathe, which you do not need to do. You hear Tiro. He is shouting. He is not shouting a word.
+?elif _last == "subura"
+  You come out at the end of the lane into the open place by the Argiletum with two hundred people at your back, and a child asleep on your arm, and you stop. You hear Tiro behind you. He is shouting. He is not shouting a word.
+?else
+  You come down off the hill by the lane under the cypresses, with the glare in your eyes and the old man's prayer still in your ear, and you stop at the bottom. You hear Tiro. He is shouting. He is not shouting a word.
+?end
+There is a man on the roof opposite. He is in a grey cloak, with his hood back, a boy of nineteen with a freckled face, and he has a lamp in his right hand, a clay jar on a cord, whirling it, over his head, round and round. He looks at you. He lifts his chin.
+?if b1.flavus == "struck" or b1.flavus_night == "faced"
+  "Collis," he says. He has a high and trembling voice. "The master says it is the one who was named." He is crying. He is very sure.
+?else
+  "Strix," he says. He has a high and trembling voice. He is crying. He is very sure.
+?end
+It is a very long throw. It is very beautiful. It goes up into the red sky with the lamp turning in it, a small white star on a cord, and you are watching it come, and you cannot move, and then Tiro, who is not good at this, who has never been good at anything but people, has hit you in the chest with both hands.
+It breaks on him.
+It is not as loud as you had thought. It is a soft, huge, heavy sound, like a sheet being shaken out, and a sheet of white flame goes up from the cobbles, and in the middle of it, for a moment, there is a man, a thin one, with his arms out, and then there is not. Then there is Tiro, on the stones, on his back, with his eyes open and the front of him burning, and the lamp's flame, which does not go out, standing up very straight on his chest in the red night.
+You do not know how you cross the street. You have his head in your arms. You have your cloak over him, and you are beating at the flame, and the flame does not go out. It is a fire that does not go out. It is the fire that knows what you are.
+His face is quite untouched. That is the thing. It is perfectly clear, and young, and amazed.
+"I was meant to be," says Tiro, "a really terrible bookkeeper."
+?if b1.sun_known == "tiro"
+  "I never told," he says. "I want you to know that. Not even when she asked. Not even when I was afraid. I never told her, and I never told them, and I never told anybody about the light on your hands." He coughs. It is a dreadful sound. "It is a good secret. I was a bit proud of it."
+  $ bond.tiro += 2
+?end
+?if b1.vow == "animal"
+  "The first one," he says, "who ever made it a bit less awful. The cattle. I was sick on a priest, once. You never laughed." He tries to smile. It does not work.
+?else
+  "You were," he says, "a very good friend. I do not know what you are. I never did. I think I should have liked to." He tries to smile. It does not work.
+?end
+His hand finds your sleeve. It is a very small, very light hand, and the fingers are curling in the cloth.
+"Please," says Tiro. "Do not do anything stupid on my account."
+There is a man on the roof opposite, with a jar in his hand, who has not run.
+:the_end
+* Stay with him. Hold him. Do not move
+  $ b1.tiro_end = "held"
+  $ humanity += 2
+  $ injury += 8
+  $ do witness(2)
+  $ bond.tiro += 3
+  You stay. It is a small and a stupid thing, and it is all you have, and you do not move, and the street goes on burning around you in its slow red roar, and a bucket line goes by, and a woman screams, and the man on the roof throws a second jar and misses by a yard. You do not look up. You have his head in your hands. He says a number of things. Most of them are about the ledgers. He says the name of a girl. He says that it does not hurt, and it is very plain that it hurts more than anything has ever hurt. You tell him that it is going to be all right. He says, "Liar." He says it with great affection. It is the last thing he says. You do not put him down for a long time.
+* Carry him to the river
+  $ b1.tiro_end = "carried"
+  $ humanity += 1
+  $ injury += 8
+  $ bond.tiro += 2
+  You lift him. He weighs nothing, and he is burning, and the flame goes with him, standing up out of his chest, white and still, and it burns your hands to the bone. You run. You go down the long lane to the river, through the smoke, with him in your arms, and the street makes way for you, in the red dark, and the people who see you will tell it for the rest of their lives, a man running with a burning boy and not putting him down. You reach the water. You go in. It does not do anything. It does not put the flame out. It is the cruellest, kindest thing in the world, that he is still alive when you reach the river, and he says, in a clear, very surprised voice, "Oh, it is cold." And then he is not.
+* Go after the one who threw it
+  $ b1.tiro_end = "avenged"
+  $ _blood += 2
+  $ do kill("human")
+  $ cunning_brutal += 4
+  $ humanity -= 3
+  $ do witness(2)
+  You lay him down. You do it very gently. You put the cloak over his face. You stand up. You do not remember the stairs. You remember the roof, and the man on it, a boy of nineteen with a freckled face, with the second jar in his hand, whirling it, round and round. He does not have time to throw it. You take him by the throat, and the jar goes over the edge of the roof, and the flame in it goes out in the street, and you do not let go. You do not let go for a very long time. When you do, you look down into the street, at the cloak, and the stillness under it, and you understand, quite clearly, that this is not an answer to anything.
+?if b1.tiro_end == "avenged"
+  The street has seen it. It has seen a great deal tonight, and it does not know what to make of this.
+?else
+  The street goes on burning around the two of you, and does not know that anything has happened.
+?end
+Tiro is dead. It is a very simple fact, and you stand on it as on a floor.
+$ do fate("tiro", "dead")
+?if in_circle("tiro")
+  $ do member_fate("tiro", "dead")
+?end
+-> dawn
+
+# dawn
+## Rust
+The sun comes up at the end of the first night over a city in flames, and it is not the colour of the sun. It is a flat dull rust, like a coin that has been a long time in the dirt, and it comes through the smoke on the Aventine with no heat in it at all. The fire does not care. It is not the kind of thing that waits for the morning. It is going to burn for six days, and then it is going to start again.
+You can stand in it. That is the strangest part. You can stand in the red smoke, on a stone wall, in the dawn, with your hands black to the wrist and your cloak in ribbons, and the sun lies on your skin like a very weak and loving cat. You have never in your life been so tired.
+?if b1.circus == "stopped"
+  $ _saved += 2
+?end
+?if b1.vigiles_ready
+  $ _saved += 1
+?end
+?if b1.evacuated == "many"
+  $ _saved += 2
+?elif b1.evacuated == "some"
+  $ _saved += 1
+?end
+?if _saved >= 8
+  $ b1.fire_toll = "light"
+?elif _saved >= 5
+  $ b1.fire_toll = "heavy"
+?else
+  $ b1.fire_toll = "terrible"
+?end
+?if b1.fire_toll == "light"
+  The Aventine foot is standing, a third of it, black but standing, and the Subura has a hole in it where a stair went, and a string of people sitting in the road beyond the hole with their mouths open. It is not nothing. It is not even a little bit. It is, by the standards of that night, almost a mercy. The city will count it for years, in hundreds. You will count it in faces.
+?elif b1.fire_toll == "heavy"
+  The Aventine foot is gone, and half of the Subura, and the whole of the long tiers of the Circus. The people of the city sit in the road in long dumb lines with the bundles they carried out, and the vigiles walk among them with their hooks over their shoulders, grey with ash, and do not meet anyone's eyes. It will be counted in thousands. You do not count.
+?else
+  There is no way to say it. The Aventine foot is a pit, and the Subura is a long red river of ash, and the Circus is a black bowl, and the people of the city are not in the road. They are in the ash. You do not count. You know, in the cold place where you keep the things that you do not look at, that it is a number you will be told for the rest of your very long life, in a voice you will recognise.
+?end
+?if b1.saved_house
+  The house stands. It is a wreck. The shutters are gone and the roof of the counting house has fallen in and the wharf is a long scar of char and oil, but it stands, and Prisca is in the doorway with her hands folded and her hair, which you have never seen out of its pins, loose over her shoulders. She looks at you across the whole length of the quay. She inclines her head, very slightly, to a man who has carried her people out of the fire.
+  $ bond.prisca += 2
+?elif b1.vaults == "moved"
+  The house is ash. The great warehouse has burned to the foundations, with its ledgers and its oil and its beautiful counting rooms, and the wharf is a long black tooth over the river. But the house is not ash. It is in the old quarry on the Esquiline, in the dark, quite safe, with the carts drawn up outside, and Prisca, when she comes out into the dawn, does not say that she was wrong to move them. She says nothing at all. She looks at you across the ash for a long time.
+?else
+  The house has lost most of its sleepers. Prisca will not say how many. She stands on the quay in her ruined gown with her hands folded and the dawn on her face, and she looks at what is left, a handful, laid out in rows under the burnt rafters, and her face has not changed at all. It has the dry stillness of a face that is going to be very still for a very long time. "I was warned," she says, to no one. "I was warned, and I did not move them." She does not look at you. It is the kindest thing that she could have done.
+  $ bond.prisca -= 2
+  $ standing -= 1
+?end
+?if b1.saved_subura
+  Naevia is sitting on a mattress in the middle of the Argiletum with a baby in her arms and a very small girl asleep against her side, who has not put down her broom. She looks up at you. "You were right," she says. "I do not want to talk about it." She does not. She holds out a hand, and you take it. It is the first plain thing that anyone has said to you all night.
+  $ bond.naevia += 2
+?else
+  You do not find Naevia. You go to the end of her lane, in the dawn, and there is nothing there, only a doorway, and a stretch of black, and a broom on the step. It is not that she is dead. It is only that you do not know, and you are never going to be able to stop looking.
+  $ bond.naevia -= 1
+?end
+Rufus is on the wall of the cistern yard, with his hook across his knees. He looks as though he has been dipped in a vat of ink. He sees you coming and does not get up.
+?if _blood == 0 and _saved >= 3
+  $ b1.rufus_saw = "mercy"
+?elif _blood >= 1 and _saved < 3
+  $ b1.rufus_saw = "slaughter"
+?elif _blood >= 1 or _saved >= 3
+  $ b1.rufus_saw = "both"
+?else
+  $ b1.rufus_saw = "unseen"
+?end
+?if b1.rufus_saw == "mercy"
+  "I saw you," says Rufus. He says it flatly. "I saw you hold up a stair. I saw you go in at a door and come out with a child. I have been fifteen years in the vigiles and I have seen men do a great many brave things, and I have never seen a man do what you did with a beam." He looks at his hands. "I do not know what you are. I know what you did. I think that is going to have to be enough for me." He does not say that he will not write it down.
+  $ bond.rufus += 3
+  $ secrecy -= 3
+?elif b1.rufus_saw == "slaughter"
+  "I saw you," says Rufus. His voice is perfectly flat. "I saw what you did, on the quay, and on the roof. I saw a man who did not run." He rubs his face with a black hand. "I have been fifteen years in the vigiles. I do not think that I have ever seen a thing like it. And I do not think that I can forget it." He looks at you, for a long time, with the eyes of a man who is making a very careful list.
+  $ bond.rufus -= 2
+  $ secrecy -= 4
+?elif b1.rufus_saw == "both"
+  "I saw you," says Rufus. "I saw both of you." He says it quite slowly. "The one who held up a stair, and the one who did not stop. I do not know which of them I am to put in the book." He looks at his hands. "I am going to put in both."
+  $ secrecy -= 3
+?else
+  Rufus looks at you with the dull, scraped out stare of a man who has been awake for a very long time. "I do not remember anything," he says. "It was dark, and there was a good deal of smoke." It is not true, and it is the most generous thing anyone has ever said to you. He turns his face away.
+?end
+He is going to write it down. You know it as you know your own name. It is in the set of his shoulders, and the way he looks at the sky. He is a plain, square, tired man in a leather cap, and he has seen the thing that nobody was meant to see, and he is going to write it on a roll of paper. It will be the first of a great many.
+$ do discover("the_vigiles")
+-> blame
+
+# blame
+## The Senate's quiet
+You find Galerius, in the end, at the top of the Palatine stair, in the red light of the first morning, with his tablet and his grey cloak and a Lictor at either shoulder. He is quite clean. There is not a speck of ash on him. He is watching the city burn with the polite, attentive, faintly sorrowful look of a scholar at a lecture that he has heard before.
+?if b1.igni_warned == "lictors" or b1.igni_warned == "both"
+  "I told you that the Senate would consider it," he says. "It did consider it." He does not look round. "It considered it most carefully, for nine days. It reached a view."
+?else
+  "You are up early," he says. "You will not find the Senate very much in a mood for visitors."
+?end
+He turns the tablet over in his hand. The Lictors do not move. Below you a long line of people are going down the hill with their bundles, and a boy is leading a goat.
+"I am told," says Galerius, gently, "that there is a sect. A very small and very odd one. They meet at night, and eat what they call a body. They do not honour the gods. It is said that they have been heard to say that the city is going to burn." He looks at the tablet. "I expect that it will be a great comfort to the people, to know whom to blame."
+It is a thing he has been told to say. It is as plain as a seal on a letter.
+:the_blame
+* Give him a name, and the cellar yard, and the date
+  $ b1.blame = "named"
+  $ standing += 1
+  $ cunning_brutal -= 1
+  "Flavus," says Galerius. He writes it down. He does not look surprised. "A lamp seller. I have that already. It is a fine thing, to have been told twice." He closes the tablet. "It will not change what the Senate says. I want you to understand that. It will change what I know. It is, I think, a small improvement, and I am grateful." It is an honest answer. It is also, you realise, a very cold one. He has just thanked you for the one thing that cannot be used.
+* Tell him that he knows exactly who did it, and that the Senate sat on its hands
+  $ b1.blame = "pressed"
+  $ defiance += 3
+  $ standing -= 2
+  $ cunning_brutal += 2
+  He does not flinch. He does not so much as shift his feet. "Yes," says Galerius. "That is correct. I should like to say that I regret it." He looks down at the city, at the long red line of the Aventine, at the smoke. "I do regret it. It is not a matter that I was consulted on." He turns, at last, and looks at you, and it is a long, tired, scholarly look. "I have known a great many men who thought that it was a simple thing to be honest to the Senate. I have been honest to it for six hundred years. It is a good deal more expensive than it looks." He turns back to the fire. "Go home. Tell nobody that you said it. It would be very much the worse for you."
+* Say nothing. Watch the city burn, beside him
+  $ b1.blame = "silent"
+  $ secrecy += 1
+  $ humanity -= 1
+  You stand with him, on the stair, in the red light, with the sun coming up like an old coin behind the smoke, and neither of you says anything for a very long time. It is not companionable. It is only that there is nothing left to be said that would not be a lie. At last Galerius says, quite softly, "It is a beautiful city." He says it as a man says a thing at a funeral. Then he goes back to his tablet, and you go down the stair.
+?if b1.circus == "let" or b1.fire_stance == "use"
+  There is something else, and it is not at all pleasant, and it is very practical. There are four thousand plots of burned land between here and the river that are going to be sold off in the autumn, and a firm that owns an insula or two knows the price of a plot. You see the figures, as clear as the sun, in your head, in a clerk's hand. You do not like yourself for it.
+  ?if can_invest("rome.insulae")
+    * Put Collis behind the burned lots, at the price of the morning
+      $ do invest("rome.insulae")
+      $ humanity -= 2
+      $ standing += 1
+      It is the best and the worst piece of business that you will ever do. You send Pollio a note, in your own hand, before the ash is cold. He reads it twice, and he does not say anything, and he does not look at you for a week.
+    * Do not
+      $ humanity += 1
+      You stand there for a very long time. You find that you cannot, and you are not sure that this is a virtue.
+  ?end
+?end
+A runner is waiting for you at the foot of the stair, a boy with a black face, with a scrap of wax in his fist. It is from Prisca. It says, in a hand that you have seen only on ledgers, in a very few words, that the covens of Rome are to meet in three nights, in the old quarry on the Esquiline, because the Senate has said that it will not move against a sect that a very great number of its members are glad of, and that the covens, therefore, will have to decide what to do about it themselves.
+It says that the house would like to know what you think.
+It says, at the bottom, in a hand that has not quite managed to stay steady: *Tiro would have wanted to be asked.*
+You fold it. You put it in your tunic. The sun comes up a little further through the smoke, and it does not warm you at all.
+$ do rest()
+=> next

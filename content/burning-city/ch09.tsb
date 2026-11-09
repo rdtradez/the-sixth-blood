@@ -1,0 +1,386 @@
+// Book One, Chapter 9 (session 11). The eve of the fire: a day of preparing, a choice of stance, the hour before the second watch, and the Circus.
+// Three day actions, dusk, one night move, then the Circus goes up. The night is not closed here: no rest() until chapter 10.
+@chapter b1c09
+@title A Very Bright Summer
+@book burning-city
+@version 1
+
+# start
+## The full moon of Julius
+$ do phase("day", 3)
+$ b1.evacuated = "none"
+$ b1.vaults = "stayed"
+$ b1.posts = "none"
+$ b1.fire_stance = "survive"
+$ b1.circus = "burned"
+$ unflag b1.vigiles_ready
+$ _stopped = 0
+$ _cells = 0
+Nine days go by the way days go by when you are waiting for one of them. They are not slow. That is the cruelty of it. They are full of ordinary things, a ledger, a lamp, a cup at the foot of the stair, and every one of them is a little closer.
+?if b1.igni_warned == "house"
+  The house has made ready as a house does, without anyone saying so. There are buckets by every door of the warehouse, and casks of water on the roofs, and Hanno has had the oil moved twice, and each time moved it back, because there is nowhere in an oil warehouse to put oil that is not an oil warehouse. Prisca walks the galleries at dusk with her hands folded. She does not ask you if you are sure. She asks, once, whether you slept, which is a thing nobody has asked you in a very long time.
+?elif b1.igni_warned == "lictors"
+  The Senate has considered. You know it has considered, because Galerius has been courteous in the street twice, and has said nothing about a lamp. There are Lictors in the Forum at their usual posts. There are no more of them than usual, and no fewer. That, you think, is the loudest message anyone has ever sent you.
+?elif b1.igni_warned == "both"
+  The house has made ready, and the Senate has considered, and the two of them have gone on not looking at each other across the city like old neighbours who have quarrelled over a wall. Prisca has a watch on every roof of the Emporium. Galerius has been courteous, and has said nothing. You carry both of them, and it is heavy, and you are almost glad of the weight.
+?else
+  You have told no one, and it has been nine days of keeping it. You have counted the roofs of the Subura, one by one, as a man counts coins he is not sure he owns. Tiro has asked you three times whether you are well. He has stopped asking. He has started to look at you instead, which is worse.
+?end
+?if b1.plan == "full"
+  You know the order of it, which is more than anyone else in Rome knows, and it sits in you like a stone in a shoe. The Circus first. Then the foot of the Aventine. Then the Emporium. The second watch, a wind from the river, a lamp in every hand.
+?else
+  You know the day and the wind and the hour, and you know that a cellar full of clay jars is not a thing that waits. You do not know the order. You have only the three names of the quarters that were marked, and the dreadful sense that the marks were not in the order you would have chosen.
+?end
+Today is the day. It dawns, as the day of a great disaster ought to dawn and never does, quite beautifully. The sky is a hard blue, and the Tiber glitters, and somewhere a woman is singing as she beats a rug.
+?if b1.coven == "alone"
+  You go out through the Subura in the early light, a man who answers to himself. For the first time you do not find it lonely. You find it simple. There is no one to ask leave of, and nobody who will be hurt if you are wrong.
+?else
+  You go out by the cellar grate at dawn, with the house's name behind you like a hand between your shoulders. It is a weight you chose. You have not yet decided whether it is heavy.
+?end
+The sun is a thin tithe, and you pay it. {cap(voice("hunger"))}.
+-> day
+
+# day
+## The day
+:day
+?if actions_left() == 3
+  The morning has a washed, innocent look. It is the kind of morning on which a great many people will later say that nothing had seemed wrong.
+?elif actions_left() == 2
+  Noon bears down. The shadows have drawn in to nothing, and the dust stands in the air without moving, and the whole city has gone quiet for its siesta.
+?else
+  The light goes long and gold, and the swifts come out over the Forum. You have never in your life seen the city so beautiful. You are standing in it like a man standing in a room he has soaked in oil, with a candle in his hand.
+?end
+* Go to the Aventine station, to Rufus and the vigiles [once] ?if actions_left() > 0
+  ~> station
+  $ do act()
+* Follow the carts out of the cellar yard, in the noon glare [once] ?if actions_left() > 0
+  ~> carts
+  $ do act(1, true)
+* Go through the Subura, and tell its people to be out of it [once] ?if actions_left() > 0
+  ~> subura_warn
+  $ do act()
+* Go to the vaults of the Emporium, and the house's sleepers [once] ?if actions_left() > 0
+  ~> vaults
+  $ do act()
+* Let the day end
+  $ do end_phase()
+?if actions_left() <= 0
+  $ do end_phase()
+?end
+?if in_phase() != ""
+  -> :day
+?end
+-> dusk
+
+# station
+The Aventine station is a plain brick yard with a shrine in the corner and a long wooden rack of hooks, ladders and leather buckets, and a smell of wet rope. A cohort of the vigiles lives here, freedmen and slaves, and the men on the benches look up at your good tunic with the ordinary dislike of the poor for a visitor in good cloth.
+$ do meet("rufus")
+?if b1.rufus == "trusted"
+  Rufus sees you from across the yard, and gets up from the bench, and comes over with his thumbs in his belt. "I said I would be about," he says. "You are early for a man who is not usually about at all." He says it without malice. He has a bruise on one cheek, and he does not say how he got it. "The captain thinks I have been at the wine. I have not been at the wine."
+  $ bond.rufus += 1
+?elif b1.rufus == "wary"
+  Rufus sees you, and stops, and for a long moment he does not come any closer. "You," he says. "The one who knows how to press." He does come, in the end. He stands a little too close, as a man stands who is thinking of where he would put his hook. "The captain says I should be nicer to the quality. I am being nice. Look at me being nice."
+?else
+  You have to ask for him. He is dragged out of the back with a bucket on his shoulder, and he looks at you for some time without a flicker. "Surveyor," he says at last. "For the insurers." He does not remember your name, if he was ever given it. He remembers the lie, which is not at all the same, and his face says so. "I have not had a very good week. If you are about to tell me something that is going to make it worse, I would like to sit down."
+?end
+$ do discover("the_vigiles")
+You have the date and the wind, and a man who puts out fires for a living, and about nine hours.
+:the_station
+* Tell him everything, and take him to the cellar yard to see the racks
+  $ flag b1.vigiles_ready
+  $ secrecy -= 1
+  $ bond.rufus += 2
+  You tell it plainly. The lamp seller, the cistern under the hill, forty grey cloaks and two hundred jars, a night, a wind. You take him to the shut yard at the foot of the Aventine and over the wall with a leg up, and he stands in the dead fig's shade with his hook in his hand and looks down at the grating, and at the black stains of pitch on the stone where the racks stood a day ago. He does not say anything for some time. Then he says, "My captain is a good man. He will not believe a word. I will not ask him." He rubs his face with a hand that is steady and not at all calm. "I will have the hooks out by dusk, and every bucket in the cohort filled, and the men who will do as I say on the walls of the Circus. It will not be everyone. It will be enough to be sorry for."
+  ?if b1.rufus == "wary"
+    He does not trust you yet. He trusts the pitch. It is a distinction that, on a day like this, you can live with.
+  ?end
+* Put Collis coin behind the station
+  $ do earn(-10)
+  $ standing += 1
+  ?if b1.rufus == "wary"
+    Rufus looks at the purse for a long moment, as a man looks at a snake that is offering to be his friend. "No," he says. "I do not know what you are, and I know what a bribe is, and I will not have the cohort bought by a man I cannot name." He pushes it back, quite gently. You pick it up. You feel a good deal smaller than you did a moment ago.
+    $ bond.rufus -= 1
+  ?else
+    $ flag b1.vigiles_ready
+    Rufus looks at it, and then at you, and for a moment you think you have offended him. Then he laughs, short and astonished. "Ropes," he says. "A hundred leather buckets. Vinegar for the blankets. I have asked the captain for those for three years." He closes his hand on it. "I do not know why. I do not ask why. If it is for tonight, I will ask only that it is enough." He pockets it, and goes to find a boy to run for the rope maker.
+  ?end
+* Give him the date and the quarter, and no more
+  ?if b1.rufus == "trusted"
+    $ flag b1.vigiles_ready
+    $ secrecy += 1
+    He nods slowly, not asking how you know. "The Circus," he says. "Under the awnings. Well. It was going to be one of them." He has the face of a man who has already spent nine days wondering where.
+  ?else
+    $ secrecy += 1
+    $ cunning_brutal -= 1
+    He listens with a very still face, and writes nothing down. "A date," he says. "A quarter. A man I do not know, on a day when I am off duty." He shakes his head. "I would like to help you. I do not know how to help a man who will not say how he knows."
+  ?end
+* Say nothing. There is no way to say it
+  $ defiance += 1
+  $ humanity -= 1
+  You stand in the yard for a time among the ladders and the smell of wet rope. You cannot find the sentence. It was never a sentence you could say. Rufus waits, with a courtesy that costs him, and then he nods and goes back to the bench, and you walk out under the arch with the nine hours a little shorter than they were.
+<~
+
+# carts
+The cellar yard at the foot of the Aventine is shut, as it has been all summer, and the lane in front of it is empty at noon in the way of lanes that have been told to be. You lie in the shade of a fig tree on the far side of a wall, with the sun on the back of your hands like a heavy and not quite hostile animal, and you wait.
+?if b1.posts == "all" or b1.plan == "full"
+  You know where they are going. You are not here for that. You are here for the how, and for the hour, and for the face of a man you can stop.
+?else
+  You do not know where they are going. You are here to learn it.
+?end
+They come out in ones and twos, grain carts and a wine dray, and the baskets on them are packed with straw. A boy leads the first, with a clean grey tunic and a bright earnest face, and a clay jar rocks very slightly in the straw behind him each time the wheel catches a stone. You can feel the jar from sixty paces. It is a dry thin heat on the skin, like a hand held too near a fire. You grit what you have for teeth, and you follow.
+$ _cells += 1
+The carts divide at the corner of the Via Appia. One goes toward the Circus and its shops. One goes toward the insulae at the foot of the hill. One goes down to the river and the Emporium wharf. You see the faces of the three drivers, and you could pick them out of a crowd of ten thousand.
+$ b1.posts = "all"
+There is one cart left in the lane, for a moment, behind the others, with a single driver, a young man with a thin neck and a wine skin, humming. He is alone, and the lane is empty, and you are thirty paces away with the sun on your back.
+:the_cart
+* Take the cart, smash the jars, and let the driver run
+  $ _stopped += 1
+  $ cunning_brutal += 1
+  $ do witness(1)
+  You step out of the shade and into the glare. It is a very bad moment, and it hurts, and it is over before he has finished turning his head. You take the bridle in one hand, and the nearest basket in the other, and the first jar is on the cobbles before he has found his voice. The second comes after it. The flame in each small clay mouth stands up for an instant, white and absolutely straight, and then drowns in oil. He stares at you. You say, in a voice you hardly know, "Run." He runs. You hope he runs in the right direction. You stand in the lane with the sun on your neck and a smear of burning oil on the stones, and you stamp it out with a foot that you notice is shaking.
+* Follow the cart, and kill the driver in an alley
+  $ _stopped += 1
+  $ do kill("human")
+  $ cunning_brutal += 3
+  $ humanity -= 3
+  You let him come to the narrow place at the bend, where the lane runs between two blank walls, and you take him there. It is very quiet. He does not have time to say a word. When it is over you set the cart's brake, and smother the three jars in sacking, and you stand a moment with your hands on the warm wood of the cart, and you say to the empty lane, to no one, that it was a thing that had to be done. It does not sound the way you expected.
+* Let it go, and watch where the last cart stops
+  $ cunning_brutal -= 2
+  $ secrecy += 1
+  You let him go by. He is humming. It is a love song, as it happens, a very bad one. You watch the cart all the way down to the river, to a plain warehouse door that you know very well, and you see him hand a basket to a boy who takes it in without a word. Then you lie in the shade a long time, with the sun on your hands, and you do not move.
+<~
+
+# subura_warn
+The Subura at midday is a hive. It is a hundred streets of insulae stacked six storeys high on top of each other, with balconies of timber and awnings of rag and washing hung out in lines between the windows, and a million people who have no idea what is about to happen to them. You stand on a corner in the heat and you look up at the dark and tinder wood of it, and you think, quite coldly, that a child could do it.
+$ do meet("naevia")
+Naevia's shop is shut for the noon. She lets you in by the back, in her apron, with a cloth in her hand, and looks at your face, and puts the cloth down.
+"Say it," she says.
+:the_subura
+* Go door to door, in daylight, and tell them yourself
+  $ b1.evacuated = "many"
+  $ secrecy -= 2
+  $ humanity += 1
+  $ do witness(1)
+  It is the strangest afternoon you have had since you died. You go from stair to stair with Naevia at your side, a man in a good tunic and a freedwoman in an apron, saying one sentence. Be out of your house tonight. Be out by the second watch. Sleep in the fields. Sleep on the river. Some of them laugh. A man throws a shoe. An old woman takes your hand in both of hers, and looks at you with a face like an old coin, and says, "I know. I have been saying it since the spring." She has been saying it since the spring. Nobody has listened to her. By dusk, perhaps a third of the street has a bundle at its door. It is not enough. You are quite sure it is more than anyone would have thought to do.
+* Tell Naevia, and let her tell them
+  $ b1.evacuated = "some"
+  $ bond.naevia += 2
+  $ secrecy += 1
+  She listens to the whole of it with her arms folded. At the end she says, slowly, "You have the look of a man who is not lying and who has not slept." She takes off her apron. "I am not a great one for the quarter. But the quarter likes me, and I know who talks to whom." She goes out into the heat. You wait in the cool of the shop for three hours, and she comes back with her sandals in her hand and her face burnt, and says only, "Some. Not all. They do not like to be told." It is a good deal more than you could have done.
+* Pay the criers and the watchmen, and say nothing yourself
+  $ do earn(-8)
+  $ b1.evacuated = "some"
+  $ cunning_brutal -= 1
+  $ secrecy += 2
+  It is very simple, with coin. A man who will cry a fire at dusk in a street where there is none is a man who can be bought for a day's wages, and the criers of the Subura are the cheapest in the city. They will go out at the hour you name. They will cry that the Tiber is rising, which it has been known to do, and that the low streets will be wet by midnight. It is a lie. It will move some of them. You are surprised, and a little bit ashamed, at how little it costs.
+* Say to her only that she should not sleep in the shop tonight
+  $ bond.naevia += 1
+  $ defiance += 1
+  $ b1.evacuated = "none"
+  She looks at you for a long time. "That is all?" she says. "That is all you will tell me?" You say it is. She nods. "I shall remember you said it," she says, with a terrible gentleness. "It was a very small thing to say." She is right. You go out into the street with it in your hands.
+<~
+
+# vaults
+The warehouse of the Merchant house stands by the Tiber in the long afternoon with its shutters closed and its great doors barred, and it looks, from the outside, like a place with nothing in it but oil. Under the oil there are the vaults. They are old Etruscan stone, cool and dry and very deep, and in them, in rows, in the dark, the sleepers of the house lie in their niches with their hands folded and their faces slack, fourteen of them, who have given up a great deal in order to be safe.
+?if b1.coven == "alone"
+  You have no right to be here. Hanno lets you in at the side door without a word, because you have a right that has nothing to do with the oath. He leads you down by the stair, with a lamp that he holds, you notice, well away from his body.
+?else
+  Hanno meets you at the head of the stair, and takes you down himself, with a lamp that he holds well away from his body. It is a habit that you did not expect to find so comforting.
+?end
+Prisca is at the foot of the stair, with her hands folded, looking at the stone.
+?if b1.igni_warned == "house" or b1.igni_warned == "both"
+  "The Emporium is the third mark on the wall," she says. "I should like to be wrong about the order. I have been wrong about the order of a great many things, in my time." She looks at the niches. "The house does not move its sleepers. It has not moved them in three hundred years. It is a very difficult thing to ask of the old ones, to leave the stone." She looks at you. "Tell me what you would do."
+?else
+  "You are in the vaults at noon," she says. "You do not usually come." She looks at you, quite calmly, and Hanno has stopped moving, behind you, with the lamp. "I think you had better tell me why."
+  ?if b1.igni_warned == "none"
+    You tell her. All of it, the lamp seller, the cellar, the date, the wind, the nine days you have kept it. She does not say a word until you have finished. Then she says, very quietly, "Nine days." It is a small cold voice. "You have had this nine days." You say that you did. She says, "I am going to be angry with you for a very long time, and I should like you to know that it will be for the right reason." It is the only reproof you will ever have from her, and it is entirely just.
+    $ bond.prisca -= 2
+  ?else
+    You tell her, because the Senate has already told you what it will do with it. She hears it as a woman hears the weather. Her eyes, when you have done, are as dry and old as dust.
+  ?end
+?end
+The vaults stand, in the lamplight, around you, with the cool dry air of a place that has never in its life been wet. Over your head, through three floors of oak and brick, are four hundred jars of oil.
+:the_vaults
+* Ask her to move the sleepers, tonight, to the old quarry on the Esquiline
+  $ b1.vaults = "moved"
+  $ bond.prisca += 1
+  $ standing += 1
+  "It will take the whole of the dusk," says Hanno, dryly, "and eleven carts, and a good deal of tact." But he is already counting. Prisca looks at the niches for a long time, and then at you. "It is a very large thing to ask," she says. "I shall do it. I should like you to know that I shall do it because it is you who ask, and not because I believe it." She half smiles. It is not a happy smile. "I have been wrong about a great many things. It will be a pleasure to be wrong about this one."
+* Tell her the stone will hold, and the oil is the danger, and let them lie
+  $ b1.vaults = "stayed"
+  $ cunning_brutal += 1
+  She considers it. The stone is old, and good, and has stood through every fire in Rome. Hanno says, from the dark, "A vault is a cistern, when it is full of smoke." Prisca does not answer him. "We shall have the doors sealed," she says finally, "and the old sand laid. They will lie where they have always lain." You nod. You know, in the cold place where you keep the things you do not look at, that you have just made a choice, and that you will not know what kind of choice it was until the second watch.
+* Say you will carry the oil out yourself, tonight, to the river
+  $ cunning_brutal += 2
+  $ do power("minor")
+  $ b1.vaults = "stayed"
+  She does not laugh. Hanno, who has not laughed in two hundred years, makes a faint sound that is not very far from it. "Four hundred jars," he says. "In an afternoon." But Prisca's eyes are on you, and thoughtful. "You would," she says. "Yes. You would try." It is not a refusal. You spend the rest of the afternoon rolling jars to the quay, and you shift, in all, perhaps a third of it, and you are black to the elbows and the sun has got into your shoulders like a hot nail. It is not enough. It is a good deal.
+<~
+
+# dusk
+## Dusk
+The sun goes down behind the Janiculum, in a great calm banner of orange and rose, and the city exhales. It has been hot, and the heat comes up off the stones as the light goes, and the streets fill with people who have come out to be cool.
+?if must_feed()
+  Hunger takes your throat in its hand, and you cannot afford it. You take what the house keeps for the purpose.
+  ?if b1.vow == "animal"
+    $ do feed("animal")
+  ?else
+    $ do feed("donor")
+  ?end
+?end
+Tiro is on the roof of the dyer's shop, with his knees drawn up, looking at the Circus. He has been there since the afternoon. He has two skins of water and a rope and a bad knife and, for once in his life, he is not talking. He makes room for you without looking round.
+?if b1.coven == "stayed"
+  He is of the house, and so are you. It makes a difference. It is the difference between two men on a wall and two men who have been put on a wall.
+?else
+  You are not of the house, and he is. He has come anyway, and he has not said that he has come to help.
+?end
+The moon rises, vast and red and low, through the haze of the day's heat over the river. It is a full moon of Julius, and it is quite extraordinarily beautiful. The wind has got up from the water. It is a warm steady wind, smelling of mud and reeds and of the dry oak of a million rafters.
+"It is a nice night for it," says Tiro, in a thin voice.
+?if b1.sun_known == "tiro"
+  He is silent a moment. "I have never told," he says. "About the sun. You know that. I thought you ought to hear it again, tonight. In case." He picks at the rope. "I should hate it if somebody had to find it out the wrong way."
+  $ bond.tiro += 1
+?end
+"Tell me what you are going to do," he says.
+You have been thinking of nothing else for nine days. You have had it ready, in your mind, as a man has a coin ready. It is only that you have not yet been asked to spend it.
+:the_stance
+* Go out and break the lamps before they are lit
+  $ b1.fire_stance = "stop"
+  $ cunning_brutal += 2
+  "Right," says Tiro. He swallows. "Right. Well. That is a very brave thing, and I have the bad knife." He stands up, and his hands are not quite still, and he is grinning like a boy.
+  -> night_stop
+* Hold the line where the fire will come, and carry out whoever you can reach
+  $ b1.fire_stance = "survive"
+  $ humanity += 1
+  "Oh, thank the gods," says Tiro. "I was hoping that you would say that one. I am terrible at the other." He is laughing, a little unsteadily. He picks up the rope.
+  -> night_survive
+* Let it come, and be the one standing in the smoke when it is done
+  $ b1.fire_stance = "use"
+  $ humanity -= 2
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  Tiro does not say anything. He looks at you for a very long time, with the moon on his face, and you see him decide not to be angry. It is a hard thing to watch. "It is going to burn," you say, "whether I stand in front of it or not." "Yes," says Tiro. "I know." He looks at the Circus. "It is only that I had thought you would stand in front of it." He does not say anything more, and he does not go away.
+  $ bond.tiro -= 2
+  -> night_use
+
+# night_stop
+## The first watch
+$ do phase("night", 1)
+There is an hour before the second watch. The Circus is a great dark oval under the moon, with its tiers of shops and awnings clinging to the outside like barnacles on a hull, and in the shadow of the arches there are figures, in grey cloaks, moving very slowly, with the care of men who are carrying something that must not be spilled.
+:the_hour
+* Take the cell at the awnings, before the lamps are lit
+  -> stop_fight
+* Soak the awnings, from the river, with the carters
+  $ _stopped += 1
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  It is a thing that is done in Rome in a drought, when the Games are on and the awnings dry out, and it is only that it is not done at midnight. You and Tiro, and six carters you have paid in the very good coin of a story about a fire inspection, drag the water in skins and troughs and the bellies of broken amphorae from the Tiber up to the first row of arches, and you soak the awnings, and the beams, and the boards, until the whole base of the Circus is dripping in the moonlight like a ship hauled up out of a flood. It will not stop a lamp. It may, for an hour, make a lamp tired.
+-> circus
+
+# stop_fight
+## The arches
+$ do fight("human", 2)
+:exchange
+* Feint toward the arches
+  $ do strike("cunning")
+* Break through them
+  $ do strike("brutal")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Talk them out of it
+  $ do strike("talk")
+* Run
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    One of them goes down in the dust, and the jar in his hands rolls, and the flame goes out against the stone.
+  ?else
+    A jar comes round on a rope, and the heat of it takes you across the shoulder like a hot iron, and you swear.
+  ?end
+  -> :exchange
+?end
+?if fight_result() == "won"
+  $ _stopped += 2
+  $ standing += 1
+  $ do witness(1)
+  They break. They are zealots, not soldiers, and when it comes to blood they are not very good at it. You put out the lamps with your boot, one by one, and Tiro takes the jars to the nearest fountain at a run, and by the time the second watch is called there is a row of dead clay on the stones and the awnings of the nearest arches are still dry.
+?elif fight_result() == "talked"
+  $ _stopped += 1
+  A boy, a lad of eighteen with a clean grey cloak and a very bright face, listens to you with his mouth open. Nobody has ever talked to him. He sets down his jar, slowly. He says, "It is for the goddess." You say that it is a very large goddess to burn so many of her people for. He puts his hand over his eyes. The others do not listen, but the boy has dropped his lamp, and the nearest arch is dry.
+?elif fight_result() == "fled"
+  You go over the Circus wall like a rat, with a shout behind you and the sound of a great many feet. You have not stopped a single lamp. You have only learned how many there are.
+?else
+  They have you down, in the dust, under the arch. The jar comes close, and the heat of it is the heat of every fear you have ever had, and Tiro, who is not good at this, comes out of the dark with the bad knife in one hand and a skin of water in the other, and empties the water in a long cold arc over the lamp. It hisses. It goes out. He hauls you up by the collar and the two of you run for the river.
+  $ secrecy -= 1
+?end
+-> circus
+
+# night_survive
+## The first watch
+$ do phase("night", 1)
+There is an hour before the second watch. You are on the stairs of an insula at the foot of the Aventine, with a skin of water on your shoulder and a child on every landing, and you are counting.
+:the_hour
+* Put the buckets and ladders in place, from the Circus to the hill
+  ?if b1.vigiles_ready
+    $ _stopped += 1
+    $ standing += 1
+    The vigiles are there. It is the first thing you see when you come round the corner of the Circus wall: a line of leather buckets set at every second door, and hooks propped on the walls, and a cohort of men in their shirtsleeves sitting on the kerb with the dull, patient look of men who have been told to wait for a thing they do not believe in. Rufus is among them, and he gets up when he sees you, and he does not say anything, and he puts his shoulder to the nearest ladder. You and Tiro take the other end.
+  ?else
+    $ cunning_brutal -= 1
+    There is nobody. That is the thing you notice. You and Tiro drag ladders from the baker's yard and buckets from a tannery, and set them at every second door like a man laying a table for a feast that nobody else has been told of, and a night watchman at the corner watches you do it with an expression of such affectionate pity that you almost explain. It is a thing you do alone. It is a good deal less than a cohort would have done.
+  ?end
+* Go door to door through the shops of the Circus, and get the sleepers out
+  $ humanity += 1
+  $ do witness(1)
+  ?if b1.evacuated == "none"
+    $ b1.evacuated = "some"
+  ?end
+  There are people in every one of them. That is the fact you had not wholly taken in. A shop under an arch is a house with a counter in front, and the family is in the back, and the children are asleep in the loft. You and Tiro go from door to door in the moonlight, knocking, in a quiet voice, with a single sentence. A baker's wife puts her head out of the window. "Is it the river?" she says. You say it is. It is the easiest lie you have ever told. It is also, you think, the first lie you have ever told for the sake of someone else's sleep.
+-> circus
+
+# night_use
+## The first watch
+$ do phase("night", 1)
+There is an hour before the second watch, and you spend it on a roof, with a cup of wine that you do not drink, looking at the Circus. Tiro does not sit with you. He stands at the far end of the roof with his back to you, and he does not say anything, and the silence is a thing like a wall.
+:the_hour
+* Stay where you are, and watch the awnings
+  $ cunning_brutal -= 1
+  $ humanity -= 1
+  You watch. It is a very still night. The people of the Circus come and go under you, a drunk, a pair of lovers, a cook with a basket, a slave with a tray, all of them going home, all of them perfectly sure that it is a night like any other. You have never before looked at a crowd and counted. You find that you cannot stop.
+* Walk with the lamp bearers, unseen, and learn the whole of it
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  ?if b1.plan == "partial"
+    $ b1.plan = "full"
+  ?end
+  $ b1.posts = "all"
+  You go down into the street and fall in, ten paces behind them, in the shadow, in the dark. It is not difficult. They are patient men, and they walk slowly, and they do not look round. You go with them from arch to arch, and you watch them set the jars in the dark places of the Circus, with their hoods back, with their grave faces lit from below by the small steady flames, and you hear one of them whisper, very low, a prayer to Vesta. It is the most gentle thing you have ever heard. You are standing a pace behind him in the dark. You could put out his lamp with a breath.
+-> circus
+
+# circus
+## The second watch
+The watchman at the Forum calls the second watch. You hear it from a long way off, in the hot still dark, thin and flat and without alarm: the hour. A cart goes over a bridge. A dog barks. Somewhere a lamp is carried across a room.
+?if _stopped >= 2
+  $ b1.circus = "stopped"
+  It starts at the far end of the Circus, and it starts small. A single awning goes up, slowly, with a sound like a sail filling, and then a second. The wind is from the river. It is a good wind for the lamp bearers. But the base of the wall is wet, and the cells of the middle arches have gone, and the thing that ought to have run along the whole length of the shops in a single breath goes, instead, from arch to arch like a drunk man, stopping, coughing, going out, and starting again.
+?elif b1.fire_stance == "use"
+  $ b1.circus = "let"
+  It starts at three places along the length of the Circus, at once, in the very same heartbeat, as it was planned. A flare, a rush, a sound like a great cloth ripped from end to end. The wind takes it. The awnings go up in a line, and the shops behind them, and the smoke rolls out over the track in a slow black billow with the red light moving inside it like a heart. You stand on a roof with a cup of wine, and you watch it, and you do not move.
+?else
+  $ b1.circus = "burned"
+  It starts at three places along the length of the Circus, at once, in the very same heartbeat, as it was planned. A flare, a rush, a sound like a great cloth ripped from end to end. The wind takes it. The awnings go up in a line, and the shops behind them, and the smoke rolls out over the track in a slow black billow with the red light moving inside it like a heart.
+?end
+The first scream is a man's, and it is surprised. You have heard a great many screams, by now. This is the first that has ever made you feel that you were the one who was late.
+?if b1.circus == "stopped"
+  Tiro has his hands over his mouth. He is laughing, a little wildly, and crying, a little, and he says, "It is only a bit of it. Only a bit." It is only a bit of it. You hold him by the shoulders, for a moment, in the red glare, and you do not say that a bit of it is going to be quite enough.
+?else
+  Tiro does not say anything. He has stopped being afraid. It is a look you have seen once before, on a face in a fire, a long way from here, and you do not like to see it again.
+?end
+The great wooden tiers of the Circus are going up now, one after another, with a long steady roar, and the smoke has got into the moon, so that it hangs over the river like a red coin in a pot of dirty water. A flaming scrap of awning, the size of a bed sheet, lifts off the roof of the Circus in the heat, and rises, slowly, turning, over the street. It drifts toward the Aventine on the wind.
+?if b1.vigiles_ready
+  Down in the street under it, very small, a hundred men in their shirts are running with buckets.
+?else
+  Down in the street under it, small and ragged, the watch is beginning to run.
+?end
+It is not a night that is going to be over by the morning. You know that now. It is a night that is going to go on for days.
+$ do end_phase()
+=> next

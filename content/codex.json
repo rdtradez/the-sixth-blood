@@ -111,6 +111,12 @@
       "title": "The Igniferi",
       "book": "burning-city",
       "text": "A sect devoted to Vesta, the goddess of the hearth, who hold that fire cleans what the dark has made. They wear grey, they carry a flame in a clay jar that is said never to go out, and they are very patient. They believe the strix, the night bird that drinks blood, is a thing to be burned out of Rome."
+    },
+    "the_great_fire": {
+      "category": "places",
+      "title": "The Great Fire",
+      "book": "burning-city",
+      "text": "It began in the shops about the Circus Maximus on the night of the full moon of Julius, and the wind from the river carried it up the Aventine and into the old quarters. It burned for the better part of a week, and by the end of it more than half the city lay in ashes.\\n\\nThe Senate of Blood had known the date for nine days. What the Senate said afterward was a good deal more careful than what it knew."
     }
   }
 }

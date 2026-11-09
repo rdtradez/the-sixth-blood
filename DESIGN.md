@@ -140,3 +140,13 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New people (`content/people.json`): Rufus, Flavus. New codex entries: the vigiles, the Igniferi. Content notes: chapter 7 carries `blood` and `violence`, chapter 8 carries `blood`, `violence` and `grief`.
 - `tests/book1d.test.js` plays chapters 7 and 8 down their branches. `tests/creation.test.js` now expects eight written chapters: update that count each session.
 - Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 11 notes (for the next session)
+
+- Book One, chapters 9 and 10 are built (`content/burning-city/ch09.tsb` and `ch10.tsb`, chapter ids `b1c09` and `b1c10`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 10 and carries on by itself when chapter 11 is added to the manifest.
+- Session 11 is built on the `session-10` branch (which sits on sessions 6 to 9; none of them are on `main` yet). Merge `session-7`, `session-8`, `session-9`, `session-10` and then `session-11` to get everything.
+- These two chapters break the usual shape on purpose: chapter 9 closes its phase with `end_phase()` and does not call `rest()`, chapter 10 opens a new night phase and calls `rest()` once at its close, so the tally of kills and witnesses for both lands together. Chapter 11 should read hunger, injury, standing and secrecy as chapter 10 left them.
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New codex entry: the Great Fire (places). Content notes: chapter 9 carries `blood` and `violence`, chapter 10 carries `blood`, `violence` and `grief`. No new people were needed.
+- Chapter 10 is a hub of four places where only three can be reached. What he did not reach is decided by the flags and the fire, and the dawn scene reads them. Later chapters and the Velati journal should read the flags (`b1.saved_*`, `b1.fire_toll`, `b1.rufus_saw`, `b1.blame`) rather than recompute them.
+- `tests/book1e.test.js` plays chapters 9 and 10 down their branches, and the `burned lots` offer is tested with a developer jump. `tests/creation.test.js` now expects ten written chapters: update that count each session. `tests/book1.test.js` gained a `stopAt` option so its wound test can stop as chapter 3 opens, since later chapters add wounds of their own.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.

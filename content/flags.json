@@ -490,6 +490,148 @@
       "default": "house",
       "note": "Chapter 8: whom he told about the plan",
       "book": "burning-city"
+    },
+    "b1.vigiles_ready": {
+      "kind": "flag",
+      "major": true,
+      "book": "burning-city",
+      "note": "Chapter 9: the Aventine vigiles were told, and stood ready with hooks and buckets"
+    },
+    "b1.evacuated": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "some",
+        "many"
+      ],
+      "major": true,
+      "default": "some",
+      "book": "burning-city",
+      "note": "Chapter 9: how many of the Subura's people he got out before the fire"
+    },
+    "b1.vaults": {
+      "kind": "enum",
+      "values": [
+        "stayed",
+        "moved"
+      ],
+      "major": true,
+      "default": "stayed",
+      "book": "burning-city",
+      "note": "Chapter 9: whether the house's sleepers were moved out of the Emporium vaults"
+    },
+    "b1.posts": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "all"
+      ],
+      "default": "all",
+      "book": "burning-city",
+      "note": "Chapter 9: whether he learned where each cell of lamp bearers would stand"
+    },
+    "b1.fire_stance": {
+      "kind": "enum",
+      "values": [
+        "stop",
+        "survive",
+        "use"
+      ],
+      "major": true,
+      "default": "survive",
+      "book": "burning-city",
+      "note": "Chapter 9: what he meant to do on the night of the fire"
+    },
+    "b1.circus": {
+      "kind": "enum",
+      "values": [
+        "stopped",
+        "burned",
+        "let"
+      ],
+      "major": true,
+      "default": "burned",
+      "book": "burning-city",
+      "note": "Chapter 9: how the Circus went up, checked in part, burning at full strength, or watched"
+    },
+    "b1.saved_foot": {
+      "kind": "flag",
+      "major": true,
+      "book": "burning-city",
+      "note": "Chapter 10: he saved the people of the insula at the Aventine foot"
+    },
+    "b1.saved_house": {
+      "kind": "flag",
+      "major": true,
+      "book": "burning-city",
+      "note": "Chapter 10: he saved the Merchant house at the Emporium"
+    },
+    "b1.saved_subura": {
+      "kind": "flag",
+      "major": true,
+      "book": "burning-city",
+      "note": "Chapter 10: he saved Naevia's stair and the Subura lanes"
+    },
+    "b1.flavus_night": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "heard",
+        "faced"
+      ],
+      "major": true,
+      "default": "unmet",
+      "book": "burning-city",
+      "note": "Chapter 10: what passed between him and Flavus on the hill on the night of the fire"
+    },
+    "b1.tiro_end": {
+      "kind": "enum",
+      "values": [
+        "held",
+        "carried",
+        "avenged"
+      ],
+      "major": true,
+      "default": "held",
+      "book": "burning-city",
+      "note": "Chapter 10: how he spent Tiro's last minutes"
+    },
+    "b1.rufus_saw": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "mercy",
+        "slaughter",
+        "both"
+      ],
+      "major": true,
+      "default": "mercy",
+      "book": "burning-city",
+      "note": "Chapter 10: what the vigil Rufus saw him do on the night of the fire"
+    },
+    "b1.fire_toll": {
+      "kind": "enum",
+      "values": [
+        "light",
+        "heavy",
+        "terrible"
+      ],
+      "major": true,
+      "default": "heavy",
+      "book": "burning-city",
+      "note": "Chapter 10: how many the Great Fire killed in the quarters he stood in"
+    },
+    "b1.blame": {
+      "kind": "enum",
+      "values": [
+        "named",
+        "pressed",
+        "silent"
+      ],
+      "major": true,
+      "default": "silent",
+      "book": "burning-city",
+      "note": "Chapter 10: what he said to Galerius on the Palatine stair about who the Senate would blame"
     }
   }
 }

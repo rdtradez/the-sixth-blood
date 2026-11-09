@@ -28,12 +28,12 @@ const HERO = { gender: 'm', origin: 'roman', role: 'legionary', path: 'born_in_r
  * priority order: at every choice the first pattern that matches an option is picked, otherwise the
  * first option is.
  */
-async function playBook(hero, wants = [], seed = 3) {
+async function playBook(hero, wants = [], seed = 3, stopAt = null) {
   const game = await realGame();
   let { frame } = await game.startBook('burning-city', { from: 'new', hero, seed });
   const pages = [];
   const picked = [];
-  for (let i = 0; i < 600 && frame.wait !== 'book_end'; i++) {
+  for (let i = 0; i < 600 && frame.wait !== 'book_end' && !(stopAt && game.state.chapter === stopAt); i++) {
     pages.push(...texts(frame));
     if (frame.wait === 'choices') {
       let at = 0;
@@ -113,8 +113,9 @@ test('the fire takes the spouse and spares the children, whatever the player doe
 });
 
 test('going into the fire wounds the hero; blood from the prisoner heals him', async () => {
-  const wounded = await playBook(HERO, [/Run for your house/, /Go in through the fire/, /Ask him who sent him/]);
-  const healed = await playBook(HERO, [/Run for your house/, /Go in through the fire/, /Feed/]);
+  // Stop as chapter 3 opens: later chapters add wounds of their own.
+  const wounded = await playBook(HERO, [/Run for your house/, /Go in through the fire/, /Ask him who sent him/], 3, 'b1c03');
+  const healed = await playBook(HERO, [/Run for your house/, /Go in through the fire/, /Feed/], 3, 'b1c03');
   assert.ok(wounded.vars.injury >= 30, 'the burns stay with a hero who does not feed');
   assert.equal(healed.vars.injury, 0);
   assert.equal(healed.vars['b1.prisoner'], 'fed');
