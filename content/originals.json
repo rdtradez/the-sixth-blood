@@ -1,7 +1,7 @@
 {
   "note": "The six originals. kind: sleeping (awaken, then the hero's choice) or wandering (reveal, then the hero's choice). book is where they awaken or are revealed. quick is the default history a quick start uses when it skips that book; the book sessions may retune it. True names are not stored here: they are revealed in the story.",
   "originals": {
-    "general": { "title": "The General", "gift": "Brute strength and war", "kind": "sleeping", "book": "burning-city", "quick": { "state": "awake", "by": "bloodline" } },
+    "general": { "title": "The General", "gift": "Brute strength and war", "kind": "sleeping", "book": "burning-city", "quick": { "state": "awake", "by": "bloodline", "fate": "loosed" } },
     "merchant": { "title": "The Merchant", "gift": "Shadows and wealth", "kind": "wandering", "book": "blood-and-gold", "quick": { "state": "revealed", "fate": "kept_secret" } },
     "priestess": { "title": "The Priestess", "gift": "Compulsion and charm", "kind": "sleeping", "book": "crown-of-ashes", "quick": { "state": "awake", "by": "bloodline" } },
     "scribe": { "title": "The Scribe", "gift": "Memory and secrets", "kind": "wandering", "book": "house-divided", "quick": { "state": "revealed", "fate": "kept_secret" } },

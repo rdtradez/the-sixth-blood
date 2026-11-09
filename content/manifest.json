@@ -180,6 +180,25 @@
             "blood",
             "war"
           ]
+        },
+        {
+          "id": "b1c17",
+          "file": "burning-city/ch17.tsb",
+          "title": "The Surety",
+          "notes": [
+            "blood",
+            "war"
+          ]
+        },
+        {
+          "id": "b1c18",
+          "file": "burning-city/ch18.tsb",
+          "title": "The Weight of Cedar",
+          "notes": [
+            "violence",
+            "blood",
+            "war"
+          ]
         }
       ],
       "incomplete": true

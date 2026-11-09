@@ -153,6 +153,12 @@
       "name": "Tarrax",
       "title": "Commander of the Lictors",
       "bio": "Firstborn of the General line and the Senate's iron fist. Tall, grey and perfectly kept. He is said to fear one thing, and it is not a living thing."
+    },
+    "general": {
+      "gender": "m",
+      "name": "The General",
+      "title": "First of the General line",
+      "bio": "A very big, very old man who was put under the hill before there was a city on it. He is courteous, dry, and in no hurry, and everyone around him is afraid of what he will want."
     }
   }
 }

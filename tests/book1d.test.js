@@ -14,12 +14,12 @@ const root = join(fileURLToPath(import.meta.url), '../..');
 const real = createNodeLoader(root);
 const HERO = { gender: 'm', origin: 'roman', role: 'legionary', path: 'born_in_rome' };
 
-async function playBook(hero, wants = [], seed = 3) {
+async function playBook(hero, wants = [], seed = 3, stopAt = null) {
   const game = new Game({ loader: real, storage: new MemoryStorage(), warn: () => {}, now: () => 5000 });
   await game.init();
   let { frame } = await game.startBook('burning-city', { from: 'new', hero, seed });
   const pages = [];
-  for (let i = 0; i < 1500 && frame.wait !== 'book_end'; i++) {
+  for (let i = 0; i < 1500 && frame.wait !== 'book_end' && !(stopAt && game.state.chapter === stopAt); i++) {
     pages.push(...texts(frame));
     if (frame.wait === 'choices') {
       let at = 0;
@@ -100,8 +100,8 @@ test('the vigil can be told the truth, lied to or pressed', async () => {
 });
 
 test('the lamp seller can be questioned, struck or left, and a blow is seen', async () => {
-  const spoke = await playBook(HERO, [/lamp seller in the Velabrum/, /Keep your face/]);
-  const struck = await playBook(HERO, [/lamp seller in the Velabrum/, /Hit him/]);
+  const spoke = await playBook(HERO, [/lamp seller in the Velabrum/, /Keep your face/], 3, 'b1c09');
+  const struck = await playBook(HERO, [/lamp seller in the Velabrum/, /Hit him/], 3, 'b1c09');
   const left = await playBook(HERO, [/lamp seller in the Velabrum/, /Say nothing, and leave/]);
   assert.equal(spoke.vars['b1.flavus'], 'spoke');
   assert.equal(struck.vars['b1.flavus'], 'struck');
