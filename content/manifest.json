@@ -80,6 +80,25 @@
             "violence",
             "grief"
           ]
+        },
+        {
+          "id": "b1c07",
+          "file": "burning-city/ch07.tsb",
+          "title": "The Dark of the Moon",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        },
+        {
+          "id": "b1c08",
+          "file": "burning-city/ch08.tsb",
+          "title": "The Steady Flame",
+          "notes": [
+            "blood",
+            "violence",
+            "grief"
+          ]
         }
       ],
       "incomplete": true

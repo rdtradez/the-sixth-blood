@@ -131,3 +131,12 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Venture prices are fixed in `content/ventures.json`, so how much a hero can buy in chapter 5 depends on his purse and Prisca's backing. Retune the stakes in the chapter if the venture prices change.
 - `tests/book1c.test.js` plays chapters 5 and 6 from the prologue down their branches, including each way chapter 6 can be reached. `tests/creation.test.js` now expects six written chapters: update that count each session.
 - Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 10 notes (for the next session)
+
+- Book One, chapters 7 and 8 are built (`content/burning-city/ch07.tsb` and `ch08.tsb`, chapter ids `b1c07` and `b1c08`). The book is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 8 and carries on by itself when chapter 9 is added to the manifest.
+- Session 10 is built on the `session-9` branch (which sits on sessions 6 to 8; none of them are on `main` yet). Merge `session-7`, `session-8`, `session-9` and then `session-10` to get everything.
+- Chapter 7 sets the coven or lone path (`choose_path`) and recruits the house into the circle when he stays, so later chapters can read `in_circle("prisca")`, `coven_path()` and `lone()`. Chapter 8 uses the day and night loop, the fight system and two codex entries; each ends with `rest()` (chapter 8 plays one `rest()` at its close, chapter 9 should read hunger, injury and standing as the player left them).
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New people (`content/people.json`): Rufus, Flavus. New codex entries: the vigiles, the Igniferi. Content notes: chapter 7 carries `blood` and `violence`, chapter 8 carries `blood`, `violence` and `grief`.
+- `tests/book1d.test.js` plays chapters 7 and 8 down their branches. `tests/creation.test.js` now expects eight written chapters: update that count each session.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.

@@ -419,6 +419,77 @@
       "default": "none",
       "note": "Chapter 6: what he did about the woman whose husband he fed on",
       "book": "burning-city"
+    },
+    "b1.coven": {
+      "kind": "enum",
+      "values": [
+        "stayed",
+        "alone"
+      ],
+      "major": true,
+      "default": "stayed",
+      "note": "Chapter 7: whether he took the house's offer or went alone",
+      "book": "burning-city"
+    },
+    "b1.oath": {
+      "kind": "enum",
+      "values": [
+        "full",
+        "reserved",
+        "none"
+      ],
+      "major": true,
+      "default": "full",
+      "note": "Chapter 7: the oath he swore to the Merchant house",
+      "book": "burning-city"
+    },
+    "b1.rufus": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "trusted",
+        "wary"
+      ],
+      "major": true,
+      "default": "none",
+      "note": "Chapter 8: how the vigil at the burned warehouse stands toward him",
+      "book": "burning-city"
+    },
+    "b1.flavus": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "spoke",
+        "struck"
+      ],
+      "major": true,
+      "default": "unmet",
+      "note": "Chapter 8: what passed between him and the lamp seller in daylight",
+      "book": "burning-city"
+    },
+    "b1.plan": {
+      "kind": "enum",
+      "values": [
+        "full",
+        "partial"
+      ],
+      "major": true,
+      "default": "full",
+      "note": "Chapter 8: how much of the Igniferi's plan he learned in the cellar",
+      "book": "burning-city"
+    },
+    "b1.igni_warned": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "house",
+        "lictors",
+        "both"
+      ],
+      "major": true,
+      "default": "house",
+      "note": "Chapter 8: whom he told about the plan",
+      "book": "burning-city"
     }
   }
 }

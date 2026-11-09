@@ -99,6 +99,18 @@
       "title": "The lesser cup",
       "book": "burning-city",
       "text": "Animal blood will keep a vampire alive, and keep him close to what he was. It leaves him slower, hungrier and weaker in a fight, and some of the old ones say a little sad.\\n\\nThe made have gone over to it for as long as there have been the made. A great many of them have gone back. It is not a vow that anybody keeps once and is done with."
+    },
+    "the_vigiles": {
+      "category": "lore",
+      "title": "The vigiles",
+      "book": "burning-city",
+      "text": "Rome's night watch, freedmen and slaves in cohorts, who carry buckets and hooks and put out the fires that a city of timber and thatch is forever starting. They are underpaid, underloved and the only people in Rome who walk its streets in the small hours with their eyes open."
+    },
+    "the_igniferi": {
+      "category": "lore",
+      "title": "The Igniferi",
+      "book": "burning-city",
+      "text": "A sect devoted to Vesta, the goddess of the hearth, who hold that fire cleans what the dark has made. They wear grey, they carry a flame in a clay jar that is said never to go out, and they are very patient. They believe the strix, the night bird that drinks blood, is a thing to be burned out of Rome."
     }
   }
 }

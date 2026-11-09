@@ -122,3 +122,31 @@ The breaking point: the moment he may swear off human blood. Six weeks after cha
 - Galerius's note arrives unsealed and he is told the man of business is never seen at the house: he will try to see him by day, and cannot. This is the seed for the Lictors testing the daywalker secret in the later chapters.
 - Tiro: the vow scene gives him his best moments so far. Do not kill him early. His death is the Great Fire.
 - Chapter 7 (the coven's offer) reads `b1.prisca_terms`, `b1.collis_terms` and `b1.vow`: the house has been very patient and wants to know whether he stays or goes alone.
+
+## Chapter 7: "The Dark of the Moon" (session 10, `content/burning-city/ch07.tsb`, chapter id `b1c07`)
+
+The coven's offer: stay or go alone. Two night actions, the vault on the dark of the moon, dawn.
+
+- Night hub (2 actions of 4): Tiro on the roof (honest about the house, bond; if `b1.sun_known` is tiro he mentions the secret); Hanno's ledger of names (what the house is: fourteen, a census, a Lictor who is fed; the terms by `b1.collis_terms`; "a man alone in Rome is not free, merely unwatched by friends"); a walk alone, followed by a thin clerk of Galerius's (lose him / let him follow / turn on him, who says Galerius pays on the first and asks whether the master of Collis comes out by day); Prisca plainly (why she wants him, by `b1.sun_known`; she will not hold him and will not be his enemy).
+- The vault: lamps out, one flame in a dish of oil. Galerius attends as the Senate's witness. `b1.coven` = stayed / alone, `b1.oath` = full / reserved / none. Staying sets the coven path and recruits Prisca (tier 3), Hanno (tier 3) and Tiro (tier 1) into the circle; a reserved oath ("the only honest kind") is defiance up. Going alone sets the lone path, Prisca gives a cedar cloak "not a leash", a hidden sleeping place if he can pay for it (else Hanno offers the counting house cellar), and Galerius enters him in the census as unattached and says he will look in.
+- Dawn: Tiro comes with a bundle (alone) or claps his shoulder three times (stayed). Hanno brings the seed of chapter 8: three burned buildings near the Circus, the Aventine foot and the Velabrum, all owed money to the house, and a watchman who saw a grey cloak with a lamp whose flame did not flicker. Prisca asks him to find out by day, quietly (asks, if he is alone).
+
+## Chapter 8: "The Steady Flame" (session 10, `content/burning-city/ch08.tsb`, chapter id `b1c08`)
+
+The Igniferi uncovered, nine days before the full moon of Julius. Three day actions, then the cellar, then the warning.
+
+- Day hub (3 actions of 4, midday costs hunger for the Velabrum): the burned warehouse (Rufus the vigil, three roofs at once, grey cloaks that did not run and prayed; `b1.rufus` = trusted / none (a surveyor lie) / wary (pressed)); the Collis ledgers (pitch, tow, resin and sealed jars bought for cash; the lead differs by `b1.collis_start`; the name Flavus); the Subura (Naevia and the girl who sweeps; Vibia returns with the cellar's location if `b1.vibia` is told or helped); the lamp seller in the Velabrum (Flavus is gentle, lame, kind, says the village on the hill was "thoroughly" dealt with and that Julius will be "a very bright summer"; the jar's flame is heat on the hero's skin, the first time he feels fire as a danger; `b1.flavus` = spoke / struck (witness, secrecy down, Flavus promises to remember his face)).
+- Dusk: if no lead was followed Tiro found the place himself. Tiro comes down either way.
+- The cellar under the Aventine: an old cistern, 200 jars with wicks, 40 grey cloaks at a small altar, a charcoal map with red marks. Watching from the grate gives the whole plan (`b1.plan` full). Slipping down is a coin toss to a fight. Questioning a man at the stair is a fight. Fights are `fight("human", 2)`; a loss means the jar's heat burns him and Tiro hauls him out; `b1.plan` partial unless he wins.
+- The plan Flavus speaks (if heard): the night of the full moon of Julius, wind from the river, the Circus first, then the Aventine foot, then the Emporium, second watch, every man with a lamp. "The fire does not forget. It has not forgotten the hill."
+- Dawn: Rufus (if trusted) tells him which Aventine cisterns are good ("in case the Circus goes up"). Who to tell, `b1.igni_warned` = house (Prisca sets a house watch, says the Senate will hear it from somebody, "I should like to know what it does when it hears") / lictors (Galerius is not surprised: "I have a file on a certain lamp" and the Senate considers a great deal; "a fire in the old quarters is not a misfortune to every one of us") / both / none.
+
+## Threads left open (session 10)
+
+- Galerius and the Senate are quietly unbothered by the fire plan. That is the seed for the blame landing on the Christians: chapter 9 can show the Senate letting the fire come and steering what is said after. A hero who told the Lictors was heard and not acted on; one who did not is simply alone.
+- `b1.flavus` struck: Flavus remembers his face. A hero who struck him can be named by the Igniferi in chapters 9 and 10 (Collis, Collesanto). Flavus is the Igniferi's leader and dies in the reckoning.
+- `b1.rufus` is the vigil who founds the Velati. Trusted: he is in the fire scenes ready, and later the first journal. Wary: he suspects the hero of being one of the strange men. None: he does not remember.
+- `b1.coven` and `b1.oath` decide how much of the house is at his back for the fire. Tiro is in the circle if he stayed; either way Tiro is at his side in chapter 9 and dies in the Great Fire.
+- The jar's flame hurts him across a room: remember it when he fights Igniferi lamps in chapter 9.
+- `b1.plan` decides whether the hero knows the order of the burning (Circus, Aventine foot, Emporium) in chapter 9.
+- Chapter 9 opens nine days later, on the eve of the full moon, with `b1.igni_warned` deciding who has been prepared.

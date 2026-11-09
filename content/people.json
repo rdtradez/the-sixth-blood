@@ -19,23 +19,122 @@
         "default": "Valerius"
       }
     },
-    "spouse": { "gender": "opposite:hero", "names": { "f": "Livia", "m": "Marcus", "x": "Livia" } },
-    "aelia": { "gender": "f", "name": "Aelia" },
-    "felix": { "gender": "m", "name": "Felix" },
-    "cassian": { "gender": "m", "name": "Cassian" },
-    "prisca": { "gender": "f", "name": "Prisca", "title": "Head of the Merchant coven", "bio": "A woman who might be forty or four hundred, with an abacus and a great deal of patience. She lends to every power in Rome, and she has taken you in." },
-    "domitia": { "gender": "f", "name": "Domitia", "title": "Mother of your spouse", "bio": "Your spouse's mother, a widow who keeps a hard face and a soft kitchen. She came to stay when the house went quiet." },
-    "sextus": { "gender": "m", "name": "Sextus", "title": "Shepherd of Collesanto", "bio": "An old shepherd with a bad knee and a good ear. He is the only man in the village who takes his sheep near the villa wall." },
-    "quintus": { "gender": "m", "name": "Quintus", "title": "A boy of Collesanto", "bio": "A boy of twelve with long arms and a stubborn mouth. The village does not listen to him, and he has noticed." },
-    "fuscus": { "gender": "m", "name": "Fuscus", "title": "The collector's man", "bio": "A thickset man in a good cloak who collects what Rome says it is owed, and a little more besides." },
-    "tiro": { "gender": "m", "name": "Tiro", "title": "A younger member of the Merchant coven", "bio": "A bookkeeper's son turned at nineteen, who was never good at sums and is very good at people. He talks when he is afraid, and he is afraid quite often." },
-    "galerius": { "gender": "m", "name": "Galerius", "title": "Lictor of the Senate of Blood", "bio": "An officer of the Senate's enforcers, polite, patient and very old. He has been told to watch you." },
-    "hanno": { "gender": "m", "name": "Hanno", "title": "Keeper of the Merchant house ledgers", "bio": "A Carthaginian who has kept accounts for three hundred years and has said perhaps nine hundred words in that time." },
-    "naevia": { "gender": "f", "name": "Naevia", "title": "Keeper of a wine shop in the Subura", "bio": "A freedwoman of fifty with a baker's arms and a face that has never been fooled twice. She is the first customer you did not frighten." },
-    "lucrio": { "gender": "m", "name": "Lucrio", "title": "A grain factor of the Merchant house", "bio": "A handsome heavy man with a good ring who has been taking a tenth of a cart a day. He knows a great many debts." },
-    "vibia": { "gender": "f", "name": "Vibia", "title": "A woman of the Subura", "bio": "A thin tired woman with a mended dress and a husband who is not coming home. She came to ask a stranger for help." },
-    "et_fledgling": { "gender": "f", "name": "Test Fledgling" },
-    "et_keeper": { "gender": "m", "name": "Test Keeper", "title": "Test keeper" },
-    "et_love": { "gender": "opposite:hero", "names": { "f": "Test Beloved", "m": "Test Beloved", "x": "Test Beloved" }, "title": "Test beloved", "bio": "A developer person who shows how the People screen lists someone you have met." }
+    "spouse": {
+      "gender": "opposite:hero",
+      "names": {
+        "f": "Livia",
+        "m": "Marcus",
+        "x": "Livia"
+      }
+    },
+    "aelia": {
+      "gender": "f",
+      "name": "Aelia"
+    },
+    "felix": {
+      "gender": "m",
+      "name": "Felix"
+    },
+    "cassian": {
+      "gender": "m",
+      "name": "Cassian"
+    },
+    "prisca": {
+      "gender": "f",
+      "name": "Prisca",
+      "title": "Head of the Merchant coven",
+      "bio": "A woman who might be forty or four hundred, with an abacus and a great deal of patience. She lends to every power in Rome, and she has taken you in."
+    },
+    "domitia": {
+      "gender": "f",
+      "name": "Domitia",
+      "title": "Mother of your spouse",
+      "bio": "Your spouse's mother, a widow who keeps a hard face and a soft kitchen. She came to stay when the house went quiet."
+    },
+    "sextus": {
+      "gender": "m",
+      "name": "Sextus",
+      "title": "Shepherd of Collesanto",
+      "bio": "An old shepherd with a bad knee and a good ear. He is the only man in the village who takes his sheep near the villa wall."
+    },
+    "quintus": {
+      "gender": "m",
+      "name": "Quintus",
+      "title": "A boy of Collesanto",
+      "bio": "A boy of twelve with long arms and a stubborn mouth. The village does not listen to him, and he has noticed."
+    },
+    "fuscus": {
+      "gender": "m",
+      "name": "Fuscus",
+      "title": "The collector's man",
+      "bio": "A thickset man in a good cloak who collects what Rome says it is owed, and a little more besides."
+    },
+    "tiro": {
+      "gender": "m",
+      "name": "Tiro",
+      "title": "A younger member of the Merchant coven",
+      "bio": "A bookkeeper's son turned at nineteen, who was never good at sums and is very good at people. He talks when he is afraid, and he is afraid quite often."
+    },
+    "galerius": {
+      "gender": "m",
+      "name": "Galerius",
+      "title": "Lictor of the Senate of Blood",
+      "bio": "An officer of the Senate's enforcers, polite, patient and very old. He has been told to watch you."
+    },
+    "hanno": {
+      "gender": "m",
+      "name": "Hanno",
+      "title": "Keeper of the Merchant house ledgers",
+      "bio": "A Carthaginian who has kept accounts for three hundred years and has said perhaps nine hundred words in that time."
+    },
+    "naevia": {
+      "gender": "f",
+      "name": "Naevia",
+      "title": "Keeper of a wine shop in the Subura",
+      "bio": "A freedwoman of fifty with a baker's arms and a face that has never been fooled twice. She is the first customer you did not frighten."
+    },
+    "lucrio": {
+      "gender": "m",
+      "name": "Lucrio",
+      "title": "A grain factor of the Merchant house",
+      "bio": "A handsome heavy man with a good ring who has been taking a tenth of a cart a day. He knows a great many debts."
+    },
+    "vibia": {
+      "gender": "f",
+      "name": "Vibia",
+      "title": "A woman of the Subura",
+      "bio": "A thin tired woman with a mended dress and a husband who is not coming home. She came to ask a stranger for help."
+    },
+    "et_fledgling": {
+      "gender": "f",
+      "name": "Test Fledgling"
+    },
+    "et_keeper": {
+      "gender": "m",
+      "name": "Test Keeper",
+      "title": "Test keeper"
+    },
+    "et_love": {
+      "gender": "opposite:hero",
+      "names": {
+        "f": "Test Beloved",
+        "m": "Test Beloved",
+        "x": "Test Beloved"
+      },
+      "title": "Test beloved",
+      "bio": "A developer person who shows how the People screen lists someone you have met."
+    },
+    "rufus": {
+      "gender": "m",
+      "name": "Rufus",
+      "title": "A vigil of the Aventine station",
+      "bio": "A plain square watchman with a leather bucket and ash to the elbows, who has seen a great many fires and is the first man in Rome to say that someone is lighting them."
+    },
+    "flavus": {
+      "gender": "m",
+      "name": "Flavus",
+      "title": "A lamp seller of the Velabrum",
+      "bio": "A lame freedman with kind eyes and a clean shop, devoted to Vesta, who has never had to lie about anything."
+    }
   }
 }
