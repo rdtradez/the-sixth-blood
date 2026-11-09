@@ -169,7 +169,7 @@ test('quick start marks quick lore as already known', () => {
 });
 
 test('schema 3 saves gain the lore state', async () => {
-  assert.equal(SCHEMA, 4);
+  assert.equal(SCHEMA, 5);
   assert.deepEqual(SCHEMA_MIGRATIONS[3]({ sys: {} }).sys.lore, { codex: {}, kin: {} });
   const storage = new MemoryStorage();
   const game = await realGame({ storage });
@@ -181,7 +181,7 @@ test('schema 3 saves gain the lore state', async () => {
   storage.setItem('tsb:slot:auto', JSON.stringify({ ...env, format: SAVE_FORMAT, schema: 3, payload, checksum: fnv1a(payload) }));
   const fresh = await realGame({ storage });
   await fresh.loadSlot('auto');
-  assert.deepEqual(fresh.state.sys.lore, { codex: {}, kin: {} });
+  assert.deepEqual(fresh.state.sys.lore, { codex: {}, kin: {}, sites: {} });
   assert.deepEqual(fresh.codex().groups.length > 0, true);
 });
 
@@ -485,4 +485,42 @@ test('the sample chapter reaches both endings', async () => {
   }
   assert.ok(seen.some((t) => t.includes('halfway down')));
   assert.ok(!seen.some((t) => t.includes('Because you waited')));
+});
+
+test('maps: start sites show, charting adds sites, and bad ids are rejected', async () => {
+  const { MAPS, mapView, siteKnown } = await import('../engine/maps.js');
+  const { createState } = await import('../engine/state.js');
+  const st = createState();
+  st.sys.lore = { codex: {}, kin: {}, sites: {} };
+  assert.deepEqual(mapView(st, 'rome').sites, ['roadhome']);
+  st.sys.lore.sites['rome.warehouse'] = { book: 'burning-city', chapter: null };
+  assert.deepEqual(mapView(st, 'rome').sites, ['warehouse', 'roadhome']);
+  assert.equal(siteKnown('rome.warehouse'), true);
+  assert.equal(siteKnown('rome.nowhere'), false);
+  assert.equal(siteKnown('mars.base'), false);
+  assert.deepEqual(SCHEMA_MIGRATIONS[4]({ sys: { lore: { codex: {}, kin: {} } } }).sys.lore.sites, {});
+});
+
+test('every site a map lists is drawn by the map page', async () => {
+  const { readFileSync } = await import('node:fs');
+  const { MAPS } = await import('../engine/maps.js');
+  for (const m of Object.values(MAPS)) {
+    const html = readFileSync(join(root, `app/maps/${m.page}.html`), 'utf8');
+    for (const s of m.sites) assert.ok(html.includes(`id:'${s}'`) || html.includes(`id:"${s}"`), `${s} is in ${m.page}.html`);
+  }
+});
+
+test('maps: Book Two shows Florence and Collesanto on the Florence page', async () => {
+  const { mapView, mapsFor, siteKnown } = await import('../engine/maps.js');
+  const { createState } = await import('../engine/state.js');
+  const st = createState();
+  st.sys.lore = { codex: {}, kin: {}, sites: { 'florence.bank': { book: 'blood-and-gold', chapter: null } } };
+  assert.deepEqual(mapView(st, 'florence').sites, ['bank', 'roadhome']);
+  assert.deepEqual(mapView(st, 'collesanto2').sites, ['farm', 'square', 'villa', 'road']);
+  assert.equal(siteKnown('florence.court'), true);
+  assert.equal(siteKnown('florence.warehouse'), false);
+  st.book = 'blood-and-gold';
+  const maps = mapsFor(st, null);
+  assert.deepEqual(maps.map((m) => m.id), ['florence', 'collesanto2']);
+  assert.ok(maps.every((m) => m.page === 'florence'));
 });

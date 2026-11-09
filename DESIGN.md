@@ -45,6 +45,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 3: game systems
 - [x] Session 4: player features, developer tools, look and feel, sample chapter
 - [x] Sessions 5 to 9: character creation and the prologue, the Rome map, Book One chapters 1 to 6
+- [x] Session 17: the Florence and Collesanto (1474) maps for Book Two
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -99,7 +100,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Book One is a work in progress: its manifest entry has `"incomplete": true` and its only chapter is the prologue (`"prologue": true`, chapter id `b1p`). The game pauses on "To be continued" after the last written chapter and carries on by itself when more is added. Session 7 adds chapters after the prologue (the prologue's `=> next` then leads into chapter 1) and the last Book One session removes `"incomplete"`.
 - The prologue sets `wealth` and `collesanto` to the same values the Book One quick start uses, so a new game and a quick start begin chapter 1 alike. Retune both together.
 - Prologue flags (`prologue.day`, `prologue.stand`, `prologue.answer`) and `hero.death` are registered with quick start defaults. `content/family.json` has no quick start status for the family yet: the Book One sessions set it when they know how each relative's story stands at the end of the book.
-- The prologue plan is in `SPOILERS/`. Session 6 (Rome map) is next.
+- The prologue plan is in `SPOILERS/`. Session 6 added the Map tab (below). Session 7 (Book One, Chapters 1 and 2) is next.
 - Session 4 lives on the `session-4` branch and session 5 is built on top of it. Merge `session-5` to `main` to get both.
 
 ### Session 7 notes (for the next session)
@@ -230,6 +231,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Aelia and Felix are now `"quick": "dead"` in `content/family.json`, so a quick start into Book Two finds the whole first family gone. Book Two's opening should read the chained `wake()`.
 - `tests/interlude-b.test.js` covers the chain end and the chapter order; `tests/book1.test.js` first night checks use `stopAt: 'lc01'`.
 - Plans are in `SPOILERS/lost-centuries.md`.
+
+- Maps (session 6): the Map tab in the menu shows `app/maps/city.html` (procedural SVG: Rome and Collesanto, with an After the fire toggle) in an iframe and tells it which sites to show. Sites per map are listed in `engine/maps.js`; `roadhome`, the farm, square, villa and road start charted. Chapters add places with `$ do chart("rome.warehouse")` and can test `charted("rome.warehouse")`. Charted places live in `sys.lore.sites` (SCHEMA 5). Later books add their city to `engine/maps.js` and `city.html`; the approved standalone previews for Florence, Paris, New Orleans, London, Chicago and New York are kept outside the repo until their sessions.
+
+### Session 17 notes (for the next session)
+
+- The Rome map tab from session 6 had never been merged into `main`; session 17 merged it first, then added the Florence map.
+- `app/maps/florence.html` draws Florence and Collesanto as it stands in 1474 (walled, unburned). `engine/maps.js` now gives each map a `page` (`city` or `florence`); the Map tab loads the page of the book the hero is in. New maps: `florence` (`bank`, `prisca`, `wool`, `bottega`, `haven`, `court`, `rooms`, `roadhome`) and `collesanto2` (`farm`, `square`, `villa`, `press`, `gate`, `crypt`, `road`), both for book `blood-and-gold`. Book Two chapters chart sites with `$ do chart("florence.bank")`.
+- `sw.js` caches the new page (`VERSION` is `tsb-7`). Later city maps follow the same pattern: copy the page, list the sites in `engine/maps.js`.
 
 ### Session 18 notes (Book Two, chapters 1 and 2)
 

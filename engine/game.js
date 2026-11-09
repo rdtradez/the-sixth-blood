@@ -12,6 +12,7 @@ import { checkContentMigrations } from './versioning.js';
 import { makeContent, CONTENT_FNS, CONTENT_COMMAND_NAMES, voiceDef } from './content.js';
 import { EngineError, clone } from './util.js';
 import { readSettings, checkSetting } from './settings.js';
+import { mapsFor } from './maps.js';
 import { peopleView, codexView, familyView, achievementsView } from './screens.js';
 import { evaluateAchievements } from './achievements.js';
 import { creationOptions, fitHero, lookChoices, compatiblePaths } from './creation.js';
@@ -649,6 +650,7 @@ export class Game {
 
   people(state = this.viewState()) { return state ? peopleView(state, this.content) : []; }
   codex(state = this.viewState()) { return codexView(state, this.content); }
+  maps(state = this.viewState()) { return state ? mapsFor(state, this.content) : []; }
   family(state = this.viewState()) { return state ? familyView(state, this.content) : []; }
 
   // ---- Saving ---------------------------------------------------------------------------
