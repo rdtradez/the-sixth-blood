@@ -47,6 +47,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Sessions 5 to 9: character creation and the prologue, the Rome map, Book One chapters 1 to 6
 - [x] Session 17: the Florence and Collesanto (1474) maps for Book Two
 - [x] Sessions 18 and 19: Book Two chapters 1 to 4
+- [x] Session 20: Book Two chapters 5 and 6
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -258,4 +259,17 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New people (`content/people.json`): Gualtiero, Ottaviano, Vieri. New codex entries: the licence of the Purse, the Medici and the Pazzi, the Priestess line, the bank of the Merchant house. Content notes: chapter 3 carries `blood` and `violence`, chapter 4 carries `blood`.
 - Chapter 3 starts a fight with `fight("fledgling", 2)` in its own scene and calls it with `~>`; `strike()` must never run before the fight starts (found while testing).
 - `tests/book2b.test.js` plays both chapters down their branches, including the fight over eight seeds, every hunger variant and each earlier decision the chapters read. `tests/book2.test.js` now expects four chapters and stops chapter 2 at the start of chapter 3.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 20 notes (Book Two, chapters 5 and 6)
+
+- Book Two chapters 5 and 6 are built (`content/blood-and-gold/ch05.tsb` and `ch06.tsb`, chapter ids `b2c05` and `b2c06`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 6 and carries on by itself when chapter 7 is added.
+- Session 20 is built on `main` (session 19 is merged), on the `session-20` branch.
+- Chapter 5 is a day phase of three actions out of four and then the noon signing and the ninth hour; it ends with `rest()` and `=> next`. Chapter 6 is a night phase of three actions out of four and then the terms at dawn; it ends with `rest()` and `=> next`, which pauses until chapter 7 exists. Chapter 7 should read hunger, injury, standing and secrecy as chapter 6 left them.
+- New decision flags keep the `b2.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. Decision flags a later chapter should read: `b2.loan`, `b2.daylight`, `b2.captain`, `b2.watcher_terms`, `b2.watcher_bond` (and `romance_status("watcher")`), with `b2.wool_wages`, `b2.portrait`, `b2.watcher_meet`, `b2.watcher_book` and `b2.vieri_watch` as smaller notes.
+- New people (`content/people.json`): the watcher (the Velati agent, gender opposite the hero, name Allegra or Matteo Bonsi), Ser Bartolo, Messer Raniero, Ser Nofri, Maestro Berto and the apprentice. New codex entries: the Banca del Colle and the Velati. Content notes: both chapters carry `blood`.
+- The Velati agent's default name is a placeholder (the design doc leaves it open). The agent's gender follows the hero's, like the spouse.
+- Chapter 4 is now `@version 2`: one passage uses the watcher's pronouns instead of a fixed "she".
+- The painter's portrait from chapter 5 gives the collection piece `florence_portrait` only if he sat as himself (`b2.portrait` is `sat`).
+- `tests/book2c.test.js` plays both chapters down their branches (every deal and sun bargain, both genders, hunger and an empty purse, each decision flag). `tests/book2.test.js` and `tests/book2b.test.js` now expect six chapters, and the chapter 4 test stops as chapter 5 begins.
 - Plans are in `SPOILERS/blood-and-gold.md`.

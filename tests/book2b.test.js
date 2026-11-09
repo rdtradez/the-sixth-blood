@@ -60,11 +60,11 @@ const WAKES = [{}, { place: 'collesanto', steward: 'keepers' }, { place: 'tomb',
 const REPLIES = ['warm', 'formal', 'silent'];
 const FRIARS = ['charmed', 'paid', 'cowed', 'hidden'];
 
-test('Book Two now lists four chapters and still pauses after the last', async () => {
+test('Book Two now lists six chapters and still pauses after the last', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 4);
+  assert.equal(book.chapterCount, 6);
 });
 
 test('chapter 3 plays through to chapter 4 for every waking, reply and friar outcome', async () => {
@@ -140,12 +140,11 @@ test('chapter 3 handles a very hungry hero', async () => {
   clean(run.text);
 });
 
-test('chapter 4 plays through and then pauses, because Book Two is incomplete', async () => {
+test('chapter 4 plays through and reaches chapter 5', async () => {
   for (const wake of WAKES) {
     for (const seat of ['sword', 'none']) {
-      const run = await play('b2c04', { 'b2.seat': seat, 'b2.oath': seat === 'sword' ? 'sworn' : 'refused' }, [], { wake });
-      assert.notEqual(run.frame.wait, 'choices');
-      assert.equal(run.game.state.chapter, 'b2c04');
+      const run = await play('b2c04', { 'b2.seat': seat, 'b2.oath': seat === 'sword' ? 'sworn' : 'refused' }, [], { wake, stopAt: 'b2c05' });
+      assert.equal(run.game.state.chapter, 'b2c05');
       clean(run.text);
     }
   }

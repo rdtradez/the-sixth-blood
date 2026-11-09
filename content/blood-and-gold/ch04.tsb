@@ -5,7 +5,7 @@
 @chapter b2c04
 @title The Purse
 @book blood-and-gold
-@version 1
+@version 2
 
 # start
 ## The strong room
@@ -193,10 +193,10 @@ You do not say where you are going. You say that you will be back before the lam
 The Arno at night is a wide, dark, slow, glittering thing, between two embankments of old stone, with the black arches of the bridges standing across it at intervals like the ribs of a drowned ship. There are lights on the water, a good many of them, from the lamps of the dyers, who work all night and throw their waste into the stream, so that the river runs yellow and blue and a strange dim red, in long slow ribbons, like the ghosts of a procession.
 It is very cold. It is the kind of cold that goes through a cloak as through a net, and you do not mind it at all. You walk along the wall for a long time. It is a very odd sensation, after so many years, to have the whole of a great city to yourself, and to know, quite simply, that it is yours to take or to leave.
 On the other bank there is a figure.
-She is standing at the water's edge, where the stair goes down, with a small shuttered lantern at her feet, and she is writing in a book. It is a little book, no bigger than a hand, and she writes in it with a stub of lead, very fast, in short, neat strokes, looking up from time to time at the river and down again at the page. She is a young woman, or looks it, in a plain brown cloak, with her hair under a cap. She is quite alone. She is not moving as a person moves who has come to the river to be alone.
-She looks up, and sees you, and goes still.
-It is a long way across the water. You cannot hear anything. You see her eyes for a moment, quite clearly, in the light of the dyers' lamps, and you see her do the thing that a very good clerk does when a customer says something unexpected, which is to go on writing, steadily, as if nothing had happened, and to write one word more than she meant to.
-Then she shuts the book, and picks up the lantern, and goes up the stair, not hurrying. She does not look back. It is very well done, and she does it, you think, just a little too well.
+{watcher.They} {watcher.are} standing at the water's edge, where the stair goes down, with a small shuttered lantern at {watcher.their} feet, and {watcher.they} {watcher.are} writing in a book. It is a little book, no bigger than a hand, and {watcher.they} write{watcher.s} in it with a stub of lead, very fast, in short, neat strokes, looking up from time to time at the river and down again at the page. {watcher.They} {watcher.are} a {pg("watcher", "young man", "young woman")}, or look{watcher.s} it, in a plain brown cloak, with a cap pulled low. {watcher.They} {watcher.are} quite alone. {watcher.They} {watcher.are} not moving as a person moves who has come to the river to be alone.
+{watcher.They} look{watcher.s} up, and see{watcher.s} you, and go{watcher.es} still.
+It is a long way across the water. You cannot hear anything. You see {watcher.their} eyes for a moment, quite clearly, in the light of the dyers' lamps, and you see {watcher.them} do the thing that a very good clerk does when a customer says something unexpected, which is to go on writing, steadily, as if nothing had happened, and to write one word more than was meant.
+Then {watcher.they} shut{watcher.s} the book, and pick{watcher.s} up the lantern, and go{watcher.es} up the stair, not hurrying. {watcher.They} never look{watcher.s} back. It is very well done, and it is done, you think, just a little too well.
 <~
 
 # terms

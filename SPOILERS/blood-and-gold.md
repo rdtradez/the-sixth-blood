@@ -41,3 +41,25 @@ Dawn: the decision `b2.prisca_deal`: partner (one house, one seal, shared risk),
 Does not decide Prisca's fate or her bloodline (the design doc leaves "Firstborn of the Merchant" open); she is written so that either reading holds.
 
 Flagged to the owner (spoiler light): nothing that changes the big picture.
+
+## Chapter 5, "The Third Hour to the Ninth" (`b2c05`, session 20)
+
+The Banca del Colle opens in the Via Porta Rossa and rises through daylight dealings, the fifth list item of the design doc. The opening reads Prisca's terms from chapter 4 (`b2.prisca_deal`: one door with two seals, a house across the street from hers, or two rooms on her credit) and the sun bargain (`b2.prisca_sun`).
+
+Day phase, three of four: the chair on the counting floor (`b2.loan`: the Medici factor Ser Bartolo and the Pazzi factor Messer Raniero each ask for a favored rate on letters of credit; he carries the Medici, the Pazzi, both or neither; then the banking venture), the Oltrarno wool workshop of Ser Nofri (`b2.wool_wages`: fair, hard or none; `florence.wool`), the bottega of Maestro Berto in the Via dei Servi (`b2.portrait`: sat, refused or disguised; sitting as himself gives the collection piece `florence_portrait`; `florence.patronage`; Berto's senior apprentice, id `apprentice`, is introduced and does nothing yet, a seed for the painter's apprentice of the design doc), and Ugolino at the side door, a condottiere's agent who pays in a very old ducat that smells of a house with no fire (`b2.captain`: funded, listened or refused; `florence.mercenaries`, the dark venture). The captain's backers are a prelate's household in Rome, a Florentine banker and a third who does not come to the door: the third is a vampire faction, which seeds chapter 9.
+
+Noon: the Arte del Cambio requires a new bank's first great contract to be sworn in the open on the marble in the Mercato Nuovo (`b2.daylight`: open, shaded awning, or Benedetto swears for the house). Vieri, a man of the Bargello with clean hands, and a new clerk who was never engaged are in the crowd. Ninth hour: Prisca's reaction (read from `b2.daylight`), the dinner invitation from Ottaviano if `b2.prisca_asked` is agreed (the way into the court's quarrel for chapter 9), and the clerk at the corner nodding at him. Ends with `rest()`.
+
+New people: Ser Bartolo, Messer Raniero, Ser Nofri, Maestro Berto, the apprentice, and the watcher. Codex: the Banca del Colle.
+
+## Chapter 6, "The Little Book" (`b2c06`, session 20)
+
+The watcher: the Velati agent, who is both the clerk and the figure he saw across the river in chapter 4 (chapter 4 is now `@version 2` and uses the watcher's pronouns). The agent is `watcher` in `content/people.json`, gender opposite the hero like the spouse, named Allegra or Matteo Bonsi on the clerks' roll. The design doc leaves the default name open, so this is a placeholder to confirm.
+
+Night phase, three of four: Benedetto and the letter from Pisa (the seal carries the Velati mark, a closed eye; Prisca has always known they watch her house; `b1.velati_seed`), the clerk's rooms over a stationer's (the little book in the Aventine shorthand; `b2.watcher_book`: read, copied or left; reads `lc.watchers`; a note at the foot of the last page in another, older hand says to look also for the one who is looking at him, a Cassian hint), the river stair (`b2.watcher_meet`: spoke, caught or waited), and the lanes behind the Badia (Vieri wants the clerk's book; `b2.vieri_watch`: shielded, claimed or ignored).
+
+Dawn on the roof of the bank: the clerk states the rule of the Velati (watch, record, do not interfere) and says they have been breaking it for three weeks. `b2.watcher_terms`: open, bargained (he may see the pages that go to Rome) or refused (the watch sends someone older). The sun comes up on his face and does nothing, and the clerk says they have wanted to see that. `b2.watcher_bond`: begun (`romance("watcher")`, bread on the step of Orsanmichele) or guarded.
+
+Later chapters: the agent is turned by Cassian in the Pazzi Conspiracy (chapter 10), not killed. The little book is a source for the Merchant original's test and the first answer. Prisca's reaction to the watcher is left for chapter 7 or 8.
+
+Flagged to the owner (spoiler light): the agent's default name is a placeholder; their gender follows the hero's, as the spouse's does.

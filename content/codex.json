@@ -233,6 +233,18 @@
       "title": "The bank of the Merchant house",
       "book": "blood-and-gold",
       "text": "A plain door and a bronze ring, with a counting floor of forty tables, a licence office and a strong room under the street. It is one of the six great houses of Florence and has never been seen to fail."
+    },
+    "banca_del_colle": {
+      "category": "places",
+      "title": "The Banca del Colle",
+      "book": "blood-and-gold",
+      "text": "The house on the Via Porta Rossa with a green hill on its sign. It is open from the third hour to the ninth, by day, and run by a man who sits in the sun. The guild requires a new bank to make its first great contract in the open, at noon, in the Mercato Nuovo."
+    },
+    "the_velati": {
+      "category": "lore",
+      "title": "The Velati",
+      "book": "blood-and-gold",
+      "text": "The Veiled Watch, begun by a vigil of the Aventine who wrote down what he saw. They keep a book, in a shorthand passed from hand to hand, and send agents to watch the old blood. Their rule is to see, to write and not to interfere. They mark their letters with a closed eye."
     }
   }
 }

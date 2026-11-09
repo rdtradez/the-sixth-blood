@@ -1584,6 +1584,126 @@
       "major": true,
       "default": "agreed",
       "note": "Chapter 4: whether he agreed to find out who is keeping the Medici and Pazzi quarrel warm"
+    },
+    "b2.loan": {
+      "kind": "enum",
+      "values": [
+        "medici",
+        "pazzi",
+        "both",
+        "neither"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "neither",
+      "note": "Chapter 5: whose letters of credit the Banca del Colle carried"
+    },
+    "b2.wool_wages": {
+      "kind": "enum",
+      "values": [
+        "fair",
+        "hard",
+        "none"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 5: the Oltrarno workshop (none if he did not buy it)"
+    },
+    "b2.portrait": {
+      "kind": "enum",
+      "values": [
+        "sat",
+        "refused",
+        "disguised"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 5: whether Maestro Berto painted his real face"
+    },
+    "b2.captain": {
+      "kind": "enum",
+      "values": [
+        "funded",
+        "listened",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 5: the stranger at the side door and the unpaid company"
+    },
+    "b2.daylight": {
+      "kind": "enum",
+      "values": [
+        "open",
+        "shaded",
+        "deputy"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "shaded",
+      "note": "Chapter 5: how he swore the house's first contract at noon"
+    },
+    "b2.watcher_meet": {
+      "kind": "enum",
+      "values": [
+        "spoke",
+        "caught",
+        "waited"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "waited",
+      "note": "Chapter 6: how he first faced the Velati clerk at the river stair"
+    },
+    "b2.watcher_book": {
+      "kind": "enum",
+      "values": [
+        "read",
+        "copied",
+        "left"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 6: what he did with the clerk's little book"
+    },
+    "b2.vieri_watch": {
+      "kind": "enum",
+      "values": [
+        "shielded",
+        "claimed",
+        "ignored"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "ignored",
+      "note": "Chapter 6: what he did when Vieri wanted the clerk"
+    },
+    "b2.watcher_terms": {
+      "kind": "enum",
+      "values": [
+        "open",
+        "bargained",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "bargained",
+      "note": "Chapter 6: the terms on which the Velati agent may watch him"
+    },
+    "b2.watcher_bond": {
+      "kind": "enum",
+      "values": [
+        "begun",
+        "guarded"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "begun",
+      "note": "Chapter 6: whether something began between him and the Velati agent"
     }
   }
 }
