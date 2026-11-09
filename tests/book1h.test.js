@@ -55,10 +55,10 @@ const NIGHT = { cordon: /Go to the cordon/, captains: /Go to Theron's captains/,
 const SIDE = { theron: /Stand with the General's line/, tarrax: /Stand with the Lictors/, alone: /Go to the door yourself/, seal: /keep both of them off/ };
 const general = (run) => run.game.state.sys.originals.general;
 
-test('chapters 15 and 16 are written, the General wakes, and the book still pauses', async () => {
+test('chapters 15 and 16 are written, the General wakes, and the book plays on', async () => {
   const run = await playFrom('b1c15', null, {});
   assert.equal(run.frame.wait, 'book_end');
-  assert.equal(run.frame.pending, true);
+  assert.notEqual(run.frame.pending, true);
   for (const flag of ['b1.tarrax_answer', 'b1.theron_door', 'b1.door_side', 'b1.cordon']) {
     assert.ok(run.vars[flag], `${flag} is always recorded`);
   }

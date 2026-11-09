@@ -308,3 +308,30 @@ The night the Senate sits. A night phase of three actions out of four places to 
 - Surety is a new invented custom. If the owner objects, the fate choice can be reattached to simple "he asks for you".
 - A sealed General under the Senate's cell is Tarrax's prisoner, under the hero's cedar is the hero's secret, under thin pegs is a clock. Book Seven can read `b1.seal_kind`.
 - Drunk is the only fate that raises `age` inside Book One. The quick start default for the General is `loosed`.
+
+## Chapter 19: "Ash and Accounts" (session 16, `content/burning-city/ch19.tsb`, chapter id `b1c19`)
+
+The aftermath and the leave taking. A day phase of two actions out of four places, then the road north, then the hill. No `rest()`; closes with `=> next`. The hero walks Rome in full sun, which nobody remarks on.
+
+- Hub (2 of 4): (1) Rufus, the Aventine watchman, writing the report for the Prefect; the hero tells him the truth, gives him a false story, or says nothing (`b1.velati_seed` = told / buried / left). Told: Rufus resolves to keep a book (the first Velati record). Buried: he keeps the Prefect's copy and a second, private tablet. An Igniferi survivor in his yard if `b1.survivor == "kept"`. (2) Prisca's counting room: who holds Collis when he leaves (`b1.collis_legacy` = house / yours / village; house hides the link, village sends coin home). She hints at who should be steward (herself if she is in the circle, Hanno, or "a bank"). (3) The Senate house: Tarrax's last word, coloured by `b1.tarrax_after`; the Senate wants him gone for a long time; promise, refuse, or bargain for a charter that Collesanto is left alone (`b1.senate_peace` = promised / none / charter). Galerius mentions the boy Placidus is learning his letters. (4) The Appian road: Theron and the General's line; coloured by the General's fate (`b1.theron_end` = kept / parted / bitter). Loosed: a note about the hat. Bargain: it was witnessed. Drunk: lawful, and he wishes it were not. Sealed: Theron keeps vigil by the cedar.
+- The road: two nights, a mule, and noon in full sun on a hilltop. He does not know what the gift is for.
+- The hill: Aelia (waiting on the wall, her mother's voice) and Felix. If `b1.aelia_talk == "truth"` Aelia knows he walks in the day. They offer to be sworn as keepers: the oath (`b1.keepers` = sworn / spared). Sworn makes them circle keepers (`keeper("aelia")`, `keeper("felix")`) and, on the lone path with the coin, takes the `keeper_oath` holding. Spared costs bond with both and humanity goes up. Domitia sleeps through, then speaks.
+- Morning: Sextus on the wall; the hero may pay for the well, the north row, or the terraces (each only if `can_build`); the cost is taken by `build()`.
+
+## Chapter 20: "The Long Sleep" (session 16, `content/burning-city/ch20.tsb`, chapter id `b1c20`)
+
+The last night on the hill and the first sleep. No phases. Calls `rest()` then `sleep()`.
+
+- The evening: he spends the hours with Aelia on the wall, Felix in the fields, both at the table, or alone (`b1.last_night`). Domitia leaves a note and bread with honey ("You are too thin").
+- The table (four lines on Hanno's paper): the place (cellar under the villa, a haven, or a tomb), the steward (the bank always; Prisca, Hanno or Tiro if in the circle and active; the keepers if sworn), the orders (safe, aggressive, dark; dark costs Humanity and Velati regard at the wake), and the guard (traps, bribes, guardians, each once, by coin).
+- The cellar: Aelia holds the candle at the stair and does not come down. Origin lines for Judean, Egyptian, Briton and Gaul heroes. If the General is sealed, he thinks of him. He lies on the swept earth; the village's heartbeats go out one at a time; a single knock, far below, once. It is not explained.
+- The wake report is not shown in Book One. The Velati journal for Book One is Rufus's notebook (`content/journal/burning-city.tsb`): he saw the hero in full sun in the yard and told nobody; he names his own record "the watchers" only if the hero told him the truth.
+
+## Threads left open (session 16)
+
+- The maker (Cassian) does not appear in chapters 13 to 20 and is not mentioned. The cellar door with the inside bar is described once more and not opened. If the owner wants the maker to leave a mark at the sleep, chapter 20's cellar scene is the place.
+- The Senate side (the Prefect taking prisoners, the ledger's four letters, the pool kept by the Senate's treasurer) is still unresolved. Nothing in chapters 19 or 20 resolves it.
+- `b1.senate_peace == "charter"` gives Collesanto a small paper protection that "will stop a clerk, not a hunter". Book Two and the Senate's later books can use it or ignore it. A hero who promised to leave is on record as having done so as a courtesy.
+- Rufus's watchers are the seed of the Velati. If Book Two opens with a recap from his hand, the journal entry already fixes his voice and that he knows the hero walks in the sun.
+- The knock heard at the sleep's start is a single soft rule: it does not depend on any flag.
+- The sleep to Florence is resolved at the end of chapter 20. See DESIGN.md session 16 notes for what the interlude sessions need to decide.

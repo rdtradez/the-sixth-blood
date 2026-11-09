@@ -51,7 +51,7 @@ async function playBook(hero, wants = [], seed = 3, stopAt = null) {
   return { game, frame, text: pages.join('\n'), vars: game.state.vars, picked };
 }
 
-test('chapters 1 to 4 play to the pause for every mortal role, with no leftovers or dashes', async () => {
+test('chapters 1 to 4 play to the end of the book for every mortal role, with no leftovers or dashes', async () => {
   for (const [role, origin, path] of [
     ['gladiator', 'gaul', 'captured'],
     ['legionary', 'briton', 'auxiliary'],
@@ -61,7 +61,7 @@ test('chapters 1 to 4 play to the pause for every mortal role, with no leftovers
   ]) {
     const run = await playBook({ gender: 'f', origin, role, path });
     assert.equal(run.frame.wait, 'book_end', role);
-    assert.equal(run.frame.pending, true, `${role}: the book pauses after chapter 4`);
+    assert.notEqual(run.frame.pending, true, `${role}: the book ends rather than pausing`);
     assert.doesNotMatch(run.text, /\{|\}|undefined|NaN|\[object|\bnull\b/, role);
     assert.doesNotMatch(run.text, /[–—]/, `${role}: no dashes in the story text`);
   }

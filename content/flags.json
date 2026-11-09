@@ -1072,6 +1072,78 @@
       "major": true,
       "default": "wary",
       "note": "Chapter 18: where the Commander of the Lictors stands with him after the judgment"
+    },
+    "b1.velati_seed": {
+      "kind": "enum",
+      "values": [
+        "told",
+        "buried",
+        "left"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 19: what the hero let the watchman Rufus write down"
+    },
+    "b1.collis_legacy": {
+      "kind": "enum",
+      "values": [
+        "house",
+        "yours",
+        "village"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "yours",
+      "note": "Chapter 19: who holds Collis when he leaves Rome"
+    },
+    "b1.senate_peace": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "promised",
+        "charter"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 19: what he told the Senate about leaving Rome"
+    },
+    "b1.theron_end": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "parted",
+        "bitter"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "parted",
+      "note": "Chapter 19: where the General's captain stands with him"
+    },
+    "b1.keepers": {
+      "kind": "enum",
+      "values": [
+        "sworn",
+        "spared"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "spared",
+      "note": "Chapter 19: whether the Valerius family was sworn as keepers of the hill"
+    },
+    "b1.last_night": {
+      "kind": "enum",
+      "values": [
+        "aelia",
+        "felix",
+        "both",
+        "alone"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "both",
+      "note": "Chapter 20: who he spent the last night on the hill with"
     }
   }
 }

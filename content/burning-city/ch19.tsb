@@ -1,0 +1,329 @@
+// Book One, Chapter 19 (session 16). The aftermath: Rome by day, the accounts, the Senate's last word, the General's people, then the road home to Collesanto.
+// One day phase of two actions out of four places, then the road, then the hill. No rest(); closes with => next.
+// Chapter 20 is the long sleep (resting place, steward, orders, protections). This chapter settles who is sworn to him and what he leaves behind.
+@chapter b1c19
+@title Ash and Accounts
+@book burning-city
+@version 1
+@next b1c20
+
+# start
+## The morning after
+$ do phase("day", 2)
+$ b1.velati_seed = "left"
+$ b1.collis_legacy = "yours"
+$ b1.senate_peace = "none"
+$ b1.theron_end = "parted"
+$ b1.keepers = "spared"
+$ _rufus = 0
+$ _study = 0
+$ _senate = 0
+$ _gate = 0
+$ _paid = 0
+You do not go to ground. It is the first thing that you notice, and it is a good while before you quite believe it. The sun comes up over the Esquiline, and the others go down into their vaults and their cellars and their windowless rooms like water going down a drain, and you stand in the road in the full white light with your hands in your sleeves, and nothing happens to you but a mild warmth on the back of the neck.
+Rome is going about its business. It has had a fire and a famine and, in the night, without any idea of it, a Senate. A man with a donkey asks you to move, and you move. A boy goes by with a basket of figs and looks at your clothes, which are in a state, and then at your face, which is not, and decides that it is none of his affair. It is, you reflect, a remarkable thing to have been through the worst night of your life and to be asked for nothing by anybody before noon.
+?if must_feed()
+  And you are hungry. It is a bad kind of hungry, the kind that has been put off since the quarry and has been given a great deal of time to think. There is a cookshop on the corner of the lane with a pot over a fire and a man in an apron, and there are other things in the lane that are not cookshops.
+  * Walk out to the markets by the river, and buy a lamb, and be quick about it
+    $ do feed("animal")
+    $ humanity += 1
+    It is not what the hunger wanted. It is, by now, a thing that you are very good at.
+  * Go to the Merchant house's donors, and pay for it ?if wealth >= 3
+    $ do feed("donor")
+    $ do earn(-3)
+    The woman in the plain stola has been told that you are coming. She holds out her arm, and looks at the wall, and thinks, as far as you can tell, about the price of lentils. It is clean and it is very quick, and you are ashamed of how well it works.
+  * Go on, as you are
+    $ cunning_brutal += 2
+    You go on hungry. It sharpens everything. It makes the city smell of what it is full of. You keep your hands in your sleeves and your eyes on the road, and you get through the morning like a man crossing a river on stepping stones.
+?end
+There is a week's worth of things that must be done, and you have the day for two of them. There are four that cannot wait.
+-> day
+
+# day
+## The long day in Rome
+:day
+?if actions_left() == 2
+  The air smells of wet ash and new pine. All the way down the Via Labicana there are men on scaffolds, and the whole of the burned quarter, which was a black field a month ago, is a forest of raw yellow poles.
+?else
+  It is afternoon, and the heat has come up. The scaffolds throw long thin shadows over the road, and somewhere a man is singing a rude song about the Treasury, very badly, with great joy.
+?end
+* Go to the Aventine station of the vigiles, where Rufus is waiting [once] ?if actions_left() > 0
+  ~> rufus
+  $ do act()
+* Go to Prisca, in the counting room, for the accounts [once] ?if actions_left() > 0
+  ~> study
+  $ do act()
+* Go up to the Senate house, where the Commander has sent for you [once] ?if actions_left() > 0
+  ~> senate
+  $ do act()
+* Go to the gate on the Appian road, where the grey people are waiting [once] ?if actions_left() > 0
+  ~> gate
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dusk
+?end
+-> :day
+
+# rufus
+## The watchman and the tablet
+$ _rufus += 1
+$ do meet("rufus")
+The Aventine station is a plain low building with a yard and a well and a row of leather buckets on pegs, and a good deal of the roof is new. It has been, you hear, a busy season. Rufus is sitting on an upturned tub in the yard, in the sun, with a wax tablet on his knee and a stylus in his fist, and he has the look of a man who has been writing for some hours and has not at all enjoyed it.
+?if b1.rufus == "trusted"
+  He gets up when he sees you. He does it slowly, as men do who have been on their feet in smoke for a month. "I thought you would come," he says. "I had a bet with myself. It was a good bet." He does not smile, quite, but something goes slack in his face that has been tight for a long time.
+?elif b1.rufus == "wary"
+  He does not get up. He looks at you for a long moment, over the tablet, with the plain steady look of a man doing sums that he does not like the answers to. "You," he says. "Yes. Well. Sit down, if you are going to. I am not going to hit you. I have thought about it, and I should not know where to begin."
+?else
+  He looks up, and looks again, and puts the stylus behind his ear. "I know you," he says slowly. "I do not know from where. That is the thing about it. I keep thinking that I do, and then it goes." He rubs his eyes with the heel of his hand. "Sit down. It is a clean tub."
+?end
+You sit. He turns the tablet round and shows it to you. It is crowded with small plain letters, and some of them have been scraped out and written over, and at the top, in a firm hand, he has put a date, and below it the one word *Observed*.
+"The Prefect wants a report," he says. "Fire. Cause. Numbers. I have written the numbers, and they are the numbers that a prefect can read. It is the rest that I am stuck on." He turns it back. "There were people in the street who were not on fire and were not running. Not many. There was a thing in the Subura that I will not put in a report. There was a man in a hood in the old quarry who walked out of a wall of flame as if it were a curtain." He looks at you very steadily. "I have a good many friends who saw some of this. We have been talking, in the evenings. We have not got anywhere. We have only got a list."
+?if b1.rufus_saw == "mercy"
+  "The part that I keep coming back to," he says, "is that some of them let people go. I saw it. A woman in a dark cloak put a child in a doorway and put her hand on the door, and went back into the smoke. I do not know what to do with that. It is not in any of the stories."
+?elif b1.rufus_saw == "slaughter"
+  "The part that I keep coming back to," he says, "is the other part. I will not say what I saw in the lane behind the Circus. I have decided that I am going to write it down very exactly, one day, in a place where it will be kept, so that somebody will know." His voice is quite even, and the knuckles of his hand on the tablet are white.
+?elif b1.rufus_saw == "both"
+  "The part that I keep coming back to," he says, "is that I saw both. I saw them do the worst thing that I have seen a person do, and I saw them do the kindest, and it was the same night, and some of them were the same people. I have been trying to find the word. I think that the word is that I was not told the truth about anything."
+?else
+  "I did not see it all," he says. "I saw the edges. It is the edges that frighten me. A thing that has edges has an inside."
+?end
+?if b1.survivor == "kept"
+  There is a third person in the yard. You had not noticed. A thin man in a borrowed tunic is sitting in the shade of the well, with his knees drawn up, and the watchmen's cook has given him a bowl of something, and he is not eating it. He is one of those who came out of the Igniferi's cellars, and he looks at you as a man looks at a lantern that he has been told is not going to go out. Rufus says only, "He knows a great deal. He is not a happy guest."
+?end
+He waits. It is clear that he has not asked, and clear that he is going to. He is a patient man. It is the thing about the vigiles. They are the only people in Rome who have ever got very good at waiting for a fire.
+"I do not know what to write," he says. "I do not know what you would like me to write. I thought that I would ask."
+* Tell him the truth, all of it, and ask him to keep it
+  $ b1.velati_seed = "told"
+  $ secrecy -= 4
+  $ velati_regard += 6
+  $ do discover("the_watchers")
+  It takes a long time. It is a hot afternoon, and the yard is quiet, and you tell him all of it, in order, in the plain voice that you used to use to the tax collector's man: what the hunger is, and what the sun does, and what a house is, and what the fire was for. He does not interrupt. Once he gets up and draws a bucket of water, and drinks half of it, and sits down again. When you are done he looks at his tablet for a very long time.
+  "It will not go in the report," he says at last. "It will go in a book." He says it as if it had been decided for him by somebody a great deal bigger. "There will be a book. It will be kept somewhere dry. Somebody will read it who is not yet born, and he will not believe it, and he will go and look." He looks up, and his eyes are quite clear. "That is all I am for, I think. I am the one that writes it down."
+  You find that you are glad. You find that you are a little afraid, and that you are glad of that too, and you could not say which of the two you are going to remember.
+* Give him a different story, and ask him to put it in the report
+  $ b1.velati_seed = "buried"
+  $ secrecy += 3
+  $ velati_regard -= 4
+  $ cunning_brutal -= 2
+  It is not hard. It is a good story, quite plausible, with a gang of arsonists in it, and a madman, and a priest of a foreign god. It has the great virtue of being something that a prefect can hang. Rufus listens to the whole of it, with his eyes on yours, and when you have finished he says nothing at all for as long as it takes to draw a breath and let it out again.
+  "Yes," he says. "That is a very good story." He writes it down. He does it in a plain flat hand, and when he is done he looks at what he has written for a moment, and then he turns the tablet over on his knee, face down, and puts his hand on the back of it. "I shall keep this one for the Prefect," he says. "I have a different tablet for the other."
+  You do not ask where he keeps it. It is not a thing that you want to know, and it is a thing, you think, that you could find out.
+* Say that you cannot tell him, and he should write what he saw
+  $ b1.velati_seed = "left"
+  $ velati_regard += 1
+  "I cannot tell you," you say, "and I will not tell you what to write." It is only a little more than silence. It is a long afternoon, and a good deal of it goes in the saying.
+  He nods. He seems to have expected nothing else, and to have, in some deep way, respected it. "Then I shall write what I saw," he says, "and I shall leave the holes where the holes are." He puts the stylus behind his ear. "It is more honest. Also it is a good deal less work."
+You get up. He gets up. He does a thing that you are not prepared for, which is to hold out his hand, quite formally, in the way that men do who are agreeing a price. You take it. It is a hard, dry, dirty hand, with a burn scar across the back.
+"If it comes again," says Rufus, "I should like it to be me that knows what it is."
+<~
+
+# study
+## The accounts
+$ _study += 1
+$ do meet("prisca")
+Prisca has taken over the counting room. It is the only room in the house with a door that locks from the inside, and she has locked it, and then, you find when you knock, unlocked it again, which is her notion of a compliment. There is an abacus on the table. There are four wax tablets and a great many scraps, and a plate with a single dry biscuit on it that nobody has eaten.
+"Sit," she says. "I have the whole of it. I have been up since the night before last, which is the thing about being what we are. It is a great help in accounts."
+She does not offer you a cup. She puts the abacus between you like a chaperone.
+"The night cost the house," she says, "a good deal. I will not tell you what. It is not your concern, and it would only make you generous, and I do not want you to be generous. I want you to be exact." She moves a bead. "Collis is another matter. Collis made money in the fire, and it made it honestly, as these things go, and it will be a thing that somebody looks at, in the spring, with a long face. You are going to leave the city. I do not know how long for. It is a thing that I can see in the way you hold your head." She looks at you with the whole of that dry patient attention. "I would like to know what you wish done with it."
+?if b1.collis_start == "slaves"
+  There is a line in the ledger that she does not look at, and does not move a bead for, and you both know that it is there.
+?elif b1.collis_start == "gladiators"
+  There is a line in the ledger, near the bottom, for a school of fighters on the Campanian road, and it is the only line in the book that she has not made a note against. You think that she has left it for you.
+?end
+?if b1.collis_name == "hidden"
+  "It has no name," she says, "which is a mercy. It is only a pattern of small debts, and it can be taken apart as it was put together." She is nearly smiling. "I admire it. I should never have had the nerve."
+?else
+  "It has your name," she says, "or the shape of one. That is a risk. It is also an asset. It is the one in the book that will still be worth something in a hundred years, and I am not at all sure that it should be given up."
+?end
+* Leave it in the house's hands, to keep and to lend
+  $ b1.collis_legacy = "house"
+  $ bond.prisca += 3
+  $ standing += 1
+  $ do hide_collis(true)
+  "Good," says Prisca, and means it, and for once does not trouble to hide that she does. She makes a note, a short one, and sands it. "It will be here. It will be kept in a name that is not yours. When you want it, ask for it, and I shall be pleased to be surprised." She looks at the biscuit for the first time. "I have never in my life been given anything that I was not afraid I should have to give back. I find that I am not afraid."
+* Keep it as your own, under Hanno's books, and let it grow
+  $ b1.collis_legacy = "yours"
+  $ bond.prisca -= 1
+  $ cunning_brutal -= 2
+  "Of course," says Prisca, with a dry exactness. "It is yours." She makes the note. It is a long one. "It will be a good deal more trouble. A thing that has a face is a thing that can be followed. I shall tell Hanno to give it a very dull face." She almost smiles. "He has, I am sorry to say, a great gift for it."
+* Send the greater part of it to the hill, and let Collis serve Collesanto
+  $ b1.collis_legacy = "village"
+  $ do send_home(8)
+  $ collesanto += 3
+  $ standing -= 1
+  $ bond.prisca += 1
+  She puts down the stylus. She looks at you for a long time. "The hill is a poor investment," she says at last. "It is a thing that I should say to anybody. It will not pay. It will be a hundred years before it pays, and then it will pay in ways that cannot be written in a ledger." She picks up the stylus again. "I do not say that I disapprove. I say that I shall have to learn a new column."
+?if in_circle("prisca") and member("prisca", "status") == "active"
+  She sits back. It is the first time that you have seen her do it. The abacus slides a little on the table, and she does not put it right.
+  "There is another thing," she says. "You will want someone to hold what is yours while you are gone. I will not say it is I. I will only say that I have a very good head for the work, and that the house is old, and that it has been, in its time, the only thing in Rome that was not for sale." She moves a bead, and moves it back. "You need not answer. You have a little while. I shall not ask again."
+?elif in_circle("hanno") and member("hanno", "status") == "active"
+  Hanno has come in, while you were talking, and is standing behind her chair with his hands folded, which is where Hanno stands when there is a thing to be said that is not his to say. He catches your eye. He says nothing for a long moment. Then he says, "I should be honoured," in the voice of a man commenting on the weather, and goes out again.
+?else
+  "You will want someone," says Prisca, "to hold what is yours, while you are gone. It will not be the house. I have thought about it. It would be a thing that was too much like a leash." She turns the biscuit plate a quarter of a turn. "There are banks. There are people in the hills. I would choose with great care. The ones who love you will be the ones who are hardest to see clearly."
+?end
+<~
+
+# senate
+## The Commander's room
+$ _senate += 1
+$ do meet("tarrax")
+The Senate house is not a place that you have wished to see again, and it has made no attempt to be pleasanter. There is a smell of cold cedar in the stair. The Lictors in the passage do not look at you, with a great and visible effort, and Galerius is waiting at the head of the stair with his tablet and an expression of the most careful blankness. He walks you down a long corridor, past doors, and does not say a word, and stops at a plain one, and knocks, and goes away.
+Tarrax is standing at the window with his back to the room. It is a narrow window, with a bar across it, and he is looking at nothing, or at the dust in the light. He is as perfectly kept as ever. There is a stain on the cuff of his grey sleeve that he has not attended to, and it is the only mark on him, and you know what it is.
+?if b1.tarrax_after == "satisfied"
+  "I wished to thank you," he says, without turning. It costs him a great deal, and he does it in a perfectly level voice. "It is not a thing that I am accustomed to. You will forgive the clumsiness. The cell is shut. I have put my hand on the lock. I do not think that I shall sleep, for some time, but I shall not sleep any worse than I have."
+  He turns. The long grey face is quite unmoved, and the eyes in it are a good deal older than you had thought. "There is a custom of this house," he says, "that a debt of this kind is not spoken of, and is not forgotten. I shall not speak of it."
+?elif b1.tarrax_after == "wary"
+  "I have not made up my mind about you," he says, without turning, "and I wished you to know it. It is a courtesy. It is not a thing that I have extended to many." He turns. The long face is perfectly still. "The thing is held. It is not held as I would have held it. I shall watch it, and you will not like that, and I shall not apologise."
+  There is a silence. "I should say," he adds, "that it is not an enemy's watch. It is a neighbour's."
+?else
+  "I will be plain," says Tarrax, and turns, and the grey face is wiped as clean as a plate. "You have done a thing in my city that is not forgiven. It is not a matter of the law. The law has been very civil. It is a matter of what I am for." He folds his hands behind him. "I do not intend that you shall come to harm. I intend that you shall know that I am waiting. It is a thing that I do rather well."
+?end
+He walks to the table and sits down, and motions you to the other chair, and does not take his eyes from your face. "The Senate would like you to leave Rome," he says. "For a long time. It will not be said in those words. It will be said that the Senate has the greatest regard for your affairs, and that they will surely prosper, in the country. It will be said very kindly." The corner of his mouth moves, a fraction. "You will have a very good case for refusing. I shall not think the less of you for it."
+* Promise to go, and to stay away for a long time
+  $ b1.senate_peace = "promised"
+  $ standing += 2
+  $ secrecy += 2
+  $ defiance -= 2
+  "Yes," you say. It is a quiet word. It is a good deal larger than it sounds, and you feel it set, like mortar. "I have a house in the hills. I shall go to it. I do not know when I shall come back."
+  Tarrax inclines his head, the exact depth, not a hair more. "That is wise," he says. "I shall see that it is recorded as a courtesy, and not a sentence. It makes a difference to the clerks."
+* Refuse, and say that you will go when you choose
+  $ b1.senate_peace = "none"
+  $ defiance += 3
+  $ standing -= 2
+  $ cunning_brutal += 2
+  "I shall go when I choose," you say. "I do not take orders from a courtesy."
+  "No," says Tarrax, almost gently. "I did not think that you would." He rises. "It will be noted. It will not be noted unkindly. You will find, I think, that a city is a very long memory." He opens the door for you himself.
+* Bargain: you will go, and in return Collesanto is left alone ?if standing >= 0 or b1.senate_ruling != "defied"
+  $ b1.senate_peace = "charter"
+  $ standing += 1
+  $ secrecy += 3
+  $ do send_home(4)
+  Tarrax looks at you for a long time. You have not seen him look at anyone so. It is not a thing that is a surprise, it is a thing that is being weighed.
+  "A small place," he says. "On a hill." He draws a tablet to him, and writes on it a few words in a perfectly plain script, and takes a seal from his belt, and presses it to the wax. "The Senate will take no notice of it," he says. "I will see that it is a matter of record that it was not an oversight. It will not stop a hunter. It will stop a clerk."
+  He puts the tablet into your hand. It is a small plain thing, the size of a palm, and it is a great deal heavier than it ought to be.
+Galerius is in the passage when you come out. He gives you a small, odd nod, as one man to another across a hall. "The boy Placidus," he says, so low that it is hardly a sound, "is learning his letters." It is all that he says. He goes away down the corridor with his tablet under his arm, and you are left with the cedar smell and the long dim stair.
+<~
+
+# gate
+## The grey people on the Appian road
+$ _gate += 1
+The Appian road, at the first milestone, is wide and white and lined with tombs, and in the shade of one of them, a great round one with a cracked cornice, the General's line has made a camp. It is not much of a camp. There are no tents. There are a dozen of them in plain grey, sitting on the grass with their cloaks round them, and a few mules with the loads taken off, and one of them is mending a boot.
+Theron gets up as you come. He has been waiting a long while, and he has the stiff, careful way of standing of a man who has spent a good many hours not moving. He does not say anything. He looks at you, and then at the road to the city, and then at his boots.
+?if original("general", "fate") == "loosed"
+  "He has gone," says Theron, at last. "He went out of the quarry in the grey, on his own feet, and he did not look back, and I have not seen him since. I have had a message." He holds it out. It is a scrap of papyrus, folded small, and on it, in a large plain hand, there are three lines. The first is a date. The second is a name, a place in the east, and a month. The third says, *Tell the boy with the book that I am very grateful for the hat.*
+  "I do not know what the hat is," says Theron, with great dignity. "I should like to be told, one day, when it is convenient."
+  You do not tell him. It is not yours to tell. You say only that it was a good hat.
+  $ b1.theron_end = "kept"
+  $ bond.theron += 3
+?elif original("general", "fate") == "bargain"
+  "He is bound," says Theron, "and it is a thing that he agreed to, and he has agreed to it in a form that cannot be argued with, because the Scribe's woman wrote it." He lets out a long breath. "I do not understand it. I have been with him for two thousand years, and I do not think that I have ever seen him sign anything. He did it with a flourish. He said that it was a matter of principle." He looks at his boots. "He is very much alive, and he is very much himself, and he has asked me to say that you are not to be troubled. I have been trying for a day to decide whether I believe it."
+  $ b1.theron_end = "kept"
+  $ bond.theron += 1
+?elif original("general", "fate") == "drunk"
+  He does not look at you. He has not looked at you since the quarry, you think, and he is not going to. "I am here," he says, "because I am required. I have been told to say what is the custom. It is that we do not take blood for blood from the man who did it, in the first year. It is a very old custom. I find that I am very grateful for it." He turns his head, at last, and the scarred face is quite white. "I will say it once. I will not say it again. What you did was lawful. I wish to God that it were not."
+  $ b1.theron_end = "bitter"
+  $ bond.theron -= 2
+?else
+  "He is under the cedar," says Theron, "and I shall be here, as long as he is." He says it very simply. "It is not that I think that I can do anything. It is only that I should like him to know that somebody is by." He looks at the road, at the milestone, at the long white line of tombs. "I do not know how long. A hundred years. A thousand. It does not matter. It is the only thing that I know how to do."
+  ?if b1.seal_kind == "thin"
+    You think of the nine small pegs, and of the frost running out across the bronze like ice across a pond. You say nothing of it. You say only that you will send what help you can. He nods, without turning, and you understand that it is a promise that he will not forget.
+  ?end
+  $ b1.theron_end = "kept"
+  $ bond.theron += 2
+?end
+He holds out his hand, at last, in the manner of the Greeks, palm up. It is an old, plain, rough gesture. You put yours into it.
+"You are going," he says. "I can see it. The line has been saying so since the morning. It is in how you stand." He nods, once, at the whole grey ragged camp. "It is a long road. We shall be here."
+<~
+
+# dusk
+## The last evening in the city
+The evening comes in with a red sky, in long strips, over the new scaffolds, and a flock of starlings goes round and round over the Forum like a handful of thrown ash. You walk through the streets for an hour, without any purpose, and see them as you have not seen them in two years: the rows of tall brown tenements, the lamps in the doorways, the little shrines at the crossroads with their garlands of wilted flowers, the whole warm, filthy, cheerful tangle of the place. It has burned, and it will burn again. It is alive.
+You do not say goodbye to anyone. It is not that you do not wish to. It is that you find that you cannot think what the word is for. A man with a donkey asks you to move, and you move.
+Hanno, at the door of the Merchant house, hands you a small heavy bag and a folded cloak, and says, in the longest speech that you have ever had from him, "The road is bad after Narnia." He bows. It is a very small bow, and quite correct, and it is a great deal. You think that it is the nearest to a blessing that a Carthaginian bookkeeper of three hundred years is able to manage.
+$ do meet("hanno")
+-> road
+
+# road
+## The road north
+It is three days to Collesanto on a good road, and the road is not good. You go in the dark, on the Flaminian way, with the mule that Hanno has found for you, which has a long sad face and no opinions, and you make it in two, because you do not need to sleep, and the mule does.
+There is a great deal of time to think, and you do not use it. You are a daywalker. It is a fact which you have lately been trying to get used to, as a man gets used to a limp. You ride through the middle of the second day with the sun on your neck and the hills going by in their brown and their gold, and the road is very quiet, and the larks go up out of the stubble, and a farmer in a field lifts his hand and you lift yours.
+Once, at noon, on the crest of a long hill, you stop and take off your cloak and stand in the whole of the light with your arms out like a man on a cross. It does not hurt. It is the strangest thing. It is a very ordinary summer day, and you are standing in it, and there is a lark going up in the blue over your head, and the whole thing is, you realise, a great and quite unearned gift.
+You do not know what it is for.
+It is evening when you come in sight of the hill.
+-> hill
+
+# hill
+## The holy hill
+Collesanto lies on its ridge in the last of the light, as it always has, with the smoke going up straight from the chimneys and the shutters of the great villa at the top blind and close. It is a good deal bigger than you remember. There are new roofs, yellow and raw, on the north row, and a scaffold at the corner of the square, and the long low rumour of a place that is mending.
+?if built("rebuilt_houses")
+  The houses have been rebuilt. It is the first thing that you see. They stand up out of the old black lines like teeth, straight and pale and square, and children are playing in the doorways of ones that have no doors.
+?end
+?if collesanto >= 25
+  There are more people in the lane than you had thought. There is a woman with a loom at her door. There is a man with a barrow of tiles. They look up as you pass, and then they look at each other, and nobody says anything, but a boy of nine takes off his cap.
+?end
+Aelia is waiting at the top of the lane. You do not know how she knew. She is standing on the old wall, with her arms folded, in a plain brown dress, with a grown woman's straight back, and she watches you come up the hill in the evening light and does not call out. When you are within a few paces she says, "You are late." She says it exactly like her mother.
+Felix comes round the corner of the house with a spade in his hand and dirt to the elbow, and stops dead, and drops the spade.
+?if b1.aelia_talk == "truth"
+  Aelia has not said that she knows. She does not need to. It is in how she looks at your hands, and your throat, and the sun on your face. She says, quite quietly, "You walk in the day." She says it as one says, *it is going to rain*. "I did not know that you could."
+  "Nor did I," you say.
+  She nods. "It is a good thing," she says, "to have a father who is difficult to kill."
+?else
+  Aelia has not been told. She has not asked. She looks at you, and at the sun on your face, and at the long dark dust of the road on your cloak, and her eyes narrow very slightly, and she says nothing at all. It is a thing that she has from her mother. It is the silence of a woman who has decided to know something later.
+?end
+They have supper, the three of you, in the old kitchen, with Domitia asleep by the fire in her chair and the whole house dim and warm and smelling of onions. You sit at the table. It is the strangest thing, to sit at a table and be given a bowl. You eat a little of it. It is good, and you cannot taste it, and you eat it all, because Felix is watching.
+It is when the bowls are cleared that you say what you have come to say. You do not say it well. You say that there is a long dark ahead. You say that you will have to go, that you will sleep, that you will be gone a very long time, and that it will be a time that you will not be able to explain. You say that they will be old. You do not say that they will be dead. It is not a thing that you can say in a kitchen.
+Felix, who is the quicker of the two, says, "How long?"
+"A long time," you say.
+Aelia says, very evenly, "Then you will need people."
+It is an offer. It is made as plainly as bread. She is looking at you across the table, with the whole of her mother's directness, and her brother beside her has put down his cup. It is, you see, a thing that they have been talking about, in the evenings, in the dark. It is a thing that they have decided.
+There are keepers, of a kind, in the old stories of the hill. They are the ones who are sworn: who hold the house, and keep the shutters, and know what is below the stair. It is an oath that a family can take, and hand down, and keep. It would be a very great thing to have. It would make them, for as long as it lasted, a target.
+* Take their oath, and make the Valerius family keepers of the hill
+  $ b1.keepers = "sworn"
+  $ bond.aelia += 3
+  $ bond.felix += 3
+  $ humanity += 1
+  $ loyalty.keepers += 15
+  $ do keeper("aelia", "keeper of the hill", 75)
+  $ do keeper("felix", "keeper of the hill", 70)
+  ?if lone() and can_acquire("keeper_oath")
+    $ do acquire("keeper_oath")
+  ?end
+  $ do discover("the_keepers")
+  It is done in the kitchen, without any ceremony, with a bowl of oil from the lamp and a drop of wine. Aelia says her part in a clear voice. Felix says his rather fast, and gets it wrong, and says it again, and goes red to the ears. They put their hands on the table, one on top of the other. It is not a thing that you ever wished for them. It is a thing that they have chosen, and you find that you have not the right to refuse it.
+  Domitia wakes, at the end, and looks at the three of you for a long moment from her chair, and says only, "I hope that you have put the bread away." She closes her eyes again.
+* Refuse. They are to live their own lives, and be kept out of it
+  $ b1.keepers = "spared"
+  $ bond.aelia -= 2
+  $ bond.felix -= 1
+  $ humanity += 2
+  $ defiance += 1
+  "No," you say. It is very quiet. You say that it is not a thing that you will have. You say that there will be other ways, that you will find them, that there is a thing that you want for them, and it is a very plain thing, and it is that they should be left alone.
+  Aelia looks at you for a very long time. She does not say that you are wrong. She says, in the end, "It is not yours to decide." She says it quite gently, and it is not a thing that you can answer. Felix, beside her, is staring at the table. He says nothing at all, and you see that it is the saddest thing that you have seen all week.
+  It is Domitia, in the chair by the fire, who says, without opening her eyes, "He is a fool. He is a good fool. It is the same in the family on both sides." She turns her face to the warmth. "Leave him be."
+There is a thing left, and you do it in the morning.
+-> morning
+
+# morning
+## What the village needs
+The sun comes up over the eastern oaks. It is the first time that you have seen it do it from this hill since you were a man, and you sit on the old wall at the top of the lane, with your boots in the dust and a cup of something warm that Felix has put into your hand, and watch.
+There is a good deal that can be done in a morning if one has gold. You have not much, and it is a thing that you have been very careful of, and Sextus, the old shepherd, who has come up the hill with his hook over his shoulder and sat down on the wall beside you without being asked, has views.
+"It is the well," he says. "It was the well, and then it was the roofs, and then it was the sheep, and after that it is the well again." He spits, with great accuracy, over the wall. "The roofs will do as they are. The sheep will see to themselves. It is the water, in the dry months. The women walk to the spring and back four times in a day, and it does not do them good, and nobody says."
+* Dig the deep well in the square [once] ?if can_build("well")
+    $ do build("well")
+    $ bond.sextus += 2
+    You pay it out of the bag, in coin, there on the wall, and Sextus counts it twice, and nods, and goes down the lane at a good deal more than his usual pace. By the afternoon there is a crowd of men in the square with picks, and a great deal of arguing, and a boy being sent for a rope.
+* Pay for the houses of the north row, to be finished properly [once] ?if can_build("rebuilt_houses")
+    $ do build("rebuilt_houses")
+    $ bond.quintus += 2
+    A mason comes out of the lower village, a thin silent man with white stone dust in the creases of his face, and looks at the scaffold, and at you, and at the sky. He names a price, and it is not a price that you argue with. It is a thing that is going to be good, and last, and be there when none of you are.
+* Lay out the terraces and the new fields, and buy the seed [once] ?if can_build("farms")
+    $ do build("farms")
+    $ bond.felix += 2
+    Felix hears it from the doorway, and comes out wiping his hands on his tunic, and walks the length of the slope at a stiff careful pace, counting something under his breath, and comes back with his face lit up like a boy's. "It will do," he says. "It will do very well." He says it as if it were a thing that he had been told he would never be allowed to say.
+* Give nothing, and let the hill go on as it is
+  The village is not a thing that you can mend in a morning, and there is a great deal of it that is not a thing that you should. You sit on the wall for a long time, with the dust on your boots, and watch it wake.
+Sextus, who has been sitting on the wall beside you all this time, says, after a while, in an offhand voice, "She has her mother's way of putting things." He means Aelia. You say that you had noticed. He says, "The village has begun to tell a story about you." He rubs his bad knee. "It is not an accurate one. It has a great deal in it about a cloak."
+You look down at the village in the morning light, at its red roofs and its smoke and its thin early noise. You find that you are smiling. It is a thing that you have not done in a very long time, and it is not a thing that you can prevent.
+The night will come, as it does. It will be the last that you spend as you are.
+=> next

@@ -21,9 +21,9 @@ async function newGame() {
   return game;
 }
 
-async function drive(game, frame, wants = []) {
+async function drive(game, frame, wants = [], stopAt = null) {
   const pages = [];
-  for (let i = 0; i < 3000 && frame.wait !== 'book_end'; i++) {
+  for (let i = 0; i < 3000 && frame.wait !== 'book_end' && !(stopAt && game.state.chapter === stopAt); i++) {
     pages.push(...texts(frame));
     if (frame.wait === 'choices') {
       let at = 0;
@@ -40,7 +40,7 @@ async function drive(game, frame, wants = []) {
   return { game, frame, text: pages.join('\n'), vars: game.state.vars };
 }
 
-async function playFrom(chapter, scene, vars, wants = [], { seed = 3, hero = HERO, general = 'hero' } = {}) {
+async function playFrom(chapter, scene, vars, wants = [], { seed = 3, hero = HERO, general = 'hero', stopAt = null } = {}) {
   const game = await newGame();
   game.setSetting('dev', true);
   await game.startBook('burning-city', { from: 'new', hero, seed });
@@ -49,7 +49,7 @@ async function playFrom(chapter, scene, vars, wants = [], { seed = 3, hero = HER
   sys.originals.general = { state: 'awake', by: general, fate: '', name: false, book: 'burning-city' };
   for (const [k, v] of Object.entries(vars)) dev.setVar(game, k, v);
   const frame = await dev.jump(game, chapter, { scene: scene ?? undefined, keep: true });
-  return drive(game, frame, wants);
+  return drive(game, frame, wants, stopAt);
 }
 
 const DAY = { room: /down to the strongroom/, study: /Go to Prisca, in her study/, caelian: /up the Caelian/, lane: /out into the lane/ };
@@ -58,10 +58,10 @@ const NIGHT = { counting: /Go to Hanno/, talk: /Go down to the strongroom, for t
 const FATE = { loosed: /^Let him go$/, bargain: /Make terms with him/, drunk: /old right of judgment/, sealed: /Give him to the cedar/ };
 const general = (run) => run.game.state.sys.originals.general;
 
-test('chapters 17 and 18 are written, a fate is always chosen, and the book still pauses', async () => {
+test('chapters 17 and 18 are written, a fate is always chosen, and the book plays on', async () => {
   const run = await playFrom('b1c17', null, {});
   assert.equal(run.frame.wait, 'book_end');
-  assert.equal(run.frame.pending, true);
+  assert.notEqual(run.frame.pending, true);
   assert.ok(run.vars['b1.general_meal']);
   assert.ok(run.vars['b1.senate_ruling']);
   assert.ok(run.vars['b1.tarrax_after']);
@@ -100,7 +100,7 @@ test('only the wrist, or standing in the light, tells the General what he is', a
 });
 
 test('a hero who leaves the drink to Prisca costs her, and the Senate still lets him judge', async () => {
-  const run = await playFrom('b1c17', 'dusk', { 'bond.prisca': 5 }, [MEAL.none]);
+  const run = await playFrom('b1c17', 'dusk', { 'bond.prisca': 5 }, [MEAL.none], { stopAt: 'b1c19' });
   assert.ok(run.vars['bond.prisca'] < 5);
   const senate = await playFrom('b1c18', 'senate', { 'b1.general_meal': 'none' }, [FATE.sealed]);
   assert.match(senate.text, /You are mistaken|you are mistaken/);
