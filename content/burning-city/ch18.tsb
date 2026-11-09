@@ -1,0 +1,604 @@
+// Book One, Chapter 18 (session 15). The night the Senate sits: preparation, the quarry, the judgment, and one of four resolutions.
+// One night phase of three actions out of four places, then the Senate, then the choice about the General (original_fate), then the dawn. Ends with rest().
+// Chapter 19 picks up the aftermath. Hunger, injury, standing and secrecy leave this chapter as the player made them.
+@chapter b1c18
+@title The Weight of Cedar
+@book burning-city
+@version 1
+
+# start
+## The night the Senate sits
+$ do phase("night", 3)
+$ b1.senate_ruling = "deferred"
+$ b1.tarrax_after = "wary"
+$ b1.seal_kind = "senate"
+$ b1.general_terms = 0
+$ _counting = 0
+$ _talk = 0
+$ _garden = 0
+$ _gate = 0
+$ _hold = 0
+$ _terms_n = 0
+$ _t_rome = 0
+$ _t_name = 0
+$ _t_call = 0
+$ _tempted = 0
+$ _asked = 0
+The day goes by like a dream that somebody else is having. You sleep a little and wake and sleep again. You eat the biscuit that Hanno gave you, which you had forgotten, and which turns out to be very good. Somewhere in the house a clock of Prisca's, which she has kept in a cupboard for two centuries, is wound and set going and ticks, to the great surprise of everyone, with a sound like a very small, very patient heart.
+It is dusk when you come up. The house has changed again. There are no servants in the passages. There are trunks standing in the atrium, corded and sealed, with the six petalled flower on their lids, and Hanno is going from one to another with a taper, checking the seals as a man tests the ice.
+?if must_feed()
+  And you are hungry. You have been hungry for some time, and it has been quiet, as it is before a storm, and it has found you in the atrium in the lamplight with the whole of a crowded house about you and the smell of blood in every wall.
+  * Go to the stables, and take a mare, and be quick about it
+    $ do feed("animal")
+    $ humanity += 1
+    It is not what the hunger wanted. It is enough.
+  * Go to the donors behind the garden, and pay ?if wealth >= 3
+    $ do feed("donor")
+    $ do earn(-3)
+    $ humanity -= 1
+    A woman in a plain stola holds out her arm without looking at you, as at a barber's. It is clean. It is quick. It is very tidy.
+  * Go on, as you are
+    $ cunning_brutal += 2
+    $ _asked += 1
+    You go on hungry. It sharpens things. The house is full of beating hearts, and you walk through them with your hands in your sleeves.
+?end
+The Senate sits at the second watch. You have the first watch, and a part of the second, and three things that you can do with it.
+-> night
+
+# night
+## The first watch
+:night
+?if actions_left() == 3
+  The sun is not long gone. A cold small wind goes round the courtyard, and the fig tree in the garden has begun, very faintly, to rattle.
+?elif actions_left() == 2
+  It is full dark. The lamps in the atrium have been lit, and a great many people are in the lane outside, and nobody is speaking.
+?else
+  The clock in the cupboard has struck. It is nearly the hour. You can hear the grey line forming in the lane, and the sound of cedar on stone, very faint, from the direction of the Esquiline.
+?end
+* Go to Hanno, in the counting room [once] ?if actions_left() > 0
+  ~> counting
+  $ do act()
+* Go down to the strongroom, for the last talk [once] ?if actions_left() > 0
+  ~> talk
+  $ do act()
+* Go out into the garden, where someone is waiting [once] ?if actions_left() > 0
+  ~> garden
+  $ do act()
+* Go to the gate, and the Scribe line [once] ?if actions_left() > 0
+  ~> gate
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> senate
+?end
+-> :night
+
+# counting
+## The counting room
+$ _counting += 1
+$ do meet("hanno")
+Hanno has put a table in the middle of the counting room, and nothing on it but a lamp, and a tablet, and a very small bag. He has put on a clean tunic. It is a thing that you have never seen him do, and it makes him look, quite suddenly, extremely old.
+"The lady says that you may have anything in the house," he says, in the voice of a man who has been rehearsing it. "I am to tell you what the house has. I am to be accurate. The lady was very clear about that."
+:counting_ask
+* Ask what the house has in cedar [once]
+  He looks at you for a moment without moving. "There is a cell," says Hanno. "It is not large. The lady laid it down in the cellars eighty years ago, in a year when she was afraid of something, and it has been in a crate under the wine, in pieces, with a book of plans." He lets out a breath. "It would hold a man. It would not hold *him* for ever. It would hold him for as long as the person who held the key were alive to hold it." The tablet has a number on it. "It is twelve."
+  * Have it brought out, and pay ?if wealth >= 12
+    $ do earn(-12)
+    $ flag b1.cedar_cell
+    "Yes," says Hanno, who has gone slightly pale. "I thought that it might be." He makes a mark in the ledger. It is a very small mark, and it will be there when the house is gone.
+  * Leave it in its crate
+    "Of course," says Hanno. His face does not change in any particular.
+  -> :counting_ask
+* Ask what the house has in the way of a road [once]
+  "There is a boat at the Emporium," says Hanno. "It is a river boat, and a plain one, with no flower on it. There is a man at Ostia who owes the lady a favour and does not ask what it was for. There is a pair of horses at the Porta Ostiensis, and a courier who has done this before." He considers. "It would carry one person who was easy to carry. Or a great many who were not, if you had a day to arrange it. It is ten."
+  * Have the road made ready, and pay ?if wealth >= 10
+    $ do earn(-10)
+    $ flag b1.escort
+    "Yes," says Hanno, with the faintest suggestion of a bow. "The lady will be glad to have been asked." He writes it down. It is a very small mark.
+  * Leave it
+    "Of course," says Hanno.
+  -> :counting_ask
+* Ask what he thinks will happen [once]
+  Hanno is quiet for such a long time that you suppose he has not heard. Then he says, gravely, as a man gives up a coin: "I have kept the books of this house for three hundred years. I have known six Commanders of the Lictors, two Firsts of the Senate, and a good many people who were afraid." He looks at the lamp. "I have never kept a book that had *him* in it. I find that I would like to see what the entries are."
+  It is, you understand, the nearest thing to a prediction that he has ever made.
+  -> :counting_ask
+* That is enough. Take your leave
+  "Go with God," says Hanno, who learned it from the clerk, "or with whomever you are going with."
+  ~> counting_out
+  <~
+-> :counting_ask
+
+# counting_out
+You go out and the door shuts, softly, on the lamp and the tablet and the very small bag. Somebody in the house is singing under their breath, a plain, rough, unmusical tune that you almost know.
+<~
+
+# talk
+## The last talk
+$ _talk += 1
+$ do meet("general")
+They have taken the guards from the door. It is a courtesy. The General is at the table when you come in, with the borrowed tunic and a plain grey cloak on top of it, and he is looking at the dark brazier with the air of a man who has been asked to make a decision about a horse.
+He is a good deal better. There is a faint warmth in him now, a gloss on the old parchment, and he is able to stand. He does not. He seems to be keeping it for the quarry.
+"Sit," he says. "There is wine. It is dreadful. It is the only thing in the house that Prisca did not think of being generous about."
+:talk_ask
+* Stand and look at him for a long time [once]
+  You do not sit. You stand across the table with your hands at your sides and look at him, and you find that the hunger has taken an interest. It is not a thing that you asked it to do. It has gone very quiet, and very sharp, and very still, and the room has begun to smell of him, of dust and iron and old oil and under both of them something dark, and enormous, and warm.
+  He sees it in your face. He does not move. He says, in a mild voice, "It would be a great deal of me."
+  You say nothing.
+  "I should not enjoy it," says the General, with enormous calm. "I would not forgive it. I say so not as a threat. I say so as a matter of record, because there are a great many people who would like to know." He sips the wine, and makes a face. "I should be a very bad enemy. I should have time to be one."
+  $ _tempted += 1
+  $ hunger += 4
+  -> :talk_ask
+* Ask what he will do if he is let go [once]
+  "I should like," says the General slowly, "to go and sit by a river for a week." He is looking at the wall. "I have a notion that it is a thing that I used to do. I should like to find out whether I liked it. After that, I should like to be told what has become of my people, in detail, by someone who was not trying to flatter me." He smiles. "I do not say that I should not do the other things. I say that I should begin with the river."
+  $ bond.general += 1
+  $ _asked += 1
+  -> :talk_ask
+* Ask what happens to him if he is put back [once]
+  He is silent. It is a long silence, and Meritamun's lamp is not in the room to fill it. "It depends what they put me back *with*," says the General at last. He picks up the cup and puts it down. "A seal is a sort of opinion. It lasts as long as everyone agrees with it. Cedar from a grove that was planted for the purpose will hold a long time. Cedar from a crate will hold until somebody is frightened enough to knock."
+  He looks at you. There is nothing in the look that is hard to bear except the kindness.
+  "I will go in, if it is put to me. I said that I would abide. I wish you would not put it to me."
+  $ bond.general += 1
+  $ _asked += 1
+  -> :talk_ask
+* Ask for his word that he will not feed on Rome while you live [once]
+  "That is a great deal to ask of a hungry man," says the General. But he is smiling, a little, and he does not say no. "I will think about it. I will think about it in a way that you may rely on." He lifts one finger. "I should like it understood that I do not promise to *like* it."
+  $ _t_rome += 1
+  $ _terms_n += 1
+  -> :talk_ask
+* Ask for his true name [once] ?if bond.general >= 2
+  The smile goes. It is replaced by a look that has in it no more than a very slight, very formal surprise, as of a man who has been asked for his house keys by someone he had been about to give them to.
+  "It is not a thing that I have said aloud," says the General, "since the second year of the plague." He looks at you. He seems to be doing a sum. It takes some time. "It is a very small thing to give, and the largest that I have. I will say it once, and you will not need to hear it twice."
+  He says it. It is very short. It is a sound that you would not have thought a human mouth could make, and when he has finished you find that you can say it back, and that you will be able to say it back for as long as you live.
+  $ do learn_name("general")
+  $ _t_name += 1
+  $ _terms_n += 1
+  $ bond.general += 2
+  -> :talk_ask
+* Ask him to come when you call, if you ever do [once]
+  "Ah," says the General. He seems genuinely touched. "That is the nicest thing that I have been asked." He puts his big hand flat on the table. "I will come. I do not say that I will come quickly, or in a good temper. I do not say that I will not tell you what I think of the summons." And then, in the voice of a man who has remembered that he is old: "I would come in any case. But it is pleasant to be asked."
+  $ _t_call += 1
+  $ _terms_n += 1
+  $ bond.general += 1
+  -> :talk_ask
+* That is enough. Take your leave
+  "Go and be clever," says the General. "I shall sit here and be a nuisance to Hanno."
+  ~> talk_out
+  <~
+-> :talk_ask
+
+# talk_out
+The oak door shuts, and the bolt is not shot. It is a courtesy that you notice more than you ought to.
+<~
+
+# garden
+## Under the fig
+$ _garden += 1
+$ do meet("tarrax")
+It is cold in the garden. There is no moon, and the sky is a very deep and starry blue, and the fig tree stands with its leaves half turned, silvered and dim, like a ship in a harbour. There is a man on the stone bench beneath it.
+He has come alone. It is a thing that you can tell at once. There are no Lictors in the lane, no red cloaks at the wall. He is wearing a plain dark soldier's cloak without a mark upon it, and his hands are on his knees, and he has the stillness of a man who has been sitting there for some hours and would be perfectly content to go on.
+"Sit," says Tarrax. "It is a good tree. I have known it since it was a twig."
+:garden_ask
+* Ask him what he came for [once]
+  "To ask a thing," says Tarrax. "And to say that I will not be able to ask it tomorrow, in front of them, in the manner that I would like." He looks at the fig. "I want him sealed. I do not say that I want him *hurt*. I do not say that I have ever wanted that. I say that if he walks out of the quarry tomorrow, every line in this city will follow him, and not us, and there is a great deal of Rome which is asleep tonight on the supposition that there are rules."
+  $ _garden += 1
+  -> :garden_ask
+* Ask him what he feared in the quarry [once]
+  He is quiet for a long time. When he speaks, he speaks to the tree. "I was told when I was made," says Tarrax, "that I was of the first line, and that the first line had a father. I was not told that he was alive. I was told that he had gone to sleep." He turns his hands over, and looks at the palms. "I have been the Commander of the Lictors for a great many years. I have done what the Senate has asked. It had not occurred to me that I might one day kneel for no reason that I could name."
+  $ bond.tarrax += 1
+  -> :garden_ask
+* Ask him whether the cell is as the Senate says [once]
+  "It is sixty beams," says Tarrax. "I laid the first of them myself. I have not looked at it for some time." He pauses. "It is a plain room, with a floor of clay and a window the width of a hand that looks out on a wall. It has been prepared for a person who was to be comfortable. I made certain of that. I should like you to know it."
+  He looks, for just a moment, as though he would like to say something else. He does not.
+  $ _garden += 1
+  -> :garden_ask
+* Ask what he will do if the General is let go [once]
+  "I shall be very sorry," says Tarrax. He says it with no emphasis. "It is what the Senate has always done. It will be sorry, afterward, and it will have a great many documents about it." He turns his head, and in the starlight his face is the colour of a bone. "I will do what I am told. I want you to know that I will do it exactly. I will not be glad."
+  $ bond.tarrax -= 1
+  -> :garden_ask
+* Tell him that you will promise nothing [once]
+  "Of course not," says Tarrax. He seems almost relieved. "I should think less of you." He rises, with the unhurried courtesy of a man who has been in a great many rooms. "Galerius says that you gave him a name. A name is a thing that I notice." He lets that sit between you. "I will not forget it."
+  ?if b1.tarrax_answer == "truth"
+    He says, with great care, "You told me, in the quarry, who made you. I did not say what I thought of it. I should like you to know that I thought a great deal."
+  ?elif b1.tarrax_answer == "lie"
+    He says, with great care, "You told me, in the quarry, who made you. It was not the truth. I have not said so. I should like you to know that I know it."
+    $ bond.tarrax -= 1
+  ?end
+  $ bond.tarrax += 1
+  ~> garden_out
+  <~
+* That is enough. Take your leave
+  "Go and be clever," says Tarrax. It is the General's phrase, and he does not seem to have noticed that it is.
+  ~> garden_out
+  <~
+-> :garden_ask
+
+# garden_out
+You leave him under the tree. When you look back from the door, he is sitting exactly as he was, with his hands on his knees, a tall grey shape against the dark, and you cannot tell whether he is waiting or has forgotten that you went.
+<~
+
+# gate
+## The Scribe line and the grey
+$ _gate += 1
+$ do meet("meritamun")
+$ do meet("theron")
+The lane has filled. They stand shoulder to shoulder in the dark, in plain grey, with their hoods back and their hands empty, a hundred of them at least, and not one of them is looking at the house. They are looking at the sky, and at the street, and at the place at the end of it where the Esquiline lifts black against the stars.
+Meritamun is sitting in the gate on a camp stool, with her table folded and her lamp at her feet, and a scroll across her knees that she is not reading. Theron is standing at her shoulder.
+"I have been asked to witness something," says Meritamun without preamble. She has not looked up. "By nobody. I have been thinking about it since the quarry, and I find that I have a stylus and nothing in the way of a conscience to stand between us."
+:gate_ask
+* Ask her what a witness does [once]
+  "In the old law," says Meritamun, "a bargain with one of the Six is not a private matter. It was not intended to be. It is a thing that is done before three heads of houses, who say aloud that they have heard it, and who bind themselves to say so afterward to anyone who should ask. It makes it a thing that cannot be called a lie." She lets a little silence fall. "It does not make it a *good* bargain. It makes it a lawful one, and in the Senate's eyes, that has sometimes been the greater difficulty."
+  $ _gate += 1
+  -> :gate_ask
+* Ask her to witness it, if there is a bargain [once]
+  "Ah," says Meritamun. She seems quite undismayed. "I thought that you would." She turns the scroll over. "I will stand. I will bring Prisca, who will be too frightened to refuse, and I will bring Theron, who will not be." She glances up. "It will cost me something with the Senate. I would like it recorded that I considered that, and that I do not much mind."
+  $ flag b1.witnessed
+  $ bond.meritamun += 2
+  -> :gate_ask
+* Ask Theron to hold the mouth of the quarry, if it comes to it [once]
+  "It will be done," says Theron, instantly. His voice is hoarse. "If you give me a sign. I would be very glad of a sign." He looks at the grey ranks in the lane, and at you. "I will not do it without one. I would like it to be understood that I am not a man who disobeys. I am a man who has not been told what to do since Macedon."
+  $ _hold += 1
+  $ bond.theron += 1
+  -> :gate_ask
+* Tell Theron that the line is to stand down whatever happens [once]
+  He does not answer for a long time. His jaw works. He says, "Very well," in a voice like cracked pottery. It is the voice of a man who has been told by a person he is trying to love that he must keep his hands in his sleeves.
+  $ bond.theron -= 2
+  $ _hold -= 1
+  -> :gate_ask
+* That is enough. Take your leave
+  "It is a very short way to the quarry," says Meritamun. She picks up her lamp. "It is a very long one to come back."
+  ~> gate_out
+  <~
+-> :gate_ask
+
+# gate_out
+The grey line parts to let you through, and closes behind you, and nobody touches you. It is a thing that you will remember for some time: the hundred of them, and the silence, and the faint rustle that a great number of hoods make when a great number of heads are turned together.
+<~
+
+# senate
+## The old quarry, at the second watch
+The old quarry has been given back its torches. They are black iron brands at forty paces, and they burn with a still red light that does not flicker, and the quarry floor is bright with them from end to end.
+It is full. The lines stand in their order, by house and by age, as they have stood for longer than anyone remembers, and between them, on the swept pale stone, there is a long clear aisle that runs from the mouth of the path to the open door of green bronze. The door stands wide. The black stair goes down behind it, quite empty, and nobody looks at it.
+At the head of the aisle there is a figure on a plain stool. It is hooded, in red wool, with the face entirely in shadow. It does not stir. It has no name that anyone has ever used. It is called the First of the Senate, and it has presided in this place, in this chair, for longer than the walls have been cut.
+Tarrax stands at its right hand. He has put on the black iron cuirass. It makes him look like a man made of the dark. Galerius is two paces behind him, and he does not lift his eyes.
+?if b1.door_side == "theron"
+  The General's line is at the left of the aisle, in a long grey rank, and it is bigger than you remembered. It has brought no arms. It has brought a great many faces.
+?elif b1.door_side == "tarrax"
+  The Lictors are at the right of the aisle in their red files, with the cedar grounded, and they have the look of men who are about to be proved right and are not at all looking forward to it.
+?else
+  They are on either side of the aisle, the grey and the red, and you walk down the middle of it with your hands empty, as you did on the night of the door, and nobody pretends that the position has a name.
+?end
+Prisca is at the foot of the aisle, with Hanno beside her. She is quite white. She does not look at you. She is holding the abacus against her chest as a child might hold a doll.
+Meritamun stands at the edge of the lines with her table, her lamp and her reed. She has not got a witness's cloak. She has brought, instead, a very plain piece of white linen, and she is holding it folded over her arm.
+Then there is a stir at the mouth of the path, and the quarry draws its breath.
+He comes down the aisle on his own feet. He has put on a plain grey cloak. It is not a very good one, and it does not fit, and it has been fastened at the throat by a pin from Prisca's own cloak, a small bronze flower, six petalled. He walks slowly, with a hand on nobody, with his head up and his great ruined shoulders squared. He stops in the middle of the aisle, where the torches are brightest, and he looks round him, unhurried, at the whole of the quarry, and the lines, and the red wool, and the open door.
+"Good evening," says the General. "I regret that I have not got a hat."
+Nobody laughs. It is a thing that you feel go through the whole of the quarry like a wind through grass, the effort of three hundred people not to.
+The First does not move. A voice comes out of the hood, thin, flat, courteous, without any age at all. "The Senate of Blood sits to hear the matter of the guest of the Merchant house. Who is his surety?"
+?if b1.general_meal == "none"
+  Prisca's hand tightens on the beads. She steps forward, a pace, with her chin up. "I am," she says. Her voice shakes, and she does not allow it to stop her. "I gave him no drink, but it was given in my house, by my steward, at my word."
+  The General has turned his head. "Madam," he says, with a great and unexpected gentleness, "you are mistaken. You are not. I have *chosen*." He looks round, a little gravely, at the Senate. "By the old custom a ward may, at the quarry, before sentence, name another in his surety's place, if the other will stand. I name him." And he points, with one huge, bony finger, and with an air of faint apology, at you.
+  Meritamun says, from the edge of the lines, in a dry, clear voice, "It is in the third roll. I wrote it. Some of you were there." There is a dreadful pause. Nobody asks which of them.
+?else
+  You step forward. It is not a thing that you decided to do. You find that you have done it, and that you are standing in the aisle, a pace in front of the lines, with the whole of the quarry looking at the back of your head.
+  "He is mine," you say. It is not a thing that you meant to say, in quite that way.
+  There is a movement along the ranks. The red wool does not shift. "By blood, or by hand?" says the First.
+  ?if b1.general_meal == "wrist"
+    "By blood," you say.
+  ?elif b1.general_meal == "donor"
+    "By hand," you say. "I brought him a man, and he asked his name."
+  ?else
+    You say, a little desperately, "By courtesy. I brought him a lamb."
+    There is a silence. And then somewhere in the grey ranks a man begins, helplessly, to cough. It is not a cough, and it is not a laugh, and it is a thing that one could be put to death for.
+  ?end
+?end
+"Then he is yours to answer for," says the First. It is said without either blessing or threat. It is merely a fact being entered in a book. "What does the guest say?"
+The General looks at you.
+He looks for a long time. There is nothing in the look that you could call a request. It is the look of a man who has laid a very great weight on someone else's shoulders and does not intend to pretend that it is not a weight.
+"I will abide," says the General, to the quarry, to the stars. "For one night. By what he says."
+-> hearing
+
+# hearing
+## What they asked
+They speak, one after another. It is the form, and the form is very old, and it takes a long time, and you stand through the whole of it with the torchlight on the side of your face.
+Tarrax speaks first, and he says in a level voice that the Senate is the keeper of the peace of the dead, and that the peace has depended for two thousand years on certain things not being done. He does not use the General's name. He says, "That which lay beneath the hill." He says that it is a sorrow, and that the Senate regrets it, and that the Senate has prepared a place. He does not look at the General. He looks at a point at the level of your collarbone, with the fixed, unshaken, absolute concentration of a man looking at a wall.
+Theron speaks next. He does not stand. He kneels, on the stone, with the ruined ear and the scarred face and the cracked pottery voice, and he says that the General's line has kept the door for longer than the Senate has had a chair, and that it asks for nothing but its father. He says, "Let him come home." It is not an argument. It is the whole of what he has.
+Prisca speaks, a few words. She says that the Merchant house asks only to be left out of the matter. She says it like a woman signing her own death warrant, and she does not lower her eyes.
+Meritamun speaks. She says that the Scribe line has recorded the whole of the night of the door and the three nights since. She says that it will record this. She says, with a sudden spark of something that is very nearly joy, "I would remind the Senate that it has never yet been in a position to say that it has been *present*."
+And then there is nobody left. The First's hood turns, very slightly, toward you.
+?if b1.door_side == "theron"
+  "The one who stood with the line," says the First, without inflection, "will speak."
+?elif b1.door_side == "tarrax"
+  "The one who stood with the Commander," says the First, without inflection, "will speak."
+?elif b1.door_side == "alone"
+  "The one who went first to the door," says the First, without inflection, "will speak."
+?else
+  "The one who stood between," says the First, without inflection, "will speak."
+?end
+?if bond.general < 0
+  The General is looking at the torches. He has the stillness of a man who has been disappointed in a friend and has decided not to say so.
+?end
+There is a great quiet in the quarry. The torches burn without a sound. Somewhere far above, a night bird is calling, over and over, a single plain note.
+[roman] It is a Roman thing, to be asked to speak before the Senate. You have been told since you could walk that it is the greatest honour a citizen can be given, and it has not occurred to you until this moment that it would feel so exactly like being on a roof.
+[not roman] It is not your Senate. You have always known that, and you have been very careful to know it, and it seems that it makes no difference whatever.
+You have the General, and the Senate, and the dark. You have four things that you might do.
+:judgment
+* Let him go
+  -> loosed
+* Make terms with him, before witnesses
+  -> bargain
+* Ask the First for the old right of judgment, an hour alone with him, and take what is in him
+  -> drunk
+* Give him to the cedar
+  -> sealed
+-> :judgment
+
+# loosed
+## Let him go
+"He goes free," you say.
+It is not loud. It does not need to be. It goes out across the quarry like a stone dropped in a well, and you hear it strike the walls and come back, and everything in the quarry draws itself in.
+"He is the guest of no one, and the prisoner of no one," you say, and your voice sounds odd in your own ears, thin and high and extremely clear. "He has been under the hill for longer than there has been a city on it. I will not put him under a roof. I will not put him back."
+The General does not move. But you see his hand come up, slowly, to the pin at his throat, and rest there, as a man's might rest on a doorframe.
+There is a long silence. Then the First says, in a voice that has not changed at all, "The Senate hears." It is a statement without any form of agreement in it. "Commander."
+Tarrax has not stirred. He has turned his head, very slightly, in your direction. There is nothing in his face. It is the face of a man who has a great deal of experience of very bad news and is not going to be hurried by this one. He says, in a level voice, "The Lictors will close the mouth of the quarry."
+It is the order that he was always going to give. It is given a little late.
+?if _hold > 0
+  Theron is on his feet. You did not see him rise. He lifts his ruined hand, and behind him the whole of the grey rank rises, like a tide coming in, with no sound but the whisper of cloth, and goes up the aisle between the torches, and is simply *there*, at the mouth of the path, a hundred plain grey figures with their hands empty and the red files of the Lictors drawn up before them. Nobody has drawn a weapon. Nobody is going to be the first.
+  The General walks up the aisle between them, on his own feet, slowly, with his head back.
+  Tarrax watches him go. He does not give the second order. It is the whole of the order that he does not give, and it hangs in the air over the quarry, and you see his jaw tighten, once, and the hand on his sword go white, and open.
+  The Lictors do not move. They have heard it, as well, in the silence. They part.
+?else
+  The Lictors move. They are very fast. They come across the swept stone in their files with their cedar levelled, and it is not a charge, it is a closing of doors, and they are between the General and the mouth of the path before he has gone a dozen paces.
+  You are in front of him. You are not quite sure how.
+  ~> loose_fight
+?end
+He stops at the mouth of the quarry. He turns, for a moment, in the night wind, with the whole of the red torchlight on one side of his face and the stars on the other.
+"I should like it understood," says the General, to the whole of the Senate, "that I am not angry. I am only extremely interested." And then, to you, in a lower voice, with a faint, creaking, helpless trace of the laugh: "I owe you a river, little one. I am a very bad debtor. You will find me a great trial."
+?if b1.escort
+  The courier from Ostia is at the mouth of the path with two horses and a cloak with no flower on it. The General looks at them. He says, with deep gravity, "I have never ridden a horse that did not have an opinion." He mounts, and goes out into the dark, with Theron running at his stirrup, with the whole of the grey line streaming up the road behind him like a cloak, and a very small bronze flower catching the torchlight at his throat.
+?else
+  Theron is at his elbow. He does not speak. He has put his arm round the General's back, in the dark, in the cold, like a son, and the General puts a hand on his shoulder and leans on it with enormous care, and so they go out, with the grey line closing round them, toward a house on the Aventine that has had a bed made up in it for a hundred and ninety years.
+?end
+$ do original_fate("general", "loosed")
+$ b1.senate_ruling = "defied"
+$ b1.tarrax_after = "vowed"
+$ bond.general += 3
+$ bond.theron += 2
+$ bond.tarrax -= 3
+$ standing -= 3
+$ velati_regard -= 2
+$ secrecy -= 2
+-> dawn
+
+# loose_fight
+## The mouth of the quarry
+$ do fight("lictor", 2)
+:loose_exchange
+* Take the front man's stake, and break it
+  $ do strike("brutal")
+* Go under it, and into the file
+  $ do strike("cunning")
+* Say, loud, that the Senate has heard him, and that the Senate does not strike a guest
+  $ do strike("talk")
+?if not fight_over()
+  -> :loose_exchange
+?end
+?if fight_result() == "talked"
+  $ standing += 1
+  There is a ragged moment. A Lictor at the end of the file says, quite clearly, "That is true." Another says, "It is the old law." Nobody orders them to stop. They stop.
+?elif fight_result() == "won"
+  $ injury += 2
+  The front rank breaks. It is not a rout. It is only that the Lictors, who are not used to being refused, have not planned for it, and that the stakes go down like a field of reeds.
+?else
+  $ injury += 6
+  $ hunger += 6
+  You are knocked flat. You are on the swept stone with a red boot on your ribs and the sound of cedar cracking, and you do not see how he does it. You only hear a voice above you say, with immense, cheerful weariness, "Oh, *do* get up," and the boot goes away.
+?end
+The General is standing over you with one huge hand open. It is not a very great hand now. It is shaking. It has in it, nevertheless, a stillness that the Lictors have felt, and that they have not got a word for, and the red files have fallen back, one by one, like a hedge from a plough.
+<~
+
+# bargain
+## Terms
+"He goes free," you say, "on terms."
+There is a stir along the ranks. "Terms," says the First. It is the first thing that it has said with any trace of color, and it is not a pleasant color. "A bargain is a thing that is made between equals."
+"Then I should be obliged," says the General, in a mild voice, "if somebody would tell the Senate that I am not, at present, in a position to be anything else."
+You do not look at the General. You look at the red hood, and you say, "I will name them before witnesses." You say it to the torches. "I have asked Meritamun of the Scribe line to hear it. I have asked nobody else."
+It is the first time that you have said aloud that you have something to give.
+:terms
+?if _terms_n >= 3
+  -> terms_done
+?end
+* Ask for his word that he will not feed on Rome while you live ?if _t_rome == 0
+  $ _t_rome += 1
+  $ _terms_n += 1
+  "He will not take what is not offered in this city," you say, "for as long as I live." There is a sound from the Lictors, a kind of breathing, that is the nearest thing a rank of vampires can come to a cheer.
+  "I give it," says the General. It is entirely without irony. "I shall be extremely hungry, and I give it."
+* Ask for his true name ?if bond.general >= 2 and _t_name == 0
+  $ _t_name += 1
+  $ _terms_n += 1
+  $ do learn_name("general")
+  He looks at you. It is a quick, shrewd, curious look, and then a smile that has in it something almost tender, and he bends his head, as to a king, and says it, so softly that nobody but you hears. It is a very short word.
+  Nobody in the quarry knows what you have been told. Everyone in it knows that you have been told.
+* Ask him to come when you call ?if _t_call == 0
+  $ _t_call += 1
+  $ _terms_n += 1
+  "He will come when I send for him," you say. There is an awful, silent, appalled attention along the ranks. "I do not say that it will be quickly."
+  "Nor in a good temper," says the General, bowing.
+* Say that it is enough ?if _terms_n >= 1
+  -> terms_done
+-> :terms
+
+# terms_done
+## Witnessed
+?if b1.witnessed
+  Meritamun steps out onto the swept stone. She has the white linen over her arm and she shakes it out as she walks. It is a cloth, a plain one, hemmed in black, and she lays it across the aisle between you and the General, and says in the old speech, quite fast, in the exact flat voice in which she gives the knock count, a formula that is three thousand years old.
+  Prisca comes forward. She is shaking in every limb. She puts her hand on the linen. Theron, on his knees, puts his hand beside hers. It is a ragged thing, a thing done a little late, and it is binding.
+  "It is witnessed," says Meritamun. "I will record it. It will not be possible, hereafter, for anyone in this quarry to say that it was not heard." She lifts her eyes, for one fleeting instant, to the red hood. "It is, you will find, entirely lawful."
+  The First does not answer for a long time. The torches burn. It is the silence of an immense machine, discovering that it has no part for what is being asked of it.
+  "The Senate," it says at last, in the same flat voice, "defers."
+  $ b1.senate_ruling = "deferred"
+  $ standing += 1
+  $ bond.meritamun += 1
+?else
+  You look round, and there is nobody. Meritamun is at the edge of the lines with her lamp, and her face is very still, and she has not been asked. You have not asked her to come forward. It is, you realise, a thing that you should have done before you came.
+  "A bargain," says the First, into the silence, "must be witnessed. It has not been. The Senate does not find a bargain." It is said with perfect politeness. "It finds a defiance."
+  There is a long moment in which the quarry does not breathe. Then the General laughs. It is a rusty, creaking, helpless sound, and it rolls round the walls like a barrel. "My dear sir," he says to the First, "I have been *called* a great many things. It is the first time that I have been called a defiance. I am extremely flattered."
+  Nobody moves. Nobody dares to be the first to. And after a very long time, it is Tarrax, in his black iron, who turns, and gives a low, level order to the files, and they ground their cedar and fall back, and are seen not to look at anyone.
+  $ b1.senate_ruling = "defied"
+?end
+$ b1.general_terms = _terms_n
+$ do original_fate("general", "bargain")
+$ b1.tarrax_after = "wary"
+$ bond.general += 2
+$ bond.tarrax -= 1
+The General turns, in the torchlight, to look at you. He has, you see, no more colour in his face than a man who has been standing for an hour, and a very great deal in his eyes.
+"It is a thing that I did not expect," he says in a low voice, "to find that I would be glad of a leash." He settles the borrowed cloak. "It is very light. I had been afraid that it would be heavy."
+He goes out between the red files with a plain grey rank closing round him, and nobody touches him, and he does not look back.
+-> dawn
+
+# drunk
+## The hour of judgment
+You say it quite quietly. It is, you find, a thing that your mouth knows how to say. "I ask the old right."
+The First lifts its hood. It is the first time that it has done so. It does not show you a face. It shows you, for a breath, the dark of the red wool, and in it, very far back, two small points of light, and a sense of an enormous, tired, old attention that is turned on you like a lamp.
+"The surety may judge his ward in private, before sentence," it says. "It is a right. It is seldom asked. It has not been asked for four hundred years." The light in the hood goes steady. "It is understood that what the surety does in the hour is his own. The Senate does not ask. The Senate does not hear."
+There is a sound from the grey ranks. It is only Theron, a kind of broken indrawn breath, and the sound of a hundred people not moving.
+The General has turned his head. He looks at you for a moment with something that is almost interest.
+"Ah," he says, quite softly, in the voice of a man who has been told a joke that he saw coming. "Down there, I suppose. It is where I am used to being robbed."
+He goes, of his own accord, to the green door, and down the black stair, one hand on the wall, slowly, with a very straight back. You go after him. Nobody has ordered it. Nobody speaks. The torches go out of your sight one by one, and there is a cold, dry, close dark, and the smell of dust and iron and old oil, and then there is nothing at all but the two of you, and a long, low, shadowed room with a floor of black stone, where a very big man has sat down on the bottom step with his hands on his knees.
+He looks up at you. His face is perfectly calm.
+"I did say," says the General, "that I should be a very bad enemy."
+:drunk_do
+* Take it. All of it
+  -> drunk_take
+* Take only a little, and step back
+  -> drunk_little
+-> drunk_out
+
+# drunk_take
+$ _tempted += 2
+$ age += 1
+$ humanity -= 6
+$ cunning_brutal += 8
+$ hunger -= 40
+You do not remember crossing the floor.
+He does not struggle. He has said that he would not. It is a thing that you will be very sorry, later, to have heard. There is only the long cold dark, and a great hand that comes up, once, and closes on your sleeve, and holds it as one holds the hand of someone who is being sick. And then there is the taste.
+It is not blood. It is a flood. It goes through you like a river at the break of the ice, and you are on your knees, and a thousand years go by, a thousand nights, a thousand faces coming up out of a dark like the bottoms of ponds, and you are, for the length of a heartbeat, a man lying on a stone floor among a great many others, dying of something, with the sound of coughing all round you and, somewhere, a woman singing.
+It stops. It does not stop. It goes on in you, in your bones, in the roots of your hair, a kind of huge, golden, unbearable ease. You have not been so well in all your life. You are, you realise, quite as strong as he was, and a good deal stronger than you were an hour ago, and you are kneeling on a cold stone floor in the dark with your hands in his cloak.
+He is lying against the wall. He is grey. He is breathing, slow and shallow, like a man in a fever, and there is a look in his face that you cannot meet.
+"Well," says the General, in a voice like a rope that has been pulled through a pulley. "That is that."
+-> drunk_out
+
+# drunk_little
+$ _tempted += 1
+$ age += 1
+$ humanity -= 3
+$ cunning_brutal += 4
+$ hunger -= 25
+It is a very careful thing. You do it as a man might lift a lid. You take one swallow, and the dark takes you a good deal further than you had planned, and for a long moment you are on a stone floor among a great many others, dying of something, with a woman singing. It goes through you as a cold wind goes through a house.
+You stop. It is not at all easy. It is the hardest thing you have ever done, and you do it, and you sit back on your heels with your hands shaking, and the General lies against the wall, grey, breathing, looking at the roof.
+"A little," he says, in a thread of a voice. "It is generous. I shall remember that it was a little."
+-> drunk_out
+
+# drunk_out
+?if b1.general_meal == "wrist"
+  He turns his head to look at you. It takes a long time. "I said once that I would try to be worth it," he says. "I think that I was. I should like you to remember that, as well."
+?end
+$ bond.general = -60
+"I will remember the taste of that," says the General. He closes his eyes. "I should not like you to suppose that I will not." His voice is almost kind. "It will take me some time. I have a great deal."
+You go up the stair alone. It is a long climb. It is a good deal easier than you remember.
+When you come out into the torchlight the whole of the quarry is looking at you. They have seen you go down. They see you come up. You can feel what they see, in the way their faces change, a sort of ripple across the ranks, a kind of recoil. You are brighter. You are not very much, and it is a thing that nobody would be able to say, but it is in the set of your shoulders and in the way the torches lie on you, and it is not a thing that can be taken back.
+Tarrax has gone, quite visibly, the colour of old ivory. It is the face of a man who has just watched the thing that he has dreaded for two thousand years happen to somebody else. He says nothing. He does not need to.
+"He will not trouble you," you say to the First. You hear it, and you do not recognise the voice.
+There is a very long silence.
+The grey ranks come down the aisle, with Theron in front, and nobody says a word. They go down the black stair, and they come up again, very slowly, carrying him on a cloak, as men carry a king who has been wounded in a battle that he did not choose. Theron's face is wet. It is quite without expression. He does not look at you at all.
+"The Senate," says the First, at last, "has not heard." It is the only thing that it can find to say, and it says it in the same flat voice, and it is not at all steady.
+$ do original_fate("general", "drunk")
+$ b1.senate_ruling = "defied"
+$ b1.tarrax_after = "vowed"
+$ bond.tarrax -= 2
+$ bond.theron -= 4
+$ standing -= 2
+$ secrecy -= 4
+$ velati_regard -= 3
+-> dawn
+
+# sealed
+## The cedar
+"Put him back," you say.
+You say it so quietly that for a moment you are not sure that you have said it. It falls into the great silence of the quarry like a coin into a well. And then you hear a sound, from the left of the aisle, which is not a cry, which is a kind of terrible deep indrawn breath, and which goes on for a long time, and is Theron.
+The General does not move. He stands with his hand on the little bronze pin at his throat. He looks at you quite gently, with the whole of that great, tired, kind attention, and he says in a low voice, "I said that I would abide." He nods. "I should like it noted that I am not angry. I should like it noted that I shall remember that I was not."
+Nobody in the quarry says anything. There is nothing in the world that anyone could say.
+?if b1.cedar_cell
+  There are two ways to do it, and you have been given both. There is the Senate's cell, sixty beams, in the cellars of the Senate house, under the Commander's hand. And there is a crate under the wine in the Merchant house, with a book of plans, that holds a man for as long as the one who has the key is alive to hold it.
+  * Give him to the Senate's cell
+    $ b1.seal_kind = "senate"
+  * Seal him in the Merchant house's cell, and keep the key yourself
+    $ b1.seal_kind = "yours"
+?elif b1.cedar
+  There are two ways to do it, and the Senate's cell is only one. The other is in your sleeve: nine small pegs of cedar from the lintel of the door, pale and light and cold in your hand. They would hold a man. They would hold him as long as somebody had not yet been frightened enough to knock.
+  * Give him to the Senate's cell
+    $ b1.seal_kind = "senate"
+  * Use the nine pegs
+    $ b1.seal_kind = "thin"
+?else
+  There is only one way to do it. The Senate has a cell, sixty beams, in the cellars of the Senate house, under the Commander's hand, and nothing else in the whole of Rome that would hold him.
+  $ b1.seal_kind = "senate"
+?end
+?if b1.seal_kind == "senate"
+  Galerius comes forward with four of the Lictors. He does not lift his eyes. He is very careful, and very gentle, and he does not touch the General, who walks between them down the long aisle with his head up, as a man might go in to dinner. The Commander walks behind. He does not give an order. He has, you see, no order to give.
+  Tarrax goes with him as far as the door of the Senate house, you are told, and sees the cedar shut, and the iron straps drawn, and puts his own hand on the lock. He is a long time. When he comes out he has not got his sword, and nobody asks where he left it.
+  $ b1.senate_ruling = "accepted"
+  $ b1.tarrax_after = "satisfied"
+  $ standing += 3
+  $ bond.tarrax += 3
+  $ velati_regard += 2
+?elif b1.seal_kind == "yours"
+  Hanno has the crate brought up on a cart at the second hour, and it is put together, in front of the whole of the Senate, on the swept stone floor of the quarry, by six clerks of the Merchant house and a carpenter who has been paid not to say what it is for. It is a plain cell. It has no window. It is not very large. When it is finished, the General walks into it of his own accord, and sits down on the floor, and folds his hands, and looks up at you through the open door with an expression of enormous, dry amusement.
+  "It is a good deal more comfortable than the last," he says. "I should like it understood that I had it in mind."
+  You lock it. There is a key. It is a very small, plain, iron key, and it is warm from your hand, and the whole of the quarry is looking at it. Nobody asks you for it. You see Tarrax's eyes, once, go to your belt, and come back.
+  $ b1.senate_ruling = "deferred"
+  $ b1.tarrax_after = "wary"
+  $ standing += 1
+  $ bond.tarrax += 1
+?else
+  You take the pegs out of your sleeve, and the General looks at them, and then at you, and then he laughs, quite softly. "Oh, little one," he says. "It is a very thin opinion." But he goes, and he sits down in the mouth of the old green door, with his back to the stair, and lets you drive them in, one at a time, into the bronze, with the heel of your hand.
+  The frost runs out across the metal in thin white lines, like ice across a pond. It holds. It looks as though it would hold for a very long time. It does not, you know, look like it would hold for ever.
+  The Lictors stand in two red files and watch it, and nobody says that it is not enough. You see the First's hood turn. You see Tarrax's face. He has the look of a man who has been given a bill that he cannot pay, and has been told that it is a kindness.
+  $ b1.senate_ruling = "deferred"
+  $ b1.tarrax_after = "wary"
+  $ bond.tarrax += 1
+  $ unflag b1.cedar
+?end
+$ do original_fate("general", "sealed")
+$ humanity -= 1
+$ bond.general -= 3
+$ bond.theron -= 3
+He does not look back. It is the last thing that you see of him, a very big man in a plain grey cloak with a bronze flower at the throat, in the torchlight, with a straight back. And the sound that follows him up the aisle is the sound of the grey line, going down on its knees, one by one, in the dust.
+-> dawn
+
+# dawn
+## The grey hour
+It is not like any dawn that you have seen. There is no ceremony in it. The torches have gone out, and the quarry is a pale scooped hollow of stone with the sky coming up behind it, and the lines have gone, one by one, without a word, like water into sand.
+Prisca is sitting on the edge of the aisle with her abacus in her lap. She has not moved the beads. She says, as you come up, "I have counted." She looks at the quarry floor, and at the empty door, and at the swept stone with its long smear of torch smoke. "It is not a small sum." She says it in the voice of a woman reading a lease. "I should like you to know that I would pay it again."
+?if b1.senate_ruling == "accepted"
+  The Senate has gone back to its rooms with a plain look of having been, for once, correct, and of not at all enjoying it. There will be a good many documents about it. The Merchant house, you suspect, will be asked to hold some of them.
+?elif b1.senate_ruling == "deferred"
+  The Senate has gone back to its rooms with a plain look of having been forced, for once, to think. It will not say so. It will be very civil to you, and to Meritamun, for some months, and it will not be a thing that you will be able to enjoy.
+?else
+  The Senate has gone back to its rooms, and it is not a plain look that it has. It is the look of an immense old machine that has been asked to do a thing for which it was not built, and has done it, and is now very slowly, very precisely, beginning to take note.
+?end
+Meritamun comes up the cliff path in the first grey, with her stylus behind her ear and the white linen folded over her arm. She stops beside you. She looks at the open door of the bronze.
+?if original("general", "fate") == "sealed"
+  "I have not written it down," she says. "I should like you to know that I was asked not to, and that I find that I am going to obey."
+?elif original("general", "fate") == "drunk"
+  "I shall record it," says Meritamun, very quietly, "in a form that nobody will be able to read for two hundred years. I find that I am a good deal more frightened of what you have become than of what you did." She does not say it unkindly. She says it as a scholar says what is in front of her.
+?else
+  "I shall record it," says Meritamun, "as I recorded the rest. He did not ask me not to. He asked that I put in the part about the hat."
+?end
+She goes. You stand at the lip of the old quarry for some time, in the cold, with the sun coming. It is not a thing that you can describe. It is the sense of having done something that cannot be undone and having not yet found out what it was.
+?if hunger > 70
+  You are hungry. You are more than hungry. You are going to be going on like this for a long time.
+?end
+Somewhere below, in the new white streets, a line of workmen is going down to the rebuilding, with their tools on their shoulders, and a boy is whistling.
+You think, with the cold perfect clarity of the hour before the sun, that Rome is going to have to be left. It is not a thing that you have decided. It is only a thing that you know, as one knows that it is going to rain. There is a long dark ahead, and a house in the hills, and a great many people who will need to be provided for when you are not there.
+$ do rest()
+=> next

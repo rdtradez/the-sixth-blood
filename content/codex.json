@@ -148,6 +148,19 @@
       "book": "burning-city",
       "person": "tarrax",
       "text": "Commander of the Lictors and Firstborn of the General line. He keeps the Senate's peace with iron and does not speak of what is under the cliff."
+    },
+    "the_general": {
+      "category": "people",
+      "title": "The General",
+      "book": "burning-city",
+      "person": "general",
+      "text": "One of the Six, and the father of the General line. He lay beneath the hill until the door was opened. He asks for a drink, a year and a hat, in that order, and has not yet said what he wants."
+    },
+    "surety": {
+      "category": "lore",
+      "title": "Surety",
+      "book": "burning-city",
+      "text": "The oldest custom of the dead. When one of them comes out of the dark, whoever first gives him drink, of their own blood or their own hand, becomes his surety. The Senate asks the ward no questions. It asks them of his surety."
     }
   }
 }

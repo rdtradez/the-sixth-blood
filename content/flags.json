@@ -992,6 +992,86 @@
       "book": "burning-city",
       "major": true,
       "note": "Chapter 16: he carries cedar pegs from the lintel of the bronze door"
+    },
+    "b1.general_meal": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "animal",
+        "donor",
+        "wrist"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "animal",
+      "note": "Chapter 17: how he gave the General his first drink (wrist: his own blood, donor: a willing man, animal: a lamb, none: he left it to Prisca's house)"
+    },
+    "b1.general_knows": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 17: the General has tasted his blood or seen him stand in the daylight, and has not asked"
+    },
+    "b1.cedar_cell": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 18: he bought the Merchant house's cell of cedar"
+    },
+    "b1.escort": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 18: he had the Merchant house make a road out of Rome ready"
+    },
+    "b1.witnessed": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 18: the Scribe line agreed to witness a bargain with the General"
+    },
+    "b1.general_terms": {
+      "kind": "number",
+      "book": "burning-city",
+      "major": true,
+      "default": 0,
+      "note": "Chapter 18: how many terms (0 to 3) he held the General to in a bargain"
+    },
+    "b1.seal_kind": {
+      "kind": "enum",
+      "values": [
+        "senate",
+        "yours",
+        "thin"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "senate",
+      "note": "Chapter 18: how the General was sealed: the Senate's cell, the hero's own cell, or nine pegs of cedar"
+    },
+    "b1.senate_ruling": {
+      "kind": "enum",
+      "values": [
+        "accepted",
+        "deferred",
+        "defied"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "deferred",
+      "note": "Chapter 18: how the Senate took his judgment of the General"
+    },
+    "b1.tarrax_after": {
+      "kind": "enum",
+      "values": [
+        "satisfied",
+        "wary",
+        "vowed"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "wary",
+      "note": "Chapter 18: where the Commander of the Lictors stands with him after the judgment"
     }
   }
 }
