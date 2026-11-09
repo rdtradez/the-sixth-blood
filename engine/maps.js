@@ -6,6 +6,7 @@
 export const MAPS = {
   rome: {
     book: 'burning-city',
+    page: 'city',
     title: 'Rome',
     start: ['roadhome'],
     fire: ['burnland'],
@@ -13,10 +14,27 @@ export const MAPS = {
   },
   collesanto: {
     book: 'burning-city',
+    page: 'city',
     title: 'Collesanto',
     start: ['farm', 'square', 'villa', 'road'],
     fire: [],
     sites: ['farm', 'square', 'villa', 'press', 'mill', 'crypt', 'road'],
+  },
+  florence: {
+    book: 'blood-and-gold',
+    page: 'florence',
+    title: 'Florence',
+    start: ['roadhome'],
+    fire: [],
+    sites: ['bank', 'prisca', 'wool', 'bottega', 'haven', 'court', 'rooms', 'roadhome'],
+  },
+  collesanto2: {
+    book: 'blood-and-gold',
+    page: 'florence',
+    title: 'Collesanto',
+    start: ['farm', 'square', 'villa', 'road'],
+    fire: [],
+    sites: ['farm', 'square', 'villa', 'press', 'gate', 'crypt', 'road'],
   },
 };
 
@@ -32,7 +50,7 @@ export function mapView(state, mapId) {
   if (!def) return null;
   const charted = state?.sys?.lore?.sites ?? {};
   const sites = def.sites.filter((s) => def.start.includes(s) || Object.hasOwn(charted, `${mapId}.${s}`));
-  return { id: mapId, title: def.title, book: def.book, sites, fire: def.fire };
+  return { id: mapId, title: def.title, book: def.book, page: def.page, sites, fire: def.fire };
 }
 
 /** The maps for the book the hero is in (or every map that has a charted site, for any book). */

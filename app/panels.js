@@ -56,7 +56,7 @@ export function mapPanel(game) {
   if (!maps.length) return [h('h2', {}, 'Map'), empty('Begin a story to see its city.')];
   const visible = maps.flatMap((m) => m.sites);
   const fire = maps.some((m) => m.fire.some((s) => visible.includes(s)));
-  const frame = h('iframe', { class: 'citymap', src: 'app/maps/city.html?embed=1', title: `Map of ${maps.map((m) => m.title).join(' and ')}` });
+  const frame = h('iframe', { class: 'citymap', src: `app/maps/${maps[0].page}.html?embed=1`, title: `Map of ${maps.map((m) => m.title).join(' and ')}` });
   const send = () => frame.contentWindow?.postMessage({ type: 'map', visible, fire }, '*');
   frame.addEventListener('load', send);
   const onReady = (e) => { if (!frame.isConnected && e.source !== frame.contentWindow) { window.removeEventListener('message', onReady); return; } if (e.source === frame.contentWindow && e.data?.type === 'map-ready') send(); };
