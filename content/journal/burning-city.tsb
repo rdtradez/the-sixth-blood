@@ -1,0 +1,94 @@
+// The Velati journal for Book One, The Burning City (session 16). Runs at the end of the book on a copy of the state; its paragraphs become one journal entry.
+// Written in the voice of Rufus, the Aventine watchman who begins the record. No choices allowed. Reads decisions, never recomputes them.
+@chapter b1_journal
+@title Velati Journal: The Burning City
+@book burning-city
+@version 1
+
+# start
+## From the notebook of Rufus, of the Aventine watch
+> Set down in the year after the fire, in the station yard, with a second tablet that is not for the Prefect.
+The Prefect has his report, and it has arsonists in it. This is the other one.
+?if b1.velati_seed == "told"
+  I was told the truth, in my own yard, on a hot afternoon, by the man who had been in the middle of it. I have not repeated it to anyone who did not need it. I have written it here, in order, so that someone who comes after me will know what to look for.
+?elif b1.velati_seed == "buried"
+  I was given a story and asked to write it down, and I wrote it down, and I knew while I was doing it that it was a story. I have kept the Prefect's copy. I have kept this one too. The difference between them is the whole of what I have learned.
+?else
+  I was told nothing, and I was not lied to either, and between the two there is a great deal of room. I have written what I saw and left the holes where the holes are.
+?end
+On the night of the fire I counted what I could.
+?if b1.fire_toll == "light"
+  Fewer died than there should have been. I have counted it three times and it does not come out any other way. Somebody was in the streets that night who was not putting out fires and was not lighting them.
+?elif b1.fire_toll == "heavy"
+  The dead were many. They were fewer than the city had any right to expect, and I know it, and I know that not all of that was luck.
+?else
+  The dead were very many. I will not put the number here. I put it on the other tablet, once, and could not do it again.
+?end
+?if b1.rufus_saw == "mercy"
+  I saw a woman in a dark cloak put a child in a doorway and go back into the smoke. I do not know what to do with that.
+?elif b1.rufus_saw == "slaughter"
+  I saw what was done in the lane behind the Circus. I have written it exactly, and I shall not read it over.
+?elif b1.rufus_saw == "both"
+  I saw the worst thing a person can do to another and the kindest, in one night, and some of the hands were the same hands.
+?end
+There are two parties. The first wore grey and carried a flame in a jar and meant to burn what they called the night bird out of Rome. They were Igniferi, of Vesta, and they were not all fools.
+?if b1.reckoning == "slaughter"
+  The second party answered them with a war, and the war was a slaughter. They hunted the grey cult from house to house and left very little of it. I have no word for it that is not a word I would use of the first party.
+?elif b1.reckoning == "mercy"
+  The second party answered them, and then, which I had not expected, stopped. There were men and women of the grey cult who were left alive, in cellars, in quarries, under guard. I cannot say whether it was wisdom. It was not what I would have done.
+?else
+  The second party answered them with a war, and the war was not wholly a slaughter. Some were spared and some were not. I could not find the rule by which it was decided, and I have come to think that there was not one.
+?end
+?if b1.survivor == "kept"
+  One of the grey cult sits in my yard in the afternoons, and eats my cook's bread, and tells me what he knows. He is not a happy man. He is a very useful one.
+?end
+Of the man at the centre of it I have put down what I can.
+?if b1.fire_stance == "stop"
+  He tried to stop it. He did not wholly succeed, and I know that he knows.
+?elif b1.fire_stance == "use"
+  He did not stop it, and I have the impression that he did not wish to, and that he has not decided how he feels about that.
+?else
+  He survived it, and helped where he could, and did not try to be anyone's hero. I respect that more than I can say.
+?end
+?if b1.blame == "named"
+  He named the ones who started it. They were the right ones. I have checked.
+?elif b1.blame == "pressed"
+  He pressed for a name, and a name was found, and I am less certain than I would like to be that it was the right one.
+?end
+?if b1.coven == "stayed"
+  He took a place in a house of the Merchant line, on the Via Labicana. I have not been inside it. I have walked past it twice.
+?else
+  He refused a house. He went alone. I think that it was meant as a courtesy to someone, and that it cost him more than it looked.
+?end
+?if b1.vow == "human"
+  He drinks what the others drink. I have noted it, and I have not forgiven it.
+?elif b1.vow == "donor"
+  He feeds from the willing, and pays them. It is not a virtue. It is a ledger. I have noticed that it is a ledger that he keeps.
+?else
+  He will not take human blood. I have seen him do it, in the Subura, at a pen of oxen. It is the only thing about him that I am sure of.
+?end
+There is one thing that I did not tell the Prefect and have told nobody else. I saw him, in the full sun, at noon, in the yard of the station, in the dust, with his sleeves rolled. He sat on my tub. The shade moved and he did not.
+Before the end of the year there was a great thing done in the quarry, on the night that the Senate sat, which I was not allowed to see and have heard of from three people who were.
+?if original("general", "fate") == "loosed"
+  They say that he let the old one go. They say it was a kindness, and a gamble, and that the old one walked out on his own feet and has not been seen in the city since.
+?elif original("general", "fate") == "bargain"
+  They say that he made terms with the old one, and that it was witnessed, and that it was lawful. I have been told that nobody has ever done that. I do not know how they know.
+?elif original("general", "fate") == "drunk"
+  They say that he drank. They say it was lawful and that nobody in the quarry could look at him. I wrote it down, and then I wrote beneath it, in the margin, that I do not think that it is a thing that he would do again.
+?else
+  They say that he put the old one back under the cedar. They say that he did it quite quietly, in front of the whole Senate, and that the old one thanked him, and that it was the worst thing that anyone there had ever seen.
+?end
+?if b1.keepers == "sworn"
+  He has gone back to his hill. There is a family there that has taken an oath to him, which I did not know was a thing that could be done. I shall find out what it is.
+?else
+  He has gone back to his hill. There is a family there that he would not allow to be sworn. I do not think that they thanked him.
+?end
+He has left the city. He has left it in the manner of a man going to bed, and it has been said, by a woman in the Senate house whom I did not like, that he will be gone for a very long time.
+I have put the tablet in the dry, and given the key to a man whom I trust, and written a name on the lid.
+?if b1.velati_seed == "told"
+  The name is not mine. I have written, simply, *the watchers*.
+?else
+  I have not yet found what to call it. We are only a few.
+?end
+> If this is found, and you are reading it, and you are afraid of the dark, I am sorry. I have not found a better way to be useful.
+=> endbook

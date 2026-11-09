@@ -76,10 +76,10 @@ const FARM = /Appian Way, where a cell/;
 const STATION = /Aventine station, where Rufus is holding/;
 const SCRIBE = /Egyptian quarter, to the Scribe/;
 
-test('chapters 11 and 12 are written and the book still pauses after them', async () => {
+test('chapters 11 and 12 are written and the book plays on to its end', async () => {
   const run = await playBook(HERO);
   assert.equal(run.frame.wait, 'book_end');
-  assert.equal(run.frame.pending, true);
+  assert.notEqual(run.frame.pending, true);
   for (const flag of ['b1.council_voice', 'b1.war_terms', 'b1.theron_fear', 'b1.cell', 'b1.reckoning', 'b1.farm', 'b1.clerk', 'b1.boy', 'b1.scribe']) {
     assert.ok(run.vars[flag], `${flag} is always recorded`);
   }
@@ -267,12 +267,12 @@ test('the codex gains the quarry and the two lines', async () => {
   for (const id of ['the_old_quarry', 'general_house']) assert.ok(run.game.state.sys.lore.codex[id], id);
 });
 
-test('every mortal role plays chapters 11 and 12 to the pause, in the house and alone', async () => {
+test('every mortal role plays chapters 11 and 12 to the end of the book, in the house and alone', async () => {
   for (const role of ['gladiator', 'legionary', 'merchant', 'physician_aide', 'house_slave']) {
     for (const oath of [/swear it all/, /go alone/]) {
       const run = await playBook({ ...HERO, role }, [oath, ...COUNCIL]);
       assert.equal(run.frame.wait, 'book_end', `${role} ${oath}`);
-      assert.equal(run.frame.pending, true);
+      assert.notEqual(run.frame.pending, true);
     }
   }
 });

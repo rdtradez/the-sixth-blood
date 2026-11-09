@@ -44,7 +44,8 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 2: flags, story voice stats, pronouns and names, origin variants, library screen
 - [x] Session 3: game systems
 - [x] Session 4: player features, developer tools, look and feel, sample chapter
-- [x] Sessions 5 to 9: character creation and the prologue, the Rome map, Book One chapters 1 to 6 (Book One is in progress)
+- [x] Sessions 5 to 9: character creation and the prologue, the Rome map, Book One chapters 1 to 6
+- [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
 
@@ -195,4 +196,17 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Chapter 17 introduces one new piece of world lore, the custom of surety, which gives the hero standing to decide the General's fate however he was woken. It is flagged to the owner in the session report.
 - Script gotchas found while building: a scene reached with `->` cannot use `<~`, so a choice body in such a scene must jump with `->`; a `:label` inside an `?if` block is unsafe for a loop, so put a looping fight in its own scene and call it with `~>`; put a condition on each choice line of a set rather than wrapping the set.
 - `tests/book1i.test.js` plays chapters 17 and 18 down their branches, including every way the General can be woken, every fate and the fight over eight seeds. `tests/creation.test.js` now expects eighteen written chapters: update that count each session. `tests/book1d.test.js` gained a `stopAt` argument, because its stat comparison is clamped once later chapters run.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 16 notes (for the next session)
+
+- Book One, chapters 19 and 20 are built (`content/burning-city/ch19.tsb` and `ch20.tsb`, chapter ids `b1c19` and `b1c20`). **Book One is finished at twenty chapters**: `"incomplete"` is removed from the manifest, so the book now ends, writes its journal, saves a carry slot and unlocks Book Two.
+- The manifest entry for Book One now has `"journal": "journal/burning-city.tsb"` (the Velati journal, written in the voice of the watchman who begins the record, reading the book's decision flags) and a spoiler light `recap` for quick starts into Book Two. `quickstart.vars` for Book Two are unchanged.
+- Chapter 19 spends two day actions out of four places, then the road and the hill, and has no `rest()` (it closes with `=> next`). Chapter 20 has no phases: it calls `rest()` once and then `sleep()`, and closes with `=> next`. The wake report is not shown in Book One; Book Two's opening reads `wake()`.
+- Chapter 20 offers `rest_place`, `steward`, `orders` and `protection`. A steward is only offered if he is in the circle and active, or if the keepers were sworn in chapter 19; the bank is always offered, so a hero on any path can finish the sleep. Protections are priced by `content/rules.json` and each can be bought once; the choice can always be ended.
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b1.velati_seed`, `b1.collis_legacy`, `b1.senate_peace`, `b1.theron_end`, `b1.keepers`, `b1.last_night`. The sleep itself is logged by the engine (`steward.burning-city`, `orders.burning-city`, `sleep.burning-city`). New codex entries: the watchers of the Aventine and the keepers of the hill. Content notes: chapter 19 carries `grief`, chapter 20 carries `slavery` and `grief`.
+- Later books and the journals should read `b1.keepers` (whether Aelia and Felix are keepers, with `keeper("aelia")` and `keeper("felix")` set), `b1.collis_legacy`, `b1.senate_peace` and `b1.velati_seed` rather than recompute them. On the lone path the keepers also take the `keeper_oath` holding when he can afford it; on the coven path they are sworn without it.
+- **For the Lost Centuries interlude sessions:** the sleep from Rome to Florence is resolved at the end of chapter 20 in one `sleep()`, and its gap in `content/sleep.json` is not marked `"split"`. The interludes are chapters added after chapter 20 in the manifest (chapter 20 closes with `=> next`, so they plug in). If an interlude should break the sleep, mark the gap `"split": true` and decide how the first `sleep()` and the early waking relate before writing it.
+- Because Book One now ends, the older Book One tests no longer stop at a pause: they play the whole book. `tests/creation.test.js` has the end of Book One test (twenty chapters, journal, Book Two unlocked) and the other pause tests use synthetic books. `tests/book1c.test.js` and `tests/book1i.test.js` use `stopAt` for stat comparisons that later chapters would change. The `tests/book1.test.js` through `book1i.test.js` pause assertions are now "the book ends".
+- `tests/book1j.test.js` plays chapters 19 and 20 and the journal down their branches (every place, steward, order, protection and the keepers' oath).
 - Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.

@@ -199,9 +199,27 @@
             "blood",
             "war"
           ]
+        },
+        {
+          "id": "b1c19",
+          "file": "burning-city/ch19.tsb",
+          "title": "Ash and Accounts",
+          "notes": [
+            "grief"
+          ]
+        },
+        {
+          "id": "b1c20",
+          "file": "burning-city/ch20.tsb",
+          "title": "The Long Sleep",
+          "notes": [
+            "slavery",
+            "grief"
+          ]
         }
       ],
-      "incomplete": true
+      "journal": "journal/burning-city.tsb",
+      "recap": "Rome burned, and you were in it. You were taken in by a house of the Merchant line and made a name in its ledgers; you learned what the Igniferi meant to do, and what a city does when it is on fire, and what it costs to answer. A very old thing under the hill was woken, and the Senate of Blood had to decide what to make of you and of it. Then you went home to Collesanto, put your affairs in other hands, and lay down in the dark to wait out the centuries."
     },
     {
       "id": "blood-and-gold",

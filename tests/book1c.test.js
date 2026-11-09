@@ -43,10 +43,10 @@ const KIN = [/Go down to the crossroads/, /End it/];
 // A hero with a stolen strongbox can afford anything the day offers.
 const FLUSH = [/Go down to the crossroads/, /End it/, /Take it/, /Keep it/];
 
-test('chapters 5 and 6 are written and the book still pauses after them', async () => {
+test('chapters 5 and 6 are written and the book plays on to its end', async () => {
   const run = await playBook(HERO);
   assert.equal(run.frame.wait, 'book_end');
-  assert.equal(run.frame.pending, true);
+  assert.notEqual(run.frame.pending, true);
   assert.ok(run.game.state.vars['b1.collis_start'], 'a first deal is always recorded');
   assert.ok(run.game.state.vars['b1.vow'], 'a vow (or none) is always recorded');
 });
@@ -104,14 +104,14 @@ test('the dark offers cost Humanity, and refusing them keeps it', async () => {
 test('a day with no deal still starts the firm, and a hero starved by the sun is fed at dusk', async () => {
   const idle = await playBook(HERO, [/Go home before the light turns/]);
   assert.ok(['wine', 'none'].includes(idle.vars['b1.collis_start']));
-  assert.equal(idle.frame.pending, true);
+  assert.notEqual(idle.frame.pending, true);
   const long = await playBook(HERO, [/Take the road to Ostia/, /Follow the grain factor/, /Walk the burned lots/, /Hunt in the oak wood/]);
   assert.equal(long.frame.wait, 'book_end');
 });
 
 test('the name: keeping the link and hiding it are different', async () => {
-  const tribute = await playBook(HERO, [/Keep the name/]);
-  const hidden = await playBook(HERO, [/Hide the link/]);
+  const tribute = await playBook(HERO, [/Keep the name/], 3, 'b1c07');
+  const hidden = await playBook(HERO, [/Hide the link/], 3, 'b1c07');
   assert.equal(tribute.vars['b1.collis_name'], 'tribute');
   assert.equal(hidden.vars['b1.collis_name'], 'hidden');
   assert.ok(hidden.vars.standing < tribute.vars.standing, 'hiding the link costs standing');
@@ -155,12 +155,12 @@ test('the man on the quay can be hired, passed or followed', async () => {
   }
 });
 
-test('the alley can be fought, paid off or drunk through, and the book still reaches its pause', async () => {
+test('the alley can be fought, paid off or drunk through, and the book still reaches its end', async () => {
   for (const seed of [1, 2, 3, 4, 5, 6]) {
     for (const wants of [[/Drop the knife/], [/Fight on/, /Take the knife man/], [/Fight on/, /Feint, and drag/], [/Fight on/, /Take the knife man/, /Drink from him/]]) {
       const run = await playBook(HERO, [...CLEAN, ...wants], seed);
       assert.equal(run.frame.wait, 'book_end', `seed ${seed} ${wants.map(String)}`);
-      assert.equal(run.frame.pending, true);
+      assert.notEqual(run.frame.pending, true);
     }
   }
 });
@@ -194,12 +194,12 @@ test('a hero who swore nothing meets the house watching, not the drover', async 
   assert.ok(!run.vars['b1.relapse']);
 });
 
-test('every mortal role plays chapters 5 and 6 to the pause, under every vow', async () => {
+test('every mortal role plays chapters 5 and 6 to the end of the book, under every vow', async () => {
   for (const role of ['gladiator', 'legionary', 'merchant', 'physician_aide', 'house_slave']) {
     for (const vow of [/Swear it off/, /only the willing/, /Swear nothing/]) {
       const run = await playBook({ ...HERO, role }, [vow]);
       assert.equal(run.frame.wait, 'book_end', `${role} ${vow}`);
-      assert.equal(run.frame.pending, true);
+      assert.notEqual(run.frame.pending, true);
     }
   }
   for (const gender of ['f', 'x']) {

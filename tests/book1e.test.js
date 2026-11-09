@@ -44,10 +44,10 @@ const BEST = [/Follow the carts/, /Take the cart, smash/, /Aventine station/, /T
 const WORST = [...DAY, /Let it come, and be the one/, /Stay where you are, and watch/, /Go up the hill, to the lamp bearers/, /Say nothing, and let him speak/,
   /foot of the hill, where the insulae/, /Work the bucket line/, /Subura, where Naevia/, /Pull down the wooden stair/];
 
-test('chapters 9 and 10 are written and the book still pauses after them', async () => {
+test('chapters 9 and 10 are written and the book plays on to its end', async () => {
   const run = await playBook(HERO);
   assert.equal(run.frame.wait, 'book_end');
-  assert.equal(run.frame.pending, true);
+  assert.notEqual(run.frame.pending, true);
   for (const flag of ['b1.fire_stance', 'b1.circus', 'b1.evacuated', 'b1.vaults', 'b1.tiro_end', 'b1.rufus_saw', 'b1.fire_toll', 'b1.blame']) {
     assert.ok(run.vars[flag], `${flag} is always recorded`);
   }
@@ -182,12 +182,12 @@ test('a firm that can afford it may buy the burned lots after a night spent watc
   }
 });
 
-test('every mortal role plays chapters 9 and 10 to the pause, in the house and alone', async () => {
+test('every mortal role plays chapters 9 and 10 to the end of the book, in the house and alone', async () => {
   for (const role of ['gladiator', 'legionary', 'merchant', 'physician_aide', 'house_slave']) {
     for (const oath of [/swear it all/, /go alone/]) {
       const run = await playBook({ ...HERO, role }, [oath]);
       assert.equal(run.frame.wait, 'book_end', `${role} ${oath}`);
-      assert.equal(run.frame.pending, true);
+      assert.notEqual(run.frame.pending, true);
     }
   }
 });

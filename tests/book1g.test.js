@@ -80,10 +80,10 @@ const REST = { spared: /put the lamps down, and go home/, given: /Give them to S
 const HUB = [ROAD.run, ROAD.ferry, ROAD.track];
 const DAYS3 = [DAY.thatch, DAY.watch, DAY.aelia];
 
-test('chapters 13 and 14 are written and the book still pauses after them', async () => {
+test('chapters 13 and 14 are written and the book plays on to its end', async () => {
   const run = await playFrom('b1c13', null, { 'b1.hill_known': true });
   assert.equal(run.frame.wait, 'book_end');
-  assert.equal(run.frame.pending, true);
+  assert.notEqual(run.frame.pending, true);
   for (const flag of ['b1.company', 'b1.hill_warned', 'b1.column', 'b1.hill_ready', 'b1.aelia_talk', 'b1.hill_stand', 'b1.flavus_end', 'b1.remnant', 'b1.hill_toll', 'b1.survivor']) {
     assert.ok(run.vars[flag], `${flag} is always recorded`);
   }

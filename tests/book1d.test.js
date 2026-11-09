@@ -36,10 +36,10 @@ async function playBook(hero, wants = [], seed = 3, stopAt = null) {
   return { game, frame, text: pages.join('\n'), vars: game.state.vars };
 }
 
-test('chapters 7 and 8 are written and the book still pauses after them', async () => {
+test('chapters 7 and 8 are written and the book plays on to its end', async () => {
   const run = await playBook(HERO);
   assert.equal(run.frame.wait, 'book_end');
-  assert.equal(run.frame.pending, true);
+  assert.notEqual(run.frame.pending, true);
   assert.ok(run.vars['b1.coven'], 'the offer is always answered');
   assert.ok(run.vars['b1.igni_warned'], 'a warning (or none) is always recorded');
 });
@@ -71,7 +71,7 @@ test('the offer: staying, staying with a reservation and going alone are recorde
   assert.ok(alone.vars.defiance > full.vars.defiance);
 });
 
-test('every vow and every way of reaching the offer plays to the pause', async () => {
+test('every vow and every way of reaching the offer plays to the end of the book', async () => {
   for (const vow of [/Swear it off/, /only the willing/, /Swear nothing/]) {
     for (const oath of [/swear it all/, /keep one thing back/, /go alone/]) {
       const run = await playBook(HERO, [vow, oath]);
@@ -136,12 +136,12 @@ test('who he tells is recorded, and telling the Lictors raises Standing more tha
   assert.ok(none.vars.defiance > house.vars.defiance, 'keeping it to himself is a defiant act');
 });
 
-test('every mortal role plays chapters 7 and 8 to the pause, in the house and alone', async () => {
+test('every mortal role plays chapters 7 and 8 to the end of the book, in the house and alone', async () => {
   for (const role of ['gladiator', 'legionary', 'merchant', 'physician_aide', 'house_slave']) {
     for (const oath of [/swear it all/, /go alone/]) {
       const run = await playBook({ ...HERO, role }, [oath]);
       assert.equal(run.frame.wait, 'book_end', `${role} ${oath}`);
-      assert.equal(run.frame.pending, true);
+      assert.notEqual(run.frame.pending, true);
     }
   }
 });

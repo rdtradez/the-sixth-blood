@@ -111,7 +111,7 @@ test('a hero who refuses the Lictor and fights never reaches a dead end, whateve
   for (const seed of [1, 2, 3, 4, 5, 6]) {
     const run = await playBook(HERO, [/Refuse to answer/, /Break away/, /Break his guard/], seed);
     assert.equal(run.frame.wait, 'book_end', `seed ${seed}`);
-    assert.equal(run.frame.pending, true);
+    assert.notEqual(run.frame.pending, true);
     assert.doesNotMatch(run.text, /[–—]/);
   }
 });

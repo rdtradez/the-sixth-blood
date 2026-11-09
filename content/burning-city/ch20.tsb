@@ -1,0 +1,192 @@
+// Book One, Chapter 20 (session 16). The last night on the hill, the four choices for the long sleep (resting place, steward, orders, protections), and the sleep itself.
+// No phases. Calls rest() once and then sleep(), which resolves the sleep to Book Two. Closes with => next, so interlude chapters can be added after it later.
+// What the sleep did is not shown here: Book Two's opening reads wake().
+@chapter b1c20
+@title The Long Sleep
+@book burning-city
+@version 1
+
+# start
+## The last night
+$ b1.last_night = "alone"
+$ _guard_n = 0
+$ _pick = ""
+The day goes by on the hill as the last days of anything go by, without anybody saying so. Felix mends a gate that does not need it. Aelia goes round the house with a cloth, and opens the shutters of rooms that have been closed for twenty years and lets the light in, and shuts them again. Domitia, in her chair, announces that she does not intend to cry, and then, about an hour after noon, does, thoroughly, and with the air of a woman getting a chore out of the way.
+You help with what you can. You carry things. It is not a great deal, and it is not a thing that is wanted, and it is a thing that you cannot help.
+Towards evening you find that you have a few hours, and that they are yours to spend, and that there are two people on the hill whom you will not see again as they are now. You may not have the right to be greedy. It is, you suppose, the only time that you will ever be offered the choice.
+* Spend it with Aelia, on the old wall, where she keeps watch
+  $ b1.last_night = "aelia"
+  $ bond.aelia += 3
+  Aelia has taken to sitting on the wall at the top of the lane in the evenings. She says that it is for the view. She sits very straight, with her hands in her lap, and her eyes on the road, and you sit down beside her and say nothing for a good while, and it is exactly right.
+  "I am going to be a very old woman," she says at last, "and you will be exactly as you are. I have thought about that. I find that I do not mind it as much as I ought." She does not look at you. "I shall keep the hill. I shall keep the house. When I am done, someone will keep it after me. I shall see to that. It is a thing that I am good at." Her mouth twists. "It is the only thing that I have ever been told that I get from you."
+  You say that she gets her mother's temper. She says that she knows. She puts her hand over yours on the stone, a dry quick hand, and leaves it there until the first star.
+* Spend it with Felix, in the fields, and let him show you what he has done
+  $ b1.last_night = "felix"
+  $ bond.felix += 3
+  Felix walks you round the hill in the last of the light, and shows you all of it. He is a young man who has been told too often that he is not clever, and he has decided, out of pure stubbornness, to be good at one thing, and the thing is dirt. He has terraces, and a drain, and a plan for a long low barn, and a row of vines that he has put in against all advice and that are doing, to everyone's irritation, very well. He explains each of them at length, in great detail, with his hands.
+  "You will not see it," he says at the end, a little breathless, "when it is done." He kicks at a clod. "I should like you to. I should like you to come back, one day, and walk down here, and say that it is not bad." He is going red. "That is all. It is not very much."
+  You say that it is a great deal. You say it as if it were a promise. You are not at all sure, as you say it, that it is not one.
+* Spend it with both, at the table, and let the evening be long
+  $ b1.last_night = "both"
+  $ bond.aelia += 2
+  $ bond.felix += 2
+  It is a long evening and a plain one. There is a roast fowl, because Domitia has decided that there will be, and a jug of the thin red wine, and a lamp, and a good deal of talk about nothing. Felix tells a long story about a mule. Aelia corrects the details. Domitia, from her chair, contradicts them both. You eat what you can. It is not the food that you want, and it is the best meal that you have had in two years.
+  Somewhere in the second hour, you find that you are laughing. It is a very strange sound. You have not heard it for so long that you do not at first know what it is, and neither, from the way that they both look at you, do they.
+* Spend it alone, on the hill, and be quiet
+  $ b1.last_night = "alone"
+  $ cunning_brutal += 1
+  You go up through the old olives to the top of the ridge, where the grass is dry and the villa wall is warm from the day, and sit down with your back against it. You do not think of anything. It is rather a feat. The sun goes down behind the western hills, in a long smear of red and gold, and the village lights come on below you, one by one, small and yellow, a lamp and a lamp and a lamp. You count them. You make it forty-one.
+  Below you, quite clearly, in the still dusk, you can hear the whole village breathing. It is a sound that you have grown used to, and it is the one that you will miss.
+?if b1.last_night != "alone"
+  Domitia, when you come in, has gone to bed. She has left a lamp burning on the table. Beside it, on a plate, there is a single piece of bread with honey on it, and a note in a hand like a hen's, which says, *Eat it. You are too thin.* It is the last thing that she writes to you. You do eat it.
+?end
+It is full dark when you come to the table in the old kitchen, and you have four things to settle before you go down.
+-> table
+
+# table
+## The four things
+You have a ledger from Hanno, and a lamp, and a jug of water that you do not drink. You have a stylus, and a long strip of paper in the new style, and it is the most important thing that you will ever write, and it is a list. It has four lines in it. They are, in the order that Hanno has put them, a place and a person and an order and a guard.
+The place is where you will lie. The person is who will hold what is yours. The order is what is to be done with it. The guard is what stands between the two, and a world that will wake long before you.
+You take them one by one.
+~> place
+~> steward
+~> orders
+~> guard
+-> cellar
+
+# place
+## Where you will lie
+You have a long time to lie, and it will be in the dark, and there are three places that you could do it.
+There is the hill. There is a room in the cellar of the villa, under the great house, a windowless place with a bar on the inside of the door. It has a dry floor and a good thick ceiling, and a view, if one could call it that, of the foundations of a house that a man once built on this hill for reasons that he did not explain. It is the safest place on earth for as long as the hill is safe, and the hill is the one thing that you intend to defend. It has the disadvantage that if the hill is ever found, so are you.
+There is a haven in a city. It is a hidden room, in a house, in a place where there are people, and the people might be of use. It is an easier thing to reach. It is an easier thing to find.
+And there is a tomb. A real one. A sealed chamber cut into the rock, with no door but one stone and no way in that is not a very long dig, and no one at all to hear you. It is the safest of all, and the loneliest, and not at all a thing that one would choose for the company.
+* The cellar under the villa, on the hill
+  $ do rest_place("collesanto")
+  $ bond.aelia += 1
+  You write it down. It is the answer that you knew you would give. It is, you think, the answer of a man who has been a long time away and has found his way home, and is not at all sure that he deserves it.
+* A haven in the city, among people who could help
+  $ do rest_place("haven")
+  $ secrecy -= 1
+  You write it down. It is a thing that a careful man would do, and a thing that Prisca would approve. You find that you do not feel careful. You feel like a man who has chosen the inn over the home, and does not quite know why.
+* The tomb in the rock, where no one will think to look
+  $ do rest_place("tomb")
+  $ humanity -= 1
+  $ cunning_brutal -= 1
+  You write it down. It takes a moment to make the letters. It is a cold thing, and a very sensible one, and it has about it a finality that you do not entirely like. You tell yourself that it is only for a time.
+<~
+
+# steward
+## Who will hold what is yours
+You will not be there. That is the hard part, and the whole point. There will be a fortune, and a house, and a name on a good many papers, and nobody to say yes or no. It is a trust, and it must be placed, and it must be placed in a pair of hands.
+There are the ones who love you. They are not at all the same as the ones who are good at it, and it is the whole of the art to know which is which.
+* The Merchant house, as a bank and a trust, under Prisca's old seal
+  $ do steward("bank")
+  $ bond.prisca += 1
+  You write it down. It is a cold choice, and very sound. It is a thing that does not depend on a heart. It will not love you, and it will not betray you, and it will go on for a very long time, being exactly what it is, and exactly as honest as the people who are paid to keep it so. It is not the thing that you would choose, if you were a better man. It is the thing that you would choose, you think, if you were a wiser.
+* Prisca, in her own person, to hold it for you ?if in_circle("prisca") and member("prisca", "status") == "active"
+  $ do steward("prisca")
+  $ bond.prisca += 4
+  $ standing += 1
+  You write her name. It looks very small. You send for her, and she comes, in the middle of the night, in a travelling cloak, with her abacus in her sleeve, and reads what you have written, and looks at it for a long time.
+  "Yes," she says. "I thought that you would." She folds it very carefully. "I shall be exact. It is the only thing that I have ever been good at, and I find that I am going to be asked to be good at it for a very long time." She puts the paper away. "I should like you to know that I am afraid."
+  "Of what?" you say.
+  "Of being thanked," says Prisca, and goes out, quite fast.
+* Hanno, who has kept the ledgers for three hundred years ?if in_circle("hanno") and member("hanno", "status") == "active"
+  $ do steward("hanno")
+  $ bond.hanno += 3
+  You write it, and send it down to him by Tiro's boy, and a good hour later there is a knock at the door and the old Carthaginian is standing on the step in his plain brown tunic with his tablets under his arm and an expression of the profoundest alarm.
+  "It is a great deal," he says. He says it quite quietly. It is the second longest speech that you have ever had from him. "It is not a thing that is done. A bookkeeper is not a steward." He looks at the paper. His mouth works. "I shall not fail you," he says, and then, with great difficulty, "I should like to say that it is the greatest thing that was ever put into my hands." He bows, abruptly, and goes away, and you hear him in the lane for some time, clearing his throat.
+* Tiro, who is young, and quick, and will be there longest ?if in_circle("tiro") and member("tiro", "status") == "active"
+  $ do steward("tiro")
+  $ bond.tiro += 3
+  Tiro takes it very badly. He reads it twice, and puts it down, and picks it up and reads it a third time, and says, "You cannot be serious." Then, "You are serious." He is deathly pale. "I am very bad at sums." He takes a long breath. "I am very good at people. I should like it noted that I am very good at people, and that it is the sums that I have been avoiding." He puts his hand flat on the paper, as if it might blow away. "I shall learn them. I swear that I shall. I shall learn every one."
+  He is not a safe choice. He is not at all a safe choice. He is, you reflect, the only person you have ever met who has never once lied to you, and you are not at all sure that this is not the same thing.
+* The Valerius keepers, Aelia and Felix, and the family after them ?if b1.keepers == "sworn"
+  $ do steward("keepers")
+  $ bond.aelia += 2
+  $ bond.felix += 2
+  You write it down. It is a very long time to ask of a family. You think of it as you write it, of how many of them there will be, of the names, of the long line of Valerii running down the hill like water, each of them told the same few things and taught the same few signs. You think of the one at the end of it, whoever he or she may be, who will be waiting at the door of the cellar when the bar comes up.
+  Aelia reads it, at the table, with her mother's frown, and says, "It is a great deal to put on a child." And then, in a different voice, "It is a great deal to put on a family. It is what a family is for." She signs. It is a plain strong hand. She hands the stylus to her brother and does not look at him, and Felix signs, and blots it, and says, "It was always going to be us."
+<~
+
+# orders
+## What is to be done with it
+There is the matter of the order. It is the part that Prisca would call the policy, and Hanno the instruction, and the part that you would once have called, if you had been asked, the point.
+It is what the steward is to do with a fortune that will have a very great while to grow, in a world that will go through a great deal. It can be kept, or it can be sown. It can be put to work in ways that are honest, or in ways that are only profitable.
+* Play it safe: land, and grain, and honest rents, and let it grow slowly
+  $ do orders("safe")
+  $ humanity += 1
+  $ standing += 1
+  It is what Hanno would have done, and what he has not been allowed to say. It is not exciting. It is an order to buy farms and vineyards and olive presses and houses with good walls, and to hold them, and to be patient, and to write nothing down that need not be written. It is the order of a man who intends to wake up and find the same hill.
+* Grow it aggressively: shipping, loans and a great deal of trade
+  $ do orders("aggressive")
+  $ cunning_brutal += 1
+  $ standing += 1
+  It is a bolder thing. It is an order to put money into ships and cargoes, and to lend at a good rate, and to buy up what is cheap and sell what is dear. It will be a good deal richer. It will be a good deal more visible. It will be, you think, like leaving a very large lamp in a window and hoping that no one comes to ask whose it is.
+* Take the dark ventures, which pay the most, and ask no questions
+  $ do orders("dark")
+  $ cunning_brutal += 3
+  $ humanity -= 3
+  $ velati_regard -= 2
+  You write it. It takes a long time, and you do not enjoy the writing. It is the order for the debt farms and the slave markets and the quiet trade in what the Senate will not name, the order that gives the greatest return and will have a very great deal of blood on it. You tell yourself that it is only for a time. You tell yourself that it is only money. You are quite aware that you have heard this before, in the voice of a number of men whom you did not like.
+  The ink is very black, and it dries slowly. You look at it for a long time before you blot it.
+<~
+
+# guard
+## What stands between
+There is the last thing, and it is a thing that you will have to pay for. It is the guard.
+It is what stands between a man in a cellar and a world that will wake long before him. There are traps, which are cheap, and bribes, which are expensive, and guardians, which are neither, and cannot be got without a very good reason and a very great deal of gold.
+You do not have an unlimited purse. It is a thing that you are aware of.
+:guard
+* Lay traps in the ways in: stones, pits and a few cunning things with wire [once] ?if wealth >= 10
+  $ do protection("traps")
+  $ _guard_n += 1
+  Felix helps with the pits. He is surprisingly good at it, and takes a certain private joy in the cleverness of the thing, and has to be told twice that he is not to put any in the lane.
+* Pay the people who would otherwise ask questions: the Prefect's clerks, a priest or two, the tax man [once] ?if wealth >= 20
+  $ do protection("bribes")
+  $ _guard_n += 1
+  $ secrecy += 2
+  It is a long list, and a great deal of it is in Hanno's small hand. It is a thing that is done with great politeness, and a good many small leather purses, and it is entirely unlike anything that you have done before, and it is a thing that does work.
+* Hire guardians: a dozen good men, sworn, to hold the road for as long as the money lasts [once] ?if wealth >= 30
+  $ do protection("guardians")
+  $ _guard_n += 1
+  They are a hard lot, old soldiers of the lesser legions, and quite unsentimental. Their captain is a heavy bald man with a limp and the look of a man who has been paid in advance to be loyal and has decided that it would be an insult to the money not to be. He walks round the villa twice, and the village once, and says, "It will do."
+* That will do
+  <~
+-> :guard
+
+# cellar
+## The room under the hill
+It is the middle of the night. The house is asleep. You go down through the quiet rooms in your bare feet with a lamp, and the stairs are dry and cold, and the cellar is as it was.
+It is not a big place. It is a long low vault, with the wine racks along one wall, and an old wooden door at the end, plain and heavy, with a bar of black iron on the inside, resting in its brackets, that you lifted once, in a different life, and let fall. There is a floor of beaten earth, and a smell of dry stone, and nothing else at all. It is, as it always was, a clean and quiet and empty place.
+?if original("general", "fate") == "sealed"
+  You think of the General, under the sixty beams of cedar, in the dark. It is not an easy thing to think of. You think that he would find this very restful, and that he would have a joke about the wine.
+?end
+Aelia is waiting at the top of the cellar stair, with a candle, as she said that she would be. She is not going to come down. She has her mother's gift for knowing which things are one's own.
+?if b1.last_night == "aelia"
+  "I have said it," she says. "I said it on the wall. I shall not say it again." She holds the candle a little higher. Her face is calm. "Go well." She says it exactly as her mother used to say it, when you went out into the fields in the morning, a very plain thing, and a great deal.
+?elif b1.last_night == "felix"
+  "Felix is asleep on the step," she says, in a whisper. "He said that he would stay awake. He did very well. He got as far as the third hour." Her mouth twitches. "I have put a blanket over him."
+?elif b1.last_night == "both"
+  "We said it at supper," she says, very low, "so I shall not say it now. I shall only say that you are not to be late." She smiles. It is the real one, her mother's, the lopsided one. "You were late tonight. Do not make a habit of it."
+?else
+  "I know that you wished to be alone," she says. "I only came to hold the light."
+?end
+She turns, and goes up, and the candle goes with her, and the long shadows swing and settle, and you are alone in the dark with your own lamp.
+You do not say any of the things that you had thought to say. You find that there is nothing in you that wants to be said. You set the lamp on the floor. You lie down on the swept earth, with your cloak under your head, and fold your hands, like a man on a tomb.
+?if [judean]
+  You say a prayer that you were taught as a child. You say it in the old tongue, under your breath, and it comes out whole. You had thought that you had forgotten it.
+?elif [egyptian]
+  You think of the river. You have not seen it in years. You think of it going on, as it always has, brown and slow, under the white sky, past all of this and all of you, and it is a good thing to think of.
+?elif [briton gaul]
+  You think of a wet green hill, and a fire in a round house, and a woman's voice singing, and you do not know whether it is a memory, or a thing that you have made. It does not matter. You hold it.
+?else
+  You think of your own hands, as they were, with the dirt in the creases. You think of a field, and a fence, and a gate that did not shut. It was a very small place. It was the whole of the world.
+?end
+The last thing that you hear is the village. It is very faint, down there under the stone. It is a sound that you have lived in, like water, for two years, and it goes on, a thousand small slow beats, a child's and a woman's and an old man's, steady and quiet and entirely unaware of you. You listen to it go on.
+$ do rest()
+$ do sleep()
+You close your eyes.
+It is not like sleep. It is like being put down, very gently, by a large hand. There is a long, quiet fall, and the sound of the village goes away, not all at once but one beat at a time, like lamps being put out down a long street, and the dark is complete and warm and does not ask anything of you at all.
+Somewhere in it, very far off, below the hill or beyond it, there is a sound like a knock. It comes once. It does not come again. You are, by then, a good way down, and you do not think about it.
+=> next

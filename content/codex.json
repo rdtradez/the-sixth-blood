@@ -161,6 +161,18 @@
       "title": "Surety",
       "book": "burning-city",
       "text": "The oldest custom of the dead. When one of them comes out of the dark, whoever first gives him drink, of their own blood or their own hand, becomes his surety. The Senate asks the ward no questions. It asks them of his surety."
+    },
+    "the_watchers": {
+      "category": "lore",
+      "title": "The watchers of the Aventine",
+      "book": "burning-city",
+      "text": "A handful of the vigiles who saw the city burn and saw, in the smoke, something that was not a fire. They have begun to meet in the evenings, in the station yard, with a wax tablet and a list. They do not mean to fight what they saw. They mean to see that somebody wrote it down."
+    },
+    "the_keepers": {
+      "category": "bloodlines",
+      "title": "The keepers of the hill",
+      "book": "burning-city",
+      "text": "The oldest way for a human family to serve one of the dead: they hold the house, keep the shutters, know what lies below the stair, and hand the knowledge down. It is an oath that can last for centuries. It makes the family, for as long as it lasts, both a shield and a mark."
     }
   }
 }
