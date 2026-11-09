@@ -217,8 +217,16 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Chapter 20 is `@version 2`: it now sleeps only the first segment (`rome_to_sack`). The old umbrella gap `rome_to_florence` is kept untouched for quick starts, which skip split gaps.
 - Engine: sleep gaps can carry a `chain`. `applySleep` accumulates years, events and a `segments` count across a chain, so `wake()` reports the whole sleep. Book Two's opening should read the chained `wake()`.
 - Engine: chapters may declare their own `journal` and `journalTitle` in the manifest. `composeChapterJournal` writes the entry at chapter end, after the book entry for the same book. `tools/check.js` validates chapter journals.
-- New gaps in `content/sleep.json`: `rome_to_sack`, `sack_to_byzantium`, `byzantium_to_florence`. Interlude B should split the last one into two segments (532 to 1348, then 1348 to Florence).
+- New gaps in `content/sleep.json`: `rome_to_sack`, `sack_to_byzantium`, `byzantium_to_florence`. Interlude B split `byzantium_to_florence` into `byzantium_to_plague` and `plague_to_florence`.
 - New flags use the `lc.` prefix, all registered with `major` and a quick start default (`lc.mason` is not major). New people, codex entries and one collection item are registered.
 - Chapter journals: `content/journal/lc-410.tsb` and `lc-537.tsb`.
 - `tests/interlude-a.test.js` covers the chain report, chapter journals, ordering and flags. `tests/book1j.test.js` uses `stopAt: 'lc01'` for chapter 20 checks.
 - Plans for these chapters are in `SPOILERS/lost-centuries.md`.
+
+### Interlude session B notes (for the next session)
+
+- Two more unnumbered interlude chapters follow `lc03`: `lc04` and `lc05` (`content/lost-centuries/`). Book One now ends after `lc05`. `lc03` is `@version 2` and sleeps `byzantium_to_plague`; `lc05` sleeps the last segment, `plague_to_florence`. The chain now has four segments summing to 1410 years, and `wake()` reports the whole of it.
+- New flags (all registered, `major`, with quick start defaults): `lc.village_1348`, `lc.sleeper_1348`, `lc.plague_road`.
+- Aelia and Felix are now `"quick": "dead"` in `content/family.json`, so a quick start into Book Two finds the whole first family gone. Book Two's opening should read the chained `wake()`.
+- `tests/interlude-b.test.js` covers the chain end and the chapter order; `tests/book1.test.js` first night checks use `stopAt: 'lc01'`.
+- Plans are in `SPOILERS/lost-centuries.md`.

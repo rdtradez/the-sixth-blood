@@ -123,13 +123,13 @@ test('going into the fire wounds the hero; blood from the prisoner heals him', a
 });
 
 test('the first night: a hero who never feeds is taken by the hunger, and the village hears of it', async () => {
-  const forced = await playBook(HERO, [/Wait for the dawn/]);
+  const forced = await playBook(HERO, [/Wait for the dawn/], 3, 'lc01');
   assert.equal(forced.vars['b1.first_blood'], 'forced');
   assert.ok(forced.game.state.sys.people.sextus, 'Sextus has been met');
   assert.ok(forced.game.state.sys.lore.codex.the_hunger, 'the hunger entry is found');
-  const hunter = await playBook(HERO, [/Hunt in the oak wood/]);
+  const hunter = await playBook(HERO, [/Hunt in the oak wood/], 3, 'lc01');
   assert.equal(hunter.vars['b1.first_blood'], 'animal');
-  const kill = await playBook(HERO, [/Go down to the crossroads/, /End it/, /Leave it/]);
+  const kill = await playBook(HERO, [/Go down to the crossroads/, /End it/, /Leave it/], 3, 'lc01');
   assert.equal(kill.vars['b1.first_blood'], 'killed');
   assert.equal(kill.vars['b1.collector'], 'killed');
   assert.ok(kill.vars.humanity < hunter.vars.humanity, 'a killing costs Humanity');
@@ -153,9 +153,9 @@ test('the daylight is survived and the sun is in the codex', async () => {
   }
 });
 
-test('a quick start into Book Two finds the spouse dead and the children living', async () => {
+test('a quick start into Book Two finds the spouse and the children dead, a thousand years on', async () => {
   const game = await realGame();
   const q = game.quickState('blood-and-gold', { hero: { origin: 'roman' } });
   assert.equal(q.sys.lore.kin.spouse.status, 'dead');
-  for (const id of ['aelia', 'felix']) assert.ok(q.sys.lore.kin[id] && q.sys.lore.kin[id].status !== 'dead', id);
+  for (const id of ['aelia', 'felix']) assert.equal(q.sys.lore.kin[id].status, 'dead', id);
 });

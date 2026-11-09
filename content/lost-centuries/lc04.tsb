@@ -1,0 +1,168 @@
+// The Lost Centuries, chapter 4 (interlude session B). 1348: the third waking, at Collesanto, in the year of the great pestilence.
+// Reads the wake report from lc03's sleep (byzantium_to_plague), b1.keepers, lc.court_537 and the rest place. A night phase of two actions out of three places, then dawn.
+// Plants the Sleeper cult seed (lc.sleeper_1348). Ends with => next into lc05, which closes the chain.
+@chapter lc04
+@title The Year of the Pestilence
+@book burning-city
+@version 1
+
+# start
+## Up again
+$ lc.village_1348 = "sheltered"
+$ lc.sleeper_1348 = "allowed"
+$ lc.plague_road = "passed"
+$ _fed = 0
+~> waking
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 2)
+It is the spring of 1348, though nobody has told you so. You learn it from the bell, which is tolling, and has been tolling, by the sound of it, for some days, and from the smell, which is not woodsmoke. You have, by the village's reckoning, two nights before whatever is coming up the valley arrives. By your own, you have a great many things to decide in very little time.
+-> night
+
+# waking
+?if wake("outcome") == "woken_early"
+  Somebody is shouting your name. It is a thing that nobody has done for a very long time, and it is done badly, in a dialect that you have to take apart like a clock. There is a lamp, and a priest with a bandage over his mouth and nose, and behind him a crowd of faces in the doorway that does not want to come any nearer.
+  "Forgive us," says the priest. "We did not know what else to do. They say that it is in Florence. They say that it is in Siena. We have prayed to the Sleeper for forty days, and today a child said that she heard something in the floor."
+  You are very hungry. They are all of them very afraid, and the thing about fear is that it has a smell too.
+?elif wake("steward") == "keepers"
+  There is a lamp, and a very old woman holding it, with a face that you have seen before, in a hundred small pieces on a hundred other faces. She is a Valeria. She has Aelia's chin. She sits down on the floor beside you, because her knees will not allow anything else.
+  "I was told to wait until the sickness came," she says. "My grandmother was told, and her grandmother. It was in the will. I thought it was a story." She looks at your hands. "I am sorry. We have buried eleven since Candlemas. I was afraid that there would be nobody left to wake you."
+?else
+  There is a lamp, and a letter, and a man from the bank's agency at Siena with a cloth over his face who has come a very long way and is plainly sorry that he came. "The accounts are in order," he says, through the cloth. "I wished to say that, before anything. They are in order. I do not know for how much longer there will be anyone to keep them."
+?end
+?if wake("place") == "collesanto"
+  You are in the cellar on the hill. The wine rack has gone, and a stair has come, and the Sleeper's chapel overhead has had its roof mended a good many times. The floor is exactly as hard as it was.
+?elif wake("place") == "haven"
+  You are in the haven, in the city, under a house that has had eleven owners and a fire. Somebody has painted a red cross on the street door, you gather, and the street is very quiet.
+?else
+  The tomb in the rock has been opened. Somebody has been in before you, a long time ago, and left a rosary and a candle stub. Beyond the stone there is a cold grey evening, and the very faint sound of weeping.
+?end
+?if lc.court_537 == "hostile"
+  There is one more thing, folded small, on the ledge by your head: a sheet of Senate vellum, with a single line in a hand that you remember, and no signature. *The East has not forgotten.* It is eight hundred years old. You find that you are almost touched.
+?end
+<~
+
+# hunger
+## The first thing
+* Take what the household has kept for you, a lamb ?if wake("outcome") != "woken_early"
+  $ do feed("animal")
+  $ humanity += 1
+  It is a good lamb. It has been a long time since anybody thought of you as a thing that must be looked after, and you are, in an odd way, very moved.
+* Ask for a willing arm ?if wake("outcome") != "woken_early"
+  $ do feed("donor")
+  $ do earn(-2)
+  It is not hard to find one. It is hard to look at them afterward, with the bell going.
+* Take one of the sick, who will not mind
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is burning with it, and does not wake, and his blood has a strange sour edge, like turned wine. You will not forget that taste. It does you no harm at all. It is a thing that you find yourself wishing that it had.
+* Go without
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It is a hard night to choose it. You do.
+<~
+
+# night
+## The village
+:night
+?if actions_left() == 2
+  Dusk comes down on the valley like a lid. Below the hill the village has shut its doors, and a few of them have been marked, and a cart is standing in the lane with a cloth over its load. Nobody is walking about. It is the quietest evening you have known, with a great deal of noise underneath it.
+?else
+  It is the deep of the night, and the bell has stopped. In its place there is a murmur on the hill, a long slow sound of many people kneeling, and the glimmer of a hundred small lights going up toward the chapel.
+?end
+* Go down among the houses, where the sickness is [once] ?if actions_left() > 0
+  ~> village
+  $ do act()
+* Go up to the chapel, where the pilgrims are [once] ?if actions_left() > 0
+  ~> chapel
+  $ do act()
+* Take the road to the north, where the carts are going [once] ?if actions_left() > 0
+  ~> road
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# village
+## The lane
+You go down in the dark, in your plain old cloak, and the first door that you try is opened by a woman who thinks that you are the priest.
+It is a poor house, and four of them are in it, on straw. The smell of it is something that you have not met in a thousand years, and your body, which is not a thing that gets ill, nevertheless tells you very firmly to leave.
+* Stay, and carry water and straw until dawn
+  $ lc.village_1348 = "sheltered"
+  $ humanity += 3
+  $ secrecy -= 1
+  It is not much. It is a bucket, and a rag, and a great many trips. By morning two of them are better and one is not, and the woman has stopped asking who you are. It is the longest night's work that you have done in a century.
+* Pay for a doctor from the town, and leave the coin on the sill
+  $ lc.village_1348 = "sheltered"
+  $ do earn(-3)
+  $ humanity += 1
+  The doctor takes the coin and says that he will come. He does not. It is, by the look of him, the better part of wisdom, and you are not at all sure that you blame him.
+* Tell them to shut the door and keep away from the hill
+  $ lc.village_1348 = "turned_away"
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  It is sensible advice. It is exactly what you would tell a stranger. You hear the bar go across behind you, and you stand on the step for some time, being sensible.
+<~
+
+# chapel
+## The Sleeper's chapel
+The chapel is full. It is a small plain building on top of a very old cellar, and they have put up a painted board over the altar, and the board is of a man lying down with his hands folded and a ring of lamps round his head. There is a name under it that is not yours, and you find that you are reading it with a sort of gentle horror. They call him the Sleeper. They say that he is waiting, and that he will wake on the last day, and that he will put his hand on the sick and they will rise.
+A very old man at the front, with a rope for a belt, is leading them in the prayer. They have put the bread for him on the step.
+* Stay at the back, and let them pray
+  $ lc.sleeper_1348 = "allowed"
+  $ secrecy += 1
+  It is a strange thing to be prayed to. It is not at all like being feared. It is quieter, and a good deal heavier, and you do not at all know where to put it.
+* Go down to the floor of the cellar, and tell the keeper to seal the stair
+  $ lc.sleeper_1348 = "denied"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  "There is no saint down there," you say. "There is a hole in the ground, and a very old tomb, and a smell." They are shocked, and then, to your horror, they are comforted. It is, they say, exactly what a saint would say.
+* Walk down the nave, and put your hand on a child's head
+  $ lc.sleeper_1348 = "embraced"
+  $ humanity -= 1
+  $ secrecy -= 3
+  $ velati_regard -= 1
+  The child is hot. It is nothing that you did. By morning she is cool, and asleep, and the village will say that you did it, and you will not be able to say that they are wrong, because you do not know. You have done a great deal of harm in your time. You are not at all sure that you know how to deal with this.
+<~
+
+# road
+## The north road
+There are carts. They are going away from the town, and they are loaded, not with goods, but with people, the ones who can still walk beside them and a great many who cannot. There is a ditch, and a man with a spade. There is a smoking pit by the crossroads, and a priest with a stole over his face reading the office to nobody.
+It is the end of something, and it does not look as though anybody is in charge.
+* Take a spade, and work with the diggers until morning
+  $ lc.plague_road = "tended"
+  $ humanity += 3
+  $ secrecy -= 1
+  You do it, because it is something to do with your hands. You do not tire. The man next to you notices that, about midnight, and says nothing, and goes on digging, and at dawn he says, "God keep you," and you find that you cannot answer.
+* Feed on the dying, where they lie, and make it quick
+  $ lc.plague_road = "taken"
+  $ do feed("human")
+  $ humanity -= 3
+  $ cunning_brutal += 3
+  It is a mercy, you tell yourself, and it is, a little, and it is not only that. There is a great deal of it. It is the easiest hunting of your life, and you will remember that as the worst thing about it.
+* Keep to the shadows, and let it go by
+  $ lc.plague_road = "passed"
+  $ secrecy += 1
+  You stand in the dark of a wall, and watch the carts go, one after another, and a child looks straight at you from the back of the last one. She does not wave. You think that you will be seeing her for some time.
+<~
+
+# dawn
+## Grey light
+Dawn finds you at the head of the lane with the whole valley below you, in a thin cold mist, and a wisp of smoke going up from every third chimney.
+?if lc.village_1348 == "sheltered"
+  Somebody has left a loaf on the step of the house where you worked, and a flower on top of it, a small blue one. It is not for you. It is for the night, or the saint, or the last of the water. You eat the flower. It is a very peculiar thing to do, and it makes you feel a little better.
+?else
+  The lane below you is empty, and the door that you shut is still barred, and nobody comes out.
+?end
+?if lc.sleeper_1348 == "embraced"
+  The pilgrims are coming down from the chapel in the first light. They are not praying. They are singing, very thin and quavering, a thing that you do not know, and the name in it is the one that is painted on the board.
+?elif lc.sleeper_1348 == "denied"
+  A stonemason is already on the chapel steps, with a chisel, taking down the board. It is for your sake. You wish, a little, that it were not.
+?end
+It is a very bad year. It will be the worst in memory, and it is not yet over. You are not of it, and you cannot help it, and in a few days you must lie down again, and let it go.
+=> next

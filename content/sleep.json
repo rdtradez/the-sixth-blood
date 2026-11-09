@@ -1,66 +1,178 @@
 {
-  "note": "The long sleeps between books (none between Chicago and New York). from and to are book ids; growth multiplies his fortune (before orders and steward); village is how much Collesanto grows; events are the history the sleep passes through, each adding risk. investments are orders tied to one gap ($ do sleep_invest): growth multiplies, risk adds danger, humanity is lost on waking, flag notes what a later book reads. A gap marked split is one segment of a longer sleep played by interlude chapters, and is skipped by quick start (which uses the whole gap, listed first, instead). Segments with the same chain add up in the wake report: wake(\"years\") and wake_event() cover the whole chain. rome_to_florence is the whole Lost Centuries sleep for quick starts; its three segments are what Book One plays: rome_to_sack (chapter 20), sack_to_byzantium and byzantium_to_florence (the interludes). Years and growth of the segments add up to the whole gap.",
-  "gaps": {
-    "rome_to_florence": {
-      "from": "burning-city", "to": "blood-and-gold", "years": 1410, "growth": 6, "village": 10,
-      "events": [
-        { "id": "sack_of_rome", "name": "The sack of Rome, 410", "risk": 1 },
-        { "id": "plague_of_justinian", "name": "The Plague of Justinian", "risk": 1 },
-        { "id": "black_death", "name": "The Black Death, 1348", "risk": 2 }
-      ]
+ "note": "The long sleeps between books (none between Chicago and New York). from and to are book ids; growth multiplies his fortune (before orders and steward); village is how much Collesanto grows; events are the history the sleep passes through, each adding risk. investments are orders tied to one gap ($ do sleep_invest): growth multiplies, risk adds danger, humanity is lost on waking, flag notes what a later book reads. A gap marked split is one segment of a longer sleep played by interlude chapters, and is skipped by quick start (which uses the whole gap, listed first, instead). Segments with the same chain add up in the wake report: wake(\"years\") and wake_event() cover the whole chain. rome_to_florence is the whole Lost Centuries sleep for quick starts; its four segments are what Book One plays: rome_to_sack (chapter 20), sack_to_byzantium, byzantium_to_plague and plague_to_florence (the interludes). Years and growth of the segments add up to the whole gap.",
+ "gaps": {
+  "rome_to_florence": {
+   "from": "burning-city",
+   "to": "blood-and-gold",
+   "years": 1410,
+   "growth": 6,
+   "village": 10,
+   "events": [
+    {
+     "id": "sack_of_rome",
+     "name": "The sack of Rome, 410",
+     "risk": 1
     },
-    "rome_to_sack": {
-      "chain": "lost_centuries", "split": true,
-      "from": "burning-city", "to": "burning-city", "years": 346, "growth": 1.8, "village": 4,
-      "events": [
-        { "id": "sack_of_rome", "name": "The sack of Rome, 410", "risk": 1 }
-      ]
+    {
+     "id": "plague_of_justinian",
+     "name": "The Plague of Justinian",
+     "risk": 1
     },
-    "sack_to_byzantium": {
-      "chain": "lost_centuries", "split": true,
-      "from": "burning-city", "to": "burning-city", "years": 127, "growth": 1.35, "village": 2,
-      "events": [
-        { "id": "fall_of_the_west", "name": "The last western emperor, 476", "risk": 0 }
-      ]
-    },
-    "byzantium_to_florence": {
-      "chain": "lost_centuries", "split": true,
-      "from": "burning-city", "to": "blood-and-gold", "years": 937, "growth": 2.5, "village": 4,
-      "events": [
-        { "id": "plague_of_justinian", "name": "The Plague of Justinian", "risk": 1 },
-        { "id": "black_death", "name": "The Black Death, 1348", "risk": 2 }
-      ]
-    },
-    "florence_to_paris": {
-      "from": "blood-and-gold", "to": "crown-of-ashes", "years": 310, "growth": 4, "village": 8,
-      "events": [
-        { "id": "sack_of_rome_1527", "name": "The sack of Rome, 1527", "risk": 1 },
-        { "id": "thirty_years_war", "name": "The Thirty Years' War", "risk": 1 }
-      ],
-      "investments": {
-        "atlantic_trade": { "name": "Atlantic trade and shipping", "growth": 1.3, "risk": 0 },
-        "new_amsterdam": { "name": "Land in New Amsterdam", "growth": 1.1, "risk": 0, "flag": "the long bet on Manhattan" },
-        "plantations": { "name": "Sugar plantations and the Atlantic slave trade", "growth": 1.8, "risk": 1, "humanity": 20 }
-      }
-    },
-    "paris_to_new_orleans": {
-      "from": "crown-of-ashes", "to": "house-divided", "years": 65, "growth": 2.5, "village": 6,
-      "events": [
-        { "id": "napoleonic_wars", "name": "The Napoleonic Wars", "risk": 1 }
-      ]
-    },
-    "new_orleans_to_london": {
-      "from": "house-divided", "to": "whitechapel-hunt", "years": 20, "growth": 1.8, "village": 4,
-      "events": [
-        { "id": "panic_of_1873", "name": "The Panic of 1873", "risk": 1 }
-      ]
-    },
-    "london_to_chicago": {
-      "from": "whitechapel-hunt", "to": "relics-lost-god", "years": 35, "growth": 2.2, "village": 5,
-      "events": [
-        { "id": "great_war", "name": "The Great War", "risk": 2 },
-        { "id": "spanish_flu", "name": "The 1918 influenza", "risk": 1 }
-      ]
+    {
+     "id": "black_death",
+     "name": "The Black Death, 1348",
+     "risk": 2
     }
+   ]
+  },
+  "rome_to_sack": {
+   "chain": "lost_centuries",
+   "split": true,
+   "from": "burning-city",
+   "to": "burning-city",
+   "years": 346,
+   "growth": 1.8,
+   "village": 4,
+   "events": [
+    {
+     "id": "sack_of_rome",
+     "name": "The sack of Rome, 410",
+     "risk": 1
+    }
+   ]
+  },
+  "sack_to_byzantium": {
+   "chain": "lost_centuries",
+   "split": true,
+   "from": "burning-city",
+   "to": "burning-city",
+   "years": 127,
+   "growth": 1.35,
+   "village": 2,
+   "events": [
+    {
+     "id": "fall_of_the_west",
+     "name": "The last western emperor, 476",
+     "risk": 0
+    }
+   ]
+  },
+  "byzantium_to_plague": {
+   "chain": "lost_centuries",
+   "split": true,
+   "from": "burning-city",
+   "to": "burning-city",
+   "years": 811,
+   "growth": 1.6,
+   "village": 2,
+   "events": [
+    {
+     "id": "plague_of_justinian",
+     "name": "The Plague of Justinian",
+     "risk": 1
+    }
+   ]
+  },
+  "plague_to_florence": {
+   "chain": "lost_centuries",
+   "split": true,
+   "from": "burning-city",
+   "to": "blood-and-gold",
+   "years": 126,
+   "growth": 1.55,
+   "village": 2,
+   "events": [
+    {
+     "id": "black_death",
+     "name": "The Black Death, 1348",
+     "risk": 2
+    }
+   ]
+  },
+  "florence_to_paris": {
+   "from": "blood-and-gold",
+   "to": "crown-of-ashes",
+   "years": 310,
+   "growth": 4,
+   "village": 8,
+   "events": [
+    {
+     "id": "sack_of_rome_1527",
+     "name": "The sack of Rome, 1527",
+     "risk": 1
+    },
+    {
+     "id": "thirty_years_war",
+     "name": "The Thirty Years' War",
+     "risk": 1
+    }
+   ],
+   "investments": {
+    "atlantic_trade": {
+     "name": "Atlantic trade and shipping",
+     "growth": 1.3,
+     "risk": 0
+    },
+    "new_amsterdam": {
+     "name": "Land in New Amsterdam",
+     "growth": 1.1,
+     "risk": 0,
+     "flag": "the long bet on Manhattan"
+    },
+    "plantations": {
+     "name": "Sugar plantations and the Atlantic slave trade",
+     "growth": 1.8,
+     "risk": 1,
+     "humanity": 20
+    }
+   }
+  },
+  "paris_to_new_orleans": {
+   "from": "crown-of-ashes",
+   "to": "house-divided",
+   "years": 65,
+   "growth": 2.5,
+   "village": 6,
+   "events": [
+    {
+     "id": "napoleonic_wars",
+     "name": "The Napoleonic Wars",
+     "risk": 1
+    }
+   ]
+  },
+  "new_orleans_to_london": {
+   "from": "house-divided",
+   "to": "whitechapel-hunt",
+   "years": 20,
+   "growth": 1.8,
+   "village": 4,
+   "events": [
+    {
+     "id": "panic_of_1873",
+     "name": "The Panic of 1873",
+     "risk": 1
+    }
+   ]
+  },
+  "london_to_chicago": {
+   "from": "whitechapel-hunt",
+   "to": "relics-lost-god",
+   "years": 35,
+   "growth": 2.2,
+   "village": 5,
+   "events": [
+    {
+     "id": "great_war",
+     "name": "The Great War",
+     "risk": 2
+    },
+    {
+     "id": "spanish_flu",
+     "name": "The 1918 influenza",
+     "risk": 1
+    }
+   ]
   }
+ }
 }

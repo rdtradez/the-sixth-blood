@@ -1,10 +1,10 @@
 // The Lost Centuries, chapter 3 (interlude session A). 537 AD: the second waking, in the Senate of Blood's new city, on the eve of the dedication of the Great Church.
 // Reads the wake report from lc02's sleep (sack_to_byzantium), lc.seat, lc.court and lc.watchers from before. A night phase of two actions out of three places, then the day of the dedication.
-// Ends with rest() and sleep("byzantium_to_florence"), the last segment of the chain, then => next, which ends Book One. The chapter's own Velati journal entry is content/journal/lc-537.tsb.
+// Ends with rest() and sleep("byzantium_to_plague"), the last segment of the chain, then => next, which ends Book One. The chapter's own Velati journal entry is content/journal/lc-537.tsb.
 @chapter lc03
 @title The Second Rome
 @book burning-city
-@version 1
+@version 2
 
 # start
 ## Up again
@@ -408,7 +408,7 @@ You have done it twice. It is not a thing that gets easier. It is a thing that g
 # bed
 ## Down again
 $ do rest()
-$ do sleep("byzantium_to_florence")
+$ do sleep("byzantium_to_plague")
 It is cold, wherever you are, and dark, and there is nothing at all to be heard. You lie down, and fold your hands, and let it take you. It is not at all like the first time. It is not like the second. It is like going to bed in a house where you have lived a very long time, and know all the creaks.
 There is a sound as you go, far above you, a long way up, and a long way off. It is a bell. It is a very large one. It is ringing for something that you cannot hear. You think that it is the new church. You think that it is, perhaps, for a thousand years.
 => next

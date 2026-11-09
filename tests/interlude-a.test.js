@@ -28,7 +28,7 @@ async function playBook(seed, pick = () => 0) {
   return { game, frame, text: pages.join('\n') };
 }
 
-test('the three interlude chapters play to the end of Book One and unlock Book Two', async () => {
+test('the five interlude chapters play to the end of Book One and unlock Book Two', async () => {
   const run = await playBook(3);
   assert.equal(run.frame.wait, 'book_end');
   assert.equal(run.frame.nextBook, 'blood-and-gold');
@@ -41,19 +41,19 @@ test('interludes are not numbered and are not counted as chapters', async () => 
   await game.init();
   const book = game.library().find((b) => b.id === 'burning-city');
   assert.equal(book.chapterCount, 20);
-  for (const id of ['lc01', 'lc02', 'lc03']) assert.equal(game.chapterMeta[id]?.number ?? null, null, `${id} is unnumbered`);
+  for (const id of ['lc01', 'lc02', 'lc03', 'lc04', 'lc05']) assert.equal(game.chapterMeta[id]?.number ?? null, null, `${id} is unnumbered`);
 });
 
 test('the sleep is a chain: the wake report sums the segments and gathers every event', async () => {
   const { game } = await playBook(3);
   const history = game.state.sys.sleep.history.filter((h) => h.chain === 'lost_centuries');
-  assert.equal(history.length, 3);
-  assert.deepEqual(history.map((h) => h.segments), [1, 2, 3]);
+  assert.equal(history.length, 4);
+  assert.deepEqual(history.map((h) => h.segments), [1, 2, 3, 4]);
   const wake = game.state.sys.sleep.wake;
   assert.equal(wake.chain, 'lost_centuries');
-  assert.equal(wake.segments, 3);
+  assert.equal(wake.segments, 4);
   assert.equal(wake.years, 1410);
-  assert.ok(history[0].years < history[1].years && history[1].years < history[2].years, 'years accumulate');
+  for (let i = 1; i < history.length; i++) assert.ok(history[i - 1].years < history[i].years, 'years accumulate');
   for (const ev of ['sack_of_rome', 'fall_of_the_west', 'plague_of_justinian', 'black_death']) assert.ok(wake.events.includes(ev), ev);
 });
 
@@ -97,5 +97,5 @@ test('a quick start into Book Two still resolves the umbrella gap', async () => 
   const umbrella = all.find((g) => (g.id ?? g.name) === 'rome_to_florence');
   assert.ok(umbrella, 'the umbrella gap remains');
   assert.ok(!umbrella.split, 'the umbrella gap is not split');
-  for (const id of ['rome_to_sack', 'sack_to_byzantium', 'byzantium_to_florence']) assert.ok(all.find((g) => (g.id ?? g.name) === id), id);
+  for (const id of ['rome_to_sack', 'sack_to_byzantium', 'byzantium_to_plague', 'plague_to_florence']) assert.ok(all.find((g) => (g.id ?? g.name) === id), id);
 });
