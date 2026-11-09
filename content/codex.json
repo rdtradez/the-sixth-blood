@@ -135,6 +135,19 @@
       "title": "The Scribe line",
       "book": "burning-city",
       "text": "The line of memory and secrets. Its keepers hold the records of the Senate, of the lines and of the dead, and they have long since noticed what the records leave out. Its coven in Rome meets in the Egyptian quarter under Meritamun."
+    },
+    "the_bronze_door": {
+      "category": "places",
+      "title": "The bronze door",
+      "book": "burning-city",
+      "text": "A door of green bronze set into the cliff at the end of the old quarry. It has been knocked on from the inside for as long as anyone in the covens will admit to counting. Cedar bars cross it on the outside."
+    },
+    "tarrax": {
+      "category": "people",
+      "title": "Tarrax",
+      "book": "burning-city",
+      "person": "tarrax",
+      "text": "Commander of the Lictors and Firstborn of the General line. He keeps the Senate's peace with iron and does not speak of what is under the cliff."
     }
   }
 }

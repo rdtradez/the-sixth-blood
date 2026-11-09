@@ -1,0 +1,332 @@
+// Book One, Chapter 15 (session 14). The covens' meeting about the door in the old quarry, and the choice of whom to stand with.
+// Two day actions of four places, the dusk, the quarry, the Commander. Closes with end_phase() and => next; no rest().
+@chapter b1c15
+@title What Knocks
+@book burning-city
+@version 1
+
+# start
+## Four nights south
+$ do phase("day", 2)
+$ b1.tarrax_answer = "silent"
+$ b1.theron_door = "unmet"
+$ b1.door_side = "alone"
+$ _prisca = 0
+$ _scribe = 0
+$ _camp = 0
+$ _lict = 0
+$ _roster = 0
+$ _knock = 0
+$ do discover("the_bronze_door")
+It takes you four nights to come down out of the hills, and you are not good company on any of them. The road runs south through country that has no idea what has happened in it. There are bean fields and vineyards and a boy asleep against a milestone with a goat's rope round his wrist. You have the smell of the hill on your clothes still, thatch and smoke and wet ash, and you cannot get rid of it, and you find, somewhere south of Eretum, that you do not wish to.
+?if b1.company == "hunters"
+  The captain with the scarred jaw rides behind you on a borrowed horse and says nothing for a hundred miles. On the third night she says, to the dark, "Theron will want to know what I counted." She does not say what she counted. It seems to be a thing that she is deciding.
+?elif b1.company == "aulus"
+  Aulus keeps up on his mule with a great deal of unlucky determination. He asks you once, on the second night, whether the Aventine station is a place where a man is asked questions or a place where a man is simply kept. You tell him that it is both. He is quiet after that, and a little straighter in the saddle.
+?else
+  You are alone on the road, and it suits you, and it does not suit you at all. You have the feeling of a man who has gone on a long journey in order to put a certain thing down and has found that he has carried it all the way.
+?end
+Prisca's runner had said that the covens would meet again at the second watch of the night that he left. You were not going to make that. You knew it on the hill, with the wax in your hand. By the second night on the road you have stopped pretending otherwise, and you are not surprised when, at the gate, a small girl with a lamp steps out of a doorway and says in the voice of someone repeating a lesson, "The lady says that the quarry has not been called. She says that she has told them that you are on the road."
+It is a very Prisca thing to have done. It is a small, dry, expensive favour, the kind that is never mentioned again and never forgotten.
+?if must_feed()
+  You are hungry. You are more than hungry. You have been on the edge of it for some days, and you have been telling yourself a story about it, and the city, in the grey hour before the sun, smells like a market.
+?end
+Rome is a city that has been burned and is not yet used to it. The new streets are straight and white and have no smell yet, and the old ones are black to the second storey, and in between there are lanes of tents and lean-tos and fresh pale scaffolding, and men on ladders singing. You cross it at dawn with your hood up.
+It is a long way to the quarry. It is not a thing that you can do before the sun. You have the day, and not much else.
+-> day
+
+# day
+## The day before the meeting
+:day
+?if actions_left() == 2
+  There is a day to spend, and a night after it that you can already feel in the roots of your teeth. You will not be able to do everything. You will not be able to do, probably, enough.
+?else
+  The afternoon is long and gold and dusty. The heat sits on the Tiber like a hand.
+?end
+* Go to Prisca's house, and be told what has happened [once] ?if actions_left() > 0
+  ~> prisca
+  $ do act()
+* Go to the Scribe line's undercroft, and Meritamun [once] ?if actions_left() > 0
+  ~> scribe
+  $ do act()
+* Go up the Esquiline to Theron's camp [once] ?if actions_left() > 0
+  ~> camp
+  $ do act()
+* Go to the Lictors' barracks on the Caelian, and find Galerius [once] ?if actions_left() > 0
+  ~> lictors
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dusk
+?end
+-> :day
+
+# prisca
+## The Merchant house
+$ _prisca += 1
+$ do meet("prisca")
+The house is very quiet. It is a thing that you had not expected, after the fire, after the rebuilding. You have been in it when it was full of voices and ledgers and the clatter of sandals on marble, and it is empty now, and the doors are all open, and there are a great many boxes in the atrium with the Merchant house's six petalled flower burned into their lids.
+Prisca is in the garden. She is sitting very straight on a stone bench under the fig, with a cup of something dark that she has not touched, and she looks at you for a long moment and says, "You smell of burning. It is a great improvement on the last time."
+She tells it plainly, as she tells everything. It began on the night of the fire. It was a sound, at first, that nobody was sure that they heard: one dull stroke, once in a long while, so far down in the cliff that it was more like a thing felt in the feet. The General's line heard it first, and said nothing. Then the Lictors on the Esquiline. Then Meritamun, who sat down in front of the door with a water clock and a stylus and counted.
+"It was slow," says Prisca. She turns the cup in her hands. "It was a thing that you could live beside. Then the hunt began, and it was less slow. Then the hill." She does not look at you. "I do not say that it is you. I say that it has quickened every time that there has been a great deal of blood on the ground. It is a thing that the Scribe line will explain to you with a great many words, and I would like to explain it with fewer."
+?if b1.reckoning == "slaughter"
+  She does not say what she thinks about the slaughter. She does not need to. It is in the way that she sets the cup down.
+?elif b1.reckoning == "mercy"
+  "It was the slowest, I am told, on the nights that your people spared," she says. She says it without inflection. "I am not told that it is a rule."
+?end
+:prisca_ask
+* Ask her what the Senate teaches about the door [once]
+  She smiles, very slightly. "That a soldier of the oldest line laid himself down beneath the city, of his own will, with an oath to wake when Rome had need of him. It is a lovely story. It is carved on a plaque in the Senate house." She looks at her hands. "I have noticed that they have never allowed a historian to visit the door."
+  $ _knock += 1
+  -> :prisca_ask
+* Ask her whether the Merchant house will stand with anyone at the door [once]
+  "No," says Prisca at once. "I have a house of four hundred souls and a bank that has just been rebuilt on land that was ash. I will not put either between a Lictor and a General." She looks at you. "If I am asked, I will say that you did not consult me. It is the only gift that I can give you. I would like it known that I know what it costs."
+  $ standing += 1
+  $ bond.prisca += 1
+  -> :prisca_ask
+* Ask her for coin, quietly, to buy the Lictors a worse night's sleep [once] ?if wealth >= 10
+  She is silent for the length of a breath. "A cordon is made of men," she says. "Men have mothers and debts." She names a sum, and it is not a small one, and she sets a purse on the bench between you without touching it.
+  $ do earn(-10)
+  $ _roster += 1
+  $ bond.prisca -= 1
+  You take it. She does not say anything. It is a debt, in the ledger that she keeps in her head, and the interest on it is in a currency that you will not see until it is called.
+  -> :prisca_ask
+* That is enough. Take your leave
+  She inclines her head. "Go and sleep, if you can," she says. "It is a thing that I am told one can do."
+  ~> prisca_out
+  <~
+-> :prisca_ask
+
+# prisca_out
+You go out through the garden, between the boxes. There is a boy with a hammer on the wall, nailing up a new stretch of vine trellis, and he does not look at you, and he does not stop. It is a very ordinary thing. It is, you think, exactly what Prisca is afraid will be taken away.
+<~
+
+# scribe
+## The undercroft
+$ _scribe += 1
+$ do meet("meritamun")
+The Egyptian quarter has come through the fire better than most, which is a thing that has been remarked on, in certain circles, with a good deal of coldness. The undercroft is exactly as you left it. There are ten thousand scrolls. The tame ibis is on the lintel. And on a long table, under a lamp of green glass, there is a sheet of papyrus ruled in a very fine hand with a hundred and sixty columns of marks.
+Meritamun does not look up. "Fourteen," she says. "In the hour before dawn. Fourteen, and it was nine the night before the hill, and four on the night of the fire." She taps the sheet with the end of her reed. "I would not say that it is an accelerating series. I would say that it is a series that has been reading the news."
+She will not say more at first. She is a woman who has waited three thousand years to be asked the right question and is not going to be hurried by the wrong one.
+:scribe_ask
+* Ask her what the knocking is answering [once]
+  "A call," she says. "I do not know whose. I do not know whether it is an answer or a plea." She looks at you for the first time, with the cool brown attention of a scholar who has found a specimen. "I know that the General is not asleep. I know that he has not been asleep for some time. A thing that is asleep does not keep count."
+  $ _knock += 1
+  -> :scribe_ask
+* Ask her to take you to the lintel, in the daylight, and read it to you [once] ?if actions_left() > 0
+  She goes very still. "It is not a thing that I was going to ask," she says. "It is not a thing that I had thought of asking." And then, quite fast, as if she is afraid that she will change her mind, she reaches for her cloak. "The sun is high. It will cost you. Come."
+  $ do act(1, true)
+  $ b1.door_read = true
+  $ _knock += 2
+  You go by the old drains, under the Esquiline, with the sun beating on the stones overhead and your skin crawling at every grating. It is not a thing that you can do for long. You come up at the quarry's mouth in the sour white glare, and the green door is there in the cliff, with the cedar across it, and a smell of old metal and old stone and something under both that is not either.
+  She reads the lintel aloud, slowly, with her lips barely moving, in a speech that you have never heard and that your tongue seems nevertheless to know the shape of. She says, at the end, "It is not a prayer. It is a count. It says: *until the count is made good.*" She turns the words over. "It does not say whose count. It does not say what is owed." She is white to the lips. "The cedar is on the outside. Do you see? A sleeper does not need a bar on the outside."
+  You say that you had noticed. You say that you had seen a bar on the inside of a door, once, and you did not like it either. She looks at you very hard, and says nothing, and it is, you think, the first time that anyone in Rome has been entirely silent in your presence.
+  $ bond.meritamun += 2
+  -> :scribe_ask
+* Ask her what she will do when it opens [once]
+  "Write it down," says Meritamun. It is not a joke. "I would like to be the one who does. I have been in the room for the end of three kingdoms. I have been a clerk at every one of them. It is a very great pity to be a clerk, and it is the only way that anything is ever known." She looks at you. "I will tell you something for nothing. Do not be the one who opens it. It is not that I fear that you would do it badly. It is that whoever does it will be the first thing that he sees."
+  $ _knock += 1
+  $ bond.meritamun += 1
+  -> :scribe_ask
+* That is enough. Take your leave
+  "Do," says Meritamun, and goes back to her columns.
+  ~> scribe_out
+  <~
+-> :scribe_ask
+
+# scribe_out
+The ibis watches you to the door with one yellow eye. It is a very patient bird.
+<~
+
+# camp
+## The General's line, on the Esquiline
+$ _camp += 1
+$ do meet("theron")
+They are drilling on the flat ground above the quarry, in the afternoon, in a heat that would drop a living man. There are thirty of them. They are in plain grey tunics, without arms, and they are doing what soldiers do when there is nothing to do and a great deal to think about: they are going through the forms, one after another, without a sound, in the dust, with their faces like shut doors.
+?if b1.company == "hunters"
+  The captain with the scarred jaw peels away from you at the edge of the field without a word. She goes to a small knot of the older ones, and speaks very low, and you see Theron look up. He looks at you across the whole width of the field. It is not a look that you can read.
+?end
+Theron is sitting on an upturned crate in the shade of a stunted fig, with a wine cup in his hand and half an ear. He has not slept. You can tell. There is a particular kind of tiredness in an old soldier that is not in the face, but in the set of the hands.
+"Valerius," he says. He does not use the other name. "You have been on a road. I am told it was a hard one." And then, because he is Theron, "You look like a man who has been told that his house is on fire and has found that it was."
+:camp_ask
+* Ask him what his captains want [once]
+  "To open it," says Theron. He says it flatly. "It is very simple. It is a thing that they hear in their blood. Every one of them, from the oldest to the one that I turned in the spring. It is not a command. It is not even a wish. It is as if one of your own children had been calling you from the bottom of a well for three weeks." He drinks. "I have told them that a line is not a family. I have told them that one does not climb down a well in the dark because one hears a voice. They are very polite about it."
+  $ _knock += 1
+  -> :camp_ask
+* Ask him to hold them, for three nights [once]
+  He is quiet for a long time. He says, at last, "I will say that I will. I will not say that I can." He puts the cup on the ground. "You must know that, Valerius. You must not go away and tell yourself that I promised."
+  $ b1.theron_door = "asked"
+  $ bond.theron += 2
+  $ standing -= 1
+  It is a bargain with a very old man, who does not lie to you, and the fact of it is more of a weight than a comfort.
+  -> :camp_ask
+* Tell him that the Commander will bring the Lictors to the cliff, and that he should keep his people clear of them [once]
+  Theron's face does not move. It goes, if anything, a shade more still. "Tarrax," he says. "Yes. It will be Tarrax." He turns the word over like a stone. "He has not stood at that door since before you were born. He will not like the look of it." He looks out across the field at the grey figures going through their forms. "I will tell them. I do not think that it will help."
+  $ b1.theron_door = "warned"
+  $ bond.theron += 1
+  $ b1.galerius = "wary"
+  -> :camp_ask
+* Ask him why he was afraid, in the quarry, at the barred door [once]
+  He is silent so long that you think that he will not answer. He says, at last, very low, "I have been at that door since before I was Theron. I did not know what it was. I knew that I was not to stand in front of it. I was told that by the one who turned me, on the night that he turned me, and I never asked why." He looks at his hands. "I think that he was afraid of it as well. I think that it was the last thing that he was ever afraid of."
+  $ _knock += 2
+  $ bond.theron += 2
+  -> :camp_ask
+* That is enough. Take your leave
+  Theron lifts the cup an inch off his knee. It is a soldier's salute, and a very tired one.
+  ~> camp_out
+  <~
+-> :camp_ask
+
+# camp_out
+You go back down the hill. At the edge of the field one of the young ones looks up from his forms, a lean man of perhaps twenty five with a very old face, and says in a perfectly quiet voice, "Does it hurt you, too?" You say that you do not know what he means. He nods slowly, as if that were the answer that he had expected, and goes back to the form.
+<~
+
+# lictors
+## The Caelian
+$ _lict += 1
+$ do meet("galerius")
+The Lictors keep a house on the Caelian that is not marked on any plan. It is a long low building with a flat roof and very few windows, and a courtyard where there is, at all hours, the sound of whetstones. You have not been invited. It does not seem to occur to anybody that this might matter.
+Galerius meets you in the courtyard. He is as polished and as courteous as he has ever been, and as old. He has a new line between his eyes. "It is a surprise," he says. "It is, I find, a surprise that is not entirely a pleasant one, and I am a man who has had a great many." He draws you into an arch of shade. "You will have heard that the Commander is coming."
+?if b1.galerius == "hostile"
+  There is no warmth in it. He does not offer you a seat. He says that you are not to come to the house again, and that the next time he is asked about you he will answer truthfully. He says it without any heat. It is the most frightening thing that he could have said.
+  $ _roster -= 1
+  ~> lictors_out
+  <~
+?elif b1.galerius == "wary"
+  "I have a position to keep," says Galerius. He does not say it as an apology. "I will not help you. I will not hinder you. I will say that the cordon has forty men, and that they are not the best of us, and that I am not at all sure that I am sorry."
+  $ _roster += 1
+?else
+  "I owe you nothing," says Galerius, "and I find that I am about to give it to you anyway. It is an indulgence that I permit myself about once a century."
+  $ _roster += 2
+?end
+:lictors_ask
+* Ask him how the cordon is made up [once]
+  He tells you. It is forty men, in four files of ten, each file with its own cedar: a long stake of the red wood, the length of a man, bound in iron at the point. They will take the cliff path at dusk the next day and the quarry floor at the second hour, and they will wait. It is a soldier's account, exact and dry, and you hear in it the voice of a man who has done this before and did not enjoy it.
+  $ _roster += 1
+  -> :lictors_ask
+* Ask him what Tarrax wants [once]
+  Galerius is quiet. He says, "I have served him four hundred years. I have seen him in a good many rooms. I have never seen him afraid of a thing that could be reasoned with." He looks at the whetstones. "He wants the door shut. He wants it shut so very much that I have begun to suspect that he does not know what is behind it." He adds, with a faint twisted smile, "It is the most reassuring thing that I know about him."
+  $ _knock += 1
+  -> :lictors_ask
+* Ask him for the roster of the cordon, the watches and the names [once]
+  Galerius looks at you for a very long time. "I will not give it to you," he says. "I will not give it to you because I am not able. It is in a book, in a room, with a Lictor at the door. I will tell you that the cliff path has a place where it narrows, at the third post, and that the man at the third post will be a boy named Placidus who has a cold." He turns, as if to go. "It is not a roster. It is a piece of gossip. I should not be surprised if you forgot it."
+  $ b1.galerius_aid = true
+  $ b1.galerius = "wary"
+  -> :lictors_ask
+* Offer him a way out, if the night goes badly [once] ?if humanity >= 40
+  He turns, and looks at you, and for a second, with the sun coming over the roof, he is only very old and very tired. "I have never been offered one," he says. "It is a thing that I will remember." He does not say that he accepts. He says, "If it comes to it, I would prefer to be in Capua." It is a kind of answer.
+  $ velati_regard += 1
+  $ humanity += 1
+  -> :lictors_ask
+* That is enough. Take your leave
+  "Of course," says Galerius.
+  ~> lictors_out
+  <~
+-> :lictors_ask
+
+# lictors_out
+You are out in the street before you realise that you have been holding your breath. It is not a thing that you need to do. It is a thing that you have not stopped doing, in a very old body, in the face of a man who might at any moment send for his colleagues.
+<~
+
+# dusk
+## The sun goes down
+?if must_feed()
+  The sun is low. You have been on your feet for most of the day, and you find, as you come up out of the Subura into a long red light, that the hunger has come up in you like the tide at the mouth of the Tiber, the whole of the weight of it at once, and that you are looking at the neck of a baker's boy with a degree of frank appraisal that you would very much like to forget.
+  * Go to the stables behind the Merchant house, and take a mare, and be quick about it
+    $ do feed("animal")
+    $ humanity += 1
+    You do it badly and quickly, in the dark of a stall, with the animal's warm panic in your hands. It is not what the hunger wanted, and it is enough.
+  * Go to Prisca's donors, a house of paid and willing veins behind the garden ?if wealth >= 3
+    $ do feed("donor")
+    $ do earn(-3)
+    $ humanity -= 1
+    A man in a plain tunic, with a bandaged wrist and a bored, professional face, sits down on a stool and holds out an arm. It is clean. It is quick. It is the most civilised thing that has ever happened to you, and you have never felt less like a man.
+  * Go on, as you are
+    $ cunning_brutal += 2
+    $ _knock += 1
+    You go on hungry. It sharpens things. The smell of the city comes up through the dark in layers, every cooking pot and every cradle, and you walk through it with your hands in your sleeves and your teeth together.
+?end
+The sun goes down behind the Janiculum in a haze of red and brass, over a city full of scaffolds. It is the hour at which the vampires of Rome come out. You can feel it all through the streets: a kind of loosening, as if some enormous hand had let go of a spring. You go up the Esquiline with the rest of the dark.
+-> quarry
+
+# quarry
+## The second watch
+The quarry is a great scooped hollow of pale stone, with the sky laid over it like a lid. There are no torches. It is a thing that nobody has said and everybody has understood. They stand in their lines in the starlight, forty of them, and their faces are very white, and nobody makes the small noises that the living make. It is the stillness of a very large audience that is listening for something.
+The lines are where they were. The Merchant house with Prisca, a little apart, with her hands folded. The Scribe line, with Meritamun, who has brought a table and is writing. The Priestess line and the Physician line, who do not look at anyone. The General's line, a long grey rank with their backs to the cliff and their faces turned toward the middle of the quarry, and there is a gap, you see, in the middle of it, a space of ten or twelve paces in front of the door, where nobody stands.
+Theron is at the head of his people. He sees you. He gives a very slight nod.
+And at the mouth of the quarry, where the path comes in from the Via Labicana, there is a man.
+It is not that he arrives. It is that you find that he has been there for some time. He is tall and spare and grey, and he is dressed in a plain dark soldier's cloak without a mark on it, and his hair is cut short in the old manner, and he stands with his weight on both feet like a man on a ship. He does not look old. He looks finished. It is as if a man had been made, very long ago, to the pattern of a particular task, and had been kept in oil.
+"Tarrax," Prisca says, very quietly, at your shoulder. She has not moved. You did not hear her come.
+$ do meet("tarrax")
+$ do discover("tarrax")
+Galerius is two paces behind him. He does not look at you. He has the manner of a man who has been very carefully told where to look.
+Tarrax walks to the middle of the quarry. He walks slowly. The whole of the General's line watches him come, and not one of them moves, and you see Theron's jaw working, once, as if he had a question that he had been taught not to ask. He stops in the empty space before the door. He does not look at it. He looks, instead, at the faces of the lines, one after another, with the neutral attention of a clerk checking a count.
+"The Senate is grateful that you came," he says. His voice is soft and level and carries to the rim of the quarry. "It was good of you to wait for a man who is slow." He lets it lie for a moment. "I will be brief. There is a door in this cliff. It has been there since before the Senate. It has been shut since before Rome had a name. It will go on being shut."
+There is a small noise from the General's line, like a breath let out through a closed throat.
+"The Senate does not forbid you to speak of it," says Tarrax. "It does not command you to be silent. It observes that there are a great many things that are better not done, and that this is among them. A cordon of the Lictors will take the cliff path tomorrow at dusk. They will bring cedar. The door will be shut again, and shut better. The General's line will stand down from the cliff." He turns his head, a quarter of an inch. "All of it."
+It is a very long silence. It is Theron's captain, a stocky man with a shaved head and a scar through his lip, who breaks it. "It is calling us," he says. He does not shout. He is almost conversational. "Commander. Do you not hear it?"
+"I hear a great many things," says Tarrax.
+:tarrax_turn
+Tarrax turns, then, and looks at you. It is very like being looked at by a wall. "You are the one from the villa above Collesanto," he says. "You are the one who woke in a room with a bar on the inside of the door. I have read Galerius's report. I have read it, I think, more often than he would like." He tilts his head. "Who made you?"
+It is very quiet in the quarry. Meritamun has stopped writing. You can feel Prisca not looking at you. You can feel, a little way off, the whole General's line looking at you with a sudden terrible attention, as they might look at a doctor with a bad report.
+* Tell him the truth. A stranger, in a sickroom, with a question about Rome
+  $ b1.tarrax_answer = "truth"
+  $ standing += 1
+  You tell it as it was. You say that it was a stranger with a soft voice and an old face, who asked a question that you did not understand, and who was gone when you woke. You describe him as well as you can. Tarrax listens without a muscle moving. When you say the word *cedar*, which you do not quite know why you said, there is the smallest change in the line of his shoulders, and then it is gone.
+  "Thank you," says Tarrax. He says it with great civility. "It is a thing that I wished to hear said, in front of them."
+* Lie. Say that you were made by a vampire who is dead
+  $ b1.tarrax_answer = "lie"
+  $ cunning_brutal -= 2
+  $ secrecy += 1
+  It comes out very smoothly. It has the great virtue of being what he expects. You give a name that is almost a name, and a city that is almost a city, and a death in the fire. Tarrax listens. He does not believe you. He looks at you for quite a long time, and the look, you feel, is not one of anger but of a mild and patient interest, as at a man who has just handed over a bad coin.
+  "Of course," he says. "Of course. I am sorry for your loss."
+* Say nothing
+  $ b1.tarrax_answer = "silent"
+  $ standing -= 1
+  You say nothing. You hold his eye. It is a very long time, and it is not a thing that has any dignity in it at all, and at the end of it Tarrax gives a small dry nod, as if you had said a good deal.
+  "That is also an answer," he says.
+Tarrax turns away from you. He has what he came for, and you do not know what that was. He addresses the quarry as a whole. "Tomorrow at dusk," he says. "The cliff path. I would take it as a kindness if nobody were in it."
+It is then that the door knocks.
+It is not loud. That is the thing that you will remember. It is not loud at all. It is one stroke, flat and heavy and slow, so deep in the rock that you feel it in the soles of your feet before you hear it, and the whole of the quarry hears it at once. Forty vampires flinch. There is a clink of grit from the cliff face and a thread of pale dust runs down the green bronze.
+Then it knocks again. It is not slow. It is two heartbeats after the first, and there is a third behind it before the second has died away, and a fourth, and the old bronze rings, a low, long, dreadful note that goes out across the quarry like a bell tolled at the bottom of the sea.
+There is a sound from the General's line. It is not a word. It is a long low moan, very quiet, as of thirty people who have all been called by name.
+Tarrax has not moved. He has put one hand, very lightly, on the hilt of a sword that was not there a moment ago. You see his knuckles. They are whiter than the rest of him.
+"Tomorrow," he says. It is almost inaudible. And he turns, and walks out of the quarry the way that he came, and nobody in the whole of Rome could say that he hurried.
+-> after
+
+# after
+## The quarry empties
+They go quickly. It is not a thing that they planned. There is a kind of tide that runs out of the quarry, and the lines are in it before they have decided to go, the Priestess line and the Physician line in a single dark cluster, the Scribe line in a clump around the table, Meritamun last, with her papyrus held against her chest, looking at the door with a face that you cannot read. The General's line does not go. Theron has to say a word, quietly, three times, before the first of them turns.
+Prisca stays. She is still standing where she stood, quite straight. She says, in a perfectly level voice, "I did not know that he could be afraid." She does not look at you. "It is a good deal worse than I thought."
+Theron comes last. He crosses the quarry floor to you, alone, and stops a little way off, and says in his gravel voice, "I have a question that I will not ask." He has put his hand over the stump of his ear, as if to keep out a noise. "I think that you know what it is."
+The door knocks. It has stopped being a sound. It is, now, a kind of weather.
+You have until tomorrow's dusk, and there are three ways to stand at the cliff, and one that is not any of them.
+-> choose
+
+# choose
+## Whom to stand with
+:choose
+* Stand with the General's line, and let them answer their own blood
+  $ b1.door_side = "theron"
+  $ bond.theron += 3
+  $ standing -= 2
+  $ bond.tarrax -= 2
+  "I will say it plainly," says Theron. "I do not ask it." And then, after a very long pause, "I will not refuse it." It is the nearest that he has come to asking for anything.
+* Stand with the Lictors, and keep the door shut
+  $ b1.door_side = "tarrax"
+  $ standing += 2
+  $ bond.theron -= 2
+  $ bond.tarrax += 2
+  Prisca lets out a breath. It is the closest she has come to approval in some time. Theron looks at you with an expression that is not anger. It is a good deal worse. It is a kind of weary recognition, as of a thing that he had expected.
+* Go to the door yourself, before either of them
+  $ b1.door_side = "alone"
+  $ cunning_brutal += 2
+  $ secrecy -= 1
+  Theron says nothing at all. He puts his hand flat on your shoulder, once, hard, and takes it away. Prisca says, "That is the stupidest thing that I have ever heard." She says it with a kind of awe.
+* Stand at the cliff and keep both of them off, and let the door decide
+  $ b1.door_side = "seal"
+  $ humanity += 1
+  $ standing += 1
+  "That is a thing that is not done," says Theron slowly. "It is a thing that has not been tried." His mouth moves. It is not a smile. "I should very much like to see it."
+You go home through the dark city with a sound at your back that no one in the streets can hear. A dog follows you for a block, whining, and turns back. In the Subura a baby is crying, and you find that you are very glad of it.
+=> next

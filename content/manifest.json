@@ -160,6 +160,26 @@
             "war",
             "grief"
           ]
+        },
+        {
+          "id": "b1c15",
+          "file": "burning-city/ch15.tsb",
+          "title": "What Knocks",
+          "notes": [
+            "violence",
+            "blood",
+            "war"
+          ]
+        },
+        {
+          "id": "b1c16",
+          "file": "burning-city/ch16.tsb",
+          "title": "The Bronze Door",
+          "notes": [
+            "violence",
+            "blood",
+            "war"
+          ]
         }
       ],
       "incomplete": true

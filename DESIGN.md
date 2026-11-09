@@ -171,3 +171,15 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Chapter 14 can damage Collesanto (`village_harm`, scaled by `b1.hill_toll`) and calls `kin()` for Aelia and Felix, so later chapters and books can read `collesanto` and the family as the hill left them.
 - `tests/book1g.test.js` plays chapters 13 and 14 down their branches, including the fights across several seeds. `tests/creation.test.js` now expects fourteen written chapters: update that count each session. `tests/book1b.test.js` and `tests/book1c.test.js` gained a `stopAt` argument, because their stat comparisons are clamped once later chapters run.
 - Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.
+
+### Session 14 notes (for the next session)
+
+- Book One, chapters 15 and 16 are built (`content/burning-city/ch15.tsb` and `ch16.tsb`, chapter ids `b1c15` and `b1c16`). Book One is twenty chapters, so the book is still `"incomplete": true` and the game pauses on "To be continued" after chapter 16. Sessions 15 and 16 write chapters 17 to 20; the last of them removes `"incomplete"` and writes the recap, the quick start values and the Velati journal.
+- Session 14 is built on the `session-13` branch (which sits on sessions 6 to 12; none of them are on `main` yet except through session 12). Merge `session-13` and then `session-14` to get everything.
+- Chapter 15 spends two day actions, then a dusk and the meeting, and has no `rest()` (it closes with `=> next`). Chapter 16 opens a fresh night phase of three actions and ends with `rest()`. Chapter 17 should read hunger, injury, standing and secrecy as chapter 16 left them.
+- `awaken("general", ...)` is called in chapter 16, so `original("general")` is `awake` and `original("general", "by")` says who woke the General. The hero's choice about the awakened General (`original_fate`) is not made yet: chapter 17 or 18 makes it, and it must be made before the book ends.
+- New decision flags keep the `b1.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`. New person (`content/people.json`): Tarrax. New codex entries: the bronze door (places) and Tarrax (people). Content notes: both chapters carry `violence`, `blood` and `war`.
+- Later chapters should read `b1.door_side`, `b1.cordon`, `b1.tarrax_answer`, `b1.cedar`, `b1.door_read`, `b1.galerius_aid` and `b1.theron_door` rather than recompute them.
+- Script gotcha found while building: `<~` only works in a scene that was called with `~>`. A choice that leaves a called scene by `-> other_scene` loses the way back, so use `~> other_scene` followed by `<~` instead.
+- `tests/book1h.test.js` plays chapters 15 and 16 down their branches, including every stand and the fights over eight seeds. `tests/creation.test.js` now expects sixteen written chapters: update that count each session.
+- Each Book One session adds its chapters to `SPOILERS/book-1.md` (plans) and keeps this file spoiler free.

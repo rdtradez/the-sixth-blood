@@ -925,6 +925,73 @@
       "major": true,
       "default": "none",
       "note": "Chapter 14: one of the sect kept alive, for the vigiles to find"
+    },
+    "b1.tarrax_answer": {
+      "kind": "enum",
+      "values": [
+        "truth",
+        "lie",
+        "silent"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "silent",
+      "note": "Chapter 15: what he told the Commander of the Lictors when asked who made him"
+    },
+    "b1.door_read": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 15: he went to the lintel of the bronze door with the Scribe line's head and heard it read"
+    },
+    "b1.galerius_aid": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 15: the Lictor Galerius gave him the roster of the cordon"
+    },
+    "b1.theron_door": {
+      "kind": "enum",
+      "values": [
+        "unmet",
+        "asked",
+        "warned"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "unmet",
+      "note": "Chapter 15: what he said to Theron about his captains and the door"
+    },
+    "b1.door_side": {
+      "kind": "enum",
+      "values": [
+        "theron",
+        "tarrax",
+        "alone",
+        "seal"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "alone",
+      "note": "Chapter 15: whom he chose to stand with at the bronze door"
+    },
+    "b1.cordon": {
+      "kind": "enum",
+      "values": [
+        "slipped",
+        "fought",
+        "passed"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "slipped",
+      "note": "Chapter 16: how he got past the Lictors on the cliff path"
+    },
+    "b1.cedar": {
+      "kind": "flag",
+      "book": "burning-city",
+      "major": true,
+      "note": "Chapter 16: he carries cedar pegs from the lintel of the bronze door"
     }
   }
 }
