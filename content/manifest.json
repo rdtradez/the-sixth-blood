@@ -250,6 +250,22 @@
           ],
           "journal": "journal/lc-537.tsb",
           "journalTitle": "A letter to the Aventine watch"
+        },
+        {
+          "id": "lc04",
+          "interlude": true,
+          "file": "lost-centuries/lc04.tsb",
+          "title": "The Year of the Pestilence",
+          "notes": [
+            "grief",
+            "blood"
+          ]
+        },
+        {
+          "id": "lc05",
+          "interlude": true,
+          "file": "lost-centuries/lc05.tsb",
+          "title": "The Last Lying Down"
         }
       ],
       "journal": "journal/burning-city.tsb",

@@ -1,0 +1,93 @@
+// The Lost Centuries, chapter 5 (interlude session B). 1348: the last lying down, which ends Book One.
+// Rest place, steward, orders and protection are chosen a final time; then rest() and sleep("plague_to_florence"), the last segment of the chain.
+@chapter lc05
+@title The Last Lying Down
+@book burning-city
+@version 1
+
+# start
+## The fourth time
+The pestilence has reached the valley. You know it from the bell, which has begun again, and from the lane, where there is now a second cart.
+You have done this three times already. You have never, you think, done it in so much of a hurry.
+~> place
+~> steward
+~> orders
+~> guard
+-> bed
+
+# place
+## Where you will lie
+* The cellar on the hill, under a chapel that is now a shrine
+  $ do rest_place("collesanto")
+  $ bond.aelia += 1
+  ?if lc.sleeper_1348 == "embraced"
+    It is the most visited tomb in the valley, and it is yours. You are not at all sure that it is safe, and you are quite sure that it is guarded.
+  ?else
+    It has been a good house for you. It is a long time since anybody put a lamp in it without being asked.
+  ?end
+* A haven in a city, among people who could help
+  $ do rest_place("haven")
+  $ secrecy -= 1
+  It is the busy middle of a place that has just lost a third of itself, and has no time at all to wonder about its neighbours.
+* The tomb in the rock
+  $ do rest_place("tomb")
+  $ humanity -= 1
+  $ cunning_brutal -= 1
+  It is cold, and dry, and a very good place to wait out a plague.
+<~
+
+# steward
+## Who will hold what is yours
+* The house of the Merchant line, as a bank and a trust
+  $ do steward("bank")
+  $ bond.prisca += 1
+  The bank has survived the plague, as it has survived everything. Half its clerks are dead. It has put a notice in the window, you gather, and is very sorry, and is open.
+* The Valerii of the hill, the keepers ?if b1.keepers == "sworn"
+  $ do steward("keepers")
+  $ bond.aelia += 2
+  $ bond.felix += 2
+  The old woman takes your hand in both of hers. "We will be here," she says. "There are not so many of us now. But we are stubborn." You believe it, and it is a very great deal.
+<~
+
+# orders
+## What is to be done with it
+* Play it safe: land, grain, honest rents
+  $ do orders("safe")
+  $ humanity += 1
+  It is the choice for an age that has seen a third of its tenants die, and still has the land.
+* Grow it aggressively: shipping, loans, trade
+  $ do orders("aggressive")
+  $ cunning_brutal += 1
+  There will be fortunes made in the years after this. There always are. It is a very ugly thing to know.
+* The dark ventures, which pay the most, and ask nothing
+  $ do orders("dark")
+  $ cunning_brutal += 3
+  $ humanity -= 3
+  $ velati_regard -= 2
+  It is a good year for it. There are a great many estates with no heir, and a great many men who would pay to be forgotten.
+<~
+
+# guard
+## What stands between
+:guard
+* Lay traps in the ways in [once] ?if wealth >= 10
+  $ do protection("traps")
+  It is a routine matter now.
+* Pay the people who would otherwise ask questions [once] ?if wealth >= 20
+  $ do protection("bribes")
+  $ secrecy += 2
+  It is, as usual, expensive. It is a bad year to be asked.
+* Hire guardians, sworn and paid [once] ?if wealth >= 30
+  $ do protection("guardians")
+  They are, you are told, the best that the district can offer, and there are a great many fewer of them than there were.
+* That will do
+  <~
+-> :guard
+
+# bed
+## Down again
+$ do rest()
+$ do sleep("plague_to_florence")
+You lie down, and fold your hands, and let it take you. It is not like the first time, or the second, or the third. It is like closing a book that you have read all the way through, and are rather sorry to leave.
+There is a sound as you go, a long way up, and a long way off. It is not a bell. It is a very small voice, a child's, saying a prayer in the language of the valley, and the name that she says in it is the one that has been painted on the board.
+=> next

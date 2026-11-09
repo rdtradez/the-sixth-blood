@@ -1294,6 +1294,41 @@
       "book": "burning-city",
       "default": "unmet",
       "note": "Lost Centuries 3 (537): the mason at the Great Church"
+    },
+    "lc.village_1348": {
+      "kind": "enum",
+      "values": [
+        "sheltered",
+        "turned_away"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "sheltered",
+      "note": "Lost Centuries 4 (1348): whether he helped the plague stricken houses of the village"
+    },
+    "lc.sleeper_1348": {
+      "kind": "enum",
+      "values": [
+        "denied",
+        "allowed",
+        "embraced"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "allowed",
+      "note": "Lost Centuries 4 (1348): what he did about the village cult of the Sleeper"
+    },
+    "lc.plague_road": {
+      "kind": "enum",
+      "values": [
+        "tended",
+        "taken",
+        "passed"
+      ],
+      "book": "burning-city",
+      "major": true,
+      "default": "passed",
+      "note": "Lost Centuries 4 (1348): what he did on the north road"
     }
   }
 }
