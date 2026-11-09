@@ -1,0 +1,299 @@
+// Book Two, Chapter 5 (session 20). The Banca del Colle rises through daytime dealings.
+// One day phase of three actions out of four (the chair, the wool district, the bottega, the captain), then the signing at noon, then the ninth hour.
+// Ends with rest() and => next. Reads b2.prisca_deal, b2.prisca_sun, b2.prisca_asked, b2.pazzi_heard, lc.sunwalk and wake(). The book is incomplete, so play pauses after this chapter until chapter 6 is added.
+// Later chapters read b2.loan, b2.wool_wages, b2.portrait, b2.captain and b2.daylight.
+@chapter b2c05
+@title The Third Hour to the Ninth
+@book blood-and-gold
+@version 1
+
+# start
+## The chair with windows
+$ b2.loan = "neither"
+$ b2.wool_wages = "none"
+$ b2.portrait = "refused"
+$ b2.captain = "refused"
+$ b2.daylight = "shaded"
+$ _house = 0
+$ do chart("florence.bank")
+$ do meet("bartolo")
+$ do meet("raniero")
+?if b2.prisca_deal == "partner"
+  The Banca del Colle opens on the first Monday after Easter, in the Via Porta Rossa, under two seals on one door: the plain bronze ring of the Merchant house, and below it, newly gilded, a small green hill with a bell tower on it. The painter who did the hill had never seen it. He did it very well from your description, and then asked, with great tact, whether the tower was perhaps not a little tall.
+?elif b2.prisca_deal == "rival"
+  The Banca del Colle opens on the first Monday after Easter, in the Via Porta Rossa, forty paces from the door of the Merchant house, and the whole street has agreed not to notice. It has its own sign, a green hill with a bell tower on it. It has its own clerks, who are young and frightened, and its own ledgers, which are new. It has, across the way, a very old and very well kept door that does not open, and you have the clear impression, as you cross the street, that someone is behind it with her chin on her fist, enjoying herself enormously.
+?else
+  The Banca del Colle opens on the first Monday after Easter, in two rooms on the Via Porta Rossa, with a green hill painted on a board over the door. It has a counter, four clerks, and a letter of credit on the Merchant house that Prisca has written in her own hand and sealed with a ring that you have not seen her use in a hundred years. It is not a partnership. It is, you think, a very polite way of saying that she will not let you fall.
+?end
+?if b2.prisca_sun == "agreed"
+  Prisca has given you the chair. It is a plain oak chair with arms, and it stands behind a counter in a room with three tall windows, and in the afternoon the sun comes across it in long gold bars, and she has had it set so that you must sit in them. She has told the whole house that the owner is a man of strange habits who likes the light.
+?elif b2.prisca_sun == "bargained"
+  The chair is yours, and so is a fifth of the house, and a clerk in the back room has written the fifth into a deed with a flourish that makes it clear what he thinks of the whole affair. You sit in the chair. It is a very good chair. It stands in front of a window, and the sun is on your hands.
+?else
+  You told Prisca that you would think about the sun. You thought about it for eleven days. On the twelfth you took a chair, and put it in front of a window, and sat in it, and nothing at all happened, and you felt rather foolish, and then rather free.
+?end
+It is a quarter to the third hour. The shutters are going back, one after another, up the length of the street, with a sound like a flock of small birds taking off. The bells of the Badia have begun. Benedetto is on the stair, with a tablet, and a face of such mild, polished calm that you know he has been awake since the middle of the night.
+"Forty clerks and eleven factors, Signore," he says, "will be through that door in twelve minutes. They are all human and they all talk. The house is open from the third hour to the ninth. It is a very long day." He gives you a small, anxious bow. "You will wish to know that there are four matters waiting, and that you cannot do all of them, and that Madonna Prisca says you will want to do the one you are most afraid of."
+Your hands are in the sun. It is a warm, dry, very ordinary sun, and it has no business being as pleasant as it is. It costs, you notice, a little. There is a faint tightness behind the eyes, and a thirst that is not yet more than a suggestion, like the first of a series of very long bills.
+?if must_feed()
+  ~> hungry
+?end
+$ do phase("day", 3)
+-> day
+
+# hungry
+## Before the doors
+You have not fed as you should. It is not a catastrophe, but you have known it was coming for some days, and you are about to spend six hours in daylight among warm human necks, and you find you would like it settled.
+* Take the cup that Benedetto keeps in the back room
+  $ do feed("bank")
+  Benedetto has it ready, in a glass with a lid, under a cloth. He does not say a word. He says it with such discretion that you could have heard it from the other side of the street.
+* Slip out by the yard door and find a stray in the lane
+  $ do feed("animal")
+  A scrawny yellow cat of no loyalty whatever. It is not much of a breakfast. It does, however, take the edge off, and the cat, which has been a cat for a long time, accepts it as a thing that happens to cats.
+* Go without, and trust to the day
+  $ cunning_brutal += 1
+  You tell yourself that you are old enough to manage a morning. It is, perhaps, not wholly true.
+<~
+
+# day
+:day
+?if actions_left() == 3
+  The doors open. They come in like a tide that has been waiting for a very long time, a great gray, brown and blue tide of caps and gowns and leather satchels, and the sound of the counting floor rises to a roar that is very nearly a pleasure. It is the sound of money being talked about.
+?elif actions_left() == 2
+  The middle of the morning has the dull, bright, contented hum of a hive. The windows are full of the sun. There is a smell of ink and warm wax and a great many people who have walked a long way, and you have been, for some time now, perfectly happy.
+?else
+  The light has gone a long way round the room. The great bell of the Duomo has struck the sixth hour, and there is a lull, and in the lull you think, with surprise, that you are tired, in the way that a living man is tired, with a faint ache in the shoulders and a longing to have the whole thing done.
+?end
+* Take the chair on the counting floor, and hear the petitioners [once] ?if actions_left() > 0
+  ~> floor
+  $ do act()
+* Go to the wool district, where a workshop is for sale [once] ?if actions_left() > 0
+  ~> wool
+  $ do act()
+* Go to the bottega in the Via dei Servi, where a painter has asked for you [once] ?if actions_left() > 0
+  ~> bottega
+  $ do act()
+* Receive the stranger who waits at the side door [once] ?if actions_left() > 0
+  ~> captain
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> signing
+?end
+-> :day
+
+# floor
+## The petitioners
+$ do chart("florence.bank")
+$ do discover("banca_del_colle")
+They come to you one at a time, and you are astonished to find that you are good at it. It is the thing that you do. You have sat in the long room of a house in Rome, behind a ledger, and listened to a man whose farm is mortgaged explain that it is only for a season. You have done it for a century on and off, in a hundred cities, with a hundred different hats. You find that you remember the very faint sound of a man who is going to lie to you, and that it has not changed.
+A mercer named Ser Lapo wants two hundred florins for madder and alum, and has brought a nephew to look honest. You give it to him. He kisses your sleeve.
+Then the Medici come, in the person of Ser Bartolo, who is the first factor of their bank in the Via Larga and has the look of a man who has never in his life been in a hurry. He has a pleasant, tired, intelligent face, and he is very polite about the Merchant house, and the hill, and a certain Signor del Colle who is said to be a recluse. He proposes that the Banca del Colle carry certain letters of credit to Bruges and to London at a favored rate. It is only a favor. It would be a very natural one, between two houses that wish each other well.
+Ten minutes later, by the other door, comes Messer Raniero of the Pazzi, who is the reverse of Ser Bartolo in every particular: small, quick, dark, with a smile that goes on and off like a lamp. He proposes, with the same exquisite courtesy, that the Banca del Colle carry certain letters of credit to Rome and to Lyons at a favored rate. It would be a favor. It would be a very natural one.
+They have not, you see, met each other in the doorway. It has been very carefully arranged that they should not.
+?if b2.pazzi_heard
+  You remember a voice on a bridge at night, and a sentence about a quarrel that someone, somewhere, would be glad to see kept warm. Messer Raniero has a very nice voice.
+?end
+?if b2.prisca_deal == "partner"
+  Prisca, behind the grille of the little window above the counter, where she is entitled to hear and not to be seen, makes no sound. You feel her not making it.
+?end
+:the_loan
+* Carry the Medici letters, and say that you will think about the Pazzi
+  $ b2.loan = "medici"
+  $ standing += 1
+  $ bond.prisca += 1
+  Ser Bartolo bows. He says that it is a very sensible decision, and that the house of the Via Larga does not forget a friend, which is, when you consider it, a promise and a warning at the same time. You find that you like him. It is a most uncomfortable thing to find out about a man who works for the people who are about to be your enemies.
+* Carry the Pazzi letters, and say that you will think about the Medici
+  $ b2.loan = "pazzi"
+  $ standing += 1
+  $ bond.prisca -= 2
+  $ secrecy -= 1
+  Messer Raniero's smile stays on for a very long time. He says that he is delighted. He says that Rome will hear of it, and that Rome is grateful, and that the Holy Father, who is a man of long memory and wide interests, will be glad to find that a new house has so firm a grasp of where the money is going. You do not think that you wanted to be mentioned to the Holy Father.
+* Carry both, and let each of them think that you are theirs
+  $ b2.loan = "both"
+  $ cunning_brutal += 2
+  $ standing -= 1
+  $ secrecy -= 2
+  It is a very old trick, and it requires a very good memory, and a very cold nerve. You have both. You tell each of them, with perfect truth, that the house is honored. Neither is reassured. Both are, for the moment, too polite to say so. It is, you reflect, a way of standing in a doorway while two men fight about which of them owns the door.
+* Carry neither, and say that the house lends to cloth and not to quarrels
+  $ b2.loan = "neither"
+  $ standing -= 1
+  $ secrecy += 1
+  $ humanity += 1
+  They both take it with the same smooth good manners, and they go out by separate doors, and you hear the two of them, one after the other, say something to a clerk in the passage. You do not catch what. You know very well the tone of a man saying that a new thing in the town is going to be a nuisance.
+The mercer's nephew comes back to say that his uncle's cloth is on the road already, and thanks you. He is the only person all morning who has said it without wanting something.
+?if can_invest("florence.banking")
+  Benedetto brings the ledger of the opening, and lays it open, and puts the pen into your hand. The house has been running on borrowed money for a month. It will need a proper capital, if it is to be a bank and not an expensive hobby.
+  * Put in the capital, and make the house a proper bank
+    $ do invest("florence.banking")
+    $ standing += 1
+    The sum goes into the ledger in a firm round hand, and it is a very large sum, and you find that you do not mind it. It is a pleasure to watch money go into a thing that is going to do something. Benedetto blots the page with the gravity of a man at a coronation.
+  * Open on the house's credit, and keep your own purse shut
+    $ cunning_brutal -= 1
+    Benedetto does not say a word. He blots the page, and he turns it, and he writes the next entry in a hand that is very slightly smaller than the last one.
+?end
+<~
+
+# wool
+## The workshop in the Oltrarno
+$ do chart("florence.wool")
+$ do meet("nofri")
+The wool district lies across the river, in a tangle of lanes that smell of lanolin and urine and the vats of the dyers. The whole of the Oltrarno is red, and blue, and green, in the long runnels of the gutters, and the stones in front of every doorway are stained as if a number of very small and very colorful men had been murdered there.
+The workshop is on a corner near the wall. It is a long low building with a loft, and a courtyard with six vats in it, and thirty looms in three rooms, and a master called Ser Nofri who has the dry, strained, humorous look of a man who has been selling his own failure for a long time and has gotten good at it. He is a decent man. He is going broke, and he knows exactly why, and he tells you, at once, without being asked.
+"I pay them too much," says Ser Nofri. "That is the whole of it. I have never been able to pay them what the Guild says they ought to be paid, because the Guild says nothing, and the weavers have to eat. And the other shops do pay it, Signore, because they pay it in the way that the Guild approves, which is to say by not paying it." He spreads his hands. "I am selling because I would rather sell to a man who is rich than lose it to one who is clever."
+There are, in the doorways, a good many people who are listening. They are quite silent. They have a look about them that you have seen on the faces of the people in a great many cities, in a great many centuries: the look of a crowd that has learned to wait.
+?if can_invest("florence.wool")
+  :the_wool
+  * Buy the workshop, and pay the weavers what Ser Nofri paid them
+    $ do invest("florence.wool")
+    $ b2.wool_wages = "fair"
+    $ humanity += 2
+    $ standing -= 1
+    $ bond.prisca -= 1
+    Ser Nofri puts his hand on the nearest loom. He does it as a man might lay it on the head of a horse. The weavers say nothing at all. They do something much more interesting, which is to start, very softly, to work. The sound of thirty looms beginning is a fine, bright, busy rattle, and you find that it is the best sound that you have heard in a month.
+  * Buy the workshop, and pay what the other shops pay
+    $ do invest("florence.wool")
+    $ b2.wool_wages = "hard"
+    $ humanity -= 2
+    $ do earn(10)
+    $ standing += 1
+    Ser Nofri takes the money, and he does not look at you. The weavers do not say anything. They go back to the looms, one by one, with the unhurried air of people who have already decided that they will remember. You have been the master of a great many people who have decided that.
+  * Walk away from the whole matter
+    $ cunning_brutal += 1
+    Ser Nofri nods. He does not look surprised. He thanks you, with great civility, for having come so far, and you go out by the courtyard, past the vats, with thirty pairs of eyes on the back of your neck.
+?else
+  There is no help for it: the purse will not stretch to a workshop this month. You say that you will think about it. You say it kindly. You see in Ser Nofri's face that he has heard a great many people say it.
+?end
+<~
+
+# bottega
+## The Via dei Servi
+$ do chart("florence.bottega")
+$ do meet("berto")
+$ do meet("apprentice")
+The painter is called Maestro Berto, and he has a bottega on the Via dei Servi that looks like a stable in which a number of angels have been hung out to dry. There are panels everywhere, on trestles and against the walls, in every state of undress from the bare gesso to the finished gold: a martyrdom, three Madonnas, an Annunciation in which the angel appears to be in some doubt about the whole business. A boy is grinding lapis in a mortar. An older apprentice, with a smear of green on the cheek and a very direct way of looking at people, is laying a ground on a board, and does not stop.
+"It is a procession," says Maestro Berto. He is a big, untidy, very cheerful man, with a face like a boiled ham and the hands of an exceedingly gifted child. "The Three Kings, going to Bethlehem. I have a banker for the first, and a cardinal's nephew for the second, and I have not yet the third. I have been looking for a third for two months. I saw you cross the Piazza. You have the head." He says it with the simplicity of a man naming a good tree. "Will you sit?"
+It is the commonest thing in Florence. Every man of substance in the city is in a picture somewhere, in a crowd, looking pious. It would be the most natural thing that you could do. It would also be a face, in color, on a panel, in a church, for as long as the panel lasted.
+The older apprentice has not looked up. {apprentice.They} {apprentice.are} mixing a green. You are aware, rather oddly, of a pair of very steady eyes on the side of your face.
+?if can_invest("florence.patronage")
+  :the_portrait
+  * Sit for him, and take the whole workshop under the house's patronage
+    $ do invest("florence.patronage")
+    $ b2.portrait = "sat"
+    $ do obtain("florence_portrait")
+    $ standing += 2
+    $ secrecy -= 1
+    He draws you in a morning. You sit very still, which is the one thing that you do better than any living man, and he says, after a time, in a small voice, that he has never had a sitter who did not need to be reminded to breathe. You find yourself, a little, enjoying it. When the sketch is done it is you. It is you in a way that no mirror has been for a long time, and you look at it for a good while.
+  * Say that you will pay for the picture, but not be in it
+    $ do invest("florence.patronage")
+    $ b2.portrait = "refused"
+    $ standing += 1
+    Maestro Berto takes it well. He says that it is a great loss to the cause of beauty, and that he will paint a bishop instead, and that he would, at any rate, be very glad of the money. The apprentice laughs, once, a short brown startled sound. It is the only noise {apprentice.they} {apprentice.have} made.
+  * Sit for him, but ask him to give the face a little less of yours
+    $ do invest("florence.patronage")
+    $ b2.portrait = "disguised"
+    $ cunning_brutal += 1
+    $ secrecy += 1
+    Maestro Berto thinks about it, and then he grins. "You mean that you wish to look like a good deal of somebody else," he says. "It is the oldest commission that I have." He draws you in a morning, a little blunter at the jaw, a little softer at the eyes, with a nose that belongs to a notary he knew in his youth. It is an excellent likeness of a man who has never existed.
+?else
+  Maestro Berto says that he quite understands, that the house must look to its books, and that the Third King may keep for a month or two. You say that you will sit another day. He says, with great sweetness, that kings are very patient. The apprentice goes on mixing the green.
+?end
+As you go out through the yard the apprentice follows, wiping both hands on an apron, and says, in a low voice, without any preamble, that the Maestro has a great many faults, and that being a bad judge of a face is not one of them. The Third King is a good head. It would be a pity if it were not painted. Then the boy with the mortar drops something, and the apprentice goes to see to it, and the whole thing is over before you can think what you ought to have said.
+<~
+
+# captain
+## The side door
+$ do chart("florence.bank")
+He has been standing at the side door, in the yard, for an hour and a half, and nobody has asked him to leave. This is itself a kind of information. He is a lean, brown, weather-cured man of fifty, in boots that cost more than the rest of him, with a plain gray cloak and a long plain sword that he wears as another man might wear a hat. He gives his name as Ugolino. He does not give a company.
+He tells you what he wants as he would tell a mason what he wanted of a wall. There is a company of three hundred lances in the Romagna that has been two months unpaid. It is a good company. It has, he says, a certain future, and certain friends who would be glad to see it kept together and well-fed until the spring. It would be a favor to those friends if the Banca del Colle were to carry the wages. It would also be a very profitable one.
+He pays in a coin that is not Florentine. You turn it over, in the sun that comes through the yard door. It is a gold ducat of a very good weight, and it has the faint, sweet, cold smell that the inside of a house has when nobody has lit a fire in it for a very long time. It has been in the hand of someone who has not been warm for a century.
+You do not say that you have noticed. Ugolino does not say that he has noticed you noticing. It is the most courteous conversation that you have had all week.
+:the_captain
+* Fund the company
+  $ b2.captain = "funded"
+  $ do invest("florence.mercenaries")
+  $ humanity -= 2
+  $ standing += 1
+  $ secrecy -= 1
+  Ugolino takes the paper. He folds it into his belt. He does not smile, or thank you, or shake your hand, because he has the same sense of occasion as a stone. He says that his friends will be informed. He says it with very faint, very dry relish, as a man says something that he has been looking forward to saying for some time.
+* Ask him, as one trader to another, who these friends are
+  $ b2.captain = "listened"
+  $ cunning_brutal += 1
+  $ do power("minor")
+  He is a hard man, and he is brave, and for a moment you see him weigh the thing, and decide that the sword at his hip is a good deal less use than it was. He says that there is a gentleman in the household of a great prelate in Rome. He says that there is a banker in Florence, whom he does not name, who would not be sorry to see a certain family brought low. He says that there is a third, who does not come to the door. You hear the third in the way he says it. He does not look at the sun.
+* Refuse, and have the man shown out
+  $ b2.captain = "refused"
+  $ standing += 1
+  $ humanity += 1
+  Benedetto shows him out. He goes, with great composure, and he does not look back, and you hear his boots go all the way down the lane. It is not a matter of any importance, you tell yourself. It has the smell of the thing that people say about the plague in its first week.
+<~
+
+# signing
+## Noon
+$ do phase("day", 1)
+$ do chart("florence.bank")
+At the sixth hour the whole of the house comes up out of the Via Porta Rossa to the Mercato Nuovo, in procession, with Benedetto at the head of it carrying the deed in a leather case, and four clerks behind him with the seals, and a notary of the Arte del Cambio puffing along at the rear in a gown that is a good deal too hot. The Arte requires it. A house cannot call itself a bank in Florence until it has made its first great contract in the open, in the loggia, before the consuls of the guild and the whole of the market, in the broad light of day. It is an old custom, and it is meant, you gather, to keep the fly by night and the foreign houses out of the business. It is also, quite by accident, the one custom in the whole of Florence that was written for the express purpose of killing you.
+The loggia is a roofed arcade with the market all about it, and in the middle of it a flat square of marble, set in the pavement, on which the oath must be sworn. It is bare. The sun stands directly over it.
+It is the hottest hour of the day. There are three hundred people in the Mercato Nuovo, and half of them have stopped to look. You see, among them, a number of faces that you know. There is a young man with a gold chain and a sneer, leaning in an archway with his arms folded, who is Vieri Salimbeni, and who has not been told that he is there. There is a man in a plain brown coat whom you have seen once in the Bargello, and who has a very clean pair of hands. And at the back of the crowd, in a gray cloak, a new clerk of the house, whom you do not recall engaging, is writing something in a very small book.
+$ do act(1, true)
+:the_oath
+* Walk out onto the marble, in the full sun, and swear
+  $ b2.daylight = "open"
+  $ standing += 2
+  $ secrecy -= 3
+  $ cunning_brutal -= 1
+  ?if lc.sunwalk == "shown"
+    It is not the first time. You walk out into it as you walked into a certain church, once, with a lifted chin, and the whole market sees you do it. It does not hurt. It is not meant to hurt. It is, you have long since decided, one of the very few things that the old blood owes you.
+  ?else
+    You step out into it. It is the first time that you have done so before three hundred eyes, and you find that you are, quite unexpectedly, afraid, in the old foolish human way, that someone is going to see you.
+  ?end
+  The sun is on your face. It is warm, and it is bright, and it makes a great white noise in the back of your head, and the air smells of hot stone and leather and horse. You swear in a voice that carries to the far end of the market, and the notary, who had expected a young man to stumble, nearly drops his pen. There is a sound from the crowd that is half a cheer and half an intake of breath. Over by the arch, Vieri Salimbeni has taken his arms off his chest.
+* Take the shaded edge of the loggia, and have the awning let down, as if for the heat
+  $ b2.daylight = "shaded"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  The awning goes down. It is the work of a minute, and the consuls, who are all fat, are grateful. The deed is laid on a trestle in the cool. You swear, in the shade, in a very ordinary voice, with the market a bright wall of noise on the other side of the cloth. It is a very simple thing. It is the sort of thing that a careful man would do. You are aware, as you do it, of three very different people who see that you have not walked out into the sun, and of three very different ways in which they will remember it.
+* Send Benedetto to swear for the house, and watch from the cellar window
+  $ b2.daylight = "deputy"
+  $ standing -= 1
+  $ secrecy += 2
+  $ bond.prisca += 1
+  Benedetto goes out in his best coat, white to the lips, and swears for the house, in a clear, high, careful voice, as one might swear in front of the Almighty. He gets through it. He does not faint, and he does not drop the deed. He has the look, when he comes back, of a man who has been to the wars. The consuls, who are all fat, say a good deal about the owner of the house who has such a tender regard for his complexion. They write it down.
+The consuls sign. The notary seals, with a little puff of relief. The market, having had its sight, goes back to its prices. It is done in a quarter of an hour, and it is, you reflect, a very small thing to have been so much afraid of.
+-> ninth
+
+# ninth
+## The ninth hour
+The house shuts at the ninth hour. The shutters go up, one after another, with the sound of a flock of birds coming to roost, and the counting floor empties out in a long gray stream of caps. By the time the last of them has gone the whole of the Via Porta Rossa has gone quiet, and the light in the windows has turned the color of weak tea.
+?if b2.prisca_deal == "partner"
+  Prisca comes down to the counting floor for the first time. It has the look of a ceremony, though she has had no notice that it was one. She stands in the middle of it, in a plain dark dress, with the abacus on its silver chain, and looks all round the long room at the forty empty tables and the little brass inkwells. Then she looks at you.
+  ?if b2.daylight == "open"
+    "You did it in the sun," she says. It is such an exact, such a very Prisca-like way of saying that it is a matter of no consequence, and that she was frightened to death, that you very nearly laugh.
+  ?elif b2.daylight == "shaded"
+    "You did it in the shade," she says. It is such an exact, such a very Prisca-like way of saying that it was well done, and that she was relieved past speech, that you very nearly laugh.
+  ?else
+    "You sent Benedetto," she says. It is such an exact, such a very Prisca-like way of saying that she would have done the same, and that she wishes she had not been right, that you very nearly laugh.
+  ?end
+  She has brought a small, plain cup, and a plate with three olives on it. She says that she wished to keep the first day. She says it without looking at you.
+?elif b2.prisca_deal == "rival"
+  There is a small, plain, sealed note on the counter, in a hand that you know, and no name on it. It says, in four lines, that the house is open and that she has watched it from the other side of the street. It says that the loan to the mercer was too generous, and the oath too showy, and the chair a fine idea. It ends, in a smaller hand, that she hopes you have eaten.
+?else
+  Benedetto brings you, without a word, a tray with a cup and three olives and a note. The note is from the Merchant house, and is quite short. It says that the credit has been drawn on twice, and well, and that the house is, so far, a very good investment. It says that she is not looking at the books.
+?end
+?if b2.prisca_asked == "agreed"
+  Benedetto lingers by the door. He has, he says, been told that the Signore had an errand for the court. A letter has come from the Bargello. It is from Messer Ottaviano. It is in a very small, very formal hand, and it offers the Signor del Colle a seat at a dinner on Thursday, at which the Prince's household would be honored if he would come, and at which, it adds, in the same prim small writing, there will be several persons of interest from the quarter of the Medici.
+  It is, you see at once, the way in. Prisca has been as good as her word.
+?end
+You stay, after the others have gone, to stand in the empty room. The sun has left the floor. It is only a floor, with a good deal of dust in it, and the ghosts of a good many footprints, and the long, quiet smell of paper that has been written on all day. It is the first time in your life that you have owned a thing that was made of days.
+Benedetto goes round the room with a taper, lighting the lamps for the night clerks. He has a way of doing it, with a little bow to each, that you have never seen in a clerk before. When he comes to the window by the chair he stops, quite suddenly, and looks out through the glass into the street.
+"Forgive me, Signore," he says. "There is a person at the corner. I do not think it is a customer. I have been watching for a quarter of an hour, and the person has not moved, and has not looked at the door, and has written, I should say, something in the region of four pages in a very small book."
+You go to the window. The street is long and gray and nearly empty, and the first lamps are being lit. At the corner by the pump, in a plain brown cloak, with a cap pulled low and a lantern that has not been lit, a figure is standing with {watcher.their} back to the wall, and a little book open on one forearm.
+It is the {pg("watcher", "young man", "young woman")} from the river. It is the same neat, quick, steady stroke of the lead, and the same trick of looking up and down with a face that gives nothing away. And it is the clerk, you realize, whom you did not engage, who was at the back of the crowd in the loggia.
+{watcher.They} look{watcher.s} up, as you watch. {watcher.They} {watcher.are} not surprised. {watcher.They} shut{watcher.s} the book with a small neat snap, as a person closes a drawer in the middle of a conversation, and lift{watcher.s} one hand, and, quite gravely, with the air of someone concluding a very long and complicated piece of business, nod{watcher.s}.
+Then {watcher.they} go{watcher.es}, round the corner, without hurrying, and the lamp-lighter comes down the street behind and does not see {watcher.them} at all.
+$ do meet("watcher")
+$ do rest()
+?if rested("income") > 0
+  The house has earned a little in its first day, and you are surprised at how well that feels.
+?end
+=> next

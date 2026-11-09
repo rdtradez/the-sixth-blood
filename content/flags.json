@@ -1584,6 +1584,285 @@
       "major": true,
       "default": "agreed",
       "note": "Chapter 4: whether he agreed to find out who is keeping the Medici and Pazzi quarrel warm"
+    },
+    "b2.loan": {
+      "kind": "enum",
+      "values": [
+        "medici",
+        "pazzi",
+        "both",
+        "neither"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "neither",
+      "note": "Chapter 5: whose letters of credit the Banca del Colle carried"
+    },
+    "b2.wool_wages": {
+      "kind": "enum",
+      "values": [
+        "fair",
+        "hard",
+        "none"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 5: the Oltrarno workshop (none if he did not buy it)"
+    },
+    "b2.portrait": {
+      "kind": "enum",
+      "values": [
+        "sat",
+        "refused",
+        "disguised"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 5: whether Maestro Berto painted his real face"
+    },
+    "b2.captain": {
+      "kind": "enum",
+      "values": [
+        "funded",
+        "listened",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 5: the stranger at the side door and the unpaid company"
+    },
+    "b2.daylight": {
+      "kind": "enum",
+      "values": [
+        "open",
+        "shaded",
+        "deputy"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "shaded",
+      "note": "Chapter 5: how he swore the house's first contract at noon"
+    },
+    "b2.watcher_meet": {
+      "kind": "enum",
+      "values": [
+        "spoke",
+        "caught",
+        "waited"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "waited",
+      "note": "Chapter 6: how he first faced the Velati clerk at the river stair"
+    },
+    "b2.watcher_book": {
+      "kind": "enum",
+      "values": [
+        "read",
+        "copied",
+        "left"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 6: what he did with the clerk's little book"
+    },
+    "b2.vieri_watch": {
+      "kind": "enum",
+      "values": [
+        "shielded",
+        "claimed",
+        "ignored"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "ignored",
+      "note": "Chapter 6: what he did when Vieri wanted the clerk"
+    },
+    "b2.watcher_terms": {
+      "kind": "enum",
+      "values": [
+        "open",
+        "bargained",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "bargained",
+      "note": "Chapter 6: the terms on which the Velati agent may watch him"
+    },
+    "b2.watcher_bond": {
+      "kind": "enum",
+      "values": [
+        "begun",
+        "guarded"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "begun",
+      "note": "Chapter 6: whether something began between him and the Velati agent"
+    },
+    "b2.supper": {
+      "kind": "enum",
+      "values": [
+        "smoothed",
+        "watched",
+        "stoked"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "watched",
+      "note": "Chapter 7: what he did when the Medici and Pazzi guests quarrelled at the Prince's table"
+    },
+    "b2.roll": {
+      "kind": "enum",
+      "values": [
+        "read",
+        "copied",
+        "asked"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "asked",
+      "note": "Chapter 7: how he came at the court's roll of the lines (read it openly, copied it by stealth, or only asked the Seneschal)"
+    },
+    "b2.prisca_sixth": {
+      "kind": "enum",
+      "values": [
+        "told",
+        "withheld"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "withheld",
+      "note": "Chapter 7: whether he told Prisca what his maker was and what the Prince had hinted"
+    },
+    "b2.elder_witness": {
+      "kind": "enum",
+      "values": [
+        "present",
+        "absent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "absent",
+      "note": "Chapter 7: whether the Velati agent stood at the door and wrote down the talk with the elder"
+    },
+    "b2.answer": {
+      "kind": "enum",
+      "values": [
+        "told",
+        "traded",
+        "closed"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "closed",
+      "note": "Chapter 7: what he gave Madonna Berengaria about his maker"
+    },
+    "b2.berengaria_debt": {
+      "kind": "flag",
+      "book": "blood-and-gold",
+      "major": true,
+      "default": false,
+      "note": "Chapter 7: he traded with Berengaria and owes her a thing she has not yet named"
+    },
+    "b2.roll_told": {
+      "kind": "enum",
+      "values": [
+        "prince",
+        "prisca",
+        "none"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 7: whom he told, at dawn, about the scraped line on the roll"
+    },
+    "b2.trader_loan": {
+      "kind": "enum",
+      "values": [
+        "fair",
+        "free",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "default": "refused",
+      "note": "Chapter 8: the thread seller's small loan at the counter (refused if he did not attend)"
+    },
+    "b2.trader_scale": {
+      "kind": "enum",
+      "values": [
+        "house",
+        "trader",
+        "weighed",
+        "unseen"
+      ],
+      "book": "blood-and-gold",
+      "default": "unseen",
+      "note": "Chapter 8: the false scale in the dyer's yard (unseen if he did not go)"
+    },
+    "b2.trader_ledger": {
+      "kind": "enum",
+      "values": [
+        "told",
+        "kept",
+        "unseen"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "unseen",
+      "note": "Chapter 8: what he did on finding the thread seller in centuries of Merchant house ledgers (unseen if he did not look)"
+    },
+    "b2.pazzi_paper": {
+      "kind": "enum",
+      "values": [
+        "warned",
+        "profited",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "silent",
+      "note": "Chapter 8: what he did with the news that a stranger is buying Pazzi paper at par"
+    },
+    "b2.trader_answer": {
+      "kind": "enum",
+      "values": [
+        "build",
+        "keep",
+        "give",
+        "rule"
+      ],
+      "book": "blood-and-gold",
+      "default": "build",
+      "note": "Chapter 8: what he said he would do with a great fortune and no heir, over a cup at the stall"
+    },
+    "b2.trader_regard": {
+      "kind": "enum",
+      "values": [
+        "warm",
+        "wary",
+        "cold"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "wary",
+      "note": "Chapter 8: the Merchant original's hidden verdict on him, built from the tests of the chapter and the choices before it (read by the revelation)"
+    },
+    "b2.trader_coin": {
+      "kind": "enum",
+      "values": [
+        "taken",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 8: whether he took the thread seller's copper token of the Merchant house"
     }
   }
 }

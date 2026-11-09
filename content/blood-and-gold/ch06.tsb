@@ -1,0 +1,257 @@
+// Book Two, Chapter 6 (session 20). The watcher: the Velati agent, and the start of something else.
+// One night phase of three actions out of four (the roll, the lodging, the river stair, the lanes), then the terms on the roof at dawn.
+// Ends with rest() and => next. Reads b2.daylight, b2.prisca_deal, b2.portrait, b1.velati_seed, lc.watchers and wake(). The book is incomplete, so play pauses after this chapter until chapter 7 is added.
+// Later chapters read b2.watcher_meet, b2.watcher_book, b2.vieri_watch, b2.watcher_terms and b2.watcher_bond, and romance("watcher").
+@chapter b2c06
+@title The Little Book
+@book blood-and-gold
+@version 1
+
+# start
+## After the loggia
+$ b2.watcher_meet = "waited"
+$ b2.watcher_book = "left"
+$ b2.vieri_watch = "ignored"
+$ b2.watcher_terms = "open"
+$ b2.watcher_bond = "guarded"
+$ _knows = 0
+$ _mark = 0
+$ do chart("florence.bank")
+The house is the color of a lamp turned low. The clerks have gone, and the night men have come, and the last bell of the Badia has said the second hour of the night in a voice like a man clearing his throat before he says something unpleasant. You have been sitting in the chair for a good while. You have not been reading.
+You know a thing about the nod at the corner. You knew it as it was given. It was not the nod of a person who has been caught. It was the nod of a person who has been waiting, for some time, to be seen, and who is rather relieved that it is over.
+?if b2.daylight == "open"
+  The whole of the market saw you walk out onto the marble at noon. You have had three notes, and a gift of a cheese, and a rumor, brought by Benedetto from the kitchen, that the new owner of the house is a saint, or a sorcerer, or a man with a very remarkable doctor. It is a good deal more attention than you had planned on.
+?elif b2.daylight == "shaded"
+  Nobody saw you walk out into the sun. A good many people saw you not do it, and have been busy all day deciding what that meant. Benedetto has reported, from the kitchen, three distinct theories, of which the most popular is that the owner has a weak chest.
+?else
+  Benedetto has been congratulated all day. He is a good deal paler than usual, and has been seen to take a small glass of wine at noon, and then another. He will, you think, be a very good clerk by the time he is forty.
+?end
+There is a new name on the roll. It is a small name, at the foot of the clerks' page, in Benedetto's neat hand, and it is dated three weeks ago, and beside it there is the tiny, tired tick that he makes when a person has been engaged and forgotten. You turn the page to the light.
+It says that the clerk is called Allegra Bonsi, or Matteo Bonsi, as the case may be, and that the clerk came with a letter. You do not recall it. You do not recall, either, ever having been told that there was a clerk.
+You have the night. You have an unexpected stillness in you, of the kind that comes before a decision, and a number of ways to spend it.
+$ do phase("night", 3)
+?if must_feed()
+  ~> hungry
+?end
+-> night
+
+# hungry
+## The edge
+The loggia took more out of you than you allowed. It is not much, but it is the kind of not much that gets worse with a lamp and a quiet room. You are, you find, thinking of throats.
+* Take the cup that Benedetto keeps in the back room
+  $ do feed("bank")
+  It is warm, and it is clean, and it is exactly as pleasant as it has been every time. It has the faint, wonderful sadness of a thing that is only what you need.
+* Go out and find an animal in the stable yard behind the Badia
+  $ do feed("animal")
+  A very old mule, who is entirely philosophical. It does not do much for the nerves, but it is a kind of honesty, and you come back up the stair feeling that you have been, for a little while, very simple.
+* Send for a donor from the wool district, and pay the price
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She is brisk, and she is shy, and she is gone before the bell. It is a clean arrangement, at a fair price. It is only that you wish, as you always do, that it were not so clean.
+<~
+
+# night
+## The long night
+:night
+?if actions_left() == 3
+  The whole of the quarter has gone to bed. There is a light on in the stationer's across the way. It has been on for some time.
+?elif actions_left() == 2
+  The great bell of the Duomo strikes the fourth hour of the night, and the sound goes out over the roofs and does not come back. A cat goes along the parapet with the manner of a man delivering a summons.
+?else
+  The lamps in the street are going out, one at a time, in the long wavering row. It is the hour before the false dawn. If you are going to do a thing, you must do it now.
+?end
+* Ask Benedetto about the new clerk, and the letter [once] ?if actions_left() > 0
+  ~> roll
+  $ do act()
+* Climb to the clerk's rooms, over the stationer's, and see what is in them [once] ?if actions_left() > 0
+  ~> lodging
+  $ do act()
+* Go to the river stair, where you first saw the clerk [once] ?if actions_left() > 0
+  ~> river
+  $ do act()
+* Walk the lanes behind the Badia, and see who else is walking [once] ?if actions_left() > 0
+  ~> lanes
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> roof
+?end
+-> :night
+
+# roll
+## The letter from Pisa
+$ do discover("the_velati")
+Benedetto is at the high desk, under a green-shaded lamp, doing the day's sums in a very small hand. He gets up when you come in. He gets up a little too fast, and it is clear that he has been waiting for this since the corner of the street.
+He has the letter. He has had it, you gather, in the drawer under the blotter, where he puts the things that he is not quite sure of. It is a good letter. It is from a stationer in Pisa, in a round commercial hand, and it says that the bearer is the best copyist that the writer has ever trained, and has a head for figures that the writer would be sorry to lose. It is signed, and sealed with a small plain seal.
+You turn it over. In the corner of the seal, so small that you would have missed it if your eyes had not been what they are, there is a mark: a little closed eye, with a single curved stroke above it, like a lid.
+You have seen it before. You saw it in a book on a table in Rome, in a hand that was not quite steady, on the night after the fire, when a vigil of the Aventine took out a stub of lead and began to write down what he had seen.
+?if b1.velati_seed == "told"
+  You let him write it. You remember that. You let an old man write down the truth of the night, all of it, at his own pace, and you wondered what he meant to do with it. Here it is, then, fourteen centuries later, in the corner of a seal.
+?elif b1.velati_seed == "buried"
+  You made him put out the worst of it. You remember the way that he looked at you, and the care with which he did not argue. It is entirely like the Velati that they should have written it down anyway, in some other place, in another hand.
+?else
+  You left him to it. You had not, at the time, the least idea of what he would do. It appears that what he did was to found an order.
+?end
+"Madonna Prisca has looked at it," says Benedetto. He says it in a very small voice. "She sent word by Tommaso's boy, this evening. She said that I was to tell you that the house has been watched since Rome, by people with that mark, and that she has always known, and that the only error is to pretend otherwise." He swallows. "She said also that this one was a good deal better than the others, and that she had not noticed until the clerk was in the building, which she found, on reflection, very interesting."
+He has been saving the last of it. He says it with great care.
+"She said that you were to be kind, Signore. She said that the Velati are generally very young. And that they are generally very frightened of what they have been sent to see."
+$ _mark = 1
+<~
+
+# lodging
+## The rooms over the stationer's
+$ do chart("florence.rooms")
+The rooms are in a lane behind the Badia, over a shop that sells paper, and ink, and quills, and a small amount of wax. It has a door that locks, and a window that does not. It is, to a person of your habits, not so much a lock as an expression of opinion.
+You go in by the window. It is very small. There is a narrow bed, made with great care. There is a table, with a lamp, and a jar of quills, and a ruler, and a great many sheets of clean paper squared up in a pile. There is a small iron box under the bed, and it is not locked, because it does not need to be: it is the sort of box that a very sensible person closes by turning a screw. And on the table, open, with the lead lying across it, is the little book.
+It is no bigger than a hand. It is written in a quick, neat, upright script, in a very odd shorthand. It takes you some time to see that you can read it. It is the shorthand of the Aventine, the one that old Rufinus used to write in, with a few letters changed. It has been passed down, you realize, for a thousand and a half years, by hand, from one person to the next, like a flame.
+It begins on a certain page, in a certain year, with a heading. It says, in plain words, *The Valerio, called the Signor del Colle, who is the Valerius of the Aventine book*. After that there is a column of dates. It goes on for a good many pages. It goes on to the loggia, and the oath, and the three faces in the crowd. It goes on, you see, to a number of things that nobody could have known who had not been at the walls of Collesanto on the feast of the saint.
+?if lc.watchers == "funded"
+  There is a line in the margin, in a different hand, that says *he paid for the book in the year of the Goths, and did not ask for his name in it*. Beside it a later hand has written *we put it in anyway*.
+?elif lc.watchers == "warned"
+  There is a line in the margin, in a different hand, that says *he warned us before the Goths, and we did not listen, and we have kept the book anyway*. It is underlined twice.
+?elif lc.watchers == "none"
+  There is a line in the margin, in a different hand, that says *the Aventine watch did not meet him, and has been sorry*.
+?else
+  There is a line in the margin, in a different hand, that says *he did not answer, in the year of the Goths, and we have never been sure whether that was courtesy or contempt*.
+?end
+There is, at the foot of the last page, a note that is not in shorthand at all, and it is in a hand that is not the clerk's. It is a very beautiful, very small, very old-fashioned hand, with long tails to the letters. It says *Look also for the one who is looking at him.* It is not signed. It has not, you think, been written by any person of the Velati. You have the very odd feeling, for a moment, of a cool breath on the back of your neck.
+:the_book
+* Read it through, all of it, and put it back as it was
+  $ b2.watcher_book = "read"
+  $ _knows = 1
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  You read for an hour. It is a very fair account. It is much fairer than you would have been. There are a good many things that you did that you had rather were not set down in a good clear hand, and they are all there, with the dates, and with no more comment than a surveyor puts on a field. It is not unkind. It is only exact. When you have done you put the book back on the table, with the lead lying across it at the same angle, and you do not touch anything else.
+* Copy out the last page, and leave the rest
+  $ b2.watcher_book = "copied"
+  $ _knows = 1
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  It is a quick business, and a mean one. You take a clean sheet from the pile and copy out the last page, word for word, in the old shorthand, and you put the sheet in your coat. You do not read the rest. You do not like it very much, afterward, but you have it.
+* Close the book without reading any of it, and go
+  $ b2.watcher_book = "left"
+  $ humanity += 2
+  $ bond.watcher += 2
+  It is not a thing that you can do easily. You have never in your life been so tempted by a few sheets of paper. You put your palm on the cover, and you hold it there for a while, and you take it away. You go out by the window. You leave the lamp as it was.
+<~
+
+# river
+## The Arno stair
+$ do chart("florence.haven")
+The river is lower than it was. It has the look of a thing that has been shrinking quietly for a week. The stair down to the water is on the near bank, below the Ponte alla Carraia, with a worn iron ring at the bottom, and it is the place where you saw the clerk write, across the water, in the light of the dyers' lamps.
+There is a lantern at the foot of it. It has been set down on the lowest step, carefully, with the shutter half open, and it is burning with a small even flame. There is nobody beside it. There is a smell of lead and lamp oil and, faintly, of wet wool.
+It is left for you, you realize. It is the oldest sign in the world.
+You go down. The stone is damp and cold under your hand. And on the next step down, in the shadow, quite still, with a folded cloak across the knees and the little book shut in both hands, sits the clerk.
+$ do meet("watcher")
+{watcher.They} look{watcher.s} up. The face is a young one, narrow, steady, a little pale, with a long upper lip and very dark brows, and the eyes are the eyes of someone who has not slept in two days. {watcher.They} {watcher.are} not afraid. {watcher.They} {watcher.have} the very exact air of a person who has been afraid for so long that it has become a kind of clothing.
+"I thought you would come to the stair," says the clerk. It is a low voice, and a clear one. "I would have come to you. I did not know how to ask."
+:the_meeting
+* Say, gently, that you have been looking for them too
+  $ b2.watcher_meet = "spoke"
+  $ bond.watcher += 3
+  $ humanity += 1
+  $ do power("minor")
+  The clerk lets out a breath that you think has been held for a good deal longer than a night. "That is better than I hoped," says {watcher.they}. "I had a speech. It was a very cold one. I think I shall not give it." There is the ghost of a smile, which is gone at once. "I ought to say that my name is not Bonsi. It is Bonsi on the roll. I shall tell you the rest when the sky is lighter."
+* Come down the last step, and take the book out of their hands
+  $ b2.watcher_meet = "caught"
+  $ cunning_brutal += 2
+  $ bond.watcher -= 2
+  $ do power("minor")
+  {watcher.They} do{watcher.es} not resist. {watcher.They} let{watcher.s} it go, with a small, hard, composed sound, as someone lets go of a rope on a ship. You open it to the first page, and find it is a very plain account of a dull day in the Via Porta Rossa, and nothing in it is at all alarming. You see in the clerk's face that it was the page that {watcher.they} had decided to put at the front. "Now you have it," says the clerk. "I am sorry. I should have liked it to be otherwise." The voice does not shake.
+* Sit down on the step above, and wait for them to speak
+  $ b2.watcher_meet = "waited"
+  $ bond.watcher += 1
+  $ secrecy += 1
+  It is the longest silence of the evening. The river goes by. A fish rises, and puts a ring on the water, and the ring goes out to the far bank and is gone. The clerk is the first to break it. "You are very good at that," says {watcher.they}. "It is a thing that I am told one has to be very old to do." It is not quite a reproach. It is not quite a compliment, either.
+<~
+
+# lanes
+## The lanes behind the Badia
+$ do meet("vieri")
+You go out into the lanes, and you walk, and you let yourself be followed. It is a very old amusement. You do not look round. You are aware of a very faint tread, a long way behind, that is a little too careful for a man who has nothing to hide, and a faint, sweet smell of gilt and of cloves and of a good coat.
+It is Vieri Salimbeni. He has been following you since the Mercato Nuovo, and has been, for the whole of the afternoon, extremely pleased with himself. He catches up with you in the Via del Proconsolo, under a lamp, with a great air of having come that way by chance.
+"You have a clerk," says Vieri, in the easy voice of one who has been told a secret and cannot bear to keep it. "A little one. In a brown cloak. I have been watching {watcher.them} for a week. {watcher.They} write{watcher.s} things in a book." He smiles. "It is a very bad clerk. {watcher.They} do{watcher.es} not sit at {watcher.their} desk, and look{watcher.s} at the ceiling when spoken to, and know{watcher.s} a great deal too much about everything. I think that I shall have {watcher.them}, if you do not mind. I should like to see what is in the book."
+He is a good deal younger than he looks. It is the first time that you have seen the thing underneath the sneer. It is a rather frightened boy, who has been told that he is dangerous, and who is working very hard to be so.
+:the_lane
+* Step between him and the lane, and tell him quietly that he will not
+  $ b2.vieri_watch = "shielded"
+  $ do power("minor")
+  $ standing += 1
+  $ bond.watcher += 2
+  He does not draw. He is not a fool. He looks at you, and then at the space beside you, and at the thing in the dark behind your shoulder that is not any longer a man. "I only meant," says Vieri, "that it was very odd." He backs a step. "You are very strange, Signore. You walk in the sun, and you stand between me and a clerk." He wets his lip. "I shall not forget it." He goes away, down the Proconsolo, rather fast, and does not look round.
+* Say that the clerk is yours, and a matter for the house
+  $ b2.vieri_watch = "claimed"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ standing += 1
+  "Oh," says Vieri. It is a very flat little sound. He has, you see, understood a thing that he had not wished to. "Of course. I had not thought. A private arrangement." He bows, with an elaborate, nervous grace, and he does not quite succeed in not smiling. By the morning the court will believe that the Signor del Colle has a lover in the counting house, and it is the very best story that you could have wished it to believe.
+* Say that he may do as he likes
+  $ b2.vieri_watch = "ignored"
+  $ humanity -= 1
+  $ bond.watcher -= 3
+  $ standing -= 1
+  It is a thing that you say because you are curious, and because you are tired, and because you wish to see what he will do. He looks at you for a long moment. Then he turns on his heel, and goes into the dark, with a long, light, quick, hungry stride. You stand where you are. It is a very long time before you ask yourself what you meant by it, and you do not like the answer.
+<~
+
+# roof
+## The roof of the Banca
+The sky over the Duomo has begun to turn the color of a pearl. It is not yet light. It is the hour in which the world is a great gray drawing of itself, in pencil, before the color goes in, and the whole city is sitting very still, as a person does who is about to be told something.
+You are on the roof of the house. It is a flat leaded roof, behind a parapet, with a little brick chimney and a trapdoor, and a view that takes in the whole of the quarter. It was the clerk who chose it. You did not ask how the clerk knew that it could be got to, from the back stair, by anyone who had been in the house for three weeks, and who had been told, on the first morning, not to go there.
+The clerk is standing at the parapet with {watcher.their} back to the Duomo and {watcher.their} cloak open, quite still, and in the first of the light you see the face, which is a good deal younger than you had thought, and tired in a way that you have not seen on any person of that age.
+"My name is Bonsi, in this house," says the clerk. "Elsewhere it is something else, and I shall tell you when you ask it. I am of the Velati, as you will have worked out. I have been sent by the watch at Rome, which is to say by the descendants of the Aventine watch, to see you and to write down what I see." {watcher.They} say{watcher.s} it all in one breath, in a rapid, flat, level voice, as one says the Creed. "It is my work. I have done it for three years, in Pisa, and Siena, and Bologna. I have never before been given anyone older than a bishop."
+?if b2.watcher_book == "read"
+  You say that you have read the book. You say it without any particular emphasis. The clerk goes quite white, and then, slowly, quite red, and says nothing for the length of a breath. "I thought that you might," says {watcher.they}. "I put the lamp so that you could." It is a thing that you did not expect.
+?elif b2.watcher_book == "copied"
+  You say that you have the last page. You take it out of your coat and show it. The clerk looks at the sheet for a long time. "That is not the page that matters," says {watcher.they}, very low. "It is only the one that frightens me."
+?elif b2.watcher_book == "left"
+  You say that you were in the room, and that you did not read it. The clerk looks at you with an odd expression. "I know," says {watcher.they}. "I put a hair across the cover. It was not disturbed." {watcher.They} {watcher.are} silent for a moment. "I had not expected that. I do not know what to do with it."
+?end
+?if b2.portrait == "sat"
+  "I was in the bottega, on the Via dei Servi," says the clerk, abruptly. "At the back. I did not know I was going to say that." The color is up in the clerk's face again. "You sat very well."
+?end
+?if _mark == 1
+  "Benedetto will have shown you the seal," says the clerk. "I did not make it very good on purpose. I wished it to be found."
+?end
+"Here is how it stands," says the clerk. "I am to watch, and I am to record, and I am not to interfere. It is the rule of the Velati and it is very strict. I may not warn you of anything. I may not help you. I may only see, and write, and send what I have written to Rome." {watcher.They} draw{watcher.s} a long breath. "I have been breaking it, a little, for three weeks. I have not been able to help it. I wished you to know that I was here. I wished you to find me. It is the only reason that I wrote the page about the river."
+There is a thing in the voice. It is not fear. It is something a good deal harder to be afraid of than fear, and the clerk is plainly new to it.
+:the_terms
+* Say that they may watch, openly, and that you will not hide a thing from the book
+  $ b2.watcher_terms = "open"
+  $ bond.watcher += 3
+  $ secrecy -= 2
+  $ humanity += 1
+  $ standing += 1
+  The clerk stares. It is very evident that this was the last answer that was expected. "You cannot mean it," says {watcher.they}. "It is the worst thing that a man in your position could do. I shall have to write all of it." {watcher.They} laugh{watcher.s}, a short, shaky, astonished laugh. "I shall write it very well."
+* Say that they may watch, and that you will see what they write
+  $ b2.watcher_terms = "bargained"
+  $ cunning_brutal += 1
+  $ bond.watcher += 1
+  $ secrecy += 1
+  "That is the Velati rule turned inside out," says the clerk. "It is not allowed. It is also, I think, a very reasonable thing to ask." There is a flicker of something that might be humor. "You may see the pages that I send to Rome. You may not see the ones that I keep. I shall tell you which are which. It is the best offer that I can make, and it is more than I am entitled to."
+* Tell them to take the book and the clerk's seals and go back to Rome
+  $ b2.watcher_terms = "refused"
+  $ cunning_brutal += 2
+  $ bond.watcher -= 3
+  $ secrecy += 2
+  $ standing -= 1
+  The clerk takes it very quietly. It is, you see, what was expected, and it is rather worse to hear than to expect. "I will go," says {watcher.they}. "I will go to Rome, and I shall be replaced by someone older, who will be much better at it, and who will not have told you anything." {watcher.They} turn{watcher.s} to the parapet. "I will say, at least, that I am sorry that it was this way. I had hoped it would be otherwise."
+The east has gone quite pink. The bells are beginning, the great one first, then the small ones, and the sun comes up over the hills of Fiesole in a long, level, golden bar, and falls across the roof, and across the two of you. It strikes the clerk's face. It strikes yours. It does nothing at all. It is a warm sun, on a quiet roof, in the early morning, and a very ordinary one.
+The clerk looks at your face in it. It is a long look. It is the look of someone who has read about a thing for three years in a dead language and has just heard it spoken.
+"I have wanted to see that," says {watcher.they}, very low, "for such a long time."
+It is a plain remark, and you find that you have no answer to it. You stand with the light on your face and the cold of the night going out of the lead under your hands. After a little the clerk says, rather quickly, that it is a good hour, and that there is a baker's on the corner of the Via dei Calzaiuoli that opens at the first light, and that the bread is quite good. It is not an invitation. It is the shape of one, held out, with the greatest care, at arm's length.
+:the_bond
+* Say that you would like to see the bakery
+  $ b2.watcher_bond = "begun"
+  $ do romance("watcher")
+  $ bond.watcher += 4
+  $ humanity += 1
+  $ secrecy -= 1
+  You go down together, by the back stair, past the strong room and the long dark counting floor. The street is wet and gray and empty, and smells of yeast and woodsmoke, and there is, at the corner, a baker with his sleeves rolled up and his face pink from the oven, who gives the two of you a loaf, without being asked, and a sidelong look that you will remember. You eat it on the step of the Orsanmichele, in the first of the sun. It is not a good loaf. It is the best thing that you have had in years.
+* Say that you are glad to have met them, and that the matter is a private one
+  $ b2.watcher_bond = "guarded"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  The clerk takes it with a very small nod, and does not argue. {watcher.They} fold{watcher.s} the cloak over {watcher.their} arm, and bow, a stiff little formal bow, with the cap in {watcher.their} hand. "I understand," says the clerk. "It is the proper answer, and a wise one." {watcher.They} go{watcher.es} down by the back stair. You hear the steps go on, a long way, and then the door, and then nothing. You stand a long time in the sun. It is very quiet on the roof, and a good deal colder than it was.
+$ do rest()
+=> next

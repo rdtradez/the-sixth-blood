@@ -1,0 +1,330 @@
+// Book Two, Chapter 8 (session 21). The Merchant original tests him, in disguise, and he does not know it.
+// One day phase of three actions out of four (the counter, the dyer's yard, the old books, the factors), then the stall in the Mercato Vecchio at dusk.
+// Ends with rest() and => next. Reads b2.roll_told, b2.wool_wages, b2.captain, b2.loan, b2.pazzi_heard, b2.prisca_deal and wake().
+// The book is incomplete, so play pauses after this chapter until chapter 9 is added.
+// Later chapters read b2.trader_regard, b2.trader_coin, b2.trader_answer, b2.trader_ledger and b2.pazzi_paper, and the Merchant's revelation reads the regard.
+@chapter b2c08
+@title The Seller of Thread
+@book blood-and-gold
+@version 1
+
+# start
+## A small matter at the third hour
+$ b2.trader_loan = "refused"
+$ b2.trader_scale = "unseen"
+$ b2.trader_ledger = "unseen"
+$ b2.pazzi_paper = "silent"
+$ b2.trader_answer = "build"
+$ b2.trader_regard = "wary"
+$ b2.trader_coin = "refused"
+$ _score = 0
+$ do chart("florence.bank")
+$ do meet("nanni")
+?if b2.roll_told == "prince"
+  The Prince has sent no word. It is the most eloquent thing that he could have done. A man of the Bargello has been seen in the Via Porta Rossa twice before the bell, buying nothing, and Benedetto has noticed that the man is a good deal better dressed than the Bargello can usually afford.
+?elif b2.roll_told == "prisca"
+  Prisca has sent no word either. She came to the counting floor at the second hour, in her plain dark gown, and walked the length of it with her hands folded, and looked at every ledger, and went away again. Benedetto reports that she touched, in passing, a single quill. He says it as if it were a state occasion.
+?else
+  You slept, in the way that you do. It was not a good sleep, and it was not a very long one, and it was full of small quiet marks cut into wood. You woke with a name in your mouth that you could not have said. It is gone now. The sun is on the sill.
+?end
+It is a quarter to the third hour, and the shutters are going back, one after another, up the length of the street, with a sound like a flock of small birds. The sun is in the chair. It is a warm, ordinary sun, and it costs you, as it always does, a very little: a faint tightness behind the eyes, and a thirst that is no more than a suggestion.
+Benedetto is on the stair. He has his tablet, and a face of very polished calm, and he comes down it with an air that you have begun to know. It is the air of a clerk who has a number of small things to say, and one that he is rather afraid of.
+"Four matters, Signore, and you cannot do them all," he says. "I have set them down in order of how much I should like you to look at them." He clears his throat. "And there is a person waiting in the line. A seller of thread from the Mercato Vecchio. A Nanni, I think. He has been there since before the bell. He asks for a very small sum, on a pledge, and has said that he will wait as long as the Signore likes." Benedetto frowns, very slightly. "I have been looking at him for a quarter of an hour. I could not tell you the color of his eyes. It is a thing that has never happened to me."
+?if must_feed()
+  ~> hungry
+?end
+$ do phase("day", 3)
+-> day
+
+# hungry
+## Before the doors
+You have been putting it off, and it is no longer very much of a decision. You are about to spend six hours in daylight among warm necks, and your hands are not as steady as you would like them to be.
+* Take the cup that Benedetto keeps in the back room
+  $ do feed("bank")
+  It is ready, under a cloth, in a glass with a lid. He has not said a word about it in all the weeks that he has kept it, and the silence has become, in its way, a kind of tenderness.
+* Slip out by the yard door and find an animal in the lane
+  $ do feed("animal")
+  A very old tomcat, of a philosophical disposition, who accepts it as a thing that sometimes happens on a Friday. It does not do much for you. It is, at least, a kind of honesty.
+* Go without, and trust to the day
+  $ cunning_brutal += 1
+  You tell yourself that you are old enough to manage a morning. It is, perhaps, not wholly true.
+<~
+
+# day
+:day
+?if actions_left() == 3
+  The doors open, and the tide comes in. It is a great, brown, gray and blue tide of caps, and gowns, and leather satchels, and the noise of the counting floor rises to a roar that is almost a pleasure. A man has dropped a bag of florins on the stair, and four people have gone down on their knees to help him pick them up, and two of them are now disputing the last coin.
+?elif actions_left() == 2
+  The middle of the morning has the dull, bright, contented hum of a hive. The windows are full of sun. The great bell of the Duomo has struck the sixth hour, and a clerk is asleep standing up behind a pillar, and is not, for once, noticed.
+?else
+  The light has gone a long way across the floor. There is a lull, and in the lull you find that you are tired in the plain, simple, human way, with an ache in the shoulders and a longing to be home. The ninth hour is not far off. The bell is already, in some distant belfry, clearing its throat.
+?end
+* Hear the thread seller at the counter, and his small matter [once] ?if actions_left() > 0
+  ~> counter
+  $ do act()
+* Go to the dyer's yard in the Oltrarno, where there is a quarrel over a scale [once] ?if actions_left() > 0
+  ~> dyers
+  $ do act()
+* Go down to the strong room with Benedetto, and look at the old books [once] ?if actions_left() > 0
+  ~> ledgers
+  $ do act()
+* Take the two factors, Ser Bartolo and Messer Raniero, to the back room [once] ?if actions_left() > 0
+  ~> factors
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dusk
+?end
+-> :day
+
+# counter
+## A very small sum
+$ do chart("florence.bank")
+He is at the very end of the line, and he has been so for so long that it has become an architectural feature. He is small, and bent, and brown, in a patched gown of no color, with a round cap pulled down to the eyebrows, and a handcart standing at his heel loaded with hanks of thread of every shade, red and blue and a yellow like butter. His hands are stained at the ends of the fingers, a deep, kind, permanent indigo. He has a face. It is the sort of face that you look at with the whole of your attention and cannot afterward put together, like a word said too often.
+"Signore," says Nanni. His voice is mild, and dry, and rather high. "I am a seller of thread. I have the honor to deal with your house, in a small way, through the clerk. I have never had cause to trouble the master." He has a cap in his hands, now, which you did not see him take off. "I should like nine florins, for a month, against this."
+He lays it on the counter. It is a wooden measuring rod, a yard long, very old, and black with handling, marked along the edge in a fine, worn, faintly unfamiliar scale of feet and fingers. It is worth, you judge, a florin and a half, to the right sort of person, and nothing at all to the wrong one. The clerks at the counter have all stopped writing.
+"It was my grandfather's," says Nanni. "It is not worth the loan. I should be sorry if you took it for more than it is. It is only that I find that a man ought to put something down." He looks up. It is the first time that you have seen his eyes, and you are quite sure that you will not be able to say what they were.
+He wants the money for a lot of undyed thread at Prato, before the fair. He says so plainly. It is a very small, very sensible, very ordinary request, and you have, at the corner of your mind, the strongest impression that you are being weighed.
+:the_loan
+* Lend him the nine florins at the house rate, and keep the rod in the strong room
+  $ b2.trader_loan = "fair"
+  $ humanity += 1
+  $ standing += 1
+  The clerk writes it. It is done at a fair rate, in a fair hand, on a fair day, and there is not a thing in it for the most careful auditor to blame. Nanni bows. He says that the Signore is very exact, and that exactness is a rare thing in a young house. "You will find the rod in good order," he adds. "I have never lost a pledge, and I have never been late. It is a small boast." He has, you could swear, the faintest air of being pleased, and of being quite unwilling to show it.
+* Lend him the nine florins freely, with no pledge and no interest, and tell him to keep the rod
+  $ b2.trader_loan = "free"
+  $ humanity += 2
+  He looks at the coin. He does not pick it up. "It is very kind," says Nanni. "It is more kind, I fear, than I can take." He pushes the rod gently across the counter, until it lies against your hand. "I do not take what I cannot pay for, Signore. It is not pride. It is only that I have found that a debt, between friends, is a thing that is a great deal safer than a gift." His eyes crinkle. "Put it in the books. Put the interest in, too. I should be offended if you did not." He bows, and takes up the money, and the rod stays where it is.
+* Say that the house does not lend upon rods, and that he must apply at a pawnbroker
+  $ b2.trader_loan = "refused"
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  He takes it very quietly. It is, you see, what he expected, and there is no reproach in it at all. "Of course," says Nanni. "It is a bad pledge. I said so." He takes up the rod, and sets it back in the handcart, with a small gentle pat, as a man pats a horse. "I shall go to the Ponte. There is a pawnbroker there who will take it for four florins, and be sorry afterward." He puts on his cap. "I thank the Signore for the trouble. It was a very civil answer."
+<~
+
+# dyers
+## The scale
+$ do chart("florence.wool")
+The dyer's yard is on a long wet lane off the Via dei Serragli, between the river and a high wall, and it smells of woad and lye and old stale vats and the sour breath of a great many sheep. There are vats the size of wells, steaming, with their stained blue edges, and men in leather aprons the color of bruises, and a yard of racks hung with long wet skeins that drip a slow, bright, bitter rain. The foreman is a thick, red, reasonable man called Lippo. He has a pair of scales on a trestle in the middle of the yard, and he has a quarrel.
+It is with the thread seller. He is there again, in the same patched gown, with the same handcart, and he is standing with his hands folded in front of him, perfectly calm, as a man might who has had this argument for a good many years.
+"It is a question of the weight, Signore," says Lippo, and he is plainly relieved to see you. "The old man sells us thread by the pound, and he will have it weighed on his own brass, and I say that our own scale is the lawful one, and that it comes out a good ounce lighter on every pound. It is in the guild's book, it is stamped, it has been the scale of this yard for thirty years." He looks, for an instant, a little uncomfortable. "It has always come out light. It is a thing that is generally understood."
+?if b2.wool_wages == "hard"
+  The men by the vats do not look up. They have the careful, flat expression of persons who have learned what the master does with an opinion. One of them has stopped stirring.
+?elif b2.wool_wages == "fair"
+  The men by the vats are watching you. It is not hostility. It is the steady, patient, fond regard of persons who have found a master who is a good deal better than they expected, and who would like to see how far it goes.
+?else
+  The men by the vats are watching you with the polite, impersonal interest of those who have never seen you before, and have no reason to expect anything.
+?end
+Nanni says nothing. He has his eyes on the scale, as one watches a dog that is not his own, and which is not, so far, doing any harm.
+It is, as it happens, an easy thing to see. You are at the trestle in two steps, and you have your finger on the beam, and it is as plain to your senses as a bell. The stamped scale is false. It is false by a hair, and it has been false, in the yard's favor, for a very long time.
+:the_scale
+* Have the scale mended in front of everyone, pay the old man for thirty years' short weight on his last load, and say that the yard will weigh it fair
+  $ b2.trader_scale = "weighed"
+  $ standing += 1
+  $ humanity += 2
+  $ do earn(-3)
+  Lippo goes very red. He opens his mouth, and shuts it, and says, in a small voice, that it is the guild's stamp. "Then the guild's stamp is wrong," you say, "and so is the yard." It is not a loud sentence. It is not meant to be. It goes through the yard, between the vats, like a draught through a church. A boy is sent for a smith. The old man's thread is weighed again, on his brass, in front of the whole yard, and the difference is counted out in coin, and Nanni takes it with a small grave bow, and a look that is gone almost before you can read it. "It was, if you will allow me, a very exact piece of justice," he says. "I have never seen it done in this yard."
+* Say that the yard is in the right, but give the old man the difference privately, from your own purse
+  $ b2.trader_scale = "trader"
+  $ cunning_brutal += 1
+  $ humanity += 1
+  Lippo looks as if he had been given a very large present and does not know where to put it. The old man looks at the coin in his palm. He closes his hand, slowly, over it. "It is a kindness," says Nanni, in a voice so mild that it could not be argued with. "It is a very private one. I think I should be sorry to be the reason that a false scale should go on being used." He does not say anything else. He takes up the handles of his cart, and goes out of the yard, and the men by the vats do not watch him go.
+* Say that the stamped scale is the lawful one, and the old man must take what he is given
+  $ b2.trader_scale = "house"
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  $ do earn(1)
+  It is a perfectly proper answer. It is in the guild's book. Lippo's face clears, like a field after rain, and he says that the Signore is a gentleman who understands the trade. The old man does not move. He looks at the scale, and then at you, and for a moment, in the stained, steaming, blue-shot light of the yard, you have the strong, odd feeling that you are being looked at by something a very great deal larger than a man. It passes. "Of course," says Nanni, gently. "It is the law. I have always had a great respect for it."
+<~
+
+# ledgers
+## The old books
+$ do chart("florence.prisca")
+There is a lower strong room, below the strong room, where Prisca keeps the oldest of the books. It is reached by a narrow stair, behind a door of oak with a lock that has no keyhole, and which opens only, as Benedetto explains with a certain nervous pride, to a person who has been told how to ask it. He has been told. He takes you down with the lantern held very high, and it is cold, and dry, and silent, and it smells of a great many centuries of careful people.
+There are shelves, floor to roof, of ledgers, of every shape and age. There are tablets, and rolls, and codices of wood and wax. There are bound books of Pisa and Siena and Ravenna in a small square hand, and beyond them, going back into the dark, a row of scrolls that you know, in the pit of your stomach, as one knows a smell from childhood. The shelves go back into the dark. Prisca has not, in her whole life, thrown away a thing.
+"The Signore asked about the thread seller," says Benedetto, in a low voice. He has his own reasons for being here. He has, you see, been awake half the night, looking. "I have found him in the Florentine books. He is in eleven. He has been a customer of this house for nineteen years. He has never been late. He has never borrowed more than he could carry, and never less, and in nineteen years he has never been refused, which is not, you will allow, an ordinary thing in the trade." He swallows. "And then I thought that I would look in the older ones."
+He lays a ledger on the long table, and turns it, with a lifted lamp, to a page that has been marked with a slip.
+It is Pisa, and the year is two hundred years gone. It says, in a quick, brown, very neat hand, *Nanni, thread, pays on the day*. It is in the margin of a long, dull column of small accounts. Beside it, in another hand, in a pale ink, there is the single word *always*.
+He lays another beside it. It is Ravenna. It is older. It is in a hand that you have never seen, in a Latin that has begun to go soft at the corners, and it says, quite plainly, *Nannus, filum*. Nannus, thread. There is a small gentle tick beside it. It is the same tick, you see, in the same pale ink, that is in the Pisa book. It has been made by the same pen.
+And at the end of the table there is a very old, very dry codex, with a cover of cracked red leather, that Benedetto has not dared to open, because it is not his. You open it. It is a house book of Rome. It is in a hand that you have seen across a table in a room that smelled of burnt thatch, and it is dated, in the old reckoning, to the year before the Great Fire. It says, in the middle of a page of the household's small expenses, *A hank of red thread, of the old man with the cart, on the steps of the Subura, a copper*.
+You have a very faint memory. It is not a clear one. It is a brown hand, with blue ends to the fingers, holding out a hank of red thread to a servant on a wet morning, and a voice, mild, dry and rather high. You had thought it a thing that you had dreamed.
+:the_old_books
+* Say nothing, and have Benedetto close the books, and put them back as they were
+  $ b2.trader_ledger = "kept"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  Benedetto does it with a wonderful, nervous neatness. He does not ask what you have seen. He puts the slips back in the order that they were, and wipes the dust from the covers with his sleeve, and when you have gone up the stair he stays a long time in the dark, with the lantern, looking at the shelves, and you have the very distinct impression that he has understood a good deal more than he will ever say.
+* Take it to Prisca, who is at the head of the stair, and has been watching for some time
+  $ b2.trader_ledger = "told"
+  $ bond.prisca += 1
+  $ secrecy -= 1
+  She is on the stair. She has been there, you think, for longer than she would admit. She looks at the ledgers, and at Benedetto, and at the faint, odd, helpless look in your face, and she says, quite lightly, that she has had the thread seller's custom since the days of the Subura. "He is always called Nanni," says Prisca. "It is a family. It is a trade that runs in them, as they say, like a squint. The grandfather, and the father, and the son. I have dealt with them all." She has taken the old red codex out of your hand, without seeming to, and closed it. "It is a thing that I used to find very curious. I stopped. I found that I never lost a florin by it." She smiles, and it is a perfectly sincere one. "It is a great comfort, in a long life, to have one account that has never been a trouble. I should not look at it too hard."
+<~
+
+# factors
+## The two factors
+$ do chart("florence.bank")
+They come in separately, and they are put in the back room together, because it has one chair too few and Benedetto is an optimist. Ser Bartolo is the Medici's man, a round, slow, sad, careful person with a pouch at his belt and a habit of looking at the ceiling when he tells the truth. Messer Raniero is the Pazzi's, who is thin, and long, and elegant, with a quick light voice and a ring on every finger, and has the air of a man who has been told that he is charming. They greet each other with the very great politeness of two dogs that have each been told to be good.
+They want the same thing, it appears. It is a very simple one. They have each, independently, come to ask you whether the Banca del Colle has been approached by a stranger who is buying up Pazzi paper.
+?if b2.loan == "both"
+  They ask it of you because you hold the letters of both houses, and have the best view in Florence of what is moving.
+?elif b2.loan == "medici"
+  Messer Raniero asks it with the careful, wounded air of a man whom you have not carried, and who knows it.
+?elif b2.loan == "pazzi"
+  Ser Bartolo asks it with the sorrowful politeness of a man whom you have not carried, and who is very sorry for it.
+?else
+  They ask it of you because you have not taken a side, and it is therefore possible that you will tell them the truth.
+?end
+"It is a small thing," says Ser Bartolo, to the ceiling. "A bill here and a bill there. A man in a good coat comes to a Pazzi clerk, in a counting house, and offers par for a debt that is worth sixty. He pays in coin. It is very good coin. It is rather a strange coin." He coughs. "It is an old mint, Signore. It is a mint that I have never seen. I should say that it was a very old house that had put it by."
+"And it is not only Pazzi paper," says Raniero, in his quick light voice, "that is being bought. It is the paper of those who owe the Pazzi. It is a very elegant arrangement. A man might hold the whole of the debt of a family, on both sides of its books, and call it a day." He examines a ring. "I do not like it. I do not like anything that I cannot name."
+?if b2.captain == "funded"
+  You do not say anything. You are thinking of a man at a side door, and of an old ducat that smelled of a house without a fire. You know, as clearly as if it had been written in the sun, who has been paying par for Pazzi paper. You do not know why. You know that you paid, in a small way, for a company that is now owed money by the people whose debts are being bought.
+?elif b2.captain == "listened"
+  You do not say anything. You are thinking of a man at a side door, and of an old ducat that smelled of a house without a fire. You listened to him, and you let him go. It seems a good deal less clever than it did.
+?end
+:the_paper
+* Warn Ser Bartolo, privately, that someone is buying the ground out from under the Pazzi, and that it will not stay quiet
+  $ b2.pazzi_paper = "warned"
+  $ standing += 1
+  $ secrecy -= 1
+  $ humanity += 1
+  $ bond.prisca += 1
+  You wait until Raniero has gone, with his rings and his bows, and the door is shut. Then you say it, in a low voice, to the ceiling, as he likes it said. Bartolo does not turn a hair. He looks at the plaster for a considerable time. "I thank the Signore," he says. "It will be mentioned. I do not say to whom." He goes out very slowly, with the pouch hanging at his belt, and you see that his hand, as he lifts the latch, is not quite steady.
+* Buy a little of the paper yourself, at forty, and see where it goes
+  $ b2.pazzi_paper = "profited"
+  $ cunning_brutal += 2
+  $ do earn(25)
+  $ humanity -= 1
+  $ secrecy += 1
+  It is a perfectly proper investment. It is the kind of thing that a bank is for. You have Benedetto draw up the paper, and sign it, and by the ninth hour you have bought, in a series of very small and very discreet purchases, a quiet corner of the same debt that the stranger has been buying. It is not, you tell yourself, a bet. It is merely a very good seat. You do not ask what the play is.
+* Say that you have heard nothing, and see them both to the door
+  $ b2.pazzi_paper = "silent"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  They go, one after the other, with a long, politely disappointed look at the room. It is a very correct answer. It is the answer of a house that would like to see how the thing falls out, and the whole of the quarter will know, by evening, that the Banca del Colle is not a place where one gets a straight word.
+<~
+
+# dusk
+## The ninth hour
+$ do chart("florence.bank")
+The last of the shutters comes down at the ninth hour. The clerks go out with their satchels, one by one, into a street gone gold and rose and long with shadows, and Benedetto does the sums by the window with a tired, soft click of beads, and you stand, for a long moment, in the plain gold light, in the empty room.
+There is a small, folded, very clean note on the counter. It has been left there. Nobody saw it come. It is in a mild, round, cheerful, old-fashioned hand, and it says, *If the Signore should have a moment before the bell, there is a stall in the Mercato Vecchio, by the Column. I have a cup of wine that is not good, and a stool that is. I should be glad of a little conversation. N.*
+?if b2.trader_loan == "refused"
+  You can see the line of the old man's back, as he went out into the street with the rod, and you do not think that it is because of the rod that you are going.
+?end
+You go. It is a good evening for a walk. The Mercato Vecchio is a great square, hemmed with towers and loggias and the tall dim flanks of the old houses, and every stall in it has hung out a lamp. There are butchers and fishmongers and sellers of pins and of pears, and the roar of the day has gone down to a murmur, and the smell of woodsmoke and garlic and old wet stone lies in the air like a warm coat. The Column of Abundance stands in the middle, in the last of the light, with its statue on the top, and at the foot of it, among the cloth sellers, there is a small bright stall hung with a thousand hanks of thread.
+He has lit a lantern. He has set out two stools, and a jug, and two rough clay cups. He rises, as you come, with the small stiff bow of the very old.
+"It is very good of the Signore," says Nanni. "I did not think that you would come. I thought that I should sit here, until the bell, and drink the wine myself, and that it would be a very fair evening." He pours. It is, as he promised, not good. It is thin and tart and has a taste of the barrel. You drink it, and it is the best thing that you have had all day.
+He does not sit at once. He stands and looks at the square, with his cup in both hands. It is a look that you have seen before, on the faces of very old men on very old benches, at the hour when the market closes, as though a great deal of one's life had gone through it and had been left there, like a coin dropped between the stones.
+"I have sold thread in this square," says Nanni, "for a very long time. It is a good trade. It is the one thing in the whole of the market that is of no importance, and that holds all the rest together." He sits. "It is only the thread, you know, that keeps the cloth. Nobody looks at it. I find that it is very restful."
+You sit. The lantern throws its small gold circle on the stones, and on the stall, and on the two of you. It is very quiet. A woman a long way off is calling a child in.
+"I will ask the Signore a thing," says Nanni, "and he need not answer. It is an old man's question, and I have asked it of a great many people, and I have never once had the same answer from two of them." He turns the cup. "If the Signore had a very great deal of money, and a great deal of time, and nobody at all to leave it to, what would he do with it?"
+:the_answer
+* Build something with it, that would be standing when I was gone
+  $ b2.trader_answer = "build"
+  $ humanity += 1
+  $ collesanto += 1
+  He is silent for some time. "Ah," says Nanni. He says it very softly, and rather sadly, and with a good deal of warmth. "That is the answer of a person who has seen a great deal go down. I have known one or two. They build, as a rule, a house, and then a wall, and then another house." He smiles. "It is a good answer. It is not a safe one. A thing that is built is a thing that can be burned."
+* Keep it, in the dark, against the day that it was needed
+  $ b2.trader_answer = "keep"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  "Patience," says Nanni, with a quiet, dry appreciation. "It is a rare gift. It is the best of all the gifts, and the one that a person can least afford to be proud of. There is a certain kind of money that is only strong because it waits." He nods. "I have known people who kept a coin for six hundred years. It was a good coin. They were not, I think, very happy."
+* Give it where it was wanted, and let it do its work without me
+  $ b2.trader_answer = "give"
+  $ humanity += 2
+  $ standing += 1
+  The old man laughs. It is a short, clear, delighted laugh, with something under it that you cannot name, and it is a good deal younger than the face. "I did not think that you would say that," says Nanni. "I thought, from the way you took the loan, that you would be a great deal more careful." He wipes his eyes with a stained thumb. "It is the most dangerous answer. It is also, I am afraid, the one that I like best. I hope that you will not be a fool."
+* Use it, to be obeyed, so that nothing could be done in my city that I did not know
+  $ b2.trader_answer = "rule"
+  $ cunning_brutal += 2
+  $ humanity -= 2
+  $ defiance += 1
+  He does not seem shocked. He nods, slowly, and looks into the cup, and the lantern makes a small deep gold coin of the wine. "Yes," says Nanni. "It is what money is for, in one view of the matter. It is the shortest way to a thing. I have known a good many who took it." He does not say how they ended. He does not need to. It is in the quality of the silence, which is not unkind, and in which you hear, very faintly, the sound of a great many people who are not there.
+The old man takes up the jug. He pours, with a hand that does not shake, and the thin sour wine goes round the cup in a whirl.
+?if b2.captain == "funded"
+  "I saw the man who came to your side door," says Nanni, as if it were quite a casual thing. "The condottiere's agent. I know the coin that he pays in. It is not from any mint that I would care to meet. It comes out of a house in which there is no fire, and I would not take it for a thing that I wished to be proud of." He sips. "You will do as you think best. I merely mention that it has been known to come back."
+?elif b2.captain == "listened"
+  "I saw the man who came to your side door," says Nanni, as if it were quite a casual thing. "The condottiere's agent. I know the coin that he pays in. It comes out of a house in which there is no fire." He sips. "I am glad that you did not take it."
+?end
+?if b2.pazzi_paper == "profited"
+  "I am told," says Nanni, very gently, "that the Signore has bought a little Pazzi paper. It is a good, safe, ordinary trade. I only wish to say that when a whole city owes a debt to a single hand, it is not a trade that a prudent man holds for long." He looks into the lantern. "It is the kind of debt that is paid in a crowd."
+?elif b2.pazzi_paper == "warned"
+  "I am told," says Nanni, very gently, "that the Signore has been kind to a Medici clerk. I should not worry. It is not a thing that is easily wasted." He looks at the lantern. "It is the kind of debt that is paid in a crowd, I think, and a kind word given early is worth a great deal."
+?end
+The bell of the Badia has begun. It is the last of the evening bells, a long, slow, heavy one, and it goes over the roofs and the towers and the column like a hand over the head of a child. The lamps are being lit in the loggias. In the east the sky has gone the color of a plum.
+He turns to the cart. He is rummaging, with the peculiar absorbed fussiness of the old, among the spools, and he comes out with something small in his fingers. He holds it out on his palm.
+It is a coin. It is not a florin, nor any coin that you know. It is a thick, small, dull piece of copper, worn very smooth, and on the face of it, scratched in a very fine line, there is a balance in a circle.
+"It is of no value," says Nanni. "It is a thing I give to those whom I should be sorry to see poor. The clerks of the old houses know it. It is not a great thing. A man who showed it, to a clerk of the Merchant line, in any city where the line has a door, would be asked no questions, and given what he needed, and would not be asked to pay it back." He sets it on the board, between the cups. "It is a very foolish present, and it is all that I have."
+?if b2.trader_ledger != "unseen"
+  You look at the balance, in its circle. It is the seal on the page in the cellar of the Bargello. It is the mark of Prisca's house. It is the mark on the bronze ring on the door of the bank. You think of a hank of red thread, on the steps of the Subura, on a wet morning, fourteen hundred years ago. It is a very difficult thing to say aloud.
+?end
+:the_coin
+* Take it, and thank him
+  $ b2.trader_coin = "taken"
+  $ do obtain("merchants_token")
+  $ standing += 1
+  $ bond.nanni += 2
+  It is very small, and it is warm, as a thing is that has been carried a long time in a fold of cloth. He watches you close your hand on it. He has, you see, the look of a person who has done a thing that he was uncertain of, and who is a good deal relieved, and a little afraid. "I am obliged to the Signore," says Nanni. "It is a very odd thing to be glad about. I find that I am."
+* Push it back, and say that it is too much to take from a man whom you hardly know
+  $ b2.trader_coin = "refused"
+  $ secrecy += 1
+  $ bond.nanni += 1
+  $ humanity += 1
+  He looks at the coin. He looks at you. "That is not what I expected, Signore," says Nanni. He takes up the copper, and turns it over, and sets it back, slowly, in the fold of his sleeve. "I shall keep it. It is not a thing that spoils. I should not wish to press it, on a man who has said no, for the best of reasons." He smiles, and it is a good, plain, kind one. "It will be here."
+* Ask him, plainly, who he is
+  $ b2.trader_coin = "refused"
+  $ cunning_brutal += 1
+  $ bond.nanni -= 1
+  $ secrecy += 1
+  The old man does not start. He puts down his cup, very carefully, and sets his hands on his knees, and looks at you, with a long, gentle, patient look, as if a child had asked whether the sky was far away. "I am a seller of thread," says Nanni. "I have been one for a long time. My grandfather sold thread, and his father, and a great many fathers before that. It is a trade that runs in a family. It is the only one, I think, that does." The lantern flickers. "It is not a thing that is of any interest to anyone. I have found it a very great comfort." He picks up the coin, and puts it away. "I should be sorry to be a trouble."
+$ _score = 0
+?if b2.trader_loan == "fair"
+  $ _score += 2
+?elif b2.trader_loan == "free"
+  $ _score += 1
+?end
+?if b2.trader_scale == "weighed"
+  $ _score += 2
+?elif b2.trader_scale == "trader"
+  $ _score += 1
+?elif b2.trader_scale == "house"
+  $ _score -= 1
+?end
+?if b2.trader_answer == "build" or b2.trader_answer == "give"
+  $ _score += 1
+?elif b2.trader_answer == "rule"
+  $ _score -= 1
+?end
+?if b2.wool_wages == "fair"
+  $ _score += 1
+?elif b2.wool_wages == "hard"
+  $ _score -= 1
+?end
+?if b2.captain == "funded"
+  $ _score -= 1
+?end
+?if b2.pazzi_paper == "warned"
+  $ _score += 1
+?elif b2.pazzi_paper == "profited"
+  $ _score -= 1
+?end
+?if _score >= 4
+  $ b2.trader_regard = "warm"
+?elif _score >= 1
+  $ b2.trader_regard = "wary"
+?else
+  $ b2.trader_regard = "cold"
+?end
+?if b2.trader_regard == "warm"
+  He lingers. He does not say anything more about money. He tells you, instead, in the peaceful, dry, steady voice of a man who has no reason in the world to be believed, that a person who has been asked a hard question will be asked a harder one. "The Signore will find, in the next few years, that a great many people will say that they know what he is," says Nanni. "I should be careful of those who are very sure." He smiles. "The cup is not poisoned, if you should care to come again. It is not a very good cup. But it has always been honest."
+?elif b2.trader_regard == "wary"
+  He is courteous, and kind, and says what an old man says to a younger one at the end of a long day: that the wine is bad, and the night is fine, and the Signore is welcome. There is a faint thoughtfulness about it, like a man who has been shown a drawing and is not quite sure what it is a drawing of. "I shall think about it," says Nanni, as if to himself. "I generally do. It is the thing that I am best at."
+?else
+  He is perfectly polite. He is as polite as a locked door, and it is only in the very last moment, as he is packing the thread into his cart, that you hear him say, to no one at all, in an unemphatic voice, "I think that he will do very well in business. I do not think that he will do well otherwise." It is not said to wound. It is the dry, patient verdict of a man who has seen a great many ledgers closed.
+?end
+You go back across the square in the long lamplit blue. It is a perfectly ordinary evening. A woman is arguing with a butcher over the price of a calf's head, and a boy is selling pears out of a basket on his head, and somewhere a fiddle is being played, very badly and with a great deal of feeling.
+At the corner of the Via Calimala you turn to look back. You do not know why. The stall is a small bright island in the dark, with its lantern, and its thousand colored hanks, and the stooped brown figure at the back of it, setting the last of the spools in its place. Every shadow in the whole of the square falls, as shadows should, away from its light. It is only that the old man's falls a little the other way. It lies a little closer to him than it ought, as a dog lies, and when he moves the other shadows of the market seem, for an instant, to lean toward him, like plants toward a window, and then, quite correctly, to lean away.
+You stand for some time. It is not a thing that you could swear to. The lantern gutters, and the old man bends, and the shadows are all where they should be, and you go home by the river, in the warm dark, with the taste of very bad wine on your tongue.
+$ do rest()
+=> next

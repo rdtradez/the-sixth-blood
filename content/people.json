@@ -237,6 +237,62 @@
       "name": "Vieri Salimbeni",
       "title": "A young vampire of the court",
       "bio": "Twenty three for some years now, with a good coat, a gold chain and a handsome sneer. He tests strangers in alleys, and he tells the story afterward."
+    },
+    "watcher": {
+      "gender": "opposite:hero",
+      "names": {
+        "f": "Allegra Bonsi",
+        "m": "Matteo Bonsi",
+        "x": "Allegra Bonsi"
+      },
+      "title": "A new clerk at the Banca del Colle",
+      "bio": "Quick, neat and very hard to catch looking. Keeps a small book and writes in it with a stub of lead. Has an excellent reference from a stationer in Pisa."
+    },
+    "bartolo": {
+      "gender": "m",
+      "name": "Ser Bartolo",
+      "title": "First factor of the Medici bank",
+      "bio": "A pleasant, tired, intelligent man who has never been in a hurry. He is very polite about everything."
+    },
+    "raniero": {
+      "gender": "m",
+      "name": "Messer Raniero",
+      "title": "A factor of the Pazzi bank",
+      "bio": "Small, quick and dark, with a smile that goes on and off like a lamp. He is very polite about everything."
+    },
+    "nofri": {
+      "gender": "m",
+      "name": "Ser Nofri",
+      "title": "A master wool weaver in the Oltrarno",
+      "bio": "A decent man who pays his weavers too much and is going broke for it."
+    },
+    "berto": {
+      "gender": "m",
+      "name": "Maestro Berto",
+      "title": "A painter of the Via dei Servi",
+      "bio": "A big, untidy, cheerful man with a face like a boiled ham and the hands of a gifted child."
+    },
+    "apprentice": {
+      "gender": "opposite:hero",
+      "names": {
+        "f": "Nella",
+        "m": "Nello",
+        "x": "Nella"
+      },
+      "title": "Maestro Berto's senior apprentice",
+      "bio": "Mixes the greens. Has a very direct way of looking at people and does not stop working to do it."
+    },
+    "berengaria": {
+      "gender": "f",
+      "name": "Berengaria",
+      "title": "Remembrancer of the court",
+      "bio": "A very small, very old vampire in a dark green gown, who keeps the Prince's roll in her head. She was made in Ravenna in the Gothic king's time, lives in a house with a blue door and no fire, and has said a hundred and twelve names over every night for nine hundred years."
+    },
+    "nanni": {
+      "gender": "m",
+      "name": "Nanni",
+      "title": "A seller of thread",
+      "bio": "A small bent brown old man with a handcart of colored hanks and indigo on the ends of his fingers. He has dealt with the Merchant house in a small way for as long as anyone has kept books. Nobody can say afterward what color his eyes were."
     }
   }
 }

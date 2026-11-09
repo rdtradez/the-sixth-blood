@@ -320,6 +320,38 @@
           "notes": [
             "blood"
           ]
+        },
+        {
+          "id": "b2c05",
+          "file": "blood-and-gold/ch05.tsb",
+          "title": "The Third Hour to the Ninth",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b2c06",
+          "file": "blood-and-gold/ch06.tsb",
+          "title": "The Little Book",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b2c07",
+          "file": "blood-and-gold/ch07.tsb",
+          "title": "The Scraped Page",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b2c08",
+          "file": "blood-and-gold/ch08.tsb",
+          "title": "The Seller of Thread",
+          "notes": [
+            "blood"
+          ]
         }
       ],
       "incomplete": true
