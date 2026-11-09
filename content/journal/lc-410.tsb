@@ -1,0 +1,47 @@
+// Velati journal for the Lost Centuries, 410 AD (interlude session A). Written when chapter lc02 ends, on a copy of the state. No choices.
+// The record of the Aventine watch, in the hand of Rufinus, the notary of the burial society. Reads decisions, never recomputes them.
+@chapter lc_journal_410
+@title Velati Journal: Rome, 410
+@book burning-city
+@version 1
+
+# start
+## From the book of the Aventine watch, in the hand of Rufinus
+> Set down in the year 1163 from the founding of the city, in the week after the Goths, in the back room, with the door barred.
+The Goths have been, and have gone, and I am writing this at the table with a lamp, and a pen that spits.
+?if b1.velati_seed == "told"
+  I am told that it is a thing that we have done for three hundred and forty-six years, and that I should make an entry, and I am making one. It is the first time that anything has happened.
+?else
+  I have not made an entry in this book before. I am not at all sure that it is the sort of book in which one does. I am making one because there has been, this week, a thing that does not fit anywhere else.
+?end
+The city was opened at the third watch of the twenty-fourth night of August, and was taken, in a quiet way, in the course of three days. I have counted what I could. It was not so very many. It was a great deal more than it should have been.
+?if lc.gate == "sheltered"
+  A priest of the Sallustian quarter came to me on the fourth day with nineteen people he said had been shut in a cellar by the river, and fed on bread, and told not to open the door by a man who said that he was a neighbour. He did not know the man. He said that the man had a face like an old saint, and did not eat.
+?elif lc.gate == "fought"
+  A baker in the lane under the Salarian hill told me that a man had come out of the dark, and killed three Goths at his door, and said nothing, and gone. He said that the man was covered in blood, and was not at all out of breath. I have asked him to say it again to me in a month.
+?elif lc.gate == "fed"
+  I have heard, in the lanes behind the gate, from three people who did not know one another, of someone who went among the dying on the first night and did not take the living. It is said that the dying did not mind. I do not know what to make of it. I have set it down.
+?else
+  I did not go out on the first night. I have been ashamed of it since. I have the account of the others, and I have set it down as they gave it, in two columns.
+?end
+?if lc.court == "held" or lc.court == "bargained"
+  On the morning of the twenty-fifth, at the Flaminian gate, there was a line of wagons, and a tall man beside the first, in plain clothes, in broad day, with a mule. I should not have remarked on it. It was the man whom I have, in this book, in another hand, and it says that he walks in the sun.
+?else
+  There was a line of wagons that went out on the Flaminian Way, in the dark, on the first night. It was not a Gothic line. It was a great deal too quiet. I have not been able to find out who sent it.
+?end
+?if lc.watchers == "funded"
+  He came to the door. He was a stranger. He did not give a name. He asked whether the society kept a book, and I said that it did, and he asked whether it would go on, and I said, if it could. He left a purse. I have not opened it. It is heavy. I have put it in the chest under the book, and I have said to the others that we shall need a larger chest.
+?elif lc.watchers == "warned"
+  He came to the door. He was a stranger. He told me what he thought of a book that records the wrong things, and of the people who would not want it kept. He did not say what he was. He said that I should burn it. I have not burned it. I have taken it out of the chest, and put it in another, in a place that I shall not write down.
+?else
+  A man stood at the door on the second evening, a plain man with a face that I could not afterwards describe, and asked if we were a friend of the dead. I said that we were. He thanked me, and went away. I should not have written it, except that I could not stop thinking of him.
+?end
+?if lc.hill == "defended"
+  I am told that on the hill to the north, a village that has a name I have not heard before was visited by Goths, and that the Goths went round it. The villagers say that there was a man in the road. They do not say who. It is a very old village.
+?elif lc.hill == "hidden"
+  I am told that a village on the hill to the north was visited by Goths, and found empty. The people had hidden in the cellars, and the quarry. They had a plan, written down. It is a thing that I should very much like to see.
+?elif lc.hill == "parleyed"
+  I am told that a village on the hill to the north paid off a Gothic party with grain, and a draft on a house that has not existed in a hundred years. It was honoured, in the end. The villagers are not able to say by whom.
+?end
+There is an old story in this book that a man was seen in the smoke of the Great Fire who was not in it. I have always thought that it was a tale that the old watchmen told to the young ones, to keep them awake. I am bound to say that I think so no longer.
+=> endbook

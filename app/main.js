@@ -269,7 +269,7 @@ function showFrame() {
     const orn = svg(ornamentSvg());
     orn.setAttribute('class', 'ornament');
     story.append(h('header', { class: 'chapter-head' },
-      h('p', { class: 'kicker' }, meta.prologue ? 'Prologue' : meta.number ? `Chapter ${meta.number}` : (book?.title ?? '')),
+      h('p', { class: 'kicker' }, meta.prologue ? 'Prologue' : meta.interlude ? 'The Lost Centuries' : meta.number ? `Chapter ${meta.number}` : (book?.title ?? '')),
       h('h1', {}, meta.title),
       orn));
   }

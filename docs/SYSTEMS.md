@@ -202,3 +202,7 @@ Four content files feed the player screens.
 
 Developer mode (`?dev`) adds a Dev tab: jump to any chapter or scene, view and set flags and stats, take and restore snapshots, and run the branch explorer, which plays every choice path of a chapter and reports unreached scenes and errors. `npm run walk -- <chapter>` runs the explorer from the command line.
 
+
+## Sleep chains and chapter journals
+
+A gap in `content/sleep.json` may set `"chain": "<name>"`. Each `sleep(gap)` in the chain appends a history entry; the engine adds the earlier years, merges events and sets `segments`, so `wake()` reports the whole chain. A chapter may set `journal` (a Velati script) and `journalTitle` in the manifest; the entry is composed when the chapter ends. Chapters with `"interlude": true` are unnumbered and not counted.

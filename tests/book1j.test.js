@@ -21,9 +21,9 @@ async function newGame() {
   return game;
 }
 
-async function drive(game, frame, wants = []) {
+async function drive(game, frame, wants = [], stopAt = null) {
   const pages = [];
-  for (let i = 0; i < 3000 && frame.wait !== 'book_end'; i++) {
+  for (let i = 0; i < 3000 && frame.wait !== 'book_end' && !(stopAt && game.state.chapter === stopAt); i++) {
     pages.push(...texts(frame));
     if (frame.wait === 'choices') {
       let at = 0;
@@ -40,7 +40,7 @@ async function drive(game, frame, wants = []) {
   return { game, frame, text: pages.join('\n'), vars: game.state.vars };
 }
 
-async function playFrom(chapter, scene, vars, wants = [], { seed = 3, hero = HERO, circle = true, setup } = {}) {
+async function playFrom(chapter, scene, vars, wants = [], { seed = 3, hero = HERO, circle = true, setup, stopAt = null } = {}) {
   const game = await newGame();
   game.setSetting('dev', true);
   await game.startBook('burning-city', { from: 'new', hero, seed });
@@ -57,8 +57,11 @@ async function playFrom(chapter, scene, vars, wants = [], { seed = 3, hero = HER
   for (const [k, v] of Object.entries(vars)) dev.setVar(game, k, v);
   if (setup) setup(game);
   const frame = await dev.jump(game, chapter, { scene: scene ?? undefined, keep: true });
-  return drive(game, frame, wants);
+  return drive(game, frame, wants, stopAt);
 }
+
+// Chapter 20's sleep is the first stretch of the Lost Centuries: stop where the first interlude chapter begins.
+const playSleep = (vars, wants, opts = {}) => playFrom('b1c20', null, vars, wants, { stopAt: 'lc01', ...opts });
 
 const DAY = { rufus: /Aventine station/, study: /counting room, for the accounts/, senate: /Senate house, where the Commander/, gate: /gate on the Appian road/ };
 const RUFUS = { told: /Tell him the truth/, buried: /different story/, left: /cannot tell him/ };
@@ -139,12 +142,12 @@ test('the oath of the keepers makes Aelia and Felix keepers; refusing leaves the
 
 test('each steward is recorded, and only those in the circle (or sworn) are offered', async () => {
   for (const key of ['bank', 'prisca', 'hanno', 'tiro']) {
-    const run = await playFrom('b1c20', null, { 'b1.keepers': 'spared' }, [PLACE.collesanto, STEWARD[key], ORDERS.safe]);
+    const run = await playSleep({ 'b1.keepers': 'spared' }, [PLACE.collesanto, STEWARD[key], ORDERS.safe]);
     const logged = run.game.state.decisions.find((d) => d.name === 'steward.burning-city');
     assert.equal(logged.value, key);
     assert.equal(run.game.state.sys.sleep.wake.steward, key);
   }
-  const keepers = await playFrom('b1c20', null, {}, [PLACE.collesanto, STEWARD.keepers, ORDERS.safe], {
+  const keepers = await playSleep({}, [PLACE.collesanto, STEWARD.keepers, ORDERS.safe], {
     circle: false,
     setup: (game) => {
       game.state.vars['b1.keepers'] = 'sworn';
@@ -154,43 +157,43 @@ test('each steward is recorded, and only those in the circle (or sworn) are offe
   });
   assert.equal(keepers.game.state.sys.sleep.wake.steward, 'keepers');
   // Without the circle or the oath, the bank is the only steward, and the game does not get stuck.
-  const lone = await playFrom('b1c20', null, {}, [PLACE.tomb, ORDERS.safe], { circle: false });
+  const lone = await playSleep({}, [PLACE.tomb, ORDERS.safe], { circle: false });
   assert.equal(lone.game.state.sys.sleep.wake.steward, 'bank');
 });
 
 test('the resting place and the orders are recorded in the wake report', async () => {
   for (const place of ['collesanto', 'haven', 'tomb']) {
-    const run = await playFrom('b1c20', null, {}, [PLACE[place], STEWARD.bank, ORDERS.safe]);
+    const run = await playSleep({}, [PLACE[place], STEWARD.bank, ORDERS.safe]);
     assert.equal(run.game.state.sys.sleep.wake.place, place);
   }
   for (const orders of ['safe', 'aggressive', 'dark']) {
-    const run = await playFrom('b1c20', null, {}, [PLACE.collesanto, STEWARD.bank, ORDERS[orders]]);
+    const run = await playSleep({}, [PLACE.collesanto, STEWARD.bank, ORDERS[orders]]);
     assert.equal(run.game.state.sys.sleep.wake.orders, orders);
   }
 });
 
 test('protections cost coin, can only be bought once each, and the choice can always be ended', async () => {
   const base = [PLACE.collesanto, STEWARD.bank, ORDERS.safe];
-  const rich = await playFrom('b1c20', null, { wealth: 200 }, [...base, /Lay traps/, /Pay the people/, /Hire guardians/, /That will do/]);
-  const bare = await playFrom('b1c20', null, { wealth: 200 }, [...base, /That will do/]);
+  const rich = await playSleep({ wealth: 200 }, [...base, /Lay traps/, /Pay the people/, /Hire guardians/, /That will do/]);
+  const bare = await playSleep({ wealth: 200 }, [...base, /That will do/]);
   assert.ok(rich.game.state.sys.sleep.wake.before < bare.game.state.sys.sleep.wake.before, 'protections were paid for');
-  assert.equal(rich.frame.wait, 'book_end');
-  const poor = await playFrom('b1c20', null, { wealth: 0 }, [PLACE.collesanto, STEWARD.bank, ORDERS.safe]);
-  assert.equal(poor.frame.wait, 'book_end', 'a hero with no coin is not stuck at the guard');
+  assert.equal(rich.game.state.chapter, 'lc01');
+  const poor = await playSleep({ wealth: 0 }, [PLACE.collesanto, STEWARD.bank, ORDERS.safe]);
+  assert.equal(poor.game.state.chapter, 'lc01', 'a hero with no coin is not stuck at the guard');
   assert.equal(poor.vars.wealth >= 0, true);
 });
 
 test('the dark orders cost Humanity at the wake', async () => {
-  const safe = await playFrom('b1c20', null, { humanity: 90 }, [PLACE.collesanto, STEWARD.bank, ORDERS.safe]);
-  const dark = await playFrom('b1c20', null, { humanity: 90 }, [PLACE.collesanto, STEWARD.bank, ORDERS.dark]);
+  const safe = await playSleep({ humanity: 90 }, [PLACE.collesanto, STEWARD.bank, ORDERS.safe]);
+  const dark = await playSleep({ humanity: 90 }, [PLACE.collesanto, STEWARD.bank, ORDERS.dark]);
   assert.ok(dark.vars.humanity < safe.vars.humanity);
 });
 
 test('the sleep is seeded: the same choices give the same wake report', async () => {
   const wants = [PLACE.tomb, STEWARD.bank, ORDERS.safe];
   const setup = (g) => { g.state.rng = 11; };
-  const a = await playFrom('b1c20', null, {}, wants, { setup });
-  const b = await playFrom('b1c20', null, {}, wants, { setup });
+  const a = await playSleep({}, wants, { setup });
+  const b = await playSleep({}, wants, { setup });
   assert.deepEqual(a.game.state.sys.sleep.wake, b.game.state.sys.sleep.wake);
 });
 

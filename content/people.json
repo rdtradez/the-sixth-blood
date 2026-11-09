@@ -159,6 +159,36 @@
       "name": "The General",
       "title": "First of the General line",
       "bio": "A very big, very old man who was put under the hill before there was a city on it. He is courteous, dry, and in no hurry, and everyone around him is afraid of what he will want."
+    },
+    "valeria": {
+      "gender": "f",
+      "name": "Valeria",
+      "title": "Mistress of the hill, in the year 410",
+      "bio": "A woman of the Valerii, in the eleventh generation since Aelia, with a cross on her stole and a lamp in her hand. She was told one sentence to say, and never expected to say it."
+    },
+    "wisand": {
+      "gender": "m",
+      "name": "Wisand",
+      "title": "A captain of Alaric's host",
+      "bio": "A tired Gothic officer with a thick yellow beard and one rule for the night: that the churches are to be left alone."
+    },
+    "rufinus": {
+      "gender": "m",
+      "name": "Rufinus",
+      "title": "A notary of the Aventine",
+      "bio": "A dry, careful notary of a burial society, who keeps a very old book that nobody has asked to see."
+    },
+    "eudoxia": {
+      "gender": "f",
+      "name": "Eudoxia",
+      "title": "Chamberlain of the Senate of Blood at Constantinople",
+      "bio": "A Greek vampire of great age and great manners, who runs the court from a chair in a cistern and has never raised her voice."
+    },
+    "ioannes": {
+      "gender": "m",
+      "name": "Ioannes",
+      "title": "A mason at the Great Church",
+      "bio": "A mason of Constantinople with plaster in his beard, who has been laying gold on the dome for five years and does not intend to stop."
     }
   }
 }

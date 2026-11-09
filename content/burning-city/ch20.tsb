@@ -1,10 +1,10 @@
 // Book One, Chapter 20 (session 16). The last night on the hill, the four choices for the long sleep (resting place, steward, orders, protections), and the sleep itself.
-// No phases. Calls rest() once and then sleep(), which resolves the sleep to Book Two. Closes with => next, so interlude chapters can be added after it later.
-// What the sleep did is not shown here: Book Two's opening reads wake().
+// No phases. Calls rest() once and then sleeps the first stretch of the Lost Centuries (rome_to_sack). Closes with => next, and the interlude chapters (content/lost-centuries) follow.
+// Version 2 (interlude session A): the sleep is now the first segment of the Lost Centuries chain, not the whole sleep to Book Two. What the sleep did is not shown here: the next chapter reads wake().
 @chapter b1c20
 @title The Long Sleep
 @book burning-city
-@version 1
+@version 2
 
 # start
 ## The last night
@@ -185,7 +185,7 @@ You do not say any of the things that you had thought to say. You find that ther
 ?end
 The last thing that you hear is the village. It is very faint, down there under the stone. It is a sound that you have lived in, like water, for two years, and it goes on, a thousand small slow beats, a child's and a woman's and an old man's, steady and quiet and entirely unaware of you. You listen to it go on.
 $ do rest()
-$ do sleep()
+$ do sleep("rome_to_sack")
 You close your eyes.
 It is not like sleep. It is like being put down, very gently, by a large hand. There is a long, quiet fall, and the sound of the village goes away, not all at once but one beat at a time, like lamps being put out down a long street, and the dark is complete and warm and does not ask anything of you at all.
 Somewhere in it, very far off, below the hill or beyond it, there is a sound like a knock. It comes once. It does not come again. You are, by then, a good way down, and you do not think about it.

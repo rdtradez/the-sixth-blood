@@ -1,0 +1,414 @@
+// The Lost Centuries, chapter 3 (interlude session A). 537 AD: the second waking, in the Senate of Blood's new city, on the eve of the dedication of the Great Church.
+// Reads the wake report from lc02's sleep (sack_to_byzantium), lc.seat, lc.court and lc.watchers from before. A night phase of two actions out of three places, then the day of the dedication.
+// Ends with rest() and sleep("byzantium_to_florence"), the last segment of the chain, then => next, which ends Book One. The chapter's own Velati journal entry is content/journal/lc-537.tsb.
+@chapter lc03
+@title The Second Rome
+@book burning-city
+@version 1
+
+# start
+## Up again
+$ lc.answer = "bargained"
+$ lc.sunwalk = "refused"
+$ lc.hill_537 = "none"
+$ lc.court_537 = "wary"
+$ lc.mason = "unmet"
+$ _fed = 0
+$ _pick = 0
+~> waking
+?if must_feed()
+  ~> hunger
+?end
+---
+~> writ
+---
+~> voyage
+---
+$ do phase("night", 2)
+Constantinople does not so much welcome you as absorb you. There is a quay, and a customs house, and a very large number of people, and a smell of fish and incense and hot bread, and you are standing in the middle of it in a plain cloak and a perfectly good pair of boots, and nobody notices you at all. It is, on the whole, a great relief.
+It is the twenty-fifth of December, in the eleventh year of the reign of the Emperor Justinian, and the Great Church is to be dedicated in two days. The city has been talking of nothing else since the autumn. You have, by the court's reckoning, two nights, and a morning.
+-> night
+
+# waking
+?if wake("outcome") == "woken_early"
+  ?if wake("by") == "hunters"
+    It is a torch, and a crowbar, and a voice in a Latin that you have to listen to twice. There are four of them, soldiers, deserters by the look, of one army or another, with sacks. They have heard that the cellar on the hill holds the treasure of a Gothic king. They have found a cot, and a lamp, and a body that opens its eyes.
+    The youngest has the sense to drop his torch. You are so hungry that the room has edges.
+    $ _pick = 1
+  ?elif wake("by") == "government"
+    There is a smell of cold lamp oil, and a cough, and two Lictors, standing very stiff against the wall in the grey Senate cloaks, with a roll between them. They are young. They are, you think, quite as frightened of you as you would wish. They have been told to wake you with the greatest courtesy, and have not been told how.
+    "The Senate sends its compliments," says the taller, in a thin voice, "and requires your presence." He swallows. "It said to say *requires*."
+  ?else
+    Someone has woken you, and it is not at all the person that you would have chosen. It is a hand on your shoulder, shaking, a voice saying your title, a smell of fear and good wine. They have a paper, and a reason, and a sort of desperate cheerfulness, and the thing that you notice, before you are properly awake, is that they are standing very close to the door.
+    You are very hungry. You do not at all like the look of them.
+  ?end
+?elif wake("steward") == "prisca"
+  Prisca is sitting on a stool at the end of the bed with a lamp, and her abacus in her lap, and a sheet of the Senate's vellum, and the look of a woman who has been waiting for you to wake for some time and has been doing a sum about it.
+  "I came by sea," she says. "It took thirty-one days. I do not recommend it." She holds out the vellum. "It is from the court. I thought that you ought to read it before I did anything stupid."
+?elif wake("steward") == "hanno"
+  Hanno has put a lamp on the floor, and a tablet on your chest, which is a thing that he would not ordinarily do. "It came from Constantinople," he says. "It is under the seal of the Chamberlain. I have read it three times. It is a very courteous letter." He seems to be a good deal paler than usual. "I have found that I do not trust courteous letters."
+?elif wake("steward") == "tiro"
+  "I did not open it," says Tiro. He is sitting on the end of the cot, holding a sealed roll in both hands, and looking at it as a man looks at a snake that has been put in his lap. "I wanted to. I am a person who opens letters. But it had a seal on it that I recognized from a story, and I thought that you had better do it."
+?elif wake("steward") == "keepers"
+  The man holding the lamp is old. He is Valerian, he says, of the Valerii, a long way down the line from Aelia. He has her chin and Felix's patience. "It came by a Greek ship's captain," he says. "He would give it to nobody but the head of the house. He stood at the gate for two days. He is still there, I think, eating." He gives it to you with both hands. It is a roll of the finest vellum, with a seal of black wax and a small plain sign in the Senate's mark.
+?else
+  There is a clerk, with a lamp, a ledger and a packet. "A courier arrived from the East," he says. "He would deliver it to nobody but the principal. I have taken the liberty of waking you." He does not seem at all sure about the liberty.
+?end
+?if wake("place") == "collesanto"
+  You are in the cellar on the hill. There is a wine rack along the wall again, and the floor is as hard as you remember, and somewhere above you, quite faintly, there is the sound of a bell.
+?elif wake("place") == "haven"
+  You are in the haven, in the city. It has been repapered, and a very large wardrobe pushed across the door. There is a plain wooden cross over the bed, put there by somebody who did not know what was behind the wardrobe and wished to be on the safe side.
+?else
+  The tomb in the rock has been opened. There is a lamp on the ledge, and a stone rolled aside, and a rim of grey winter light, that you do not at all mind, round the lip of the door.
+?end
+?if wake("outcome") == "woken_early"
+  Your accounts, you gather, have not been looked after as they should. It is a thing that you will have to put right.
+?end
+<~
+
+# hunger
+## The first thing
+* Find something warm and four legged
+  $ do feed("animal")
+  $ humanity += 1
+  It is not what the hunger wanted. It is a goat, again. They are a remarkably consistent animal.
+* Ask for a willing arm ?if wake("by") != "hunters"
+  $ do feed("donor")
+  $ do earn(-2)
+  It is a thing that has been arranged. It is quick, and it is clean, and you are very much ashamed of how well it works.
+* Go after the one who ran ?if _pick == 1
+  $ do feed("human")
+  $ humanity -= 3
+  $ cunning_brutal += 3
+  You catch him on the stair. He does not scream, and you do not afterwards remember having decided. He is alive at the end of it. It is not at all to your credit.
+* Go without
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It is a bad choice and you will pay for it before dawn.
+<~
+
+# writ
+## The summons
+It is a good vellum. It is written in a Latin that has been polished by a number of clerks until it has no edge on it whatever, and it says, in the end, a very simple thing.
+?if lc.seat == "taken"
+  *To a member of the roll of the Senate, greeting. The Senate sits at Constantinople, in the cistern of the Basilica, and requires the attendance of its member at the dedication of the Great Church on the feast of St Stephen. The matter touches the member's particular gift. It is to be answered in person.* It is sealed with the black wax and signed, at the foot, in a small clear hand, *Eudoxia, for the Chamberlain.*
+?elif lc.seat == "declined"
+  *To the man of the hill, greeting, and with the continued regard of the Senate. The Senate sits at Constantinople, in the cistern of the Basilica, and would take it kindly if you were to attend the dedication of the Great Church on the feast of St Stephen. The matter touches your particular gift. The Senate trusts that you will not find it necessary to decline twice.* It is sealed with the black wax and signed, at the foot, in a small clear hand, *Eudoxia, for the Chamberlain.*
+?else
+  *To the man called by the name of the hill. The Senate sits at Constantinople, in the cistern of the Basilica, and requires you at the dedication of the Great Church on the feast of St Stephen. You will present yourself to the Chamberlain. It is the last courtesy of the court.* It is sealed with the black wax and signed, at the foot, in a small clear hand, *Eudoxia, for the Chamberlain.*
+?end
+The Senate is, you read, at Constantinople. It has been there for a hundred and twenty-seven years, or the better part of the time. It has not been a thing that you have had to think of. You think of it now.
+?if lc.court == "refused"
+  You think, in particular, of a quarry, and a plain grey cloak, and a man who said that he would remember that you had been asked.
+?end
+The letter is not long. It does not say what the court wants. It is, in the way of such things, an invitation that you cannot decline, in a hand that has a great deal of experience of being refused.
+<~
+
+# voyage
+## The long road east
+It is a thing that you do not quite follow, afterwards. It takes the better part of a month. You go south by night, round the edges of two armies, to Brundisium, where the Gothic war has not reached, and take ship, in a big round merchantman, with a cargo of oil and a captain who has been paid a very large sum not to look at his passenger. You are in the hold by day, in the dark, with the oil, as a thing to be moved. At night you come up and stand in the bow, in the cold, with the sea going by under the stars like a great dark animal that has no idea that you are there.
+You see Corinth, and a lot of islands. You do not see anything at all that you recognize. There is a thing about the sea at night that is a good deal like the sleep, and you do not care for it.
+It is a Greek world. It is the thing that you notice. The sailors talk Greek, and the cook, and the captain, and the passengers, and the little boys on the quay. Latin is the language of the law, and the army, and the clerks. It is, you gather, the language that people use when they do not want to be understood by the people they are talking to. You find that your own is a little out of date. You have, according to the first mate, the accent of a statue.
+<~
+
+# night
+## The city
+:night
+?if actions_left() == 2
+  It is dark, and the lamps are lit all down the long colonnade of the Mese, and the city is a great busy glitter of oil and wax and polished marble under a sky as thick as black wool. It is all new. It is all so new that you can smell the plaster.
+?else
+  It is very late. The long streets are almost empty, and the wind is coming up off the Bosphorus with the smell of snow in it. The great dome of the new church is a darker shape against the dark, and there are scaffolds all about it, and a single yellow light, high up, where somebody is still working.
+?end
+* Go down into the cistern, where the court is waiting [once] ?if actions_left() > 0
+  ~> cistern
+  $ do act()
+* Go to the Collis house, where the Italian letters are [once] ?if actions_left() > 0
+  ~> house
+  $ do act()
+* Go and look at the Great Church, in the last of the night [once] ?if actions_left() > 0
+  ~> church
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dedication
+?end
+-> :night
+
+# cistern
+## The court in the cistern
+$ do discover("the_cistern_court")
+$ do meet("eudoxia")
+The door is in the cellar of a perfectly ordinary house, behind a perfectly ordinary wine rack, at the bottom of a perfectly ordinary stair, and there are a hundred and fifty-two more steps after that, and then there is the water.
+It is the biggest room that you have ever been in. It is a forest of columns, in rows, in the dark, standing up out of black water, three hundred and thirty-six of them by the count of the boy who carries your lamp, going away on every side beyond the reach of the light. The ceiling is a series of low domes. The air is cold and wet and smells of stone. There is a very faint sound of falling water, everywhere, like a great quiet breath.
+It is, you understand, a reservoir. It is the city's, built for the Emperor's palace, and it holds enough to withstand any siege. It is also, as of some years ago, the most secure room in the world. There are two columns at the far end that stand on carved heads, a woman with snakes for hair, one on its side, one upside down, and nobody will tell you why.
+There is a platform of planks over the water, with lamps, and chairs. There are about forty chairs, and in each of them is a person you know, or ought to, in the way that you know the people of a house that you once lived in. The old faces, the Senate of Blood, as it was in Rome, in the dark, in a very large wet room. They have kept the chairs. They have kept the manners. They have, you see, kept the quiet.
+Tarrax stands at the right hand, in the grey cloak, as he has always stood. Galerius is beside him with his tablet. In the middle, in a high-backed chair of black wood, with a rug on her knees, is a small round woman of perhaps fifty, with her hair in a plain net and the face of somebody's aunt.
+"You are very welcome," says Eudoxia. She has a quiet, pleasant Greek voice, and a Latin that is better than yours. "I am so sorry about the stairs."
+?if lc.seat == "taken"
+  "Our member," she adds, and a stir goes round the platform, a thing like the shifting of leaves.
+?elif lc.seat == "declined"
+  "Our guest," she adds, and nobody stirs at all.
+?else
+  She does not say what you are. It is quite plainly a thing that she has decided not to.
+?end
+She has a number of questions. She asks them with the gentleness of a woman who has asked a great many, over a great many centuries, of people who were afraid to answer. What are you? Who made you? How long have you walked in the sun? Has it cost you? Do you know that there are some at this table who would have been very glad if you had not come? Do you know that there are some who would be sorry?
+Nobody answers the last. You look at Tarrax. He looks at the water.
+"We are not a cruel court," says Eudoxia. "We are a very old one. It is a thing that is, I am afraid, harder to forgive." She folds her hands. "Tell us what you think we ought to do about you."
+* "I want nothing from you but to be left alone. I will give what I can."
+  $ lc.answer = "humble"
+  $ standing += 1
+  $ humanity += 1
+  $ cunning_brutal -= 2
+  It is the plain truth, and you say it plainly. There is a stir. Eudoxia nods slowly. "That," she says, "is not at all what we expected, and is a thing that I shall remember." Tarrax's mouth twitches. It is not a smile. It is the nearest thing to one that you have seen in four hundred years.
+* "Name your price. I have a good deal more of the one than the other, and so, I think, have you."
+  $ lc.answer = "bargained"
+  $ do earn(-8)
+  $ cunning_brutal += 2
+  $ standing += 1
+  Eudoxia's eyebrows go up. It is a small thing. "Ah," she says. She looks at the platform, and the platform, to your surprise, almost laughs. "It is a great deal more sensible than the last gentleman." The terms are written down in an hour. They are heavy. They are, you think, fair. There is a tithe, and a seat at the table when it is wanted, and a promise, in a small clear hand, that the hill will be left in peace.
+* "I walked in the sun before most of this table was born. I do not recall asking leave."
+  $ lc.answer = "defiant"
+  $ cunning_brutal += 3
+  $ standing -= 1
+  There is a silence you could cut with a knife. It goes on. Somewhere, a long way off, there is a drip. Galerius has stopped writing. Tarrax has turned his head. Eudoxia is quite perfectly still, with her hands folded on the rug, and a very faint line between her brows.
+  "That is true," she says, at last, "as far as it goes." She does not raise her voice. "I should be glad if you would consider, in the course of the evening, how far that is."
+~> cistern_end
+<~
+
+# cistern_end
+She tells you what she wants. It is a small thing, and it sounds like nothing, and it is perfectly reasonable.
+The Great Church is to be dedicated at noon on the feast, by the Emperor and the Patriarch, before the whole of the court and the greater part of the city. It will be the single most important event of the year, in the single most important building in the world, and the Senate of Blood, which has a hand in everything that the Emperor does, cannot send one person. It is noon. It is the most open hour of the day. There is no vampire in the city who can set foot in the light.
+"Except one," says Eudoxia.
+She wants him to be there. She wants him to walk across the forecourt, and in at the great door, in the daylight, in front of the whole city, and stand in the nave, and look at the Emperor's court, and come back and say what he saw. It is a very little thing. It would be, she says, a service. It would also, she does not say, be a thing that her people could watch from the shuttered litters that she will have at the western door, through a crack, at the cost of a very great deal of nerve. It would be a proof.
+?if lc.answer == "defiant"
+  Tarrax says nothing. He has not said anything. It is a thing that you do not at all like.
+?end
+You are not obliged to say, tonight, what you will do. The dawn, as Eudoxia points out, is a good way off.
+<~
+
+# house
+## The Collis house
+The Collis house at Constantinople is a narrow building on a side street near the harbour of Theodosius, with a good door, a small shrine to the Mother of God in the vestibule, and an office at the back full of the smell of wax. It is a good deal smaller than the one in Rome, and a great deal more orderly. It has a Greek factor, an elderly man called Nikephoros, who has been told, for as long as he can remember, to expect a letter, and has been quite sure that it would never come.
+He has one for you. It has come by sea, in the winter, in a leather case, and has the plain rough seal of the keepers of the hill.
+It is not from Valeria. She is a hundred and twenty years gone. It is from the head of the family now, an old man, who writes in a very bad Latin and a very careful hand. The Goths are at Rome again. It is a different lot, and a different king, and there is a great army of the Emperor's inside the walls, under a clever general, and the city has been besieged since the spring. The hill has sent what grain it can. The young men are on the wall. They are all quite well. It is, he says, a thing that the family has been through before.
+There is a postscript. *We have built a chapel. The bishop's man said that it was a martyr's. We did not correct him. The people call the one in the cellar the Sleeper, and pray to him on the first of the month. It is a harmless thing. I thought that you would wish to know.*
+You read it twice. It is not clear to you whether it is the funniest or the saddest thing that you have ever read. It is, you think, probably both.
+There is a thing that you can do. It is not a large thing, from this distance. It is the only thing there is.
+* Send what you can in coin, and a draft for grain
+  $ lc.hill_537 = "sent"
+  $ do earn(-6)
+  $ do send_home(6)
+  $ humanity += 1
+  Nikephoros writes the draft. It is a good one, on a good house, and will be honoured, if the war permits, by a Roman banker in Ravenna. It is the first time in your life that you have sent a letter by sea, and you find that you are standing at the door of the room, afterwards, with your hand on the jamb, for rather longer than the thing deserves.
+* Send men: paid guards from the quays, with a captain who has served under the Emperor's general
+  $ lc.hill_537 = "guarded"
+  $ do earn(-10)
+  $ standing += 1
+  $ cunning_brutal += 1
+  It is a bigger commitment than a draft. Nikephoros knows a man. The man knows a captain, a lean quiet Isaurian with an old wound, who has done this before, and thinks the price is fair. They sail in the morning, twelve of them, with the winter wind behind them, and a letter, and a good deal of private doubt. You do not ask about the war. You do not want to know.
+* There is nothing to be done from here. Keep the letter
+  $ lc.hill_537 = "ignored"
+  $ do village_harm(5)
+  $ humanity -= 1
+  It is, you tell yourself, perfectly true. It is a thing that nobody could do anything about. You fold the letter, very small, and put it in your sleeve. You carry it with you for a good many days, and you do not look at it, and you do not forget what it said.
+~> house_end
+<~
+
+# house_end
+It has begun to snow. It does not settle. It comes down in the lamplight, in large slow flakes, on a city that is much too warm to hold it, and melts.
+<~
+
+# church
+## The Great Church
+$ do discover("the_great_church")
+You go up the long slope from the harbour, past the shut shops and the lamps, to the great open square before the church, and stand at the foot of it, in the dark, in the cold, and look.
+It is, you think, the largest thing that has ever been built. It is not at all like the temples of Rome. It has no columns, no pediment, no front. It is a big brown mass of brick, in the dark, with a dome on it, and buttresses, and half-domes, going up into the sky like a hill that someone has taught to think. There are scaffolds all about it, and the ladders, and the barrows, and the heaps of marble waste, and from the very top of the dome, a hundred and eighty feet up, a single yellow light.
+There is a man at the foot of the ladder. He is sitting on an upturned barrow, with a flask, and a rag, and a cut across the back of his left hand that he is attending to without any great urgency. He is forty, or so, with plaster in his beard, and the loose shoulders of one who has been doing the same thing for five years.
+His name is Ioannes. He is a mason. He is, he says, the last on the dome, because the foreman has promised a bonus, and because the lamp up there is the one that he lit, and he'll be damned if he'll leave it. He does not at all want to talk. He does talk. He is a man who has been up a ladder for a great many hours with nobody to tell.
+$ do meet("ioannes")
+He has, he says, laid gold on the dome. It is a thing that nobody has ever done before. They have used glass, small squares of it, with gold leaf between two layers, tilted at an angle so that the light will strike it in the morning. He shows you one that he has kept, a tiny square of glass and gold, the size of a thumbnail, in the palm of his bleeding hand.
+His heartbeat is the loudest thing in the square. You are quite surprised by how much you want to hear it.
+* Hold the flask, and listen to him go on
+  $ lc.mason = "helped"
+  $ humanity += 2
+  $ bond.ioannes += 2
+  You listen to him for an hour, on a barrow, in the snow, in the dark, while he tells you about his wife, and his bad back, and the foreman, and the Emperor, and the cost of olive oil, and what it is to put the last of five years of your life into a thing that you will never see finished. He says that it is going to be a good building. He says that it will stand for a thousand years. He is perfectly right, as it happens. He is, in the end, rather drunk, and rather sentimental, and he presses the tessera into your hand, with the gold side up, and says that it is for luck.
+  $ do obtain("great_church_tessera")
+* Bind up his hand, and send him home
+  $ lc.mason = "helped"
+  $ humanity += 1
+  $ bond.ioannes += 1
+  It is a clean cut. He does not need it. You tear a strip from the hem of your cloak and bind it up, and tell him to go home to his wife, and he says, "You sound like her." He gets down off the barrow. He says that it is a funny thing, he has been lifting for five years and a stranger tells him to rest. He goes. He has, in the end, left the tessera on the barrow, and you pick it up, and put it in your sleeve.
+  $ do obtain("great_church_tessera")
+* Let him be. It is a good night for a man to be on his own
+  $ lc.mason = "left"
+  $ cunning_brutal += 1
+  You go on. It is a perfectly proper thing to have done. You think of him, afterwards, now and then, in the cold, with his cut hand and his flask and his bit of gold, and of the heart that you did not stay to hear.
+~> church_end
+<~
+
+# church_end
+The light at the top of the dome goes out. It is a very long way up. You watch it for a minute. It does not come on again.
+<~
+
+# dedication
+## The feast of St Stephen
+It is noon, and it is the brightest day of the winter, and you are standing at the foot of the steps of the Great Church in the middle of fifty thousand people, with the sun on your face.
+It is a very good sun. It is the clean hard low sun of an Eastern winter, a white thin light with a bite in it, and it comes down over the roofs of the palace and the Hippodrome and the long white colonnades and strikes the great brown mass of the church in a way that does not at all make it beautiful. It is not a beautiful building from the outside. It is the other thing: it is big.
+Nobody remarks on you. The city, in its best clothes, is going up the steps in a long slow tide, the court, the senators, the guilds, the beggars, the priests, a hundred thousand candles' worth of silks, and you go with it, in a plain cloak, with your head up. There is a long line of closed litters drawn up along the western wall, with thick curtains, and men with staves, and a number of very careful mortals standing at the carriers' heads who are watching you.
+~> proof
+-> inside
+
+# proof
+Somebody has to decide whether to be seen.
+* Walk in, in the open light, past the litters
+  $ lc.sunwalk = "shown"
+  $ standing += 2
+  $ secrecy -= 2
+  $ velati_regard -= 1
+  You do not hurry. You go up the long stair in the full light of noon, in front of the shuttered litters, one step at a time, and you feel, quite clearly, from behind the curtains, from the thin dark slits where there are eyes, the entire weight of the Senate of Blood looking at a thing that it has been afraid of for centuries. You do not turn. You do not hurry. You get to the top, and into the vestibule, and through the great door, and you hear, behind you, very faint, from one of the litters, the sound of someone letting out a breath.
+* Go round to the side, and slip in with the guilds
+  $ lc.sunwalk = "refused"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  You do not do it. You go round by the side door, with the guild of the silversmiths, who have their own banner, and a drum, and a number of very bad hats, and you let them go in front of you, and you come in with the crowd, in a corner of the nave, out of sight, and the litters at the western door see nothing at all but a crowd. It is a perfectly sound thing to have done. It will be remembered.
+<~
+
+# inside
+## The nave
+You come in under the great vault, and you stop.
+It is a thing that cannot be described, and many people have tried. It is not a building at all. It is a space. It is a thing that has been hollowed out of the air, and lined with marble, and gilded, and hung with lamps, and roofed with a dome so high, and so wide, and so light, that it seems to float. It does not look as if it is held up by anything. It looks as if it is held up by the light. There are forty windows in a ring round the foot of the dome, and the sun comes in through them in a great slow fall of gold, straight down, in shafts that you could lean on, and the whole interior is lit like the inside of a bell.
+You stand in it. You are, you think, probably the only one of your kind in all the world who ever will. It does not hurt. It is the thing that you notice, and cannot help noticing: it does not hurt in the least. It is only very, very bright.
+Somebody beside you, a fat old senator, in a splendid robe, says to his neighbour in a loud whisper that the Emperor has been heard to say that he has outdone the builder of the temple at Jerusalem. The neighbour says that it is a thing that he ought not to say. The senator says that it is a thing that he is, nevertheless, quite right about.
+The Emperor comes in. He is a middle-sized grey man in purple, with a heavy, smooth, tired face, and he walks very slowly, and stops, once, in the middle of the nave, and looks up, for a long time, at the dome. You watch his face. It is not the face of a man who is pleased. It is the face of a man who has built the thing he wanted and is beginning to wonder what to want next.
+You have, in the light, a few hours. You could do with them what you like.
+* Listen to the court, and remember it all, for the Chamberlain
+  $ cunning_brutal -= 1
+  $ standing += 1
+  You stand at a pillar and listen. It is the single most informative afternoon of your life. They speak Greek, and Latin, and bad Latin, in the low voices of people who are quite sure that they are not being overheard. You hear who is out of favour, and who is in, and who is owed money, and who is sleeping with whom, and what the Empress thinks of the Patriarch, and how the Emperor is going to pay for the next war. You do not write it down. You do not need to.
+  It is, you suppose, a very useful thing to have.
+* Sell the court a little oil, and a few good loans
+  $ do earn(12)
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  You have, in the course of the afternoon, a number of very agreeable conversations. It is a great deal easier than you had expected. The court is very rich, and in a very good mood, and full of the sort of people who are on the point of being in debt. You come out of the Great Church, at dusk, with a great many promises, and a very full notebook, and a clear conscience, as far as it goes.
+* Stand in it, and do nothing at all
+  $ humanity += 3
+  $ cunning_brutal -= 1
+  You stand under the dome, in the light, until it goes. It is a thing that you will never be able to explain. It is the first time in three hundred years that you have stood in a room that was made to hold the sun, and it does not ask you for anything, and you stay.
+~> evening
+-> settle
+
+# evening
+## Dusk
+It is dusk before the crowd thins. The long gold shafts of the light go dim, and amber, and red, and go up the walls like a tide going out, and the lamps are lit, and the great church becomes a place of shadows, and soft light, and the low murmur of a great many people saying goodbye.
+You come out on the steps in the last of the sun. The litters are gone from the western wall. There is a single closed one left, at the foot of the steps, with a Lictor beside it. The curtain is a hand's breadth open.
+?if lc.answer == "defiant" and lc.sunwalk == "refused"
+  $ lc.court_537 = "hostile"
+  There is nobody in the gap. It is, you think, a very long time since anybody has spoken your name with such a complete lack of affection.
+?else
+  A hand comes out of the gap. It is a small, plump, steady one, with a plain ring. It holds a piece of vellum, folded small. You take it. *Thank you,* it says, in the small clear hand, and nothing more.
+  ?if lc.answer == "humble" or (lc.sunwalk == "shown" and lc.answer != "defiant")
+    $ lc.court_537 = "allied"
+  ?else
+    $ lc.court_537 = "wary"
+  ?end
+?end
+It is a short walk to the harbour. You do not hurry. You have, for the first time in a good while, nowhere that you need to be, and nobody who is waiting.
+<~
+
+# settle
+## The third lying down
+It is the last of it. You have a ship to find, and a hill to see to, and a thousand years to cover, in the dark, in a very short time.
+You have done it twice. It is not a thing that gets easier. It is a thing that gets quicker.
+~> place
+~> steward
+~> orders
+~> guard
+-> bed
+
+# place
+## Where you will lie
+* The cellar on the hill, with the bell and the Sleeper's chapel overhead
+  $ do rest_place("collesanto")
+  $ bond.aelia += 1
+  It is, it appears, a place of pilgrimage. It is the only thing to be said for it. It is, you think, probably the safest house in Italy, as long as the hill holds, and as long as nobody reads the inscription.
+* A haven in a city, among people who could help
+  $ do rest_place("haven")
+  $ secrecy -= 1
+  You buy a house in a quarter of the East that nobody in the West has heard of. It is the middle of a great busy place, among people who have never seen you, and it is the best hiding that there is.
+* The tomb in the rock
+  $ do rest_place("tomb")
+  $ humanity -= 1
+  $ cunning_brutal -= 1
+  It is cold. It is dry. It is very, very quiet. You tell yourself that it will be over quickly.
+<~
+
+# steward
+## Who will hold what is yours
+* The house of the Merchant line, as a bank and a trust
+  $ do steward("bank")
+  $ bond.prisca += 1
+  The bank has done well. It has answered every letter. It has, as far as you know, never lied, and it has never, in five hundred years, once been grateful.
+* Prisca, in her own person ?if in_circle("prisca") and member("prisca", "status") == "active"
+  $ do steward("prisca")
+  $ bond.prisca += 3
+  $ standing += 1
+  "I shall be exact," says Prisca. She has said it before. She says it, this time, with a very small sigh, as of a woman who knows that she has once again been made to give her word, and is going to keep it, and does not at all expect to be thanked.
+* Hanno, who has kept the ledgers ?if in_circle("hanno") and member("hanno", "status") == "active"
+  $ do steward("hanno")
+  $ bond.hanno += 3
+  He says nothing at all. He reads the paper, and signs, and bows, and goes out. It is, you gather, a great honour.
+* Tiro, who is young and quick ?if in_circle("tiro") and member("tiro", "status") == "active"
+  $ do steward("tiro")
+  $ bond.tiro += 3
+  Tiro says that he has done it once and will do it again, and that he would like it noted that he was brave. You note it. It is, by now, rather an understatement.
+* The Valerii of the hill, the keepers ?if b1.keepers == "sworn"
+  $ do steward("keepers")
+  $ bond.aelia += 2
+  $ bond.felix += 2
+  Valerian reads the paper, slowly, with his lips moving. "It is a family," he says. "It will go on." He looks at the word *keepers* for some time. "It is a great deal. It is what a family is for."
+<~
+
+# orders
+## What is to be done with it
+* Play it safe: land, grain, honest rents
+  $ do orders("safe")
+  $ humanity += 1
+  It is the choice for an age that has been robbed too often to want anything else.
+* Grow it aggressively: shipping, loans, trade
+  $ do orders("aggressive")
+  $ cunning_brutal += 1
+  It is a good time for it. The Emperor is rebuilding the world, and he has not got the money.
+* The dark ventures, which pay the most, and ask nothing
+  $ do orders("dark")
+  $ cunning_brutal += 3
+  $ humanity -= 3
+  $ velati_regard -= 2
+  It is the third time that you have written it. It does not get easier. It does, you find, get more convincing.
+<~
+
+# guard
+## What stands between
+:guard
+* Lay traps in the ways in [once] ?if wealth >= 10
+  $ do protection("traps")
+  It is by now a perfectly routine matter.
+* Pay the people who would otherwise ask questions [once] ?if wealth >= 20
+  $ do protection("bribes")
+  $ secrecy += 2
+  It is, as usual, expensive.
+* Hire guardians, sworn and paid [once] ?if wealth >= 30
+  $ do protection("guardians")
+  They are, you are told, the best that the East can offer. It is a thing that is said of a good many things.
+* That will do
+  <~
+-> :guard
+
+# bed
+## Down again
+$ do rest()
+$ do sleep("byzantium_to_florence")
+It is cold, wherever you are, and dark, and there is nothing at all to be heard. You lie down, and fold your hands, and let it take you. It is not at all like the first time. It is not like the second. It is like going to bed in a house where you have lived a very long time, and know all the creaks.
+There is a sound as you go, far above you, a long way up, and a long way off. It is a bell. It is a very large one. It is ringing for something that you cannot hear. You think that it is the new church. You think that it is, perhaps, for a thousand years.
+=> next
