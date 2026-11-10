@@ -416,6 +416,24 @@
           "notes": [
             "blood"
           ]
+        },
+        {
+          "id": "b2c17",
+          "file": "blood-and-gold/ch17.tsb",
+          "title": "The Elevation",
+          "notes": [
+            "violence",
+            "blood"
+          ]
+        },
+        {
+          "id": "b2c18",
+          "file": "blood-and-gold/ch18.tsb",
+          "title": "The Night After",
+          "notes": [
+            "violence",
+            "blood"
+          ]
         }
       ],
       "incomplete": true

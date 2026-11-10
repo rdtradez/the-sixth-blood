@@ -48,7 +48,7 @@ async function play(chapter, vars, wants = [], { stopAt = null, seed = 3, wake =
   game.state.sys.sleep.wake = { quick: true, place: 'haven', steward: 'bank', outcome: 'on_schedule', years: 1410, ...wake };
   for (const [k, v] of Object.entries({ wealth: 50000, ...vars })) dev.setVar(game, k, v);
   const frame = await dev.jump(game, chapter, { keep: true });
-  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c15' ? 'b2c16' : null));
+  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c15' ? 'b2c16' : chapter === 'b2c16' ? 'b2c17' : null));
 }
 
 const clean = (text) => {
@@ -59,11 +59,11 @@ const clean = (text) => {
 
 
 
-test('Book Two lists sixteen chapters and still pauses after the last', async () => {
+test('Book Two lists eighteen chapters and still pauses after the last', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 16);
+  assert.equal(book.chapterCount, 18);
 });
 
 test('chapter 15 plays through to chapter 16 for every answer to the Prince, the Captain and the faction', async () => {
@@ -134,7 +134,7 @@ test('chapter 16 plays through every answer to the girl, the clerk and the threa
     for (const bond of ['begun', 'guarded']) {
       for (const regard of ['warm', 'wary', 'cold']) {
         const run = await play('b2c16', { 'b2.sire': sire, 'b2.watcher_bond': bond, 'b2.trader_regard': regard });
-        assert.equal(run.frame.wait === 'choices', false, JSON.stringify([sire, bond, regard]));
+        assert.equal(run.game.state.chapter, 'b2c17', JSON.stringify([sire, bond, regard]));
         assert.notEqual(run.vars['b2.easter_stand'], undefined);
         clean(run.text);
       }
@@ -143,7 +143,7 @@ test('chapter 16 plays through every answer to the girl, the clerk and the threa
   for (const told of ['before', 'half', 'none']) {
     for (const plan of ['guard', 'forbid', 'trust']) {
       const run = await play('b2c16', { 'b2.prisca_told': told, 'b2.prince_plan': plan, 'b2.company_day': 'city', 'b2.ring_task': 'accepted', 'b2.warning': 'open' });
-      assert.equal(run.frame.wait === 'choices', false, JSON.stringify([told, plan]));
+      assert.equal(run.game.state.chapter, 'b2c17', JSON.stringify([told, plan]));
       clean(run.text);
     }
   }

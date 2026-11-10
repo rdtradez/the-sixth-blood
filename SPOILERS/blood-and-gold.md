@@ -141,3 +141,15 @@ Hooks for chapter 17 onward: the Mass itself, read from `b2.easter_stand`, `b2.p
 
 Flagged to the owner (spoiler light): nothing here changes the big picture and nobody major dies. Chapter 15 can have the Prince break his own Peace if the player tells him to, which is a first.
 
+## Chapters 17 and 18 (session 26): the Elevation, and the night after
+
+Interpretation: the Pazzi Conspiracy follows history closely (Giuliano dies in the church in every branch; Lorenzo lives; the Archbishop is hanged; the city turns on the Pazzi). The player's choices decide who he saved, what it cost, what he saw, and what the faction and the gray figure now know of him. The Merchant's revelation and the sleep stay for chapters 19 and 20. Cassian's name is still not said; the gray figure is called only the figure.
+
+Chapter 17, "The Elevation" (`b2c17`). Easter Sunday, from where he chose to stand (`b2.easter_stand`). Beside: Lorenzo (`b2.elevation` = lorenzo, taken out through the new sacristy), Giuliano (giuliano, held as he dies), the priest (priest, one fight exchange set against a human tier) or the oiled door behind the sacristy (sacristy, only if `b2.duomo` is measured; a groom tells a name). Door: the gray figure stands beside him at the south door (stood, broke or spoke; if spoke, the figure says what he wants: the Peace broken in a church, the Prince's friend's house sent into the dark, and the clerk with the little book taken). Away: late (runs, too late) or books (stays, earns coin, loses standing and humanity). Aftermath reads Fiammetta (`b2.fiammetta_easter`) and, if the clerk was in the church (`b2.agent_easter` not away) and he was in the church, offers `b2.agent_fall`: carried or left.
+
+Chapter 18, "The Night After" (`b2c18`). Night phase, three of four. The Piazza (`b2.hunt`: named the faction to Ottaviano, sheltered Ugolino's pilgrims and the servants, or stood aside). The river stair (`b2.agent_end`: truth, hold or bar; the gray figure turns the clerk in every branch and `b2.agent_turned` is set at the start of the chapter, so the turning happens even if he does not go; in bar he is overmatched and hurt). The bank (`b2.panic`: steady, hedge or profit; the protect or profit choice of the design doc). The villa (`b2.villa`: broke the ring, kept it and learned the figure came to Ormanno in the plague winter, or handed Ormanno to the Prince). Dawn: Nanni's note asks him to the Baptistery at the third hour, alone and in the sun. That is the Merchant's revelation, chapter 19.
+
+Hooks for chapters 19 and 20: the Baptistery and Nanni; the turned clerk waking as the figure's fledgling and what they remember (reads `b2.agent_end`, `b2.watcher_bond`); the bank in the week after (reads `b2.panic`); Ormanno and the Prince (reads `b2.villa`); the ring; Fiammetta; the sleep and who keeps the hill.
+
+Flagged to the owner (spoiler light): the Conspiracy follows history, so one major figure dies in every branch. Nothing here changes the big picture.
+

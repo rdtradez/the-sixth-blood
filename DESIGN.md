@@ -51,8 +51,10 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 21: Book Two chapters 7 and 8
 - [x] Session 22: Book Two chapters 9 and 10
 - [x] Session 23: Book Two chapters 11 and 12
+- [x] Sessions 24 and 25: Book Two chapters 13 to 16
 - [x] Session 24: Book Two chapters 13 and 14
 - [x] Session 25: Book Two chapters 15 and 16
+- [x] Session 26: Book Two chapters 17 and 18
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -336,3 +338,12 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Tests: `tests/book2h.test.js` plays both chapters down their branches (every answer to each decision, hunger, a woman hero, the skipped doors and the unseen values). All Book Two test files now expect sixteen chapters, and `tests/book2g.test.js` lets chapter 14 run on into chapter 15.
 - Plans are in `SPOILERS/blood-and-gold.md`.
 
+### Session 26 notes (Book Two, chapters 17 and 18)
+
+- Book Two chapters 17 and 18 are built (`content/blood-and-gold/ch17.tsb` and `ch18.tsb`, chapter ids `b2c17` and `b2c18`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 18 and carries on by itself when chapter 19 is added.
+- Session 26 is built on the `session-25` branch, which is not merged to `main` yet (nor is `session-24`). Merge `session-24`, `session-25` and then `session-26` to get everything.
+- Chapter 17 has no phase and no `rest()`: an opening scene, then one of three scenes chosen by `b2.easter_stand`, then an aftermath scene, and it ends with `=> next`. Chapter 18 is a short opening scene, then a night phase of three actions out of four, then the dawn; it ends with `rest()` and `=> next`, which pauses until chapter 19 exists. Chapter 19 should read hunger, standing and secrecy as chapter 18 left them.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.elevation`, `b2.agent_fall` (chapter 17) and `b2.hunt`, `b2.agent_end`, `b2.panic`, `b2.villa` (chapter 18), plus `b2.agent_turned`, which chapter 18 always sets. Flags that can be skipped have an `unseen` value that the chapter sets on entry.
+- No new people, codex entries or collection pieces. Content notes: both chapters carry `violence` and `blood`. Chapter 17 uses the fight system for one optional exchange set.
+- Tests: `tests/book2i.test.js` plays both chapters down their branches (every stand, plan, company, girl and clerk, the fight over eight seeds, hunger, a woman hero, each decision flag and the skipped door). All Book Two test files now expect eighteen chapters, and `tests/book2h.test.js` lets chapter 16 run on into chapter 17.
+- Plans are in `SPOILERS/blood-and-gold.md`.

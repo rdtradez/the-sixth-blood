@@ -57,11 +57,11 @@ const WAKES = [
   { place: 'haven', steward: 'hanno' },
 ];
 
-test('Book Two is listed as incomplete with sixteen chapters', async () => {
+test('Book Two is listed as incomplete with eighteen chapters', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 16);
+  assert.equal(book.chapterCount, 18);
 });
 
 test('chapter 1 plays through for every kind of waking and reaches chapter 2', async () => {

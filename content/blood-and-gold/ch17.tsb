@@ -1,0 +1,232 @@
+// Book Two, Chapter 17 (session 26). Easter Sunday, and the Elevation.
+// No phase. An opening scene, then the Mass, played from where he chose to stand (beside, door or away), then the aftermath in the church.
+// Has no rest() and ends with => next. Chapter 18 opens a fresh night phase. Reads b2.easter_stand, b2.prince_plan, b2.duomo, b2.company_day, b2.ring_task, b2.warning, b2.fiammetta_easter, b2.agent_easter, b2.prisca_told, b2.sire, b2.faction.
+// The book is incomplete, so play pauses after chapter 18 until chapter 19 is added.
+// Later chapters read b2.elevation and b2.agent_fall.
+@chapter b2c17
+@title The Elevation
+@book blood-and-gold
+@version 1
+
+# start
+## Easter Sunday
+$ b2.elevation = "unseen"
+$ b2.agent_fall = "unseen"
+$ do chart("florence.court")
+The day comes up clean and blue and cold. There is not a cloud over the cupola. Every bell in Florence is ringing, the great ones and the little ones together, a brazen tumbling noise that goes on for an hour without a pause, and the whole city has put on its best and is walking, in clean linen and brocade and borrowed velvet, toward the same place.
+?if b2.prince_plan == "guard"
+  The twelve of the court who were told to kneel in Medici livery went in at first light, quietly, by the sacristy, and you have not seen one of them since.
+?elif b2.prince_plan == "forbid"
+  The court is at home, in the dark, with the shutters closed, as the Prince said. It is the first Easter in sixty years on which the Peace has been kept by the simple method of nobody going out.
+?end
+?if b2.duomo == "barred"
+  The sacristan has barred the north door. He told you so at the bank, at the second hour, with a great deal of dignity, and held out his hand for a third florin.
+?end
+?if b2.company_day == "city"
+  The pilgrims in the straw hats are in the Piazza, very quiet this morning and very sober, and they are standing in two long lines on either side of the church steps with their staves, as though they had been told to keep the door.
+?elif b2.company_day == "hill"
+  The company is on the hill, at Collesanto, in the vineyard, sitting in the sun and playing at dice. You are very glad of it, and not at all sure that the gladness will survive the day.
+?end
+?if must_feed()
+  ~> hungry
+?end
+You have the whole of the morning, and one place in it. You chose it, last night, in the cold, and now it is the hour, and there is nobody to ask.
+?if b2.easter_stand == "beside"
+  -> beside
+?elif b2.easter_stand == "door"
+  -> door
+?else
+  -> away
+?end
+
+# hungry
+## Before the Mass
+You went into the vigil on a fast, and a vampire's fast is not the same as a man's, and you can feel it all through you now like a note that has been held too long.
+* Go to Benedetto's back room, where the cup is kept
+  $ do feed("bank")
+  It is warm and clean and nobody asks. Benedetto puts a plate of Easter bread on the table beside it, quite as if it were an ordinary thing to do, and goes away to dress.
+* Take a lamb from the flock at the Porta San Frediano, and leave a coin on the gatepost
+  $ do feed("animal")
+  $ do earn(-1)
+  It is an Easter lamb, and it would have been eaten by noon, and you are not proud of it.
+* Pay a donor from the Borgo, who is kneeling at her own door in her best, and is glad of the coin
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She is gentle and quick, and says that it is a blessing on the feast, and you cannot tell if she is making a joke.
+<~
+
+# beside
+## The nave
+$ do chart("florence.court")
+The church is full to the doors. It is the largest room that you have been in for fourteen hundred years, and it is full of people, in a rustle of silk and wool, and a smell of wax and wet stone and rosemary, and a thousand quiet coughs going up into the dim of the cupola like birds. The Archbishop is at the altar in cloth of gold, and the choir has begun the Mass of the day, and you are standing in the nave on the north side, six paces from the pillar of the family, in your good coat, with your hat in your hand.
+?if b2.fiammetta_easter == "near"
+  Fiammetta is at your elbow, in her good blue. She has her prayer book open the wrong way up and has not noticed. She keeps looking at you, and at the pillar, and at you, and her hand, in its small clean glove, is gripping your sleeve above the wrist.
+?elif b2.fiammetta_easter == "chose"
+  Fiammetta is not beside you. You can see the back of her blue gown, a long way off, on the far side of the nave, among the wives of the wool guild, standing very straight, and now and then she turns her head and looks across the whole width of the church at you, to see that you are there.
+?end
+The Medici are where they are always. Lorenzo is a little forward of the pillar, with his dark head bent, and Giuliano is not with him. A word is passed from mouth to mouth that he has not come, that he has a hurt leg, and a stir goes over the Pazzi pews. And then the church door at the south opens, and he comes in, limping, with Francesco de' Pazzi on his arm, laughing, in a manner that the whole of the church can see is very affectionate, and you see a hand go over his ribs as they pass, to see if he has a mail shirt on, and he has not.
+It is very like the moment before a charge. It is a thing you know in your hands.
+:the_elevation
+The bell is struck.
+It is a small high bell, a sacring bell, held by an altar boy, and it rings once, and every head in the great church bows. And in the little silence after it, in the place where a thousand people have shut their eyes, you hear a sound that no one else will ever remember, the sound of a priest drawing a short knife from his sleeve.
+* Go for Lorenzo, and take him out of it, before the second blow
+  $ b2.elevation = "lorenzo"
+  $ standing += 2
+  $ bond.gualtiero += 1
+  You are across the six paces before the second priest has his hand up. You do not remember getting there. You have him by the collar of his gown and the girdle of his hose, and the knife goes past the side of his neck and takes a long red slice of his collar and nothing else. Lorenzo turns, with an expression of intense astonishment, and a friend of his, a poet with a long nose, puts himself in the way, and between you, in a confusion of velvet, you have him through the door of the new sacristy at the run, and the great bronze leaf swings and is slammed, and somebody is shooting the bolts. Behind you, in the nave, someone has begun to scream.
+* Go for Giuliano, who has not drawn, and who has a hand at his side
+  $ b2.elevation = "giuliano"
+  $ bond.gualtiero += 1
+  $ humanity += 1
+  $ standing += 1
+  You hear the first of the blows land as you go. It is a dreadful soft sound. By the time you have thrust two men aside he is on the floor, with his face turned up, with Francesco de' Pazzi on top of him in a frenzy, stabbing again and again, with such wildness that he has cut himself in the thigh, and you take Francesco by the hair and by the arm and throw him a great distance, and he goes among the chairs. You kneel. Giuliano has a very young face. It is gray, and puzzled, and perfectly clear, and there is a great deal of blood. "It is nothing," he says, in the voice of a boy who has fallen from a horse. He looks at you for some time, and he does not say anything more at all.
+* Take the priest with the knife, who is the nearer, and do not let Lorenzo be hurt
+  $ b2.elevation = "priest"
+  $ do witness(2)
+  $ secrecy -= 2
+  ~> priest
+* Go for the oiled door behind the sacristy, where the second pair will be, if the first fail ?if b2.duomo == "measured"
+  $ b2.elevation = "sacristy"
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  $ standing += 1
+  You are out of the nave at a run, by the little stair, through the sacristy, into the courtyard, as the screaming begins. It is as you thought. There are two men in the cold sunlight by the oiled door, in the plain jackets of the Pazzi grooms, with a rope ladder, and a sack, and a very good horse. They look at you as a man looks at the sudden shape of his own death. One of them runs. The other is much too slow. He tells you very quickly, and in a high voice, everything that he knows, which is not much, and which is a name.
+-> after
+
+# priest
+## The knife
+$ do fight("human", 2)
+:priest_exchange
+* Take him by the wrist and the throat, before the knife can come round
+  $ do strike("brutal")
+* Catch the knife on the sleeve of your good coat, and turn it back
+  $ do strike("cunning")
+* Say, very low, that he is in a church
+  $ do strike("talk")
+?if not fight_over()
+  -> :priest_exchange
+?end
+?if fight_result() == "won" or fight_result() == "talked"
+  $ standing += 1
+  The priest goes down on the pavement with the knife skittering away, and he lies there with his mouth open, and does not get up. It is a very quick, plain, ugly thing, and a man in a gold-edged cloak, who has been a long time in public life and who knows a good deal about the beginning of a riot, says in a dazed voice, "Who was that?" before somebody else has the presence of mind to hustle him through the bronze door. Lorenzo is hurt, but not badly. A friend of his has a hand pressed over the long red cut in his neck, and the poet is shouting for a bolt, and the sacristy door swings shut with a great clang.
+?else
+  $ injury += 3
+  $ hunger += 3
+  $ standing -= 1
+  You have misjudged it. He is much stronger than a priest should be, and much more frightened, and the knife goes into your side, under the ribs, and out again, and it is a very odd, cold, familiar feeling. By the time you have got him down, Lorenzo has been cut across the neck, and a friend has flung a cloak over the wound, and the bronze door is slammed behind them. You lean on the nearest pillar. You are bleeding in a church, on Easter morning, in front of two hundred people, and there is not a thing that can be done about it.
+?end
+<~
+
+# door
+## The south door
+$ do chart("florence.court")
+It is a very large and very handsome door, set in a deep arch, with the morning pouring across the steps. There is a high smell of beeswax and of the crowd behind you. You have been standing here, in the angle of the jamb, for the better part of an hour, in your good coat, with the gray ring on the outside of your glove, and you have looked at nothing.
+?if b2.ring_task == "bargained"
+  You have thought about the sacristy and its second door. It is a good thought and you do not know what to do with it, and the more you think the worse it grows.
+?end
+He is beside you. You did not see him come. He has been there for as long as you have, a head shorter, in a plain hooded gray cloak, with his hands in his sleeves and his face somewhere in the shade of the hood, and he is not breathing. The air around him is the temperature of a cellar. A man goes by, going in late, in a fur hat, and glances at the two of you and shivers and goes on, and he has forgotten you before he has taken three steps.
+"I read that you were here," says the figure. It is the voice you heard once in a house with no fire, very mild and very dry. "That is good. A man at the door is not at the pillar."
+The sacring bell is a very small sound from a great distance. You hear it, a clear little silver note, and you hear a thousand people bow their heads. You hear, quite plainly, from the far end of the nave, a stir, and a cry, and a noise like a sack of grain thrown on a floor.
+:the_door
+* Stand where you are, and look at nothing, as you were asked
+  $ b2.elevation = "stood"
+  $ standing -= 1
+  $ humanity -= 3
+  $ secrecy += 2
+  $ bond.gualtiero -= 2
+  You look at the street. There is a donkey in it, with a basket of eggs, and a child with a red balloon of a pig's bladder, and a pigeon walking about on the cobbles with its head going up and down. It is all very bright and very small. Behind you, in the church, they are shouting. You hear a woman begin to scream, and you hear it go on, and you hear a man cry out a name, in a voice that has stopped being a voice, and you do not turn your head. It is the longest quarter of an hour that you have spent in fourteen hundred years. When it is over the figure at your side says, "Thank you," and goes into the shade, and is not there.
+* Break from it, and go in, at a run
+  $ b2.elevation = "broke"
+  $ standing += 1
+  $ humanity += 2
+  $ secrecy -= 2
+  $ bond.gualtiero += 1
+  You do not look at him. You hear him say, very mildly, "It is too late," and he is right. By the time you have thrust through the doors and the packed back of the nave and across the whole of the church, it is done, and there is a space in the middle of the floor with a man lying in it, and a ring of people who have fallen back from him, quite silent, with their hands to their mouths. The bronze door is shut. Lorenzo is behind it. You have nothing to do but to stand, with your gray ring on your hand, in a place where everyone will remember that you stood.
+* Speak to him, low, and ask what it is that he wants
+  $ b2.elevation = "spoke"
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  He does not turn. "Three things," he says, quite calmly. "That the Peace should be broken in a church, in front of everyone, so that it can never again be said to have been a good one. That the family of the Prince's friend should be sent into the dark, and that Rome should be fed. And that the one who is on the second pillar with a little book should be taken." A pause. "That is only a small thing. It is a kindness. He is an interesting writer, and he is going to die in any case." The sound from the church rises. "You asked."
+-> after
+
+# away
+## The bank
+$ do chart("florence.bank")
+You have the great ledger open at the page that records the Pazzi paper, and the candle, though it is full day, burning at your elbow, and you are very still. It is very quiet in the counting house. The clerks have been given the day. Benedetto is at Mass with his wife, and you can hear, through the shut window, the steady brazen jubilation of the bells, and a long way off the cheers.
+?if b2.prisca_told == "none"
+  You do not know where Prisca is. You have not seen her since the noon of the day before.
+?elif b2.prisca_told == "half"
+  Prisca is at the window at Careggi, and you can see her, in your mind, with her hands at her sides, quite still, and her eyes on the road to the city.
+?else
+  Prisca is across the long table, with her ledger, very upright, and she has not looked up since the bells began. She is not leaving. Her pen is going. It makes a faint dry whispering that you could cry at.
+?end
+The bells stop. They stop all together, as if a hand has gone round the whole city and closed on them, and there is, for the space of three breaths, a silence of such perfect size that you can hear a pigeon walking on the roof. Then there is a roar. It is a sound that you know. It is the sound of a great many people who have just seen something that they will never be able to put down.
+:the_away
+* Put on your hat, and go, at once, as fast as you can run
+  $ b2.elevation = "late"
+  $ standing -= 1
+  $ humanity += 1
+  $ secrecy -= 1
+  You are in the street before you have decided it. It is two hundred paces. You run them, as you have not run since Rome, in the sun, down the middle of the road, with the whole of the city pouring the other way, white and shouting, and a woman with a baby in her arms catches at your sleeve and says, "They have killed him, they have killed him, in the church." By the time you have got to the great west door the thing is over. You will have been the last man in Florence to hear what you could have stopped.
+* Stay in the chair, and turn the page
+  $ b2.elevation = "books"
+  $ standing -= 2
+  $ humanity -= 3
+  $ secrecy += 3
+  $ do earn(40)
+  You turn the page. It is a fine page, ruled in red, and it carries sixty-one entries, and by the time you have added the last of them the noise in the street has become a single, continuous, huge, many-throated howl. You blot the figure. You do not go to the window. It is not that you do not know what it is. You have a very clear idea of what it is, and you have decided to be a man who has been in his counting house all day, and you are, and that is the thing that you will be remembered by.
+-> after
+
+# after
+## What was left in the church
+$ do chart("florence.court")
+?if b2.elevation == "books"
+  You hear it at the third hour, in a little crowd of clerks and neighbors in the Via de' Calzaiuoli, standing in the sun with their caps in their hands: that they were at the Elevation, the Pazzi, and the Archbishop's men, and that Giuliano de' Medici is dead of nineteen wounds on the floor of the great church. That Lorenzo is hurt, and is shut in the sacristy with his friends. That the Archbishop, with a score of armed Perugian exiles, has gone to take the Palazzo, and that the Signoria has shut the doors on him and that the Gonfalonier is at this moment hurling his men out of the windows. That the people of Florence have been shouting the old cry, which is "Palle," the Medici's, and not the Pazzi's, and have been dragging the first of the Pazzi men down the Via dei Servi by the heels.
+  You stand in the sun and you hear it. It is a very bright, pleasant day, and the tower of the Bargello is quite sharp against the sky.
+?else
+  The great church has stopped being a church. A hundred people have gone out of it by the doors at a run, and two hundred have stayed, standing in the aisles, with white faces, as people stand at the scene of a fire, and a very old woman is on her knees at the foot of a pillar with a prayer book in her hands, saying the same line over and over in a flat voice. The sun comes through the high windows in broad slow bars. There is a smell of blood on the cold stone, and of dust, and of torn silk, and of incense that is still smoking.
+  Giuliano de' Medici is dead. There is no one in the church who does not know it. They have not yet carried him out. He lies on his back on the pavement below the high altar with his hands crossed on his chest by somebody who must have been kneeling by him, and there is a good deal of his blood on the floor, and the Pazzi are gone.
+  ?if b2.elevation == "giuliano"
+    You are there. You have his head on your knee, and his hand, which is still warm, is in yours, and nobody has told you that you may let go. It is the longest moment that you have had in a church, and you think that he has been trying, for some time, to say something. "Tell my brother," he says. It is a thin little voice. It is a boy's. He does not say what. You tell the people about you that he is gone, and you lay him down, and you cross his hands.
+  ?elif b2.elevation == "lorenzo" or b2.elevation == "priest"
+    You know before you are told. You heard it as you went through the door. You were not quick enough, and you were not meant to have been, and it is a very small comfort that one brother is in the sacristy with a cloak on his neck, and alive, and shouting at everyone to open the door and let him out, and that you did that.
+  ?elif b2.elevation == "sacristy"
+    The grooms in the courtyard were the second pair, and the first had already done what they came to do. You have a man in your hand who will say a name. You have a very good horse. It is no help at all with the thing on the pavement, and you know it, and you stand over it with your hat in your hand.
+  ?elif b2.elevation == "stood"
+    You come back through the south door as the nave begins to empty, in a stream, with your gray ring on the outside of your glove, and you go through the people as through a river, and you see what you did not look at. He is on the pavement in front of the altar. It is a very young face. People are looking at you, and they will go on looking. The gray ring on your glove is the only thing in the church that is not moving.
+  ?elif b2.elevation == "broke"
+    You came in too late, and you know it, and you stand over it with the ring on your glove, and a woman in the crowd looks at the ring, and then at your face, and goes very white and puts her hand across her mouth.
+  ?elif b2.elevation == "spoke"
+    You came back through the south door when the thing was over. The figure was not at the jamb. You did not hear him go.
+  ?else
+    You came too late. It is a very short sentence, and there is nothing to add to it.
+  ?end
+  ?if b2.fiammetta_easter == "near"
+    Fiammetta is beside you. She has not let go of your sleeve. She is dead white, quite dry eyed, and she is looking at the floor and at the long red smear that goes under the altar rail, and her lips are moving. "I saw it," she says. "I saw all of it. I could not close my eyes." She turns her face against your arm, in a stiff, small movement. "You said that I should see what it is. I have seen it."
+  ?elif b2.fiammetta_easter == "chose"
+    Fiammetta comes across the nave through the crowd, as the church empties. She has a long scratch on her cheek and her good blue has been torn at the shoulder, and she is quite steady. She has been holding a little girl by the hand, a stranger's, who has been sick on her shoes. She puts the child into the arms of a nun. "I stood where I liked," she says, in a very small hard voice, and looks at you, and does not say anything else, because there is nothing that could be said.
+  ?elif b2.fiammetta_easter == "home"
+    Fiammetta is on the road to Collesanto, in a cart, with a Valerio carter and a basket of bread, and it will be dark before she hears, and she will hear it from a stranger at a gate.
+  ?end
+?end
+?if b2.agent_easter != "away" and b2.elevation != "books" and b2.elevation != "sacristy"
+  The clerk is on the north side of the nave, at the second pillar, where a person with a notebook would be entirely natural, and not at all noticed. {watcher.They} {were} very noticed. A crowd has gone over {watcher.them} in the first rush for the doors. {watcher.They} {are} lying against the base of the pillar, with the little book still in {watcher.their} hand, open at a page that has been written on very fast, and a long ugly stain is spreading under {watcher.their} coat, and {watcher.their} face is the color of the stone.
+  :the_clerk
+  * Lift {watcher.them}, and carry {watcher.them} out by the sacristy courtyard, to the river
+    $ b2.agent_fall = "carried"
+    $ bond.watcher += 3
+    $ secrecy -= 1
+    $ humanity += 1
+    {watcher.They} weigh{watcher.s} nothing. {watcher.They} {are} breathing in short, light, wet little breaths, and {watcher.their} eyes are open, and you carry {watcher.them} through the sacristy, past the bolted bronze door, and out by the little stair into the sun of the courtyard, and no one stops you, because there are a dozen other people being carried. "It is a very strange thing," says the clerk, quite distinctly, against your shoulder. "I was writing. I was writing, and I thought, there is a man by the door who is not looking." There is a small, wet, startled laugh. "I should like to have got that down."
+  * Leave {watcher.them} with a priest, and go to the family, which is the thing you came for
+    $ b2.agent_fall = "left"
+    $ bond.watcher -= 3
+    $ standing += 1
+    $ humanity -= 1
+    A priest kneels, and begins the prayers. You say that you will come back. You mean it, and you go, toward the sacristy, toward the bolted door, and you do not look behind you, and in the nave there is a very small, light, thin voice that says, quite clearly, to nobody, "Oh. It is you." You do not turn. It is a thing that you will not be able to leave behind.
+?elif b2.agent_easter == "away"
+  The clerk is not in the church. {watcher.They} {were} sent away from it, by you, on the stair, and have, quite properly, not come. {watcher.They} {are} in a room above a dyer's, with the shutters closed, writing, and will hear of it at noon from the boy who brings the bread.
+?end
+There is a sound, a long way off, like a dam going. The people in the Piazza have taken up the old cry. It is "Palle, palle", and it is coming down the Via dei Calzaiuoli toward you, and with it a great deal of broken shouting, and it is going to be a long and very bad day.
+=> next

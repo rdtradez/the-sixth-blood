@@ -2293,6 +2293,96 @@
       "major": true,
       "default": "beside",
       "note": "Chapter 16: where he will stand at the Elevation (beside the family, at the south door, or away at the bank)"
+    },
+    "b2.elevation": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "lorenzo",
+        "giuliano",
+        "priest",
+        "sacristy",
+        "stood",
+        "broke",
+        "spoke",
+        "late",
+        "books"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "lorenzo",
+      "note": "Chapter 17: what he did at the Elevation (unseen is the starting value before the Mass)"
+    },
+    "b2.agent_fall": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "carried",
+        "left"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "carried",
+      "note": "Chapter 17: whether he carried the wounded Velati agent out of the church (unseen if the agent was not there or he was not in the church)"
+    },
+    "b2.hunt": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "named",
+        "sheltered",
+        "stood"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "stood",
+      "note": "Chapter 18: what he did about the hunt for the conspirators in the Piazza (unseen if he did not go)"
+    },
+    "b2.agent_end": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "truth",
+        "hold",
+        "bar"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "hold",
+      "note": "Chapter 18: how he met the turning of the Velati agent on the river stair (unseen if he did not go)"
+    },
+    "b2.panic": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "steady",
+        "hedge",
+        "profit"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "steady",
+      "note": "Chapter 18: what the bank did in the run after the Elevation (unseen if he did not go)"
+    },
+    "b2.villa": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "broke",
+        "kept",
+        "handed"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 18: what he did with Ser Ormanno at the villa (unseen if he did not go)"
+    },
+    "b2.agent_turned": {
+      "kind": "flag",
+      "book": "blood-and-gold",
+      "major": true,
+      "default": true,
+      "note": "Chapter 18: the Velati agent was turned by the gray figure on Easter night (always set)"
     }
   }
 }
