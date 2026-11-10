@@ -1,0 +1,260 @@
+// Book Two, Chapter 20 (session 27). The long quiet: the last night on the hill, the five things to leave behind, and the sleep to Paris.
+// No phases. Calls rest() once and then sleeps the whole of florence_to_paris. Closes with => next, which ends the book (the Velati journal is written and Book Three unlocks).
+// Reads b2.court_end, b2.clerk_wake, b2.merchant_fate, b2.fiammetta_end, b2.sire, b2.panic, b2.trader_coin and the circle. Sets b2.last_night and b2.agent_letter. The engine logs the sleep itself (steward.blood-and-gold, orders.blood-and-gold, sleep.blood-and-gold).
+// What the sleep did is not shown here: Book Three's opening reads wake().
+@chapter b2c20
+@title The Long Quiet
+@book blood-and-gold
+@version 1
+
+# start
+## The first frost
+$ b2.last_night = "alone"
+$ b2.agent_letter = "none"
+$ _guard_n = 0
+$ do chart("florence.bank")
+It is November, and the first frost has come down off the Apennines in the night and lies on the roofs of the city like a fine white dust. The bells are silent. They have been silent since July, by order of Rome: the Pope has laid Florence under an interdict, and excommunicated its first citizen, and a very large army from Naples is eating its way up the Val d'Elsa. The great church has not had a Mass sung in it since the Sunday. The doors are open, and nobody goes in. There is the plague in the lower quarters, and a kind of dry, bright, wary courage everywhere else, such as a city has when it has made up its mind to be hated and found that it does not at all mind.
+It has been seven months. You have had a good many of the days of them in the sun, and a great many of the nights, and you have been very busy, and you have not noticed that you were being counted.
+Ottaviano comes to the bank at dusk, with a paper and without an escort, and stands at the door of the strong room with his hat in his hand. He is thinner, and there is something in his face that has not been there before, which is a kind of attention. He does not sit.
+?if b2.court_end == "seat"
+  "The Prince asks me to say," he says, "that you have been a most valuable councillor. He asks me to say it first, because he thinks that it is the thing that you will remember." He turns the hat. "There are sixty of us. Forty of them can count, and thirty-nine have noticed that a councillor who has sat in the Prince's right hand for seven months has not got one gray hair, and has been seen in the Piazza at noon. It has been remarked in the Velati house at Pisa. A man came from Pisa on the Tuesday with a very small book."
+?elif b2.court_end == "debt"
+  "The Prince asks me to say," he says, "that the Remembrancer's roll holds a debt in your name, to be asked in any year, and that he does not intend to be asked." He turns the hat. "He wishes me to say that it is not a threat. It is a statement that he would be glad of an early opportunity to be forgetful. There is a man at the Velati house at Pisa who has a very small book, and who has asked a number of questions about your hair."
+?else
+  "The Prince asks me to say," he says, "that he has never known a man who asked for so little, and that it is the one thing that makes him uneasy. The sixty cannot make you out. They do not like it. A man came from the Velati house at Pisa on the Tuesday with a very small book, and he asked them what it was that you did not want."
+?end
+He is silent a moment. "It is not an order," says Ottaviano. "It is a courtesy. The Prince would be very much obliged if you were somewhere else for a generation. He says that it is only a thing that a friend may say, and he has had a good deal of practice at it lately." His mouth twists. "I am to say that he is sorry. I did not think that he knew how."
+You have been a very long time in the world. It is not a thing that you have to be told twice. You thank him, and he bows, rather lower than he need, and goes.
+?if b2.clerk_wake == "stayed"
+  You think of a thin voice on a stair, saying that it was all right.
+?elif b2.clerk_wake == "warned"
+  You think of a small figure on the Pisa road, walking, with a book, and a man a long way behind who was not in a hurry.
+?elif b2.clerk_wake == "hidden"
+  You think of a chest sliding across a floor as if it had been a leaf.
+?else
+  You think of a room over a dyer's shop that you did not go to.
+?end
+You send Benedetto to the hill with a note. It says that you are coming up on the morrow, and that it will be for the last time for a good while, and that nobody is to make a fuss.
+-> hill
+
+# hill
+## The last night
+$ do chart("collesanto2.villa")
+There is a thin cold clear light on the hill, and the vines are bare and tied up in long black rows, and the smoke from the village goes straight up. It is the stillest day of the year. Ginevra is on the step of the great house, in a thick shawl, with a stick, with the look of a woman who has been told a great many things by a great many people and has formed her own opinion. She does not get up.
+?if b2.fiammetta_end == "sired" or b2.fiammetta_end == "given"
+  Fiammetta is beside her, in the shade of the door, which is a thing that she does not need now and still, from habit, does. She has grown very quiet, and very still, and she keeps her hands folded. She has learned in seven months a great many things that took you a century.
+?elif b2.fiammetta_end == "kept"
+  Fiammetta is beside her, in a plain brown gown, with a ring of keys at her belt that is not yet quite hers, and a look in her face that has gone from girlhood to something finer and a good deal more tired. She has taken the oath and she does not forget it. It is in the way she stands.
+?else
+  Fiammetta is beside her, in a plain gown, with her chin up, and she has not forgiven you. She has not made a point of it. She does not need to.
+?end
+The day goes by the way that the last days go. Tommaso mends a gate that does not need it. The women have been baking since before dawn, and nobody has said why. Towards evening you find that you have a few hours, and that they are your own, and that there are two people on the hill whom you will not see again as they are. You have a great deal of practice, by now, at being greedy about it.
+* Spend it with Ginevra, on the step, and let the old woman talk
+  $ b2.last_night = "ginevra"
+  $ bond.ginevra += 3
+  She talks for three hours. She is a very great talker, and it is all about the hill. She tells you the name of every field. She tells you who is a fool, and who has married a fool, and who will be a fool in ten years, and which of the children can be trusted with a mule. She tells you, quite suddenly, in the middle of a story about a goat, that she is afraid. "I am not afraid of dying," she says. "I am afraid that I shall not be good enough. It is a thing that comes of being told that one is a saint's keeper. One ought to have been better trained." She pats your hand with her dry knotted one. "You will not be told that I said it. I should like you to know that I am very glad that you came."
+* Spend it with Fiammetta, on the old wall above the vines
+  $ b2.last_night = "fiammetta"
+  $ bond.fiammetta += 3
+  ?if b2.fiammetta_end == "sired" or b2.fiammetta_end == "given"
+    She walks you up to the top of the ridge in the dark, with the long white rows below, and the small yellow lights of the village going out, one by one, in the cold. She can hear every one of them. She says so, in a small voice, as one might admit to a vice. "I do not know how you have borne it," she says, "for so long." She does not wait for an answer. "I shall keep the hill. I shall keep the shrine. I shall teach my own, if there are any, to be quiet." She puts her cold hand on the wall. "I should like to be a thing that does not need to be told what is good. I think that I may be able to manage it, if you tell me where to start."
+  ?elif b2.fiammetta_end == "kept"
+    She sits on the wall, with her keys in her lap, and her feet over the drop, and she is a great deal more at ease than she ought to be. "I am going to be a very old woman," she says. "I have thought about it. I find that I do not mind it as much as I should. I shall be hard, and I shall be careful, and I shall have the girl who is to follow me taught by the time she is ten." She kicks a stone down the slope and listens to it go. "I said that I would ask again. I meant it. I should like it written somewhere that I did not say that I would be unhappy."
+  ?else
+    She sits on the wall with her arms round her knees and her face turned away. It is a long time before she speaks. "I am still angry," she says, "and I should like you to know that I am going to go on being angry for a very long while. It is a thing that keeps me warm." She glances at you. "I shall keep the hill. It is not for you. It is for the people on it." And then, very low, to the dark, "Go well."
+  ?end
+* Spend it with both, at the long table, and let the evening be long
+  $ b2.last_night = "both"
+  $ bond.ginevra += 2
+  $ bond.fiammetta += 2
+  It is a long evening and a plain one. There is a roast kid, and a jug of the thin dark red from the south terrace, and the lamp, and the fire, and the whole of the household in and out of the door with plates. Tommaso tells a story about a priest and a pig, which Ginevra corrects, and Fiammetta contradicts them both. You eat what you can, and drink a little, and let it go by. Somewhere in the second hour you find that you are laughing, and that you have been for some time, and that it is a thing that you had thought you were out of practice for.
+* Spend it alone, on the ridge, in the cold, and be quiet
+  $ b2.last_night = "alone"
+  $ cunning_brutal += 1
+  You go up through the dry black vines, with the frost cracking underfoot, to the top, where there is a ruined wall and a view. The whole of the Arno valley lies below you, in the starlight, and the red scatter of Florence at the end of it, very small, with its bells silent. You do not think about anything. It is rather a feat. You count the lights in the village. You make it ninety-three. It is a good many more than it was, and you can hear every one of them, a small slow beat, in the cold, going on.
+?if b2.last_night != "alone"
+  Ginevra, when you come in, has gone to bed. She has left a lamp on the table, and beside it, on a plate, a piece of bread with oil on it and a note, in a large unsteady hand, that says *Eat it. You are too thin.* You do.
+?end
+It is full dark when you come to the table in the old kitchen, and you have five things to settle before you go down.
+-> table
+
+# table
+## The five things
+You have the ledger, which Benedetto has made up in a fair hand, and a lamp, and a jug of water. You have a quill, and a long strip of paper, and it is the most important thing that you shall write in this century, and it is a list. It has five lines in it. A place, a person, an order, a guard, and a word.
+You take them one by one.
+~> place
+~> steward
+~> orders
+~> guard
+~> invest
+~> letter
+-> cellar
+
+# place
+## Where you will lie
+There are three places, as there were last time, and it is no easier to choose.
+There is the hill. The cellar under the great house has a bar on the inside of the door, and a dry floor, and a shrine above it that has been kept very carefully by a family who think it is a saint. There is a haven in a city, among the people that might be of use. And there is a tomb, a sealed chamber cut into the rock, with no door but one stone.
+* The cellar under the great house, on the hill
+  $ do rest_place("collesanto")
+  $ bond.ginevra += 1
+  You write it down. It is the answer that you knew you would give. It is a very long way to come back to the same place twice, and you find that you are not at all sorry.
+* A haven in the city, among people who could help
+  $ do rest_place("haven")
+  $ secrecy -= 1
+  You write it down. It is the choice of a careful man, and Prisca would approve of it. You find that you feel like a man who has taken a room at an inn on the day that he was to go home.
+* The tomb in the rock, where no one will think to look
+  $ do rest_place("tomb")
+  $ humanity -= 1
+  $ cunning_brutal -= 1
+  You write it down. It is the safest of the three, and the loneliest. You tell yourself that it is only for a time, in the voice that you have heard other people use.
+<~
+
+# steward
+## Who will hold what is yours
+There will be a fortune, and a bank with your name in its books, and a hill, and a great number of papers, and no one to say yes or no. It must be put in someone's hands. There are the ones who love you, and the ones who are good at it, and it is the whole of the art to know which is which.
+* The Merchant house, as a bank and a trust, under Prisca's old seal
+  $ do steward("bank")
+  $ bond.prisca += 1
+  ?if b2.merchant_fate == "allied"
+    You write it down. It is a very cold choice, and a very sound one, and you find, as you write it, that there is a small bent figure in the back of your mind with a hank of blue thread in its hand, and that it is nodding. It will not be a bank without a friend in it. That is a thing that you were not able to say last time.
+  ?elif b2.merchant_fate == "exposed"
+    You write it down. It is a cold choice, and a sound one, and Prisca will keep it as she keeps everything, exactly. She has not once, in seven months, mentioned the cellar in Antioch. She has begun to leave a little pile of nine florins on the corner of the counter every quarter day, and nobody has said why.
+  ?else
+    You write it down. It is a cold choice, and a very sound one, and it does not depend on a heart. It will not love you, and it will not betray you, and it will go on for a very long time being exactly what it is.
+  ?end
+* Prisca, in her own person, to hold it for you ?if in_circle("prisca") and member("prisca", "status") == "active"
+  $ do steward("prisca")
+  $ bond.prisca += 4
+  $ standing += 1
+  You write her name, and send for her, and she comes in the middle of the night, in a traveling cloak, with an abacus in her sleeve, and reads it, and looks at it for a very long time. "I shall be exact," she says. "It is the only thing that I have ever been good at, and I find that I am going to be asked to be good at it for a very long time." She folds it. "I should like you to know that I am afraid."
+  "Of what?" you say.
+  "Of being thanked," says Prisca, and goes out, rather fast, as she did the last time.
+* The Valerio keepers, Ginevra and Tommaso and the girl, and the family after them ?if in_circle("ginevra") or in_circle("tommaso") or in_circle("fiammetta")
+  $ do steward("keepers")
+  $ bond.ginevra += 2
+  $ loyalty.keepers += 15
+  ?if lone() and can_acquire("keeper_oath")
+    $ do acquire("keeper_oath")
+  ?end
+  You write it down. It is a very long time to ask of a family, and you think of it as you write: the names, and the long line of Valerio running down the hill like water, each one told the same few things and taught the same few signs. Ginevra reads it at the kitchen table with her spectacles on the end of her nose, and says that it is a great deal to put on a child, and then, in a different voice, that it is a great deal to put on a family, and that is what a family is for. She signs. It is a plain strong hand. She gives the pen to her grandson, and Tommaso blots it, and says that it was always going to be them.
+* Fiammetta, who will be there the longest ?if (b2.fiammetta_end == "sired" or b2.fiammetta_end == "given") and member("fiammetta", "status") == "active"
+  $ do steward("fiammetta")
+  $ bond.fiammetta += 4
+  $ humanity -= 1
+  You write her name, and it looks very small. She reads it in the lamplight with her new eyes, and her face does not change. "It is a great deal," she says. "I shall not tell you that I am not afraid. I shall say that I shall be exact, and that I shall be hard, and that I shall be the thing that nobody expects to find on the hill in the night." She folds it, and she smiles, the lopsided one, which is the one thing about her that has not changed. "It is a very long time to be asked to be good. I find that I should like to try."
+<~
+
+# orders
+## What is to be done with it
+There is the matter of the order. It is what a steward is to do with a fortune that has a very great while to grow, in a world that will go through a good deal. It can be kept, or it can be sown. It can be done honestly, or only profitably.
+* Play it safe: land, and wool, and honest rents, and let it grow slowly
+  $ do orders("safe")
+  $ humanity += 1
+  $ standing += 1
+  It is the order of a man who intends to wake up and find the same hill. It is not exciting. It is an order to buy farms and vineyards and houses with good walls, and to hold them, and to be patient, and to write nothing down that need not be written.
+* Grow it aggressively: banking, shipping and a great deal of trade
+  $ do orders("aggressive")
+  $ cunning_brutal += 1
+  $ standing += 1
+  It is a bolder thing. It is an order to lend, and to insure ships, and to buy what is cheap and sell what is dear in every port from Bruges to Alexandria. It will be a good deal richer. It will be a good deal more visible. It is like leaving a large lamp in a window and hoping that no one comes to ask whose it is.
+* Take the dark ventures, which pay the most, and ask no questions
+  $ do orders("dark")
+  $ cunning_brutal += 3
+  $ humanity -= 3
+  $ velati_regard -= 2
+  You write it. It takes a long time, and you do not enjoy the writing. It is the order for the debt farms and the slave markets and the quiet trade that the Prince's court does not name, the order that gives the greatest return and will have a great deal of blood on it. You tell yourself that it is only money. You are quite aware that you have heard this before, in the voices of a number of men whom you did not like.
+<~
+
+# guard
+## What stands between
+It is a thing that must be paid for, and it is much dearer than it was in Rome, because the whole world is. There are traps, which are cheap, and bribes, which are not, and guardians, which are neither, and cannot be had without a good reason and a great deal of gold.
+:guard
+* Lay traps in the ways in: a drain, a false stair, a few cunning things in the rock [once] ?if wealth >= 80
+  $ do protection("traps")
+  $ _guard_n += 1
+  Tommaso helps with the drain. He has a gift for it, and a good deal of private joy in the cleverness of the thing, and has to be told twice that the lane to the shrine is not to be trapped.
+* Pay the people who would otherwise ask questions: the bishop's notary, the Eight's clerk, a friar or two [once] ?if wealth >= 160
+  $ do protection("bribes")
+  $ _guard_n += 1
+  $ secrecy += 2
+  It is a long list, and a great deal of it is in Benedetto's neat hand. It is done with a great deal of politeness and a number of small leather purses, and it does, to your considerable interest, work.
+* Hire guardians: a company of good men, sworn, to hold the road as long as the money lasts [once] ?if wealth >= 240
+  $ do protection("guardians")
+  $ _guard_n += 1
+  They are a hard lot, old condottieri, unsentimental and rather fat. Their captain is a bald man with a limp, who looks at the hill, and the village, and the bar on the cellar door, and says that it will do. You have heard that said before, in another century, by a man with a similar limp. It occurs to you that the profession is a very conservative one.
+* That will do
+  <~
+-> :guard
+
+# invest
+## What it is to be put into
+There is one more thing, and it is a thing that you do not have to do. The world is a good deal wider than it was in Rome, and there are people in Lisbon and in Seville who say that there is a great deal more of it to the west. A fortune that lies still for three hundred years grows. A fortune that is sown grows faster. It is the oldest trade in the world, and you are not sure that you like the way it is done.
+:invest
+* Put a share into ships and the Atlantic trade: sugar, and wine, and the new ports [once]
+  $ do sleep_invest("atlantic_trade")
+  $ standing += 1
+  It is a thing that the Portuguese are doing, and the Genoese, and a number of the Medici's cousins. It is not wicked, as such things go. It is very likely that it will be.
+* Buy land in the far north west, on an island at the mouth of a great river, that no one wants [once]
+  $ do sleep_invest("new_amsterdam")
+  $ cunning_brutal -= 1
+  A man in the Genoese house has a map. It is a very bad map, and the island on it is shaped like a leaf, and you buy it as one buys a seed, for no reason. It will cost almost nothing. It is the sort of thing that nobody ever remembers having done.
+* Take a share in sugar, and the trade that feeds it [once]
+  $ do sleep_invest("plantations")
+  $ humanity -= 5
+  $ velati_regard -= 1
+  You know exactly what it is. You are told by a very polite man across a table that it is the most profitable thing in the world, and you do not argue, and you put your name to it, and you are aware as you do that you have just made a promise that will be a good deal more expensive than the money.
+* That will do
+  <~
+-> :invest
+
+# letter
+## A word
+It is the last of the five lines, and the only one that does not have a price. You have a sheet of paper, and a pen, and a seal, and you have a good deal of time.
+* Write a letter for the clerk, to be left in the strong room and given if it is ever asked for
+  $ b2.agent_letter = "left"
+  $ bond.watcher += 1
+  $ humanity += 1
+  It takes the whole of an hour. You write it three times and burn two. The one that you leave is a short one. It says that you were not able to say everything, and that you are sorry, and that it was a great deal better to have been written down by someone like that than to have been unwritten. It says that the house of Valerio will give a bed and a cup and no questions to anyone who comes to the door with a very small notebook. It does not say whom it is for. It says only, at the end, *I think that you will know the hand.* You give it to Benedetto with the instruction that it is to be kept in the strong room and not to be shown to anyone, and he says that he understands, and quite plainly does not.
+* Write nothing
+  $ b2.agent_letter = "none"
+  $ cunning_brutal += 1
+  You look at the paper for a long time. You do not know what you would put on it. You fold it in half, and put it in the fire, and watch it curl.
+<~
+
+# cellar
+## The room under the hill
+It is the middle of the night. The house is asleep. You go down through the quiet rooms in your bare feet with a lamp, and the stairs are dry and cold, and the cellar is as it was.
+It is a long low vault with the racks along one wall and the old wooden door at the end, with the black iron bar on the inside, resting in its brackets. It is a clean and quiet place, and a good deal more comfortable than it was.
+?if b2.merchant_fate == "allied"
+  There is a very small hank of thread on the shelf by the door. It is not any color that you can name. You did not put it there. You find that you are smiling.
+?elif b2.merchant_fate == "exposed"
+  There is a coin on the shelf by the door, a copper one, with a balance in a circle. You did not put it there. You turn it over, and on the back there is a single word, in a hand like the back of a thread label, and the word is *Sorry*. You do not know which of the two of them left it.
+?end
+Ginevra is waiting at the top of the stair, with a candle. She is not coming down. She has the gift of knowing which things are one's own.
+?if b2.last_night == "ginevra"
+  "I have said it," she says. "I said it on the step. I shall not say it again." She holds the candle up. "Go well." She says it as the women of the hill have said it for four hundred years, a very plain thing, and a great deal.
+?elif b2.last_night == "fiammetta"
+  "The girl is asleep on the step," she says, in a whisper. "She said that she would stay awake." Her mouth twitches. "She did very well. She got as far as the third hour. I have put a shawl over her."
+?elif b2.last_night == "both"
+  "We said it at supper," says Ginevra, very low, "so I shall not say it now. I shall only say that you are not to be late." She smiles. It is the lopsided one. It has been in the family a good while.
+?else
+  "I know that you wished to be alone," she says. "I only came to hold the light."
+?end
+She turns and goes up, and the candle goes with her, and the long shadows swing and settle, and you are alone in the dark with your own lamp.
+You do not say any of the things that you had thought to say. You find that there is nothing in you that wants to be said. You set the lamp on the floor. You lie down on the swept earth with your cloak under your head, and fold your hands, like a man on a tomb.
+?if [judean]
+  You say a prayer that you were taught as a child. It comes out whole. You had thought that you had forgotten it, and it is a great comfort to have been wrong.
+?elif [egyptian]
+  You think of the river. You think of it going on, as it always has, brown and slow under a white sky, past all of this and all of you.
+?elif [briton gaul]
+  You think of a wet green hill, and a fire in a round house, and a woman's voice singing, and you do not know whether it is a memory or a thing that you have made. It does not matter. You hold it.
+?else
+  You think of your own hands, as they were, with the dirt in the creases. You think of a field, and a fence, and a gate that did not shut. It was a very small place. It was the whole of the world.
+?end
+The last thing you hear is the village, very faint, down there under the stone. It is a sound that you have lived in like water for two years, and it goes on, a thousand small slow beats, a child's and a woman's and an old man's, steady and quiet and entirely unaware of you. You listen to it go on.
+$ do rest()
+$ do sleep("florence_to_paris")
+You close your eyes.
+It is not like sleep. It is like being put down, very gently, by a large hand. There is a long quiet fall, and the sound of the village goes away, not all at once but one beat at a time, like lamps put out down a long street, and the dark is complete and warm and asks nothing of you at all.
+Somewhere in it, very far off, there is a sound like a thread being drawn through a needle. It comes once. It does not come again. You are, by then, a good way down, and you do not think about it.
+=> next

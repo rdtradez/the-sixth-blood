@@ -51,6 +51,10 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 21: Book Two chapters 7 and 8
 - [x] Session 22: Book Two chapters 9 and 10
 - [x] Session 23: Book Two chapters 11 and 12
+- [x] Session 24: Book Two chapters 13 and 14
+- [x] Session 25: Book Two chapters 15 and 16
+- [x] Session 26: Book Two chapters 17 and 18
+- [x] Session 27: Book Two chapters 19 and 20; Book Two is complete (journal, recap, sleep to Paris)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -312,3 +316,47 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - `tests/book2f.test.js` plays both chapters down their branches (every faction answer, both genders, hunger, each decision flag, every arrival of the girl from the hill, each answer to her request, and the hidden option when he cannot sire). `tests/book2e.test.js` now lets chapter 10 run on into chapter 11, and all Book Two test files expect twelve chapters.
 - Plans are in `SPOILERS/blood-and-gold.md`.
 
+### Session 24 notes (Book Two, chapters 13 and 14)
+
+- Book Two chapters 13 and 14 are built (`content/blood-and-gold/ch13.tsb` and `ch14.tsb`, chapter ids `b2c13` and `b2c14`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 14 and carries on by itself when chapter 15 is added.
+- Session 24 is built on `main` (session 23 is merged), on the `session-24` branch.
+- Chapter 13 is a short opening scene, then a night phase of three actions out of four, then the dawn; it ends with `rest()` and `=> next`. Chapter 14 opens with a ride to Collesanto by day (no phase), then a day phase of three actions out of four and a dusk scene at the gate; it ends with `rest()` and `=> next`, which pauses until chapter 15 exists. Chapter 15 should read hunger, standing and secrecy as chapter 14 left them.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.anselm`, `b2.fiammetta_night`, `b2.medici_paper`, `b2.watcher_night`, `b2.prisca_promise` (chapter 13) and `b2.shrine`, `b2.walls`, `b2.ginevra`, `b2.ridge`, `b2.ormanno_man` (chapter 14). Flags that can be skipped have an `unseen` value that the chapter sets on entry. `b2.prisca_promise` and `b2.ormanno_man` have no `unseen` value because those choices are always reached.
+- New person: Brother Anselm (`content/people.json`). New collection piece: `sixth_border` (only if he asked the old brother the right question). No new codex entries. Content notes: chapter 13 carries `blood`, chapter 14 carries `violence`.
+- Chapter 13 reads `b2.berengaria_debt` and clears it with `unflag` only when the debt is paid by asking the right question. Chapter 14 uses `build("walls")` when `can_build("walls")` is true and the player picks it, and uses the fight system for one exchange set at the gate.
+- Tests: `tests/book2g.test.js` plays both chapters down their branches (every pointer to the old brother, all three answers to each decision, hunger, a woman hero, the walls with and without the money, the border piece and the debt, and things left unseen). All Book Two test files now expect fourteen chapters, and `tests/book2f.test.js` lets chapter 12 run on into chapter 13.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 25 notes (Book Two, chapters 15 and 16)
+
+- Book Two chapters 15 and 16 are built (`content/blood-and-gold/ch15.tsb` and `ch16.tsb`, chapter ids `b2c15` and `b2c16`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 16 and carries on by itself when chapter 17 is added.
+- Session 25 is built on the `session-24` branch, which is not merged to `main` yet. Merge `session-24` and then `session-25` to get everything.
+- Chapter 15 is a short opening scene, then a night phase of three actions out of four, then the dawn; it ends with `rest()` and `=> next`. Chapter 16 is a short opening scene, then a day phase of three actions out of four and a dusk scene; it ends with `rest()` and `=> next`, which pauses until chapter 17 exists. Chapter 17 should read hunger, standing and secrecy as chapter 16 left them.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.prince_plan`, `b2.company_day`, `b2.ring_task`, `b2.warning`, `b2.prisca_told` (chapter 15) and `b2.duomo`, `b2.nanni_eve`, `b2.agent_easter`, `b2.fiammetta_easter`, `b2.easter_stand` (chapter 16). Flags that can be skipped have an `unseen` value that the chapter sets on entry. `b2.prisca_told` and `b2.easter_stand` have no `unseen` value because those choices are always reached.
+- No new people, codex entries, collection pieces or content notes beyond `blood` on both chapters. Neither chapter calls `sire()`, `build()` or the fight system.
+- Later chapters should read `b2.easter_stand` and the other flags above rather than recompute them.
+- Tests: `tests/book2h.test.js` plays both chapters down their branches (every answer to each decision, hunger, a woman hero, the skipped doors and the unseen values). All Book Two test files now expect sixteen chapters, and `tests/book2g.test.js` lets chapter 14 run on into chapter 15.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 26 notes (Book Two, chapters 17 and 18)
+
+- Book Two chapters 17 and 18 are built (`content/blood-and-gold/ch17.tsb` and `ch18.tsb`, chapter ids `b2c17` and `b2c18`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 18 and carries on by itself when chapter 19 is added.
+- Session 26 is built on the `session-25` branch, which is not merged to `main` yet (nor is `session-24`). Merge `session-24`, `session-25` and then `session-26` to get everything.
+- Chapter 17 has no phase and no `rest()`: an opening scene, then one of three scenes chosen by `b2.easter_stand`, then an aftermath scene, and it ends with `=> next`. Chapter 18 is a short opening scene, then a night phase of three actions out of four, then the dawn; it ends with `rest()` and `=> next`, which pauses until chapter 19 exists. Chapter 19 should read hunger, standing and secrecy as chapter 18 left them.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.elevation`, `b2.agent_fall` (chapter 17) and `b2.hunt`, `b2.agent_end`, `b2.panic`, `b2.villa` (chapter 18), plus `b2.agent_turned`, which chapter 18 always sets. Flags that can be skipped have an `unseen` value that the chapter sets on entry.
+- No new people, codex entries or collection pieces. Content notes: both chapters carry `violence` and `blood`. Chapter 17 uses the fight system for one optional exchange set.
+- Tests: `tests/book2i.test.js` plays both chapters down their branches (every stand, plan, company, girl and clerk, the fight over eight seeds, hunger, a woman hero, each decision flag and the skipped door). All Book Two test files now expect eighteen chapters, and `tests/book2h.test.js` lets chapter 16 run on into chapter 17.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 27 notes (Book Two, chapters 19 and 20)
+
+- Book Two chapters 19 and 20 are built (`content/blood-and-gold/ch19.tsb` and `ch20.tsb`, chapter ids `b2c19` and `b2c20`). **Book Two is finished at twenty chapters**: `"incomplete"` is removed from the manifest, so the book now ends, writes its journal, and unlocks Book Three (which has no chapters yet).
+- Session 27 is built on the `session-26` branch, which sits on `session-25` and `session-24`; none of sessions 24 to 26 are on `main` yet. Merge `session-24`, `session-25`, `session-26` and then `session-27` to get everything.
+- The manifest entry for Book Two now has `"journal": "journal/blood-and-gold.tsb"` (the Velati journal, written in the voice of the clerk of the Banca del Colle, reading the book's decision flags) and a spoiler light `recap` for quick starts into Book Three. `quickstart.vars` for Book Three are unchanged.
+- Chapter 19 is an opening scene, a short hunger scene if he needs it, a day phase of three actions out of four, and a dusk scene; it closes with `=> next` and no `rest()`. Chapter 20 has no phases: it calls `rest()` once and then `sleep("florence_to_paris")`, and closes with `=> next`. The wake report is not shown in Book Two; Book Three's opening reads `wake()`.
+- Chapter 20 offers `rest_place`, `steward` (the bank always; Prisca if active in the circle; the Valerio keepers if any of them are in the circle; Fiammetta if she is an active fledgling), `orders`, `protection` and the gap's own investments (`sleep_invest`). Protections are priced by `content/rules.json` at the Florence scale (8), so the story gates them at 80, 160 and 240 coin.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.merchant_stance`, `b2.merchant_learned`, `b2.prisca_maker`, `b2.court_end`, `b2.clerk_wake`, `b2.fiammetta_end`, `b2.merchant_fate` (chapter 19) and `b2.last_night`, `b2.agent_letter` (chapter 20). Flags that can be skipped have an `unseen` value that the chapter sets on entry. The Merchant's choice is also recorded by `original_fate("merchant", ...)`, so later books read `original("merchant", "fate")`.
+- Later books and the journals should read `b2.merchant_fate`, `b2.clerk_wake`, `b2.fiammetta_end`, `b2.agent_letter`, `b2.court_end` and `b2.prisca_maker` rather than recompute them. The clerk's romance is ended as `turned` in chapter 19 (when the romance had begun), ready for Book Four's return.
+- New codex entry: the Merchant (lore). No new people. Content notes: chapter 19 carries `blood` and `grief`, chapter 20 carries `slavery` and `grief`.
+- Tests: `tests/book2j.test.js` plays both chapters down their branches (every Merchant tone, stance and answer, every door, the fate and the gift, hunger, a woman hero, every last night, steward, order, guard, investment and letter, the end of the book, the journal). All Book Two test files now expect twenty chapters and a finished book, and `tests/book2i.test.js` lets chapter 18 run on into chapter 19.
+- Plans are in `SPOILERS/blood-and-gold.md`.

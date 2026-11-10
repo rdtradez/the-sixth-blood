@@ -2038,6 +2038,464 @@
       "major": true,
       "default": "kept",
       "note": "Chapter 12: how Fiammetta was set to work at the bank"
+    },
+    "b2.anselm": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "asked",
+        "waited",
+        "pressed"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "waited",
+      "note": "Chapter 13: how he came at the old brother at San Miniato who painted the borders of the roll (unseen if he did not go)"
+    },
+    "b2.fiammetta_night": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "taught",
+        "trusted",
+        "forbade"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "taught",
+      "note": "Chapter 13: how he dealt with Fiammetta on a Lent night (teach her, trust her or forbid her; unseen if he did not go)"
+    },
+    "b2.medici_paper": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "lent",
+        "bought",
+        "aloof"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "aloof",
+      "note": "Chapter 13: what he did when Ser Bartolo asked for coin after the papal accounts left the Medici bank"
+    },
+    "b2.watcher_night": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "told",
+        "kept"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 13: whether he told the Velati agent how he thinks it ends (unseen if he did not go)"
+    },
+    "b2.prisca_promise": {
+      "kind": "enum",
+      "values": [
+        "agreed",
+        "hedged",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "hedged",
+      "note": "Chapter 13: whether he promised Prisca to tell her before, and not after"
+    },
+    "b2.shrine": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "relocked",
+        "guarded",
+        "trusted"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "relocked",
+      "note": "Chapter 14: what he did about the oiled lock of the shrine cellar at Collesanto (unseen if he did not go)"
+    },
+    "b2.walls": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "raised",
+        "levied",
+        "left"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "levied",
+      "note": "Chapter 14: the walls of Collesanto (unseen if he did not walk them)"
+    },
+    "b2.ginevra": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "told",
+        "kept",
+        "asked"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 14: how much he told Ginevra of the threat to the hill (unseen if he did not sit at her table)"
+    },
+    "b2.ridge": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "followed",
+        "warned",
+        "ignored"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "warned",
+      "note": "Chapter 14: what he did about the false shepherds on the ridge (unseen if he did not climb)"
+    },
+    "b2.ormanno_man": {
+      "kind": "enum",
+      "values": [
+        "heard",
+        "refused",
+        "fought"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 14: his answer to the faction's offer to buy the hill, given at the gate at dusk"
+    },
+    "b2.prince_plan": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "guard",
+        "forbid",
+        "trust"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "forbid",
+      "note": "Chapter 15: what he told the Prince to do about the Sunday (unseen if he did not go to the loggia)"
+    },
+    "b2.company_day": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "city",
+        "away",
+        "hill"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "away",
+      "note": "Chapter 15: where he sent Ugolino's company for Easter (unseen if he did not go to Campi)"
+    },
+    "b2.ring_task": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "accepted",
+        "bargained",
+        "declined"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "declined",
+      "note": "Chapter 15: his answer to the faction's request that he stand at the south door of the great church (unseen if he did not answer)"
+    },
+    "b2.warning": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "open",
+        "veiled",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "veiled",
+      "note": "Chapter 15: how much he told Ser Bartolo of the plot against the Medici (unseen if he did not go)"
+    },
+    "b2.prisca_told": {
+      "kind": "enum",
+      "values": [
+        "before",
+        "half",
+        "none"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "half",
+      "note": "Chapter 15: how much he told Prisca before the Sunday"
+    },
+    "b2.duomo": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "measured",
+        "barred",
+        "prayed"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "measured",
+      "note": "Chapter 16: what he did in the great church on Holy Saturday (unseen if he did not go)"
+    },
+    "b2.nanni_eve": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "asked",
+        "told",
+        "bought"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "asked",
+      "note": "Chapter 16: what passed with the seller of thread on the eve (unseen if he did not go)"
+    },
+    "b2.agent_easter": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "away",
+        "near",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "near",
+      "note": "Chapter 16: what he told the Velati agent about the Sunday (unseen if he did not go to the river stair)"
+    },
+    "b2.fiammetta_easter": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "home",
+        "near",
+        "chose"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "chose",
+      "note": "Chapter 16: where Fiammetta is to be on the Sunday (unseen if he did not see her)"
+    },
+    "b2.easter_stand": {
+      "kind": "enum",
+      "values": [
+        "beside",
+        "door",
+        "away"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "beside",
+      "note": "Chapter 16: where he will stand at the Elevation (beside the family, at the south door, or away at the bank)"
+    },
+    "b2.elevation": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "lorenzo",
+        "giuliano",
+        "priest",
+        "sacristy",
+        "stood",
+        "broke",
+        "spoke",
+        "late",
+        "books"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "lorenzo",
+      "note": "Chapter 17: what he did at the Elevation (unseen is the starting value before the Mass)"
+    },
+    "b2.agent_fall": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "carried",
+        "left"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "carried",
+      "note": "Chapter 17: whether he carried the wounded Velati agent out of the church (unseen if the agent was not there or he was not in the church)"
+    },
+    "b2.hunt": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "named",
+        "sheltered",
+        "stood"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "stood",
+      "note": "Chapter 18: what he did about the hunt for the conspirators in the Piazza (unseen if he did not go)"
+    },
+    "b2.agent_end": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "truth",
+        "hold",
+        "bar"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "hold",
+      "note": "Chapter 18: how he met the turning of the Velati agent on the river stair (unseen if he did not go)"
+    },
+    "b2.panic": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "steady",
+        "hedge",
+        "profit"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "steady",
+      "note": "Chapter 18: what the bank did in the run after the Elevation (unseen if he did not go)"
+    },
+    "b2.villa": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "broke",
+        "kept",
+        "handed"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 18: what he did with Ser Ormanno at the villa (unseen if he did not go)"
+    },
+    "b2.agent_turned": {
+      "kind": "flag",
+      "book": "blood-and-gold",
+      "major": true,
+      "default": true,
+      "note": "Chapter 18: the Velati agent was turned by the gray figure on Easter night (always set)"
+    },
+    "b2.merchant_stance": {
+      "kind": "enum",
+      "values": [
+        "open",
+        "guarded",
+        "angry"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "open",
+      "note": "Chapter 19: how he took the Merchant's revelation in the Baptistery"
+    },
+    "b2.merchant_learned": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "roll",
+        "prisca",
+        "figure"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 19: the one true answer he asked of the Merchant (none if he kept it)"
+    },
+    "b2.prisca_maker": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "asked",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "silent",
+      "note": "Chapter 19: whether he asked Prisca about her making (unseen if he did not go to the bank)"
+    },
+    "b2.court_end": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "seat",
+        "debt",
+        "quiet"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "quiet",
+      "note": "Chapter 19: what he took from the Prince after Easter (unseen if he did not go)"
+    },
+    "b2.clerk_wake": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "stayed",
+        "warned",
+        "hidden"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "hidden",
+      "note": "Chapter 19: how he met the turned clerk's waking (unseen if he did not go)"
+    },
+    "b2.fiammetta_end": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "sired",
+        "given",
+        "kept",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 19: what became of Fiammetta's request (sired in chapter 12, given now, sworn a keeper, or refused; unseen if he did not go)"
+    },
+    "b2.merchant_fate": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "exposed",
+        "allied"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 19: what he did with the Merchant's secret (also recorded as original_fate)"
+    },
+    "b2.last_night": {
+      "kind": "enum",
+      "values": [
+        "ginevra",
+        "fiammetta",
+        "both",
+        "alone"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "alone",
+      "note": "Chapter 20: how he spent the last night on the hill"
+    },
+    "b2.agent_letter": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "none"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 20: whether he left a letter in the strong room for the turned clerk"
     }
   }
 }

@@ -48,7 +48,7 @@ async function play(chapter, vars, wants = [], { stopAt = null, seed = 3, wake =
   game.state.sys.sleep.wake = { quick: true, place: 'haven', steward: 'bank', outcome: 'on_schedule', years: 1410, ...wake };
   for (const [k, v] of Object.entries({ wealth: 50000, ...vars })) dev.setVar(game, k, v);
   const frame = await dev.jump(game, chapter, { keep: true });
-  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c11' ? 'b2c12' : null));
+  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c11' ? 'b2c12' : chapter === 'b2c12' ? 'b2c13' : null));
 }
 
 const clean = (text) => {
@@ -57,11 +57,11 @@ const clean = (text) => {
   assert.doesNotMatch(text, /\$ do /);
 };
 
-test('Book Two lists twelve chapters and still pauses after the last', async () => {
+test('Book Two lists twenty chapters and is finished', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
-  assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 12);
+  assert.equal(book.incomplete, false);
+  assert.equal(book.chapterCount, 20);
 });
 
 test('chapter 11 plays through to chapter 12 for every faction answer', async () => {
@@ -116,8 +116,7 @@ test('chapter 12 plays through for every arrival and every answer', async () => 
     for (const deal of ['partner', 'rival', 'quiet']) {
       for (const ask of [/Do it\. She is asking/, /when the spring is over/, /Tell her no/]) {
         const run = await play('b2c12', { 'b2.fiammetta': fiammetta, 'b2.prisca_deal': deal, 'b2.paper': 'recorded', 'b2.guccio_fate': 'handed' }, [ask]);
-        assert.notEqual(run.frame.wait, 'choices', JSON.stringify([fiammetta, deal, String(ask)]));
-        assert.equal(run.game.state.chapter, 'b2c12');
+        assert.equal(run.game.state.chapter, 'b2c13', JSON.stringify([fiammetta, deal, String(ask)]));
         clean(run.text);
       }
     }
@@ -126,15 +125,15 @@ test('chapter 12 plays through for every arrival and every answer', async () => 
 
 test('chapter 12 plays through when very hungry, for a woman, and after every guccio ending', async () => {
   const hungry = await play('b2c12', { hunger: 95 }, [/Benedetto's back room/]);
-  assert.notEqual(hungry.frame.wait, 'choices');
+  assert.equal(hungry.game.state.chapter, 'b2c13');
   clean(hungry.text);
   const woman = await play('b2c12', {}, [], { hero: { ...HERO, gender: 'f' } });
-  assert.notEqual(woman.frame.wait, 'choices');
+  assert.equal(woman.game.state.chapter, 'b2c13');
   clean(woman.text);
   for (const fate of ['hidden', 'handed', 'left', 'unseen']) {
     for (const paper of ['carried', 'recorded', 'refused', 'unseen']) {
       const run = await play('b2c12', { 'b2.guccio_fate': fate, 'b2.paper': paper }, [/Bargello/]);
-      assert.notEqual(run.frame.wait, 'choices');
+      assert.equal(run.game.state.chapter, 'b2c13');
       clean(run.text);
     }
   }

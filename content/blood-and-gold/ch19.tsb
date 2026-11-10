@@ -1,0 +1,367 @@
+// Book Two, Chapter 19 (session 27). The font: the Merchant's revelation and the week after.
+// An opening scene in the Baptistery (no phase), a short hunger scene if he needs it, then one day phase of three actions out of four (the bank, the Prince, the clerk, the girl), then a dusk scene at the thread stall where the Merchant's fate is chosen.
+// Ends with => next (no rest(): chapter 20 opens a fresh night and ends the book). Reads b2.trader_regard, b2.trader_coin, b2.trader_ledger, b2.agent_end, b2.agent_fall, b2.watcher_bond, b2.panic, b2.prisca_told, b2.villa, b2.hunt, b2.elevation, b2.sire, b2.fiammetta_easter, b2.faction.
+// Later chapters and the Velati journal read b2.merchant_stance, b2.merchant_learned, b2.prisca_maker, b2.court_end, b2.clerk_wake, b2.fiammetta_end and b2.merchant_fate. original("merchant", "fate") is always set by the end.
+@chapter b2c19
+@title The Font
+@book blood-and-gold
+@version 1
+
+# start
+## The third hour
+$ b2.merchant_stance = "open"
+$ b2.merchant_learned = "none"
+$ b2.prisca_maker = "unseen"
+$ b2.court_end = "unseen"
+$ b2.clerk_wake = "unseen"
+$ b2.fiammetta_end = "unseen"
+$ b2.merchant_fate = "kept"
+$ do chart("florence.court")
+The Baptistery of San Giovanni is an octagon of white and green marble with a lantern at the top of its dome, and at the third hour on a bright morning the sun comes down through the lantern in a single hard bar and lies across the floor like a plank. There is no one in it. The sacristan has put up his bolt and gone to see what the city is doing, which is a thing that all of Florence is doing this morning, and the great bronze doors have been left on the latch by somebody who has not been told that they are not to be.
+You come in out of the sun, which is a thing that you can do and most of your kind cannot, and the cold of the stone meets you like a hand.
+He is sitting on the step of the font, in the bar of light. He has left his handcart outside. He has taken off his hood, and he has his indigo fingers folded on his knee, and for the first time since you have known him you can see his face. You see it quite clearly. It is brown and lined, with a long straight nose, and eyes that are the color of a river under ice. You find that you are afraid that you will not remember it, and then you find that you will.
+He is not bent. That is the first thing. He sits very straight indeed.
+Then you see the shadow. It is a thing that you have never been able to look at for long, in the stall, in the Mercato, in the lane; it has always seemed to be a little nearer to him than a shadow ought. In the sunlight it lies across the stone behind him, perfectly clear, and it is a good deal longer than he is. It is the shadow of a tall man, standing, with his arms at his sides, and it moves a little when he does not.
+?if b2.trader_regard == "warm"
+  "Sit down," says the seller of thread, and he is smiling. It is a small, shy, rather astonishing smile in a face that has not had much practice. "I have been hoping for a very long while that I should be allowed to say it to someone."
+?elif b2.trader_regard == "wary"
+  "Sit down, if you like," says the seller of thread, in his small dry voice, "or stand. I find that I am not particular. I should like to see what it is that you do."
+?else
+  "I will not ask you to sit," says the seller of thread. His voice is level, and quite without warmth, and not unkind. "I have said that I would say a thing, and I shall say it. It is a matter of manners, and of a debt, and I am not at all sure that you have earned it."
+?end
+"I am the one that the six called the Merchant," he says. "It was not my name. It was my trade, and I was glad of it, because it let me keep my name." He looks at the font. "I made a bargain with a god in a plague winter, in the dark, because I was very frightened and had a child, and it was a very good bargain, and I have been paying for it ever since in the only coin that I have, which is that I have never been looked at twice." He spreads his hands. "It is a gift. It is a gift of shadows. I take a man's memory of my face and I put it in the shadow, and he goes away with the shadow and he does not know why. It has been a very great convenience. It has been the loneliest thing that I have ever done."
+?if b2.trader_coin == "taken"
+  He looks at the thing that you have in your belt, the little copper token with the balance in its circle. "You kept it," he says. "I was not sure that you would."
+?end
+"I should like to have said it on a better day," he says. "I should like to have said it on any other."
+:the_stance
+* Say that you are glad to know who you have been talking to, and that you have a good many questions
+  $ b2.merchant_stance = "open"
+  $ bond.nanni += 2
+  $ secrecy -= 1
+  He bows his head. It is very slight. "You are the first in a thousand years who has said so," he says, "and I do not expect that you will be the last who will be sorry." But he looks, for a moment, a good deal less tired.
+* Say nothing, and look at the doors, and wait to be told what is wanted
+  $ b2.merchant_stance = "guarded"
+  $ secrecy += 1
+  $ cunning_brutal -= 1
+  "That is very proper," he says. He does not seem to mind. "I have sold thread for a good many years to people who are very proper. I think that I should have been sorry if you had not been." He settles his hands. "I shall try to be brief."
+* Tell him that the clerk is dead of the thing that was done in the church, and that he sold thread in the square three days before it
+  $ b2.merchant_stance = "angry"
+  $ bond.nanni -= 1
+  $ humanity += 1
+  $ cunning_brutal += 1
+  He does not flinch. It is a thing that you notice, and it is not a thing that you like, because he does not flinch like a man who has been told a thing, but like one who has been hearing it for several days. "It is true," he says. "I knew that there would be a day. I did not know that there would be that one, and I did not know that the one in gray would have what he wanted from the person I should have liked him not to have." His mouth is steady. "It is the only reason that I am sitting here. I should like it said."
+:the_font
+"I shall ask nothing of you today," he says. "I have found that it is a very bad plan. But I owe you a thing, and the thing that I owe is one true answer to one question, and you may have any one that you like, and I shall not lie, and I shall not lie by leaving it out."
+* Ask about the roll, and the sixth line, and the seals
+  $ b2.merchant_learned = "roll"
+  $ do discover("the_merchant")
+  ~> roll
+  -> :after
+* Ask about Prisca, and what it is that he is to her
+  $ b2.merchant_learned = "prisca"
+  $ do discover("the_merchant")
+  ~> prisca
+  -> :after
+* Ask about the man in gray, and what he is to him
+  $ b2.merchant_learned = "figure"
+  $ do discover("the_merchant")
+  ~> figure
+  -> :after
+* Ask nothing, and keep the answer
+  $ b2.merchant_learned = "none"
+  $ do discover("the_merchant")
+  $ bond.nanni += 1
+  $ cunning_brutal -= 1
+  "That is very shrewd," he says, and there is something in his face that is almost disappointment, and almost respect. "I shall remember that I owe it. It is a very uncommon thing to be owed." He gets up from the step. He does it slowly, as a tall man gets up who has spent a long time sitting small.
+:after
+$ do reveal("merchant")
+$ do learn_name("merchant")
+He stands in the bar of light, and he is quite different standing. It is very simple. The bend is gone out of his back and the stoop out of his shoulders, and there is a strength in him that is very like the strength in the old paintings of the saints, which is not at all the strength of a man who has ever struck anybody. The shadow goes up the wall behind him, a good deal larger than he is.
+"I have three days of being a seller of thread left in me," he says. "It is not a matter of pride. It is a thing that I should like to have a little longer. You will have a good deal to do, and so shall I." He puts his hood up, and as it comes over his face he is, quite plainly, a small bent old man again, and you cannot afterward have said what color his eyes were. "Come to the stall on the evening of the third day. You may keep my secret. You may carry it to my daughter's house. Or you may stand beside me in the Mercato at noon, in front of everyone, and let them wonder." The hood turns a little. "It is yours to say. I find that I am not afraid, and I have not been able to say that in a very long time."
+He goes out through the bronze doors into the white sun, and you hear the handcart start up, with its one bad wheel, going away across the piazza. It is a very small sound.
+?if must_feed()
+  ~> hungry
+?end
+It is Monday, and the whole of Florence has a hangover from a murder. You have the days until the evening of the third. You have a bank, and a Prince, and a lodging, and a girl on the hill road, and there will be time for three of them.
+$ do phase("day", 3)
+-> day
+
+# roll
+## The sixth panel
+"I was in Anatolia," says the seller of thread, "in the year that the Goths came into Italy, and I did not come back for a long time. When I did, it was done. There was a page, and a number of seals, and a very quiet agreement among a number of people who had been told, each of them, that the others had already said yes." He looks at his hands. "I was not asked. I do not think that any of the five was asked, as one asks. They were told that it was a thing that was already half done, and that the sixth was not at the table to say otherwise. It is the oldest trick in the world, and I have used it myself."
+"The balance in the circle is not mine," he says. "I did not give the seal. It was cut in the house of a child of mine, and she has the right of it, and it was not she who cut it, I think. I do not know who it was. I should like to know." He closes his eyes. "I learned of it in the autumn. I did not say a word. I was a coward in a very small way, in a place where it would not have cost me anything, and I have kept the habit up for fifteen hundred years."
+<~
+
+# prisca
+## The only one he went back to see
+"She is of my making," says the seller of thread. He says it very quietly, as a man says a thing for the first time. "She is not the first. She is the only one that I let myself know. It was in Antioch, in a cellar, in a bad summer, when she was dying of a fever and a debt, and was a great deal too clever to die of either." The shadow lies very still behind him. "I put my shadow across her face while I did it, as I do. It is a mercy to the people I make. In the morning she remembered a kindness, and a purse of gold, and no face at all. She has been looking for the giver of that purse ever since, in the books of every house in the world."
+He smiles, a little crookedly. "It has not occurred to her to look at the man who comes to her counter every quarter day with nine florins and a measuring rod. I am very proud of that, and very ashamed. I do not know that she would forgive it." He looks up. "I would rather that it did not come from me. I have said that I should not ask. I am only saying that I would rather."
+<~
+
+# figure
+## The man in gray
+"He came to my stall on the Thursday before the feast," says the seller of thread, "in a plain cloak, and bought a hank of black, and paid for it in a very old coin. He has not bought thread of me in four hundred years. I knew him at once. I knew the one who made him, when that one was young, and I will not say the name, because it is not mine to say, and because it is the only thing that I have ever been afraid to." The long shadow shifts. "He is not a wicked man. He is a patient one, and he has read a very great deal, and what he has read is what will be, and he is not at all sure that he likes it."
+"He cannot read what has not been decided," he says. "It is the only thing that I know of him that is of any use. A man who has settled on nothing is a very hard book to read. I should keep my mind unmade as long as you can bear to." He gives you a look that is not at all that of a seller of thread. "I do not think that you will bear it very long. It is a thing that I have noticed about people who are good."
+<~
+
+# hungry
+## The Monday hunger
+It has been a week of a good deal of blood, in one way or another, and the thing in you that counts it has stopped being polite. You find, with a small cold start, that you are standing in the sun on the steps of the Baptistery with your hand on the stone, and that the sun does not make it any better.
+* Go to Benedetto's back room, where the cup is kept
+  $ do feed("bank")
+  It is warm and clean and nobody asks. You drink it standing, with your hat on, like a man at a bar.
+* Find one of the sick in the Misericordia's yard, who will not see Tuesday
+  $ do feed("donor")
+  $ humanity -= 2
+  $ secrecy -= 1
+  He does not wake. You are very careful. There is a sister at the end of the row with a lamp, and she does not turn her head, and you do not think that it is out of ignorance.
+* Take a hen from a yard in the Borgo, and leave a coin on the step
+  $ do feed("animal")
+  $ do earn(-1)
+  It is dull, and quiet, and very quickly done.
+<~
+
+# day
+## The days before the evening
+:day
+?if actions_left() == 3
+  The morning is very bright. The bells are ringing again, a great deal too loudly, as if the whole city were trying to make up for a night of silence, and from the Piazza della Signoria there comes, now and again, a sort of long, low murmur that you do not wish to identify. There are four doors that you might knock at, and no time for more than three.
+?elif actions_left() == 2
+  It is the second day, or what you have been calling the second day. The light has gone mild and gold and the streets have begun to smell of bread again, which is the one thing that a city does not stop doing.
+?else
+  It is the third day, and a thin cool wind has come up from the river, and the long afternoon is going out of the sky. There is time for one more door, and then the evening, and the stall.
+?end
+* Go to the bank, where Prisca is sitting among the wreck of a very good week [once] ?if actions_left() > 0
+  ~> bank
+  $ do act()
+* Go to the Prince, who has sent for the whole of the court [once] ?if actions_left() > 0
+  ~> court
+  $ do act()
+* Go to the lodging over the dyer's shop, where the clerk lies [once] ?if actions_left() > 0
+  ~> clerk
+  $ do act()
+* Go to the girl from the hill, who has not been out of the upper room [once] ?if actions_left() > 0
+  ~> girl
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dusk
+?end
+-> :day
+
+# bank
+## The counting house
+$ do chart("florence.bank")
+Prisca is in the strong room, in her cloak, with the door open behind her and a long white list on the table, and she has not slept. She has the air of a woman who has been told a thing and is putting it, very carefully, where it belongs. Benedetto is asleep on the bench, with his boots off. There is the smell of cold ink, and wax, and a very faint sourness of something burned.
+?if b2.panic == "steady"
+  "We paid every claim," she says. "I have never in four hundred years paid so much to so many people who were so little grateful. It was the best thing that has been done in this house." She sets down the pen. "I am told that the Medici will remember it. I am told that they will not."
+?elif b2.panic == "hedge"
+  "We paid slowly," says Prisca. "It was a very reasonable week. I am told that we shall not have been the house that was open, but the house that was careful, and I find that I do not mind what I am called, which is not a thing that I should have said a year ago."
+?elif b2.panic == "profit"
+  "We have a great deal of Pazzi paper," says Prisca, "and a great deal of gold. I have looked at both for the better part of two days." She does not smile. "It is the best week we have ever had. I cannot think of a thing that I should less like to be known for."
+?else
+  "You were not here," says Prisca, "so I decided. I decided that we should pay, and then I decided that we should not, and in the end I did what a house does, which is the thing that it did the last time." She waves a hand. "It will do. I should like to have been told."
+?end
+?if b2.prisca_told == "before"
+  "I was told," she says. "It is a good deal harder to be angry with a man who has told you. I have been trying all week. I find that I cannot."
+?end
+?if b2.faction == "joined"
+  She does not speak of the ring. She looks at your hand when she thinks that you are not looking, and then at the door.
+?end
+:the_bank
+* Ask her about the first night: who gave her the Gift, and what she remembers of the face ?if b2.merchant_learned == "prisca"
+  $ b2.prisca_maker = "asked"
+  $ bond.prisca += 2
+  She is silent for so long that you think that you have been very stupid. "It was a cellar in Antioch," she says at last, in a voice that you have never heard, quite small. "There was a fever. There was a purse of gold, afterward, on the table, with a note in Greek that said *Buy a better house*." She puts a finger on the table. "I have it. I have kept the purse for fourteen hundred years. I do not remember his face. I have looked for him. I thought that he was dead, and that it was a kindness that had no one left to thank." She looks at you, with her head a little on one side. "I do not know why you have asked me, and I do not know why I have told you. I should like very much to be told why."
+  You say that you will, in a few days. It is, you find, almost entirely true.
+* Sit with her, and say nothing, and let her talk about the wreckage
+  $ b2.prisca_maker = "silent"
+  $ bond.prisca += 1
+  You sit for two hours, and she talks, and it is all about money, and it is the most intimate thing that has been said to you in a year. She does not look up. When Benedetto wakes and says, in a thick voice, that it is the hour for the porters, she says that it can wait. It is the first time that you have heard her say it.
+* Tell her that you will be gone before the year is out, and begin to say what is to be done with the house
+  $ b2.prisca_maker = "silent"
+  $ standing += 1
+  $ bond.prisca -= 1
+  Her face does not change. She takes up the pen, and puts it down, and says, "I thought that you would. It is the oldest custom of your kind, and the only one that I do not understand." She pulls a sheet toward her. "Say it, then. I shall write it down. I should like to have it exact."
+<~
+
+# court
+## The hall behind the Bargello
+$ do chart("florence.court")
+The Prince is not in the plain chair. He is standing by the window with his back to the hall, and the sixty of the court are in their places against the wall with their hands folded, and no one is speaking. It is the middle of the day, and the shutters are closed, and the candles are lit. Ottaviano is at his elbow, in black, with a paper.
+Gualtiero does not turn. "It was a very ugly week," he says, in the soft pleasant voice that you have learned to be afraid of. "It was a week in which a church was made a shambles, and a priest of God was hanged from the window of a palace, and no vampire in the city was told that it was to be done." He turns his head. "I do not like not being told."
+?if b2.villa == "handed"
+  "The old gentleman from the Fiesole road is in the cell under the tower," he says. "He has talked for two days. He has asked for nothing, and I have given him nothing, and I am told that I have never had a more truthful prisoner." He tilts his head. "I am obliged to you. I did not like to say so before sixty."
+?elif b2.villa == "broke"
+  "I am told that you took a ring to a house on the Fiesole road, and brought nothing back," he says. "I am told that it was a courtesy. I think that it was a mistake. I think that it was exactly the sort of mistake that I should have liked to make myself."
+?elif b2.villa == "kept"
+  "I am told that you hold a certain ring," he says. "I should not like it to be a thing that was in your hand when it is wanted." He does not look at it. "I should like it to be a thing that I did not know about."
+?else
+  "I am told that you did not go to the villa," he says, "and that it is empty. I am told that nobody has seen the old gentleman since Sunday."
+?end
+?if b2.hunt == "named"
+  Ottaviano looks at you. It is a very brief look. It says that he has a list, and that there are no more hanged servants on it than he can help.
+?elif b2.hunt == "sheltered"
+  Ottaviano does not look at you at all, which is how you know that he has not forgotten the sixty men.
+?end
+:the_court
+* Accept a place on the council, since he has offered it, and mean to use it
+  $ b2.court_end = "seat"
+  $ standing += 3
+  $ secrecy -= 2
+  $ bond.gualtiero += 2
+  The Prince inclines his head. A chair is brought, which is not the plain chair, and you sit in it, and sixty heads turn, and you are aware that it is a thing that cannot be undone. "I should like it to be a seat that is used," says Gualtiero. "I find that I have a great many people who sit." He looks at you with the first approach to a smile that you have ever seen on his face. "I have lost a friend. I do not see why I should not acquire one."
+* Ask for nothing, but ask that a debt be written in the Remembrancer's roll, and left unspent
+  $ b2.court_end = "debt"
+  $ standing += 1
+  $ bond.gualtiero += 1
+  $ secrecy += 1
+  Berengaria, who has been sitting very small by the wall, gets up and goes to the roll without a word. It is a very short entry. It says that the Prince owes the house of Valerio one favor, to be asked in any year. "It is a thing that I should like to have written," she says, to nobody. "It is not often that one sees a man ask for a thing that will outlast the asking."
+* Say that you wish to take nothing, and that you are very tired
+  $ b2.court_end = "quiet"
+  $ humanity += 1
+  $ bond.gualtiero -= 1
+  The Prince watches you for a long moment. "You are a very strange guest," he says. "I do not think that I have had one before who has been asked, and said that he was tired." It is not hostile. It is, you think, almost wistful. "I shall remember it. It is the only thing that anyone has said in this hall today that I did not understand."
+<~
+
+# clerk
+## The lodging over the dyer's
+$ do chart("florence.rooms")
+?if b2.agent_end == "unseen"
+  The room over the dyer's shop is on the second floor, with a window on the lane and a smell of woad coming up through the boards. You did not see it done. You have been told. You find the door unbarred, and the room tidy, and the clerk on the bed with {watcher.their} book on {watcher.their} breast, as the boy said.
+?else
+  The room over the dyer's shop is on the second floor, with a window on the lane and a smell of woad coming up through the boards. You carried {watcher.them} here yourself, or someone did, in the gray before the dawn. The clerk lies on the narrow bed with {watcher.their} book on {watcher.their} breast, perfectly still.
+?end
+{watcher.They} {are} not dead. You know it by the way that the room does not smell of death, but of something colder, close, and dry, as of a house with no fire. The breath has stopped. The skin has gone the color of candle wax. You have seen it before, in a girl in a courtyard in Rome, with a chin like Fiammetta's, and you know exactly how long it is.
+It will be at the second dusk. That is the Tuesday. It is a thing that no one can alter.
+:the_clerk
+* Sit by {watcher.them}, in the sun, and wait for the dusk, and be the first thing that {watcher.they} see
+  $ b2.clerk_wake = "stayed"
+  $ bond.watcher += 3
+  $ humanity += 1
+  You sit on the stool, with your back to the window, with the sun on your shoulders, and you do not do anything at all. It is a very long afternoon. At the second dusk the breath comes, in a long, shuddering, appalled inhalation, and the clerk opens {watcher.their} eyes, which are not the color that they were, and looks at the ceiling for a long moment without moving. Then {watcher.they} turn{watcher.s} {watcher.their} head. "It is you," says {watcher.name}. It is the faintest thread of a voice. "I wrote it all down. I do not think that I can read it." There is a pause, and a very slow, dawning, terrible look of astonishment. "I can hear the river," says the clerk. "I can hear every drop."
+  There is a step on the stair, a soft step, in soft shoes. It does not come up. It stops at the turn, and waits. You do not look round. "It is very kind," says the voice from the stair, quite gently, "of you to have come. I did not like to think that they should wake alone." The clerk's hand finds yours. It is cold and quite dry. "I shall be a little while," says the clerk, in a perfectly steady voice, "and then I shall go with him. It is all right. I think that it is meant to be." You go down the stair, past the gray hooded man, who does not turn his head, and you do not know what it is that you have done.
+* Take the clerk's purse and the road paper, and put a bag of florins on the table, and bar the door from the lane
+  $ b2.clerk_wake = "hidden"
+  $ bond.watcher += 1
+  $ cunning_brutal += 1
+  $ do earn(-5)
+  $ secrecy -= 1
+  You do it very quickly, and quite badly. It is not at all a plan. It is the thing that a man does who is not allowed to do any other. You bar the shutter, and you drag the chest across the door, and you put the florins on the sill, and you stand in the room with the shutters closed until your own thirst begins to tell you the hour.
+  It is the second dusk, and you do not hear him come. You hear the chest slide across the floor, very quietly, as if it had been a leaf. The man in the gray cloak is standing in the doorway with his hands in his sleeves. "It was a courteous thing to have done," he says, quite gently, "and I am sorry that I could not allow it." He goes to the bed. The clerk opens {watcher.their} eyes, and looks at him, and then at you, and then, very slowly, smiles. "I think that I should like to go," says {watcher.name}. "I should like to see what it is." You do not stop it. It is the worst thing that you have ever not done.
+* Leave a letter on the table, and a good horse at the Porta San Frediano, and go away before the dusk
+  $ b2.clerk_wake = "warned"
+  $ bond.watcher += 1
+  $ secrecy += 1
+  $ humanity -= 1
+  $ do earn(-4)
+  It is a short letter. You write it twice. It says that the horse is at the Porta San Frediano, and that it is a good one, and that the road to Pisa goes by the river and there is a Velati house in the Via della Faggiola that will take {watcher.them} in, and that there are things that a man in gray cannot do in the sun. It does not say what you are afraid of, because you do not know. You do not say goodbye.
+  You are told on the Wednesday that the horse was found, tied, at the Porta San Frediano, with its feed untouched, and that the room over the dyer's shop was empty, and that there was a window open in the lane. The clerk was seen, they say, on the Pisa road at the first light, walking, with a small book, in the dark, quite alone, and a man behind who was not hurrying.
+?if romance_status("watcher") != ""
+  $ do romance_end("watcher", "turned")
+?end
+<~
+
+# girl
+## The girl on the hill road
+$ do chart("florence.bank")
+?if b2.sire == "sired"
+  Fiammetta is in the upper room, with the shutters closed and a single candle, and she has not been out of it in three days. She is sitting very straight on the narrow bed, with her boots on, and she is perfectly beautiful in a way that she was not a week ago, and she knows it, and she hates it. She has her hands flat on her knees, as if she were afraid of what they might do.
+  "I am not hungry," she says, as you come in. It is a lie, and it is not a very good one. "I have been counting the beats in the street. There are four hundred and some in the lane alone. It is very difficult not to." She looks at you with those new eyes. "I should like to know what I am to do now. Everyone has stopped telling me."
+  $ b2.fiammetta_end = "sired"
+  $ bond.fiammetta += 2
+  You tell her. It takes a long time, and it is the plainest thing that you have said all week. You tell her where the cup is kept, and which of the people on the counting floor can be trusted with a look, and how long it is until the dawn. She listens with her hands folded. At the end of it she says only, "I shall keep the hill." It is not a question. "Somebody must, when you have gone. It is the thing that I was going to do." She gets up, and goes to the window, and stands in the narrow bar of the evening light with her back to you. "I shall be better at it than I was."
+?else
+  ~> girl_ask
+?end
+<~
+
+# girl_ask
+## The asking
+Fiammetta is in the upper room, with the window open, in the plain gown that she came in, and she has been waiting for you for three days with the particular patience of a person who has made up her mind. She does not get up.
+?if b2.fiammetta_easter == "home"
+  "I was sent home on Saturday," she says, "and I stayed there until the news came, and then I came back. I do not think that you are to send me home again."
+?elif b2.fiammetta_easter == "near"
+  "I stood at the back of the church," she says. "I saw it. I saw all of it. I do not think that you are to send me anywhere again."
+?else
+  "I was in the church," she says, "where I had said I should be, and I did what I did." She does not say what. She does not need to.
+?end
+"It was a very bad week," says Fiammetta. "I should like to say again what I said in the lane. I find that nothing has changed it, and that a great deal has made it stronger." She looks up, and her eyes are very steady. "Will you?"
+* Do it. She is asking, clearly, and the world is not going to be kinder ?if can_sire()
+  $ b2.fiammetta_end = "given"
+  $ do sire("fiammetta", "fledgling of the hill")
+  $ bond.fiammetta += 3
+  $ humanity -= 3
+  $ cunning_brutal += 1
+  $ secrecy -= 2
+  It is quiet, and quick, and a good deal less terrible than she has been told, because you have thought about it for a very long time. She lies on the narrow bed with her hands folded and says that she is not afraid, and this time it is true. It is done at the third hour of the night. She opens her eyes, a little after, and says in a small clear voice that it is not at all what she expected, and that it is a good deal better than the dark.
+* Tell her no, and put your hand on her head, and swear her to the hill as its keeper, human and free to the end of her days
+  $ b2.fiammetta_end = "kept"
+  $ bond.fiammetta += 1
+  $ humanity += 3
+  $ loyalty.keepers += 10
+  $ do keeper("fiammetta", "keeper of the hill", 80)
+  She does not weep. She takes a long breath, and nods, and kneels, which you did not ask of her, and says her part in a clear voice, in a language she has been taught for the purpose. It is a very short oath, and it is the oldest that you know. When she gets up there is something in her face that is at once relieved and bereft, and you know that you have taken a thing from her, and given another. "I shall be old," she says. "I should like to be very old, and very good at it." She smiles, a lopsided little smile. "I shall ask again. I give you notice. I shall ask in forty years, and in sixty."
+* Tell her no, and tell her why, and that you will not change your mind
+  $ b2.fiammetta_end = "refused"
+  $ bond.fiammetta -= 1
+  $ humanity += 2
+  $ secrecy += 1
+  She looks at you for a long time. It is not an angry look. It is the look of a person who has found out something about a great many other people at once. "Then I shall not ask you again," she says, "and I shall find another way. It is a thing that I have noticed about the people who are most afraid of power. They are not always at the top of the stair." She gets up, and goes to the window. "I shall keep the hill, as I said. I shall keep it as a woman, and I shall be very much harder."
+<~
+
+# dusk
+## The Mercato Vecchio
+$ do chart("florence.bank")
+You come into the old market at the end of the third day, in the last of the light, and the Column of Abundance is a thin pale shape against a violet sky, with the pigeons going round it. The stalls are being put up for the night. A woman is covering a barrel of eels. A man is going from lamp to lamp with a taper. It is a perfectly ordinary evening, and nobody in it has the faintest idea.
+The stall is where it always is, in the corner, under the arch, with its little awning, and the indigo-blue and madder-red and weld-yellow hanks in their rows. He is sitting behind it on a three legged stool, small and bent and brown, with his hands in his lap. He looks up when you come, and does not say a word. The shadow lies under the stool, very close.
+?if b2.trader_regard == "warm"
+  "You may have the stool," he says. "I shall stand. It is a very small thing to be able to give."
+?elif b2.trader_regard == "wary"
+  "I have kept the lamp lit," he says. "I was not sure that you would come, and I did not like to think that I had been the only one who was not sure."
+?else
+  "Well," says the seller of thread. It is quite a courteous word. It is the courtesy of a man who is not in the least surprised.
+?end
+?if b2.merchant_stance == "angry"
+  "I am not going to ask you to forgive me for the clerk," he says. "I should like you to know that it is still on the list."
+?end
+He folds his hands. "It is not a thing that I can say twice," he says. "It is the matter of what is to be done with me."
+:the_fate
+* Keep it. It is his, and he has asked for nothing, and the world is a good deal safer for an old man who sells thread
+  $ b2.merchant_fate = "kept"
+  $ do original_fate("merchant", "kept_secret")
+  $ secrecy += 3
+  $ bond.nanni += 2
+  ?if b2.prisca_maker == "asked"
+    $ bond.prisca -= 1
+  ?end
+  He lets out a breath that he has been holding, you think, for a good deal of the evening. "I thank you," he says, simply. "I do not say it often." He reaches under the stall and takes out a hank of a color that you cannot afterward name, a gray that is not gray, and puts it in your hand. "It is a thread of my shadow," he says. "It is a very small thing. It is for a night when you wish to be somebody else." He does not smile, but his eyes do. "Do not tell my daughter that I said it was a gift. She would want to know what was in it."
+  ?if b2.prisca_maker == "asked"
+    You do not say anything of the purse in the strong room, or the cellar in Antioch. It sits in you like a stone in a shoe. It is a thing that you shall have to carry a long way.
+  ?end
+* Take it to Prisca, and to the Merchant line, since it is theirs to know
+  $ b2.merchant_fate = "exposed"
+  $ do original_fate("merchant", "exposed")
+  $ bond.prisca += 3
+  $ bond.nanni -= 3
+  $ standing += 2
+  $ secrecy -= 3
+  He does not argue. He listens to the whole of it with his hands in his lap, and at the end he nods, once, slowly, like a man who has been told that the physician will come in the morning. "I said that it was yours," he says. "I did not say that I should like it." He gets up, and the stool goes over behind him, and he does not stoop to pick it up. "You will tell her tonight. I shall not be in this city on the morrow." He begins, with great deliberation, to put away the thread. "I should be glad if you would not tell her that I was afraid. She would not believe it, and she would try to."
+  ?if b2.trader_regard == "warm"
+    It is the worst thing that you have done to anyone who was kind to you, and he does not say so, and it is a long time before you stop hearing that he did not.
+  ?end
+  You find her in the strong room, at the table. It takes the whole of the night. She does not interrupt. At the end she says only, in a voice that you do not at first know, "He gave me a purse." She puts her face in her hands, and you go out, and close the door.
+* Stand beside him in the Mercato at noon, in front of everyone, and let them wonder
+  $ b2.merchant_fate = "allied"
+  $ do original_fate("merchant", "allied")
+  $ standing += 2
+  $ secrecy -= 3
+  $ bond.nanni += 4
+  $ humanity += 1
+  He looks at you for a long time. Then he does a thing that you do not expect. He laughs, a short surprised bark, like a dog's, and it echoes under the arch, and the woman with the eels looks round. "You are quite mad," he says, with great affection. "It is the one thing that I had not allowed for." He wipes his eyes on the back of his indigo hand. "Very well. At noon." He leans across the stall and puts a small copper token, with a balance in a circle, in your palm, and closes your fingers over it. "It is not the same as the one I gave you. It is a good deal older. It is the one that I should have given the first time, if I had been braver."
+  The next day, at noon, in the Mercato Vecchio, in front of the whole of Florence, a seller of thread and a banker's partner sit on a stall and share a bottle of sour wine, and nobody who goes by can afterward say why it was that they looked twice, and did not know.
+:the_end
+$ do chart("florence.bank")
+It is dark when you leave. The lamps are lit round the Column, and the smell of woodsmoke has come up from the river, and there is a thin new moon over the roof of the Baptistery. You are very tired, which is a thing that happens to you now and then, and not at all a bad thing. The bells of San Lorenzo ring Compline. There is the matter of the hill, and the sleep, and a good many other things, and they will wait.
+=> next

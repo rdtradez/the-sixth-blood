@@ -1,0 +1,60 @@
+// The Velati journal for Book Two, Blood and Gold (session 27). Runs at the end of the book on a copy of the state; its paragraphs become one journal entry.
+// Written in the voice of the Velati clerk of the Banca del Colle, from the notebook that was recovered afterward. No choices allowed. Reads decisions, never recomputes them.
+@chapter b2_journal
+@title Velati Journal: Blood and Gold
+@book blood-and-gold
+@version 1
+
+# start
+## From the little book of the clerk at the Banca del Colle
+> Set down in Florence, in the Aventine shorthand, in a room over a dyer's shop. For the house at Pisa, and for no one else.
+The Pisa house asked for a report on the man at the bank opposite, and has had eleven of them. This is the twelfth, and it is not for Pisa.
+?if b2.watcher_terms == "open"
+  I told him from the first who I was and whom I wrote for. I have wondered since whether it was brave or only tidy.
+?elif b2.watcher_terms == "refused"
+  I did not tell him anything, and he did not ask, and we both knew, and it was a very civil winter.
+?else
+  We came to terms in the first month. I report what is public, and he does not trouble to hide what is not. It is a bargain of a kind I had not thought was permitted.
+?end
+?if b2.watcher_bond == "begun"
+  I have not written the rest of it. I have written that there are things in this book that are not for Pisa. I leave it there.
+?end
+I have set down what I could of the court. It has a Prince, who is patient, and a Remembrancer, who is very small, and a roll of five lines with a sixth that was scraped nearly to the skin.
+?if b2.elder_witness == "present"
+  I stood at the door of the house with the blue door and wrote down what was said, in the lane, in the dark, in the Aventine hand. I did not understand it. I have copied it three times, and sent none of the copies.
+?end
+I have set down, too, what was done to the city in the spring.
+?if b2.elevation == "lorenzo"
+  He took the one who was meant to live out through the new sacristy, and I saw him do it.
+?elif b2.elevation == "giuliano"
+  He held the one who was meant to die, and held him till it was over. I do not think that anyone had asked him to.
+?elif b2.elevation == "priest"
+  He fought a priest in the north aisle with the whole nave watching, and he did not kill him, and I do not know whether it was wise.
+?elif b2.elevation == "sacristy"
+  He was at the small oiled door behind the sacristy before the Host was raised. I wrote it down because I had been told, the week before, that it was there, and I could not think how he knew.
+?elif b2.elevation == "stood" or b2.elevation == "broke" or b2.elevation == "spoke"
+  He was at the south door, where a man had been told to stand, and he stood with something in gray beside him. I do not know what passed. I have written that it was a long time.
+?else
+  I did not see where he was. I have been told that he was at the bank, with the books, and I have written it, and I cannot make it mean anything.
+?end
+?if b2.agent_end == "truth"
+  He told me what he was, on the stair, at the end, kneeling, in the lamplight, with the river going by. It was the first true thing that anyone had told me in four years, and I have written it down, and I cannot read it.
+?elif b2.agent_end == "hold"
+  He held my hand on the stair and did not say a word. It was a great deal.
+?elif b2.agent_end == "bar"
+  He told a thing in gray that it would not, and was struck down for it, and was courteously forgiven. I have never seen a braver or a stupider thing done.
+?else
+  I think that I was alone on the stair. I do not remember who came.
+?end
+This is the last page. It is a good deal later than the rest.
+> The book was recovered by the Aventine watch from a room over a dyer's shop in the Via dei Conciatori. It was open on the bed. The last page is unsigned, and the hand has changed. It is smaller, and quicker, and very much more sure of itself, and it says, in four words, that the writer is very well.
+?if b2.clerk_wake == "stayed"
+  A stranger who was on the stair that night has said that he was present, and that the writer was not afraid.
+?elif b2.clerk_wake == "warned"
+  A horse was found tied at the Porta San Frediano, with its feed untouched.
+?end
+?if b2.agent_letter == "left"
+  A letter in a good hand is said to be kept at the bank, to be given up on request. Nobody has requested it.
+?end
+> If this is found, and you are reading it, and you are not at Pisa, I am sorry. I should have liked to have been a better reporter, and a worse friend.
+=> endbook

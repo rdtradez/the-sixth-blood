@@ -1,0 +1,346 @@
+// Book Two, Chapter 13 (session 24). The old brother at San Miniato, and the people the Lent nights are bringing to the door.
+// A short opening scene (no phase), then one night phase of three actions out of four (San Miniato, the girl at night, Ser Bartolo's back office, the river stair), then the dawn.
+// Ends with rest() and => next. Reads b2.answer, b2.berengaria_debt, b2.watcher_book, b2.sire, b2.fiammetta, b2.faction, b2.watcher_bond, b2.prisca_deal, b2.prisca_conspiracy, b2.paper and b2.loan.
+// The book is incomplete, so play pauses after this chapter until chapter 14 is added.
+// Later chapters read b2.anselm, b2.fiammetta_night, b2.medici_paper, b2.watcher_night and b2.prisca_promise.
+@chapter b2c13
+@title The Brother at San Miniato
+@book blood-and-gold
+@version 1
+
+# start
+## The weeks before the great feast
+$ b2.anselm = "unseen"
+$ b2.fiammetta_night = "unseen"
+$ b2.medici_paper = "unseen"
+$ b2.watcher_night = "unseen"
+$ b2.prisca_promise = "hedged"
+$ do chart("florence.bank")
+$ do meet("anselm")
+It is Lent, and the city has put on its gray. The stalls in the Mercato sell salt cod and dried peas, the bells go over the roofs a little flatter than they did, and in the evenings the confraternities walk the streets in their hoods with candles, singing something low. The bank has done very well out of it. Nobody has ever been so eager to settle his debts as a man who has been told that he may die before Easter.
+?if b2.answer == "told"
+  A boy comes to the side door at dusk, a small boy in a green ribbon who has been given a coin to run and has run a good deal farther than the coin was worth. He holds out a square of folded paper. It is in a hand as small and precise as a row of stitches. It says: "He is at San Miniato, in the cell under the stair. He was the one who painted the borders. He has not said a word since the page was scraped. I do not know what to ask him, and I have had nine hundred years to think of it. Perhaps you will."
+?elif b2.answer == "traded"
+  A boy comes to the side door at dusk, a small boy in a green ribbon who has been given a coin to run and has run a good deal farther than the coin was worth. He holds out a square of folded paper. It is in a hand as small and precise as a row of stitches. It says: "I will now name what you owe me, Signore. Go to San Miniato, to the cell under the stair, and find Brother Anselm, who painted the borders of the roll. Ask him one question, and only that one: what did you paint? Then come and tell me what he says. That is all. It is a small debt. I have been three hundred years finding someone who would pay it."
+  You turn the paper over. There is nothing on the back. It is a very small debt, and you find that you do not trust it at all.
+?else
+  There is no message from the house with the blue door, and you did not expect one. It is the clerk who brings it, indirectly, on the river stair, with the little book open on a knee. There is a line near the end of the oldest pages, in the hand of someone who is long dead. It says that there is an illuminator at San Miniato who has not spoken in thirty years, and that no one has thought to ask why. "I have been carrying it for six weeks," says {watcher.they}. "I thought that it was a thing to be left alone. I find that I no longer think so."
+?end
+?if must_feed()
+  ~> hungry
+?end
+$ do phase("night", 3)
+-> night
+
+# hungry
+## Before the doors
+The Lent has made the donors cautious and the streets thin, and your hunger has been patient for longer than it ought to have been. It comes back now all at once, very politely, like a person who has been waiting in the hall.
+* Go to Benedetto's back room, where the cup is kept
+  $ do feed("bank")
+  It is warm and clean and nobody asks. You are very careful that no one sees you go.
+* Take a sheep from a fold beyond the wall, and leave a coin on the gatepost
+  $ do feed("animal")
+  $ do earn(-1)
+  It is a stupid, patient creature, and you leave the coin, and you are ashamed of the coin.
+* Pay a donor from the Borgo
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She does not talk, and you are grateful. The coin is warm in her hand when you go.
+<~
+
+# night
+## Lent, after the bells
+:night
+?if actions_left() == 3
+  Compline has gone, and the candles of a confraternity are going away down the Via dei Servi like a slow, quiet fire. Four doors in the city want you tonight, and you can go to three.
+?elif actions_left() == 2
+  It is the middle of the night. A fine cold wind has come down from the hills, and the lamps at the corners burn small and steady. You have the feeling, which has grown in you for a month, of a city that is holding its breath.
+?else
+  It is very late. Over the roofs of the Oltrarno the sky is still black, but there is a faint paleness in the east, which is only the hour of the cocks. There is time for one more door, if it is a short one.
+?end
+* Climb to San Miniato, to the cell under the stair [once] ?if actions_left() > 0
+  ~> anselm
+  $ do act()
+* See to the girl, who has not been easy since the lane [once] ?if actions_left() > 0
+  ~> girl
+  $ do act()
+* Go to the back office of Ser Bartolo, who has asked for you by name [once] ?if actions_left() > 0
+  ~> bartolo
+  $ do act()
+* Go down to the river stair, where the clerk is waiting [once] ?if actions_left() > 0
+  ~> clerk
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# anselm
+## The cell under the stair
+$ do chart("florence.roadhome")
+San Miniato stands on its hill above the river, white and green and very old, with the whole of the city laid out below it like a plan on a table. The monks are at their rest. You go up through the cypresses by a path that has been worn into the rock by a thousand years of shoes, and a lay brother with a lantern lets you in at a low door, looks at your face, and goes away again without a word, with the look of a man who has been told to expect somebody and has not been told who.
+The cell is under the stair, as the paper said. It is no bigger than a cupboard. There is a narrow bed that has not been slept on, and a lectern, and on the lectern a leaf of vellum with a border begun, a small green vine and a gold bud, that has been begun so many times and left so long that the gold has gone to the color of a dead leaf. An old man sits on the floor with his back against the wall.
+He is very old. It is not the face, which is mild and brown and rather vague, like a monk in the corner of a painting. It is the stillness. He has not moved in a long time, and he does not move now. His hands lie open in his lap. There is old yellow paint in the creases of the fingers. He looks at you, with a pair of blue and utterly patient eyes, and waits, as a man waits for a stranger to say a word that he has heard before and does not mind hearing again.
+You have been told that no one has asked the right question. You have a notion of what a right question might be. You also have the notion that you may have only one.
+:the_cell
+* Kneel, so that your eyes are level with his, and ask him what he painted
+  ~> asked
+  -> :the_cell_end
+* Sit down on the floor beside him, and say nothing at all, and wait for the bell
+  ~> waited
+  -> :the_cell_end
+* Tell him that you know about the sixth panel, and that he is going to tell you what was on it
+  ~> pressed
+  -> :the_cell_end
+:the_cell_end
+<~
+
+# asked
+$ b2.anselm = "asked"
+$ standing += 1
+$ humanity += 1
+$ bond.anselm += 3
+$ do discover("the_roll")
+He does not answer at once. His eyes go to the lectern, and to the leaf, and to his own open hands, and back to you. Then a thing happens in his face that you have seen before, once or twice, on a sleeper being woken, a slow, enormous, bewildered arrival, as of a person coming up a very long stair.
+"Nobody has asked me that," says Brother Anselm.
+It is a very dry, small, rusty voice. He clears his throat. He says it again, with more care, as a man tries a lock. "Nobody has ever asked me that. They ask me what I saw. I could not say what I saw. But I can say what I painted." He looks at his hands. "I painted a sun."
+He tells it slowly, with pauses, in a Latin that has the sound of a very old and very careful school. The sixth panel was the largest. It was done in the days before the page was scraped, in the great hall of the old Senate in Ravenna, in white and gold, and the border was a vine. In the middle was a sun. It had six rays, which was an odd number, and he had asked why, and been told that it was the number of the lines. Five of the rays were done in gold. The sixth he was told to do in red lead, and he did it, and it is the only thing in his long life that he is quite sure was well made. "It was the best ray I ever did," says Anselm. "I have drawn it a thousand times since, in my head, and it is still the best."
+He tells you the rest because he cannot stop now. The page was scraped by night, by a man in a gray coat, who did it himself with a knife, slowly, over many hours, and Anselm was made to watch. He says that the man wept the whole time. "He did not make a sound. He did not stop. He scraped, and he wept, and when he came to the red ray he stopped for a long while, and then he did it last of all." He turns his hands over, and looks at the paint in the creases. "I have wondered for six hundred years if he knew that I could see. I think that he did. I think that he wished that someone might."
+He gets up, with an effort, and goes to the lectern. From under the leaf he takes a narrow strip of old vellum, gold and green and cracked, no longer than your hand. It is a scrap of the border. It was cut off the sixth panel before the scraping, by a boy who wished for a keepsake, and who was not seen again. "You may take it," says Anselm. "I have no further need of it. I have said it."
+$ do obtain("sixth_border")
+?if b2.berengaria_debt
+  $ unflag b2.berengaria_debt
+  You will have to take the rest of it to the house with the blue door, and it will not be an easy errand. It is, you think, the first debt that you have ever been glad to pay.
+?end
+You leave him sitting at the lectern with a brush in his hand. He is dipping it into a pot of gold that has been dry for thirty years, and the brush is moving.
+<~
+
+# waited
+$ b2.anselm = "waited"
+$ bond.anselm += 2
+$ humanity += 1
+You sit. It is a very odd thing to do, for a great vampire, on the stone floor of a cupboard, with your knees up like a boy's. He does not look at you, after the first moment. He looks at the lectern, and at the long unfinished vine, and the quiet in the little cell gathers and thickens, so that you begin to hear small things: the cypress branches on the wall outside, and the water in a gutter, and the lay brother's step going away and coming back.
+It is a long wait. The bell of the monastery rings the hour of the night office, and the monks go by in the passage over your head, shuffling, murmuring, and the small sound of the psalm comes down through the stair like water through a roof. Anselm does not move until it has died away. Then he reaches into his sleeve and takes out a burned stick, and gets up with an effort, and goes to the whitewashed wall beside the lectern, and draws.
+It is a circle. It is a sun, with rays, drawn with perfect and fluent ease. There are six of them. He draws five quickly, as a man writes his own name, and the last with much more care, and when he has done it he stands back. You see that the stick has gone dry in the last stroke and left a thin gray line, and he looks at it for a moment with an expression of the most open distress. Then he rubs his thumb in the soot, and goes over it, and it is red.
+It is not red. It is soot. It is only the eye that makes it red.
+He sits down again against the wall, and shuts his eyes, and does not say a word. You stay until the bell. You have learned a thing, and you are not certain what it is.
+?if b2.berengaria_debt
+  You do not have an answer that you can carry to the house with the blue door, only a drawing and a silence, and you are not certain that it will count. You are fairly certain that it will have to.
+?end
+<~
+
+# pressed
+$ b2.anselm = "pressed"
+$ standing -= 1
+$ bond.anselm -= 2
+$ secrecy -= 1
+It is the wrong thing to say. You know it as you say it, as a man knows that he has stepped off a stair. The mildness goes out of the old face as though a shutter had been pulled across it. He stares at you for a moment in perfect horror. He puts his two open hands over his mouth, quite slowly, as a child does, and presses them there.
+You say it again, more gently. You say it a third time, less gently, and it is a mistake that you have made before. There is a step in the passage, and the lay brother is at the door with a lantern, and a second brother behind him with a cudgel, a stout and entirely mortal man, who stands as a mortal man stands when he has made up his mind to be killed rather than not to stand. "He is not well," says the lay brother, gruffly. "He is not to be troubled. You will go, if you please, Signore."
+You go. The old man is rocking on the floor, with his hands over his mouth, and the leaf of vellum with its dead gold vine has fallen to the stone beside him. You have the feeling of having broken a thing that has taken a very long time to mend. You do not think that he will speak again, to anyone.
+?if b2.berengaria_debt
+  You will have to go to the house with the blue door and say that you were not able to ask. It will not be a pleasant visit.
+?end
+<~
+
+# girl
+## The little room over the counting floor
+$ do chart("florence.bank")
+?if b2.sire == "sired"
+  ~> girl_sired
+?elif b2.sire == "later"
+  ~> girl_later
+?else
+  ~> girl_refused
+?end
+<~
+
+# girl_sired
+## A very quiet hunger
+She has been up since dusk. She is sitting on the end of the narrow bed in her wool wrapper with her hands pressed between her knees, and she has turned the lamp down so low that it is hardly a lamp at all, because she cannot yet bear the light of a flame. She looks up as you come in. Her eyes are quite dry, and they are not the color that they were, and she looks, in the dark, a good deal more like a Valerio than she ever did by day.
+"I am very hungry," says Fiammetta. She says it as one makes a report. "I have been hungry since I woke. I have been sitting here for four hours telling myself that I am not to do anything about it until you came." She takes a long, careful breath, and lets it out, and does not need to. "I have found that I can hear the whole house. Benedetto's heart is going like a mill. I should like you to tell me what to do."
+:the_girl
+* Teach her yourself: take her to the back room, and show her how it is done, and how not to do it
+  $ b2.fiammetta_night = "taught"
+  $ bond.fiammetta += 3
+  $ humanity += 1
+  $ do feed("bank")
+  It is not a lesson that you expected to give. You show her the cup, and the way of drinking from it, and then the other way, and the reason that the second must be rare. You show her how to stop. She is a very good pupil. She is white and shaking and absolutely exact. At the end of it she says "Thank you" in a very small voice, and then, in a different one, "Is it always like this?" and you tell her the truth, which is that it is, a little less each year, and that it is never quite nothing.
+* Give her a purse and the key to the postern, and let her find it out herself, with one rule
+  $ b2.fiammetta_night = "trusted"
+  $ bond.fiammetta += 1
+  $ secrecy -= 2
+  $ cunning_brutal += 1
+  You tell her the rule, which is that she is not to kill, and that she is to be home before the first bird. You tell her where the donors are. She takes the purse, and looks at it, and at you, with a long, odd, level look in which there is a good deal of gratitude and a trace of something that is not. "You think that I can," she says. "I shall try to be worth it." She goes out by the postern in the dark, and you stand in the little room with the lamp turned down, and you do not sleep.
+* Keep her in. Give her the cup, here, and tell her that she is not to go out until the spring
+  $ b2.fiammetta_night = "forbade"
+  $ bond.fiammetta -= 1
+  $ secrecy += 2
+  $ humanity -= 1
+  She takes the cup. She does not argue. She drinks it down in the dark with her eyes shut, and when she has done she sets it on the floor with great care, and sits with her hands in her lap, and says, "I see." It is a very civil thing to say. She does not say anything more. When you go out you turn on the stair, and see that she has gone to the window, and is looking at the lane with her face against the bars.
+<~
+
+# girl_later
+## A bargain in the dark
+She is on the stair of the little room when you come up, with her chin on her knees. She has not been asleep. She has been here for some time, and she says at once, without preface, in the voice of a person who has rehearsed it, "I have counted the days. There are thirty one until Easter. I should like to know whether you meant spring, as the weather, or spring, as the calendar, because they are not at all the same."
+You say that you do not know either.
+"Then I shall plan," says Fiammetta, "for both." She has the look of a young woman who is very tired, and very determined, and who has not decided whether to be angry. "There is something that I should like you to do tonight. I should like you to tell me what it will be."
+:the_girl_later
+* Tell her, truthfully and in order, what it will cost, and what it will give, and what it will take away
+  $ b2.fiammetta_night = "taught"
+  $ bond.fiammetta += 3
+  $ humanity += 1
+  It takes the better part of an hour. You do not spare her anything. You tell her about the hunger, and the sun, and the long, odd, drifting solitude, and about the day when the people that she loves begin to grow old before her eyes. You tell her about a girl in a courtyard in Rome. She listens with her whole body, as a person listens in a storm, and at the end of it she is quiet for a long time. "Thank you," she says. "That is a great deal. I shall think about all of it." She smiles a little. "I think that I shall still ask again."
+* Say nothing, and leave the door open, and let her ask whatever she likes
+  $ b2.fiammetta_night = "trusted"
+  $ bond.fiammetta += 1
+  $ standing += 1
+  She asks. It is not what you thought. She asks how you eat, and when you sleep, and what you do on feast days, and whether you have ever been in a church, and what you do when it is very hot. She asks a long list of small questions, and you answer them as truthfully as you can, and at the end you realize that she has been taking the measure of your whole life, a stitch at a time, quite quietly, and that she has not been asking about the Gift at all. It is rather the thing that it is built on.
+* Tell her that it is not to be spoken of again until the spring, and that she is to leave it alone
+  $ b2.fiammetta_night = "forbade"
+  $ bond.fiammetta -= 2
+  $ humanity -= 1
+  She gets up. She is standing a step above you, and for the first time her face is exactly level with yours. "You will find, Signore," says Fiammetta, very softly, "that it is a great deal harder to leave a thing alone when it has been offered by somebody else." She does not explain. She goes up the stair, and her door shuts, not loudly, and you stand on the landing with a very cold, uneasy sense of having said the wrong word to the right person.
+<~
+
+# girl_refused
+## The gate on the Fiesole road
+She is not in the little room. It is the first thing that you know, because the bed is made, and the wrapper hangs on its peg, and the key to the postern is not on its nail. Benedetto is in the passage with a candle in his shaking hand, and a face the color of tallow. "She went out at the second hour," he says. "She said that she wanted air. I did not see. I thought that it was only the Lent."
+It takes you less than an hour to find her. She is on the Fiesole road, a mile beyond the gate, standing in the dark under a cypress with her bundle at her feet, looking up the hill at the lights of a long, low, shuttered house that does not show one lamp. She does not turn when you come up. "I wanted to see it," says Fiammetta. "I have been told a good deal about it. I wanted to know if it was a real place." She is perfectly composed, and perfectly white. "It is a real place. There is a man at the gate who does not breathe. He has been watching me for a quarter of an hour. I think that he is waiting to see which way I am going to go."
+:the_girl_refused
+* Take her home by the hand, and tell her what that house is, and what is in it
+  $ b2.fiammetta_night = "taught"
+  $ bond.fiammetta += 3
+  $ secrecy -= 1
+  $ humanity += 1
+  You tell her all of it, as you walk, in the cold, under the stars. It does not seem to be the right time or the right place and it is the only one that you have. She listens to every word, her hand quite steady in yours, and when you come to the gate at the Prato she stops, and says, in a very small, very clear voice, "I am sorry. I was going to ask him. I should have gone, I think, if you had not come." You say that you know. It is the nearest that you have ever been to her.
+* Ask her what she saw, and let her say it, and walk back at her side
+  $ b2.fiammetta_night = "trusted"
+  $ bond.fiammetta += 2
+  $ standing += 1
+  She has seen a good deal. She has the eye of her house, and she has been standing under the cypress for an hour. She tells you what lamps were lit, and which were not, and how many men were on the wall, and where the stable door is. She tells you, in a low voice, that there was a carriage with its curtains drawn, and that she is fairly sure she saw it at the Pazzi house on Sunday. You listen, and say nothing, and the Valerio chin goes up a little at every item, as it will in front of a person who is paying attention.
+* Take her home, and lock her door, and tell her that if she goes again you will take her back to the hill
+  $ b2.fiammetta_night = "forbade"
+  $ bond.fiammetta -= 2
+  $ secrecy += 1
+  $ humanity -= 1
+  She does not struggle. It is almost worse. She walks beside you the whole mile with her bundle in her arms, her face turned away, and she goes up the stair and into the little room, and you turn the key, and stand on the other side of the door with your forehead against the wood. After a long time you hear her sit down on the bed. You hear her say, very quietly, to the wall, "I shall ask him then." You are not certain that you were meant to hear it.
+<~
+
+# bartolo
+## The Medici back office
+$ do chart("florence.bank")
+Ser Bartolo has not been in a hurry in the whole of the time that you have known him, and he is not in a hurry now. It is a good deal worse. He receives you in a small, bare, warm room behind the Medici counting house, among stacks of letters tied in red tape, with a single candle and a jug of the thin sour wine that is all that anyone in Florence will drink in Lent. He has been there for a very long time. He does not stand up. "I have a small difficulty," he says, with great politeness. "I should like to tell you what it is."
+He tells it very quietly. The Medici bank had the papal accounts in Rome, which is the best business in Christendom. They had them until a month ago, when the Holy See transferred them, by a single letter, with a short and civil and unmistakable courtesy, to another house. It is not a thing that a bank can fight. It is a very large sum of money, and a very large amount of good name, and the other house is one that you know. It is not hard to see where the money is going. A good many people in Florence are taking a lively interest in what happens to a house that has lost the Pope.
+"The paper that the Medici owe is good," says Bartolo, "and it will be good. But it will be a spring, I think, or a summer, before it is seen to be. I need a certain sum of coin for ninety days. It would be a great kindness. I do not offer an interest that you will think very fine." He turns the cup in his fingers. "I do not know anyone else to ask. It has been a very odd Lent."
+:the_bartolo
+* Lend it at a fair rate, in the name of the house, and let the whole of the Arte del Cambio see you do it
+  $ b2.medici_paper = "lent"
+  $ do earn(-30)
+  $ standing += 2
+  $ secrecy -= 1
+  $ bond.bartolo += 3
+  He does not say very much. He writes out the receipt with a hand that is not quite as steady as it was, and sands it, and gives it to you, and holds your hand a little longer than is quite the custom. "It will be remembered," he says. "I am not speaking of the loan." You think, going down the stair, that it is exactly the sort of thing that a very careful bank is made to do, and that no one has ever got rich by it.
+* Buy a good quantity of the Medici paper at a discount, quietly, through Benedetto, and hold it
+  $ b2.medici_paper = "bought"
+  $ do earn(25)
+  $ bond.bartolo -= 2
+  $ standing -= 1
+  It is a perfectly legal and perfectly sound transaction. The paper is good, and the discount is large, and in a year it will be at par. Bartolo does not know what is being done, for a day or two, and when he does he writes you a very short and very courteous letter, and it is not a letter that is meant to be answered. You put it in the strong room with the rest of the paper. It is good paper.
+* Say that you are not able, and that the house of the Colle does not lend in Lent to either party
+  $ b2.medici_paper = "aloof"
+  $ bond.bartolo -= 1
+  $ secrecy += 1
+  He nods, as a man nods who has been told the price of a thing. "It was a great deal to ask," he says. "I shall find another way." He does not look reproachful. He looks as a man does who has said to himself in advance that this might happen, and has not quite managed to believe it. "It is a very hard time to be a banker," says Bartolo. "I hope it will not be a very much harder one."
+?if b2.loan == "pazzi" and b2.medici_paper == "lent"
+  He looks at you for a moment, with his pleasant, tired, intelligent eyes, and says nothing about the fact that you carry the letters of credit of the house across the street. It is not a thing that needs to be said.
+?end
+<~
+
+# clerk
+## The river stair
+$ do chart("florence.bank")
+The river is low and slow and the color of pewter. It is the hour when the washerwomen's boards are empty, and the lamp at the end of the Ponte alle Grazie makes a thin yellow track on the water. The clerk is on the third step with the little book shut on a knee, and a coat that is too thin, and a face that looks as if it had been scrubbed with a cloth. {watcher.They} {watcher.have} been waiting for some time.
+?if b2.watcher_bond == "begun"
+  ~> clerk_close
+?else
+  ~> clerk_cool
+?end
+<~
+
+# clerk_close
+{watcher.They} get{watcher.s} up when {watcher.they} see{watcher.s} you. It is a small, odd, abrupt thing to do, as if someone had been caught out in a weakness, and then it is not abrupt at all, and {watcher.they} {watcher.are} very close, with a hand against your sleeve, saying nothing. The river goes by. It is quite a long time before {watcher.they} speak.
+"I have been asked a question," says {watcher.they}. "By the house in Pisa. It has been put to me in a very polite letter. They wish to know whether I think that it is a thing which will end well." There is a small unsteady breath. "I did not know what to say. I think that I should like to know what I am to say."
+:the_clerk_close
+* Tell {watcher.them} the whole of it, the faction and the Sunday and what you mean to do
+  $ b2.watcher_night = "told"
+  $ bond.watcher += 3
+  $ secrecy -= 2
+  $ humanity += 1
+  You tell {watcher.them}. It takes a long time, on the cold stair, with the river going by, and {watcher.they} listen{watcher.s} with {watcher.their} eyes shut. At the end {watcher.they} {watcher.are} quiet. "Then I shall write that it is a thing which has not yet ended," says {watcher.they}, very low, "and that I do not know how it will." {watcher.They} put{watcher.s} {watcher.their} forehead against your shoulder for a moment. "That is the first honest thing that I have put in a letter in three years."
+* Say that you do not know how it ends, and that {watcher.they} must write whatever is true
+  $ b2.watcher_night = "kept"
+  $ bond.watcher += 1
+  $ secrecy += 1
+  "That is a perfectly fair answer," says {watcher.they}, after a moment, in a voice which is not entirely steady. "It is not the one I hoped for." {watcher.They} take{watcher.s} {watcher.their} hand off your sleeve, quite slowly, and put{watcher.s} it in {watcher.their} pocket. "I shall write that I was told nothing, and that it was a very great deal."
+<~
+
+# clerk_cool
+{watcher.They} get{watcher.s} up, quickly, when {watcher.they} see{watcher.s} you, and bow{watcher.s}, and do{watcher.es} not quite meet your eye. It is quite a correct, formal bow. There is a small coolness in it, as of a person who has made up {watcher.their} mind not to be hurt.
+"The house in Pisa has answered," says {watcher.they}. "It is a very short letter. It says that the pages are to go to Rome, as it was ordered, and that I am to be recalled in the summer." {watcher.They} look{watcher.s} at the water. "I should like to know if that is a thing that you would be sorry about. I do not ask for any reason."
+:the_clerk_cool
+* Say that you would be sorry, and that you would find a way to keep {watcher.them}
+  $ b2.watcher_night = "told"
+  $ bond.watcher += 2
+  $ secrecy -= 1
+  There is a very long silence. It is the first time that you have seen {watcher.them} quite lost for a word. "I did not expect it," says {watcher.they}, at last, with a small unsteady laugh, and the sound is a surprising one. "I shall have to think of something to put in the letter. I do not at all know what." You say that you will think of it together.
+* Say that it is the house's right to recall whom it likes, and that you will not stand in its way
+  $ b2.watcher_night = "kept"
+  $ bond.watcher -= 1
+  $ secrecy += 1
+  "That is correct," says {watcher.they}. "It is quite correct." {watcher.They} bow{watcher.s} again, to the water. "I shall keep my notes in order." It is a very proper thing to say, and it does not sound like a thing that {watcher.they} mean{watcher.s}.
+<~
+
+# dawn
+## The first cock
+$ do chart("florence.prisca")
+The wind has dropped. The sky over San Miniato has the color of the inside of a white shell, and the lamps at the corners have gone out one by one, with a small sound like a breath being let go.
+?if b2.anselm == "asked"
+  There is a very old man on a hill who is painting again, and you cannot decide whether to be glad.
+?elif b2.anselm == "pressed"
+  There is a very old man on a hill who is sitting with his hands over his mouth, and you do not think that you will be able to forget it.
+?end
+?if b2.medici_paper == "lent"
+  In the back office of a house across the way a tired man is sleeping with his head on his arm and a receipt under his hand.
+?elif b2.medici_paper == "bought"
+  In the strong room of the Banca del Colle there is a bundle of paper in red tape that is worth a good deal more than it cost, and that you do not look at when you pass.
+?end
+Prisca is at the side door, exactly as she was after the first Thursday, in her cloak, with the thin paper in her hand. It is a good deal thinner than it was. She has been up all night, and she does not show it, except that she has not taken off her gloves.
+?if b2.prisca_conspiracy == "told"
+  "I have my list," she says. "Eleven names. Four of them are Roman, and two are Florentine, and five are people whom I have never seen." She folds it. "I shall not ask you what you are doing. I think that you will tell me when you can. But I should like to ask you one thing, and I should like an honest answer. When it comes, Signore, whatever it is, I wish to be told before. Not after. It is a thing that I have never asked of anyone."
+?else
+  "I have my list," she says. "Eleven names. I should like to show it to you, and I think that you know why I do not." She folds it. "I am not asking you for your confidence. I am asking you for one thing, and I should like an honest answer. When it comes, Signore, whatever it is, I wish to be told before. Not after. It is a thing that I have never asked of anyone."
+?end
+?if b2.paper == "carried"
+  She does not mention the box in the cellar. It is a very pointed silence.
+?end
+:the_promise
+* Say that you will tell her, before, whatever it costs ?if b2.prisca_deal != "rival"
+  $ b2.prisca_promise = "agreed"
+  $ bond.prisca += 3
+  $ secrecy -= 1
+  $ standing += 1
+  "Thank you," says Prisca. It is very quiet. It is the voice of a woman who has been alone in a house for a very long time and has been given a key. She puts out her gloved hand and, for a moment, lays it over yours. "I shall hold you to it," she says. "I do not think that I shall have to."
+* Say that you will tell her what you can, when you can, and that she must trust you for the rest
+  $ b2.prisca_promise = "hedged"
+  $ bond.prisca += 1
+  She considers it. It is not a thing that you can read in her face, which is perfectly composed. "That is an honest answer," she says, "and it is not the one that I asked for." She nods, slowly, like a woman accepting a note of hand from a debtor of whom she is fond. "I shall take it."
+* Say that there are things that you cannot tell her, even before, and that it is for her own sake
+  $ b2.prisca_promise = "refused"
+  $ bond.prisca -= 2
+  $ secrecy += 1
+  There is a pause. Prisca's hand goes to the lace at her throat, and stays there. "For my own sake," she says, evenly. "I have been told that before, Signore, by a number of persons, and each time that I have been told it I have turned out to be the last to hear." She smiles. It is quite a pleasant, level smile. "I shall remember that you said it."
+The light comes over the roofs. The first Mass begins, and a bell somewhere in the Oltrarno answers it, a little flat, a little late.
+$ do rest()
+=> next
