@@ -1,0 +1,277 @@
+// Book Two, Chapter 14 (session 24). Collesanto by daylight, and the faction at its gate.
+// An opening scene (no phase), then one day phase of three actions out of four (the shrine cellar, the walls, Ginevra's table, the ridge above the vineyard), then a dusk scene at the gate.
+// Ends with rest() and => next, which pauses until chapter 15 exists. Reads b2.sire, b2.valerii, b2.faction, b2.fiammetta_night, b2.paper, b2.prisca_promise, b2.guccio_fate and can_build("walls").
+// The book is incomplete, so play pauses after this chapter until chapter 15 is added.
+// Later chapters read b2.shrine, b2.walls, b2.ginevra, b2.ridge and b2.ormanno_man.
+@chapter b2c14
+@title The Hill by Daylight
+@book blood-and-gold
+@version 1
+
+# start
+## A letter from Tommaso
+$ b2.shrine = "unseen"
+$ b2.walls = "unseen"
+$ b2.ginevra = "unseen"
+$ b2.ridge = "unseen"
+$ b2.ormanno_man = "refused"
+$ do chart("collesanto2.road")
+The letter comes at the second hour of the night, by a boy on a mule who has ridden since noon. It is from Tommaso, in a square, stubborn mason's hand with every letter made separately, and it says very little. It says that on the morning of Tuesday the lock of the shrine cellar was found to be oiled. It had not been oiled by anyone on the hill. The dust on the stair has been walked over by one pair of shoes, a size that no one in Collesanto wears, and nothing has been taken, and there is a clean place on the floor of the cellar, a hand's breadth wide, where somebody knelt. "I do not know what to do," Tommaso writes at the bottom, and then, after a gap, in smaller letters, "I did not like to ask my mother."
+You go by day. It is a ride of five hours, and you have the whole of it in the sun, which is a very large and astonishing pleasure at any time, and a good deal more so in Lent, with the barley green on the terraces and a thin warm wind coming up out of the valley with the smell of thyme. The road climbs. The high walls of the little town are in front of you at noon, pale and square, and the bell of the chapel is going, and there is a smoke from a hundred chimneys.
+It is the strangest thing in your life, to ride up to a place that is yours and be greeted by people who are not afraid of you. They know your face. They know the horse. A boy runs ahead shouting. At the gate there is a ring of faces, and a dog, and a woman with a baby on her arm who curtseys to you with a look that you have seen on the faces of people at a shrine, and do not know what to do with.
+?if must_feed()
+  ~> hungry
+?end
+$ do phase("day", 3)
+-> day
+
+# hungry
+## Before the gate
+The long ride has brought it up in you, and the smell of the hearth fires, and the warm bodies of the people at the gate. It comes back all at once, very politely, like a person who has been waiting in the hall.
+* Slip round to the kitchen yard, where Ginevra has kept a cup of the hill's blood for you since the spring
+  $ do feed("bank")
+  It is warm and clean, and nobody asks. Ginevra's face is at the window, quite expressionless, and goes away again.
+* Take a ewe from the lower fold, and leave a coin on the gatepost
+  $ do feed("animal")
+  $ do earn(-1)
+  It is a stupid, patient creature, and you leave the coin, and you are ashamed of the coin.
+* Ask a woman of the village, who has offered, and pay her
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She says that it is an honor. You do not know what to say to that, and so you say nothing, and she does not seem to mind.
+<~
+
+# day
+## What the hill needs
+:day
+?if actions_left() == 3
+  It is the third hour of the afternoon, and the whole hill is out in the sun. The goats are on the terraces, and somebody is singing at the well, and the white dust of the lane goes up behind a cart. There is a good deal to see to, and the daylight to do it in.
+?elif actions_left() == 2
+  The light has begun to slant. The shadows of the cypresses are long on the vines, and the smell of the hearths has changed to something with onions in it. You find that you are watching the line of the ridge more than you mean to.
+?else
+  The ninth hour. The light is gold, and the walls of the little town have gone the color of honey. There is time for one more thing, and then the dusk, and you have a feeling that the dusk will not wait.
+?end
+* Go down into the cellar of the shrine with Tommaso [once] ?if actions_left() > 0
+  ~> cellar
+  $ do act()
+* Walk the walls with Tommaso, and look at what they would keep out [once] ?if actions_left() > 0
+  ~> walls
+  $ do act()
+* Sit down at Ginevra's table [once] ?if actions_left() > 0
+  ~> ginevra
+  $ do act()
+* Climb to the ridge above the vineyard, where Tommaso says the shepherds are wrong [once] ?if actions_left() > 0
+  ~> ridge
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dusk
+?end
+-> :day
+
+# cellar
+## The shrine
+$ do chart("collesanto2.crypt")
+The shrine is a small, plain, whitewashed chapel set into the side of the hill, with a painted saint over the door whose face has been renewed so many times that it is no longer very clearly anyone's. It is full of flowers. There are bunches of wild thyme and bread and a pair of small shoes, left by mothers, and a row of stubby candles. Tommaso unlocks the little door behind the altar with a key as long as his hand. It does not stick. It has been very lately oiled.
+The cellar is dry and cool and very old. It was dug in the year that the first houses were rebuilt, and it has the smell of a place where a great deal of silence has been kept. There is a low stone shelf along one wall, worn smooth in the middle, where you slept for fourteen hundred years. There is a niche for a lamp. There is a clean place on the floor, a hand's breadth wide, a little in front of the shelf, where the dust has been disturbed by somebody who knelt.
+You look at it for a long time. Tommaso stands in the door with his lantern held a little too high and does not say anything. Then you take out of your sleeve the little box with the gray silk and the very old key, and set it on the shelf, and the two of you look at it together.
+You turn the little key over in your fingers. It is the same pattern as the lock. The wards are a little worn, as they would be by years of use, and it has the smooth, dark look of a thing that has been carried a long time in a pocket. It means that a second key has been made, a long while ago, or that there was always one more than the hill believed.
+"There are three keys," says Tommaso, very low. "There is mine, and my mother's, and the one that you have, and I have counted them every night this week, and I should like not to think about it."
+:the_cellar
+* Change the lock, with a smith of the Arte, and give three keys: Tommaso's, Ginevra's and yours
+  $ b2.shrine = "relocked"
+  $ bond.tommaso += 1
+  $ secrecy += 1
+  $ do earn(-5)
+  It is the sensible thing, and it is dull, and it is sufficient for a great many nights. The smith comes from Florence the next morning with a satchel of tools and a face like a boiled egg, and does not ask a question. By evening there is a new brass lock on the little door, and the old one hangs on a nail in the sacristy, where anyone who cared to look might see it.
+* Set a watch on the shrine, six men with a bell, by night, in turns
+  $ b2.shrine = "guarded"
+  $ bond.tommaso += 2
+  $ standing += 1
+  $ do earn(-3)
+  He nods slowly. It is the answer that he had been hoping for and had not liked to ask for. By dark there are six of the hill's young men sitting on the step of the shrine with cudgels and a flask, very much on their dignity, and a small bell on a cord. The village, which has been wondering for three days what has been going on, takes it as a great honor.
+* Leave the shrine to the keeping of Ginevra, who has kept it since before the walls were built
+  $ b2.shrine = "trusted"
+  $ bond.ginevra += 3
+  $ bond.tommaso -= 1
+  $ secrecy -= 1
+  He does not argue. He looks, for an instant, as a man looks who has been relieved of a burden and has also been told that he is not the one that carries it. "She will keep it," he says, at last. "She has never lost a key in her life." He goes to find her, and you stand in the little cold cellar, with the clean place on the floor in front of you, and the key in its box.
+<~
+
+# walls
+## The bounds
+$ do chart("collesanto2.gate")
+The walls were begun in the first year after you went to sleep, by a man who had a memory of a fire and was determined not to have it again, and they have been added to ever since by every Valerio with a chisel. They are a good, plain, dry stone wall, as high as a man on a horse, with a gate that would keep out a flock of sheep. Tommaso takes you the whole way round them, as a man shows a house that he has built. At every thin place he stops, and says what it would cost, and what it would do, and he never says that it is necessary.
+There is not a great deal to be said for what these walls will stop. They will stop thieves. They will stop a mob. They will not stop a person who walks through the gate with a courteous bow, and a letter, and a friend inside.
+?if b2.faction == "joined" or b2.faction == "feigned"
+  You have a gray ring in your sleeve, and you have an uneasy sense that the wall has just been measured against it.
+?end
+:the_walls
+* Raise the walls properly, with towers and a gate of oak and iron ?if can_build("walls")
+  $ b2.walls = "raised"
+  $ do build("walls")
+  $ bond.tommaso += 2
+  $ standing += 1
+  It takes all the rest of the afternoon to say, and the whole of a summer to do, and a great deal of money. Tommaso goes quite pink. He says that he has had the plan in a drawer for nine years, and he has it out of the drawer before you have finished speaking. By the evening the first stakes are in the ground, with a string between them, and there is a crowd of small boys with their hands in their pockets, looking at the line of it as if it were the edge of the world.
+* Levy the men in their own time, and put up a stout wooden gate and a watch tower, and no more
+  $ b2.walls = "levied"
+  $ bond.tommaso += 1
+  $ secrecy += 1
+  It is a perfectly sensible answer, and it will do for the present. The men are called together at the church door and are told what is wanted, and they do not complain, because it is the hill, and it is their own. By dusk there is a stack of squared chestnut timber at the gate, and a very small boy is sitting on the top of it with a stick, being the watch.
+* Leave the walls as they are, and say that a wall is a kind of invitation
+  $ b2.walls = "left"
+  $ bond.tommaso -= 1
+  $ secrecy += 2
+  $ humanity -= 1
+  He looks at you for some time, a heavy dark man in a leather apron with a bit of chalk in his fist. He does not say that you are wrong. "It is as you say, Signore," says Tommaso, quite politely, and he rubs out the chalk mark on the stone with the side of his thumb, and does not look at you again until the end of the afternoon.
+<~
+
+# ginevra
+## The table in the kitchen
+$ do chart("collesanto2.villa")
+Ginevra keeps the kitchen of the old villa as a general keeps a tent, and you sit down at her table because there is nowhere else that you could possibly sit. She is a very small old woman in a white cap. She sets down a bowl of bean soup in front of you, though you do not eat it, and a hunk of bread that you do not touch, and a cup of the hill's own red that you will not finish. She stands to watch you not eating. It has been her way of saying a great many things for fifty years.
+She says nothing at all about the shrine. She asks after the bank. She asks after the girl, which she does in the voice of a person asking after the weather.
+?if b2.sire == "sired"
+  "She has not written for a fortnight," says Ginevra. "Before that she wrote every Sunday, in her own hand, at length. The last one said that she was well, and very busy, and that she would not be home for the feast." She puts her hands on the table. "It was a good letter. It was not the kind of thing that is written by a girl who is well."
+  ?if b2.valerii == "sworn"
+    She does not ask what has been done. She is looking at you with her grandmother's eyes, very steadily, and she has known what you are for fifty years, and she knows what she is being told. "I should like to see her," says Ginevra, "when she is able to be seen."
+  ?else
+    She does not ask. She is looking at you very steadily, as a woman does who has not been told something and has not asked for it. "I should like to see her," says Ginevra, "when she is able to be seen." You do not know how much she knows.
+  ?end
+?elif b2.sire == "later"
+  "She writes every Sunday," says Ginevra, "and every Sunday she writes the same thing in different words. She is waiting for the spring." She turns the spoon in the pot. "I do not know what she is waiting for. I am her grandmother, Signore, and I have been very careful not to know. I should like you to tell me if I ought to be afraid."
+?else
+  "She writes every Sunday," says Ginevra. "She says that she is learning the books. She says that Benedetto is a very patient man. She asked her father, in the third letter, whether the cellar had a second door." She puts down the spoon. "I do not know why she asked that. I should like to know if I ought to be afraid."
+?end
+You could tell her. It is the place to do it, and she is the person, and you have a very clear sense of how much she would take, and how much she would not.
+:the_table
+* Tell her all of it: the faction, the key, the threat in the lane, and the girl
+  $ b2.ginevra = "told"
+  $ bond.ginevra += 3
+  $ secrecy -= 2
+  $ humanity += 1
+  She listens to every word, and she does not interrupt, and her small old hands lie on the table like two pieces of rope. When you have done she sits quite still for a time. "The key was given to her," she says, "so that I should know that they had it. It was a courtesy. It was a message to me." She gets up, and takes down a heavy iron pot, and sets it on the fire, quite unnecessarily. "I have been the mother of this hill for fifty years, Signore. I have had people at the gate before. I shall know what to do with this one."
+* Tell her that there is a danger, and that she is to keep the doors barred, and ask no more
+  $ b2.ginevra = "kept"
+  $ bond.ginevra -= 1
+  $ secrecy += 1
+  She looks at you for a long time, and you see that she knows quite well what has been left out. It is an old, tired, dry look. "I have kept this hill for fifty years on less than that," she says, and she does not sound reproachful, only as if she were stating a figure. "I shall bar the doors." She picks up the bowl that you have not eaten and takes it away.
+* Ask her what she would do
+  $ b2.ginevra = "asked"
+  $ bond.ginevra += 2
+  $ standing += 1
+  There is a long silence. It is the question that she has not been asked in fifty years, and she takes it with something very like a flush of surprise, as a woman takes a gift that she did not expect. "I should do nothing, which is the thing that they would not expect," she says at last, slowly. "I should go on as before. I should let them walk in at the gate, and I should have a pot of soup on the fire." The corners of her old mouth go a little up. "It is quite difficult to threaten a person who gives you a bowl of soup."
+<~
+
+# ridge
+## The shepherds
+$ do chart("collesanto2.farm")
+It is a stiff climb, up the terraces, through the green barley and the gray olives, and past the last of the vines, to a place where the hill breaks off into a sheep walk and a long, bare, windy ridge of rock. Tommaso goes first, with his hands in his belt, and does not talk. At the top he points, and you look.
+There are three of them. They are a half mile along the ridge, sitting on a flat stone with a small fire, in rough brown cloaks with the hoods up, and a flock of perhaps forty sheep that is wandering about with an air of no particular owner. They are looking at the shrine. They have been looking at it since the morning.
+"They have not got a dog," says Tommaso. "A flock of that size would have a dog, and two boys. They have not got a crook between them. And they came up on Sunday, on foot, from the Florence road, and not one of them has asked for a drink at the well." He frowns. "And their boots, Signore, are a great deal too good."
+You look again, with your other sight. They are not shepherds. They are very still. It is the stillness of men who have been told to wait, and are good at it, and are not human, or are not wholly human, and do not feel the cold.
+:the_ridge
+* Follow them, when they go, and find out where they sleep
+  $ b2.ridge = "followed"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  $ standing += 1
+  You wait. It is not difficult. At the going down of the sun they put out the fire, and gather their flock, and go off down the far side of the ridge at an easy walk that covers a good deal of ground, and you go after them, a hundred paces behind, in the long shadow. They do not look round. They walk eleven miles, to a low brown farmhouse on the Fiesole road that has had no smoke from its chimney in a hundred years, and they go in at the door, and you see that there is a gray ribbon tied to the latch.
+* Take Tommaso down, and tell him what they are, and have him put the hill on its guard
+  $ b2.ridge = "warned"
+  $ bond.tommaso += 3
+  $ secrecy -= 1
+  He does not ask what they are. He takes it as a mason takes a verdict, with a long, slow breath, and goes quite grave. By the evening he has had the men called to the church, and told them, in his square plain voice, that there are strangers on the ridge, and that no man of the hill is to go out alone after dark, and that every door is to have a stick behind it. "It is a mercy that you came," he says. "It will be all over the village by supper."
+* Leave them alone, and say nothing, and let them look
+  $ b2.ridge = "ignored"
+  $ bond.tommaso -= 1
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  You say that it is as well not to give them the satisfaction. It is an excellent answer. You have a very precise sense, as you say it, that you are not as sure as you sound. Tommaso looks at the ridge for a while and says nothing. The three brown figures do not move, and you go down the hill, and the back of your neck prickles for the whole of the way.
+<~
+
+# dusk
+## The man in black
+$ do chart("collesanto2.gate")
+The sun goes down behind the hill. It goes quite slowly, from gold to rose, and from rose to the color of the inside of a shell, and the shadows of the cypresses run out across the vines to meet one another. The hearths are lit. You are standing at the gate, in the last light, with your hands behind you and your back against the stone, and you are not in the least surprised when he comes.
+He has come up the road on foot, the tall, soft, civil man in black, with no rain on him, and no dust either. He carries a small leather case under his arm. He stops at a courteous distance, and bows. He does not look at your face.
+?if b2.faction == "joined"
+  "Ser Ormanno's compliments," he says, "to a friend of the house. He wishes that it be known that he is entirely content with the way in which the Signore has conducted himself. He has been so good as to take an interest in the Signore's hill."
+?elif b2.faction == "feigned"
+  "Ser Ormanno's compliments," he says, "to a friend of the house, or to one who has been very good at appearing to be. He wishes that it be known that he has noticed the distinction, and is not at all offended by it. He has been so good as to take an interest in the Signore's hill."
+?else
+  "Ser Ormanno's compliments," he says, "to one who has been so good as to decline his hospitality. He wishes that it be known that he is not in the least offended. He has been so good as to take an interest in the Signore's hill."
+?end
+He opens the case. It is a roll of vellum with a heavy gray seal, and he holds it out with both hands. It is a deed of purchase. It is for the whole of the hill, the village and the vines and the walls and the little chapel, for a sum that is a great deal more than it is worth, in the old coin, payable on the day that it is signed. It has been drawn up by a very good notary. There is a particular clause about the cellar under the shrine, which is to be left entirely to the purchaser's discretion.
+"It is a very handsome offer," says the civil man. "It is the sort of offer that is made once. Ser Ormanno is a patient man. He is only anxious that the people of the hill should be well, and should not be put to any inconvenience." He glances, quite gently, at the ridge. "It is a very exposed place, in the dark."
+?if b2.ridge == "followed"
+  You have been to the farmhouse with the gray ribbon on the latch. You do not say so. You see his eyes flick, very briefly, at the dust on your boots.
+?end
+?if b2.shrine == "guarded"
+  There are six young men on the step of the shrine behind you, with cudgels. They have gone very quiet.
+?end
+:the_gate
+* Take the deed, and say that you will consider it, and let him go back down the road
+  ~> heard
+  -> :the_gate_end
+* Tear it across, and tell him that the hill is not for sale, and never will be
+  ~> refused
+  -> :the_gate_end
+* Take him by the front of his coat, and tell him that he is not going back down the road
+  ~> fought
+  -> :the_gate_end
+:the_gate_end
+$ do rest()
+=> next
+
+# heard
+$ b2.ormanno_man = "heard"
+$ secrecy += 1
+$ standing -= 1
+$ bond.ginevra -= 1
+He bows, with great satisfaction, and puts the roll back into the case. "It is all that Ser Ormanno asks," he says. "A little time. He will not be hurried." He goes down the road into the dusk with the same unhurried gliding step, a tall black figure that grows smaller and does not seem to touch the ground, and when he is quite out of sight you find that you are holding the vellum in your hand, and that it is warm, and that you cannot remember taking it.
+There is a small sound at your elbow. It is Ginevra, in her white cap, with a ladle in her fist. She has been standing in the door of the kitchen. She does not say a word. She goes in again.
+<~
+
+# refused
+$ b2.ormanno_man = "refused"
+$ standing += 1
+$ bond.ginevra += 2
+$ secrecy -= 1
+It is a very good vellum, and it tears with a long satisfying sound, and you let the two halves fall in the dust of the road. "The hill is not for sale," you say. "You may tell your master that I said so, in front of its people." There is a small, shocked movement in the dark behind you. It is the six young men, or the whole of the hill, or both. "You may tell him that I said that he is a very bad neighbor."
+The civil man looks at the torn halves in the dust. His soft face does not alter. He bows, quite as deeply as he did before, and a little more slowly. "I shall tell him," he says, "exactly." He goes down the road. It is a very long time before the sound of his step is gone, and it is a good deal longer before the hill begins to breathe again, and a woman somewhere near the gate bursts into a great hiccuping, joyful, entirely inappropriate laugh.
+<~
+
+# fought
+## At the gate
+$ do fight("fledgling", 2)
+:gate_exchange
+* Close with him, and go under the case, and take him by the throat
+  $ do strike("brutal")
+* Slip his first rush, and put him against the wall of the shrine
+  $ do strike("cunning")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Say his master's name, and ask him what Ser Ormanno will say when he is asked about this
+  $ do strike("talk")
+?if not fight_over()
+  -> :gate_exchange
+?end
+$ b2.ormanno_man = "fought"
+$ secrecy -= 2
+$ cunning_brutal += 1
+?if fight_result() == "won"
+  $ standing += 1
+  $ bond.ginevra += 1
+  He is a good deal stronger than he looks, and he has been trained by someone, and it does him no good at all. He goes against the shrine wall with a sound that carries to the farthest terrace. The case bursts. The deed goes out of it in the wind, and across the vines, a long pale tongue of vellum, and he is on his knees in the dust with a hand to his ribs, looking up at you with a flat gray face in which there is nothing at all, neither anger nor fear. "I shall tell him," he says, in exactly the same voice as before. "He will be quite interested."
+?elif fight_result() == "talked"
+  $ standing += 1
+  You say the name softly, and the civil man stops, with his hand an inch from your coat. He had not expected to hear it said in this place, in that voice, in front of the whole of a village. There is a long silence. He lowers his hand. "I see," he says, and bows, and goes, and it is not until he is out of sight that you notice that your own hands are shaking.
+?else
+  $ injury += 4
+  $ hunger += 4
+  $ standing -= 2
+  He is a good deal quicker than you thought, and a good deal older. It is not a fair fight. There is a blow that you do not see, and a wall that comes up to meet you, and for a moment the whole of the gate is a bright and noisy ring. When you can see again he is standing over you, quite breathless, with his coat torn, and the case under his arm. "I am only the messenger," says the civil man. He sounds almost apologetic. "It was not necessary." He goes down the road, and the six young men of the hill, who have been standing behind you with their mouths open, do not know whether to cheer.
+?end
+<~

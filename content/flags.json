@@ -2038,6 +2038,133 @@
       "major": true,
       "default": "kept",
       "note": "Chapter 12: how Fiammetta was set to work at the bank"
+    },
+    "b2.anselm": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "asked",
+        "waited",
+        "pressed"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "waited",
+      "note": "Chapter 13: how he came at the old brother at San Miniato who painted the borders of the roll (unseen if he did not go)"
+    },
+    "b2.fiammetta_night": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "taught",
+        "trusted",
+        "forbade"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "taught",
+      "note": "Chapter 13: how he dealt with Fiammetta on a Lent night (teach her, trust her or forbid her; unseen if he did not go)"
+    },
+    "b2.medici_paper": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "lent",
+        "bought",
+        "aloof"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "aloof",
+      "note": "Chapter 13: what he did when Ser Bartolo asked for coin after the papal accounts left the Medici bank"
+    },
+    "b2.watcher_night": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "told",
+        "kept"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 13: whether he told the Velati agent how he thinks it ends (unseen if he did not go)"
+    },
+    "b2.prisca_promise": {
+      "kind": "enum",
+      "values": [
+        "agreed",
+        "hedged",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "hedged",
+      "note": "Chapter 13: whether he promised Prisca to tell her before, and not after"
+    },
+    "b2.shrine": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "relocked",
+        "guarded",
+        "trusted"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "relocked",
+      "note": "Chapter 14: what he did about the oiled lock of the shrine cellar at Collesanto (unseen if he did not go)"
+    },
+    "b2.walls": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "raised",
+        "levied",
+        "left"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "levied",
+      "note": "Chapter 14: the walls of Collesanto (unseen if he did not walk them)"
+    },
+    "b2.ginevra": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "told",
+        "kept",
+        "asked"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 14: how much he told Ginevra of the threat to the hill (unseen if he did not sit at her table)"
+    },
+    "b2.ridge": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "followed",
+        "warned",
+        "ignored"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "warned",
+      "note": "Chapter 14: what he did about the false shepherds on the ridge (unseen if he did not climb)"
+    },
+    "b2.ormanno_man": {
+      "kind": "enum",
+      "values": [
+        "heard",
+        "refused",
+        "fought"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 14: his answer to the faction's offer to buy the hill, given at the gate at dusk"
     }
   }
 }

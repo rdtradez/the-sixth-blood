@@ -317,6 +317,12 @@
       "name": "Messer Guccio",
       "title": "A lender to the Pazzi",
       "bio": "A thick, careful moneylender behind Orsanmichele, who has taken a very large sum for a very small favor and has not slept since."
+    },
+    "anselm": {
+      "gender": "m",
+      "name": "Brother Anselm",
+      "title": "An old brother at San Miniato",
+      "bio": "A mild, brown, vague old vampire in a monk's habit, with old yellow paint in the creases of his fingers. He painted the borders of the court's roll, and has not spoken in thirty years."
     }
   }
 }

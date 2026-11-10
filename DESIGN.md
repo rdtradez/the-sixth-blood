@@ -51,6 +51,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 21: Book Two chapters 7 and 8
 - [x] Session 22: Book Two chapters 9 and 10
 - [x] Session 23: Book Two chapters 11 and 12
+- [x] Session 24: Book Two chapters 13 and 14
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -312,3 +313,13 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - `tests/book2f.test.js` plays both chapters down their branches (every faction answer, both genders, hunger, each decision flag, every arrival of the girl from the hill, each answer to her request, and the hidden option when he cannot sire). `tests/book2e.test.js` now lets chapter 10 run on into chapter 11, and all Book Two test files expect twelve chapters.
 - Plans are in `SPOILERS/blood-and-gold.md`.
 
+### Session 24 notes (Book Two, chapters 13 and 14)
+
+- Book Two chapters 13 and 14 are built (`content/blood-and-gold/ch13.tsb` and `ch14.tsb`, chapter ids `b2c13` and `b2c14`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 14 and carries on by itself when chapter 15 is added.
+- Session 24 is built on `main` (session 23 is merged), on the `session-24` branch.
+- Chapter 13 is a short opening scene, then a night phase of three actions out of four, then the dawn; it ends with `rest()` and `=> next`. Chapter 14 opens with a ride to Collesanto by day (no phase), then a day phase of three actions out of four and a dusk scene at the gate; it ends with `rest()` and `=> next`, which pauses until chapter 15 exists. Chapter 15 should read hunger, standing and secrecy as chapter 14 left them.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.anselm`, `b2.fiammetta_night`, `b2.medici_paper`, `b2.watcher_night`, `b2.prisca_promise` (chapter 13) and `b2.shrine`, `b2.walls`, `b2.ginevra`, `b2.ridge`, `b2.ormanno_man` (chapter 14). Flags that can be skipped have an `unseen` value that the chapter sets on entry. `b2.prisca_promise` and `b2.ormanno_man` have no `unseen` value because those choices are always reached.
+- New person: Brother Anselm (`content/people.json`). New collection piece: `sixth_border` (only if he asked the old brother the right question). No new codex entries. Content notes: chapter 13 carries `blood`, chapter 14 carries `violence`.
+- Chapter 13 reads `b2.berengaria_debt` and clears it with `unflag` only when the debt is paid by asking the right question. Chapter 14 uses `build("walls")` when `can_build("walls")` is true and the player picks it, and uses the fight system for one exchange set at the gate.
+- Tests: `tests/book2g.test.js` plays both chapters down their branches (every pointer to the old brother, all three answers to each decision, hunger, a woman hero, the walls with and without the money, the border piece and the debt, and things left unseen). All Book Two test files now expect fourteen chapters, and `tests/book2f.test.js` lets chapter 12 run on into chapter 13.
+- Plans are in `SPOILERS/blood-and-gold.md`.
