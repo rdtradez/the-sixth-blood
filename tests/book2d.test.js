@@ -57,11 +57,11 @@ const clean = (text) => {
   assert.doesNotMatch(text, /\$ do /);
 };
 
-test('Book Two lists eighteen chapters and still pauses after the last', async () => {
+test('Book Two lists twenty chapters and is finished', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
-  assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 18);
+  assert.equal(book.incomplete, false);
+  assert.equal(book.chapterCount, 20);
 });
 
 test('chapter 7 plays through to chapter 8 for every court history and the Velati terms', async () => {

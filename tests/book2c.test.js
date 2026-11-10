@@ -60,11 +60,11 @@ const clean = (text) => {
 const DEALS = ['partner', 'rival', 'quiet'];
 const SUNS = ['agreed', 'bargained', 'kept'];
 
-test('Book Two lists eighteen chapters and still pauses after the last', async () => {
+test('Book Two lists twenty chapters and is finished', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
-  assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 18);
+  assert.equal(book.incomplete, false);
+  assert.equal(book.chapterCount, 20);
 });
 
 test('chapter 5 plays through to chapter 6 for every deal and bargain about the sun', async () => {

@@ -2383,6 +2383,119 @@
       "major": true,
       "default": true,
       "note": "Chapter 18: the Velati agent was turned by the gray figure on Easter night (always set)"
+    },
+    "b2.merchant_stance": {
+      "kind": "enum",
+      "values": [
+        "open",
+        "guarded",
+        "angry"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "open",
+      "note": "Chapter 19: how he took the Merchant's revelation in the Baptistery"
+    },
+    "b2.merchant_learned": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "roll",
+        "prisca",
+        "figure"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 19: the one true answer he asked of the Merchant (none if he kept it)"
+    },
+    "b2.prisca_maker": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "asked",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "silent",
+      "note": "Chapter 19: whether he asked Prisca about her making (unseen if he did not go to the bank)"
+    },
+    "b2.court_end": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "seat",
+        "debt",
+        "quiet"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "quiet",
+      "note": "Chapter 19: what he took from the Prince after Easter (unseen if he did not go)"
+    },
+    "b2.clerk_wake": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "stayed",
+        "warned",
+        "hidden"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "hidden",
+      "note": "Chapter 19: how he met the turned clerk's waking (unseen if he did not go)"
+    },
+    "b2.fiammetta_end": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "sired",
+        "given",
+        "kept",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 19: what became of Fiammetta's request (sired in chapter 12, given now, sworn a keeper, or refused; unseen if he did not go)"
+    },
+    "b2.merchant_fate": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "exposed",
+        "allied"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 19: what he did with the Merchant's secret (also recorded as original_fate)"
+    },
+    "b2.last_night": {
+      "kind": "enum",
+      "values": [
+        "ginevra",
+        "fiammetta",
+        "both",
+        "alone"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "alone",
+      "note": "Chapter 20: how he spent the last night on the hill"
+    },
+    "b2.agent_letter": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "none"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 20: whether he left a letter in the strong room for the turned clerk"
     }
   }
 }

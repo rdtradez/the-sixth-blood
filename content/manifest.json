@@ -434,9 +434,28 @@
             "violence",
             "blood"
           ]
+        },
+        {
+          "id": "b2c19",
+          "file": "blood-and-gold/ch19.tsb",
+          "title": "The Font",
+          "notes": [
+            "blood",
+            "grief"
+          ]
+        },
+        {
+          "id": "b2c20",
+          "file": "blood-and-gold/ch20.tsb",
+          "title": "The Long Quiet",
+          "notes": [
+            "slavery",
+            "grief"
+          ]
         }
       ],
-      "incomplete": true
+      "journal": "journal/blood-and-gold.tsb",
+      "recap": "Florence was golden, and so were its debts. You woke into a house of the Merchant line grown into a bank, learned the court and its Prince, took a name in the ledgers and a seat in the sun, and met a clerk who wrote you down. You were told, by an old woman who counts in notches, that your line was once more than a rumor. In the spring of 1478 a city nearly lost its first family, and you were in it, or you were not. Then you went home to Collesanto, put your affairs in other hands, and lay down once more to wait out the centuries."
     },
     {
       "id": "crown-of-ashes",

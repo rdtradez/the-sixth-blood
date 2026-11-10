@@ -48,7 +48,7 @@ async function play(chapter, vars, wants = [], { stopAt = null, seed = 3, wake =
   game.state.sys.sleep.wake = { quick: true, place: 'haven', steward: 'bank', outcome: 'on_schedule', years: 1410, ...wake };
   for (const [k, v] of Object.entries({ wealth: 50000, ...vars })) dev.setVar(game, k, v);
   const frame = await dev.jump(game, chapter, { keep: true });
-  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c17' ? 'b2c18' : null));
+  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c17' ? 'b2c18' : chapter === 'b2c18' ? 'b2c19' : null));
 }
 
 const clean = (text) => {
@@ -59,11 +59,11 @@ const clean = (text) => {
 
 
 
-test('Book Two lists eighteen chapters and still pauses after the last', async () => {
+test('Book Two lists twenty chapters and is finished', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
-  assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 18);
+  assert.equal(book.incomplete, false);
+  assert.equal(book.chapterCount, 20);
 });
 
 test('chapter 17 plays through to chapter 18 from every stand, with every plan and company', async () => {
@@ -131,14 +131,14 @@ test('chapter 17 fights the priest over several seeds without getting stuck', as
 test('chapter 18 plays through every ending of every door, hungry and for a woman', async () => {
   const hungry = await play('b2c18', { hunger: 95 }, [/Benedetto's back room/]);
   clean(hungry.text);
-  assert.equal(hungry.frame.wait === 'choices', false);
+  assert.equal(hungry.game.state.chapter, 'b2c19');
   const woman = await play('b2c18', {}, [], { hero: { ...HERO, gender: 'f' } });
   clean(woman.text);
   for (const fall of ['unseen', 'carried', 'left']) {
     for (const told of ['before', 'half', 'none']) {
       for (const faction of ['joined', 'feigned', 'refused']) {
         const run = await play('b2c18', { 'b2.agent_fall': fall, 'b2.prisca_told': told, 'b2.faction': faction, 'b2.company_day': 'city', 'b2.paper': 'carried' });
-        assert.equal(run.frame.wait === 'choices', false, JSON.stringify([fall, told, faction]));
+        assert.equal(run.game.state.chapter, 'b2c19', JSON.stringify([fall, told, faction]));
         clean(run.text);
       }
     }

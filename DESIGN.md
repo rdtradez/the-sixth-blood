@@ -54,6 +54,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 24: Book Two chapters 13 and 14
 - [x] Session 25: Book Two chapters 15 and 16
 - [x] Session 26: Book Two chapters 17 and 18
+- [x] Session 27: Book Two chapters 19 and 20; Book Two is complete (journal, recap, sleep to Paris)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -345,4 +346,17 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.elevation`, `b2.agent_fall` (chapter 17) and `b2.hunt`, `b2.agent_end`, `b2.panic`, `b2.villa` (chapter 18), plus `b2.agent_turned`, which chapter 18 always sets. Flags that can be skipped have an `unseen` value that the chapter sets on entry.
 - No new people, codex entries or collection pieces. Content notes: both chapters carry `violence` and `blood`. Chapter 17 uses the fight system for one optional exchange set.
 - Tests: `tests/book2i.test.js` plays both chapters down their branches (every stand, plan, company, girl and clerk, the fight over eight seeds, hunger, a woman hero, each decision flag and the skipped door). All Book Two test files now expect eighteen chapters, and `tests/book2h.test.js` lets chapter 16 run on into chapter 17.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 27 notes (Book Two, chapters 19 and 20)
+
+- Book Two chapters 19 and 20 are built (`content/blood-and-gold/ch19.tsb` and `ch20.tsb`, chapter ids `b2c19` and `b2c20`). **Book Two is finished at twenty chapters**: `"incomplete"` is removed from the manifest, so the book now ends, writes its journal, and unlocks Book Three (which has no chapters yet).
+- Session 27 is built on the `session-26` branch, which sits on `session-25` and `session-24`; none of sessions 24 to 26 are on `main` yet. Merge `session-24`, `session-25`, `session-26` and then `session-27` to get everything.
+- The manifest entry for Book Two now has `"journal": "journal/blood-and-gold.tsb"` (the Velati journal, written in the voice of the clerk of the Banca del Colle, reading the book's decision flags) and a spoiler light `recap` for quick starts into Book Three. `quickstart.vars` for Book Three are unchanged.
+- Chapter 19 is an opening scene, a short hunger scene if he needs it, a day phase of three actions out of four, and a dusk scene; it closes with `=> next` and no `rest()`. Chapter 20 has no phases: it calls `rest()` once and then `sleep("florence_to_paris")`, and closes with `=> next`. The wake report is not shown in Book Two; Book Three's opening reads `wake()`.
+- Chapter 20 offers `rest_place`, `steward` (the bank always; Prisca if active in the circle; the Valerio keepers if any of them are in the circle; Fiammetta if she is an active fledgling), `orders`, `protection` and the gap's own investments (`sleep_invest`). Protections are priced by `content/rules.json` at the Florence scale (8), so the story gates them at 80, 160 and 240 coin.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.merchant_stance`, `b2.merchant_learned`, `b2.prisca_maker`, `b2.court_end`, `b2.clerk_wake`, `b2.fiammetta_end`, `b2.merchant_fate` (chapter 19) and `b2.last_night`, `b2.agent_letter` (chapter 20). Flags that can be skipped have an `unseen` value that the chapter sets on entry. The Merchant's choice is also recorded by `original_fate("merchant", ...)`, so later books read `original("merchant", "fate")`.
+- Later books and the journals should read `b2.merchant_fate`, `b2.clerk_wake`, `b2.fiammetta_end`, `b2.agent_letter`, `b2.court_end` and `b2.prisca_maker` rather than recompute them. The clerk's romance is ended as `turned` in chapter 19 (when the romance had begun), ready for Book Four's return.
+- New codex entry: the Merchant (lore). No new people. Content notes: chapter 19 carries `blood` and `grief`, chapter 20 carries `slavery` and `grief`.
+- Tests: `tests/book2j.test.js` plays both chapters down their branches (every Merchant tone, stance and answer, every door, the fate and the gift, hunger, a woman hero, every last night, steward, order, guard, investment and letter, the end of the book, the journal). All Book Two test files now expect twenty chapters and a finished book, and `tests/book2i.test.js` lets chapter 18 run on into chapter 19.
 - Plans are in `SPOILERS/blood-and-gold.md`.
