@@ -51,7 +51,6 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 21: Book Two chapters 7 and 8
 - [x] Session 22: Book Two chapters 9 and 10
 - [x] Session 23: Book Two chapters 11 and 12
-- [x] Sessions 24 and 25: Book Two chapters 13 to 16
 - [x] Session 24: Book Two chapters 13 and 14
 - [x] Session 25: Book Two chapters 15 and 16
 - [x] Session 26: Book Two chapters 17 and 18
