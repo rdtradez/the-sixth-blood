@@ -311,6 +311,12 @@
       "name": "Monsignor Tullio Savelli",
       "title": "A Roman prelate, here for the baths",
       "bio": "Thick, handsome and florid, in a cardinal's purple cap and good fur. He makes a room feel as though it had been furnished for him, and he is very kind about it."
+    },
+    "guccio": {
+      "gender": "m",
+      "name": "Messer Guccio",
+      "title": "A lender to the Pazzi",
+      "bio": "A thick, careful moneylender behind Orsanmichele, who has taken a very large sum for a very small favor and has not slept since."
     }
   }
 }

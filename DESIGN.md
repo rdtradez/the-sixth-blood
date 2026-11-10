@@ -50,6 +50,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 20: Book Two chapters 5 and 6
 - [x] Session 21: Book Two chapters 7 and 8
 - [x] Session 22: Book Two chapters 9 and 10
+- [x] Session 23: Book Two chapters 11 and 12
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -299,3 +300,15 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - `florence.mercenaries` is an investment, not a map site, so `chart()` cannot take it.
 - `tests/book2e.test.js` plays both chapters down their branches (every court history, both genders, hunger, each decision flag, the optional questions, the ring and the old ducat). `tests/book2d.test.js` now stops chapter 8 as chapter 9 begins, and all the Book Two test files expect ten chapters.
 - Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 23 notes (Book Two, chapters 11 and 12)
+
+- Book Two chapters 11 and 12 are built (`content/blood-and-gold/ch11.tsb` and `ch12.tsb`, chapter ids `b2c11` and `b2c12`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 12 and carries on by itself when chapter 13 is added.
+- Session 23 is built on the `session-22` branch, which is not merged to `main` yet. Merge `session-20`, `session-21`, `session-22` and then `session-23`.
+- Chapter 11 is a short opening scene, then a night phase of three actions out of four, then the dawn; it ends with `rest()` and `=> next`. Chapter 12 opens with an arrival, then a day phase of three actions out of four and a dusk scene; it ends with `rest()` and `=> next`, which pauses until chapter 13 exists. Chapter 13 should read hunger, standing and secrecy as chapter 12 left them.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.paper`, `b2.guccio_fate`, `b2.savelli`, `b2.watcher_shield`, `b2.sire` and `b2.fiammetta_work`. Flags that can be skipped have an `unseen` value that the chapter sets on entry. `b2.sire` has no `unseen` value because the choice is always reached.
+- New person: Messer Guccio (`content/people.json`). No new codex entries or collection pieces. Content notes: neither chapter adds a new note.
+- Chapter 12 offers the first use of `sire()` in the series. The option only shows when `can_sire()` is true, so later chapters should read `b2.sire` and `member("fiammetta", "kind")` rather than assume. If Fiammetta is sired she is a plain vampire in the circle (line sixth, tier 1), and `sire()` has already added hunger and lowered Velati regard.
+- `tests/book2f.test.js` plays both chapters down their branches (every faction answer, both genders, hunger, each decision flag, every arrival of Fiammetta, all three answers about the Dark Gift, and the hidden option when he cannot sire). `tests/book2e.test.js` now lets chapter 10 run on into chapter 11, and all Book Two test files expect twelve chapters.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+

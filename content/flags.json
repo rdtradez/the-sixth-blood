@@ -1961,6 +1961,83 @@
       "major": true,
       "default": "told",
       "note": "Chapter 10: how much he told Prince Gualtiero about the supper on the Fiesole road"
+    },
+    "b2.paper": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "carried",
+        "recorded",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "recorded",
+      "note": "Chapter 11: what he did with the box of Pazzi paper in the old coin at the side door"
+    },
+    "b2.guccio_fate": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "hidden",
+        "handed",
+        "left"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "handed",
+      "note": "Chapter 11: what he did when Messer Guccio tried to run"
+    },
+    "b2.savelli": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "heard",
+        "pried",
+        "cut"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "heard",
+      "note": "Chapter 11: how he handled the Roman prelate at the bath house"
+    },
+    "b2.watcher_shield": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "warned",
+        "kept",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 11: what he told the Velati agent on the river stair"
+    },
+    "b2.sire": {
+      "kind": "enum",
+      "values": [
+        "sired",
+        "later",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 12: his answer when Fiammetta asked for the Dark Gift"
+    },
+    "b2.fiammetta_work": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "ledgers",
+        "errands",
+        "kept"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 12: how Fiammetta was set to work at the bank"
     }
   }
 }
