@@ -400,6 +400,22 @@
           "notes": [
             "violence"
           ]
+        },
+        {
+          "id": "b2c15",
+          "file": "blood-and-gold/ch15.tsb",
+          "title": "The Week of Palms",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b2c16",
+          "file": "blood-and-gold/ch16.tsb",
+          "title": "The Eve",
+          "notes": [
+            "blood"
+          ]
         }
       ],
       "incomplete": true

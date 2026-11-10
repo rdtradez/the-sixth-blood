@@ -2165,6 +2165,134 @@
       "major": true,
       "default": "refused",
       "note": "Chapter 14: his answer to the faction's offer to buy the hill, given at the gate at dusk"
+    },
+    "b2.prince_plan": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "guard",
+        "forbid",
+        "trust"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "forbid",
+      "note": "Chapter 15: what he told the Prince to do about the Sunday (unseen if he did not go to the loggia)"
+    },
+    "b2.company_day": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "city",
+        "away",
+        "hill"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "away",
+      "note": "Chapter 15: where he sent Ugolino's company for Easter (unseen if he did not go to Campi)"
+    },
+    "b2.ring_task": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "accepted",
+        "bargained",
+        "declined"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "declined",
+      "note": "Chapter 15: his answer to the faction's request that he stand at the south door of the great church (unseen if he did not answer)"
+    },
+    "b2.warning": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "open",
+        "veiled",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "veiled",
+      "note": "Chapter 15: how much he told Ser Bartolo of the plot against the Medici (unseen if he did not go)"
+    },
+    "b2.prisca_told": {
+      "kind": "enum",
+      "values": [
+        "before",
+        "half",
+        "none"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "half",
+      "note": "Chapter 15: how much he told Prisca before the Sunday"
+    },
+    "b2.duomo": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "measured",
+        "barred",
+        "prayed"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "measured",
+      "note": "Chapter 16: what he did in the great church on Holy Saturday (unseen if he did not go)"
+    },
+    "b2.nanni_eve": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "asked",
+        "told",
+        "bought"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "asked",
+      "note": "Chapter 16: what passed with the seller of thread on the eve (unseen if he did not go)"
+    },
+    "b2.agent_easter": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "away",
+        "near",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "near",
+      "note": "Chapter 16: what he told the Velati agent about the Sunday (unseen if he did not go to the river stair)"
+    },
+    "b2.fiammetta_easter": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "home",
+        "near",
+        "chose"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "chose",
+      "note": "Chapter 16: where Fiammetta is to be on the Sunday (unseen if he did not see her)"
+    },
+    "b2.easter_stand": {
+      "kind": "enum",
+      "values": [
+        "beside",
+        "door",
+        "away"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "beside",
+      "note": "Chapter 16: where he will stand at the Elevation (beside the family, at the south door, or away at the bank)"
     }
   }
 }

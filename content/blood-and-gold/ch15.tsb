@@ -1,0 +1,241 @@
+// Book Two, Chapter 15 (session 25). Holy Week, and the nights before the Sunday.
+// A short opening scene (no phase), then one night phase of three actions out of four (the Prince's loggia, the company at Campi, the faction's task, the Medici counting house), then the dawn.
+// Ends with rest() and => next. Reads b2.prince_told, b2.captain, b2.ugolino, b2.faction, b2.paper, b2.medici_paper, b2.savelli, b2.prisca_promise and b2.prisca_conspiracy.
+// The book is incomplete, so play pauses after this chapter until chapter 16 is added.
+// Later chapters read b2.prince_plan, b2.company_day, b2.ring_task, b2.warning and b2.prisca_told.
+@chapter b2c15
+@title The Week of Palms
+@book blood-and-gold
+@version 1
+
+# start
+## Palm Sunday, in the evening
+$ b2.prince_plan = "unseen"
+$ b2.company_day = "unseen"
+$ b2.ring_task = "unseen"
+$ b2.warning = "unseen"
+$ b2.prisca_told = "half"
+$ do chart("florence.bank")
+The city has put out its palms. They are in every doorway, olive and box and willow, tied with red thread, and the children go about with them in the wet evening hitting each other. The Lent is almost over. There are eight days to the feast, and on the whole of the Arno there is not a barge that has not been scraped, not a window that has not been washed, not a stall that has not got something painted on it. Florence is going to be looked at. She has been getting ready for a month.
+?if b2.savelli == "pried"
+  You know the day. You have known it for weeks, from a man who could not taste his figs. It is the Sunday, at the Elevation, in the great church, and it has been going about in your head like a stone in a shoe, and tonight, with the palms in the doorways, it has become the next Sunday but one, and then the next, and then this.
+?else
+  You do not know the hour, or you have not let yourself be certain of it. You know that it is a Sunday, and that the whole city will be in one place, and that a faction of the very old has been very patient. Palm Sunday has gone by, in a heap of green rubbish, and nothing has been said to you at all.
+?end
+?if b2.paper == "carried" or b2.paper == "recorded"
+  In the strong room there is a box of old gold that you have not yet been able to put anywhere.
+?end
+?if must_feed()
+  ~> hungry
+?end
+$ do phase("night", 3)
+-> night
+
+# hungry
+## Before the doors
+The week has been all errands, and your hunger has been patient for longer than it ought to have been. It comes back now all at once, very politely, like a person who has been waiting in the hall.
+* Go to Benedetto's back room, where the cup is kept
+  $ do feed("bank")
+  It is warm and clean and nobody asks. Benedetto does not look up from his ledger, which is a kindness he has made into a habit.
+* Take a lamb from a fold beyond the Porta Romana, and leave a coin on the gatepost
+  $ do feed("animal")
+  $ do earn(-1)
+  It is a stupid, patient creature, and you leave the coin, and you are ashamed of the coin.
+* Pay a donor from the Borgo
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She does not talk, and you are grateful. The coin is warm in her hand when you go.
+<~
+
+# night
+## The first days of the week
+:night
+?if actions_left() == 3
+  The lamps of the Via Larga are lit, and the doors of the great houses are standing open on their courtyards, with servants going in and out carrying things. Four doors want you tonight, and you can go to three.
+?elif actions_left() == 2
+  It is the middle of the night. The confraternities have gone home. A thin rain has begun, which has made the whole city smell of wet stone and wax, and the watchmen have drawn their hoods over their faces.
+?else
+  The sky over the Oltrarno is still black, but you can feel the hour of the cocks. There is time for one more door, if it is a short one.
+?end
+* Go to the Prince's loggia, where he has been sitting up [once] ?if actions_left() > 0
+  ~> prince
+  $ do act()
+* Ride out to the company at Campi, where the Captain's men are drinking [once] ?if actions_left() > 0
+  ~> company
+  $ do act()
+* Answer the civil man in black, who has left a gray ribbon on the latch [once] ?if actions_left() > 0
+  ~> task
+  $ do act()
+* Go to Ser Bartolo, at the Medici counting house, who is not sleeping [once] ?if actions_left() > 0
+  ~> bartolo
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# prince
+## The loggia
+$ do chart("florence.court")
+Prince Gualtiero is sitting in the dark, in the corner of the loggia, with a rug over his knees which he does not need. It is a thing that he has begun to do. He has become, in the last month, a little more like a man and a little less like a lord. A single lamp burns on the parapet with a moth going round it. He does not turn his head when you come in.
+?if b2.prince_told == "told"
+  "You have told me," he says. "You have told me everything, and I have been grateful, and I have done nothing, and I have been ashamed of both." He folds his hands. "It is Sunday, then. I have known since you came. A man does not stop knowing a thing because he has been politely requested to."
+?elif b2.prince_told == "partial"
+  "You told me a part of it," he says. "I have been sitting here wondering about the rest. I do not say that you ought to have said it. I say only that a Prince who is told a part of a thing has to do his own arithmetic." He folds his hands. "The sum is Sunday."
+?else
+  "You told me nothing," he says. "It was as plain as a bell. I have been the Prince of this city for sixty years, and I have a certain number of ears." He folds his hands. "It is Sunday. I did not need you for it. I should have liked to be asked."
+?end
+"There is a law," says Gualtiero. "I made it. We do not act upon the affairs of the living. It is the whole of the Peace. It is the reason that there is a Peace. If I send a hundred of my own into the church, with swords, to stand about the Medici, I have broken it myself, in the face of the city, and the people who wish it broken will have what they wanted without the trouble of the plot." He looks at the moth. "I am asking you what I am to do. I have not asked anyone in a very long time."
+:the_prince
+* Tell him to break the law, quietly, and put a dozen of the court behind the Medici's pillar
+  $ b2.prince_plan = "guard"
+  $ bond.gualtiero += 2
+  $ standing += 1
+  $ secrecy -= 1
+  He says nothing for a moment. Then, very slowly, he takes the rug off his knees, folds it, and lays it on the bench, like a man laying down something that he has been carrying for a long way. "A dozen," he says. "In the dress of the household. They will not draw. They will stand where I put them, and if the Peace is a cage, it shall be said that it was I who opened the door." He does not smile. He is a good deal paler than he was.
+* Tell him to keep the law, and keep the court out of it, and that you will see to the rest
+  $ b2.prince_plan = "forbid"
+  $ bond.gualtiero -= 1
+  $ standing += 1
+  $ secrecy += 1
+  "I thought that you would say that," he says, and there is a flat, tired relief in it, and a smaller thing under it that you do not like. "It is a hard thing to be told to do nothing by a man who has said it so plainly that he means to do something." He nods. "The court will be at their prayers. They will be in their stalls, and not a hand's breadth from them. It will be a very pious Easter."
+* Say that it is his city, and that he must decide it
+  $ b2.prince_plan = "trust"
+  $ bond.gualtiero += 1
+  $ standing -= 1
+  He looks at you for some time. It is a long, old look, a very patient one. "I see," he says. "You have given me back my own question. It is quite correct. It is not a thing that I had expected from you." He turns his head to the lamp. "I shall think about it until the morning, and I shall do what I should have done if you had not come at all. It is a comfort to know what that is."
+<~
+
+# company
+## Campi
+$ do chart("florence.roadhome")
+The company of Ugolino has taken over the whole of a wine shop at Campi, and a good part of the road in front of it. There are sixty men. They are playing at dice on the steps in the rain and singing something obscene to the tune of a psalm, and they have all, to a man, been paid in advance. Ugolino is at the back, on a barrel, with his boots off, cleaning a knife with a rag.
+?if b2.captain == "funded"
+  "You have been very good to me," he says, "and I have been very good to you, and I have been getting a little nervous about the arithmetic."
+?elif b2.captain == "listened"
+  "You have heard me, and I have heard you," he says, "and I have been a long time in this trade without finding out what that is worth."
+?else
+  "You sent me away with a flea in my ear," he says, without rancor, "and I went, and now here you are, which is very flattering, and I should like to know why."
+?end
+He puts down the knife. "I am asked to take the company to Imola for the Easter week. It is a very handsome sum, in the old coin. It is from the man I told you of, who does not say who pays. I have said that I will think about it. I have been thinking about it for nine days." He scratches under his jaw. "It is a Sunday that many people will be in one place. I am not a very clever man. I am sure that I should rather be somewhere else."
+:the_company
+* Bring the company into the city for Easter, as pilgrims, with their swords in the straw
+  $ b2.company_day = "city"
+  $ bond.ugolino += 2
+  $ do earn(-12)
+  $ secrecy -= 1
+  He whistles through his teeth. It is a long, low, delighted sound. "Sixty pilgrims," he says. "It will be the most abominable thing that the Prior of San Marco has ever seen. They will have to be told to take their hats off." He is already pulling on a boot. "I shall want a great many candles. It is very hard to look like a pilgrim without a candle."
+* Let him take the money, and the company, and go to Imola
+  $ b2.company_day = "away"
+  $ bond.ugolino -= 1
+  $ secrecy += 1
+  He looks at you for a moment as if he had expected to be argued with. "That is a very cool answer," he says. "It is the answer of a person who has something else to do." He takes up the knife. "I shall go, then. I shall take their money. I shall be as slow as a wet week on the road." He grins, a little crookedly. "If you should find that you want me by Sunday, I shall be in a very expensive state of regret."
+* Send the company to Collesanto, under the hill, to sit on the shrine
+  $ b2.company_day = "hill"
+  $ bond.ugolino += 1
+  $ bond.tommaso -= 1
+  $ do earn(-8)
+  "To sit on a cellar," says Ugolino, "for a Lent's pay, and a very civil dinner." He considers it. "It is not a thing that I shall be able to explain to the men. They will be sure that there is a treasure." You say that there is something under the hill that is worth a good deal more than a treasure, and you do not say what it is, and he has the sense, which is the reason that you keep him, not to ask.
+<~
+
+# task
+## The gray ribbon
+$ do chart("florence.rooms")
+The ribbon is on the latch of the side door, tied in a neat little bow, and it is wet. It is not the civil man's way to leave a message, as a rule, and it is not his way to leave it in the rain. There is a card under it, in a hand as even as a rule of lead, with no name. It says that someone will be at the south door of the great church on Sunday, at the Elevation, when the bell is struck. It says that the person will be known by a gray ring, worn on the outside of the glove.
+?if b2.faction == "joined"
+  It says that Ser Ormanno asks for the proof of a friend's faith, and that it is a very small thing. It is to stand at the door, and to look at nothing.
+?elif b2.faction == "feigned"
+  It says that Ser Ormanno asks that the gentleman who has been so very good at appearing to be a friend should now be one, and that it is a very small thing. It is to stand at the door, and to look at nothing.
+?else
+  It says that Ser Ormanno is aware that the gentleman has declined his table, and has no wish to press him, and would be glad of a very small kindness. It is to be at the south door of the church on Sunday, and to look at nothing, and it is not, in the circumstances, a thing that it will be wise to refuse.
+?end
+There is a second line, very small, at the bottom. "A man who is at the door is not at the pillar."
+:the_task
+* Accept it, and send word that you will be there
+  $ b2.ring_task = "accepted"
+  $ bond.prisca -= 1
+  $ secrecy += 1
+  $ standing += 1
+  It is a very simple thing to do. You write four words on the back of the card, and put it in the box under the ribbon, and by the morning it is gone. You have a very distinct feeling, doing it, of putting your own name to something, and there is no great comfort in the fact that it was done for a reason.
+* Answer that you will come, but ask what is behind the door
+  $ b2.ring_task = "bargained"
+  $ secrecy -= 1
+  $ cunning_brutal -= 1
+  There is no answer for a night and a day. Then there is a very small one, in the same lead rule hand, on a fresh card. It says that what is behind the door is the sacristy, and that the sacristy has another door. It says that the gentleman is not asked to do anything at all, and that it is the whole of the kindness. It says that he is a person who asks questions, and that Ser Ormanno has remembered it.
+* Burn the card in the lamp, and say nothing, and leave the ribbon on the latch
+  $ b2.ring_task = "declined"
+  $ standing -= 1
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  The card burns with a little blue flame and a smell like old paper, and the gray ribbon you leave where it is. It is a very eloquent thing to do. You are a good deal more pleased with it than you will be, and you know it as you do it.
+<~
+
+# bartolo
+## The back office, again
+$ do chart("florence.bank")
+Ser Bartolo has not been to bed. There is a heap of grey ash in the grate, and a half eaten plate of lentils, and a map of the city on the table with a number of small marks in ink. He looks up when you come in, and does not say who you are. It is a thing that he has done for thirty years, in the dark, to people who have come into this room. He says that the house is very much obliged.
+?if b2.medici_paper == "lent"
+  "You have been a good friend," he says. "I am not so great a fool as to suppose that you have done it for nothing. I have been trying to guess the price."
+?elif b2.medici_paper == "bought"
+  "I have heard what you did with the paper," he says, quite without malice. "I am a banker. I hope that I should have done the same. I am very much alive to the fact that you have come to see me all the same."
+?else
+  "I did not look to see you," he says. "It was a very hard Lent, and you did not choose to lend in it. I am not a man who holds a thing against a house for being careful."
+?end
+There is nothing in the room that could be called a weapon. There is a very small, tired, clever man, and a bundle of the letters of a great house, and the knowledge, which is as plain to him as to you, that something is going to happen at Easter.
+:the_bartolo
+* Tell him plainly that there is a plot, against the Medici, in the church, at the Elevation, by the Pazzi
+  $ b2.warning = "open"
+  $ bond.bartolo += 3
+  $ standing += 2
+  $ secrecy -= 2
+  He is very still. It is not the stillness of surprise. It is the stillness of a man who has been told, at last, a thing that he has been afraid to be told, and finds that it is a good deal smaller than the fear. "Thank you," he says. "I shall take it to the house." He is writing before you have finished. "They will not stay away from the church. They cannot. It would be said that they were afraid. I shall see that there are a good many friends in the pews." He looks up. "Is it a thing that I may say you told me?"
+* Tell him only that the family would do well to be seen at a different Mass this year
+  $ b2.warning = "veiled"
+  $ bond.bartolo += 1
+  $ secrecy -= 1
+  He turns the pen over. "It is very good advice," he says, "and it is advice that has a hole in the middle of it the size of a church door." He does not press. "I shall say that I had a bad dream. I shall say it to a number of people. I shall be very much believed, and nothing will be done." He smiles, thinly. "I am much obliged for the courtesy of the dream."
+* Say nothing of it, and ask for the news of the Pope's money
+  $ b2.warning = "silent"
+  $ bond.bartolo -= 2
+  $ secrecy += 2
+  $ standing -= 1
+  He tells you, at great length and in great detail, with the air of a man who has been given a gift and does not know where it came from. It is all perfectly true. It is, you think, an extremely good account of a bank that is going to be in a great deal of trouble. He does not say that he knows that you have not told him something. When you go he stands up, which he did not do when you came in.
+<~
+
+# dawn
+## Before the first Mass of Tuesday
+$ do chart("florence.prisca")
+The rain has stopped. The streets are shining, and a baker's boy goes by with a tray of the little buns that are only made in Holy Week, with a cross cut on the top. It is the dullest and most peaceful hour in the whole of the day, and you stand in it, at the side door of the bank, with the feeling of a man who has been up all night adding a sum and has not got the answer.
+Prisca is on the step. She has not sent word. She is in her house cloak, with her hair in a plain net, and she looks at you for some time before she says anything.
+?if b2.prisca_promise == "agreed"
+  "I asked you for a thing," she says. "I have been very careful not to ask for it again. I should like to know whether I am going to be told before."
+?elif b2.prisca_promise == "hedged"
+  "You said that you would tell me what you could," she says, "and I have counted every night since, and I have not been told anything. It is quite possible that you could not."
+?else
+  "You said that there were things you could not tell me, for my own sake," she says. "I have been thinking about that for a month. I have come to say that I should like to be told them all the same."
+?end
+?if b2.ring_task == "accepted"
+  She looks at your glove. There is no ring on it. She does not say that she has looked.
+?end
+:the_prisca
+* Tell her everything: the Sunday, the church, the ring and what you have done
+  $ b2.prisca_told = "before"
+  $ bond.prisca += 3
+  $ secrecy -= 2
+  $ humanity += 1
+  It takes a quarter of an hour. She listens without moving, and when you have finished she does not say anything for so long that you begin to be afraid. Then she takes off her glove, finger by finger, and lays it on the step. "Thank you," she says. "That is the first time in four hundred years that anyone has told me a thing before." She stoops and takes it up again. "I shall have a great many letters of credit to write today. I shall write them as if I knew nothing."
+* Tell her that it will be Sunday, and that she is to be out of the city, and no more
+  $ b2.prisca_told = "half"
+  $ bond.prisca += 1
+  $ secrecy += 1
+  She considers it very carefully. "I am to be out of the city on the most profitable week of the year, on the word of a man who will not tell me why." She almost smiles. "It is a very fine thing to be trusted so little and so much." She nods. "I shall go to the villa at Careggi on Saturday. I shall take the books. I shall be a very busy invalid."
+* Say that there is nothing to tell, and that the week is a quiet one
+  $ b2.prisca_told = "none"
+  $ bond.prisca -= 3
+  $ secrecy += 2
+  "Is it," says Prisca. It is perfectly civil. She looks at the shining street, and then at you, and then she says, very gently, "I have lived with the dishonest for four hundred years, and I find that I mind it more in the people that I should like to trust." She draws up her hood. "I shall do as I think best. You must not be surprised by it."
+The first bell begins, a little flat, a little late, and a woman with a basket of palms goes down the street under a pale new sun.
+$ do rest()
+=> next

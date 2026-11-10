@@ -48,7 +48,7 @@ async function play(chapter, vars, wants = [], { stopAt = null, seed = 3, wake =
   game.state.sys.sleep.wake = { quick: true, place: 'haven', steward: 'bank', outcome: 'on_schedule', years: 1410, ...wake };
   for (const [k, v] of Object.entries({ wealth: 50000, ...vars })) dev.setVar(game, k, v);
   const frame = await dev.jump(game, chapter, { keep: true });
-  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c13' ? 'b2c14' : null));
+  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c13' ? 'b2c14' : chapter === 'b2c14' ? 'b2c15' : null));
 }
 
 const clean = (text) => {
@@ -57,11 +57,11 @@ const clean = (text) => {
   assert.doesNotMatch(text, /\$ do /);
 };
 
-test('Book Two lists fourteen chapters and still pauses after the last', async () => {
+test('Book Two lists sixteen chapters and still pauses after the last', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 14);
+  assert.equal(book.chapterCount, 16);
 });
 
 test('chapter 13 plays through to chapter 14 for every pointer, answer to the girl and bond', async () => {
@@ -149,7 +149,7 @@ test('chapter 14 plays through for every faction answer, gender, hunger and each
       for (const valerii of ['sworn', 'trusted', 'distant']) {
         const run = await play('b2c14', { 'b2.faction': faction, 'b2.sire': sire, 'b2.valerii': valerii });
         assert.notEqual(run.game.state.chapter, 'b2c13');
-        assert.equal(run.frame.wait === 'choices', false, JSON.stringify([faction, sire, valerii]));
+        assert.equal(run.game.state.chapter, 'b2c15', JSON.stringify([faction, sire, valerii]));
         clean(run.text);
       }
     }

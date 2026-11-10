@@ -1,0 +1,243 @@
+// Book Two, Chapter 16 (session 25). Holy Saturday, and the eve of the Sunday.
+// A short opening scene (no phase), then one day phase of three actions out of four (the great church, the thread stall, the clerk, the girl), then a dusk scene at the bank where the last choice is made.
+// Ends with rest() and => next, which pauses until chapter 17 exists. Reads b2.sire, b2.fiammetta, b2.watcher_bond, b2.watcher_night, b2.trader_regard, b2.prince_plan, b2.company_day, b2.ring_task, b2.warning, b2.prisca_told and b2.faction.
+// The book is incomplete, so play pauses after this chapter until chapter 17 is added.
+// Later chapters read b2.duomo, b2.nanni_eve, b2.agent_easter, b2.fiammetta_easter and b2.easter_stand.
+@chapter b2c16
+@title The Eve
+@book blood-and-gold
+@version 1
+
+# start
+## Holy Saturday
+$ b2.duomo = "unseen"
+$ b2.nanni_eve = "unseen"
+$ b2.agent_easter = "unseen"
+$ b2.fiammetta_easter = "unseen"
+$ b2.easter_stand = "away"
+$ do chart("florence.court")
+It is the quietest day of the year. The bells have been tied up since Thursday, and the whole of Florence has gone about for two days in a strange, muffled hush, without a clapper in the city. The shops are shut. The cooks are not yet at their ovens. Everybody is waiting for the noon, when the bells come back, and the Glory is sung, and Lent is over, and the colombina is lit and sent flying down the Corso on a wire, over the heads of the crowd, to set fire to a cart of fireworks at the door of the great church.
+You are in the sun. It is a very pale, clean, cool April sun, and you have the whole of it, and not many people have thought to wonder why. You have the whole of a day, which is a thing that none of the court have, and you have a hundred things to do with it and not time for more than three.
+?if b2.warning == "open"
+  A boy came to the bank at first light with a very short note, in Bartolo's cramped hand. It says that a number of friends will be in the pews, and that they have been told to look pious. It says nothing else, and it is signed with the initial of a man who has been brave for the first time in his life.
+?elif b2.warning == "silent"
+  There has been no word from the house across the way. You did not expect it.
+?end
+?if must_feed()
+  ~> hungry
+?end
+$ do phase("day", 3)
+-> day
+
+# hungry
+## Before the day
+The long hush has made the donors scarce, and the fast has taken the edge off the butcher's trade, and your hunger has grown up quietly in the corner like a child who has been told to be good.
+* Go to Benedetto's back room, where the cup is kept
+  $ do feed("bank")
+  It is warm and clean and nobody asks.
+* Take a kid from the pen at the Porta San Frediano, and leave a coin on the post
+  $ do feed("animal")
+  $ do earn(-1)
+  It is a stupid, patient creature, and you leave the coin, and you are ashamed of the coin.
+* Pay a donor from the Borgo, who is glad of it, in a week of no custom
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She is very quick, and very practical, and she does not look at your face.
+<~
+
+# day
+## What can be done in a day
+:day
+?if actions_left() == 3
+  It is early, and the light is flat and white. A crier is going up the Via dei Calzaiuoli with a bell wrapped in sacking, calling the hours in a whisper. There are four things you would do, and the time for three.
+?elif actions_left() == 2
+  The light has warmed. Somebody is beating a carpet on a roof, very softly. You can hear the whole of the city making a small noise, like a vast house with the shutters closed.
+?else
+  The light has begun to slant, and the colombina's wire has been strung across the Corso, a long bright thread against the blue. There is time for one more thing, and then the dusk.
+?end
+* Go to the great church, and walk about it in the light [once] ?if actions_left() > 0
+  ~> duomo
+  $ do act()
+* Find the seller of thread, who has set up a stall on the Piazza di San Giovanni [once] ?if actions_left() > 0
+  ~> nanni
+  $ do act()
+* Go down to the river stair, where the clerk is waiting [once] ?if actions_left() > 0
+  ~> clerk
+  $ do act()
+* See to the girl from the hill, before the Sunday [once] ?if actions_left() > 0
+  ~> girl
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dusk
+?end
+-> :day
+
+# duomo
+## Santa Maria del Fiore
+$ do chart("florence.court")
+The great church is empty. It is the strangest thing that you have seen in it. The cupola is a dim, blue, enormous silence over the crossing, with the light coming down it in dusty ropes, and the pavement has been washed, and every one of the chairs has been set out in rows. A sacristan is going about with a taper. There are workmen at the choir screen, taking down a trestle, and a nun at the Lady Chapel on her knees, quite alone, with her hands against her face.
+You walk it slowly, as you walked a camp once, from the west door to the east. It is a very large space and a very simple one. It has a great many pillars. It has a north door and a south door and a door to each of the sacristies, and a stair, behind the choir, to the loft, and a high gallery where nobody ever goes. It has a place, just before the high altar, where a family of the first consequence will kneel at the Elevation, with their backs to the whole of the nave.
+There are very few places in it where a man who knew his business could not be killed, and fewer still where one could not be saved, if the right people stood in the right places, and they were very quick.
+:the_duomo
+* Measure it: the doors, the stair, the loft, and the sacristy that has another door
+  $ b2.duomo = "measured"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  $ standing += 1
+  It takes the better part of the morning. You walk the pillars, and count your paces between them, and climb the stair to the loft, where there is a space behind a shutter from which a very good archer, or a person with a very good view, could see the whole of the choir. You go down the second stair, behind the sacristy. It comes out in a courtyard. There is a very small door, very old, which has been oiled.
+* Give the sacristan a florin, and ask him to bar the north door for the Mass
+  $ b2.duomo = "barred"
+  $ do earn(-2)
+  $ bond.bartolo += 1
+  $ secrecy -= 1
+  The sacristan weighs the florin in his palm like a man with a doubtful egg. He says that it is irregular. He says that it is against the custom. He says that he has never in forty years been asked, and that a man who was prepared to pay a florin for the door to be barred would be very likely prepared to pay two. You pay two. He says, with great dignity, that he will see what can be done, and puts them both away.
+* Kneel in the Lady Chapel, by the nun, for an hour, and leave the church to God
+  $ b2.duomo = "prayed"
+  $ humanity += 2
+  $ secrecy += 1
+  It is not a thing that you have done for a very long time. You kneel, in the cold, on the stone, in a church which is full of the particular silence of a place that has had a great many prayers said in it, and you do not say anything at all. At the end of the hour the nun gets up, and looks at you, and says in a very small flat voice that she has seen you here before. You have never been in this church. She goes away, and you do not follow her.
+<~
+
+# nanni
+## The seller of thread
+$ do chart("florence.wool")
+He is at the end of the line of stalls, between a man who sells hot chestnuts and a woman with a tray of crosses, in the same shabby brown coat, behind the same trestle of small colored spools. The Piazza is nearly empty. There is a pigeon on his shoulder. He looks like what he is not, as thoroughly as he did in the autumn, and he looks up when he sees you, and does not look the least surprised.
+?if b2.trader_regard == "warm"
+  "I wondered if you would come," says Nanni. "I have been sitting here since the sixth hour, hoping, and it is a very bad stall for hoping." He moves a spool of crimson to make room. "I am very glad that you did."
+?elif b2.trader_regard == "wary"
+  "You have come," says Nanni. "It is a good day for it. Nobody else is out." He turns a spool of gray in his fingers. "I have been wondering how you would spend it. It is a great deal to ask of a day."
+?else
+  "Well," says Nanni, quite pleasantly. "A very busy man, on a very busy morning, and he has found the time to buy thread." There is no unkindness in it. There is no warmth either. "I shall try to be worth the trouble."
+?end
+He does not say what he is. He has not said it once. There is a sort of crowded stillness about him, like a man who is holding up a very great weight and is anxious that nobody should notice.
+:the_nanni
+* Ask him what he would do, if the day were his
+  $ b2.nanni_eve = "asked"
+  $ bond.nanni += 2
+  $ cunning_brutal -= 1
+  "I?" says Nanni. He looks genuinely startled. He puts down the spool, and the pigeon on his shoulder shifts and settles. "It is not a thing that I am asked, you know. It is a great many centuries since anyone put it to me as if I might have an answer." He is silent for a little. "I should not do anything alone," he says at last. "It is the whole of my small wisdom. A thing that is done by one person is a very easy thing to cut. A thread has to be a great many threads." He picks up the spool again. "It is only thread, Signore. I have never claimed that it was more."
+* Tell him what you mean to do, and see what he says
+  $ b2.nanni_eve = "told"
+  $ bond.nanni += 1
+  $ secrecy -= 1
+  $ standing += 1
+  He listens with his head on one side, like a man hearing a tune that he half remembers. He does not say that it is wise, or that it is foolish. When you have done he is quiet for a moment, and then he says only, "I shall be somewhere in the church. I generally am, you know. It is a very good place for a seller of thread." He looks at his spools. "I shall say a prayer, I think. I do not very often. It will be a novelty."
+* Buy a spool of gray thread, and ask for nothing
+  $ b2.nanni_eve = "bought"
+  $ do earn(-1)
+  $ secrecy += 1
+  He wraps it in a scrap of paper, and takes your coin, and gives you a very small, neat, perfectly correct bow. "It is a good color," he says. "It will not show." He does not say what it is for. It lies in your sleeve for the rest of the day, a small light round weight, like a thing that has been put there on purpose.
+<~
+
+# clerk
+## The river stair
+$ do chart("florence.bank")
+The clerk is at the top of the stair this time, sitting in the sun with the little book in {watcher.their} lap, shut, and a hand shading {watcher.their} eyes. It is a thing that {watcher.they} {watcher.have} never done, in the whole of the time that you have known {watcher.them}. {watcher.They} {watcher.have} found out that the sun is warm. It has changed the look of {watcher.their} face.
+?if b2.watcher_bond == "begun"
+  {watcher.They} do{watcher.es} not get up. {watcher.They} put{watcher.s} out a hand, and you take it, and you sit on the step beside {watcher.them}, and nobody says anything for a little. The river is high and brown with the Lent rains. It is a very ordinary thing to do, and it is not a thing that either of you has done before.
+?else
+  {watcher.They} get{watcher.s} up when {watcher.they} see{watcher.s} you, and bow{watcher.s}, correct and a little stiff, and sit{watcher.s} down again a very little further off than {watcher.they} did before. The river is high and brown with the Lent rains.
+?end
+?if b2.watcher_night == "told"
+  "I have written to Pisa," says the clerk. "I said that it was a thing which had not yet ended. I think that it was true." {watcher.They} look{watcher.s} at the water. "I have been told that I am to be at the church tomorrow. It is a great feast. The whole of the house will be there. I am to take notes."
+?else
+  "I have had no answer from Pisa," says the clerk, "and I do not know what to take that to mean. I am told to be at the church tomorrow. It is a great feast. I am to take notes."
+?end
+{watcher.They} turn{watcher.s} the little book over in {watcher.their} hands. "I have an odd feeling about it," {watcher.they} say{watcher.s}. "I have not had it before. I do not know what to put in the notes."
+:the_clerk
+* Tell {watcher.them} to stay away from the church tomorrow, and not to ask why
+  $ b2.agent_easter = "away"
+  $ bond.watcher += 1
+  $ secrecy += 1
+  "I cannot," says the clerk. It is very gentle. "It is the one thing in the world that I am not able to do. It is what I am for." {watcher.They} look{watcher.s} at you, and the sun is in {watcher.their} eyes, and there is a very small, sad smile. "But I thank you for saying it. I shall be at the back. I shall be by a door." {watcher.They} put{watcher.s} the book in {watcher.their} pocket. "I find that I should like to be by a door."
+* Tell {watcher.them} to be at the church, and to stand where you can see {watcher.them}
+  $ b2.agent_easter = "near"
+  $ bond.watcher += 2
+  $ secrecy -= 1
+  "Where?" says the clerk. You tell {watcher.them}, the second pillar on the north side, below the pulpit, where a person with a notebook would be entirely natural and not at all noticed. {watcher.They} repeat{watcher.s} it, twice, with a small frown, as a person learns a poem. "It is a very good place," {watcher.they} say{watcher.s}. "I shall write it down. I shall be able to see everything." There is a pause. "I think that I should like to be seen."
+* Say nothing, and let {watcher.them} go to the church as it was ordered
+  $ b2.agent_easter = "silent"
+  $ bond.watcher -= 2
+  $ secrecy += 2
+  The clerk looks at you for a moment longer than is comfortable. "Very well," says {watcher.they}, gently, and opens the little book, and writes something down, and shuts it. It is very quick. You do not ask what it was, and you are not told, and it is a long while before the stair ceases to have the look of a place where something has been left unsaid.
+<~
+
+# girl
+## The girl from the hill
+$ do chart("florence.rooms")
+?if b2.sire == "sired"
+  She is awake, which she should not be, in the shuttered room over the counting floor, in a white shift with the shutters drawn, gray in the face and entirely furious. She has not slept since the dusk. She has kept awake because you said that you would come, and she wishes you to know what it has cost her, and she does, at length, in a voice that is a little too high and a little too steady.
+?elif b2.sire == "later"
+  She is at the long table in the counting house, with a pen behind her ear and a smear of ink on her cheek, doing a column of figures with her lips moving. She looks up, and she is a good deal thinner than when she came, and a good deal more grown up, and there is a stubborn, bright, expectant look on her face that you have learned to dread.
+?else
+  She is at the long table in the counting house, with a pen behind her ear and a smear of ink on her cheek, doing a column of figures with her lips moving. She looks up, and she is a good deal thinner than when she came, and a good deal more grown up, and there is a stubborn, bright, wary look on her face, as of a girl who has said her say and does not mean to say it twice.
+?end
+"It is the feast," says Fiammetta. "Everybody says that it is the greatest day in the year. Benedetto says that I may go to the church with his wife." She puts down the pen. "I should like to know what I am to do. I have a feeling that I am being sent for a reason, and I do not at all like not knowing it."
+:the_girl
+* Send her home to Collesanto, in a cart, tonight, and tell her grandmother that you asked it
+  $ b2.fiammetta_easter = "home"
+  $ bond.fiammetta -= 2
+  $ bond.ginevra += 1
+  $ secrecy += 1
+  She does not argue. It is the dreadful thing. She goes quite white and quite still and says, "As you wish, Signore," in her grandmother's very voice, and picks up her pen, and finishes the column. When she has done it she blots it. "It is quite right," she says. "I should only have been in the way."
+* Take her to the church, and keep her at your elbow
+  $ b2.fiammetta_easter = "near"
+  $ bond.fiammetta += 2
+  $ secrecy -= 1
+  She looks at you, and a very slow, very radiant, very unwise smile comes up in her face. "At your elbow," she says. "All the time?" You say that it is the whole of the condition. She says that she will wear her good blue, and runs up the stairs to find it, and you stand in the counting house with the feeling of a man who has done a thing that could not very well have been done differently, and that is a mistake.
+* Tell her what is going to happen, and leave it with her to say where she should be
+  $ b2.fiammetta_easter = "chose"
+  $ bond.fiammetta += 3
+  $ humanity += 1
+  $ secrecy -= 2
+  She listens as she listened in the hall at Collesanto, with her eyes very wide and her hands in her lap. When you have finished she is quiet for a long time. "It is the first time that you have told me a thing," she says, "and not a thing about me." She gets up, and walks to the window, and stands with her back to you. "I shall go to the church," says Fiammetta, steadily. "I shall go by myself, and I shall stand where I like. I think that if I am to be one of your people I had better learn what it is."
+<~
+
+# dusk
+## The evening of the Vigil
+$ do chart("florence.prisca")
+The bells come back at noon, all together, with a great crash, and the colombina goes down the Corso on its wire, trailing sparks, and sets a cart of fireworks off at the door of the church with a noise like the end of the world. Everybody cheers. By dusk it is over, and the city has gone home to eat, and there is a great smell of roasting kid and rosemary, and lamps in every window.
+You are at the bank. It is the hour at which a counting house is at its emptiest, with the ledgers shut and the strong room locked and a candle burning at the end of the long table, and you are standing with your back to the cold hearth, and you have to decide.
+?if b2.prisca_told == "before"
+  Prisca is at the table, in her traveling cloak, with a pen in her hand and a great pile of letters in front of her, every one of them sealed. She is not leaving. She has decided that she will not. She says that it is a pity to be told before if there is nothing to be done with it.
+?elif b2.prisca_told == "half"
+  Prisca has gone to Careggi, as she said. She has left a note on the table. It says only, "I shall be at the window, in the villa, at the Elevation, and I shall know." It is signed with the initial of a person who is not used to being left in the dark.
+?else
+  Prisca is not here. She has not left a word, and her door has been locked since noon. A servant says that she has gone out in a closed litter, to see a friend. It is an odd hour for a visit.
+?end
+?if b2.prince_plan == "guard"
+  A dozen of the court are in the household livery of the Medici, in the great church, at this moment, kneeling in the dark in the right places. It is the first time in sixty years that the Peace has been broken, and it has been broken by the Prince himself.
+?elif b2.prince_plan == "forbid"
+  The court is at its prayers, as the Prince said. Not one of them has been seen in the streets since the noon.
+?end
+?if b2.company_day == "city"
+  Sixty pilgrims came in at the Porta al Prato at the ninth hour, in the straw hats of the Roman road, with their candles and their staves, and have taken every lodging in the Borgo San Lorenzo. They are being very devout and are extremely drunk.
+?end
+?if b2.ring_task == "accepted" or b2.ring_task == "bargained"
+  The gray ring is on the table. You do not remember taking it out.
+?end
+The faction knows that you know. You are certain of it. The man at the south door is not at the pillar. You have been asked to be at the one, and you could be at the other, and in a few hours the bell will be struck, and there will be one place that you are standing in, and it will have been chosen.
+:the_stand
+* Stand beside the family, in the nave, as near as you may, and make yourself the thing between them and the door
+  $ b2.easter_stand = "beside"
+  $ standing += 2
+  $ humanity += 1
+  $ secrecy -= 3
+  It is the whole of your answer. You put on your good coat, and your plainest face, and take your hat from its peg, and you feel as you did once on a hill, with a line of cold bronze in front of you, a long time ago, in another city. It is a very long time since you have known, before it began, what you were going to do.
+* Go to the south door, as the card asked, and wear the ring
+  $ b2.easter_stand = "door"
+  $ standing -= 1
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  You put the ring on the outside of the glove. It is a heavy gray thing, and it fits very well. It is the first time that you have thought of it as a key. You do not say what you mean to do with it, even to yourself, and you take the long way round to the south door, so that you may think about it in the dark.
+* Stay at the bank, with the books, and see what the morning brings
+  $ b2.easter_stand = "away"
+  $ standing -= 2
+  $ humanity -= 2
+  $ secrecy += 3
+  $ do earn(20)
+  It is a perfectly reasonable thing to do. There is a great deal of work to be done in a week in which a bank may be asked to carry the whole of a city's anxiety, and there is a good deal of money to be made by a house that has not committed itself. You sit down, and take up the first of the ledgers, and the candle burns steadily in the cold room, and you do not see a single figure.
+$ do rest()
+=> next
