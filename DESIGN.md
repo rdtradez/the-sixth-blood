@@ -49,6 +49,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Sessions 18 and 19: Book Two chapters 1 to 4
 - [x] Session 20: Book Two chapters 5 and 6
 - [x] Session 21: Book Two chapters 7 and 8
+- [x] Session 22: Book Two chapters 9 and 10
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -285,4 +286,16 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - `b2.trader_regard` is computed at the end of chapter 8 from this chapter's choices and from `b2.wool_wages`, `b2.captain` (and `b2.pazzi_paper`). Later chapters and the Velati journal should read the flag rather than recompute it.
 - Script gotcha found while building: a scratch variable that is set by more than one action of a night phase also leaks into every later `?if` that reads it, so give each fact its own `_name`.
 - `tests/book2d.test.js` plays both chapters down their branches (every earlier oath, seat, sire answer and Velati terms; both genders; hunger; each decision flag and gift; the hidden verdict in three bands). `tests/book2c.test.js` now stops chapter 6 as chapter 7 begins, and `tests/book2.test.js`, `tests/book2b.test.js` and `tests/book2c.test.js` expect eight chapters.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 22 notes (Book Two, chapters 9 and 10)
+
+- Book Two chapters 9 and 10 are built (`content/blood-and-gold/ch09.tsb` and `ch10.tsb`, chapter ids `b2c09` and `b2c10`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 10 and carries on by itself when chapter 11 is added.
+- Session 22 is built on the `session-21` branch, which is not merged to `main` yet. Merge `session-20`, then `session-21`, then `session-22`.
+- Chapter 9 opens with a scene at the river (no phase), then a night phase of three actions out of four, then the dawn; it ends with `rest()` and `=> next`. Chapter 10 is one long supper scene with optional questions, then the road home and a dawn scene with the Prince; it ends with `rest()` and `=> next`, which pauses until chapter 11 exists. Chapter 11 should read hunger, standing and secrecy as chapter 10 left them.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.clerk`, `b2.guccio`, `b2.ugolino`, `b2.agent_truth`, `b2.prisca_conspiracy`, `b2.faction`, `b2.faction_price` and `b2.prince_told`. Flags that can be skipped have an `unseen` value that the chapter sets on entry.
+- New people: Ugolino, Ser Ormanno dell'Ancisa and Monsignor Tullio Savelli. New codex entry: the old mint. New collection pieces: `old_ducat` (only if the dead clerk's purse is quietly kept) and `gray_ring` (if he joined or pretended to join). Content notes: neither chapter adds a new note.
+- Script gotcha found while building: a `?if` at the left margin between two `*` choices ends the first choice's menu, so the second choice runs after the first. Indent a conditional that belongs to a choice.
+- `florence.mercenaries` is an investment, not a map site, so `chart()` cannot take it.
+- `tests/book2e.test.js` plays both chapters down their branches (every court history, both genders, hunger, each decision flag, the optional questions, the ring and the old ducat). `tests/book2d.test.js` now stops chapter 8 as chapter 9 begins, and all the Book Two test files expect ten chapters.
 - Plans are in `SPOILERS/blood-and-gold.md`.

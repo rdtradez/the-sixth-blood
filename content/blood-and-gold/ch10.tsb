@@ -1,0 +1,218 @@
+// Book Two, Chapter 10 (session 22). The conspiracy, second act: supper at the house on the Fiesole road, and the faction's offer.
+// One long scene at the table (three optional questions, then the decision), a short reckoning on the road home, and a dawn scene where the Prince can be told or not.
+// Ends with rest() and => next. Reads b2.clerk, b2.guccio, b2.ugolino, b2.agent_truth, b2.prisca_conspiracy, b2.seat, b2.captain and b2.watcher_bond.
+// The book is incomplete, so play pauses after this chapter until chapter 11 is added.
+// Later chapters read b2.faction, b2.faction_price and b2.prince_told.
+@chapter b2c10
+@title The House With No Fire
+@book blood-and-gold
+@version 1
+
+# start
+## The Fiesole road
+$ b2.faction = "refused"
+$ b2.faction_price = "none"
+$ b2.prince_told = "silent"
+$ do chart("florence.haven")
+$ do meet("tullio")
+?if b2.agent_truth == "told"
+  The clerk is at the stable door when you take the horse out, in a dark coat, with the little book buttoned into it and no lantern. "I shall not come in," says {watcher.they}. "I shall be on the wall of the garden, and I shall have my back to the stones, and I shall count to six hundred. If you have not come out by then I shall do something that I have not yet decided on." {watcher.They} do{watcher.s} not smile. It is not a speech meant to be funny.
+?elif b2.agent_truth == "withheld"
+  There is nobody at the stable door. You had half thought that there would be. You have the odd, flat sense, which you know a little too well, of a thing that you could have had and did not ask for.
+?end
+?if b2.prisca_conspiracy == "told"
+  A note from Prisca is waiting, in her narrow upright hand, folded very small. It says: *Ormanno has the oldest licence in the book, and has never fed. Eat first. Say little. Do not drink what is poured.* It is signed with nothing at all, which in Prisca is a form of affection.
+?end
+The new moon is a thin pale scratch behind a cloud, and the road to Fiesole climbs out of the town between high walls of olive and cypress, and a smell of wet earth. There is no one else on it. There are no carts, no friars, no lovers. It is the kind of silence that is arranged.
+The house stands at the end of a long avenue of black cypresses, a plain square villa with a loggia, shuttered, and not a window lit. There is a lamp at the gate, which is the only thing in the whole place that is lit, and it is not burning oil. It is a little round glass of white light on an iron arm, with no flame in it that you can find, and it is perfectly steady.
+A servant opens the door before you have lifted your hand. He is a tall, soft, civil man in black, with the unlined face of one who has worn the same expression for a very long while. He takes your cloak. He does not look at your face, and there is something in the quality of his not looking that tells you what he is, and that he has been so for a good many years, and that he is not unhappy.
+"The Signore is expected," he says. "They are at table."
+You walk in through a hall of cold stone. It is a beautiful house, and it is wrong in a way that takes you a full minute to find. It is that there is no smell of cooking. There is no smell of woodsmoke, or tallow, or damp dog. There is no warmth coming out of any of the doors. The great hearth in the hall is swept and laid and has not, you would say, been lit in your lifetime. It has a bunch of dried lavender in it, as a woman might leave in a vase.
+-> table
+
+# table
+## The table
+The room is a long one, painted a deep green, with a ceiling of dark beams, and the table in the middle of it is laid for six with old silver, old glass and a white cloth. There is a good deal of food. It is all, you notice, for show. The bread has the dull gloss of a thing made of wax. In the cups there is wine, which is red, and which is not wine.
+Four of them are standing when you come in.
+Ser Ormanno dell'Ancisa is smaller than his letters. He is a neat dry old gentleman in a plain gown of a rich cloth, with a long clever fair face and a white fringe of hair, and the hand that he gives you is smooth and cold and as light as a leaf. He is not an old man. He was old, once, and he stopped, and that is not the same. "It is very good of you to come so far," he says, in a voice like the ink of his letter. "I did not like to ask. One does not like to ask a person who has been so very careful not to be asked."
+Beside him is Messer Guccio, in his best gown, grey to the lips, who bows to you without meeting your eye and sits down again at once, as if his knees had been unstrung. A thick handsome florid man in a cardinal's purple cap and a very fine fur is standing at the end of the table with a cup in his hand. He is the sort of person who makes a room feel as if it had been furnished for him. He is, you have no doubt, Monsignor Tullio Savelli, of the household of a great Cardinal, who has come for the baths. He gives you a smile of enormous warmth, like a man welcoming a new tenant.
+And the sixth place, at the foot of the table, is laid, and the chair is drawn out, and there is no one in it. Then, between one blink and the next, there is. A tall person in a plain gray cloak, with a hood, seated quite still, with both hands on the cloth, who has not, you are sure, come in by any door. You cannot see a face. You cannot, you find, quite look at the place where the face should be. It is not a thing that is done to you. It is more that your eyes have been given a better thing to do.
+"Our friend does not speak at supper," says Ormanno, pleasantly. "He is very shy. Please sit."
+?if b2.seat == "sword"
+  You sit with your back to the wall and the door in your eye, as a Captain should, and no one remarks on it. Monsignor Savelli raises his cup to you a quarter of an inch, as one tips a hat to a fellow soldier.
+?else
+  You sit where you are put, which is on Ormanno's right hand. It is a courtesy, and a very exact one. It is the place one gives to a guest whom one intends, in the course of the evening, to have something from.
+?end
+They eat nothing. You are not offered anything, and you are glad. Messer Guccio's hands lie on the cloth like a pair of dead fish. For a long minute nobody speaks. It is Ormanno who ends it, with the pleasant, unhurried manner of an old physician beginning a bad piece of news.
+"I will tell you what we are," he says. "It will save us both the pretence. We are persons of an opinion. It is a very old and quite respectable opinion, and it is that a Peace is a thing that has a price, and that the price has been paid, in this city, for two hundred years, by one set of persons and not another." He turns the stem of the cup. "Prince Gualtiero has kept the Peace. It is a very good Peace. It has kept a great many people alive. It has also kept a number of us at table in a room with no fire for a long time, and the Prince, who is a good man, has never once asked himself what a Peace is for."
+"It is for living in," says Monsignor Savelli, gently. "Not for waiting."
+:the_table
+* Ask what, exactly, is coming in the spring [once]
+  $ _asked_spring = 1
+  Ormanno's eyebrows lift a little. It is the first time that he has not looked entirely at ease, and it passes at once. "It is not for the table to say what a mortal city will do," he says. "It is a city of quarrels. The Pazzi have a long account with the Medici, and the Medici are not blind men, and a quarrel that has been kept warm for so long wants, in the end, only a morning." He lifts a hand. "We shall not make it. We shall not touch it. We shall merely see that no one stands in front of it." Monsignor Savelli says, very mildly, that there is a Sunday, and a church, and a great concourse, and that the Holy Father is, in the matter, entirely informed. He says it as one speaks of the weather in Rome. "It is of no concern to us what the mortals do to one another," says Ormanno. "It is of some concern to us who is permitted to prevent it."
+  ?if b2.ugolino == "talked"
+    You think of the farm at Campi, and the Sunday that a captain would not name, and you keep your face as it is.
+  ?end
+  -> :the_table
+* Ask about the gold, and the Cardinal's household [once]
+  $ _asked_gold = 1
+  Monsignor Savelli laughs, a rich, comfortable, rolling sound. "The gold is very old," he says, "and very Roman, and a great many people would be sorry to hear it spoken of. It is the Senate's own. It was put by, in a hard hour, in a certain house, by a certain family, to keep a certain thing alive." He looks at Ormanno with a flash of something like affection. "It has been kept alive. It is the reason that I am a Monsignor and my friend is a banker and you, I think, are a person of consequence. There is a great deal of it. It does not run out." He sips from the cup, and it is, you see, an act of courtesy. "We are not poor, Signore. You must not think that we have come to you for money."
+  ?if b2.guccio == "copied"
+    You have the day-book in your sleeve, in a clerk's hand, and you do not let your face say so. Messer Guccio looks at your sleeve, once, and then at the cloth, and a drop of sweat goes down his temple.
+  ?end
+  -> :the_table
+* Ask about the guest at the foot of the table [once]
+  $ _asked_third = 1
+  The hooded figure does not move. It is, you realize, the only thing in the room that does not breathe. Ormanno does not turn his head. "He is a friend of a friend," he says, with the air of a man being very candid. "He is not a Florentine, nor a Roman. He has a great fondness for a quarrel kept at the proper heat, and a great gift for it. I do not ask him how he came by it." There is a silence. Messer Guccio is looking steadily at the tablecloth. "He asked to meet you," says Ormanno. "It is rather unusual. He does not, as a rule, take any interest in the people that we have to dinner."
+  Then the figure speaks. It is not loud. It is a low, soft, courteous voice, with no accent that you can name, and a faint sweetness at the back of it, like the ink of a letter. "I read that you were a Captain," it says, "in a place that was burned. It is a thing that I do not forget." It does not say another word.
+  You find that the palms of your hands are cold.
+  -> :the_table
+* Say that you have not come to be asked, but to hear what is wanted [once]
+  $ _asked_want = 1
+  Ormanno inclines his head, as a teacher at a quick pupil. "That is the proper question, and I shall answer it plainly. We want three things. We want your bank, which is a good one, to carry the paper of the house of Pazzi, in the old coin, through the winter, without remark. We want it understood in the Purse that your seal does not trouble itself about what is not its business. And we want, when the time comes, that the Captain, or the Captain's friends, are somewhere else." He pauses. "It is very little. It is, in fact, a favor of not doing."
+  "In return," says Monsignor Savelli, "there is a second seat in the Purse of this city for the house that holds yours. There is Rome, which has a great deal of use for persons who are well thought of. There is a great deal of gold. And there is a certain safety." He smiles. "It is a thing that one does not know that one wants until one has been without it. The person who asked you a question at the Prince's table, in the winter, about who made you. He would be a good deal less curious."
+  ?if b2.sire_answer == "lied" or b2.sire_answer == "deflected"
+    So they know that, too. They know that you gave the Prince half an answer. You are very careful not to let the knowledge reach your face.
+  ?end
+  -> :the_table
+* Say yes, and mean it. The Peace is a cage, and you are tired of the bars
+  ~> joins
+  -> :the_end
+* Say yes, and mean none of it
+  ~> feigns
+  -> :the_end
+* Say no, courteously, and stand up
+  ~> refuses
+  -> :the_end
+:the_end
+-> road
+
+# joins
+## The ring
+$ b2.faction = "joined"
+$ b2.faction_price = "paid"
+$ do obtain("gray_ring")
+$ cunning_brutal += 2
+$ humanity -= 2
+$ standing += 2
+$ secrecy += 1
+$ bond.ormanno += 2
+$ do power("minor")
+"Good," says Ormanno, and for a moment the whole long clever face is alight, as if a lamp had been lit under paper. "That is very good. I did not expect it. I expected a month of delay." He lays a hand on the cloth. It is cold, and dry, and nearly weightless. "It is a thing that we do not often say. You are very welcome."
+He takes a ring from his finger, a plain heavy band of old gold, worn thin, with a gray stone the color of rain, and he holds it out to you across the table. It is a small piece of the Senate's gold, struck over, and it is warm. It is the only warm thing in the room. You take it, and it does not feel like a favor. It feels like a thing that has been waiting.
+"It is not a chain," says Monsignor Savelli, comfortably. "I should be sorry if you thought so."
+At the foot of the table, the figure in the gray cloak lifts one hand an inch from the cloth, in a motion so slight that you are not sure that you saw it. It is, you understand, a sort of nod. It is the nod of a person who has thought a great deal about what you would say, and has been proved right, and is not triumphant about it, and is very slightly sorry.
+Messer Guccio has shut his eyes.
+?if b2.watcher_bond == "begun"
+  And you think, because you cannot help it, of a narrow face in a lamp, and a stub of lead, and a pair of hands folded a little too carefully. It does not feel like a thing that you can put in a ring.
+?end
+<~
+
+# feigns
+## The cup
+$ b2.faction = "feigned"
+$ b2.faction_price = "paid"
+$ do obtain("gray_ring")
+$ cunning_brutal += 2
+$ secrecy += 2
+$ humanity -= 1
+$ bond.ormanno += 1
+You say it well. You have a good deal of practice in a face that says one thing, and you put the whole of it into your voice. You say that you are very much of their opinion. You say that you have thought of the Peace as a cage for a good while, and have been looking for someone to say it. You say it a little too fast, and then, with a great calm effort, a little more slowly.
+Ormanno watches you through the whole of it with a faint, dry, pleasant look. Monsignor Savelli is nodding. Messer Guccio has not opened his eyes. And at the foot of the table the figure in the gray cloak is entirely still, and you have the horrible sense, as of a hand laid very lightly on the back of the neck, that he is the only person at the table who is listening to the part under the words.
+"Very good," says Ormanno, at last. "It is a pleasure to meet a person who is capable of being persuaded." He takes a ring from his finger. It is a plain band of old gold with a gray stone. "I will not insult you by asking for more than you have said. I will ask only that you wear this. It is a very little thing. It will be a sign to our friends, when you meet them, that you are of the company." He holds it out. "And it will be a sign to me, when I look at your hand, that you have not changed your mind."
+It is a very neat piece of work. You take it. It is warm, and you put it on, and it fits, and the cold sweet smell of the house comes up very faintly from the metal, and you know, with perfect clearness, that you will not be able to take it off in front of any of them, and that you will be asked, soon, for a proof.
+At the foot of the table the hood turns, very slightly, toward your hand. It stays turned for a count of five.
+<~
+
+# refuses
+## The door
+$ b2.faction = "refused"
+$ b2.faction_price = "refused"
+$ humanity += 1
+$ standing += 1
+$ secrecy -= 1
+$ bond.ormanno -= 1
+You stand up. It is a good, plain, steady piece of rudeness, and you are conscious of every pair of eyes. You say that it is a very handsome offer, and a very civil house. You say that you have come to a city to live in it, and that you have found a Peace, and that it is not a good one, but it is the one that there is. You say that you will not carry their paper, and you will not look away, and you will not be somewhere else.
+There is a long silence. Monsignor Savelli sighs, comfortably, like a man at the end of a very good dinner, and sets down his cup. "I am sorry," he says. "I am very sorry. It would have been so much simpler."
+Ormanno does not rise. He folds his small cold hands on the cloth, and he looks at you with the long clever face entirely clear, and there is, in it, a courtesy so perfect that it is a kind of threat. "It is quite all right," he says. "It is a good deal better than a lie. I have heard a great many lies at this table, and they are a weariness." He tips his head. "You will find the door as you left it. You will not be followed. I should not think of it. It is only that I hope you will think, in the next few weeks, about what a Peace is for, and who will be asked, when it is done, what they did."
+The figure at the foot of the table has not moved. As you pass behind the chairs, you feel the cold of its attention go across your back like a draft, and stop, between the shoulders, and rest there until the door has shut.
+Messer Guccio, you notice, has not opened his eyes.
+<~
+
+# road
+## The road down
+$ do chart("florence.rooms")
+The air outside is raw and clean, after the house. It smells of wet leaves, and woodsmoke from a farm in the hollow, and horse, and you stand on the gravel with your face turned up for a long minute and breathe it, like a man coming up from under water. It is a great pleasure to be warm in the nose.
+?if b2.agent_truth == "told"
+  There is a small noise on the wall of the garden, the scrape of a heel. "Five hundred and eighty," says the clerk, in a low voice, from somewhere in the dark. "I had begun to compose a very bad letter." {watcher.They} come{watcher.s} down onto the road with a very little unsteadiness, and fall{watcher.s} into step beside you, and for a quarter of a mile neither of you says a word.
+  ?if b2.faction == "refused"
+    "You refused them," says {watcher.they}, at last. It is not a question. "I heard it through the shutter. I did not hear all of it. I heard enough." {watcher.They} walk{watcher.s} a few steps. "I do not know what you have bought yourself. I know what you have not sold. It is not the same thing, and it is a good deal more than most of us manage."
+  ?elif b2.faction == "joined"
+    "You took a ring," says {watcher.they}, at last. It is a very careful voice. "I saw it, through the shutter. It was on the table, and then it was not." You say nothing. {watcher.They} do{watcher.s} not press. "I shall put in the book that you sat at a table with the persons concerned. I shall put in nothing else, tonight," says {watcher.they}. "I should like to be told, one day, what it is that I have not written."
+  ?else
+    "You took a ring," says {watcher.they}, at last. "You said yes, and you had your hand flat on your knee. You are not a good liar, Signore. You are a better one than I am." There is, for the first time that night, the beginning of a smile. "It is a thing that I am prepared to find a comfort."
+  ?end
+?else
+  The road is empty. The cypresses lean in the wind. Behind you, on the hill, the white glass lamp goes on burning at the gate, quite steadily, with no flame in it.
+?end
+You ride down toward the sleeping town. There is a long pale smudge in the east over the Mugnone, and the first cock is crowing in a farmyard, in the voice of an optimist. You have a great deal to think about, and you find that you are not thinking about any of it. You are thinking about a bunch of dried lavender in a cold hearth.
+?if must_feed()
+  ~> thirst
+?end
+-> prince
+
+# thirst
+## The first light
+The shaking comes up on you, all at once, as it does after a long time among persons who do not need to eat. You pull up the horse under a wall.
+* Go to Benedetto's back room, where the cup is kept
+  $ do feed("bank")
+  It is warm, and kept clean, and nobody asks. It is a very great relief to be, for a few minutes, a thing that wants one simple thing and is given it.
+* Take a sheep from a fold by the road, and leave a coin on the gatepost
+  $ do feed("animal")
+  $ do earn(-1)
+  It is a stupid, patient, startled creature, and you leave the coin, and you are ashamed of the coin, and you leave it.
+* Pay a donor from the Borgo
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She does not talk, and you are grateful. The coin is warm in her hand when you go.
+<~
+
+# prince
+## The Prince's door
+$ do chart("florence.court")
+The Prince's house is awake, in the way of a house that has not been to bed. Messer Ottaviano is on the stair in his gown and slippers, with a candle, looking as if he had been placed there by a very exact hand. He has the little tight look of a man who has been told nothing and has guessed most of it.
+"The Prince is in the loggia," he says. "He has been there since the third hour. He asked me, at midnight, whether the Signore had gone out of the city. I said that I did not know. He said that he did, and that I was not to say so." He lowers the candle. "I should be a good deal easier in my mind, Signore, if I knew where you had been."
+You go up. The loggia is open to the dawn, and cold, and pearl gray, and the Prince is standing in it with his back to you and his hands clasped behind him, looking out over the roofs of Florence at the grey dome of the Duomo and the pale line of the hills. He is a tall old man in a plain black gown. He has stood, you think, in a good many such places, at a good many dawns. He does not turn.
+"There is a kind of silence," says Prince Gualtiero, "that a city makes, when something is about to be done to it. I have heard it three times. I heard it before the plague. I heard it when the Ciompi came up the Via dei Servi. I have been hearing it for the whole of this winter, and I have not been able to find the place that it comes from." He turns, then. It is a long, tired, intelligent face, that has been a long time in charge of itself. "You have been somewhere, Signore. I do not ask where. I ask you only to say whether it is a thing that I ought to know."
+:the_prince
+* Tell him everything: the house, the table, the ring, the coin, and the one at the foot of the table
+  $ b2.prince_told = "told"
+  $ standing += 1
+  $ secrecy -= 3
+  $ humanity += 1
+  $ bond.gualtiero += 2
+  It takes a good while. He does not interrupt. He listens as he must have listened, for two hundred years, to the news of wars and the loss of cities, with perfect attention and no change of face. Only at the name of Ormanno does a muscle move in his jaw, and only at the gray cloak does he put out a hand, very slightly, and lay it on the cold stone of the balustrade. "He has the oldest licence in the book," he says, at the end, in an odd, flat voice. "I gave it to him myself. He was a young man. He was my friend." He is silent for a time. "I thank you. I had a good many reasons not to believe it, and you have taken them away."
+  ?if b2.faction == "joined"
+    He looks, then, at your right hand, at the ring that you have not been able to hide, and for a long moment it is not a Prince who looks at you, but a very old man who has been, once again, disappointed. "I shall not ask you why," says Prince Gualtiero. "I shall ask you to remember that you told me." It is not a reproach. It is worse. It is a hope.
+  ?elif b2.faction == "feigned"
+    He looks at the ring on your right hand, and something in the long face shifts, and comes to rest. "I see," he says. "It is a dangerous thing, to wear a coat that is not one's own." He lays a hand on your shoulder. It is the first time that he has done so. "You will not be asked to do it alone. I give you my word. I have not given it often."
+  ?end
+* Tell him that there is a faction, and that you are looking into it, and say no more
+  $ b2.prince_told = "partial"
+  $ secrecy -= 1
+  $ cunning_brutal += 1
+  He considers you for some time. "It is a wise answer," he says, "and a poor one." He does not smile. "I have been a Prince for a long while, Signore, and the persons who told me a part of a thing were always, in the end, the persons who knew the rest of it. I shall not press." He turns back to the hills. "I shall remember that you said it. I shall remember it very exactly. I hope that you will do the same."
+* Tell him that you went out for air, and ask whether it is a thing that he ought to know
+  $ b2.prince_told = "silent"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  $ standing -= 1
+  He looks at you for quite a long time. There is no anger in it. There is something that you would rather was anger. "No," says Prince Gualtiero, at last, very gently. "I do not think that it is." He turns back to the hills. "I was young, once, and I had a friend who went out for air. It is a long while ago. It was a very good friend." He does not say more. You stand beside him in the loggia while the light comes up, and neither of you says anything, and the great dome goes slowly from gray to rose.
+?if b2.faction == "refused" and b2.prince_told == "silent"
+  It is a strange thing, to have said no to a house with no fire, and to have said nothing to a house with a hearth, and to have been alone, in each, with the same thing.
+?end
+The bells begin, one after another. It is the first Mass.
+$ do rest()
+=> next
