@@ -1,0 +1,277 @@
+// Book Two, Chapter 11 (session 23). The conspiracy, third act: the first Thursday, the paper in the old coin, and the people it frightens.
+// A short opening scene (no phase), then one night phase of three actions out of four (the side door and the paper, the back stair of Guccio's house, the bath house and the Roman, the river stair and the clerk), then the dawn.
+// Ends with rest() and => next. Reads b2.faction, b2.faction_price, b2.prince_told, b2.guccio, b2.agent_truth, b2.watcher_bond, b2.prisca_deal, b2.prisca_conspiracy and b2.seat.
+// The book is incomplete, so play pauses after this chapter until chapter 12 is added.
+// Later chapters read b2.paper, b2.guccio_fate, b2.savelli and b2.watcher_shield.
+@chapter b2c11
+@title Paper in the Old Coin
+@book blood-and-gold
+@version 1
+
+# start
+## The first Thursday
+$ b2.paper = "unseen"
+$ b2.guccio_fate = "unseen"
+$ b2.savelli = "unseen"
+$ b2.watcher_shield = "unseen"
+$ do chart("florence.bank")
+$ do meet("benedetto")
+Twelve days go by like a held breath. The Lenten markets fill and empty. A mule falls on the Ponte Santa Trinita and holds up the whole town for an hour, and a girl in the Borgo Pinti is married in a borrowed gown. Nothing happens, and it is a very full kind of nothing. Every person you meet seems to have been told one thing that they are not telling you.
+?if b2.faction == "joined"
+  The ring sits on your hand like a small warm animal. You have worn it in the counting house and in the street, and nobody has remarked on it, and you have begun to understand that this is because nobody who matters needs to.
+?elif b2.faction == "feigned"
+  The ring is in a drawer of your desk, under a ledger, and you have taken it out and put it on perhaps eleven times, to see how it feels to be a person that you are not. It feels, each time, a little more like a coat that has been cut to your measure.
+?else
+  You have no ring. You have a note from Prisca, a note from the Prince, and a very strong sense of a door that has been closed gently, from the other side, by a person who is in no hurry.
+?end
+?if b2.prince_told == "told"
+  The Prince's man has been in the lane behind the bank for four nights, in a brown cloak, with the air of a gardener who has been told to watch one particular rose. You have not said anything to him and he has not said anything to you, and it is, in its way, a sort of conversation.
+?elif b2.prince_told == "partial"
+  There is a man of the Bargello who is a little too often in the Via Porta Rossa. You have decided to take it as a courtesy.
+?else
+  You have seen no sign of the Prince's people, which you find that you do not like at all.
+?end
+It is the first Thursday of the month. You know it because of a day-book that you read, or a porter who talked, or a thing that Messer Guccio's face did, at the edge of a crowd, a few days ago, like a man hearing his name said in the next room. Benedetto knows it because you have told him to expect an unusual night, and he has received the information in the manner of a clerk who has resolved never again to be surprised.
+"I have put the strong box in the small cellar, Signore," he says, "and the lamp where you can reach it, and the small cup in the usual place." He clears his throat. "I have also put a chair by the side door. I do not think that you will sit in it."
+?if must_feed()
+  ~> hungry
+?end
+$ do phase("night", 3)
+-> night
+
+# hungry
+## Before the lamps
+You have put it off, with the care of a man who will pay for it. It is no use. The shaking is in your hands, very slightly, and the street seems to be a little too loud.
+* Go to Benedetto's back room, where the cup is kept
+  $ do feed("bank")
+  It is warm and clean, and nobody asks. You stand with your forehead against the cold edge of the shelf until it passes.
+* Take a goat from the yard behind the dyers
+  $ do feed("animal")
+  The goat is a sour, intelligent, unimpressed creature, and takes it very personally.
+* Pay a donor from the Borgo
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She does not talk, and you are grateful. The coin is warm in her hand when you go.
+<~
+
+# night
+## The long Thursday
+:night
+?if actions_left() == 3
+  The bell of the Duomo strikes the second hour of the night. A thin sleet is coming across the roofs from the north. Four doors in this city are going to open tonight, and you can walk through three of them.
+?elif actions_left() == 2
+  Midnight, a wet one. The gutters are running. You have been on the street long enough to see two of the Prince's brown cloaks, and one of somebody else's, which was gray, and which went round a corner very smoothly.
+?else
+  The sleet has turned to rain. It is very late, and the sky over San Miniato is the color of a bruise that is beginning to heal. There is time for one more door, if it is a short one.
+?end
+* Wait at the side door of the bank, where a box is expected [once] ?if actions_left() > 0
+  ~> paper
+  $ do act()
+* Go to the back stair behind Messer Guccio's house, where the gray visitor comes [once] ?if actions_left() > 0
+  ~> stair
+  $ do act()
+* Go to the bath house in the Via del Giglio, where the Roman is taking the waters [once] ?if actions_left() > 0
+  ~> baths
+  $ do act()
+* Go to the clerk, who has asked to be met on the river stair [once] ?if actions_left() > 0
+  ~> clerk
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# paper
+## The box at the side door
+$ do chart("florence.bank")
+It comes at the stroke of eleven, which you have found is the kind of thing that they are punctual about. There is a knock that is not a knock, merely a pause in the sound of the rain, and when Benedetto draws the bolt there is the tall, soft, civil man in black from the house on the Fiesole road, with an iron-bound box in his arms and no rain on him at all.
+He bows. He does not look at your face. "With the compliments of Ser Ormanno," he says, "and a list. It is a very small matter. It is a quantity of paper of the house of Pazzi, drawn on Rome, to be carried through the winter in the books of this house, and paid, when it is called, in the coin that is in the box." He sets it down on the flags, very gently, as one sets down a child. "The Signore will find the coin to be of an excellent weight."
+Benedetto opens it, because you nod. It is full to the lid of gold, in neat rolls, and it is all old. You have seen three coins of it before. There is a great deal more of it than there ought to be in any one place in Italy, and it smells, very faintly, of a hearth that has been swept and never lit.
+?if b2.faction == "joined"
+  "It is the first of the favors," says the servant, "of which Ser Ormanno spoke. It is a thing that is expected of a friend. It is, if I may say so, a proof."
+?elif b2.faction == "feigned"
+  "It is a small matter," says the servant, "and Ser Ormanno was sure that it would be a pleasure. He was of the opinion that a person who has put on a ring would be glad to show that it fits."
+?else
+  "Ser Ormanno was of the opinion," says the servant, with perfect courtesy, "that the Signore would not wish to be thought discourteous, after so civil a supper. He has sent it, in any case. It would be a great pity if it were refused, and it were to be said afterward that the Banca del Colle had known."
+?end
+Benedetto, at your elbow, has gone quite still. He is a man who has spent his life with money, and he is looking at that box the way a doctor looks at a rash.
+:the_paper
+* Take it in, and write it in the books like any other deposit
+  $ b2.paper = "carried"
+  $ wealth += 400
+  $ standing -= 1
+  $ secrecy += 1
+  $ humanity -= 1
+  $ cunning_brutal += 1
+  You say that the house will carry it, and the servant bows. Benedetto's pen does not tremble, which is the bravest thing that you have seen him do. The box goes down to the small cellar, and the door is shut. It is a very large amount of money. It sits there, in the dark, like a patient animal, and you find that you can feel it through two floors.
+  ?if b2.faction == "refused"
+    You have taken the gold of the people who sent you away, and you are quite aware that this is not what a person does who has refused. You tell yourself that it is a way of being able to see them. It is an excellent reason, and you notice that you are very pleased with it.
+  ?end
+* Take it in, and have Benedetto copy every coin and every name into a second book that stays in the strong room
+  $ b2.paper = "recorded"
+  $ standing += 1
+  $ secrecy -= 1
+  $ cunning_brutal += 1
+  $ bond.benedetto += 1
+  The servant watches the pen for some time. He says nothing. It is not clear whether he has seen the second book, or has simply seen that Benedetto is writing a great deal for a man who has been given a plain job, and has put it by, for later. "It is a very careful house," he says, at last, in the voice of a man making a note. Benedetto does not look up. By the end of the night he has filled eleven leaves in a small clear hand, and put them in the strong room under three keys, and he has the look of one who has never been so afraid, or so happy, in his life.
+* Refuse it, and send it back with the man who brought it
+  $ b2.paper = "refused"
+  $ humanity += 1
+  $ standing += 1
+  $ secrecy -= 1
+  $ bond.ormanno -= 1
+  The servant does not argue. He bows, a little deeper than before, and takes up the box, which is very heavy and which he lifts as if it were full of feathers. "It is a pity," he says. "It will be remembered that it was offered." He goes out into the rain, and the rain, you notice, begins at the threshold, as if it had been waiting for him.
+  Benedetto bolts the door. His hands are quite steady. He says, "That was a great deal of money, Signore," in a thoughtful voice, and then, after a pause, "I am glad."
+?if b2.prisca_deal == "partner"
+  You think of Prisca, in the strong room across the street, who has never in her life been surprised by a payment. You think of her seal, which is half yours.
+?end
+<~
+
+# stair
+## The back stair
+$ do chart("florence.court")
+The lane of the saddlers is dark, and it runs with water. The back of the house of Messer Guccio is a plain wall with a low door in it and a stair going up outside, under a little penthouse roof, with a lamp on a bracket that has gone out. There is a niche in the wall opposite, with a stone Virgin, who has seen a great deal.
+You are not the first to wait there. There is a thin shape in the niche, with its back to the plaster, and it is Messer Guccio. He is not in his good gown. He is in a plain dark cloak, with the hood up, and a small leather case under his arm, and a face like candle wax. He does not hear you until you are quite close, and then he makes a small sound and nearly goes over backward into the Virgin.
+"I have not come to be seen," says Messer Guccio. "I have come to be somewhere else. I was going to be somewhere else. I have been standing here for an hour, and I cannot do it." His voice cracks. "I cannot do it, Signore. He comes at midnight. He is coming now. I have been sixteen years in this trade, and I have never been so afraid of a man."
+?if b2.guccio == "copied"
+  He has seen the day-book go, and not said a word. He looks at your sleeve, once, quite helplessly. "You have it," he says. "I know that you have it. I have lain awake and listened for you at the window every night." He laughs, a short, horrible sound. "I do not know whether I am glad."
+?elif b2.guccio == "bribed"
+  "The porter," he says, bitterly. "I turned him off this morning. It is of no use. It is no use at all." He shuts his eyes. "He knew, you see, and I knew he knew, and I had no way to ask what he had said."
+?else
+  "You said it to my face," he says, "in front of the porter, in the lane. It was the only honest thing that anyone has said to me since the autumn."
+?end
+There is a step on the stair above you. It is a very slow, light, regular one, and it is coming down.
+:the_stair
+* Take him by the arm and go. Hide him, at the hill, where the old woman keeps a cellar with a good lock
+  $ b2.guccio_fate = "hidden"
+  $ bond.guccio += 3
+  $ humanity += 1
+  $ standing -= 1
+  $ secrecy -= 1
+  $ do send_home(15)
+  It is done in a minute, and it feels like a long one. You take him by the elbow, and he comes like a sleeper, and you are in the next lane before the shape on the stair has reached the turn. You hear it stop. You do not look round. By dawn there is a closed cart in the yard of the bank, with an honest carter and a canvas sheet, and Messer Guccio in it, curled up like a child, with his case on his chest. It will take him to Collesanto. Tommaso will have to be told some very odd things.
+  ?if b2.valerii == "distant"
+    You think, as you watch it go, that the hill has not been told very much by you, and that it is about to be told a good deal.
+  ?end
+* Take him to the Prince, tonight, and let the Peace do what it is for
+  $ b2.guccio_fate = "handed"
+  $ standing += 2
+  $ secrecy -= 2
+  $ cunning_brutal += 1
+  $ bond.gualtiero += 1
+  $ bond.guccio -= 1
+  He does not resist. He has the look of a man who has been waiting a very long time to be told what to do, and does not mind in the least who does it. You go through the sleeping streets with his hand in yours, like a child's, and Messer Ottaviano is at the door of the Prince's house in his slippers with his candle, and takes him in with a very small, sharp, approving nod. "It is better, Signore," says Ottaviano. "It is a great deal better than the other thing." He does not say what the other thing is. You do not ask.
+* Let him go. He has chosen, and it is not yours to choose for him
+  $ b2.guccio_fate = "left"
+  $ humanity += 1
+  $ secrecy += 1
+  $ bond.guccio -= 2
+  He looks at you with a kind of dazed disbelief. Then he goes, very fast, down the lane toward the river, with his case under his arm, a small dark shape that gets smaller, and does not look round. The shape on the stair comes down to the last step and stops. It is the gray figure from the foot of the table, and it does not look at you at all. It looks along the lane, where the man went, for a long time. Then it turns the hood, very slowly, toward the Virgin in her niche, and you have the clear impression that it is smiling.
+  You stand in the rain and wait for a while longer than you need to.
+?if b2.guccio_fate == "left"
+  The hooded figure goes up the stair again, without a sound. It does not go after him. You do not know why. You will think about it for a long time.
+?end
+<~
+
+# baths
+## The bath house in the Via del Giglio
+$ do chart("florence.court")
+$ do meet("tullio")
+It is a high, hot, tiled room, full of steam and the sound of dripping, and it smells of rosemary and sulfur and warm marble. It is a very peculiar place to find a vampire, and Monsignor Savelli is clearly pleased with the joke. He is in a great white sheet, in a stone chair, with a little table at his elbow with a jug on it, a book, and a plate of figs, and a sweet and enormous contentment. He cannot, you understand, taste a thing that he eats. He eats it with the air of a man doing honor to its memory.
+"My dear Signore," he says. "You have come to look at an old man in his bath." He waves a fig. "Sit. It is a good deal less wicked than it looks."
+?if b2.faction == "joined"
+  "I hear that you have been so good as to take our friend's paper. I am delighted. It is a great weight off Ormanno's mind, and I confess it is a great weight off mine." He sighs, comfortably. "One has been so afraid of being disappointed."
+?elif b2.faction == "feigned"
+  "You wear the ring only on Sundays, I hear," says the Monsignor, with a twinkle. "It is a very sensible plan. It keeps the gold from the damp."
+?else
+  "I am so sorry that we were not able to agree," says the Monsignor, as if it had been a trifle about a horse. "I hope that you will not think that I bear any grudge. I do not. It is not a thing that I have ever been able to do."
+?end
+He pours a cup of something from the jug, which is not water, and hands it to you with a great show of manners. He is very easy, and very kind, and there is no part of him that you can get hold of.
+:the_baths
+* Listen. Let him talk, and keep your face, and learn what a kind man says when he thinks that you are a friend
+  $ b2.savelli = "heard"
+  $ secrecy += 1
+  $ standing += 1
+  $ cunning_brutal += 1
+  He talks for an hour, and it is very pleasant. He talks about Rome, and a Cardinal with a gift for waiting, and a Holy Father who has a gift for forgetting, and about the way that a household of priests can hold a secret, which is by having so many that nobody can tell which is the real one. He mentions, in passing, a Sunday, and a great church, and a certain hour of the Mass, as one who has only just remembered it. He lets it go. You let it go also. You do not write it down. You are not the sort of person who needs to.
+* Pry. Ask what the Sunday is, and what the hour is, and who is to be in the church
+  $ b2.savelli = "pried"
+  $ cunning_brutal += 2
+  $ secrecy -= 1
+  $ humanity -= 1
+  It is clumsy, and you know it as you do it. The Monsignor does not stop smiling. He takes a fig, and he eats it, with enormous attention, to the last seed. "My dear Signore," he says, very softly, "I did not think that you would ask." For a moment the whole round florid face is quite empty, and there is no warmth at all, and it is like looking into a well. Then it fills again. "It is the hour of the Elevation," he says, "in the great church. It is a very beautiful moment. Everyone is looking at the same thing." He licks his thumb. "I hope that you will come. It would be so very sad to hear that you had stayed away."
+* Get up, and say that you will take no more of his hospitality, and not be asked again
+  $ b2.savelli = "cut"
+  $ humanity += 1
+  $ standing += 1
+  $ secrecy -= 1
+  $ bond.tullio -= 2
+  "Of course," says the Monsignor. He is, if anything, a shade more pleased. "Of course. You will not mind if I say that I admire it." He waves the fig. "A person who cannot be brought to dinner can still be brought to other things. It is one of the great comforts of age." He goes back to his book. You are at the door of the steam, with the cold of the street on your face, before you notice that he has not, in fact, said anything at all that you could swear to.
+<~
+
+# clerk
+## The river stair
+$ do chart("florence.rooms")
+It is below the Ponte alle Grazie, where a flight of old wet steps goes down to the water, between two mooring posts. The river is high and brown and talks to itself. The clerk is sitting on the fourth step with a hat pulled down and the little book buttoned inside a coat, and has the look of a person who has been sitting there in the rain for a good while and has not noticed.
+"I have had a letter," says {watcher.they}, without turning round. "From the house in Pisa. It is a very short letter. It asks that the pages of the last three months be sent to Rome, in the original, by the next courier, and not copied." {watcher.They} turn{watcher.s} then, and the narrow face is very white in the dark. "It is not usual. We copy. It is the whole of our art."
+There is a long pause.
+"And there is a person," says {watcher.they}, "who has been in my lodging. I do not think that he took anything. I came home, and the window was shut, and I had left it open. There was a smell." {watcher.They} wipe{watcher.s} the rain off {watcher.their} face with the back of a hand. "It was not a nice smell. It was a cold sort of sweetness. It was like the inside of a church that is never used."
+?if b2.agent_truth == "told"
+  "You told me what it was," says {watcher.they}. "I wrote none of it. I have it by heart." It is said quite simply, as a person might tell you the time.
+?else
+  "I had a thought," says {watcher.they}, "that you knew more than you said. I have been trying very hard not to hold it against you."
+?end
+?if b2.watcher_bond == "begun"
+  Your hands are very close together on the wet stone, and neither of you moves.
+?end
+:the_clerk
+* Tell the clerk to go, now, tonight, before Easter, to the house in Pisa or somewhere further, and take the book
+  $ b2.watcher_shield = "warned"
+  $ bond.watcher += 2
+  $ secrecy += 1
+  The clerk listens with a stillness that you are beginning to recognize as a kind of anger. "I have been told that before," says {watcher.they}, at last, "by my own masters, and I did not go." There is a little shaky laugh. "I shall consider it, Signore. I shall consider it very carefully. I am not good at going." {watcher.They} get{watcher.s} up, and brush{watcher.es} off {watcher.their} coat, and for a moment you think that {watcher.they} {watcher.are} going to say something more. {watcher.They} do{watcher.s} not.
+* Ask the clerk to stay, and keep writing, and put down every single thing, including this
+  $ b2.watcher_shield = "kept"
+  $ bond.watcher += 1
+  $ standing += 1
+  $ secrecy -= 1
+  "That is a hard thing to ask," says the clerk, slowly. "I think that you know it." There is a very long pause, and the river goes by. "I shall write it. I shall write it all, and I shall hide it where only one person would think to look, and I shall be very careful whom I tell. I should like you to know that I am afraid." It is said quite steadily, like a note on a margin. "It is not a reason."
+* Say that you will see to it, and nothing more, and put your coat on the clerk's shoulders
+  $ b2.watcher_shield = "silent"
+  $ bond.watcher += 1
+  $ humanity += 1
+  The clerk looks at the coat as if it were a very odd object, and then at you. There is a small smile, wavering and very brief. "That was not an answer," says {watcher.they}. "It was a very good coat, though." {watcher.They} do{watcher.s} not give it back, and you do not ask.
+<~
+
+# dawn
+## The thin gray
+$ do chart("florence.bank")
+The rain stops at the cock crow, between one breath and the next, like a thing that has been told. The street smells of wet stone and bread. A baker's boy goes by with a tray on his head, whistling.
+?if b2.paper == "carried"
+  Under the floor of the bank there is a box of gold that you could feel through two storeys, and you have the odd sense, which you do not like, of having been paid.
+?elif b2.paper == "recorded"
+  Eleven leaves in a small clear hand are in the strong room, under three keys, and you find that you are more comfortable in the house than you have been for a fortnight.
+?elif b2.paper == "refused"
+  You did not take the box, and a thing in your chest is very light for it, and a thing in your head is making a list of what it will cost.
+?end
+?if b2.guccio_fate == "hidden"
+  There is a cart on the road to Collesanto, in the first light, with a man in it who is asleep for the first time in a month.
+?elif b2.guccio_fate == "handed"
+  Somewhere in the Prince's house a very frightened man is explaining himself, with a great deal of detail, to a person who does not interrupt.
+?elif b2.guccio_fate == "left"
+  Somewhere in the city a man is running. You do not know whether he will be found.
+?end
+?if b2.savelli == "pried"
+  The Elevation. You say the word over in your head, and it does not go away.
+?end
+Prisca is at the side door with her cloak on. She has not been to bed, and she looks as she always looks, which is as though she were about to receive a delegation. She has a thin folded paper in her hand.
+?if b2.prisca_conspiracy == "told"
+  "I have had the Roman correspondents in to see me," she says. "Three of them. They called, within a few hours of each other, on three small pretexts, and each one wished to know whether the house of the Colle was well." She hands you the paper. "It is a list of the people who asked. I find that it is the first time in a great many years that anyone has taken so much trouble to ask after my health."
+?else
+  "I have had three of the Roman correspondents in to see me," she says. "I did not ask them to come. They wished to know whether the house of the Colle was well." She does not hand you the paper. She looks at it, and then at you, and then she folds it very small. "I shall tell you what it says when you tell me what you have been doing."
+?end
+The light comes over the roofs, and the bells begin. It is the first Mass.
+$ do rest()
+=> next

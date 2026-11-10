@@ -352,6 +352,38 @@
           "notes": [
             "blood"
           ]
+        },
+        {
+          "id": "b2c09",
+          "file": "blood-and-gold/ch09.tsb",
+          "title": "The Old Mint",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b2c10",
+          "file": "blood-and-gold/ch10.tsb",
+          "title": "The House With No Fire",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b2c11",
+          "file": "blood-and-gold/ch11.tsb",
+          "title": "Paper in the Old Coin",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b2c12",
+          "file": "blood-and-gold/ch12.tsb",
+          "title": "The Girl from the Hill",
+          "notes": [
+            "blood"
+          ]
         }
       ],
       "incomplete": true

@@ -49,6 +49,8 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Sessions 18 and 19: Book Two chapters 1 to 4
 - [x] Session 20: Book Two chapters 5 and 6
 - [x] Session 21: Book Two chapters 7 and 8
+- [x] Session 22: Book Two chapters 9 and 10
+- [x] Session 23: Book Two chapters 11 and 12
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -286,3 +288,27 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Script gotcha found while building: a scratch variable that is set by more than one action of a night phase also leaks into every later `?if` that reads it, so give each fact its own `_name`.
 - `tests/book2d.test.js` plays both chapters down their branches (every earlier oath, seat, sire answer and Velati terms; both genders; hunger; each decision flag and gift; the hidden verdict in three bands). `tests/book2c.test.js` now stops chapter 6 as chapter 7 begins, and `tests/book2.test.js`, `tests/book2b.test.js` and `tests/book2c.test.js` expect eight chapters.
 - Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 22 notes (Book Two, chapters 9 and 10)
+
+- Book Two chapters 9 and 10 are built (`content/blood-and-gold/ch09.tsb` and `ch10.tsb`, chapter ids `b2c09` and `b2c10`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 10 and carries on by itself when chapter 11 is added.
+- Session 22 is built on the `session-21` branch, which is not merged to `main` yet. Merge `session-20`, then `session-21`, then `session-22`.
+- Chapter 9 opens with a scene at the river (no phase), then a night phase of three actions out of four, then the dawn; it ends with `rest()` and `=> next`. Chapter 10 is one long supper scene with optional questions, then the road home and a dawn scene with the Prince; it ends with `rest()` and `=> next`, which pauses until chapter 11 exists. Chapter 11 should read hunger, standing and secrecy as chapter 10 left them.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.clerk`, `b2.guccio`, `b2.ugolino`, `b2.agent_truth`, `b2.prisca_conspiracy`, `b2.faction`, `b2.faction_price` and `b2.prince_told`. Flags that can be skipped have an `unseen` value that the chapter sets on entry.
+- New people: Ugolino, Ser Ormanno dell'Ancisa and Monsignor Tullio Savelli. New codex entry: the old mint. New collection pieces: `old_ducat` (only if the dead clerk's purse is quietly kept) and `gray_ring` (if he joined or pretended to join). Content notes: neither chapter adds a new note.
+- Script gotcha found while building: a `?if` at the left margin between two `*` choices ends the first choice's menu, so the second choice runs after the first. Indent a conditional that belongs to a choice.
+- `florence.mercenaries` is an investment, not a map site, so `chart()` cannot take it.
+- `tests/book2e.test.js` plays both chapters down their branches (every court history, both genders, hunger, each decision flag, the optional questions, the ring and the old ducat). `tests/book2d.test.js` now stops chapter 8 as chapter 9 begins, and all the Book Two test files expect ten chapters.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 23 notes (Book Two, chapters 11 and 12)
+
+- Book Two chapters 11 and 12 are built (`content/blood-and-gold/ch11.tsb` and `ch12.tsb`, chapter ids `b2c11` and `b2c12`). The manifest entry is still `"incomplete": true`, so the game pauses on "To be continued" after chapter 12 and carries on by itself when chapter 13 is added.
+- Session 23 is built on the `session-22` branch, which is not merged to `main` yet. Merge `session-20`, `session-21`, `session-22` and then `session-23`.
+- Chapter 11 is a short opening scene, then a night phase of three actions out of four, then the dawn; it ends with `rest()` and `=> next`. Chapter 12 opens with an arrival, then a day phase of three actions out of four and a dusk scene; it ends with `rest()` and `=> next`, which pauses until chapter 13 exists. Chapter 13 should read hunger, standing and secrecy as chapter 12 left them.
+- New decision flags, registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b2.paper`, `b2.guccio_fate`, `b2.savelli`, `b2.watcher_shield`, `b2.sire` and `b2.fiammetta_work`. Flags that can be skipped have an `unseen` value that the chapter sets on entry. `b2.sire` has no `unseen` value because the choice is always reached.
+- New person: Messer Guccio (`content/people.json`). No new codex entries or collection pieces. Content notes: neither chapter adds a new note.
+- Chapter 12 uses `sire()` for the first time. The option only shows when `can_sire()` is true, so later chapters should read `b2.sire` and `member()` rather than assume. Details are in `SPOILERS/`.
+- `tests/book2f.test.js` plays both chapters down their branches (every faction answer, both genders, hunger, each decision flag, every arrival of the girl from the hill, each answer to her request, and the hidden option when he cannot sire). `tests/book2e.test.js` now lets chapter 10 run on into chapter 11, and all Book Two test files expect twelve chapters.
+- Plans are in `SPOILERS/blood-and-gold.md`.
+

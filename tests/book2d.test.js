@@ -48,7 +48,7 @@ async function play(chapter, vars, wants = [], { stopAt = null, seed = 3, wake =
   game.state.sys.sleep.wake = { quick: true, place: 'haven', steward: 'bank', outcome: 'on_schedule', years: 1410, ...wake };
   for (const [k, v] of Object.entries({ wealth: 50000, ...vars })) dev.setVar(game, k, v);
   const frame = await dev.jump(game, chapter, { keep: true });
-  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c07' ? 'b2c08' : null));
+  return drive(game, frame, wants, stopAt ?? (chapter === 'b2c07' ? 'b2c08' : chapter === 'b2c08' ? 'b2c09' : null));
 }
 
 const clean = (text) => {
@@ -57,11 +57,11 @@ const clean = (text) => {
   assert.doesNotMatch(text, /\$ do /);
 };
 
-test('Book Two lists eight chapters and still pauses after the last', async () => {
+test('Book Two lists twelve chapters and still pauses after the last', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'blood-and-gold');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 8);
+  assert.equal(book.chapterCount, 12);
 });
 
 test('chapter 7 plays through to chapter 8 for every court history and the Velati terms', async () => {
@@ -163,13 +163,12 @@ test('chapter 7 records who he told at dawn', async () => {
   }
 });
 
-test('chapter 8 plays through and then pauses, because Book Two is incomplete', async () => {
+test('chapter 8 plays through and hands on to chapter 9', async () => {
   for (const told of ['prince', 'prisca', 'none']) {
     for (const wages of ['fair', 'hard', 'none']) {
       for (const captain of ['funded', 'listened', 'refused']) {
         const run = await play('b2c08', { 'b2.roll_told': told, 'b2.wool_wages': wages, 'b2.captain': captain, 'b2.loan': 'both' });
-        assert.notEqual(run.frame.wait, 'choices', JSON.stringify([told, wages, captain]));
-        assert.equal(run.game.state.chapter, 'b2c08');
+        assert.equal(run.game.state.chapter, 'b2c09');
         clean(run.text);
       }
     }
@@ -178,10 +177,10 @@ test('chapter 8 plays through and then pauses, because Book Two is incomplete', 
 
 test('chapter 8 plays through when very hungry and for a woman', async () => {
   const hungry = await play('b2c08', { hunger: 95 }, [/Take the cup/]);
-  assert.notEqual(hungry.frame.wait, 'choices');
+  assert.equal(hungry.game.state.chapter, 'b2c09');
   clean(hungry.text);
   const woman = await play('b2c08', {}, [], { hero: { ...HERO, gender: 'f' } });
-  assert.notEqual(woman.frame.wait, 'choices');
+  assert.equal(woman.game.state.chapter, 'b2c09');
   clean(woman.text);
 });
 

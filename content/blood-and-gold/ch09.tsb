@@ -1,0 +1,235 @@
+// Book Two, Chapter 9 (session 22). The conspiracy, first act: a dead clerk, an old coin, and the faction behind the quarrel.
+// A scene at the weir (no phase), then one night phase of three actions out of four (Messer Guccio's counting house, the captain's company, the clerk and the little book, Prisca's licence ledger), then the summons at dawn.
+// Ends with rest() and => next. Reads b2.seat, b2.captain, b2.prisca_asked, b2.prisca_deal, b2.watcher_bond, b2.elder_witness, b2.pazzi_paper, b2.supper, b2.licence and b2.vieri_watch.
+// The book is incomplete, so play pauses after this chapter until chapter 11 is added.
+// Later chapters read b2.clerk, b2.guccio, b2.ugolino, b2.agent_truth and b2.prisca_conspiracy.
+@chapter b2c09
+@title The Old Mint
+@book blood-and-gold
+@version 1
+
+# start
+## The weir at San Niccolo
+$ b2.clerk = "read"
+$ b2.guccio = "unseen"
+$ b2.ugolino = "unseen"
+$ b2.agent_truth = "unseen"
+$ b2.prisca_conspiracy = "unseen"
+$ do chart("florence.haven")
+$ do meet("ormanno")
+$ do discover("the_old_mint")
+?if b2.seat == "sword"
+  Messer Ottaviano's note is in the small prim hand, and it is the shortest that he has ever sent you. It says that there is a body at the weir below San Niccolo, that the Officers of the Night have been very properly asked to wait, and that the Prince would take it as a favor if the Captain would come before the water has finished with it. It does not say that the Prince is anxious. It does not need to. The ink has been blotted twice.
+?else
+  Benedetto brings it to you at the foot of the stair, at the hour of the first lamps, with his tablet held against his chest like a shield. A clerk of the Pazzi house has been taken out of the Arno at the weir below San Niccolo. He had an account with the bank, a very small one, and Ser Bartolo, who has never in his life asked a favor of anyone without first clearing his throat for a quarter of an hour, has sent a boy running to say that he would be grateful if the Signore would take a look at it before the Officers do.
+?end
+It has been nine nights since the stall in the Mercato Vecchio, and they have been quiet ones. There is a thing that a city does when it is about to do something, and it is very like the silence of a house in which a person is listening at a door.
+The weir is a low, long, white curve of water at the bottom of the town, where the river is dammed to turn the mills. It makes a steady shouting noise in the dark. There are lanterns on the bank, and four of the Officers in their tall caps, and a stout priest with his sleeves rolled, and a little crowd of the sort that gathers by water as if drawn on a string. He is in the reeds at the edge, face down, in a good brown gown, with one shoe gone. He is a young man. He has a clerk's hands, with the callus at the second finger, and a thin gold ring.
+His name was Dino Falconi. He was thirty. The priest knows him, and says so, in a flat sad voice, like a man reading from a list: that he was a clerk in the Pazzi counting house, that he had a wife in the Borgo Pinti and a child of two, and that he was seen at the Ponte alle Grazie at the second hour of the night, quite sober, with a letter in his hand.
+You go down the bank. You are not hindered. There is a thing that the mortal world does, when you walk toward a dead man in the dark with a certain look, and it is to move.
+He has no wound. He has been drowned. But there is something wrong with the water, and you know it before you know what it is: it is the smell, cold and sweet and faintly stale, of the inside of a house in which nobody has lit a fire for a very long time. It is on his collar. It is on his wrists, where the cloth has been dragged, in the shape of two hands that held him down. They were not warm hands. They did not leave a print of heat in the wool.
+There is a purse at his belt, and in it three gold ducats, of an excellent weight, of an old and unfamiliar stamp, and in his right fist, clenched so hard that the priest has not been able to open it, there is a scrap of paper. You open it. It is a list, in a neat clerk's hand, of a dozen small debts, with a name against each, and at the foot of the page, drawn very lightly with the side of a pencil, a single short gray line.
+:the_body
+* Have the body and the purse carried to the Bargello under the Prince's eye, and say who you think did it
+  $ b2.clerk = "claimed"
+  $ standing += 2
+  $ secrecy -= 2
+  $ humanity += 1
+  $ bond.ottaviano += 1
+  It is done at once, and in the open, and a good deal of the crowd goes with it. You say, in a voice that carries, that a clerk of the Pazzi house has been murdered in the dark by someone who is not afraid of the Prince's Peace. It is not, strictly, a thing that you know. It is a thing that a number of persons in Florence will now know that you said. There is a small, flat silence among the Officers, as of men who have discovered that their captain is a person. The priest crosses himself. Somewhere up the bank a woman has begun, very quietly, to cry.
+* Pay the priest to see that the widow is looked after, quietly, and keep the purse
+  $ b2.clerk = "hushed"
+  $ do obtain("old_ducat")
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ do earn(-10)
+  $ humanity += 1
+  It is a thing that is easily done. The priest has a good face, and a very small parish, and he takes the florins without a word, and without looking at them, which is to his credit. The Officers are told that the young man fell from the bridge, drunk, which the priest says that he is very much afraid is the truth. It is not. You put the three old ducats in your pocket, where they lie against your leg like three small cold coals, and the paper in your sleeve. Nobody will ask. It is the best arrangement for the widow, and you tell yourself that it is also the best for the city.
+* Look at the place again, slowly, and then say that he must have slipped
+  $ b2.clerk = "read"
+  $ cunning_brutal += 1
+  $ secrecy += 2
+  You do it very thoroughly, and in a quarter of an hour. You find the place on the bank where the reeds have been broken, and the place where two persons stood close together, and the place, a little downstream, where one of them went away across the stones without leaving a mark. You say, aloud, to the priest, that the water is deceptive in the dark. You leave the purse where it is. It is an odd feeling, to walk away from a thing so plainly meant for you, with your hands behind your back, in the sight of a great many people who are all, in their several ways, afraid.
+If the place had a voice it would be a thin one. The weir roars on. At the top of the bank, on the dark road, a figure that you cannot see very well is standing under a wall with its hands in the sleeves of a long cloak, perfectly still, and when you look straight at it there is nothing there but the wall.
+?if must_feed()
+  ~> hungry
+?end
+$ do phase("night", 3)
+-> night
+
+# hungry
+## The river and the cold
+It is the smell of the water. You have been very good about it, all evening, and the dead man's wrists are still in your mind, and your hands are shaking a very little. It is not a dignified time for it.
+* Go to Benedetto's back room, where the cup is kept
+  $ do feed("bank")
+  It is kept clean, and warm, and nobody asks. You stand with your forehead against the cold edge of the shelf until the shaking stops, and it is a great relief to be, for a few minutes, only a thing that is hungry.
+* Find an animal in the tannery yard by the river
+  $ do feed("animal")
+  A very large, old, thoughtful dog, who is not in the least afraid, and who looks at you afterward with a perfect and lasting contempt.
+* Pay a donor from the Borgo
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She does not talk, and you are grateful. The coin is warm in her hand when you go.
+<~
+
+# night
+## What the coin knows
+:night
+?if actions_left() == 3
+  The bell of the Duomo strikes the second hour of the night. The three ducats, or the memory of them, are cold in your hand. You have a number of questions and a great many places to ask them in, and none of them, you find, is very far from the river.
+?elif actions_left() == 2
+  The midnight is a dim, wet one. A drizzle has come down off the hills, and the lanterns on the bridges have each put on a small soft halo. A cat is watching you from a wall with the unwinking attention of an informer.
+?else
+  It is late. The sky over the Porta alla Croce has begun, very faintly, to pale. You have time for one more place, if it is a short one, and a feeling, which you cannot account for, that someone has been following your progress with a great deal more interest than the stones.
+?end
+* Go to the counting house of Messer Guccio, who lends to the Pazzi [once] ?if actions_left() > 0
+  ~> guccio
+  $ do act()
+* Ride out to where Ugolino's company is quartered [once] ?if actions_left() > 0
+  ~> ugolino
+  $ do act()
+* Go to the clerk, who keeps the little book and knows about coins [once] ?if actions_left() > 0
+  ~> clerk
+  $ do act()
+* Go to Prisca, who keeps the ledger of the licences of the Purse [once] ?if actions_left() > 0
+  ~> prisca
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> summons
+?end
+-> :night
+
+# guccio
+## The house behind Orsanmichele
+$ do chart("florence.court")
+The house of Messer Guccio is a narrow one, behind Orsanmichele, in the lane of the saddlers, with a well-polished door and a brass plate that says that it lends. It is the sort of house that has been taught to look like a church from the front and a vault from the back. There is a lamp in the counting room. There is a porter in a chair at the door, awake, with a large bad-tempered hound across his feet, and over the whole of it the air of a respectable and slightly frightened business that does not much care to be looked at.
+You think about it for the length of two breaths. There are three ways in, and each of them has a person at the end.
+:the_house
+* Wait until the master goes out to the Bargello, and go through the window, and copy the day-book
+  $ b2.guccio = "copied"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ humanity -= 1
+  He goes at the middle of the night, in a good cloak, with the swift worried step of a man who has been sent for. You are over the sill in a moment. It is a pleasant room, panelled, with a sea chart on one wall, and a strongbox, and a great flat day-book on a sloped desk, in a hand that is a good deal more careful than its owner. You copy the last four pages, fast, with the lamp turned low. It is a very dull piece of work, which is its great quality. There is a monthly payment of sixty florins to *O. dell'A.* for *the company in the Romagna*. There is a copy of a letter to *T. S.*, in Rome, in the household of a great prelate, acknowledging receipt of par for paper that is worth sixty. And there is, at the bottom of the third page, in smaller ink, a note that he has plainly written for himself and has not been able to help writing, which says: *for the spring after next. Do not ask for the day.*
+* Give the porter a florin and a good deal of conversation, and see what the hound thinks
+  $ b2.guccio = "bribed"
+  $ do earn(-1)
+  $ humanity += 1
+  He is a very stolid man, and he has a great deal of loyalty and a very small salary, and the one is easier to put aside than the other. He tells you, over a sweet wine from the corner stall, that his master has a visitor on the first Thursday of every month, in the middle of the night, who does not give a name and is never announced. A tall person in a plain gray cloak. A person who goes up by the back stair. The porter cannot tell you whether there was one of them or three, which troubles him, and he says so, twice. The hound does not trouble him. It lies at your feet, with its great head on its paws, and it looks at you with the perfect, sad understanding of a creature that has been told to guard a door against a thing that it has never once been able to smell.
+* Wait for him at the door, and ask him, in front of the porter, what a respectable man is doing with an old mint
+  $ b2.guccio = "faced"
+  $ standing += 1
+  $ secrecy -= 1
+  $ cunning_brutal += 1
+  He comes home from the Bargello at the third hour, walking quickly, and he sees you under the lamp at the corner and checks, like a horse. He is as white as a sheet. He does not run. He is a Guccio, and has been brought up not to. "Signore," he says, "I was at the table. You were very kind. I should be a great deal happier if you were a little less so." He looks at the porter, and at the hound, and at the shuttered windows, and he lowers his voice, until it is no more than a thread. "I am the purse. That is all that I am. I count, and I pay, and I do not ask. If you wish to know who holds the strings, do not ask the purse." He swallows. "And I should not ask it in the street."
+You go away with the faint, unpleasant sense of having touched a wire that goes a long way.
+<~
+
+# ugolino
+## The company at Campi
+They are quartered on the Prato road, at a farm beyond Campi, a long low stone steading with a barn the size of a church and a great many horses in the yard, and it is very quiet for a thing that holds three hundred lances. There are sentries, and they are good ones. They let you walk up the lane in the dark, and into the yard, and across the yard to the door, and they do not stop you, because they have been told that you will come.
+He is at a long table in a bare room, with a cup and a lantern, and a map held down at the corners with four daggers. He is cleaning a very plain sword, with a rag and a little oil, as another man might say his beads.
+?if b2.captain == "funded"
+  "The Signore's florins have bought eleven wagons of oats," says Ugolino, without looking up. "It is a thing that I do not forget. I have been in the trade for thirty years, and it is the first time that a banker has paid me on the day."
+?elif b2.captain == "listened"
+  "The Signore heard me out, at the side door," says Ugolino, without looking up, "and did not pay, and did not shout. I have thought about it. It is not a thing that bankers generally do."
+?else
+  "The Signore had me shown out of his yard," says Ugolino, without looking up. "I have thought about that, too. It was a civil way to do it."
+?end
+He lays the sword across his knees. He has the stillness of a man who has seen a great many bad days, and who has decided to be well mannered about it.
+"You will have come to ask who pays me," he says. "I shall not say. It is not that I am loyal. It is that I am a mercenary, and the whole of my reputation is that I am not a man who talks." He looks at you, for the first time, a long blank gray look. "But I will not insult you. I will not pretend that it is not a thing that you can see."
+:the_company
+* Offer him double what his friends pay, and the company's wages to the end of the year
+  $ b2.ugolino = "bought"
+  $ do earn(-30)
+  $ cunning_brutal += 1
+  He considers it for some time. He is, you see, honestly tempted. "It is a very handsome offer," says Ugolino. "I shall take the oats, and the wages, and I will thank you for them." He wipes the blade. "And I shall keep the other contract, Signore. I have never in my life been hired twice by two men who wanted the same thing, and found it a great difficulty. A man can be hired as often as he likes. He can only be killed once." He says it without malice. "But I will say this. If it should ever come to a morning when I am asked to choose, it will be a harder choice than it would have been."
+* Sit down, and share his cup, and talk to him as one soldier to another
+  $ b2.ugolino = "talked"
+  $ humanity += 1
+  $ bond.ugolino += 2
+  It is a very odd conversation, and you enjoy it a good deal. You talk about the Romagna, and bad bridges, and the price of horses, and the quality of captains. He thaws by degrees, like a river in March. It is over the second cup that he tells you, in the voice of a man who is not telling you, that the company is paid through the spring after next, and not a day longer, and that the men who pay him do not like to be asked about the day. He says that it is a Sunday. He says that it is a sort of Sunday on which a great many people will be in one place. He says no more. He gets up, and puts the sword into its sheath, and says that it has been a pleasure, and that you must not come again.
+* Put a hand on the table, and tell him that you know what the company is for, and that it will not happen
+  $ b2.ugolino = "threatened"
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  $ secrecy -= 1
+  The lantern flame leans. Three of the sentries, who have been in the doorway for some time, take one step forward. Ugolino does not move. He looks at your hand, and then at your face, and for the first time in your acquaintance he smiles, a short, grim, genuine one. "That is a good answer," he says. "It is the one that I should have given. It will not change the wages." He lifts a finger, and the sentries stop. "You may go, Signore. I shall not trouble you for the courtesy. I shall remember that you came."
+<~
+
+# clerk
+## The little book and the old gold
+$ do chart("florence.rooms")
+The lamp is lit, and the casement ajar. There is a bowl of chestnuts on the table, not yet roasted, and the clerk has been waiting for you with the particular still attention of a person who has been waiting for some time and has decided not to appear to.
+?if b2.elder_witness == "present"
+  "I heard what was said in the Via dei Pecori," says {watcher.they}. "I wrote it, and it is in the book, and it is not in the copy that goes to Rome. I should like you to know that." {watcher.They} fold{watcher.s} {watcher.their} hands. "It is the first time that I have ever held a thing back. I find that I have a very poor opinion of myself, and an excellent one of the thing."
+?end
+You put the three old ducats on the table, or the one that you have, or the drawing of it that you have made, and the clerk looks at it for a long time. {watcher.They} do not touch it.
+"It is not a ducat," says {watcher.they}. "It is a Venetian stamp on an older piece of gold. The gold has been melted and struck again, and it was not, I think, melted in Venice. There is a kind of gold that comes out of old treasuries, which is purer than the new, because it has been refined so many times by so many careful hands." {watcher.They} turn{watcher.s} it over, with a pencil. "It is a Roman gold, Signore. It is the gold of the old Senate's own chest, struck over, and the only person who could still have a chest of it is someone who has been keeping it for a very long time, in a house where there is no fire."
+?if b2.watcher_bond == "begun"
+  There is a very small silence. The lamp makes a soft sound. It is the kind of silence that two persons have when they have decided, at the same moment, not to look at each other, and have both noticed.
+?end
+:the_agent
+* Tell the clerk everything: the weir, the old gold, the supper, the company, and what you are afraid of
+  $ b2.agent_truth = "told"
+  $ bond.watcher += 3
+  $ secrecy -= 2
+  $ humanity += 1
+  It comes out slowly, and then fast. It is a great relief, in a way that you had not looked for, to say it aloud to someone who will not laugh and who has a pencil. The clerk writes none of it. The lead lies across the page, untouched, and the narrow face, in the lamp, goes through a number of expressions in order, like a person reading a very long letter. "You have told me a great deal," says {watcher.they}, at the end. "It is more than the book is entitled to. I shall keep it out of the book, for the present, and I shall keep it, otherwise, with great care." {watcher.They} look{watcher.s} at you. It is the plain, steady look of someone who has been trusted and is doing the sum of what it costs. "It is the first time that anyone has told me the truth without being asked. I do not entirely know what to do with it."
+* Give the clerk the coin, and ask for nothing but the history of the gold
+  $ b2.agent_truth = "withheld"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  $ bond.watcher -= 1
+  The clerk nods, rather slowly. There is something in it that you recognize and would prefer not to. It is the face of a person who has been given exactly what they asked for, and has understood perfectly well that it is not what was meant. "Of course," says {watcher.they}. "I shall look. It will take a day or two. I will put it in a letter." {watcher.They} pick{watcher.s} up the pencil, and put it down again, a very little too carefully. "I should only say that it is very much easier to help a person who has said what he is looking for."
+<~
+
+# prisca
+## The ledger of the licences
+$ do chart("florence.prisca")
+The strong room is cold, and still, and smells of the good clean smell of money. She has been at the long table for hours. She has the great ledger of the licences of the Purse open in front of her, with a lamp, and a very sharp pen, and a face of perfect, level composure.
+?if b2.prisca_asked == "agreed"
+  "I have been expecting you," says Prisca, "since the night that you said that you would look into it. I was beginning to think that you had forgotten." She turns the book a quarter turn, toward you. "I am glad to see that you did not."
+?else
+  "I did not ask you for this," says Prisca, without looking up. "You declined to find out who was keeping the quarrel warm. I accepted it. I find that I am not much surprised to see you." She does not turn the book. "I assume that something has changed."
+?end
+You tell her, in a few plain sentences, about the dead clerk, and the cold water, and the three old coins. She listens with her eyes on the page. At the end of it she says nothing for some time, and then she turns the book, after all, and her finger goes down the long columns, quite steadily, until it stops.
+"The Purse licenses every feeding in this city," says Prisca. "It is the only reason that the Prince has kept the Peace for two hundred years. I have never, in all that time, let a licence to a person that I could not name." Her finger rests on a line. "I let one, in the winter, to a Roman. A Monsignor Tullio Savelli, of the household of a great Cardinal, who is here for the baths. He paid a year in advance. He paid in gold." She looks up. "It was old gold. I remember thinking that it was very pretty."
+She runs her finger on, and down, and stops again. "And one, thirty years ago, to a Florentine banker called Ormanno dell'Ancisa, who has the oldest licence in the book, and who has never, to my knowledge, fed in the city at all. He pays his fee. He has never asked for a thing." She does not take her eyes from the line. "It has always seemed to me that a man who does not feed in Florence has some other business here."
+:the_ledger
+* Tell her all that you know, and ask what she would do
+  $ b2.prisca_conspiracy = "told"
+  $ bond.prisca += 2
+  $ secrecy -= 1
+  $ humanity += 1
+  She hears it with the quiet, unflurried courtesy of a person for whom nothing has ever been a surprise and who has long ago stopped expecting it. When you have finished she folds her hands. "I shall tell you what I would do," says Prisca. "I should do nothing, for a month, and watch where the money goes." She looks at you. "But you are not a banker. You are a soldier who has learned to count. Do what you can bear." Then, very low, as if it cost her something: "I should be glad if you would tell me before you do it, and not after."
+  ?if b2.prisca_deal == "partner"
+    There is a pause. "We are one house," says Prisca. "It is not a figure of speech. If this goes wrong it goes wrong for both seals, and I shall not be spared the account." She lifts her eyes. "I should like to be told."
+  ?end
+* Take the names, and say nothing of what you mean to do with them
+  $ b2.prisca_conspiracy = "kept"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  $ bond.prisca -= 1
+  She does not protest. She closes the book, very gently, on the page, and rests her hand on it for a moment. There is no reproach in her face, only a very old patience. "It is a sensible habit," says Prisca. "I have it myself. I hope you will not find that it grows." She looks at the lamp. "A person who tells no one anything is a person who is very much alone, my dear. I have been one. I do not recommend it."
+<~
+
+# summons
+## The gray wax
+$ do chart("florence.bank")
+The dawn comes up pale and wet, like a thing washed. You walk home by the river and the wall, and the bells are beginning to speak, one after another, from the towers, in a rough, kind, uneven chorus, and the first of the bakers is lifting his shutter.
+There is a letter on the sill of the side door. It has not been left by any hand that you know. It is a small stiff square of good paper, folded very exactly, and sealed with a blob of plain gray wax that has been pressed with a thumb and no seal at all. It is in a smooth, cultivated, rather old-fashioned hand, with a faint sweetness to the ink.
+?if b2.clerk == "claimed"
+  It begins by saying that it was very handsome of the Signore to take the poor young man to the Bargello, and that it is a good thing, in a city, when a person's death is properly attended.
+?elif b2.clerk == "hushed"
+  It begins by saying that it was very handsome of the Signore to think of the widow, and that a small kindness, quietly done, is the best sort.
+?else
+  It begins by saying that the Signore has an eye, and that there are few in Florence who would have noticed a thing at the weir that was not meant to be noticed.
+?end
+It goes on, in the same easy hand. It says that Ser Ormanno dell'Ancisa presents his compliments, and would take it as a kindness if the Signore would sup at his house, on the road to Fiesole, on the night of the new moon. It says that a small number of friends will be there. It says that they have heard a great deal about the Signore, and have, for some time, had the very greatest curiosity. It ends, without a flourish, on a single line, which is a little more carefully written than the rest.
+*We should be sorry to be the only persons in Florence who did not know you.*
+You stand in the gray light, in the doorway, with the paper in your hand. There is a smell on it, so faint that you would not notice it if you had not been looking for it for the whole of the night. It is cold, and sweet, and a little stale. It is the inside of a house in which no one has lit a fire for a very long time.
+$ do rest()
+=> next

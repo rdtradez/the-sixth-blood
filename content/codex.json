@@ -265,6 +265,12 @@
       "book": "blood-and-gold",
       "person": "nanni",
       "text": "A seller of thread in the Mercato Vecchio who has been a small customer of the Merchant house for longer than the books go back. He does not look at you quite the way other people do, and you cannot afterward say why."
+    },
+    "the_old_mint": {
+      "category": "lore",
+      "title": "The old mint",
+      "book": "blood-and-gold",
+      "text": "Gold that has been refined so many times by so many careful hands that it is purer than anything newly struck. Somebody in Florence is paying for a great deal with it, and the coin smells of a house in which no fire has been lit for a very long time."
     }
   }
 }

@@ -9,6 +9,8 @@
     "god_relic": { "book": "relics-lost-god", "name": "A relic of the god" },
     "great_church_tessera": { "book": "burning-city", "name": "A gold tessera from the Great Church" },
     "remembrancers_tally": { "book": "blood-and-gold", "name": "The Remembrancer's tally" },
-    "merchants_token": { "book": "blood-and-gold", "name": "A copper balance" }
+    "merchants_token": { "book": "blood-and-gold", "name": "A copper balance" },
+    "old_ducat": { "book": "blood-and-gold", "name": "An old gold ducat" },
+    "gray_ring": { "book": "blood-and-gold", "name": "A thin gold ring with a rain-gray stone" }
   }
 }

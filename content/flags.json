@@ -1863,6 +1863,181 @@
       "major": true,
       "default": "refused",
       "note": "Chapter 8: whether he took the thread seller's copper token of the Merchant house"
+    },
+    "b2.clerk": {
+      "kind": "enum",
+      "values": [
+        "claimed",
+        "hushed",
+        "read"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "hushed",
+      "note": "Chapter 9: how he handled the drowned Pazzi clerk at the weir (took it to the Bargello openly, hushed it, or read the scene and kept quiet)"
+    },
+    "b2.guccio": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "copied",
+        "bribed",
+        "faced"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "bribed",
+      "note": "Chapter 9: how he came at Messer Guccio's counting house"
+    },
+    "b2.ugolino": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "bought",
+        "talked",
+        "threatened"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "talked",
+      "note": "Chapter 9: how he dealt with the captain of the company in the Romagna"
+    },
+    "b2.agent_truth": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "told",
+        "withheld"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "told",
+      "note": "Chapter 9: whether he told the Velati agent the whole truth about the quarrel"
+    },
+    "b2.prisca_conspiracy": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "told",
+        "kept"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "told",
+      "note": "Chapter 9: whether he shared what he found with Prisca"
+    },
+    "b2.faction": {
+      "kind": "enum",
+      "values": [
+        "joined",
+        "feigned",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "feigned",
+      "note": "Chapter 10: his answer to the faction of old vampires who want the Peace ended (joined them, pretended to, or refused)"
+    },
+    "b2.faction_price": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "paid",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "paid",
+      "note": "Chapter 10: whether he took the faction's ring and so owes them"
+    },
+    "b2.prince_told": {
+      "kind": "enum",
+      "values": [
+        "told",
+        "partial",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "told",
+      "note": "Chapter 10: how much he told Prince Gualtiero about the supper on the Fiesole road"
+    },
+    "b2.paper": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "carried",
+        "recorded",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "recorded",
+      "note": "Chapter 11: what he did with the box of Pazzi paper in the old coin at the side door"
+    },
+    "b2.guccio_fate": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "hidden",
+        "handed",
+        "left"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "handed",
+      "note": "Chapter 11: what he did when Messer Guccio tried to run"
+    },
+    "b2.savelli": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "heard",
+        "pried",
+        "cut"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "heard",
+      "note": "Chapter 11: how he handled the Roman prelate at the bath house"
+    },
+    "b2.watcher_shield": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "warned",
+        "kept",
+        "silent"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 11: what he told the Velati agent on the river stair"
+    },
+    "b2.sire": {
+      "kind": "enum",
+      "values": [
+        "sired",
+        "later",
+        "refused"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 12: his answer when Fiammetta asked for the Dark Gift"
+    },
+    "b2.fiammetta_work": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "ledgers",
+        "errands",
+        "kept"
+      ],
+      "book": "blood-and-gold",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 12: how Fiammetta was set to work at the bank"
     }
   }
 }

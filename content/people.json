@@ -293,6 +293,30 @@
       "name": "Nanni",
       "title": "A seller of thread",
       "bio": "A small bent brown old man with a handcart of colored hanks and indigo on the ends of his fingers. He has dealt with the Merchant house in a small way for as long as anyone has kept books. Nobody can say afterward what color his eyes were."
+    },
+    "ugolino": {
+      "gender": "m",
+      "name": "Ugolino",
+      "title": "Captain's agent of a free company",
+      "bio": "Lean and brown, about fifty, in a gray cloak, with a long plain sword that he cleans as another man tells his beads. He keeps his word and his counsel."
+    },
+    "ormanno": {
+      "gender": "m",
+      "name": "Ser Ormanno dell'Ancisa",
+      "title": "A Florentine banker with the oldest licence in the Purse's book",
+      "bio": "Known by his letters only. His hand is smooth and old fashioned and his paper smells faintly of a house with no fire."
+    },
+    "tullio": {
+      "gender": "m",
+      "name": "Monsignor Tullio Savelli",
+      "title": "A Roman prelate, here for the baths",
+      "bio": "Thick, handsome and florid, in a cardinal's purple cap and good fur. He makes a room feel as though it had been furnished for him, and he is very kind about it."
+    },
+    "guccio": {
+      "gender": "m",
+      "name": "Messer Guccio",
+      "title": "A lender to the Pazzi",
+      "bio": "A thick, careful moneylender behind Orsanmichele, who has taken a very large sum for a very small favor and has not slept since."
     }
   }
 }

@@ -1,0 +1,228 @@
+// Book Two, Chapter 12 (session 23). The girl from the hill arrives in Florence, and the faction's courtesy finds her.
+// A day phase of three actions out of four (the counting floor, the city by day, Prisca, the Bargello), then a dusk scene where the choice about the Dark Gift is made.
+// Ends with rest() and => next. Reads b2.fiammetta, b2.valerii, b2.prisca_deal, b2.faction, b2.paper, b2.guccio_fate, b2.watcher_bond and can_sire().
+// The book is incomplete, so play pauses after this chapter until chapter 13 is added.
+// Later chapters read b2.sire and b2.fiammetta_work.
+@chapter b2c12
+@title The Girl from the Hill
+@book blood-and-gold
+@version 1
+
+# start
+## A cart at the Porta San Frediano
+$ b2.sire = "refused"
+$ b2.fiammetta_work = "unseen"
+$ do chart("florence.bank")
+$ do meet("fiammetta")
+?if b2.fiammetta == "refused"
+  She comes without leave. Benedetto brings the news at the second hour, in a low voice, with a letter. It is from Ginevra, in her upright, fierce hand, and it says that the girl took the mule and a loaf in the night, that Tommaso has gone after her and not caught her, and that the Signore will oblige her grandmother by not sending her back, since she would only come again.
+  She is on the stair of the bank in a brown gown that is a little too short, with mud to the knee and a bundle on her back, quite white with tiredness and quite determined. "I know that you said no," says Fiammetta. "I have thought about it for eleven days. I do not think that you meant it. I think that you were being kind."
+?elif b2.fiammetta == "promised"
+  She comes in the carrier's cart, on a Tuesday, with a trunk that is a good deal too small, and a letter from Ginevra, which is not a long one. It says that the house of Valerio has kept its word, and that the Signore is to keep his.
+  She is standing on the step of the bank in her best gown, which is a green one, and which was a good one, and which has been turned twice. She does not say anything. She looks at the door as if it were the gate of a town in a story.
+?else
+  She comes with her father. Tommaso has not been to Florence in nine years, and he stands in the lane with his hat in his hands, looking at the shutters, as a man looks at a very large animal that he has been told is tame. The girl is already on the step, in a clean gown, with her hair up, and a hard little book of accounts under her arm that she has kept, she says, for two years.
+  "I am sorry, Signore," says Tommaso, very stiffly. "She would not be talked out of it. I have done what I could."
+?end
+She is seventeen. She has the Valerio chin, and the steady eyes, and a way of looking at a room as if she were learning it. She has never seen a street with a roof over it, or a river with so many bridges. She does not say a word about any of it. It is only that she looks, and her face, which was shut, begins to come open like a book at a place that it has been before.
+?if must_feed()
+  ~> hungry
+?end
+$ do phase("day", 3)
+-> day
+
+# hungry
+## Before the doors
+You had meant to see to it earlier, and the girl's arrival has driven it out of your head. The hunger comes back all at once, very politely, like a person who has been waiting in the hall.
+* Go to Benedetto's back room, where the cup is kept
+  $ do feed("bank")
+  It is warm and clean and nobody asks. You are very careful that no one sees you go.
+* Take a sheep from a fold beyond the wall, and leave a coin on the gatepost
+  $ do feed("animal")
+  $ do earn(-1)
+  It is a stupid, patient creature, and you leave the coin, and you are ashamed of the coin.
+* Pay a donor from the Borgo
+  $ do feed("donor")
+  $ do earn(-4)
+  $ humanity -= 1
+  She does not talk, and you are grateful. The coin is warm in her hand when you go.
+<~
+
+# day
+## What to do with a clever girl
+:day
+?if actions_left() == 3
+  It is the third hour, and the whole street is awake, and a girl who has never been to Florence is standing in the middle of it with her bundle. There is a great deal to do, and you have the daylight to do it in.
+?elif actions_left() == 2
+  Noon, and the great bell of the Signoria is going across the roofs. The shadows have shortened under the awnings. The sun is hot on your neck, and you find, as you always do, that it is a very large and astonishing pleasure.
+?else
+  The ninth hour. The light has gone gold. There is time for one more thing, and then the dusk, and you have a feeling that the dusk is going to want you.
+?end
+* Take her to the counting floor, and let Benedetto find out what she can do [once] ?if actions_left() > 0
+  ~> floor
+  $ do act()
+* Walk her through the city by daylight [once] ?if actions_left() > 0
+  ~> city
+  $ do act()
+* Take her to Prisca [once] ?if actions_left() > 0
+  ~> prisca
+  $ do act()
+* Go to the Bargello, where the Prince's man has asked to see you [once] ?if actions_left() > 0
+  ~> bargello
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dusk
+?end
+-> :day
+
+# floor
+## The counting floor
+$ do chart("florence.bank")
+Benedetto receives her with the cautious courtesy of a man who has been handed a very clever cat. He gives her a stool, and a ledger, and a pen, and says that she is to copy a page, as a thing that he does for everybody, and goes away to see to some small matter in the back, and comes back in a quarter of an hour. He picks up the page. He reads it. He reads it again. He takes off his spectacles and cleans them on his sleeve. "She has corrected my arithmetic," he says, to nobody in particular.
+:the_floor
+* Let her keep the ledgers of the house, with the one thing that she must not do, which is write anything about the box in the cellar
+  $ b2.fiammetta_work = "ledgers"
+  $ bond.fiammetta += 2
+  $ bond.benedetto += 1
+  $ standing += 1
+  She goes into the books like a swimmer into the sea. By the end of the afternoon she has found two small errors of long standing, and one large one that is not an error. She brings it to you, with a perfectly white face, and sets it down very carefully, and says nothing, and you look at it and know that she has seen the thing in the cellar. She has not asked. It is the first time that you have been quite sure that she is going to be dangerous.
+* Give her errands about the town, with a purse and a boy, and keep her out of the books
+  $ b2.fiammetta_work = "errands"
+  $ bond.fiammetta += 1
+  $ secrecy += 1
+  She is quicker than the boy, and she is back in an hour, with the change counted twice and a small, pleased, sharp look. She has not been in the strong room. She has been in a good many of the streets between here and the Mercato, and she has noticed, at every one of them, which of the doors are kept by someone watching. She mentions it, in passing, over the bread.
+* Have Benedetto keep her at his own elbow, and teach her slowly
+  $ b2.fiammetta_work = "kept"
+  $ bond.fiammetta += 1
+  $ bond.benedetto += 2
+  Benedetto accepts her as a gardener accepts a seedling that he did not plant. By dusk she is perched on the second stool at the counting table, with her hair coming down, adding a column of florins in her head, and he is saying "No, no, again," in a voice of the most perfect and profound contentment.
+<~
+
+# city
+## Florence by day
+$ do chart("florence.court")
+It is a perfect day. You walk her through it, and it is a good deal harder than you expected, because it is a little like seeing it for the first time yourself. You take her up the Via dei Servi, where the great pale dome of the Duomo hangs over the roofs at the end of the street like a held breath, and she stops dead and does not move for a full minute. You take her across the Ponte Vecchio, where the butchers are shouting, and into the Mercato Nuovo, where the bankers sit at their tables in the open air and do the business of half the world with a pen.
+She does not say very much. She asks questions, a great many of them, in the same low rapid voice as in the passage at Collesanto, and she listens to the answers, and when she has understood one she goes quiet for a while. At the foot of the Campanile she says: "You are in the sun."
+It is not a question. It has been said very gently, as one says a thing that one has been carrying for a long time.
+:the_city
+* Tell her that it is a gift, and no more
+  $ bond.fiammetta += 1
+  $ secrecy += 1
+  "Yes," she says. "I thought that it might be." She looks at the pale dome. "My grandmother says that the saint walks by day on the feast, in the procession, and that it is a thing that only a few people ever see. She says that it is a miracle." She turns her head. "I do not think that she has been quite right about the saint."
+* Tell her what it is, and what it costs, and what it is not
+  $ bond.fiammetta += 3
+  $ secrecy -= 2
+  $ humanity += 1
+  You tell her a good deal. It is a surprise to find that you can. She listens, with her hands in her sleeves, and she does not interrupt, and at the end she is a little pale. "Thank you," she says. "I did not think that you would." She looks at the pale dome again. "It is a good deal worse than a saint," she says, thoughtfully, "and a good deal better than I thought."
+* Turn it into a joke, and buy her a sweet cake in the market
+  $ bond.fiammetta += 1
+  $ humanity += 1
+  She takes the cake with a certain dignity, and eats it with a great deal less. She does not press. She is very young, and has not yet learned that it is a form of cruelty to be told, with a smile, that one is not to ask. She has, however, learned it very well indeed, and she files it, and says nothing, and you know that she has filed it.
+<~
+
+# prisca
+## The strong room, by day
+$ do chart("florence.prisca")
+Prisca receives her in the long room above the counting floor, standing, with her hands folded, in her plain dark gown. She does not smile. She looks at the girl for a good while, from the plain brown hem to the straight line of the shoulders. It is a look that is a good deal like an auditor's. The girl bears it, with her chin up, and her eyes level, and her hands steady on the strap of her bundle, and you have never been so proud of anybody.
+"You are a Valerio," says Prisca, at last.
+"Yes, madonna."
+"I knew one, a long time ago, in another city," says Prisca. "She had that chin. She was very much too brave." She turns. It is the nearest thing to a gentleness that you have seen in her. "I shall give you a piece of advice, child, and you will not like it. Do not be indispensable. It is the commonest way to be killed."
+?if b2.prisca_deal == "partner"
+  She says, to you, in a very low voice, when the girl has gone down: "She is one of ours, in the book, or she will be. I should like to be told what you intend to do with her. I think that you have not yet decided."
+?elif b2.prisca_deal == "rival"
+  She says, to you, in a very low voice, when the girl has gone down: "I do not poach. But I should like it known that if she is ever without a roof, she has one." It is a most carefully neutral sentence, and it costs her, you see, a great deal.
+?else
+  She says, to you, in a very low voice, when the girl has gone down: "She is not your house's, nor mine. I should like to keep it so." It is a plain thing to say, and it is a very odd one, and you think about it for some time.
+?end
+$ bond.prisca += 1
+<~
+
+# bargello
+## The Prince's man
+$ do chart("florence.court")
+Messer Ottaviano receives you in the little room behind the great hall, with the tall windows and the plain deal table. He has the look of a man who has been up for a long time on a great deal of cold coffee, and who is very pleased to see you.
+?if b2.guccio_fate == "handed"
+  "Messer Guccio is well," he says. "He is in a good room, with a lock, and he has told the Prince a great many things in the last two days. They are, I am sorry to say, very dull ones. It is the way of the truth." He sniffs. "The Prince is in a very odd humor."
+?elif b2.guccio_fate == "hidden"
+  "Messer Guccio is not to be found," he says, with immense blandness. "It is a pity. The Prince had a number of questions. He is, I think, very much inclined to believe that the Signore has an idea where the man is." He looks at the ceiling. "He has not asked."
+?elif b2.guccio_fate == "left"
+  "Messer Guccio was found," says Ottaviano, in a very careful voice, "in the Arno, below San Niccolo, at the weir. It was a very quiet death." He does not say what he thinks of the person who allowed it. He does not need to.
+?else
+  "It is a quiet week," says Ottaviano. "I do not trust it in the least."
+?end
+He pours you a cup of cold wine and does not drink it. "I am to say, Signore," he says, "that the Prince would take it as a kindness if the young lady from the hill were to be told, in good time, that the city is a more dangerous place than it looks. I do not know why he says it. He has not been in a very good mood since the first Thursday."
+?if b2.paper == "carried"
+  He does not mention the bank. It is a very pointed silence.
+?elif b2.paper == "recorded"
+  "And he has asked me to say that eleven leaves in a small clear hand would be a great comfort to him," says Ottaviano, in a voice of the most perfect neutrality, "if they were ever to be read."
+?end
+<~
+
+# dusk
+## The gray ribbon
+$ do chart("florence.bank")
+The light goes. It goes quite slowly, from gold to rose, and from rose to the color of the inside of a shell. The shutters are being drawn up the street, one by one. The girl has gone up to the little room over the counting floor that Benedetto has had made up for her, and you are in the lane behind the bank, with a lantern, looking at nothing.
+There is a step in the lane.
+It is the tall, soft, civil man in black. He has no rain on him this time. He has a small parcel in his hand, tied with a gray ribbon. He bows, and does not look at your face.
+"With the compliments of Ser Ormanno," he says, "for the young lady who has come from the hill. It is a very little thing. It is a gift. He was told that she had come, and he was very much pleased." He holds it out. "He hopes that she will be very happy in Florence, and that it will not be necessary for any one of her family to be unhappy, on the hill, in the dark, in a cellar."
+You take it, because there is nothing else to do. It is a small neat box. In it, on a bed of gray silk, is a tiny, exquisite, very old key.
+It is a key to the shrine on the hill. It is a key to a lock that has not been changed since the cellar was dug.
+He bows again. He goes. It is perfectly quiet, and you stand in the lane with a lantern and the key, and then you hear, at the end of the lane, a quick light step on the stair, and a voice, very low and very quick. "I saw him from the window," says Fiammetta. "I know who he was. I am not stupid."
+She is standing in the door with her arms wrapped round herself. She has taken off her good gown and is in a plain wool wrapper, and her hair is down. She is very white, and her eyes are quite dry, and she does not look in the least like a child.
+"It is a threat," she says. "It is a threat to my grandmother. And it is because of me." She takes a breath. "You said once that I was wanted on the hill. You were right. I am wanted by everyone, and the people who want me are not the sort who ask. I should like to be a person who cannot be had."
+There is a silence in the lane. It is a very long one. You know quite well what it is that she is going to say, and you find that you are not in the least ready.
+"Make me what you are," says Fiammetta. "I have thought about it. I have been thinking about it since the saint."
+:the_asking
+* Do it. She is asking, clearly and with her eyes open, and the world is not going to be kinder ?if can_sire()
+  ~> sired
+  -> :the_end
+* Tell her that you will, when the spring is over, and that she is to be careful until then
+  ~> later
+  -> :the_end
+* Tell her no, and tell her why, and promise her a house that will not fall
+  ~> refused
+  -> :the_end
+:the_end
+$ do rest()
+=> next
+
+# sired
+## The Dark Gift
+$ b2.sire = "sired"
+$ do sire("fiammetta", "fledgling of the hill")
+$ bond.fiammetta += 3
+$ humanity -= 3
+$ cunning_brutal += 1
+$ secrecy -= 2
+It is not what you expected. It is very quiet, and a good deal slower. You take her up the stair to the little room, and you shut the door, and she lies on the narrow bed in her wool wrapper with her hands folded on her breast, like a saint carved on a tomb. She is perfectly calm. She says, once, in a small level voice, that she is not afraid, and you know that it is not true, and you know that it is the bravest thing that anyone has said in your hearing.
+You tell her what it will be. It takes a long time. You tell her about the thirst, and the dark, and the long, long afterward, and you tell her that she will not be able to go home, not as she was. You tell her about Rome, and a girl in a courtyard with a chin like hers. She listens. At the end of it she says "I know," and turns her wrist to the lamp.
+It is done at the third hour of the night. It is very simple and very terrible, and it is over before you understand that it has begun. She opens her eyes, a little after, and they are a very different color. She does not say anything for some time. She puts her hand to her mouth and takes it away, and looks at it, and begins, in a small, shaking, astonished voice, to laugh.
+?if b2.watcher_bond == "begun"
+  The clerk will have to be told. It will be in the book. You have a very clear picture of a narrow face over a page, and a stub of lead, and a hand that does not write.
+?end
+You sit by the bed until dawn. It is the longest night of your life. Her hand is cold in yours, and then it is not.
+<~
+
+# later
+## A promise
+$ b2.sire = "later"
+$ bond.fiammetta += 1
+$ humanity += 1
+She nods slowly. There is a long pause, and the lantern flickers. "That is a bargain," says Fiammetta, at last, in a flat little voice. "I shall hold you to it." She looks at the key in the box. "Is it a good bargain, for you?"
+You say that you do not know.
+She nods again, and it is something very like respect. "Then it is a good bargain," she says, and goes in, and shuts the door with a very little click, like a lock. You stand in the lane for a long time with the key. In the morning you send a rider to Collesanto with a note for Ginevra, and a new lock for the shrine, and a very careful account of what has been said.
+<~
+
+# refused
+## A house that will not fall
+$ b2.sire = "refused"
+$ bond.fiammetta -= 1
+$ humanity += 2
+$ standing += 1
+You tell her. You tell her it is not a thing that one can take back, and that it will cost her the sun, and her grandmother's table, and the long slow ordinary years of a mortal life, and that she is seventeen. You say it as kindly as you can. You say it badly. She listens with her chin up, and her eyes very bright, and her hands shut, and she does not cry.
+"It is not your right," she says, at last, quite softly. "It is mine. I should like you to remember that I asked."
+"I shall," you say.
+"I shall ask again," says Fiammetta. She goes in, and shuts the door. It does not slam. It is, in its way, a good deal worse. You stand in the lane, with the key in your hand, and a great, calm, miserable certainty that you have done the right thing, and that it will not be thanked.
+You send a rider to Collesanto in the morning with a new lock for the shrine, and a very careful note.
+<~
