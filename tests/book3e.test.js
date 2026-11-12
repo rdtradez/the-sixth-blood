@@ -153,9 +153,9 @@ test('chapter 10 plays through for every state of the book so far', async () => 
     for (const exodus of ['sent', 'stood', 'told']) {
       for (const hunger of [10, 90]) {
         for (const roll of ['read', 'left']) {
-          const run = await play('b3c10', {}, { ...START, hunger, 'b3.hunt': hunt, 'b3.exodus': exodus, 'b3.roll': roll, 'b3.weapon': 'accepted', 'b3.aubry': 'drilled', 'b3.grain': 'relieved' }, []);
+          const run = await play('b3c10', {}, { ...START, hunger, 'b3.hunt': hunt, 'b3.exodus': exodus, 'b3.roll': roll, 'b3.weapon': 'accepted', 'b3.aubry': 'drilled', 'b3.grain': 'relieved' }, [], { stopAt: 'b3c11' });
           clean(run);
-          assert.equal(run.game.state.chapter, 'b3c10', `${hunt} ${exodus} ${hunger} ${roll}`);
+          assert.equal(run.game.state.chapter, 'b3c11', `${hunt} ${exodus} ${hunger} ${roll}`);
           assert.match(run.text, /baker's boy/);
         }
       }
@@ -166,21 +166,21 @@ test('chapter 10 plays through for every state of the book so far', async () => 
 test('chapter 10 takes each choice at Versailles, on the road, in the cellar and in the faubourg', async () => {
   for (const weapon of ['accepted', 'refused']) {
     for (const [key, re] of [['door', /Hold the door/], ['women', /March back with the women/], ['watched', /Stay on the terrace/]]) {
-      const run = await play('b3c10', {}, { ...START, 'b3.weapon': weapon }, via(/post horse for Versailles/, re));
+      const run = await play('b3c10', {}, { ...START, 'b3.weapon': weapon }, via(/post horse for Versailles/, re), { stopAt: 'b3c11' });
       assert.equal(run.vars['b3.versailles'], key, `${weapon} ${key}`);
       clean(run);
     }
   }
   for (const roll of ['read', 'left']) {
     for (const [key, re] of [['followed', /Follow it, and see/], ['taken', /Stop the chaise/], ['let', /Let it go by/]]) {
-      const run = await play('b3c10', {}, { ...START, 'b3.roll': roll }, via(/Avignon courier will come in/, re));
+      const run = await play('b3c10', {}, { ...START, 'b3.roll': roll }, via(/Avignon courier will come in/, re), { stopAt: 'b3c11' });
       assert.equal(run.vars['b3.courier'], key, `${roll} ${key}`);
       clean(run);
     }
   }
   for (const [key, re] of [['read', /Read what the hand/], ['broke', /Break the slate/], ['left', /Close the grille/]]) {
     for (const courier of ['followed', 'taken', 'let']) {
-      const run = await play('b3c10', {}, { ...START, 'b3.courier': courier }, via(/Answer Ottaviano's note/, re));
+      const run = await play('b3c10', {}, { ...START, 'b3.courier': courier }, via(/Answer Ottaviano's note/, re), { stopAt: 'b3c11' });
       assert.equal(run.vars['b3.vault'], key, `${courier} ${key}`);
       clean(run);
     }
@@ -188,7 +188,7 @@ test('chapter 10 takes each choice at Versailles, on the road, in the cellar and
   for (const exodus of ['sent', 'stood', 'told']) {
     for (const grain of ['relieved', 'hoarded', 'ignored']) {
       for (const [key, re] of [['bread', /Send a cart of the house's bread/], ['armed', /muskets from the house's stores/], ['none', /Do nothing, and go home/]]) {
-        const run = await play('b3c10', {}, { ...START, 'b3.exodus': exodus, 'b3.grain': grain }, via(/faubourg Saint-Antoine, where the women/, re));
+        const run = await play('b3c10', {}, { ...START, 'b3.exodus': exodus, 'b3.grain': grain }, via(/faubourg Saint-Antoine, where the women/, re), { stopAt: 'b3c11' });
         assert.equal(run.vars['b3.march'], key, `${exodus} ${grain} ${key}`);
         clean(run);
       }
@@ -196,11 +196,11 @@ test('chapter 10 takes each choice at Versailles, on the road, in the cellar and
   }
 });
 
-test('chapter 10 sets defaults for what he did not do, and ends with the book paused after the last written chapter', async () => {
-  const run = await play('b3c10', {}, START, []);
+test('chapter 10 sets defaults for what he did not do, and leads on to chapter 11', async () => {
+  const run = await play('b3c10', {}, START, [], { stopAt: 'b3c11' });
   const defaults = { 'b3.versailles': 'watched', 'b3.courier': 'let', 'b3.vault': 'left', 'b3.march': 'none' };
   for (const k of Object.keys(defaults)) assert.ok(run.vars[k] !== undefined, k);
   assert.ok(Object.keys(defaults).filter((k) => run.vars[k] !== defaults[k]).length <= 3);
-  assert.equal(run.game.state.chapter, 'b3c10');
+  assert.equal(run.game.state.chapter, 'b3c11');
   clean(run);
 });

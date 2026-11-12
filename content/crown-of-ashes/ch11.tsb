@@ -1,0 +1,269 @@
+// Book Three, Chapter 11 (session 34). Winter 1789 to the fourteenth of July 1790. The sale of the Church's lands, the Cadets' petition, the Senate's letter, the Champ de Mars, and the Festival of the Federation.
+// Opens on the counting room (no phase), then one night phase of three actions out of four (the night of the thirteenth), then a dawn on the fourteenth.
+// Ends with rest() and => next. Reads b3.vault, b3.hunt, b3.boy, b3.exodus, b3.march, b3.council, b3.cadets, b3.aubry, b3.gallery and b3.valere. Chapter 12 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c11
+@title The Altar of the Fatherland
+@book crown-of-ashes
+@version 1
+
+# start
+## The sale
+$ b3.nationals = "refused"
+$ b3.charter = "kept"
+$ b3.senate = "stalled"
+$ b3.federation = "watched"
+~> ledger
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the night of the thirteenth of July, and it has been raining, off and on, for a week. There are four things that want doing by your own reckoning, and time for three.
+-> night
+
+# ledger
+It is a long winter, and then a long spring, and in the course of it Paris is taken to pieces and put up for sale.
+It begins in November, with a decree. The Church's lands are placed at the disposal of the nation. In February the vows are suppressed, and the convents open their doors, and the nuns go out into the street with their bundles, blinking, like people let out of a long play. In April there is paper money, the assignat, that is to be redeemed in land, and in the weeks after it the district offices begin to sell. They sell the abbeys, the gardens, the vineyards of the chapters, the cloister of the Cordeliers, the very bells. It is the greatest sale of property that has been seen in Europe since the Reformation. There is not a respectable family in Paris that is not, in some fashion, turning over a list.
+Adélaïde has a list. She keeps it in the drawer of the counting room desk, under the proofs, and she takes it out in the evenings, after Étienne has gone up, and lays it flat, and puts a ruler under it. She does it with the air of a woman doing something slightly improper in a church. She says that it is the cheapest stone in Paris. She says that it is, in the end, only arithmetic.
+Étienne does not look at the list. He says that he has been forty years a printer in the rue Saint-Jacques, and that his father was married at Saint-Séverin, and that he does not think that the nation is a very good executor. He says it quite mildly. He goes on with his spectacles.
+Baptiste has stopped coming home to supper. He is at the Cordeliers, or at the Jacobins, or in the back room of a Cordeliers printer, and he comes in at midnight smelling of ink and wet wool and the particular ardor of a young man who has found, at last, a room in which everyone is saying what he thought. He has begun to call the Prince the Gentleman of the faubourg. He does not know why. It is a thing that he has picked up.
+Aubry does not call anything anything. He has been on the Champ de Mars every day since the first of June, with a spade.
+<~
+
+# hunger
+## A dry night
+There is, for once, no rain. It has cleared at dusk, and the sky over the roofs of the rue Saint-Jacques is a high, pale, washed green, and in the street the whole of the smell of the day has come up out of the stones: horse, and tallow, and bread, and the warm brown reek of a great many people who have been doing manual labor in the heat. You feel it in the roots of the teeth. There is a carter asleep on his load at the corner, with his hat over his face.
+* Take it from the carter, and leave him a coin
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  He does not wake. It is done in the shadow of the wagon, in half a minute, with great care, and you put a silver écu in the crown of his hat. It is a thing that you can afford, and it does not at all help.
+* Feed on the pigeons in the loft of the shop
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  Adélaïde keeps them for the messages, and she would be much distressed. You are very quick. There are three that are never missed, and one that is, and for a week she goes about with a puzzled look at the door of the loft.
+* Do without, and put your mind on other things
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It is not hard, in the first hour. It is the second that begins to tell. You find that you are walking a great deal faster than you meant, and looking at the necks of persons.
+<~
+
+# lots
+## The Carmelites
+The convent is in the rue de Vaugirard. It is a long, low, gray, handsome pile, with a garden behind it, three acres, with a well, and a lime walk, and a wall, and a church of the last century with a vaulted crypt where the old fathers lie in their niches in rows. It was suppressed in February. The last of the brothers went out at the end of April. There is a notice on the gate with the price in assignats, and the date of the sale, in the clean round hand of a clerk.
+Adélaïde has come with you. She is in her good gray cloak, with her hands in her sleeves. She does not say that she wants it. She walks about in the long grass of the cloister garden, among the dandelions, with her eyes on the ground, and in the end she says, in a rather small voice, that it would be a very good house for a printing works, and for a bindery, and for a stock of paper, and that it has the driest cellars south of the river.
+There is a smell in the crypt that you know. It is old, and cold, and a little sweet. You think, for a moment, that it would make a haven that nobody on earth would think to look for.
+?if b3.gallery == "haven"
+  You already have one, of course, under the shop, among the bones of the Innocents. It is a great deal less handsome. It is a good deal less visible, too, which is not a quality that you have ever known to go out of fashion.
+?end
+There is no one else at the gate. It is a dry, pleasant, early summer evening, and somewhere in the lime walk a blackbird is making a great deal of noise.
+* Buy it through Adélaïde, in the house's name
+  $ b3.nationals = "bought"
+  $ do earn(-6)
+  $ cunning_brutal += 1
+  $ standing -= 1
+  $ bond.adelaide += 2
+  $ do chart("paris.counting")
+  $ do discover("the_national_lands")
+  It is done in a morning, at the district office, over a green baize table, before a clerk who has never been so civil, while you lie in the dark with your power of attorney in her pocket. Adélaïde signs. She has a firm hand. She writes the name of the house on the line, and under it, in the margin, a little carefully, as if she were making a note to herself, the words "for the paper." The convent is yours by the twenty-first of the month. There is a nun, an old one, who has not gone, and who is sitting in the porter's lodge with a knitting bag on her knees. She says, quite pleasantly, that she was told she had a month. She does not say anything about the crypt.
+* Let the district have it for a hospital, at the price Adélaïde names
+  $ b3.nationals = "lent"
+  $ do earn(-2)
+  $ humanity += 2
+  $ standing += 1
+  $ bond.adelaide -= 1
+  $ do chart("paris.counting")
+  $ do discover("the_national_lands")
+  The district is delighted. It is a thing that the district has not been offered, which is a quantity of beds on a government loan, and the price is so reasonable that a commissioner takes you by the hand. By the autumn there are sixty cots in the old refectory. They are not very good cots. They are a great deal better than the floor of the Hôtel-Dieu, which is where the same sixty would have been. Adélaïde enters it in the ledger without a word, in a small, upright, perfectly legible script, and then, in the margin, for the first time in your acquaintance, a question mark.
+* Refuse it, and say that the house will not buy what was taken
+  $ b3.nationals = "refused"
+  $ humanity += 1
+  $ defiance += 1
+  $ bond.adelaide -= 2
+  $ do discover("the_national_lands")
+  You say it at the gate. You say it, a little to your own surprise, with a good deal of feeling, and the blackbird stops. It is Adélaïde who answers. She says, very levelly, that she understands it, and that there are a hundred and eighty buyers in the queue behind the gate who do not, and that the Carmelites are going to be a printing house by Michaelmas whether it is hers or the notary's from the rue du Bac. She says it without any anger at all. She is quite right. You walk home in silence, by the rue de Sèvres, in the long violet dusk.
+<~
+
+# petition
+## The Declaration of the Blood
+The cellar of the brewery has been done up. It has a table, and a lamp, and eight good chairs, and a map of Paris on the wall with a great many pins. It looks, in a rough way, like a section of the Jacobins. Clemence has put a jug of flowers on the sill, which is in the circumstances a quite extraordinary thing.
+?if b3.exodus == "sent"
+  They have been back since the winter. They do not say much about the provinces. Thibault has a new, slow, careful way of going into a room, with his eyes on the floor.
+?elif b3.exodus == "told"
+  They look at you a good deal. It has been a long time since the night in the brewery, and they do not say anything about it, and it is on the table with the lamp.
+?else
+  They are all there. They have the settled, slightly dusty air of a company that has been waiting for a long time in the same place and is not going to stop.
+?end
+?if b3.march == "armed"
+  Nobody mentions the muskets. They have been oiled. They are under the sacking in the corner, and everyone is careful not to sit on them.
+?end
+Severin has a paper. He puts it down on the table with both hands, flat, in front of you. It is written in a very clear, very fine script, in violet ink. It is called a Declaration of the Blood, in seven articles. It says that the Peace of Paris shall not be kept by terror. It says that no Lictor shall hunt within the walls without a vote of the council. It says that the young shall have a seat at it, and a voice, and a vote. It says that nobody shall be put to the question for what he is. It is very short. It is, in an odd way, rather beautiful.
+He says that it must go to the Prince. He says that it must go to him by a hand that he does not know how to refuse, and that is not a Cadet, and is not of the court. He says that it is the thing that the Assembly has done for the mortals, and that they will not wait forever for the blood.
+* Carry it to the Prince as it is written
+  $ b3.charter = "carried"
+  $ bond.severin += 2
+  $ secrecy -= 1
+  $ cunning_brutal += 1
+  $ do chart("paris.rebels")
+  $ do discover("the_declaration_of_the_blood")
+  Clemence looks up. It is the first time that evening that anyone has looked at you as if you were not a piece of furniture. She says that she is obliged. She says it stiffly. She is a mason's daughter and does not say a thing that she does not mean. You put the paper inside your coat, over the heart, where there is not, and never has been, anything to be careful of, and Severin takes your hand in both of his, and holds it a good deal longer than he need.
+* Soften it, and carry the half that the Prince will read
+  $ b3.charter = "softened"
+  $ bond.severin -= 1
+  $ standing += 2
+  $ cunning_brutal -= 1
+  $ do chart("paris.court")
+  $ do discover("the_declaration_of_the_blood")
+  You do it at the table, with a pen, in the lamplight, while they watch. You take out the fourth and the sixth. You change a word in the first. It takes a quarter of an hour. When you have done, it is a paper that a great lord might read at breakfast without spilling his chocolate, and Severin looks at it for a long time, and then at you. He says that it is a very good piece of drafting. He says it the way that a man says it who has been struck, courteously, with the flat of a sword.
+* Keep it, and tell them that its time has not come
+  $ b3.charter = "kept"
+  $ bond.severin -= 2
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  $ do discover("the_declaration_of_the_blood")
+  You say it as gently as you can. You say that the court is a thing like the sea, that it comes in, and that a page of fine writing will not turn it. You say that you will keep the paper, and that you will know when. Thibault is looking at his hands. Clemence is looking at you. Severin says nothing at all, and folds the Declaration in four, very exactly, and gives it to you across the table, with a sort of ironical, grieved bow, as one gives back a book to a man who has not understood it.
+<~
+
+# seal
+## The Lyon coach
+The letter has come by the Lyon coach, in the ordinary post, in a cover of plain gray paper. It is addressed in a very exact Latin hand to the one who goes by your name, at the house of the printer in the rue Saint-Jacques, and it has been sealed with a ring that you know, and have not seen in a good many years.
+?if b3.hunt == "taken"
+  It is Galerius's seal, and it is not Galerius's hand. It is a clerk's. It says that the Senate has been informed of the matter of the boy, by the report of the Lictor sent, and that it thanks you for what you did at the Innocents, in so far as it was done. It says that the Senate does not at this time require the boy. It says that it would be obliged to hear, in your own words, what you propose to do about him, and by what rule.
+?elif b3.hunt == "sworn"
+  It is, to your considerable surprise, in Galerius's own hand, and sent from the rue des Prouvaires, by way of Rome, for the sake of the form. He has copied it out of the Senate's reply. It says that the oath you took on the thirty-first of August has been entered. It says that a witness has been appointed in Paris, who is himself, and who has a stove, and a good deal of time. At the foot, below the seal, in his own writing, he has added a line. It says that he would be glad if you would come on Sunday. It says that there is a cake.
+?elif b3.hunt == "spared"
+  It is in Galerius's own hand, from a post town on the road to Rome, a good many miles away. It says that he has made his report. It says that it was a true one. It says that the Senate has, on the whole, been less interested in what he did than in what you did, and has asked him to enquire, through his own channels, what you are. It is the most courteous thing that you have ever read. It makes you, quite suddenly, rather cold.
+?else
+  It is not in anyone's hand that you know. It is a young hand, quick and round, a hand that has been taught to write by someone who was afraid of it. It says that the Senate has been unable to find a Lictor who was sent to Paris last summer, and that it has the honor to enquire, through the office of the Remembrancer, whether you have any knowledge of his present whereabouts. It is signed, very prettily, with a flourish. There is a postscript. It says that a person will call at the shop in the autumn.
+?end
+?if b3.boy == "hidden"
+  It does not mention the boy at Lyon. It has the air of not mentioning him with some care.
+?end
+It lies on the table under the lamp. The seal is a small red disk with a wolf in it.
+* Answer it plainly, in your own name
+  $ b3.senate = "answered"
+  $ standing += 2
+  $ secrecy -= 1
+  $ cunning_brutal -= 1
+  $ do chart("paris.court")
+  $ do discover("the_senate_letter")
+  You write it at the counting room desk, with Adélaïde's pen, on a half sheet of the house's paper, which is the best in Paris. It takes some time. It is a plain account, in a neat hand, of what was done, and what was said, and what you propose, and it does not leave out the part that is not to your credit. When you have sealed it you hold it a moment in your hand. It is the first letter that you have written to the Senate in a hundred and fifty years that you have not minded signing.
+* Answer it slowly, and say very little
+  $ b3.senate = "stalled"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ do discover("the_senate_letter")
+  It is eleven lines. It acknowledges the receipt. It says that the writer is at the Senate's service, and is engaged at present in the affairs of a house of business, and will report in the autumn. It has the great merit that every word of it is true. You read it over twice, with a feeling of a certain elegant emptiness, as of a very good empty room, and send it by the afternoon coach.
+* Send it back with the seal unbroken
+  $ b3.senate = "defied"
+  $ defiance += 2
+  $ standing -= 2
+  $ secrecy -= 1
+  $ do chart("paris.rebels")
+  $ do discover("the_senate_letter")
+  You do not open it. You turn it over, and write on the cover, in plain French, that the addressee has declined it, and you give it back to the post. It is perfectly polite. It is also, there is no getting round it, the most insolent thing that you have ever done. Baptiste, who has been watching from the press with an ink ball in each hand, says in a low voice that he did not know that one could do that to a seal.
+<~
+
+# field
+## The Champ de Mars
+It is a quarter of an hour on foot from the Pont Royal, and you hear it before you see it. It is the sound of fifteen thousand spades.
+They have been at it for six weeks. The Champ de Mars, which is a drill ground, flat as a table, has been dug out into an enormous amphitheater, a mile round, with banks of earth sloping up on every side to the height of a church, to hold a festival of the nation on the fourteenth. The engineers could not finish it. The engineers were three weeks behind. So Paris, on its own, has come out and done it. It has done it by shifts, in bands, with banners, the districts, the guilds, the sections, the market women, the Capuchins in their habits, the cripples of the Invalides, children with toy barrows, in a hot, dusty, ecstatic frenzy of earth. They sing as they dig. They have been singing for six weeks. It is a very old tune, and they have put new words to it.
+In the middle of it, on a stone platform, with four stairs, there is an altar. It is a plain, square, white thing, in a great space of mud. It is called the Altar of the Fatherland. In the dusk, in the rain that has begun again, with a hundred torches burning round it in the dark, it looks like the one tidy thing in a tumbled world.
+Aubry is there, in his sergeant's coat, with a spade, in a line of the parish battalion, up to his knees in mud.
+?if b3.aubry == "drilled"
+  He looks, in the torchlight, ten years younger. He has been told that it is not a drill. He does not believe it. He has dug a trench that you could hide a cannon in.
+?end
+At the foot of the altar steps, a little before ten, two parties meet.
+One is the court's watch, in plain gray cloaks, six of them, with Brezac at their head, a tall pale figure with a stick. They have come to see that nothing is done at the altar that has not been bespoken. The other is a small knot of the young, from the faubourg, with Severin among them, in a mason's smock, with a violet ribbon. They have come, it seems, to look. They are standing about thirty feet away. Everyone is quite quiet.
+?if b3.council == "cadets"
+  Brezac has not forgotten the night of the council. He has not forgiven it. He does not look at you at all.
+?elif b3.council == "court"
+  Brezac nods to you across the mud, one short nod, as a swordsman nods to a man who has taken the right side of a quarrel.
+?end
+Nobody has drawn anything. Nobody is going to, yet. It is the kind of silence that one is able to hear the end of.
+* Take a spade, and dig with the night shift
+  $ b3.federation = "dug"
+  $ humanity += 2
+  $ secrecy += 1
+  $ standing += 1
+  $ bond.aubry += 1
+  $ do discover("the_federation")
+  It is a quite simple thing. You take the spade that a girl of fifteen holds out, and fall in, between a priest and a fishwife, and dig. It is a perfectly honest work. It is a great deal harder than anything you have done for a year. They pass the barrows down the line without a word. After an hour the priest says that you have a good back for a clerk. After two the fishwife says that she has never seen a gentleman dig a straight line. At midnight, when the watch and the Cadets have gone away from the altar by two different gates, each convinced that it was the other that gave way, you are still at it, up to the ankles in clay, and singing. You do not know the words. It does not matter. Nobody does.
+* Stand between Brezac's watch and the Cadets, at the foot of the altar
+  $ b3.federation = "between"
+  $ standing += 2
+  $ secrecy -= 1
+  $ cunning_brutal -= 1
+  $ do chart("paris.court")
+  $ do discover("the_federation")
+  You walk out over the mud with nothing in your hands, and stop at the third step of the altar, in the full light of the torches. There are fifteen thousand mortals within a hundred yards, and they are all looking at the Altar of the Fatherland, and none of them at you. You say, in a conversational tone, that it is a very large place for a quarrel. Brezac's stick moves a half inch. Severin laughs, a short, light, astonished laugh, quite involuntarily, and then looks as if he would like it back. It is a long minute. At the end of it the court's watch turns on its heel and goes, with the air of men who are going to say they were never there. The Cadets go the other way. Neither of them has been, in the least degree, persuaded. You have only made it, for one night, rather expensive.
+* Watch from the bank, and keep out of it
+  $ b3.federation = "watched"
+  $ secrecy += 2
+  $ humanity -= 1
+  $ cunning_brutal += 1
+  $ do discover("the_federation")
+  There is a mound of spoil, thirty feet high, at the south end, with a hurdle on the top, where the carters stop to smoke. You climb it, and sit down on the hurdle, in the rain, with your collar up. It is an excellent view. You see the whole of the field, the long glittering ring of the torches, the black swarm of the spades, the white altar, the two small knots of figures at the foot of it, as at the bottom of a well. You see exactly what happens. You see it from a distance of a quarter of a mile. It is, you reflect, the vantage point of a god, or of an editor, and not at all the place for a man.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is a little after nine. The rain has begun again, a fine soft pelting drizzle, and the whole of Paris smells of wet earth and fresh bread.
+?elif actions_left() == 2
+  It is nearly midnight. Somewhere to the west, a very long way off, a drum is beating the hour, and there is a small high singing in the dark that comes and goes.
+?else
+  It is four in the morning. There is a gray light on the roofs, and a sound of spades, still, from the south. There is one thing more that you can do before the day.
+?end
+* Go over the list of national lots with Adélaïde, in the counting room [once] ?if actions_left() > 0
+  ~> lots
+  $ do act()
+* Take the Cadets' petition from Severin, in the brewery cellar [once] ?if actions_left() > 0
+  ~> petition
+  $ do act()
+* Open the letter that came by the Lyon coach [once] ?if actions_left() > 0
+  ~> seal
+  $ do act()
+* Walk out to the Champ de Mars, where the field has been dug [once] ?if actions_left() > 0
+  ~> field
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# dawn
+## The fourteenth
+You lie down at first light, in the dark, with the sound of drums beginning, and sleep through it. It is a thing that you do not mind in the least, as a rule. It is a thing that you mind, today, a good deal. The festival goes on over your head, through the whole of the daylight, through the stone, in the rain, like weather in another country.
+It is Baptiste who tells you, at dusk, sitting on the end of the folding table with a half eaten roll. It rained. It rained from the first light until the afternoon, in sheets, over three hundred thousand people, who sat on the banks of earth in a long, steaming, many colored ring, under umbrellas and sacks and the banners of the eighty three departments, with their feet in the clay, and sang, and ate, and did not once go home. A bishop with a limp said a Mass at the altar, with a tricolor sash round his waist, and sixty priests in white. Lafayette on a white horse mounted the steps and raised his sword and swore it, and three hundred thousand throats swore it after him, with the rain running down every face, and the cannon went off, and the sound rolled along the river like a long drawn breath. The king took the oath from his tent, in a violet coat, in a voice that carried perhaps ten yards. There was a pause, and then the whole of the ring gave him a cheer. Baptiste says that it was a real one. He says that he has never been so happy, or so frightened, in his life. He says that he thinks that the king was the only person on the field who looked as if he did not wholly mean it, and the only one who was wholly believed.
+The Prince was not there. The court sent a coach with the arms on the panel, and a footman, and that is all that anyone could say of it.
+?if b3.federation == "dug"
+  Baptiste has been told, by Aubry, who had it from the priest, that a gentleman in a good coat dug the last of the trench by the altar, in the night, with the night shift, and was not asked his name. He says it with a perfectly straight face.
+?end
+That night, they dance. It is the other half of the festival, and it has been got up by nobody. On the ruins of the Bastille, in the dark, among the fallen towers and the heaps of stone, somebody has hung a board between two torches. It says, in chalk, that here they dance. There are lanterns. There are two violins and a drum, and a girl on a barrel with a tambourine, and a thousand couples going round and round in the rubble, in the warm wet dusk, among the tumbled blocks, in the smell of the river and of wet plaster, with the great black shape of the Arsenal over them all. It is, you think, standing at the edge, in your coat, with your collar up, the first time in your life that you have seen anything like it. It is a people that has been let out. It is dancing on its own prison.
+?if b3.nationals == "bought"
+  When you go home there is a deed on the counter, tied in red tape, with a seal. It is, as of this morning, the property of a house of business in the rue Saint-Jacques, which is also to say, in a limited, legal, quite unrepentant sense, of you.
+?elif b3.nationals == "lent"
+  A small boy has come to the door of the shop, from the district, with a note. It is from a commissioner. It says that the new hospital has its first patient, and that the cot by the window has been given, if you do not object, the name of the house.
+?end
+?if b3.charter == "carried"
+  There is a card on the counter, in violet ink. It has one word on it. It says Thanks.
+?elif b3.charter == "softened"
+  Severin has not come. There is a letter from Clemence instead, brief and cold, on a sheet of ruled paper, to say that they will wait, and that they are not stupid.
+?end
+?if b3.senate == "defied"
+  Étienne has found the returned letter, on the counter, in its cover. He has turned it over twice. He says nothing about it. He puts it, with great care, in a drawer, among the old copperplates.
+?end
+Ottaviano finds you among the dancers, a little before midnight. He does not come near. He walks beside you, at a distance of three paces, along the edge of the rubble, with his eyes on the torches, and says, as if he were reading it from the sky, that he has a thing to tell you.
+?if b3.vault == "broke"
+  He says that since the night of the fifth of October the Lady has turned her head. It is a very small thing. It is a quarter of an inch, toward the door of the cellar. He says that the chalk is writing a different hand now, and that it is not the Prince's.
+?elif b3.vault == "read"
+  He says that the slate has been filled, and that he has put another across her knees, and that it has begun, in the margin, in a smaller script, to set down a name. He does not say whose. He says that it is your own. He says it as a man says that he has found a mouse in the larder.
+?else
+  He says that the Lady writes on, and has not stopped, and that the heaps in the third cellar are now nearly to the height of a man's hip. He says that he has not been down. He says that he can hear it from the kitchens, on the quiet nights, like a very small mouse in a wall.
+?end
+He goes, without waiting to be answered, toward the river, where the court's coach is waiting with its lamps lit.
+$ do rest()
+=> next

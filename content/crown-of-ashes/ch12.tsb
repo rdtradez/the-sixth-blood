@@ -1,0 +1,342 @@
+// Book Three, Chapter 12 (session 34). The twentieth and twenty first of June 1791, and the seventeenth of July. The king's flight, the Cadets and the court, Inspector Garnier, the presses, and the shooting on the Champ de Mars.
+// Opens on the evening of the twentieth (no phase), then one night phase of three actions out of four, then the morning of the twenty first, then a fixed closing scene on the seventeenth of July that every player plays, then an aftermath.
+// Ends with rest() and => next. Reads b3.charter, b3.federation, b3.press, b3.rights, b3.broadsheet, b3.file, b3.gallery, b3.boy, b3.hunt, b3.vault, b3.aubry, b3.cadets, b3.senate and b3.nationals. Chapter 13 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c12
+@title The Berline
+@book crown-of-ashes
+@version 1
+
+# start
+## The twentieth
+$ b3.flight = "watched"
+$ b3.republic = "refused"
+$ b3.coup = "none"
+$ b3.garnier = "turned"
+$ b3.champ = "stayed"
+~> evening
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the night of the twentieth of June, and it is warm. There are four things that want doing by your own reckoning, and time for three.
+-> night
+
+# evening
+It is the longest day of the year, and the first for two years on which it has not rained, and the whole of Paris is out of doors.
+They are on the quays, and on the benches of the Tuileries garden, and in the wine shops of the rue Saint-Honoré, with the doors open and the tables in the street. It is a very different city from the one that you woke in. It has, for one thing, a great deal of paper. Every wall carries a bill. Every corner has a man with a bundle, crying a title, and in the cafés of the Palais-Royal they have given up trying to read the news and read it aloud instead, standing on chairs. There are six hundred journals. There is a cap, a red cap of wool, on the head of a good many persons who did not own one in the spring. The country has been a constitutional monarchy for twenty months, and has not for one afternoon of it been quiet.
+There is a note on the table in the counting room. It came at six, by Ottaviano's own hand, which is to say that he came to the door and gave it to the apprentice and went away without waiting. It is in the Prince's script, small and cold and regular. It has no salutation. It says that the king will leave the Tuileries tonight, in a berline, with the queen and the children, by the Porte Saint-Martin and the road to Châlons, and that nobody in the court has been told but the persons who are to be of use. It says that the Prince does not propose to be of use. It says that he has it, in writing, in the third cellar, that it will not signify.
+Étienne has read it over your shoulder. He says nothing. He goes up to bed. He has been going up to bed a good deal earlier, lately, with a hand on the rail.
+Aubry is not at supper. His battalion has the night guard at the Carrousel. He went at five, with his stripes, in a clean stock, saying that it was a quiet turn. He has an old soldier's way of saying so.
+<~
+
+# hunger
+## A warm night
+It is the warmth. It comes up from the paving stones, in the dark, in the narrow streets of the Latin quarter, like the heat from a bed of embers, and it brings out the whole sweet animal smell of a summer night in a crowded city. There are lovers on the steps of Saint-Étienne. There is a man snoring on a bench by the fountain in the place Maubert, with a bottle in his lap and his coat under his head. You can hear his heart from across the square.
+* Take it from the sleeper, and set the bottle straight
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  He will wake with a headache and a conviction that he has been bitten by a flea. You put the bottle beside him, upright, with the cork in. It is a small, absurd, scrupulous gesture, and a good deal of your conscience is in it.
+* Feed on a cart horse in the yard of the brewery
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  He is an enormous gray, as patient as a wall, and he turns his head to look at you with a great calm brown eye. He does not mind in the least. It is, you feel, a better arrangement than most.
+* Wait, and do not feed
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It is a thing that you can do. It is not a thing that is pleasant to do. By eleven o'clock you have the sensation of a very fine wire, somewhere at the base of the skull, being drawn, slowly, a little tighter.
+<~
+
+# tuileries
+## The Carrousel
+The palace at night is a long, low, lamplit, sleeping thing, with a thousand windows and four hundred guards. It has been the king's prison for twenty months, and has all the look of it. The sentries stand at the gates, at the arch, at the foot of every stair, in blue and white, with their muskets grounded, in the warm dark. In the great court a coachman of a particular kind, a gentleman's gentleman in a very neat greatcoat, is walking a little way up and down, in the shadow, with a whip, with the careless gait of one who is waiting for a lady.
+It is a quarter to eleven. There is a lamp in a certain window on the first floor. It goes out.
+You are standing under the arch of the Carrousel, with your hat over your eyes. There is a little crowd of the usual idlers. There is a lamplighter, with a ladder. There is the officer of the guard, who is a good man, and sleepy, in a chair, with a pipe. And there is, in the rue de l'Échelle, a hackney coach with its blinds down and its horses harnessed, that has been standing there for an hour, in the way that a thing stands that is waiting to be noticed, and is not.
+Lafayette's carriage comes up the Carrousel at eleven, on its way to the Hôtel de Ville from the king's own levee. It comes on at a good trot. It crosses, for a moment, the very line along which the hackney coach will pass.
+There are three sentries within hearing. They are boys. They are in the habit of looking at the lamps.
+* Delay the general's carriage at the corner, by a wheel and a drunk
+  $ b3.flight = "aided"
+  $ cunning_brutal += 2
+  $ secrecy -= 1
+  $ humanity -= 1
+  $ standing -= 1
+  $ do chart("paris.court")
+  $ do discover("the_flight_to_varennes")
+  It is done with the lamplighter's ladder, and a hand placed at the right moment on a trace, and a man who is perfectly drunk, who has been standing in the road for some time, and who now begins, with the greatest affability, to explain a point of law to the postilion. It costs four minutes. It is the cheapest and the vilest thing that you have ever done with a ladder. You do not see the coach go. You hear it, a little after, in the rue de l'Échelle, as a series of ordinary noises: a door, a child's sleepy voice saying a word, a woman who says hush, and the long iron rumble of the wheels away toward the Porte Saint-Martin, in the warm dark, like a very large dog going home.
+* Go to the officer of the guard, and say what you know
+  $ b3.flight = "warned"
+  $ humanity += 1
+  $ standing += 1
+  $ secrecy -= 2
+  $ cunning_brutal -= 1
+  $ do chart("paris.rebels")
+  $ do discover("the_flight_to_varennes")
+  He is a good man. He takes the pipe out of his mouth. He looks at you for some time, with the expression of a person who has been told that the sun will go out tonight, and does not intend to be the first to say so. He says that you will do him the favor to repeat it to the general's aide. The aide says that you will do him the favor to wait. You wait in a passage, on a chair, for an hour. It is nearly one before a very young officer comes out and tells you, with great kindness, that his excellency is quite certain that the king is in bed. It is a lovely, warm, silly, tragic hour. You have done what you could. You go home along the river, with the feeling of a man who has been given a receipt.
+* Stay in the dark under the arch, and watch the thing happen
+  $ b3.flight = "watched"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  $ do discover("the_flight_to_varennes")
+  You watch it from the arch with your hat on. It goes off, in the end, like a thing in a dream, in the most ordinary way imaginable. A hackney coach, a gentleman's servant, a woman in a gray traveling dress with a veil, leading two children by the hand, and a tall, large, heavy man in a servant's round hat, who does not walk like a servant, and who is the king. He holds her arm a little too carefully. He looks, as he goes by under the lamp, quite extraordinarily glad to be out of doors. Nobody looks at him. The sentries look at the lamps. It is the most complete invisibility that you have ever seen, and it is accomplished, as far as you can tell, entirely by being in a hurry.
+<~
+
+# shop
+## The type
+The shop is lit. It is eleven at night, and every lamp in the room is burning, and Baptiste is at the case in his shirtsleeves, with a composing stick in his left hand and a look of the blackest and brightest anger, setting type as fast as a machine. He does not look round.
+He has been told by a man at the Cordeliers, he says, who had it from a man at the Tuileries, that the gates are not to be shut tonight. He has been told that there is a berline. He does not know, he says, what he knows, and he does not know if it is true. He knows that if it is true there will be a morning on which there is no king in Paris, and that on that morning there will be a hundred thousand persons in the street who want a piece of paper to tell them what it means. He means that it shall be one of his.
+He has set a heading. It is in the big wooden letters of the posters. It is a single word, which he has not yet dared to put in the form.
+?if b3.broadsheet == "named"
+  It is the house's own imprint at the foot. It has been there since July of two years ago, and it has not been taken off. Étienne has said that it will hang them all some day. He has also said that he is very proud of it.
+?elif b3.broadsheet == "unnamed"
+  The old Swiss imprint is in the case already, with a "Neuchâtel" in it that has not been anywhere near Neuchâtel since the spring of 1789.
+?end
+?if b3.rights == "annotated"
+  On the wall above the case is the old Declaration, with the note on the colonies in the margin, which has been there for twenty two months, and has turned brown.
+?end
+Adélaïde is standing at the foot of the stairs with a candle, in her wrapper. She does not say what she thinks. She is looking at her brother's back.
+The word is REPUBLIC. It is not a word that has been printed in Paris, so far, by any respectable house. It is not, quite, against the law. It is a great deal less than treason. It is more, a good deal, than a joke.
+* Print it, under the house's name, in the largest type
+  $ b3.republic = "printed"
+  $ standing -= 1
+  $ defiance += 2
+  $ secrecy -= 2
+  $ bond.baptiste += 2
+  $ bond.adelaide -= 1
+  $ do chart("paris.presses")
+  $ do chart("paris.rebels")
+  $ do discover("the_republic")
+  It takes the night. It is one of the great nights of the shop. There are four presses going at once, the new and the old, and the boys in the yard with the wet sheets, and Étienne in a nightcap at the folding table, with a face like an old Roman, folding, and not saying a word about it. By dawn there are eleven thousand copies. You put the house's name at the foot. You do it with your own hand, in the big letters, and you feel a very odd sensation, between the shoulder blades, as of an old lamp turned up.
+* Print the Assembly's notice, and the news, and nothing else
+  $ b3.republic = "neutral"
+  $ standing += 1
+  $ cunning_brutal += 1
+  $ bond.baptiste -= 1
+  $ do chart("paris.presses")
+  $ do discover("the_republic")
+  You say that it will be a plain sheet, and a true one. You write it yourself, at the counting room desk. It says that the king has left the Tuileries in the night, that the Assembly is sitting, that the barriers are closed, that the National Guard is under arms, and that the citizens are asked to keep order. It is quite accurate. It sells nine thousand copies by noon. Baptiste does not say anything. He takes the big wooden letters out of the form, one by one, and lays them, with enormous care, in their drawer.
+* Pull the type, and print nothing tonight
+  $ b3.republic = "refused"
+  $ secrecy += 2
+  $ standing += 1
+  $ humanity += 1
+  $ bond.baptiste -= 2
+  $ do discover("the_republic")
+  You put your hand on his shoulder. You say that there is a time for it, and that this is not it. He turns round. He has ink on his forehead. He has a look that is quite unlike anything that you have seen on him, a hard, bright, adult look, and he says, in a voice that has cracked once, that there is never a time. He says it as an accusation, and not as a rule. Then he sits down on an upturned box, with his hands between his knees. Adélaïde puts down the candle. She says that she will make some coffee.
+<~
+
+# cellar
+## The brewery
+They are not in the cellar. They are in the yard. It is a warm night, and they have come out, the whole of them, and are sitting on the barrel staves in the starlight, in the smell of hops, with their faces turned up, like a party at a play.
+?if b3.boy == "taught"
+  Thibault has grown. It is a thing that happens, to one of the young, in a year and a half, with a good teacher. He sits with his back against the wall. He is quite still. He has the look of one who is learning to be.
+?elif b3.boy == "hidden"
+  Thibault is not there. There is a place on the staves, between Clemence and a rough man in a leather apron, that nobody has sat in.
+?else
+  Thibault is at the end of the row, with his knees drawn up, rocking a little, with his hands clasped round his shins. He looks at you once, and then away.
+?end
+Severin is on his feet. He has the news. He had it at nine, from the porter of a house in the rue de Verneuil, who has a sister in the queen's laundry, and he has been walking up and down the yard ever since. He says that the court has been told. He says that the court will not move. He says that the court has an old, cold, patient habit of letting the world go by until it is quite sure what the world has done, and that tonight, for the first time in three hundred years, it has not got its Prince to lean on, for the Prince has gone, in a plain carriage, to the house of a certain Lady, and has not come out.
+He says that it is the night. He says that the court has three hundred servants and eleven who can fight, and that Brezac is at the Tuileries with half of them, doing something stupid for the king. He says that if it is to be done, it is to be done before the dawn, while the whole city is looking the other way.
+They are looking at you. There is a violet ribbon on every coat.
+?if b3.charter == "carried"
+  Clemence says that you took the paper to the Prince. She says that she believes that you did, and that he did not answer it. She says it in a quite impersonal tone. It is much worse than if she had shouted.
+?elif b3.charter == "softened"
+  Clemence says that they have read what you did to the paper. She says that they have not got it by heart.
+?end
+?if b3.federation == "between"
+  One of the older ones says, with a half smile, that you are the gentleman who stood at the altar. It is intended as a compliment. It is not entirely taken as one.
+?end
+* Ride with them to the Hôtel de Saint-Aubin, and see it done
+  $ b3.coup = "backed"
+  $ cunning_brutal += 3
+  $ defiance += 2
+  $ standing -= 2
+  $ secrecy -= 2
+  $ humanity -= 1
+  $ bond.severin += 3
+  $ do chart("paris.rebels")
+  $ do discover("the_cadets")
+  You go. You go on foot, through the warm streets, in a long file of eleven, in the dark, over the Pont Royal and into the faubourg Saint-Germain, and nobody on the road looks at you. It is the quietest revolution that has ever happened. There are no pikes, and no drums, and no banners. They have their hands in their pockets. At the gate of the Hôtel the porter looks out of his lodge, and sees a good many young faces, and a violet ribbon, and a very old one, and goes back in and shuts the door. It is not locked. Nothing on the ground floor is locked. There is a great hall, with a hundred candles burning, and sugar cakes on every sideboard, and there is nobody in it at all but Ottaviano, in a chair, in a gray coat, who gets up as they come in, and says, with great simplicity, that the Prince is in the cellar.
+* Ride ahead of them, and talk them out of it
+  $ b3.coup = "stopped"
+  $ standing += 2
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  $ bond.severin -= 2
+  $ do chart("paris.court")
+  $ do discover("the_cadets")
+  It takes two hours, and a barrel, and the better part of the night. You do not argue. You are by this time rather too tired to argue. You say what you have seen. You say that you have seen the court's hands in the Tuileries, and a hackney coach, and a king, and that the whole of Paris is going to wake tomorrow and look for somebody to hang, and that it will not be careful about the age of the persons that it finds. You say that the young are nothing to the court tonight, and that tomorrow they will be everything. Clemence says it first. She says that she supposes that they had better wait. She says it with a face of stone. Severin does not speak at all. He takes the ribbon out of his buttonhole, and puts it in his pocket, and looks at you for a long moment in the starlight, and you know that it has cost you a friend.
+* Go to the Hôtel de Saint-Aubin, and tell Ottaviano what is coming
+  $ b3.coup = "told"
+  $ standing += 1
+  $ secrecy += 1
+  $ humanity -= 1
+  $ bond.severin -= 3
+  $ cunning_brutal += 1
+  $ do chart("paris.court")
+  $ do discover("the_cadets")
+  You do it in the kitchen, by the dying stove, in a whisper, with the sleepy cook asleep on a chair. Ottaviano listens with his eyes shut. He says, when you have done, that it is a great service. He says it in a tone that does not leave you any room. He says that the house will be shut at midnight, and the watch doubled, and the old pistols got down from the gallery. You go out by the back stair. In the yard you meet a boy of the kitchen, who is crying, who has been sent for a doctor, and who says that it is only the heat. It is a good while later, on the Pont Royal, that you meet them coming the other way. They have seen the lights. They do not say anything. They go by on the other side of the road, in a file, in the dark, and Severin does not look round.
+<~
+
+# garnier
+## The Inspector
+It is a quarter past one in the morning when somebody begins to knock at the door of the shop.
+It is not a loud knock. It is a small, hasty, timid one, such as might be made by a tradesman with a bill. It is a long while before Adélaïde, who has her hand on the bolt, can make out the face in the glass, a thin, yellowish, sweating, clean shaven face, with the wig put on a little crooked.
+It is Inspector Garnier. He has been, for three years, the Lieutenant General's man in the quarter. He has been, for two, the Section's. He is in his office coat, with his hat in his hand, and his breath is coming in short sobs, like a man who has run a long way, and has not run for fifteen years.
+He says that he must see you. He says that he has been told, by a clerk, by a man in the corridor of the Hôtel de Ville, that when the king is gone there will be a search for the person who let him go, and that there are four hundred names on the list of the persons who might have, and that his is the fifth. He says that he has been the police for twenty years. He says that he knows what the people do with the police.
+?if b3.file == "kept"
+  He does not mention the file. He does not need to. It is in the back of the room with him like a third person, with its hat on.
+?elif b3.file == "burned"
+  He says that he has not forgotten what you did with the paper, in July. He says it at the door, in the dark, in a rush, as a man tenders a coin.
+?else
+  He says that he has the file still, in a drawer, at home. He says that he has not looked at it in two years. He says that he thought that you ought to know.
+?end
+There is a sound of footsteps in the street, a good way off, running.
+* Hide him in the quarry gallery, and ask for nothing
+  $ b3.garnier = "sheltered"
+  $ humanity += 2
+  $ standing += 1
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  $ bond.adelaide += 1
+  $ do discover("inspector_garnier")
+  You take him down yourself, through the trap behind the folding table, with a candle, past the case of old blocks, by the stair that goes to the bones. He goes very quietly. He holds on to your sleeve. When you come to the dry chamber, and the shelves of the dead, he looks about him, with his mouth open, and his hat in both hands, for a long minute. He says, in a very small voice, that he has been in the room above for three years, and has often wondered. You leave him a lantern, and a loaf, and a bottle of water. You do not tell him what he is lying among. He knows, by the smell. He says thank you, three times, and then he says it again in the dark.
+* Hide him, and take the Section's files in return
+  $ b3.garnier = "bargained"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  $ humanity -= 1
+  $ bond.adelaide -= 1
+  $ do chart("paris.counting")
+  $ do discover("inspector_garnier")
+  It is a perfectly simple bargain. He is in no state to haggle. You say that he may stay, and that he shall not be sought, and that in the morning he shall go out by the quarry door to a post chaise, with a passport, and a purse. You say that in return you will have the Section's papers on the Cadets and the Valère house, and the presses, all of them, by the evening. He does not say a word. He gets out the keys of his office, from his waistcoat, a ring with fourteen, and detaches one, and gives it to you with a hand that is as wet as a fish. It is the key to a drawer. It is the most miserable transaction that you have ever carried through, and it is very well done.
+* Turn him away, and shut the door
+  $ b3.garnier = "turned"
+  $ cunning_brutal += 2
+  $ humanity -= 3
+  $ secrecy += 2
+  $ bond.adelaide -= 2
+  $ do discover("inspector_garnier")
+  It is the thing that a prudent man would do. You say that you are sorry, and that the house has its own troubles, and you say it quietly, through the crack of the door. He stands on the step. He does not plead. He puts on his wig, which has slipped, and straightens it with both hands, with a certain dreadful dignity, and says that he quite understands. He goes off down the rue Saint-Jacques with his hat on the back of his head, walking, now, in no sort of hurry at all. Adélaïde has been standing at the foot of the stair for the whole of it, in the dark, with the candle. She does not say a word. She looks at you, and goes up.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is a little after ten. The heat has not gone out of the stones. There is a great deal of noise from the quays, of people who have not gone to bed.
+?elif actions_left() == 2
+  It is past midnight. There is a smell of rain, a long way off, and the first of the dogs are beginning to bark, one after another, from the Latin quarter to the river.
+?else
+  It is four in the morning, and the sky over the roofs of the rue Saint-Jacques is a thin pale primrose. There is one thing more that you can do before the day.
+?end
+* Go to the Tuileries, where the Guard is changing at the Carrousel [once] ?if actions_left() > 0
+  ~> tuileries
+  $ do act()
+* Look in at the shop, where Baptiste has been setting type since supper [once] ?if actions_left() > 0
+  ~> shop
+  $ do act()
+* Go to the brewery yard, where Severin is waiting for the court to fall [once] ?if actions_left() > 0
+  ~> cellar
+  $ do act()
+* Answer the knock on the shop door, where Inspector Garnier is standing [once] ?if actions_left() > 0
+  ~> garnier
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> morning
+?end
+-> :night
+
+# morning
+## The twenty first
+You sleep through it. It is found out at seven, when a valet goes in with the chocolate and sees that the bed has not been slept in, and by eight the whole of Paris has heard, and you lie in the haven, in the dark, with the stone over you, and hear none of it. You wake at dusk to a city that has been turned over like a mattress.
+It is told you by the apprentice, and the baker, and a woman at a stall, all at once, in the street, and by the very walls. The bells rang, first, from every tower, the tocsin, and then the drums beat the générale, and the cannon of the Invalides fired the alarm, and a roar came up from the quays that people say was like a very large thing turning over. The king is gone. The queen is gone. The children are gone. The great gates of the Tuileries stood open all the morning, and a crowd walked into the royal apartments and sat on the beds. Somebody put a tricolor cap on the bust of Louis the Fourteenth. A seamstress took a ribbon from the queen's dressing table, as a keepsake, and cried. There is a bill pinned to the gate, that says that whoever applauds the king will be beaten, and whoever insults him will be hanged.
+?if b3.flight == "aided"
+  You hear it said, again and again, in the street, that the general's carriage was held up on the Carrousel for the matter of four minutes. You hear it from a baker, and from an old woman with a basket, and from a member of the Assembly, who says that it was no doubt an accident. Nobody looks at you. You walk home with your collar up and your hands in your pockets, and by the Pont Neuf, you find that your hands are shaking.
+?elif b3.flight == "warned"
+  You are summoned, at nine that night, to give an account. They are civil. They write it down. A young man with a pen says, with a pleasant smile, that it is a very great pity that his excellency did not feel able to credit it. It is the thing that you will hear said most often, in the next year, about a great many people.
+?end
+?if b3.republic == "printed"
+  The sheets have been on every wall since nine in the morning. The word is a great red hand in the middle of the rue Saint-Jacques. There is a crowd round it, in the lamplight, reading it aloud. A man in a cap says that it is a very strong word. A woman says that she does not see why it should not be. They do not know where it came from. A tall boy of twenty with ink on his forehead is standing at the corner, with his hands in his pockets, a little pale, looking at the wall as at a face.
+?elif b3.republic == "neutral"
+  The plain sheet sold all day. It was the best seller in the quarter. It has no opinions in it, and a great deal of the truth, and nobody, in the course of that long day, forgave it.
+?end
+?if b3.coup == "backed"
+  There is a thing that you did in the night that you do not look at. You have, in your pocket, a small gray glove, that was given to you by a man in the Prince's hall. He said that it was the Prince's, and that you would know what to do with it. You do not. You put it in a drawer.
+?elif b3.coup == "stopped"
+  The house in the faubourg Saint-Germain has kept its doors. You walk past it at ten that night, in the dark. It looks exactly as it always did.
+?end
+?if b3.garnier == "sheltered"
+  He is still in the quarry. He sends up a note by the apprentice. It is a half sheet, in a clerkly hand, that says that he will not forget it.
+?elif b3.garnier == "bargained"
+  The files were left at noon, in a hamper, by a hackney coach. They are very complete. They are a good deal more complete than you expected.
+?elif b3.garnier == "turned"
+  There is a rumor in the Latin quarter, at nightfall, that the Section have found an inspector of the old police hanging from a lamp in the rue Mouffetard. It is not true. They have only found his hat.
+?end
+They bring the king back on the twenty fifth. He has got as far as Varennes, a little town in the Argonne, where a postmaster named Drouet knew him by the face on an assignat. He has been stopped at a bridge, in the night, by a cart of furniture, and he comes back, with his family, in the heat of the evening, in the same berline, through the whole of the city, in a silence of three hundred thousand. Nobody takes off a hat. Nobody says a word. You are told it by Adélaïde, who watched it from the roof of the shop with Étienne's spyglass. She says that she has never seen anything so loud.
+-> july
+
+# july
+## The seventeenth of July
+It is the Sunday. You lie through the whole of it in the cellar under the shop, and hear it only as noise, through the stone. It is, you are told, a hot, windless, brilliant day, the sort that comes to Paris once or twice in a summer, with a sky like a blue enamel plate, and a strong smell of dust. The Assembly has declared the king suspended, and then, on the sixteenth, in a kind of a panic, has restored him. It has decided that the flight was a kidnapping. It has been a quarrel of three weeks, between the Cordeliers and the Jacobins, between those who want a republic and those who want a very small king, and the Cordeliers have drawn up a petition, to be signed on the Altar of the Fatherland.
+They are going to sign it today. They have gone out by thousands, with their children, in their Sunday clothes, as one goes to a fête, and they have stayed. A man sells lemonade by the steps. The great field of the Federation, that a year ago was a pit of mud, is now baked as hard as a brick, and white. There are six thousand, and then eight, and then, by the time that you go out, at the going down of the sun, perhaps ten, on the banks, and on the steps of the altar, and in the dust, signing by the light of lanterns that somebody has fetched. There are women. There are old soldiers. There are three hundred children, who have found that the banks make an excellent slide.
+Baptiste is on the altar steps. He is quite easy to see, being a head taller than most, in a clean shirt, with a quill behind his ear, and a long roll of paper under his arm, among the first. He has been there since noon, so Adélaïde says. He has been asked three times by a man in a gray coat to go home.
+Adélaïde has not wished him to come. She has put up the shutters. She has told Étienne that he is on no account to go out, and Étienne, with great dignity, has gone to the church of Saint-Séverin and is sitting in the north aisle, with his hat on his knee, to be seen there if anybody should ask.
+Aubry is in the ranks. He is on the left of the line of the parish battalion, a little back, with his musket at the shoulder, in the yellow dust. The National Guard has been called out. There has been a riot, in the afternoon, at the Gros-Caillou, over two men who were found under the altar, a barber and an invalid, who had hidden there with a gimlet, to look up the women's petticoats, and who were hanged for it by the crowd. It is an absurd and vile little thing. It has been made, by the Hôtel de Ville, into a reason. They have hoisted the red flag. They have proclaimed martial law.
+Lafayette has been delayed at the Hôtel de Ville by the quarrel in the Assembly, and he comes onto the field at nine, in the long pale green twilight of a July night, with the Guard, in a hollow square, with their bayonets fixed, and the drum beating. The crowd is perhaps six thousand, by now, thinning, with the lanterns among them. A few of them throw stones.
+It is a very bad moment. You can feel what is going to happen as one can feel a storm in a tooth. There is a great deal that you could do, and perhaps nothing that would be any good.
+:the_choice
+* Go in over the bank, and bring Baptiste out by the collar
+  $ b3.champ = "fetched"
+  $ humanity += 2
+  $ bond.baptiste += 2
+  $ standing -= 1
+  $ secrecy -= 1
+  $ do discover("the_champ_de_mars")
+  You go down the slope in a run, through the crowd, which is beginning to sway, and up the four steps of the altar, two at a time, and take him by the back of the collar as one takes a puppy. He is very angry. He is a good deal stronger than he looks, and he turns on you in a fury, with the roll of paper clutched to his chest, and he says that it is a free country. You do not argue. You say, quite quietly, in his ear, that it is not a free country this afternoon. You get him down the steps, and through the thinning edge of the field, by a gap in the hurdles, into the dark of the elms of the Gros-Caillou, as the first volley goes off. It is high. It is a high volley, into the air, over the crowd, over the altar, and the whole of the field goes up in a roar of white doves, and dust, and one long wail. Then the second one is not.
+* Stand between the Guard and the altar, with your hands open
+  $ b3.champ = "stood"
+  $ humanity += 3
+  $ standing += 2
+  $ secrecy -= 3
+  $ injury += 2
+  $ do chart("paris.court")
+  $ do discover("the_champ_de_mars")
+  You do it without thinking. You walk across the dust, in the last of the twilight, to the place at the foot of the altar steps, where the first rank of the battalion has come up in line, and you turn round with your back to the petition, and open your hands. It is a thing that you have not done since Etruria. A sergeant with a gray mustache sees you. It is Aubry. He does not lower the musket. He looks at you along it, with his old, shrewd, tired blue eyes, as along a road. There is a long second. And then somebody at the back gives the order, and the whole rank fires, and the line of smoke runs along it like a rope, and you are hit twice in the chest, and once in the shoulder, in front of three thousand people, and do not fall. It is the most remarkable thing that has ever happened on that field, and everyone sees it, and nobody says it. The Veil is a thing of the dark. It is dark, nearly. It is not quite dark enough.
+* Stay away, and watch from the roof of the shop
+  $ b3.champ = "stayed"
+  $ secrecy += 2
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  $ standing -= 1
+  $ bond.baptiste -= 1
+  $ do discover("the_champ_de_mars")
+  You are on the roof, among the chimney pots, in the last green of the sky, with a good view over the whole of the southwest of the city, to the river and the long yellow line of the field. It is a long way. The sound arrives a little after the sight of it. It is a small, flat, dry, crackling sound, like the noise of someone walking over a field of stubble. A long white cloud lifts and spreads. You are aware that you have not moved. You are aware that you are holding on to a chimney. It is not, you think, that you were afraid. It is that you have found out what it is to be a man who watches.
+The firing goes on for perhaps a minute. There are fifty dead, by the best account, and perhaps four hundred wounded, though nobody will ever count. The crowd goes out over the banks in a flood, screaming, and leaves a great number of small things lying in the dust: a hat, a shoe, a child's wooden horse, a Sunday parasol. The red flag is taken down. The altar stands in the middle of it all, empty, white, with a roll of paper on the third step, trodden into the dust, with four thousand names.
+-> after
+
+# after
+## The eighteenth
+Baptiste comes in at midnight. He is not dead. He is not even hurt. He has his coat torn, and a graze on the cheek, and he comes in through the back, quite quietly, and sits down at the case, and puts both his hands flat on the type, and begins to cry, without any noise, like a child.
+?if b3.champ == "fetched"
+  Nobody says anything about the collar. Adélaïde puts a basin of water in front of him. Her hand, on the edge of it, is not at all steady.
+?elif b3.champ == "stood"
+  Aubry comes later. He does not come in. He stands in the yard in the dark with his musket slung and his hat in his hand, and says, across the cobbles, in a flat voice, that he put his own round into the dust at your feet. He says that it was the only honest thing that he did that day, and that he did it too late to matter. He says that he is going to ask to be relieved. He is looking at your shoulder. You have put on a clean shirt, and a dark coat. He does not ask. He says that he has been thirty years in the service, and has seen a good many things that he was told, and has never till today been shown one.
+?else
+  Baptiste does not say where he was. Adélaïde does not ask. Nobody asks. It is a long supper.
+?end
+The Cordeliers are shut by the morning. The red flag has been taken down. The Jacobins, in a panic, have split, and the better part of the members have gone out to a new club, in a convent of the Feuillants, which is not to be republican. The petition is called, in the Assembly, a conspiracy. It will be said, for a long time, in the faubourg Saint-Antoine, that the king was never forgiven, and the nation was never the same, and the national Guard fired on the people. It will be said by those who were there.
+There is a card on the counter, in the morning, in the Prince's own hand, in a grave, cold, upright script, that does not belong to Ottaviano. It is brief. It says that the Prince would be glad of a word with you at the Hôtel de Saint-Aubin on the next dark of the moon, and that it is a matter of some urgency, and that it concerns a lady.
+Ottaviano has put a line at the foot.
+?if b3.vault == "broke"
+  It says that the slate has stopped. It says that the hand lies open on her knee. It says that, for the first time in four hundred years, nobody in the house can say what is to be done on the morrow, and that the Prince has not slept.
+?elif b3.vault == "read"
+  It says that the slate has stopped. It says that the last line was written on the evening of the sixteenth, and that it was your name, and a date, and nothing else, and that the date is not yet.
+?else
+  It says that the slate has stopped. It says that the hand has not moved since the sixth hour of the evening of the sixteenth. It says that he has gone down, in the night, and listened, and that the third cellar is the quietest place in Paris.
+?end
+There is a cup of coffee on the corner of the counting room desk, cooling, in a saucer. Adélaïde has set it there. She has not said what it is for.
+$ do rest()
+=> next

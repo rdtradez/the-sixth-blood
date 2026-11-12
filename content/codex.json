@@ -385,6 +385,54 @@
       "title": "The third cellar",
       "book": "crown-of-ashes",
       "text": "The deepest cellar of the Hotel de Saint-Aubin, older than the house, closed by a steel door with a grille. The court calls it the Cellar and does not say what is in it."
+    },
+    "the_national_lands": {
+      "category": "lore",
+      "title": "The national lands",
+      "book": "crown-of-ashes",
+      "text": "The Church's property, put at the nation's disposal in November 1789 and sold off by the district offices from the winter of 1790. The Valere house was offered a convent in the rue de Vaugirard."
+    },
+    "the_declaration_of_the_blood": {
+      "category": "lore",
+      "title": "The Declaration of the Blood",
+      "book": "crown-of-ashes",
+      "text": "Seven articles drawn up by the Cadets: no rule by terror, no hunting within the walls without a vote, a seat for the young."
+    },
+    "the_senate_letter": {
+      "category": "lore",
+      "title": "The Senate's letter",
+      "book": "crown-of-ashes",
+      "text": "A letter under the wolf seal, asking what became of the Lictor sent to Paris and what the hero means to do about the boy."
+    },
+    "the_federation": {
+      "category": "places",
+      "title": "The Champ de Mars",
+      "book": "crown-of-ashes",
+      "text": "The drill ground dug out by the whole of Paris in June 1790 for the Festival of the Federation, with the Altar of the Fatherland at its centre."
+    },
+    "the_flight_to_varennes": {
+      "category": "lore",
+      "title": "The flight to Varennes",
+      "book": "crown-of-ashes",
+      "text": "The king's flight from the Tuileries on the night of the twentieth of June 1791, stopped at Varennes the next evening."
+    },
+    "the_republic": {
+      "category": "lore",
+      "title": "The word Republic",
+      "book": "crown-of-ashes",
+      "text": "In June 1791 a word that no respectable house in Paris had yet printed."
+    },
+    "inspector_garnier": {
+      "category": "people",
+      "title": "Inspector Garnier",
+      "book": "crown-of-ashes",
+      "text": "The police inspector who kept a file on every printer in the quarter, and who came to the shop door on the night of the king's flight."
+    },
+    "the_champ_de_mars": {
+      "category": "lore",
+      "title": "The seventeenth of July",
+      "book": "crown-of-ashes",
+      "text": "The shooting at the Altar of the Fatherland on the Champ de Mars, where the National Guard fired on the crowd signing the Cordeliers' petition."
     }
   }
 }
