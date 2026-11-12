@@ -499,6 +499,18 @@
       "title": "The keepers of Paris",
       "book": "crown-of-ashes",
       "text": "The Valere house in the rue Saint-Jacques, printers, who have kept the hero's books and his haven since the court came to France. The post passes with a ring of keys and a form of words that is older than the house."
+    },
+    "the_law_of_suspects": {
+      "category": "lore",
+      "title": "The Law of Suspects",
+      "book": "crown-of-ashes",
+      "text": "A decree of the seventeenth of September 1793 that ordered the arrest of everyone who might be thought an enemy of the Republic: nobles, their kin, those refused a certificate of civism, and those who could not account for their means. The Tribunal and the Section lists did the rest."
+    },
+    "the_twenty_first_of_brumaire": {
+      "category": "lore",
+      "title": "The twenty first of Brumaire",
+      "book": "crown-of-ashes",
+      "text": "The eleventh of November 1793, in the Year Two. A sitting of the Tribunal ran late, and the last cart came to the Place of the Revolution by torchlight. What the crowd saw there is still told in Paris, and not agreed."
     }
   }
 }

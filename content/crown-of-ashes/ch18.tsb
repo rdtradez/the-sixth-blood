@@ -1,0 +1,345 @@
+// Book Three, Chapter 18 (session 37). The autumn of 1793 told, and the night of the tenth to the eleventh of November. The Conciergerie, the Marais, the brewery yard, the rue des Prouvaires, and the Place of the Revolution at dusk.
+// Opens on the autumn (no phase), then one night phase of three actions out of four, then the eleventh told at dusk, then a fixed closing scene in the Place that every player plays.
+// Ends with rest() and => next. Reads b3.arrest, b3.civism, b3.young, b3.committee, b3.sword, b3.keeper, b3.third, b3.envoy, b3.hunt, b3.crossing and b3.carmes. Chapter 19 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c18
+@title The Year of the Falling Leaves
+@book crown-of-ashes
+@version 1
+
+# start
+## The autumn
+$ b3.cell = "left"
+$ b3.marais = "left"
+$ b3.yard_veil = "held"
+$ b3.officer = "bargained"
+$ b3.rising = "watched"
+~> autumn
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the night of the tenth of November, a Sunday, a little after five, and there is a thin cold fog. There are four things that want doing by your own reckoning, and time for three.
+-> night
+
+# autumn
+The year has been begun again. It began, by decree, on the twenty second of September, which was the day on which the sun crossed the line, and it is called the Year Two. The months have been given the names of the weather. It is Brumaire, the month of the fogs. The week has ten days. The saints are gone from the calendar, and there are tools, and roots, and farm animals in their places, so that a man who is born on the day of the turnip may be married on the day of the plough. It is very much admired. It has been remarked that nobody can remember what day it is.
+On the sixteenth of October they brought the queen to the Place in a cart, with her hands tied behind her, and cut her hair. It was done at a quarter past noon, and the Place was quite full. On the thirty first, twenty one of the members of the Convention who had been put out of it in June were taken to the same spot, in four carts, and sang the Marseillaise all the way. It took thirty six minutes. There is a machine, in the Place, that has been very much improved, and a new man, called the Sanson of the Section, who has a cheerful manner and a stained apron. There is a smell. The gutters have been changed to carry it. It is a smell that has gone into the stone.
+?if b3.arrest == "paper"
+  The month that you bought is up. It was a good month. It was not a long one.
+?elif b3.arrest == "followed"
+  You have been to the grille of the Conciergerie four times, with a basket, and four times the basket has been taken in, and four times a note has come out, in a fair clerk's hand, to say that the Chevalier is well, and that he asks to be remembered to the house.
+?else
+  Brézac has been in the Conciergerie seven weeks. It has been said, by the person who brings the soup, that he sleeps well, plays at piquet, and is much admired by the turnkeys.
+?end
+He was examined on the third of the month. He was asked his name, and his profession, and whether he had ever carried arms against the people. He answered that he had carried them for a hundred and fifty years, and that on the whole they had not complained. There was laughter in the room. It was written down. He is to be tried on the twenty first of Brumaire, which is to say tomorrow, with two others, a clerk of the Farmers General and a woman who sold lace in the rue Saint-Honoré. It is thought that it will not take long.
+?if b3.young == "backed"
+  The Cadets are in the Revolutionary Army, all but a few. They go out at dusk, by twos, in red caps, with the Section's cards, and they come back, near dawn, with names. It is a number of names. There are six old ones of the court who have been found in cellars. They have not come back from the Conciergerie. There is not a great deal of pleasure in it in the yard. Severin has a cough that he does not have.
+?elif b3.young == "forbade"
+  The Cadets have stayed in the quarry, and in the yard, and they are very quiet. Severin does not come to the shop. A boy brings the notes, and does not wait. There is a place, in the row on the staves, that has been left vacant, as at a table after a death.
+?else
+  The Cadets are waiting. They have been waiting for sixteen months. It has become a thing in itself, like a kind of weather, and the yard has a smell of it, of malt and iron, and of persons who are not going to be able to go on.
+?end
+?if b3.committee == "served"
+  The presses of the house run nights for the Committee. The lists go out at dawn, in bundles, on a barrow. Adélaïde has the first copy. She reads it, and puts it in the stove.
+?elif b3.civism == "refused"
+  The house in the rue Saint-Jacques is on the third list still. It is not, so far, a list that anybody has come to read.
+?end
+?if b3.keeper == "adelaide"
+  Adélaïde keeps the house. She has begun to say, in the Section, in a hard voice, that it is only a shop.
+?elif b3.keeper == "baptiste"
+  Baptiste keeps the house. He had a notice, on the fifth, from the Commune, to say that Le Fanal was to be suppressed, and he has gone on printing it, under another name, in the cellar. It has doubled in sales.
+?end
+?if b3.third == "touched"
+  The Prince has said, once, at the door of the third cellar, that the hand has not been still since the night of the king.
+?elif b3.third == "read"
+  The Prince has said, in the cellar, that he thinks that he now knows what he would say if he were not told. He has not said what it is.
+?end
+It is a very mild autumn. The leaves have turned, along the quays, and fallen, and lie in the gutters in long brown drifts that nobody has been told to sweep, and it is said by the old women of the quarter that it is the year of the falling leaves.
+<~
+
+# hunger
+## The fog
+It is a gray, wet night, with the fog standing on the river like a lid, and the lamps at the corners make small rooms of light and nothing between them. There is a long queue at a baker's in the rue Mouffetard that has been there since the afternoon, and will be there tomorrow, and in the doorway of an empty church a woman sleeps with a child in her skirts and a cabbage.
+* Take it from the sleeper, quickly, and leave a coin in the cabbage
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  You take as little as you can, from the arm, with the child not awake. She moves, and sighs. You leave all that you have, in the leaves, and go away. It is a thing that nobody would call a charity, and it is not a thing that she will ever know has been done.
+* Take it from a horse, in the stable of the Section
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  It is an old gray cart horse, with a hanging lip, who has stood in the same stall since the requisition and is accustomed to be disturbed. He puts back an ear. He allows it, as an old man allows a very young doctor.
+* Wait, and do not feed
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It is the fog that makes it possible. There is nothing in it to see. You stand at the end of the Pont au Change, with the river going by like a rumour, and wait for the thing in you to remember its manners.
+<~
+
+# cell
+## The Conciergerie
+It is a long vaulted room under the Palace, with a lamp on a chain, and a smell of wet straw and of old soup. He has been put in the third cell on the left, which was the Queen's, and has been given the straw of an aristocrat, which is of better quality than the straw of a commoner. There are two turnkeys in the passage, playing at cards, who have been well paid, and do not look up. He is on a stool. He has shaved. He has set out, on a plank, his sword, which was refused him, and which he has drawn instead, in the dust, with the point of his finger, as a boy draws a ship.
+He says that he is very glad to see you. He says that it is the first time that he has been able to say it to a person who knew what it meant.
+?if b3.arrest == "paper"
+  He says that he has had a month, and that he has used it to read. He has read a book of sermons, and a novel, and the whole of a volume of the Encyclopaedia, from the beginning, and he thinks very highly of the article on Fortification.
+?else
+  He says that the time has gone by rather faster than he had supposed.
+?end
+He says that the Prince has been to see him. Not in the body. A card, with a word on it, brought by a person who would not give his name. The card said: stand up. He says that he does not know what it can mean, and that he has an idea that it will be explained.
+He says that he is tired. It is the first time that you have ever heard him say it.
+* Promise that you will be in the Place, and see it
+  $ b3.cell = "promised"
+  $ humanity += 1
+  $ standing += 1
+  $ bond.brezac += 3
+  $ do chart("paris.court")
+  $ do discover("the_twenty_first_of_brumaire")
+  He is very much moved. He does not show it. He takes your hand, in both of his, and holds it, as an old swordsman does, a little too long. He says that he would take it very kindly. He says that it is a great thing for a man to have, at such a time, a person in a crowd who knows his face. He does not ask you to be brave.
+* Argue that there is a way, and that you could take him out tonight
+  $ b3.cell = "argued"
+  $ defiance += 2
+  $ secrecy -= 1
+  $ cunning_brutal += 1
+  $ bond.brezac += 1
+  $ do chart("paris.court")
+  $ do discover("the_twenty_first_of_brumaire")
+  You say it low, with your back to the passage. You say that there are two turnkeys and a gate, and that it would be a quarter of an hour. He lets you finish. He says that he knows it is true. He says that he has thought of it, and that he finds that he does not wish to go. He says that there is a thing that is wanted of him, which he cannot say, and that he would be a very poor sort of sword if he were to break in his own hand at the last. He says it with a perfectly gentle obstinacy. He smiles. It is like arguing with a wall that has been built by a very good mason.
+* Send in a basket of Tokay, and do not go
+  $ b3.cell = "left"
+  $ secrecy += 1
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  $ bond.brezac -= 2
+  $ do chart("paris.court")
+  $ do discover("the_twenty_first_of_brumaire")
+  You stand at the head of the passage, in the dark, for a quarter of an hour, with the basket in your hand. You give it to the turnkey. You say that it is for the gentleman in the third cell, and that no name is to be given. The turnkey says that it is the third basket, and that it is a very good house that sends so much wine to a man who is going to be shot at dawn. He is wrong about the hour, and about the weapon, and you do not correct him.
+<~
+
+# marais
+## The rue Saint-Antoine
+It is a narrow house, with a carriage gate, and a court the size of a handkerchief, and a plane tree that has been stripped of its leaves by the wind. The blinds are down. There is a single lamp, in a back room, on the second floor. A cook, an old woman in a mob cap, lets you in, and says that the master is reading, and that he has not eaten since the Tuesday, which is, she says, a thing that she does not understand, as he never has.
+He is at a table, in the gray coat, with a very old book open, which is not a book that he is reading. He is a good deal smaller. He has the sharp, drawn, lucid look that he had on the night of the king, but it has gone further, as a candle goes that is past the middle. He looks up. He says, before you have said a word, that he knows.
+He says that Brézac was the best of them. He says that Brézac was the only one who ever asked him a question to which he did not know the answer. He says that it is quite proper that it should be he. He says that it was in the passage, and that it was in the hand, and that it has been in the hand since a year ago.
+He says that he has been told what is to happen in the Place. He says it without any emphasis. He says that it is not to be seen by anybody.
+?if b3.crossing == "left"
+  He says that he did not come back over the river on his own account, and that he does not think that he can be asked to go again.
+?end
+* Vow that nobody in the Place will see it
+  $ b3.marais = "vowed"
+  $ humanity += 1
+  $ secrecy += 1
+  $ standing += 1
+  $ bond.ottaviano += 1
+  $ do chart("paris.court")
+  $ do discover("the_twenty_first_of_brumaire")
+  You give your word. You give it in the old form, as to a lord of the house, with your hand on the table. He looks at it. He says that it is a very great deal to ask of a man, and that it is very much to your credit that you have not asked what it is. He says that he will not forget it. He closes the book. He says that he had better try to eat.
+* Press him to come to the Place himself, and see Brézac stand
+  $ b3.marais = "pressed"
+  $ defiance += 2
+  $ cunning_brutal -= 1
+  $ humanity += 1
+  $ do chart("paris.court")
+  $ do discover("the_twenty_first_of_brumaire")
+  He is very still. He says that he has not been in a crowd since the siege of La Rochelle. He says that he would not know where to stand. He says that he is afraid, and has been afraid for a very long time, and that he had thought that it was a thing that had stopped. He says it with a faint remote astonishment, as if he had discovered a fresh vein of ore under the cellar. He says that he will see. He says it in a voice that is a refusal.
+* Say what you must, and leave him to his book
+  $ b3.marais = "left"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ humanity -= 1
+  You say that there is nothing that you can do that has not been done. He nods. He says that it is very much what he supposed. He looks down at the page. The cook shows you out through the court, past the plane tree, and shuts the gate with both hands, as one shuts the door of a sick room.
+<~
+
+# yard
+## The brewery yard
+The Cadets are in a circle, under the lantern, with their backs to the staves and the casks, and Clémence is in the middle of it, standing. She has a paper in her hand. It is a hand bill, the width of a man's palm, that has been set, in the dark, in a very small type, in a hurry. It says that tomorrow, at the Place of the Revolution, there is to be shown the proof that the aristocrats are not men.
+?if b3.young == "backed"
+  Severin is at the edge of the lantern, in a red cap, with a card in his hand and a good deal of mud on his boots. He does not look as if he has slept. He says that it is Clémence's, and that he did not help to write it.
+?elif b3.young == "forbade"
+  Severin is not in the circle. He is on a cask by himself, with his hands between his knees, and has the air of a man who has decided to have no opinion.
+?else
+  Severin is leaning on the staves with his arms crossed, and says that it was Clémence's notion, and that it is a very good one, and that he has been saying so for a quarter of an hour.
+?end
+She says it quite plainly. She says that the court has told them for three hundred years that they are made of a different stuff, that they must not be seen, and that to be seen is to be burned. She says that tomorrow a thing is going to happen in a public place before a crowd of twenty thousand, which the court has not wished to be seen, and which cannot be hidden by any of the arts of the old ones, because the old ones are not going to be there. She says that this is the proof. She says that it is not the proof that they are monsters. It is the proof that they are a people.
+She says that she would like to be in the Place to say it.
+* Keep them in the quarry, and say that you will answer for it
+  $ b3.yard_veil = "held"
+  $ standing += 1
+  $ secrecy += 2
+  $ humanity += 1
+  $ bond.severin -= 1
+  $ do chart("paris.rebels")
+  $ do discover("the_twenty_first_of_brumaire")
+  She does not argue. She looks at you, with her mason's hands, as one looks at a block that has been refused. She says that it is very much what she supposed. She says, to the circle, quite gently, that they are to go below. They go. It is done in good order. It is a very quiet defeat, and it has no kind of look of being the last.
+* Let her go to the Place, and say nothing
+  $ b3.yard_veil = "let"
+  $ defiance += 3
+  $ secrecy -= 3
+  $ humanity += 1
+  $ bond.severin += 1
+  $ do chart("paris.rebels")
+  $ do discover("the_twenty_first_of_brumaire")
+  You do not say anything. It is a thing that is, in itself, a statement. She does not wait to see whether it is meant. She folds the paper, and puts it inside her bodice, and goes up the stair into the fog without a word, with a dozen after her, and the yard is, quite suddenly, almost empty. Severin says, in the silence, that he will go and see that they come to no harm. He goes.
+* Send Severin to the Place with them, as a guard, and burn the hand bills
+  $ b3.yard_veil = "sent"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  $ standing += 1
+  $ bond.severin += 1
+  $ bond.clemence -= 2
+  $ do chart("paris.rebels")
+  $ do discover("the_twenty_first_of_brumaire")
+  You take the bills from the table, one by one, in a quiet way, and put them in the stove, and nobody moves. Clémence watches them go. She does not say anything. She says, at the end, that it was a very fine type, and that it took her a week. It is arranged that Severin is to take six of the oldest, in plain coats, to the Place, and that they are to stand at the front, and that they are to say nothing, and that they are to be there. It is a very odd compromise. It is made by persons who are too tired to want anything else.
+<~
+
+# officer
+## The rue des Prouvaires
+It is the room over the chandler's, with the small stove, and the same courtesy, and a letter on the table, under a stone. There is a candle. There is a person at the window.
+?if b3.hunt == "sworn"
+  It is Galerius. He has been, he says, in Paris a great while, and he has been wishing to go home, and it was thought that he might see this first. He is very much older than he was in the spring. He holds his old hat in his hands. He says that the Senate is aware of what is to be done in the Place tomorrow, and that it has asked him to attend.
+?else
+  It is the Senate's second officer, the long fair man of a very great correctness. He has a good coat, and gloves, and a small notebook, in which he has not written anything. He says that the Senate is aware of what is to be done in the Place tomorrow, and that it has asked him to see that nothing is said, afterwards, in the streets, that cannot be unsaid.
+?end
+He says that it is the opinion of the Senate that a thing of this sort, in a public place, is the greatest danger to the Peace since the Fall of Alexandria. He says that it is a matter that is to be kept. He says that he is to ask the hero, as the holder of a house in Paris, and as a member of the court, whether it will be.
+?if b3.envoy == "heard"
+  He says that he has the honor to remind you of the spring, and of the plainness with which you gave an account of yourself. He says that it is a thing that the Senate has not forgotten.
+?elif b3.envoy == "sent"
+  He says that it is a very long time since anybody put him out of a door, and that he has the greatest respect for you, and that he hopes that it is not going to be necessary to do it again.
+?else
+  He says that you gave the Senate what it asked for, and nothing more, and that it was very exact.
+?end
+* Give your word that the Veil will hold
+  $ b3.officer = "pledged"
+  $ standing += 2
+  $ defiance -= 2
+  $ secrecy += 1
+  $ do chart("paris.court")
+  $ do discover("the_twenty_first_of_brumaire")
+  He is a little startled. He says that the Senate does not, in general, ask for it in that form. He writes, in his notebook, for the first time. He says that it is on your head. He says it without menace, as a man says it who has handed across a very heavy and a very fragile object. It is a thing that you will have to see done.
+* Say that the Senate has no standing in the matter, and that it may send its report
+  $ b3.officer = "defied"
+  $ defiance += 3
+  $ standing -= 2
+  $ secrecy -= 1
+  $ cunning_brutal += 1
+  $ do chart("paris.court")
+  $ do discover("the_twenty_first_of_brumaire")
+  It is a thing that you say with great pleasure, and it is a mistake, and you know it while you are saying it. He closes the notebook. He says that it has been very instructive. He says that he will not be able to forbid the Senate to attend, and that it will be there. He says that it is a very great pity, because in his private opinion the hero is an honest man.
+* Offer to see the Veil kept, if the Senate will leave the Cadets alone for a year
+  $ b3.officer = "bargained"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  $ standing += 1
+  $ do chart("paris.rebels")
+  $ do discover("the_twenty_first_of_brumaire")
+  He considers it. He says that it is not in his gift. He says that he will say it, in the report, in just those words, and that he will say that he thought that it was reasonable. He says that it is the most a man in his position can do. He folds his gloves. It is, you think, the nearest thing to a kindness that the Senate has done you since Rome.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is a little after five, and the fog is down on the quays, and the lamps are lit in the shops, and nobody is buying. There is a smell of the river. It is very cold.
+?elif actions_left() == 2
+  It is the middle of the night. The patrols go by in the fog without being seen, and are heard a long way off, in step, like a slow clock.
+?else
+  It is four. There is a very faint gray in the east, that is not yet light. There is one thing more that you can do before the day.
+?end
+* Go to the Conciergerie, where Brézac has asked for you [once] ?if actions_left() > 0
+  ~> cell
+  $ do act()
+* Go to the house in the rue Saint-Antoine, where the Prince has stopped eating [once] ?if actions_left() > 0
+  ~> marais
+  $ do act()
+* Go to the brewery in the rue de Charonne, where Clémence has a hand bill [once] ?if actions_left() > 0
+  ~> yard
+  $ do act()
+* Go to the rue des Prouvaires, where there is a stranger at the window [once] ?if actions_left() > 0
+  ~> officer
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> morning
+?end
+-> :night
+
+# morning
+## The twenty first of Brumaire
+You are in the haven before the day, with the stone over you, and you hear nothing of it. The Tribunal sits at eight. It is in the great hall of the Palace, which is the room in which the kings of France were once crowned with a great deal of ceremony, and it is a thing that people say, now, with a lowered voice, that it is a fine room for it.
+It is told you at dusk by Baptiste, who comes down the stair himself, in his shirt sleeves, without his hat, with a very white face, and stands at the foot with one hand on the wall.
+He says that the three were tried at ten. He says that it was done in a quarter of an hour, and that the clerk and the lace seller said nothing at all, and that the Chevalier was asked whether he had anything to say. He says that the Chevalier said that he had only one observation, which was that the court was a great deal more interesting than he had been led to expect. He says that they laughed again. He says that the sentence was passed at a little after two, and that the three were taken to the Conciergerie to be made ready.
+He says that it had been supposed that it would be done at four. He says that the cart was kept, because the Tribunal had another case, and then a third, and that at half past four it was not yet out, and that by five the light was going and that it was in the Place that torches were lit.
+?if b3.committee == "served"
+  He says that it has been remarked, in the shop, that it is a pity about the new lists, since the old one was so well set.
+?end
+?if b3.yard_veil == "let"
+  He says that there was a girl at the Pont au Change, in a gray dress, with a stack of hand bills, who was stopped by the Guard, and then not stopped, and that she has gone down towards the Place with a great many young people in her train, in the fog, and has not been seen.
+?elif b3.yard_veil == "sent"
+  He says that there are six young men at the front of the crowd, in plain coats, who have the look of persons who are about to see a thing that they have been told of, and do not like it.
+?end
+He says that he thought that you would wish to know.
+-> place
+
+# place
+## The Place of the Revolution
+You go on foot, along the river, in the last of the dusk, and the fog comes up from the Seine in rags. The whole of the Place is full. It is not to be believed. It is a quarter of a mile of heads, with the horses of the Guard in lines, and the lamps lit upon poles, and the torches. They are tarred and burning, in iron cressets, round the base of the machine, and they send up a heavy red smoke, that hangs over the whole of the square at the height of a roof. You find a place under the colonnade of the Garde Meuble, against a pillar, in a hat, in the thick of the dark, where a man may stand without being looked at. Nobody does.
+There is a drum. It is an ugly sound. It is a good deal slower than it should be. The cart comes in by the rue Royale, in the smoke, with the three of them in it, sitting up with their hands tied behind them. The clerk is gray. The woman has her eyes shut. Brézac is in the plain gray coat, bare headed, with the scar pale in the torchlight, and he is looking over the heads of the crowd, with great attention, at something in the middle distance. He finds it. It is you. His face does not change. He inclines his head, a quarter of an inch, as a man does at the opera, to an acquaintance in a box.
+?if b3.cell == "promised"
+  You have kept your word. It is a poor thing, in the circumstances, and it is all that there is.
+?end
+?if b3.marais == "vowed"
+  There is a plain coach under the trees by the Tuileries wall, with the blinds down, and Ottaviano on the box. It has been standing there since dusk.
+?elif b3.marais == "pressed"
+  There is a plain coach under the trees by the Tuileries wall, with the blinds drawn. The door has opened. There is a hand on the sill, white, very small, that does not seem able to decide whether to come out. It does not.
+?end
+?if b3.yard_veil == "let"
+  Clémence is on the steps of the Ministry of the Marine, on a barrel, in the gray dress, and has the hand bills in a heap at her feet. She is quite calm. She is waiting.
+?elif b3.yard_veil == "sent"
+  Severin is at the front, between two of the National Guard, in a plain coat. He has not got a hand bill. He is looking at the machine.
+?end
+?if b3.officer == "pledged"
+  The Senate's man is at the edge of the colonnade, under a lamp, with his gloves. He has the little notebook open. He does not look at you.
+?elif b3.officer == "defied"
+  The Senate's man is at the edge of the colonnade, in a good coat, and a hat. He has brought two others. They are quite still. It is not at all a matter of pretending that you have not seen them.
+?else
+  The Senate's man is at the edge of the colonnade, under a lamp, with his gloves, and he has a small book.
+?end
+They are taken in order. The lace seller is first. She is quick, and does not make a sound. The clerk is the second. He says that it is a mistake, in a high voice, to the crowd, and the crowd does not say anything. It is done in the time that it takes to lift a hat.
+It is the third. He mounts the steps by himself, and does not take the arm of the assistant. He stands. He looks, for the last time, at the whole of the Place, and the fog, and the torches. He says, in a clear, light, carrying voice, that is not at all like a speech, that he would be obliged if somebody would see to the horse. He is laid on the plank. The plank goes forward. There is a click, and the whole of the Place is absolutely still.
+The knife comes down. It makes the sound that it always makes, which is smaller than you were afraid. The assistant takes the head out of the basket, by the hair, and walks to the rail, and holds it up. The roar begins, in the front, and goes back, in a wave, through the whole of the Place. It is not an angry sound. It is a sound that is made by a very large number of persons who are all glad to be somebody else.
+It stops. It does not stop altogether. It stops at the front. The assistant is looking at the head in his hand. It has opened its eyes.
+It looks at the crowd, with perfect gravity, and then, for an instant, directly at you. The mouth moves. It says one word, without a voice, that you could read from any distance in the world. It says: now.
+The assistant lets go of it. It falls on the boards, and rolls, and the front of the crowd gives back like water. The body on the plank has moved. It has put out a hand. It is a large, fair, white hand, with the knuckles scarred, and it feels along the boards, with a patient, practical air, like the hand of a man who has dropped his glove. It finds the head. It lifts it. There is a perfectly clear and audible sound in the silence, like the closing of a very well made box.
+Brézac sits up on the plank of the guillotine, with his head on his shoulders, and the scar on his face, and puts up his hand to the place at his neck, and looks about him with a mild, rather puzzled, courteous interest, as one who has been wakened in a strange house.
+Nobody breathes. It is a thing that lasts, perhaps, four seconds. It is a very long time.
+* Make a cry, in the crowd, that turns every head
+  $ b3.rising = "covered"
+  $ humanity -= 2
+  $ secrecy += 3
+  $ cunning_brutal += 2
+  $ standing += 1
+  $ do chart("paris.court")
+  $ do discover("the_twenty_first_of_brumaire")
+  You do it from the pillar, in the old voice that carries without being loud, and in the fine, high, shrill accents of the women of the Halles. You cry that it is the Austrians. You cry that they have broken in at the Barrière. You cry it twice. It goes through the crowd like a draught through a house. A thousand heads go round at once, and a thousand people begin to run, and there is a crash and a scream by the Ministry of the Marine, and a horse goes down, and the Guard shouts. It is a hideous noise. It is the best that can be done. By the time it is quiet the machine has been cleared, and the assistant is sitting on the steps, with his head between his knees, and the three bodies have been put in the cart, and the Place is going home. Two persons, it is said, were trodden to death at the Garde Meuble. You do not ask for their names.
+* Go through the crowd, and take him out in the dark
+  $ b3.rising = "carried"
+  $ secrecy -= 1
+  $ defiance += 2
+  $ humanity += 1
+  $ standing += 1
+  $ bond.brezac += 3
+  $ do chart("paris.court")
+  $ do discover("the_twenty_first_of_brumaire")
+  You go across the Place at the pace of a man who is going to give evidence. Nobody stops you. The assistants have got off the platform and are standing in the smoke with their mouths open. You go up the steps. You say, in a loud flat voice, in the voice of the Section, that the citizen is not dead, and that he is to be taken in charge, and is to be examined, on the order of the Committee, and you say a name. It is the name of a man in a round hat, and it is a very good name. You get an arm round him. He is very heavy, and quite cold. He leans on you, like a drunk man, with a sort of formal apology. The wicker coffin, in the cart, is the nearest, and you put him into it, and the lid goes down, and a plain coach comes slowly through the crowd to the foot of the steps, with its blinds down, and takes it.
+* Do nothing, and stand under the pillar, and look
+  $ b3.rising = "watched"
+  $ secrecy -= 4
+  $ humanity += 1
+  $ defiance += 2
+  $ cunning_brutal -= 1
+  $ do chart("paris.court")
+  $ do discover("the_twenty_first_of_brumaire")
+  You do not move. It is a decision, and it is the only one that has ever seemed to you to be wholly honest. You watch the whole of the thing. He gets to his feet. He is quite steady. He says, in the same clear light voice, that he is very much obliged to the Section, and that there appears to have been some mistake. There is a long sound. It is not a cry. It is a sound that is made by a very great number of persons all at once, who are exactly as frightened as they have ever been. A woman begins to pray. Somebody laughs, and goes on laughing. It goes on, in waves. The Guard has not got an order. It is some while before anybody is able to think of one. By that time several hundred persons have seen it, and there is not very much to be done about it.
+It is dark. The torches are burning down. The Place is not at all quiet.
+The hand of the Lady is moving, you know, a long way off, in the dark of a cellar, on a slate. It is writing one word.
+$ do rest()
+=> next
