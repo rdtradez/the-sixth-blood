@@ -95,6 +95,9 @@ test('chapter 9 takes each choice at the press, the brewery, the boy and the Pri
     for (const [key, re] of [['taught', /quarry gallery, and begin/], ['hidden', /night coach for Lyon/], ['left', /Leave him where he is/]]) {
       const run = await play('b3c09', {}, { ...START, 'b3.greve': greve }, via(/Look for Thibault/, re), { stopAt: 'b3c10' });
       assert.equal(run.vars['b3.boy'], key, `${greve} ${key}`);
+      const thibault = run.game.state.sys.circle.thibault;
+      if (key === 'taught') assert.equal(thibault?.status, 'active', `${greve} taught: Thibault joins the coven`);
+      else assert.equal(thibault, undefined, `${greve} ${key}: Thibault does not join`);
       clean(run);
     }
   }
