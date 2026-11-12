@@ -1,0 +1,229 @@
+// Book Three, Chapter 6 (session 31). The Réveillon riot, the evening of 27 April and the night of 28 April 1789. The crowd, the Veil, the wounded, the council.
+// Opens on the evening of the smoke (no phase), then one night phase of three actions out of four, then a dawn that points at the Estates.
+// Ends with rest() and => next. Reads b3.cadets, b3.weapon, b3.list, b3.galerius, b3.grain, b3.aubry, b3.severin and b3.gallery. Chapter 7 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c06
+@title The Wallpaper Factory
+@book crown-of-ashes
+@version 1
+
+# start
+## The twenty-seventh
+$ b3.riot = "held"
+$ b3.veil = "left"
+$ b3.wounded = "refused"
+$ b3.council = "silent"
+~> smoke
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the night of the twenty-eighth, and the whole of the east of the city is on its feet. There are four things in it that want doing by your own reckoning, and time for three.
+-> night
+
+# smoke
+The first sign of it is a color in the sky, over the roofs of the rue Saint-Jacques, at about the hour of the evening bell. It is not a sunset. It is a low brown stain with an orange edge, going up in a column from somewhere beyond the Bastille, and it is not moving. Étienne comes out and looks at it with his spectacles in his hand and says that it is a very large fire, and then, after a time, that it is a very large fire in the wrong place.
+It began on the twenty-seventh, in the Place de Grève, at noon, with a straw man. There were three hundred of them, journeymen, mostly, and boys, and they carried an effigy of Réveillon, in a coat, with a placard on its chest that said that he was a scoundrel who had wished to starve the people, and they hanged it from a lamp and burned it, with a great deal of singing, and the watch did not interfere. By night there were three thousand of them, and it was no longer a straw man.
+It is the twenty-eighth now, in the afternoon, and the thing has not stopped. It has gone back to the faubourg and taken the house. There is a thousand of them in the rue de Montreuil, and then there is ten thousand, and the paper works are being taken apart by the hands of the people who made the paper, quickly, with care, as one takes apart a house that one has been told is not one's own. The Gardes Françaises have been called out. The Royal-Cravate is on the way from Versailles. It is a great deal of cavalry for a wallpaper factory.
+?if b3.weapon == "accepted"
+  A note comes in a footman's pocket from the Hôtel de Saint-Aubin, in the Prince's own hand. It is a single line. It says that it is the hour for which the Prince has employed you, and that nobody should be spoken to who can be seen to.
+?end
+?if b3.cadets == "sworn"
+  Clémence's boy is in the shop at seven, out of breath, with the lilac ribbon pulled out of his cap and clenched in his fist. He says only that they are all in the rue de Montreuil, and that Thibault is with them, and that Séverin has said that you would know what it meant.
+?elif b3.cadets == "refused"
+  Nobody comes from the rue de Charonne. You find that you had thought that somebody would.
+?else
+  A boy that you do not know brings a scrap of gray paper, with a lilac smear on the corner. It says, in a plain mason's hand, *We are at the works. Whatever you decide, we would rather that you saw it.*
+?end
+<~
+
+# hunger
+## The smoke
+The smell of the fire does it. It is a plain, dry, domestic smell, of paper and burning varnish and warm timber, with something under it, and the something under it is the thing that wakes you. You have been walking in the rue du Faubourg for a quarter of an hour, and you are three streets from the crowd, and you find that you are looking at the people on the pavement as one looks at a table.
+* Take it from a looter who has gone back to his cellar with a sack
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  He is not a wicked man. He is a man with a bolt of painted paper under one arm and a silver candlestick under the other, in a cellar, in the dark, with the noise of the whole of the faubourg going on over his head. He does not even cry out. It is done in the time it takes for a bell to ring once, and when it is done you lay the paper on his chest, quite carefully, as a thing that he might want.
+* Go back through the Arsenal gate to the stables, where the cavalry horses are tied
+  $ do feed("animal")
+  $ secrecy += 1
+  $ humanity += 1
+  The troopers are all at the front, and there is a single groom, who is asleep. The horses are bored and very frightened, and one of them is a gray with a white stocking, who puts its head against your shoulder as if it were being tended. It is not at all what you had expected to do tonight.
+* Put it aside, and go into the smoke as you are
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It walks beside you, very close, a half step behind, like a servant. You find that you can keep it there. It is a thing that you will have to keep your eye on.
+<~
+
+# crowd
+## The rue de Montreuil
+The street is full from wall to wall. It is not a mob in the sense of the word that the court uses. It is a trade. There are the cabinet makers, and the glassmen, and the dyers, with their aprons on, and their wives, with the children on their shoulders, and the carters, and a number of boys, and they are all doing something. There is a row of men on the roof of the works with long poles, pushing the tiles off into the yard. There is a line of women passing out the furniture hand to hand to a bonfire at the end of the street, a chair and a clock case and a rolled bundle of printed paper, one at a time, with the careful rhythm of a chain at a well.
+In the cellars they have found the wine. It is not a good wine. It is a very great deal of wine.
+The works are alight in four places. In the yard of the neighboring house, the Folie Titon, a man has hung a portrait from a window by the cord, and it turns slowly there in the heat with its painted eyes, a gentleman in a powdered wig, until the cord burns through.
+Far up the street, over the heads, at the corner by the Bastille, there is a glitter. It is the bayonets of the Gardes Françaises, in a line of white and blue, coming on at a walk.
+?if b3.cadets != "refused"
+  You see them before you are seen. There are nine or ten of the Cadets in the crowd, among the carters, with their collars up, in the gray plain clothes of their work, scattered, and none of them near the others. Clémence is on a wall, with a stone in her hand that she has not thrown. Séverin is in the doorway of the Folie Titon with a cane. He sees you across the whole width of the street and he lifts it, an inch, as one lifts a hat.
+?end
+It is going to be very bad in about four minutes. You have, you think, those four minutes.
+* Go into the front of it, and stand with the Cadets and the carters
+  $ b3.riot = "stood"
+  $ defiance += 3
+  $ standing -= 2
+  $ secrecy -= 2
+  $ bond.severin += 2
+  $ do chart("paris.rebels")
+  $ do discover("the_reveillon_riot")
+  You stand in the front. It is not a place of any advantage. You have been in the front of a good many things, and it has always been a place of noise and a good deal of waiting, and nobody ever tells you whom you are waiting for. A carter beside you with a face like a red wall takes one look at you, in your good coat, and offers you his flask. The line of white and blue comes on, at a walk, and halts at forty yards, and there is a pause of perfect silence in which the whole street can hear the roof timbers going.
+  Then somebody throws a stone. It is a very small stone. It is a thing that happens in every war, at the beginning, and nobody ever sees who it was.
+* Go along the crowd, and turn the ones at the front from the burning
+  $ b3.riot = "turned"
+  $ cunning_brutal -= 2
+  $ humanity += 3
+  $ standing += 1
+  $ do discover("the_reveillon_riot")
+  It is the most difficult thing that you have done in a long time. You walk against the stream. You take a man by the arm, and another, and you say the same four words in a low steady voice, to each of them, in the plain French of the faubourg: that it is not the house, and that it is the soldiers. They do not listen. They are not a thing that will listen. But there are forty of them in the front who look at your face, and each of them, for a second, remembers that he has a wife and a room and a bed, and the front of the crowd gives, here and there, in a ragged way, like a wall in which a few stones have been loosened. It will not save a very large number. It will save some.
+* Hold back at the end of the street, and watch where it goes
+  $ b3.riot = "held"
+  $ cunning_brutal += 1
+  $ secrecy += 2
+  $ defiance -= 1
+  $ do discover("the_reveillon_riot")
+  It is the sensible place. You stand under the arch of a coach house, in your good coat, with your hands in your pockets, where the troops will not look, and the crowd will not need you. You see all of it. It is a thing that you have the training for, and it gives you the particular dry clarity of the man in the stand. It is also, you will find, a place from which a man sees everything and cannot afterward say that he was not there.
+The line of white and blue fires, in the end, at about a quarter to nine. It is not a single volley. It is a ripple, from the right, from the end by the Bastille, a long ragged crackling thing, like a very large piece of canvas being torn. The street is entirely different afterward. It goes backward. It goes into the doorways and into the courts, and it leaves behind it, on the cobbles, in the red light, a great number of people who have lain down.
+<~
+
+# veil
+## The boy who got up
+You find Thibault in the Cour des Trois Frères, by the pump. He has been hit twice, once in the chest, once in the throat, and has gone down against the well curb with his cap beside him, and for a moment, as you come through the crowd with your arm up, he is very plainly dead. Then he opens his eyes. He is surprised. He puts his hand to his neck, where the blood is going, and the blood stops, and he gets up.
+He does it slowly, as one gets up after a fall. It is the most natural thing in the world. He puts his hand out for his cap.
+There is a sergeant of the Gardes Françaises at the mouth of the court, with a fixed bayonet and a smoking musket, about thirty feet away, with the moonlit face of a man who has been doing a thing that he has never done before. He is looking at the boy. He has seen him fall. He has seen him get up. He is not stupid, and he is not a coward, and he has just been told by every officer in his regiment for a week that these people are scum, and he is trying very hard to decide what it is that he has seen.
+There are two hundred people in the court. It is a matter of a few moments.
+* Take the boy by the shoulders, lay him down again, and have him carried out as a corpse
+  $ b3.veil = "covered"
+  $ secrecy += 2
+  $ cunning_brutal -= 1
+  $ bond.baptiste += 1
+  It is the cheap way, and it takes some nerve. You lay him down. He is a very good actor, which is the thing that you remember afterward. You say, quite loud, in the manner of a gentleman, that the boy is dead and that the cart is to be sent for, and by the time that the sergeant has crossed the court there are two Cadets with a shutter and a handkerchief over his face, and a woman crying, and you are standing over him with your hat in your hand. The sergeant looks, and sees, and looks away. He goes off with his lips moving. It is a good deal better than a miracle. You will have to deal with it.
+* Follow the sergeant home, and see that he does not tell it
+  $ b3.veil = "silenced"
+  $ humanity -= 4
+  $ secrecy += 3
+  $ cunning_brutal += 3
+  $ do feed("human")
+  It is a four hour thing, in the end, a long, cold, tidy business, in a lodging in the rue de Bercy, up a stair, with a wife asleep in the next room whom you do not wake. It does not take a great deal of skill. He was an honest man, who was doing his duty, and he has seen what he has seen, and there is no way to ask him to forget. You tell yourself that it is for the boy. It is for the Peace. It is, you note, for a good many things, and when you have finished listing them you are on the stair again, in the dark, with an entire silence behind you, and you do not look at your hands.
+* Do nothing about it. It is a matter for the boy, and for the Peace
+  $ b3.veil = "left"
+  $ secrecy -= 3
+  $ standing -= 1
+  $ defiance += 1
+  You watch the boy, and the boy watches you. You say nothing, and you do nothing, and the sergeant, after a while, crosses himself, and goes away down the street to his officer, with his musket held out from his body like something that he has been told to carry and does not wish to touch. The boy has a smear of blood on his throat, and a hole in his jacket, and the dazed look of a child that has been woken up. It will be known by morning to the whole of the regiment. It will be known by the end of the week to somebody who has been looking for it for a very long time.
+<~
+
+# wounded
+## The stair in the rue Saint-Jacques
+They come to the house at about midnight. It is not an arrangement. It is a thing that the street does. The shop is the nearest door with a stair and a pump and a cellar in a mile, on the road from the faubourg to the Hôtel-Dieu, and the Hôtel-Dieu is full, and the first of them is brought in on a shutter by two glassmen who do not say anything but lay it on the counter, as one lays down a thing of value.
+It is a girl of about fifteen, with a ball in the shoulder. She is conscious. She has lost a great deal of blood and she is looking at the type cases, with an expression of mild interest, as if it were the thing that she had been told about.
+There are going to be more. Étienne has come down in his nightshirt. He has a candle. He is looking, with the face of a man who has done the sum, at the door, the stair, the shop, the register, the Inspector of the book trade, and the thirty years of a house that has never been mentioned in a police report. Behind him on the stair, in the dark, is Adélaïde, who does not speak. She has put on her apron. She is holding it by the strings.
+Aubry has come down in his boots. He has been a soldier. He takes in the girl, and the shutter, and the two glassmen, and says, with the first note of anything like pleasure that you have heard in him for a month, that he will want a table and boiling water and a clean knife and the smaller of the two presses cleared of everything that can be burned.
+* Open the house, and have them brought in
+  $ b3.wounded = "sheltered"
+  $ humanity += 3
+  $ standing -= 1
+  $ secrecy -= 2
+  $ bond.aubry += 3
+  $ bond.adelaide += 2
+  $ bond.etienne += 1
+  $ loyalty.keepers += 1
+  By two there are eleven in the shop. By four there are twenty, in the cellar and the yard and the stair, in the straw and on the type cases, and a surgeon from the Hôtel-Dieu, who was walking by, who is taken in by the collar and put to work. Adélaïde does the accounts of it. She writes the names. She writes them in the day book, in her clear round hand, one under the other, with the wound and the hour, and it is not until the morning that you understand what she has done, and that the Inspector of the book trade will be able to read it. She has done it anyway. She says that it was the only honest thing that she could think of that was also a record.
+* Send them on to the Hôtel-Dieu, and close the shop
+  $ b3.wounded = "refused"
+  $ secrecy += 2
+  $ humanity -= 2
+  $ standing += 1
+  $ bond.aubry -= 3
+  $ bond.adelaide -= 2
+  It is the safe thing, and you say it in the safe voice. There is a pause in the shop that has a weight. Aubry looks at you, with his hands at his sides. He takes up the shutter, himself, with the glassmen, and carries the girl out, into the rue Saint-Jacques, and turns left, for the river, and does not come back for an hour. Étienne bolts the door. It is the only time in thirty years that the house has shut it on the street. Adélaïde goes upstairs without a word, and you hear her door, which is a quiet one, close very exactly.
+<~
+
+# council
+## The Hôtel de Saint-Aubin, at two
+They are all there. It is the first time that you have seen the council of the court sitting as a council, and not as a room of people at a party. There are nineteen of them, round a long table of black walnut under the chandelier, and every one of them is old, and every one of them has dressed. The Marquise de Sérignan is in black, with a fan. Brezac stands behind the Prince's chair, with his arms folded, in the plain coat of a man who has been waiting a long time to be given an order. The Prince is in his plain chair. He looks, in the candlelight, like a very old picture of himself.
+It is Brezac who speaks first. He does it quietly. There were three of the young ones in the crowd tonight, he says, who were seen by the troops to do things that ought not to be seen. There is a boy who has been shot and has not died. It is going to be known. It is going to be known by the Lieutenant General of Police by the morning, and by the Senate within the month, and the Peace has been kept in this city for three hundred years by the one rule that is not written, which is that it is not to be known. He asks, in a voice with no heat in it whatever, for the leave of the council to find the people who have done it.
+There is a silence. The Marquise opens her fan. She says, to the air, that it is a matter of very great interest to the council to learn what the faubourg owes to the court, and what the court, in its turn, may owe.
+The Prince looks at you. It is quite plain that he has been waiting to. He says, in his gentle voice, that the Senator's friend has been in the street tonight, and that he would like to hear what was seen there.
+?if b3.cadets == "sworn"
+  Séverin's name is not spoken in the room. It is not necessary. It is in the way that nobody looks at the empty chair at the foot of the table, where the Prince's godson would have sat.
+?end
+?if b3.veil == "silenced"
+  There is a thing on your hands that has not yet been seen, and you are aware of it as of a draught from a door.
+?end
+* Speak for the young ones, and say that the fault is the bread and not the blood
+  $ b3.council = "cadets"
+  $ defiance += 3
+  $ standing -= 3
+  $ secrecy -= 1
+  $ bond.severin += 3
+  $ do chart("paris.court")
+  It is not a popular thing to say. You say it simply. You say that there are four thousand of them in the faubourg, who were made in the dark, and never taught, and that the Peace has done nothing for them in three hundred years but a list of rules, and that what the troops saw tonight was not a breach of the Veil but the first honest appearance of it, which is that a thing is happening. Brezac does not move. The Marquise does not close her fan. The Prince listens, with his head a little on one side, as a man listens to a clock that he has heard before, and at the end says, with great gentleness, that it is a thing that he had hoped to be told by somebody. He does not say that he agrees.
+* Speak for the court, and say that the Veil must be mended, and quickly
+  $ b3.council = "court"
+  $ standing += 3
+  $ defiance -= 3
+  $ humanity -= 1
+  $ bond.severin -= 3
+  $ do chart("paris.court")
+  It is the sensible thing, and the room takes it as a relief. You say that there is a boy who has been seen, and that the thing to do is to find him, and see that he is taught, and that the people who have taught him nothing should be asked for an account. There is a murmur round the table. Brezac nods, once, as at a good point in a drill. The Prince does not look at him. He is looking at you, with an expression that is not at all displeased, and not at all warm, and he says that he is obliged to you for the counsel, and that it is exactly what he would have said himself.
+* Say what you saw, plainly, and give them no advice
+  $ b3.council = "silent"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  $ do chart("paris.court")
+  You tell it as a witness, in a dry level voice, in order: the straw man, the fire, the line of white and blue, the first stone, the volley. You leave out the Cadets. You do not leave out the boy. When you have done there is a long pause, and Brezac's jaw moves, and the Marquise says in a small voice that it is an extremely clear account. The Prince thanks you. He does not ask what you think, and you find, as you go out, that you are a little ashamed of how much you wanted to be asked.
+The council goes on after you have gone. You can hear it through the doors, in the cold hall, a low steady murmur like the sea. You wait for the carriage in the entry, and a footman in the lilac livery, who is not Octave's, brings you a cup of something warm. It is blood, with a little spice. It is quite good. It is, you realize, being offered to you as a courtesy, and for the first time in your life you have the feeling of being a person that the court will in the future be obliged to be polite to.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is very dark, with a red stain along the eastern rim of the sky, and a sound that comes and goes on the wind from the faubourg, which is not quite a sound and is not quite silence.
+?elif actions_left() == 2
+  The bells of Notre-Dame are striking midnight, and are answered, one after another, along the whole length of the river, by all the others, and then by nothing.
+?else
+  It is a little before three. The sky is getting a bruised look. There is one thing more that you can do before the sun.
+?end
+* Go into the rue de Montreuil, where the works are burning [once] ?if actions_left() > 0
+  ~> crowd
+  $ do act()
+* Find the boy who was hit, in the Cour des Trois Frères [once] ?if actions_left() > 0
+  ~> veil
+  $ do act()
+* Go back to the shop, where the wounded are being carried in [once] ?if actions_left() > 0
+  ~> wounded
+  $ do act()
+* Answer the summons of the council at the Hôtel de Saint-Aubin [once] ?if actions_left() > 0
+  ~> council
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# dawn
+## The black shell
+The morning of the twenty-ninth is bright and clean and very still. It is the finest day of the spring. There is no wind. The smoke goes straight up from the faubourg in a single gray column, and the whole of the east of the city smells like a cooled hearth. The works of Réveillon are a black shell, with the sky showing through the beams, and the street in front of them has been washed. It was done at dawn, with buckets, by the soldiers. There is a very great deal of straw.
+Nobody will agree on the number of the dead. The court says a dozen. The faubourg says a thousand. The people who carried them out say that it was more than the first number and a good deal less than the second, and that it does not make any difference, because each of them had a name.
+The Estates General are to open at Versailles in a week. The king is going to receive the deputies of the three orders in his palace, in procession, with banners, with bishops and nobles and six hundred members of the Third in plain black coats, and it is the thing that the whole of France has been waiting for, for a hundred and seventy five years. It is going to be a very fine procession. There is going to be a good deal of talk, after the riot, about whether it should go ahead.
+There is a knock at the shop door at a little after seven.
+It is not the police. It is Séverin, and Clémence beside him, and a pale boy behind them with his cap in his hand and a darkened place on the throat of his shirt. They have not slept. They have been walking. Séverin has the plain gray coat on, and is not smiling, and has the look of a man who has been very much a boy until quite lately and has had to give it up.
+"We are not asking," he says. He does not say it unkindly. He says it as one reports the weather. "We came to tell you. It is going to be the summer, and it is going to be worse than this, and we are going to be in it. I thought that you would like to know it before you were told it by somebody else."
+Clémence says nothing. She looks past you at the shop, at the stair, at the shutter that is still on the counter with a brown stain on it, and at the girl with the bandaged shoulder who is asleep on a pile of folded paper. She has her hand on the door frame, and it is a very small hand, and there is white dust in the creases of it, and there always will be.
+?if b3.weapon == "accepted"
+  There is a folded note in your coat, in the Prince's hand, that you have not yet answered.
+?end
+?if b3.galerius == "senate"
+  You think of a room in the rue des Prouvaires, over a chandler's, with a single iron stove, and of an old man who will have heard the volley from there, and have counted.
+?end
+$ do rest()
+=> next

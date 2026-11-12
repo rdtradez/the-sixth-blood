@@ -377,6 +377,18 @@
       "name": "Inspector Garnier",
       "title": "Inspector of the book trade",
       "bio": "A quiet pink little man of fifty with a clerk's hands and a face like a well kept ledger. He searches houses at the hour when people are sure to be in, and is very sorry about it."
+    },
+    "clemence": {
+      "gender": "f",
+      "name": "Clémence Roche",
+      "title": "A Cadet of the faubourg",
+      "bio": "A mason's daughter of twenty, square and dark, with white dust in the creases of her hands. She cut the letters of the bill, and does not say much."
+    },
+    "thibault": {
+      "gender": "m",
+      "name": "Thibault Marchand",
+      "title": "A young Cadet",
+      "bio": "A cooper's boy of sixteen, made in a hayloft three years ago by a woman he has not seen since. He has not yet learned that he is never going to be cold again."
     }
   }
 }

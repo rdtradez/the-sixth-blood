@@ -72,7 +72,7 @@ test('Book Three lists its written chapters and is not yet finished', async () =
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'crown-of-ashes');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 4);
+  assert.equal(book.chapterCount, 6);
 });
 
 test('chapter 1 plays through for every kind of waking and reaches chapter 2', async () => {
