@@ -63,7 +63,7 @@ test('chapter 5 plays through for every state of the book so far, and reaches th
   for (const weapon of ['accepted', 'bargained', 'refused']) {
     for (const severin of ['open', 'careful', 'cold']) {
       for (const hunger of [10, 90]) {
-        const run = await play('b3c05', {}, { ...START, hunger, 'b3.weapon': weapon, 'b3.severin': severin, 'b1.galerius': 'hostile', 'b3.roll': 'read' }, []);
+        const run = await play('b3c05', {}, { ...START, hunger, 'b3.weapon': weapon, 'b3.severin': severin, 'b1.galerius': 'hostile', 'b3.roll': 'read' }, [], { stopAt: 'b3c06' });
         assert.equal(run.game.state.chapter, 'b3c06', `${weapon} ${severin} ${hunger}`);
         clean(run);
       }

@@ -1,0 +1,276 @@
+// Book Three, Chapter 8 (session 32). The end of July and the beginning of August 1789. The Great Fear, the Place de Grève, the Lictor, the muskets.
+// Opens on the shop and the miller's letter (no phase), then one night phase of three actions out of four, then a dawn on the night of the fourth of August.
+// Ends with rest() and => next. Reads b3.grain, b3.veil, b3.galerius, b3.file, b3.aubry, b3.cadets, b3.night, b3.weapon and b3.severin. Chapter 9 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c08
+@title The Great Fear
+@book crown-of-ashes
+@version 1
+
+# start
+## The twenty-second
+$ b3.granary = "burned"
+$ b3.greve = "left"
+$ b3.lictor = "hid"
+$ b3.muskets = "refused"
+~> shop
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the evening of the twenty-second of July. The heat has not broken in nine days, and the whole of France has taken fright of a thing that is not there. There are four things that want doing by your own reckoning, and time for three.
+-> night
+
+# shop
+It has been eight days, and it has the taste of eight years. The Bastille is being taken down, stone by stone, by a hired crew of masons with a band, and the stones are being sold. The king has put on the new cockade of red, white and blue, and said to the city that he is its friend. The marquis de Lafayette commands a National Guard of the citizens, and every quarter of Paris has a battalion, and every battalion has a drum. The court has gone. The Comte d'Artois went on the seventeenth, in the night, with his hounds, and the Prince de Condé, and a number of others, in coaches with the blinds down, for Turin. You hear that three hundred noble families have left Paris in a week. It is what the newspapers call the first emigration.
+In the countryside, where the harvest should be coming in, there is a fear. It started in a village in the north, on the twentieth, over a rumor of brigands, and it has gone across the whole of France in ten days faster than a man on a horse could carry it. A hundred thousand people have rung the tocsin and taken down the old fowling piece and gone out to meet an army that has not come. There are no brigands. There is a great deal of hunger, and the green wheat, and the dread of an aristocratic plot to cut the corn before it is ripe and starve the people into obedience. In a good many places the peasants, having assembled, have thought that they might as well burn the château. Nobody has been very much surprised.
+There is a letter on the counting room table that came by the coach from Corbeil, in a miller's laboring hand, on gray paper, with a thumb print. It says that the village has been at the church since Sunday. It says that there are people in the lane who have not eaten since Thursday. It says that the miller knows what is in the granary at the end of the street, and who owns it, and he is writing to say that it is a pity.
+?if b3.grain == "hoarded"
+  It is your own granary. It has been your own since March, through two cousins and a bank, and a good clerk in a gray coat has been keeping the key. The price of a sack in the market of Corbeil is now four times what you paid.
+?elif b3.grain == "relieved"
+  It is the village's own bread. You bought the stock in March and sold it at the old price, at the door, and it is in the ovens of Corbeil. There is not a very great deal left of it. The miller wishes you to know that the people have not forgotten.
+?elif b3.grain == "exposed"
+  The company has fled. The names were printed in the spring, and the agents went off in a night, and left behind them a granary at the end of a street, with a hundred sacks in it, and nobody's name on the door.
+?else
+  It is somebody else's granary. It is a company's, in the name of a bank, which has been buying standing wheat on the Prince's account and the Farmers General's since April. You were told about it, and you let it be.
+?end
+Adélaïde has read it. She has laid it flat with the palm of her hand, in the light, and said nothing. She looks at it as at a column that does not add.
+Aubry is in the court in the uniform of the parish battalion, with a sergeant's stripes sewn on, by a friend, on the wrong sleeve. He is a very contented man. He has said at supper that for the first time since 1781 he has had something to do on a Wednesday.
+<~
+
+# hunger
+## The heat
+It is the heat. It is the damp, still, smothering heat of a city that is too full, and it comes up the stair of the shop with the smell of every house in the street at once, of soup and sweat and tallow and sour wine. There is a blue vein beating in the throat of the girl who brings your candle.
+* Take it from a drunk in the gutter, who will not remember
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  There are a great many of them. A man with a drum, a man with a flag, a man with a cockade on a pole who has fallen asleep on the cobbles in the full cheerful glory of the day, and you turn him on his side, afterward, so that he will not choke.
+* Go to the stables behind the Hôtel de Soubise, where the coach horses are tied
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  The coaches have left, but the horses have not. They are bored and uneasy, and one of them, a bay mare, puts her ears back, and then, as you come near, lowers her head. It is the quietest feeding that you have done in a month.
+* Put it aside, and go on
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It will not be put away. It sits at your shoulder all the way down the stair. It is perfectly polite. It does not say anything, and you can feel it listening.
+<~
+
+# granary
+## Corbeil
+You go by night, on a post horse, down the long straight road to the south, through country that has not seen so many torches since the Hundred Years' War. There is a fire in every village. There are men on every bridge with scythes. At one of them, at Essonnes, they stop you with a pitchfork and ask whether you are a brigand, and you say that you are a gentleman from Paris on his way to look at a granary, and they think about this for some time and then let you through, with an air of great uncertainty, as if they had passed a very large dog.
+Corbeil lies in a bend of the Seine under a hill. The granary is at the end of the street, a long low stone shed with a tiled roof, standing a little back from the road with its doors closed, and in front of the doors, in the lane, there are three hundred people. They have torches. They have been standing there for two hours. They are not shouting. It is the quiet that is frightening. They are looking at the door, as a congregation looks at a tabernacle, with a long, steady, hungry attention, and at the foot of the steps, under the lantern, there is the miller, a short broad man in a flour-colored coat, holding a hat in two hands.
+?if b3.grain == "hoarded"
+  The gray-coated clerk is on the roof. You can see him against the sky with a fowling piece, trembling. He has been there since dusk. He sees you in the lane, and a look of the most intense relief goes across his face.
+?end
+There are women in the front. One of them has a baby on her arm. She is about nineteen, and she looks at you without hatred. It is much worse than hatred.
+?if b3.aubry == "drilled"
+  Aubry has come down on the evening coach with six of the boys. They are in the lane behind you, with their muskets, in their rank, in the red light, as they were taught. They are looking at the crowd. They do not look comfortable.
+?end
+The miller says to you, very low, that he has a key, and that he has not used it, and that he has been waiting for somebody who has the right.
+* Open the doors, and let the village have it
+  $ b3.granary = "opened"
+  $ humanity += 4
+  $ standing -= 1
+  $ defiance += 1
+  $ do earn(-5)
+  $ bond.adelaide += 2
+  $ do chart("paris.counting")
+  $ do discover("the_great_fear")
+  You take the key from the miller, and you go up the steps, and open the door. The sound that goes up from the lane is not a cheer. It is a long, low, shuddering breath, as of a great many people who have been holding it. They go in in order. It is the most astonishing thing. They come out with a sack each on a shoulder, one at a time, and the women carry them off down the lane, and nobody shouts, and nobody pushes. In the whole of an hour there is not a sack dropped. The miller counts. He does it aloud, in a voice that shakes, to the end of the hundred, and then sits down on the step with his head in his hands. It is a very large sum. It is, as it turns out, about a fifth of what you paid, and Adélaïde will say nothing, and will enter it as a gift.
+* Stand in the door, and keep it, with Aubry's boys and your own face
+  $ b3.granary = "defended"
+  $ cunning_brutal += 3
+  $ humanity -= 2
+  $ standing += 2
+  $ secrecy -= 1
+  $ bond.adelaide -= 2
+  $ do chart("paris.counting")
+  $ do discover("the_great_fear")
+  You take your stand in front of the steps. It is not a thing that you can do with a gentleman's voice. You look at the first of them, a large man with a torch, and you let him see what you are. It is not much. It is a little. It is no more than a man might do with his eyes. He stops. The ones behind him stop, and the line wavers, and then it goes back, as a wave goes back, a yard, and a yard more, and stands. Nobody speaks. Nobody quite understands what has happened. A woman in the front crosses herself. You are aware, in the quiet, of the baby crying, and you are aware that it is not at all the baby that you are looking at. It will hold till morning. It will be a good deal of trouble to forget.
+* Let it burn, and say that it was the Fear
+  $ b3.granary = "burned"
+  $ cunning_brutal += 1
+  $ humanity -= 3
+  $ secrecy += 2
+  $ do earn(4)
+  $ do chart("paris.counting")
+  $ do discover("the_great_fear")
+  It is a very simple thing. You do not do anything. You stand a little way off in the dark, and the first of the torches goes in at the thatch of the lean-to, and the rest follows it, quite naturally, and in a quarter of an hour the long stone shed has a roof of flame. The sacks go with it. It is a crime of a very low order. It is of the sort that is done in a hundred villages that night in the whole of France, and the Fear takes the blame, and no one will ever know that the owner was in the lane with his hat on. You hold the miller's arm. He weeps, and then he stops. He says, in a very quiet voice, that he understood that you were a gentleman, and the sentence trails off like a thread.
+<~
+
+# greve
+## The Place de Grève
+You come into the Place de Grève at about eight in the evening, in the last of the light, and it is a thing that you have been told about and cannot prepare for. It is the great square before the Hôtel de Ville, a long open space of cobbles running down to the river, and it has never in its history been empty on a day of any importance, because it is where the city does its hangings. Tonight it is full. There are twenty thousand people in it, with their faces all turned the same way.
+There is a lamp post at the corner of the rue de la Vannerie, an iron lantern bracket, with a rope on it. They are not new to this. They have used it for the governor of the Bastille, a week ago, and for a good many before. Under it there is a pole with a head on it, an old man's, gray, with a wisp of hay stuffed in the mouth. It is the head of Foulon, who was a minister, and who is said to have said that the people might eat hay. He was taken at Viry that morning, and brought in a cart, with a bundle of thistles for a crown, and hanged on that lamp three times, because the rope broke twice. Now, in the dusk, they are finishing with the other one. He is Bertier de Sauvigny, the Intendant of Paris, his son in law, and he is not quite dead.
+You do not look at him for long. It is not a thing that you will be able to look at. There is a great sound from the crowd, an immense low animal sound, of satisfaction and horror, and a good many people are being sick behind the wall of the Hôtel de Ville. A young man in a green coat is carrying, on a pike, a thing that he has just taken from the body and is holding up to the light, in both hands, like a priest.
+?if b3.cadets != "refused"
+  They are in the crowd, the lilac ribbons, all of them. There are eleven. They have come by themselves, in a body, and are standing together in the shadow of the arcade, and they are looking at the lamp post, and the thing under it, and nobody is saying a word. It is Thibault whom you see first. He has his hand over his mouth. His eyes are quite black. It is not horror. It is something a good deal worse than horror, and it has the smell of a very good dinner.
+?else
+  There are a good many young people in the arcade who have the look of a thing that is not quite what it is. You have seen it in the faubourg. They are standing in a ring, with their eyes on the lamp post, and nobody is saying anything at all.
+?end
+There is blood in the square. It is a great deal of blood. It is in the cracks of the cobbles, and on the walls, and on the hands of ten thousand people who will wash them in the morning. It is not a thing that can be ignored by a body that was made to feed on it.
+* Go through the crowd to the arcade, and take the boys out of the square
+  $ b3.greve = "stopped"
+  $ humanity += 3
+  $ cunning_brutal -= 2
+  $ standing += 1
+  $ bond.thibault += 3
+  $ bond.severin += 1
+  $ do chart("paris.rebels")
+  It is perhaps the hardest thing that you have done in a long while. You walk across the open front of the square in the full lamplight, through the people, with your hands at your sides, and you take Thibault by the shoulder. He does not resist. He is shaking. You take him, and the girl beside him, and a pale boy of twelve in a brewer's apron, and you walk them out of the Place de Grève, up the rue de la Mortellerie, and along the river wall, without a word. At the Pont Marie, Thibault sits down on a stone and puts his face in his hands. You say nothing. You stand with your back to the parapet. After a time he says, from a long way off, that he did not know that it would be like that, and you say that no one does.
+* Take them to the foot of the lamp, and let them drink
+  $ b3.greve = "allowed"
+  $ humanity -= 4
+  $ cunning_brutal += 3
+  $ defiance += 2
+  $ secrecy -= 2
+  $ bond.thibault -= 1
+  $ bond.severin += 2
+  $ do chart("paris.rebels")
+  It is done under cover of a very large crowd, in the dark, at the edge of the pool of light. The man is dead. He is quite dead. He has been dead for ten minutes. He was a man that you could have said, with perfect justice, that the city owed a great deal to. You stand with your back to the crowd and your cloak spread, and they go to him one at a time, quickly, in the way that one goes to a spring in the desert. It is the first time that they have fed in a month. They do not say anything afterward. They look at you, and you look at the river. It is a thing that you will not be able to explain to anyone who has not been in that square tonight, and a thing that will not need to be explained to those who have.
+* Leave them to it. They are old enough to know what they are
+  $ b3.greve = "left"
+  $ secrecy -= 2
+  $ standing -= 1
+  $ cunning_brutal += 1
+  $ defiance += 1
+  You watch it from the doorway of a cutler's. You do not do anything. You do not seem to be able to. It is a thing that you notice with a certain interest. The crowd roars, and surges, and goes on, and the pale boy in the brewer's apron has gone from the arcade, and so has a girl whom you do not know. When you look again for Thibault, at about nine, he has gone as well. You do not know where. It is the Place de Grève. The river is a hundred yards off, and it has seen a good deal.
+<~
+
+# lictor
+## The rue des Prouvaires
+It is a very clean stair. It smells of cold iron and chalk, and it goes up the back of the chandler's house in a series of short turns, and at the top of it there is a door that is not locked. The room is as you remember it. It is bare, and swept, and austere, with a deal table and a single iron stove, and a window that looks over a courtyard in which a pump drips. It is a soldier's room. It has never been a room in which anyone has expected to be comfortable.
+Galerius is at the table. He does not stand. He is a very old man in a plain brown coat, small and spare, with a seamed gray face, and when he lifts his head and looks at you it is the look of a man who has been very patient with a good many people, over a great deal of time. He is writing. He has a pen, and a pot of ink, and a long narrow roll of paper, in a close tiny script, and the line at the top is in Latin. He does not speak until he has finished the sentence. He sands it, and sets down the pen.
+He says, in the plainest way, that he has not been idle. He has been counting. It is a matter of the Veil, which was broken in April. He says that it was a great breach, and that he would be a poor officer if he did not take it as such, and that it was done by a boy of sixteen who got up.
+?if b3.veil == "silenced"
+  He says that there was a sergeant of the Gardes Françaises, who has since died, in the rue de Bercy, in a manner that left some questions open. He says that he does not ask who did it. He asks only that it is not done again.
+?elif b3.veil == "covered"
+  He says that the matter was mended, in the court, with a shutter and a handkerchief, and that it was very neatly done, and that he has not been able to find that it was done by anybody. He looks at you. It is a gaze that has been looking at Roman senators for twice as long as you have been a vampire.
+?else
+  He says that the sergeant was left alive, and told what he saw to his officer, and that the officer told it to his colonel, and that it is by now in a good many mouths. It is, he says, a thing that the Senate will not be pleased about.
+?end
+?if b3.galerius == "senate"
+  He reminds you, without heat, that in March you said that you answered to the Senate if Paris broke. He says that it has broken.
+?elif b3.galerius == "court"
+  He says that in March you said that you answered to the Prince's Peace. He says that the Peace has been broken in his own house, and that the Prince has gone to Versailles with a third of his court, and that he supposes that it leaves you in a very odd position.
+?else
+  He says that in March you said that you answered to yourself. He does not seem to find it surprising. He says that it is a thing that the Senate has heard before, and that it is generally followed by a trial.
+?end
+?if b3.file == "kept"
+  He looks, once, at the bulge of your coat. He does not say anything. He knows exactly what is in it.
+?end
+He asks for a name. He asks it plainly. It is the name of the boy who got up. He is the Lictor, and he is the Senate's officer in Paris, and he has the right to it, and he says that he does not wish to be driven to find it in a way that is less polite. He will wait until the end of the month. He is, he says, a patient man.
+* Give him the name
+  $ b3.lictor = "gave"
+  $ standing += 3
+  $ humanity -= 3
+  $ secrecy += 2
+  $ bond.thibault -= 4
+  $ bond.severin -= 2
+  $ do chart("paris.court")
+  You say it. It is Thibault Marchand, a cooper's boy of sixteen, from the faubourg, made in a hayloft three years ago, who does not know that there are any rules. Galerius writes it down. He does it with great care, and sands it. He does not thank you. He says that he will see that the boy is dealt with by the book, and that the book is in many respects a kinder instrument than a mob. He says it quite sincerely. You find that it does not help in the least.
+* Lie to him
+  $ b3.lictor = "hid"
+  $ cunning_brutal += 2
+  $ secrecy -= 2
+  $ standing -= 2
+  $ defiance += 2
+  $ bond.thibault += 1
+  You say that you do not know. You say it quite steadily, as a thing that you have said many times, and you say that it was dark, and that there were two hundred in the court. Galerius looks at you for a very long time. He is not angry. He is very sad. He says, with great courtesy, that there are not a great many liars in the world that he has not met, and that he has met most of them over a good many centuries, and that he does not think that you are one by nature. He says that it is a pity to start so late. He does not write anything down.
+* Offer to take the boy in hand yourself, and answer for him
+  $ b3.lictor = "bargained"
+  $ cunning_brutal -= 1
+  $ standing += 1
+  $ humanity += 1
+  $ bond.thibault += 2
+  $ do chart("paris.court")
+  It is a thing that is allowed, by the old law. You say that the boy has no maker, that he was left to himself, and that it is the duty of anyone who knows him to teach him. You say that you will take him, and answer for him, and be the one to be asked if he breaks another thing. Galerius considers it. He considers it for so long that the stove ticks twice. At the end of it he says that a Lictor is not accustomed to be offered a hostage, and that it is a long time since anyone offered him one of his own accord. He says that he will accept it. He says that it will be written down. It will, you notice, be written down in your own name.
+You go out by the stair. In the court the pump is still dripping, a very small steady sound, like a clock. It is a very clean stair.
+<~
+
+# muskets
+## The parish battalion
+The parish of Saint-Séverin has a National Guard, and the National Guard has a drum, a flag, a captain who is a wine merchant, and eleven muskets. It has four hundred men. They meet every evening in the church of the Sorbonne, with their pikes and their fowling pieces and a number of walking sticks, and drill under a sergeant who was in the Gardes Françaises, in a great deal of dust, and they are very anxious.
+They have sent a deputation to the shop. It is the wine merchant, a stout, cheerful, harried man called Lemaire, with the cockade of the parish in his hat, and Aubry behind him, in the stripes, with the face of a man who has been compelled. They want arms. The city has none. The arms are all in the Arsenal and the Invalides, which are taken, and in the hands of the people who took them, and the new government of the Hôtel de Ville is giving them out at the rate of one for each man who can show that he has a vote. They want four hundred stand. They have heard, says Lemaire, mopping his face, that a house in the rue Saint-Jacques has a very good friend in Liège.
+It is true. You have a friend in Liège. It is a gun founder, with a wife and a great many children, who has been making muskets for the Dutch and the Austrians since before you were born, and who would be glad of a payment in advance, and would not be able to say who the buyer was. It is a matter of three thousand livres, and a barge, and about a month.
+It is a profit. It would be a very large profit. It is the sort of a profit that every house in Paris has been looking for since the fourteenth, and Adélaïde has already done the sum, and she has laid it on the table with her face turned a little away.
+* Sell them, at the price that the market will bear
+  $ b3.muskets = "sold"
+  $ cunning_brutal += 2
+  $ humanity -= 2
+  $ standing += 1
+  $ bond.aubry -= 1
+  $ bond.adelaide += 1
+  $ do chart("paris.counting")
+  ?if can_invest("paris.arms")
+    $ do invest("paris.arms")
+  ?end
+  You say it quite pleasantly. You say that the house will be glad to oblige the parish at the price. The wine merchant swallows. He says that it is a great deal, and that it is a time when a great many things are. Aubry stares at the floor. When the barge comes up from the river, at the end of August, it is Lemaire's own signature on the receipt, and the muskets are in the church by the first Sunday. They are very good muskets. They are the ones that are used in September, in the Champ de Mars, and you will see them again.
+* Lend them, and take no money for it
+  $ b3.muskets = "lent"
+  $ cunning_brutal -= 1
+  $ humanity += 2
+  $ standing += 2
+  $ defiance += 2
+  $ bond.aubry += 3
+  $ bond.adelaide -= 1
+  $ do earn(-5)
+  $ do chart("paris.counting")
+  It is Aubry's face that does it. He does not say a word. He looks, for the first time since the night of the riot, like a man who has found something to do. You say that the house will see that the battalion is armed, and that it will be a loan, and the wine merchant begins to say a number of things, and Adélaïde, in the corner, quietly closes the book. It is the cheapest thing that you have ever bought. It will not be remembered as cheap.
+* Say that the house does not deal in arms
+  $ b3.muskets = "refused"
+  $ secrecy += 2
+  $ standing -= 1
+  $ bond.aubry -= 3
+  $ humanity += 1
+  It is a thing that is said by a good many houses in Paris that month. They go out, the three of them, with some dignity. Lemaire says that it is perfectly understood. Aubry does not say anything. He turns at the door, and he looks at you, and then, quite carefully, he takes the stripes from his sleeve with a thumbnail, as one takes a stamp from an envelope, and lays them on the counter. You have the impression that it was a thing that had been sewn on twice.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is a little after nine. The heat has hardly gone out of the stones, and from the direction of the river there is a thin, steady, many-voiced noise, like a very large kettle.
+?elif actions_left() == 2
+  It is past midnight. A watchman is calling the hour in the rue Saint-Jacques with a new cockade in his hat and the old words, and nobody has told him that they have gone out of fashion.
+?else
+  There is a gray light in the east, and the swifts are going over, screaming. It is a little before three. There is one thing more that you can do before the sun.
+?end
+* Take a post horse for Corbeil, where the village is waiting at the granary [once] ?if actions_left() > 0
+  ~> granary
+  $ do act()
+* Go down to the Place de Grève, where the crowd is still in the square [once] ?if actions_left() > 0
+  ~> greve
+  $ do act()
+* Climb the stair to the rue des Prouvaires, where the Lictor is writing [once] ?if actions_left() > 0
+  ~> lictor
+  $ do act()
+* Hear the deputation of the parish battalion in the shop [once] ?if actions_left() > 0
+  ~> muskets
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# dawn
+## The night of the fourth
+It is August. The heat breaks, at last, on the second, with a thunderstorm, and it rains for a day and a night on the roofs and the open drains of the city and on the rubble of the Bastille. It has the smell of the first of the autumn. On the fourth, in the evening, in a great hall at Versailles, an extraordinary thing happens, and you hear of it on the morning of the fifth, from Baptiste, who comes in at six with his hair standing up and a sheet of paper in his fist.
+It was done in a single night. There was a deputy, a Viscount, who rose, at eight in the evening, and proposed that the nobility should give up its rights. It was meant as a clever device, to calm the countryside. They were all very tired. Then somebody else rose, and gave up something of his own, and another, and a bishop gave up the tithe, and a duke the hunting, and a hundred men were on their feet at once, in a gush, in a rapture, crying out their own ruin. By two in the morning there was no such thing in France as a feudal due. There were no more serfs, and no tithes, and no privileged towns, and no venality of offices, and no special taxes for the poor. There were tears. A great number of the deputies embraced. It was, says Baptiste, with a kind of awe, the end of a thousand years in a single night.
+Étienne reads it twice. He takes off his spectacles. He says that it will be a good deal harder to put in practice than it was to say, and that the peasants are going to think that it means a good deal more than it does.
+It is the Marquise de Sérignan who sends, at nine, by her own footman, in a plain hand, on a half sheet. It says that the writer has been informed that the greater part of her revenue has this night been abolished by a body of persons who have not the slightest notion what it means, and that she would be glad to have the pleasure of the company of a gentleman who is understood to keep a good set of books. It adds that the court's long column of debts is a matter that its creditors will now be interested in, and that it is understood that the principal creditor lives in Amsterdam.
+?if b3.lictor == "gave"
+  You have the name of a boy in your mouth like a stone. It will be a long time before it goes.
+?elif b3.lictor == "bargained"
+  There is a line in a very old script, on a long narrow roll, in a plain room in the rue des Prouvaires, that has your name in it.
+?else
+  There is a gray old man, in a plain room, who is waiting for the end of the month.
+?end
+?if b3.greve == "stopped"
+  Thibault is sitting on the step of the shop. He has been there since five. He does not say anything. He holds out a small flat package, wrapped in a handkerchief, and it is a loaf of bread, a plain dull ordinary loaf, still warm, that he has bought at the corner. It is the first that he has bought in three years. He does not know what to do with it.
+?end
+It is the fifth of August. You have until the thirty first.
+$ do rest()
+=> next

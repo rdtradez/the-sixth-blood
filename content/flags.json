@@ -2896,6 +2896,99 @@
       "major": true,
       "default": "silent",
       "note": "Chapter 6: what he said to the council at the Hotel de Saint-Aubin (silent if he did not go)"
+    },
+    "b3.barrier": {
+      "kind": "enum",
+      "values": [
+        "watched",
+        "joined",
+        "kept"
+      ],
+      "book": "crown-of-ashes",
+      "default": "watched",
+      "note": "Chapter 7: what he did at the burning wall on the night of the thirteenth (watched if he did not go)"
+    },
+    "b3.file": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "burned",
+        "kept"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 7: what he did about the police file on the house (left if he did not go)"
+    },
+    "b3.night": {
+      "kind": "enum",
+      "values": [
+        "between",
+        "warned",
+        "brezac"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "between",
+      "note": "Chapter 7: what he did about Brezac's watch against the Cadets (between if he did not go)"
+    },
+    "b3.broadsheet": {
+      "kind": "enum",
+      "values": [
+        "refused",
+        "named",
+        "unnamed"
+      ],
+      "book": "crown-of-ashes",
+      "default": "refused",
+      "note": "Chapter 7: whether the house printed Baptiste's broadsheet (refused if he did not go to the shop)"
+    },
+    "b3.granary": {
+      "kind": "enum",
+      "values": [
+        "burned",
+        "opened",
+        "defended"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "burned",
+      "note": "Chapter 8: what he did at the granary at Corbeil (burned if he did not go)"
+    },
+    "b3.greve": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "stopped",
+        "allowed"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 8: what he did about the Cadets in the Place de Greve (left if he did not go)"
+    },
+    "b3.lictor": {
+      "kind": "enum",
+      "values": [
+        "hid",
+        "gave",
+        "bargained"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "hid",
+      "note": "Chapter 8: what he told Galerius about the boy who got up (hid if he did not go)"
+    },
+    "b3.muskets": {
+      "kind": "enum",
+      "values": [
+        "refused",
+        "sold",
+        "lent"
+      ],
+      "book": "crown-of-ashes",
+      "default": "refused",
+      "note": "Chapter 8: what the house did about the parish battalion's muskets (refused if he did not hear them)"
     }
   }
 }

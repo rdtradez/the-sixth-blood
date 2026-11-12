@@ -64,3 +64,26 @@ Dawn: the factory a black shell, the Estates General opening at Versailles on th
 Hooks for chapter 7 onward: the procession at Versailles (4 May) and the Tennis Court Oath (20 June); the Cadets' answer to the Prince; Galerius and the Veil; the grain at Corbeil in July; the list; Garnier's file on the house; Baptiste's pamphlet; the haven among the bones; the Avignon account.
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+
+## Chapter 7, "The Fourteenth of July" (`b3c07`, session 32)
+
+Estates General opened 5 May, the Tennis Court Oath 20 June, Necker dismissed 11 July, the Palais-Royal on the 12th, the toll wall burned on the 12th and 13th, the Invalides and the Bastille on the 14th. Opens on the twelfth and thirteenth (the court silent, the troops round the city, the faubourg arming; a note from the Prince if `b3.weapon` is accepted; the Cadets' runner), no phase. Hunger scene on entry if needed.
+
+Night phase (the night of the 13th), three of four: the barrier (the Wall of the Farmers General burning at the Barriere du Trone; `b3.barrier`: joined, kept (kept the peace between the parish militia and the crowd, with Aubry's boys if `b3.aubry` is drilled) or watched); the Lieutenant General's offices (Garnier is emptying the files before the mob arrives; the Valere file is on the top shelf; `b3.file`: burned, kept (as a lever on Garnier) or left); the Hotel de Saint-Aubin (Brezac means to move on the Cadets before dawn, while the city is looking at the Bastille; `b3.night`: warned the Cadets, between (stood between Brezac's watch and the Cadets at the Pont Marie), or brezac (rode with the watch); reads `b3.council`, `b3.veil`, `b3.cadets`); the shop (Baptiste's broadsheet, PARIS IS IN ARMS, three hundred sheets before dawn; `b3.broadsheet`: named (house imprint), unnamed or refused; Aubry goes out at four with the boys).
+
+The day of the 14th: he cannot see it. He lies in the haven (or the cellar of the shop) and hears the guns of the Bastille through the stone; the ordinary sun, the thing a vampire loses. Dusk: Aubry's report, the seven prisoners, de Launay's head, the key of the Bastille. Thibault, Severin and Clemence in the street at dusk. If `b3.veil` is silenced, Thibault has been told that a man died for him; if covered, he thanks him; if left, a Garde has told his regiment. Galerius's card on the table under the lamp: he will call on the hero on the Sunday. Ends with `rest()` and `=> next`.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 8, "The Great Fear" (`b3c08`, session 32)
+
+22 July to early August 1789: Foulon and Berthier lynched in the Place de Greve (22 July), the Great Fear in the countryside (from 20 July: rumor of brigands cutting the green wheat), the night of 4 August. Opens on the grain (a letter from the miller at Corbeil, reads `b3.grain`) and the shop (the National Guard of the parish; Aubry as a sergeant), no phase. Hunger scene on entry if needed.
+
+Night phase, three of four: the granary at Corbeil (a day's ride; the villagers with pitchforks at the doors; reads `b3.grain`: if hoarded it is his stock they storm, if relieved it is the village's own bread, if exposed the company's agents are gone and the people are hungry, if ignored it is somebody else's; `b3.granary`: opened (the doors, loses money, humanity), defended (Aubry's boys and the hero's own will against the villagers) or burned (let it burn and say it was the Fear)); the Place de Greve at dusk (Berthier's last quarter hour; Thibault and the Cadets in the crowd and the taste of it; `b3.greve`: stopped (took the boys away from the body), allowed (let the boys feed on the body, which is already dead) or left); Galerius in the rue des Prouvaires (the Veil was broken in April; he counts it; asks for the name of the boy who got up; reads `b3.veil`, `b3.galerius`, `b3.file`; `b3.lictor`: gave (Thibault's name), hid (lied), bargained (offered to teach the boy himself, under the hero's oath, and be answerable)); the muskets (the parish battalion wants arms; the house's purse and Aubry's name; `b3.muskets`: sold (paris.arms), lent or refused).
+
+Dawn: the night of the fourth of August; the Assembly has abolished the feudal dues, and the Marquise's income with them. The court begins to count what it owes to Amsterdam. Galerius's deadline: the end of the month.
+
+Hooks: the October days; the Priestess's hand (Avignon account); the Declaration of the Rights of Man; Galerius's final hunt; Thibault; the Cadets and the Veil; Garnier.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.

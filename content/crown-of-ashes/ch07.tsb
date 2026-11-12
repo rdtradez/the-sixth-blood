@@ -1,0 +1,270 @@
+// Book Three, Chapter 7 (session 32). The twelfth to the fourteenth of July 1789. The wall burns, the files, the court, the shop, and a day he cannot see.
+// Opens on the twelfth and thirteenth (no phase), then one night phase of three actions out of four, then a dawn, the day of the fourteenth, and a dusk.
+// Ends with rest() and => next. Reads b3.weapon, b3.cadets, b3.aubry, b3.council, b3.veil, b3.severin, b3.gallery and b3.press. Chapter 8 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c07
+@title The Fourteenth of July
+@book crown-of-ashes
+@version 1
+
+# start
+## The thirteenth
+$ b3.barrier = "watched"
+$ b3.file = "left"
+$ b3.night = "between"
+$ b3.broadsheet = "refused"
+~> summer
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the night of the thirteenth of July, and the whole of Paris is awake with its boots on. There are four things in it that want doing by your own reckoning, and time for three.
+-> night
+
+# summer
+The spring went by in a procession. You were not at Versailles to see it. You read about it afterward in a great many sheets, some of them printed in the rue Saint-Jacques, and it seems to have been very fine: the six hundred deputies of the Third in their plain black coats, walking behind the nobles in their feathers and the bishops in their lace, and nobody quite looking at anybody. By the twentieth of June they had been locked out of their hall by the king's men, and had gone to a tennis court, and sworn a thing on a bare floor that has been said a good many times since by people who were not there. The king has been very patient. The king has also been collecting regiments. There are German and Swiss troops now at the Champ de Mars and at Saint-Denis and at Sèvres, a ring of them, in their white and blue, with their cannon, and every one of them speaks a language that Paris cannot talk to.
+On Sunday the twelfth the king dismissed Necker. It was the one minister that the city trusted with its bread. The news reached the Palais-Royal at about noon, and by one o'clock a young man had climbed on a table in the garden with a pistol in each hand and a green leaf in his hat, and said that it was the signal for a Saint Bartholomew of patriots, and that they must take arms. By evening the whole of the city had a green cockade. By night the theaters were closed, and the busts of Necker and the Duke of Orléans were going along the boulevard under black crape, and the Royal-Allemand cavalry had ridden into the Place Louis XV and been met by a shower of chairs and paving stones.
+It is the thirteenth. It has been a long hot day with the bells ringing the tocsin from every steeple, one after another, and nobody having told them to stop. The wall of the Farmers General, which you passed in the frozen dark on the second of December, has been burning since the morning. It is a matter of fifty four barriers. The people have taken the toll houses apart, and the clerks have gone, and the wine and the meat and the firewood have been coming into the city all day without paying a sou, in a long happy disorderly stream.
+Étienne has shut the shop and put up the shutters and sits in the counting room with his hands on his knees. Aubry has gone out in his old uniform coat, with the cross of Saint Louis on it, which he has not worn since Yorktown. Baptiste has not come in since morning.
+?if b3.weapon == "accepted"
+  A footman brings a note at dusk from the Hôtel de Saint-Aubin, in the Prince's hand. It says that the list is not to be thought of tonight, and that the Peace is to be kept, and that he would be obliged if you would not do anything that cannot be explained afterward.
+?end
+?if b3.cadets == "sworn"
+  Clémence's boy is in the yard at nine with a lilac ribbon. He says that nothing is going to happen tonight, and that it is going to happen in the morning, and that Séverin has sent word that you will want to be somewhere that is not the faubourg.
+?elif b3.cadets == "refused"
+  There is no word from the rue de Charonne. You find that you are listening for it, as one listens for a step on a stair.
+?end
+<~
+
+# hunger
+## The tocsin
+The bells do it. It is a sound that goes on all night in the bones, and your teeth ache with it, and the hunger comes up through the stones of the street with the stream of carts and the smell of the open barrels. There is a mob in every square, and every one of them is warm, and not one of them is looking at the faces.
+* Take it from a looter asleep in a doorway with a wheel of cheese in his arms
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  It is the easiest thing in the world. He does not wake. He has had a very good day, and he will have a very bad head in the morning, and it will be a good deal worse than he thinks, and you leave the cheese.
+* Go down to the cattle pens at the barrier, where the herds have come in unclaimed
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  There are four hundred head of beasts in the Place d'Enfer, bellowing, with nobody to tax them and nobody to drive them, and a boy asleep on a gate. It is not unpleasant. You go back with your sleeves rolled up and your collar clean.
+* Put it aside, and go on
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It keeps pace. It is very quiet. It does not want to go anywhere. It wants to be walked about in the noise, like a dog that has been shut up all day.
+<~
+
+# barrier
+## The wall
+You go out to the Barrière du Trône by the long road, along the faubourg, and it is as bright as a feast. The toll houses of Monsieur Ledoux, which the Farmers General built, with their pillars and their pediments, stand along the wall with their windows smashed, and are burning gently, with no one near them. It is a pretty fire. It lights the road on both sides. There are two or three thousand people on it, with torches, and handcarts, and a number of sheep.
+Nobody has told them to burn the wall. They have been told for forty years that it was a thing that could not be touched, and that the man who touched it would be hanged, and they have touched it, and the sky has not fallen. It is the plainest sort of joy. A cooper in his shirt has climbed to the top of a pillar, with an adze, and is chopping at the carved arms of the Farmers General, and the people below are cheering at every stroke, as if it were a play.
+There is a second crowd, at the end of the road, by the arch of the Barrière. It is not so happy. It is two hundred men of the parish militia, hastily formed, in their working clothes, with pikes and hunting guns, and the green leaf in every hat, and in front of them an ancient officer on a horse who is trying to tell them what to do. A column of the Royal-Allemand has been seen on the Vincennes road. Nobody is sure whether it is a patrol or an army. There is a great deal of shouting, and a boy is crying, and the crowd and the militia are looking at one another like two dogs that do not know which of them is the master.
+?if b3.aubry == "drilled"
+  The twelve boys of the shop are among the militia, in a rank, with long pikes, in their printers' aprons. Their faces are white. They are standing exactly as they were taught, with their feet apart, and one of them is shaking so that the head of his pike is going up and down like a metronome.
+?end
+?if b3.cadets != "refused"
+  You see three or four of the lilac ribbons among the carters, and one of the pale boys, Thibault, up a lamp post, with a flaming bar of wood, in a very high state of delight.
+?end
+* Go into the fire with the others, and help to bring the wall down
+  $ b3.barrier = "joined"
+  $ defiance += 3
+  $ standing -= 2
+  $ secrecy -= 1
+  $ bond.severin += 1
+  $ do chart("paris.rebels")
+  $ do discover("the_bastille")
+  It is not a thing that you would have thought of doing in your own time. It turns out to be very good exercise. You take a beam out of the burning roof of the toll house, with a carter on the other end, and you carry it across the road and throw it on the pile, and there is a cheer. It is not for you. It is for the beam. You do it for an hour. When you have done, you stand with your hands black, in the red light, on the roadway of a city that has no wall, and it comes to you that it is the oldest sort of feeling and that you have not had it since the Aventine.
+* Go to the militia, and keep the peace between the crowd and them
+  $ b3.barrier = "kept"
+  $ cunning_brutal -= 1
+  $ humanity += 2
+  $ standing += 1
+  $ do discover("the_bastille")
+  It is a good deal harder than the other. You take the old officer's horse by the bridle and say to him quietly, in the voice of a man who has done this sort of thing before, that a patrol is a patrol and that no one in the road is a soldier, and that the best thing that he can do with two hundred butchers and bakers is to put them in a rank at the side and let the road alone. He looks at your coat. He looks at the rank. He gives the order, in a cracked voice, and the pikes go up like a hedge, and the crowd goes on burning the wall, and nobody has died. The column from Vincennes is a patrol, in the end. It rides by at a trot, with its eyes front, and nobody says a word to it.
+* Stay on the roadside, and see which way it goes
+  $ b3.barrier = "watched"
+  $ cunning_brutal += 1
+  $ secrecy += 2
+  $ defiance -= 1
+  $ do discover("the_bastille")
+  It is the sensible thing. You sit on a mile stone, in the light of a burning toll house, and look at the faces. You have seen a number of cities come undone, and it always begins in the same way, with a pleasure, and what you see on every face in the road tonight is that pleasure. It is a thing that you will want to remember. It is also the kind of thing that a man can sit and observe from a stone for a very long time.
+<~
+
+# file
+## The rue de Jérusalem
+The offices of the Lieutenant General of Police are in an old house in the rue de Jérusalem, behind the Palais de Justice, with a high wall and a court like a well, and at one in the morning there is a light in a window on the second floor. It is not a gentleman's window. It is the light of a man who is working very hard and very quietly at something that he does not wish to be seen at.
+You find Inspector Garnier in a long room full of shelves. He has taken off his coat. He has a lantern on the floor and a basket beside it, and he is taking folders down from the shelves in armfuls, with the neat unhurried movement of a man clearing a table after a dinner, and putting them into the basket. There are four thousand folders in the room. There is a very large stove at the end, going at full blast on the hottest night of the year. He sees you in the door. He does not stop. He says, with the mildest politeness, that he supposed that it would be somebody, and that he is glad that it is only you.
+He is a thin tired man of about fifty, with ink on his cuff. He has been the Inspector of the book trade for twenty years. He has not ever, in your experience, been a villain. He says that the mob will be here by dawn, or by Wednesday, and that it will not know what it is looking for, and that it will find, at the end of the day, the names of every informer and every spy and every unlucky wife who ever wrote a letter to the Lieutenant General about a husband, and there will be murders. He is burning the informers. It is, he says, a thing that a man in his position can do for his country.
+He lifts one more folder off the top shelf. It is a blue one, with the name Valère on it, and the date 1788, and a tag. It is about an inch thick. He weighs it in his hand. He looks at you for the first time.
+* Take it from him, and put it into the stove yourself
+  $ b3.file = "burned"
+  $ secrecy += 2
+  $ standing += 1
+  $ bond.adelaide += 1
+  $ do chart("paris.presses")
+  He lets you. He is a little surprised. It goes into the stove with the others, an inch of the house in the rue Saint-Jacques, its presses and its lodgers and the hours of its candles, and burns with a clear steady flame, and you watch it until it is a black leaf and the name has gone. Garnier closes the stove door. He says, without looking round, that it is the first time in twenty years that he has had a thing done for him by a person he was investigating, and that he does not think that he will mention it.
+* Take it from him, and keep it
+  $ b3.file = "kept"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  $ standing += 1
+  $ bond.adelaide -= 1
+  $ do chart("paris.presses")
+  You put it inside your coat. He does not argue. He says that he had thought that you might, and that he is not in a position to say that it would be unreasonable. You read a little of it on the stair, in the lantern light. It is a very fair account of the house, with a few mistakes and a great many accurate things, and a last page in a different ink that begins with the words *the lodger on the third floor*, and ends with a question that has not been answered. It is a pleasure to hold a thing like that. It will be some time before you stop being pleased.
+* Let him do as he likes with it, and go
+  $ b3.file = "left"
+  $ humanity += 1
+  $ secrecy -= 1
+  He puts it back on the shelf. He says that it is a funny sort of thing, that he can burn four thousand and not a single one of them is the one that he would like to. He sets the lantern down. You go down the stair, and into the rue de Jérusalem, and as you cross the court a voice says something to you out of the dark, and it is the voice of a clerk, an old man, who is carrying out a ledger in his two arms like a child. It is a quarter to two. By the afternoon, you will learn, a crowd will break into the building and find a stove, and a quantity of ash, and a great many shelves.
+<~
+
+# night_court
+## The Hôtel de Saint-Aubin, at three
+The house is dark. It is the first time that you have seen the whole of it dark. There is not a candle in the long gallery or the salon, and the sugar cakes have gone from the sideboards, and in the courtyard there are two coaches with their horses in, and a number of trunks. The court is packing. It does it very quietly, as it does everything. By the end of the week, you gather, a third of it will have left for Versailles and a good many of the rest for Avignon.
+Brezac is in the orangery. He is alone. He has a plain gray coat on, and a sword, and a small tricorn, and the face of a man who has made up his mind. It is not a pleasant face, and it is a very honest one. He has put it to the Prince, he says, in the plainest way, that the city will be looking at the Bastille tomorrow. It will be looking at it from the morning until dark. There will be nobody in the faubourg Saint-Antoine who is not in the street. There will not be a better time for twenty men, quietly, to go into a brewery cellar in the rue de Charonne, and put an end to a thing that has been a danger to the Peace since April. The Prince did not say yes. He did not say no. He is in the chapel at the end of the garden, on his knees, with the door shut, and has been there since midnight.
+It is a thing that a man of the court says in a certain voice, to see what the other will do.
+?if b3.council == "cadets"
+  He says that it is a pity, in the circumstances, that you spoke as you did in April, because it makes it a great deal harder for him to ask for your help, and a great deal easier to expect your hindrance.
+?elif b3.council == "court"
+  He says that he was glad to hear you speak as you did in April, and that he supposes that it was meant.
+?end
+?if b3.veil == "silenced"
+  He looks at your hands. He knows, you see. He has known since the morning after April, and has not said so, and it is a thing that he intends to be understood that he has not said.
+?end
+* Tell the Cadets that the watch is coming
+  $ b3.night = "warned"
+  $ defiance += 2
+  $ standing -= 2
+  $ bond.severin += 3
+  $ bond.thibault += 1
+  $ do chart("paris.court")
+  You do not say anything to Brezac. You nod, in the way that a man nods who has been told the time, and you go out through the garden door, and along the quai at a pace that you could not keep up by daylight, and are in the rue de Charonne in eleven minutes. There is nobody on the stairs of the brewery. Clémence meets you at the cellar door, with a candle in her hand and a long iron bar. She has not asked anything. She listens, and then she turns and says one word down the stair, and it is as if she had kicked an anthill. By four they are gone, all forty of them, with their blankets and their bills and the case of type, into the quarries, and the cellar is empty. It is a thing that you will have done.
+* Go to the Pont Marie, and stand in the way of the watch
+  $ b3.night = "between"
+  $ cunning_brutal -= 1
+  $ standing += 1
+  $ humanity += 1
+  $ do chart("paris.court")
+  It is not a thing that you say to anyone. You walk to the Pont Marie, where the road from the faubourg Saint-Germain comes over to the Île Saint-Louis, and you stand in the middle of the bridge with your hands behind you. They come at a little before four. There are twenty of them, in gray, in a column of twos, not hurrying. Brezac is at their head. He stops three paces off. He looks at you, a long time, with a face that has been thinking for several centuries, and you look back. It is a very quiet fight. There are no swords in it. At the end of it he says that he was not aware that the Prince had put anyone on the bridge, and you say that the Prince had not, and he says that in that case it is an unusual form of impertinence, and takes his men back across the river. You will have to answer for it. It was, you decide, worth the price of a pleasant bridge at four in the morning.
+* Ride with the watch, and see that it is done quietly
+  $ b3.night = "brezac"
+  $ cunning_brutal += 2
+  $ standing += 3
+  $ defiance -= 3
+  $ bond.severin -= 4
+  $ bond.thibault -= 1
+  $ secrecy += 1
+  $ do chart("paris.court")
+  It is the court's own errand, and you have said that you will see it done, and you see it. You go in a coach with the blinds down, in a column with a number of others, through the empty streets, and at four in the morning you come to the green door in the rue de Charonne. It is open. It is a thing that you have been expecting to find, and do not. There is a long cold cellar with a hundred empty casks and a dead candle and a great many torn pieces of paper. They have gone, an hour before, by a door at the back, and somebody has told them. Brezac looks at you in the dark with great gentleness. He does not say a word. You do not say a word. It is not a thing that either of you will refer to again, and both of you will remember it for the rest of your lives.
+<~
+
+# shop
+## The type
+The shop is lit, and shuttered, and quite full. It is a thing that you have not seen. There are fifteen people in it who have no business to be there, and every one of them is working. Adélaïde is at the long table with a pen and a lamp, ruling lines. Étienne is at the second press with his sleeves rolled up and his spectacles on his forehead, inking, as he has not inked in thirty years, because the journeymen have all gone to the Palais-Royal. Baptiste is at the stone, with a composing stick in one hand and a long strip of type in the other, and he is shouting.
+He has been up for two nights. He has a bruise on his cheekbone and the green leaf in his cap. He says that he has the broadsheet set. It is one page, of three columns, with a black border, and a single line at the top in the largest face in the house, which says PARIS IS IN ARMS. He wants three hundred copies by dawn. It will not take long. He has everything that he knows, from the Palais-Royal, from the barrier, from the Invalides, where the people have been all evening asking for powder, and from the Hôtel de Ville, where the electors have been sitting since Sunday making a militia. It is, he says, the only true account in Paris of what is happening in Paris, and by noon it will be wrong.
+Aubry is by the door in his coat, with the cross on his breast. He says that he is going out at four, with the boys, to the Invalides and then to wherever there are people with guns. He has not said that he is going to the Bastille. It is what he means.
+?if b3.press == "underground"
+  There is a drawer behind the counter that nobody has opened in some time, with the blocks for the imprint of *At London*, a thing that was done in a hurry on a winter's night. Baptiste has it open. He is looking at it, and at you.
+?end
+* Print it, with the house's name at the foot, plain
+  $ b3.broadsheet = "named"
+  $ defiance += 2
+  $ standing -= 1
+  $ secrecy -= 2
+  $ bond.baptiste += 3
+  $ bond.adelaide += 1
+  $ do chart("paris.presses")
+  Adélaïde sets the line. She does it with her own hands, without a word, in the smallest face, at the bottom of the page: *Valère, imprimeurs, rue Saint-Jacques, au Soleil d'Or*. She looks at it. She does not say that she is afraid, because it would be a waste of a perfectly good page. By four there are three hundred sheets in the yard and the boys are going out of the gate with their arms full, in the first of the light, and the old house is for the first time in two hundred and fifty years a thing that has said its own name in public.
+* Print it, with no imprint, and let it go out as a thing without a father
+  $ b3.broadsheet = "unnamed"
+  $ cunning_brutal += 1
+  $ secrecy += 2
+  $ bond.baptiste += 1
+  $ do chart("paris.presses")
+  It is the right thing for a house like this one. It takes away the name and leaves the black border. Adélaïde looks at it a long while and says that it is a thing she has seen a good many times in the book trade, and that it is a thing that she has always rather despised. She says that she will not be saying so. By four there are three hundred sheets in the yard, and they go out of the gate as a number of boys' loads of washing might, under their coats.
+* Tell Baptiste that the house will not print it
+  $ b3.broadsheet = "refused"
+  $ secrecy += 3
+  $ standing += 1
+  $ bond.baptiste -= 3
+  $ bond.etienne += 1
+  There is a silence in the shop that has a bitter taste. Baptiste puts down the composing stick. He says, quite quietly, that he is a compositor, and that it is a trade, and that he had thought that he was in a house that printed the truth. He says that he knows what a house is that does not. He takes off his apron and folds it, and puts it on the stone, and goes out by the yard door, past Aubry, who does not stop him. It will be printed in the morning, in any event, by another house. It is a very good broadsheet.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is a little after ten. The tocsin is still going from every steeple, and on the southern horizon, where the Invalides stands, there is a faint red glow that is not the sun.
+?elif actions_left() == 2
+  It is past midnight. There is a smell of woodsmoke and of cheap wine, and somewhere in the faubourg a drum is beating, a plain bare rhythm that is not being played for anyone.
+?else
+  The east is going gray. It is a little before three. There is one thing more that you can do before the sun.
+?end
+* Go out to the Barrière du Trône, where the wall is burning [once] ?if actions_left() > 0
+  ~> barrier
+  $ do act()
+* Go to the rue de Jérusalem, where the Lieutenant General's files are being burned [once] ?if actions_left() > 0
+  ~> file
+  $ do act()
+* Answer the silence at the Hôtel de Saint-Aubin [once] ?if actions_left() > 0
+  ~> night_court
+  $ do act()
+* Go back to the shop, where Baptiste is setting type [once] ?if actions_left() > 0
+  ~> shop
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> day
+?end
+-> :night
+
+# day
+## The day of the fourteenth
+You cannot see it. It is the thing that you will remember. It is the biggest day of the century, and it is a bright hot Tuesday, and you are a hundred feet under the rue Saint-Jacques, in the dark, with the lid of the world shut on top of you, in your coffin or your chamber or your plain room with its blind, and you cannot see a thing.
+?if b3.gallery == "haven"
+  The haven among the bones is very quiet. It is a dry vaulted chamber with a stone shelf and a lamp that you have not lit, and a passage at the end that goes to the rue de la Huchette, and a million of the dead of the Innocents stacked in the dark on the other side of the wall, in good order, like the shelves in a library.
+?else
+  The cellar of the shop is quite dry, with the casks of ink and the paper in its bales, and a bed made up behind a stack of wet sheets, which Adélaïde has seen to, as she sees to everything, without being asked.
+?end
+You sleep, for the most part. A vampire sleeps in the day as a stone does, and it is not a thing that you can alter. But there is a point, in the early afternoon, when you are not sleeping, when you lie on your back and listen, and what you hear is not a sound at all, or not at first. It is a kind of pressure in the stone. It comes down from the street through the floor of the shop and the cellar and the vault, a long dull rolling like a very distant weather, and it goes on for four hours.
+It is the guns. It is the guns of the Bastille, and of the people who are attacking it, and it is, you think, a very great number of them. They go and they stop and they go again. There is a long gap about three o'clock in which you can hear nothing at all, and you lie in the dark with your hands folded on your chest and think that it is over, and that you do not know which way. Then there is a sound that is like a single enormous door being shut, a long way off. After that there is a noise, very faint, but even the stone cannot keep it out. It is a roar. It goes up out of the whole city, like a gust through a wood.
+It is the first time since Rome that you have been so completely out of a thing that you would have given a good deal to see.
+-> dusk
+
+# dusk
+## The key
+It is Aubry who tells it. He is in the shop at nine, when you come up the cellar stair, in his old coat with the cross, with his face black from the powder, and he is sitting on the counter with a glass of Étienne's brandy and does not appear to know that it is in his hand. He has been in it since noon. He went with the boys to the Invalides at dawn, and they came away with a pike each and a musket between three, and then went to the Bastille, because it was the next place. He says that it was not at all like a battle. It was like something that a crowd does when it has been told for four hundred years that it cannot.
+He tells it in order. There was the courtyard, and the drawbridge, and a carpenter and a cook who went up on the roof of the guardhouse with axes and cut the chains. There was the governor, who fired into the crowd and killed ninety, and then wished to blow up the powder, and was prevented by a soldier of the guard. There were the Gardes Françaises who came, at three, with cannon, and trained them on the gate. It was they who did it, says Aubry, and not the people. The governor ran up the white flag. It was a very short thing, at the end of it. He says that they let the people in, and the people went through the whole fortress like water, looking for the dungeons, and found seven prisoners. There were four forgers and two lunatics and a nobleman who had been shut up by his family. He says that it was a great disappointment. They had been looking for ten thousand.
+?if b3.aubry == "drilled"
+  Two of the boys were wounded, one of them badly, in the yard, and a third has not come back. Aubry says it as a plain fact, as one says how many horses were lost, and then he puts the glass down, very carefully, on the counter, and looks at it.
+?end
+There was a thing at the end that he does not want to say, and says. They took the governor to the Hôtel de Ville, and in the Place de Grève, in the evening, they killed him. It was not done with any ceremony. A cook cut off his head with a pocket knife, because it was what he had, and it was put on a pike and carried through the streets, and a long procession followed it, with the keys. He has the key. It is a large rusty one, as long as a hand. He puts it down on the counter in front of you, and it lies there on the polished wood in the light of the lamp, with the dust of the dungeons still on it. It is a very ugly object.
+?if b3.broadsheet == "named"
+  The broadsheet, he says, was on the walls by six. It was read aloud in the Place Maubert, and in the Halle, by a market porter with a very good voice, and it was torn up and passed round and read again. It had the name of the house at the foot of it. He thinks that this will be remembered, and he looks at Adélaïde, and Adélaïde looks at the counting book.
+?elif b3.broadsheet == "unnamed"
+  The broadsheet was read all over the quarter. It did not have a name at the foot, and a number of people asked about that, and two of the boys said at the same moment that they did not know who had printed it, and were not believed by anybody.
+?else
+  Another house printed it. The imprint was Brunet's, in the rue Mazarine. It was a very good broadsheet, and it sold nine hundred in an hour. Baptiste did not come back to the shop this evening, and nobody has said the name.
+?end
+You go out into the street at ten. It is full. There is a bonfire at the corner of the rue des Noyers, and a drum, and a man with a violin who is playing a thing that is not a tune. The windows of every house are lit, in the whole length of the street, up to the roofs, and there are people on the pavement who have not spoken to one another for ten years, singing. It is a night that no one is going to forget. There is a smell of gunpowder and spilled wine and fried onions. The great black bulk of the Bastille is at the end of the city, in the dark, with its towers still standing.
+Three of them are waiting for you at the corner. They are standing a little apart from the crowd, in plain gray, with a ribbon each in their buttonholes, and it is the first time you have seen them walk in the street in a group.
+?if b3.night == "warned"
+  Séverin does not say thank you. He holds out his hand, as one man holds it out to another in a street, and you take it. It is a thing that will be remembered, in a certain cellar, for a very long time.
+?elif b3.night == "between"
+  Séverin tells you, with a ghost of the old lilac manner, that he has heard that someone stood on a bridge, and that he would be very much obliged to be told who. You do not tell him. He seems to find this, on the whole, an even better answer.
+?else
+  Séverin does not offer his hand. He looks at you, and at the empty place in the street where there would have been a carriage, and he says only that he hopes that it was a pleasant night, and that he is glad to see that it ended well.
+?end
+Clémence is looking at the sky over the Bastille. She says that there are a great many people in the faubourg tonight who will not be able to explain how they got there, and that it is the first time that she has been in a crowd and not been afraid of it.
+?if b3.veil == "covered"
+  Thibault comes up behind her, shy, in a clean shirt, and says that he wished to say it before the end of the day, and that he does not know the words. He says that it was a very good funeral. He laughs. He is sixteen, and he is going to be sixteen for ever, and he looks, in the light of the bonfire, quite alive.
+?elif b3.veil == "silenced"
+  Thibault does not look at you. He looks at his boots. He says, in a flat low voice, that he has heard what became of the sergeant. He says that nobody told him. He knows, as a thing that one knows by the smell of a room, and that he will not say anything about it, and that he would like to be sure that it will not be done again, for his sake.
+?else
+  Thibault tells you, with a nervous grin, that a Garde Française looked at him in the crowd on the Pont Neuf this afternoon, a young one, in a blue coat, and went quite white, and crossed himself, and walked away. It was not the sergeant. It was another. He says that he thinks that they all know.
+?end
+There is a card on the table in the shop when you go in, under the lamp, in a plain upright hand that does not belong to anyone in the house. It is a small white card. It has been left by someone who has taken the trouble to come in by the yard, and to put it exactly in the center of the table, under the light, and to go away without a sound. It says, in Latin, in a very old script, that the writer has counted what was seen in April, and that he will wait upon you on the Sunday, at the hour that is convenient to a gentleman. It is signed with a letter G.
+You put it in the stove. It does not occur to you until the paper has gone that it is a thing that one ought not to do, in a house that has a Lictor in the neighborhood, and a police file that nobody has burned.
+$ do rest()
+=> next

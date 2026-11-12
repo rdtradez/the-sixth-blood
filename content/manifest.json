@@ -525,6 +525,24 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b3c07",
+          "file": "crown-of-ashes/ch07.tsb",
+          "title": "The Fourteenth of July",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        },
+        {
+          "id": "b3c08",
+          "file": "crown-of-ashes/ch08.tsb",
+          "title": "The Great Fear",
+          "notes": [
+            "blood",
+            "violence"
+          ]
         }
       ],
       "incomplete": true
