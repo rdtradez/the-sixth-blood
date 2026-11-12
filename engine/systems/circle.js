@@ -109,7 +109,14 @@ export const circle = {
         const p = sireProblem(ctx);
         if (p) throw new EngineError(`$ do sire("${id}"): ${p} (check can_sire() first)`);
         const s = sysOf(ctx);
-        add(ctx, id, { kind: 'vampire', line: 'sixth', sire: 'hero', tier: 1, daywalk, role }, loyalty);
+        // A sworn human keeper can be turned: the keeper entry becomes a fledgling and keeps its join book.
+        const old = s.circle[id];
+        let joined;
+        if (old && present(old) && old.kind === 'keeper') {
+          joined = old.joined;
+          delete s.circle[id];
+        }
+        add(ctx, id, { kind: 'vampire', line: 'sixth', sire: 'hero', tier: 1, daywalk, role, ...(joined === undefined ? {} : { joined }) }, loyalty);
         s.sired[ctx.state.book] = (s.sired[ctx.state.book] ?? 0) + 1;
         // Siring with the old blood drains him heavily, and every new vampire alarms the Velati.
         bump(ctx, 'hunger', rule(ctx, 'coven.sireHunger', 30));

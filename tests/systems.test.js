@@ -186,6 +186,12 @@ test('no siring in Book One; from Book Two at most two a book', async () => {
   assert.equal(game.state.vars.hunger, 10 + 30 + 30); // siring with the old blood drains him
 });
 
+test('a sworn keeper can be sired and becomes a fledgling instead of erroring', async () => {
+  const game = await sysGame({ b2: `${H('b2', 'blood-and-gold')}\n# start\n$ do keeper("aelia", "keeper in the making", 60)\n$ do sire("aelia", "fledgling")\nA {in_circle("aelia")} "{member("aelia", "kind")}" "{member("aelia", "sire")}" {coven_size()}.\n---\n=> endbook\n` }, { book: 'blood-and-gold' });
+  await game.startBook('blood-and-gold', { from: 'quick', seed: 2 });
+  assert.equal(texts(game.frame)[0], 'A yes "vampire" "hero" 1.');
+});
+
 test('a mission resolves at rest, reports once, and can be debriefed', async () => {
   const game = await run([
     PEOPLE, '$ do send("prisca", "scout", 1)', 'A {on_mission("prisca")} "{mission("prisca")}".',
