@@ -47,7 +47,7 @@ async function play(chapter, wake, vars, wants = [], { stopAt = null, seed = 3 }
   game.state.sys.sleep.wake = { quick: true, place: 'collesanto', steward: 'bank', outcome: 'on_schedule', years: 310, invest: [], ...wake };
   for (const [k, v] of Object.entries(vars)) dev.setVar(game, k, v);
   const frame = await dev.jump(game, chapter, { keep: true });
-  return drive(game, frame, wants, stopAt ?? (chapter === 'b3c12' ? 'b3c13' : null));
+  return drive(game, frame, wants, stopAt ?? (chapter === 'b3c12' ? 'b3c13' : chapter === 'b3c14' ? 'b3c15' : null));
 }
 
 const clean = (run) => {
@@ -66,7 +66,7 @@ test('chapter 13 plays through for every state of the book so far, and reaches c
     for (const coup of ['none', 'backed', 'stopped', 'told']) {
       for (const champ of ['stayed', 'fetched', 'stood']) {
         for (const hunger of [10, 90]) {
-          const run = await play('b3c13', {}, { ...START, ...EARLIER, hunger, 'b3.vault': vault, 'b3.coup': coup, 'b3.champ': champ }, []);
+          const run = await play('b3c13', {}, { ...START, ...EARLIER, hunger, 'b3.vault': vault, 'b3.coup': coup, 'b3.champ': champ }, [], { stopAt: 'b3c14' });
           assert.equal(run.game.state.chapter, 'b3c14', `${vault} ${coup} ${champ} ${hunger}`);
           assert.match(run.text, /before the war/);
           clean(run);
@@ -140,13 +140,13 @@ test('chapter 13 sets defaults for what he did not do, and spends three of four 
 
 const LATE = { ...EARLIER, 'b3.key': 'held', 'b3.cadets_home': 'sheltered', 'b3.journal': 'backed', 'b3.aubry_post': 'sent', 'b3.war': 'contract', 'b3.coup': 'backed', 'b3.champ': 'stood' };
 
-test('chapter 14 plays through for every state of the book so far, and the book pauses after it', async () => {
+test('chapter 14 plays through for every state of the book so far, and reaches chapter 15', async () => {
   for (const key of ['none', 'held', 'bargained', 'refused']) {
     for (const vault of ['read', 'broke', 'left']) {
       for (const nationals of ['bought', 'lent', 'refused']) {
         for (const hunger of [10, 90]) {
           const run = await play('b3c14', {}, { ...START, ...LATE, hunger, 'b3.key': key, 'b3.vault': vault, 'b3.nationals': nationals }, []);
-          assert.equal(run.game.state.chapter, 'b3c14', `${key} ${vault} ${nationals} ${hunger}`);
+          assert.equal(run.game.state.chapter, 'b3c15', `${key} ${vault} ${nationals} ${hunger}`);
           assert.match(run.text, /second of September/);
           clean(run);
         }

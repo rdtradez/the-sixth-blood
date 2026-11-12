@@ -161,3 +161,29 @@ The day is told at dusk by Adelaide (the king to the Assembly, the Swiss killed,
 Hooks: the September massacres at the convent in the rue de Vaugirard; the Prince's collapse; the Cadets; Clemence in the cellar of the old Hotel de Ville; Etienne; Baptiste and the Commune; Brezac at home with his Tokay; the Lady's waking.
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies. The Cadets sit out the assault itself because it happens in daylight.
+
+## Chapter 15, "The Second of September" (`b3c15`, session 36)
+
+The design doc gives no list for these chapters beyond the book outline (the Terror, a vampire guillotined whose head reattaches, the fall of the Blood Prince, the Priestess's awakening, sleep), so this plan was written from the hooks chapter 14 left: the second passage on the slate (Sunday the second of September, the Carmelite house left open, the young ones let to burn, the Prince across the river). Late August to the night of the second to the third of September 1792. Opens on the last days of August (Longwy fallen, Verdun besieged, the house searches of the twenty ninth and thirtieth, three thousand arrested, the barriers shut), no phase. Hunger scene on entry if needed.
+
+Night phase (the night of the first to the second), three of four: the convent in the rue de Vaugirard (four of the Cadets, Clemence and three who would not be sheltered or sent, have slept in the crypt since the tenth; the house is the hero's property, a hospital or a prison for nonjuring priests by `b3.nationals`; `b3.carmes`: cadets (took the four out before dawn, and the priests stay), priests (opened the gate at three and told them to go; about thirty walk out, and the crypt is left), watched (stood in the garden and did neither)); the Hotel de Saint-Aubin (the Prince is going over the river before the day, as the slate says; `b3.crossing`: pressed (asked him to put the court's eleven at the convent gate; Brezac goes if `b3.brezac` is held or rode), crossed (saw him over the Pont Neuf, a plain coach and a drawn blind), left); the Hotel de Ville (the Surveillance Committee's lists; reads `b3.garnier`, `b3.file`; `b3.arrests`: warned (the families of eleven on the list, by the back door), struck (a clerk bribed, six names struck), kept (copied the list)); the shop (Adelaide has hidden a nonjuring priest in the cellar since the tenth, the abbe who married her; `b3.priest`: hid (the quarry under the shop), sent (the Orleans coach, at a price), left (he says he will go back to his house, as his conscience bids).
+
+The day is told at dusk: the alarm gun at two, the tocsin, Danton's speech, the carriages of priests at the Abbaye at three, the Carmes garden at four (about a hundred and fifteen killed; the Archbishop of Arles). Variants by `b3.carmes`, `b3.nationals`, `b3.priest`. If `b3.carmes` is watched, two of the four Cadets burned when the crypt door was forced; Clemence was dragged out by the third and has the marks of it.
+
+Fixed closing scene: the Abbaye, the night of the second to the third, by lantern light. The young lieutenant of the Swiss from the Tuileries corridor is at Maillard's table. `b3.abbaye`: spoke (stood at the table and spoke for him; he is let go, and the table remembers), took (took him out by the back stair; costs secrecy and humanity), stayed (stayed in the street; the cry through the wall). Ends with `rest()` and `=> next`.
+
+Hooks: the convent as a place of the dead; Clemence; the Prince's collapse; Garnier; the abbe; the lieutenant; the September letter to the provinces; the Republic; the Lady's slate.
+
+Flagged to the owner (spoiler light): nothing changes the big picture; two unnamed Cadets can be lost, and no named character dies.
+
+## Chapter 16, "The Winter of the Trial" (`b3c16`, session 36)
+
+September 1792 to the twenty first of January 1793. Valmy, the Republic proclaimed (22 September), the iron chest (20 November), the trial, the vote (16 to 17 January). Opens on the autumn (the Prince has not come back over the river; Etienne is dying; the war has turned), no phase. Hunger scene on entry if needed.
+
+Night phase (the night of the twentieth to the twenty first), three of four: the Temple (the king's last night; the lane, the guard; `b3.temple`: offered (sent a word through a sergeant of the Temple guard that a way could be found), watched (stood in the lane under the tower lamp), left); the house in the rue Saint-Jacques (Etienne's deathbed; `b3.etienne`: told (everything), sat (said nothing and stayed), left (left him to Adelaide); reads `b3.valere`, `b3.baptiste`); the rue des Prouvaires (the Senate's answer; reads `b3.hunt`: sworn (Galerius is still the witness, and calls his work complete), taken (a second Lictor arrives to ask for the boy), spared (a letter), destroyed (a young Lictor with a warrant); `b3.envoy`: heard (told him all), bargained, sent away; reads `b3.senate`); the third cellar (the Prince, brought back across the river by Ottaviano for the night; the third passage on the slate; `b3.third`: read, rubbed or kept).
+
+The twenty first is told at dusk: the drums, the king's last words lost under them, Aubry in the ranks, the handkerchiefs. Fixed closing scene: Etienne dies in the small hours of the twenty second, and Adelaide asks him for the keys. `b3.keeper`: adelaide (sworn her the keeper of the house), baptiste (the house is his), none (the house is shut). Ends with `rest()` and `=> next`.
+
+Hooks: the war on England and Holland (1 February), the Vendee, the levy, the Revolutionary Tribunal, the Committee of Public Safety, the Terror; the guillotine; the Prince; the Lady's waking.
+
+Flagged to the owner (spoiler light): the king's execution is told at dusk, since it takes place by day. Nothing changes the big picture and no major character dies.

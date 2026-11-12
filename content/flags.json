@@ -3320,6 +3320,125 @@
       "major": true,
       "default": "kept",
       "note": "Chapter 14: what he did about the second line on the slate"
+    },
+    "b3.carmes": {
+      "kind": "enum",
+      "values": [
+        "cadets",
+        "priests",
+        "watched"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "watched",
+      "note": "Chapter 15: what he did at the Carmelite house on the night before the second of September (watched if he did not go)"
+    },
+    "b3.crossing": {
+      "kind": "enum",
+      "values": [
+        "pressed",
+        "crossed",
+        "left"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 15: what he did when the Prince left for the other side of the river (left if he did not go)"
+    },
+    "b3.arrests": {
+      "kind": "enum",
+      "values": [
+        "warned",
+        "struck",
+        "kept"
+      ],
+      "book": "crown-of-ashes",
+      "default": "kept",
+      "note": "Chapter 15: what he did with the Surveillance Committee's lists (kept if he did not go)"
+    },
+    "b3.priest": {
+      "kind": "enum",
+      "values": [
+        "hid",
+        "sent",
+        "left"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 15: what he did about the priest in the Valere cellar (left if he did not go)"
+    },
+    "b3.abbaye": {
+      "kind": "enum",
+      "values": [
+        "spoke",
+        "took",
+        "stayed"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "stayed",
+      "note": "Chapter 15: what he did for the young Swiss lieutenant at the Abbaye"
+    },
+    "b3.temple": {
+      "kind": "enum",
+      "values": [
+        "offered",
+        "watched",
+        "left"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 16: what he did at the Temple on the king's last night (left if he did not go)"
+    },
+    "b3.etienne": {
+      "kind": "enum",
+      "values": [
+        "told",
+        "sat",
+        "left"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 16: what he did at Etienne's bed (left if he did not go)"
+    },
+    "b3.envoy": {
+      "kind": "enum",
+      "values": [
+        "heard",
+        "bargained",
+        "sent"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "heard",
+      "note": "Chapter 16: how he answered the Senate's officer (heard if he did not go)"
+    },
+    "b3.third": {
+      "kind": "enum",
+      "values": [
+        "read",
+        "touched",
+        "left"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 16: what he did at the third cellar on the night of the twentieth of January (left if he did not go)"
+    },
+    "b3.keeper": {
+      "kind": "enum",
+      "values": [
+        "adelaide",
+        "baptiste",
+        "none"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 16: who he named keeper of the Valere house when Etienne died"
     }
   }
 }

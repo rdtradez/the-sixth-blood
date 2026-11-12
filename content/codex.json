@@ -469,6 +469,36 @@
       "title": "The second line",
       "book": "crown-of-ashes",
       "text": "A passage that the Lady's hand began to write in August 1792, after a long silence. It names a Sunday in September and a house in the rue de Vaugirard."
+    },
+    "the_second_of_september": {
+      "category": "lore",
+      "title": "The second of September",
+      "book": "crown-of-ashes",
+      "text": "The first of the prison massacres of 1792. Paris, with Verdun under siege and the barriers shut, killed over a thousand prisoners in four days, beginning with priests at the Abbaye and the Carmelite house in the rue de Vaugirard."
+    },
+    "the_abbaye": {
+      "category": "lore",
+      "title": "The Abbaye",
+      "book": "crown-of-ashes",
+      "text": "The old prison of Saint-Germain-des-Pres, where on the night of the second of September 1792 a self appointed table under a man named Maillard judged the prisoners one by one, by lamplight."
+    },
+    "the_twenty_first_of_january": {
+      "category": "lore",
+      "title": "The twenty first of January",
+      "book": "crown-of-ashes",
+      "text": "The day in 1793 when the king, who had been tried by the Convention and condemned, was put to death in the Place de la Revolution at about ten in the morning, in a fog, under a roll of drums."
+    },
+    "the_third_slate": {
+      "category": "lore",
+      "title": "The third line",
+      "book": "crown-of-ashes",
+      "text": "A passage that the Lady's hand wrote on the night before the king's death. It names a man who is to stand up from under the knife, and says nothing of what is to be done with him."
+    },
+    "the_keepers_of_paris": {
+      "category": "lore",
+      "title": "The keepers of Paris",
+      "book": "crown-of-ashes",
+      "text": "The Valere house in the rue Saint-Jacques, printers, who have kept the hero's books and his haven since the court came to France. The post passes with a ring of keys and a form of words that is older than the house."
     }
   }
 }

@@ -1,0 +1,338 @@
+// Book Three, Chapter 15 (session 36). The last days of August 1792 and the night of the second to the third of September. The convent, the Prince's crossing, the lists, the priest in the cellar, and the Abbaye.
+// Opens on the end of August (no phase), then one night phase of three actions out of four (the night of the first to the second), then the dusk and the day told, then a fixed closing scene at the Abbaye that every player plays.
+// Ends with rest() and => next. Reads b3.nationals, b3.brezac, b3.garnier, b3.file, b3.palace, b3.slate, b3.faubourg, b3.cadets_home and b3.baptiste. Chapter 16 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c15
+@title The Second of September
+@book crown-of-ashes
+@version 1
+
+# start
+## The last of August
+$ b3.carmes = "watched"
+$ b3.crossing = "left"
+$ b3.arrests = "kept"
+$ b3.priest = "left"
+$ b3.abbaye = "stayed"
+~> evening
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the night of the first of September, a Saturday, and a little after ten. There are four things that want doing by your own reckoning, and time for three.
+-> night
+
+# evening
+## The barriers
+Longwy fell on the twenty third. It was a small place, and it gave itself up in a day, and the news was a week reaching Paris, and it came as a thing comes that has been expected for a long time and has been got ready for in all the wrong ways. Verdun is besieged. It is eighty leagues. A good cavalry could be at the gates in a week, and the whole of Paris knows the figure, and says it over, in the shops, as people say over the price of bread.
+The barriers have been shut since the twenty eighth. On the twenty ninth and thirtieth the Commune went through the houses, by night, with torches, looking for arms and for priests and for anybody who had not been seen to be afraid, and took three thousand, and put them in the Abbaye, and the Conciergerie, and La Force, and the Châtelet, and the old convent in the rue de Vaugirard, where the priests who would not take the oath have been kept since the spring. It was very well done. It was done on a list. A man who has a list is a man who is very much comforted.
+?if b3.garnier == "turned"
+  The Inspector's name is on one of them. It was written, you gather, by his own clerk, in a very neat hand.
+?end
+There is a good deal of talk of the prisons. It is said, in the cafés, with a note of impatience, that it is a poor thing to send the best of the city to the frontier, with the pikes, and leave behind it, in the gaols, three thousand persons who would be glad to open the doors to the Prussians. It is not said by a particular man. It is said by the weather.
+The shop has a quiet that you do not like. Étienne is in his bed. Baptiste is out. Adélaïde has been moving through the house all week with a basin and a cloth and her face very steady, and has twice been seen, at the head of the cellar stair, listening, with her hand on the rail.
+?if b3.slate == "told"
+  The Prince is not in the Hôtel de Saint-Aubin. He is in the third cellar. Ottaviano says that he has not spoken since the Tuesday, except once, to say that it was his own hand, and that he was obliged to you.
+?elif b3.slate == "rubbed"
+  There is a stain of white dust on the cuff of the coat that you wore to the cellar. You have not been able to get it out. It has the look, in a certain light, of a letter.
+?else
+  You have the line by heart. You have had it, three weeks, like a coin in the mouth. The second of September is to be a Sunday. It is a Sunday.
+?end
+<~
+
+# hunger
+## The close night
+It is the shut barriers. They have put the smell of the whole city into a box, and shut it, and the box is full of people who are afraid. In the rue de la Harpe a watchman, on a doorstep, with a pike across his knees, who has been told to stop everybody and who is asleep, snores, with his throat bare, quite easy to reach.
+* Take it from the watchman, and put the pike back across his knees
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  He does not wake. He will say, in the morning, to a sergeant, that it was the heat. You put the pike straight, and it is a ridiculous thing to have done, and you are glad of it.
+* Go down to the river, to the horses of the water carriers, and take it there
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  They stand in the dark in a line along the quay, with their heads down, patient and enormous. The big gray, who is nearest, lets you. It is not what the blood wants. It is a very honest way of getting it.
+* Wait, and do not feed
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It is a thing that can be done. The night is long. You find that you have begun to count the doors that are shut.
+<~
+
+# convent
+## The rue de Vaugirard
+It is the old house of the Carmelites. It has a long gray front on the street, with a gate, and a court, and behind it a garden with a wall round it, and a chapel with a small dome, and under the chapel a crypt, that is dry, and very deep, and is the best cellar on the left bank of the river.
+?if b3.nationals == "bought"
+  The deed is in a drawer in the counting room, in Adélaïde's name. It is a quiet house. She has let the cells to a society of widows, and put a bench in the garden, and there is a smell of cabbage and wet linen. The gate is on the latch, and the porter, who is eighty, looks at you with great affection and does not get up.
+?elif b3.nationals == "lent"
+  It is the district's hospital, as you arranged it, with forty beds in the cells, and a small stove in the chapel. There is a surgeon asleep on a bench in the passage with his coat over his face, and a sister, who has not yet been told that she is no longer a sister, going round with a candle, quietly, bed by bed.
+?else
+  It is a prison. There is a sentry at the gate, a National Guard of fifty, with a red face and a pipe, who is quite amiable, and a turnkey, and in the cells, behind the old doors, a hundred and fifty priests who would not take the oath, sitting on the straw. They have been singing a very little. It is the sort of singing that is done to keep an hour in its place.
+?end
+You go down by the passage behind the sacristy, to the crypt. They are there, four of them, in the dark, on pallets, in their clothes, in the cold, among the stone coffins of nuns who have been dead two hundred years. They have not been sheltered or sent. They have wanted a deep place and a quiet one, and a place that was nobody's, and they found it. Clemence has sat up. She is in the man's coat. She says that there are three that she would give her life for and one that she would not, and that she has not yet decided which is which.
+She says that the Commune has been in the garden twice this week, looking at the wall.
+It is a quarter past one. It is a Sunday, very nearly, and the line on the slate is in your head as plain as the lamp. You know what is to be done in this house. You do not know whether you are able to make it not be done. It is a thing that you can do for one of two parties, and the dawn is five hours off.
+* Take the four out before the day, by the passage to the garden, and leave the house as it is
+  $ b3.carmes = "cadets"
+  $ standing += 1
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  $ bond.clemence += 2
+  $ do chart("paris.rebels")
+  $ do discover("the_second_of_september")
+  It is done in a quarter of an hour. You are not gentle about it. You say that there is a thing coming that you cannot stop, and that it is not a thing that they will be able to get out of, once the doors are open, and that they are to come. Clemence looks at you for a good while, with her head on one side. She says, at the end, that she thought you would say that. She says that it is not at all what she would have said. They go up through the garden, in the dark, in a line, between the beds of lettuce, to a cart that Adélaïde's carter has left at the end of the lane, under a tarpaulin, and the cart goes away down the rue du Cherche-Midi, quite slowly, on a horse that is half asleep. You stand in the garden. In the cells, behind the old doors, somebody has begun to sing again, very low. You do not go in.
+* Open the gate at three, and tell the priests that they may go
+  $ b3.carmes = "priests"
+  $ humanity += 3
+  $ secrecy -= 2
+  $ standing -= 1
+  $ cunning_brutal -= 1
+  $ do chart("paris.court")
+  $ do discover("the_second_of_september")
+  It is a thing that is not in the least difficult. You have the porter's keys, or the turnkey's, or the sister's, and you go from door to door in the old passage, in the lamplight, and say in a low voice what you say. Many of them do not believe it. Some of them are afraid of a trap, and some are not able to walk. A very old man, with a face like a seal, a bishop, who says that he is the Archbishop of Arles, thanks you for your trouble, and says that his place is with his people, and goes back and sits on the straw. At three you open the gate. About thirty walk out. They go in twos and threes, in the dark, with their hats pulled down, with that air of a person who is leaving church in the middle of the sermon. The sentry is asleep. The crypt, behind you, you do not go near. You have said that it is not possible, and you know that it was a choice.
+* Stand in the garden, and do neither
+  $ b3.carmes = "watched"
+  $ secrecy += 2
+  $ cunning_brutal += 2
+  $ humanity -= 2
+  $ bond.clemence -= 2
+  $ do chart("paris.rebels")
+  $ do discover("the_second_of_september")
+  You say that you will not do either. You are not sure why. You say that there is a thing that you want to see, and then you cannot tell what it is, and you stand a long time under the old pear tree, in the cold, listening to the hundred and fifty at their psalm, until it is the hour that you must go. Clemence has not spoken. She has not said that she will go if you will not. She says, as you go, in the voice of a woman who does not expect to be answered, that you might at least have said what you meant to do.
+<~
+
+# prince
+## The plain coach
+He is in the hall, in a gray traveling cloak, with a small trunk and a sword. It is the first time that you have seen him in the hall. The candles are out. The great doors are open, and in the court there is a plain coach, with the blinds drawn, and Ottaviano on the box, with his hat low, and the horses stamping.
+?if b3.slate == "told"
+  He says that it is quite right. He says that it is the thing that was written, and that he has made up his mind to it, as a man does who has been told by his physician what he must eat. He says that it is a very great relief. He says that he does not intend to see it.
+?elif b3.slate == "rubbed"
+  He says that you rubbed it out, and that it came again, and that he has been thinking about that, in the cellar, for three weeks. He says that he has decided to go. He says that he cannot say whether it is obedience or a form of revenge.
+?else
+  He says that he is going across the river. He says that it is to be a quiet Sunday, and that he finds that he has a wish to be in the Marais. He does not say why. He does not look at you while he says it, and it is not at all a kind of lie that he has the habit of.
+?end
+There is no one else in the house but the pale woman in gray, who sits on the stair with her hands in her lap.
+?if b3.brezac == "held"
+  Brézac is not here. He has been in the Rue de Vaugirard since midnight, he says, at the Prince's own word, and Ottaviano has been told to say that it was not an order.
+?elif b3.brezac == "rode"
+  Brézac has been out all night. He came in, at midnight, and was sick, in the great hall, quite quietly, in a corner, like a very old dog.
+?end
+* Ask him to put the court's eleven at the convent gate, and stay
+  $ b3.crossing = "pressed"
+  $ standing += 1
+  $ defiance += 1
+  $ cunning_brutal += 1
+  $ bond.ottaviano += 1
+  $ do chart("paris.court")
+  $ do discover("the_second_of_september")
+  You say that it is not a thing that he may do, and that there is a house with a hundred and fifty men in it, and four of his own, and that there are eleven in this hall who would stand at a gate if he said it. He listens quite politely, with his head bent. At the end, he says that it is the first time in four hundred years that anyone has asked him for the sword of the house in order to use it on behalf of mortals. He says that he is not able. He says that he is not sure that it is a kindness to be asked. He goes out to the coach. But you have seen the pale woman, on the stair, put up her head.
+* See him over the river, in the coach, with the blind drawn
+  $ b3.crossing = "crossed"
+  $ humanity += 1
+  $ secrecy += 1
+  $ standing -= 1
+  $ cunning_brutal -= 1
+  $ bond.ottaviano += 1
+  $ do chart("paris.court")
+  $ do discover("the_second_of_september")
+  You get in. It is as dark as a box, and smells of leather and cold and of some sort of herb. He does not speak until the Pont Neuf. He says then, in the dark, that you are very good. He says that it is a thing that he has noticed, that you are always a little too good for the occasion. He says it without any malice. At the other side, at the Quai de la Mégisserie, he puts his hand out of the window to take the air, and you see, in the lamp of the bridge, that it is perfectly white, and quite steady, and that it is holding a handkerchief.
+* Let him go, and do not follow
+  $ b3.crossing = "left"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  $ do chart("paris.court")
+  $ do discover("the_second_of_september")
+  You stand in the court and watch the coach go out under the arch. It does not hurry. It goes out into the street at a walk, with its blinds, and turns, and is gone. Ottaviano, on the box, does not look round. The pale woman has come down the stair, and stands beside you, in the empty hall, with her hands folded, and says, after a long while, in a voice that is the voice of a very young person, whether it is wicked to be glad.
+<~
+
+# arrests
+## The Hôtel de Ville
+It is the Commune's, and it is a great ugly house with a hundred windows, all lit, and a sentry at every door who has been told to let in persons with a piece of paper. They are in the Surveillance Committee, in a long low room, under a bust of Brutus, at a table that is littered with lists. There are three clerks. There is a smell of candle grease and sour wine. They are not at all sinister. They are men who have worked a very long time at a very small salary, and who have been told, today, that they are the nation.
+?if b3.garnier == "bargained"
+  You have the Section's papers, the ones you had of the Inspector. It is a small thing. They are well made, and the youngest of the clerks, a flat-faced young man with ink to his elbows, reads your name, and looks again, and does not say anything about it.
+?elif b3.garnier == "sheltered"
+  The Inspector's old clerk is on the third desk. He has the look of a man who has been sent for, and does not know why. He sees you, and puts down his pen, and does not take it up for some time.
+?else
+  There is a sheet on the table in the Inspector's own hand. It is a list of eleven names, in the faubourg Saint-Germain, with a mark against each one that says only, very plainly, that they are dangerous.
+?end
+?if b3.file == "kept"
+  You have the file that you kept, the lever, the thin buff folder that Garnier would have burned. It is a thing that has a use. You put it in your coat.
+?end
+There are five hundred names, on the long list of the Abbaye. There are a hundred and fifty on the list for the rue de Vaugirard. It is a thing that is done very quickly, at a quarter past two, by a very small man at a very big table, who reads them aloud with a pencil.
+* Go by the back stair to the families, and warn them
+  $ b3.arrests = "warned"
+  $ humanity += 2
+  $ secrecy -= 2
+  $ standing += 1
+  $ cunning_brutal -= 1
+  $ do chart("paris.counting")
+  $ do discover("the_second_of_september")
+  You copy out eleven names. You go to the houses. It is a thing that takes two hours and the whole of your ingenuity, and a great deal of knocking at doors that open on a chain. You say, to a woman in a nightcap, and to a man with a candle, and to a child in a shirt who is the only one to answer, that it will be well to be out of the house by the morning, and out of the quarter, and out of Paris if there is a way. Some do not believe you. Some of them are, by the morning, gone. It is not very much. It is a thing that you can say that you did.
+* Pay a clerk to strike six names from the list
+  $ b3.arrests = "struck"
+  $ do earn(-3)
+  $ cunning_brutal += 2
+  $ standing += 1
+  $ secrecy -= 1
+  $ do chart("paris.counting")
+  $ do discover("the_second_of_september")
+  It is a matter of a purse, and a flat-faced young man, and a cup of wine at the Café de la Régence, where you are two gentlemen of leisure. He does it neatly. He draws a line through the names with a very ordinary pen, and puts in the margin, in a very clerkly hand, that they have been released on the order of a Section. It is a thing that is done, he says, every day. You do not ask about the other four hundred and ninety.
+* Copy the list, and say nothing of it
+  $ b3.arrests = "kept"
+  $ secrecy += 2
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  $ do chart("paris.counting")
+  $ do discover("the_second_of_september")
+  It takes you the better part of an hour, in a corner, in a cold light, with a borrowed pen. It is a list of the whole of the prisoners of Paris, with the reason for each. It is the sort of thing that a person who would one day be asked, in the course of a long century, for the names of the dead, would be very glad to have. You put it in your coat. You do not look at the clerks. They do not look at you.
+<~
+
+# shop
+## The cellar stair
+The shop is dark, and the yard is dark, and the old Swiss press has a sheet over it, like a piece of furniture in a house that is shut for the summer. There is a light under the counting room door. Adélaïde is at the foot of the cellar stair, in a wrapper, with her hair plaited, and a candle in a saucer. She has been waiting. She does not say good evening. She says that there is a person in the cellar.
+He is in the old wine room, among the casks, on a pallet, with a book. He is a man of sixty or so, in an old black coat, and a shabby stock, with a round bald head, and a pair of steel spectacles on the end of his nose, who looks at you with a sort of mild, ironic benevolence, as at a thing that might one day be explained to him. He is the abbé who married her. He has been there since the tenth of August. He has never had the oath, and has not said what he thinks of it.
+He says that it is very good of her. He says it as if to someone not in the room. He says that he is under no illusion. He says that a man in his position is something of a trouble, and that he would not wish to be the cause of any, and that he has been wondering, in his cellar, since Wednesday, with a certain amount of curiosity, whether he ought to give himself up.
+Adélaïde stands very straight. She does not look at him. She says, to you, in a small clear voice, that she has told him that he is not to be thought of, and that she would like to know who has the right to say so.
+* Hide him in the quarry under the shop, where the Cadets slept
+  $ b3.priest = "hid"
+  $ secrecy += 1
+  $ humanity += 1
+  $ bond.adelaide += 2
+  $ do chart("paris.presses")
+  $ do discover("the_second_of_september")
+  You carry him down yourself, in your arms, as one does a very large child, because he cannot manage the ladder, and he says that it is most undignified, and that he is obliged. The old gallery is dry, and low, and smells of stone and of the sea. You put him in the dry chamber, the one the size of a chapel, among the bones. He looks about him with great interest. He says that it is the best sermon that he has ever been privileged to hear, and that it is a pity that it is not his own. Adélaïde lights the lamp. She sits on the step. They talk, as you go up, very low, about the price of wine.
+* Put him on the Orléans coach, at a price
+  $ b3.priest = "sent"
+  $ do earn(-2)
+  $ cunning_brutal += 1
+  $ standing += 1
+  $ secrecy -= 1
+  $ bond.adelaide += 1
+  $ do chart("paris.presses")
+  $ do discover("the_second_of_september")
+  It is a matter of a coachman, who is a cousin of the carter, and a passport that has the name of Baptiste's dead schoolfellow on it, and a bag. The barriers are shut. The coachman says that he knows a gate. You take the old man down to the rue du Faubourg Saint-Jacques, at four, in the dark, and put him in, among the sleeping persons, with his book. He thanks you, from the window, with great courtesy. He says that he will pray for you, if it is not an impertinence. It is a thing that you do not know how to answer.
+* Let him go back to his house, as his conscience bids him
+  $ b3.priest = "left"
+  $ humanity -= 1
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  $ bond.adelaide -= 2
+  $ do chart("paris.presses")
+  $ do discover("the_second_of_september")
+  You say that it is a matter for himself. You say it in the voice that you have learned for it, kind and quite without hope, and you are aware, as you say it, of Adélaïde's face, turning, in the candlelight, like a leaf in water. He is satisfied. He says that it is a very fair thing to say. He puts on his hat, and kisses her hand, and goes up the stair into the court, and out. It is a quarter to four. He has a long way to walk, in the dark, to the rue de Vaugirard, and he is quite old, and does not hurry.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is a little after ten, and the whole of the quarter is awake and listening, behind shutters, in the heat.
+?elif actions_left() == 2
+  It is after one. There are lights in every window of the Hôtel de Ville, and a sound, a long way off, of drums, going round and round a square.
+?else
+  It is three. The stars are going out one by one over the rue de Vaugirard, and the cocks have begun in the yards. There is one thing more that you can do before the day.
+?end
+* Go to the old Carmelite house in the rue de Vaugirard, where the Cadets sleep under the chapel [once] ?if actions_left() > 0
+  ~> convent
+  $ do act()
+* Go to the Hôtel de Saint-Aubin, where a plain coach is waiting in the court [once] ?if actions_left() > 0
+  ~> prince
+  $ do act()
+* Go to the Hôtel de Ville, where the Surveillance Committee is at its lists [once] ?if actions_left() > 0
+  ~> arrests
+  $ do act()
+* Look in at the shop, where Adélaïde is waiting at the head of the cellar stair [once] ?if actions_left() > 0
+  ~> shop
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> morning
+?end
+-> :night
+
+# morning
+## The Sunday
+You are in the haven before the sun, with the stone over you, and you hear it, as you have heard every great day of this century, only as a noise through the rock. It begins at about two. It is a gun. It is the alarm gun on the Pont Neuf, a single dry flat thump, and then, after a pause that is exactly as long as you would expect it to be, another. After the guns, the tocsin, and after the tocsin, a long confused rolling sound, that is made of a great many feet, and a great many drums, and a great many voices that are saying the same few words.
+It is told you at dusk, by Adélaïde, who has not come down the stair. She has sent the old porter's boy, with the tray, and a note. The note is in her clear plain hand, and is not signed, and it is very short.
+It says that the first carriages left the Hôtel de Ville at about half past two, with twenty priests in them, for the Abbaye. It says that the mob caught them in the rue de Buci, and that they were killed at the gate, one by one, as they got down. It says that the thing was done, in the Abbaye, in a room, at a table, by a man named Maillard, in a gray coat, with a sword, who sits with a book and a lamp and judges them by the hour, and that it is not yet done. It says that the gates of the Carmes were opened at four. It says that it was done in the garden. It says that there were a hundred and fifteen. It says that the Archbishop of Arles, who was old, and lame, was the first of those who were killed on the steps of the chapel, and that they were all of them very quiet.
+?if b3.carmes == "priests"
+  It says that there were a good many fewer than there might have been. It says that the porter has been telling it at the baker's, in a voice of great astonishment: that on the night before, a gentleman opened the gate. She has underlined the word gentleman. She has not said which.
+?elif b3.carmes == "cadets"
+  It says that the cart came to the shop at half past three, in the dark, and that there were four persons in it, under a tarpaulin, and that one of them, a young woman in a man's coat, got down in the yard and was sick, and then stood, quite still, with her back to the wall, and would not be touched.
+?else
+  It says that the crypt was opened at about five. It says that there was a good deal of light. It says that the thing that is told in the quarter is a very odd one: that the mob, which had come for priests, broke into the cellar under the chapel, which was a quite empty cellar, and fled out of it, with a cry, and would not go in again. It is not said what they saw. The carter, who went for the bodies, has said that there was a great deal of ash.
+?end
+?if b3.carmes == "priests"
+  It says that the crypt was not opened until five, and that when it was, there was a good deal of light, and that two of the four who slept there did not come out, and that the third got Clemence through the garden, in a sack, and is not able to say how.
+?end
+?if b3.carmes != "cadets"
+  Clemence has come in at the yard door at about nine, with the marks of it on her hands and neck, dragged out of the crypt by the third of them, at the last, through the garden, in a sack. She has not said how she lived. She is in the attic, with the shutters nailed, and has asked that nobody speak to her but you.
+?end
+?if b3.priest == "left"
+  The abbé walked to the rue de Vaugirard on the Sunday morning, in his old black coat, with his book, and gave himself up at the gate. He is not among those who are returned. It is not a thing that Adélaïde has written. It is a thing that is in the very straight line of her pen.
+?elif b3.priest == "hid"
+  The abbé is in the quarry, with a lamp. Adélaïde has been down with soup, every hour, and has not said what she has heard.
+?elif b3.priest == "sent"
+  A note came from Étampes at noon, in the old man's own hand, to say that he has arrived, and that there is no cause for anxiety. It is the one piece of good news in the house.
+?end
+?if b3.nationals == "bought"
+  It is a house that stands in her name, and she does not know whether she may go into it again.
+?elif b3.nationals == "lent"
+  The forty beds were carried out, on the Saturday, by the surgeon and the sister, into the street, and put in a cart. It is the one thing in the whole matter that anyone has been able to say was foreseen.
+?end
+It is nearly eight. The drums are still going. In the rue Saint-Jacques there is a smell of smoke, and of wet stone, and somewhere a woman is singing a child to sleep in a high flat voice, with a great deal of care.
+-> abbaye
+
+# abbaye
+## The table
+It is a quarter to ten. The rue de Bussy is full of people, and of lanterns, and of a heavy sweetish smell, and the gate of the Abbaye is open, in the wall, in the light of a dozen torches, with a pile of straw before it, which is very red. It is not a thing that you will describe. You go in by the guard room. Nobody stops you. Everybody is a little drunk, and very polite, and a man in a leather apron offers you a cup of wine, which is a thing that you take, and do not drink.
+In the court of the prison, in the lamplight, at a table with a green cloth, under the arch of a stair, there are twelve men. They are sitting in chairs. There is a lamp on the table, and a great book, and a bottle, and at the head of it all, a gray coat, a sword on the table, a long thin sallow face, and a pen, a man of forty with the look of an usher: Maillard. A prisoner stands in front of the table, between two men with pikes, with his hat in his hand. They are reading something. It is the register of the gaol.
+It is the young lieutenant. You know him as soon as you see him. It is the same too young face, and the same gray coat, that you saw on the tenth of August in the corridor of the Cour des Princes, with a roll of paper. He is the Swiss. He has been in a cell for three weeks. He has been, since the tenth, in the Abbaye, with some of his regiment, and the others have been gone, in the afternoon, by the gate. He stands very straight. He has that blank, polite, rather dazed air of a person who has had very little sleep and who is waiting for the end of a sermon.
+Maillard asks him whether he fired on the people. He says that he has his orders. Maillard asks him what they were. He says that they were not to fire first, and that they were, in that case, obeyed.
+?if b3.palace == "warned"
+  You think of the thick fair captain, in the lamp of the stair, who said that he would remember it. You think that it is the thing that he said.
+?elif b3.palace == "carried"
+  There is an old woman, in the crowd, behind the pikes, in a gray gown, who was brought out by the river gate. She has her hands in her apron. She is looking at the lieutenant, and her mouth is working, and nobody has noticed.
+?end
+?if b3.baptiste == "went"
+  Somebody in the crowd, a young man in a torn sleeve, pushes forward to see. He is gone before you can be certain.
+?end
+The table has not decided. There is a pause, and a murmur, and the pikes have not moved. It will be done, in the next three minutes, one way or the other. You can see which way the table inclines, and it is a thing that you cannot be certain of.
+:the_table
+* Go to the table, and speak for him
+  $ b3.abbaye = "spoke"
+  $ standing += 2
+  $ humanity += 2
+  $ secrecy -= 2
+  $ cunning_brutal -= 1
+  $ do chart("paris.court")
+  $ do discover("the_abbaye")
+  It is the oddest speech that you have ever made. You make it with your hat in your hand. You say that you are a citizen of the section, and a printer's friend, and that you were at the Tuileries on the night of the ninth, and that you saw the whole of it, and that the young man at the table is not guilty of any act, and that his orders were what he has said. You say that it is a Swiss regiment, and that it has been sold, twice, by its own officers, and that the citizens do not wish it to be said, in the morning, that they were not just. Maillard looks at you, and at the lamp, and at the book. It is a long time. He says that the citizen speaks well. He says that the table has been a good deal pressed. He says, to the man in the leather apron, in a tone of immense weariness, that the prisoner is acquitted. The man shouts. The pikes go up. They carry the lieutenant out, between them, on their shoulders, with a cry of long live the nation, through the gate, into the street, in the light of the torches. He does not seem to understand. He looks back at you, over somebody's head, with his round young face, as though he had left something behind. Maillard writes, in the book, with his pen. He does not look up. He says, as you go, to the room in general, that the citizen's name has been noted.
+* Take him out by the back stair, with the keeper's key
+  $ b3.abbaye = "took"
+  $ secrecy -= 2
+  $ humanity -= 1
+  $ cunning_brutal += 2
+  $ standing += 1
+  $ do chart("paris.rebels")
+  $ do discover("the_abbaye")
+  There is a keeper, a stout, frightened man in a nightcap, at a door behind the stair, with a ring of keys, who has been sitting on a bench with his head in his hands since six. He does not know you. He knows what you are, in the way that a dog knows a thing that is not a dog. You say that you wish to take a prisoner out. He says that it is not possible. You say it again. It is a thing that is very easy to do and that you do not like at all. He gives you the key. You go through the passage behind the table, in the dark, and take the lieutenant by the arm, when he is turned away from the light, and put your hand on his mouth. It is not a rough thing. It takes a quarter of a minute. You are out of the little wicket, in the rue Sainte-Marguerite, in the dark, before the table has finished its pause, and you walk him quite quickly through the lanes to the river. He says nothing. He is not able to. At the Pont Royal, where the water is black, you take away your hand. He says, in German, a word that is not a thanks. It is an extremely frightened one. Behind you, somewhere, a voice says, in a great fatigue, that the prisoner has been lost.
+* Stay in the street, and do not go in
+  $ b3.abbaye = "stayed"
+  $ secrecy += 2
+  $ cunning_brutal += 2
+  $ humanity -= 3
+  $ do chart("paris.rebels")
+  $ do discover("the_abbaye")
+  You stand in the rue de Bussy, among the lanterns. You stand there for a very long time. You do not know, afterwards, how long. You do not go in. There is a thing that you are able to hear, through the wall, over the heads of the crowd, and the drums, and the song that somebody has begun on the pavement, which has to do with a dance. It is a short thing. It is a voice, a young one, saying, very clearly, and quite without reproach, a name that you do not know, and then the cry. It is the same cry that you have heard in every revolution. It is a good deal like a cheer. You stay where you are until the first light begins, a very long way off, over Charenton, and a boy comes round the corner with a bucket and a broom.
+It is a very long night. It is the second of September, and the third, and the fourth, it will be said, and the fifth: it goes on in the Châtelet, and La Force, and the Conciergerie, and the Bicêtre, and the Salpêtrière, for four days, and the Commune sends its circular to the provinces, and by the end of it there are a thousand and some hundreds of the dead.
+?if b3.crossing == "crossed"
+  You think of the Prince, in the Marais, behind a blind, with a handkerchief, and a book, hearing it.
+?elif b3.crossing == "pressed"
+  There is a sound, before dawn, of a very slow footfall in the rue de Bussy, and a gleam of old steel in the torchlight, and a pale, tall, solitary figure at the gate, who has come, alone, in a gray coat, in the last of the dark, and stands with a sword in his hand, and does not use it. It is Brézac. He has been there, you are told, since one. He is quite white, and his scar has gone gray, and he has not been seen to speak.
+?else
+  There is nobody of the court in the street. It is what the line said.
+?end
+You are in the haven before the sun, with the stone over you. You have a smell of smoke in your coat that you do not think that you will lose.
+$ do rest()
+=> next
