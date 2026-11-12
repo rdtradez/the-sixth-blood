@@ -1,10 +1,10 @@
 // Book Three, Chapter 9 (session 33). The end of August 1789. The Declaration of the Rights of Man, the Cadets, the boy, the Prince's leave, and Galerius's last night in the ossuary.
 // Opens on the shop on the twenty-sixth (no phase), then one night phase of three actions out of four (the night of the thirtieth), then a fixed closing scene (the hunt), then the dawn of the thirty first.
-// Ends with rest() and => next. Reads b3.greve, b3.lictor, b3.cadets, b3.abolition, b3.sugar, b3.presses_use, b3.galerius, b3.file, b3.severin and b3.veil. Chapter 10 should read hunger, standing and secrecy as this chapter left them.
+// Taking Thibault in (b3.boy taught) puts him in the coven. Ends with rest() and => next. Reads b3.greve, b3.lictor, b3.cadets, b3.abolition, b3.sugar, b3.presses_use, b3.galerius, b3.file, b3.severin and b3.veil. Chapter 10 should read hunger, standing and secrecy as this chapter left them.
 @chapter b3c09
 @title The Thirty-First
 @book crown-of-ashes
-@version 1
+@version 2
 
 # start
 ## The twenty-sixth
@@ -171,8 +171,10 @@ He says, to the floor, that the old man in the brown coat has been to the faubou
   $ cunning_brutal -= 1
   $ bond.thibault += 4
   $ standing += 1
+  $ do recruit("thibault", "unclaimed", 1, "his ward", 70)
   $ do chart("paris.rebels")
   You take him by the sleeve and walk him through the back streets in the last of the dark, and down the old stone stair under the shop, and along the gallery in the bones. It is cold. It is perfectly quiet. You set your candle on a ledge. You say that there is a thing that he must know before he knows any other, which is how to stop. It is not very much. It is a matter of the breath, and the hand, and the last inch. He is a quick pupil. He is quick in the way of a thing that has had nobody to tell it anything for three years, and cannot believe its luck. By four in the morning he has put his hand flat on the wall of the gallery and held it there without shaking for a quarter of an hour, and he is looking at you with a face so naked and so grateful that you have to turn away.
+  He does not ask to be sworn to anything. He asks, at the stair, whether he may come back tomorrow night, and the night after. You say that he may. It is the beginning of a house, though neither of you says so.
 * Put him on the night coach for Lyon
   $ b3.boy = "hidden"
   $ cunning_brutal += 1
