@@ -3093,6 +3093,112 @@
       "book": "crown-of-ashes",
       "default": "none",
       "note": "Chapter 10: what he did for the women of the faubourg on the night of the fifth (none if he did not go)"
+    },
+    "b3.nationals": {
+      "kind": "enum",
+      "values": [
+        "refused",
+        "bought",
+        "lent"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 11: what he did about the Carmelite convent among the national lands (refused if he did not go)"
+    },
+    "b3.charter": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "carried",
+        "softened"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 11: what he did with the Cadets' Declaration of the Blood (kept if he did not go)"
+    },
+    "b3.senate": {
+      "kind": "enum",
+      "values": [
+        "stalled",
+        "answered",
+        "defied"
+      ],
+      "book": "crown-of-ashes",
+      "default": "stalled",
+      "note": "Chapter 11: how he answered the Senate's letter (stalled if he did not open it)"
+    },
+    "b3.federation": {
+      "kind": "enum",
+      "values": [
+        "watched",
+        "dug",
+        "between"
+      ],
+      "book": "crown-of-ashes",
+      "default": "watched",
+      "note": "Chapter 11: what he did at the Champ de Mars on the night before the Federation (watched if he did not go)"
+    },
+    "b3.flight": {
+      "kind": "enum",
+      "values": [
+        "watched",
+        "aided",
+        "warned"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "watched",
+      "note": "Chapter 12: what he did at the Tuileries on the night of the king's flight (watched if he did not go)"
+    },
+    "b3.republic": {
+      "kind": "enum",
+      "values": [
+        "refused",
+        "neutral",
+        "printed"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 12: what the house printed on the morning of the king's flight (refused if he did not go to the shop)"
+    },
+    "b3.coup": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "backed",
+        "stopped",
+        "told"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 12: what he did about the Cadets' plan against the court (none if he did not go)"
+    },
+    "b3.garnier": {
+      "kind": "enum",
+      "values": [
+        "turned",
+        "sheltered",
+        "bargained"
+      ],
+      "book": "crown-of-ashes",
+      "default": "turned",
+      "note": "Chapter 12: what he did for Inspector Garnier at the door (turned if he did not answer it)"
+    },
+    "b3.champ": {
+      "kind": "enum",
+      "values": [
+        "stayed",
+        "fetched",
+        "stood"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "stayed",
+      "note": "Chapter 12: what he did on the Champ de Mars on the seventeenth of July"
     }
   }
 }

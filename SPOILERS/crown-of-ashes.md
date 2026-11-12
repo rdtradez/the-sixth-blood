@@ -111,3 +111,29 @@ Dawn of the sixth: the procession into Paris, loaves on pikes; the Prince follow
 Hooks: the Terror; the Cadets; Severin; the Prince's fear; Garnier; Galerius (if sworn, a witness; if destroyed, a Senate that will send another; if spared, a report at Rome); the Lady's slate.
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 11, "The Altar of the Fatherland" (`b3c11`, session 34)
+
+Winter 1789 to the fourteenth of July 1790. The Church's lands are sold (decree of November, vows suppressed in February, assignats in April); Paris digs the Champ de Mars by hand for the Festival of the Federation. Opens on the counting room (Adelaide's list of national lots, Etienne's distaste, Baptiste at the Cordeliers, Aubry with a spade), no phase. Hunger scene on entry if needed. He cannot see the day, so the Festival itself is told to him at dusk by Baptiste and ends in the dancing on the ruins of the Bastille.
+
+Night phase (the night of the thirteenth), three of four: the Carmelite convent in the rue de Vaugirard (Adelaide wants it for a bindery; the crypt would make a haven; `b3.nationals`: bought (through Adelaide's name), lent (to the district for a hospital) or refused; the same convent is where the September massacres will happen in 1792); the brewery (the Cadets' Declaration of the Blood, seven articles, violet ink; `b3.charter`: carried (to the Prince as written), softened (the half the Prince will read) or kept; reads `b3.exodus`, `b3.march`); the Lyon coach (the Senate's letter, which varies with `b3.hunt`; `b3.senate`: answered, stalled or defied; reads `b3.boy`); the Champ de Mars (Brezac's watch and the Cadets meet at the altar steps; `b3.federation`: dug, between (stood between them) or watched; reads `b3.aubry`, `b3.council`).
+
+Dawn: Baptiste's account of the Federation, the dance, then Ottaviano with news of the Lady's slate (reads `b3.vault`: if broke she has turned her head, if read the margin has begun to write the hero's name, if left the heaps have grown).
+
+Hooks: the Declaration of the Blood (carried, softened or kept); the convent (the crypt, the September massacre); the Senate's letter (a young Lictor will call in the autumn if Galerius was destroyed); Brezac and Severin; Ottaviano's fear.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 12, "The Berline" (`b3c12`, session 34)
+
+The twentieth and twenty first of June 1791 (the flight to Varennes), then the seventeenth of July (the shooting on the Champ de Mars). Opens on the evening of the twentieth (the Prince's note: the king will go tonight, the Prince will not be of use, because the Lady's slate says it will not signify; Aubry on the night guard), no phase. Hunger scene on entry if needed.
+
+Night phase, three of four: the Carrousel (a hackney coach in the rue de l'Echelle; Lafayette's carriage crosses its line; `b3.flight`: aided (a ladder, a drunk and four minutes), warned (told the officer of the guard; nobody believed it) or watched); the shop (Baptiste sets one word, REPUBLIC; `b3.republic`: printed under the house's name, neutral, or refused; reads `b3.broadsheet`, `b3.rights`); the brewery yard (Severin says the court is leaderless because the Prince has gone to the third cellar; `b3.coup`: backed (rode with the Cadets to the Hotel, which is open and empty but for Ottaviano), stopped (talked them out of it, which costs a friend) or told (warned Ottaviano); reads `b3.charter`, `b3.federation`, `b3.boy`); Inspector Garnier at the shop door (the police will be hunted for the king's escape; `b3.garnier`: sheltered (the quarry gallery), bargained (the Section's files for a passport) or turned; reads `b3.file`).
+
+The morning of the twenty first is told to him at dusk (he cannot see it); the king is brought back on the twenty fifth. Fixed closing scene, the seventeenth of July: the petition on the Altar of the Fatherland, signed late into the evening by lantern light (the timing is moved to after sunset so that he can be there), the National Guard under Lafayette fires; Aubry is in the ranks, Baptiste is on the altar steps. `b3.champ`: fetched (took Baptiste out by the collar before the volley), stood (stood in front of the line and was hit three times in front of three thousand people and did not fall; costs secrecy, gains humanity and standing; Aubry fires into the dust) or stayed (watched from the roof).
+
+Aftermath: the Cordeliers shut, the Jacobins split. A card from the Prince asks for a word at the next dark of the moon on a matter that concerns a lady. Ottaviano adds that the slate has stopped: the hand has not moved since the evening of the sixteenth (if read, the last line was the hero's name and a date that has not yet come).
+
+Hooks: the Lady's hand has stopped and her awakening is near; the Prince's summons; Severin (if the Cadets were stopped or told); Garnier's papers (if bargained); Aubry's doubt; Baptiste and the republic; the Terror; the convent in the rue de Vaugirard.
+
+Flagged to the owner (spoiler light): the Champ de Mars shooting is moved from about seven to about nine in the evening so that the hero can be present after dark. Nothing else changes the big picture and no major character dies.

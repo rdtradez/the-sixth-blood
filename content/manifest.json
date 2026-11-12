@@ -561,6 +561,23 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b3c11",
+          "file": "crown-of-ashes/ch11.tsb",
+          "title": "The Altar of the Fatherland",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b3c12",
+          "file": "crown-of-ashes/ch12.tsb",
+          "title": "The Berline",
+          "notes": [
+            "blood",
+            "violence"
+          ]
         }
       ],
       "incomplete": true
