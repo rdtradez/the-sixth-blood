@@ -596,6 +596,25 @@
             "violence",
             "war"
           ]
+        },
+        {
+          "id": "b3c15",
+          "file": "crown-of-ashes/ch15.tsb",
+          "title": "The Second of September",
+          "notes": [
+            "blood",
+            "violence",
+            "war"
+          ]
+        },
+        {
+          "id": "b3c16",
+          "file": "crown-of-ashes/ch16.tsb",
+          "title": "The Winter of the Trial",
+          "notes": [
+            "blood",
+            "grief"
+          ]
         }
       ],
       "incomplete": true
