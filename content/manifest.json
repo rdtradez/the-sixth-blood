@@ -578,6 +578,24 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b3c13",
+          "file": "crown-of-ashes/ch13.tsb",
+          "title": "The Dark of the Moon",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b3c14",
+          "file": "crown-of-ashes/ch14.tsb",
+          "title": "The Tenth of August",
+          "notes": [
+            "blood",
+            "violence",
+            "war"
+          ]
         }
       ],
       "incomplete": true

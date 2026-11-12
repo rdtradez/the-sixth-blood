@@ -62,6 +62,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 32: Book Three chapters 7 and 8
 - [x] Session 33: Book Three chapters 9 and 10
 - [x] Session 34: Book Three chapters 11 and 12
+- [x] Session 35: Book Three chapters 13 and 14
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -434,4 +435,16 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Chapter 11 charts `paris.counting`, `paris.rebels` and `paris.court`, and can call `earn()` for the convent. Chapter 12 charts `paris.court`, `paris.rebels`, `paris.presses` and `paris.counting`, and can add `injury`. No fights, no new engine behavior, so no new schema or migration.
 - The hero cannot see the day, so the daytime events in both chapters are told to him at dusk rather than shown.
 - Tests: `tests/book3f.test.js` plays both chapters down every choice and flag value, for every earlier state that they read, and checks the no dashes, no braces and no daylight rules. `tests/book3.test.js` now expects twelve written chapters (update that count each session). `tests/book3e.test.js` now stops at chapter 11 where it used to rely on the pause after chapter 10.
+- Plans are in `SPOILERS/crown-of-ashes.md`.
+
+### Session 35 notes (Book Three, chapters 13 and 14)
+
+- Chapters `b3c13` and `b3c14` are in `content/crown-of-ashes/` (`ch13.tsb`, `ch14.tsb`). The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 14 and carries on by itself when chapter 15 is added.
+- The design doc has no list for these two chapters beyond the book outline, so they were planned in `SPOILERS/crown-of-ashes.md` from the hooks chapter 12 left. Check the plan against your own intentions for chapters 15 to 20 before building them.
+- Chapter 13 opens on a short scene with no phase, then one night phase of three actions out of four, an autumn told at dusk and a fixed closing scene every player plays. Chapter 14 opens on a short scene with no phase, then one night phase of three actions out of four, a day told at dusk and a fixed closing scene every player plays. Each ends with `rest()` and `=> next`, and each has a short hunger scene that only runs if `must_feed()` is true on entry. Chapter 15 should read hunger, standing and secrecy as chapter 14 left them.
+- New decision flags use the `b3.` prefix and are registered in `content/flags.json` with `book`, `major` where later chapters care, and a quick start `default`: `b3.key`, `b3.cadets_home`, `b3.journal`, `b3.aubry_post`, `b3.war` (chapter 13) and `b3.brezac`, `b3.faubourg`, `b3.palace`, `b3.baptiste`, `b3.slate` (chapter 14). Flags that can be skipped are set to their default on entry, so a chapter that sets a flag in its own night phase cannot be seeded with that flag from a test.
+- No new people. New codex entries: the key to the third cellar, the Constitution of 1791, the war of 1792, the Swiss Guard, the tenth of August and the second line. Content notes: chapter 13 carries `blood`, chapter 14 carries `blood`, `violence` and `war`.
+- Chapter 13 charts `paris.court`, `paris.rebels`, `paris.presses` and `paris.counting`, and calls `earn()`. Chapter 14 charts `paris.court`, `paris.rebels` and `paris.presses`. No fights, no new engine behavior, so no new schema or migration.
+- The hero cannot see the day, so the daytime events in both chapters are told to him at dusk rather than shown. The Cadets sit out the assault on the palace because it happens in daylight.
+- Tests: `tests/book3g.test.js` plays both chapters down every choice and flag value, for every earlier state that they read, and checks the no dashes, no braces and no daylight rules. `tests/book3.test.js` now expects fourteen written chapters (update that count each session). `tests/book3f.test.js` now stops at chapter 13 where it used to rely on the pause after chapter 12.
 - Plans are in `SPOILERS/crown-of-ashes.md`.

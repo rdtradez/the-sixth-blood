@@ -3199,6 +3199,127 @@
       "major": true,
       "default": "stayed",
       "note": "Chapter 12: what he did on the Champ de Mars on the seventeenth of July"
+    },
+    "b3.key": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "held",
+        "refused",
+        "bargained"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 13: whether he took the key to the third cellar from the Prince (none if he did not go)"
+    },
+    "b3.cadets_home": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "sheltered",
+        "sent"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 13: what he did for the Cadets after the court's notice (left if he did not go)"
+    },
+    "b3.journal": {
+      "kind": "enum",
+      "values": [
+        "refused",
+        "backed",
+        "funded"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 13: Baptiste's journal Le Fanal (refused if he did not go)"
+    },
+    "b3.aubry_post": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "kept",
+        "sent"
+      ],
+      "book": "crown-of-ashes",
+      "default": "left",
+      "note": "Chapter 13: Aubry's post as the war comes (left if he did not go)"
+    },
+    "b3.war": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "contract",
+        "gold"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 13: what Collis did when the war was declared"
+    },
+    "b3.brezac": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "held",
+        "let",
+        "rode"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 14: what he did about Brezac and the court on the night of the ninth of August (none if he did not go)"
+    },
+    "b3.faubourg": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "marched",
+        "steered",
+        "stayed"
+      ],
+      "book": "crown-of-ashes",
+      "default": "none",
+      "note": "Chapter 14: what he did with the faubourg column and the Cadets (none if he did not go)"
+    },
+    "b3.palace": {
+      "kind": "enum",
+      "values": [
+        "watched",
+        "warned",
+        "carried"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "watched",
+      "note": "Chapter 14: what he did at the Tuileries on the night of the ninth of August (watched if he did not go)"
+    },
+    "b3.baptiste": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "let",
+        "kept",
+        "went"
+      ],
+      "book": "crown-of-ashes",
+      "default": "none",
+      "note": "Chapter 14: what he did about Baptiste on the night of the ninth of August (none if he did not go)"
+    },
+    "b3.slate": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "told",
+        "rubbed"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 14: what he did about the second line on the slate"
     }
   }
 }
