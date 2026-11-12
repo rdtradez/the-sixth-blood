@@ -211,3 +211,24 @@ The eleventh is told at dusk. The Tribunal sat late, so the last cart came to th
 Hooks: the Veil frayed or not; the Senate's report; Brezac himself; the Prince's collapse; the Lady's waking; the guillotine as a rumour; Chapters 19 and 20.
 
 Flagged to the owner (spoiler light): the execution is shown at dusk, in torchlight, after sunset. Brezac is guillotined and is not killed. Nothing else changes the big picture.
+
+## Chapter 19, "The Ninth of Thermidor" (`b3c19`, session 38)
+
+The design doc gives no list for these chapters beyond the book outline (the Terror, the fall of the Blood Prince, the Priestess's awakening, sleep), so this plan was written from the hooks chapter 18 left: the Veil, the Senate's report, Brezac, the Prince's collapse and the Lady's waking. December 1793 to the night of the tenth to the eleventh of Thermidor (28 to 29 July 1794). Opens on the winter and spring told in one scene (Danton, the Festival of the Supreme Being, the law of 22 Prairial, the machine moved to the Barriere du Trone, Picpus), no phase. Hunger scene on entry if needed. Reads `b3.rising`, `b3.committee`, `b3.young`, `b3.keeper`.
+
+Night phase (the night of the ninth to the tenth), three of four: the Hotel de Saint-Aubin (the Prince went down at dusk with Ottaviano and the key and the door is shut; the court argues whether there is a Peace without him; Brezac stands at the foot of the table; `b3.court`: held (nothing is decided till she has spoken), pushed (the Peace was a habit and the court may make its own), left); the quarry (the Cadets want out on the first day of the end of the Terror; `b3.quarry`: opened, shut, led (out of Paris in twos with the house's papers, costs wealth)); the shop (a man from the Commune and a Convention clerk both want a proclamation struck off; `b3.thermidor`: commune, convention, neither); the rue des Prouvaires (the Senate's second officer, or Galerius if `b3.hunt` is sworn, has a report to send at midnight on the Veil; `b3.report`: written (an honest account), lied (the Veil held), refused).
+
+The tenth is told at dusk by Adelaide (Robespierre guillotined at half past six, Aubry at the Hotel de Ville, variants by `b3.thermidor` and `b3.quarry`). Fixed closing scene: the third cellar, the night of the tenth to the eleventh, a quarter before four. The Lady wakes; the Prince is released ("it is finished"). `b3.prince`: kept (the hero asks mercy for him and the Lady asks him whether he would like to stay; he stays at the door), yielded (the hero says nothing; he goes up the stair and nobody records where). `b3.lady`: knelt (it is what she was afraid of), answered (the first account in a hundred and fifty years that was not a petition), stood (does not kneel and asks what she has written about him; she smiles). She says the Peace is ended and that she has a great deal to attend to, and tells him to go and lie down. Ends with `rest()` and `=> next`.
+
+Hooks: the Lady's plans; the court without a Peace; Brezac; the Cadets loose or led out (Veil to be reconsidered); the Senate's report; the Prince in a chair outside the third cellar or gone.
+
+Flagged to the owner (spoiler light): the Prince falls but is not killed (he is released and either stays or goes), and the Lady is awake. These are the design doc's outline beats. Nothing else changes the big picture.
+
+## Chapter 20, "The Long Quiet" (`b3c20`, session 38)
+
+August 1794 (the last days of Thermidor). No phases. Opens on the city after Thermidor and Ottaviano at dusk with a card from the Lady (the Prince in a chair with Plutarch, or a gray glove on a table; the court held, split or waiting; the card says she will want him in a long while, and she will know where; a second line if `b3.lady` is knelt or stood). The last night: `b3.last_night`: house (the Valere house, Adelaide or Baptiste or neither as keeper; a small stained book, the first thing Etienne printed), quarry (the Cadets, by `b3.quarry`; Severin is sorry for half of himself), court (the steps with Ottaviano and Brezac and a bottle of Tokay), alone (the river). Then place, steward (bank, Prisca, the Valerio keepers, Adelaide or Baptiste through `keeper()`), orders, guard; no investment scene (the gap has none); `b3.letter`: left (a door in the house of Valere for anyone who asks in the name of the Sun, or comes with a small bright key or rosemary), none. Then the cellar, `rest()`, `sleep("paris_to_new_orleans")`, `=> next`.
+
+Hooks for Book Four: the Lady and the card; the Valere house and the Sun sign; the letter; the Cadets scattered; Brezac and the court without a Peace; the hero wakes in 1859.
+
+Flagged to the owner (spoiler light): nothing changes the big picture.
+

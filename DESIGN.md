@@ -65,6 +65,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 35: Book Three chapters 13 and 14
 - [x] Session 36: Book Three chapters 15 and 16
 - [x] Session 37: Book Three chapters 17 and 18
+- [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -474,4 +475,18 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Chapter 17 charts `paris.counting`, `paris.court`, `paris.rebels` and `paris.presses` and can call `earn()`. Chapter 18 charts `paris.court` and `paris.rebels`. No fights, no new engine behavior, so no new schema or migration.
 - The hero cannot see the day. Chapter 18 shows its closing scene after dark, by torchlight, and tells the rest of the day at dusk.
 - Tests: `tests/book3i.test.js` plays both chapters down every choice and flag value, for every earlier state that they read, and checks the no dashes, no braces and no daylight rules. `tests/book3.test.js` now expects eighteen written chapters (update that count each session). `tests/book3h.test.js` now stops at chapter 17 where it used to rely on the pause after chapter 16.
+- Plans are in `SPOILERS/crown-of-ashes.md`.
+
+### Session 38 notes (Book Three, chapters 19 and 20)
+
+- Chapters `b3c19` and `b3c20` are in `content/crown-of-ashes/` (`ch19.tsb`, `ch20.tsb`). **Book Three is finished at twenty chapters**: `"incomplete"` is removed from the manifest, so the book now ends, writes its journal, and unlocks Book Four (which has no chapters yet).
+- Session 38 is built on the `session-37` branch (chapters 15 to 18 are not on `main` yet). Merge `session-36`, `session-37` and then `session-38` to get everything.
+- The manifest entry for Book Three now has `"journal": "journal/crown-of-ashes.tsb"` (the Velati journal, written in the voice of the Senate's second officer at Paris, reading the book's decision flags) and a spoiler light `recap` for quick starts into Book Four. `quickstart.vars` for Book Four are unchanged.
+- Chapter 19 has the same shape as chapters 15 to 18: an opening scene with no phase, a short hunger scene that only runs if `must_feed()` is true on entry, one night phase of three actions out of four, a day told at dusk, and a fixed closing scene every player plays. It ends with `rest()` and `=> next`. Chapter 20 has no phases: it calls `rest()` once and then `sleep("paris_to_new_orleans")`, and closes with `=> next`. The wake report is not shown in Book Three; Book Four's opening reads `wake()`.
+- New decision flags use the `b3.` prefix and are registered in `content/flags.json` with `book`, `major` and a quick start `default`: `b3.court`, `b3.quarry`, `b3.thermidor`, `b3.report`, `b3.prince`, `b3.lady` (chapter 19) and `b3.last_night`, `b3.letter` (chapter 20). Flags that can be skipped are set to their default on entry. Later books and the journals should read these rather than recompute them.
+- Chapter 20 offers `rest_place`, `steward`, `orders` and `protection`. A steward is offered from the circle as in Book Two, and the Valère house is offered through `keeper()` then `steward()` for whoever `b3.keeper` names; the bank is always offered, so a hero on any path can finish the sleep. The `paris_to_new_orleans` gap has no investments, so there is no investment scene.
+- New codex entries: the ninth of Thermidor and the Lady of the third cellar. No new people. Content notes: chapter 19 carries `blood`, `violence` and `grief`, chapter 20 carries `slavery` and `grief`.
+- Chapter 19 charts `paris.court`, `paris.rebels` and `paris.presses` and can call `earn()`. Chapter 20 charts `paris.valere`. No fights, no new engine behavior, so no new schema or migration.
+- The hero cannot see the day. The tenth of Thermidor is told at dusk, and the closing scene is played in the small hours.
+- Tests: `tests/book3j.test.js` plays both chapters down every choice and flag value, for every earlier state that they read, and checks the end of the book, the sleep, the journal and the no dashes, no braces and no daylight rules. `tests/book3.test.js` now expects twenty written chapters and a finished book. `tests/book3i.test.js` now stops at chapter 19 where it used to rely on the pause after chapter 18.
 - Plans are in `SPOILERS/crown-of-ashes.md`.

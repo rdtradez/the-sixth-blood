@@ -1,0 +1,57 @@
+// The Velati journal for Book Three, Crown of Ashes (session 38). Runs at the end of the book on a copy of the state; its paragraphs become one journal entry.
+// Written in the voice of the Senate's second officer at Paris, from the report-book that he left in a room over a chandler's in the rue des Prouvaires. No choices allowed. Reads decisions, never recomputes them.
+@chapter b3_journal
+@title Velati Journal: Crown of Ashes
+@book crown-of-ashes
+@version 1
+
+# start
+## From the report-book of the second officer at Paris
+> Set down in Paris, in the Aventine shorthand, in a room over a chandler's. For the Senate, and for no one else.
+I was sent to see that the Veil held in a city that was cutting its own throat in public, and I have to report that I did not see it hold. I saw that it was not needed. A people who will do that in a square, before breakfast, to each other, have no further interest in anything that happens at night.
+?if b3.rising == "covered"
+  I was in the Place on the eleventh of November. I saw a man made to stand up from the plank, and I saw a crowd turned round by a cry about the Austrians. I do not know who made it. Two persons were killed in the press, and I have written down their names, as I do not think that anybody else will.
+?elif b3.rising == "carried"
+  I was in the Place on the eleventh of November. I saw a man made to stand up from the plank, and I saw him carried off in a wicker coffin, in the dark, on the order of a Committee that did not sit that evening. It was very well done. I have not put in the name.
+?else
+  I was in the Place on the eleventh of November. I saw a man made to stand up from the plank, in front of some thousands, and I saw that nothing was done. I have been asked by Rome to account for it. I have said that it was seen, and that it was allowed, and that I am not able to say by whom.
+?end
+?if b3.report == "written"
+  I was given a plain account at midnight on the ninth of Thermidor, in the hero's own hand, in the heat, on the chandler's paper. It said more than it needed to. It is attached. I should like it to be read as it was written.
+?elif b3.report == "lied"
+  I was told at midnight on the ninth of Thermidor that the Veil had held. I have entered it in those words. I should like the Senate to know that I knew that it was not exact, and that it was a courtesy.
+?else
+  I was told at midnight on the ninth of Thermidor that the Senate might come and see for itself. I have entered it. It is the most reasonable thing that anybody has said to me in six years.
+?end
+?if b3.officer == "pledged"
+  I have the hero's word, given in the autumn, that the Veil would hold. I have to say that, in the sense in which I understood it, it did.
+?elif b3.officer == "defied"
+  I have the hero's answer, given in the autumn, that the Senate has no standing. I have to say that I thought it a mistake, and that I think it a little less of one now.
+?elif b3.officer == "bargained"
+  I have the hero's offer, made in the autumn, of a Veil kept for a year's peace for the young. I put it in the report in his words. I have had no reply.
+?end
+I have also to report on the court. It is under a Prince, or was.
+?if b3.prince == "kept"
+  The Prince, who was the creature of the Priestess line and wrote nothing but what he was told, is alive, in a chair on a landing, reading Plutarch. I have been to see him. He was not able to say what he had done. He said that it was done.
+?else
+  The Prince has gone from the house. There is a glove on a table. It has been very much discussed, and I should say that it is the only thing in the matter that nobody has been able to improve upon.
+?end
+?if b3.lady == "knelt"
+  I did not see the Priestess. I am told that the hero knelt to her, in the old form, and that she was displeased.
+?elif b3.lady == "stood"
+  I did not see the Priestess. I am told that the hero did not kneel to her, and asked what she had written of him, and that she smiled. I have asked the Senate's archivist to tell me whether this is a good sign. He is still reading.
+?else
+  I did not see the Priestess. I am told that the hero answered her plainly, standing, as to a client. It is said that she listened to the whole of it.
+?end
+?if b3.quarry == "opened"
+  I have to add that the young ones of the court, who are called the Cadets, were let out of a quarry on the night of the ninth of Thermidor, and have since been seen in the streets, by day, in some numbers, under assumed names. The Veil will have to be considered from the beginning.
+?elif b3.quarry == "led"
+  I have to add that the young ones of the court, who are called the Cadets, were taken out of Paris on the night of the ninth of Thermidor, in twos, by a person who knew the barrières. They are at Auteuil and in a number of other places. I have not been able to find out the names.
+?end
+This is the last page. It is a good deal later than the rest.
+> The book was recovered by the Aventine watch from a room over a chandler's in the rue des Prouvaires, in the spring of 1795. It was on the table, under a stone. The last page is unsigned. It is in a very much calmer hand, and it says, in one line, that the writer has gone to see about a harvest.
+?if b3.letter == "left"
+  A letter in a good hand is said to be kept in a printer's house in the rue Saint-Jacques, to be given up to whoever asks in the name of the Sun. It has not been asked for.
+?end
+> If this is found, and you are reading it, and you are not the Senate, I am sorry. I should have liked to have been a better officer, and a worse reader of the weather.
+=> endbook

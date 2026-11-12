@@ -634,9 +634,29 @@
             "violence",
             "grief"
           ]
+        },
+        {
+          "id": "b3c19",
+          "file": "crown-of-ashes/ch19.tsb",
+          "title": "The Ninth of Thermidor",
+          "notes": [
+            "blood",
+            "violence",
+            "grief"
+          ]
+        },
+        {
+          "id": "b3c20",
+          "file": "crown-of-ashes/ch20.tsb",
+          "title": "The Long Quiet",
+          "notes": [
+            "slavery",
+            "grief"
+          ]
         }
       ],
-      "incomplete": true
+      "journal": "journal/crown-of-ashes.tsb",
+      "recap": "Paris tore itself in two, and you were in it, in a printer's house, with a court of the old blood above you and a Terror in the street. You learned that a Lady slept in a cellar and wrote the Prince's days on a slate, and you read it, or you did not. You saw a man stand up from under the knife, and did what you did about it. On the night the Incorruptible fell the Lady woke, and the Peace went with the Prince. Then you put your affairs in other hands, and lay down once more to wait out the century."
     },
     {
       "id": "house-divided",

@@ -1,0 +1,236 @@
+// Book Three, Chapter 20 (session 38). The long quiet: the last night in Paris, the four things to leave behind, and the sleep to New Orleans.
+// No phases. Calls rest() once and then sleeps the whole of paris_to_new_orleans. Closes with => next, which ends the book (the Velati journal is written and Book Four unlocks).
+// Reads b3.prince, b3.lady, b3.court, b3.quarry, b3.keeper, b3.rising, b3.report and the circle. Sets b3.last_night and b3.letter. The engine logs the sleep itself (steward.crown-of-ashes, orders.crown-of-ashes, sleep.crown-of-ashes).
+// What the sleep did is not shown here: Book Four's opening reads wake().
+@chapter b3c20
+@title The Long Quiet
+@book crown-of-ashes
+@version 1
+
+# start
+## The last of Thermidor
+$ b3.last_night = "alone"
+$ b3.letter = "none"
+$ _place = "haven"
+$ _guard_n = 0
+$ do chart("paris.valere")
+It is the middle of August, which is to say the last days of Thermidor, with the month of the fruit a week off, and the Year Two has begun, in the last fortnight, to be spoken of in the past tense. The prisons are emptying. They are emptying slowly, by order, a few hundred a week, with a clerk at the gate and a great deal of paper, and the people who come out of them have a stunned and rather shy look, like persons who have been asleep in a train. The Jacobins have been told to meet less. The machine has not been used since the twenty eighth of July, and stands under a tarred sheet, and the boys of the faubourg have been caught climbing on it. It is said that the garden in the rue de Picpus has been shut, and that a woman of the Section has been paid to see that nobody goes in.
+It has been a fortnight. You have had a good many of the days of it under the stone, and the nights, and you have been about a great number of small matters, and you have not noticed that you were being counted.
+Ottaviano comes to the shop at dusk with a card and without an escort, and stands at the door of the cellar with his hat in his hand. He is quite a different man. He has stopped being a seneschal, and has not yet discovered what he is instead, and he has the air of a person on the first morning of a long illness who has been told that he may sit up.
+?if b3.prince == "kept"
+  He says that the Prince is in a chair, on the landing outside the third cellar, with a rug, and a lamp, and a very large book, which is a Plutarch. He says that he is reading it for the first time. He says that he was a very good Prince and that he is, it appears, a good deal better at being nobody.
+?else
+  He says that there has been no word of the Prince. He says that he has had the house searched, and the road to the river, and the stable. He says that on the table of the third cellar, on the morning after, there was a gray glove, laid flat, with the fingers together, like a hand that had been put down to be remembered.
+?end
+He says that the Lady has not left the cellar. He says that she has had the rosemary changed, and the door, and a table put in, and a lamp, and that she sits in it all day, and sends out a note at dusk, in a hand like a line of print, to one person or another. He says that they are all quite short.
+?if b3.court == "held"
+  He says that the court has not met. He says that it is in the habit of sitting down, now, and waiting to be told, and that it has been told that the Peace is the Lady's, and has said nothing. It is thought to be a very good sign.
+?elif b3.court == "pushed"
+  He says that the court has not met, and that it has split, and that it is a very odd thing to see eleven of the oldest persons in Paris with their hats on in the hall, not speaking to each other. He says that he has begun to wonder whether you were right.
+?else
+  He says that the court has not met. He says that it is waiting. It has been a thing that he has been unable to say, in plain words, to anyone, that he does not think that it knows what for.
+?end
+He gives you the card. It is one line, in the hand like print. It says that you have done very well, and that you should sleep. It says that the rest of what is to be done is not to be done in your time. It says that she will want you in a long while, and that she will know where.
+?if b3.lady == "stood"
+  There is a second line below, smaller, which says that she has not been able to read it, and that she would like to know.
+?elif b3.lady == "knelt"
+  There is a second line below, smaller, which says that you are not to do it again.
+?end
+It is a card of no weight at all. It is the thing that you will carry through three quarters of a century.
+---
+-> last_night
+
+# last_night
+## The last night
+It is not to be long. It is August, and the nights are short, and you have a thing that you want to do, which is to see the three or four persons that you can. You have, by your own reckoning, until the dawn.
+* Spend it at the long table in the shop, with Adélaïde and Baptiste
+  $ b3.last_night = "house"
+  $ humanity += 2
+  ?if b3.keeper == "adelaide"
+    She has laid the table in the back room, as for a feast, with a cloth, and a cold fowl, and a bottle that she says has been in the cellar since the old king. It is very good. She does not say much. She keeps the keys on the cloth, at her right hand, where she can see them, and at the end she pushes them an inch towards you, and takes them back.
+  ?elif b3.keeper == "baptiste"
+    He has set the table in the shop, among the cases, because the back room is cold. It is full of the sort of food that a young man prepares for a great occasion, which is to say that there is a great deal of cheese. He talks of America. He says that he has sold the manuscript. It is to be a book in the spring. He does not ask you to read it.
+  ?else
+    The house has no master. The two of them sit at the table, at either end, in the middle of the shop, and are exceedingly polite to each other. It is, you understand, a new thing. They have been brought up to be afraid of the same person and now they are not.
+  ?end
+  They do not say it. Nobody says that it is for a long time. They talk of the winter, and the price of paper, and a coat that Baptiste wants. Near midnight Adélaïde gets up, and goes to the shelf, and takes down a small, stained, dog eared volume with the sign of the Sun on the spine, and puts it into your hand. It is the first thing that Étienne ever printed. She says that it is not good. She says that she thinks that you should have it.
+* Go down to the yard, and sit with the Cadets
+  $ b3.last_night = "quarry"
+  $ humanity += 1
+  $ bond.clemence += 1
+  $ bond.severin += 1
+  ?if b3.quarry == "opened"
+    There are not very many of them. They have gone about the city, like water into a sponge, and have found rooms, and a number of them have found work, and one of them has found a husband. They have come back, tonight, for the first time, in ones and twos, as they might to a school, and Clémence has put out the lantern on the barrel and lit a second beside it. She says that she has not yet decided whether she is angry.
+  ?elif b3.quarry == "led"
+    There are only three. Clémence is one of them, in a gray dress, in a new hat, and Severin, and a girl you do not know. They have come in from Auteuil by a stage, in the evening, to say good night, and have been very careful about it, as people are who have got somewhere and do not entirely trust it. Clémence says that there is a printer at Auteuil who wants a compositor. She says that she thinks she may go for it.
+  ?else
+    They are all there, in the gallery, and the lantern burns. They have not gone out. They are waiting, still, as they have waited since the Terror began, and it has come to you that they will go on waiting for as long as there is anyone to tell them to. Clémence says nothing at all. She gives you a cup of the bad wine. She says that it is the last of the cask.
+  ?end
+  Severin walks you to the head of the stair. He says that he is sorry that he was not what the Prince wanted. He says that he is not sorry that he was what he was. He says that it is a very strange thing, to be sorry about only half of a person.
+* Sit on the steps of the Hôtel de Saint-Aubin with Ottaviano and Brézac, and drink Tokay
+  $ b3.last_night = "court"
+  $ standing += 1
+  $ bond.ottaviano += 2
+  $ bond.brezac += 2
+  They have brought a chair out for you, and a rug, though it is a warm night. It is a thing that has not been done in the house in your time. They sit on the steps below you, with the bottle between them and one glass, and pass it. Ottaviano speaks of the Prince's gardens in Florence, and the Medici, and the long white road over the Alps in the carriage of the Queen, and does not say what he is going to do. Brézac says very little. At two in the morning he says that he has stood up. He says that he does not mean in the Place. He says that it is a thing that is going on in the whole of his body, and that it has been going on since November, and that it is, so far, an improvement.
+* Walk by yourself along the river, in the warm night, and be quiet
+  $ b3.last_night = "alone"
+  $ cunning_brutal += 1
+  $ humanity += 1
+  You go down to the quay by the Pont Neuf. It is a very still night, and there is a smell of the river, and of the lime trees, which are in flower, and of hay, from a barge. The lights are out on the Seine. A man is fishing from the steps. He has no hat. You stand on the bridge for a long while, and look at the city, and it is only a city. It is quite quiet. It is a thing that has not been true of it for six years. Somewhere in it a clock strikes three, and then another, a little late, and a third, which has been wrong for a hundred years.
+-> table
+
+# table
+## The four things
+You have a sheet of the shop's paper, and a quill, and a candle, and it is the most important thing that you shall write in this century, and it is a list. It has four lines in it. A place, a person, an order, a guard. There is a fifth, which does not have a price.
+You take them one by one.
+~> place
+~> steward
+~> orders
+~> guard
+~> letter
+-> cellar
+
+# place
+## Where you will lie
+There are three places, as there always are, and it is no easier to choose.
+There is the hill. The cellar under the great house at Collesanto, with its bar on the inside of the door, and its dry floor, and the village above it, which has grown up the slope in the last thousand years like ivy. There is a haven in the city, under the shop, in the rue Saint-Jacques, among people who are your own, in a place that has, for the moment, a good deal to be said for it. And there is a tomb, a sealed chamber cut in the rock under the faubourg, with no door but one stone.
+* The cellar under the great house, on the hill
+  $ do rest_place("collesanto")
+  $ _place = "collesanto"
+  $ bond.ginevra += 1
+  You write it down. It is the answer that you knew you would give. It is a very long way to go in a stage coach, in the dark, with a box, and you find that you are not at all sorry.
+* A haven in the city, under the shop
+  $ do rest_place("haven")
+  $ _place = "haven"
+  $ secrecy -= 1
+  You write it down. It is the choice of a man who has begun to think that he has a house. You find that you feel like a person who has taken a room in a lodging for a very long visit, and has put his name on the door.
+* The tomb in the rock, where no one will think to look
+  $ do rest_place("tomb")
+  $ _place = "tomb"
+  $ humanity -= 1
+  $ cunning_brutal -= 1
+  You write it down. It is the safest of the three, and the loneliest. You tell yourself that it is only for a time, in the voice that you have heard other people use.
+<~
+
+# steward
+## Who will hold what is yours
+There will be a fortune, a printing house with your name on its sign, a hill, and a great number of papers, and no one to say yes or no. It is the habit of the century to say that everything will be different. It must be put in someone's hands. There are those who love you, and those who are good at it, and the whole of the art is to know which is which.
+* The Merchant house, as a bank and a trust, under Prisca's old seal
+  $ do steward("bank")
+  $ bond.prisca += 1
+  You write it down. It is a cold choice, and a sound one, and it does not depend upon a heart. It has survived the Medici, and the Inquisition, and the Revolution, and it will go on being exactly what it is. A letter goes to Amsterdam by the morning post. It is answered in four days, in a hand like an abacus. It says that Prisca has noted the arrangement, and that she regrets the Revolution, in a sentence, and that she will be exact.
+* Prisca, in her own person, to hold it for you ?if in_circle("prisca") and member("prisca", "status") == "active"
+  $ do steward("prisca")
+  $ bond.prisca += 4
+  $ standing += 1
+  You write her name, and send, and she comes, in the middle of the week, in a traveling cloak, with an abacus in her sleeve. She reads it and looks at it for a long time. "I shall be exact," she says. "It is the only thing that I have ever been good at, and I have found that I am to be asked to be good at it for the whole of a century that I do not think I shall like." She folds it. "I should like you to know that I am afraid."
+  "Of what?" you say.
+  "Of being thanked," says Prisca, and goes out, rather fast, as she did the last time.
+* The Valerio keepers, Ginevra and Tommaso and the girl, and the family after them ?if in_circle("ginevra") or in_circle("tommaso") or in_circle("fiammetta")
+  $ do steward("keepers")
+  $ bond.ginevra += 2
+  $ loyalty.keepers += 15
+  ?if lone() and can_acquire("keeper_oath")
+    $ do acquire("keeper_oath")
+  ?end
+  You write it down. It is a very long time to ask of a family, and you think of it as you write: the names, and the long line of Valerio running down the hill like water, each one told the same few things and taught the same few signs. They will have seen a king beheaded, and a Republic, and an Emperor, by the end of it, from a kitchen. They will say that it was all in the weather.
+* Adélaïde, and the house of Valère after her ?if b3.keeper == "adelaide"
+  $ do keeper("adelaide", "steward")
+  $ do steward("adelaide")
+  $ bond.adelaide += 3
+  $ humanity += 1
+  You write her name, and it looks a very small thing on the sheet, and she reads it at the table in the back room with her spectacles on the end of her nose. She says that it is a good deal to put on a woman of thirty one. She says that she will put it on a child, and then on a child's child, and that it will be the one thing in the family that is not talked of at dinner. She folds the sheet. She says that she will keep the house open, and the cellar swept, and the sign on the door. She says that it will be the Sun, and that it will not have been taken down.
+* Baptiste, and the house of Valère after him ?if b3.keeper == "baptiste"
+  $ do keeper("baptiste", "steward")
+  $ do steward("baptiste")
+  $ bond.baptiste += 3
+  $ humanity += 1
+  You write his name, and he reads it in the shop, among the cases, with a slow, startled, rather pleased face, as a young man reads a sentence that he has been waiting for. He says that he is not sure that he is the right person. He says that it is, in his experience, the thing that the right person says. He says that he will keep the house, and the presses, and the sign, and that he will write it all down, in a book, so that whoever comes after will be able to say that he had it from the first hand.
+<~
+
+# orders
+## What is to be done with it
+There is the matter of the order. It is what a steward is to do with a fortune that has a very great while to grow, in a century that is going to go through a good deal. It can be kept, or it can be sown. It can be done honestly, or only profitably.
+* Play it safe: land, and rents, and honest paper, and let it grow slowly
+  $ do orders("safe")
+  $ humanity += 1
+  $ standing += 1
+  It is the order of a man who intends to wake and find the same house. It is not exciting. It is an order to buy farms and houses with good walls, and to hold them, and to write nothing down that need not be written, and to distrust, above all, any currency that is printed.
+* Grow it aggressively: banking, shipping, canals and a great deal of trade
+  $ do orders("aggressive")
+  $ cunning_brutal += 1
+  $ standing += 1
+  It is a bolder thing. It is an order to lend to the new governments, and to insure the new ships, and to buy what is cheap in the wreck of a Revolution and sell what is dear in the peace. It will be a good deal richer. It will be a good deal more visible. It is like leaving a lamp in a window and trusting that nobody will come to ask whose it is.
+* Take the dark ventures, which pay the most, and ask no questions
+  $ do orders("dark")
+  $ cunning_brutal += 3
+  $ humanity -= 3
+  $ velati_regard -= 2
+  You write it. It takes a long time, and you do not enjoy the writing. It is the order for the plantation notes, and the war contracts, and the quiet trade that nobody has named, the order that gives the greatest return and will have a great deal of blood on it. You tell yourself that it is only money. You are quite aware that you have heard this before, in the voices of a number of men whom you did not like.
+<~
+
+# guard
+## What stands between
+It is a thing that must be paid for, and it is dearer than it was, because the whole world is. There are traps, which are cheap, and bribes, which are not, and guardians, which are neither, and cannot be had without a good reason and a great deal of gold.
+:guard
+* Lay traps in the ways in: a drain, a false stair, a few cunning things in the rock [once] ?if wealth >= 80
+  $ do protection("traps")
+  $ _guard_n += 1
+  The man who does it is a mason of the faubourg, a quiet fellow with a wen, who has built more false stairs than a theatre. He is very pleased with the drain. He has to be told twice that the lane to the shrine is not to be trapped.
+* Pay the people who would otherwise ask questions: the Section's clerk, the prefect's man, a curate or two [once] ?if wealth >= 160
+  $ do protection("bribes")
+  $ _guard_n += 1
+  $ secrecy += 2
+  It is a long list, in Adélaïde's neat hand. It is done with a great deal of politeness and a number of small leather purses, and it works, as such things do, for as long as the people in the purses are alive.
+* Hire guardians: a company of good men, sworn, to hold the road as long as the money lasts [once] ?if wealth >= 240
+  $ do protection("guardians")
+  $ _guard_n += 1
+  They are old soldiers of the Armies of the Republic, who have been paid in paper and would like to be paid in anything. Their sergeant is a gaunt man with one ear, who looks at the door, and the stair, and the bar, and says that it will do. You have heard that said before, in another century, by a man with a limp. It occurs to you that the profession is a very conservative one.
+* That will do
+  <~
+-> :guard
+
+# letter
+## A word
+It is the last of the lines, and the only one that does not have a price. You have a sheet of paper, and a pen, and a seal, and you have a little time.
+* Write a letter, to be kept in the house, and given to whoever comes to the door and asks for it in the name of the Sun
+  $ b3.letter = "left"
+  $ humanity += 1
+  $ standing += 1
+  It takes the whole of an hour. You write it three times and burn two. The one that you leave is short. It says that you are not able to say everything, and that you are sorry for some of it, and that the house of Valère is to give a bed and a cup and no questions to anyone who comes to the door with a very small bright key, or with a sprig of rosemary, or with nothing at all and a good reason. It says that it is not a promise of anything. It says that it is only a door.
+* Write nothing
+  $ b3.letter = "none"
+  $ cunning_brutal += 1
+  You look at the paper for a long time. You do not know what you would put on it. You fold it in half, and put it in the candle, and watch it curl.
+<~
+
+# cellar
+## The last room
+It is the end of the night. The house is asleep. You go down through the quiet rooms in your bare feet with a lamp, and the stairs are cold, and the stone is as it was.
+?if _place == "collesanto"
+  It is the hill that you see, at the last, which is a thing that you did not expect: the wet green roof, and a fire in a round house, and a woman's voice singing. You do not know whether it is a memory or a thing that you have made. It does not matter. You hold it.
+?elif _place == "tomb"
+  It is a very small room, and very cold, and the door is a stone. You set the lamp on the floor and look at it. It is a thing that you have been told by a great number of persons is the safest place in the world. You find that you are able to believe it, and that you are not at all consoled.
+?else
+  It is the cellar under the shop. It smells of old paper and of the river, and of the lime blossom that has been brought in on someone's coat. There are the type cases, in the dark, and the sack of lentils, and the little glimmer of a pewter jug. It is the nearest thing that you have had to a home since a hill in the south, and you notice that you have begun to be sorry.
+?end
+?if b3.last_night == "house"
+  You think of a long table, and a cloth, and a small stained book that is in your coat. It is a thing that is going to be here when you are not.
+?elif b3.last_night == "quarry"
+  You think of a girl in a gray dress with a mason's hands, and a young man at the head of a stair, who is sorry for half of himself. It is, you think, a very fair proportion.
+?elif b3.last_night == "court"
+  You think of a bottle that was passed with one glass, and a man who has stood up. It is not at all certain that anybody is going to be told how it comes out.
+?else
+  You think of a river, and a man fishing, and three clocks that did not agree. It is a thing that you hold. It is a very small thing, and quite enough.
+?end
+?if b3.rising == "carried"
+  You think of a coffin, in a cart, in the dark, and a very large, very cold hand that put itself into yours, like a drunk man's, with a sort of formal apology.
+?end
+The last thing that you hear is the house, very faint, down there under the stone. It is a sound that you have lived in like water for six years, the presses, and the stair, and a voice at the end of a passage, and it goes on, steady and quiet and entirely unaware of you. You listen to it go on.
+$ do rest()
+$ do sleep("paris_to_new_orleans")
+You close your eyes.
+It is not like sleep. It is like being put down, very gently, by a large hand. There is a long quiet fall, and the sound of the house goes away, not all at once but one beat at a time, like lamps put out down a long street, and the dark is complete and warm and asks nothing of you at all.
+Somewhere in it, very far off, there is a sound like a stick of chalk, set down on a slate. It comes once. It does not come again. You are, by then, a good way down, and you do not think about it.
+=> next

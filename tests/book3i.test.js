@@ -47,7 +47,7 @@ async function play(chapter, vars, wants = [], { stopAt = null, seed = 3 } = {})
   game.state.sys.sleep.wake = { quick: true, place: 'collesanto', steward: 'bank', outcome: 'on_schedule', years: 310, invest: [], ...{} };
   for (const [k, v] of Object.entries(vars)) dev.setVar(game, k, v);
   const frame = await dev.jump(game, chapter, { keep: true });
-  return drive(game, frame, wants, stopAt ?? (chapter === 'b3c17' ? 'b3c18' : null));
+  return drive(game, frame, wants, stopAt ?? (chapter === 'b3c17' ? 'b3c18' : chapter === 'b3c18' ? 'b3c19' : null));
 }
 
 const clean = (run) => {
@@ -133,13 +133,13 @@ test('chapter 17 sets defaults for what he did not do, and spends three of four 
   clean(run);
 });
 
-test('chapter 18 plays through for every state of the book so far, and the book pauses after it', async () => {
+test('chapter 18 plays through for every state of the book so far, and reaches chapter 19', async () => {
   for (const arrest of ['let', 'paper', 'followed']) {
     for (const young of ['backed', 'held', 'forbade']) {
       for (const committee of ['served', 'dodged', 'refused']) {
         for (const hunger of [10, 90]) {
           const run = await play('b3c18', { ...START, ...LATE, hunger, 'b3.arrest': arrest, 'b3.young': young, 'b3.committee': committee }, []);
-          assert.equal(run.game.state.chapter, 'b3c18', `${arrest} ${young} ${committee} ${hunger}`);
+          assert.equal(run.game.state.chapter, 'b3c19', `${arrest} ${young} ${committee} ${hunger}`);
           assert.match(run.text, /Year Two/);
           assert.match(run.text, /sits up on the plank/);
           clean(run);
