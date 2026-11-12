@@ -615,6 +615,25 @@
             "blood",
             "grief"
           ]
+        },
+        {
+          "id": "b3c17",
+          "file": "crown-of-ashes/ch17.tsb",
+          "title": "The Law of Suspects",
+          "notes": [
+            "blood",
+            "war"
+          ]
+        },
+        {
+          "id": "b3c18",
+          "file": "crown-of-ashes/ch18.tsb",
+          "title": "The Year of the Falling Leaves",
+          "notes": [
+            "blood",
+            "violence",
+            "grief"
+          ]
         }
       ],
       "incomplete": true

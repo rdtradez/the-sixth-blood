@@ -1,0 +1,328 @@
+// Book Three, Chapter 17 (session 37). The spring and summer of 1793 told, and the night of the sixteenth to the seventeenth of September. The Section committee, the Hôtel de Saint-Aubin, the brewery yard, the shop, and the warrant for Brézac.
+// Opens on the months since the king (no phase), then one night phase of three actions out of four, then the seventeenth told at dusk, then a fixed closing scene at the Hôtel de Saint-Aubin that every player plays.
+// Ends with rest() and => next. Reads b3.keeper, b3.journal, b3.aubry_post, b3.carmes, b3.crossing, b3.third and b3.brezac. Chapter 18 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c17
+@title The Law of Suspects
+@book crown-of-ashes
+@version 1
+
+# start
+## The months since the king
+$ b3.civism = "refused"
+$ b3.sword = "left"
+$ b3.young = "held"
+$ b3.committee = "refused"
+$ b3.arrest = "let"
+~> months
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the night of the sixteenth of September, a Monday, a little after seven, and still warm. There are four things that want doing by your own reckoning, and time for three.
+-> night
+
+# months
+It is a thing that a great many people have remarked, that it began to rain on the day after the king. It rained, with a few interruptions, until Easter. The Convention declared war on England and on Holland on the first of February, in the same week in which it was reported that the price of sugar had gone to forty sous the pound, and the two events were felt by the whole of Paris to be connected. The assignat has lost half of what it was worth. In the spring the nation asked for three hundred thousand men, by lot, and the west of the country, which had not been asked what it thought, took down its muskets and went to its priests. It is called the Vendée. It is a word that is said, now, in the street, in a low voice, as a doctor says the name of a fever.
+On the tenth of March there was set up a Tribunal, to try the enemies of the people, and it was explained that there would be no appeal. In April the Convention appointed a Committee to look after the public safety. It is a small room, in the Tuileries, in what were the queen's apartments, and it has twelve men in it, and a clock. It was agreed by everybody that it was a temporary measure. At the end of May the Convention was surrounded by the Sections, with cannon, for three days, and twenty nine of its members were put out of it, and the rest sat on, with their hands on their knees, and voted.
+There is a woman from Caen who came to Paris in July with a kitchen knife in her sleeve, and who is said to have been rather astonished at the quantity of blood. She was executed on the Wednesday. She had a red shift, and a perfectly composed face. It has been remarked, by persons who ought to know, that nobody in the history of the world ever did so much for the reputation of a man whom she wished to be rid of.
+It is now a crime to have been rich, or to have been poor in the wrong place. The bread has a price which is fixed by law, and no bread. Everybody has a card. The word Monsieur has gone out, and the word Citizen has come in, and it is said that in the streets of the quarter it is very much easier to say than to mean. On the twenty third of August the nation was declared to be in permanent requisition. The young men are to fight. The married men are to forge arms. The women are to make tents and to serve in the hospitals. The old men are to be carried into the public places to preach hatred of kings and the unity of the Republic. It is said that this was taken quite seriously.
+?if b3.keeper == "adelaide"
+  Adélaïde keeps the house. She has had her hair cut short and wears a black ribbon, and she has learned in six months to be a great deal more frightening than Étienne ever was. The books are in order. The strongbox has been moved, and it is not now to be said where. When the Section sends a man to ask what is printed in the shop she sends back a message that it is the Republic's business, and that the Republic is welcome to come and look.
+?elif b3.keeper == "baptiste"
+  Baptiste keeps the house, as well as a man may who has never in his life kept anything. The shop has been loud since the spring. There are more journals on the stone than there are on the shelves. Adélaïde keeps the books for him, in the little room, without comment, and with the face of a woman who has been asked to watch a man she is fond of try to ride a very large horse.
+?else
+  The house in the rue Saint-Jacques is shut. The shop has a board over its door that says the premises are closed for the duration of the war. Adélaïde lives in two rooms at the back, with a girl, and takes in sewing. She has not once, since the winter, asked you for anything. It is a good deal worse than if she had.
+?end
+?if b3.journal == "backed"
+  Le Fanal comes out on the Thursdays, under the plate of the house, in four pages, with no comment. It has a name now, and a number of persons who would be much obliged if it were to take their side. It does not.
+?elif b3.journal == "funded"
+  Le Fanal comes out on the Thursdays, and nobody knows who pays for it. There is a good deal of speculation. A man from the Section has asked Baptiste, twice, and Baptiste has said, twice, that it is a gift from the people.
+?else
+  Baptiste has taken a post as a compositor at the printing house of the Convention. He sets, all day, the speeches of men he has not voted for. He does not mention it.
+?end
+?if b3.aubry_post == "kept"
+  Aubry is a sergeant of the parish battalion, and is to go, they say, with the second levy, to the frontier, in October. He has taken it with the old calm. The lurcher is to be left with Adélaïde.
+?elif b3.aubry_post == "sent"
+  Aubry has been made a captain, at Soissons, and writes once a month, three lines, to say that the bread is good and that the Austrians have not come. He is in the army of the North. It is a thing that it is not now possible to think about for very long.
+?else
+  Aubry has gone. He went in March, with the first of the levy, without saying where. There was a card, afterwards, to say that he was well, and it had a stag upon it, which was a thing that you did not know he could draw.
+?end
+?if b3.carmes == "cadets"
+  The Cadets are twenty one in the quarry, and have been told that it is for the winter. Clémence has two presses of her own, in a gallery that was never on any plan, and has printed, in the dark, in a month, nine thousand copies of a hand bill that nobody knows the origin of.
+?else
+  The Cadets are fewer than they were. Clémence has come back to the yard in the rue de Charonne, and sits, in the evenings, on the same cask, with the same square hands folded, looking at the door. She does not say anything about the Carmelite house. She has a slate on her knee, with a name on it, that she does not show.
+?end
+The Prince has not been seen. There is a rumour that he has been unwell, and a rumour that he has left France. Ottaviano has not come. It has been a great while since a card has been left at the door.
+It is the middle of September, and the leaves are beginning to turn on the trees along the Luxembourg wall. It is said by the old women of the quarter that it is going to be an early autumn.
+<~
+
+# hunger
+## The warm night
+It is a close night, with a smell of river mud and of the tanneries, and the Section has set a lamp at every corner by decree. The rest of the street is quite dark. In the rue des Cordeliers a man in a red cap sits on a step with a bottle, singing, under his breath, a song about a lamp post, and does not sing it well.
+* Take it from the singer, and leave him sleeping it off
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  He is drunk to the lips and has no objection. You carry him, quite gently, into the shadow of the arch, and take what you need, and leave him on a pile of sacking with his bottle. He will think that it was a nightmare. It will, in a manner of speaking, be very much the same.
+* Take it from a rat catcher's terrier, in the yard of the Mont de Piété
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  It is a small hard dog with a collar of spikes, and a good deal of opinion. It does not like it. It is a great relief to everybody that it does not bark.
+* Wait, and do not feed
+  $ cunning_brutal += 2
+  $ humanity += 1
+  You walk along the river as far as the Pont Neuf, and back. The hunger is an old acquaintance, and keeps its distance, rather sullenly, like a dog that has been shown the stick.
+<~
+
+# civism
+## The committee of the Section
+It is in a convent of the rue Saint-Jacques, that was given up in the spring, in a long low refectory with a stove, a great deal of paper, and a bust of Brutus, which has been placed upon the pulpit. It is ten at night, and there is a queue. The persons who stand in it hold, in their hands, nothing at all, with the look of those who would like very much to have been given something to hold. They are waiting for a certificate that states that they are citizens, and have been, and that the Section can answer for them. It is called a certificate of civism. It is much easier to be refused one than to be given one, and there is a clerk at the end of the room, in spectacles, who has a very large book, and does neither with any pleasure.
+?if b3.keeper == "adelaide"
+  She has been before you. She is at the clerk's table, in the black ribbon, with her papers in a neat packet, giving, without any expression, a long list of dates.
+?elif b3.keeper == "baptiste"
+  Baptiste has been before you. He is standing in the corner of the room with his hat in his hand, and the face of a man who has said something that he regrets.
+?else
+  The house in the rue Saint-Jacques is on the list as a shop that is closed. It is on a second list, under the name of the Valère family, as persons of no occupation. It is not easy to see what is to be done with a house that has been put on both.
+?end
+The clerk looks at you, over the spectacles, with great weariness. He says that the citizen Colline has been a good deal absent. He says that there has been a note about it. He says that it is not that anybody would suggest that it was suspicious, but that a man who is a good deal absent, and has the money, and has an old lodging in the Marais, is in a position that has been remarked.
+* Put a purse of the new paper into the ledger, and ask to be vouched for
+  $ b3.civism = "bought"
+  $ do earn(-3)
+  $ secrecy += 1
+  $ humanity -= 1
+  $ cunning_brutal += 1
+  $ standing += 1
+  $ do chart("paris.counting")
+  $ do discover("the_law_of_suspects")
+  He does not look at it. He looks at the ceiling for as long as it takes to turn a page. He writes, in a good clerk's hand, that the citizen Colline is known to the Section, and that he has contributed to the patriotic loan, and that he is a friend of liberty. He signs it. He says, in a very low voice, that it is a great pity that so many people had not thought of it earlier. It is a kind of compliment, and it is a kind of warning. The paper is stamped and dried.
+* Offer the house's presses to the Section, for its bills
+  $ b3.civism = "earned"
+  $ standing += 2
+  $ defiance -= 1
+  $ secrecy += 1
+  $ do chart("paris.presses")
+  $ do discover("the_law_of_suspects")
+  It is said in a plain way, as a thing that a good citizen would do, and the whole room is a little moved by it. The president of the committee, a tall slow cooper with a red cap, comes down from the pulpit to shake your hand. It is arranged that the shop is to print the Section's bills at cost, and that the Section is to be, in return, a good deal more helpful. It takes two minutes. It is the kind of thing that, later, a person will hold up as evidence, in either direction.
+* Say that you do not need a certificate from a stove
+  $ b3.civism = "refused"
+  $ defiance += 3
+  $ standing -= 2
+  $ secrecy -= 2
+  $ cunning_brutal += 1
+  $ do chart("paris.counting")
+  $ do discover("the_law_of_suspects")
+  It is said quite quietly, but it has an effect. The queue goes still. The clerk takes off his spectacles and looks at them. He says that it will be noted, and he writes it in the book, with some care, as one who would very much rather it were not his handwriting. You go out into the corridor. A woman there puts her hand on your sleeve, and says, in a whisper, that it was very brave, and that she would give a great deal to be so stupid.
+<~
+
+# sword
+## The Hôtel de Saint-Aubin
+It is the little salon behind the gallery, with the shutters closed, and a fire in the grate, though the night is warm. Brézac is in the chair by it, in the plain gray coat, with the scar white in the firelight and a bottle of Tokay at his elbow. He has had the glasses set for two. He says that he has been expecting you for a week.
+He is quite calm. He says that he has had a card, from a person who has an interest in his comfort, to say that the Committee of General Security has put his name on a list. It is not the first. It is the first that has the name of a street on it. He says that it is the rue des Prouvaires. He says that he has not the least idea what a man should do who has been the sword of a court for a hundred and fifty years, and is told that it has been abolished.
+?if b3.crossing == "left"
+  He says that he has not seen the Prince since the Sunday in September a year ago. He says it without any particular emphasis.
+?else
+  He says that the Prince sent him a line, in the spring, in the old hand, and that it said only that he was to look to himself.
+?end
+?if b3.brezac == "rode"
+  He says that he was sorry about the Carrousel, in August of last year, and that he has been sorry about it ever since, as one is sorry about the weather.
+?end
+He pours. He says that he is not afraid. He says that it is a curious thing, and that he would like to know why.
+* Tell him that a warrant is coming, and that he should be gone by the morning
+  $ b3.sword = "warned"
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  $ bond.brezac += 2
+  $ do chart("paris.court")
+  $ do discover("the_law_of_suspects")
+  He hears it out. He does not smile. He says that you are very good, and that he is much obliged. He says that a gentleman who has fought in the Fronde does not leave by the Orléans barrier with a bundle, and that he would be ashamed to be found in a barn. He says that if they come for him they will find him at home, and in a clean shirt. He is a little pale, but his hand does not shake. He lifts his glass, and says that he thinks that it is a very good year.
+* Offer him the third cellar, and say that nobody will look for him under the Prince
+  $ b3.sword = "hidden"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ bond.brezac += 1
+  $ do chart("paris.court")
+  $ do discover("the_law_of_suspects")
+  He thinks about it for a good while. He accepts. He comes for the night, in a cloak, across the court, through the long hall, and down, past the pale woman on the stair, and he stands before the grille with his hat in his hand for a long time, as before the altar of a church that he has not been in since a child. He says nothing. At the dawn he thanks you very gravely, and goes home. He says that it is a very great honor, and that he did not feel that it was meant for him.
+* Say nothing, and drink the Tokay
+  $ b3.sword = "left"
+  $ secrecy += 1
+  $ humanity -= 1
+  $ cunning_brutal += 1
+  You do not say anything. It is a thing that you can do very well. You sit by the fire for an hour, and drink his wine, and talk of Burgundy, and horses, and the old opera. He is a little disappointed. He says, at the door, that it has been a very good evening, and that he would not have supposed that a man could be so tactful as to say nothing at all. It is the one thing that you have not been able to bear in anyone in this century, and it is exactly what you have done.
+<~
+
+# young
+## The brewery yard
+It is a close night, and the yard smells of malt. There are forty of them on the staves, under a lantern, and Severin on his feet, with a paper. It is a printed paper, and it is a certificate of civism, of the Section of the Quinze-Vingts, in the name of a citizen who has been dead for two years. He has twenty more. He says that they are all genuine. He says that he had them from a clerk.
+He says that on the fifth of the month the Convention formed an army of the interior. It is called the Revolutionary Army. It is to go through the country, with the guillotine, in a cart, and to see that the bread is brought to the cities, and that the rich are persuaded. It is a force of six thousand men, and they will be armed, and they will be paid, and they will go at night. He says that the cards will take the Cadets in. He says that the old ones of the court are all of them, in the eyes of the Section, ci-devants, and that for the first time in three hundred years, the Section would be obliged to the persons who named them.
+?if b3.carmes == "cadets"
+  Clémence is on the cask. She says nothing. She has her slate on her knee. She looks at you quite openly, as one who knows what you are going to say, and has decided that she does not mind.
+?else
+  Clémence is not on the cask. She is at the end of the yard, by the wall, alone. She has not looked up.
+?end
+He asks what the house will say. It is the first time that he has put it in a form to be refused.
+* Give them the house's money and the Section's cards
+  $ b3.young = "backed"
+  $ do earn(-4)
+  $ defiance += 3
+  $ humanity -= 2
+  $ secrecy -= 2
+  $ bond.severin += 3
+  $ do chart("paris.rebels")
+  $ do discover("the_law_of_suspects")
+  It is said with a very curious feeling, as of a man who steps off a small, well known stair. They take the purse in their two hands, like a sacrament. They sing, very softly, a song that has not got any words. Severin says that nobody in the history of the Peace has had so good a friend. You do not say what you think it is going to look like when it is done.
+* Say that it is not yet the time, and ask them to wait
+  $ b3.young = "held"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ bond.severin -= 1
+  $ do chart("paris.rebels")
+  $ do discover("the_law_of_suspects")
+  There is a long silence. Severin folds the paper. He says that it is what he thought you would say. He says that he does not know how long they can be asked, and that there are persons who have been waiting three hundred years, and who are not in the least impressed by a man who has waited for sixteen. They do not move. It is a kind of obedience that is not a kind of loyalty.
+* Forbid it, flatly, and say that you will answer for the Section yourself
+  $ b3.young = "forbade"
+  $ defiance -= 2
+  $ standing += 1
+  $ humanity += 1
+  $ bond.severin -= 3
+  $ do chart("paris.rebels")
+  $ do discover("the_law_of_suspects")
+  You say it in the old voice, the one that was used in the villa, and the whole yard hears it. They are young. A good many of them stare at their shoes. Severin goes the color of tallow. He says, very slowly, that he will remember that. It is not quite a threat. It is the way a man lays a thing on a shelf, to be taken down.
+<~
+
+# committee
+## The shop
+It is a quarter to midnight. There is a man standing in the shop, under the lamp, in a long brown coat and a round hat, with a leather case in his hand, who has been admitted by Adélaïde and is now being looked at by her, from the door of the little room, with an expression that she has trained, in the course of nine months, to mean nothing at all. He is a thin man, sallow, forty, with a good deal of ink on the side of his hand and the look of a person who has been very reasonably treated, for a long while, by nobody.
+He says that his name is Lemaire. He says that he has the honor to be attached to the Committee of General Security. He says that he is not come about anything. He says it twice, and with a smile.
+He opens the case. It is a list, in a clerk's round hand, of the printing houses of the quarter, with notes. There are fourteen. Twelve have a line drawn through them. The house in the rue Saint-Jacques has a small mark in the margin, in red, which is very much like an eye.
+?if b3.journal == "backed"
+  He says that Le Fanal has been read with great pleasure in the Committee. He says that it is observed to be a journal that has no opinion, and that it is very hard, in the present state of things, to say that a man has no opinion and to be quite believed.
+?elif b3.journal == "funded"
+  He says that it is a very small matter, but that it has been remarked that nobody knows who pays for Le Fanal, and that it is the kind of thing that a committee likes to be told.
+?else
+  He says that it is a pity about the journal, which he understands to have been dropped. He says that the shop has still, on its shelves, an excellent fount of Garamond.
+?end
+He says that what is wanted is six presses, working nights, for the Committee's circulars, and the lists, and the Law. He says that it is a kind of honor. He says that he would not like it to be thought that the Committee had asked, and that it had been refused.
+* Take the Committee's work, and take the Committee's paper
+  $ b3.committee = "served"
+  $ do earn(9)
+  $ standing += 2
+  $ humanity -= 2
+  $ secrecy += 1
+  $ defiance -= 2
+  $ do chart("paris.presses")
+  $ do discover("the_law_of_suspects")
+  It is a good deal of money, in a currency that is not any good. It is an excellent protection. It is a kind of bargain that the whole of the century is made of. Adélaïde sets the first of the lists herself, in the small hours, with her mouth shut tight, and a face like a stone. It is a list of the names of the persons who are to be pursued. She does it perfectly. It is the first time you have seen anybody do so terrible a thing so well.
+* Offer the Section's bills in its place, and say that the house is too small
+  $ b3.committee = "dodged"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ standing += 1
+  $ do chart("paris.presses")
+  $ do discover("the_law_of_suspects")
+  He thinks about it. He says that it is a very ingenious answer. He says that it is exactly what a clever house would say. He says it with great good humor, and writes it down. He leaves, in the end, with a promise of a small job of the Section's, and with the look of a man who has put a mark in a book that will be opened at the proper page.
+* Say that the house prints what it pleases, and that the Committee may buy it
+  $ b3.committee = "refused"
+  $ defiance += 3
+  $ standing -= 2
+  $ secrecy -= 1
+  $ humanity += 1
+  $ do chart("paris.presses")
+  $ do discover("the_law_of_suspects")
+  He folds the list, and puts it in his case. He says that it is very much to the honor of the house. He says that he will tell the Committee precisely that. He puts his hat on at the door, and says, with an urbanity which is very nearly gentle, that the citizen has a very great deal of courage for a person who has so many windows.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is a little after seven, and still warm, and the Section's lamps are lit, one at each corner, like a row of small yellow eyes. The quarter is at its supper. It is very quiet.
+?elif actions_left() == 2
+  It is the middle of the night. The shops are shuttered, and in the long streets the patrols go by, in step, with their pikes, stopping at every house that has a light.
+?else
+  It is four. There is a smell of damp leaves, which is a smell that was not in the city a week ago. There is one thing more that you can do before the day.
+?end
+* Go to the committee of the Section, where there is a queue for certificates [once] ?if actions_left() > 0
+  ~> civism
+  $ do act()
+* Go to the Hôtel de Saint-Aubin, where Brézac has set out two glasses [once] ?if actions_left() > 0
+  ~> sword
+  $ do act()
+* Go to the brewery in the rue de Charonne, where Severin has a paper [once] ?if actions_left() > 0
+  ~> young
+  $ do act()
+* Go to the shop, where a man of the Committee is waiting under the lamp [once] ?if actions_left() > 0
+  ~> committee
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> morning
+?end
+-> :night
+
+# morning
+## The seventeenth
+You are in the haven before the day, with the stone over you, and the day goes by, as it has gone by every day of this century, as a thing that happens to other people. There are noises, now and again, through the rock. There is the drum of the Section, at eight. There is, a good deal later, a long roll, and a shout, a long way off, which is not at all like a cheer.
+It is told you at dusk by Adélaïde, who comes down the stair with a lamp in her hand, and a printed sheet folded very small in the other, and stands on the third step, and reads it aloud.
+It is a law. It is nine articles long. It was passed that morning, by the Convention, on the motion of a member who has been a good deal in the news. It provides that all suspected persons who are in the territory of the Republic, and who are still at large, shall be arrested at once. It says who is to be considered suspect. They are those who by their conduct, relations, remarks or writings have shown themselves partisans of tyranny. They are those who have not been able to justify their means of existence. They are those who have been refused certificates of civism. They are the former nobles, and the husbands, wives, fathers, mothers, sons, daughters, brothers, sisters and agents of emigrés. It is a very large number of persons. It is a number that nobody has been able to count.
+?if b3.civism == "bought"
+  She says that the house's certificate was stamped on Monday, and that it is in the drawer. She does not say what she thinks of the clerk.
+?elif b3.civism == "earned"
+  She says that the Section has sent round to ask when the first of the bills will be ready.
+?else
+  She says that the house has been marked. She says it quite steadily. She says that it is on the third list.
+?end
+?if b3.committee == "served"
+  She says that the lists for the Committee have been set, and that they are being run off, in the cellar, on the old Swiss press. She says that it is the first time that she has heard the press go so quietly.
+?elif b3.committee == "refused"
+  She says that a man in a round hat has been seen twice in the street, and that he has not come in.
+?end
+She stops. She puts the sheet down. She says, in a rather peculiar voice, that there are going to be a great many more things said in this house, in the next year, that nobody is going to be able to take back.
+-> arrest
+
+# arrest
+## The warrant
+It is a little after midnight, in the second hour of the seventeenth, and you have been sent for. It is Ottaviano's card, in the old hand, left with the porter in the rue Saint-Jacques at dusk. It says only: the Hôtel. You go across the river on foot, by the Pont Neuf, with the lamps going out one by one along the quays, and into the court. It is full of torches.
+There are eight of them, in the red caps and the tricolor sashes, with pikes and one lantern, and a commissary of the Section, a stout pale man in a green coat with the paper in his hand, who has been brought here from his bed and does not like it. They have a hackney coach in the court. There are two men on the steps with muskets, and two behind. They are very nervous. They have been told that this is a place of old and terrible reputation, and they have been given a warrant against a single man.
+Brézac has come down to the head of the stair. He is in a clean shirt, and a plain coat of gray, with a sword at his side that he does not touch. He is smiling. He has the look of a man who has just seen the first act of a play which he understands very much better than the audience. There is a candle in his hand, which has been burning for some time, and he has not let it gutter.
+He says, good evening, to the commissary. He says that he supposes that it is himself.
+The commissary reads it. It is a very short warrant, and it has been written a good deal faster than it has been spelled. It says that the ci-devant Brézac, called the Chevalier de Brézac, of no profession, is to be taken to the Conciergerie, to be examined, as a suspect, and kept at the disposition of the Tribunal. He has a hand that trembles.
+?if b3.sword == "warned"
+  Brézac says, in a perfectly level voice, that he has been expecting it, and thanks you for having been so good.
+?elif b3.sword == "hidden"
+  Brézac says that he has already had the honor of a night in the cellar, and that he found it excessively restful, and that he is quite ready.
+?end
+?if b3.committee == "served"
+  The commissary has seen you. He says that it is the citizen of the printing house, of the rue Saint-Jacques, and that it is very good, and very fortunate, that a patriot should be here. He says it with a kind of misery. He is asking you to be a witness.
+?end
+Brézac looks at you. He does not ask for anything. He has the courtesy, which is a courtesy of three centuries, not to make a request which it would give pain to refuse.
+* Stand aside, and let them take him
+  $ b3.arrest = "let"
+  $ humanity -= 1
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  $ bond.brezac += 1
+  $ do chart("paris.court")
+  $ do discover("the_law_of_suspects")
+  You do not move. The soldiers go up, with their pikes, in a bunch, like men going up to a bull. He goes down to them. He gives the candle to the nearest of them, who takes it, with a kind of start, and holds it, in his big hand, like a sacred object. He says that it has been a very good house. He gets into the coach. He settles his sword on his knee, as if he were going to the opera. The commissary shuts the door. It is a quarter of an hour, in the whole, and nobody has been hurt, and it is the worst quarter of an hour of the year.
+* Take the commissary aside, and buy the month
+  $ b3.arrest = "paper"
+  $ do earn(-7)
+  $ secrecy -= 1
+  $ standing += 1
+  $ cunning_brutal += 2
+  $ bond.brezac += 2
+  $ do chart("paris.counting")
+  $ do discover("the_law_of_suspects")
+  It takes three minutes, in a corner of the court, under the arch, and a good deal of paper. You say that the examination is a very great matter, and that it would be a pity if the citizen were to be questioned in a hurry, and that there are persons who would take a great interest in the order in which names are put. The commissary does not look at you. He nods. He takes the purse, with a kind of horror. He says that it is not in his power to prevent it, but that it is in his power to be late. Brézac is taken, all the same, and goes down the steps with his candle. At the door of the coach, he turns, and, with a courteous inclination, sets his hat very slightly on one side. It is a thing that men do who have just been dealt a good hand.
+* Go with the coach, as far as the gate of the Conciergerie
+  $ b3.arrest = "followed"
+  $ humanity += 1
+  $ secrecy -= 1
+  $ bond.brezac += 3
+  $ do chart("paris.court")
+  $ do discover("the_law_of_suspects")
+  You walk behind it, through the dark, with your hands in your pockets, as a man might walk behind a hearse. It goes by the Pont Neuf, and along the quay, and in by the great gate of the Palace, where the torch bearers are lit. You stand in the shadow. There is an official at the grille with a lantern, who reads the warrant, with great ceremony, and writes a number. Brézac gets down. He says, as he goes through, without turning his head, in the voice that he has always used for the end of a duel, that it would be a very great kindness to say nothing to the Prince. It is the last thing that he says. The wicket closes.
+$ do rest()
+=> next

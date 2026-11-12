@@ -3439,6 +3439,126 @@
       "major": true,
       "default": "none",
       "note": "Chapter 16: who he named keeper of the Valere house when Etienne died"
+    },
+    "b3.civism": {
+      "kind": "enum",
+      "values": [
+        "bought",
+        "earned",
+        "refused"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 17: how the house got its certificate of civism (refused if he did not go)"
+    },
+    "b3.sword": {
+      "kind": "enum",
+      "values": [
+        "warned",
+        "hidden",
+        "left"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 17: what he did for Brezac when the name was on a list (left if he did not go)"
+    },
+    "b3.young": {
+      "kind": "enum",
+      "values": [
+        "backed",
+        "held",
+        "forbade"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "held",
+      "note": "Chapter 17: his answer to Severin about the Revolutionary Army (held if he did not go)"
+    },
+    "b3.committee": {
+      "kind": "enum",
+      "values": [
+        "served",
+        "dodged",
+        "refused"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 17: his answer to the Committee of General Security about the presses (refused if he did not go)"
+    },
+    "b3.arrest": {
+      "kind": "enum",
+      "values": [
+        "let",
+        "paper",
+        "followed"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "let",
+      "note": "Chapter 17: how he met the warrant for Brezac"
+    },
+    "b3.cell": {
+      "kind": "enum",
+      "values": [
+        "promised",
+        "argued",
+        "left"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 18: what he did at the Conciergerie on the night before the Tribunal (left if he did not go)"
+    },
+    "b3.marais": {
+      "kind": "enum",
+      "values": [
+        "vowed",
+        "pressed",
+        "left"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 18: what he said to the Prince in the rue Saint-Antoine (left if he did not go)"
+    },
+    "b3.yard_veil": {
+      "kind": "enum",
+      "values": [
+        "held",
+        "let",
+        "sent"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "held",
+      "note": "Chapter 18: what he did about the Cadets and the Place (held if he did not go)"
+    },
+    "b3.officer": {
+      "kind": "enum",
+      "values": [
+        "pledged",
+        "defied",
+        "bargained"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "bargained",
+      "note": "Chapter 18: his answer to the Senate officer about the Veil (bargained if he did not go)"
+    },
+    "b3.rising": {
+      "kind": "enum",
+      "values": [
+        "covered",
+        "carried",
+        "watched"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "watched",
+      "note": "Chapter 18: what he did when the guillotined man sat up"
     }
   }
 }

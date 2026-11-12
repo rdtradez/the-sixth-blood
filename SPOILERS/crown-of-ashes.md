@@ -187,3 +187,27 @@ The twenty first is told at dusk: the drums, the king's last words lost under th
 Hooks: the war on England and Holland (1 February), the Vendee, the levy, the Revolutionary Tribunal, the Committee of Public Safety, the Terror; the guillotine; the Prince; the Lady's waking.
 
 Flagged to the owner (spoiler light): the king's execution is told at dusk, since it takes place by day. Nothing changes the big picture and no major character dies.
+
+## Chapter 17, "The Law of Suspects" (`b3c17`, session 37)
+
+The design doc gives no list for these chapters beyond the book outline (the Terror, a vampire guillotined whose head reattaches before a crowd, the fall of the Blood Prince, the Priestess's awakening, sleep), so this plan was written from the hooks chapter 16 left: the war, the levy, the Tribunal, the Committee, the Terror, the third passage on the slate (a man is to be put under the knife in the year of the falling leaves, and is to stand up). February to the seventeenth of September 1793. Opens on the spring and summer told in one scene (war on England and Holland, the levy and the Vendee, the Tribunal, the Committee, the Girondins, Marat and Corday, the maximum, the levy of the whole nation), no phase. Hunger scene on entry if needed. Reads `b3.keeper`, `b3.journal`, `b3.aubry_post`, `b3.carmes`.
+
+Night phase (the night of the sixteenth to the seventeenth of September), three of four: the Section committee in the rue Saint-Jacques (the certificate of civism the house must have; `b3.civism`: bought (a clerk and a purse), earned (the house prints the Section's bills; reads `b3.journal`, `b3.keeper`), refused (goes without)); the Hotel de Saint-Aubin (Brezac has been denounced, and takes it with Tokay; `b3.sword`: warned (told him a warrant is coming; he thanks you and does not move), hidden (offered the third cellar; he comes for one night and goes home at dawn), left); the brewery in the rue de Charonne (Severin wants the Cadets inside the Revolutionary Army, with cards from the Section, to hunt the old ones; reads `b3.carmes`; `b3.young`: backed (the house's money and the cards), held (not yet), forbade); the shop (a citizen of the Committee of General Security wants the house's presses for the Committee; reads `b3.journal`, `b3.keeper`; `b3.committee`: served (prints for the Committee, paid in paper; standing up, humanity down), dodged (a Section job in its place), refused).
+
+The seventeenth is told at dusk (the Law of Suspects; the Section lists; Adelaide). Fixed closing scene: the Hotel de Saint-Aubin at midnight, the Section's men with a warrant for the citizen Brezac, ci-devant. `b3.arrest`: let (stood aside; he goes quietly), paper (a purchased delay of a month; costs wealth and secrecy), followed (went with the cart to the gate of the Conciergerie). Ends with `rest()` and `=> next`.
+
+Hooks: Brezac in the Conciergerie; the Tribunal; the Cadets in the Revolutionary Army; the committee's work; the Prince's state; the Lady's slate; the year of the falling leaves.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 18, "The Year of the Falling Leaves" (`b3c18`, session 37)
+
+October to the eleventh of November 1793 (the twenty first of Brumaire, Year II). The Queen, the Girondins, the new calendar, the Festival of Reason, the Tribunal's sitting on Brezac. Opens on the autumn told, no phase. Hunger scene on entry if needed. Reads `b3.arrest`, `b3.civism`, `b3.young`, `b3.committee`, `b3.sword`, `b3.keeper`, `b3.third`, `b3.envoy`.
+
+Night phase (the night of the tenth to the eleventh of November), three of four: the Conciergerie (Brezac's last night; `b3.cell`: promised (to stand in the Place and see it), argued (for a rescue; he refuses), left (sent a basket of Tokay and did not go in)); the Marais (the Prince, who knows the slate and wants Brezac's rising kept from the crowd; `b3.marais`: vowed (swore to cover it), pressed (asked him to come to the Place himself), left); the rue de Charonne (the Cadets want the crowd to see it, as proof the old ones can be unmade or made human; `b3.yard_veil`: held (kept them in the quarry), let (did not stop Clemence going), sent (sent Severin to the Place with them as a guard, and Clemence's pamphlet unprinted); reads `b3.young`); the rue des Prouvaires (the Senate's second officer, come to see that the Veil holds; reads `b3.envoy`, `b3.hunt`; `b3.officer`: pledged (the hero's word that the Veil will hold), defied, bargained).
+
+The eleventh is told at dusk. The Tribunal sat late, so the last cart came to the Place of the Revolution after the light was gone, by torches. Fixed closing scene: the Place at dusk. The head falls and is shown, and after a breath the body moves. `b3.rising`: covered (made a cry and a stir in the crowd that took every eye, at a price), carried (got the head and the body into a closed cart in the dark), watched (did nothing; some hundreds saw it). Ends with `rest()` and `=> next`. The Lady's hand writes: he stood up.
+
+Hooks: the Veil frayed or not; the Senate's report; Brezac himself; the Prince's collapse; the Lady's waking; the guillotine as a rumour; Chapters 19 and 20.
+
+Flagged to the owner (spoiler light): the execution is shown at dusk, in torchlight, after sunset. Brezac is guillotined and is not killed. Nothing else changes the big picture.
