@@ -1,0 +1,261 @@
+// Book Three, Chapter 4 (session 30). Maison Colline's presses, the thaw of January 1789. What the shop prints, the police, the quarries under the hill.
+// Opens on the thaw and Baptiste's pamphlet (no phase), then one night phase of three actions out of four, then a dawn that leaves a hook for the rebels.
+// Ends with rest() and => next. Reads b3.press, b3.venture, b3.sugar, b3.valere, b3.weapon, b3.severin, b3.octave and b3.roll. Chapter 5 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c04
+@title What the Presses Said
+@book crown-of-ashes
+@version 1
+
+# start
+## The thaw
+$ b3.presses_use = "coin"
+$ b3.abolition = "unseen"
+$ b3.raid = "bribed"
+$ b3.gallery = "left"
+$ b3.paster = "left"
+~> thaw
+?if must_feed()
+  ~> hunger
+?end
+---
+~> shop_morning
+---
+$ do phase("night", 3)
+It is the night on which the whole of the trade is in the shop at once, and there are four things in it that want doing, by your own reckoning, and time for three.
+-> night
+
+# thaw
+The frost breaks in the second week of January, in a night of rain. The Seine goes out with a noise like a battle, great gray plates of it grinding down between the piers with a tree in the middle of each, and in the morning the street is one long river of black slush from the Sorbonne to the wall. It does not make anyone happier. There is no bread to be had, because the mills are frozen, and there will be no bread to be had when they thaw, because the carts cannot come. The queue goes round the corner of the rue des Noyers and back up the hill. Nobody in it is talking about anything but the king, who has promised to double the Third, and a priest from Chartres who has written a pamphlet that has sold thirty thousand.
+Paris is reading. It is the thing that you notice first and last. It reads in the queues, and in the cafés, and on the steps of the colleges, and at the doors of the shops, in the long cold January evenings, by a single candle, aloud, to anyone who will stand still. There are seven hundred pamphlets in the city this month. There were two hundred last year. A man in the rue Saint-Jacques who has sold nothing but almanacs for thirty years has sold, in a week, a hundred and sixty copies of a sheet that says that the nation is a tree and the nobility is a parasite.
+?if b3.press == "underground"
+  Baptiste's pamphlet on bread has been out for a fortnight. It was printed in a single night, twelve hundred copies, under the sign of *At London*, in the cellar, and sold by two students from the Collège du Plessis in the arcades of the Palais Royal for twelve sous apiece. It is already in a second printing. It has gone to Lyon, and to Rouen, in the false bottoms of two cheese crates, and a woman at Versailles is said to have read it aloud, at table, to the Queen's own dressmaker. Nobody has been taken. It is a thing that you find you cannot stop thinking of, as one thinks of a lamp that has been left on in an empty house.
+?elif b3.press == "licensed"
+  The censor sent the pamphlet back in six days, which was a miracle. It came with seven lines struck out in red, and a note that said it might be sold under the tacit permission of the Director, who did not wish to know about it. Baptiste, in a fury, has printed it with the seven lines left blank, as seven neat white gaps in the text. It is selling twice as fast as it would have done. People buy it to see what is not there. Étienne says that it is the first honest thing that the censors have ever done for the house.
+?else
+  Baptiste did not wait for the spring. He has been silent for five weeks, which for him is a sort of illness, and then one morning he came down with a face like a closed door and said that a man from Neuchâtel had paid him a hundred livres for the manuscript, and that it would be out by the end of the month under another man's name. He did not look at you when he said it. He sets the almanacs with great exactness, and the Prayers of the Hours are without a single error. It is, you think, a kind of reproach.
+?end
+?if owns("paris.printing")
+  Adélaïde's seventh press came on a barge from Rouen in the last week of the frost, and was brought up the stair in pieces by eight men and a priest, and put together in the back room under her eye. There is a bindery behind it now, with two women at the folding bench, and a stock of Dutch type in a locked chest. She does not say that she was right. She leaves the account book open on the desk, with the first month's column ruled in red.
+?end
+<~
+
+# hunger
+## The long thaw
+The hunger comes in the rain, in the rue de la Harpe, as you are coming back from the river with the damp in your coat and a wet cat at your heels. It is not a surprise. There has been no occasion for three nights, and it is plain, from the way that the people in the doorways look at you and then away, that something in your face has begun to tell.
+* Take it from a drover sleeping in his cart, and be done with it
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  It is a short, sour business in the dark under the tarpaulin, with the smell of wet cattle and the sound of the gutter. He does not wake. You will not find out, in the morning, whether he did, because you will not go by that way. It is the cheapest of the ways. The price is not paid in coin.
+* Go to the shambles at the Petit Pont, where the butchers work at night
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  It is a place that the Parisians do not look at, a row of low black sheds, wet to the knees, with the blood running in the gutter to the river in a smooth red thread. The master butcher is very much used to gentlemen with unusual tastes. He has an ox, he says, which will be dead by the morning in any case. It is a great deal better than most of what you have done.
+* Take nothing. Walk it off, in the rain, along the quays
+  $ cunning_brutal += 2
+  $ humanity += 1
+  You walk for three hours, to the Louvre and round by the Tuileries and back, in a rain that has turned to sleet, and by the end of it you are a good deal wetter and no better. The hunger does not go. It lies down, like a dog, in a corner of you, and waits.
+<~
+
+# shop_morning
+## The night's work
+It is the night after Candlemas. The shop is lit from the floor to the beams. There are three men standing in the front of it, in wet coats, each of whom has come on the same errand, which is to be the first to be given a favor, and Étienne, behind the counter, has gone the color of a candle.
+Baptiste has been called out of the cellar. He has ink to the elbows. He stands at the end of the counter with a roll of paper under his arm, and he is, you see, in the throes of a great decision, and is waiting to find out whether it is going to be allowed.
+There is a clerk in the livery of a very large bank. He is Octave's man, and he lays a small packet on the counter without a word. It is a broadsheet, in the good plain French of a court secretary, entitled *A Dialogue between a Farmer and his Curé upon the Duty of Peace*, with a purse of a hundred louis pinned to the corner.
+There is a stout woman from the parish of Saint-Étienne du Mont, with a bundle, who says that the district is to write its list of grievances for the Estates, and that the vicar has no money for printing, and that a good many hundred copies of a blank form would be a great kindness to forty parishes. She does not offer a purse. She has a cheese.
+And there is a man from the Café Procope, in a green coat, a fat easy person with a ledger, who will print anything, he says, anything at all, for either side, provided that the money is down. He has twelve jobs. He has brought them all.
+The presses are six and a half. It is a fine night and the type is good. It will not do all of it.
+* Print the court's dialogue, and take the purse
+  $ b3.presses_use = "court"
+  $ standing += 2
+  $ defiance -= 1
+  $ do earn(6)
+  $ bond.baptiste -= 2
+  Étienne counts the louis twice, and puts them away with a small sound like a man closing a door on his own children. Baptiste says nothing. He goes out through the yard to the pump and stands there with his hands under the water for a long time. The dialogue is a good one. It is quiet and reasonable and sad, and sets out, in the voice of a farmer, with some skill, that the king is the father of the nation and that the Estates are in the hands of God. It will be on the wall of every church door in the faubourg by Sunday. It will not, you think, be read.
+* Print the parish forms, and the grievances, for nothing
+  $ b3.presses_use = "people"
+  $ secrecy -= 2
+  $ defiance += 2
+  $ do earn(-3)
+  $ bond.baptiste += 3
+  $ loyalty.keepers += 1
+  $ do discover("the_cahiers")
+  The woman from Saint-Étienne does not know how to say thank you. She puts down the cheese. By midnight the forty presses of the district have run out of paper and you have six presses going in the back of a printer's shop, all night, printing the same blank sheet, over and over, each headed in a fine plain type *The Grievances of the Parish of*, with an empty space, and a line for a name. Baptiste is setting it himself. He has stopped looking at you as if you were a visiting archbishop, and has begun to look at you as if you were a person.
+* Take every job that pays, and let the sheets say what they say
+  $ b3.presses_use = "coin"
+  $ cunning_brutal -= 1
+  $ do earn(8)
+  $ bond.adelaide += 2
+  $ secrecy += 1
+  It is the oldest rule of the trade. A press has no opinions, and a house that has no opinions cannot be hanged for them. By two in the morning Étienne has printed the Dialogue, the forms, and three separate refutations of a pamphlet that will not be written until Friday. Adélaïde ledgers the whole in a neat column and says nothing for a long while, and then, in a small voice, that she had not known that it was so much easier to be paid than to be right.
+Baptiste has not moved from the counter. At the last he comes forward, and unrolls what he has under his arm. It is a single sheet. It is headed, in a plain hand, *An Appeal from the Society of the Friends of the Blacks, to the Electors of the Kingdom*, and it is eleven paragraphs long, and it says, with great restraint, that the colonies of the Antilles are held by a system that the Estates ought to be asked to end.
+?if b3.sugar == "funded"
+  He does not look at you. He has not been told, but he has been in the house for two months, and he can read a ledger. He has seen a line, in a hand that is not Adélaïde's, against a Society in the rue Neuve-Saint-Augustin. "They have not got enough money to print it," he says. "I know whose purse they were not able to ask."
+?elif b3.sugar == "sold"
+  He does not know what you did with the island, in December. He knows only that it was sold, that it was sold quickly, and that the buyer was a man in Bordeaux who has been mentioned in the sheet as a friend of the planters. He has the look of someone who is holding a lamp very steadily and waiting to see where it will be put.
+?else
+  He does not know what is in your ledgers. He knows what is in the house's, which is a line for a plantation at Beauséjour, in a hand that is a hundred years older than he is. He has seen it. He is a very honest boy, and he has stopped, at the door, with the paper held out as if it were hot.
+?end
+* Print it, with the house's name at the foot
+  $ b3.abolition = "printed"
+  $ standing -= 1
+  $ secrecy -= 2
+  $ defiance += 1
+  $ humanity += 2
+  $ bond.baptiste += 2
+  $ do discover("friends_of_the_blacks")
+  The type is set by dawn. It is short, and plain, and it goes on the press with a sound like a long indrawn breath. It is signed at the foot, in a small clear letter, *At Paris, from the Maison Colline, in the rue Saint-Jacques*, and it is a thing that nobody in the house has ever done before, which is to put a name to a sheet. Aubry reads it on the stair, in the lamplight, with his pipe going cold in his hand. He says, at the end, that he saw it done once in Virginia, and that it was the only part of the country that he could not look at without feeling that he had been lied to.
+* Print it, with no name, under a Swiss imprint
+  $ b3.abolition = "printed"
+  $ secrecy += 1
+  $ humanity += 1
+  $ do discover("friends_of_the_blacks")
+  It is the more prudent way, and you take it, and it is only afterward that you realize how long it is since you did anything just because it was the right thing to do. The sheet goes out under the imprint of *Neuchâtel, de l'Imprimerie de la Société Typographique*, which does not exist. The Society is very grateful. Baptiste says it is not necessary to be grateful for a thing that is done to be safe. He says it very gently, and it hurts.
+* Send him away, and say that it is not the house's business
+  $ b3.abolition = "refused"
+  $ secrecy += 2
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  $ bond.baptiste -= 3
+  Baptiste stands for a moment. He rolls the paper up again, very slowly, with the care of someone folding a flag. "It will be printed," he says. "It does not need us." He goes out through the yard. You have said the true thing, which is that a printing house is a business and a business is not a conscience, and you will hear it said back to you, a long time from now, in a different voice.
+<~
+
+# inspector
+## The knock
+It is a quarter past one in the morning, and the knock is on the shop door, a firm, courteous double rap, such as a magistrate gives to the door of a man he has known for years. The boy goes. He comes back at a run. There is a gentleman, he says, in a gray coat, with a lantern, and with him four men with staves, and a locksmith.
+He is Inspector Garnier of the book trade, a quiet pink little man of fifty with a clerk's hands and a face like a well kept ledger. He comes in with his hat in his hand. He says that he is very sorry, and that it is the hour at which the police are able to be sure of finding people in, and that nothing is further from his thoughts than to disturb a respectable house. He has a warrant. It is in order. It is in the name of the Lieutenant General of Police and it says that the house of the widow Valère and son is to be searched for prohibited books.
+?if b3.press == "underground"
+  It is not an error. They have come because of the pamphlet. There are four hundred copies of it under the floor of the cellar and the types in a locked case in the passage, and a woman at Versailles has been heard reading it to the Queen's dressmaker. Étienne has gone a very strange gray. Behind him the boy is looking at the cellar door, with the whole of his heart in his face.
+?elif b3.press == "licensed"
+  It is not an error. The pamphlet with the seven blank spaces has been the talk of the faubourg for a fortnight, and a sheet that is a hundred and fifty lines of silence is, to the police, a good deal more suspicious than a sheet that says something. There is a permission, in the strongroom, in the Director's own hand. It will not be enough. A tacit permission is one that the person who gave it can always say he never gave.
+?else
+  It is not what it seems. He has not come for the pamphlet. A rival printer in the rue du Foin has laid an information that the house prints, at night, on a press that is not in the register, which is true. It is the seventh, or the half of the sixth. You had not thought that anyone had counted.
+?end
+He waits, with the courteous patience of a very successful servant, for somebody to speak.
+* Meet him at the door with a purse, and ask what would be convenient
+  $ b3.raid = "bribed"
+  $ do earn(-10)
+  $ secrecy += 1
+  $ standing -= 1
+  He does not look at it. He looks, quite kindly, at you. It is the look of a man who has been offered a good many purses in a good many doorways, and has learned to tell by weight what sort of man is holding it. "I will not search tonight," he says, "for a house with so many friends." The purse goes into his coat with a small sound like a coin being set down in a collection plate. "I should be glad to see the register, in the spring." He goes out with his four men, and the locksmith, who is plainly disappointed. You have bought a season. It is, you gather, the price of a season in the book trade.
+* Keep him in the shop with talk, and have the cellar cleared
+  $ b3.raid = "hid"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  $ defiance += 1
+  It takes eleven minutes. You talk, in the long stiff French of a wealthy foreigner, about the price of paper, and the quality of the Dutch type, and the cousin in Burgundy, and he listens with every sign of patience and with the very fine politeness of someone who has all night. Aubry and Baptiste do the cellar. They go down the back stair, in their stockings, with the boy, with four hundred sheets in a sack and the case of type in a barrow, and through a door in the cellar wall, by the dark, down into the quarry. When the police go down at last there is nothing in it but barrels. Garnier looks at the empty floor for a long while. He says, in the end, with a little bow, that it is very clean. It is the nearest that he has ever come to a compliment.
+* Give the Prince's name, and let him understand that the house is protected ?if b3.weapon != "refused"
+  $ b3.raid = "court"
+  $ standing += 2
+  $ secrecy -= 2
+  $ defiance -= 1
+  $ cunning_brutal += 1
+  You say it gently, with no emphasis, as a man mentions the weather: that the Maison Colline has business with the Hôtel de Saint-Aubin. It has the effect of a stone dropped in a well. Garnier's face does not change, but he sets down the warrant. "I was not informed," he says, carefully. "I am very much obliged to Monsieur for telling me." He goes out with his four men. There is no purse and no search, and no friendly little chat. You have been made, for the first time, a part of the quiet, strong, invisible thing that the police do not ask about, and you do not at all like how comfortable it feels.
+* Let him search, and see what he finds
+  $ b3.raid = "faced"
+  $ cunning_brutal += 2
+  $ defiance += 1
+  They go through the house from the roof to the cellar. They are good. They take down every book, and they lift every board. It is a long cold hour in the middle of a long cold night, and a good deal depends on Adélaïde, who sits at her desk through the whole of it with the ledgers open and her pen going, and who gives the inspector, at the end, a receipt.
+  ?if b3.press == "underground"
+    They take a sack of sheets and three cases of type. Étienne goes with them, in his coat, to the Châtelet, with the face of a man walking to his own funeral, and is not back until the morning. It costs you a good deal of money and a good deal more in favors, and a night of a printer's sleep that cannot be paid back. Nobody speaks of it for a week.
+  ?else
+    They take a bundle of old almanacs, which is a joke, and a bad one. Garnier is plainly a little ashamed. He bows to Adélaïde, and says that Madame keeps a very fine register, and that it is a pity that there are not more like her.
+  ?end
+Étienne sits down on the bottom stair, when they have gone, and takes off his spectacles, and wipes them with a corner of his apron for a very long time.
+<~
+
+# gallery
+## The quarries
+Aubry takes you down himself. It is a thing that he has been wanting to do, you gather, for some weeks. He goes in front with the lantern, in his old blue coat with the facings picked off, down the cellar stair, and through an arch in the back wall that has been bricked up and un-bricked within the memory of the house, and down a long sloping tunnel into the rock.
+They are the old quarries of the hill, from which all of Paris has been built. They run for leagues. They go under the streets and the colleges and the Observatory, in a great dark honeycomb, dry as paper, cool, and silent, with a faint sweet smell of lime and stone. They have been used for two thousand years. There are mushroom beds in some of them, and smugglers' stores, and a very small chapel somewhere that has not yet been found again. In the last two years the city has been emptying the churchyard of the Innocents into them, by night, in carts, under black cloth, with priests in front with torches, a million bones, and they are stacked along the gallery walls in long neat ranks, skulls and thigh bones, as far as the lantern will go.
+"It is a very respectable gallery," says Aubry. "I have been in worse billets."
+There is a place, thirty yards on, where the passage opens out into a chamber the size of a chapel. The ceiling is a good ten feet. There is a pillar of living rock in the center, and a floor of white sand, and a smell like the inside of a bell. It is very dark. It is quite dry. It is, you realize, perhaps the best place that you have been shown for an age to lay down your head.
+* Make it a haven, with a door, and a lock, and a way out ?if can_acquire("hidden_chamber")
+  $ b3.gallery = "haven"
+  $ do acquire("hidden_chamber")
+  $ do chart("paris.haven")
+  $ secrecy += 2
+  $ bond.aubry += 2
+  It takes four nights. Aubry does the measuring, with a surveyor's chain, and Baptiste the carpentry, and a man that Aubry knows from the engineers does the brick, without asking why. At the end there is a narrow door of oak in a wall of stone, and a lock of Birmingham steel, and a bed of dry sand and straw behind a screen of bones, and a second passage, that comes up in the cellar of a wine merchant in the rue de la Huchette. Aubry stands in the door with his lantern, with the look of a man who has built a redoubt that he does not expect to be attacked. "I should not like," he says, "to be a man who tried to find you."
+* Use it to store the types, the papers and the house's books, and keep the door shut
+  $ b3.gallery = "stores"
+  $ secrecy += 1
+  $ bond.adelaide += 1
+  It is a sensible use, and a quiet one. By the end of the week the chamber has a dozen oak chests along one wall, and a shelf of ledgers, and a locked case of type that Étienne refuses to let anyone else carry. If the police come again, they will find a cellar that is a cellar. It will be a very long time before anybody thinks to look at the walls. Adélaïde says that she would like it in writing, in the margin of the account book, that this is the best insurance that she has ever seen, and that it costs nothing.
+* Brick up the arch again, and leave the quarries alone
+  $ b3.gallery = "left"
+  $ humanity += 1
+  Aubry is a little disappointed. He says nothing. He sets down the lantern, and looks round the white chamber once, with a soldier's long measuring eye, and says that it is a pity. A little way off, in the dark, something drips. You turn and climb the long slope. At the cellar door you find that you have been holding your breath, and have no idea for how long.
+$ do discover("the_quarries")
+<~
+
+# street
+## The sheet on the wall
+The rue Saint-Jacques is empty at three in the morning, and glazed with wet. There is a single lamp, and a boy of fifteen under it, on a ladder, pasting up a bill on the wall of the Collège de Beauvais. He has a brush and a bucket and a bundle of paper under his arm. He does it with great speed, as a boy does who is not at all sure that it is allowed.
+You are on the other side of the street before he has done. It is a single large sheet on cheap gray paper, in a type that you do not know. It is very good. It is not a trade type. It has been cut by someone who has looked at a great many Roman inscriptions. It is headed, in capitals, TO THE YOUNG OF THE BLOOD, and it says, in forty lines, in a kind of high impatient poetry, that there is a Peace in the city, and that it is not a peace but a lid; that the elders of the court have been dead for two hundred years and do not know it; that in a time when kings are being asked by their bakers to explain themselves, there is no reason why a creature that has outlived three dynasties should not be asked as well. It is signed *The Cadets*.
+It is, you think, rather well written.
+The boy is down the ladder, and away down the hill, in a long loose run, before you have finished reading.
+* Follow him through the dark
+  $ b3.paster = "followed"
+  $ do chart("paris.rebels")
+  $ secrecy -= 1
+  $ cunning_brutal += 1
+  He is faster than he looks, and he knows the streets, and it takes the whole of your skill. He goes down by the rue des Noyers and over the little bridge by the Hôtel-Dieu and east, through a maze of black lanes that smell of tannery and drains, into the faubourg Saint-Antoine, where the houses lean together over the street like conspirators. He is clever. He doubles twice. But he is not clever enough, and at the end of a close in the rue de Charonne he goes down a flight of steps into a cellar under a cabinet maker's, and a door shuts behind him on a sound of many people. There is a line of light along the sill. You stand a long time in the rain. You do not knock. You know the address now, and you know it is the address of a great many people who would be very much interested to know that you know it.
+* Tear the bill from the wall
+  $ b3.paster = "tore"
+  $ standing += 1
+  $ defiance -= 1
+  $ secrecy += 1
+  It comes away in strips, with the wet paste on your fingers. It is a very small act. It is the act of a servant of the Peace who has seen a thing that the Peace does not like. You are aware, as you walk on, of how well it fits, and of the fact that there are, by now, nine more on the other side of the hill, and that you have destroyed one of them.
+* Read it to the end, and leave it on the wall
+  $ b3.paster = "left"
+  $ defiance += 1
+  $ cunning_brutal -= 1
+  You read it twice. It is the best thing that you have read in a long while, and it is, as the Prince said, a thing that is true. It says nothing that a man who had lived in Rome would not have thought, or said, in a different language. You walk on, up the hill, and leave it for the dawn. It is a good place for it. By seven there will be three hundred people reading it, and it will be the first morning in two hundred and fifty years that anyone has been able to say to the court, in print, in the street, that it is not wanted.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  The rain has stopped, and there is a fine hard cold coming down from the north again, and the whole shop smells of ink and wet wool.
+?elif actions_left() == 2
+  The Sorbonne clock strikes one. In the long room, six presses are working, and the noise of them is a kind of music, a steady wooden heartbeat that the whole of the house has come to be soothed by.
+?else
+  There is a gray in the glass of the skylight that is not yet a color, and one thing left that you have time for.
+?end
+* Take the night's work in the shop, with the three men waiting [once] ?if actions_left() > 0
+  ~> shop_morning
+  $ do act()
+* Answer the knock at the door [once] ?if actions_left() > 0
+  ~> inspector
+  $ do act()
+* Go down into the quarries with Aubry [once] ?if actions_left() > 0
+  ~> gallery
+  $ do act()
+* Walk out into the street, in the small hours [once] ?if actions_left() > 0
+  ~> street
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# dawn
+## The sheets that nobody printed
+It is Adélaïde who finds it. She comes into the shop at six, with her keys and her candle and her shawl round her shoulders, as she has done every day for nine years, and stops in the door. She says, in a perfectly level voice, that somebody has been using the press.
+It is the third of the six. It is clean, and the forme has been wiped, and the tympan is dry. But the bed of it is damp. There is a stack of paper on the stone, fifteen quires, still warm, still smelling of fresh oil. It is the paper of the house. It is the type of the house. It is the sheet from the wall of the Collège de Beauvais.
+Nobody has been in the shop. Étienne has been in his bed. Baptiste has been on the third floor with Aubry, and Aubry will swear to it, and does. The boy has been in the yard. The door was locked, and is locked, and the key is in Adélaïde's pocket, and there was not a mark on the lock. She has counted the paper. They are five hundred sheets short.
+She does not look at you. She is not a woman who needs to be told that there is only one other door.
+You go down. The cellar is cold, and empty, and exactly as it was. At the back, in the arch where Aubry's brick was taken out, the door to the quarry stands a little open on its hinge, and on the sill, where nobody had put it, there is a single card, with a lilac stain on the corner, and a smell of violets.
+?if b3.gallery == "haven"
+  It is not on the sill of the cellar. It is on the door of the haven, thirty yards on, pinned with a wafer to the oak, and there is a line of dust across the sand on the floor of the chamber where somebody has walked in, and has walked out again, and has not touched anything.
+?end
+*Your cellar is a good one. It was a pity not to use it. S.*
+Étienne has come down behind you. He has his spectacles on his forehead. He is looking at the card. He does not say anything, for a long time. Then he says, with great care, as one reads out a verdict, that he has been a printer for forty years and has never until this morning understood what the word *imprint* means.
+?if b3.weapon == "accepted"
+  There is a folded paper in your coat, with twelve names on it. You do not need to look at it to know that at least one of them is the name of the hand that wrote the card.
+?end
+$ do rest()
+=> next

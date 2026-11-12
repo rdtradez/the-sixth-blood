@@ -2647,6 +2647,147 @@
       "book": "crown-of-ashes",
       "default": "none",
       "note": "Chapter 2: whether the house put money into the presses, the wine, or nothing"
+    },
+    "b3.salon": {
+      "kind": "enum",
+      "values": [
+        "cold",
+        "charmed",
+        "listened"
+      ],
+      "book": "crown-of-ashes",
+      "default": "listened",
+      "note": "Chapter 3: how he took the Marquise de Sérignan's tour of the court"
+    },
+    "b3.severin": {
+      "kind": "enum",
+      "values": [
+        "open",
+        "careful",
+        "cold"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "careful",
+      "note": "Chapter 3: how he answered the young Chevalier who wrote the card"
+    },
+    "b3.trial": {
+      "kind": "enum",
+      "values": [
+        "declined",
+        "won",
+        "lost"
+      ],
+      "book": "crown-of-ashes",
+      "default": "declined",
+      "note": "Chapter 3: what came of the champion's invitation in the long gallery (declined if he did not go or refused)"
+    },
+    "b3.octave": {
+      "kind": "enum",
+      "values": [
+        "guarded",
+        "promised",
+        "spy"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "guarded",
+      "note": "Chapter 3: what he said to the Prince's seneschal in the orangery (guarded if he did not go)"
+    },
+    "b3.roll": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "read"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 3: whether he copied the page of the Remembrancer's roll (left if he did not go)"
+    },
+    "b3.weapon": {
+      "kind": "enum",
+      "values": [
+        "accepted",
+        "bargained",
+        "refused"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "bargained",
+      "note": "Chapter 3: his answer to the Prince's request that he be the court's hand"
+    },
+    "b3.price": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "seat",
+        "valere",
+        "roll"
+      ],
+      "book": "crown-of-ashes",
+      "default": "none",
+      "note": "Chapter 3: what he asked of the Prince, if he bargained"
+    },
+    "b3.presses_use": {
+      "kind": "enum",
+      "values": [
+        "court",
+        "people",
+        "coin"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "coin",
+      "note": "Chapter 4: what the presses of the Maison Colline printed on the night the trade came: the court's dialogue, the parish grievances, or whatever paid"
+    },
+    "b3.abolition": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "printed",
+        "refused"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "unseen",
+      "note": "Chapter 4: whether he printed the appeal of the Friends of the Blacks (unseen if he did not take the night's work)"
+    },
+    "b3.raid": {
+      "kind": "enum",
+      "values": [
+        "bribed",
+        "hid",
+        "court",
+        "faced"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "bribed",
+      "note": "Chapter 4: how he met Inspector Garnier's search of the shop (bribed if he did not answer the knock)"
+    },
+    "b3.gallery": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "haven",
+        "stores"
+      ],
+      "book": "crown-of-ashes",
+      "default": "left",
+      "note": "Chapter 4: what he did with the quarry chamber under the shop (left if he did not go down)"
+    },
+    "b3.paster": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "followed",
+        "tore"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 4: what he did about the bill of the Cadets on the wall of the Collège de Beauvais (left if he did not go out)"
     }
   }
 }

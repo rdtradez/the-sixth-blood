@@ -57,6 +57,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 27: Book Two chapters 19 and 20; Book Two is complete (journal, recap, sleep to Paris)
 - [x] Session 28: the Paris and Collesanto (1788) maps for Book Three
 - [x] Session 29: Book Three chapters 1 and 2
+- [x] Session 30: Book Three chapters 3 and 4
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -379,3 +380,12 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Tests: `tests/book3.test.js` plays both chapters from nine kinds of waking, down every branch (each way out of being woken early, each way to eat, each answer to the king, the books, the street and Prisca's note; each use of the sleep's investments; every greeting, press, bread and venture choice; the family told or not told), and checks the no dashes and no braces rules.
 - Plans are in `SPOILERS/crown-of-ashes.md`.
 
+### Session 30 notes (Book Three, chapters 3 and 4)
+
+- Chapters `b3c03` and `b3c04` are in `content/crown-of-ashes/` (`ch03.tsb`, `ch04.tsb`). The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 4 and carries on by itself when chapter 5 is added.
+- Both chapters open on a short scene with no phase (the drive and the Prince's house; the thaw), then one night phase of three actions out of four, then a closing scene. Each ends with `rest()`; chapter 3 ends with `rest()` and `=> next`, and chapter 4 the same. Chapter 5 should read hunger, standing and secrecy as chapter 4 left them. Each has a short hunger scene that only runs if `must_feed()` is true on entry.
+- New decision flags use the `b3.` prefix and are registered in `content/flags.json` with `book`, `major` where later chapters care, and a quick start `default`: `b3.salon`, `b3.severin`, `b3.trial`, `b3.octave`, `b3.roll`, `b3.weapon`, `b3.price` (chapter 3) and `b3.presses_use`, `b3.abolition`, `b3.raid`, `b3.gallery`, `b3.paster` (chapter 4). Flags that can be skipped are set to their default on entry.
+- New people (`content/people.json`): the Marquise de Serignan, Severin de Lasalle, Monsieur de Brezac and Inspector Garnier. New codex entries: the Peace, a Lictor in Paris, the Remembrancer's roll, the Estates General, the cahiers, the Friends of the Blacks and the quarries. Content notes: chapter 3 carries `blood` and `violence`, chapter 4 carries `blood` and `slavery`.
+- Chapter 3 uses the fight system once (an optional bout, `fight("elder")`, with a first blood version) and charts `paris.court`. Chapter 4 offers `acquire("hidden_chamber")` for the quarry chamber if the house can afford it, and charts `paris.haven` and `paris.rebels`.
+- Tests: `tests/book3b.test.js` plays both chapters down every choice and every flag value, for every press, venture and hunger state, and checks the no dashes and no braces rules. `tests/book3.test.js` now expects four written chapters: update that count each session.
+- Plans are in `SPOILERS/crown-of-ashes.md`.
