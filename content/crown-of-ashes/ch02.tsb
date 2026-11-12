@@ -1,0 +1,293 @@
+// Book Three, Chapter 2 (session 29). The Valère family, in Paris, in the great frost of December 1788.
+// Opens with the road north and the arrival (no phase), then one night phase of three actions out of four, then the dawn and a card from the court.
+// Ends with rest() and => next, which pauses until chapter 3 exists. Reads wake("steward"), b2.valerii, b3.street, b3.sugar and b2.court_end.
+@chapter b3c02
+@title The House in the Rue Saint-Jacques
+@book crown-of-ashes
+@version 1
+
+# start
+## The road north
+$ b3.titles = "monsieur"
+$ b3.valere = "trusted"
+$ b3.press = "quiet"
+$ b3.bread = "passed"
+$ b3.venture = "none"
+$ _knows = 0
+$ _etienne_new = 1
+?if b2.valerii == "sworn" or wake("steward") == "keepers"
+  $ _knows = 1
+?end
+?if wake("steward") == "keepers"
+  $ _etienne_new = 0
+?end
+$ do meet("etienne")
+$ do kin("etienne")
+~> road
+?if must_feed()
+  ~> road_hunger
+?end
+---
+~> arrival
+---
+~> greeting
+---
+$ do phase("night", 3)
+It is the first night in the house, and it is cold enough that the water in the basin has a skin on it, and there are, by your own reckoning, four things in it that want doing and time for three.
+-> night
+
+# road
+## Three weeks
+The berline has its blinds sewn shut, and a brazier at the foot of the seat that is for the horses' sake and not for yours, and it goes up through the Piedmont and over the pass in a sleet that makes the postilions sing. You are not very good at being carried. You lie in the dark and listen to the horses, and to the wheels, and to the man on the box with a flask, and you count the weeks in post houses, in each of which a boy comes out with a lantern and looks at the number plate and does not look in.
+?if wake("steward") == "keepers"
+  Étienne sits across from you for the whole of it, with a rug over his knees and a small book in his lap, and reads, by a lantern with a hood, in the intervals when it is safe. He reads about the French in the way that a man reads about his own relations. On the second week, on the far side of the mountains, at three in the morning, he puts the book down and says, "Monsieur, I should like to know something, and I think that I am afraid to ask." You tell him to ask. He asks whether it is true that you were there when the Great Fire was lit. You say that it is. He says, "Ah." After a long time he says that it is a great deal to know that one's family has been looking at one for seventeen centuries, and that he hopes that he has not embarrassed them.
+?elif wake("steward") == "fiammetta"
+  A boy from the hill rides on the box, one of the charcoal burners' sons, lent by Fiammetta, for the sake of the air and a pistol. He comes in at the halts with his teeth chattering and sits for a quarter of an hour in the corner telling you what he can about his employer, which is that she does not sleep, and that she has never once raised her voice, and that nobody on the hill has ever been quite able to leave. He has a note from her in his hat. It says, *The family in Paris are cousins. They are to be told what they need and not what they want.*
+?else
+  Anselme rides on the box, for the sake of the air, and comes in at the halts, with his teeth chattering, and sits for a quarter of an hour in the corner telling you what he can about the house in the rue Vivienne and the state of the roads. He says, in a voice from which he has plainly tried to remove anything that could be written down, that the Valères are a very good family. He says that they are a printing family. He says that the shop is not, so far as he can tell, quite what the police think it is, and that he is sure that it is quite what the family thinks.
+?end
+There is a very long night at Lyon, in an inn with a sagging bed and a great number of cats, and then Burgundy, in frost, with the vines standing in black rows in the snow like the staves of a cage, and then the plain, and the poplars, and the long white road to Paris.
+<~
+
+# road_hunger
+## The hunger on the road
+The hunger comes on you somewhere between Dijon and Sens. It is not a surprise. You have been walking a long time on the edge of it, and in the corner of the berline in the dark, with the post horses steaming and a young postilion alone in the yard with a bucket, it comes in like a flood.
+* Take the postilion, quickly, and leave him sleeping in the straw
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  It is very quick, and very cold, and he does not wake until the horses have been changed. He will say in the morning that he fell asleep in the straw, and nobody will think it odd, because it is the third week of a very bad winter and every postilion in France has fallen asleep in a manger. It is the sort of crime that nobody has ever remarked upon. That is no comfort.
+* Ask for a horse, and take what you need from the stable
+  $ do feed("animal")
+  $ humanity += 1
+  The post master is very much surprised to be woken, and is sure that it is the strangest thing that anyone has ever asked him. He is paid enough that he does not ask why. The horse is a patient bay with a white sock, and it stands through all of it with the resigned eyes of an animal who has been asked to give blood to very much stranger things than you.
+* Wait. Take nothing, and endure it to the next stage
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It is a long hundred miles. You sit with your face in the corner and a handkerchief over your mouth, and you count the posts. You do not scream. It is a very near thing at Fontainebleau, where a girl with a basket of hot chestnuts leans in at the window to sell you one, and you take her hand to pay, and hold it for a moment too long, and let it go.
+<~
+
+# arrival
+## The wall
+You come into Paris in the dark, on the second of December, by the road from the south, and the first that you know of it is a light, and a rope across the road, and a fat man in a cocked hat who says that he is a servant of the Farmers General and wants to know what you carry.
+It is a toll house. It is a good deal larger than a toll house ought to be. It is of stone, with columns, in the manner of a Greek temple that has been asked to collect money, and it is one of fifty that stand in a ring round the whole of the city, joined by a wall, that has been built in the last four years by the tax farmers to catch the wine and the salt and the firewood on their way in. Nobody likes it. The people say that the wall that walls Paris makes Paris murmur.
+The man in the hat is not interested in you. He is interested in the boxes, and he prods the straw with a long rod, and finds nothing of any consequence, and a bottle of brandy, which he keeps. You are let through, and the berline goes on, over the frozen ruts, into the dark.
+Paris smells of woodsmoke and wet horse and frozen mud. It is the most crowded place that you have ever been, and it is, in the black of December, almost entirely silent. There are lanterns, hung on ropes across the streets, that sway in the wind, and under each of them a little puddle of yellow light with a skin of ice on it. The houses go up on each side to five and six stories, each leaning a little toward its neighbor, as though for warmth. In the doorways there are people, a good many people, sitting with their knees up and their hands in their sleeves, who do not look up as you go by. They are waiting for something. It takes you a long time to understand that it is morning, and the bakers.
+The rue Saint-Jacques runs from the river to the wall in a long straight spine of stone, up the hill, past the colleges, past the Sorbonne with its great gray dome like a head with a hat, and it is full of printing. There are shops with presses in the windows, and shops with bound books in the windows, and a shop with a sign of a golden sun, rubbed nearly bare by weather, that says in a very small letter underneath that it is the Soleil d'Or. You look at it for a good while. It is a good deal less presumptuous than the king's.
+$ do chart("paris.valere")
+$ do discover("the_barrieres")
+<~
+
+# greeting
+## The door
+It is a tall narrow house, of gray stone, with a door in the middle and a shop on the ground floor with the shutters up and a lamp over the lintel. There is a smell of ink and warm paper and lamp oil, which is a very different smell from the one that you remember from the last century's scriptoria. There is a boy of nine with a broom. There is a yard at the back, and a stair, and a cellar that goes a great deal further down than the house is high.
+?if _etienne_new == 0
+  It is Étienne's own door, and he opens it with his own key, with the dazed relief of a man who has been three weeks away from home and had not entirely expected to return. There are a great many people in the passage, and a smell of bread, and a clatter of dishes, and a general sense of a household that has been tidied for an inspection.
+?else
+  The door is opened from inside before you have lifted a hand. A lean gray man of sixty, in a printer's apron over a good black coat, stands in the passage with a candle. He has Aelia's chin. You have seen that chin on a hundred faces in a thousand years. He looks at you for a very long moment, and then at the candle, as if he suspected that it were lying, and says, in the careful voice of a man who has practiced it, "Monsieur Colline. The house of Valère. The house is honored."
+?end
+Behind him, in the passage, there is a young woman with her arms folded and a pen behind her ear, who has plainly decided, on a number of previous occasions, that she is not going to be impressed. There is a lad of twenty, in an ink-stained shirt, with a great deal of black hair and the beginnings of a mustache, who is gazing at you as if you had been delivered from the sky. And there is a lean tall man of forty, in a faded blue coat with the facings picked off, leaning on the newel post with a pipe, who looks at you with an expression of the most complete and friendly interest, and says nothing at all.
+You are aware that the next words that you say will be repeated.
+:the_title
+* Bow low and say "Monseigneur", as the manners of your last century require
+  $ b3.titles = "monseigneur"
+  $ standing -= 1
+  $ cunning_brutal -= 1
+  Étienne goes red to the roots of his hair. Behind him the young woman puts her hand over her mouth. The boy with the broom says "Monseigneur" back, with great feeling, and is cuffed. "Monsieur," says Étienne, in agony, "I am a printer. In this street the last man who was called Monseigneur was a bishop, and we set his sermon in italics." The man at the newel post takes the pipe from his mouth. "In America," he says, with relish, "it would be treason." You have the very distinct feeling that you have just been added to the household as a source of anecdote.
+* Say "Monsieur", and watch what the others do
+  $ b3.titles = "monsieur"
+  $ secrecy += 1
+  $ cunning_brutal -= 1
+  It is the safest word in the language, and it is plainly a good one. Étienne lets out his breath. The young woman unfolds her arms by a quarter of an inch. You have the sense of having crossed some very large room on tiptoe and of having been seen to do it, and, on the whole, approved.
+* Ask whether a title is required, and be told, with relief, that you may be a monsieur
+  $ b3.titles = "asked"
+  $ humanity += 1
+  "Required?" says Étienne. "Monsieur, in the rue Saint-Jacques we have not required a title of anyone since the Fronde." The man at the newel post says that in his experience, which is a long one and mostly of military kitchens, the less a man is called the more he is liked. The young woman says, flatly, that it is the same with money. It is the first thing that she has said, and it is, you find, very much to the point.
+They are brought forward and named. The young woman is Adélaïde, Étienne's daughter, a widow at twenty nine, who keeps the books and the keys and the temper of the household. The lad is Baptiste, her brother, a compositor, who has set in type every pamphlet that was ever printed in the Latin quarter and has opinions on most of them. The man at the post is Captain Aubry, who has the third floor and an excellent view, a half-pay officer of Rochambeau's army, lately returned from Virginia. He says that he has been told that you are a Florentine, and a patron of the house, and that you are not to be asked how old you are. He says that this is the best news that he has heard since Yorktown.
+$ do meet("adelaide")
+$ do meet("baptiste")
+$ do meet("aubry")
+$ do kin("adelaide")
+$ do kin("baptiste")
+<~
+
+# presses
+## The shop by night
+$ do chart("paris.presses")
+Baptiste takes you down into the shop at midnight, with a lantern, with the air of a boy showing a priest his private chapel. There are six presses in the long room, great wooden things, black with age and ink, each with its screw and its bar and its sleeping tympan, and rows of cases, each with its tray of metal type, all in the dark like bones in a vault. It is a good deal bigger than you had expected. It smells of linseed oil and lamp black. There is a half-printed sheet on the nearest bed with a lead block of woodcut, a fat saint, and a smear of red.
+"The almanac," says Baptiste. "The Prayers of the Hours. A Child's Catechism. It is what pays." He lowers his voice, though there is nobody in the room. "It is not what is wanted."
+He has a manuscript in his shirt. It is a small thing, forty pages, in his own handwriting, with the corrections of a man who has been up for a week. It is called *A Citizen's Letter to His Neighbors Concerning Bread*, and it says in a great many hot and well-turned sentences that the price of grain is not an act of God but a decision of men, that there are men who benefit by it, and that the Estates ought to be told. It does not name the men. It names, in a footnote, an office.
+"There is a licensed printer in the rue du Foin," says Baptiste, "who has a royal permission, and he would not touch this with a pole. There is a man in Neuchâtel who prints anything for a price. And there is us."
+Étienne has come down the stair behind you, and stands in the door, in his night cap, with a candle. He does not say anything. He has the look of a man who has had this conversation before, and has lost it, and has come to see how it ends.
+* "Print the almanacs. Keep the house quiet, and let the lad wait until the spring."
+  $ b3.press = "quiet"
+  $ secrecy += 2
+  $ loyalty.keepers += 1
+  Baptiste looks as though you had struck him. Étienne's shoulders come down by half an inch. "It is a bad winter for a house to be noticed," you say, and mean it, and it is a thing that you have said, in one language and another, in a very great many cellars. Baptiste goes up to bed with the manuscript in his shirt, and does not say good night. You will not hear the end of it.
+* "Take out a royal permission for it, and send it to the censor. Let them say yes or no."
+  $ b3.press = "licensed"
+  $ standing += 1
+  $ cunning_brutal -= 2
+  "He will say no," says Baptiste. "The censors have said no to everything for sixty years." "He may not," you say. "It is a new year, and a new minister, and a very frightened king. They are letting a good deal through. Ask. It costs a bribe and a week, and if it works, it is a pamphlet that can be sold in daylight." Étienne takes the candle out of his own hand and looks at it. "I think," he says, with very great care, "that I would be proud of that."
+* "Print it, under a foreign imprint, and keep the types in the cellar."
+  $ b3.press = "underground"
+  $ secrecy -= 1
+  $ defiance += 1
+  $ cunning_brutal += 1
+  Baptiste's face is a thing to see. Étienne sets the candle down on a case of type with a hand that is not entirely steady. "Monsieur," he says, "the last man to be taken for it was a printer in the rue de la Harpe. He is at the Bastille. He has been there for two years. I have a daughter." "You have a cellar," you say. It is a good one. You have already seen that it goes down, in a long dry gallery, into the quarries under the hill, where there is room enough for a great many things that nobody has asked to see. It is done by two in the morning. The first sheet comes off the press, damp and black and smelling of oil, with *At London* printed at the foot, and it is the most beautiful thing that you have seen in a hundred years.
+<~
+
+# table
+## The supper
+They keep a late table in the house, as people do who work at night, and it is laid in the back room by the stove with a cloth and a great deal of soup. There is a tureen, and a loaf that nobody touches, and a bottle of the thin red of the house, and, on a plate at the center, with a good deal of ceremony, a very small cheese. Adélaïde serves it herself, with the air of a woman who has been told that there is an important guest and has decided that she will see to it that nothing is wasted.
+Captain Aubry is at your elbow, and has been talking since the soup. He has the long face and the easy hands of a man who has seen a great many things and has chosen to find the best of them funny. He tells you about Virginia. It is a land, he says, of red mud and tobacco and very tall trees, and the people there have a way of looking at one that is quite remarkable. They look at a man as though they were weighing him, and in the end they simply decide. "I was at the redoubt," he says, "in October of 'eighty one. A man in a hunting shirt took me by the hand, when it was over, and said that he was obliged. I did not know what to say. I had never in my life been thanked by a farmer."
+"They have no king," says Baptiste, from the other end of the table, with a spoonful of soup halfway to his mouth and the expression of a man at a shrine. "They have a Congress. They have put it in a book. It has been ratified by eleven of the thirteen. They say that it is a Constitution."
+"They say a great many things," says Aubry, mildly. "They owe us a good deal of money." He turns to you. "It is a very beautiful idea, Monsieur. I have not seen it work for more than a week at a time. I should be glad to be wrong."
+Adélaïde is looking at you, across the loaf, with her chin in her hand. She has the look of someone who has been studying a column of figures all evening and has found that the total is not what she had been told.
+?if _knows == 1
+  She says, in a low voice, "My father says that it is a thing we are not to say at the table." Étienne has gone very still. There is a long moment. "He says that there is a thing that has been in the family since before it had a name, and that it is not a thing that is said. He says that it is not that I may not ask. It is that I may not ask in front of the boy."
+  It is, you understand, the thing that you were taught, on the hill, in a different tongue. They have carried it from Tuscany in a printer's trunk, in a small handwritten book, and they have done their best, and it has come out as a sort of grace.
+  * Let them say it, and take it, and stand
+    $ b3.valere = "sworn"
+    $ loyalty.keepers += 4
+    $ bond.adelaide += 2
+    $ secrecy -= 1
+    They get to their feet, all of them, even the Captain, who has not been told and does not ask. Étienne says it first. It is *the hill is kept*, in a French that has never once been spoken in a church, and Adélaïde says it after him, a half beat late, with her eyes on your face. Baptiste says it last, in a high excited voice that breaks in the middle. It is a small thing. It is the thing that your house was built on. You find that you cannot, for a moment, say anything at all.
+  * Put them at their ease, and tell them it is soup, and not a sacrament
+    $ b3.valere = "trusted"
+    $ loyalty.keepers += 2
+    $ bond.adelaide += 1
+    $ humanity += 1
+    "It is the best soup," you say, "that I have had in seventeen hundred years. It is a great deal better than a sacrament, which is generally cold." Adélaïde laughs, helplessly, and covers her face. Étienne lets out his breath. They do not stand. It is, you think, on the whole, the best thing that you could have done, and it is only afterward that you understand that it has made it harder for them to ask for anything.
+  * Thank them, and keep it brief, and go no further
+    $ b3.valere = "distant"
+    $ secrecy += 2
+    $ bond.adelaide -= 1
+    "I am very much obliged," you say, "and I will remember it." It is a courteous thing to say, and a very cold one. Étienne bows. Adélaïde looks at her plate. You have the impression of having closed a small door on something that was only just beginning to come into the room.
+?else
+  She says, evenly, "My cousins on the hill write that you are a patron of the house, Monsieur. My father says that you are a very rich Florentine who prefers the night and is not to be asked his age. I should like to say that I do the accounts." She smooths the cloth. "I have found, in the books of the house for the last two hundred and fifty years, the same name, and the same hand, and the same habit of leaving a note in the margin. I should like very much to be told that you are a very remarkable family."
+  * Tell her the truth, all of it
+    $ b3.valere = "sworn"
+    $ loyalty.keepers += 4
+    $ bond.adelaide += 3
+    $ secrecy -= 2
+    $ humanity += 1
+    You tell it as briefly as a thing like that can be told. Rome, and the fire, and the cellar, and the sleep. Nobody moves. The stove ticks. When you have done there is a very long silence, and then Captain Aubry says, in a voice of the most courteous interest, that he believes that he will go up to bed, and takes the bottle with him. Baptiste has not blinked. Étienne has put his spoon down. It is Adélaïde who speaks. "I knew that there was something," she says, and she is shaking. "I did not think that it would be so much older than the Medici."
+  * Tell her the family story, and let the rest lie
+    $ b3.valere = "trusted"
+    $ loyalty.keepers += 2
+    $ bond.adelaide += 1
+    You say that you are a distant kinsman, from a line that has lived long, and that you have had a very great deal of sleep. It is very nearly true. It is the kind of lie that is made of true things set at slightly the wrong angle, and she knows it, and lets it stand, with a small nod, and the air of a woman who has decided to be patient.
+  * Say that you are a patron of the house, and no more
+    $ b3.valere = "distant"
+    $ secrecy += 2
+    $ bond.adelaide -= 1
+    "I am a patron of the house," you say, "and I am obliged to you for the soup." It is a courteous answer, and a very final one. She looks at you for a moment longer, with her head a little on one side, and says that she is very glad to hear it, in the voice of a woman who has been to the end of a column of figures and decided to try the other side of the sheet.
+?end
+There is bread that nobody touches. It is a thing that you notice only gradually. It is on the table, whole, a round dark loaf, and the whole of the family has been eating soup around it as though it were not there. Nobody explains. It is, you gather from the look on the boy's face, the last in the house, and it is for the morning.
+<~
+
+# street
+## The queue
+You go out into the frost at two in the morning, and the street has people in it.
+They are in a line. It goes the whole length of the rue Saint-Jacques from the baker's door at the corner of the rue des Noyers to the foot of the hill, a double line, one on each side, with a space down the middle for the gutter. They are mostly women, in shawls, with children, and some old men with sacks, and a few lads from the colleges, with their gowns tucked up and a book each. They have candles stuck in bottles. They are quiet. It is a quiet of a sort that you have not heard since the last siege that you were in, a long patient hush with a cough in it, and it goes on until the last light of the last candle.
+The baker has put a paper on his door. It says, in a clerk's hand, that there will be no bread before five. It also says, in a different hand, in pencil, *Pontoise*, and nothing else.
+A girl of about twelve is selling her coat. She is not asking much. She is holding it up, a blue wool thing with a patched elbow, and she says it to the street in a clear little voice, and nobody looks at her. A man next to you, a huge cooper with a black beard, says that it is the Marquis. He says that there is a pact, among the great millers and the men who sell grain to the king, and that they have bought the whole of the flour in the Beauce in advance, and that they keep it in barns, and that it is being held for the price. It is a thing that all of Paris says. He has never seen it and he has never doubted it. "They want us to starve," he says, with a calm that is worse than rage, "until the king asks for the money, and then they will let it out, and we will thank them."
+It is not true, you think. It is a thing that is said because there is no one else to say. It may be that, and it may be true as well. In Rome there was a granary, and a man whose business it was to be hated.
+* Give what you have to the line, quietly, a few coins at a time
+  $ b3.bread = "gave"
+  $ do earn(-6)
+  $ humanity += 2
+  You go along it from the head to the tail, a coin to a hand, with the words that a man says who has done it before. Nobody is grateful. A woman looks at the coin and then at you and says, with great care, "It is not bread, Monsieur." It is a thing that you know. You go on. By the time that you have reached the foot of the hill the baker has put a second lamp in his window, and there are, you notice, a good many people who have stopped looking at you at all, which is the most that you were hoping for.
+* Slip into the alley behind, and take what you need from a drunk who will not remember
+  $ b3.bread = "fed"
+  $ do feed("human")
+  $ humanity -= 2
+  The alley smells of the gutter and of a very great deal of wine. He is a carter, on his back by a wall, asleep in a ring of his own breath. It is a thing that you have done a thousand times and it is no easier for being cold. He wakes, a little, at the end, and puts out a hand, and says "Mama." You leave him a coin in his glove. It does not make it better, and you know it, and you do it all the same.
+* Stand and watch, and learn what you can
+  $ b3.bread = "passed"
+  $ secrecy += 1
+  $ cunning_brutal -= 1
+  You stay on the corner, in your cloak, with your hat pulled down, until the dawn bell at the Sorbonne. You hear what they say. You hear a great deal. They say that the king is a good man and that it is a pity. They say that the Queen is an Austrian and that she has diamonds. They say that the Estates General will do it, that it will be a great day, that a man named Necker will see to it. They say it, all of them, in the same patient voice, as people say a prayer that they do not much expect to be answered. You file it all away. It is, you think, a great deal of information, and a very little use.
+<~
+
+# counting
+## The counting room
+$ do chart("paris.counting")
+Adélaïde has a room of her own at the back of the first floor, with a desk under a north window and a stove and a drawer with a lock. It is the neatest room that you have ever seen. There is a ledger on the desk, open, and a ruler laid across it, and a second ledger beside it, smaller, which she turns face down as you come in.
+"It is the Maison Colline," she says. "It is what my father calls you in the books. It is a very respectable name. It deals in paper, and a little wine, and a few small interests in the fisheries at Dunkirk. It does not do very much. It is meant to be forgotten." She sits. "I do not think that it is quite what you are for."
+She is very quick. She lays it out in twenty minutes: the presses, which are six and a half of the best in the Latin quarter and make a modest living; the wine, which is the house's own, from a very small place in Burgundy; the land, which is a few farms outside Meaux that nobody has looked at since the Wars of Religion. She has the figures in her head. She has the figures on the page. She has, in a drawer, a small estimate, folded in four, of what the house would be if it were to do what the house could.
+"I have worked it out," she says, "for fun. I did not suppose that there would be a reason."
+?if can_invest("paris.printing") or can_invest("paris.wine")
+  :the_venture
+  * Put the money of the house into the presses, and make them the best in Paris ?if can_invest("paris.printing")
+    $ do invest("paris.printing")
+    $ b3.venture = "printing"
+    $ bond.adelaide += 2
+    She does not say anything. She turns the second ledger face up and writes a line in it, with her tongue between her teeth. It is a plan for a seventh press, a new house, a bindery, and a stock of Dutch type, and it takes up eleven pages, and it is, you find, perfectly sound. "I thought that you would say that," she says. "I only hoped that you would say it before the spring."
+  * Put the money into the wine, which is quiet, and sells in any weather ?if can_invest("paris.wine")
+    $ do invest("paris.wine")
+    $ b3.venture = "wine"
+    $ secrecy += 1
+    She writes it down in a very flat hand. It is, she says, a good choice. It is a great deal safer than printing, and a great deal duller, and she will see to it that a cousin in Burgundy is told. You have the impression that you have disappointed her a little, and that she thinks the better of you for it.
+  * Put nothing in, yet. Wait, and look
+    $ b3.venture = "none"
+    $ cunning_brutal -= 1
+    She nods, and says, as one says a thing that has been agreed, that it is only a fortnight. You have the distinct feeling that a fortnight is, in her mind, about as long as a decade is in yours.
+?else
+  You have, at present, the coin for neither, and she sees it at once and says nothing, and puts the second ledger back in the drawer and turns the key.
+?end
+She hesitates at the door of the room. "There is one thing more," she says. "It is not in the books." She has a letter in her sleeve. It is a very ordinary letter, in a clerk's hand, sealed with a plain wafer, and it says in four lines that a gentleman who has not been named would be very much obliged if Monsieur Colline would call upon a person of quality at a convenient hour, at a house that is not named, in the faubourg Saint-Germain, in the course of the week. It has been delivered, she says, to the shop, by hand, three times.
+"They are very polite," says Adélaïde. "They have been polite for a fortnight. It is the manner of the police and of the great. I thought you would like to know."
+<~
+
+# night
+## The first night
+:night
+?if actions_left() == 3
+  The night is long, and the house is full of the small noises of a family that does not know where to put its hands.
+?elif actions_left() == 2
+  The frost has come down hard on the roofs, and the whole house cracks, from time to time, like a ship.
+?else
+  There is a gray in the sky that is not yet a color, and the first carts have begun on the hill, and you have one thing left that you have time for.
+?end
+* Go down into the shop with Baptiste [once] ?if actions_left() > 0
+  ~> presses
+  $ do act()
+* Sit down to supper with the family [once] ?if actions_left() > 0
+  ~> table
+  $ do act()
+* Go out into the frost, and see the street [once] ?if actions_left() > 0
+  ~> street
+  $ do act()
+* Go over the books with Adélaïde [once] ?if actions_left() > 0
+  ~> counting
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# dawn
+## The card
+$ do discover("the_press_trade")
+The light comes, at the top of the street, over the black roofs, a pale pink streak with a fringe of smoke, and the first bell of the Sorbonne begins. Somewhere in the house, below, a door opens, and the boy is sent out with a basket. It is a hard clear morning with ice on every rail, and the cold of it is so complete that it has a sound.
+There is a knock at the shop door, which is not a thing that happens at that hour. It is a small knock, a gloved one, three taps and then one, and you know it before you have turned your head. It is a knock that you have heard on the door of a bank in Florence, on a night of rain, three hundred and ten years ago.
+It is Ottaviano. He is thinner. He is dressed, with great care, in the black of a notary, and he has a hat in his hands, and a gray in his face that has not been there in any of the years that you knew him. He has been in France for two hundred and fifty years and has been called Octave for the last hundred, because the French could not say it. He stands in the door of the printer's shop, in the frost, with his hat turning very slowly in his hands, and he looks at you with something that you would call, in a living man, relief.
+"Monsieur," he says. "I am very sorry. I could think of no better hour."
+?if b2.court_end == "seat"
+  "The Prince has not forgotten that you were of his council," says Ottaviano, "and he would take it very kindly if you would come to him. He says that it is the matter of a very small favor. He says that it is a thing that he would not ask of a stranger."
+?elif b2.court_end == "debt"
+  "The Prince has not forgotten that there is a debt in the Remembrancer's roll in your name," says Ottaviano, with great delicacy, "and he wishes me to say that he has no intention of collecting it. He would like, if you are willing, to discuss the matter of a small favor, in the nature of an exchange."
+?else
+  "The Prince has not forgotten that you were a man who asked for nothing," says Ottaviano, "and that it was the one thing about you that he could never make out. He says that he is now in a position where he would be very glad of the company of a man who wants nothing. He would like to see you."
+?end
+There is a card in his hand. It is on thick cream stock, in an engraved copperplate, with a plain seal in black wax, and the words *Monsieur Colline is desired to wait upon His Highness at the Hôtel de Saint-Aubin, on Thursday at the hour of the opera.* There is a line in pencil on the back, in a hand that you do not know, that says, *The King's army is not to be trusted. Ours is not to be trusted either.*
+Étienne has come up behind you. He is in his shirtsleeves, with his spectacles on his forehead. He is staring at the card. He does not say anything. He does not, you notice, so much as breathe.
+"It is a very great honor," says Ottaviano, quietly, to the room in general, and to the printer in particular. "I would not, in your place, be afraid."
+He puts on his hat. It is the gesture of a man who has put it on a great many times in a great many doorways and has not once felt that it fitted. He goes down the street in the frost, into the morning, with the hat very straight, and the light behind him.
+You hold the card. It is, by a long way, the most expensive piece of paper that has been put in your hand for several hundred years.
+$ do chart("paris.court")
+$ do rest()
+=> next

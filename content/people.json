@@ -323,6 +323,36 @@
       "name": "Brother Anselm",
       "title": "An old brother at San Miniato",
       "bio": "A mild, brown, vague old vampire in a monk's habit, with old yellow paint in the creases of his fingers. He painted the borders of the court's roll, and has not spoken in thirty years."
+    },
+    "etienne": {
+      "gender": "m",
+      "name": "Étienne Valère",
+      "title": "Master printer of the rue Saint-Jacques",
+      "bio": "A lean gray man of sixty with an inky thumb and Aelia's chin, whose family left the hill for Paris in the train of a Medici queen. He keeps the secret, the house and the presses, in that order, and is afraid, on the whole, in the right proportions."
+    },
+    "adelaide": {
+      "gender": "f",
+      "name": "Adélaïde Valère",
+      "title": "Étienne's daughter",
+      "bio": "A widow of twenty nine who keeps the books, the keys and the temper of the household. She has been quietly adding up the house for years, and has found that it comes to more than she was told."
+    },
+    "baptiste": {
+      "gender": "m",
+      "name": "Jean-Baptiste Valère",
+      "title": "A compositor of the Valère shop",
+      "bio": "Adélaïde's brother, twenty, a compositor with a great deal of black hair and a head full of America. He has set every pamphlet in the Latin quarter and has a manuscript of his own in his shirt."
+    },
+    "aubry": {
+      "gender": "m",
+      "name": "Captain Lucien Aubry",
+      "title": "A half-pay officer lodging on the third floor",
+      "bio": "A long-faced veteran of Rochambeau's army, lately home from Virginia. He finds most things funny, and has never in his life been thanked by a farmer until Yorktown."
+    },
+    "roux": {
+      "gender": "m",
+      "name": "Anselme Roux",
+      "title": "A clerk of the Merchant house in the rue Vivienne",
+      "bio": "A plump young man in a good brown coat who carried a letter and a key to Florence in the spring, and has been afraid ever since."
     }
   }
 }

@@ -277,6 +277,24 @@
       "title": "The Merchant",
       "book": "blood-and-gold",
       "text": "One of the Six, and the father of the Merchant line. He sold thread in the Mercato Vecchio for longer than the books go back, and nobody could afterward say what color his eyes were. His gift is shadows: he gives a man's memory of his face to his shadow, and the man goes away with it."
+    },
+    "paris_court": {
+      "category": "lore",
+      "title": "The court at Paris",
+      "book": "crown-of-ashes",
+      "text": "The vampire court of Florence followed the Medici queen over the Alps and settled in Paris, where it has grown decadent on pastry and politics. The Prince keeps the peace, the Merchant house keeps the purse from Amsterdam, and nobody has asked the court's opinion of the king."
+    },
+    "the_barrieres": {
+      "category": "places",
+      "title": "The Wall of the Farmers General",
+      "book": "crown-of-ashes",
+      "text": "A ring of fifty toll houses joined by a wall, built in the last four years to catch wine, salt and firewood on their way into Paris. It is of no use against an army and a great deal of use against a cart. The people say that the wall that walls Paris makes Paris murmur."
+    },
+    "the_press_trade": {
+      "category": "lore",
+      "title": "The book trade of the Latin quarter",
+      "book": "crown-of-ashes",
+      "text": "Paris has more printers than the police can follow: licensed houses with a royal permission, houses with a tacit one, and houses that print under the name of a town in Switzerland. A shop is raided on the word of a rival or an informer, and a printer who is taken goes to the Bastille."
     }
   }
 }

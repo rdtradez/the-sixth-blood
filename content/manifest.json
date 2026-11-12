@@ -472,7 +472,27 @@
           "collesanto": 45
         }
       },
-      "chapters": []
+      "chapters": [
+        {
+          "id": "b3c01",
+          "file": "crown-of-ashes/ch01.tsb",
+          "title": "The Year of the Hail",
+          "notes": [
+            "blood",
+            "violence",
+            "slavery"
+          ]
+        },
+        {
+          "id": "b3c02",
+          "file": "crown-of-ashes/ch02.tsb",
+          "title": "The House in the Rue Saint-Jacques",
+          "notes": [
+            "blood"
+          ]
+        }
+      ],
+      "incomplete": true
     },
     {
       "id": "house-divided",
