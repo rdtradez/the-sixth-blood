@@ -1,0 +1,380 @@
+// Book Three, Chapter 9 (session 33). The end of August 1789. The Declaration of the Rights of Man, the Cadets, the boy, the Prince's leave, and Galerius's last night in the ossuary.
+// Opens on the shop on the twenty-sixth (no phase), then one night phase of three actions out of four (the night of the thirtieth), then a fixed closing scene (the hunt), then the dawn of the thirty first.
+// Ends with rest() and => next. Reads b3.greve, b3.lictor, b3.cadets, b3.abolition, b3.sugar, b3.presses_use, b3.galerius, b3.file, b3.severin and b3.veil. Chapter 10 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c09
+@title The Thirty-First
+@book crown-of-ashes
+@version 1
+
+# start
+## The twenty-sixth
+$ b3.rights = "refused"
+$ b3.exodus = "stood"
+$ b3.boy = "left"
+$ b3.protest = "left"
+$ b3.hunt = "taken"
+~> shop
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the night of the thirtieth of August. You have a night and a part of another, and four things that want doing by your own reckoning, and time for three. There is a fifth, which has no choice in it, and which is waiting for the end of the night in the place that it has picked.
+-> night
+
+# shop
+It is the twenty-sixth, a Wednesday, and Baptiste has been at the Assembly since seven in the morning, in the gallery, with a pencil and a hat full of sandwiches, and he comes in at nine in the evening with his collar gone and his face shining. It has been passed. It has been debated for a week, article by article, under a very high ceiling, by men who sat up with candles and argued over every comma, and what they have made out of it is a single sheet. It is seventeen articles. It is, says Baptiste, standing in the middle of the floor with the paper held out in front of him in both hands like a dish, the shortest thing that has ever been written that is going to take a hundred years to read.
+He reads it aloud. He reads it twice. Men are born and remain free and equal in rights. Liberty consists in the power to do whatever does not injure another. The law is the expression of the general will. The Valère shop has heard a good many things read aloud in its time, by candle, in a low voice, with the shutters closed, and it has never heard anything like the silence in which the old man at the second press stands with a stick of type in his hand and does not move.
+Étienne asks to see it. He takes his spectacles from his pocket, and reads it again to himself, slowly, to the end. Then he says, quietly, that it says nothing whatever about the people in the inventory of a plantation. He says it without heat. He says that it will be a very curious thing to see how long a sentence can go on being true for one half of a street.
+?if b3.greve == "stopped"
+  Thibault has been in the back of the shop for three weeks, on a stool by the stove, with a duster, because he cannot think of anything else that he is permitted to hold. He has not said very much. He has listened to Baptiste, with his mouth a little open, and when the line came about the law being the same for all, whether it protects or punishes, he put the duster down on his knee.
+?elif b3.greve == "allowed"
+  Thibault has not been to the shop since the Place de Grève. There is a lilac ribbon on the doorpost that nobody has put there, and it has been there for a week.
+?else
+  Nobody has seen Thibault. It is understood, in the way that things are understood on that stair, that it is better not to ask.
+?end
+Adélaïde has put the lamp on the corner of the counter and is looking at a calendar that hangs on the wall behind it, a printer's calendar, with the days struck through in red. She has not looked at it for a month. She turns her head and meets your eye. There are five days left in it.
+?if b3.lictor == "gave"
+  You gave a name. You know it, as one knows a loose tooth, with the tip of the tongue.
+?elif b3.lictor == "bargained"
+  You have put your own name in a very old book. It is a thing that is not easy to forget at a printer's, where the whole world is put in the way of a signature.
+?else
+  You told a gray old man that you did not know, and he is an old man who has not been lied to by anybody that he did not remember.
+?end
+<~
+
+# hunger
+## The sticky heat
+It is the end of the heat, and it has left the city sour. There is a sweetish smell of cabbage and wet slate, and under it, running along the walls of the houses like a trail of ink, the long warm smell of a great many people asleep with their windows open. There is a boy of twelve in the gutter below the shop with a tray of lemons. He has fallen asleep with his head on the tray.
+* Take what you need from a sleeping drunk in the rue de la Harpe
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  He is a man of the usual sort. He has a purse, which you leave, and a snore that does not alter. It is done in a doorway in perhaps a minute. You lay him on his side, as before, and put his hat over his face.
+* Go down to the stable of the Hôtel de Cluny and feed on a carthorse
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  It is a very large gray, with feet like buckets, and it does not object. It is a quiet and a heavy business. You lean your forehead on the great warm shoulder when it is over, for a moment, and it blows through its nose, comfortably, as at a friend.
+* Put it off, and go on
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It is a thing that can be put off. It will not be put off for very long. You can feel it at the back of the neck, politely, like a clerk who is waiting for a signature.
+<~
+
+# rights
+## Seventeen articles
+They have set it already in the long forme. It is a thing that the house could have run off in an hour, with a hundred reams of paper, and a pair of boys, and a good deal of ink. There are four hundred copies ordered by the Parish. There are three thousand by a bookseller in the rue Saint-Jacques who has not paid his last account. There is a request from a committee of the Assembly, in a clerk's very correct hand, for a clean sheet to be sent to every town in France.
+Baptiste is standing with the composing stick in his hand and a very particular look in his face.
+?if b3.abolition == "printed"
+  He says that it is the same face as in March, on a different morning. He says that in March it was the Friends of the Blacks, and that he has had a note from the Society since then, in the same blue ink, saying that the Declaration says men, and asking what the Assembly means by the word.
+?elif b3.abolition == "refused"
+  He does not say anything about March. It was a thing that was declined, and he is a man who does not remind. He sets the stick down beside the forme very carefully, as though it might go off.
+?else
+  He says nothing about the colonies. It is a very large silence, in a shop where the account of the plantation at Cap-Français is kept in a green folder on the second shelf.
+?end
+?if b3.sugar == "kept"
+  Adélaïde has not turned her head. It is a thing that you notice. She has kept the green folder on the second shelf for a good many months, and she has not once opened it in front of anybody.
+?elif b3.sugar == "funded"
+  Adélaïde has a small, tight smile. The house put money into the Friends of the Blacks in the winter, and a sheet of paper that says that men are born equal is a very agreeable thing to find on one's counter.
+?end
+It is perfectly plain what is to be done. It is only a matter of how.
+* Print it plain, seventeen articles and no more
+  $ b3.rights = "plain"
+  $ standing += 2
+  $ secrecy += 1
+  $ do earn(2)
+  $ do chart("paris.presses")
+  $ do discover("the_declaration")
+  The press goes through the night. It is not a thing that needs to be said twice. The sheets come off the tympan, one after another, black and wet, and hang along the cord above the stove like washing, and by dawn the shop smells of linseed oil and wet paper and success. They go out in baskets at six. By nine there is a boy on every corner of the faubourg with a bundle under his arm, and a man who has never read anything in his life is standing in the rue Mouffetard, in the early sun, with his lips moving.
+* Print it with a note under it about the colonies
+  $ b3.rights = "annotated"
+  $ humanity += 3
+  $ defiance += 2
+  $ standing -= 1
+  $ secrecy -= 1
+  $ do chart("paris.presses")
+  $ do discover("the_declaration")
+  It is a small note, in italic, in a type that is a size too small. It says that the preceding articles are the common property of all men, of whatever color, in whatever quarter of the world, and that no one who signs his name to them can honestly keep an inventory of persons. It is a very short sentence. It costs you at least four subscriptions, and the commission of a bookseller in the rue Saint-Jacques, who sends round a boy to say that he does not wish to see a political opinion on a clean sheet. Baptiste sets it himself, without a word. When the proof comes off, he looks at it a long time, and then he takes the stick and puts a full stop at the end of it, a very exact round one, and wipes his hands on his apron.
+* Decline the order, and do not touch it
+  $ b3.rights = "refused"
+  $ standing -= 1
+  $ cunning_brutal += 1
+  $ bond.adelaide += 1
+  $ do chart("paris.presses")
+  You say that the house has enough in hand. It is a thing that is said in the trade a dozen times a week, and it has a perfectly respectable sound. Baptiste looks at you. He does not argue. He takes his apron off, and folds it, and goes out of the shop, and you hear his feet on the stair, going down the steps with a great deal of care, as a man goes who has been told that he is carrying something that might break.
+<~
+
+# charonne
+## The brewery
+The brewery in the rue de Charonne smells, as it has always smelled, of the thick, sweet, malty ghost of a good many thousand barrels, and the cellar has been swept. It is the first thing that you notice. Somebody has taken a broom to it, and laid a plank for a table, and put a candle in a bottle at either end.
+They are all there. They are sitting along the benches against the wall, eleven of them, in their shirtsleeves, with their lilac ribbons in their pockets for the night, and they have not been talking. It is Séverin who stands up. He has a letter in his hand, a small, plain one, and he holds it by the corner.
+He says that it was left at the door at noon by a footman in no livery. It is the Prince's handwriting. It says, civilly, that a Lictor of the Senate has asked leave to hunt in the city of Paris for a youth of the faubourg who has broken the Veil, and that the Prince, having the duty of the Peace, has not found a reason to refuse.
+?if b3.cadets == "sworn"
+  There is a silence. They look at you. It is the look that was given in March, in the cellar, over the same plank, when you put your hand on it.
+?elif b3.cadets == "refused"
+  They look at you as one looks at a guest who has been told that he is not wanted and has come anyway.
+?else
+  They look at you with the courtesy of people who have not yet decided.
+?end
+?if b3.greve == "allowed"
+  Thibault is not among them. It is Clemence who has taken his place on the bench, and it is a place that nobody sits in. She has her hands between her knees. She does not look at the boy's stool.
+?end
+Clemence says, flatly, that it is a Lictor and that he is a very old one, and that there is a way of dealing with an old one, which she has been told of by a man who has done it, and that it takes four.
+* Send them out of Paris, tonight, by the roads that you can name
+  $ b3.exodus = "sent"
+  $ humanity += 2
+  $ cunning_brutal -= 1
+  $ standing += 1
+  $ bond.severin -= 1
+  $ bond.clemence += 1
+  $ do chart("paris.rebels")
+  You say that it will be very simple. You say that the house has cousins at Rouen, and at Lyon, and at Nantes, and a wine shop in the rue Saint-Victor with a cart that goes out at four, and a good many other things that were arranged some months ago, in the quiet, against exactly this. It is not a thing that they wish to hear. Séverin, with his chin up, says that he will not run from the one thing that he was ever good at. Clemence puts a hand on his sleeve. After a long time, and with no grace whatever, they begin to put their things into their pockets. They go in twos and threes, up the cellar stair, into the dark.
+* Tell them you will stand with them, and let him come
+  $ b3.exodus = "stood"
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  $ defiance += 2
+  $ secrecy -= 1
+  $ bond.severin += 2
+  $ do chart("paris.rebels")
+  It is not a thing that you should say. You hear yourself say it. There is a movement along the bench, like a wind going over wheat. Clemence says, shortly, that it is not the brave thing but the stupid one, and that she is glad of it. You spend the better part of two hours going over the cellar, and the stair, and the vent at the back, and the yard, with a candle, and a pencil, and the least of their number, a boy of fifteen with a cooper's apron, who has the best head for the corners. It is not a plan. It is a good deal better than nothing.
+* Tell them the whole truth: the Veil, the name, the deadline
+  $ b3.exodus = "told"
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  $ bond.severin += 1
+  $ bond.clemence += 2
+  $ do chart("paris.rebels")
+  ?if b3.veil == "silenced"
+    You tell them about the sergeant in the rue de Bercy. You do not dress it. It is the worst of it, and you give it to them first, so that they may know what kind of a man is asking them for their trust. Nobody says anything. Clemence looks at the table.
+  ?end
+  You tell it plainly, from the morning of the riot to the stair in the rue des Prouvaires, and the offer made there, and the answer given, and the end of the month. It is a longer tale than you had thought. At the end of it Séverin says, in a voice that is a little unsteady, that he had thought that you were a very much simpler person. It is meant as a compliment. Nobody laughs. It is not clear what any of them will do. You can see them, one by one, making up their minds, in the candlelight, as the people do in a church at the moment when the priest has stopped.
+<~
+
+# boy
+## Thibault
+You find him in a bakehouse in the rue de la Mortellerie, behind the ovens, in the one warm corner, where the baker's wife lets him sleep because she has taken him for a runaway apprentice. It is twenty minutes before the bread. The place smells like heaven. He has been awake for some time. He is sitting on a sack of flour with his knees drawn up and a lilac ribbon wound round his fist, and when he sees you he does not stand.
+?if b3.greve == "stopped"
+  He says that he has been thinking about the bread. It is an odd, tired, serious thing to say. He says that there is a loaf on the shelf behind him that is going to be eaten by somebody in the morning, and that he cannot get over it.
+?elif b3.greve == "allowed"
+  He says nothing for a long time. Then he says that he has not been able to forget how it tasted, and that he would very much like to be told that it was wicked, so that he might know where he stood.
+?else
+  He says that he has not been anywhere. It is true. It is not what he means. He means that there is nowhere that he has found that does not have the Square in it.
+?end
+He is sixteen. He has been sixteen for three years. It is a very difficult thing to look at.
+He says, to the floor, that the old man in the brown coat has been to the faubourg twice, and has asked the baker's wife at the next door whether a cooper's boy had come by. He says it quite flatly. He asks whether it is true that they do it to you in a ring, in front of everybody, with a book.
+* Take him down to the quarry gallery, and begin to teach him
+  $ b3.boy = "taught"
+  $ humanity += 2
+  $ cunning_brutal -= 1
+  $ bond.thibault += 4
+  $ standing += 1
+  $ do chart("paris.rebels")
+  You take him by the sleeve and walk him through the back streets in the last of the dark, and down the old stone stair under the shop, and along the gallery in the bones. It is cold. It is perfectly quiet. You set your candle on a ledge. You say that there is a thing that he must know before he knows any other, which is how to stop. It is not very much. It is a matter of the breath, and the hand, and the last inch. He is a quick pupil. He is quick in the way of a thing that has had nobody to tell it anything for three years, and cannot believe its luck. By four in the morning he has put his hand flat on the wall of the gallery and held it there without shaking for a quarter of an hour, and he is looking at you with a face so naked and so grateful that you have to turn away.
+* Put him on the night coach for Lyon
+  $ b3.boy = "hidden"
+  $ cunning_brutal += 1
+  $ secrecy += 2
+  $ humanity += 1
+  $ bond.thibault += 1
+  $ do chart("paris.rebels")
+  There is a Valère cousin at Lyon, in the rue Mercière, a bookbinder, who will ask no questions and keep a boy in the cellar. You say so. You give him a letter, and a purse, and a pass that is as good as any in France, because it is made in the shop. He does not argue. He is a good deal too tired. You put him in the corner of the coach, in the dark, among a priest and two women with baskets, and give a coin to the guard, and watch the lamps go out along the rue Saint-Martin, until you cannot tell them from the stars. He did not say good-bye. He put his hand out of the window, once, with the ribbon in it, and let it go.
+* Leave him where he is
+  $ b3.boy = "left"
+  $ cunning_brutal += 2
+  $ humanity -= 2
+  $ bond.thibault -= 3
+  $ secrecy -= 1
+  You say that you are sorry, and that there is nothing that you can do tonight. It is not even a lie. It is the sort of thing that you could have said to a good many people in a good many centuries, and have. He nods. He does not seem surprised. He says that it is all right, and that he is used to waiting, and then, because the baker's wife has come through with the first of the loaves, and the smell goes through the whole of the room like a hand, he puts his face against his knees.
+<~
+
+# leave
+## The Prince's leave
+The Hôtel de Saint-Aubin is lit by one lamp. It is the first time that you have seen it so. The sugar cakes have gone from the sideboards, and the great saloon is full of trunks, packed and corded, standing in rows like a congregation. A good many of the families are going, in the next month, to Turin, and to Brussels, and to the country. Ottaviano has a pen behind his ear and a face that has been awake for two hundred years. He says, without any greeting, that he has been expecting you, and that it is a pity that the thing has not got a better name.
+He says that the Prince's leave is a formal thing, and that it is customary, and that by the Peace, in the case of a Lictor, it cannot be refused unless there is an interest. He says that it has been granted. He says it in a flat tone. He says that if a gentleman who is a friend of the house were to ask, in the proper terms, that the leave be recalled, it might very well be a matter that the Prince would have to hear.
+?if b3.octave == "promised"
+  He reminds you, without any emphasis, that in December you promised him the house's protection of the Prince. He says that this is an odd use of it.
+?elif b3.octave == "spy"
+  He does not say anything about December. He does not need to.
+?end
+The Prince is upstairs, in the small closet, in a plain chair. He has been in it since six. He has not eaten. He has a paper in his hand that he is not reading.
+* Ask him, in the proper terms, to recall the leave
+  $ b3.protest = "asked"
+  $ standing += 2
+  $ secrecy -= 1
+  $ cunning_brutal -= 1
+  $ do chart("paris.court")
+  You go up. You do it as it is done. You stand in front of the chair, and you say what you have to say, in the language of the house, at the right length. The Prince listens with his head a little on one side. He has a small, gray, tired face, like an official's at the end of a day. At the end of it he says that he will think about it. It is not a refusal. It is, in the court, very nearly an agreement. He says it in a voice that sounds as if it has been spoken by someone standing behind him. You do not know what to make of it. Then he turns the paper in his hand, and puts it, face down, on his knee.
+* Say nothing, and leave the Prince to his chair
+  $ b3.protest = "left"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ standing -= 1
+  Ottaviano goes down with you to the door. It is a thing that is done in a house where a decision has been taken, and nobody is quite sure by whom. He does not speak until you are on the step. Then he says, very low, that the Prince has been a good deal alone since the fourteenth, and that he has taken to writing at night, a great many pages, in a hand that is not very steady, and burning them. He says it as a man says a thing that he has had on his mind for some while, and has not had anyone to tell.
+<~
+
+# hunt
+## The Innocents
+It is a little before four. It is the hour before the first of the carts, when the whole of Paris lies like a drowned thing, and nothing moves in it but the water in the gutters. You have been told where, in the plain old fashion, by a card on the sill of your own window with a single line on it, and a Roman numeral. It is the old cemetery of the Innocents.
+It is empty. It has been emptied. For three years the dead of six hundred years have been going out of it by night in tumbrels, in the dark, to a quarry on the road to Orléans, and the ground has been turned over to the depth of a man. It is a long, bare, flat place, with a rime of frost on the clay, and the rue de la Lingerie on one side, and the church of the Innocents on the other with its doors off. Under it, there is the charnel house, and the bones that the carts have not yet taken, and a stair.
+Galerius is sitting on the lip of the stair with a lantern. He has a plain brown coat and a long narrow roll across his knees. He does not look up. He has the air of a man who has been waiting, and is not impatient, and has a sufficient quantity of time.
+?if b3.exodus == "stood"
+  He says that he has been told that there are eleven young persons in a brewery cellar with a plank across the door, and that he thinks it very proper of you. He says that they will not be needed.
+?elif b3.exodus == "sent"
+  He says that he has been told that there is an empty brewery in the rue de Charonne and that eleven persons have left Paris in the last six hours by six roads. He says that he did not ask who gave the advice.
+?else
+  He says that he has been told that you spoke to the young persons in the brewery. He says that it is a kind of honesty that is not much practiced. He does not say whether he approves.
+?end
+?if b3.boy == "taught"
+  He says that there is a boy in the gallery under the rue Saint-Jacques who has just done something rather remarkable with his hand against a wall, and that he has been listening to it for an hour. He says that he would like to know the name of the man who taught it to him.
+?elif b3.boy == "hidden"
+  He says that the Lyon coach has gone, and that it is a very good coach, and that it will be at Villefranche by the afternoon. He says that he has always preferred, in a hunt, to be where the thing will be, rather than where it is.
+?else
+  He says that the cooper's boy is in a bakehouse in the rue de la Mortellerie, and that he has not touched him. He says that it is a courtesy that he has paid, and that it will be a good deal harder to pay a second time.
+?end
+?if b3.protest == "asked"
+  He says that the Prince's leave was recalled at three in the morning, and has not yet been delivered. He says that it was a pretty piece of work, and that he is not going to wait for the delivery.
+?end
+He stands up. He does it with some difficulty. He is, you perceive, an old man, who has been standing for a very long time, in a good many cities, on behalf of a body that has not asked whether he was tired. He takes up the roll. He says that it is the thirty-first. He says it as one says the name of a day of the week.
+He says that he has a form for it. He says that it is a form that was drawn up in the reign of the Emperor Tiberius, and that he has not found it wanting. He says that he would be very glad if you would help him to fill it in.
+* Tell him where the boy is, and stand aside
+  $ b3.hunt = "taken"
+  $ standing += 3
+  $ humanity -= 3
+  $ secrecy += 2
+  $ bond.thibault -= 4
+  $ bond.severin -= 2
+  $ do chart("paris.court")
+  $ do discover("the_innocents")
+  You say it. It is an address, and a name, and the hour. It takes no time. Galerius writes it down, in his tiny script, and sands it, and rolls the roll. He thanks you. It is perfectly sincere. He goes up the stair into the gray light of the dead ground, a small brown figure, very upright, with the lantern in his hand, and he does not once look back, and you stand where you are among the heaps of the old clay, in a place that has been emptied of every living and dead thing, and understand that you have done what was asked.
+* Offer him your oath, and answer for the boy yourself, by the old law ?if b3.lictor == "bargained" or b3.protest == "asked"
+  $ b3.hunt = "sworn"
+  $ standing += 2
+  $ humanity += 2
+  $ cunning_brutal -= 1
+  $ bond.thibault += 2
+  $ do chart("paris.court")
+  $ do discover("the_innocents")
+  It is a very short form. You have only to say it, in the old tongue, with your hand on the lantern. You say that you will be the one to be asked. You say that you will teach, and answer, and be written down. Galerius listens to it with his head a little bent. At the end of it he is quiet for so long that a cock crows, a long way off, in the direction of the markets, in the first of the gray. Then he says that it has been a hundred and sixty years since anyone offered him that, and that it was refused by the one who asked. He says that he will accept. He says it with a little, dry, difficult smile. He says that he has an idea that it will be a very interesting piece of paper, and that he will therefore stay in Paris, for a while, to see it witnessed.
+* Draw, and meet him
+  ~> duel
+  $ do discover("the_innocents")
+<~
+
+# duel
+## The lantern
+$ do fight("lictor", 3)
+:exchange
+* Feint toward the stair and come in low
+  $ do strike("cunning")
+* Break his guard, and keep going
+  $ do strike("brutal")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Talk him down, over the lantern
+  $ do strike("talk")
+* Go for the street
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    He gives ground. It is a quiet, correct, patient step, as of a man who has done it for two thousand years, and does not like it.
+  ?else
+    The short Roman blade comes up out of his sleeve and finds the line of your ribs, with no more fuss than a man putting down a cup.
+  ?end
+  -> :exchange
+?end
+?if fight_result() == "won"
+  ~> mercy
+?elif fight_result() == "talked"
+  $ b3.hunt = "sworn"
+  $ standing += 2
+  $ humanity += 1
+  $ bond.thibault += 1
+  You say it quite suddenly, and without a plan, and it is a sentence about the road from Rome to Veii in the first year of the Republic. It is the one thing in the world that a very old man cannot hear unmoved. The blade comes down. He sits on the lip of the stair, slowly, like a man who has been struck on the back of the knee, and says nothing, and for a good minute the old cemetery listens to him not saying it. Then he says that it was not fair, and that he will accept your oath. He says that he will stay a little in Paris. He is, perhaps, a little frightened of what he will find if he goes home.
+?else
+  $ b3.hunt = "taken"
+  $ standing -= 2
+  $ humanity -= 1
+  $ secrecy += 1
+  $ bond.thibault -= 3
+  He does it with great grace, and a certain regret. It is a short fight, and you do not win it, and when it is over you are sitting in the frozen clay with your back against a heap of old bones and a hand held to your side. He stands over you, courteous and unmarked. He gives you the hand that is not holding the lantern. He says that it was well done, in a young man, and that he would like to say that he is sorry. Then he picks up his roll from the ground, and goes up the stair into the gray, and leaves you to count what he has taken.
+?end
+<~
+
+# mercy
+## The old man
+He is on one knee in the frost. It is a thing that you did not quite expect to see. The lantern has fallen on its side and gone out, and in the gray that is coming up behind the church of the Innocents there is only the shape of him, small and brown and bent, with his two hands on the ground and his breath going in and out of him like a bellows. He does not ask for anything. He has the blade in his hand, still, and he has not offered it.
+He says that it is a quite regular conclusion. He says that it is not often that the Senate sends a Lictor who is beaten by a person of three hundred years. He says that he is not afraid. He says that he has been waiting for a long time for something to be afraid of, and it has not yet turned up.
+* Let him go home with a report
+  $ b3.hunt = "spared"
+  $ humanity += 3
+  $ standing += 1
+  $ cunning_brutal -= 2
+  $ bond.thibault += 2
+  $ do chart("paris.court")
+  You take the blade out of his hand by the point, and give it back to him by the hilt. He looks at it. He looks at you. It is a long look, and not at all what you would have expected; it has in it a kind of weary, appalled amusement. He says that he will go to Rome. He says that it will take him some months, and that he will write a very long report, in which a great deal will be set down accurately and a number of things will not be set down at all. He says that it is a thing that he has not done in two thousand years, and that he has an idea that it will be a very great relief. He gets up, with a hand on the clay. He does not take the lantern. He walks off into the dark of the rue Saint-Denis, in his brown coat, with his roll under his arm, and the town takes him in as it takes everybody.
+* Finish it
+  $ b3.hunt = "destroyed"
+  $ humanity -= 6
+  $ cunning_brutal += 4
+  $ secrecy -= 3
+  $ standing -= 3
+  $ defiance += 2
+  $ bond.thibault += 1
+  $ do chart("paris.court")
+  It is done as such things are done, very simply, and it takes less time than it ought. He does not resist. He looks at you, at the end, with an expression that you will think about for a very long time, and that is not reproach. It is a sort of courteous recognition, as of a man who has been given a final piece of information that he had been expecting. Then there is nothing in the old cemetery but a brown coat on the frozen clay, and a very long, narrow roll, in a close tiny script, which begins with a line in Latin and has a good many more lines than yours. A Lictor does not simply go missing. It will be known at Rome by the new moon.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is a little after nine, and the city has the heavy, shut, listening look that it has had since July. The first of the lamps are being lit along the rue Saint-Jacques, by a man in a cockade.
+?elif actions_left() == 2
+  It is past midnight. There are one or two cabs on the quay, and a patrol of the National Guard with a drum that they have forgotten to beat.
+?else
+  It is three in the morning. The frost is on the roofs. There is one thing more that you can do, before the other thing, which is waiting.
+?end
+* Go to the press room, where Baptiste is setting the Declaration [once] ?if actions_left() > 0
+  ~> rights
+  $ do act()
+* Go to the brewery in the rue de Charonne, where the lilac ribbons are meeting [once] ?if actions_left() > 0
+  ~> charonne
+  $ do act()
+* Look for Thibault, in the streets by the river [once] ?if actions_left() > 0
+  ~> boy
+  $ do act()
+* Call on the Hôtel de Saint-Aubin, where the trunks are being packed [once] ?if actions_left() > 0
+  ~> leave
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  ~> hunt
+  -> dawn
+?end
+-> :night
+
+# dawn
+## The thirty-first
+It is a gray, cold, windless morning. The first carts are in the street. There is a smell of baking, and the sound of the shutters of the rue Saint-Jacques going up one after another, with a clatter, like a long line of men clearing their throats.
+?if b3.hunt == "destroyed"
+  You walk home along the river. It is not a thing that you remember very well. There is a bakery at the corner of the rue de la Huchette, and the girl at the door says good morning, and you say it back, and she gives you, without being asked, a small, hot, floury roll, in a twist of paper. You hold it for a long time. You do not eat it.
+?elif b3.hunt == "spared"
+  You walk home along the river. There is a gray wind, from the north, with the smell of the snow in it. It is the first morning in a month on which you have not felt the Senate on the back of your neck. You are aware that it will come back.
+?elif b3.hunt == "sworn"
+  You walk home along the river, with a very old promise round your neck like a stone on a string. It is perfectly bearable. It is something that you will feel for a long time, in a certain kind of weather.
+?else
+  You walk home along the river, in the cold, with nothing in your hands. It is the thirty-first of August. A form has been filled in, and it has your name on one line of it, in a close tiny script, and it is a very clean piece of work.
+?end
+?if b3.boy == "taught"
+  Thibault is waiting on the step of the shop, with his hand flat against the doorpost. He looks up at you, and then, with extreme care, takes it away.
+?elif b3.boy == "hidden"
+  There is a letter on the counter, in a bookbinder's neat commercial hand, from Lyon. It says, in four lines, that the parcel has arrived, and that it is very quiet, and that it eats very little.
+?end
+?if b3.rights != "refused"
+  There is a bundle of the Declaration on the counter, with the string cut. The first of the sheets has already been pinned to the wall of the shop, over the stove, by Adélaïde, with four pins. It has been put a little crooked. She has not straightened it.
+?end
+Étienne comes down in his shirtsleeves to say that the Assembly has been arguing all night about whether the king shall have a veto. He says that it will be a long autumn.
+$ do rest()
+=> next

@@ -87,3 +87,27 @@ Dawn: the night of the fourth of August; the Assembly has abolished the feudal d
 Hooks: the October days; the Priestess's hand (Avignon account); the Declaration of the Rights of Man; Galerius's final hunt; Thibault; the Cadets and the Veil; Garnier.
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 9, "The Thirty-First" (`b3c09`, session 33)
+
+The end of August 1789: the Declaration of the Rights of Man (26 August) and the deadline Galerius set. Opens on the shop on the twenty-sixth (Baptiste with the proofs of the Declaration; Thibault's state reads `b3.greve` and `b3.lictor`), no phase. Hunger scene on entry if needed.
+
+Night phase, three of four (the night of the thirtieth): the presses (the Declaration of seventeen articles; `b3.rights`: plain, annotated (a note on the colonies, reads `b3.abolition`, `b3.sugar`) or refused); the brewery in the rue de Charonne (the Cadets; Severin has heard of the Lictor's deadline; `b3.exodus`: sent (the Cadets out of Paris for the provinces), stood (they stay and he stands with them) or told (the whole truth about the Lictor, and the Veil); reads `b3.cadets`, `b3.greve`); Thibault (`b3.boy`: taught (the quarry gallery, the old rules, by hand), hidden (sent to the Valere cousins at Lyon by the night coach) or left; reads `b3.lictor`); the Hotel de Saint-Aubin (Ottaviano; a Lictor needs the Prince's leave to hunt in his city; `b3.protest`: asked (the Prince is asked to refuse it) or left).
+
+The closing scene is fixed: the old cemetery of the Innocents, emptied, and the ossuary under it, a little before the dawn of the thirty-first. Galerius comes with a lantern and his roll. He knows where the boy is whether or not he is there. `b3.hunt` (Galerius's fate): taken (tell him and stand aside, the boy or the hero's word goes to the Senate), sworn (the old law of answering for a younger, open if `b3.lictor` is bargained or `b3.protest` is asked; he stays in Paris as the witness), spared (fight him and win, then let him go home with a report), destroyed (fight him, win, and finish it; costs humanity and the Senate will hear). The fight is `fight("lictor", 3)`; a lost fight falls back to `taken`.
+
+Dawn of the thirty-first. Ends with `rest()` and `=> next`.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies, except where the player chooses it, which the design doc names as a key choice.
+
+## Chapter 10, "The Lady Who Sleeps" (`b3c10`, session 33)
+
+The October days, 5 and 6 October 1789: the women of the markets march on Versailles in the rain, and the king and the Assembly are brought to Paris (the baker, the baker's wife and the baker's boy). Opens on the fifth in the rain (bread, the drum at the Hotel de Ville, Aubry's battalion called out), no phase. Hunger scene on entry if needed.
+
+Night phase, three of four: Versailles (the rain, Lafayette at midnight, the Gardes du corps killed at dawn, the queen's staircase; `b3.versailles`: door (held the door with the court's sword), women (marched with them) or watched); the Avignon courier (the quarterly gold, and the road from the south; reads `b3.roll`; `b3.courier`: followed, taken (stopped, and the letter read) or let; the letter is in the Prince's own hand and dated before he wrote it); the third cellar of the Hotel de Saint-Aubin (Ottaviano shows him the steel door that no Prince has opened; through the grille the Lady who sleeps, on dry rosemary, her hand moving on a slate; `b3.vault`: read (what the hand wrote), broke (broke the slate and woke her a little) or left); the faubourg (the women come home with the court's bread; `b3.march`: bread, armed or none; reads `b3.grain`, `b3.granary`, `b3.exodus`).
+
+Dawn of the sixth: the procession into Paris, loaves on pikes; the Prince follows the king to the Tuileries' side of the river. The Priestess's hand is revealed; her awakening is for the end of the book.
+
+Hooks: the Terror; the Cadets; Severin; the Prince's fear; Garnier; Galerius (if sworn, a witness; if destroyed, a Senate that will send another; if spared, a report at Rome); the Lady's slate.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.

@@ -161,8 +161,8 @@ test('chapter 8 takes each choice at the granary, the square, the Lictor and the
   }
 });
 
-test('chapter 8 ends with the book paused after the last written chapter', async () => {
-  const run = await play('b3c08', {}, START, []);
-  assert.equal(run.game.state.chapter, 'b3c08');
+test('chapter 8 leads on to chapter 9', async () => {
+  const run = await play('b3c08', {}, START, [], { stopAt: 'b3c09' });
+  assert.equal(run.game.state.chapter, 'b3c09');
   assert.match(run.text, /thirty first/);
 });

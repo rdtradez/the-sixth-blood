@@ -60,6 +60,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 30: Book Three chapters 3 and 4
 - [x] Session 31: Book Three chapters 5 and 6
 - [x] Session 32: Book Three chapters 7 and 8
+- [x] Session 33: Book Three chapters 9 and 10
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -411,4 +412,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - No new people. New codex entries: the Bastille and the Great Fear. Content notes: both chapters carry `blood` and `violence`.
 - Chapter 7 charts `paris.rebels`, `paris.presses` and `paris.court`; chapter 8 charts `paris.counting`, `paris.rebels` and `paris.court`. Chapter 8 can call `invest("paris.arms")` (only if the house can afford it) and `earn()` for the granary. No new engine behavior, so no new schema or migration.
 - Tests: `tests/book3d.test.js` plays both chapters down every choice and flag value, for every earlier state that they read, and checks the no dashes and no braces rules. `tests/book3.test.js` now expects eight written chapters (update that count each session). `tests/book3c.test.js` gained a `stopAt` for its chapter 5 run, because chapter 6 now leads on.
+- Plans are in `SPOILERS/crown-of-ashes.md`.
+
+### Session 33 notes (Book Three, chapters 9 and 10)
+
+- Chapters `b3c09` and `b3c10` are in `content/crown-of-ashes/` (`ch09.tsb`, `ch10.tsb`). The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 10 and carries on by itself when chapter 11 is added.
+- Chapter 9 opens on a short scene with no phase, then one night phase of three actions out of four, then a fixed closing scene that every player plays, then a dawn. Chapter 10 opens on a short scene with no phase, then one night phase of three actions out of four and a dawn. Each ends with `rest()` and `=> next`, and each has a short hunger scene that only runs if `must_feed()` is true on entry. Chapter 11 should read hunger, standing and secrecy as chapter 10 left them.
+- New decision flags use the `b3.` prefix and are registered in `content/flags.json` with `book`, `major` where later chapters care, and a quick start `default`: `b3.rights`, `b3.exodus`, `b3.boy`, `b3.protest`, `b3.hunt` (chapter 9) and `b3.versailles`, `b3.courier`, `b3.vault`, `b3.march` (chapter 10). Flags that can be skipped are set to their default on entry, so a chapter that sets a flag in its own night phase cannot be seeded with that flag from a test.
+- No new people. New codex entries: the Declaration, the Innocents, the October days, the Avignon account and the third cellar. Content notes: both chapters carry `blood` and `violence`.
+- Chapter 9 uses the fight system once (`fight("lictor", 3)`) and charts `paris.presses`, `paris.rebels` and `paris.court`. Chapter 10 charts `paris.court`, `paris.rebels` and `paris.counting`, and can call `earn()`. No new engine behavior, so no new schema or migration.
+- Tests: `tests/book3e.test.js` plays both chapters down every choice and flag value, for every earlier state that they read, runs the fight across forty seeds, and checks the no dashes and no braces rules. `tests/book3.test.js` now expects ten written chapters (update that count each session). `tests/book3d.test.js` now checks that chapter 8 leads on to chapter 9.
 - Plans are in `SPOILERS/crown-of-ashes.md`.
