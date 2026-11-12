@@ -59,6 +59,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 29: Book Three chapters 1 and 2
 - [x] Session 30: Book Three chapters 3 and 4
 - [x] Session 31: Book Three chapters 5 and 6
+- [x] Session 32: Book Three chapters 7 and 8
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -400,4 +401,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New people (`content/people.json`): Clemence Roche and Thibault Marchand. New codex entries: the Cadets and the Reveillon riot. Content notes: chapter 5 carries `blood`, chapter 6 carries `blood` and `violence`.
 - Chapter 5 charts `paris.rebels`, `paris.counting`; chapter 6 charts `paris.rebels` and `paris.court`. No new engine behavior, so no new schema or migration.
 - Tests: `tests/book3c.test.js` plays both chapters down every choice and flag value, for every earlier state that they read, and checks the no dashes and no braces rules. `tests/book3.test.js` now expects six written chapters: update that count each session.
+- Plans are in `SPOILERS/crown-of-ashes.md`.
+
+### Session 32 notes (Book Three, chapters 7 and 8)
+
+- Chapters `b3c07` and `b3c08` are in `content/crown-of-ashes/` (`ch07.tsb`, `ch08.tsb`). The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 8 and carries on by itself when chapter 9 is added.
+- Chapter 7 opens on a short scene with no phase, then one night phase of three actions out of four, then a dawn, a day scene (he cannot see it) and a dusk, and ends with `rest()` and `=> next`. Chapter 8 opens on a short scene with no phase, then one night phase of three actions out of four and a dawn, and ends with `rest()` and `=> next`. Each has a short hunger scene that only runs if `must_feed()` is true on entry. Chapter 9 should read hunger, standing and secrecy as chapter 8 left them.
+- New decision flags use the `b3.` prefix and are registered in `content/flags.json` with `book`, `major` where later chapters care, and a quick start `default`: `b3.barrier`, `b3.file`, `b3.night`, `b3.broadsheet` (chapter 7) and `b3.granary`, `b3.greve`, `b3.lictor`, `b3.muskets` (chapter 8). Flags that can be skipped are set to their default on entry.
+- No new people. New codex entries: the Bastille and the Great Fear. Content notes: both chapters carry `blood` and `violence`.
+- Chapter 7 charts `paris.rebels`, `paris.presses` and `paris.court`; chapter 8 charts `paris.counting`, `paris.rebels` and `paris.court`. Chapter 8 can call `invest("paris.arms")` (only if the house can afford it) and `earn()` for the granary. No new engine behavior, so no new schema or migration.
+- Tests: `tests/book3d.test.js` plays both chapters down every choice and flag value, for every earlier state that they read, and checks the no dashes and no braces rules. `tests/book3.test.js` now expects eight written chapters (update that count each session). `tests/book3c.test.js` gained a `stopAt` for its chapter 5 run, because chapter 6 now leads on.
 - Plans are in `SPOILERS/crown-of-ashes.md`.

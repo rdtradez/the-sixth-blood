@@ -343,6 +343,18 @@
       "title": "The Reveillon riot",
       "book": "crown-of-ashes",
       "text": "On the 27th and 28th of April 1789 a crowd of the faubourg Saint-Antoine burned the effigy and then the house and works of a wallpaper maker who was said to have wished the people to live on fifteen sous a day. The Gardes Françaises fired into the street. Nobody agrees on the number of the dead."
+    },
+    "the_bastille": {
+      "category": "places",
+      "title": "The Bastille",
+      "book": "crown-of-ashes",
+      "text": "The old royal fortress and prison at the east end of the faubourg Saint-Antoine, eight round towers with a few prisoners in them and a great deal of powder. On the 14th of July 1789 the people of Paris took it in an afternoon."
+    },
+    "the_great_fear": {
+      "category": "lore",
+      "title": "The Great Fear",
+      "book": "crown-of-ashes",
+      "text": "In the last days of July 1789 a rumor of brigands, said to be hired by the nobility to cut the green corn, ran across France faster than a rider could carry it. A hundred thousand villagers rang the tocsin and took up arms against an enemy that was not there."
     }
   }
 }
