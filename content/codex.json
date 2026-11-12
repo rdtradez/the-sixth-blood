@@ -433,6 +433,42 @@
       "title": "The seventeenth of July",
       "book": "crown-of-ashes",
       "text": "The shooting at the Altar of the Fatherland on the Champ de Mars, where the National Guard fired on the crowd signing the Cordeliers' petition."
+    },
+    "the_key_of_the_cellar": {
+      "category": "places",
+      "title": "The key to the third cellar",
+      "book": "crown-of-ashes",
+      "text": "A small bright steel key, newly cut, to the grille of the third cellar of the Hotel de Saint-Aubin. The Prince offered it in the summer of 1791 to the one person he could find who would not kneel."
+    },
+    "the_constitution_of_1791": {
+      "category": "lore",
+      "title": "The Constitution of 1791",
+      "book": "crown-of-ashes",
+      "text": "The first written constitution of France, accepted by the king on the fourteenth of September 1791. It made him a king under the law and closed the Assembly that wrote it."
+    },
+    "the_declaration_of_war": {
+      "category": "lore",
+      "title": "The war of 1792",
+      "book": "crown-of-ashes",
+      "text": "France declared war on the king of Bohemia and Hungary on the twentieth of April 1792. It was voted by acclamation, and went badly from the first."
+    },
+    "the_swiss_guard": {
+      "category": "lore",
+      "title": "The Swiss Guard",
+      "book": "crown-of-ashes",
+      "text": "Some nine hundred men of the Swiss regiments, in red coats, who held the Tuileries for the king in the summer of 1792."
+    },
+    "the_tenth_of_august": {
+      "category": "lore",
+      "title": "The tenth of August",
+      "book": "crown-of-ashes",
+      "text": "The storming of the Tuileries in 1792. The tocsin began at midnight, the Marseillais and the faubourgs took the palace in the morning, and the king was suspended."
+    },
+    "the_second_slate": {
+      "category": "lore",
+      "title": "The second line",
+      "book": "crown-of-ashes",
+      "text": "A passage that the Lady's hand began to write in August 1792, after a long silence. It names a Sunday in September and a house in the rue de Vaugirard."
     }
   }
 }

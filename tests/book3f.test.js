@@ -47,7 +47,7 @@ async function play(chapter, wake, vars, wants = [], { stopAt = null, seed = 3 }
   game.state.sys.sleep.wake = { quick: true, place: 'collesanto', steward: 'bank', outcome: 'on_schedule', years: 310, invest: [], ...wake };
   for (const [k, v] of Object.entries(vars)) dev.setVar(game, k, v);
   const frame = await dev.jump(game, chapter, { keep: true });
-  return drive(game, frame, wants, stopAt);
+  return drive(game, frame, wants, stopAt ?? (chapter === 'b3c12' ? 'b3c13' : null));
 }
 
 const clean = (run) => {
@@ -128,13 +128,13 @@ test('chapter 11: buying the convent brings the deed to the counter, with no raw
 
 const LATE = { 'b3.charter': 'carried', 'b3.federation': 'between', 'b3.broadsheet': 'named', 'b3.rights': 'annotated', 'b3.senate': 'answered', 'b3.nationals': 'bought' };
 
-test('chapter 12 plays through for every state of the book so far, and the book pauses after it', async () => {
+test('chapter 12 plays through for every state of the book so far, and chapter 13 follows it', async () => {
   for (const file of ['kept', 'burned', 'left']) {
     for (const boy of ['taught', 'hidden', 'left']) {
       for (const vault of ['read', 'broke', 'left']) {
         for (const hunger of [10, 90]) {
           const run = await play('b3c12', {}, { ...START, hunger, ...LATE, 'b3.file': file, 'b3.boy': boy, 'b3.vault': vault }, []);
-          assert.equal(run.game.state.chapter, 'b3c12', `${file} ${boy} ${vault} ${hunger}`);
+          assert.equal(run.game.state.chapter, 'b3c13', `${file} ${boy} ${vault} ${hunger}`);
           assert.match(run.text, /seventeenth of July/);
           assert.match(run.text, /slate has stopped/);
           clean(run);
@@ -191,7 +191,7 @@ test('chapter 12 sets defaults for what he did not do, and spends three of four 
   const defaults = { 'b3.flight': 'watched', 'b3.republic': 'refused', 'b3.coup': 'none', 'b3.garnier': 'turned' };
   for (const k of Object.keys(defaults)) assert.ok(run.vars[k] !== undefined, k);
   assert.ok(Object.keys(defaults).filter((k) => run.vars[k] !== defaults[k]).length <= 3);
-  assert.equal(run.game.state.chapter, 'b3c12');
+  assert.equal(run.game.state.chapter, 'b3c13');
   clean(run);
 });
 

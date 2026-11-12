@@ -1,0 +1,344 @@
+// Book Three, Chapter 13 (session 35). The dark of the moon at the end of July 1791, the autumn that follows, and the night before the declaration of war in April 1792. The Prince's key, the Cadets' notice, Baptiste's journal, Aubry's post, and the war.
+// Opens on the evening after the Prince's card (no phase), then one night phase of three actions out of four, then the autumn and winter told at dusk, then a fixed closing scene on the nineteenth of April that every player plays.
+// Ends with rest() and => next. Reads b3.vault, b3.charter, b3.coup, b3.champ, b3.republic, b3.garnier, b3.file, b3.boy, b3.aubry and b3.nationals. Chapter 14 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c13
+@title The Dark of the Moon
+@book crown-of-ashes
+@version 1
+
+# start
+## The last of July
+$ b3.key = "none"
+$ b3.cadets_home = "left"
+$ b3.journal = "refused"
+$ b3.aubry_post = "left"
+$ b3.war = "none"
+~> evening
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the dark of the moon, and a little after nine. There are four things that want doing by your own reckoning, and time for three.
+-> night
+
+# evening
+It is the fortnight after the field, and the city has the look of a house in which somebody has been rude at dinner. Nobody speaks of it. Everybody is a little too polite. The Cordeliers are shut, and the Jacobins are two clubs, and in the cafés of the Palais-Royal they have begun to say "the Champ de Mars" as they used to say "the Bastille", in a lowered voice, with the face of a person who has been given a name to remember.
+?if b3.champ == "stood"
+  There is a thing that is being said in the quarter, and you do not hear it said, because it stops when you come into a room. It is that a gentleman was seen to be shot at the foot of the altar, in front of the whole battalion, and got up. It is generally agreed that it was the dust. It is the sort of agreement that has a good deal of weight on it.
+?end
+The Prince's card has been propped against the inkwell for a fortnight, and Adélaïde has twice moved it, and twice put it back. She has said nothing about it. She has taken, instead, to leaving the lamp lit in the counting room until a quarter to the hour, as though a visitor might come.
+He does not come. A plain coach comes, at dusk, without lamps, with Ottaviano on the box in a greatcoat that is much too warm for the weather. He does not get down. He looks at the shop for some time, with an expression of acute personal dislike, as of a man who has been sent to fetch a dog that has bitten him once, and then he touches his hat.
+<~
+
+# hunger
+## The dark of the moon
+It is the dark. It is not a thing that you mind, as a rule, but it is a thing that you notice. There is no moon at all, and the stars are very thick over the roofs, and the hunger comes up out of the paving with the heat, from the cellars and the gutters, in a long unhurried tide. There is a drunken tailor on the steps of the church of Saint-Étienne, singing, in a cracked tenor, a tune from the Opéra, and a very young watchman who has been told to move him on, and has not the heart.
+* Take it from the tailor, while the watchman looks the other way
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  He sings through the whole of it, and goes on for a bar or two afterward, in a smaller voice, with an air of mild astonishment. The watchman has turned his back. It is, you think, the most cooperative theft that you have ever committed, and not the least shameful.
+* Feed on the draught horses in the carter's yard behind the rue Mouffetard
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  They stand in a row in the dark, with their heads down, steaming, and they do not object. It is a poor sort of meal, and an honest one, and nobody sees you at it but a cat.
+* Wait, and do not feed
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It is a long way to the other side of the river. By the Pont Neuf your hands have begun to feel a little like somebody else's, and by the Pont Royal you are quite sure of it.
+<~
+
+# prince
+## The Hôtel de Saint-Aubin
+The house has been got ready for a funeral, or a ball. It is hard to say which. Every window is shuttered. There is a candle on every stair. In the great hall, where the sugar cakes stood on the night of the berline, there is a single plain chair, and nothing else at all, and the floor has been swept so thoroughly that your steps ring.
+Ottaviano takes you down. He does not say anything on the way. He takes you past the kitchens, and the cold store, and the racks of the old Florentine wine, and under the arch, to the second cellar, and no farther. It is a low square room, with a stone bench, and a lamp, and the Prince is sitting on the bench in a gray coat, with his hands between his knees, like a man in the waiting room of a very bad doctor.
+He is much as you remember him, small and gray and exact, with the scholar's forehead and the pale attentive eyes. He is also, in some manner that is not to be seen, a good deal smaller. He has not slept. You would not have thought that a thing so old could have lost the habit.
+He says that he is obliged to you for coming. He says it in the voice of a person who has said, for four hundred years, what he is obliged for, and has never before meant it.
+?if b3.vault == "read"
+  He says that Ottaviano has told him that you knelt, and read, in October. He says that he is glad of it. He says that it is a great relief to him to be in the company of a person who knows the worst, and that he has not been in that situation, with anybody, since the reign of the Sun King.
+?elif b3.vault == "broke"
+  He says that he knows what you did to the slate. He says it with no reproach whatever. He says that the hand has not written a line since the night of the berline, and that in four hundred years it has not before been still for so long as an hour. He says that it is a thing for which he has no word, and that he did not know, until it was gone, how much he had been leaning on it.
+?else
+  He says that Ottaviano has told him that you shut the grille, and said nothing, and asked nobody. He says that it was the kindest thing that anybody has done in that house in a long time, and the most useless.
+?end
+?if b3.charter == "carried"
+  He says that he has your paper still, the seven articles, in his own hand, in the drawer of the table in the study. He says that he did not answer it, because there was no answer that would not have been a lie, and that he has not been in the habit.
+?elif b3.charter == "softened"
+  He says that he read the half of the paper that you were good enough to send him. He says that he has a very fair notion of the half that you were not.
+?end
+?if b3.coup == "backed"
+  He says that the young ones came to his door, in June, in the night, and found it open. He says that they stood in the hall for the better part of an hour, and that nobody had the least idea what to do. He says that he was very much struck.
+?elif b3.coup == "stopped"
+  He says that he has heard how the young ones were kept from his door. He says that he is not sure that he has been fairly served, and that he is quite sure that he has been well.
+?elif b3.coup == "told"
+  He says that he has been warned, in the past, a number of times. He says that it is invariably followed by a bill, and that he looks forward to the bill with a certain curiosity.
+?end
+Then he says what it is.
+It is not complicated. It is only a thing that he has not been able to say in any other room. He says that the Lady is going to wake. He does not know when. He says that for four hundred years he has done what the slate told him, and that he has told himself that the slate is a thing that she does in her sleep, like a woman who talks, and that it is his own mind, written out. He says that he does not believe that now. He says that the thing which has been on her knee since before the Fronde was a letter, and that it was addressed to him, and that she is a person, and that she is going to wake and read what he has done.
+He takes a key from his pocket. It is not the key that Ottaviano had in the rain. It is a small one, of bright steel, quite new, and he turns it over once, and holds it out.
+He says that there is nobody in the house whom he can ask to stand at the grille on the night that she wakes. He says that Ottaviano would faint. He says that Brezac would draw. He says that the young ones would burn the house. He says that you are, so far as he can tell, the only person in Paris who has been in that room and has neither fled nor knelt nor wished to be forgiven.
+* Take the key, and say that you will be at the grille
+  $ b3.key = "held"
+  $ standing += 1
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  $ bond.ottaviano += 2
+  $ do chart("paris.court")
+  $ do discover("the_key_of_the_cellar")
+  It is very light. You put it in your waistcoat pocket, against the watch, and the Prince lets out a long breath, and for a moment looks, simply, old. He says that he will send when there is a sign. He does not say what sign. He says that he is sorry. He says it to the floor. Ottaviano, on the stair, is crying very quietly into a handkerchief, with the whole of his composure still in place.
+* Refuse it, and say that it is a quarrel in his own family
+  $ b3.key = "refused"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  $ standing -= 1
+  $ bond.ottaviano -= 1
+  $ do chart("paris.court")
+  $ do discover("the_key_of_the_cellar")
+  You say it as gently as you can. You say that you have a house of your own to keep, and that you would sooner not be the one who stood at that door. He does not argue. He puts the key back in his pocket with a small dry nod, as of a man who has had an answer that he expected and not the one that he hoped for, and he thanks you, again, in exactly the same voice.
+* Take the key, and ask that the Cadets be let alone until she wakes
+  $ b3.key = "bargained"
+  $ cunning_brutal += 2
+  $ standing += 1
+  $ humanity += 1
+  $ secrecy -= 1
+  $ bond.ottaviano += 1
+  $ do chart("paris.court")
+  $ do discover("the_key_of_the_cellar")
+  He is silent for some time. Then he says that it is a very fair price, and that it was a mistake in him to suppose that you would not name one. He says that he will send word to Brezac. He says that nobody will go near the brewery, or the Charonne cellar, or any one of the young, from the dark of this moon to the night of her waking, and that after that, it will not be his to say. The key is warm. It has been in his hand a long while.
+<~
+
+# cellar
+## The brewery in the rue de Charonne
+They have been served with a notice. It has been done in the court's own way, by a footman in plain livery, who knocked at the cellar door in the middle of the afternoon, when nobody was awake to answer, and left a card. It says, in Brezac's hand, which is large and square and courteous, that the persons who have lately assembled in this house are asked to leave the city of Paris by the first of September, and that it is a matter of regret.
+?if b3.key == "bargained"
+  You have the Prince's word in your pocket, and you say so. Clemence says, without any expression at all, that she is glad that the Prince can be got to say something. She does not say that she believes it.
+?end
+They are in the long vaulted room, among the barrels, in the light of two lamps. There are fourteen of them now. There are some whom you do not know, a girl from the Halles with a bandaged hand, two brothers from the Gobelins who sit very close, an old workman who says nothing at all. Clemence is at the head of the table. She has been, since the field, the one who speaks.
+?if b3.coup == "backed"
+  Severin is at her left hand, and gets up when you come in, and takes your hand in both of his. He says that there is nobody in Paris whom he would sooner see. He says it quite simply, with the high color on his cheekbones, like a boy.
+?elif b3.coup == "stopped"
+  Severin is at the end of the table, and does not get up. He looks at you for some time, with his chin on his fist. He says, quite pleasantly, that he has been wondering whether it was kindness. He says that he has not been able to decide.
+?elif b3.coup == "told"
+  Severin is not there. His chair has been left empty, and nobody has sat in it, and when you look at it the whole room finds something to do with its hands.
+?else
+  Severin is on his feet by the stair, with his arms folded, and a very bright and brittle gaiety. He says that he is quite delighted. He says that he has always wished to be driven out of a city.
+?end
+?if b3.boy == "taught"
+  Thibault sits by Clemence, and has a pencil, and is writing out the notice in a fair round hand, word by word, to learn it. He looks up and smiles. It is the smile of a boy of sixteen, and it is not at all a boy's.
+?elif b3.boy == "hidden"
+  There is no Thibault. There is an empty place at the end of the bench, and a small blue cap that somebody has put on the table, and not moved.
+?end
+They want to know what you will do. They do not ask it. It is in every face, like the lamp.
+* Give them the old quarry gallery under the shop
+  $ b3.cadets_home = "sheltered"
+  $ humanity += 1
+  $ standing += 1
+  $ secrecy -= 2
+  $ cunning_brutal -= 1
+  $ bond.clemence += 2
+  $ bond.severin += 1
+  $ do chart("paris.rebels")
+  $ do discover("the_cadets")
+  It is a good place. It is dry, and deep, and has a second way out into the rue Gay-Lussac, by a well, and it is full of the dead of four hundred years, who are quiet company. Clemence goes down alone, with a candle, and is gone a quarter of an hour. When she comes up she has white dust on her sleeve, and a face that you cannot read. She says that it will do. She says that she has never been in a place before that was older than the court. Étienne, when he is told, takes off his spectacles, and says that he has been the keeper of that gallery for sixty years, and has never before been asked to let it.
+* Send them out of Paris, with letters to the regiments on the frontier
+  $ b3.cadets_home = "sent"
+  $ cunning_brutal += 1
+  $ standing += 1
+  $ secrecy += 1
+  $ bond.clemence -= 1
+  $ do chart("paris.rebels")
+  $ do discover("the_cadets")
+  It is a piece of business, and you do it as such. You have letters, from the shop, to a colonel at Metz and a commissary at Lille and a printer at Strasbourg who will do anything for a bale of paper. You say that there will be a war, soon, and that a war is a great place for the young, and for the dark, and that nobody counts the dead of a regiment. Clemence reads the letters twice. She says that it is a very sensible suggestion. She says that she supposes it is how the thing is done. The girl from the Halles begins, very quietly, to cry.
+* Tell them that it is for them to decide, and give them your hand
+  $ b3.cadets_home = "left"
+  $ defiance += 1
+  $ humanity += 1
+  $ secrecy += 1
+  $ standing -= 1
+  $ bond.clemence += 1
+  $ do chart("paris.rebels")
+  $ do discover("the_cadets")
+  You say that you are in no position to tell them what is right. You say that you will stand by what they decide, and that you do not know how much that will be. It is an honest answer, and a poor one, and Clemence takes it, with some dignity, for what it is worth. Somebody lights a third lamp. The old workman, who has not spoken, says that in his experience it is the people who say that who are still there in the morning. It is not clear whether it is a compliment.
+<~
+
+# shop
+## The prospectus
+Baptiste is not at the case. He is at the counting room desk, in his shirtsleeves, with a quill behind each ear and a great sheet of figures, and he has the look of a person who has found, to his own horror, that he can add.
+It is a prospectus. He has written it himself, in a fair large hand, and has had it set, and has pulled one proof. It is for a journal, to appear twice a week, on four pages, at three sous, under the title of Le Fanal, which is a ship's lantern, and he has the subscriptions of two hundred and twelve persons already, in a notebook, in pencil, at the Cordeliers, the day before the field. He says that they are not the sort who forget. He says that he has been told that the press is about to be put under a law. He says that it is the very reason.
+Adélaïde stands behind him with her arms folded, looking at the sums, and she does not say that they are wrong.
+?if b3.republic == "printed"
+  He does not say anything about the word. He does not need to. It is in the heading of the prospectus, in very small type, down at the left, where the editor's name would go: a single sentence, in Latin, that means that a thing is not the less true for being late.
+?elif b3.republic == "refused"
+  He has not forgiven you for the night of the twentieth, and he has not said so, and the prospectus is the way in which he does it. It is not a reproach. It is an invitation to be a person who would not do it again.
+?end
+?if b3.garnier == "bargained"
+  The Section's files are in the bottom drawer, under the second ledger, and neither of you has opened them. Baptiste has put a pot of ink on the top, for a paperweight.
+?elif b3.garnier == "sheltered"
+  There is a note on the corner of the desk, in a clerkly hand, that says that if the shop should be searched on the Tuesday, it will be on the Monday.
+?end
+He wants the shop's name. He does not say so. He wants the old brass plate on the door, and the presses at night, and a man who will sign a bond to the printer's guild. He knows, he says, that it is a great deal to ask.
+* Put the house's name to it, and the presses, and the brass plate
+  $ b3.journal = "backed"
+  $ defiance += 2
+  $ standing -= 1
+  $ secrecy -= 2
+  $ bond.baptiste += 3
+  $ bond.adelaide -= 1
+  $ do chart("paris.presses")
+  $ do discover("the_constitution_of_1791")
+  You sign it in the counting room, at the desk, under the lamp. It is quickly done. Étienne comes down in his nightcap, to witness, and reads it all through, twice, with his lips moving. He signs with a flourish. He says that it is the sixth time that the house has gone bail for a thing that will hang it, and that it has never yet been hanged, and he does not see why it should begin now. Baptiste does not say thank you. He gets up from the desk, and goes out into the yard, and you hear him in the dark, quite distinctly, laughing, like a boy who has been let out.
+* Lend him the money, through a bookseller in Lyon, and keep the house's name out
+  $ b3.journal = "funded"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  $ standing += 1
+  $ bond.baptiste += 1
+  $ do earn(-3)
+  $ do chart("paris.presses")
+  $ do discover("the_constitution_of_1791")
+  It is a very Italian arrangement. You say that it shall be set elsewhere, and printed on the old Swiss press at the back, under a name that does not exist, and paid for from Lyon, in letters of exchange. Baptiste hears it out with a face of stone. He says that it is generous. He says that it is also, so far as he can tell, the way in which one buys a person's silence, and that he would like it understood that he has no intention of being bought. Adélaïde, over his shoulder, lets her breath out. She had not been aware that she was holding it.
+* Say that it cannot be done, and the house is not to be put at risk
+  $ b3.journal = "refused"
+  $ secrecy += 2
+  $ standing += 1
+  $ humanity -= 1
+  $ bond.baptiste -= 3
+  $ bond.adelaide += 1
+  You say it as kindly as you can, and it is not kind. He listens to the end. Then he folds the proof of the prospectus into four, and puts it in his waistcoat, without a word, and takes the quills from behind his ears, one at a time, and sets them on the desk, like a man laying down a pair of keys. He says that he is twenty one. He says that there are other presses in Paris. He goes out to the yard, and you hear the door to the street open and shut, and you do not hear him come back.
+<~
+
+# aubry
+## The sergeant
+He has not been to the shop for nine days. He sends word, by the apprentice, that he will be on the bench in the little court of Saint-Séverin at ten, and that if you are not there he will understand.
+He is sitting on the bench in his old brown coat, with his hands on his knees and his hat on the stone beside him, and an air of enormous and weary patience, like a horse that has been left standing. He is looking at the church wall. It is a small, high, mossy wall, with a window in it that is never opened.
+?if b3.champ == "stood"
+  He does not look at your chest. He has taken great care not to. He says that he has put in his papers, that he has been refused, and that he has put them in again. He says that he has been a sergeant for twenty two years, and that on the seventeenth of July he fired into a crowd and into a man, and that the man did not fall, and that it is only the second of the things that he is troubled by.
+?elif b3.champ == "fetched"
+  He says that he has had Baptiste to supper twice since the field, and that the boy ate nothing. He says that it was a damned thing, that day, and that he is of the opinion that it was nobody's fault, and has not been able to make that sit.
+?else
+  He says that he was in the second rank, at the left, in the dust. He says that he fired into the air, as he was told to, and that the man next to him did not. He says that he is not certain that it is better.
+?end
+He says that there will be a war. He says it quite flatly, as a man reads off a gauge. He says that the Assembly has called for a hundred thousand volunteers to fill the battalions of the frontier, and that there are four hundred in the faubourg who have put their names down, and that they are all boys. He says that a battalion of boys wants a sergeant.
+He does not ask for it. He looks at the wall.
+* Keep him at the shop, as the porter of the yard, and let the war go by
+  $ b3.aubry_post = "kept"
+  $ humanity += 1
+  $ secrecy += 1
+  $ bond.aubry += 2
+  $ do discover("the_declaration_of_war")
+  You say that he has done his duty to the king and the nation and the faubourg and that it is time he did a little for himself. He laughs, shortly, through his nose. He says that he has not the least idea how. He says that he will take it, if it is offered, and that he will be a very bad porter. In the end he says that he will have a chair by the door, and a dog, if there is a dog to be had, and that you are not to let Adélaïde tell him what to do.
+* Write to the colonel of an old regiment of the line, and get him a captain's commission
+  $ b3.aubry_post = "sent"
+  $ standing += 1
+  $ cunning_brutal += 1
+  $ bond.aubry += 1
+  $ do discover("the_declaration_of_war")
+  It takes four letters, and a gift of wine, and the use of a name. You have it by the end of the week. He reads the commission in the yard, standing, in the light of the kitchen lamp, with his lips moving, and then he reads it again, and folds it small, and puts it inside his coat. He says that he had not thought to be an officer. He says that it is a thing that a man has to be forgiven for. He says it to the cobbles, and he does not say what he means.
+* Say that it is for him to decide, and that you will stand by it
+  $ b3.aubry_post = "left"
+  $ defiance += 1
+  $ humanity += 1
+  $ bond.aubry += 1
+  $ do discover("the_declaration_of_war")
+  He thinks about it for a very long time. The bell of Saint-Séverin goes the quarter, and the half. He says that he supposes that nobody has ever really decided anything, and that they have only been found, afterward, to have been standing somewhere. He puts on his hat. He says that you are a bad adviser, and that he is obliged to you for it.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is a little after nine. The streets are close and hot, and full of people who have not been able to sleep, and who talk in low voices on the doorsteps, about nothing.
+?elif actions_left() == 2
+  It is the middle of the night. A bell somewhere has struck twelve, and been answered, a little late, by two more, as if by a pair of old men disagreeing over the time.
+?else
+  It is three, and the stars have thinned, and there is a smell of damp, and the baker's boys are beginning to open the shutters in the rue de la Harpe. There is one thing more that you can do before the day.
+?end
+* Go to the Hôtel de Saint-Aubin, where Ottaviano's coach is waiting [once] ?if actions_left() > 0
+  ~> prince
+  $ do act()
+* Go to the brewery in the rue de Charonne, where the court's notice has been served [once] ?if actions_left() > 0
+  ~> cellar
+  $ do act()
+* Look in at the shop, where Baptiste has a prospectus on the desk [once] ?if actions_left() > 0
+  ~> shop
+  $ do act()
+* Walk to Saint-Séverin, where the sergeant has asked you to come [once] ?if actions_left() > 0
+  ~> aubry
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> autumn
+?end
+-> :night
+
+# autumn
+## The year turns
+You sleep, and wake, and sleep, and it is a matter of weeks. You have them as one has a long illness, in pieces: a bell, a bill, a draught of cold air under a door.
+The king has accepted the Constitution. He did it on the fourteenth of September, in the Assembly, in a plain black coat, and the whole of Paris lit its windows, and fired off the guns of the Invalides, and went to the Champ de Mars to dance. They put up a great tricolor ribbon on the Altar of the Fatherland, and nobody mentions the dust. It is said that it is all over. It is said by a great many persons, at the tops of their voices, in the street, with the air of men who are trying to be heard by somebody who is not listening.
+The new Assembly has met in the Riding School, on the first of October. There are not three hundred men in it who have ever sat before. They sit on the left, and on the right, and in the center, in a great noisy awkward mass, and the left is called the Mountain, as a joke, and has begun to take itself seriously. There is a man named Brissot, who talks very well, and who has discovered that there is no better cure for a quarrel at home than a war abroad. There is a king who has agreed to it, for reasons of his own. There is a queen who has written, in cipher, to her brother. It is not known to you what the cipher says. It is known to a great many.
+?if b3.cadets_home == "sheltered"
+  The Cadets live in the quarry. You hear them under the floor at night, a long way down, like a school at lessons: a voice, and a pause, and a murmur of answers. Clemence has taught the girl from the Halles to read. Étienne has put a lamp at the head of the stair, and does not say why.
+?elif b3.cadets_home == "sent"
+  A letter comes from Metz, in November, in a round hand, that has been taught. It says that it is cold, and that the regiment is good, and that the colonel does not look at the hours that his new clerk keeps. It is signed by Thibault, or by a boy who has been using his name. There is a drawing, at the foot, of a small dog.
+?else
+  The Cadets have gone, you hear, in ones and twos, to places that nobody names. Clemence is still at the brewery, with four or five. She is said to be looking after the old workman, who has taken a cold, and is dying of it, which is a thing that a vampire cannot do, and which nobody has had the heart to explain to him.
+?end
+?if b3.journal == "backed"
+  Le Fanal comes out on the third of November. It is pasted on every wall in the faubourg by the second morning, with the brass plate of the house in the corner of it, and sells nine hundred copies on the first day, and fourteen hundred on the second. Étienne has pasted one on the wall of the counting room, and has not allowed it to be touched. There is a notice in it, on the third page, on the price of bread, in Baptiste's own prose, that is the best thing that you have yet seen him do.
+?elif b3.journal == "funded"
+  Le Fanal comes out on the third of November, from a press that does not exist, under a name that has not been born. It is very good. You read it standing, in the street, in the light of a shop window. Baptiste does not speak of it. He has, a little too often, the look of a man who has been given a present, and who has not yet decided to whom he owes it.
+?else
+  There is a journal called Le Fanal, that comes out in November, from the shop of a printer in the rue de la Harpe, whom nobody has heard of. It is a very good one. It has a fair share of Baptiste's prose in it, under a name that is not his. Adélaïde reads it on the stairs, and folds it, and puts it in her apron.
+?end
+?if b3.aubry_post == "sent"
+  He is a captain in the Third Volunteers of the Faubourg. He writes once, from the camp at Soissons, in a hand like a row of fence posts. It says that the men are very young and the muskets very old, and that he has been teaching them to load. It says that it is a great comfort to be of use. It does not mention the king.
+?elif b3.aubry_post == "kept"
+  He has a chair by the door of the yard, and a dog, which is a lurcher, and a clay pipe. He is of no use whatever as a porter. He knows the name of every child in the street, and has been seen, at the hour when the shop shuts, teaching two of them to fire a wooden musket.
+?else
+  He is a sergeant still, in the parish battalion, in a coat that is quite as brown as it was. He has the look of a man who has made up his mind without having decided.
+?end
+Étienne does not come down to supper after Christmas. He has a cold that will not go, and a cough, and a way of lying very still in the afternoons, with his hand on the counterpane. The old doctor from the rue des Cordeliers says that it is nothing. He says it in a way that makes it perfectly clear.
+-> april
+
+# april
+## The nineteenth of April
+It is the evening before the war.
+It is a damp, mild, rather ordinary night, with a light rain in it, and a smell of lilac from somebody's yard, and a great crowd in the Palais-Royal, and a general sense that something has already happened. It has, in a manner. The king went to the Assembly this noon in his black coat, and read a paper, in a low flat voice, proposing war against the king of Bohemia and Hungary, which is to say the emperor, which is to say the queen's brother. The Assembly voted it, in an hour, almost without dissent. They cheered. They threw up their hats. A man at the back, who had sat on the left all that winter and said that he did not want it, was heard to say that he supposed that nobody ever does.
+There is a letter on the table in the counting room. It is from the Merchant house in the rue Vivienne, and it is cordial. It says that the Army of the North will want, by midsummer, forty thousand pairs of shoes, and flour for sixty thousand men, and a great many horses, and that the Minister of War has not got any of it, and has not got the money to pay for it, and has been told, by a person in the Treasury, to ask the houses of the city. It says that Collis has been named. It says that the terms are not what might be wished, and that the paper in which they are to be paid is the assignat, which is a thing that is now worth, in the Bourse, a good deal less than it says. It says that the Merchant house in Amsterdam has taken the liberty of thinking of a second way.
+Adélaïde has read it. She has marked the margin, in pencil, with two small crosses. She says that she is not able to say which of the two is the more disagreeable.
+:the_war
+* Take the contract for the Army of the North, and be paid in paper
+  $ b3.war = "contract"
+  $ standing += 2
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  $ secrecy -= 1
+  $ do earn(14)
+  $ do chart("paris.counting")
+  $ do discover("the_declaration_of_war")
+  You say that you will do it. You say it at the desk, in the lamplight, with a good deal less conviction than you show. It is a good contract. It will clothe, and feed, and shoe, a very great number of persons who are going to die, and it will pay, in a currency that is going to die with them, a profit that is very nearly real. Adélaïde writes the order, and sands it, and does not look up. She says that she will go to Rouen herself, for the leather. She says that it is a very fine thing to be useful, and that she has been told so, in the past, by a great many tailors.
+* Put the house's reserves into gold, and send them to Amsterdam
+  $ b3.war = "gold"
+  $ secrecy += 1
+  $ cunning_brutal += 2
+  $ standing -= 1
+  $ humanity -= 1
+  $ do earn(-4)
+  $ do chart("paris.counting")
+  $ do discover("the_declaration_of_war")
+  It is a matter of a night, and four letters, and a certain amount of arranging. You turn the paper into gold, at a loss, which the Bourse enjoys, and the gold into bills on Amsterdam, and the bills into a very small packet that goes out of the city at dawn in a bookseller's cart, in a bale of Voltaire. It is, as the Merchant house says, a second way. It is not, you reflect, a way that anybody would be proud of. Adélaïde, when she hears of it, says that it is a good thing that somebody in the house has the sense to be ashamed.
+* Leave Collis out of it, and let the war be somebody else's
+  $ b3.war = "none"
+  $ humanity += 1
+  $ standing -= 1
+  $ secrecy += 1
+  $ do earn(-2)
+  $ do chart("paris.counting")
+  $ do discover("the_declaration_of_war")
+  You say that you will not. You put the letter in the drawer, under the second ledger, with the Section's files, if there are any, and the Prince's card. It is a very small gesture, in the matter of forty thousand pairs of shoes, and it costs about what it ought. Étienne, who has been brought down in a chair, and sits at the foot of the table in a shawl, says, in a voice like a dry leaf, that in his experience a house is judged by what it declines. He says it to the lamp. Then he says that he is very tired.
+There is a knock at the yard door, at one, a plain knock, three times, the same that the Prince's footman uses. It is Ottaviano. He has no hat, and no coach, and his gray coat is wet through, and he says, with great calm, in the doorway, that he has been sent to say that the hand has moved.
+It was only for a moment. It made one stroke, and stopped. It was a thing like a letter, a single upright, such as one makes at the beginning of a word. He says that the Prince was in the cellar and saw it. He says that he sat down on the floor.
+He says that the Prince does not ask you to come tonight. He says that he thought that you should know.
+$ do rest()
+=> next

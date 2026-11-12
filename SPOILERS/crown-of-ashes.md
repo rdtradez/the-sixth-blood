@@ -137,3 +137,27 @@ Aftermath: the Cordeliers shut, the Jacobins split. A card from the Prince asks 
 Hooks: the Lady's hand has stopped and her awakening is near; the Prince's summons; Severin (if the Cadets were stopped or told); Garnier's papers (if bargained); Aubry's doubt; Baptiste and the republic; the Terror; the convent in the rue de Vaugirard.
 
 Flagged to the owner (spoiler light): the Champ de Mars shooting is moved from about seven to about nine in the evening so that the hero can be present after dark. Nothing else changes the big picture and no major character dies.
+
+## Chapter 13, "The Dark of the Moon" (`b3c13`, session 35)
+
+The design doc has no list for chapters 13 and 14 beyond the book outline, so this plan was written from the hooks chapter 12 left: the Prince's card, the stopped slate, the Cadets, Aubry, Baptiste, the war. Late July 1791 to the nineteenth of April 1792 (the eve of the declaration of war). Opens on the fortnight after the Champ de Mars and the Prince's coach (Ottaviano on the box), no phase. Hunger scene on entry if needed.
+
+Night phase (the dark of the moon), three of four: the Hotel de Saint-Aubin (the Prince, small and unslept, says the Lady will wake and read what he has done; offers a new bright key to the grille; `b3.key`: held (took it and promised to stand at the grille), refused, bargained (took it for the Cadets' safety until she wakes); reads `b3.vault`, `b3.charter`, `b3.coup`); the rue de Charonne brewery (Brezac's notice that the Cadets must leave Paris by the first of September; `b3.cadets_home`: sheltered (the quarry gallery under the shop), sent (letters to the regiments on the frontier), or left; reads `b3.coup`, `b3.boy`, `b3.key`); the shop (Baptiste's prospectus for the journal Le Fanal; `b3.journal`: backed (the house's name and plate), funded (money through Lyon, no name), refused; reads `b3.republic`, `b3.garnier`); the bench at Saint-Severin (Aubry and the volunteers; `b3.aubry_post`: kept (porter of the yard), sent (a captain's commission), left; reads `b3.champ`).
+
+The autumn is told at dusk (the king accepts the Constitution on 14 September, the Legislative Assembly on 1 October, the Cadets, the journal, Aubry, Etienne's cough). Fixed closing scene, the nineteenth of April 1792: the king proposes war, the Merchant house's letter about the Army of the North (forty thousand pairs of shoes, paid in assignats); `b3.war`: contract (Collis takes it, paid in paper; wealth up, humanity down), gold (reserves out to Amsterdam; a second way), none (left out of it). Ottaviano at the yard door at one: the hand has moved, once, a single upright stroke.
+
+Hooks: the Lady's second line; the convent (Sept 1792); Etienne's decline; Baptiste's journal and the Terror; the Cadets in the quarry or at Metz; Aubry as captain or porter; the war contract and the assignat.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 14, "The Tenth of August" (`b3c14`, session 35)
+
+The night of the ninth to the tenth of August 1792, and the dusk of the tenth. Opens on the evening of the ninth (the Brunswick manifesto, the twentieth of June told, the Marseillais), no phase. Hunger scene on entry if needed.
+
+Night phase, three of four: the Hotel de Saint-Aubin (Brezac and the court's eleven mean to go to the king; `b3.brezac`: held (stood in the door and said the Prince's silence is the Prince's order), let, rode (went as far as the Carrousel, where the Swiss captain politely declines them); reads `b3.key`); the rue de Charonne (the faubourg column under the tocsin, and the Cadets, who cannot fight in the day; `b3.faubourg`: marched (with the column as far as the Place de la Bastille), steered (took the bridges instead), stayed; reads `b3.cadets_home`, `b3.coup`); the Tuileries (the Swiss and the gentlemen in black coats; `b3.palace`: warned (told the captain what the morning would be), carried (took the linen keeper and the servants' children out by the river gate), watched; reads `b3.brezac`, `b3.champ`); the shop (the Commune's proclamation, Baptiste and Etienne's bedside; `b3.baptiste`: let (to the Place de la Bastille with the bills), kept (print instead), went (with him as far as the Place, home at dawn); reads `b3.journal`, `b3.aubry_post`).
+
+The day is told at dusk by Adelaide (the king to the Assembly, the Swiss killed, the palace burning). Fixed closing scene: the third cellar at ten. The Prince has come down alone and sits on the floor before the grille. The hand writes a second passage (a Sunday, the second of September, the house in the rue de Vaugirard to be left open, the young ones to be let to burn, the Prince to be on the other side of the river). `b3.slate`: told (it is both his hand and hers), kept (kept it to himself), rubbed (rubbed out the line; it is written again). Reads `b3.vault` (if broke, the chalk writes on the rock), `b3.key`, `b3.nationals` (the convent as bought, lent or a prison), `b3.hunt`.
+
+Hooks: the September massacres at the convent in the rue de Vaugirard; the Prince's collapse; the Cadets; Clemence in the cellar of the old Hotel de Ville; Etienne; Baptiste and the Commune; Brezac at home with his Tokay; the Lady's waking.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies. The Cadets sit out the assault itself because it happens in daylight.
