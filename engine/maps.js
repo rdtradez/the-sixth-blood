@@ -36,6 +36,22 @@ export const MAPS = {
     fire: [],
     sites: ['farm', 'square', 'villa', 'press', 'gate', 'crypt', 'road'],
   },
+  paris: {
+    book: 'crown-of-ashes',
+    page: 'paris',
+    title: 'Paris',
+    start: ['roadhome'],
+    fire: [],
+    sites: ['presses', 'counting', 'land', 'valere', 'haven', 'rebels', 'court', 'roadhome'],
+  },
+  collesanto3: {
+    book: 'crown-of-ashes',
+    page: 'paris',
+    title: 'Collesanto',
+    start: ['farm', 'square', 'villa', 'road'],
+    fire: [],
+    sites: ['farm', 'square', 'villa', 'press', 'gate', 'crypt', 'road'],
+  },
 };
 
 /** "rome.warehouse" -> true when it is a real site of a real map. */

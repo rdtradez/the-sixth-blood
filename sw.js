@@ -1,11 +1,11 @@
 // Service worker: lets the game open and play offline after the first visit.
 // Network first, so a new release is picked up as soon as the device is online;
 // the cache is only the fallback. Bump VERSION to force old caches to be dropped.
-const VERSION = 'tsb-7';
+const VERSION = 'tsb-8';
 
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',
-  'app/styles.css', 'app/main.js', 'app/dom.js', 'app/art.js', 'app/settings-ui.js', 'app/panels.js', 'app/maps/city.html', 'app/maps/florence.html', 'engine/maps.js', 'app/devpanel.js', 'app/creation.js',
+  'app/styles.css', 'app/main.js', 'app/dom.js', 'app/art.js', 'app/settings-ui.js', 'app/panels.js', 'app/maps/city.html', 'app/maps/florence.html', 'app/maps/paris.html', 'engine/maps.js', 'app/devpanel.js', 'app/creation.js',
   'fonts/cinzel-latin-400-normal.woff2', 'fonts/cinzel-latin-600-normal.woff2', 'fonts/eb-garamond-latin-400-normal.woff2',
   'fonts/eb-garamond-latin-400-italic.woff2', 'fonts/eb-garamond-latin-600-normal.woff2', 'fonts/pinyon-script-latin-400-normal.woff2',
   'engine/util.js', 'engine/expr.js', 'engine/state.js', 'engine/script.js', 'engine/validate.js',

@@ -55,6 +55,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 25: Book Two chapters 15 and 16
 - [x] Session 26: Book Two chapters 17 and 18
 - [x] Session 27: Book Two chapters 19 and 20; Book Two is complete (journal, recap, sleep to Paris)
+- [x] Session 28: the Paris and Collesanto (1788) maps for Book Three
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -241,13 +242,19 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - `tests/interlude-b.test.js` covers the chain end and the chapter order; `tests/book1.test.js` first night checks use `stopAt: 'lc01'`.
 - Plans are in `SPOILERS/lost-centuries.md`.
 
-- Maps (session 6): the Map tab in the menu shows `app/maps/city.html` (procedural SVG: Rome and Collesanto, with an After the fire toggle) in an iframe and tells it which sites to show. Sites per map are listed in `engine/maps.js`; `roadhome`, the farm, square, villa and road start charted. Chapters add places with `$ do chart("rome.warehouse")` and can test `charted("rome.warehouse")`. Charted places live in `sys.lore.sites` (SCHEMA 5). Later books add their city to `engine/maps.js` and `city.html`; the approved standalone previews for Florence, Paris, New Orleans, London, Chicago and New York are kept outside the repo until their sessions.
+- Maps (session 6): the Map tab in the menu shows `app/maps/city.html` (procedural SVG: Rome and Collesanto, with an After the fire toggle) in an iframe and tells it which sites to show. Sites per map are listed in `engine/maps.js`; `roadhome`, the farm, square, villa and road start charted. Chapters add places with `$ do chart("rome.warehouse")` and can test `charted("rome.warehouse")`. Charted places live in `sys.lore.sites` (SCHEMA 5). Later books add their city to `engine/maps.js` and `city.html`; the approved standalone previews for Florence (done), Paris (done), New Orleans, London, Chicago and New York are kept outside the repo until their sessions.
 
 ### Session 17 notes (for the next session)
 
 - The Rome map tab from session 6 had never been merged into `main`; session 17 merged it first, then added the Florence map.
 - `app/maps/florence.html` draws Florence and Collesanto as it stands in 1474 (walled, unburned). `engine/maps.js` now gives each map a `page` (`city` or `florence`); the Map tab loads the page of the book the hero is in. New maps: `florence` (`bank`, `prisca`, `wool`, `bottega`, `haven`, `court`, `rooms`, `roadhome`) and `collesanto2` (`farm`, `square`, `villa`, `press`, `gate`, `crypt`, `road`), both for book `blood-and-gold`. Book Two chapters chart sites with `$ do chart("florence.bank")`.
 - `sw.js` caches the new page (`VERSION` is `tsb-7`). Later city maps follow the same pattern: copy the page, list the sites in `engine/maps.js`.
+
+### Session 28 notes (for the next session)
+
+- `app/maps/paris.html` draws Paris and Collesanto as they stand in 1788 (walled Paris with its barrières, the Seine and both banks; the walled village). It is the Florence page with the approved Paris preview's drawing and sites. `engine/maps.js` gains `paris` (`presses`, `counting`, `land`, `valere`, `haven`, `rebels`, `court`, `roadhome`) and `collesanto3` (`farm`, `square`, `villa`, `press`, `gate`, `crypt`, `road`), both for book `crown-of-ashes` on page `paris`. Book Three chapters chart sites with `$ do chart("paris.counting")`.
+- The Paris press site is `presses`, not `press`, because the Map tab sends one flat list of visible site ids to the page and `collesanto3` already uses `press`. Keep site ids unique across the two maps of a book. A test checks this.
+- `sw.js` caches the new page (`VERSION` is `tsb-8`). New Orleans, London, Chicago and New York follow the same pattern.
 
 ### Session 18 notes (Book Two, chapters 1 and 2)
 

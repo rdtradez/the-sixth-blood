@@ -524,3 +524,21 @@ test('maps: Book Two shows Florence and Collesanto on the Florence page', async 
   assert.deepEqual(maps.map((m) => m.id), ['florence', 'collesanto2']);
   assert.ok(maps.every((m) => m.page === 'florence'));
 });
+
+test('maps: Book Three shows Paris and Collesanto on the Paris page, with no site id shared between the two', async () => {
+  const { mapView, mapsFor, siteKnown, MAPS } = await import('../engine/maps.js');
+  const { createState } = await import('../engine/state.js');
+  const st = createState();
+  st.sys.lore = { codex: {}, kin: {}, sites: { 'paris.haven': { book: 'crown-of-ashes', chapter: null } } };
+  assert.deepEqual(mapView(st, 'paris').sites, ['haven', 'roadhome']);
+  assert.deepEqual(mapView(st, 'collesanto3').sites, ['farm', 'square', 'villa', 'road']);
+  assert.equal(siteKnown('paris.presses'), true);
+  assert.equal(siteKnown('paris.press'), false);
+  assert.equal(siteKnown('collesanto3.press'), true);
+  const overlap = MAPS.paris.sites.filter((s) => MAPS.collesanto3.sites.includes(s));
+  assert.deepEqual(overlap, []);
+  st.book = 'crown-of-ashes';
+  const maps = mapsFor(st, null);
+  assert.deepEqual(maps.map((m) => m.id), ['paris', 'collesanto3']);
+  assert.ok(maps.every((m) => m.page === 'paris'));
+});
