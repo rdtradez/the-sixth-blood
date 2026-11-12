@@ -2989,6 +2989,110 @@
       "book": "crown-of-ashes",
       "default": "refused",
       "note": "Chapter 8: what the house did about the parish battalion's muskets (refused if he did not hear them)"
+    },
+    "b3.rights": {
+      "kind": "enum",
+      "values": [
+        "refused",
+        "plain",
+        "annotated"
+      ],
+      "book": "crown-of-ashes",
+      "default": "refused",
+      "note": "Chapter 9: how the house printed the Declaration of the Rights of Man (refused if he did not go to the press room)"
+    },
+    "b3.exodus": {
+      "kind": "enum",
+      "values": [
+        "stood",
+        "sent",
+        "told"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "stood",
+      "note": "Chapter 9: what he said to the Cadets about the Lictor's deadline (stood if he did not go)"
+    },
+    "b3.boy": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "taught",
+        "hidden"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 9: what he did for Thibault in the last week of August (left if he did not look for him)"
+    },
+    "b3.protest": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "asked"
+      ],
+      "book": "crown-of-ashes",
+      "default": "left",
+      "note": "Chapter 9: whether he asked the Prince to recall the Lictor's leave to hunt (left if he did not go)"
+    },
+    "b3.hunt": {
+      "kind": "enum",
+      "values": [
+        "taken",
+        "sworn",
+        "spared",
+        "destroyed"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "taken",
+      "note": "Chapter 9: how Galerius's last hunt ended: the boy taken, his oath sworn, Galerius spared, or destroyed"
+    },
+    "b3.versailles": {
+      "kind": "enum",
+      "values": [
+        "watched",
+        "door",
+        "women"
+      ],
+      "book": "crown-of-ashes",
+      "default": "watched",
+      "note": "Chapter 10: what he did at Versailles on the morning of the sixth of October (watched if he did not go)"
+    },
+    "b3.courier": {
+      "kind": "enum",
+      "values": [
+        "let",
+        "followed",
+        "taken"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "let",
+      "note": "Chapter 10: what he did about the courier from Avignon (let if he did not go)"
+    },
+    "b3.vault": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "read",
+        "broke"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 10: what he did in the third cellar of the Hotel de Saint-Aubin (left if he did not go)"
+    },
+    "b3.march": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "bread",
+        "armed"
+      ],
+      "book": "crown-of-ashes",
+      "default": "none",
+      "note": "Chapter 10: what he did for the women of the faubourg on the night of the fifth (none if he did not go)"
     }
   }
 }

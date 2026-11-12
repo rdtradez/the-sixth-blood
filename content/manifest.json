@@ -543,6 +543,24 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b3c09",
+          "file": "crown-of-ashes/ch09.tsb",
+          "title": "The Thirty-First",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        },
+        {
+          "id": "b3c10",
+          "file": "crown-of-ashes/ch10.tsb",
+          "title": "The Lady Who Sleeps",
+          "notes": [
+            "blood",
+            "violence"
+          ]
         }
       ],
       "incomplete": true

@@ -355,6 +355,36 @@
       "title": "The Great Fear",
       "book": "crown-of-ashes",
       "text": "In the last days of July 1789 a rumor of brigands, said to be hired by the nobility to cut the green corn, ran across France faster than a rider could carry it. A hundred thousand villagers rang the tocsin and took up arms against an enemy that was not there."
+    },
+    "the_declaration": {
+      "category": "lore",
+      "title": "The Declaration of the Rights of Man",
+      "book": "crown-of-ashes",
+      "text": "Seventeen articles passed by the National Assembly on the twenty sixth of August 1789. It says that men are born and remain free and equal in rights, and it does not say which men."
+    },
+    "the_innocents": {
+      "category": "places",
+      "title": "The Innocents",
+      "book": "crown-of-ashes",
+      "text": "The oldest cemetery in Paris, six hundred years of the dead in a single walled yard. It was closed in 1780 and has been emptied, a cart a night, into the quarries beyond the Barrière d'Enfer."
+    },
+    "the_october_days": {
+      "category": "lore",
+      "title": "The October days",
+      "book": "crown-of-ashes",
+      "text": "On the fifth of October 1789 the market women of Paris marched on Versailles in the rain, asking for bread. On the sixth they brought the king and queen back to the Tuileries, with the baker, the baker's wife and the baker's boy as their cry."
+    },
+    "the_avignon_account": {
+      "category": "lore",
+      "title": "The Avignon account",
+      "book": "crown-of-ashes",
+      "text": "A purse of gold sent four times a year from the Prince's house to a town in the south, in the name of a Lady who sleeps, and a letter that comes back."
+    },
+    "the_third_cellar": {
+      "category": "places",
+      "title": "The third cellar",
+      "book": "crown-of-ashes",
+      "text": "The deepest cellar of the Hotel de Saint-Aubin, older than the house, closed by a steel door with a grille. The court calls it the Cellar and does not say what is in it."
     }
   }
 }
