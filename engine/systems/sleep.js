@@ -169,6 +169,8 @@ export const sleep = {
       },
     },
     wake_event: { spec: ['text'], fn: (ctx, id) => Boolean(sysOf(ctx).sleep.wake?.events?.includes(id)) },
+    // True if the long sleep he has just woken from was put into this investment (content/sleep.json).
+    wake_invest: { spec: ['investment'], fn: (ctx, id) => Boolean(sysOf(ctx).sleep.wake?.invest?.includes(id)) },
   },
   commands: {
     rest_place: { spec: [PLACES], fn: (ctx, place) => { plan(sysOf(ctx)).place = place; } },

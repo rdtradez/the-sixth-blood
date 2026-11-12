@@ -56,6 +56,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 26: Book Two chapters 17 and 18
 - [x] Session 27: Book Two chapters 19 and 20; Book Two is complete (journal, recap, sleep to Paris)
 - [x] Session 28: the Paris and Collesanto (1788) maps for Book Three
+- [x] Session 29: Book Three chapters 1 and 2
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
 ### Session 1 notes (for the next session)
@@ -367,3 +368,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New codex entry: the Merchant (lore). No new people. Content notes: chapter 19 carries `blood` and `grief`, chapter 20 carries `slavery` and `grief`.
 - Tests: `tests/book2j.test.js` plays both chapters down their branches (every Merchant tone, stance and answer, every door, the fate and the gift, hunger, a woman hero, every last night, steward, order, guard, investment and letter, the end of the book, the journal). All Book Two test files now expect twenty chapters and a finished book, and `tests/book2i.test.js` lets chapter 18 run on into chapter 19.
 - Plans are in `SPOILERS/blood-and-gold.md`.
+
+### Session 29 notes (Book Three, chapters 1 and 2)
+
+- Book Three ("crown-of-ashes") begins. Chapters `b3c01` and `b3c02` are in `content/crown-of-ashes/` (`ch01.tsb`, `ch02.tsb`). The manifest entry is `"incomplete": true`, so the game pauses on "To be continued" after chapter 2 and carries on by itself when chapter 3 is added.
+- Chapter 1 reads the chained `wake()` report (place, steward, outcome, who woke him) for every combination, including the quick start report, and the new `wake_invest("id")` function (true if the long sleep was put into that investment; docs/SYSTEMS.md). He wakes in Tuscany, so chapter 1 closes by setting out for Paris and chapter 2 opens on the road. Chapter 1 is a night phase of three actions out of four and ends with `rest()` and `=> next`. Chapter 2 is the road and an arrival (no phase), then a night phase of three actions out of four and a short dawn; it ends with `rest()` and `=> next`, which pauses until chapter 3 exists. Chapter 3 should read hunger, standing and secrecy as chapter 2 left them.
+- New decision flags use the `b3.` prefix and are registered in `content/flags.json` with `book`, `major` where later chapters care, and a quick start `default`: `b3.trouble`, `b3.sugar`, `b3.crane_offer` (chapter 1) and `b3.valere`, `b3.press`, `b3.bread` (chapter 2), with `b3.first_feed`, `b3.king`, `b3.books`, `b3.street`, `b3.prisca_reply`, `b3.titles` and `b3.venture` as smaller notes. Flags that can be skipped have an `unseen` value that the chapter sets on entry.
+- New people (`content/people.json`): Etienne, Adelaide and Baptiste Valere, Captain Aubry and Anselme Roux. The Valere are also in `content/family.json` (quick start status: living). New codex entries: the court at Paris, the Wall of the Farmers General and the book trade of the Latin quarter. Content notes: chapter 1 carries `blood`, `violence` and `slavery`, chapter 2 carries `blood`.
+- Chapter 2 uses `invest()` for the first time in Book Three (`paris.printing` or `paris.wine`, only if the house can afford it) and charts `paris.valere`, `paris.presses`, `paris.counting` and `paris.court`; chapter 1 charts `collesanto3.crypt` or `collesanto3.road`. Prisca appears only as a letter in this book.
+- Tests: `tests/book3.test.js` plays both chapters from nine kinds of waking, down every branch (each way out of being woken early, each way to eat, each answer to the king, the books, the street and Prisca's note; each use of the sleep's investments; every greeting, press, bread and venture choice; the family told or not told), and checks the no dashes and no braces rules.
+- Plans are in `SPOILERS/crown-of-ashes.md`.
+

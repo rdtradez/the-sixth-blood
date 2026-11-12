@@ -71,6 +71,24 @@
       "book": "blood-and-gold",
       "label": "Descendant",
       "quick": "dead"
+    },
+    "etienne": {
+      "person": "etienne",
+      "book": "crown-of-ashes",
+      "label": "Descendant",
+      "quick": true
+    },
+    "adelaide": {
+      "person": "adelaide",
+      "book": "crown-of-ashes",
+      "label": "Descendant",
+      "quick": true
+    },
+    "baptiste": {
+      "person": "baptiste",
+      "book": "crown-of-ashes",
+      "label": "Descendant",
+      "quick": true
     }
   }
 }

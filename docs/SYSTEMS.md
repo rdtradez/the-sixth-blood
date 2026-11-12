@@ -170,7 +170,7 @@ $ do sleep()
 
 `$ do steward_corrupted()` marks a steward secretly turned or bribed. Outcomes: `prospered`, `on_schedule`, `losses`, `woken_early` (by `hunters`, `government` or `steward`). Safety is the steward's skill and loyalty, protections, the hiding place (Collesanto's walls, a tomb, the haven's holdings) and a seeded roll; danger is the orders, the history of the gap, an unhidden Collis paper trail, low Secrecy, risky investments and a corrupted steward. On waking: age rises one tier, hunger is high (very high if woken early), wounds are healed, adjustment is low, ventures become legacy, city holdings are gone, the village has grown. Woken early he is broke.
 
-The next book's opening reads `wake("outcome")`, `wake("by")`, `wake("steward")`, `wake("orders")`, `wake("place")`, `wake("gap")`, `wake("richer")`, `wake("years")` and `wake_event("black_death")`.
+The next book's opening reads `wake("outcome")`, `wake("by")`, `wake("steward")`, `wake("orders")`, `wake("place")`, `wake("gap")`, `wake("richer")`, `wake("years")`, `wake_event("black_death")` and `wake_invest("plantations")` (true if that sleep was put into the investment).
 
 A gap marked `"split": true` in `content/sleep.json` can be broken into several sleeps by interlude chapters (`$ do sleep("gap_id")`); quick start skips split gaps.
 

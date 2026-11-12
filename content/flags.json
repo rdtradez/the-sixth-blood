@@ -2496,6 +2496,157 @@
       "major": true,
       "default": "none",
       "note": "Chapter 20: whether he left a letter in the strong room for the turned clerk"
+    },
+    "b3.trouble": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "fled",
+        "fought",
+        "talked"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 1: how he got out of being woken early (none if he was not)"
+    },
+    "b3.first_feed": {
+      "kind": "enum",
+      "values": [
+        "animal",
+        "donor",
+        "human",
+        "none"
+      ],
+      "book": "crown-of-ashes",
+      "default": "animal",
+      "note": "Chapter 1: how he took the first meal of the age (none if he went without)"
+    },
+    "b3.king": {
+      "kind": "enum",
+      "values": [
+        "bluffed",
+        "asked",
+        "blustered"
+      ],
+      "book": "crown-of-ashes",
+      "default": "bluffed",
+      "note": "Chapter 1: how he asked who is king of France"
+    },
+    "b3.books": {
+      "kind": "enum",
+      "values": [
+        "trusted",
+        "audited"
+      ],
+      "book": "crown-of-ashes",
+      "default": "trusted",
+      "note": "Chapter 1: whether he signed the steward's books or read them through"
+    },
+    "b3.sugar": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "kept",
+        "sold",
+        "funded"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "unseen",
+      "note": "Chapter 1: what he did about the sugar plantation in Saint-Domingue (unseen unless the sleep was put into plantations)"
+    },
+    "b3.crane_offer": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "refused",
+        "considered"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "unseen",
+      "note": "Chapter 1: his answer to Crane's offer for the Manhattan land (unseen unless the sleep was put into New Amsterdam)"
+    },
+    "b3.street": {
+      "kind": "enum",
+      "values": [
+        "watched",
+        "spoke",
+        "printed"
+      ],
+      "book": "crown-of-ashes",
+      "default": "watched",
+      "note": "Chapter 1: what he did on his first night out on the hill or in Florence"
+    },
+    "b3.prisca_reply": {
+      "kind": "enum",
+      "values": [
+        "warm",
+        "formal",
+        "silent"
+      ],
+      "book": "crown-of-ashes",
+      "default": "formal",
+      "note": "Chapter 1: how he answered Prisca's note from Amsterdam"
+    },
+    "b3.titles": {
+      "kind": "enum",
+      "values": [
+        "monseigneur",
+        "monsieur",
+        "asked"
+      ],
+      "book": "crown-of-ashes",
+      "default": "monsieur",
+      "note": "Chapter 2: how he greeted the master of the Valère house"
+    },
+    "b3.valere": {
+      "kind": "enum",
+      "values": [
+        "sworn",
+        "trusted",
+        "distant"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "trusted",
+      "note": "Chapter 2: how far the Valère family are told the truth, or take the oath"
+    },
+    "b3.press": {
+      "kind": "enum",
+      "values": [
+        "quiet",
+        "licensed",
+        "underground"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "quiet",
+      "note": "Chapter 2: what he told Baptiste about the pamphlet on bread: wait, take a royal permission, or print it under a foreign imprint"
+    },
+    "b3.bread": {
+      "kind": "enum",
+      "values": [
+        "gave",
+        "fed",
+        "passed"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "passed",
+      "note": "Chapter 2: what he did in the bread queue of the rue Saint-Jacques"
+    },
+    "b3.venture": {
+      "kind": "enum",
+      "values": [
+        "printing",
+        "wine",
+        "none"
+      ],
+      "book": "crown-of-ashes",
+      "default": "none",
+      "note": "Chapter 2: whether the house put money into the presses, the wine, or nothing"
     }
   }
 }
