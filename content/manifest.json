@@ -508,6 +508,23 @@
             "blood",
             "slavery"
           ]
+        },
+        {
+          "id": "b3c05",
+          "file": "crown-of-ashes/ch05.tsb",
+          "title": "The Faubourg Saint-Antoine",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b3c06",
+          "file": "crown-of-ashes/ch06.tsb",
+          "title": "The Wallpaper Factory",
+          "notes": [
+            "blood",
+            "violence"
+          ]
         }
       ],
       "incomplete": true

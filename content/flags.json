@@ -2788,6 +2788,114 @@
       "major": true,
       "default": "left",
       "note": "Chapter 4: what he did about the bill of the Cadets on the wall of the Collège de Beauvais (left if he did not go out)"
+    },
+    "b3.cadets": {
+      "kind": "enum",
+      "values": [
+        "heard",
+        "sworn",
+        "refused"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "heard",
+      "note": "Chapter 5: what he answered the Cadets in the cellar in the rue de Charonne (heard if he did not go)"
+    },
+    "b3.list": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "kept",
+        "warned",
+        "burned"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "unseen",
+      "note": "Chapter 5: what he did with the Prince's paper of twelve names (unseen if the Prince was not served or he did not read it)"
+    },
+    "b3.galerius": {
+      "kind": "enum",
+      "values": [
+        "own",
+        "senate",
+        "court"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "own",
+      "note": "Chapter 5: whom he told the Lictor he answers to (own if he did not go)"
+    },
+    "b3.grain": {
+      "kind": "enum",
+      "values": [
+        "ignored",
+        "hoarded",
+        "relieved",
+        "exposed"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "ignored",
+      "note": "Chapter 5: what he did about the grain company at Corbeil (ignored if he did not sit down with the letter)"
+    },
+    "b3.aubry": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "drilled",
+        "listened"
+      ],
+      "book": "crown-of-ashes",
+      "default": "left",
+      "note": "Chapter 5: what he did when Aubry offered to drill the boys of the shop (left if he did not go out)"
+    },
+    "b3.riot": {
+      "kind": "enum",
+      "values": [
+        "held",
+        "stood",
+        "turned"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "held",
+      "note": "Chapter 6: where he put himself in the rue de Montreuil (held if he did not go)"
+    },
+    "b3.veil": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "covered",
+        "silenced"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 6: what he did about the boy who got up in front of a sergeant (left if he did not go)"
+    },
+    "b3.wounded": {
+      "kind": "enum",
+      "values": [
+        "refused",
+        "sheltered"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 6: whether the shop took in the wounded (refused if he did not go back)"
+    },
+    "b3.council": {
+      "kind": "enum",
+      "values": [
+        "silent",
+        "cadets",
+        "court"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "silent",
+      "note": "Chapter 6: what he said to the council at the Hotel de Saint-Aubin (silent if he did not go)"
     }
   }
 }

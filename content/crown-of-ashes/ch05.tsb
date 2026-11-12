@@ -1,0 +1,272 @@
+// Book Three, Chapter 5 (session 31). The faubourg Saint-Antoine in Lent, March 1789. The young ones, the Lictor's room, the bread.
+// Opens on the faubourg by day (no phase), then one night phase of three actions out of four, then a dawn that points at the spring.
+// Ends with rest() and => next. Reads b1.galerius, b1.galerius_aid, b3.weapon, b3.roll, b3.severin, b3.press, b3.sugar and b3.gallery. Chapter 6 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c05
+@title The Faubourg Saint-Antoine
+@book crown-of-ashes
+@version 1
+
+# start
+## Lent
+$ b3.cadets = "heard"
+$ b3.list = "unseen"
+$ b3.galerius = "own"
+$ b3.grain = "ignored"
+$ b3.aubry = "left"
+~> faubourg
+?if must_feed()
+  ~> hunger
+?end
+---
+$ do phase("night", 3)
+It is the Sunday of the card, and the faubourg does not close its shutters until the church bells have stopped, and then it opens them again. There are four things in it that want doing by your own reckoning, and time for three.
+-> night
+
+# faubourg
+The faubourg Saint-Antoine lies east of the Bastille like a second city that has been told to wait outside the first. It is the city of the hands. The cabinet makers are here, who make the beds and the clock cases of the whole of Europe, and the glassmen, and the dyers, and the men who make the carriages that the court rides in, and ten thousand more who make nothing in particular and are paid by the day. They live six to a room, up black stairs, in courts that the carts cannot get into. It is a place that Paris does not look at, as Paris does not look at its own feet.
+It is Lent, and it is the worst Lent in memory. The bread stands at fourteen sous the four pound loaf, and a journeyman earns twenty sous on a good day. In the rue de Charonne a woman is selling her mattress by the handful, wool by wool, to a man who is selling it again by the pound. At the end of the rue de Montreuil there is a high wall with a good deal of smoke coming over it, which is the paper works of Monsieur Réveillon, who makes the wallpaper that the court hangs in its salons, and who is, they say, a very good master, and pays his people well, and is hated for it with the particular loathing that the poor keep for the one rich man whom they have to look at.
+You have a card in your coat that smells of violets, and an address on the back of it in a hand that has looked at a good many Roman inscriptions.
+?if b3.severin == "open"
+  Séverin has sent a boy to wait for you at the Pont Marie. He is about twelve, with a cap pulled down and a lilac ribbon in the lining of it. He says that Monsieur Séverin sends his compliments, and that the house in the rue de Charonne has a green door, and that he would not like you to think that it was a trap, because it is not nearly clever enough for that.
+?else
+  Nobody has sent for you. It is the card that has done it, and the empty place on the press, and the plain fact that when a house has been entered once by someone who left a note, the only civil thing is to go and say that you got it. You go on foot, in the dusk, with your collar up.
+?end
+<~
+
+# hunger
+## The Lenten fast
+The hunger finds you at the Pont Marie, with the river going by black and slow beneath it. It is not a thing that you can walk off in a faubourg where every face is turned toward you for the plain reason that it has nothing else to look at. A woman in a doorway has stopped talking in the middle of a word.
+* Take it from a drunkard asleep under the arch, and leave him his purse
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  It is quick. He is warm with cheap wine, and he does not stir, and you leave him in the straw with his coat drawn over him as one covers a child. There are, you think, a good many people in this city who would have been grateful to do it for the sake of the purse.
+* Go down to the slaughter yards on the Bièvre, where the hides are scraped
+  $ do feed("animal")
+  $ humanity += 1
+  $ secrecy += 1
+  The tanners look at you once, and then very carefully do not look at you again. They have seen stranger. There is a calf, and a bucket, and nobody speaks. You walk back up the hill with the taste of tannery and iron in your mouth and the feeling of a man who has done a clean thing in a dirty place.
+* Take nothing, and go on with it
+  $ cunning_brutal += 2
+  $ humanity += 1
+  It stays. It goes up the stairs with you and into the room, a small lean thing, patient, and sits at the foot of your chair. It will want a great deal more attention before the night is out.
+<~
+
+# cadets
+## The green door
+The house in the rue de Charonne is a cooper's yard with a house in front of it, and under the house is a vaulted cellar that was a brewery in the time of Louis the Fourteenth. There are forty people in it. They are sitting on casks and on the stairs and on the floor, in the light of six candles, and they are all very young. They are the youngest vampires that you have seen in Paris, and some of them are the youngest you have seen anywhere. They are the journeyman's sons, and the girls of the glassworks, and the apprentices of the carriage makers, made in a hurry by a great many different hands in the last twenty years, and left to learn the rules from one another.
+Nobody stops talking when you come in. They are watching you the way that people watch a very large dog that they have been told is gentle.
+Séverin is on the cellar stair. He has taken off the lilac coat, and has on a plain gray one, and looks nineteen, which he is not. He does not bow. He says, with a cheerfulness that is a good deal more careful than it sounds, that he is glad that you could come, and that he hopes you will forgive the arrangements, because they have had to be made by people who have never made any.
+A girl comes down beside him. She is perhaps twenty, square and dark, with a mason's hands and a plain gray dress with a stain of white dust at the hem that will never come out. This is Clémence Roche, who cut the letters of the bill. She does not say anything at all for a long time. She looks at your face as one looks at a stone that has been brought for judgment, to see where the grain runs.
+At the back of the cellar, on a cask, with his knees up, is a boy of sixteen with an unlit pipe, who is watching the candle flames with a great deal too much attention, and is shaking, very slightly, in the way of one who has not yet learned that he is never going to be cold again. That is Thibault Marchand. He was a cooper's boy. He was made three years ago, in a hayloft, by a woman whom he has not seen since.
+Clémence says it plainly. There is a Peace, she says, and it has been kept for three hundred years, and it has kept the old ones in their houses and the young ones in their cellars, and she has nothing to say against any particular article of it. But there are four thousand of them in Paris, now, who have been made in the dark and never taught anything but fear. The Prince has a house in the faubourg Saint-Germain and a list of rules in a drawer. The Cadets have the cellar. They want somebody to stand between the one and the other who is old enough to be listened to in the one place and young enough, in the heart, to be trusted in the other.
+"We do not want a leader," says Séverin. "We have eleven. We want a witness."
+* Take their oath, on the bones under the hill
+  $ b3.cadets = "sworn"
+  $ defiance += 3
+  $ standing -= 2
+  $ secrecy -= 1
+  $ bond.severin += 3
+  $ do chart("paris.rebels")
+  $ do discover("the_cadets")
+  It is a short oath. It was written by Clémence, on a slate, in a fortnight, and it has the plainness of a thing that has been cut. They say it to you, and you say it back, and it commits you to no deed at all but only to a side, which is a good deal more. Forty cups are raised, of a very thin red wine, to a thing that the faubourg is going to need. The boy on the cask has stopped shaking. Séverin does not smile. He puts out a hand, and you take it, and it is a good deal colder than you had remembered, and holds on a good deal harder.
+* Hear them out to the end, and promise nothing
+  $ b3.cadets = "heard"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  $ bond.severin += 1
+  $ do discover("the_cadets")
+  You sit among them for three hours on a barrel, and say very little. They tell you the whole of it. They tell you who has been taken in the last year by the court's watchmen, and who has been sent to the country, and who has simply stopped coming, and you find that you are making a list of your own, in your head, in the plain close hand of a clerk. They do not press you. At the end Clémence says that it is more than she had expected, and a good deal less than she had hoped, and that it will do for a Sunday.
+* Tell them that they are children playing at a war, and go
+  $ b3.cadets = "refused"
+  $ standing += 1
+  $ defiance -= 2
+  $ bond.severin -= 2
+  $ do discover("the_cadets")
+  It is the true thing, or it is a true thing. They take it very quietly. Clémence's face does not change at all. Séverin says, as you go up the stair, that he would very much like to be wrong, and that he would like you to be there on the day when he is. At the head of the stair the boy with the pipe has come up behind you, and stands in the dark, and says, in the small flat voice of someone repeating a lesson, that he had not thought that it was going to be a war. He had thought that it was going to be a home.
+<~
+
+# galerius
+## The rue des Prouvaires
+The old Lictor has a room on the second floor over a chandler's shop in the rue des Prouvaires, in the shadow of the Halles, with a window that gives upon the market and a good deal of the smell of it. There is a bed, a desk, a small iron stove, and one chair. It is the room of a man who has served a great many masters and has not been given a great many rooms. He is sitting in it, as he sat in Rome, as straight as a lance. He has the look, very faint, of a man who has been waiting for you for several weeks and has used the time to practise being surprised.
+He is very old. He does not ask you to sit, because there is only one chair, and he is in it, and he would not dream of letting you see that this was a difficulty.
+?if b1.galerius == "hostile"
+  "We have not been friends," he says. It is the beginning of every conversation that you have had with him, and it is quite true. "I do not ask that we should be. I ask only for a quarter of an hour of attention, and the loan of a candle."
+?elif b1.galerius == "wary"
+  "It is a long time since Rome," he says. He says it without warmth and without malice, like a man naming a city on a map. "I will not pretend that I have not thought of you. I have had a great many years to think."
+?else
+  "I was told that you were awake," he says. He is not smiling. He has not smiled since the Republic. "I am pleased. It is a thing that does not often happen to a Lictor, to be pleased to learn that someone is still alive."
+?end
+?if b1.galerius_aid
+  He does not mention the roster of the cordon. It lies between you on the desk, in the silence, like a coin that has been put down by someone who does not wish to be thanked.
+?end
+He is in Paris on the business of the Remembrancer's roll. It is the Senate's own book of who owes what to whom, of the old ones, in every city that has a Prince, and it has not been audited in Paris since the Medici queen. The Senate has heard that it is a good deal stranger than it ought to be.
+?if b3.roll == "read"
+  He looks at you for a moment, with the long still look of a man who has found a thread on his sleeve. "You have seen it," he says. "It does not matter. I know what is in the long column. I wished to learn who else did."
+?else
+  "I have seen the long column," he says. "I wish to learn whether anyone else in this city has seen it, and has had the sense to look away."
+?end
+He puts the question. He puts it quite simply, as he would have put a charge. If the thing that they are all afraid of should come to Paris, in the summer, in the street, and the Prince should fail, to whom does the Maison Colline answer? Not the Maison Colline. The one who owns it.
+* "To the Senate, as I always have"
+  $ b3.galerius = "senate"
+  $ standing += 2
+  $ defiance -= 2
+  $ secrecy -= 1
+  It is what he wishes to hear, and it is, you realize as you say it, not entirely a lie. He bows his head by a quarter of an inch. He tells you the names of two houses in Paris that are not to be trusted, and of one man in the Prince's household who is. It is the first thing that a Lictor has given you in a great many years that was not an order. It has a hook in it, as such things do. "I will remember," he says. "It is the whole of my profession."
+* "To myself, and to what I owe"
+  $ b3.galerius = "own"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  He receives it without a muscle moving. He has had it said to him before, by better men, and has outlived them all. "That is an answer," he says. "It will do. It is not a safe one." He takes up his candle, which is a stub, and looks at it with a kind of regret. "I should like to be able to tell the Senate that you were a friend of order. I shall tell them that you were a man of your word. They will not know which is worse."
+* "To the Prince's Peace, which is the only law in Paris"
+  $ b3.galerius = "court"
+  $ standing += 1
+  $ secrecy += 1
+  $ defiance -= 1
+  "The Peace," says Galerius. He says it as one says the name of a child that has gone to the bad. "It was a good law. It was written by a clever man, for a city that no longer exists. You are right to answer to it. It is the only thing that has kept me from my duty, these thirty years, which is to tell the Senate that it is a flag over a well." He does not seem to be angry. He looks, you think, as a man looks who has been told a very good joke and cannot find the place to laugh.
+You go down the stair in the smell of the market. At the bottom there is a girl asleep on a sack of onions with her hand on a knife, and a man at the corner reading a sheet by a lantern, which has the Cadets' type on it. You do not think that Galerius has missed either.
+<~
+
+# grain
+## The letter from Corbeil
+It is Adélaïde who finds it, as she finds everything, in the third week of Lent, in a bundle of the house's ordinary post. It is a letter from a miller at Corbeil on the Seine, whom the house has paid for flour for the shop's own table for eleven years. It is written in a hand that has had to be taught a great deal very late. It does not ask for anything. It says only that a man has been to his mill, three times, in a good coat, with a clerk, and has offered him double the price for every sack of standing grain that he can keep back, and that he has refused, and that his neighbors have not.
+She has done the sums. They are on a half sheet. It is a company, with a name that she cannot find in any register, buying the grain of three provinces before it is cut, to hold until the price is at its peak, which will be in the summer. It is paid for by men who are very much the Prince's creditors, or the Farmers General's, and it is, she says, perfectly lawful. She has put down two columns. In one of them is what the house would earn if it were to buy a part of the same grain. In the other is what the faubourg would pay for it.
+"I do not ask you what you will do," says Adélaïde. She is not looking at the paper. "I ask only that you do it with the book open."
+?if b3.bread == "gave"
+  You gave, in December, to the queue in the rue des Noyers, a loaf apiece, and it is remembered. She does not say it. It is in the way that she does not look up.
+?elif b3.bread == "fed"
+  You fed the queue in the winter, for three weeks, from the Colline's own ovens. It cost the house a good deal and it has not been forgotten, and she does not say that either.
+?end
+* Buy the Corbeil stock, and hold it for the summer price
+  $ b3.grain = "hoarded"
+  $ do earn(14)
+  $ humanity -= 3
+  $ standing += 1
+  $ defiance -= 1
+  $ bond.adelaide -= 3
+  $ do chart("paris.counting")
+  It is done by a clerk in a gray coat on the Tuesday, through two cousins and a bank, and nothing about it is illegal. The money comes in all at once, in the dry black ink of a very good bargain. Adélaïde enters it, without comment, in the book, in the clear round hand that she uses for everything, and shuts the book rather slowly. She says that she will not be able to look at the queue in the rue des Noyers for some time without doing the arithmetic. It is a thing that you will find that you can do very easily.
+* Buy it, and sell it at the old price, at the door of the shop
+  $ b3.grain = "relieved"
+  $ do earn(-6)
+  $ humanity += 3
+  $ standing += 1
+  $ bond.adelaide += 2
+  $ loyalty.keepers += 1
+  $ do chart("paris.counting")
+  It is a ruinous thing to do, and it is done with great care. The flour goes into the cellar of the shop, in two hundred sacks, and a chalk board is hung in the window that says the price, which is the price of the autumn. By noon the line goes round the corner of the rue des Noyers and up the hill. The company at Corbeil has lost its stock, and will know whom to thank. Adélaïde enters the loss, at the foot of the column, in red. She says that it is the best money that the house has spent since the seventh press, and a good deal more than the house can afford, and that she hopes you will not do it twice.
+* Have Baptiste print the names of the company, and say who is paying
+  $ b3.grain = "exposed"
+  $ secrecy -= 2
+  $ defiance += 2
+  $ standing -= 1
+  $ bond.baptiste += 2
+  $ do chart("paris.counting")
+  It takes him a night. It is eight lines, in the plainest type, headed *Who Eats the Harvest?*, and it names four men and a house in the rue Vivienne that you know. It goes out by morning. It is the best piece of work that he has done, and for a fortnight a good many people in a good many cafés say it to one another, and none of them know who is the author, and it makes not a particle of difference to the price of bread. It makes a great deal of difference to the amount of attention that is paid to the house.
+* Leave it. Grain is the king's business
+  $ b3.grain = "ignored"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  You fold the letter, and put it in the drawer, and say that it is not the house's concern. She does not argue. She has been a printer's daughter for twenty-nine years, and has learned to accept that there are a number of things in a printing house that may not be said. She enters nothing. It is, you think, the most distinct entry she has ever made.
+<~
+
+# list
+## Twelve names
+It is not a long list. You have not looked at it, as you have not looked at it since the coach, and it lies in the drawer of the little table in the quarry gallery, or at the back of the strongbox, in the dark, in a clerk's round hand. You take it out in the quiet of the small hours, by a single candle, and you read it.
+There are twelve names. They are young. They are all, you see, from the faubourg. They are all members of a cellar in a cooper's yard in the rue de Charonne. Against each is written the name of a street, and the hour at which the person is most easily found, and beside seven of them a single small word in Latin, which is *Admonendus*. He is to be spoken to.
+The sixth is Thibault Marchand. The ninth is Clémence Roche. The third is Séverin de Lasalle, and the clerk, whoever he was, has put against it, in a very fine hand, a small cross, which the clerk's habit seems to use for the people whom the court is fond of.
+* Keep it, and keep your word to the Prince
+  $ b3.list = "kept"
+  $ standing += 2
+  $ defiance -= 2
+  $ humanity -= 1
+  It is what you said you would do. You fold it again, along the creases, and put it back, and do not read it a second time. You tell yourself that it is only a list. A list is a thing that does nothing at all until somebody begins to go down it, and you have made it, in a perfectly reasonable way, into a duty. It is a very quiet duty. It will not call for anything for a while.
+* Warn the three whom you know
+  $ b3.list = "warned"
+  $ secrecy -= 2
+  $ standing -= 2
+  $ defiance += 2
+  $ bond.severin += 2
+  $ humanity += 2
+  You send no letter. You go yourself, to the three addresses, in the hour that is written, and say the same thing at each door, in the same low voice, which is that they are on a list and that the list is in the hand of somebody who does not wish to use it. Clémence listens to the end. She says that she had known. She says that it is a different thing to be told. At the third door the boy with the pipe looks at you for a very long time, and says nothing, and shuts the door with great gentleness.
+* Burn it
+  $ b3.list = "burned"
+  $ defiance += 3
+  $ standing -= 3
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  The paper goes up in the small iron stove with a sound like a breath. It is a thing that you have not done before, and it feels very much like a larger act than it is. There is a clerk in the Hôtel de Saint-Aubin who has a copy, and the Prince will have heard that the page is gone before the week is out. You have made a gesture. The size of it will not be settled by you.
+<~
+
+# aubry
+## The American idea
+Aubry has been waiting for the house to be quiet. He has put on his old blue coat, with the facings picked off, and he is sitting on an upturned crate in the yard of the shop, with a clay pipe, and four boys of the house in a row on the cobbles in front of him, in their shirtsleeves, each holding a broom.
+"I am teaching them to stand," he says, as one remarks that it is raining. "It is the only thing that I know, and I find that Paris is lacking in it. There is going to be a day, Monsieur, when a good many people will be in a good many streets with nothing in their hands, and the only thing that will make a difference is whether the man beside them is where he is supposed to be."
+He tells the story as he has told it before, in the lamplight, to himself. It is the story of Yorktown, and a night in October, and a trench with a hundred and fifty yards of mud in it, and a boy of nineteen from Maryland who did not know the drill and stood in the right place because he was told to. It is not a long story. Aubry tells it flatly, like a man reading a bill.
+* Let him drill the boys, and stand in the line yourself
+  $ b3.aubry = "drilled"
+  $ bond.aubry += 3
+  $ standing += 1
+  $ defiance += 1
+  $ secrecy -= 1
+  It is absurd. It is a night in March in a printer's yard with four boys and six brooms, and a retired captain of foot, and a man who has been walking the earth since the reign of Nero, in the line, at attention, with a stick. It is also the most orderly thing that you have seen in Paris in three months. Aubry says nothing about it until the end, and then he says, with a kind of surprise, that you have the look of a man who has done it before. You tell him that you have, and that it did not end well, and that you would like to try it again.
+* Listen to him, and say nothing more
+  $ b3.aubry = "listened"
+  $ bond.aubry += 1
+  $ humanity += 1
+  You sit on the pump trough in the dark and let him tell it. He tells it well. When it is done he knocks the dottle out of his pipe on his boot and says that it does a man good to say a thing to somebody who does not need to be told. He is, you see, very much alone. It is a thing that you know the look of.
+* Tell him that the house has no use for soldiers
+  $ b3.aubry = "left"
+  $ bond.aubry -= 2
+  $ secrecy += 1
+  He takes it as he has taken every disappointment in a long career, with a nod and a small, correct bow. He dismisses the boys. He puts the brooms in the shed, one at a time, in a row, and goes up to his room, and the light in his window does not go out until dawn.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  It is full dark, and a thin dry cold is coming up off the river, and the bells of Saint-Paul are ringing for a service that nobody has asked for.
+?elif actions_left() == 2
+  Midnight has struck at the Arsenal. In the faubourg the shutters are going up, one after another, and behind each of them somebody is counting.
+?else
+  There is a paleness over the roofs to the east. It will be an hour before it is a color. There is time for one thing more.
+?end
+* Go to the green door in the rue de Charonne [once] ?if actions_left() > 0
+  ~> cadets
+  $ do act()
+* Climb the stair in the rue des Prouvaires [once] ?if actions_left() > 0
+  ~> galerius
+  $ do act()
+* Sit down with Adélaïde and the letter from Corbeil [once] ?if actions_left() > 0
+  ~> grain
+  $ do act()
+* Read the Prince's paper, alone, by a candle [once] ?if actions_left() > 0 and b3.weapon == "accepted"
+  ~> list
+  $ do act()
+* Go out into the yard, where Aubry is waiting [once] ?if actions_left() > 0 and b3.weapon != "accepted"
+  ~> aubry
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# dawn
+## Sixteen sous
+The bread goes up in the night. It is a thing that a city does as a body does a fever, without anyone having decided it. By the morning bell the loaf in the rue des Noyers is sixteen sous, and there is a woman in the queue who has not got sixteen sous, and a man behind her who has, and between the two of them, on the cobbles, in the gray light, there is nothing at all, which is the trouble.
+Baptiste comes in from the street with the news in his hand, as he comes in with everything, wet and breathless and too young for it. It is not the bread. It is something that is being said in the arcades of the Palais Royal, and in the cafés, and in the cabinet makers' shops in the faubourg, in a great many mouths at once. It is said that Monsieur Réveillon, the wallpaper maker of the rue de Montreuil, who has been named to speak at the meeting of the electors of the district, has said that a workman can live very well on fifteen sous a day.
+He did not say it. Étienne says so, at the counter, over his spectacles, with the weariness of a man who has known the man for thirty years. He said that a workman might live on fifteen sous, in a good year, if the bread were cheap, and he said it as a thing that he would hope for. It was a Thursday. It is Monday. It is a different sentence now, and it has been said by a thousand people, and it is not going to be un-said.
+?if b3.cadets == "sworn"
+  There is a lilac ribbon tied to the knocker of the shop door, as there is on a good many doors in the street that you did not know the meaning of. It is only a ribbon. You do not take it off.
+?elif b3.cadets == "refused"
+  You do not hear from the cellar in the rue de Charonne. It is a silence of a particular kind, and you find that you are listening to it.
+?end
+?if b3.grain == "hoarded"
+  Adélaïde has entered, in her own hand, a figure in the margin of the account book that the house did not have a month ago. She has underlined it once. She does not look at it.
+?elif b3.grain == "relieved"
+  The chalk board is still in the window. Someone has written under it, in a different hand, in charcoal, a single word. It is *Merci*.
+?end
+You stand at the window of the counting room with the paper in your hand and the noise of the street coming up, and you know what the next month is going to be, in the way that one knows a coming storm by the stillness of the leaves. It is a very small thing to start from. It is a sentence that a man did not say.
+$ do rest()
+=> next

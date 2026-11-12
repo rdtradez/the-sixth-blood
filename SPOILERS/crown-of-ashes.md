@@ -44,3 +44,23 @@ Hooks for chapter 5 onward: Sunday in the faubourg Saint-Antoine (if `b3.severin
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
 
+
+## Chapter 5, "The Faubourg Saint-Antoine" (`b3c05`, session 31)
+
+March 1789, Lent, the bread at fourteen sous. The Sunday of the card (the address in the faubourg Saint-Antoine; the card on the sill of the quarry door is enough even if `b3.severin` was not open). Opens on the faubourg by day (the cabinet makers, the glassworks, the brewer Santerre's yard, Réveillon's wallpaper works at the end of the rue de Montreuil), no phase. Hunger scene on entry if he needs it.
+
+Night phase, three of four: the cellar in the rue de Charonne (the Cadets: Severin, Clemence Roche, a mason's daughter made in 1771 who cut the letters of the bill, and Thibault Marchand, a cooper's boy made in 1786 and not yet in command of himself; they want a Lictor's friend, not a Prince's; `b3.cadets`: sworn, heard or refused); the Lictor's room in the rue des Prouvaires (Galerius above a chandler, courtesy and a small cold stove; reads `b1.galerius`, `b1.galerius_aid`, `b3.roll`; he asks whether the hero answers to the Senate if Paris breaks; `b3.galerius`: senate, own or court); the counting room (a letter from a miller at Corbeil: a company is buying standing grain for the Prince's own creditors and for the Farmers General; `b3.grain`: hoarded, relieved, exposed or ignored); and either the Prince's list (if `b3.weapon` is accepted: twelve names, among them Severin and Clemence; `b3.list`: kept, warned or burned) or Aubry's idea (if not: the printers' boys and the militia of the parish; `b3.aubry`: drilled, listened or left).
+
+Dawn: the bread goes to sixteen sous, and a man in the arcades says that Réveillon, who makes wallpaper, has told an electoral meeting that a workman can live on fifteen sous a day. It is not true that he said it. It will be believed.
+
+## Chapter 6, "The Wallpaper Factory" (`b3c06`, session 31)
+
+The Réveillon riot, 27 and 28 April 1789. The crowd burns the effigies and then the house and works in the rue de Montreuil; the Gardes Françaises under Besenval fire into the faubourg and perhaps three hundred are killed. Opens on the evening of the 27th (the smoke over the faubourg; Severin's runner; if `b3.weapon` is accepted, a note from the Prince), no phase. Hunger scene on entry if needed.
+
+Night phase, three of four: the crowd (`b3.riot`: stood with it, turned it from the burning, or held back; the soldiers fire either way); the Veil (Thibault is hit by a musket ball in front of two hundred people, gets up, and a Garde sees it; `b3.veil`: covered, silenced or left; "silenced" is a mortal killed to keep a secret and costs humanity); the wounded (the house in the rue Saint-Jacques is the nearest with a stair and a cellar; `b3.wounded`: sheltered or refused; sheltered gives Aubry and Adélaïde a hand and Garnier a reason); the council at the Hôtel de Saint-Aubin at two in the morning (Brezac asks for the Cadets' heads, the Marquise asks what the faubourg owes the court, the Prince asks him; `b3.council`: cadets, court or silent).
+
+Dawn: the factory a black shell, the Estates General opening at Versailles on the 4th and 5th of May. Severin and Clemence at the door, no longer asking.
+
+Hooks for chapter 7 onward: the procession at Versailles (4 May) and the Tennis Court Oath (20 June); the Cadets' answer to the Prince; Galerius and the Veil; the grain at Corbeil in July; the list; Garnier's file on the house; Baptiste's pamphlet; the haven among the bones; the Avignon account.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.

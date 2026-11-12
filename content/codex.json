@@ -331,6 +331,18 @@
       "title": "The quarries under the hill",
       "book": "crown-of-ashes",
       "text": "The old stone workings from which Paris was built run for leagues under the left bank, dry, cool and unmapped. The city has lately been emptying the churchyard of the Innocents into them, by night, a million bones in neat ranks."
+    },
+    "the_cadets": {
+      "category": "lore",
+      "title": "The Cadets",
+      "book": "crown-of-ashes",
+      "text": "The young vampires of the faubourg Saint-Antoine, made in a hurry by a great many different hands and left to learn the rules from one another. They meet in a brewery cellar in the rue de Charonne and wear a scrap of lilac."
+    },
+    "the_reveillon_riot": {
+      "category": "lore",
+      "title": "The Reveillon riot",
+      "book": "crown-of-ashes",
+      "text": "On the 27th and 28th of April 1789 a crowd of the faubourg Saint-Antoine burned the effigy and then the house and works of a wallpaper maker who was said to have wished the people to live on fifteen sous a day. The Gardes Françaises fired into the street. Nobody agrees on the number of the dead."
     }
   }
 }
