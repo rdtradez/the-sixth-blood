@@ -248,9 +248,9 @@
     },
     "the_roll": {
       "category": "lore",
-      "title": "The roll of the lines",
-      "book": "blood-and-gold",
-      "text": "The court's great book of the blood. Five lines are set out in gilt, each with its mark and its names. After them is a sixth panel, framed, with a name struck through and the vellum scraped thin. Five seals stand at the foot of the page, and a line of Latin says the sixth is ended, by the consent of the five, in the time of the Goths."
+      "title": "The Remembrancer's roll",
+      "book": "crown-of-ashes",
+      "text": "A calf bound book, ruled in red, in which every debt, favor and secret of the court at Paris has been entered for two hundred and fifty years in one small black hand. Most of the long right column is owed to a single house in Amsterdam."
     },
     "berengaria": {
       "category": "people",
@@ -295,6 +295,42 @@
       "title": "The book trade of the Latin quarter",
       "book": "crown-of-ashes",
       "text": "Paris has more printers than the police can follow: licensed houses with a royal permission, houses with a tacit one, and houses that print under the name of a town in Switzerland. A shop is raided on the word of a rival or an informer, and a printer who is taken goes to the Bastille."
+    },
+    "the_peace": {
+      "category": "lore",
+      "title": "The Prince's Peace",
+      "book": "crown-of-ashes",
+      "text": "The old agreement of the court at Paris, brought over the Alps from Florence: no vampire hunts in the open, no vampire quarrels in the streets, and every grievance goes to the Prince. The young think it is a cage. The old think it is the reason that anyone is still alive."
+    },
+    "the_lictors_of_paris": {
+      "category": "lore",
+      "title": "A Lictor in the rue des Prouvaires",
+      "book": "crown-of-ashes",
+      "text": "The Senate in Rome has sent a Lictor to Paris on a matter of the court's roll. He has taken a room over a cutler's, wears a plain brown coat, and asks courteously after a certain kind of Roman face."
+    },
+    "the_estates_general": {
+      "category": "places",
+      "title": "The Estates General",
+      "book": "crown-of-ashes",
+      "text": "The king has called the three estates, clergy, nobility and everyone else, to meet at Versailles in May for the first time in a hundred and seventy five years. The Third Estate has been promised as many seats as the other two together, and is reading a great deal."
+    },
+    "the_cahiers": {
+      "category": "lore",
+      "title": "The cahiers de doléances",
+      "book": "crown-of-ashes",
+      "text": "Every parish and every guild in France has been asked to write down its grievances for the Estates. In the Latin quarter the printers are making the blank forms by the thousand."
+    },
+    "friends_of_the_blacks": {
+      "category": "lore",
+      "title": "The Friends of the Blacks",
+      "book": "crown-of-ashes",
+      "text": "A society of Paris writers and bankers, founded in the year before he woke, that asks the kingdom to end the slave system of the colonies. It has more learning than money and more friends in London than in Paris."
+    },
+    "the_quarries": {
+      "category": "places",
+      "title": "The quarries under the hill",
+      "book": "crown-of-ashes",
+      "text": "The old stone workings from which Paris was built run for leagues under the left bank, dry, cool and unmapped. The city has lately been emptying the churchyard of the Innocents into them, by night, a million bones in neat ranks."
     }
   }
 }

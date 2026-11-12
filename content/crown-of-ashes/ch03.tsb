@@ -1,0 +1,362 @@
+// Book Three, Chapter 3 (session 30). The court at Paris wants him as a weapon. The Hotel de Saint-Aubin, a Thursday in December 1788.
+// Opens on the drive (no phase), then one night phase of three actions out of four, then the Prince's request and the dawn.
+// Ends with rest() and => next. Reads b2.court_end, b3.sugar, b3.valere, b3.press and wake("steward"). Chapter 4 should read hunger, standing and secrecy as this chapter left them.
+@chapter b3c03
+@title The Hour of the Opera
+@book crown-of-ashes
+@version 1
+
+# start
+## Thursday
+$ b3.salon = "listened"
+$ b3.severin = "careful"
+$ b3.trial = "declined"
+$ b3.octave = "guarded"
+$ b3.roll = "left"
+$ b3.weapon = "bargained"
+$ b3.price = "none"
+$ do meet("gualtiero")
+$ do meet("ottaviano")
+$ do discover("the_peace")
+~> drive
+?if must_feed()
+  ~> hunger
+?end
+---
+~> hotel
+---
+$ do phase("night", 3)
+The Prince has not said when the evening ends, and nobody in the house will be so bad mannered as to suggest it. There are four things in the rooms that want doing, by your own reckoning, and time for three of them before the hour at which a polite guest begins to look at the windows.
+-> night
+
+# drive
+## The faubourg
+The week has gone in the shop and the street. On Thursday, at the hour when the city goes to the theatre, a black coach with no arms on the door comes up the rue Saint-Jacques at a walk and stops before the sign of the sun. Octave is in it, with his hat on his knee. He does not say a word until the shutters of the Latin quarter are behind you, and then he says, to the window, that the Prince is in a good humor and that you should not be deceived by it.
+The great houses of the faubourg Saint-Germain stand behind high walls, in long streets that are all gate and no window, and a coach with its blinds down goes through them as a thought goes through a sleeping head. Over the river the Opera is lit, and you can see, as you cross, the long double line of carriages on the quay with their lamps, and the footmen asleep on the boxes, and the breath of two hundred horses going up in a single gray cloud. It is the hour, Octave says, at which Paris is looking the other way. Everything that the court wishes to do without being seen it does between the second act and the ballet. It has done so for a hundred and fifty years, and nobody has ever once remarked that the box of the Marquise de Sérignan is empty for the whole of the evening.
+Frost has put a skin on the cobbles, and the horses go carefully. Octave says that you are expected. He says that the Prince has asked for you by name, in the old way, which is a courtesy that has not been shown to anyone since the old Duke. He says, a moment later, and without turning his head, that the Prince is not a man who wastes a courtesy.
+<~
+
+# hunger
+## Before the gate
+The hunger comes up in the dark of the coach, in the long stretch of the quai des Théatins, and you would very much sooner it did not. It is a bad thing to arrive at the house of a Prince with an empty vein. It is a worse thing to do it in the street.
+Octave has seen your face. He taps on the roof, and the coach stops in the shadow of a wall, and he says, with the gentleness of a man who has often done it for others, that there is a house close by where a woman is paid by the month to be asleep.
+* Take what you need from the woman who is paid to sleep
+  $ do feed("donor")
+  $ humanity += 1
+  It is very quiet, and very clean, and the house smells of lavender and old linen. She does not wake, and she will have a headache in the morning, and a small purse under the pillow. It is the way that the court does it, and it is a great deal better than the way that you have known. You do not like how easily you accept it.
+* Ask the coachman to stop at a stable, and take it from a horse
+  $ do feed("animal")
+  $ secrecy += 1
+  The coachman does not turn a hair. A horse is a horse, and he has been driving gentlemen in black for thirty years. The horse is a big gray with a patient eye. Octave holds the lantern, and averts his face, and says afterward that it is a very fine old-fashioned habit and that nobody in the house will ever forgive you for it.
+* Go in as you are, and say nothing
+  $ cunning_brutal += 2
+  $ standing -= 1
+  It is a long hour. You sit with your hands on your knees and your teeth together, and Octave looks at them and says nothing at all, for which you are grateful. In the great gilded hall of the Prince there will be a number of people who can tell to a minute how long it is since you last fed. You are going to be looked at, a good deal, by people who are hungry in a much more comfortable way.
+<~
+
+# hotel
+## The Hotel de Saint-Aubin
+There is a court before the house, and a stair, and a porter in the livery of a bank, who bows without lifting his eyes. The Hôtel de Saint-Aubin is a great white house of the last reign, with a roof like a folded fan, and a staircase that was meant to be looked at from below. It is lit from top to bottom. It is, you realize, lit as a ship is lit that has been told that it will be fired on: every window, every landing, a hundred and fifty candles on the stair alone, and not a single person in the street outside who has the faintest idea that anything is going on.
+Inside, it is warm. It is very warm, and smells of orange water and wax and hot sugar, and under it, faintly, a good deal older than any of it, of what you would expect. The court has gone to a great deal of trouble to make its dead into a spectacle. There are cakes. There are tiers of them on the sideboards, in pale pink and gold and green, in the shape of temples and ships and swans, and a great many of the guests are standing in front of them with a small silver fork, not eating. It is a thing that Octave explains in the stairwell, very low. It is the fashion. It is a way of showing that one has everything and does not need it.
+There are perhaps sixty of them in the long salon. They have the faces of people who were beautiful at nineteen and have not been allowed to forget it, and they turn, all together, as you come in, with the soft movement of a flock of birds. It is the very reverse of the cellar at Careggi. There is not a plain chair in the room. There is, at the far end, under a great chandelier, a small gray man in a coat of black velvet who has not got up.
+He is seated on a straight wooden chair that would not be out of place in a convent. He has a book on his knee. He has been sitting so, you understand, since before you came in, and will continue until you are gone, and everybody in the room knows exactly where he is without once looking. He lifts his pale eyes, and they find you at once.
+"Monsieur Colline," says Gualtiero, Prince of the court of France, who was once Prince of Florence. "It is a very long way from the Via Larga. I am glad to see that the road did not wear you."
+$ do chart("paris.court")
+$ do meet("serignan")
+$ do meet("brezac")
+~> prince_welcome
+<~
+
+# prince_welcome
+?if b2.court_end == "seat"
+  "I had thought," says the Prince, "that you would be gone for a century and that I should have to tell the council that your chair was empty. It is a pleasure to be wrong." There is, you notice, a chair at his left hand, and it is not a plain one. It is kept for you. It has been kept, you gather, for three hundred and ten years, and dusted.
+?elif b2.court_end == "debt"
+  "It is a very rare thing," says the Prince, "to be owed a debt by a man who is certain to remember it." He smiles, thinly. "I should like to say at once that I have not forgotten, and that I am not going to ask you to forgive it. It is not the business of this evening."
+?else
+  "It is a quality that I have always admired in you," says the Prince, "that you want nothing. I have been a prince for four hundred years, and I have never been able to learn it."
+?end
+He lets that hang in the candlelight. Then he lowers his eyes to the book and says, in an absent voice, that you are to enjoy the house, that you are to be introduced to such of his friends as you like, and that he will send for you when the music has begun, which is the only hour at which a man in his position can be sure of not being overheard.
+It is, you think, very civil. It is the civility of a man who has had a good many guests and has not once been wrong about any of them.
+<~
+
+# salon
+## The long salon
+The Marquise de Sérignan is a woman of no age whatever, in black silk and a good deal of diamonds, with white hair dressed three feet high in the style of a queen who has been dead for a decade. She has been at the court since it crossed the Alps. She was made in the reign of Henri Deux, in a room that she will describe to you, if you let her, and she has the gift of making a very long story seem as if it had been told for you alone. She takes your arm and walks you down the room with the air of a woman showing off a tame lion to a hostile audience.
+"You will be very much stared at," she says. "It is in your favor. We have not had anything to stare at since the English ambassador's parrot died."
+She tells you the court. It does not take her long. There is a king who is good, and a queen who is Austrian, and a minister from Geneva who is going to make everything right, and, beneath the three of them, a country that is cold and hungry and has begun to read. She says that the court has lived in France for two hundred and fifty years and has never, in all that time, been so afraid.
+"They do not tell you," she says, "that it is a very uncomfortable thing to be hunted by arithmetic."
+She has a manner that you have met before, in the best of the Merchant's people, of asking a question as if she knew the answer and was only checking that you did.
+* Be charming, and let her think that she has found a friend
+  $ b3.salon = "charmed"
+  $ standing += 2
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  It is not difficult. You have had three centuries to learn how it is done and she has had two hundred and fifty years to forget how it is received. She laughs, behind her fan, in a high clear voice that does not belong to a woman of her years, and half the room looks round. By the end of the second tour you have been introduced to eleven people and have been invited to nine suppers. She says, in your ear, that you are a great deal too good at it, and she says it with a kind of delight.
+* Be civil and cold, and give nothing away
+  $ b3.salon = "cold"
+  $ secrecy += 2
+  $ standing -= 1
+  She takes it very well. She has been refused by better. She says that it is a great pity, because she had been going to be extremely indiscreet, and she pats your hand and lets you go. A number of people, behind her, have noticed that you did not laugh. You are aware, as you cross the room, of the kind of silence that follows a man who has been judged and found to be of no use at a card table.
+* Say little, and listen, which is what the room is for
+  $ b3.salon = "listened"
+  $ cunning_brutal -= 2
+  $ secrecy += 1
+  It is the old method, and it has never failed. You ask her about the king. You ask her about the Prince's health. You ask her, as a thing of no importance, which of the families are in debt to the house. She tells you. She tells you with such evident joy that you perceive that nobody else has asked her anything for years. By midnight you have a map of the room in your head, with the lines of fear drawn in, and it is the single most useful thing that you will carry out of the house.
+A very young man has been standing at the end of the sideboard for some time, in a coat of lilac silk, with his hands behind him, pretending to be interested in a swan made of sugar. He has a handsome narrow face, and a very high color for a dead man, and the abstracted look of someone who has been told to wait. The Marquise sees him at the same moment, and her face closes like a book. "That," she says, "is the Chevalier de Lasalle. He is the Prince's godchild. He is very amusing. I should not be seen to enjoy it."
+She leaves you.
+He comes along the sideboard in his own time. He does not bow. He looks at the swan and at you, and says, to the swan, in a tone of the most perfect politeness, that he hopes the little card was of some use.
+You look at him. "The pencil," says Séverin de Lasalle. "On the back. I thought that you would like a second opinion before you were asked for a first."
+$ do meet("severin")
+* Thank him, and ask what he knows
+  $ b3.severin = "open"
+  $ bond.severin += 2
+  $ cunning_brutal -= 1
+  He looks pleased, and then, a little too late, afraid, as if he had not meant to be seen being pleased. "Not here," he says. "I will tell you what I can. I would sooner tell you the truth than a story, but I should like you to be the first to say which you prefer." He drifts off toward the cakes. He leaves behind him a faint smell of violets and powder, and a distinct feeling of having been, in some manner, auditioned.
+* Thank him, and say nothing more
+  $ b3.severin = "careful"
+  $ secrecy += 1
+  "Very wise," says Séverin, gravely, and means it, and is a little hurt by it. He bows, at last, a good deal lower than the occasion needs. "I will be in the house all evening. Everybody is. It is the great thing about us." He goes off, and you realize that you have just been handed, with great skill, to the one person in the room who is not looking at you.
+* Ask whose card it was, and whether he writes it to everyone
+  $ b3.severin = "cold"
+  $ bond.severin -= 1
+  $ cunning_brutal += 1
+  The color goes out of his face by a degree. "To a few," he says. "To the ones that I think are worth the postage." He has the look of someone who has put his hand into a drawer and found it empty. He bows, and goes, and the swan loses a wing to his sleeve on the way, and you think that you have made a small enemy of a person who did not deserve it, and a great deal more likely a friend.
+<~
+
+# gallery
+## The long gallery
+The Prince's champion is called Brézac, and has been the sword of the court since before the Fronde. He is a big, fair, quiet man of about forty, in a plain coat of gray, with a scar from the corner of his mouth to his ear that nobody has ever had the bad manners to ask about. The long gallery is lit by two hundred candles and floored with oak. The walls are hung with swords. It is a place that was built for exactly one purpose, and the court is already gathering in the doorway to see it done.
+"The Prince," says Brézac, "does not ask for proof. It is a thing that he never does. He asks me to say that if you should happen to feel like a little exercise, it would be a kindness to the young ones." He does not say it unkindly. He has a pleasant voice, with a trace of the Midi. He is a soldier asking another soldier if he would care to look at the ground.
+There is no way to make it more than it is. He is an elder, a man of two hundred years who has done nothing else, and the whole court knows what it is being offered: the first look, in three hundred years, at a man of the Merchant's line who does not belong to anyone.
+* Accept, and give him the whole of it
+  ~> trial
+* Accept, to first blood, and say so before the room
+  $ standing += 1
+  ~> trial_light
+* Decline, courteously, as a guest who has not come to be tried
+  $ b3.trial = "declined"
+  $ standing -= 1
+  $ secrecy += 2
+  Brézac bows. There is a murmur, in the doorway, like the settling of silk. "Very proper," he says, "and very wise," and sets his sword back on the wall as carefully as a man who has no wish to be seen to be disappointed. You can feel the room revise you downward by a very small amount and upward by a very large one. It is the kind of calculation that a court does without ever knowing it has done it. You have been placed in the category of those who do not need to prove anything, which is the most dangerous one.
+<~
+
+# trial
+## Steel
+$ do fight("elder", 2)
+:exchange
+* Feint toward the window and come in low
+  $ do strike("cunning")
+* Break his guard and keep going
+  $ do strike("brutal")
+* Let the blood loose ?if not must_feed()
+  $ do strike("power")
+* Talk him down, in front of everyone
+  $ do strike("talk")
+* Give ground, and leave the floor
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    The blade goes by your ear with a sound like torn cloth. The gallery draws one breath.
+  ?else
+    A very hard hand has found your ribs, and for a moment you see the candles as a single long white stripe.
+  ?end
+  -> :exchange
+?end
+~> trial_end
+<~
+
+# trial_light
+## First blood
+$ do fight("elder", 1)
+:exchange
+* Feint toward the window and come in low
+  $ do strike("cunning")
+* Break his guard and keep going
+  $ do strike("brutal")
+* Talk him down, in front of everyone
+  $ do strike("talk")
+* Give ground, and leave the floor
+  $ do strike("flee")
+?if not fight_over()
+  Brézac steps back with a curt nod and a drop of blood on his cuff, and neither of you is sure whose.
+  -> :exchange
+?end
+~> trial_end
+<~
+
+# trial_end
+?if fight_result() == "won"
+  $ b3.trial = "won"
+  $ standing += 3
+  $ secrecy -= 2
+  It ends with his sword flat against the floor, and yours at the point of his collar, and a silence that you could cut and serve. Brézac looks up at you with an expression of the purest professional interest. "A very great pleasure," he says. Somebody in the doorway begins to clap, very quietly, and stops, as if he had been caught at it. You have been seen, in front of sixty of the court, to have done a thing that has not been done in this house since the Fronde.
+?elif fight_result() == "talked"
+  $ b3.trial = "won"
+  $ standing += 2
+  It comes to you in the middle of a lunge, and you say it, and he stops. It is a very short sentence, about the weather in Florence in the year that he was made. His blade comes down by an inch, and he looks, for a moment, thirty years younger. "Monsieur," he says, "that was not fair." He is laughing. The court does not know quite what to do with it.
+?elif fight_result() == "fled"
+  $ b3.trial = "lost"
+  $ standing -= 2
+  You leave the floor and leave the gallery, and nobody tries to stop you, which is much worse than if they had. Brézac does not follow. He puts up his sword and says, to nobody, that it was well done to know when. It is a very polite remark. It is the kind of remark that a court spends a month repeating.
+?else
+  $ b3.trial = "lost"
+  $ do heal()
+  $ standing -= 1
+  $ secrecy -= 1
+  It is a short fight and you lose it. He does it with great grace, and a certain regret, and he gives you a hand to rise. "Thirty years ago," he says, quietly, "I should not have been so careful." The court makes the small appreciative noise that it makes when it has seen a good thing well done. You find that you do not mind, as much as you ought. You have found out the limit of a thing, and in this house that is worth a good deal.
+?end
+<~
+
+# garden
+## The orangery
+Octave takes you out through a window into a glass house at the back, where the court keeps its oranges. It is the one room in the house that is not warm. It is very dark, and smells of earth and leaf and damp, and he walks down the central path between the tubs with his hat in his hands, the way a man walks in a church where he is no longer sure of his place.
+"I am going to tell you something," he says, "and I would take it as a kindness if you did not say whom you had it from." He has aged. You know that it is not possible. It is the look of a man who has been looked at too long.
+He tells it in the plain order of a clerk. There is a Prince who has not slept for six weeks, and who sits in his chair at night with a book that he does not read. There is a court that has decided, without ever saying so, that if the city rises it will be the city's fault and that somebody ought to be sent to see to it. There is a Senate in Rome, which has not forgotten, and which has sent a Lictor to Paris this autumn on a matter of the Remembrancer's roll. He is an old one. He has taken a room in the rue des Prouvaires over a cutler's. He has been seen in the Faubourg, at night, in a plain brown coat, asking in a courteous voice after a certain kind of Roman face.
+"His name," says Octave, "is Galerius. I think that you know it."
+You do. It is a very long way from the Via Sacra. There is a silence between the tubs, in which a drop of water falls from a leaf.
+"I should like," says Octave, "to be of use to you. It is not a thing that I can say in the house."
+* Promise him that if it comes to it, he will not be left to the Prince's anger
+  $ b3.octave = "promised"
+  $ bond.ottaviano += 3
+  $ humanity += 1
+  He does not answer. He holds his hat against his chest, and for a moment his shoulders move. "I have been a servant for six hundred years," he says, at last. "No one has ever said that before. I shall try not to disappoint you." He puts his hat on. There is a dry sound in it, like a small bird landing on a roof, and you realize that it is the first time in a very long while that he has made a promise of his own.
+* Take what he has told you, and give nothing back
+  $ b3.octave = "guarded"
+  $ secrecy += 1
+  $ bond.ottaviano -= 1
+  "Of course," says Octave, and nods, very slightly, as a man nods at a tradesman's bill. He is not offended. He has done exactly this to others, in a long career, and it is not unfair that it should be done to him. He goes back to the house with his hat straight and a look of having been, on the whole, thoroughly dealt with.
+* Ask him to keep an ear at the Prince's door, and tell you what is said there
+  $ b3.octave = "spy"
+  $ bond.ottaviano -= 2
+  $ cunning_brutal += 2
+  He looks at you for a long time. Then he says that he has been listening at the Prince's door for three hundred and fifty years, and that he had not, until now, known that it might be of any value to anybody. It is said without bitterness. It is said as a man says a thing that he has just understood about his own life. "I will do it," he says, "but I wish that you had not asked." You wish it too.
+$ do discover("the_lictors_of_paris")
+<~
+
+# roll
+## The Remembrancer's desk
+It is in a small room off the library, behind a tapestry, with a lamp and a clerk who is asleep. It is the roll of the court. It is a great calf bound book, as long as a man's arm, ruled in red, in which every debt, every favor, every secret and every gift of the vampires of Paris has been entered for two hundred and fifty years in the same small black hand.
+The clerk, who is old, and has the gray patient face of a creature that lives at a desk, wakes in the lamplight and gives a great start. He says that it is not allowed. He says it three times. Then he sees what he is looking at, and does not say it a fourth.
+It is a good book. It is the best that you have seen since the Banca. In the long left column is every name in the room, and in the long right column what each name owes, and to whom, and for what; and at the bottom of a good many of the pages, in a neater hand, in green, a line that says *Amsterdam*. It is a very considerable sum. It is, you realize, a very considerable fraction of the whole of the court's capital, and it is all owed to a single house in a single city, in the name of a woman who has not set foot in France in a hundred years.
+You find the Prince's page last. He is not in debt to Amsterdam. He has never been. He is, instead, the creditor of the whole of the court, which is exactly what you would expect. It is only on the last line, half under the binding, that you find the single thing that does not fit, a small regular quarterly sum paid by the Prince, in gold, to an account at Avignon, to a name that is not a name but a title, written out in full in a very old form of French. *The Lady who sleeps.*
+* Copy the page, and put it back
+  $ b3.roll = "read"
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  $ do discover("the_roll")
+  You do it as you have done it in a dozen archives, with a small blunt pencil on the back of a playbill. The clerk watches with the patient horror of an old man watching his own execution. When you give him the book he holds it against his chest like an infant. "I did not see you," he says. "I should like it to be understood." It is understood. It is the sort of thing that is understood very quickly in this house.
+* Close the book, and give it back to the clerk unread
+  $ b3.roll = "left"
+  $ humanity += 1
+  $ standing += 1
+  The clerk's relief is so great that it is almost indecent. He takes the book, and says that he will remember the courtesy. It is a thing that you suspect will be remembered, in a house where the whole of life consists of what is remembered. You walk out of the little room with the feeling of having refused something, and of not being at all certain what.
+<~
+
+# night
+:night
+?if actions_left() == 3
+  The music has begun in the next room, a small orchestra of the court's own, who are very good, and do not tire.
+?elif actions_left() == 2
+  Somebody has opened a window to let in the cold, and a gust of it moves the flames of two hundred candles all together.
+?else
+  The first clock in the house strikes three. It is the single sound in the whole of the Hôtel de Saint-Aubin that has not been arranged.
+?end
+* Walk the long salon with the Marquise [once] ?if actions_left() > 0
+  ~> salon
+  $ do act()
+* Go down the long gallery, where the Prince's champion waits [once] ?if actions_left() > 0
+  ~> gallery
+  $ do act()
+* Go out to the orangery with Octave [once] ?if actions_left() > 0
+  ~> garden
+  $ do act()
+* Find the Remembrancer's desk [once] ?if actions_left() > 0
+  ~> roll
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> prince
+?end
+-> :night
+
+# prince
+## The request
+It is a small room at the very top of the house. It has a fire, and two chairs, and a window that looks east over the roofs of the city, toward the faubourg Saint-Antoine, where there are no lights at all. There is a table with a decanter that nobody has touched. The Prince has put down his book.
+"I shall be brief," he says, "because it is a long evening and we are both very old." He folds his hands. "It is a plain thing and I shall say it plainly. I am afraid."
+It is, you think, a remarkable thing to say. He says it as a man reports the weather.
+"The king is a good man who has never in his life been asked to decide anything. The ministers are afraid of the crowds, and the crowds are afraid of the ministers, and the army, I am told by a very honest officer, would shoot at a general sooner than at a baker. There is going to be a great meeting in May. There will be a fair, and a riot, and a revolution, probably in that order, and my court has no idea at all what to do about it." He pauses. "That is the first fear. It is the one I can say aloud."
+He looks, then, out of the window. "The second is nearer. There are young ones in the faubourg. They have read the pamphlets. They have been taught, by a good many printers, that a man may be anything that he is clever enough to be, and they have drawn the obvious conclusion. They do not trust my Peace. They think it is a cage." He smiles, without humor. "They are right."
+There is a silence. The fire shifts.
+"I need a hand outside the court," says Gualtiero. "I do not mean a sword. I have Brézac for that, who is better than anything that you or I could make. I mean someone old, and strong, and of no party, whom the young ones might trust and the old ones might fear. I mean someone whom I could send. I should like it to be you." He lifts his eyes. "I have never in my life said the plain word. It is a weapon. I am asking you to be mine."
+?if b3.roll == "read"
+  You think of a small black line, half under a binding, and a title written out in full, and you do not look at it. It is a very odd sensation to hold a man's secret in front of him like a cup.
+?end
+?if b3.trial == "won"
+  He does not mention the gallery. He does not need to. The whole of the house has been talking of nothing else for an hour.
+?elif b3.trial == "lost"
+  He does not mention the gallery. It is, you realize, a courtesy, and a measure, and a fair one.
+?end
+:the_ask
+* "I will be your hand. Tell me what you want done."
+  $ b3.weapon = "accepted"
+  $ standing += 3
+  $ defiance -= 2
+  $ secrecy -= 1
+  $ cunning_brutal += 1
+  He closes his eyes, for a moment, in what you would almost call relief. "It is not much," he says. "It is only a list." He takes a folded paper from his sleeve and lays it on the table between you, face down, without a word. It is a very old gesture, and it has been made in this house a great many times. You do not turn it over, yet. You can feel the weight of it, as a man feels a stone in his pocket that he has agreed to carry across a country.
+  He is, you think, much older than he looked when you came in.
+* "I will be your hand, at a price. Let us speak of the price."
+  $ b3.weapon = "bargained"
+  $ cunning_brutal -= 1
+  $ standing += 1
+  ~> price
+* "No. I will not be anyone's weapon."
+  $ b3.weapon = "refused"
+  $ defiance += 3
+  $ standing -= 2
+  $ secrecy += 1
+  He nods, slowly. He does not seem surprised. "I thought that you would say that," he says. "I had been afraid that you would say it more kindly." He turns the decanter a quarter of a turn on the table. "You will be neither my weapon nor my enemy, then, and I shall be able to keep you so for some little while. It is the one thing that I cannot promise to do for the others." He smiles, a very small smile, as if at an old jest. "The door is at the foot of the stair. You will find that it has been left open."
+-> dawn
+
+# price
+:the_price
+"Naturally," says the Prince. He is not offended. He has a gift for treating a price as a compliment. "It is a sign that the thing is taken seriously. What is it that you would like?"
+* A seat at the council, at your left hand
+  $ b3.price = "seat"
+  $ standing += 3
+  $ defiance -= 1
+  He is silent for a moment. Then he says that it is a very great deal to ask, and that it is quite fair, and that the chair is kept. You think of the council of the court as you saw it that evening, the sixty beautiful faces, and you do not entirely like what you have bought. It is a seat in a house with no exits.
+* The house in the rue Saint-Jacques is not to be touched. Not by the court, not by the Prince's friends
+  $ b3.price = "valere"
+  $ loyalty.keepers += 3
+  $ bond.adelaide += 1
+  He looks at you for a long time. "I did not know that you had such a household," he says, at last. "I shall see to it. It will be known in every house of the court by Sunday." He writes a line, on a leaf of the book that he had on his knee, and signs it, with his full name, and a title that has not been used in France since Catherine's day. It is a thing that no one has ever got from him before. It is a very thin piece of paper, and you are well aware of how thin.
+* Nothing from the court. Only that you tell me, honestly, what the Prince does not tell his council
+  $ b3.price = "roll"
+  $ cunning_brutal -= 2
+  $ secrecy += 1
+  The Prince laughs, for the first time, a low dry sound with no breath in it. "You have taken the one thing that I could not refuse," he says. "I should like to say that I am sorry. I find that I am not." He gives you his hand. It is as cold and light as a dry leaf. "Then we shall be friends, Monsieur, for as long as I can bear it."
+* Say that you will think about the price, and take the commission in the morning
+  $ b3.price = "none"
+  $ cunning_brutal += 1
+  "Ah," says Gualtiero, softly. "That is the oldest of all the prices." He inclines his head. "I will wait. It is a thing I am good at." He does not seem displeased. He looks, for a moment, like a man who has been told that a very difficult game is still to be played.
+<~
+
+# dawn
+## The coach
+$ do discover("the_estates_general")
+The coach takes you home along the river, in the black before the dawn, with the blinds down and Octave silent in the corner. The frost has hardened. The Seine is beginning to freeze, in long gray plates that grind against the piers of the Pont Neuf like teeth, and the bakers' lamps are lit in the rue Dauphine, and a long line of women has formed at every door in the cold. Nobody in it looks at the coach. They have no reason to.
+?if b3.weapon == "accepted"
+  There is a folded paper in your coat. It has twelve names on it, in a clerk's hand. It is the list of the young ones in the faubourg who are to be spoken to. You do not read it in the coach. You know that you will read it at the first quiet moment, and that you will be sorry.
+?elif b3.weapon == "bargained"
+  You have a bargain, and a name for it, and a promise that is in a house's keeping. You are not at all sure whether you have bought a friend or sold a year, and you suspect that the difference will become clear in the spring.
+?else
+  The door was left open, as he had said. It is a very great deal lighter to go out of a house than to go into it. It is only on the Pont Neuf, with the river grinding under the wheels, that you begin to consider what kind of silence it was that had been left behind you.
+?end
+?if b3.severin == "open"
+  Somewhere between the Pont Neuf and the rue Saint-Jacques, a paper is pushed into the coach through the open slat of the blind by a hand in a lilac glove, and falls on the seat. It is a card, with an address in the faubourg Saint-Antoine, and under it a single line: *If you wish to know what they are afraid of, come on Sunday. Bring nobody. Bring a lantern.* Octave says nothing. He looks at the card for a long moment and then, very carefully, out of the window.
+?end
+Étienne is waiting up. He has a candle, and a face the color of tallow, and he has plainly not been to bed. He says that Captain Aubry has been out twice to see if the street was clear. He says that Baptiste has sat the whole night in the shop with a stick, and that Adélaïde has done the accounts. He says that nobody has been taken. It is a very good thing to be able to say. You tell him that nobody will be.
+You say it, and as you say it, you hear what it will mean.
+$ do rest()
+=> next

@@ -353,6 +353,30 @@
       "name": "Anselme Roux",
       "title": "A clerk of the Merchant house in the rue Vivienne",
       "bio": "A plump young man in a good brown coat who carried a letter and a key to Florence in the spring, and has been afraid ever since."
+    },
+    "serignan": {
+      "gender": "f",
+      "name": "The Marquise de Sérignan",
+      "title": "Hostess of the court at Paris",
+      "bio": "A woman of no age in black silk and a great many diamonds, made in the reign of Henri Deux. She knows who owes what to whom in every house of the court, and tells it with delight to anyone who will listen."
+    },
+    "severin": {
+      "gender": "m",
+      "name": "Séverin de Lasalle",
+      "title": "Chevalier, the Prince's godchild",
+      "bio": "A handsome narrow faced young vampire in lilac silk, with a high color for a dead man and a habit of pretending to be interested in the nearest swan made of sugar. He writes a very good hand and has opinions about the Peace."
+    },
+    "brezac": {
+      "gender": "m",
+      "name": "Monsieur de Brézac",
+      "title": "The sword of the court",
+      "bio": "A big fair quiet man of two hundred years, in plain gray, with a scar from the corner of his mouth to his ear. He has been the Prince's champion since before the Fronde, and is polite to everyone, which is how you can tell."
+    },
+    "garnier": {
+      "gender": "m",
+      "name": "Inspector Garnier",
+      "title": "Inspector of the book trade",
+      "bio": "A quiet pink little man of fifty with a clerk's hands and a face like a well kept ledger. He searches houses at the hour when people are sure to be in, and is very sorry about it."
     }
   }
 }

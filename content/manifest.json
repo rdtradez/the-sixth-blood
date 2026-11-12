@@ -490,6 +490,24 @@
           "notes": [
             "blood"
           ]
+        },
+        {
+          "id": "b3c03",
+          "file": "crown-of-ashes/ch03.tsb",
+          "title": "The Hour of the Opera",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        },
+        {
+          "id": "b3c04",
+          "file": "crown-of-ashes/ch04.tsb",
+          "title": "What the Presses Said",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
         }
       ],
       "incomplete": true
