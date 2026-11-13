@@ -613,6 +613,114 @@
       "title": "The Native Guards",
       "book": "house-divided",
       "text": "A regiment of free men of color, raised in the spring of 1861 and drilled in blue coats on the Plains of Mexico. They are the only free men in Louisiana to be given a gun by their government."
+    },
+    "the_fall_of_new_orleans": {
+      "category": "lore",
+      "title": "The fall of New Orleans",
+      "book": "house-divided",
+      "text": "On the morning of 24 April 1862 a Federal fleet passes Forts Jackson and St. Philip in the dark and anchors off the levee the next day. The Confederate troops withdraw, the city is left to its mayor, and the Union flag follows within days."
+    },
+    "the_burning_of_the_cotton": {
+      "category": "lore",
+      "title": "The burning of the cotton",
+      "book": "house-divided",
+      "text": "As the fleet approaches, the city's cotton is rolled onto the levee and burned by order, with steamboats and an unfinished ironclad set alight on the river. Sugar and molasses run in the gutters, and the poor of the Irish Channel gather it."
+    },
+    "the_occupation": {
+      "category": "lore",
+      "title": "The Occupation",
+      "book": "house-divided",
+      "text": "From May 1862 the city is governed by General Butler, who cleans the streets, feeds the poor from army stores, hangs a man for tearing down the flag, and is hated by the best families. Many of the old houses leave for the upper river."
+    },
+    "the_oath": {
+      "category": "lore",
+      "title": "The oath of allegiance",
+      "book": "house-divided",
+      "text": "The Occupation requires residents to register and swear to the United States. Foreigners may register with their consuls instead. Those who refuse have their property inventoried."
+    },
+    "the_contraband_camps": {
+      "category": "lore",
+      "title": "The contraband camps",
+      "book": "house-divided",
+      "text": "As the army moves up the bayous, people from the sugar parishes walk to the Union lines at Camp Parapet and elsewhere. In September 1862 the free men of the Native Guards are mustered into Federal service."
+    },
+    "the_new_general": {
+      "category": "lore",
+      "title": "The new General",
+      "book": "house-divided",
+      "text": "In December 1862 General Butler is recalled and replaced by General Banks, a Massachusetts politician sent to be liked. The army prepares to move up the river toward Port Hudson."
+    },
+    "port_hudson": {
+      "category": "lore",
+      "title": "Port Hudson",
+      "book": "house-divided",
+      "text": "A Confederate fortress on a bluff above the Mississippi, held under siege by Union forces from May to July 1863. Its fall, with Vicksburg, opens the whole river."
+    },
+    "the_hospital_boats": {
+      "category": "lore",
+      "title": "The hospital boats",
+      "book": "house-divided",
+      "text": "During the siege of Port Hudson steamboats carry surgeons, ice and nurses upriver from New Orleans to the landing at Springfield, where the wounded are laid in rows in a field."
+    },
+    "the_river_houses_in_the_war": {
+      "category": "lore",
+      "title": "The river houses in the war",
+      "book": "house-divided",
+      "text": "Southern vampire houses follow their states into the war and hold part of the trenches at Port Hudson. They do not fight like soldiers, and they do not forget who has helped them."
+    },
+    "the_river_opens": {
+      "category": "lore",
+      "title": "The river opens",
+      "book": "house-divided",
+      "text": "Vicksburg falls on 4 July 1863 and Port Hudson on 9 July. The whole Mississippi is in Union hands, and New Orleans is joined to the upper valley again."
+    },
+    "the_first_open_summer": {
+      "category": "lore",
+      "title": "The first open summer",
+      "book": "house-divided",
+      "text": "With the river open, shuttered warehouses are sold for almost nothing and merchants of every kind come back to the Levee to rebuild their trade."
+    },
+    "the_ice_trade": {
+      "category": "lore",
+      "title": "The ice trade",
+      "book": "house-divided",
+      "text": "Ice shipped from Boston in sawdust is worth more than cotton in a Gulf summer. Whoever holds the first cold warehouse on the open river holds a good deal of the city."
+    },
+    "the_mobile_house": {
+      "category": "lore",
+      "title": "The Mobile house",
+      "book": "house-divided",
+      "text": "A small house of the Gulf coast, beaten at Port Hudson and cut off by the blockade. It wants the Compact to name it a house in its own right."
+    },
+    "the_returning_guards": {
+      "category": "lore",
+      "title": "The returning Guards",
+      "book": "house-divided",
+      "text": "After Port Hudson the wounded of the Native Guards come down the river by hospital boat to the Treme, where the free families wait for them at the landing."
+    },
+    "the_free_labor_system": {
+      "category": "lore",
+      "title": "The free labor system",
+      "book": "house-divided",
+      "text": "General Banks orders that freed people on the sugar estates be paid a small wage and bound to the plantation for a year by passes. Many call it slavery under a new name."
+    },
+    "the_teche_house": {
+      "category": "lore",
+      "title": "The Teche house",
+      "book": "house-divided",
+      "text": "A river house of the Teche country, led by the Delorme brothers, who do not wish the Compact written again and will pay in iron to prevent it."
+    },
+    "the_labor_contracts": {
+      "category": "lore",
+      "title": "The labor contracts",
+      "book": "house-divided",
+      "text": "Contracts read aloud in the yards of the sugar estates in winter 1863 set wages, passes and a year of work. Some estates add schools or land, most do not."
+    },
+    "the_school_in_the_treme": {
+      "category": "lore",
+      "title": "The school in the Treme",
+      "book": "house-divided",
+      "text": "Honorine Armand keeps a school for the children of the free families and the freed, supported by a society of the Treme, and the lamp in its window is lit every night."
     }
   }
 }

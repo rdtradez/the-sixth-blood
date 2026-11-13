@@ -68,3 +68,64 @@ Hooks: Roan; Honorine (a possible love); Lucien's grudge and the river houses' w
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
 
+
+## Chapter 7, "The Forts" (`b4c07`, session 43)
+
+The night of 24 April 1862. The fleet passes Forts Jackson and St. Philip, the bells ring, the city burns its own cotton and boats on the levee, the Confederate army withdraws and the river houses leave for the upper river. Night phase, three of four: the levee (the lieutenant's order, `b4.fires`: burned, hoarded under the Marigny wall, or the sheds opened to the hungry of the Irish Channel), Belle Rive (Beaumont invokes the first article of the Compact; eight wagons and not enough of them; `b4.exodus`: rode with the wagons to Carrollton, stayed, or kept the three sleepers who cannot be moved in the Marigny cellar, which makes the hero the keeper of the river house's heart), the Marigny (the coven on the night of the guns; a hidden chamber and the vaults; Fiammetta to the school, `b4.vigil` = school, or Prisca to move the firm's paper into gold and Havana drafts, `b4.vigil` = paper; Hanno to the watch), the school in the Tremé (Honorine with fifty children and a lamp; `b4.honorine`: walked her home at dawn and began a romance, helped (the cellar and a guard), or apart).
+
+Dawn: the fleet at anchor off the levee, sugar in the gutters; if the sleepers were kept, Pompee and Isaure bring six boxes into the cellar. A card from Captain Wren of the Provost Marshal's staff, with a line from Crane on the back.
+
+Hooks: the sleepers in the cellar (the heart of a house, to be returned, held or traded); Lucien's grudge, now with a debt; Honorine (a possible love); Wren; Crane's letters; the cotton under the wall if hoarded.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 8, "The Occupation" (`b4c08`, session 43)
+
+October 1862, the city under General Butler. Captain Thaddeus Wren (an Illinois lawyer, plain and patient, Thorne's name in his notebook) calls. Night phase, three of four: the Provost (the oath, `b4.provost`: swore, registered as a French subject, or refused and faced an inventory; reads `b4.fires`), Camp Parapet (the people of the sugar parishes walking in; the Native Guards mustered into Federal service, Armand's brother in blue; if the sugar estate was held, an old woman from Belle Isle says "Master"; `b4.camp`: deeded land to the people, funded the camp, or gave a purse and stayed apart), the Marigny gate (Lucien, ragged and wounded, Belle Rive taken by a Wisconsin regiment; if the sleepers were kept, he asks first after them; `b4.lucien`: returned them and sheltered him, held them and refused him, or bargained and wrote the Compact again on new terms, with the lower river in the keeping of the house of the sixth), the long room (the coven at supper, Prisca to the Treasury agents, Fiammetta to the camp, the blood network, the training hall, Hanno to the books).
+
+Dawn: the first frost, the consequences of the oath, the camp's reply, the river house's reply, a card from Honorine if walked, and a letter from the Senate's Resident whose seal is impressed on the wrong side of the fold. This deepens the doubt of Roan seeded in chapter 6.
+
+Hooks: the Compact's new terms or the debt; Wren; Honorine; the camp and the deed; the Senate's seal and the Scribe; Butler's recall in December; the Native Guards at Port Hudson in 1863.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 9, "The Lamp and the Fold" (`b4c09`, session 44)
+
+January 1863, the new General. The Velati agent (turned in 1478) returns after nearly four centuries, having been told by a person the Order trusts that the Senate Resident's seal is on the wrong way about (`b4.watcher`: told everything, guarded, sent away). The printer Aurelien reads the Resident's letter under a lens: sealed once, opened and sealed again, so someone has the Resident's letters before they reach the hero (`b4.seal`: wrote to the Resident, answered with a false letter, said nothing). The school in the Treme needs a roof (`b4.school`: built it himself, lent through the society, sat and read copybooks; romance with Honorine deepens if walked and not apart). House: the coven, Compact terms, errands.
+
+Dawn: the agent's note or a message in a ledger, the answers to the seal, a copybook from the school, the Guards ordered upriver in March.
+
+Hooks: who intercepts the Resident's letters (Scribe's creature or cover, Roan still undecided); the agent's loyalties and the Order; Honorine; the false letters' replies (one from Charleston).
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 10, "Port Hudson" (`b4c10`, session 44)
+
+Late May 1863, the siege. Armand's note the evening before the Guards' assault on 27 May. Night phase, three of four: the hospital boat (Brault's *Marie Laure*, surgeons and ice to Springfield Landing; `b4.hospital`: went and carried, sent, paid only), Lucien's letter from the works (nineteen river house vampires on the left of the line; he gives the hour and the batteries; `b4.works`: warned Lucien to keep out of the right, told Wren, burned it), the school at night (`b4.waiting`: sat with Honorine, read to the children, stayed an hour). House: Prisca and Fiammetta upriver, Hanno to the lists.
+
+Dawn: the assault fails after six charges; consequences of `b4.works` in the aftermath; Armand wounded and will recover; a Resident's letter, in order this time, that he trusts least.
+
+Hooks: Lucien's debt or grudge; Wren's suspicion; Armand's arm; Honorine; the Resident's letter; the fall of Port Hudson in July.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 11, "The River Opens" (`b4c11`, session 45)
+
+July 1863. Vicksburg and Port Hudson fall, the river opens. Gaspard Fontenot of Mobile (the silent man of the winter supper in chapter 4, beaten at Port Hudson, eleven of nineteen left, on parole) leaves a card: he wants the Compact to name the lower Gulf a house in its own right. Night phase, three of four: the old cotton press on Gravier Street (the coven's haven built out, `b4.coven_home`: raised as a second house with a hall and a hidden cellar, hidden as a net of small rooms behind the free families, or kept and given to the hospital), the Levee (the ice and steamboat company, `b4.firm`: the family's own company run by the household, partnered with Brault, or alone), the garden behind the Cathedral (`b4.fontenot`: parleyed as equals, showed the sixth blood, or refused; reads `b4.works`), the Treme landing (Armand comes home on the first hospital boat, `b4.homecoming`: carried, sat, or apart; reads `b4.hospital` and `b4.honorine`).
+
+Dawn: the haven and firm in the morning, Fontenot's letter (postscript points at a river house that wants no new Compact, seen at Madame Lachapelle's door), a copybook from Honorine, Wren on a pass for Fontenot, an unsigned note: the river is open in both directions.
+
+Hooks: Fontenot at the next Compact table; the Teche house (the Delorme brothers) who want the old Compact kept; Madame Lachapelle; the firm's income and cold warehouse; Honorine and Armand.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 12, "The Winter House" (`b4c12`, session 45)
+
+December 1863. The first frost and the Delorme sign (a river pearl in black iron) left on the step. Night phase, three of four: keep watch on the haven (the elder Delorme and four of the Teche house come at two in the morning; `b4.defense`: stood at the door and fought with the family behind him, struck first at their boat, or sent for Beaumont and made him answer for the Compact; if unwatched the coven holds the house alone and Fiammetta is hurt but will recover), the sugar estate (the Army's labor contract read in the yard; Belle Isle if held, otherwise Sans Souci; `b4.labor`: bought the land for the people through the free families, signed and added wages and a school, or signed nothing), the school's Christmas supper (`b4.christmas`: sat in the kept chair, brought a gift, or stayed a quarter hour), the family (errands and the informants and hidden chamber holdings).
+
+Dawn: the haven after the night, the contract's consequence, the Ice Company's first quarter, a lantern from Wren, a letter from Crane (he is coming) and a note from Charleston if the false letter was sent.
+
+Hooks: Beaumont's answer to the Teche house at the next Chapter; Crane's arrival; the Charleston house; the land deeds and the Army; Fontenot's spring return; Armand returning to duty; the Red River campaign and the new State convention in 1864.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+

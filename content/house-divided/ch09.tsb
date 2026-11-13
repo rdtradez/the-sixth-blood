@@ -1,0 +1,249 @@
+// Book Four, Chapter 9 (session 44). January 1863: the new General, the Velati agent at the door, the seal, the school.
+// Opens with no phase (the city under the new General, then a knock), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a gray dawn.
+// Reads b4.circle, b4.provost, b4.camp, b4.lucien, b4.honorine, b4.exodus, b4.vigil and the circle. Sets b4.watcher, b4.seal and b4.school.
+// Ends with rest() and => next, which pauses until chapter 10 exists (the manifest entry is incomplete).
+@chapter b4c09
+@title The Lamp and the Fold
+@book house-divided
+@version 1
+
+# start
+## January
+$ b4.watcher = "guarded"
+$ b4.seal = "silent"
+$ b4.school = "apart"
+$ do discover("the_new_general")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is January, and there are four things that want doing tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## The new General
+The General of the spoons has been recalled. He went in the middle of December, with a great deal of noise on the levee and a very little in the Rue Royale, and the best families of the city, who had called him a beast for seven months, found that they had nobody left to call it. His successor is a politician in a general's coat, a gentle, florid, tidy man from Massachusetts who makes speeches, and who has been given, with the army, an order to be liked.
+It is not at all the same city. The soldiers have stopped buying lace, because there is no more of it. The ladies of the Rue Esplanade have given up spitting, and taken up, with an air of tragic dignity, the knitting of socks for a cause that they no longer expect to see win. The cotton has not come down the river for a year, and the Levee, where there used to be a mile of bales, has a mile of mules, and a mile of army wagons, and, at the upper end, a great many women in black.
+The Guards are drilling. You hear them from the Marigny, in the afternoons, when the wind is from the Lake: a long, level, rhythmic crunch of boots in the shell of the Parade ground, and the voice of a sergeant who has been a free man for all of his life and a soldier for four months. They are going to be sent up the river in the spring. Everyone knows it. Nobody says where.
+You have had no letter from Havana in three weeks. It is not a thing that you ought to have noticed. You have noticed it a good deal.
+The knock comes at the counting house at dusk, a light, quick, very correct tap, four times, with a pause between the second and the third. You have heard it before. It is not a thing that a man forgets, who has heard it on a staircase in a house on the Via dei Servi, in the evening, when it was the only knock in the world that he was waiting for.
+<~
+
+# hunger
+## The warm dark
+* Take a mule from the Quartermaster's lot, a long-eared, philosophical animal, and do it gently
+  $ do feed("animal")
+  $ humanity += 1
+  The mule has opinions, and expresses them, in a low steady complaint all the while you drink, and has, when you have done, a look of great forbearance. You leave it a bucket of oats and a sugar loaf. In the morning the corporal of the lot will say that a mule that has lost a pint of blood and gained a sugar loaf is, in his experience, the only creature in the Army with any sense.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a young widow from the Rue Burgundy who now does the sewing for a regiment, and who has never in her life been so tired. She is not at all afraid. She says that it is a great deal pleasanter than a bayonet drill, and takes the money without counting it.
+* Hunt the levee, where the teamsters drink
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  There is a great deal of whiskey and very little light, and a man who is asleep on a pile of harness, with a face like a boy. He wakes in the morning with a headache and a tale of a very tall gentleman, and the tale is laughed at, for it is generally agreed that the whiskey on the levee has been getting worse.
+<~
+
+# night
+## A night in the new year
+:night
+?if actions_left() == 3
+  It is a clear, dry, windless night, and the frost has come back. The bugles are going, a long way off, and under them, from the Tremé, a low, steady, rhythmic singing.
+?elif actions_left() == 2
+  There is a mist coming up off the river, and the gas lamps in the Rue Royale have haloes. A watchman is crying the hour, in a French that is a good deal worse than it was.
+?else
+  The lamps are going down, one by one, along the Rue Dauphine. The first dray is on the stones. You have one thing left.
+?end
+* Open the door to the knock at the counting house [once] ?if actions_left() > 0
+  ~> watcher
+  $ do act()
+* Take the Senate's letter, and its fold, to the one man in the city who would know a forgery [once] ?if actions_left() > 0
+  ~> seal
+  $ do act()
+* Go to the school in the Tremé, where there is a lamp lit and a new roof wanted [once] ?if actions_left() > 0
+  ~> school
+  $ do act()
+* See to the coven, and the house [once] ?if actions_left() > 0
+  ~> house
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# watcher
+## The knock
+$ do chart("neworleans.bank")
+$ do meet("watcher")
+{watcher.They} {watcher.are} standing on the banquette in a gray traveling cloak, with a small leather bag, and a stub of lead behind {watcher.their} ear, and a face that has not changed in the least. It is the same quick, neat, hard to catch face, a little thinner, a little more tired, and a very great deal more careful. It is the face of a person who has been, for three hundred and eighty five years, a good deal further from home than anyone has the right to be.
+{watcher.They} {watcher.have} been in the city for nine days. {watcher.They} say it at once, quickly, in the plain level voice of a clerk giving an account. {watcher.They} have been watching the house. {watcher.They} have been watching, from a tavern window across the Rue Royale, with a book, to see who comes and goes, and whether it is a thing that is safe. It is, {watcher.they} say, a habit. It is a habit that was trained into {watcher.them} by an Order that does not exist, for a purpose that it does not name.
+?if b2.watcher_bond == "begun"
+  It is the first thing that you notice, after the face. It is not a thing that either of you has said aloud in three hundred and eighty five years, and it is in the room all the same, like a lamp that someone has turned very low.
+?end
+"I have been turned," says {watcher.name}. "You know that. You were there. I have not forgotten it, and I have not forgiven it, and I have not come about it." {watcher.They} put the bag down on the desk. "I have come because I was told, in a letter from a person I trust, that a Resident of the Senate of Blood has been writing to a Frenchman in New Orleans on a seal that is the wrong way about. I have been told that the Order has a name for that. I have been told that you should hear it from me."
+It is not, you gradually understand, an apology, and not an accusation. It is a report. It is the kind of report that is made to a person whose answer matters, by someone who has not decided what the answer is going to be.
+:the_watcher
+* Tell {watcher.them} everything: the seal, the letters, Cassian, and what you know of the line you come from
+  $ b4.watcher = "open"
+  $ humanity += 2
+  $ secrecy -= 2
+  $ standing += 1
+  It takes all night, in three installments, with coffee, and a pause at the third hour when you stop and cannot go on. You tell it in the order that it happened. {watcher.name} does not write a word. At the end, when it is quite light, {watcher.they} say, in a very small voice, "Nobody has ever told the Order that." And then, after a long time, "I do not think the Order is going to be told." It is the first time that you have heard the name of a thing that the Velati have not been prepared to call a secret.
+* Give {watcher.them} a bed and a book to read, and tell {watcher.them} what you must, and no more
+  $ b4.watcher = "guarded"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  You give {watcher.them} the room above the counting house, and a candle, and a ledger of the Valère paper, and the part of the story that is a matter of public record. {watcher.They} take it with a polite nod and no comment, and read the ledger for an hour, and you have, quite clearly, the impression of being very carefully weighed. It is not an unpleasant feeling. It is the feeling of being a book, in a library, that someone has not yet decided to take down.
+* Send {watcher.them} away: say that you will not be reported on, to anyone, by anyone, ever again
+  $ b4.watcher = "refused"
+  $ defiance += 3
+  $ standing -= 1
+  $ humanity -= 1
+  $ secrecy += 1
+  {watcher.They} take it very quietly. There is nothing in {watcher.their} face at all, and then there is a very faint, rueful, bitter, understanding line at the corner of the mouth, and it goes. "I thought that you would say that," {watcher.they} say. "I should like it noted, for my own satisfaction, that I came anyway." {watcher.They} pick up the bag. At the door, without turning, {watcher.they} add, "It is the Resident's seal. If you have any sense, you will have it looked at by somebody who has no reason to love you."
+$ do discover("the_velati")
+<~
+
+# seal
+## The fold
+$ do chart("neworleans.valere")
+Aurélien Valère's printing room is in the back of the paper's building, behind the Rue Royale, and it smells of lampblack, hot lead and the old, strong, settled coffee of a man who has been up all night with a forme. He has the Senate's letter on the stone under a lens, with the fold open, and a rule laid across the wax, and a little brass loupe screwed into his eye, and he looks, in that light, a great deal more like his great grandfather in the rue Saint-Jacques than he has any right to.
+"It is a very good seal," he says. "I will say that for it. It is the Senate's own matrix, I would swear to it, and the wax is the old Roman red. It has not been forged." He turns the fold to the lamp. "It has been *made twice*."
+You wait.
+"A man impressing a seal with the paper unfolded," says Aurélien, with the dry delight of a craftsman who has been brought a puzzle, "gets a seal that sits in the middle of the sheet. A man who folds it first, and presses the wax over the fold, gets a seal that straddles it. This one has done neither. It has been impressed on the flat, in the proper place, and the paper has then been folded *the other way about*, on a line that was not there when the wax was set. It is, I think, a letter that was written, sealed and sent, once, from one place, and has then been opened, read, and sealed again, by a person who had the matrix and did not have the patience." He lifts the loupe. "It is, in my opinion, not the Resident who is doing it. It is somebody who has the Resident's letters before they reach you."
+That is a thing that it is, perhaps, possible to be too clever about.
+:the_seal
+* Write to the Resident, plainly, and say what you have seen, and ask him to explain
+  $ b4.seal = "wrote"
+  $ humanity += 1
+  $ standing += 1
+  $ secrecy -= 1
+  You write it in your own hand, in a courteous Latin, on the firm's good paper, and you sign it, and you send it by a different ship from the one that brought the letter. It will be a month before there is an answer. It is a strangely satisfying letter to have written. It says to a person on the other side of an ocean that you are not a fool, and that you have been watched, and that you are prepared to be told by him that it is not the case.
+* Answer the next letter with a false one, and see who is the first to reply
+  $ b4.seal = "trap"
+  $ cunning_brutal += 3
+  $ secrecy += 2
+  $ humanity -= 1
+  Aurélien lays out the pieces with a printer's pleasure: a letter that says, in the Resident's own phrases, that you are going to sleep, and have put your affairs in order, and are at the disposal of the Senate in the matter of a certain old debt. It is not true, and it is entirely plausible, and it is sent by three roads, each of which says something a little different. Somewhere, on one of them, a person is going to read it, and act. He cannot, you think, resist. They never can.
+* Say nothing, and keep the letter, and see what comes next
+  $ b4.seal = "silent"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  "It is a thing that I have observed," says Aurélien gravely, rolling up the lens in its cloth, "in my business. A man who has been cheated in a small way and says nothing is a man who is waiting for a larger one." He gives you back the letter. "I shall keep my own counsel, Monsieur. I have no one to tell."
+<~
+
+# school
+## The Tremé
+$ do chart("neworleans.school")
+There is a lamp in the window of the school, and a new patch on the roof, of tarred canvas, that is leaking on a row of benches. Honorine has put a bucket under it, and then a second, and then, with great determination, a basin, and the three of them are making a soft, patient, uneven music, like a clock that cannot make up its mind.
+She is at the long table at the back, with a lamp and a pile of copybooks, correcting. She does not look up. "The rain is coming in over the primer class," she says, "and I have had a promise of a carpenter since the feast of Saint Martin. I am prepared to believe in a great many things. I am not prepared to believe in carpenters."
+?if b4.honorine == "walked"
+  She looks up, then, with a small, level look, and it is a look that has a good deal in it. "I have not thanked you for the night of the guns," she says. "I do not intend to. I intend to say that I should be glad of the company."
+?elif b4.honorine == "helped"
+  She looks up, then, with a small, level, courteous look. "I have not forgotten the cellar and the guard," she says. "I mention it because it has been on my mind."
+?else
+  She looks up, and the look is more guarded. "You have a way of arriving when it rains," she says. "I should like to think it was a coincidence."
+?end
+?if b4.camp == "deeded"
+  On the wall by the door there is a framed paper. It is, you see, a copy of the deed, with the names in a round new hand, and under it, in a child's careful capitals, *WE LIVE HERE.*
+?end
+She has a letter on the table, among the copybooks, with a black seal. It is from the Lake road. It is from her cousin, a sergeant of the Guards, and it says that the regiment has been told to be ready to move. She does not say what it is that she is afraid of. She says only that a school can teach a child to read a casualty list, and that she would give a very great deal for it not to be a thing that they need to be taught.
+:the_school
+* Mend the roof, and pay the carpenter yourself, and do not make a thing of it
+  $ b4.school = "built"
+  $ humanity += 2
+  $ standing += 1
+  $ do earn(-3)
+  It takes a night, in the end, and a ladder, and four sheets of good tin from a chandler on the levee who has never been asked what they were for. You do the greater part of the work yourself, in the dark, with a mallet, with the rain on your back, and a small, tight, astonished silence below. When you come down, Honorine is holding the lamp. She does not say anything. She puts the lamp in your hand, and takes the mallet, and puts it carefully on the table, with the air of a woman who has decided that the ladder is going to be a thing that they will both have to think about later.
+* Lend the school the money, in a proper note, with a proper interest, and let the society have the credit
+  $ b4.school = "lent"
+  $ standing += 2
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ do earn(-2)
+  It is Armand's society that signs, and Honorine who reads the note, line by line, with a pencil, and approves, and says that she prefers a debt to a gift, since it is a thing that can be paid. The roof is mended by Friday, by a carpenter of the Tremé who has been waiting, it appears, for the money since Martinmas. It is not a gesture, and it is not meant for one. It is a roof. It is the best kind of help that has been given in the city in a year.
+* Sit with her through the evening, and read the letters of the children aloud, and mend nothing
+  $ b4.school = "apart"
+  $ humanity += 1
+  $ secrecy += 1
+  You sit at the long table in the lamplight with a pile of copybooks, and read them aloud, one by one, in your best French, and Honorine, at the other end, corrects the spelling with a pencil. They are very bad. They are, for the greater part, copies of the Lord's Prayer, and of a letter from a soldier to his mother, in which the same three words appear. The roof leaks all the while, steadily. It is the best evening that you have spent in the city, and you could not say why.
+?if b4.honorine == "walked" and b4.school != "apart"
+  $ do romance("honorine", "together")
+?end
+$ do discover("the_native_guards")
+<~
+
+# house
+## The long room
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  The coven is in the long room, and the long room has become, over the winter, the part of the house that is lived in. There is a fire, and a sofa that nobody sits on, and a map of the lower river that Hanno has pinned to the wall with a row of colored tacks, and a great deal of paper.
+  ?if b4.lucien == "bargained"
+    Prisca has the new terms of the Compact open on her knee, and is reading them for the fourth time, with an expression of remote and complete professional admiration. She says that she has never in six hundred years seen a document so well drafted by a man who was bleeding on a doorstep.
+  ?elif b4.lucien == "held"
+    Fiammetta has put an extra bar on the shutters of the long room, and a second on the gate, and does not say why. She has, you notice, taken to sleeping with her back to a wall.
+  ?else
+    Hanno has a letter from the river houses, in the Natchez hand, that he will not let anyone else read. He says only that it is polite, and that he finds the politeness more alarming than an insult.
+  ?end
+  It is a family. You have long since stopped being surprised by it. It is a good deal more precious than any of the things it has cost.
+?elif coven_size() > 0
+  The house is quiet. They are a long way off. You think of them in the evening, as a man thinks of a lamp that he has left lit, in a window, in a street that he has not been back to for some time.
+?else
+  The house is quiet and dark, with a draught under the door, and a clock ticking somewhere that you have not wound. It is not an unpleasant solitude. It is a very old one.
+?end
+:the_house
+* Send Prisca to the Treasury agents, for a license to ship in the firm's name, under the new General [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca") and task("prisca") == ""
+  $ do send("prisca", "negotiate", 1)
+  Prisca says that the new General is a man who is anxious to be liked, and that a person who is anxious to be liked is the easiest creature on earth to do business with. She says it as a woman says grace.
+* Send Fiammetta to the Lake road, to watch the camp and the Guards [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta") and task("fiammetta") == ""
+  $ do send("fiammetta", "protect", 1)
+  Fiammetta puts on her good boots and says that she is going to do it very quietly. She says it with great gravity. You have the impression, as she goes, that she is quietly practising to be somebody.
+* Lay a blood supply on, through the hospital and the slaughter yards, so that nobody in the house has to hunt ?if can_acquire("blood_network")
+  $ do acquire("blood_network")
+  $ humanity += 1
+  $ secrecy += 1
+  It is done through a surgeon of the Charity Hospital with a very large practice among the army's dead, and it is, as these things go, perfectly decent. In a week the house is a good deal more peaceful.
+* Set up the training hall in the old carriage house, and see to the young ones ?if can_acquire("training_hall")
+  $ do acquire("training_hall")
+  $ cunning_brutal += 1
+  $ standing += 1
+  The carriage house has a good floor, as Prisca has pointed out. In a week it is a long bare room with a rack of foils and a sand pit, and a regular sound, in the small hours, of someone being patiently thrown on the floor.
+* Put Hanno at the books, for the whole of the war ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "business")
+  Hanno receives it with the grave, tired, delighted air of a man who has been given a gift that he had not ventured to ask for. He goes into the study, and the door closes behind him softly, like a bolt shot on a very large safe.
+* That will do for tonight
+  -> :house_done
+-> :the_house
+:house_done
+<~
+
+# dawn
+## A gray morning
+It is a gray morning, with a thin rain, the first rain of the year that is not in the least cold. The streets are shining. A mule team is going slowly down the Rue Dauphine with its ears back.
+?if b4.watcher == "open"
+  There is a note on the hall table, in a quick neat hand, on a half sheet of the firm's paper. *I have written to the person I trust. I have not told them what you told me. I think that I am going to need to be very careful for some time. Thank you for the coffee.* It is signed with a single initial.
+?elif b4.watcher == "guarded"
+  The room above the counting house is empty, and the bed made, and the ledger of the Valère paper is back on the desk, with a slip of paper in it at a page that you do not at once understand. It is a page of figures that does not add up, by exactly one hundred and four dollars. It is, you realize after a moment, a message.
+?else
+  There is nothing at the door at all, and nothing on the step, and across the Rue Royale, at the tavern window, the table where a person sat with a book for nine days is empty, and has been wiped.
+?end
+?if b4.seal == "wrote"
+  A day passes, and then another, and then a week, and you begin to find that you have been counting the ships.
+?elif b4.seal == "trap"
+  By the end of the week, three of the false letters have been answered. Two are from persons that you expected. The third is from a house in Charleston, in a clerk's hand, and you spend a long time looking at it.
+?else
+  The letter lies in the drawer, with the others, with its wrong fold, and you find that you take it out and look at it every night, as a man looks at a tooth.
+?end
+?if b4.school == "built"
+  In the evening a child from the Tremé brings a copybook to the door, wrapped in a handkerchief. It is open at a page. It says, in a very large round hand, *THE ROOF DOES NOT LEAK.* There is a small, firm, upright H in the corner.
+?elif b4.school == "lent"
+  There is a receipt on the desk, from the society, for the first payment, in Honorine's hand, with the figures ruled off.
+?end
+The word from the Lake road comes at noon, from a boy on a mule, quite plainly, and is not secret in the least. The Guards are to march in the first week of March. It is not said where. It is said, in the Tremé, in the quiet voice of people who have been told a thing by someone they trust, that it is a place with a very high bluff, a very long river, and a great many guns.
+$ do rest()
+=> next

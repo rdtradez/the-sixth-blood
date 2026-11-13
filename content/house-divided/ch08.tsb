@@ -1,0 +1,284 @@
+// Book Four, Chapter 8 (session 43). October 1862: the city under the Occupation.
+// Opens with no phase (the city under the General, then the Captain's call), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a long frost at dawn.
+// Reads b4.circle, b4.fires, b4.exodus, b4.vigil, b4.honorine, b4.guards, b4.estate, b4.blockade, b4.thorne, b4.shelter and the circle. Sets b4.provost, b4.camp and b4.lucien.
+// Ends with rest() and => next, which pauses until chapter 9 exists (the manifest entry is incomplete).
+@chapter b4c08
+@title The Occupation
+@book house-divided
+@version 1
+
+# start
+## October
+$ b4.provost = "neutral"
+$ b4.camp = "apart"
+$ b4.lucien = "returned"
+$ do discover("the_occupation")
+$ do meet("wren")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is October, and there are four things that want doing tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## The General's city
+It has been a summer of strange things, and you have seen all of them from the window of a house in the Marigny with the shutters half drawn.
+The General came in the first week of May, a short, heavy, squinting man in a very good coat, with a bald head and an eye that does not match, and he has run the city ever since like a ship's purser who has been given a navy. He has cleaned the streets. He has hanged a gambler, on the Mint, for tearing down a flag, and the whole of the city has gone gray with it. He has issued an order about the ladies that has been read aloud in every drawing room and not forgiven in any. He has taken the silver from a bank that had it from the Dutch, and a quantity of sugar from persons who had it from nobody, and he has fed, out of the Army's own stores, thirty thousand of the poor, who had been starving, in the old way, before he came. They call him Beast, and Spoons, and, in the Irish Channel, by a name that is very nearly affection. He is the first man in New Orleans since the Spaniards who has been neither afraid of the river houses nor impressed by them.
+The ships are in the river and the soldiers are in the Cabildo and the Custom House and, in rows of white tents, along the Lake road and out at Carrollton. There is a new flag on the Mint. There are bands in the evening, playing tunes that were forbidden a year ago, and there are a great many young men in blue in the Rue Royale, buying lace.
+It is also a summer of fever. The yellow jack did not come, for the first year in a great while, because the General had the gutters scoured and the quarantine kept. The other thing has come instead. It is a silence, in the old houses of the Rue Esplanade, a closing of shutters and a burning of letters, and a quiet, steady, endless, courteous disappearance of the best of the city's people up the river. You are not at all sorry to be a Frenchman.
+The card comes at four. It has been left at the counting house by a tall, spare, sandy man in an infantry captain's coat, who did not wait, and who has written on it in pencil in a clear, deliberate hand. *Captain T. Wren, of the Provost Marshal's staff. I shall call at nine this evening, if convenient. If not convenient, I shall call at ten.*
+It has been a very long time since a person has written you a card that was so completely certain of the answer.
+<~
+
+# hunger
+## The warm dark
+* Take a horse from the Federal picket line, a big tired gelding, and do it gently
+  $ do feed("animal")
+  $ humanity += 1
+  The sentry is asleep on his feet, with his musket in the crook of his arm. The horse is a big dun artillery beast with a brand on its flank, and a great, sad, patient, suffering look, and is glad of the sugar. You leave the sentry his dignity and the horse a handful of oats. In the morning there will be a short, puzzled, soldierly inquiry, and nobody will ever know.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a woman of the Rue des Ursulines, in a wrapper, who is a seamstress and has lately had a great deal to do for the officers' wives. She is not at all afraid. She says that after the last six months a person who asks politely is a pleasure.
+* Hunt the Rampart, where the soldiers drink
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  There are ten thousand of them in the city, a great many in the dark, a great many drunk, a great many a long way from home. A corporal of an Ohio regiment sleeps it off, behind a barrel, and wakes at the bugle with a ringing head and a story. His sergeant will say that it is the water.
+<~
+
+# night
+## A night under the flag
+:night
+?if actions_left() == 3
+  It is a clear cool night, the first of the year, and the smoke of ten thousand cook fires is lying flat across the roofs. There is a regimental band playing, a long way off, at the Lake.
+?elif actions_left() == 2
+  The bugles have sounded taps, one after another, over the city, in a long, falling, plaintive chain. A little wind has come up from the river, and it smells of rain.
+?else
+  There is a thin gray over the Lake, and the first drays are coming into the Market, and a great many people are going to Mass. You have one thing left.
+?end
+* Receive Captain Wren, of the Provost Marshal's staff [once] ?if actions_left() > 0
+  ~> provost
+  $ do act()
+* Ride out to Camp Parapet, where the people from the sugar parishes are coming in [once] ?if actions_left() > 0
+  ~> camp
+  $ do act()
+* Answer the knock at the Marigny gate, which has been going for some time [once] ?if actions_left() > 0
+  ~> lucien
+  $ do act()
+* See to the coven, and the house [once] ?if actions_left() > 0
+  ~> house
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# provost
+## Captain Wren
+$ do chart("neworleans.bank")
+He is exactly on time. He is thirty five, perhaps, or a little less, a long, spare, sunburnt man with sandy hair going gray at the temples, and gray eyes, and a manner that is the plainest you have ever met. He wears an infantry captain's coat, quite worn, and a revolver he does not seem to know about. He sits in the counting house chair, and declines wine, and takes water, and puts a small notebook on his knee, and a pencil on the notebook, and regards you with a pleasant, level, unhurried interest, as a naturalist regards a bird that he has been told is not found in the county.
+He is, he says, a lawyer. He is from a small town in Illinois, where he read law in the office of a man who has lately gone to Washington, and he was commissioned in a regiment of volunteers, and has been, since May, a person whose business is the paper of the city. It is a good deal of paper. He has been through, he says, the books of eleven banks, the registers of the French consul, the rolls of the Exchange, and the inventory of a number of houses that nobody has come back to.
+"I am not here to be clever, Monsieur Colline," he says. "I am here because your name appears in a good many places that it should not. You have a French passport that was issued in Paris in the year of the Exhibition, and a counting house in the American style, and nine boats, and a bank in Paris of which no one in this city has ever seen a ledger. You gave away your sugar to the Irish Channel." He looks at his notebook. "Or you did not. I have heard both."
+?if b4.fires == "opened"
+  He lifts his eyes, and there is, behind the pleasantness, something that you cannot quite read. "Four women of the Channel told me about your sheds," he says. "They told it very differently. One said you were a saint, and one said you were a fool, and the third said that you were not at all human." He shuts the notebook on his finger. "The fourth said that you were the only man on the Levee that night who did not want something."
+?elif b4.fires == "hoarded"
+  He lifts his eyes. "The Treasury agents are very anxious about cotton," he says. "They believe that there is a great deal of it still hidden, in cellars, under floors, in the wall of a cistern." He lets that lie. "I have said that I do not think that is a thing the Provost Marshal's staff need concern itself with."
+?else
+  He lifts his eyes. "You burned your cotton," he says. "It is not what I should have done, but it was in order. I was in the Navy's boats at the Levee on the twenty fifth. It looked like the end of the world." He taps the notebook, once. "It is a very good thing, to meet a man whose books agree with his conscience."
+?end
+It is not, you gradually understand, an interrogation. It is something a great deal more unusual. It is an invitation, offered by a person who is afraid that you will not accept it.
+?if b4.thorne != "turned"
+  He mentions, without emphasis, that he had a letter in the summer from a gentleman of Boston. He does not say the name. He says that the gentleman had a high opinion of you.
+?end
+:the_provost
+* Take the oath of allegiance to the United States, and be done with it
+  $ b4.provost = "swore"
+  $ standing += 1
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  $ do earn(2)
+  He takes the paper from his case, and a pen from the desk, and watches you sign with the same unreadable regard. He does not say anything until it is done. "You are the first person in this office in three weeks who has not asked me what it meant," he says. He folds the paper into the book. "I am glad that it was easy. It was not meant to be." You think that you would have liked him, in another century, and it occurs to you that you are, for the first time in a great while, on one side of something.
+* Register as a French subject, under the consul, and decline to be anything else
+  $ b4.provost = "neutral"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  He smiles. It is a small, dry, slightly rueful smile, the smile of a man who has seen a good deal of this. "That is what the French do," he says. "It is what the English do, and the Greeks, and the Swiss. It is a very respectable position, and I have not met a man yet who was comfortable in it." He writes in the notebook, and puts a stamp on a form. "I shall not be the one to take it from you. I am only telling you that I have seen what happens to the people who sit in the middle of the road."
+* Refuse: say that you have sworn to nobody in all your centuries, and will not begin in a counting house
+  $ b4.provost = "refused"
+  $ defiance += 3
+  $ standing -= 2
+  $ secrecy -= 1
+  He does not seem surprised. He puts the pencil behind his ear, and looks at you for a long moment. "That is the first honest thing that has been said in this office," he says, "and I am afraid that it is going to cost you a great deal." He rises. "The General has a way of dealing with gentlemen who will not swear. It is not unkind. It consists of an inventory." He puts on his hat. "I shall see that mine is a short one."
+?if b4.circle != "stay" and coven_size() > 0
+  As he goes, he passes Hanno on the stair, and bows to him with the plain, grave, courteous nod that a man gives to a person he has been told about, and Hanno, who has not been told anything, bows back, and stands for some time looking after him.
+?end
+$ do discover("the_oath")
+<~
+
+# camp
+## Camp Parapet
+$ do chart("neworleans.roadhome")
+You smell it a mile before you see it: woodsmoke, and a great many people, and frying meal. Camp Parapet is out beyond Carrollton on the river road, a long earth fort with a ditch and a drawbridge, that the Confederates built to keep the Yankees out of the city, and that the Yankees have taken. It has two thousand men in it. It has, outside the ditch, in the long grass, on the levee, in the cane stubble, in tents and sheds and lean tos and ranks of wagons, a great many more. They are coming in from the sugar parishes, from the Lafourche and the Teche, from the whole of the cane country, as the army moves up the bayous, in ones and twos and families and whole plantations. They are walking. They have been walking for days. They have bundles, and children, and a quilt, and a pot.
+They are not very afraid. It is the odd thing. They are tired and hungry, and sometimes sick, and they have no idea what is going to become of them. But they are not afraid of the thing that they have left, and the dark is full of the sound of people talking, quite quietly, about nothing, as people do in a room when the door has been opened.
+There is a long lantern lit beside the first tent, and a schoolroom made of a wagon sheet, with a blackboard that is a barn door, and about forty children on the grass, reciting. They are reciting the alphabet. Honorine Armand is standing in front of them, in the gray dress, with her sleeves pushed up and a switch in her hand that she is using as a pointer, and she has not seen you.
+Her brother is behind her, at the edge of the light. He is in a blue coat, a new one, with shoulder straps, and a sword. It is the same cut, you notice, as the coat he wore on the Plains of Mexico a year ago. It is not at all the same color on the inside.
+"They mustered us on the twenty seventh of September," says Armand, quite quietly. He has a very odd, wondering, careful look. "We are the First Regiment of the Native Guards, and we are in the service of the United States. It is the same men. It is the same coats, almost." He looks at the children. "I cannot tell you what it is to stand in one's own uniform, a second time, and mean it."
+?if b4.guards == "funded"
+  He touches the hilt of the sword. "It was paid for in the Rue Royale," he says. "I have not forgotten who paid."
+?elif b4.guards == "warned"
+  "You told me what was coming," he says. "You were right in everything but the end. I am going to see what comes of that."
+?end
+?if b4.estate == "held"
+  Among the tents, by a fire, an old woman has looked up. She has a face that you have seen, in the long ledger, on a page that you read in the first week of your waking. She is in a good dress, a gray one, and she has her hands folded in her lap, and she has not moved. She is, you understand, from Belle Isle. She says, in a soft, flat, unhurried voice, without any particular expression, "Master." She says it as a person says a word in a language that they are about to give up.
+  It is the worst thing that has happened to you in the city.
+?end
+?if b4.shelter == "hid" or b4.blockade == "hid"
+  In the dark by a tent post, a girl of fourteen with a very straight back is bandaging a boy's foot. She does not look up. She has, you think, more or less run the camp for a week.
+?end
+:the_camp
+* Deed the land: the lots on the Lake road, and the sugar land you hold, to the people of the camp, in a form that they can keep
+  $ b4.camp = "deeded"
+  $ humanity += 3
+  $ standing -= 2
+  $ secrecy -= 2
+  $ do earn(-8)
+  It takes three weeks, and four lawyers, and a good deal of the Captain's patience, and when it is done there are two hundred and forty acres, in plain lots, on the Lake road and the river, in the names of the people who are living on them, in a book at the Parish Court. It is not a gift. It is a deed. It cannot be taken back by anyone but a court, and the court has, for the first time in a century, a General who will not read the book upside down. Honorine, at the end of it, comes up to you at the edge of the tents, at night, and says nothing at all. She only takes your hand, as if it were a thing that she had been meaning to ask to borrow, and holds it for a long minute, and gives it back.
+* Fund the camp: tents, a doctor, meal, a school, paid for out of the firm's account, so long as the army needs it
+  $ b4.camp = "funded"
+  $ humanity += 2
+  $ standing += 1
+  $ do earn(-4)
+  It is a plain, large, sensible, boring thing, and is very much what is wanted. Armand's friends find the doctor, and Hanno's books find the meal, and in a week the camp has a long shed with a stove, and a table, and a good clean ward, and a school with a real blackboard, and a number of persons who are, for the first time in some months, in the habit of eating. You do not stay to be thanked. It is a thing you have learned, in the years, that the thing which is wanted is the thing which is least thanked.
+* Give them what you have in your purse, tonight, and go back to the city and stay out of it
+  $ b4.camp = "apart"
+  $ secrecy += 1
+  $ humanity -= 1
+  $ do earn(-1)
+  You put the purse in the schoolmistress's hand, and she looks at the weight of it, and at you, and says, "Thank you," in the grave level voice of a person recording a transaction. She does not say that it is not enough. She says only, "We shall remember that someone came." You ride back toward the city in the dark with the sound of the alphabet behind you, one letter after another, like beads on a string.
+$ do discover("the_contraband_camps")
+<~
+
+# lucien
+## The gate
+$ do chart("neworleans.haven")
+It is not a knock that a person gives who has any intention of being let in. It is a long, uneven, savage, patient pounding, with the flat of a fist, and it has been going on, Hanno will say later, since nine o'clock. When you open the gate, there is no one at it for a moment. Then, from the shadow of the wall, a figure rises, quite slowly, on one knee, and it is Lucien.
+He is in rags. It is not a figure of speech. He has a shirt that was once a good one, and a pair of trousers black with swamp mud, and one boot, and a long wound along his forearm that has not healed, and he is gaunter than a vampire has any right to be, and his eyes are very large. He has been, you understand, four days without feeding properly, and a night without any shelter at all, and a soldier's bullet has taken him through the shoulder, and he has walked the whole of the way from Carrollton.
+"They have Belle Rive," he says. His voice has no pride in it left to speak of. "A regiment of Wisconsin men. They are in the great house, in my mother's rooms. They are digging in the cellar for the silver." He closes his eyes. "My father has gone to Natchez. He has left me to hold the city for the house. I have held it for five months, and I have lost it in a week."
+?if b4.exodus == "kept"
+  He does not look at the cellar door, behind you, and you understand that it has cost him a great deal not to. "They have the sleepers," he says. "They have not found them. They are going to." His hand is shaking. "I came to ask whether they are safe. I did not come to ask for anything for myself."
+?else
+  He opens his hand. In it there is a very small, very worn, very familiar thing, a signet of the river house, that he has taken off his finger. "I do not ask for anything for myself," he says. "I ask what the river asks of a house. It is a night's shelter. It is a thing that is owed."
+?end
+He looks at you, then, at last, as a man looks at a person he has hated for two years and who is, tonight, the only person in the city. It is not a look that you will forget.
+"I know what I did on the Bayou Road," he says. "I know what I said at Belle Rive. I would give anything I own not to have to ask you." He tries to smile, and it does not come. "It appears that I own nothing."
+:the_gate
+* Take him in, and tend him, and give him what he asks, and ask nothing back ?if b4.exodus == "kept"
+  $ b4.lucien = "returned"
+  $ humanity += 2
+  $ standing += 2
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  You tend him in the long room, at the fire, with a cloth, and a bottle, and Hanno's knife. You give him blood, and a bed, and a night's rest, and before the dawn you have moved the six boxes out of the cellar, in a laundry cart with a load of sheets on top, down to the river in the fog, and onto a Spanish brig that is going out under a French flag. It is a very long night. He does not thank you. He sits by the boxes in the cart, in a borrowed coat, and does not look at anything. At the pier, when the last is aboard, he says, in a voice like a crack in glass, "It is not a thing that is going to be forgotten." You say that you know. For the first time, you cannot tell what he means.
+* Take him in, and tend him, and give him what he asks, and ask nothing back ?if b4.exodus != "kept"
+  $ b4.lucien = "returned"
+  $ humanity += 2
+  $ standing += 2
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  You tend him in the long room, at the fire, with a cloth, and a bottle, and Hanno's knife. You give him blood, and a bed, and a night's rest, and a place at the table, as a guest, and an introduction, in the dark before the dawn, to a Spanish captain who is going out under a French flag. He sits in the borrowed coat at the end of the table and does not touch the bread. When he goes, at the gate, he says, in a voice like a crack in glass, "It is not a thing that is going to be forgotten." You say that you know. For the first time, you cannot tell what he means.
+* Refuse: send him back into the dark, and keep what is in the cellar, and what you have
+  $ b4.lucien = "held"
+  $ cunning_brutal += 2
+  $ humanity -= 3
+  $ standing -= 2
+  $ secrecy += 1
+  He does not plead. It would have been easier if he had. He rises to his full height, a thin, ragged, burning figure in the lamplight, and says in the clear, ringing voice of a boy who has been brought up to be a lord that it is a thing he will never forget, nor his father, nor his father's father. Then he turns, and walks away down the Rue Esplanade, in the first gray of the dawn, with a stiff, jerky, painful step, and does not look back. Hanno, behind you, says very quietly that a man who has been refused a door has been given a country.
+* Name the price: ask for the Compact to be written again, on new terms, with the lower river put in the keeping of the house of the sixth
+  $ b4.lucien = "bargained"
+  $ cunning_brutal += 3
+  $ standing += 3
+  $ humanity -= 2
+  $ secrecy -= 1
+  He stares at you. It goes through his face slowly, like a stain. Then, very quietly, he begins to laugh, a hoarse, broken, helpless laugh with no breath in it, and slides down the wall until he is sitting on the step with his arms about his knees. "It is what my father would have done," he says. "It is what my father would have done." He looks up. "I have not the right to sign. I have the right to carry. I will carry it." It is done in an hour, in your own hand and his, on the back of a bill of lading. Nobody who sees it will ever believe that it was written on a doorstep. It has the whole of the river in it.
+$ do discover("the_river_houses")
+<~
+
+# house
+## The long room
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  The coven is at supper, in the long room, and it is a good deal more like a family than it was at the beginning of the year. There are three pairs of gloves on the mantel, and a map of the Lake road on the table, and a plate of oysters that nobody has eaten, because nobody is able to.
+  ?if b4.vigil == "school"
+    Fiammetta is at the end of the table, with a slate. It is a real slate, in a wooden frame, and she is copying out a column of figures from a book with her tongue between her teeth. She says, without looking up, that she is being taught arithmetic by a lady, that it is a very great deal more difficult than biting, and that she has never been so happy.
+  ?elif b4.vigil == "paper"
+    Prisca has the Havana drafts laid out in a fan on the table. She says, without looking up, that the Confederate notes the city was using in April are now good for lighting fires, and that a house that was quiet in the right week has the only money in the parish. She does not smile. It is, you think, the happiest that you have ever seen her.
+  ?else
+    Hanno has brought up a bottle of the good Valère wine, and says, with great dignity, that the house has been together for six months now through a siege, a fall, and an occupation, and that he proposes a toast, and has not been able to think of what it should be.
+  ?end
+  It is the old thing, the thing that has been in every house that you have loved: a table, a lamp, and a few people who do not need you to say anything. They are your arm in the city, and they have been, this autumn, a good deal more than that.
+?elif coven_size() > 0
+  The house is quiet. They are a long way off. You find, in the study, that you have been writing a letter to someone across the sea, and that it has gone on for four pages.
+?else
+  The house is quiet and dark, and a soldier is whistling on the banquette. You walk through the long room, with a candle, and think, for the first time in a good while, of a lit window.
+?end
+:the_house
+* Send Prisca to the Treasury agents, to treat for a license to trade in the firm's name, under the flag [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca")
+  $ do send("prisca", "negotiate", 1)
+  Prisca is putting on her gloves before you have finished the sentence. She says that a Treasury agent is a clerk with a gun, and that she has never had a quarrel with a clerk in her life.
+* Send Fiammetta to stand watch at Camp Parapet, over the school and the lamps [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
+  $ do send("fiammetta", "protect", 1)
+  Fiammetta puts down her slate with great care, and her pen with greater, and says that she is going to be very good. She says it as a person says a vow. You have, rather faintly, the impression that she has been waiting to be asked for a month.
+* Lay a blood supply on, through the hospital and the slaughter yards, so that nobody in the house has to hunt ?if can_acquire("blood_network")
+  $ do acquire("blood_network")
+  $ humanity += 1
+  $ secrecy += 1
+  It is a delicate business, and a very practical one, and is done through a surgeon of the Charity Hospital who has had a good deal to do with the army's dead. It is not a thing that you would care to describe at table. It is a very decent arrangement, as these things go, and in a week the house is a good deal more peaceful.
+* Set up the training hall in the old carriage house, and see to the young ones ?if can_acquire("training_hall")
+  $ do acquire("training_hall")
+  $ cunning_brutal += 1
+  $ standing += 1
+  It is Fiammetta, if she is in the house, who says that the carriage house is the very place, and Prisca, if she is, who points out that it has a good floor. It becomes a long bare room with a rack of foils and a sand pit and a number of ingenious things on the wall, and there is, within a week, in the small hours, a regular sound of someone being very patiently thrown on the floor.
+* Put Hanno at the books, for the whole of the war ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "business")
+  Hanno receives it with the grave, tired, delighted air of a man who has been given a gift that he had not ventured to ask for. He says that there are only two kinds of war, and that the second is the one in which the accountant wins. He goes to the study. The door closes behind him very softly, with an air of finality, like a bolt shot on a very large safe.
+* That will do for tonight
+  -> :house_done
+-> :the_house
+:house_done
+<~
+
+# dawn
+## The frost
+There is a frost. It is the first of the year, and it lies on the roofs of the Marigny in a white thin crust, and on the iron of the galleries, and on the broken glass of the Bayou Road. The city smells of cold wood smoke and coffee, and for the first time since the spring there is no band.
+?if b4.provost == "swore"
+  There is a pass on the hall table, with the Provost Marshal's stamp, that lets you go about the city after dark. It is the first piece of paper that you have owned in this country that does not say anything about who you are.
+?elif b4.provost == "refused"
+  There is a clerk at the door of the counting house at seven, with a ledger under his arm, and a sergeant behind him, and a list. It is, as promised, a short one.
+?else
+  There is a notice in the *Delta* this morning, among the foreign residents, that Monsieur Colline of the Rue Royale has been entered at the French consulate. It is a very small paragraph, and it will protect you from everything but a thing that happens.
+?end
+?if b4.camp == "deeded"
+  A woman has left a basket at the gate, with a cloth over it. In it are six pecans, a dozen eggs, and a note, in a round new careful hand that has not written many notes. It says only, *The deed is read aloud on Sundays.*
+?elif b4.camp == "funded"
+  A boy from the camp has brought a note from the schoolmistress. It says that the ward is full, that the doctor has been given a cot, and that the second blackboard has arrived. It is signed with a single, sharp, upright H.
+?end
+?if b4.lucien == "bargained"
+  You wake in the dusk to a note from Natchez, brought by a Spanish captain, in a hand like a ruled line. It says, *The Compact is read again. I agree to it. I do not forgive it.* It is signed *Beaumont*. It has beneath it, in a different hand, a single line that you did not expect. *My son lives, and I find that I am not able to dislike you for it.*
+?elif b4.lucien == "returned"
+  You do not hear from the river house. It is the only reply that you expected. It is not, you gradually understand, silence. It is a debt, entered in a book, in a hand that does not forget.
+?else
+  You do not hear from the river house, and you do not expect to. It is a quiet that is going to be very long. You think of a ragged figure walking down the Rue Esplanade, upright, in the dawn, and of the thing that a man is capable of becoming who has been refused at a door.
+?end
+?if b4.honorine == "walked"
+  There is a card from the Tremé, in a clear upright hand. It has no message at all but a date, a place and a time, and in the corner, very small, *I do not need an answer.*
+?end
+There is a letter, besides, from a Resident of the Senate of Blood, on thick cream paper, in the chiseled Latin hand that you know. It has been brought up from Havana by a ship's boy, and it is signed with the seal that you have seen on every letter from that quarter. It says, in six elegant, noncommittal lines, that the Senate regrets the disturbances in the Western Sea, and has taken note of the Resident's satisfaction with Monsieur Colline's discretion, and trusts that he will remain, as ever, a friend of the Veil.
+You hold it to the lamp, as you hold every paper. The paper is the Senate's. The wax is the Senate's. The seal, you see, is impressed with the right image, in the right hand. It is only that it is on the wrong side of the fold.
+You put it down. You are not at all sure what you have seen. It is a very small thing. It is, in a very long life, the kind of very small thing that is generally the beginning of a great many others.
+$ do rest()
+=> next

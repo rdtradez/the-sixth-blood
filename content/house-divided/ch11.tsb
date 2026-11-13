@@ -1,0 +1,266 @@
+// Book Four, Chapter 11 (session 45). July 1863: Port Hudson falls, the river opens, the Mobile house comes down it, the coven's haven and firm are built out.
+// Opens with no phase (the city hearing the news), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a long dawn.
+// Reads b4.circle, b4.hospital, b4.works, b4.waiting, b4.honorine, b4.lucien, b4.estate, b4.watcher, b4.seal and the circle. Sets b4.coven_home, b4.firm, b4.fontenot and b4.homecoming.
+// Ends with rest() and => next, which pauses until chapter 12 exists (the manifest entry is incomplete).
+@chapter b4c11
+@title The River Opens
+@book house-divided
+@version 1
+
+# start
+## July
+$ b4.coven_home = "kept"
+$ b4.firm = "alone"
+$ b4.fontenot = "refused"
+$ b4.homecoming = "apart"
+$ do meet("fontenot")
+$ do discover("the_river_opens")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is the middle of July, and there are four things that want doing tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## The ninth of July
+The river is open.
+It is said first by a gunboat, which comes down past the Levee on the tenth with her whistle tied down, and goes on blowing it until she has run out of steam. It is said next, and more steadily, by every bell in the city, and by the people on the banquettes, who stand about and say it to each other as though they were not sure that it could be true. Vicksburg went on the fourth. Port Hudson went on the ninth, after forty eight days, with a garrison that had been eating mules and had run out of mules. A man can go from the Levee to St. Louis now, without being fired on, and a great many people in the city have been standing at the head of Canal Street, looking up the water, doing the sum.
+It is, you find, a very odd feeling. It is not triumph. It is a sort of long, tired breath. The war has gone away from the river, and left the river to the people who live on it.
+It is also, you learn by the evening, the sort of thing that a great many persons have been waiting for. The first boat up from Baton Rouge has not been in an hour before a card is brought to the gate. It is a small card, cream, with a border of green, and a name that you have heard once, a long time ago, in a room full of candles, said by nobody. *M. Gaspard Fontenot, of Mobile.* On the back, in a very fine pencil, is a line. *At your convenience, and before the Beaumonts'.*
+You turn it over several times.
+<~
+
+# hunger
+## The warm dark
+* Go to the stockyards at Gretna, where the cattle have been coming in off the army's contracts, and do it quietly
+  $ do feed("animal")
+  $ humanity += 1
+  It is a hot, loud, steaming place at that hour, full of lanterns and shouting, and nobody looks at a man in a good coat at the back of the pens. You choose an old cow with a mild eye. It is not a thing that is easy to be proud of. It is, however, honest, and the drovers are very much too busy to see.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  He is a pilot of the river, out of work, with a scar across his chin, who has not slept in a bed in a week and thinks that he is being paid to talk. He talks. It is a very great deal about the sandbars below the Passes. You learn, in the end, a good many things that you did not expect to know, and he goes home with money in his pocket and a faint, pleasant headache.
+* Hunt the Rampart, where the discharged men are drinking
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  There are a great many men in the Rampart tonight who have no one at all to ask where they are. You choose one at the end of a bar, in a shabby blue coat, and walk him home, and he does not remember it afterward. He remembers that a gentleman was kind. He wakes in a doorway with his pockets undisturbed, and a bad taste in his mouth, and a strange sadness that he cannot account for.
+<~
+
+# night
+## The tenth night
+:night
+?if actions_left() == 3
+  It is a warm clear night, with lamps in every window, and a band somewhere at the foot of Canal Street playing the one tune that it knows, over and over, with enormous enthusiasm. The whole of the city smells of gunpowder and magnolia.
+?elif actions_left() == 2
+  The band has stopped, and a few of the lamps are going out. There is the long, soft, ordinary sound of a city going to bed after an event. A dog barks in the Marigny.
+?else
+  There is a gray line over the Lake, and a milkman's cart in the next street. You have one thing left, and the whole of the night to do it in, and about an hour.
+?end
+* Take the old cotton press on Gravier Street, and make a place of it for the family [once] ?if actions_left() > 0
+  ~> house
+  $ do act()
+* Go down to the Levee, where the first steamers of the open river are loading [once] ?if actions_left() > 0
+  ~> firm
+  $ do act()
+* Receive the gentleman of Mobile, in the garden behind the Cathedral [once] ?if actions_left() > 0
+  ~> fontenot
+  $ do act()
+* Go to the Tremé, where the hospital boat has put a wounded man ashore [once] ?if actions_left() > 0
+  ~> homecoming
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# house
+## The press on Gravier Street
+$ do chart("neworleans.haven")
+It is a long, ugly, honest building of brick, four stories high, with iron shutters and a loading door like a barn, and it has been standing empty since April, when its owner, a cotton factor with a flag on his hat, left the city for a place that he did not name. The price is absurd. The factor's agent, a thin, nervous, perfectly courteous little man, offers it at a figure that would have made a younger man laugh, and then lowers it twice, without being asked, while looking at his boots.
+There is a cellar under it that goes down two floors, to a place of vaulted brick and iron columns, in which the cotton was kept for the damp, and which is, as a result, one of the driest rooms in the city. It has no windows at all. It has a drain to the old Carondelet canal. It is a thing that you would be perfectly able to walk through, without comment, a hundred times, and never notice, in the dark, that you had had the idea.
+?if coven_size() > 0 and b4.circle != "stay"
+  They come to look at it, all of them, in the dusk, in a straggling line, as a family goes to look at a house that it has not yet admitted that it is going to buy. Fiammetta runs straight down into the cellar, and is heard, for some time, shouting at the end of it, for the pleasure of the echo. Prisca goes slowly round with a pencil and says that the floors are sound, and the roof is very bad, and that a house with a roof like that has no business to cost anything, and that she will buy it. Hanno stands in the middle of the great upper floor, with his hat in his hands, and says nothing at all for a long time.
+  "It is the first one," he says, at last, "that has had room." He does not say for what. He does not need to.
+?elif coven_size() > 0
+  They are a long way off. You walk through it alone, in the dusk, and your steps go on after you into the cellar, and you think that it would hold a good many, and that it will be a good while before they are all in the same room.
+?else
+  You walk through it alone, in the dusk, and it is a very large building to be alone in. It would be, you think, a thing to do for a family, if there were one.
+?end
+:the_house
+* Make it the family's second house: a hall, a long table, rooms for twelve, and a cellar that nobody knows about
+  $ b4.coven_home = "raised"
+  $ humanity += 1
+  $ secrecy += 1
+  $ standing += 1
+  ?if can_acquire("coven_house")
+    $ do acquire("coven_house")
+  ?elif can_acquire("hidden_chamber")
+    $ do acquire("hidden_chamber")
+  ?else
+    $ do earn(-6)
+  ?end
+  It takes three weeks, in the end, and a great many men who are told that the owner is a gentleman of retired habits. The roof goes first, and then the floors, and then, with a good deal of coughing, the long table, which is carried in through the loading door by eight men and is, in the end, left half a foot too long for any door in the building. There is a hall with a hearth big enough to roast a calf. There are rooms upstairs, with beds in them that nobody has asked for, and in the cellar, behind an iron column that swings if you know where to lean on it, there is another. Nobody mentions that. You hear Prisca, if she is there, tell the mason, quite sweetly, that he has done his work well, and that he will forget it by Michaelmas, and the mason, who has been paid in a way that he does not understand, agrees that he certainly will.
+* Spread the family through the city instead, in small rooms behind free families' houses, on the Bayou Road, on the Lake, in the Tremé, so that no one house can be found
+  $ b4.coven_home = "hidden"
+  $ secrecy += 2
+  $ humanity += 1
+  ?if can_acquire("escape_tunnels")
+    $ do acquire("escape_tunnels")
+  ?elif can_acquire("informants")
+    $ do acquire("informants")
+  ?else
+    $ do earn(-4)
+  ?end
+  It is done in a fortnight, in a dozen small gestures, and nearly all of it by the free families, who have a very great deal of practice at it and would not hear of being paid. There is a back room behind a milliner's on the Bayou Road with a door in a wardrobe. There is a loft over a cooper's at the Lake. There is a place under the floor of a church, not in the Tremé, that is not to be named. The press on Gravier Street is bought, and left as it is, a great ugly useful warehouse that sells nothing to anyone. It is not, you understand, a house. It is a net. You find that you sleep rather better for knowing that it is there, and that the people who hold it are not yours, but are, in the plain sense of the word, your friends.
+* Leave it, and spend the money on the people who need it
+  $ b4.coven_home = "kept"
+  $ humanity += 2
+  $ standing += 1
+  $ do earn(-5)
+  You tell the little agent that the price is too low, which he does not at all understand. You pay him half as much again, and ask him to give the building to the Charity Hospital for the use of the convalescent, and he looks at you for a long moment with a face of such complete bewilderment that you have, for a moment, an almost physical sense of what it is to be a madman in a commercial town. It is done by the end of the week. The hospital puts up a sign. It has, you notice, got the name wrong, and you do not correct it.
+$ do discover("the_first_open_summer")
+<~
+
+# firm
+## The Levee
+$ do chart("neworleans.wharf")
+The Levee is, tonight, a good deal more like itself than it has been in two years. There are forty steamers at the foot of Canal Street, and as many more beyond, and a smell of hot iron and wet cotton, and an enormous quantity of men carrying things in the wrong direction. It is a market, all at once, and the whole of the river valley is arriving at it at the same time to be sold to.
+Captain Brault is on the foredeck of the *Marie Laure*, with his coat off, drinking coffee out of a tin cup, and he looks down at you over the rail with the expression of a man who has been expecting a particular visitor and is not at all sure that he is glad. "I am going to take twenty boats up," he says, "before the end of the month, with anything, to anywhere. It is a thing I have thought of since the spring. I haven't a dollar to do it with."
+There is, behind him, in the lamplight, a long white shape under a tarpaulin, and a smell, and it is the smell of cold. It is ice. It has come down from Boston, round the Gulf, in a barque, packed in sawdust, and there is a very great deal of it. Nobody in the lower valley has had any, in two summers.
+:the_firm
+* Found a company, in the family's name, to do it: boats, ice, and a warehouse, with the household to run it
+  $ b4.firm = "coven"
+  $ standing += 2
+  $ cunning_brutal += 1
+  $ do earn(-8)
+  ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and task("prisca") == ""
+    $ do coven_task("prisca", "business")
+  ?end
+  It is drawn up on the foredeck, on a ship's biscuit box, by lantern, by a person who is not Prisca and a good deal like her. It is called the Pontchartrain and Mississippi Ice and Transport Company, and it has seven partners, none of whom, as it turns out, is a man who can be called on in the daytime. The river has had, in its time, a great many companies run by a great many sorts of persons, and none of them has ever been asked. There are twenty boats by the end of the month, and a great deal of ice, and, in the open end of the warehouse at Gravier Street, if you have it, a long cold room in which a great many things may be kept, for a great many reasons, that have nothing to do with fish.
+  ?if coven_size() > 0 and b4.circle != "stay"
+    It is the family's. You hear Fiammetta, from the end of the Levee, tell a drayman that she is a director, and the drayman, who does not believe it, gives her a very good price on a barrow of lemons.
+  ?end
+* Back Brault's boats alone, with a draft, and take a share in what comes
+  $ b4.firm = "partner"
+  $ cunning_brutal += 1
+  $ standing += 1
+  $ do earn(-5)
+  Brault takes the draft without looking at it, and puts it in his hat. "That is very handsome," he says. "I shall paint your name on a boat, if you like. I shall paint it very small." He goes up the gangplank two steps at a time, a short square man with a great deal to do, and a quarter of an hour later the *Marie Laure* is casting off, with a bright new line of white paint on her bow that says nothing at all. It is a thing that men of business have been doing for each other since Tyre. It is a good deal more comfortable than a company.
+* Leave it to the market, and watch the first boat go
+  $ b4.firm = "alone"
+  $ secrecy += 2
+  $ humanity -= 1
+  You stand on the Levee in the warm dark, among the barrels, and see Brault shake hands with a stranger, and a draft change hands, and a boat go out into the stream with a lantern at her stern. There is nothing at all the matter with it. It is, you reflect, exactly the thing that you would have done in Rome, in the year of the fire. It is not a thing that you think about for very long.
+$ do discover("the_ice_trade")
+<~
+
+# fontenot
+## The garden
+$ do chart("neworleans.beaumont")
+It is a small walled garden behind the Cathedral, with a fig tree, and a fountain that has not run since the Spanish, and a bench. It is a place where a great many persons have, in their time, been told very bad news by a priest. There are, tonight, no priests. There is a candle in a glass, on the bench, and a gentleman beside it, in a gray coat, with his hat on his knee.
+He rises. He is not tall. He has a very mild, long, scholarly face, with a short gray beard, and a large pair of spectacles that he does not need, and he bows exactly as far as the courtesy of a stranger in the town requires. It is the Mobile man. It is the man who sat through the whole of a winter's supper, in the old house at Belle Rive, and said nothing, and wrote nothing, and looked at the candles.
+"Monsieur," he says, "I am obliged. I am not going to waste your hour." He has a slow, dry Gulf voice, a long way from the river. "I had nineteen in the works at Port Hudson. I have eleven. They are in the parish prison at Baton Rouge, on their parole, in the care of a Wisconsin captain who has been instructed to treat them as gentlemen, and who is, I regret to say, doing it. I have a house in Mobile that is under blockade, and a bank that has been, since Tuesday, very much out of favor. I have, in short, been beaten, and have not got a great deal left, except a certain sense of what a man ought to do next."
+?if b4.works == "warned"
+  He pauses. "I understand that I owe a favor in the matter of a trench," he says, "though I do not know quite whose it was. I should like to be the sort of man who pays a thing when it is due. I do not often get the chance."
+?elif b4.works == "told"
+  He pauses. "It has been said to me, in the prison," he says, quite gently, "that a battery on the right of the line was found very oddly silent. I am sure that it was luck."
+?else
+  He pauses. "I have heard that the river house had a letter from the works," he says, "that was, I believe, never answered. I have wondered, from time to time, who it was addressed to."
+?end
+:the_garden
+* Hear what he wants, as an equal, and say what you can give
+  $ b4.fontenot = "parleyed"
+  $ standing += 1
+  $ humanity += 1
+  $ cunning_brutal += 1
+  He wants, he says, a thing that is very simple, and a great deal harder than it sounds. He wants, in the autumn, to sit at a table with the river houses, and to have the lower Gulf recognized in the Compact as a house in its own right, and not as a province of the Beaumonts. He wants somebody to say it who has not been, in any recent year, a Beaumont's creature. He looks at you. "It is rare," he says, "to find a house that nobody owns." He says it with the very faintest smile. He says that he has heard of a family, in the Faubourg, and a bloodline, and that he has no idea what the bloodline is, and that he does not propose to ask. You tell him what you will, and what you will not. It is not a long list. At the end of it he nods, slowly, like a man who has been given a thing to carry that is not too heavy, and bows, and goes out by the little gate.
+* Let him see what the house of the sixth is, and let that be the whole of the conversation
+  $ b4.fontenot = "showed"
+  $ standing += 2
+  $ secrecy -= 2
+  $ cunning_brutal += 2
+  It is a small thing. It is done without any effort at all. You do not rise. You do not raise your voice. You look at the candle in its glass, and it goes out, and the whole garden, in a single breath, goes colder by ten degrees, and every leaf on the fig tree turns in the same direction. It is the old blood, and it does what it does. He does not move. He is a hundred and sixty years old, and has seen a good many things, and does not, therefore, show it. Only his spectacles, which have slipped, are, for a little while, a very little crooked. "I see," he says, at last, quite mildly. "That is what Madame Lachapelle meant." He puts his hat on. He says that he will not trouble you again, except by letter. It is a statement that has, you notice, a great deal of respect in it, and a good deal more of fear.
+  ?if coven_size() > 0 and b4.circle != "stay"
+    There is, at the wall behind the fig tree, as you leave, a pale small shape that you recognize, in a cloak, with a knife that she has not taken out. It is Fiammetta, who has been there since dusk, and who says, as you pass, with great composure, that she has not been of any use, and that she is extremely glad.
+  ?end
+* Refuse to see him, and send word by the gate that the house of the sixth does not receive a stranger by night
+  $ b4.fontenot = "refused"
+  $ standing -= 1
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  You do not go. You send Pompée, who is the best man you have for a thing of this kind, with a card in the same cream and a short line in your own hand, to say that the family does not receive in the dark, and is obliged. He is back in a quarter of an hour, with his hat in his hand, and the card, unopened. "He said that he quite understood," says Pompée, in the tone of a man who does not entirely like what he has been asked to repeat. "He said it was very proper. He said that he would write."
+$ do discover("the_mobile_house")
+<~
+
+# homecoming
+## The boat at the Tremé landing
+$ do chart("neworleans.treme")
+The hospital boat has put in at the foot of Esplanade Avenue, and there is a long row of stretchers on the levee under a lantern, and a number of women of the Tremé going down the row with water, and a boy running with a note. It is the end of a long day. It is the first boat of the open river, and she has come down from the landing at Springfield with a hold full of men who have been, for six weeks, in a field.
+?if b4.hospital == "went"
+  You know the field. You know the sound of it, in a way that you will not forget, and you find that you go down the row without any hesitation at all, and bend, and take the poles of a stretcher from a boy who has been trying to lift it by himself.
+?end
+He is on the fifth stretcher, in a blue coat that has been cut off at the left sleeve, and bandaged to the shoulder, and he is asleep, or doing it very well. It is a long, thin, handsome, tired face, and it is not at all a young one, any longer. There is a ration chit in the breast of his coat, in his own hand, with a crease in it from being folded for a long while. It is the note that you were given in May. He has kept the other half.
+Honorine is there. She has come down alone, in her gray shawl, without a bonnet, and has been standing at the foot of the stretcher for some time without touching it, as though it were a thing that might, if she did, go away. She looks up. She does not say a word.
+:the_homecoming
+* Take him up yourself, and carry him home through the Tremé, and let the whole street see
+  $ b4.homecoming = "carried"
+  $ humanity += 2
+  $ standing += 2
+  $ secrecy -= 2
+  There is nothing at all to it. You are stronger than any four of them. You lift him without effort, and he is a great deal lighter than he was in the winter, and you carry him up the street in the lamplight with Honorine at your side, and all the doors opening. There are people on the banquettes, who say nothing, and take off their hats. At the door of the house a very old woman, whom you have never seen, puts her hand on your sleeve for a moment, and says, in French, that God has noticed. You do not know what to say. You set him down on his own bed. He does not wake. His sister stands with her hand on the coverlet and her back to you, and says, quite steadily, that she is obliged, and that you will forgive her if she is not, tonight, very good company.
+  ?if b4.honorine == "walked"
+    $ do romance("honorine", "together")
+  ?end
+* Send for a carriage and a good surgeon, and sit with Honorine through what is left of the night
+  $ b4.homecoming = "sat"
+  $ humanity += 1
+  $ standing += 1
+  $ do earn(-1)
+  It is a carriage of the Valère firm, with the blinds down, and a surgeon of the Charity Hospital with a face like an unlit lantern, who says that the wound is clean and the arm will be useful, in time, for a good many things, but will never again be of much use for a violin. Armand, waking at the corner of Rampart Street, says in a thin plain voice that he had not been aware that he played. Honorine laughs. It is a short, astonished, cracked laugh, and she puts her hand over her mouth, and cries, and it is a long while before she stops. You sit with her in the kitchen until light, and say very little, and she tells you the whole of the siege, from the first day, in order, as one tells a thing that one has been saving.
+* See that he is taken home, and leave the family to it
+  $ b4.homecoming = "apart"
+  $ secrecy += 1
+  $ humanity -= 1
+  You send a boy for a carriage, and pay the driver, and put a note in Honorine's hand with a number on it, at the Valère house, in case a surgeon is wanted. She looks at it. She looks at you, for a moment, with the clear level eyes. "That is very kind," she says, in a voice with nothing whatever the matter with it, and puts it in her pocket. You go back to the Levee, and the lamps, and the great tired noise of the open river, and it is a long time before you notice that you have forgotten what you came out to buy.
+$ do discover("the_returning_guards")
+<~
+
+# dawn
+## The morning of the gray card
+It is a gray, warm, wet dawn, with a mist over the river, and a smell of steamers.
+?if b4.coven_home == "raised"
+  The house on Gravier Street is awake. It has, in four hours, taken on the manner of a house that has lived in a place for a long time, which is a thing that a house may do very quickly, if enough persons have walked through it. There are lights in the upper rooms. There is a smell of coffee in the hall. Somebody has found a piano, which is out of tune, and somebody is playing it, badly, with great spirit, at a quarter to six in the morning.
+  ?if coven_size() > 0 and b4.circle != "stay"
+    Hanno comes to find you, in the cellar, to say that the room is dry, and that it is, as far as he is able to judge, a good deal safer than the old house, and that he has put a bottle of the Valère wine on the mantelpiece of the hall, in case anyone should wish to christen it. It is, you think, the first time that he has ever sounded like a man at home.
+  ?end
+?elif b4.coven_home == "hidden"
+  There is a knock at the kitchen door at dawn, and a child, of the Lake, with a note from a cooper, to say that the loft is ready. It is not signed. It is written in a careful round hand that you have seen before, on a copybook. You have a net. It is not a house. It is a good deal better.
+?else
+  A man from the Charity Hospital comes at dawn to say that the old press has been scrubbed, and the cellar aired, and that forty of the convalescent will be moved into it by noon. He is a plain, tired, very kind man, and he says that he does not understand it, and has, in the circumstances, decided not to try.
+?end
+?if b4.firm == "coven"
+  By nine o'clock the Pontchartrain and Mississippi Ice and Transport Company has a sign. It is on a board on the loading door. It is lettered in a very handsome flourishing hand, and is eight feet long, and says that it is the oldest established house on the river, which it is not. Brault sends round a note by a boy. It has, in his big untidy hand, one line. *I never thought that I should be glad to take orders from ladies.*
+?elif b4.firm == "partner"
+  The *Marie Laure* is back in the stream by the afternoon, with a good deal of ice on her, and a note in Brault's hand, with a small neat figure at the bottom, which you look at for a long while, and then put in a drawer.
+?end
+?if b4.fontenot == "parleyed"
+  A letter comes at noon, in a fine gray pencil, from a gentleman who has gone on the afternoon boat to Mobile. It says that he is obliged, and that he will be in the city again at the first frost. It adds, in a postscript, that there is one among the river houses who does not, he thinks, wish the Compact to be written again at all, and who has been seen twice, in the last month, at Madame Lachapelle's door. It does not say who.
+?elif b4.fontenot == "showed"
+  Nothing comes. It is a very long, quiet morning, without a letter or a card. A little before noon a boy brings a small parcel from the Cathedral, wrapped in brown paper, and in it is a candle, in a glass, and a piece of cream card. It says, in the finest pencil, *I did not touch it.*
+?else
+  A letter comes at noon, in a fine gray pencil, from the Mobile man's boat, which is the first to leave for the east. It says that he regrets that a misunderstanding should have arisen, that he has no wish to give offence, and that, since the family does not receive, he will find another road. It is perfectly courteous. It has, in the postscript, a line that you read three times. *There are persons in the city who do.*
+?end
+?if b4.homecoming == "carried" or b4.homecoming == "sat"
+  There is a copybook at the door at noon, with a handkerchief round it. It is in Honorine's hand, in the round upright script, and it is not a sentence. It is a column of figures, ruled, of what it will cost to put a school in the Tremé into the care of a society for two years. It has a tiny note at the bottom. *This is not a request.*
+?else
+  There is nothing from the Tremé. It is a long gray morning, and you find that you go to the window several times.
+?end
+Captain Wren calls at four, in a very plain blue coat, with his hat in his hand. He sits in the study for a quarter of an hour, and talks about the price of ice. At the door he says, as an afterthought, that the Provost Marshal has had a request from a gentleman of Mobile for a pass up the river, and that it has been granted, and that the gentleman gave, as his reason, a desire to see the grave of a friend. It is a perfectly ordinary pass. He says that he thought it only fair to mention it.
+There is a note in the evening post, in a hand that is not Roan's and not Crane's, and that you have not seen before. It is on thin paper, unsigned, and has been folded in three. It says, *The river is open in both directions.* It is, you find, a thing that you think about for a very long time.
+$ do rest()
+=> next

@@ -1,0 +1,311 @@
+// Book Four, Chapter 12 (session 45). December 1863: the first frost, the Teche house strikes at the family, the Army's labor contract, Christmas in the Treme.
+// Opens with no phase (the frost, a window broken), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a long dawn.
+// Reads b4.circle, b4.coven_home, b4.firm, b4.fontenot, b4.homecoming, b4.honorine, b4.estate, b4.works, b4.seal, b4.school and the circle. Sets b4.defense, b4.labor and b4.christmas.
+// Ends with rest() and => next, which pauses until chapter 13 exists (the manifest entry is incomplete).
+@chapter b4c12
+@title The Winter House
+@book house-divided
+@version 1
+
+# start
+## December
+$ b4.defense = "unwatched"
+$ b4.labor = "apart"
+$ b4.christmas = "apart"
+$ do discover("the_free_labor_system")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is the second week of December, and there are four things that want doing tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## The first frost
+The first frost comes on the ninth, in the night, and in the morning the whole of the city is the color of a pewter plate. It is a thing that happens in New Orleans about one year in three, and the effect, on a population that has spent the autumn explaining to itself why it is cold, is very curious. There are people on the banquettes in three overcoats and a parasol.
+It is a quiet season, as such things go. The river is open and the war has gone north and west, to a place called Chattanooga and a place called Red River, and the city is fed by it, and is in the odd, shaky, half-ashamed prosperity of a town under occupation that has found out that it can make money. There is a great deal of news. The President has said something at Washington about pardons. A General at the Custom House has said something about a new State. A man in the Tremé has said, loudly, in the street, that he is not a bit surprised.
+You find, at about seven in the evening, on the step, a small, hard, ugly thing. It is a river pearl, set in a ring of black iron. It has been left on the step, quite plainly, for you to find. You have seen it once, on the hand of a young man in a white coat, in the card room at Belle Rive, in a winter that now seems a long time ago.
+It is the Delormes' sign. It is, in the plain sense of the language of the river, a card.
+<~
+
+# hunger
+## The warm dark
+* Go to the French Market at the end of the night, and take what the butchers throw out
+  $ do feed("animal")
+  $ humanity += 1
+  It is a cold, wet, bright place at four in the morning, with braziers, and women in shawls, and an old man in a doorway selling coffee with a great deal of sugar in it. The butchers do not look up. It is a thing that has been done in the market, by one person and another, since before the Americans. You take what you need from the back of a stall, and leave a coin on the block, and an old woman gives you a long, slow, approving nod.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a laundress of the Marigny, in a red kerchief, with a baby at home and a husband in the Guards, who has been told what it is for by a friend and has decided that the price is a fair one. She sits very straight on the edge of the chair, and talks all the time, in a low rapid French, about the price of starch. She is not at all afraid. It is, you reflect, a great deal more than can be said of you.
+* Hunt the Rampart, where the cold has driven the drinkers into the doorways
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  It is a very simple thing in this weather. The Rampart is full of men who have been put out of a bar at one in the morning with nowhere to go and nothing to cover them. You choose one who is already, in a sense, a good way gone, and he does not wake. He is carried to the Charity Hospital by a passing patrol, in the morning, with a story about exposure, and is put in a warm bed. It is a thing that you do not allow yourself to think about for long.
+<~
+
+# night
+## The long night
+:night
+?if actions_left() == 3
+  It is very cold and very clear, with a hard white moon over the cathedral and every banquette shining. The frost has put a skin on the puddles in the Marigny. You can hear footsteps a street away.
+?elif actions_left() == 2
+  A little after midnight the wind comes round into the north, and a great many shutters bang at once, all over the city, like a very slow volley.
+?else
+  There is an hour left, and a gray at the bottom of the sky over the Lake, and the first carts. You have one thing left to do.
+?end
+* Keep watch on the house tonight, for what the pearl promised [once] ?if actions_left() > 0
+  ~> defense
+  $ do act()
+* Go below the city to the sugar estate, where the Army's new contract is to be read to the people [once] ?if actions_left() > 0
+  ~> labor
+  $ do act()
+* Go to the school in the Tremé, where there is a Christmas supper, and a chair kept [once] ?if actions_left() > 0
+  ~> christmas
+  $ do act()
+* See to the family, and what it needs [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# defense
+## What the pearl promised
+$ do chart("neworleans.haven")
+?if b4.coven_home == "raised"
+  The house on Gravier Street is dark, and quiet, with the iron shutters closed, and every lamp in the cellar out. There is a smell of frost in the great hall. The long table has been pushed back against the wall, and the benches put up on it, and in the middle of the floor, on a rug, there is one small lamp, turned very low.
+?elif b4.coven_home == "hidden"
+  The back rooms of the city are quiet. They are, tonight, a dozen small dark windows, behind a dozen small shops. You go round them in order, as a man goes round the stations of a church, and in each one there is somebody awake who says nothing, and nods.
+?else
+  The house in the Marigny is dark, and the courtyard shining with frost. There is a cat on the wall. There is a smell of woodsmoke from the next street, and the shutters of the long room have been closed.
+?end
+?if coven_size() > 0 and b4.circle != "stay"
+  The family is up. It is the most striking thing about them. Nobody has been told. Prisca is sitting very upright in the hall with her gloves on and her hands folded, as if for a train. Hanno has locked the study, and the vaults, and has put on a very old coat with a pistol in the pocket that he plainly does not know how to use. Fiammetta is on the stair, with her knees up, and has been there since eleven, with her knife across them. She looks up as you come in. "I was not going to be left," she says. It is the whole of the speech.
+  It is, you think, a thing that you are not able to say anything about, and you do not.
+?else
+  You are alone in it. It is a very large place to hold alone. You light no lamp at all.
+?end
+They come a little after two.
+It is not a rush. It is very quiet. There is the sound of a latch, on the river side, that has been lifted with a knife, and a long cold breath of air along the floor. There are five of them, in dark coats. You do not hear them. You smell them: wet iron, cane, a thing like old lamp oil. They are of the lower river. One is a good deal older than the others, and wears the black iron ring, with the pearl, on his left hand.
+He is a Delorme. It is the elder of the brothers of the Teche, with the elbows, and he stands inside the door for a moment with his hat in his hand, a thin gray courteous man, and says, in a very soft voice, that he is sorry to be so late.
+:the_door
+* Stand at the door, and meet him, and let the old blood loose if it must
+  $ b4.defense = "stood"
+  $ standing += 2
+  $ cunning_brutal += 1
+  ~> fight
+* Go out the back, to the river, and take the fight to the Teche house's boat before it can be brought up
+  $ b4.defense = "struck"
+  $ standing += 1
+  $ secrecy -= 1
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  You go out by the carriage house, and over the wall, and along the Levee in the dark with the frost cracking under your boots, to a long low steamer at the foot of Esplanade with her lights out. There are four of the Teche house aboard. They are not expecting anything. It is done in a very short time, and with a good deal of quiet, and at the end of it there are four men on the foredeck who are not dead, and who are, in the plain sense of the word, very much embarrassed. You leave a card on the capstan. It says, in your own hand, *The house is awake.* It is the old river way of speaking, and every one of them will know it.
+  When you come back to the house, at four, it is quiet. The family is in the hall. Nobody has been hurt, which is, you suspect, more a matter of the family's temper than of your own. Fiammetta says that she is a little disappointed, and Prisca looks at her.
+* Send the family's own word to the house of Beaumont, and let him do what the Compact requires
+  $ b4.defense = "parleyed"
+  $ standing += 1
+  $ humanity += 1
+  $ cunning_brutal += 1
+  You send Pompée, with a card, up the river road to Belle Rive in the dark, at a gallop, to tell Monsieur Beaumont that his Compact has been broken at the door of a house that has signed it, and to say that he may, if he likes, come and see what is done. It is a thing that nobody has ever done to him. He comes. He comes in a closed carriage with Lucien beside him, at four in the morning, in a fur coat, as though to a christening, and stands in the hall of the house and looks at the broken latch for a long time without a word.
+  "I shall have this seen to," he says at last, very quietly, in a voice that has the whole of the river in it. "It will not happen again." He looks at the Delorme ring, which has been left on the table. He picks it up. "Lucien," he says, "you will go to the Teche in the morning." Lucien does not say anything. His face is white. He bows to you, stiffly, with a great effort, and goes out.
+$ do discover("the_teche_house")
+<~
+
+# fight
+## The hall
+$ do fight("elder", 2)
+:the_fight
+* Slip inside his guard, and end it before the others can come up
+  $ do strike("cunning")
+* Meet him squarely, and break him
+  $ do strike("brutal")
+* Let the sixth blood out ?if not must_feed()
+  $ do strike("power")
+* Say who the house is, and ask whether he is quite sure
+  $ do strike("talk")
+* Go
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    He gives ground, and the courtesy has gone out of his face, and a great deal else has come in.
+  ?else
+    He is a very old man, and a very fast one, and has taken three centuries to learn it.
+  ?end
+  -> :the_fight
+?end
+?if fight_result() == "won"
+  It is over very soon after that. There is a sound that you know, a long, small, final sound, like a door pulled to. The elder Delorme is on his knees on the stone, with one hand on his breast, looking up at you with a face that has gone through three kinds of surprise, and arrived at a fourth.
+  ?if coven_size() > 0 and b4.circle != "stay"
+    The others have not moved. They have found, in the hall, three persons they had not counted on, and have, in the way of men who have been in a war, done the arithmetic. One of them says, very quietly, that it is not a thing that was said to be so. Prisca says, from the chair, in a perfectly level voice, that it is a pity, and that he will see himself out.
+  ?end
+  $ standing += 2
+  $ cunning_brutal += 1
+?elif fight_result() == "talked"
+  You say it very gently. You say the name of the house, and the name of the blood, and that it has been a very long time since anyone attempted this, and that there was a reason. The thin gray man stands very still. Behind him, in the dark, one of the younger ones has taken a step back. It is a long moment. Then he bows, exactly as far as the situation demands, and goes out the way he came, and the others after him, and the latch is put back from the outside, with great care, by a hand that is not quite steady.
+  $ humanity += 1
+  $ standing += 1
+?elif fight_result() == "fled"
+  You are in the street. You do not remember going through the door. Behind you, in the house, there is a great deal of noise, and then none. It is a very long walk round the block, and when you come back, it is over, and the family is in the hall, looking at you with a great kindness that is a good deal harder to bear than anything else could have been.
+  $ standing -= 2
+?else
+  It goes very badly. He is older than you thought, and faster, and for a few seconds the great hall is nothing but cold iron and wet air and the sound of your own breath. It is the others who stop it. A voice that you do not know, from the stair, says "Enough," and it is a woman's voice, and it is all at once the only sound there is. When your eyes clear, the Delormes are gone, and the latch is swinging, and someone has put a coat round your shoulders.
+  $ standing -= 1
+?end
+<~
+
+# labor
+## The reading of the contract
+$ do chart("neworleans.lots")
+?if b4.estate == "held"
+  The sugar estate that you hold, below the city, is called Belle Isle, and it has never in its life been so quiet. The mill is cold. The great kettles are dull with frost. There are two hundred and twelve people on it, and they have been standing in the yard for an hour, in the white morning, in front of the overseer's house, waiting to be told what they are.
+?else
+  The estate is on the Bayou road, below the city, and it is called Sans Souci, which is a thing it has never been. Its owner went to Texas in the spring with his wife and his plate, and left behind him a house with its shutters nailed, a mill that nobody has the sugar for, and a hundred and ninety people who have, since then, run it among themselves. They have been standing in the yard for an hour, in the white morning, in front of the overseer's house, waiting to be told what they are.
+?end
+There is a clerk of the Army on a box, in a blue coat, with a paper. He is a pleasant young man from Massachusetts with a bad cold, and he reads it in a voice that is, plainly, not his own. It is the General's labor order. The people are free, it says, by the Army's reckoning, and are to work. They are to be paid ten dollars a month, the men, and eight the women, and found in food and a cabin. They are to sign for a year. They are not to leave the place without a pass. They are not to be whipped. It is, as a piece of law, a very curious and ingenious instrument, and not one person in the yard believes it.
+There is an old woman at the front, in a clean headcloth, with her arms folded. She says, in a voice that carries all across the frozen yard, that she has been told for sixty years that she was free, and that it was always a thing that the master said first.
+?if b4.estate == "held" and b4.school == "built"
+  There is a girl beside her, nine or ten, with a copybook under her arm, in a round upright hand. It is the first that you have seen of the Tremé on the estate. She looks at you with enormous gravity.
+?end
+:the_labor
+* Buy the land at the Treasury's sale, through the free families of the Tremé, and put the title into the names of the people who work it
+  $ b4.labor = "land"
+  $ humanity += 3
+  $ standing -= 1
+  $ secrecy -= 2
+  $ do earn(-12)
+  It is done through Captain Wren's clerk, and a notary of the Tremé with very large cuffs, and eleven free men of the parish who put their names down as trustees. It takes a fortnight. It is, in the strict sense, not at all clear that it is legal, and it is, in the plain sense, not at all clear that it is not. The Treasury sells the land at the end of the month. The title is put into a long, narrow, blue envelope. Nobody reads it aloud. The old woman in the headcloth holds the envelope for a very long time without opening it, and then gives it, with great formality, to the girl with the copybook, and says that she is to read it, and that she is to read every word.
+* Sign the Army's contract, and add to it out of your own pocket: double wages, a school, and the pass torn up
+  $ b4.labor = "wages"
+  $ humanity += 1
+  $ standing += 2
+  $ cunning_brutal += 1
+  $ do earn(-7)
+  You sign it on the clerk's box, in a clear plain hand, under the General's name, with a pen that is frozen. Then you take the pencil from behind the clerk's ear, and write, in the margin, in block letters, the things that you propose to add, and the clerk, who is not a stupid young man, reads them with his lips moving, and says that it is highly irregular, and that he supposes the General will not mind. You tear the pass in half in front of the yard. It is not applauded. It is looked at, in complete silence, by two hundred people, who have all stopped breathing. It is a very much better sound than applause.
+* Sign nothing, and let the Army and the people work it out between them
+  $ b4.labor = "apart"
+  $ secrecy += 2
+  $ humanity -= 3
+  You tell the clerk that you will think it over, which is a thing that a gentleman says. You walk back to the carriage through the frozen yard. Nobody stops you. Nobody says a word. At the gate a very old man, in a coat with the sleeves cut off, takes his hat off, and holds it. It is a courtesy. It is the one thing that you are unable to look at. You are in the carriage, and in the road, and a good mile on before you realize that you have not breathed.
+$ do discover("the_labor_contracts")
+<~
+
+# christmas
+## The supper
+$ do chart("neworleans.school")
+The school has been lit since five. It is hung with cedar, and paper chains, and a great many candles in saucers, and there is a smell of gumbo, and oranges, and wet wool. There are sixty children in the long room, and their mothers, and a number of men in blue, and in the corner, in a chair that has been put there on purpose, with a rug over his knees and his left arm in a clean sling, a pale thin man with the beginnings of a beard.
+There is a chair kept. It is at the head of the long table, between Honorine and the stove, with a plate before it, and a napkin folded in a very particular manner, and nobody has sat in it.
+Armand looks up. There is a very faint, very tired smile. "I am told," he says, in his dry Paris voice, "that it is not at all a thing that I am to question."
+?if b4.homecoming == "carried"
+  Nobody mentions the Levee. It is simply understood. Every one of the mothers, as you come in, looks up, and says "Monsieur," quietly, as one says it to a person who has been to church.
+?elif b4.homecoming == "sat"
+  Honorine does not say a word, but she touches your hand, once, going past, a very light dry touch, and goes on to the stove.
+?end
+:the_supper
+* Sit in the kept chair, and eat, and let it be an ordinary evening
+  $ b4.christmas = "table"
+  $ humanity += 2
+  $ standing += 1
+  $ secrecy += 1
+  It is a long, loud, delicious evening. There is a goose, in the Tremé manner, with a great deal of rice. There is a very small boy under the table, for much of it, who is being fed by hand. Armand is made to tell the story of the field hospital, which he does badly, and is corrected by his sister. A child of seven sings a carol, in French, in tune, with a perfectly composed face, and it is quite impossible to be unmoved. At about ten you find that you have eaten the whole of a plate of rice, without noticing, and that it has been, in every way that matters, perfectly good.
+  ?if b4.honorine == "walked" or b4.homecoming == "carried"
+    $ do romance("honorine", "together")
+  ?end
+* Bring them a gift: a cart of books and slates from the Valère warehouse, and a stove for the second room
+  $ b4.christmas = "gift"
+  $ humanity += 1
+  $ standing += 2
+  $ do earn(-3)
+  It arrives in the middle of supper, in a mule cart, driven by a very solemn Pompée, with a hat full of snow that is not snow but frost. There are two hundred slates, and a crate of primers, and a map of the world on a roller, and a stove with a great deal of nickel. There is a silence. Then a child, a small one, in a red shawl, says in a high clear voice, "Is it ours?" It is Honorine who answers, after a moment, that it is, and sits down, rather suddenly, on a bench.
+* Stay a quarter of an hour, and give your respects, and go
+  $ b4.christmas = "apart"
+  $ secrecy += 1
+  $ humanity -= 1
+  You stay a quarter of an hour, and say all the correct things, and take a cup of something hot and hold it without drinking. The children sing. You find that you are very much afraid of the chair. At the door Armand says, very quietly, in the dry voice, that he is aware of what you are, and what you are not, and that he has made up his mind to be grateful, as a matter of policy. He says it with great kindness. It has a great deal in it, and you are not at all sure that you are able to carry it.
+$ do discover("the_school_in_the_treme")
+<~
+
+# family
+## The long table
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  ?if b4.coven_home == "raised"
+    They are in the hall of the house on Gravier Street, at the long table, with the lamp turned up and a fire in the great hearth. It is the first winter that there has been a hearth. It makes a great difference. Fiammetta is asleep on the bench, with her head on her arm. Hanno is doing sums, and has been doing them for some time, and has a very peaceful face. There are, you think, a good many ways of being a family, and this is one of them.
+  ?else
+    They are in the long room, with the shutters closed and a fire lit, and a pot of coffee on the hob. It is a very quiet evening. There is a chess board on the table with the pieces in a position that nobody is able to explain.
+  ?end
+  ?if b4.firm == "coven"
+    Prisca has the books of the Ice Company open at her elbow. She says that they have made four thousand dollars in the first month, and that it is shameful, and that she is going to do better. She has, you notice, a spot of ink on one finger. It is the first time that you have ever seen her with anything on her hands.
+  ?end
+?elif coven_size() > 0
+  The house is quiet. They are a long way off. There is a letter on the table, in a hand that you know, four pages long, which you have not yet had time to open.
+?else
+  The house is quiet and cold, and the fire has gone out in the study. You find that you have been standing in the hall for some time, listening to the clock.
+?end
+:the_family
+* Send Prisca to the Treasury agents, and Brault's clerks, to see about the ice and the licenses [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca") and task("prisca") == ""
+  $ do send("prisca", "negotiate", 1)
+  Prisca says that she has a great deal of respect for a clerk who has found a way of making himself indispensable, and that she proposes to find out what it is. She puts on her gloves. She does not hurry.
+* Send Fiammetta down the river road to the Teche, to see what the house is doing [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta") and task("fiammetta") == ""
+  $ do send("fiammetta", "scout", 1)
+  Fiammetta takes her cloak down from the hook and says that she knows exactly how to be careful, and has been waiting a year to be asked. She is out of the door before you can say anything, and you are left with a cold draught, and a sense of having let a very small dangerous thing out of a bag.
+* Put Hanno to the watch, to hear what the lower river says ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "watch")
+  Hanno says that it is a very great honor to be asked to listen, and that he has been listening for four hundred years, and that it is the first time that anyone has called it a duty. He puts on his spectacles. He goes to the window.
+* Put a few eyes in the lower river, a ferryman here, a priest there, so that the house hears before it is told ?if can_acquire("informants")
+  $ do acquire("informants")
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  It is done through the free families of the Lake, and a Jesuit with a very large circle of acquaintances. There is a ferryman who has a cousin at the Teche, and a priest who has a nephew in Mobile, and a little girl at a school who has heard, from a servant, what was said at a table. It takes a fortnight. It is a thing of very small silent threads, and it is, you reflect, a good deal of what a house is for.
+* Lay a stair and a second door behind the great hall, a way out that nobody has been shown ?if can_acquire("hidden_chamber")
+  $ do acquire("hidden_chamber")
+  $ cunning_brutal += 1
+  $ humanity += 1
+  It is Hanno, if he is there, who knows of the old drain, and Prisca, if she is, who says that it will cost three times what it should, and that she will get it for two. It is a narrow brick stair, going down, with a turn in it, and a door at the bottom that opens on a place that you will not describe. It is the sort of thing that a family keeps, in a cold winter, for the night when it is needed, and hopes not to use.
+* That will do for tonight
+  -> :family_done
+-> :the_family
+:family_done
+<~
+
+# dawn
+## The twenty first
+It is a hard white dawn, with a thin film of ice on the water barrels, and a long low smoke over the river, and the bells.
+?if b4.defense == "stood"
+  Nobody has been killed. It is the first thing that you learn, and it is the one that matters. The house is quiet, and the broken latch has been mended by a carpenter who was told that it was a mouse. Hanno sweeps the hall. Fiammetta, on the stair, is asleep, with her knife across her knees, and a very small crooked smile.
+?elif b4.defense == "struck"
+  A boy comes at six from the Levee, with the news that the steamer at the foot of Esplanade has cast off in the night, and gone down the river, with her fires banked and a man at the wheel who is not looking behind him. It is said that she carried the Delormes. It is a very short, quiet story, and it is told on the Levee in an undertone.
+?elif b4.defense == "parleyed"
+  A letter comes from Belle Rive, at nine, in a very fine old hand, on thick paper, with a seal of black wax. It is two lines. It says that the house of the Teche has been informed that the Compact is to be read at the next Chapter, and that it will be asked to attend. There is a postscript, in a younger, harder hand, that says only, *I am sorry.* It is signed with a very small L.
+?else
+  The word comes at six, from Hanno, in a note under the study door, that it has been a quiet night, and that nothing has happened that is worth the paper. It is a good deal of understatement. You find, in the hall, the next morning, a broken latch, and a carpet turned back, and on the wall, a long dark stain that has been scrubbed. There are small drops of blood on the stair, in a line, going down.
+  ?if coven_size() > 0 and b4.circle != "stay"
+    They tell you, afterwards, at breakfast. It was five of them, and the family was in the hall, and nobody was told. Fiammetta was cut across the arm, quite deeply, and it has been bound up by Prisca, who did it very badly and refuses to say so. Hanno put a pistol ball through a Delorme's hat. It was Prisca, in the end, who said the name of the house, and the name of the blood, in a perfectly level voice, and the Teche men went out through the river door in a very careful line. The family held. It was, you think, the thing that you would have wished, and the thing that you would have wished never to be asked of them. Fiammetta, with her arm in a sling, says that it is nothing, and that she has never in her life been so well.
+  ?else
+    You find that the house has been entered, and walked through, and left, and that nothing has been taken at all. It is a thing that has been done, very slowly, as a message, by persons who have been told to be polite. You sit in the hall until dawn.
+  ?end
+?end
+?if b4.labor == "land"
+  The long blue envelope is, you learn from the notary, on the table of a cabin on the estate, under a candle, and a girl of nine is reading it aloud to eleven persons, by the word, with her finger. It is the first thing that she has read in her life that is not in a copybook.
+?elif b4.labor == "wages"
+  There is a letter from the clerk of the Army at noon, in a small anxious hand, to say that the General's staff has been informed, and has not made up its mind, and has not, therefore, said anything. It says that the pass has been torn up, and that nobody has put it back. It is the first thing of the kind that he has been able to say.
+?else
+  A note comes from the Army at noon. It says that the contract has been read at the estate, and that the people have declined to sign it, and that the Army regrets. It does not say what the Army is going to do. You are not at all sure that it knows.
+?end
+?if b4.firm == "coven"
+  The first quarter's figures of the Ice Company are in the morning post. They are not at all what a company of seven persons who sleep in the day have any right to expect. Prisca has written, at the bottom, in a fine plain hand, *We are going to need a bigger warehouse.* It is underlined, twice.
+?end
+Captain Wren is in the hall at noon with his hat in his hand. He says, in his plain, mild, Illinois voice, that he has been on the Provost Marshal's staff for fourteen months and that a great deal of his work has been to be told things by persons who did not wish to be seen telling them. He says that it has occurred to him that a house with a good many windows ought to have a lamp. He leaves a small brass lantern with a shutter on the hall table, and goes out. It is a thing that you look at for a long time.
+There is a letter on the evening post, in a small neat sarcastic hand, with a London postmark, which has taken three months, and which is the first for a year that you have been entirely glad to see. It is from Mr. Crane. It is three lines. It says that he is told that you have a house, and a family, and a firm, and an ice trade, and that he has the greatest respect for the first and the greatest suspicion of the rest. It says that he is coming. It does not say when.
+?if b4.seal == "trap"
+  Under the seal there is a second, plain, very small slip. It is from Charleston. It says, *The false letter you sent has been answered by someone who was not meant to see it.* It is not signed.
+?end
+It is the twenty first of December, and the shortest day of the year, and a good deal colder than it has any right to be.
+$ do rest()
+=> next
