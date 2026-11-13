@@ -3843,6 +3843,198 @@
       "major": true,
       "default": "tomb",
       "note": "Chapter 2: where he lies by day in New Orleans"
+    },
+    "b4.supper": {
+      "kind": "enum",
+      "values": [
+        "guest",
+        "equal",
+        "stranger"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "guest",
+      "note": "Chapter 3: how he sat at the Beaumont table"
+    },
+    "b4.compact": {
+      "kind": "enum",
+      "values": [
+        "signed",
+        "bargained",
+        "refused"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "bargained",
+      "note": "Chapter 3: the Compact of the River"
+    },
+    "b4.armand": {
+      "kind": "enum",
+      "values": [
+        "ally",
+        "patient",
+        "distant"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "patient",
+      "note": "Chapter 3: the physician of the Treme"
+    },
+    "b4.rival": {
+      "kind": "enum",
+      "values": [
+        "heard",
+        "allied",
+        "told"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "heard",
+      "note": "Chapter 3: Madame Lachapelle of the Bayou St. John"
+    },
+    "b4.office": {
+      "kind": "enum",
+      "values": [
+        "opened",
+        "shared",
+        "none"
+      ],
+      "book": "house-divided",
+      "major": false,
+      "default": "opened",
+      "note": "Chapter 3: the counting house of Colline et Compagnie"
+    },
+    "b4.paper": {
+      "kind": "enum",
+      "values": [
+        "silent",
+        "dissent",
+        "praise"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "silent",
+      "note": "Chapter 4: the line of the Valere paper on the election"
+    },
+    "b4.houses": {
+      "kind": "enum",
+      "values": [
+        "pledged",
+        "conditional",
+        "withheld"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "conditional",
+      "note": "Chapter 4: his answer to the river houses at Belle Rive"
+    },
+    "b4.errand": {
+      "kind": "enum",
+      "values": [
+        "scout",
+        "protect",
+        "none"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 4: the coven's errand (or the keepers') after the gathering"
+    },
+    "b4.papers": {
+      "kind": "enum",
+      "values": [
+        "forged",
+        "bought",
+        "refused"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 4: the first papers for Armand's people"
+    },
+    "b4.envoy": {
+      "kind": "enum",
+      "values": [
+        "heard",
+        "bargained",
+        "refused"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "heard",
+      "note": "Chapter 5: his answer to the Senate's Resident"
+    },
+    "b4.levy": {
+      "kind": "enum",
+      "values": [
+        "gave",
+        "lent",
+        "refused"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "lent",
+      "note": "Chapter 5: the first test of the Compact, the firm's boats and bank for the state"
+    },
+    "b4.shelter": {
+      "kind": "enum",
+      "values": [
+        "hid",
+        "sent",
+        "left"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 5: the free families on the Bayou St. John"
+    },
+    "b4.thorne": {
+      "kind": "enum",
+      "values": [
+        "listened",
+        "traded",
+        "turned"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "listened",
+      "note": "Chapter 6: the factor from Boston and the Northern houses"
+    },
+    "b4.blockade": {
+      "kind": "enum",
+      "values": [
+        "ran",
+        "tied",
+        "hid"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "tied",
+      "note": "Chapter 6: what the firm's nine boats do under the blockade"
+    },
+    "b4.raid": {
+      "kind": "enum",
+      "values": [
+        "defended",
+        "warned",
+        "watched"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "watched",
+      "note": "Chapter 6: the river house's raid on the Bayou St. John"
+    },
+    "b4.guards": {
+      "kind": "enum",
+      "values": [
+        "funded",
+        "warned",
+        "apart"
+      ],
+      "book": "house-divided",
+      "major": false,
+      "default": "apart",
+      "note": "Chapter 6: the Native Guards of the Tremé"
     }
   }
 }

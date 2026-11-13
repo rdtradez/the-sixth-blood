@@ -1,0 +1,291 @@
+// Book Four, Chapter 6 (session 42). Late May 1861: the blockade comes to the Passes, a Northern visitor, a raid on the Bayou.
+// Opens with no phase (the city under the blockade, then the visitor's card), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and the first ship at dawn.
+// Reads b4.circle, b4.compact, b4.houses, b4.levy, b4.envoy, b4.shelter, b4.rival, b4.armand, b4.papers and the circle. Sets b4.thorne, b4.blockade, b4.raid and b4.guards.
+// Ends with rest() and => next, which pauses until chapter 7 exists (the manifest entry is incomplete).
+@chapter b4c06
+@title The Blockade
+@book house-divided
+@version 1
+
+# start
+## May
+$ b4.thorne = "listened"
+$ b4.blockade = "tied"
+$ b4.raid = "watched"
+$ b4.guards = "apart"
+$ do discover("the_blockade")
+$ do meet("thorne")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is the end of May, and there are four things that want doing tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## The river stops
+It has been, since the winter, a city in which everything is a little too bright. The flags are new. The uniforms are new, and so are the drums, and the ladies' committees, and the sermons, and the songs. The war began in April, at a fort in Charleston harbor, and the news came up the wire in the middle of a ball, and the whole room cheered. It is a thing that you have seen before, in other cities, and it has never once been as it seemed.
+Then, in the last week of the month, the river stops.
+It is not a thing that happens at once. It is a thing that arrives by degrees, like a change in the tide. A steamer comes in with news that there is a Federal sloop of war off the Passes, a black ugly thing with a great many guns, which has taken up her station and is looking at the sea. Another says that there are two. By the end of the week there is a proclamation, and a notice at the Exchange, and a silence on the levee that you have never heard there before. The cotton, which is piled in ranks to the horizon, in bales as high as houses, has nowhere to go. Nine boats of the house of Colline are tied up at the wharf in a row, with their funnels cold, and their crews sitting on the rails.
+You have lived through eleven blockades, and not much cared for any. This one, you notice, is different in a single respect. It is the first that has been laid by a government against its own country. The men on the levee do not know yet what that means. They are going to learn.
+The card comes at ten. It has been brought by hand, by a young Irish clerk in a very good coat, who was told to wait and has been waiting for an hour in a state of rigid correctness. It is a good plain card, of Boston stock, with a name engraved very small. It says *Mr. Elias Thorne, of Messrs. Thorne and Pickering, Factors, India Wharf.* It says, in a small neat hand under the engraving, *I should be glad of a quarter of an hour. I do not come by Pearl Street.*
+It is the last remark that decides you. You have the impression that it was written by someone who has read a certain correspondent's letters, and is not at all amused.
+<~
+
+# hunger
+## The warm dark
+* Take a horse from the livery, in the Rue des Ramparts, and be gentle about it
+  $ do feed("animal")
+  $ humanity += 1
+  It is a big bay gelding with a white sock, and has a great deal of dignity, and stands quite still, with its ears back, while you do it. You leave it standing in the straw with a handful of sugar. It has, you believe, the best of the bargain.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a cigar roller, from the Spanish quarter, and is sorry about the war, for her brother is in it, and tells you so for an hour afterwards, with her feet up. It is, you realize, the first time that anybody in the city has told you anything about the war that was not a song.
+* Hunt the levee, where the idle crews are drinking
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  There are three thousand men with nothing to do, and a great deal of cheap whiskey, and a warm dark, and it is the easiest thing in the world. A deckhand sleeps it off among the cotton bales and wakes at dawn with a headache and a dreadful dream. You are back in the Marigny by then.
+<~
+
+# night
+## The first night of the blockade
+:night
+?if actions_left() == 3
+  It is warm, and the air is full of the smell of the river and of ten thousand bales of cotton. There is a sweetness in it, a little rotten, that is going to become a good deal stronger.
+?elif actions_left() == 2
+  The moon has come up over the levee, a big pale peach, and the idle boats are silvered in their rows.
+?else
+  The first mockingbird has begun in the yard, and the sky behind the sugar house is going the color of a pearl. You have one thing left.
+?end
+* Receive Mr. Thorne of Boston, in the counting house [once] ?if actions_left() > 0
+  ~> thorne
+  $ do act()
+* Go down to the wharf, to the nine idle boats [once] ?if actions_left() > 0
+  ~> wharf
+  $ do act()
+* Go out to the Bayou St. John, where something is wrong [once] ?if actions_left() > 0
+  ~> bayou
+  $ do act()
+* Cross to the Tremé, to Dr. Armand [once] ?if actions_left() > 0
+  ~> treme
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# thorne
+## The factor from India Wharf
+$ do chart("neworleans.bank")
+He is a tall, bony, fair man in a black broadcloth coat of a cut that has not changed for forty years, with a long grave face, pale eyes, a stiff white stock and a Bible, a small plain one, in the pocket. He sits very upright in the counting house chair and refuses the wine, and the cigar, and the chair's cushion, and takes, with an expression of resigned suffering, a cup of tea. He has an accent that you have not heard in a long time, the dry flat vowels of a Puritan village. He might be thirty five. He has been, you judge, rather more than two hundred years in the dark.
+He does not begin with pleasantries. It is not in him. He says that he came down by the Mobile packet, in the last week before the ships arrived, on a pass signed by a Governor, as a buyer of cotton on behalf of a house that does not exist. He says that he has been in New Orleans for three days. He says that he has seen the river houses, and the market, and the Exchange, and the Louisiana Native Guards on parade in their blue coats on the Plains of Mexico, and that he has formed an opinion.
+"I am told," he says, "by the persons who tell me things, that the sixth has come to this city, and is sitting at the tables of Mr. Beaumont, and has been courteous to them." He sets down the cup, exactly in the ring. "I do not blame you. I should have been courteous. I should have been a good deal more courteous than I was in Boston. But I think you ought to know what you have been sitting at."
+He tells it plainly, as a man who has been asked to lay a case before a jury. There are in the North, he says, a number of persons of his kind. They are few. They are, for the most part, old, and they are, for the most part, quiet, and a good many of them were made in the days when the colonies were young and the fear of God was a thing a man could count. They have had a long time to think. They have come, over a period of some years, to a conclusion that is not at all what their elders would have liked. It is that a country is a thing that can be made to behave, and that a vampire who has watched a country for two centuries has the right, and perhaps the duty, to give it a nudge.
+"The war will end the trade," he says. "It will end it in this country, within five years, and it will do so at the price of a good many hundreds of thousands of men. I do not say it will be a clean thing. I say that it will be done. The question is what is to be done, after, with a river." His pale eyes lift. "The river houses will fall with the South. They do not know it. They have been rich for a hundred years, and have never had to learn how to be poor. We, in the North, shall want a friend in the lower country. I am told that Mr. Crane has written to you. I should be obliged if you would not take his advice."
+You say, mildly, that you have not been given a great deal of advice by Mr. Crane. You have been given a good many jokes.
+"That," says Mr. Thorne, "is his advice."
+:the_thorne
+* Hear all of it, and say that you will think, and keep both doors open
+  $ b4.thorne = "listened"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  $ standing += 1
+  He bows his head. It is a very small, rigid, graceful gesture, like a man laying down a hand at cards. "That is the answer of a prudent person," he says, "and I have always disliked it in the abstract." Something in his long face moves. It is the beginning of a smile, thin and dry as the edge of a blade. "It was the answer I gave in Salem. It was not, I think, a great success." He rises. He has the grace, at the door, to say that the factor's house will be at the St. Charles Hotel until Wednesday, and then at an address in Pensacola, and then nowhere at all.
+* Trade: give him the river houses' roads and their blockade runners, in return for the North's goodwill and a clear road for the Colline boats
+  $ b4.thorne = "traded"
+  $ cunning_brutal += 3
+  $ standing -= 2
+  $ humanity -= 2
+  $ velati_regard -= 1
+  $ do earn(3)
+  He considers this for a long time in silence, with his hands on his knees. It is the silence of a man who has come a great way to hear the answer that he half hoped he would not be given. "It is a thing that I did not ask," he says, "and that I am going to accept." He takes out a little black book, and a stub of pencil, and writes, in a tiny regular hand, and you watch the river houses pass, name by name and road by road, into a notebook that is going north. It is done in a quarter of an hour. At the end of it he looks, for the first time, tired. "I am not at all sure that I have been a good influence," he says. "I should like to think that I have been a useful one."
+* Say that you are of the South by choice and of no side by nature, and that you will not be used by either
+  $ b4.thorne = "turned"
+  $ defiance += 2
+  $ secrecy += 2
+  $ standing += 1
+  $ humanity += 1
+  He accepts it without surprise, the way a physician receives a bad report that he has expected for some time. "I was asked to put it to you. I have put it." He rises. At the door, with his hat in his hand, he says very quietly, "I would give a great deal to be a man who could say that and be believed. I have been, in my time, a great many things, and I find that the one that I am least often permitted to be is neutral." It is a very odd parting. It has, you think, something in it that is very like envy.
+?if b4.thorne != "turned"
+  As he goes, he lays a small flat packet on the desk, wrapped in brown paper and tied with a bit of tarred twine. "A trifle," he says. "From a person in New York who is not Mr. Crane." He does not say what it is. You open it when he has gone. It is a map of the lower Mississippi, in an engineer's hand, with a number of soundings, and in the corner, in pencil, a single line that you read twice. *The sixth should know that the river has a way of being a different color at Vicksburg.*
+?end
+$ do discover("the_northern_houses")
+<~
+
+# wharf
+## Nine boats
+$ do chart("neworleans.wharf")
+They are tied up three abreast, with their paddle wheels still, and the river sliding by them as if nothing had happened. They are good boats. You bought the first four in a hurry, in a bad winter, and the others in better times, and they are called after nothing in particular: the *Aurélie*, the *Marguerite*, the *Colline*, the *Belle of Natchez*, and five more. There are a hundred and sixty men on their decks, and in the boilers, and in the rigging. They are sitting on the rails in the warm night, with their legs hanging, smoking pipes and looking at the water. They have not been paid for a week.
+The captain of the *Colline* is a leathery old man named Brault, who has been on the river for forty years, with a wooden leg and a big white mustache. He takes his hat off and puts it back on again, which is a thing that he does when he has made up his mind to say something that he does not like.
+"There's a Federal ship at the Passes," he says. "She's not very big. She'd have trouble, in the dark, with a boat that knew the bars. There's a Spanish brig at Barataria that'll take cotton at a dollar a pound, and there's a banker in Havana that'll pay it in gold." He looks at his boots. "And there's a great many people in this city who'd give a good deal to be carried somewhere, a good deal further than Mobile."
+It is a thing you can see for yourself, in the lamp. It is not a decision for a fool. A boat tied to the wharf is a boat that costs a hundred dollars a day. A boat that runs the Passes costs a fortune, and risks a gunboat, and brings a profit that will set the firm up for ten years. And there is a third thing, which is that there is, under the lamp, among the crews, a number of people who are not crew, and have no business being on a wharf at night, and who have been standing very quietly in the shadows of the sheds, with bundles.
+?if b4.shelter == "hid"
+  Among them, you notice, with a quiet lift of the heart, there is a girl of fourteen with a very straight back, who has been sent, apparently, by a certain old woman on a certain bayou to look at the boats.
+?end
+:the_blockade
+* Lay them up, pay the crews a month, and wait for the war to be over
+  $ b4.blockade = "tied"
+  $ secrecy += 1
+  $ standing += 1
+  $ do earn(-4)
+  Brault takes it with an air of slightly baffled relief, as a man receives a gift that he had not been prepared to ask for. The crews are paid in the lamplight on the wharf, from a strong box, in gold, and there is a moment of real, incredulous, simple pleasure that you do not at all expect. A man gets up on the rail, and says that the Colline firm is a house to ship in. You do not tell him that it is the only thing you could think of that did not cost somebody's life.
+* Run the Passes: a boat a week, cotton out and gold in, and ask no questions of the cargo
+  $ b4.blockade = "ran"
+  $ cunning_brutal += 2
+  $ humanity -= 3
+  $ standing += 3
+  $ do earn(6)
+  $ do discover("the_cotton_economy")
+  Brault laughs, a short, rusty laugh. "I'll have her out by Thursday," he says. "She's a mud turtle of a boat, but she knows the bar at Pass a l'Outre like her own mother." It is the beginning of a very profitable season. It is a season of fast boats, and dark nights, and a large amount of money. It is a season, too, of cotton bales that came from somewhere, and were picked by somebody, and by the end of it you do not like to look at the columns of the ledger.
+* Put the boats to another use: carry people north by the lakes and the Gulf, before the doors shut
+  $ b4.blockade = "hid"
+  $ humanity += 3
+  $ secrecy -= 2
+  $ standing -= 3
+  $ do earn(-5)
+  Brault looks at you for a long moment, and takes off his hat, and holds it. "Well, now," he says. "That's a thing I did not expect." It is a business of the dead of the moon, and false papers, and a Spanish captain who has been paid more than he is worth, and, in the end, three boats and a great deal of quiet, and ninety people in the holds who have gone, in the dark, one night in June, a very long way from home. You never learn their names. It is the thing about the whole of it that you are proudest of, and the thing that cost you most.
+?if coven_size() > 0 and b4.circle != "stay" and in_circle("hanno") and member("hanno", "status") == "active"
+  Hanno has come down from the counting house with the books, and stands at your elbow, and says, in the gravest voice that you have ever heard from him, that he has been in three wars of this kind. He says that he has never seen a firm survive one by being clever. He says that the only firms that survive are the ones that, at the end, have something to be forgiven for that they can afford.
+?end
+<~
+
+# bayou
+## The shell road
+$ do chart("neworleans.roadhome")
+You smell it before you see it. It is a smell that has no business on the shell road, a thing that you have not encountered since Paris: a thin cold smoke, and under it, quite distinctly, the smell of a house that has been entered by people who did not knock. The big oaks are black against the sky. There is a light, a low, flickering, unnatural light, in the gallery of the cottage, and it is moving about.
+They have come on foot, six of them, in a half circle, with lamps. You know three of the faces. The Delorme brothers have brought their own people, and Lucien has come with them, bareheaded, in a white shirt, with his sleeves rolled, and a look on his face that is not at all like the one he wore in the sugar house yard. It is a look of cold, trembling, delighted hatred. It is the look of a person who has found, at last, permission.
+They have not set the house on fire. It is a fine point, and it is quite possible that they have been told not to. They have broken the front door, and there is a man on the gallery in the Delorme livery who has Madame Lachapelle by the elbow. She is standing quite straight, in her gray silk, with the cat in her arm, and is saying something in a clear small voice that carries across the yard.
+"I do not recall," says Madame Lachapelle, "that I have asked the gentlemen into my house."
+?if b4.rival == "allied"
+  She does not look at you. She is too proud for that. But you see her draw a long, small breath, and you know that she has seen, over the Delorme shoulders, in the dark under the oaks, a figure she did not expect to see.
+?end
+?if b4.errand == "protect" and in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
+  Fiammetta is already there. She is sitting on the rail of the old icehouse, a dozen yards from the gallery, in the dark, with her knees drawn up, and she has been watching them for some time. She meets your eye across the yard. She does not smile, and she does not say a word. She raises one eyebrow by perhaps a sixteenth of an inch.
+?end
+:the_raid
+* Walk into the lamplight and say that this house is under the protection of Colline et Compagnie
+  $ b4.raid = "defended"
+  $ standing += 1
+  $ cunning_brutal += 1
+  $ secrecy -= 1
+  They turn. It is a slow, startled, wolfish turning. Lucien takes a step forward, and the man on the gallery lets go of Madame's elbow.
+  ~> yard
+* Send word, by a boy, to the river house, that Madame Lachapelle is being robbed on the Bayou Road, and stay in the dark
+  $ b4.raid = "warned"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  $ standing += 1
+  It is the oldest weapon there is. You write three lines on a leaf of your pocket book, in a plain round hand, and give it to a boy with a shilling, and he goes off down the shell road like a hare. You stand under the oaks and wait. It takes eleven minutes. Then a carriage, a big black one, with a lamp, comes up the road at a very sober pace, and Beaumont gets out of it, in his black coat, with his hat on, and says one word to the yard, and the yard dissolves. He does not look at the dark under the oaks. He is far too well bred. He offers Madame his arm. "It is a thing that I regret," he says. "It was not done in my name." She says that she does not suppose that it was. She says that she supposes that it was done in his house.
+  He sees you then, in the dark, and gives you a long look, from under his hat. It is, you think, the look of a man who has been shown, quite neatly, that he can be managed, and who has decided that he does not mind.
+* Stay in the dark, and watch what the houses do with a law they have just made
+  $ b4.raid = "watched"
+  $ secrecy += 2
+  $ humanity -= 3
+  $ cunning_brutal += 1
+  You stand among the cypresses and watch. It is a very quiet thing. They do not burn the house. They do not harm the old woman. They take her, with great courtesy, to the road, and put her, with her cat, into a closed carriage, and drive away toward the river, and it is only when it has gone that you understand that there was never any need of violence, that it was never meant to be a raid. It was meant to be a letter. They break every pane in the front of the house, one at a time, with a hunting crop, for the sound. It is a very small, very careful, very finished piece of work. When they have gone, you go up the steps, and stand in the broken light, and nobody has been hurt, and you have done nothing. You find that it is not, as the books say, an easy thing to do.
+$ do discover("the_river_houses")
+<~
+
+# yard
+## The gallery
+$ do fight("fledgling", 2)
+:the_yard
+* Go for the nearest man, and finish it cleanly
+  $ do strike("brutal")
+* Use the dark: feint, and take them from the side
+  $ do strike("cunning")
+* Let the old blood loose ?if not must_feed()
+  $ do strike("power")
+* Say Lucien's father's name, and ask what the Compact says about another house's gallery
+  $ do strike("talk")
+* Go
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    They give ground, and it is a good deal more ragged than before.
+  ?else
+    They are quick and they are many, and the lamplight makes every shadow a hand.
+  ?end
+  -> :the_yard
+?end
+?if fight_result() == "won"
+  It is over very soon. There is a short bright confusion of lamps, and a great deal of noise, and the cat leaves Madame's arm like a thrown stone. Then there are three men on the shell, and the rest have gone back into the dark under the oaks, and Lucien is standing with his sleeves in rags and a look on his face that is not hatred, and not fear. It is something rather worse. It is calculation. He picks up his coat, and looks at Madame, and at you, and says, quite quietly, in the voice of someone who is writing it in a book, "It will be remembered." You say that you hope so. It is the only way that anything gets better.
+  $ standing += 2
+  $ cunning_brutal += 1
+?elif fight_result() == "talked"
+  You say it very softly, in the clear, level, patient voice that a very old man uses to a very young one. You say that the Compact says nothing about a lady's gallery, and that the first article of the river is that houses do not make war on houses, and that a house that does so has made a very great mistake. You see it go through them. It goes through Lucien last. He stands for a long moment with his fists half raised. Then, with a very small, hard, savage motion of the shoulders, he turns away, and they go. It is not a victory. It is something very like a postponement.
+  $ humanity += 1
+  $ standing += 1
+?elif fight_result() == "fled"
+  You are in the road before you know it, with the smell of smoke and wet cypress in your nose, and behind you a woman's clear small voice raised in a perfectly courteous sentence that does not, at all, sound like a plea. It is a long walk back. It is a very long time before you stop hearing it.
+  $ standing -= 3
+  $ humanity -= 1
+?else
+  It goes badly. They are fast, and angry, and several, and for a short bad time the yard is a place of cold hands and swinging lamps. It is Fiammetta, or Madame, or the cat, or a stroke of pure luck, who ends it. You are on the gallery steps, on your hands and knees, bleeding on the old boards, and the raiders are going back into the trees. Madame, standing over you, with her lamp, says in a voice quite free of any reproach that you are a very brave person, and that she would be obliged if you would not do it again.
+  $ standing -= 1
+?end
+<~
+
+# treme
+## The Faubourg, in the heat
+$ do chart("neworleans.treme")
+The Tremé is hot. It is a thick, slow, jasmine scented heat, and the long low cottages are open to it, with their shutters folded back and their galleries full of people, and the whole street smells of coffee and frying and lamp oil. It is a good neighborhood. It has always been a good neighborhood. It has, tonight, a particular air, as of a family waiting at a station.
+Dr. Armand is on his step. He has been called out twice already tonight, to a child with a fever and an old man with a fall, and has the look of a man who has been wrung out and hung up to dry. He rises when he sees you, which he did not do in the autumn.
+"They have raised a regiment," he says. He is not speaking quite to you. "They are called the Native Guards. They are men of color, free, with property, and they have been drilling, since April, in blue coats, on the Plains of Mexico. There are fifteen hundred of them. They have been asked by the Governor to protect the city." He looks up the street, at the glow of a lamp. "My brother is a lieutenant. He has a very good sword. He has been told that he is to wear it, and that, when the time comes, it will be remembered that he wore it."
+There is a very long silence. You can hear a woman singing, somewhere, in a back kitchen. It is a very old song. It has a great many verses.
+"They believe," says Armand, "that if they are seen to be loyal, they will be safe. I do not say that they are fools. They have a great deal to lose. They have houses and shops, and a great deal of paper. They are the only free men in the State of Louisiana who have been given a gun by their government." He rubs his forehead. "I think that it is going to be taken away. I think it will be taken away the first day that it is useful to do so."
+His sister has come out onto the gallery behind him. She is a tall, dark, composed woman in a plain gray dress, with her sleeves pushed up, who runs the school that is in the society's back room. You have seen her through the glass. She has not spoken to you before. She says, in a clear low voice with a Paris vowel, "My brother thinks that you can be asked a thing." She does not smile. "I have told him that you can be asked anything, and that it is a question of whether you will answer."
+:the_guards
+* Pay for the Guards' arms and uniforms, through the Valère house, and ask nothing
+  $ b4.guards = "funded"
+  $ humanity += 1
+  $ standing += 2
+  $ do earn(-5)
+  $ cunning_brutal += 1
+  Armand looks at you for a very long time. It is not gratitude. It is something a good deal more complicated, and a good deal more careful. "It will be an investment," he says at last. "It will be the soundest in the Tremé." He holds out his hand. It is the first time. The sister, behind him, says nothing, but she has put down her sleeve.
+* Tell them, plainly, what you think is coming, and say that they should keep their rifles and their papers and be ready
+  $ b4.guards = "warned"
+  $ humanity += 2
+  $ secrecy -= 1
+  $ cunning_brutal -= 1
+  He does not say a word. He sits down on his own step, quite suddenly, like a man who has been told a thing that he had known all along. The sister, after a moment, says in a low voice, "I thought that you would say that." She says, "It is a good thing to be told by someone who has seen it." You find that you have said a great deal more than you intended, about a number of other cities, and a number of other years. They listen. It is not a thing that you are ever likely to be forgiven for, and it is the truest thing you have said in the city.
+* Say that it is not your quarrel, and that you cannot be of use
+  $ b4.guards = "apart"
+  $ secrecy += 1
+  $ humanity -= 2
+  $ standing -= 1
+  Armand receives it with great composure. He rises, and bows, from the waist, and says that he quite understands. It is a very civil sentence, and it has a very exact weight, and you feel it on your shoulders all the way down the walk. Behind you, on the gallery, a woman's voice says, quite quietly, in French, "Of course." It is not at all a reproach. It is a note being made.
+?if b4.papers == "forged" or b4.papers == "bought"
+  Before you go, the sister, whose name is Honorine, comes down the steps and walks with you to the gate. "I have seen the work that was done in the surgery," she says. "It was a thing that nobody had asked for in so many years." She puts out her hand and, for a moment, so lightly that you scarcely feel it, touches your sleeve. "I wished to say that I know what it cost." You do not know, for a moment, what to say.
+?end
+$ do meet("honorine")
+$ do discover("the_native_guards")
+<~
+
+# dawn
+## The first ship
+The light comes up thin and white over the river, and it is, for the first time in several weeks, a morning that smells of something other than cotton. It smells of coal smoke. It comes from the south, from the direction of the Passes, in a long low smear across the east, and the harbor police, on the levee, are standing in a row with their hands shading their eyes.
+It is the first of them. She is a long way off, a black speck with a plume of dirty smoke, standing slowly in toward the Head of the Passes, and she has been seen by the pilots, and by the idle crews on the nine boats, and by every man on the levee, and a great quiet has gone over the city like a hand. A woman in the Rue Royale, hanging out a wash, has stopped, with a sheet in her hands, and is looking south.
+?if b4.blockade == "ran"
+  Brault's boat, the *Colline*, is down the river in the dark with a hold full of cotton. You do not know where she is. You wait for her, in the way that a man waits for the first cock crow, and find that you are less afraid for the boat than for yourself.
+?elif b4.blockade == "hid"
+  Three of your boats are gone. They went in the dark of the moon, with the lights out, and have not been heard of since. It is a hard thing to be sure that they are safe. It is the only way to be sure that they are free.
+?else
+  The nine boats are at the wharf, in their row, with their crews asleep on deck. They look, in the dawn, like a line of toys that a child has put away.
+?end
+?if b4.raid == "defended"
+  On the table in your room, there is a small plain card in a clear pointed hand. It has no name. It says only, *The cat is well.* You have to read it twice before you understand that it is from Madame Lachapelle, and that you are going to keep it.
+?elif b4.raid == "warned"
+  On the table in your room there is a very small, very civil note from the river house, in Beaumont's ruled hand. It does not mention the Bayou Road. It says that the first Friday of the month will be at the usual hour, and that there is a matter to be considered, and that Monsieur Colline's good offices are, as always, valued.
+?else
+  There is nothing on the table in your room. The house on the Bayou Road is dark, and the glass is broken, and there is a note nailed to the door in a hunting hand that you do not need to read.
+?end
+There is a letter on the hall table, with a New York postmark and a hand that you know. It is not Crane's. It is a long stiff upright hand, a Puritan's, with a flourish on the capital letters like a small drawn bow, and it is very short. It is from Mr. Thorne. *I have been at Pensacola. The Navy has been told of a gentleman in New Orleans who has the keys to nine boats. I have done what I can to prevent anyone from thinking of you as a cause.* Under it, in a different pencil, in a clerkly hand, there is a postscript. *Not from me. From the person who told me to write. He says to watch the Senate's man. He says that one in whom everyone has confidence is generally the one who has not been seen to do anything.*
+You do not know what it means. It is not signed. You fold it, and put it with the others, and sit for some time at the window, watching the smoke come up the river.
+$ do rest()
+=> next

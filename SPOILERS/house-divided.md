@@ -27,3 +27,44 @@ Night phase, three of four: the house of Valere on the Rue Royale (Aurelien, his
 Dawn: a card on good paper from the house of Beaumont, delivered by hand to the Valere door: Augustin Beaumont desires to know whether Monsieur Colline has woken.
 
 Hooks: Beaumont's supper; the doctor in Treme; the woman and boy (if bought); the venture's income and shame; Crane's second letter; the circle's arrival.
+
+## Chapter 3, "The First Friday" (`b4c03`, session 41)
+
+March 1860. Answering the card: Augustin Beaumont calls, or is called on, and the hero is asked to supper at the river house (`neworleans.beaumont`). Beaumont is courteous, patient, and entirely clear that the sixth blood is a thing the river houses have waited a century to see in their own parish. Man out of time and measure: the hero is at once the strongest person at the table and the guest. Beaumont's household: his lady Isaure, his son Lucien (hot, proud), the gray servant Pompée (a sworn human keeper of the house), five other vampires of the river house. The table beat (`b4.supper`: guest, equal, stranger) and the Compact of the River (`b4.compact`: signed, bargained, refused): the houses do not sire in each other's parish without leave, feed by the old rules, stand together against outsiders, and the house of the sixth blood will stand at the river's side when it is asked. Signing carries the whole book.
+
+Hunger scene if needed. Night phase, three of four: the coven house and the haven (build out: coven house, training hall, blood network, front business; posts and standing tasks; ahead members arrive this chapter), the Treme (Dr. Armand, `b4.armand`: ally, patient, distant; the free people's society, the law of 1857; what became of the woman and boy if the sale was left), the Bayou St. John (Madame Celestine Lachapelle, the small old house Beaumont has fallen out with, who shelters the free and the hunted; `b4.rival`: heard, allied, told), the counting house (Colline et Compagnie opens its door, `b4.office`: opened, shared, none; Philomene and Theo if bought).
+
+Dawn: Crane's second letter, by hand, left on the pillow of a locked room.
+
+Hooks: the Compact's first test; Lachapelle's house; Armand's papers; Lucien's grudge; Crane.
+
+## Chapter 4, "The Night of the Returns" (`b4c04`, session 41)
+
+6 November 1860, the night of the presidential election. The city under torches and rain. Night phase, three of four: the paper (Aurelien's French daily must take a line, `b4.paper`: silent, dissent, praise), the gathering of the river houses at Belle Rive (seven houses; Beaumont proposes that if the state leaves the houses stand with it; Lucien challenges the sixth blood and is answered, a short fight; `b4.houses`: pledged, conditional, withheld), the coven's night (the family beat, a quarrel and a supper, and an errand; `b4.errand`: scout, protect, none; on the lone path the keepers), the Treme (Armand's society and the first papers, a scheme not a signature; `b4.papers`: forged, bought, refused).
+
+Dawn: the bells, the news by wire that the Illinois lawyer has the election, a letter bearing the Senate's seal.
+
+Hooks: secession in January; the houses' choice; the errand's debrief; Armand's people; the Senate's agent.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 5, "The Envoy and the Convention" (`b4c05`, session 42)
+
+January 1861, the night before Louisiana votes itself out. The Senate's seal opened: Septimus Roan, Resident of the Senate of Blood for the Western Sea (a dry gray clerk of nine hundred years), calls at the counting house at midnight. The Senate is now a correspondence, wants the Veil kept through the coming war, and is embarrassed, not threatened, by a daywalker of the erased line (`b4.envoy`: heard, bargained for a letter of protection and a debt, refused). Night phase, three of four: the envoy, the Exchange and the river house at three in the morning (the first article of the Compact comes due: the firm's nine boats and bank for the state's arming; `b4.levy`: gave, lent at a rate, refused; reads `b4.houses` and `b4.compact`), the Bayou St. John (Madame Lachapelle shelters eleven free people the new registration law will hunt; `b4.shelter`: hid under the cooperage, sent north by the lake, left; reads `b4.rival`), the Marigny haven (the errand's debrief; escape tunnels, informants, safehouses; Fiammetta to the guard, Prisca to the business).
+
+Dawn: twenty one guns for the state; chalk or silence on the door by the levy; a notice in the Valere paper for friends of Madame L.; Crane's letter from Havana.
+
+Hooks: the Senate's debt and Roan's parting warning (not wise to be the only one of anything); Fortier's memory of the sixth in Lyon; Lucien's smile if the levy was refused; the free families; Crane.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 6, "The Blockade" (`b4c06`, session 42)
+
+Late May 1861, the first Federal ship off the Passes. Elias Thorne of Boston (a New England vampire of two hundred years, a Salem survivor) comes under a factor's flag to say that the Northern houses want a friend on the river and that the war will end the trade at a terrible price (`b4.thorne`: listened, traded the river houses' roads for a clear road, turned away; a map and a warning from "a person in New York who is not Mr. Crane"). Night phase, three of four: Thorne, the nine idle boats (`b4.blockade`: tied up and crews paid, ran the Passes for the dark money, carried people north; Captain Brault), the Bayou St. John (the river houses raid Madame Lachapelle's house, Lucien with them; `b4.raid`: defended it and fought, warned the river house through a boy, watched; if the errand sent Fiammetta she is already on the icehouse rail), the Tremé (the free men's Native Guards; Armand's brother a lieutenant; Honorine, his sister and the schoolmistress, introduced; `b4.guards`: funded, warned them, kept apart).
+
+Dawn: coal smoke from the Passes; a card from Madame L. or Beaumont or a broken door; a note from Thorne with a postscript from "the person who told me to write": watch the Senate's man, the one everyone trusts. This seeds Roan as a figure to doubt (he may be the Scribe's creature or the Scribe's cover) without deciding it.
+
+Hooks: Roan; Honorine (a possible love); Lucien's grudge and the river houses' war footing; the Native Guards and the fall of the city in 1862; Brault's boats; Crane and Thorne as rivals; the free families on the lake.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
