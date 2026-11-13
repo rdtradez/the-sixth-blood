@@ -32,6 +32,42 @@ export function peoplePanel(game) {
   ];
 }
 
+function sendRow(game, view, m, rerender) {
+  if (!game.state) return null;
+  const what = h('select', { class: 'covenTask', 'aria-label': `Errand for ${m.name}`, disabled: !m.canSend },
+    h('option', { value: '' }, view.actionsLeft > 0 ? 'Send on an errand' : `No ${view.phase || 'time'} left to send them`),
+    ...view.missions.map((o) => h('option', { value: o.id }, o.label)));
+  const how = h('select', { class: 'covenTask', 'aria-label': `How ${m.name} should go`, disabled: !m.canSend },
+    ...view.risks.map((o) => h('option', { value: String(o.id), selected: o.id === 2 }, o.label)));
+  what.addEventListener('change', () => { if (!what.value) return; game.sendOnMission(m.id, what.value, Number(how.value)); rerender?.(); });
+  return h('div', { class: 'sendrow' }, what, how);
+}
+
+export function covenPanel(game, rerender) {
+  const view = game.coven();
+  if (!view.members.length) return [h('h2', {}, 'Coven'), empty('No one is sworn to you yet. Those who join you, and those you turn, are kept here.')];
+  const inStory = Boolean(game.state);
+  const options = [h('option', { value: 'none' }, 'No task'), ...view.tasks.map((t) => h('option', { value: t.id }, t.label))];
+  return [
+    h('h2', {}, 'Coven'),
+    h('p', { class: 'count' }, `${view.covenCount} ${view.covenCount === 1 ? 'is' : 'are'} with you`),
+    h('p', { class: 'bio' }, 'Give each of them a task and they keep to it through the long sleep, and work your business while you are awake. Send them on errands while you have a night or day to spend. The next chapter tells you how it went.'),
+    ...view.members.map((m) => {
+      const select = h('select', { class: 'covenTask', 'aria-label': `Task for ${m.name}`, disabled: !(inStory && m.canTask) }, ...options.map((o) => o.cloneNode(true)));
+      select.value = m.task || 'none';
+      select.addEventListener('change', () => { game.setCovenTask(m.id, select.value); rerender?.(); });
+      return h('div', { class: `person${m.active ? '' : ' gone'}` },
+        h('div', { class: 'who' }, h('span', { class: 'pname' }, m.name), m.role ? h('span', { class: 'ptitle' }, m.role) : null),
+        h('div', { class: 'notes' }, [...m.notes, m.joinedIn ? `Joined in ${m.joinedIn}` : ''].filter(Boolean).join(' · ')),
+        m.doing ? h('p', { class: 'bio' }, m.doing) : null,
+        m.lastTask ? h('p', { class: 'bio' }, m.lastTask) : null,
+        m.active ? select : null,
+        m.active && !m.away ? sendRow(game, view, m, rerender) : null,
+        m.active && m.task ? h('p', { class: 'bio' }, view.tasks.find((t) => t.id === m.task)?.text ?? '') : null);
+    }),
+  ];
+}
+
 function member(n) {
   const cls = `member${n.you ? ' you' : ''}${n.status === 'dead' ? ' dead' : ''}${n.status === 'unknown' ? ' unknown' : ''}`;
   return h('div', { class: cls },

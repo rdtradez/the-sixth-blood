@@ -16,6 +16,7 @@
 // City holdings (a haven's tunnels) are left behind when he sleeps; lasting ones travel.
 
 import { sysOf, cat, rule, bump, stat, scale, bookNumber, logDecision } from './core.js';
+import { businessHands } from './circle.js';
 import { EngineError } from '../util.js';
 
 export const PATHS = ['coven', 'lone'];
@@ -37,7 +38,9 @@ export function income(ctx) {
     const def = venture(ctx, id);
     if (def) total += def.income * v.level;
   }
-  return Math.round(total);
+  // His coven works the business with him: each hand tasked to it adds a share, up to a cap.
+  const share = Math.min(rule(ctx, 'coven.businessCap', 0.4), businessHands(ctx) * rule(ctx, 'coven.businessShare', 0.1));
+  return Math.round(total * (1 + share));
 }
 
 function availableNow(ctx, def) {

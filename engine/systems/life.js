@@ -28,6 +28,17 @@ const DEFAULT_FEEDING = {
   bank: { hunger: -40 },
 };
 
+/** Spend actions from the current day or night phase. Shared by $ do act() and the Coven tab. */
+export function spendActions(ctx, n = 1, midday = false) {
+  const s = sysOf(ctx);
+  if (!s.phase) throw new EngineError('$ do act(): no day or night phase has begun ($ do phase("day"))');
+  const spend = Math.max(1, Math.round(n));
+  s.phase.left = Math.max(0, s.phase.left - spend);
+  s.phase.used += spend;
+  s.unfed += spend;
+  if (s.phase.kind === 'day' && midday) bump(ctx, 'hunger', sunHunger(ctx) * spend);
+}
+
 export const life = {
   fns: {
     in_phase: { spec: [], fn: (ctx) => sysOf(ctx).phase?.kind ?? '' },
@@ -54,13 +65,7 @@ export const life = {
     act: {
       spec: ['number?', 'bool?'],
       fn(ctx, n = 1, midday = false) {
-        const s = sysOf(ctx);
-        if (!s.phase) throw new EngineError('$ do act(): no day or night phase has begun ($ do phase("day"))');
-        const spend = Math.max(1, Math.round(n));
-        s.phase.left = Math.max(0, s.phase.left - spend);
-        s.phase.used += spend;
-        s.unfed += spend;
-        if (s.phase.kind === 'day' && midday) bump(ctx, 'hunger', sunHunger(ctx) * spend);
+        spendActions(ctx, n, midday);
       },
     },
     end_phase: { spec: [], fn: (ctx) => { sysOf(ctx).phase = null; } },

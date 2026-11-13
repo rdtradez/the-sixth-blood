@@ -1,7 +1,7 @@
 // Service worker: lets the game open and play offline after the first visit.
 // Network first, so a new release is picked up as soon as the device is online;
 // the cache is only the fallback. Bump VERSION to force old caches to be dropped.
-const VERSION = 'tsb-9';
+const VERSION = 'tsb-11';
 
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',

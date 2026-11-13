@@ -29,14 +29,14 @@
 import { sysOf, cat, rule, bump, stat, setStat, roll, logDecision, scale } from './core.js';
 import { income, holdingEffect } from './collis.js';
 import { villageDefense } from './village.js';
-import { memberPower, wakeCircle } from './circle.js';
+import { memberPower, wakeCircle, taskEffects, recordTasks } from './circle.js';
 import { EngineError } from '../util.js';
 
 export const PLACES = ['collesanto', 'haven', 'tomb'];
 export const ORDERS = ['safe', 'aggressive', 'dark'];
 export const PROTECTIONS = ['traps', 'bribes', 'guardians'];
 export const OUTCOMES = ['prospered', 'on_schedule', 'losses', 'woken_early'];
-export const WAKE_FIELDS = ['outcome', 'by', 'steward', 'orders', 'place', 'gap', 'richer', 'years'];
+export const WAKE_FIELDS = ['outcome', 'by', 'steward', 'orders', 'place', 'gap', 'richer', 'years', 'intel'];
 
 const ORDER_RULES = {
   safe: { risk: 0, growth: 1 },
@@ -89,8 +89,12 @@ export function resolveSleep(ctx, gapId) {
   const exposed = stat(ctx, 'secrecy') < 40 ? 2 : 0;
   const investRisk = invest.reduce((n, i) => n + (i.risk ?? 0), 0);
 
+  // The coven's standing tasks (guard, tend, watch). Rolls only for members who have one.
+  const tasks = taskEffects(ctx);
+  const guard = Math.min(rule(ctx, 'sleep.task.guardCap', 4), tasks.guard * rule(ctx, 'sleep.task.guard', 1));
+
   const safety = st.score + protect + placeHide(ctx, place) + holdingEffect(ctx, 'defense') + roll(ctx, 6);
-  const danger = rule(ctx, 'sleep.baseDanger', 6) + o.risk + eventRisk + paperTrail + exposed + investRisk + (p.corrupt ? 4 : 0);
+  const danger = rule(ctx, 'sleep.baseDanger', 6) - guard + o.risk + eventRisk + paperTrail + exposed + investRisk + (p.corrupt ? 4 : 0);
   const margin = safety - danger;
   const outcome = margin >= 3 ? 'prospered' : margin >= 0 ? 'on_schedule' : margin >= -3 ? 'losses' : 'woken_early';
 
@@ -98,7 +102,7 @@ export function resolveSleep(ctx, gapId) {
   const before = stat(ctx, 'wealth');
   const ventures = income(ctx) * rule(ctx, 'sleep.ventureValue', 20);
   const fortune = holdingEffect(ctx, 'fortune'); // vaults and hidden fortunes protect a share from losses
-  let growth = gap.growth * o.growth * st.growth;
+  let growth = gap.growth * o.growth * st.growth * (1 + Math.min(rule(ctx, 'sleep.task.businessCap', 0.3), tasks.business * rule(ctx, 'sleep.task.business', 0.06)));
   for (const i of invest) growth *= i.growth ?? 1;
   if (place === 'tomb') growth *= 0.9;
   if (outcome === 'prospered') growth *= 1.2;
@@ -115,6 +119,7 @@ export function resolveSleep(ctx, gapId) {
     before, after, richer: after > before, events: (gap.events ?? []).map((e) => e.id),
     invest: p.invest.slice(), humanity: (o.humanity ?? 0) + invest.reduce((n, i) => n + (i.humanity ?? 0), 0), velati: o.velati ?? 0,
     village: outcome === 'woken_early' ? 0 : (gap.village ?? 5) + (steward === 'keepers' ? 5 : 0) + (place === 'collesanto' ? 2 : 0),
+    tasks: tasks.results, intel: tasks.watch,
     margin,
   };
 }
@@ -134,6 +139,7 @@ function applySleep(ctx, r) {
   for (const v of Object.values(s.ventures)) v.legacy = true;
   for (const id of Object.keys(s.holdings)) if (cat(ctx).holdings[id]?.scope === 'city') delete s.holdings[id];
   wakeCircle(ctx);
+  recordTasks(ctx, r.tasks);
   s.collis.hidden = false;
   s.phase = null;
   s.fight = null;

@@ -8,7 +8,7 @@ import { MemoryStorage, MANUAL_SLOTS } from '../engine/saves.js';
 import { h, inline, svg, toast } from './dom.js';
 import { titleSvg, ornamentSvg } from './art.js';
 import { applySettings, settingsPanel } from './settings-ui.js';
-import { youPanel, peoplePanel, familyPanel, mapPanel, codexPanel, achievementsPanel } from './panels.js';
+import { youPanel, peoplePanel, covenPanel, familyPanel, mapPanel, codexPanel, achievementsPanel } from './panels.js';
 import { devPanel } from './devpanel.js';
 import { creationScreen } from './creation.js';
 
@@ -275,6 +275,7 @@ function showFrame() {
   }
   for (const p of frame.paragraphs) {
     if (p.kind === 'h') story.append(h('h2', { class: 'story-h' }, inline(p.text)));
+    else if (p.kind === 'coven') story.append(h('aside', { class: 'coven-note' }, inline(p.text)));
     else if (p.kind === 'quote') story.append(h('blockquote', {}, inline(p.text)));
     else story.append(h('p', {}, inline(p.text)));
   }
@@ -358,6 +359,7 @@ function menuTabs() {
   return [
     { id: 'you', label: 'You', show: inStory() },
     { id: 'people', label: 'People' },
+    { id: 'coven', label: 'Coven', show: inStory() },
     { id: 'map', label: 'Map', show: inStory() },
     { id: 'family', label: 'Family' },
     { id: 'codex', label: 'Codex' },
@@ -389,6 +391,7 @@ function renderMenu(keepScroll = false) {
   const panels = {
     you: () => youPanel(game),
     people: () => peoplePanel(game),
+    coven: () => covenPanel(game, () => renderMenu(true)),
     map: () => mapPanel(game),
     family: () => familyPanel(game),
     codex: () => codexPanel(game),

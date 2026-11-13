@@ -134,6 +134,10 @@ Every member is a person in `content/people.json`; loyalty is `loyalty.<id>`.
 | `$ do quest("lucia", "lost_brother")`, `$ do quest_answer("lucia", "join")`, `$ do quest_done("lucia")`, `quest_state()` | Their own missions. Approve, refuse or join changes loyalty. |
 | `acts_alone("lucia")` | Loyalty is low (or his own fledgling, middling loyalty, and his defiance runs high): they act behind his back. |
 
+| `$ do coven_task("lucia", "business")`, `task("lucia")`, `task_result("lucia")` | A standing task: `guard`, `business` or `watch` (`"none"` stands them down). It stays set through the long sleep and into the next book. `business` adds a share of venture income now (`coven.businessShare`, capped by `coven.businessCap`; not while they are on a mission or acting alone) and grows the fortune in a sleep. `guard` lowers the danger of a sleep. `watch` brings news: `wake("intel")` on waking is a number. `task_result` is `success`, `partial` or `failed` after the last sleep. The player can also set tasks from the menu's Coven tab (`game.setCovenTask`). Book sessions should offer the choice before a sleep and read the results in the next book's opening. |
+
+**The coven's news.** At the start of every chapter the engine tells the player, before the chapter's own words, what the coven did since the last one (`engine/coven-news.js`): missions that finished, how each standing task went through a sleep, a member now working the business, and a member who has stopped answering. Each piece is told once. Chapters need no script for this. The Coven tab can also send a member on a mission (`game.sendOnMission`), which spends one action of the current phase just as `$ do send()` plus `$ do act()` does in a script, so the Coven tab and the chapters share the same missions.
+
 Member power is their age tier when they joined plus one per book since, plus one if he sired them (the old blood), plus training.
 
 ## Bonds (`bonds.js`)
