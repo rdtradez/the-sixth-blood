@@ -426,6 +426,24 @@
       "name": "Philomène",
       "title": "A cook, with her son Théo",
       "bio": "Twenty eight, tall, with a closed quiet face and an eye that does not hide what it is weighing. Her son is seven and asks whether you are a ghost."
+    },
+    "beaumont": {
+      "gender": "m",
+      "name": "Augustin Beaumont",
+      "title": "Of the river house, Bayou Road",
+      "bio": "Tall, silver haired, perfectly courteous. Head of the greatest of the river houses, a man who has never had to raise his voice because nobody has ever made him wait."
+    },
+    "lucien": {
+      "gender": "m",
+      "name": "Lucien Beaumont",
+      "title": "Son of the river house",
+      "bio": "Young for his kind and aware of it. Handsome, proud, quick to take an insult and slow to forget one."
+    },
+    "lachapelle": {
+      "gender": "f",
+      "name": "Madame Célestine Lachapelle",
+      "title": "Of the Bayou St. John",
+      "bio": "Small, old, in gray silk, with a house of six on a bayou and a door that is never quite locked. Once the equal of the river house. Now its inconvenience."
     }
   }
 }

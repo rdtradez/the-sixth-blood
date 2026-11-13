@@ -1,4 +1,4 @@
-// Session 40: Book Four, chapters 1 and 2. Played from different wake reports and down the branches. (This file says what is guaranteed, not what happens.)
+// Sessions 40 and 41: Book Four, chapters 1 to 4. Played from different wake reports and down the branches. (This file says what is guaranteed, not what happens.)
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -81,11 +81,11 @@ const coven = (g) => {
   }
 };
 
-test('Book Four lists its two written chapters and is still incomplete', async () => {
+test('Book Four lists its four written chapters and is still incomplete', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'house-divided');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 2);
+  assert.equal(book.chapterCount, 4);
 });
 
 test('chapter 1 plays through every kind of waking and reaches chapter 2', async () => {
@@ -219,4 +219,93 @@ test('the coven can be given a house and posts in the haven scene', async () => 
   assert.equal(run.game.state.sys.circle.hanno.task, 'business');
   assert.ok(run.game.state.sys.holdings?.coven_house || run.text.match(/Marigny/));
   clean(run);
+});
+
+const CH3 = { 'b4.circle': 'all', 'b4.haven': 'rented', 'b4.auction': 'bought', 'b4.crane_reply': 'answered' };
+
+test('chapter 3 plays through every circle, auction and crane reply, and runs on into chapter 4', async () => {
+  for (const circle of ['all', 'ahead', 'stay']) {
+    for (const auction of ['left', 'stood', 'bought']) {
+      for (const reply of ['burned', 'kept', 'answered']) {
+        for (const hunger of [10, 90]) {
+          const run = await play('b4c03', {}, { ...START, hunger, 'b4.circle': circle, 'b4.auction': auction, 'b4.crane_reply': reply }, [], { sys: circle === 'stay' ? null : coven });
+          assert.match(run.text, /Beaumont/, `${circle} ${auction} ${reply}`);
+          assert.match(run.text, /returns|Illinois/);
+          assert.equal(run.frame.wait, 'book_end');
+          assert.equal(run.frame.pending, true);
+          clean(run);
+        }
+      }
+    }
+  }
+});
+
+test('chapter 3 takes each choice and records it', async () => {
+  const sets = [
+    ['b4.supper', [['guest', /Take the chair/], ['equal', /as an equal/], ['stranger', /to be quiet/]], null],
+    ['b4.compact', [['signed', /^Sign it$/], ['bargained', /named in the asking/], ['refused', /keep to it without signing/]], null],
+    ['b4.armand', [['ally', /you will help, in whatever/], ['patient', /Offer him money/], ['distant', /can promise nothing/]], /physician/],
+    ['b4.rival', [['heard', /Hear her out/], ['allied', /make an understanding|Make an understanding/], ['told', /speaking of it to Monsieur/]], /Bayou St. John/],
+    ['b4.office', [['opened', /Open the firm in the open/], ['shared', /Share the firm/], ['none', /Shut it for the present/]], /counting house/],
+  ];
+  for (const [flag, branches, night] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b4c03', {}, { ...START, wealth: 400000, ...CH3 }, night ? [night, re] : [re], { sys: coven });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('the coven house in chapter 3 can be built out and given its posts', async () => {
+  const run = await play('b4c03', {}, { ...START, wealth: 900000, ...CH3 }, [/coven's quarter/, /training room/, /blood supply/, /front over the carriage/, /Set Prisca/, /Set Hanno/, /That will do/], { sys: coven });
+  assert.equal(run.game.state.sys.circle.prisca.task, 'watch');
+  assert.equal(run.game.state.sys.circle.hanno.task, 'business');
+  clean(run);
+});
+
+test('chapter 4 plays through every circle, paper and waking, and pauses at the end of the book so far', async () => {
+  for (const circle of ['all', 'ahead', 'stay']) {
+    for (const hunger of [10, 90]) {
+      for (const wants of [[], [/Run the other/], [/praises the South|Run the one that praises/]]) {
+        const run = await play('b4c04', {}, { ...START, hunger, 'b4.circle': circle, 'b4.auction': 'bought' }, wants, { sys: circle === 'stay' ? null : coven });
+        assert.match(run.text, /Illinois lawyer/);
+        assert.equal(run.frame.wait, 'book_end');
+        assert.equal(run.frame.pending, true);
+        clean(run);
+      }
+    }
+  }
+});
+
+test('chapter 4 takes each choice and records it', async () => {
+  const sets = [
+    ['b4.paper', [['silent', /Run neither/], ['dissent', /Run the other/], ['praise', /Run the one that praises/]], null],
+    ['b4.houses', [['pledged', /stand with the houses/], ['conditional', /where you are asked/], ['withheld', /will not stand with the state/]], /river house, where the houses/],
+    ['b4.errand', [['scout', /Send Prisca/], ['protect', /Send Fiammetta/], ['none', /Keep them home/]], /coven's table/],
+    ['b4.papers', [['forged', /Have the papers made/], ['bought', /Buy people out/], ['refused', /will not put your hand/]], /Tremé, to Dr/],
+  ];
+  for (const [flag, branches, night] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b4c04', {}, { ...START, wealth: 400000, 'b4.circle': 'all', 'b4.compact': 'signed' }, night ? [night, re, /That is all/] : [re], { sys: coven });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('the errand sends a coven member out on a mission', async () => {
+  const run = await play('b4c04', {}, { ...START, 'b4.circle': 'all' }, [/coven's table/, /Send Prisca/], { sys: coven });
+  assert.ok(run.game.state.sys.circle.prisca.mission || run.vars['b4.errand'] === 'scout');
+  clean(run);
+});
+
+test('every way of meeting Lucien in the yard plays to the end', async () => {
+  for (const re of [/Slip inside/, /Meet him squarely/, /Say his father/, /^Go$/, /old blood/]) {
+    for (const seed of [1, 3, 7]) {
+      const run = await play('b4c04', {}, { ...START, 'b4.circle': 'all' }, [/river house, where the houses/, /stand where you are asked/, re], { sys: coven, seed });
+      assert.match(run.text, /Lucien/);
+      clean(run);
+    }
+  }
 });

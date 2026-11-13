@@ -67,6 +67,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 37: Book Three chapters 17 and 18
 - [x] Session 39: the New Orleans and Collesanto (1859) maps for Book Four
 - [x] Session 40: Book Four chapters 1 and 2
+- [x] Session 41: Book Four chapters 3 and 4
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
@@ -507,4 +508,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The manifest, hero alias (`Monsieur Colline`) and company name (`Colline et Compagnie`, in `content/rules.json`) are set for the book. New people (`content/people.json`): Honoré Valère, Filippo Valerio, Aurélien Valère, H. Crane, Dr. Léonce Armand and Philomène. New codex entries: New Orleans in 1859, the Second Empire, the river houses, the free people of color, cotton and the slave economy, and the Exchange and the yards. Content notes: both chapters carry `blood` and `slavery`.
 - Chapter 2 charts `neworleans.wharf`, `neworleans.valere`, `neworleans.bank`, `neworleans.lots`, `neworleans.haven`, `neworleans.beaumont` and, if the school is founded, `neworleans.school`; chapter 1 charts `collesanto4.road` when he leaves the hill. It uses `invest()` (the `nola.*` ventures) and can call `earn()`. No fights, no new engine behavior, so no new schema or migration.
 - Tests: `tests/book4.test.js` plays both chapters from eight kinds of waking and every passage, circle, venture, auction and haven, with and without a coven, for four origins and paths, and checks the no dashes, no braces and no daylight rules.
+- Plans are in `SPOILERS/house-divided.md`.
+
+### Session 41 notes (Book Four, chapters 3 and 4)
+
+- Chapters `b4c03` and `b4c04` are in `content/house-divided/` (`ch03.tsb`, `ch04.tsb`); the manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 4 and carries on by itself when chapter 5 is added. Both chapters have the same shape as chapter 2: an opening with no phase, a short hunger scene that only runs if `must_feed()` is true on entry, one night phase of three actions out of four, and a closing scene. Both end with `rest()` and `=> next`.
+- New decision flags (`b4.` prefix, registered with `book`, `major` where later chapters care, and a quick start `default`): `b4.supper`, `b4.compact`, `b4.armand`, `b4.rival`, `b4.office` (chapter 3) and `b4.paper`, `b4.houses`, `b4.errand`, `b4.papers` (chapter 4). `b4.compact` and `b4.houses` carry the book; later chapters should read them rather than recompute.
+- The coven is used in both chapters. Chapter 3 builds out the haven (`training_hall`, `blood_network`, `front_business`), sets standing tasks for Prisca and Hanno, and brings an `ahead` circle ashore. Chapter 4 has a family scene and an errand (`send("prisca", "scout", 1)` or `send("fiammetta", "protect", 1)`) whose debrief the next chapter's coven news reports; a river house rival and a coven's neighbour (Madame Lachapelle) are introduced. Both read `b4.circle` and treat `stay` as the coven being far away.
+- Chapter 4 has one short fight (`fight("fledgling", 2)`), with every outcome written. New people (`content/people.json`): Augustin Beaumont, Lucien Beaumont and Madame Célestine Lachapelle. New codex entries: the Compact of the River and the election of 1860. Content notes: both chapters carry `blood` and `slavery`. No new engine behavior, so no schema or migration.
+- Chapter 3 charts `neworleans.beaumont`, `haven`, `treme`, `market` and `bank`; chapter 4 charts `beaumont`, `haven`, `treme` and `wharf`.
+- Tests: `tests/book4.test.js` now plays chapters 3 and 4 down every circle, auction, paper and choice, with and without a coven, and every way of meeting the fight.
 - Plans are in `SPOILERS/house-divided.md`.

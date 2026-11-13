@@ -1,0 +1,312 @@
+// Book Four, Chapter 3 (session 41). The first Friday of March 1860: supper at the river house, and a night in the city.
+// Opens with no phase (the answer to the card, the supper and the Compact), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a letter at dawn.
+// Reads b4.circle, b4.haven, b4.auction, b4.valere, b4.crane_reply and the circle. Sets b4.supper, b4.compact, b4.armand, b4.rival and b4.office.
+// Ends with rest() and => next.
+@chapter b4c03
+@title The First Friday
+@book house-divided
+@version 1
+
+# start
+## The answer
+$ b4.supper = "guest"
+$ b4.compact = "bargained"
+$ b4.armand = "patient"
+$ b4.rival = "heard"
+$ b4.office = "none"
+$ do meet("beaumont")
+~> answer
+---
+~> supper
+---
+~> compact
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is past midnight when the carriage sets you down in the Rue Royale, and the whole of the city is wet and quiet and smells of the river. There are four things that want doing before the sky turns, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# answer
+## Ten o'clock
+It is the first Friday in March, and at ten o'clock the knocker goes, three taps and then one. It is the same man, the gray headed servant in the blue coat, and he has the same card, and he has a good deal more patience than anyone should be asked for. He says, to the air above Aurélien's shoulder, that Monsieur Beaumont is at home, and will be pleased to see Monsieur Colline at supper, and has sent the carriage.
+Nobody in the house is able to speak. The old aunt, from the stair, says only that it is as well to go, since it is a thing that is going to be done in any case, and that a man should walk through the front door of a house like that on his own feet, with his hat in his hand, and not be fetched.
+?if coven_size() > 0 and b4.circle == "ahead"
+  The others came up the river in the second week of February, in crates marked as pianos, and are in the loft above the printing office, where they have been very well behaved. They watch you dress with a kind of grave, family attention. Prisca does your cravat, which you have not asked for, and tells you that you are to remember that he is a host, and that a host is a man who has already decided.
+?elif coven_size() > 0 and b4.circle == "all"
+  They stand in the hall, in the lamplight, the whole small family of you, and watch you go down the steps to the carriage with expressions that you could not have described a century ago, and can now. You are not going alone. You are going, you understand, with all of them behind you, and you are the only one who is to be seen.
+?elif b4.circle == "stay"
+  You go alone. It is a thing that you have done a very great many times, and it has never before seemed quite so much like a decision.
+?end
+The carriage goes out of the city by the Bayou Road, in the dark, between the live oaks and the low, wet fields, and there is a moment when you pass out of the lamps and the whole of the night closes in, green and soft and loud with frogs. You find that you are listening, with a part of yourself that has not been used in a long time, for the others. It is the oldest sense there is. It is the one by which a wolf knows another wolf.
+They are there. There are seven of them, in a house two miles off, and they know that you are coming, and they are very much awake.
+<~
+
+# supper
+## The river house
+$ do chart("neworleans.beaumont")
+It stands at the end of an avenue of oaks, under a low roof that sweeps down over a gallery on every side, and it is lit in every window, which a house of that kind does not do for a guest. There are columns, and a hall that goes through the whole of the building from front to back with the doors open on a garden, and a smell of beeswax and jasmine and old cypress. The servants wear blue. They are all, you notice, very old.
+Augustin Beaumont is waiting in the hall. He is tall, and silver at the temple, and perfectly still, in a black coat of the cut of thirty years ago, and he comes forward with both hands out and a smile of entire and unforced warmth. It is the smile of a man who has never in his life had to wonder whether he would be received. "Monsieur Colline," he says. "You are exactly as late as I should have wished. It is a very long way from Paris."
+He takes your hand. It is a plain handshake, and it goes on a moment too long, and in that moment you feel him look. It is not a look of the eyes. It is a pressure, patient and courteous and a century old, like a hand laid flat on a door, and you find that you are leaning on it, very gently, with all of your weight, and that it does not move.
+He is a good deal more careful afterward. "Ah," he says softly, and lets go.
+?if b4.circle == "all" or (b4.circle == "ahead" and coven_size() > 0)
+  He has also, you realize, felt the others, a long way off in the town, as a man feels a draft from a door that he knows he did not leave open. His eyes go, for a moment, toward the city. He does not say anything about it. He is much too well bred.
+?end
+There are six at the table. There is his lady, Isaure, who is small and dark and exquisite in gray, and looks at you as a woman looks at a wine she has been told about. There is a pair of brothers in their forties, in evening dress, who sit with their elbows exactly alike. There is a thin, quiet woman who is introduced as the widow Marchand, and says nothing, and eats nothing, and never once takes her eyes off your hands. There is a gentleman of a great age, in a high collar, who was, he tells you, in the Battle of New Orleans, and in a good many more recent affairs, and has been asleep since dinner.
+And there is a young man at the foot of the table, handsome, flushed, with his father's mouth and none of his father's patience, who is not introduced at all, and is Lucien. He raises his glass to you, very slightly, with a smile that does not reach anywhere. "The sixth," he says. "I had imagined a taller man."
+$ do meet("lucien")
+"Lucien," says Beaumont, without turning his head, and the young man's glass goes down.
+There is a dinner. It is a very good one, in the manner of the country, with turtle soup and a pompano and a daube, and wine from the cellars of three generations, and a pitcher of something dark, from the kitchen, that is brought in covered and set at each place and is not mentioned. The talk is of the weather, and the river, and the price of sugar, and the Opera, and a great many people who have been dead for some time. It is all done with such perfect and easy courtesy that it is some while before you notice that you are being very gently and very thoroughly taken apart.
+They know the name. They know a good deal else. They know that the house of Valère has had a quiet friend for sixty years. They know, to the month, when you came ashore. They do not know where you lie by day, and are courteous enough, you notice, not to ask. At one point the old man wakes, and looks down the table, and says in a clear voice, "He has the Roman face. I said that he would," and goes back to sleep.
+Over the coffee, Beaumont leans back, and puts his fingertips together, and says that he would like to say a thing, if Monsieur Colline will permit it, that is not a pleasant thing to hear.
+"There were six of us," he says. "In the beginning. It was told to my grandfather's sire, in Lyon, in a year when it was very much less dangerous to say it, that there were six bloods and that the sixth had gone out of the world. We have kept the place at the table. It is," and he smiles, "a very small matter. A chair. But we have kept it for a hundred years in a country where nobody keeps anything, and I am a little moved, I find, to see it filled."
+:the_table
+* Take the chair, and thank him for the keeping of it
+  $ b4.supper = "guest"
+  $ standing += 1
+  $ humanity += 1
+  You say that you are honored, and that you did not know, and that you will be very much in his debt. It is, you find, nearly true. Isaure smiles, a quick small genuine smile, and Beaumont inclines his head, with the grace of a man receiving a thing that he was always going to be given. It is a very comfortable moment. You are aware that it is also the moment at which a man makes a mistake.
+* Answer him as an equal, and name what you are
+  $ b4.supper = "equal"
+  $ cunning_brutal += 1
+  $ standing += 2
+  You say that you are old, and that you are the Roman's, and the Roman's maker's, and that you were at the burning of a very great many things, and that you have been dead a good deal longer than the Compact has been alive. You say it quite gently. It is the first time in the evening that anyone at the table has looked at you without calculation. The brothers have put down their cups. Beaumont says, softly, "Yes. I had hoped it was so," and you have the strong impression that he has been waiting a very long time to be frightened of somebody properly.
+* Say that you came to the city to be quiet, and ask that he permit it
+  $ b4.supper = "stranger"
+  $ secrecy += 1
+  $ standing -= 1
+  You say that you are tired, and that you came to the country for the air, and that you desire nothing in it but to be left to your accounts. It is a very reasonable speech, and Beaumont hears it through with great and sympathetic attention, and at the end of it says, "But of course," in the voice of a man who has been told by a child that it does not want its supper. Lucien laughs, under his breath. Isaure looks at her plate.
+<~
+
+# compact
+## The Compact of the River
+They take him, when the table is cleared, into a long room at the back of the house, with books to the ceiling and a shaded lamp and a window on the garden. It is a room that smells of paper and old tobacco. There is a table, and on the table a sheet, in a brown ink that has been mended in places, in a French of the last century. At the foot of it are six names, in six hands, and a blank place under them.
+"The Compact of the River," says Beaumont. "We do not call it a law. It is only what is done." He reads it aloud, very simply, as a man reads a grace. A house does not turn another in the other's parish without leave. A house does not feed upon another's people, nor take its sleep within its walls. A quarrel is not carried out of doors. The houses stand together against any stranger who would make a noise. And the house of the sixth blood, when it is asked, will stand at the river's side.
+$ do discover("the_compact_of_the_river")
+It is, you think, a very fair thing, as these things go, and a very old one, and written in a hand that you can trust. It has one clause in it that you read three times. It does not say what the river's side is. It says only that it will be asked.
+"It has been signed by every house in the lower valley for ninety years," says Beaumont. "It has never yet been asked of anyone to do anything harder than not to be rude. I do not suppose it will be. But I am a prudent man, and I like to know where my neighbors stand."
+:the_pen
+* Sign it
+  $ b4.compact = "signed"
+  $ standing += 2
+  $ secrecy += 1
+  $ humanity -= 1
+  The pen is a plain steel pen, and the ink is brown, and the name goes down in your own hand, in the Roman letters of your youth, under the other six. You feel it settle on you, as a roof settles on a house, with a small stir of the air. It is a thing that is done. It is going to be a very great deal harder to undo than it was to do. Beaumont blows on the ink, with care, and looks at it for some time.
+* Sign it, but write that the river's side is to be named in the asking
+  $ b4.compact = "bargained"
+  $ cunning_brutal += 2
+  $ standing += 1
+  You write it in the margin, in your best clear hand, and it is a very short line. It says that the river's side shall be named by the one who asks it, in plain words, before it is answered. Beaumont reads it twice. He is silent a long time. At the end of it he laughs, a real laugh, an old and rather surprised one, and says that nobody has put a word in the margin of the Compact since the year seventy two, and that he thinks it a very good word, and that Lucien will not like it at all. He signs beside you, to witness it.
+* Decline, and say that you will keep to it without signing
+  $ b4.compact = "refused"
+  $ secrecy -= 1
+  $ standing -= 2
+  $ cunning_brutal -= 1
+  You say that you have signed things for a great many people, and that it has not, in your experience, made them kinder. You will keep to every word of it, you say, as a guest keeps to the customs of a house. You will simply not put your name on it. There is a long, still, polite silence. Beaumont says only, "I see," and rolls the sheet with great gentleness, and it is the gentleness that tells you what you have done.
+  Lucien, who has been standing in the door, smiles. It is the first honest thing that he has done all night.
+Beaumont sees you to the carriage himself. He stands a moment under the lamp, bareheaded, in the moths, with his hand on the door. "I am told," he says, "that there are others of your house. In the city. A family." He lets it lie. "It is a great thing to have a family. I should be sorry if anything were to trouble it. We are very quiet here, Monsieur Colline, but we are not at all careless of our neighbors." It is courteously said. It is also, you are fairly sure, a perfectly exact description of a knife.
+<~
+
+# hunger
+## The road home
+* Take what the carriage horses will spare, in the dark of the avenue
+  $ do feed("animal")
+  $ humanity += 1
+  It is not much, and the coachman is a long way up, and thinking of his bed. The horse stands and shakes, and is a good deal calmer than you are. You leave a coin on the seat, from habit, though no one has ever once sent you a bill.
+* Send word to the Rue Royale, and have a donor brought to the carriage
+  $ do feed("donor")
+  $ do earn(-2)
+  A boy is sent ahead on a mule. By the time you are in the Faubourg there is a woman at the gate with a shawl over her head, and a face that tells you nothing, and a price already agreed. It is done in the carriage, with the blinds drawn. She counts the money twice, carefully, and says goodnight in a voice that is polite and a good way off.
+* Stop the carriage in the Faubourg, and find someone in the dark
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  There is a man who has been a long time in a tavern, and who is going home by the wall, unsteadily, with a song. It is over very quickly. You lay him in the lee of a doorway, with his hat over his face, and he will wake in the morning with a headache and a firm conviction that he has been robbed. You feel entirely well, and not at all like yourself.
+<~
+
+# night
+## After supper
+:night
+?if actions_left() == 3
+  The night has hardly begun, and you are full of other people's wine, and other people's manners.
+?elif actions_left() == 2
+  The moon has gone behind a bank of cloud and the lamps have the soft wet look of a city that is nearly asleep.
+?else
+  There is a grayness over the river. You have one thing left that you have time for.
+?end
+* Go to the coven's quarter, and see to the house [once] ?if actions_left() > 0
+  ~> house
+  $ do act()
+* Cross to the Tremé, to the physician [once] ?if actions_left() > 0
+  ~> treme
+  $ do act()
+* Take the shell road to the Bayou St. John [once] ?if actions_left() > 0
+  ~> bayou
+  $ do act()
+* Open the doors of the counting house [once] ?if actions_left() > 0
+  ~> office
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# house
+## The haven, built out
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  It is a different thing, now, to come in by the gate. There is a light at the back of the house, and a smell of something being cooked that is not for any of you, which is for the cook, who is a human woman and has been told to ask no questions and has, with great firmness, not asked. There is a murmur of voices upstairs, low and unhurried, the sound of people who are living in a place and not merely hiding in it.
+  They gather in the long room, when you come, without being called, as a family does. Prisca has a ledger. Fiammetta has a small blade, and a lemon, and is peeling it. Hanno, in the corner, has a column of figures that goes the whole way down a page. They have all, it appears, been waiting for the one subject, and they come to it with the greatest tact and some hurry. Beaumont has had them watched since Tuesday, and the watchers have been watched, and they have a good deal to say.
+  ?if b4.circle == "ahead"
+    You say that you are glad they came. It is a very short speech, and it is received with a great deal of attention. Fiammetta stops peeling. After a moment, without looking up, she says that it is a good deal better than the hill, and goes back to the lemon, and her ears are red.
+  ?end
+  There is a good deal of work to be done in a house that is going to be lived in, and there is, you find, a good deal of money to be spent on it. It is the sort of work that a family is made of.
+?elif coven_size() > 0
+  The house is very quiet. The others are a long way off, in a country that you have left, and you find that you have sent them, in your head, three letters that you have not written. It is a good house, and it has room in it, and it is waiting.
+?else
+  The house is very quiet. It is a good house, and there is nobody in it, and the quiet has a quality that you have lived with before and that you are, you find, a little tired of. A man alone can have a haven. It takes a good many more than one to have a home.
+?end
+:the_works
+* Build a training room in the cellar and the long gallery, for the young ones ?if coven_path() and can_acquire("training_hall")
+  $ do acquire("training_hall")
+  $ standing += 1
+  You have a carpenter, and a free mason from the Tremé who is a great deal better than either, and in three nights there is a long, bare, well lit room under the house with a floor of sprung cypress and a wall of mirrors that nobody will be able to look into. It smells of chalk and lamp oil. Fiammetta is in it before the paint is dry. She says that it is exactly like the hill, and that she has not been so happy since, and asks if it may have a rack of foils.
+* Set up a blood supply in the Marigny, with a midwife and an apothecary ?if can_acquire("blood_network")
+  $ do acquire("blood_network")
+  $ secrecy += 1
+  $ humanity += 1
+  It is done through a woman who delivers children in four parishes and a druggist on the Rue Dauphine who is in her debt, and it is done very carefully, with a receipt book and a rota and a good deal of kindness. Nobody is hurt. A very small sum goes out each week. It is not, you think, a thing that would be anybody's choice of a life. It is a great deal better than the alleys.
+* Put a front over the carriage house, a cooperage with a sign ?if can_acquire("front_business")
+  $ do acquire("front_business")
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  It sells barrels, and does it well, to the sugar houses. There is a foreman, a very honest German, who is told that the owner is a gentleman of retired habits and bad lungs and will not be seen by day, and who accepts it with the calm of a man from a country where a good many owners are like that. The barrels are, you gather, very good barrels. It is odd to have made a thing that is entirely honest.
+* Set Prisca to watch the river house ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and task("prisca") != "watch"
+  $ do coven_task("prisca", "watch")
+  Prisca says that she has already begun, and she says it so exactly that you do not doubt it. She is, she says, going to need an ear in the Beaumont kitchen, and a boy at the Bayou Road toll, and a little money. It is evidently the best news she has had in a century.
+* Set Hanno to the books of the coven and the firm ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") != "business"
+  $ do coven_task("hanno", "business")
+  Hanno takes it in the way that a man takes a gift of a good tool, with a nod and no thanks. By the second night he has found a clerk at the bank who has been cooking an account, and has declined, with a certain refinement, to do anything about it that would be of use to the clerk.
+* That will do for tonight
+  -> :house_done
+-> :the_works
+:house_done
+<~
+
+# treme
+## The Faubourg
+$ do chart("neworleans.treme")
+$ do meet("armand")
+$ do discover("the_free_people_of_color")
+The Tremé is a long bright sleepy suburb of low cottages, in a hundred colors, with galleries and gardens and a church at the end of every other street. It is the great quarter of the free people of color, who are tradesmen, and builders, and teachers, and a good many of whom are richer than the people who despise them. There are a great many lamps still lit. It is a place where people are awake because they have a good deal to be awake about.
+Dr. Armand's house is a long green cottage, with a brass plate. He is in his shirt sleeves, in his surgery, with a lamp, and a very small child on the table with a very large fever, and a mother in the corner, who has said nothing in an hour. He looks up when you come in, and sees what you are, or sees enough, with the quick wide look of a man who has read a great deal. He does not stop what he is doing. He says, in French, very levelly, that he will be a few minutes and that there is a chair.
+?if b4.doctor == "helped"
+  He says, as he works, that he has not forgotten the cabin, and the lamp, and the good broth that was not drunk, and that he is not a man who forgets a kindness, and that it is a great nuisance to him.
+?elif b4.doctor == "talked"
+  He says that he has been thinking about what you said on the deck, about home, and has come to the conclusion that you were right and that he does not like it.
+?end
+When the fever has broken, a little before the dawn, he washes his hands, and sits down in the other chair, and says that his grandfather's friend, in Santiago, a long time ago, was a boy of a house called Valère. "I know a little of what you are," he says. "I know what my family were told. It is not very much, and it is in a poor sort of Latin."
+He tells you of the city. He tells it very quietly, in the order of a physician's notes. A law was made in 1857, that no one may free a slave by will or deed, or by any means short of the legislature. A law has been proposed, in this session, that every free man of color shall choose a master or leave the state. There is a society in the Tremé, which has a name that he will not say, which buys people out, one at a time, and sets them to work, and keeps the papers in a very safe place. It has never had enough money. It has never had a friend who was awake at night.
+?if b4.auction == "bought"
+  He says, with a little hesitation, that there is a woman in a house on the Rue Royale, with a boy, and that it has been remarked in the Tremé, and that the Tremé would like to know what she is to be to the man who has her. It is said with great courtesy. It is also said with the whole of his back.
+?elif b4.auction == "stood"
+  He says that a woman and her son were sold from a yard on Baronne Street, in January, to a house in the Garden District, and that he has been told that she is well, and that she is a cook, and that the boy has been put to the stables. He says it without any feeling in his voice, and it is the absence of the feeling that you hear.
+?else
+  He says that there were a great many sold from the yard on Baronne Street in January, and that the Tremé has a list, and that nobody on it has been a name for very long.
+?end
+:the_doctor
+* Say that you will help, in whatever way he asks, and ask what that is
+  $ b4.armand = "ally"
+  $ humanity += 2
+  $ standing += 1
+  He looks at you for a long moment, with his hands folded, and says that he does not know. It is the honest answer. It is, he says, the first time in a year that anyone with money has asked him the question. He says that he will have to talk to some other persons, who will not at all like it, and that you are to expect a note.
+* Offer him money, quietly, and ask for nothing in return
+  $ b4.armand = "patient"
+  $ do earn(-4)
+  $ humanity += 1
+  He takes it as a man takes a thing that he has been told is a gift and knows to be a loan. He says that he is obliged to you, and that he is going to count it, and that you will be told, to the penny, where every part of it has gone. He does not smile. It is evident that this is, for him, the highest form of courtesy.
+* Say that the city is dangerous for you both, and that you can promise nothing
+  $ b4.armand = "distant"
+  $ secrecy += 1
+  $ humanity -= 1
+  He nods, once, as at a diagnosis that he has expected. "That is fair," he says, and it is perfectly civil, and he sees you to the door, and it is a long cold way down the walk. You hear the door close behind you with the softness of a man shutting a book.
+<~
+
+# bayou
+## The Bayou St. John
+$ do chart("neworleans.market")
+The shell road goes out of the city to the north, white in the dark, between ditches full of frogs, and at the end of it the bayou lies like a long black mirror under the cypress. There are boats at a landing. There is a light on the far side. It is the only light there is, and it is, evidently, meant to be seen.
+The house is a low raised cottage in the old French style, with a double roof and a gallery, and a garden full of roses and four dogs. There is a lamp in the window. The door is not locked. A girl of about sixteen, in a clean white apron, opens it, looks at you carefully, and goes away without a word. A little later a very small old woman in gray silk comes down the stair on a stick, with a boy beside her, who is carrying a candle with the most perfect gravity.
+$ do meet("lachapelle")
+"Madame Célestine Lachapelle," she says. "You will be the sixth. I have been told." Her French is the French of a century before, the French of the old colony, and her eyes are bright and black and a great deal too shrewd. "You have been to supper with Augustin. It is not a thing that you are to be ashamed of. We have all been to supper with Augustin."
+She gives you a chair, and coffee, and a seat by a fire that has been lit for the purpose. There are six in the house, she says. It was nine. There were three that she was not able to keep, and she does not say what happened to them. She was the Beaumont's equal, once, in the days when the river houses were three and not seven. They quarreled, over a matter of principle that has been a great deal discussed and is a very small matter, which is the people. She holds that a house that feeds upon a country should not also own it. He holds that the thing is a good deal older than either of them.
+There are, in the back rooms of the cottage, a good many people who are not vampires. They are in the kitchen, and the loft, and the room over the stable, at all times of the day. Some of them are free. Some of them are not, any longer, in any sense that would be recognized by a court. She does not say this, and she does not hide it. A dog yawns, on the rug, and the boy with the candle sits down very quietly beside it.
+"I have not signed the Compact in eleven years," she says. "He has not yet found a form of words that would let him say that I have broken it. He is looking. I thought that you should know that, before you have found yourself in a room with it." She smiles. "It is a good deal of trouble to be a person who is always in the right."
+:the_bayou
+* Hear her out, and promise nothing
+  $ b4.rival = "heard"
+  $ cunning_brutal += 1
+  She tells it all, in the dry old voice, over the coffee, and you listen, and say nothing at all, and at the end of it she says, "That is wise, and I am disappointed," and the two things are said with a perfectly equal courtesy. You are shown out through the roses. The dogs watch you go. You have a feeling that you have been given a great deal more than you have taken.
+* Make an understanding with her, quietly, against the day it is wanted
+  $ b4.rival = "allied"
+  $ standing -= 1
+  $ secrecy -= 1
+  $ humanity += 1
+  She is not at all surprised. She says that there is a boat at the landing, and that it will be kept ready for anyone you wish to send, at any hour, and that the people in her back rooms can be sent a long way by water. She says that there is nothing written down, and that there never has been, and that this is the reason that she is old. It is a small matter. You know, as you go back along the shell road with the frogs shouting, that you have just done the most dangerous thing in the evening.
+* Thank her, and say that you will be speaking of it to Monsieur Beaumont
+  $ b4.rival = "told"
+  $ standing += 1
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  She does not move. She looks at you for a long time, with a face that has no unkindness in it at all. "Yes," she says. "It is what I should have done, in your place, at your age. It is also exactly what he wants." She rings a small bell, and the girl comes, and shows you out through the hall, and the door is not shut behind you, and nobody locks it, and you are aware, until you are at the road, of a small boy's eyes at a window.
+<~
+
+# office
+## Colline et Compagnie
+$ do chart("neworleans.bank")
+The firm has a door. It is a green door, on the Rue de la Douane, between a ship chandler and a notary, with a brass plate that Aurélien had made in January and has been polishing ever since in a state of mounting anxiety. It has three rooms and a vault and a brass lamp, and a clerk with a green shade, and an apprentice. It has not, in any real sense, a single customer.
+?if b4.office != "opened"
+  You turn the key. It is a thing that you have done a very great many times, in a great many cities, with a great many keys.
+?end
+Rochefort has come in, in spite of the hour, in a coat that he has put on over his nightshirt, because he cannot, he says, be easy in his mind. He has the books. They are good books. He is an honest man and a competent one and he is, you perceive, a little afraid of you in the way that a man is afraid of a cat that has been very quiet.
+?if b4.auction == "bought"
+  There is a woman at the end of the table, with a bandana and a clean apron, who has been brought in by Aurélien because she can read and cipher, and write a hand like copperplate, and has not once been asked to. She is Philomène. She does not look at you. A small boy is asleep under the table with his head on a ledger. When you come in, she rises, and stands with her eyes lowered and her hands at her sides, and the boy wakes and looks at you with great grave attention, and asks if you are a ghost.
+  There are papers on the table that you have been trying not to look at. There is a bill of sale. It is, in the law of the state of Louisiana, a deed of the possession of two persons. It has your name on it. It is a thing that you will not be able to undo with a signature, since the law says that you may not, and you stand and look at it a long time.
+?end
+:the_firm
+* Open the firm in the open, in your own alias, with a notice in the papers
+  $ b4.office = "opened"
+  $ standing += 2
+  $ secrecy -= 1
+  The notice goes in the *Picayune* and the *Bee* and the Valère paper on Monday, in a very small and very correct type. It says that Colline et Compagnie, of Paris and New Orleans, shipping and exchange, has opened its offices at the Rue de la Douane. It is the oldest sort of announcement. Within a week there are cards on the tray from men who have never heard of you, and by the end of the month there are a great many of them.
+* Share the firm with the Valère, and keep your own name out of it
+  $ b4.office = "shared"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  You say that the firm is the Valère's, and that you are a sleeping partner in the most literal sense, and that your name is to appear nowhere but on a single piece of paper in a single drawer. Aurélien is moved nearly to tears, and Rochefort looks at the ledger with the face of a man who has been given an enormous responsibility and a quite unnecessary amount of freedom.
+* Shut it for the present, and think
+  $ b4.office = "none"
+  $ secrecy += 1
+  The brass lamp goes out. Rochefort goes home, relieved, and Aurélien stays behind, a little smaller than before, and says, in a voice that tries to be level, that it is entirely a matter for you.
+?if b4.auction == "bought"
+  Philomène has not moved. "Monsieur," she says at last, in a very low voice, "the boy will be put out of the way. If it is to be a hard night." It is the first thing that she has said to you. It is exactly the thing that a person says who has learned that it is the way to survive. You say, as gently as you are able, that nobody is going to be put out of the way, and that she is to go home, and that you will see her in the morning. She goes. She does not believe you. You do not see why she should.
+?end
+<~
+
+# dawn
+## The letter
+The light comes up gray over the river, and the frogs stop all at once, as if at a signal. You go up the stair of the Rue Royale, in the smell of coffee and the first of the drays, and you find, on the table in your room, where there was nothing at midnight, a letter.
+It has been in a locked room, with a shuttered window and a bolted door, and the key has not left your pocket. It is a small, neat, ironical hand.
+?if b4.crane_reply == "answered"
+  *My dear Colline. I have your note. Very civil, and very much shorter than I had hoped. I am told that you are in the Crescent City, among the cotton factors and the Creoles, where I am sure that you are a great success. I have learned a thing or two since I wrote. I will not tell you what, because I do not think it is for the post. You will know where to find me. I am where I have always been. Crane.*
+?elif b4.crane_reply == "kept"
+  *My dear Colline. You did not answer, and I did not suppose that you would. A man does not answer a letter like that one from a ship. I write again, in the hope that you have read it a little more carefully by now. They are very much alive here, in the North, in the winter of this year, and they are not in a good temper. I think that you would find the air of New York agreeable. Crane.*
+?else
+  *My dear Colline. You burned my first, I imagine. It is what I should have done. It is a pity, since it had a good deal of my best prose in it. I enclose a second, which has less. The Houses of the South are, I am told, very fine. They are also, I am told, sitting on a keg. I thought that you might like to know that there are other persons in this country who are aware of it. Crane.*
+?end
+There is a postscript, in pencil, in a much smaller hand. *Ask Beaumont what he does with the ones he cannot persuade.*
+You read it twice, and put it in the stove, and watch it curl. From the street comes the sound of a bell, and a milk cart, and a man selling hot rice cakes in a voice like a violin. In the courtyard, under the banana, the old aunt is sitting in the first gray light with her coffee, and has taken a seat, you notice, where she can see the gate.
+$ do rest()
+=> next

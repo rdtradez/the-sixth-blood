@@ -1,0 +1,281 @@
+// Book Four, Chapter 4 (session 41). The night of the presidential election, 6 November 1860.
+// Opens with no phase (the city under torches, then the paper), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and the news at dawn.
+// Reads b4.circle, b4.compact, b4.supper, b4.rival, b4.armand, b4.office, b4.auction and the circle. Sets b4.paper, b4.houses, b4.errand and b4.papers.
+// Ends with rest() and => next, which pauses until chapter 5 exists (the manifest entry is incomplete).
+@chapter b4c04
+@title The Night of the Returns
+@book house-divided
+@version 1
+
+# start
+## The sixth of November
+$ b4.paper = "silent"
+$ b4.houses = "conditional"
+$ b4.errand = "none"
+$ b4.papers = "refused"
+$ do discover("the_election_of_1860")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is the night of the sixth, and the polls have been closed for two hours, and nobody in the city is thinking of bed. There are four things that want doing, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## Torchlight
+There has been a great deal of weather in the winter and the spring and a good deal of politics in the summer, and by the autumn the two are the same thing. It has rained for four days. The gutters are brimming, and every wall in the city is pasted with the bills of the Breckinridge men and the Bell men and the Douglas men, and in the Rue Royale, where the paste is still wet, somebody has chalked, in a large round schoolboy's hand, a single word, which is *Never*.
+There are torches on the levee. A company of the Minute Men, in blue shirts, with a banner and a fife, goes by every hour, singing, and there is a bonfire of tar barrels at Lafayette Square, and every bar in the Rue Chartres has a man on a table. The talk is all of Illinois. There is a lawyer there, a tall plain ugly lawyer whom nobody had heard of two years ago, and who is going, it is said, to be the President, and who will, it is said, set every slave in the South free by Christmas and marry every Negro to a white woman by Easter. It is believed, in the Exchange, to the last detail, by men who are not at all fools.
+You have lived through eleven elections that deserved the name, and have not much cared for any. This one has a smell. You have known it before. It is the smell of a house in which the quarrel has been going on so long that it has begun, quite quietly, to be about the furniture.
+Aurélien comes to you in the counting house at ten, with ink on his cuffs and a face the color of a candle. It is the paper. It is a French daily, four pages, with a circulation of eleven hundred and a reputation for being sound on the subject of the price of sugar, and in the morning it must take a line. The printer has set a leader in two versions. He has them both in his hand.
+?if b4.armand == "ally"
+  He says, a little low, that Dr. Armand has been to the counting house twice in the week, and has asked, with great civility, what the paper means to say.
+?end
+:the_paper
+* Run neither leader, and print the returns and the prices
+  $ b4.paper = "silent"
+  $ secrecy += 1
+  $ standing -= 1
+  He is so relieved that he sits down on the corner of a stool. It is a very French solution, and a very commercial one, and the whole of the cheap end of the city will think it cowardly, and nobody will be hurt by it for a month. You feel that you have spent a good deal of something in order not to spend it.
+* Run the other, the one that says the Union is a country and not a bargain
+  $ b4.paper = "dissent"
+  $ standing -= 3
+  $ humanity += 2
+  $ secrecy -= 1
+  He reads it over, once more, with his lips moving, and goes quite white. It is a good, plain, rather long leader, in the formal French of an old gentleman, and it does not name a single name. It says that a country is not a thing that a man may leave because he has been outvoted. He puts it into the forme with his own hands. You see him, through the glass, setting the last line, with the face of a man who has just lit a fuse.
+* Run the one that praises the South and the men of Louisiana
+  $ b4.paper = "praise"
+  $ standing += 3
+  $ humanity -= 2
+  He looks at it for a long time, and then at you, and then, without a word, takes it away to the composing room. It is a long, rolling, magnificent leader, with a good many references to Thermopylae. You read it in proof, and it is very well written, and you do not like yourself in it.
+Aurélien does not speak for a moment. Then, in a low voice, to the desk, "My grandfather," he says, "ran the paper through the revolution. He used to say it was the whole of the art. To be on the right side of the printing press, and the wrong side of the bayonet." He folds the proof. "I do not know, now, which is which."
+<~
+
+# hunger
+## The wet streets
+* Take a dog, from a yard in the Faubourg, and be quick about it
+  $ do feed("animal")
+  $ humanity += 1
+  It is a large, wet, indifferent dog, and it is not in the least afraid. You leave it asleep, among the cabbages, with a fine cold nose, and walk away down the street a little fuller, and a good deal more ashamed than the thing requires.
+* Send for a willing donor, and pay for her night
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a seamstress, and does it for the rent, and has her own way of doing it, which is brisk. She asks, at the end, whether the gentleman has any views upon the election, and he, with a clear conscience, says that he has none. She says that she wishes that she had been so lucky.
+* Go out, among the torches, and take what the crowd will not miss
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  It is the easiest night of the year for it. There are ten thousand people in the streets, with torches and drink and the madness of a city that is about to make a great decision, and nobody sees anything that is not on a banner. A man falls, in the crush at the corner of the Place d'Armes. By the time that the crowd has gone by, there is nothing in the gutter that anyone is going to remember.
+<~
+
+# night
+## The returns
+:night
+?if actions_left() == 3
+  The torches are still going by on the levee, and the bells of three churches are arguing about the hour.
+?elif actions_left() == 2
+  It has begun to rain again. The torches have thinned and the bonfires hiss. A boy goes by, running, with a wet handbill.
+?else
+  The rain has stopped, and the first gray is in the east, and there is a quiet that is a little like the quiet before a gun. You have one thing left.
+?end
+* Go out to the river house, where the houses are sitting [once] ?if actions_left() > 0
+  ~> belle_rive
+  $ do act()
+* Go home, to the coven's table [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+* Cross to the Tremé, to Dr. Armand [once] ?if actions_left() > 0
+  ~> treme
+  $ do act()
+* Walk the levee, among the torches, and listen [once] ?if actions_left() > 0
+  ~> levee
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# belle_rive
+## The houses sit
+$ do chart("neworleans.beaumont")
+They are meeting at Belle Rive, which is Beaumont's sugar house, a long low brick building at the back of the river house, under the live oaks. It is a good place for it. It is full, by day, of the noise of the mill, and by night of nothing at all. There is a long table in the old boiling room, among the great copper kettles, with a branch of candles, and eleven chairs, and when you come in at the door, in your wet coat, eleven faces turn to look at you, and not all of them are kind.
+There are seven houses. You know the faces now. There are the brothers Delorme, of the Teche, with their elbows. There is the widow Marchand. There is the old man in the high collar, who is awake, tonight, and sharp as a pin, and whose name is Fortier. There is a lean, dark man from Mobile, and a young woman from Natchez with a diamond cross, and a very fat gentle priest, who is a vampire, and was a Jesuit, and has not in all his long life been known to say a harsh word. Beaumont sits at the head of it, in black, with his hands together. Lucien stands behind his chair.
+?if b4.rival == "allied"
+  There is a chair at the foot of the table that is empty, and a candle in front of it that is lit, and nobody remarks it. A note lies on the cloth in a thin gray hand. It says, *Madame Lachapelle regrets.* It is a very precise insult. You are the only person in the room who knows that she is also, in a very small way, your ally.
+?elif b4.rival == "told"
+  Beaumont does not mention the Bayou St. John. He does not need to. He lays a small plain ivory comb on the cloth at your place, and says nothing, and you remember that there was a girl in a white apron at the door. It is the most courteous way that you have ever been told that a thing is known.
+?end
+Beaumont speaks briefly. He speaks as a man speaks who has been rehearsing a speech for a very long time and has found, at the last, that it is perfectly simple. The Illinois lawyer has been chosen. By the end of the year the lower South will have left the Union. It will be a quiet thing, he says, and a lawful one, and it will be over by Easter. And the houses, he says, will stand with the state. They will give it their eyes, in the northern ports and at the telegraph, and their purses, and their long memories. It is a thing that has always been understood. It is what the river is for.
+The word *river* goes round the table, softly, like a small dry wind. He turns his head, with a perfect courtesy. "And Monsieur Colline?" he says. "Who has a chair among us, and has signed our paper. We have not heard from the sixth."
+?if b4.compact == "signed"
+  There is a murmur. It is, you realize, the thing that the paper was for. You signed, and it is being asked, and you were told that it would not be.
+?elif b4.compact == "bargained"
+  There is a murmur. You wrote a word in a margin, in March. It is the word that you are now to be asked to use.
+?elif b4.compact == "refused"
+  There is a murmur, and a couple of smiles. You did not sign. It is a thing that Beaumont has been waiting, with great patience, for the use of.
+?end
+:the_houses
+* Say that you will stand with the houses, and with the state
+  $ b4.houses = "pledged"
+  $ standing += 3
+  $ humanity -= 3
+  $ cunning_brutal += 1
+  It is very quiet in the boiling room. You hear yourself say it, in a clear, well bred, perfectly reasonable voice, and it goes into the room as a coin into a well. The old man Fortier nods once. The priest closes his eyes. Beaumont inclines his head and says, "Then the house of the sixth is of the river," and in a tone so soft that you scarcely hear it, "I had hoped it would be said." There is a good deal of wine. It is a very good hock. You taste nothing.
+* Say that you will stand where you are asked, when it is asked, and not before
+  $ b4.houses = "conditional"
+  $ cunning_brutal += 1
+  $ standing += 1
+  "That is the clause," says Beaumont gently. "It is what the paper says. I will not complain of a man who reads the paper." There is a ripple, which is a good deal short of a laugh. The brothers look at their cuffs. The Mobile man, who has said nothing all night, says to nobody that it is a prudent answer, and that he has noticed that the prudent have often been the last to die.
+* Say that you will not stand with the state, whatever it does, and will say so
+  $ b4.houses = "withheld"
+  $ standing -= 3
+  $ secrecy -= 1
+  $ humanity += 2
+  There is a silence in which a candle gutters. Then the young woman from Natchez, quite clearly, laughs. Nobody follows her. Beaumont's face does not change. "I have always found," he says at last, "that it is easiest to say these things in the abstract." It is a very civil sentence, and everyone in the room understands exactly what it means, which is that it has been put in a drawer.
+Lucien has not moved. He has been looking at you, the whole of the time, with the steady brilliant eyes of a young man who has found something to hate. When the others rise, and the room fills with the scraping of chairs and the soft talk of people who are being careful, he steps around his father's chair, and says, in a low pleasant voice, that he would be obliged if Monsieur Colline would step out into the garden for a moment, to see the sugar house yard by lamplight. It is not a request.
+Beaumont says, without looking up, "Lucien." The word is a good deal quieter than before, and has a great deal less in it. He lifts one hand a very little from the cloth. It is permission. He has decided, you understand, to know.
+The yard is wet and black, with the iron kettles shining in the lamp and a great heap of cane trash steaming at one side. Lucien takes off his coat, and folds it, with attention, and hangs it on a nail. It is a thing that he has plainly seen done in a play. "It is only," he says, "that I wish to see it. I have been told so much. A century of the sixth. I should like to see what it is."
+$ do fight("fledgling", 2)
+:the_yard
+* Slip inside his guard, and have it over quickly
+  $ do strike("cunning")
+* Meet him squarely and break him
+  $ do strike("brutal")
+* Let the old blood loose ?if not must_feed()
+  $ do strike("power")
+* Say his father's name, and ask whether this is the manner of the house
+  $ do strike("talk")
+* Go
+  $ do strike("flee")
+?if not fight_over()
+  ?if last_strike() == "hit"
+    He gives ground, and is white at the mouth, and is a great deal more careful.
+  ?else
+    He is very fast, and his hands are like cold iron, and he has done this before.
+  ?end
+  -> :the_yard
+?end
+?if fight_result() == "won"
+  It is over in a few seconds more. There is a sound that you remember from a great many fights, a long, small, final sound, as of a door shut. Lucien is on his back on the wet cinders, with one arm useless, looking up at you with a face that has gone from rage to bewilderment, and from bewilderment, quite suddenly, to something that is very like fear. He did not know. It is a thing that they simply did not know.
+  The door of the boiling room has opened. Beaumont is standing in it, with the lamp behind him. He has not been watching. He has seen, with a great deal of clearness, that it was over. "That will do," he says, very softly, in a voice that is for everyone, and Lucien gets slowly to his feet, and does not look at his father. It will be remembered. You know, as you pick up your coat, that you have made a friend of nobody tonight, and that you have taught a house that it has a good deal to be afraid of.
+  $ standing += 2
+  $ cunning_brutal += 1
+?elif fight_result() == "talked"
+  You say it with great gentleness. You say that his father is a gentleman, and that he has sat at the head of a table for a hundred years, and that there is a reason that it has been a quiet table. Lucien stands with his fists half raised. A long breath goes out of him. He is, after all, a boy, and has been a boy a very long time. He says nothing, and takes his coat, and goes in, and you hear a door. Beaumont, in the light of the lamp, gives you the smallest nod of his head. It is the only compliment that he has paid you all night.
+  $ humanity += 1
+  $ standing += 1
+?elif fight_result() == "fled"
+  You are in the lane before you know it, with the wet cane trash on your boots, and behind you, not loudly, the sound of a young man's laughter. It is a very long way back to the city. Nobody follows. It is not necessary. A man who runs from the yard of the river house has said a thing that nobody will trouble to repeat.
+  $ standing -= 2
+?else
+  It goes badly. He is fast, and angry, and more than a little drunk upon his own quarrel, and for a few seconds the yard is a place of cold iron and wet black air. It is Beaumont who stops it, with a hand on his son's collar, and a face like a closed book. "Enough," he says. "It has been seen." You are bleeding, a little, in the lamp, and the young man's mouth is bright and red. You are not at all sure that you have not been shown, quite exactly, how a thing would go.
+  $ standing -= 1
+?end
+<~
+
+# family
+## The coven's table
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  They are in the long room at the back of the house, with a fire in the grate and the shutters closed and a pot on the hob, which nobody is going to eat. It is the Marigny hour, the hour between the late and the early, when the whole of a quiet street is asleep. It is a thing that has not occurred to you until now, that you have been coming home, for some months, to a lit window.
+  They have, it appears, been having an argument. It is an old one, and conducted at a low pitch, and it is a thing that you have heard before in other forms in other houses: it is a quarrel about money that is really a quarrel about who is trusted. Hanno says that the firm has twenty thousand in a bank that is going to fail. Fiammetta says that she does not see why a thing that has been paid is to be taken back. Prisca says nothing, with great firmness, and darns a glove.
+  You sit down. They look at you, all three, with the faces of children who have been caught at a thing, and have not for a moment supposed that you would mind. It is a very strange, warm, grave thing to be the head of a house.
+  ?if b4.compact == "signed" or b4.houses == "pledged"
+    You tell them what has been said at Belle Rive, or the half of it. It goes round the table, and settles, and nobody speaks. Prisca puts down the glove. "It is a very old sort of promise," she says, "and a thing that is easy to keep until it is asked." She does not say anything more.
+  ?else
+    You tell them what has been said at Belle Rive, or the half of it. Hanno is the first to speak. He says that a man who will not be counted is a man who is going to be counted anyway, and that it is a thing that he would not, himself, have said, and that he would not, himself, have been in the least sorry to hear.
+  ?end
+  They have, between them, an idea. It is a modest one. There is a great deal that a family can do in a night, while the master is at his sugar.
+  :the_errand
+  * Send Prisca to learn the river houses' roads and their watchers [once] ?if in_circle("prisca") and member("prisca", "status") == "active" and not on_mission("prisca")
+    $ b4.errand = "scout"
+    $ do send("prisca", "scout", 1)
+    Prisca takes her gloves, and does not say that she has been waiting for it. She is in the door before you have finished. She says that she will be a week, and will be very dull, and that a person who is dull is a person nobody has ever once been afraid of.
+  * Send Fiammetta to stand watch over the Tremé, and Dr. Armand's door [once] ?if in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
+    $ b4.errand = "protect"
+    $ do send("fiammetta", "protect", 1)
+    Fiammetta gets up at once, and puts down the lemon, which she has been peeling for an hour, and says that she has a very small, very fierce, entirely personal objection to a city in which a doctor may not sleep. It is the longest speech that you have ever had from her. She goes out by the window.
+  * Keep them home tonight, and let them be a family [once]
+    The fire is low, and you put on a log, and Hanno finds a bottle that is not at all what it seems, and Fiammetta, with the greatest solemnity, tells a story about the hill. It is an old story, and not at all funny, and by the end of it everyone has laughed. It is the quietest evening that you have had in a century. You do not mean to forget it.
+  * That is all [once]
+    -> :family_done
+  -> :the_errand
+?elif coven_size() > 0
+  The house is quiet. They are a long way off, in a country across the sea. You sit in the long room, in the dark, with the fire gone out, and think of a lit window in another country. It is not a thing that a man can send by letter.
+?else
+  You sit in the long room, in the dark, with a book, and a glass that you do not drink, and listen to the rain. It is a thing that you have done in nine cities. It has not become any easier.
+?end
+:family_done
+<~
+
+# treme
+## The Faubourg, in the rain
+$ do chart("neworleans.treme")
+The Tremé is not asleep. It has the look of a place that has decided, collectively, not to sleep. There are lamps in the windows of the long low cottages, and the doors are open, and men are standing under the galleries in the rain with their hats pulled down, talking in low voices, and falling silent when you come by. They know the name. They know it, you realize, by the carriage, and the coat, and the way that you hold your head. They know what you are as a man knows an unfriendly dog by the gait.
+Dr. Armand has people in the surgery. There is a printer, and a builder, and two women who are teachers, and an old man with a white beard who sits very upright and who is, it appears, the secretary of the society that does not have a name. They have a table, and papers, and a lamp, and a little case of tools in a velvet bag, and on the table in the middle of it is a sheet, which is a bill of sale, and a copy of it, and a form of certificate of freedom in a hand so exact that it is a pleasure to look at.
+"It is a scheme," says Armand. He has not asked you to sit. "It is a thing that is going to be done in any case. The law of fifty seven says that no man may free another. It says nothing, however, about a man who has been free." He lays his finger on the form. "There are in this parish nine hundred persons who are free by the law, and a good many more who are not, and there are a good many of the first who died last year, with their papers. It is not, you will understand, a thing to be said."
+There is a long pause. It is perfectly clear what he is asking. It is a very serious thing to be asked, and he has asked it in a way that gives you the whole of the choice.
+:the_papers
+* Have the papers made, in Dr. Armand's hand, and pay for the lot
+  $ b4.papers = "forged"
+  $ do earn(-5)
+  $ humanity += 3
+  $ standing -= 2
+  $ secrecy -= 1
+  He does not thank you. The old secretary closes his eyes. The printer reaches into the velvet bag, with great gravity, and takes out a small steel plate, and it is quite plain that it was made a long time ago, by a person who has been waiting for a patron, and who has not allowed himself to hope. You sit up the rest of the night in the surgery, in the lamp, watching them work. It is a very small and a very plain thing. It is the first thing in the city that you have been proud of.
+* Buy people out by the law, the slow honest way, through the Valère
+  $ b4.papers = "bought"
+  $ do earn(-4)
+  $ humanity += 1
+  $ standing += 1
+  Armand is silent for a long time, and the old man strokes his beard. "It is slow," says Armand at last. "It is legal. It will, I think, save forty a year, if you are willing to put money behind it and leave the buying to us." He writes something on a card and gives it to you. It is a name, a street and a sum. It is, you understand, a kind of compromise that nobody in the room wished for, and everybody in it is able to live with.
+* Say that you will not put your hand to papers, and give money for the society's school
+  $ b4.papers = "refused"
+  $ secrecy += 1
+  $ humanity -= 1
+  $ do earn(-2)
+  He receives it without a word. There is, in the room, the thin uncomfortable stillness of a number of people who had hoped, and have been told, politely, that they were mistaken. The old man says that it is a very generous gift to a very worthy object. He says it without the least expression. You hear, as you go down the walk, the lamp being put out.
+?if b4.auction == "bought" and b4.papers != "refused"
+  Armand follows you out to the gate. He is a good deal shorter, in the rain, than he was in the room. "The woman, in the Rue Royale," he says, "and her son. There is a form for them, if you wish it. It would not mean what it meant a year ago. It would mean that they were not yours." He looks at you. "It is, I think, the only part of this that is a matter between the two of you."
+  $ do discover("the_cotton_economy")
+?end
+<~
+
+# levee
+## The levee
+$ do chart("neworleans.wharf")
+There are torches on the levee, in a long smoky line, under the great black steamboats in their tiers, with their funnels like a forest of dead trees, and the wind from the river carries the smell of tar and wet cotton and woodsmoke. There is a bonfire at the foot of Canal Street. A great crowd stands about it, and there is a man on a cotton bale, with a lantern, reading out of a telegram.
+It is not the election. The election has been over for an hour. It is the thing that comes after, the thing that a country does when it has been told, and has not decided what to feel. A man in a white hat shouts that the Black Republicans have the White House. A woman begins, very softly, to sing. A boy in a blue shirt climbs a lamp post. It is all done without any sort of order, and with a good deal of sincerity. You walk through it like a ghost, as you have walked through a great many crowds, and nobody sees you.
+Among the bales at the edge of the light there is a little knot of people who are not part of it. They are black, and quiet, and a few of them are in the clothes of the field, and one or two of them are children. They are the property of a house, and they have been brought down to see the fire, because it is a holiday. They stand together, at the edge, in the dark, and watch the white faces in the light. They are not afraid. They have the look of persons who are listening very hard to a language that they have not been taught, and understand perfectly.
+:the_levee
+* Stand with them a while, and listen
+  $ humanity += 1
+  $ secrecy += 1
+  An old man, among them, in a patched coat, who has not once looked at you, says softly, to nobody, that it is a great night, and that the master is going to be in a bad temper in the morning, and that a bad temper is not the same as a change. A child laughs. The old man puts a hand on the child's shoulder. You do not say anything. There is nothing in the world that you have to say that is worth the breaking of the silence.
+* Go among the crowd, and hear what the men with the torches intend
+  $ cunning_brutal += 1
+  $ standing += 1
+  It is a loud, easy, mean little thing to hear. They intend, it appears, to hold a convention. They intend to leave the Union by January. They intend, to a man, that it shall be done without bloodshed, and every man has a rifle under his bed. You meet a young clerk from the Exchange, and a schoolmaster, and a man who sells dry goods, and not one of them is a villain. It is a great deal worse than that. It is a whole city of people who have never in their lives had to ask themselves what they were standing on.
+* Take the Rue Royale home, and do not look back
+  $ secrecy += 1
+  $ humanity -= 1
+  You walk home in the rain, by the lamps, through a city that is making a noise. It is a hard thing, and a quite natural one, to know a great deal of what is coming, and to have no part in it. You go up the stair of the Valère house with your coat dripping on the carpet, and put your hat on a nail, and stand at the window, and watch the torches go by.
+<~
+
+# dawn
+## The wire
+The light comes up gray and wet over the river, and from every steeple in the city the bells begin, not together, one after another, like men arguing in a room. In the Rue Royale a boy runs by with the early edition, shouting. In the courtyard of the Valère house, under the banana, the old aunt is sitting in her black shawl with a cup, and she has a newspaper on her knee, and does not read it.
+The wire has been confirmed. It has come in the night, by the Western Union, through Cairo and Memphis and Vicksburg. The Illinois lawyer has been elected President of the United States, with not a single vote from a single state south of Virginia. It is a thing that nobody in the city will for a moment believe, and every man in it has known for a month. The shops are all shut. It is Wednesday morning. You can hear, a long way off, a gun being fired, slowly, at intervals, from a battery on the levee, in a kind of salute.
+?if b4.paper == "dissent"
+  The paper is on the step. Aurélien's leader is on the second page, in a heavy black rule, in a large clear type, and under it somebody has already written, in pencil, in the margin, a word that is not *Never*. It is a good deal less pleasant.
+?elif b4.paper == "praise"
+  The paper is on the step. Aurélien's leader is on the first page, very handsome, with a good deal of Thermopylae. You see two men in the street reading it aloud to a third. It has done, you suppose, what it was written to do.
+?else
+  The paper is on the step, and has, in its columns, a great many numbers. It is the most careful piece of cowardice that has ever been printed in the city, and for the moment it is the only paper in New Orleans that nobody has been angry with.
+?end
+There is a letter on the table in your room. It has come in the night, by a hand that has not been seen, and has been put where it was certain to be found. It is a long thin letter, in a hard cream envelope, sealed in black wax with a device that you know. It is the Senate's. It has not been seen, in this country, in sixty years, and you have not seen it since Paris.
+You turn it over once. You do not break the seal. It is a thing that you are going to do in a moment, when the light is a little higher, and you have drunk your coffee, and have decided what sort of man is to open it.
+$ do rest()
+=> next

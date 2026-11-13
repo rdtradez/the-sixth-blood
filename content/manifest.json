@@ -691,6 +691,24 @@
             "blood",
             "slavery"
           ]
+        },
+        {
+          "id": "b4c03",
+          "file": "house-divided/ch03.tsb",
+          "title": "The First Friday",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
+        },
+        {
+          "id": "b4c04",
+          "file": "house-divided/ch04.tsb",
+          "title": "The Night of the Returns",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
         }
       ],
       "incomplete": true
