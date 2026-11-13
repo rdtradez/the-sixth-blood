@@ -7,3 +7,5 @@ Chapter plans for each book are written here, one file per book, before the chap
 `blood-and-gold.md` holds the Book Two notes.
 
 `crown-of-ashes.md` holds the Book Three notes.
+
+`house-divided.md` holds the Book Four notes.

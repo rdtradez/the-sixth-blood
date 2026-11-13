@@ -6,7 +6,8 @@
       "name": "Gaius",
       "aliases": {
         "blood-and-gold": "Signor del Colle",
-        "crown-of-ashes": "Monsieur Colline"
+        "crown-of-ashes": "Monsieur Colline",
+        "house-divided": "Monsieur Colline"
       },
       "surnames": {
         "burning-city": "Valerius",
@@ -389,6 +390,42 @@
       "name": "Thibault Marchand",
       "title": "A young Cadet",
       "bio": "A cooper's boy of sixteen, made in a hayloft three years ago by a woman he has not seen since. He has not yet learned that he is never going to be cold again."
+    },
+    "honore": {
+      "gender": "m",
+      "name": "Honoré Valère",
+      "title": "Printer of the rue Saint-Jacques",
+      "bio": "Stout, fifty, with ink in both thumbs and spectacles in his hair. The great grandson of the house's steward, who has inherited the instructions without the paper they were written on."
+    },
+    "filippo": {
+      "gender": "m",
+      "name": "Filippo Valerio",
+      "title": "Of the hill",
+      "bio": "A lean brown gentleman farmer with Aelia's chin and the habit of looking at the floor first. Has been rehearsing what to say to the wall for a month."
+    },
+    "aurelien": {
+      "gender": "m",
+      "name": "Aurélien Valère",
+      "title": "Of the Rue Royale, New Orleans",
+      "bio": "A small stooped commercial man in a good black coat who runs a counting house and a French daily on the river. A better man than he thinks and a worse liar than he hopes."
+    },
+    "crane": {
+      "gender": "m",
+      "name": "H. Crane",
+      "title": "Of Pearl Street, New York",
+      "bio": "A young shipper nobody has seen by day. Writes a small neat sarcastic hand and leaves doors open on purpose."
+    },
+    "armand": {
+      "gender": "m",
+      "name": "Dr. Léonce Armand",
+      "title": "A physician of the Faubourg Tremé",
+      "bio": "Thirty, tall, very straight in the back. Nine years at the Faculty in Paris, where he was a physician. His family has been free in Louisiana since the Spanish."
+    },
+    "philomene": {
+      "gender": "f",
+      "name": "Philomène",
+      "title": "A cook, with her son Théo",
+      "bio": "Twenty eight, tall, with a closed quiet face and an eye that does not hide what it is weighing. Her son is seven and asks whether you are a ghost."
     }
   }
 }

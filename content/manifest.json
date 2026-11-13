@@ -673,7 +673,27 @@
           "collesanto": 55
         }
       },
-      "chapters": []
+      "chapters": [
+        {
+          "id": "b4c01",
+          "file": "house-divided/ch01.tsb",
+          "title": "A Letter from the River",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
+        },
+        {
+          "id": "b4c02",
+          "file": "house-divided/ch02.tsb",
+          "title": "The Levee",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
+        }
+      ],
+      "incomplete": true
     },
     {
       "id": "whitechapel-hunt",

@@ -523,6 +523,42 @@
       "title": "The Lady of the third cellar",
       "book": "crown-of-ashes",
       "text": "The Priestess line's eldest, who slept in the rosemary under the Hotel de Saint-Aubin and wrote the court's doings on a slate. She woke in the small hours of the eleventh of Thermidor, in the last days of July 1794, and released the Prince. She has said that she has a great deal to attend to, and that it will keep."
+    },
+    "the_crescent_city": {
+      "category": "places",
+      "title": "New Orleans, 1859",
+      "book": "house-divided",
+      "text": "A port built on a bend of the river, lower than the water that feeds it, so that nothing is buried and nothing is quite dry. The largest cotton market in the world and the largest market in people in America. The streets are French and Spanish, the money is English and Northern, and every house in it has been paid for."
+    },
+    "the_second_empire": {
+      "category": "lore",
+      "title": "The Second Empire",
+      "book": "house-divided",
+      "text": "The nephew of the first Napoleon, elected President in 1848 and made Emperor four years later. He rebuilds Paris with straight boulevards and gas lamps and moves the people who lived where they run. The printing trade is licensed, and watched, and mostly kept."
+    },
+    "the_river_covens": {
+      "category": "bloodlines",
+      "title": "The river houses",
+      "book": "house-divided",
+      "text": "The vampires of the lower Mississippi keep to the old plantation families, and keep their own courts, and have kept out of the Senate's reach for a hundred years. They are said to be proud, patient, and very well informed."
+    },
+    "the_free_people_of_color": {
+      "category": "people",
+      "title": "The free people of color",
+      "book": "house-divided",
+      "text": "A class of free men and women, many of them property owners and tradesmen, who have lived in New Orleans since the Spanish. They have their own schools, churches and societies. Every year the law of the state grows narrower for them."
+    },
+    "the_cotton_economy": {
+      "category": "lore",
+      "title": "Cotton and the slave economy",
+      "book": "house-divided",
+      "text": "The fortune of the age. Every bale on the levee is the work of enslaved people, and every loan against it is written on the security of persons. A man who invests in it may never see what he has bought, which is the point of the arrangement."
+    },
+    "the_st_louis_exchange": {
+      "category": "places",
+      "title": "The Exchange and the yards",
+      "book": "house-divided",
+      "text": "The great domed hall in the St. Louis Hotel where bills on Liverpool and Havre are cried every day, and where people are sold at auction under the same roof. The dealers' yards on Baronne and Gravier Streets keep an inventory for private sale, behind a painted board and a lamp, as respectably as any hardware shop. The law forbids selling a child under ten apart from its mother."
     }
   }
 }
