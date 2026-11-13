@@ -129,3 +129,23 @@ Hooks: Beaumont's answer to the Teche house at the next Chapter; Crane's arrival
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
 
+
+## Chapter 13, "The Man from Pearl Street" (`b4c13`, session 46)
+
+March 1864. The new State government is sworn in under the live oaks and the bells; Crane comes up from the Gulf on a night packet. Night phase, three of four: the wharf (Crane at the foot of Canal Street; `b4.guest`: took him into the house, spoke to him on the wharf and let him find his own lodging, or tested him first), the Chapter of the river houses at Belle Rive (Beaumont answers the Teche house under the Compact; `b4.chapter`: stood with Beaumont, spoke for the sixth blood and the family's right, or stayed away; reads `b4.defense` and `b4.fontenot`), the Treme hall (the free men's petition to Washington for the vote; `b4.petition`: funded the delegation, signed with the free families, or apart; reads `b4.school`, `b4.labor`), and the family (errands, safehouses, training hall, the firm's warehouse).
+
+Dawn: Crane's first remark on the house, Armand's orders to rejoin his regiment, the Chapter's result, a note from Wren on the petition, a card from Mobile saying the spring return is coming.
+
+Hooks: Fontenot at the Compact table; the Atlantic proposal Crane carries from Thorne; the ice warehouse; the Teche house after the Chapter; the free State convention of the summer.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 14, "The Free State" (`b4c14`, session 46)
+
+September 1864. The convention has written a constitution that ends slavery in the State; the vote is on the sixth. Night phase, three of four: the Compact table in the great hall of the house (Fontenot asks, again, for a house of the lower Gulf, with Delorme and Beaumont and Madame Lachapelle present; `b4.gulf`: seated the Gulf house, bound it to the Compact with a price, or refused the seat; reads `b4.fontenot`, `b4.chapter`), the parlor at the hotel (Crane and Thorne's Atlantic proposal, a compact of Northern and Southern houses against the Senate's correspondence; `b4.atlantic`: signed, bargained for the family's seat, or refused; reads `b4.guest`), the Ice Company's warehouse (the Teche house tries the firm; `b4.warehouse`: kept the crew and the cold room and rebuilt larger with the free families, took Brault's money and his guards, or let it burn and moved; reads `b4.firm`, `b4.defense`), and the family.
+
+Dawn: the vote, the coven's morning, a letter from Wren, Armand's second return, a letter from Charleston if the false letter was sent.
+
+Hooks: Cassian's confession and Collis's hardest test come later in the book; the sixth of November and the voting of the winter; Reconstruction and the massacre of 1866.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.

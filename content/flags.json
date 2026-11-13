@@ -4276,6 +4276,78 @@
       "major": true,
       "default": "apart",
       "note": "Chapter 12: Christmas supper at the school in the Treme"
+    },
+    "b4.guest": {
+      "kind": "enum",
+      "values": [
+        "housed",
+        "wharf",
+        "tested"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "wharf",
+      "note": "Chapter 13: how Crane was received when he came up from the Gulf"
+    },
+    "b4.chapter": {
+      "kind": "enum",
+      "values": [
+        "stood",
+        "spoke",
+        "absent"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "absent",
+      "note": "Chapter 13: the Chapter of the river houses on the Teche house"
+    },
+    "b4.petition": {
+      "kind": "enum",
+      "values": [
+        "funded",
+        "signed",
+        "apart"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "apart",
+      "note": "Chapter 13: the free men's petition to Washington for the vote"
+    },
+    "b4.gulf": {
+      "kind": "enum",
+      "values": [
+        "seated",
+        "bound",
+        "refused"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 14: the Gulf house's request for a seat at the Compact table"
+    },
+    "b4.atlantic": {
+      "kind": "enum",
+      "values": [
+        "signed",
+        "bargained",
+        "refused"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 14: the Atlantic Compact proposed by Thorne and Crane"
+    },
+    "b4.warehouse": {
+      "kind": "enum",
+      "values": [
+        "rebuilt",
+        "guarded",
+        "moved"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "moved",
+      "note": "Chapter 14: the Ice Company warehouse after the Teche house's visits"
     }
   }
 }

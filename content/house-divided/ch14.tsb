@@ -1,0 +1,270 @@
+// Book Four, Chapter 14 (session 46). September 1864: the vote on the free State constitution, the Gulf house at the Compact table, the Atlantic proposal, the Ice Company's warehouse.
+// Opens with no phase (the convention's work, the heat), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a long dawn.
+// Reads b4.circle, b4.coven_home, b4.firm, b4.fontenot, b4.chapter, b4.guest, b4.defense, b4.petition, b4.seal. Sets b4.gulf, b4.atlantic and b4.warehouse.
+// Ends with rest() and => next, which pauses until chapter 15 exists (the manifest entry is incomplete).
+@chapter b4c14
+@title The Free State
+@version 1
+
+# start
+## September
+$ b4.gulf = "refused"
+$ b4.atlantic = "refused"
+$ b4.warehouse = "moved"
+$ do discover("the_free_state_convention")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is the first week of September, and there are four things that want doing tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## The convention
+It has been a long, hot, hard summer, and it is ending as they end in New Orleans, with a great deal of rain. The convention has sat since April, in the Mechanics' Institute, and has been as quarrelsome as a family. It has written a constitution. It says, in the first of its articles, in a perfectly plain French and English, that slavery is abolished in the State of Louisiana. It is to be voted on the sixth. Every man who is allowed to vote has an opinion, and a number of those who are not allowed have had to be restrained from giving it.
+The war has gone a good way north. A Red River campaign has been fought, and lost, and a great many of the Guards have been in it, and a number have come back, and some have not. The town is crowded with the maimed and the idle and the contractors. There are posters on every wall. There is a smell of wet paper, and hot sugar, and the river at its lowest.
+Three cards come in the evening post. One is from the Mobile gentleman, who is in the city, and asks, with great punctilio, to be put on the Compact's table. One is from the Hotel on the Rue Saint Charles, in the small neat hand, and says only: *I have something to show you which I should prefer not to say in a letter.* The third, in a clerk's hand, from the Levee, says that the warehouse that Mrs. Prisca bought in the spring has had a visit from a man who did not give his name.
+<~
+
+# hunger
+## The warm dark
+* Slip down to the river at the lowest of the night, where the flatboats lie, and take what the cattle drovers sleep beside
+  $ do feed("animal")
+  $ humanity += 1
+  It is a long hot bank, full of horses and mules and a great, soft, restless animal warmth, and the smell of straw. A big roan mare stands for it, as though it were the plainest thing in the world. You lean your head against her shoulder afterwards, a good while.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a seamstress from the Rue Dauphine, a widow of the war, with a thin, brave, tired face, and a very exact notion of what her time is worth. She takes the money, and counts it, and puts the half of it in her shoe. She says that it is the first honest thing she has been asked to do for a month.
+* Take a man from the gaming rooms of the Rue Royale, where the contractors drink
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is a fat, loud, genial purveyor of army shoes, with a wad of notes in his waistcoat, who has been explaining to the room, for an hour, that the war is the best thing that has ever happened to him. He does not say it again. He is found at six, on a bench in Jackson Square, quite unharmed, quite well, in a very deep sleep, and is, for a week, a good deal more modest.
+<~
+
+# night
+## The long night
+:night
+?if actions_left() == 3
+  It is hot, and close, and overcast, with lightning, very far off, over the Lake, and no wind at all. Every shutter in the city is open and every man in it is on a doorstep.
+?elif actions_left() == 2
+  The thunder comes nearer. There is a first heavy drop, then another, on the banquette, like coins.
+?else
+  There is an hour left, and the rain has stopped, and the gutters are running, and a cock is crowing, very badly, in a yard. You have one thing left to do.
+?end
+* Take the chair at the head of the Compact's table, where the Mobile house has asked to be heard [once] ?if actions_left() > 0
+  ~> gulf
+  $ do act()
+* Go to the hotel on the Rue Saint Charles, where Crane has something to show you [once] ?if actions_left() > 0
+  ~> atlantic
+  $ do act()
+* Go down to the Levee, to the Ice Company's warehouse, and the man who did not give his name [once] ?if actions_left() > 0
+  ~> warehouse
+  $ do act()
+* See to the family, and what it needs [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# gulf
+## The Compact's table
+$ do chart("neworleans.haven")
+?if b4.coven_home == "raised"
+  It is in the great hall on Gravier Street, and it has never, in all its life, been so full. The long table has been pulled out to its whole length, with every lamp lit, and the Compact itself, in a box of plain wood, set down in the middle of it.
+?elif b4.coven_home == "hidden"
+  It is in the largest of the back rooms, with the doors open on the passage, and a lamp at every one. The table has been brought in, in pieces, and put together by Hanno, with a spirit level.
+?else
+  It is in the long room in the Marigny, with the shutters closed and the table pulled out into the middle of the floor.
+?end
+?if b4.chapter == "absent"
+  The river houses have come, all the same. They have not, you notice, quite looked at you.
+?else
+  The river houses are all here, in their black, in their rings. There is the old couple from the Pontchartrain shore, who have brought their own cushions. There is Madame Lachapelle, in gray silk, with her little stick, who nods to you as to a person who has, in the end, done what she hoped.
+?end
+Beaumont is at the right hand. The elder Delorme is at the left, and has been silent for an hour. At the end of the table, in a plain brown coat, hat on his knee, sits Gaspard Fontenot of Mobile, with eleven men of the lower Gulf in two rows behind him, in the old gray of the Confederate service, with their buttons stripped. They are very still. They have fought, and they have lost, and they have come, in the strict sense of the words, to ask.
+Fontenot rises. He is a heavy, quiet, square man with a scar on his chin. He says that he has not come to make a speech. He says that the lower Gulf has had no house since the Compact was written, and that it was therefore, for a long time, no one, and that the war has taught it, in the plainest way, what that is. He asks for a seat. He asks that it be a house, in its own right, with a voice in the Chapter and a share in the table. He sits.
+?if b4.fontenot == "showed"
+  He glances at you once, quickly, across the table. It is a glance that has the whole of a summer garden in it.
+?elif b4.fontenot == "parleyed"
+  He nods to you, once, across the table, as to an old colleague.
+?end
+:the_gulf
+* Move that the Gulf house be seated, and sit it at the table as an equal
+  $ b4.gulf = "seated"
+  $ humanity += 2
+  $ standing += 2
+  $ secrecy -= 1
+  $ cunning_brutal -= 1
+  You say that the house of the lower Gulf has fought a war, and been beaten, and has come on foot to ask for a chair, and that it would be a very strange table that said no. There is a pause. The old woman from the Pontchartrain shore says, at once, "Aye." Beaumont looks a long time at his hands. Then he lifts one of them. The elder Delorme does not. It is seven to three. When Fontenot is shown to his chair, he does it very stiffly, and puts his hat on the floor beside it, and says nothing at all, and does not look up for some time.
+* Seat it, but bind it: a price, in silver and in service, and the Compact sworn again at the table before the Chapter
+  $ b4.gulf = "bound"
+  $ standing += 2
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  It is a very long, very dry, very careful passage of an hour. You propose a term of seven years, a bond, a surety in the person of one of the Gulf's elders, and an oath, on the box, that the house shall not make war on any house of the Compact without the Chapter's leave. Beaumont says that it is a very proper thing. The Teche house says that it is a very insulting one. Fontenot agrees to all of it, in a low, even voice, with a face like a shut door, and signs, and goes out of the room afterwards without a word, and stands for a long time in the courtyard in the rain.
+* Refuse the seat, and let the Chapter say what it will
+  $ b4.gulf = "refused"
+  $ secrecy += 2
+  $ standing -= 2
+  $ humanity -= 2
+  You say that the Compact is a thing that was written for a particular time and a particular river, and that you do not propose to see it rewritten at a table in a hurry. It is a perfectly reasonable thing to say. It is received in a long silence. The Delormes have the grace not to smile. Fontenot stands, and bows, with great correctness, and goes out with his eleven in their stripped gray coats, in two rows, as they came. In the passage he says, to nobody, "I had been told you were a man who would hear it." It is not a reproach. It is worse.
+$ do discover("the_gulf_house")
+<~
+
+# atlantic
+## The parlor at the hotel
+$ do chart("neworleans.bank")
+It is a bare, hot, shuttered parlor, with a green baize table, and a map of the United States on the wall with the Union in pink, and a very small young man at the table in his shirt sleeves, with a decanter of water. He is not alone. At the window, with his back to the room, in a black coat that has not changed cut in forty years, there is a tall, fair, grave man with a small Bible in his hand. He turns. It is Elias Thorne, of Boston. He has come down, he says, by the Fall River boat, and the railroad, and the Gulf, and has not yet forgiven any of them.
+There is a paper on the table. It is long, and in two hands, one small and neat and the other upright and Calvinist, and it has a title: *Articles of an Atlantic Compact of the Houses.* It proposes that the houses of the North and the houses of the South, now that the war has made the question of a boundary a plain matter of fact, should bind themselves to a common law, a common court, a common refusal to take orders from the Senate's correspondence, and a common defense of every house against every other. It proposes a seat on the court for each. It proposes, among other things, a seat for the sixth blood.
+Thorne says, in a very deep, dry, level voice, that he has been two hundred years in a country, and has seen it make two constitutions, and that he knows what a thing looks like when it is about to be made a third time. He says that the houses will be made, one way or another, by somebody, and that it is a matter of whom.
+?if b4.guest == "housed"
+  Crane has not looked at you once. He says, to the table, "I should say that I have been entirely honest about this with the family, and that the family has been very kind."
+?elif b4.guest == "tested"
+  Crane has not looked at you once. He says to the table, with a very small smile, "I should say that I have been entirely honest, and that I was asked about it at some length."
+?end
+:the_atlantic
+* Sign the articles, as the sixth blood, and take the seat
+  $ b4.atlantic = "signed"
+  $ standing += 3
+  $ secrecy -= 3
+  $ cunning_brutal += 1
+  You take the pen. It is a plain steel pen, and the ink is violet. You write the name of the house, and the date, and under it, with a thing in the chest that you do not understand, the name of the blood. Thorne's hand, when he takes yours, is very dry, and as cold as the table. Crane says, quite softly, that he did not think it would be so soon. It is done at ten minutes to three. It is the end of something, and the beginning of a thing that has no name yet.
+* Bargain: sign the court, and the common law, but keep the family's own seat, and its own door, for the family
+  $ b4.atlantic = "bargained"
+  $ standing += 2
+  $ cunning_brutal += 2
+  $ secrecy -= 1
+  It takes two hours. You say that the family will take a seat on the court, and a share in the common law, but that the house is its own, that it is not to be inspected, and that no house shall have any right of entry to it, ever, for any cause. Thorne says that this is an unusual condition. Crane says that it is an exceedingly sensible one. They go through it clause by clause, with the baize table between, and at the end, with a small dry crackle of paper, they amend the articles in two places, in two hands, and you sign.
+* Refuse, politely, and say that the family has a house of its own to keep
+  $ b4.atlantic = "refused"
+  $ secrecy += 2
+  $ humanity += 1
+  $ standing -= 1
+  You say that you are very much obliged, and that the family is a small one, and has had a hard year, and does not at present propose to be a party to the government of two continents. Thorne inclines his head, gravely, like a man at a graveside. Crane says nothing for some time. He says, at last, "I told him that you would say it." He does not say whether he thought it was a good thing or a bad one.
+$ do discover("the_atlantic_compact")
+<~
+
+# warehouse
+## The cold room
+$ do chart("neworleans.lots")
+It is a long gray brick shed on the Levee, with a new roof, and an iron door, and a great black cavern of a cellar under it, thirty feet deep, in which the Ice Company keeps six hundred tons of Wenham ice in sawdust. It is a very cool, very dim, very peaceful place, and it is the only one in New Orleans in which a person may, in September, be entirely comfortable.
+?if b4.firm == "coven"
+  The crew are in the yard: twenty four men of the Tremé and the Marigny, in their aprons, with their tongs. The foreman is a free man called Jules, a big, quiet fellow with a gray beard. He has been with the company since the first quarter, and he is, you have been told, the only man in the city who has ever been able to make Prisca laugh.
+?elif b4.firm == "partner"
+  The crew are Brault's. There are twenty of them in the yard in their aprons, and two of the Brault clerks at a table, with a ledger, and the look of men who have been told to be pleasant.
+?else
+  The crew are a gang of hired hands from the wharves, with one of the Levee's overseers over them, a smooth, sallow man with a revolver, who has not at all liked being woken.
+?end
+There has been a visit. The iron door has been tried with a crowbar, and failed. A great deal of oil has been poured along the foot of the east wall, and not lit. There is, chalked on the brick, at the height of a man's shoulder, a small round mark: a ring, with a stone in it. It is the Teche house's.
+It is Jules who says, quietly, that they came back twice. It is the third time that has been the worst.
+:the_warehouse
+* Keep the crew, and the cold room, and rebuild larger with the free families as partners, who know every cellar on the Levee
+  $ b4.warehouse = "rebuilt"
+  $ humanity += 2
+  $ standing += 1
+  $ secrecy -= 1
+  $ do earn(-6)
+  It is a very long plan, and it is Jules's. He draws it with a stick in the dust of the yard: another cellar, twice the size, a new wall, a night watch of men from the Tremé with lanterns and shotguns, and, along the whole of the Levee side, a pair of the biggest brick furnaces that have been built in the city. The free families of the Marigny put in a third of the money, as partners, on paper. There is a moment, when the paper is signed, in which every man in the yard stands very straight, and takes off his cap.
+* Take Brault's offer: his money, and his guards, and the half of the profits
+  $ b4.warehouse = "guarded"
+  $ standing += 1
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ do earn(6)
+  It is arranged on the Levee, over a glass of something, with a Brault clerk with sleek hair, and it takes a quarter of an hour. Brault's guards are in the yard at dawn: eight stout men with Sharp's carbines. They are, in every way, perfectly efficient. The foreman looks at them for some time. He says that it is a very fine thing to have so much protection, and goes in to the cold room, and does not come out until the evening.
+* Let it burn, if the Teche house must have a fire, and move the company across the river to a place that has not been marked
+  $ b4.warehouse = "moved"
+  $ secrecy += 2
+  $ humanity -= 2
+  $ standing -= 1
+  You say that it is only a shed. It is, in the plain sense, quite true. Jules does not say anything. He stands in the yard with the tongs in his hand and looks at the chalked ring. You give the order to move the ice in the morning, to a cellar at Algiers, and the shed is left, with its door open, to anyone who likes. It burns at about three the next night. It makes a very handsome blaze. The Levee is full of people. A man in the crowd says, loudly, that it is a pity, and that it was a good roof.
+$ do discover("the_ice_company_warehouse")
+<~
+
+# family
+## The long table
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  ?if b4.coven_home == "raised"
+    The house on Gravier Street has the look, tonight, of a household in a rainstorm: every lamp lit, every door open, a number of wet coats on every peg. Fiammetta is on the banister, in her stocking feet, reading a letter aloud, in a high voice, to a girl of the school. Hanno is writing. Prisca is in the great chair, with her hands folded, and the look of a woman who has just won an argument and is deciding what to do with it.
+  ?else
+    They are in the long room, with the windows open on the rain, and a lamp lit, and every chair taken. It is very hot. Nobody has said a word for a quarter of an hour, and it is, you think, the most comfortable silence that you have ever sat in.
+  ?end
+  ?if b4.guest == "housed"
+    Crane is on the sofa, with his feet up, reading Prisca's ledger. He says that she has a most astonishing hand.
+  ?end
+?elif coven_size() > 0
+  The house is quiet and the lamps are low. They are a long way off. There is a letter on the table, in a hand that you know, which you have not yet opened.
+?else
+  The house is very quiet. The rain on the roof is the only sound. You sit for a long time in the dark.
+?end
+:the_family
+* Send Prisca to Madame Lachapelle, on the Bayou St. John, to ask what the old river thinks of a new house at the table [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca") and task("prisca") == ""
+  $ do send("prisca", "negotiate", 1)
+  Prisca says that she and Madame Lachapelle have not spoken in forty years, and that it is quite long enough. She puts on her best gloves. She says that she will take a cake.
+* Send Fiammetta to watch the Levee for the ring and the stone [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta") and task("fiammetta") == ""
+  $ do send("fiammetta", "scout", 1)
+  Fiammetta says that she has been waiting all summer for somebody to ask her to watch a thing. She goes up on the roof, by the water spout, in the rain, without a coat.
+* Set Hanno to guard the house through the night ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "guard")
+  Hanno says, rather shyly, that he has never had to guard anything but a ledger. He takes down the old pistol from the shelf. He says that it is a very good ledger.
+* Build a blood supply that does not depend on the street, a doctor at the Charity, a nurse at the hospital, and a number of quiet arrangements ?if can_acquire("blood_network")
+  $ do acquire("blood_network")
+  $ humanity += 1
+  $ secrecy += 1
+  It is done through the family and the free families. A doctor at the Charity gives a name. A nurse at the Hotel Dieu is very careful, and very kind. There are, by the end of the month, nineteen persons in the city who know what the house is, and who have agreed, for a reason of their own, to be exceedingly discreet. It is, you reflect, a thing that no tyrant has ever been able to build.
+* Fit a vault in the cellar for the family's papers and the Compact's box ?if can_acquire("vaults")
+  $ do acquire("vaults")
+  $ cunning_brutal += 1
+  It is a room under a room, with an iron door and a good lock. Hanno puts in, on the first night, the Compact in its box of plain wood, and the Articles of the Atlantic, if they have been signed, and the deeds of the Tremé school. He says that it is a thing that is a very great comfort to a ledger.
+* That will do for tonight
+  -> :family_done
+-> :the_family
+:family_done
+<~
+
+# dawn
+## The seventh
+The rain has stopped. It is a clean, washed, blue morning, with a thin cool air out of the north for the first time since April, and the bells, and the smell of coffee and wet brick.
+The vote was taken yesterday. It was not close. The constitution is adopted. Slavery is, in the plain words of the Constitution of the State of Louisiana, abolished. It is announced from the steps of the Mechanics' Institute at nine, and the cannon in Jackson Square are fired. There is no cheering. There are a great many people in the street, in a kind of stunned, quiet, listening silence, as at the end of a very long service.
+?if b4.gulf == "seated"
+  Fontenot is at the door of the hotel in the Rue Saint Louis at noon, with his hat in his hand, to say, in his heavy slow voice, that he has been seated, and that he has not the words. He says, very simply, that the Gulf house will be, in any matter that the Compact calls it to, at the family's right hand. He does not say that it is a debt. He lets it be one.
+?elif b4.gulf == "bound"
+  Fontenot's surety is delivered at noon, in a sealed box, by a very old man in gray. It is a sheet of vellum, and a lock of hair, and a ring. It is a very correct thing, and it is a thing that nobody enjoys.
+?else
+  A letter comes from Mobile in the evening, in a heavy square hand. It is four lines. It says that the Gulf house will make its own arrangements, and that it will remember where it was refused a chair, and by whom.
+?end
+?if b4.atlantic == "signed"
+  A cable comes in the afternoon from New York, by way of Havana, in a code that you do not know, and a plain English clerk's translation. It says that the Atlantic Compact is in force, and that the first court is to sit in the spring, at Pearl Street. It adds, in Crane's small neat hand, *You are the youngest seat. I should be very careful of the others.*
+?elif b4.atlantic == "bargained"
+  There is a thick envelope in the post, from New York, with the amended articles in a clean copy, and a short note in Crane's hand. It says that the clause about the family's door has been much discussed in Boston, and that Thorne, at the end, said only that it was the most Puritan thing he had ever read. It is, you gather, a compliment.
+?else
+  Crane comes at four in the afternoon, to say that he is going north in the morning, with Thorne, by the packet. He says it lightly. He says that they will do without, and that it is quite likely that it will be a better thing without. He says that he will write. He holds out a hand, in the kid glove, and it is a little less cold than it was in March.
+?end
+?if b4.warehouse == "rebuilt"
+  Jules sends a note at noon, in a large careful hand. It says that the first of the new furnaces is lit, and that the company's name has been painted over the door, in letters four feet high. He has put the names of the partners below it, in smaller ones. He has put, at the end, in the smallest, the name of the house.
+?elif b4.warehouse == "guarded"
+  Prisca's account of the quarter comes in at noon, with a note in her fine plain hand. The profits are up by a third. She says that they are not, in her view, to be trusted, and that it is a very comfortable thing to be on the right side of a number.
+?else
+  The Algiers cellar is not as good as the Levee's. It is damp, and it is a mile from anywhere, and Jules has said, to the man who brought the carts, that he will see them all damned before he lights a fire in it. It is, however, a place that nobody has chalked.
+?end
+?if b4.defense == "unwatched" and b4.coven_home != "kept"
+  Fiammetta's arm has quite healed. She says that it was nothing, and has been showing the scar to the girls of the school.
+?end
+?if b4.petition == "funded" or b4.petition == "signed"
+  There is a letter on the evening post, from Washington, in a plain square hand that is not Wren's. It is from a Senator's secretary. It says that the petition of the free men of Louisiana has been received, and read, with attention, and laid before the President. It does not say what he said.
+?end
+Dr. Armand has been home on furlough for a fortnight. He comes to the door at five in his shirt sleeves, with his hair uncombed, and a small boy of the school at either hand. He says that the Constitution is a very fine document, and that he proposes to read it, in the next few days, with a good deal of attention, and a ruler. He says that Honorine has asked him to say that the school will want a stove.
+?if b4.seal == "trap"
+  There is a slip from Charleston, without a signature, in the evening post. *The false letter has been answered a third time. This time it was by the one who matters. He is coming.*
+?end
+It is the seventh of September, and a Wednesday, and the first fine day of the autumn.
+$ do rest()
+=> next

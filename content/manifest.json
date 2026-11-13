@@ -783,6 +783,25 @@
             "blood",
             "slavery"
           ]
+        },
+        {
+          "id": "b4c13",
+          "file": "house-divided/ch13.tsb",
+          "title": "The Man from Pearl Street",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
+        },
+        {
+          "id": "b4c14",
+          "file": "house-divided/ch14.tsb",
+          "title": "The Free State",
+          "notes": [
+            "blood",
+            "slavery",
+            "war"
+          ]
         }
       ],
       "incomplete": true

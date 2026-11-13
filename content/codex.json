@@ -721,6 +721,54 @@
       "title": "The school in the Treme",
       "book": "house-divided",
       "text": "Honorine Armand keeps a school for the children of the free families and the freed, supported by a society of the Treme, and the lamp in its window is lit every night."
+    },
+    "the_new_state_government": {
+      "category": "lore",
+      "title": "The new State government",
+      "book": "house-divided",
+      "text": "In March 1864 a Governor is sworn in at Lafayette Square under the Army's protection, elected by a small number of voters. It is a government of the State and not yet a settled one."
+    },
+    "the_atlantic_houses": {
+      "category": "lore",
+      "title": "The Atlantic houses",
+      "book": "house-divided",
+      "text": "The vampire houses of Boston and New York keep to a few old rules of their own and write to each other in small neat hands. They did not take sides in the war and are now thinking about what comes after it."
+    },
+    "the_chapter_of_the_river_houses": {
+      "category": "lore",
+      "title": "The Chapter of the river houses",
+      "book": "house-divided",
+      "text": "The river houses meet in Chapter at Belle Rive to read the Compact aloud and vote on a breach with a white stone and a black. A fine is paid in silver and sometimes in a seat."
+    },
+    "the_petition_of_the_free_men": {
+      "category": "lore",
+      "title": "The petition of the free men",
+      "book": "house-divided",
+      "text": "In early 1864 the free men of color of New Orleans draw up a petition to the President asking for the vote, on the grounds of taxes paid, houses owned and a regiment raised."
+    },
+    "the_free_state_convention": {
+      "category": "lore",
+      "title": "The convention of 1864",
+      "book": "house-divided",
+      "text": "A convention at the Mechanics' Institute writes a new constitution for Louisiana whose first article abolishes slavery. It is voted on in September."
+    },
+    "the_gulf_house": {
+      "category": "lore",
+      "title": "The Gulf house",
+      "book": "house-divided",
+      "text": "The vampires of the lower Gulf coast around Mobile have never had a house of their own at the Compact table. Gaspard Fontenot asks for one in the autumn of 1864."
+    },
+    "the_atlantic_compact": {
+      "category": "lore",
+      "title": "The Atlantic Compact",
+      "book": "house-divided",
+      "text": "Elias Thorne and H. Crane propose a common law and a common court for the houses of the North and the South, with a seat for each house that signs."
+    },
+    "the_ice_company_warehouse": {
+      "category": "lore",
+      "title": "The ice company warehouse",
+      "book": "house-divided",
+      "text": "A brick shed on the Levee with a deep cellar holds hundreds of tons of ice cut in New England. It is the only place in the city that stays cool in September, and it has enemies."
     }
   }
 }
