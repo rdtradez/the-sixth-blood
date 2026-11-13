@@ -72,6 +72,8 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 43: Book Four chapters 7 and 8
 - [x] Session 44: Book Four chapters 9 and 10
 - [x] Session 45: Book Four chapters 11 and 12
+- [x] Session 46: Book Four chapters 13 and 14
+- [x] Session 47: Book Four chapters 15 and 16
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
@@ -564,3 +566,22 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Sessions 43 and 44 (pull requests #41 and #42) were not merged when this session started, so the session 45 branch is stacked on them. Merge #41, then #42, then this one.
 - Plans are in `SPOILERS/house-divided.md`.
 
+### Session 46 notes (Book Four, chapters 13 and 14)
+
+- Chapters `b4c13` and `b4c14` are in `content/house-divided/` (`ch13.tsb`, `ch14.tsb`). The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 14. Same shape as chapters 3 to 12: an opening with no phase, a short hunger scene that only runs if `must_feed()` is true on entry, one night phase of three actions out of four, and a closing scene ending in `rest()` and `=> next`.
+- Coven focus, as the owner asked: both chapters put the family, its havens, its business and the rival and allied houses at the center. Each has errands for Prisca and Fiammetta, a task for Hanno while he has none, and haven holdings offered only through `can_acquire` (chapter 13: `escape_tunnels`, `training_hall`; chapter 14: `blood_network`, `vaults`). Chapter 14 holds the Compact table in the coven's own house and puts the Ice Company's warehouse at the center of one night action.
+- New decision flags (`b4.` prefix, registered): `b4.guest`, `b4.chapter`, `b4.petition` (chapter 13) and `b4.gulf`, `b4.atlantic`, `b4.warehouse` (chapter 14). `b4.chapter`, `b4.gulf`, `b4.atlantic` and `b4.warehouse` are the ones later chapters should read first.
+- New codex entries: the new State government, the Atlantic houses, the Chapter of the river houses, the petition of the free men, the convention of 1864, the Gulf house, the Atlantic Compact, the ice company warehouse. Content notes: chapter 13 `blood`, `slavery`; chapter 14 `blood`, `slavery`, `war`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book4.test.js` plays chapters 13 and 14 down every circle, waking, haven, firm and Chapter branch, takes every recorded choice, and expects fourteen chapters.
+- Sessions 43 to 45 (pull requests #41, #42 and the session 45 branch) were not merged when this session started, so the session 46 branch is stacked on session 45. Merge them in order.
+- Plans are in `SPOILERS/house-divided.md`.
+
+### Session 47 notes (Book Four, chapters 15 and 16)
+
+- Chapters `b4c15` and `b4c16` are in `content/house-divided/` (`ch15.tsb`, `ch16.tsb`), about 11,000 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 16. Same shape as chapters 3 to 14: an opening with no phase, a short hunger scene that only runs if `must_feed()` is true on entry, one night phase of three actions out of four, and a closing scene ending in `rest()` and `=> next`.
+- Coven focus, as the owner asked: both chapters put the family, its havens, its business and the rival and allied houses at the center, and show the strength of the sixth blood in the hero and the family. Each has errands for Prisca and Fiammetta, a task for Hanno while he has none, and holdings offered only through `can_acquire` (chapter 15: `informants`, `hidden_chamber`; chapter 16: `front_business`, `safehouses`).
+- New decision flags (`b4.` prefix, registered): `b4.refuge`, `b4.peace`, `b4.physician` (chapter 15) and `b4.court`, `b4.codes`, `b4.teche` (chapter 16). Note that `b4.exodus` already belongs to chapter 7, so chapter 15's flag is `b4.refuge`. `b4.refuge`, `b4.peace`, `b4.court` and `b4.teche` are the ones later chapters should read first.
+- New codex entries: the surrender of 1865, the fall of Mobile, the river houses after the war, the doctor come home, the winter laws of 1865, the Atlantic court, the Black Codes. Content notes: chapter 15 `blood`, `slavery`, `war`; chapter 16 `blood`, `slavery`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book4.test.js` plays chapters 15 and 16 down every circle, waking, haven, firm, Gulf answer and warehouse, takes every recorded choice, and expects sixteen chapters.
+- Sessions 43 to 46 were not merged when this session started, so the session 47 branch is stacked on session 46. Merge them in order.
+- Plans are in `SPOILERS/house-divided.md`.

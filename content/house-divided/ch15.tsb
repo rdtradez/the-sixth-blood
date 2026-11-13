@@ -1,0 +1,278 @@
+// Book Four, Chapter 15 (session 47). April 1865: the surrender, the fall of Mobile, the Gulf house's people on the road, Beaumont at the family's door, the doctor mustered out.
+// Opens with no phase (the news and the bells), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a long dawn.
+// Reads b4.circle, b4.coven_home, b4.firm, b4.gulf, b4.chapter, b4.atlantic, b4.hospital, b4.honorine, b4.warehouse, b4.seal. Sets b4.refuge, b4.peace and b4.physician.
+// Ends with rest() and => next, which pauses until chapter 16 exists (the manifest entry is incomplete).
+@chapter b4c15
+@title The Bells of April
+@version 1
+
+# start
+## April
+$ b4.refuge = "left"
+$ b4.peace = "terms"
+$ b4.physician = "own"
+$ do discover("the_surrender_of_1865")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is the middle of April, and there are four things that want doing tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## The news
+The war ends in New Orleans as it began, with a great deal of noise and no one quite certain what it means. For a week the bells have been rung and stopped and rung. A paper says that General Lee has laid down his arms in Virginia. Another says that it is a lie. A third, printed in the night, says that it is true, and that Mobile has fallen, and that the gray army of the Gulf has marched out of its trenches with its colors furled.
+The town is full of men who have no idea what to do with their hands. There are soldiers on every corner, blue, and a good many in the old gray, with their buttons cut off, walking south on the levee road with their boots tied round their necks. There are black men and women on every step of every house, sitting, with nothing whatever to carry, and the look of people who are waiting to be told that it is true.
+Three notes come in the evening post. One is from the Mobile gentleman, in a hand that has been written on a knee, and says, with no punctilio at all, that eleven families of the lower Gulf are on the road to the Lake, and that they have no place to go. One is from Belle Rive, in Beaumont's own upright hand, and says that he is coming, on foot, tonight, and that he would be obliged if the door were not locked. The third is in a small blue envelope from the Tremé, in a hand you know, and says only: *He has been mustered out. He is standing in the road in front of the house, in his uniform, and will not come in. Please come.*
+<~
+
+# hunger
+## The warm dark
+* Go down to the pens behind the Slaughterhouse Road, in the rain, and take what the drovers have left
+  $ do feed("animal")
+  $ humanity += 1
+  It is a long, steaming, bawling shed, and the cattle are too tired to mind. A young heifer stands quite still for it, with her great wet eyes half closed. You lean against her afterwards a good while, and the rain comes down on the roof like a drum.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  He is a boy of nineteen, a drummer of a Maine regiment, who has been sent to the city to be mustered out and has not been told how. He takes the money with a kind of wonder. He asks, at the door, whether it is true that the war is over. You say that it is. He says that he did not think it would feel like this, and goes away down the banquette very slowly.
+* Take a contractor from the hotel on the Rue Saint Charles, where the speculators drink
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is a stout, damp, cheerful man from Ohio who has been explaining all evening that there is a fortune to be made in the ruin of a country. He does not explain it again. He is found at six on the steps of the Custom House, in a pleasant sleep, with every pocket intact, and is, for a month, a very much quieter speculator.
+<~
+
+# night
+## The long night
+:night
+?if actions_left() == 3
+  It is warm, and wet, and there is no moon. The bells are going again, and a band is playing somewhere very badly, and in the Rue Royale a man is singing, to nobody, in a good tenor, an air that has no words in it.
+?elif actions_left() == 2
+  A cannon is fired from the Place d'Armes, once, and then nothing. A long silence follows, such as comes after a very loud noise in a very large room.
+?else
+  There is an hour left, and the band has stopped, and a wet gray light is thinking about the east. You have one thing left to do.
+?end
+* Go up the Lake road, to the camp on the shell bank where the Mobile families have stopped [once] ?if actions_left() > 0
+  ~> mobile
+  $ do act()
+* Open the door, and wait for the man who is coming on foot from Belle Rive [once] ?if actions_left() > 0
+  ~> beaumont
+  $ do act()
+* Go out to the Tremé, to the road in front of the house, and the man standing in it [once] ?if actions_left() > 0
+  ~> doctor
+  $ do act()
+* See to the family, and what it needs [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# mobile
+## The shell bank
+$ do chart("neworleans.lots")
+It is two miles up the Lake road, where the shell bank runs out into the cypress, and there is a fire, and a number of wagons, and a great many children. They have come from Mobile in nine days, on foot, and by boat, and in a stolen ambulance. There are forty or fifty persons, and eleven of them are the Gulf house, though you would not know it, in the firelight, from the rest. They are very thin. They are, almost to a man, very quiet.
+?if b4.gulf == "seated"
+  Fontenot is at the fire in his brown coat, with his hat on his knee, and a girl of six asleep across his boots. He has the look of a man who has been very much afraid, and has not yet allowed himself to stop. He does not rise. He says, in his slow heavy voice, "I have not come to ask the Compact. I have come to ask the house that gave me a chair."
+?elif b4.gulf == "bound"
+  Fontenot is at the fire, very straight, in his brown coat. The old man in gray who brought the surety stands behind him, as he has stood behind him for six months. Fontenot says, in a level voice, that the term of seven years is still running, and that he proposes to keep it, and that he is in no position to keep anything else.
+?else
+  Fontenot is not at the fire. It is a woman who comes forward, a tall thin one in a man's overcoat, who is his sister. She says that he is at the water, and will not come up, and that he said that you would not wish him to. She says that she has come in his place, and that she has never asked a stranger for anything.
+?end
+The Army has been along the road twice. It has taken the wagons, and the horses, and a ledger. It has not yet understood what it has in its hands.
+You pick up the tail of the last wagon, which has gone down at the axle in the shell, and lift it, with one hand, and hold it a long minute, while a boy puts a log under. It is a thing you have not thought about. The sixth blood does not tire. There is a silence round the fire, and a child laughs.
+:the_refuge
+* Bring them in: the house on the town side, every room of it, and the cellar and the school beside it
+  $ b4.refuge = "sheltered"
+  $ humanity += 2
+  $ standing += 1
+  $ secrecy -= 2
+  ?if b4.coven_home == "raised"
+    They are in the great hall on Gravier Street by three in the morning, thirty at a time, in their wet boots. Prisca does the counting, with a pencil, at the door. Fiammetta takes the children to the kitchen, and makes, out of nothing, a very great quantity of porridge. Hanno finds, in the cellar, forty blankets that he has been told for a year that he did not own.
+  ?elif b4.coven_home == "hidden"
+    They come in by the back passage, in twos and threes, in the rain, past a door that has not been opened for a stranger since it was built. The free families of the Marigny are waiting in the little rooms with lamps and soup. A woman from the Tremé says to the first child that she is not to be afraid of the dark, because the dark in this house is on her side.
+  ?else
+    They are put in the long room in the Marigny, and in the stable, and in the two rooms over the carriage house. It is not enough. The free families of the street come out with beds. By morning there is not a mattress left on the block, and the whole neighborhood knows, and has not said one word.
+  ?end
+  It is a great, plain, tiring kindness, and it is not safe. It is done, at four in the morning, by a very small family, for a house that has not so far done it any good.
+* Put them on the firm's boats for Havana, at the family's cost, and the family's name on none of the papers
+  $ b4.refuge = "shipped"
+  $ standing += 1
+  $ cunning_brutal += 1
+  $ do earn(-5)
+  ?if b4.firm == "coven"
+    It is Jules who arranges it, on the Levee, in an hour, with no questions: two of the ice boats, with their holds scoured and their decks scrubbed, and a company clerk who has been told that the manifest is to read *perishable freight*. They go down the river at dawn, forty of them, wrapped in oilcloth, in the cold, with the children on the sawdust, and every one of the crew has been given a day's pay for not remembering it.
+  ?elif b4.firm == "partner"
+    Brault's clerk sees to it, for a price. It is a great deal of money. It is done with a perfectly smooth face, and a perfectly smooth ledger, and the boats go out at six with a Brault flag on the stern. Fontenot's sister looks at the flag for some time. She says, to nobody, that it is a strange world in which a Brault is used for mercy.
+  ?else
+    It is done through a Greek on the Levee who owns three small schooners and a reputation. It is done badly, and at four times the price. Two of the boats go out in the night. One is turned back at the bar by a patrol, and has to be got off by hand, and the Mobile families come back up the road in the dawn, with the children, and do not look at you.
+  ?end
+  It is, in the plain sense, a deliverance. It is also a way of not having them in the house.
+* Say that the family is a small one, and cannot take forty, and give what money it can
+  $ b4.refuge = "left"
+  $ secrecy += 2
+  $ humanity -= 2
+  $ standing -= 1
+  $ do earn(-1)
+  It is perfectly true. You say it, and put the purse into the sister's hand, and she takes it, and looks at it, and says that it is very handsome. You say that you will send a wagon with bread. She nods. She says, quite gently, that she was brought up to believe that a house of the blood did not turn away a house of the blood. She does not say it as a reproach. She says it as one says a date.
+$ do discover("the_fall_of_mobile")
+<~
+
+# beaumont
+## The man on foot
+$ do chart("neworleans.haven")
+He comes at one in the morning, on foot, without a servant, in a long dusty coat, and has walked, he says, from Belle Rive, because he could not find a carriage that would stop for a Confederate. He is smaller than you remember. He is gray, and there is a rent in his sleeve, and he takes a chair, when it is offered, with the care of a man who has not sat in one for a week. He declines a glass. He accepts a cup of plain water, and drinks it very slowly.
+?if b4.chapter == "stood"
+  He says, "You stood with me at the Chapter. I have not forgotten it. I should like you to know that I do not propose to ask you to do it again for nothing."
+?elif b4.chapter == "spoke"
+  He says, "You spoke for your family at the Chapter. I thought at the time that it was an impertinence. I have since decided that it was the only honest speech made that night."
+?else
+  He says, "You were not at the Chapter. I noticed it. It is the sort of thing a man notices, when he is about to need a person."
+?end
+He says that the war is over, and that he lost it. He says that the river houses were the Confederacy's, in everything but the name, and that they will be broken up now, by the Army, by the Atlantic houses, by their own children, and that it is a very natural thing and he does not complain of it. He says that he has come to ask one thing. He asks the Compact to hold. He asks that the river houses be given a year, only a year, to come to terms with a world in which they are the beaten party. He asks it of the house that has the sixth blood, and the Gulf's friendship, and, he says, the only reputation in the city for keeping its word.
+?if b4.atlantic == "signed" or b4.atlantic == "bargained"
+  He says, dryly, that he is aware that you have a seat on a court in Boston, and that it is a thing that he has been told about by four different persons, with four different faces.
+?end
+:the_peace
+* Swear the year, on the Compact's box, and put your own name under the river houses' for it
+  $ b4.peace = "sworn"
+  $ standing += 2
+  $ humanity += 1
+  $ secrecy -= 1
+  $ cunning_brutal -= 1
+  He does not expect it. You can see that he does not. Hanno brings the box, and the old man puts his hand on the lid, and says the words, in an old river French that is not quite like any other. You say them after him. It is a short oath. When it is done he sits for some time with his hand on the wood, and then, very gently, takes it away. He says, "I was told that you were a hard man. It is a thing I have never been so glad to be wrong about."
+* Give the year, for a price: the Teche house made to answer for the feud, and the river houses' people opened to the family's own eye
+  $ b4.peace = "terms"
+  $ standing += 2
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  It is a long, dry, civil hour. You say that you will give the river houses a year, and that in the year the Teche house will answer, before the Chapter, for every fire and every ring on every wall, and that the family will be shown, by every house of the Compact, the roll of the persons it holds. Beaumont listens to every clause. He says that it is very hard. He says that it is, on the whole, rather less hard than he had prepared himself for. He signs. His hand shakes only on the last letter.
+* Say that the Compact was a thing made for the river, and the river is a different thing now, and give him nothing
+  $ b4.peace = "broke"
+  $ secrecy += 2
+  $ humanity -= 2
+  $ standing -= 2
+  He takes it very well. That is the worst of it. He puts the cup down, and rises, with the care of the aged, and says that he quite understands. He says that he did not suppose, at the beginning of the evening, that it would be otherwise. He says that it was kind of you to open the door. In the passage he puts on his hat, and stops, and says, with his back to you, "I shall do what I can for them. It will not be much." He goes out into the rain, and you hear him on the banquette, walking, for a long time.
+$ do discover("the_river_houses_after_the_war")
+<~
+
+# doctor
+## The road in front of the house
+$ do chart("neworleans.treme")
+He is standing exactly in the middle of the road, in front of the little house on the Rue Ursulines, in a blue coat that is a size too big for him now, with a blanket roll over one shoulder and a small black bag in his hand. He has not been standing there long. He has been standing there, you think, a good while. The street is quite empty, and there is a lamp lit in the window, and a woman's shadow moves behind it and stops.
+?if b4.hospital == "went"
+  He says that he has been on the hospital boats since the summer of 1863, and that the last of them is to be struck from the Army's list on the first of the month, and that he has been given a letter of thanks, and a month's pay, and a very civil dismissal.
+?elif b4.hospital == "sent"
+  He says that the hospital stores the family sent have all been used, and the Sisters have taken over the wards, and that he is to be consulted, from time to time, as one consults a retired colonel.
+?else
+  He says that the money went where it was sent, and the wards are closed, and that he has no hospital, and no regiment, and that he finds, to his considerable surprise, that he does not know the first thing about being a private person.
+?end
+He is very thin. He has the look of a man who has had a long dry fever and has been told that it is over. He says that he has been in the war for three years. He says that he saw a good many things, and was right about some of them, and has been told by two colonels and a priest that this is a very good thing. He says that he has been standing here to find out how it feels.
+?if b4.honorine == "walked"
+  Honorine is in the door, with a copybook under her arm. She is taller. She says, with great dignity, that she has been standing in it for an hour, and that she has not been at all afraid, and that she thinks he should come in out of the road.
+?elif b4.honorine == "helped"
+  Honorine is at the window. She has put the lamp in it herself.
+?else
+  There is a light in the window, and nobody at it.
+?end
+:the_doctor
+* Take him in, and offer him a room in the house, and a place at the family's table as its physician
+  $ b4.physician = "family"
+  $ humanity += 1
+  $ secrecy -= 2
+  $ standing += 1
+  He thinks it over for rather a long time. He says that he is not sure that he is a person who ought to know what the house is. You say that he has known for two years. He says that he has known for two years and has not looked at it. He says that he supposes it is time. He picks up the bag. He goes in. A little later you hear, from the kitchen, a great clatter, and Honorine's voice, high and delighted, telling somebody that a physician is to be addressed as *Doctor*.
+* Set him up in a surgery of his own on the Rue Ursulines, with the firm's money and none of the family's name
+  $ b4.physician = "practice"
+  $ standing += 1
+  $ cunning_brutal += 1
+  $ do earn(-3)
+  It is done in the morning, as such things are done. A brass plate is ordered. A dentist's chair is found in a house on the Rue Dauphine, and is removed, with some difficulty, by four men. There are shelves to be put up, and a window to be unstuck. Armand stands among it with his hands in his pockets, quite lost, and says, at last, with a smile you have not seen on him before, that he supposes that he will have to get used to patients who are not on fire.
+* Let him be, and say only that the house is there if he wants it
+  $ b4.physician = "own"
+  $ secrecy += 1
+  $ humanity += 1
+  You stand a while in the road with him. You say that the house is there, and that it will be there in a year, and that there is no hurry. He says that it is the kindest thing that anyone has said to him since March of 1862. He puts a hand, once, on your arm. He goes in at the door. You walk home, in the first gray of the morning, with a very clear notion that it was the right thing, and no notion at all whether it was the wise one.
+$ do discover("the_doctor_come_home")
+<~
+
+# family
+## The long table
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  ?if b4.coven_home == "raised"
+    The house on Gravier Street is awake, as it is on the night of any great piece of news: every door open, a pot on the range, and a number of persons in every room talking at the same time. Fiammetta is on the stair, with a copy of the paper, reading it aloud, with commentary. Hanno is trying to write the news down. Prisca sits very upright in the great chair, with a glass of nothing, and says that she has seen four wars end, and that this is the first that she has ever been tempted to believe.
+  ?else
+    They are in the long room, with the windows open, and the bells coming in at them from every quarter of the town. Nobody speaks very much. Prisca has made tea, which nobody drinks. It is, you think, a very peaceful kind of excitement.
+  ?end
+  ?if b4.guest == "housed"
+    There is a letter from New York on the sideboard, in a small neat hand. It says that Crane is sorry to have missed the bells, and has had them rung for him, in a small way, at a church on Pearl Street.
+  ?end
+?elif coven_size() > 0
+  The house is quiet and the lamps are low. They are a long way off. There is a letter on the table in a hand that you know, which you have not yet opened. It is dated three weeks ago.
+?else
+  The house is very quiet tonight. The bells come in at the shutters, and go out again. You sit a long time in the dark with them.
+?end
+:the_family
+* Send Prisca to the Army's office in the Custom House, to ask what is to be done with the freed people's contracts [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca") and task("prisca") == ""
+  $ do send("prisca", "negotiate", 1)
+  Prisca says that the Army is a very simple creature, and may be brought to do almost anything if it is given a form to fill in. She takes a satchel, and a very large quantity of forms, and a clean pen, and goes out like a woman off to a battle that she has been looking forward to.
+* Send Fiammetta up the Lake road, to see that the wagons get through [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta") and task("fiammetta") == ""
+  $ do send("fiammetta", "protect", 1)
+  Fiammetta says that she has not been asked to protect a thing since the hill. She takes her cloak. She is gone before the sentence is finished, and is seen, a moment after, from the window, going up the Lake road at a flat run, at a pace that no horse in the Parish could keep.
+* Set Hanno to keep the house's books for the winter, and a roll of every person who sleeps under the roof ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "business")
+  Hanno says that it will be a great pleasure. He says that he has not had a proper roll to keep since the hill. He sharpens a pencil. He says that he will put, at the head of the list, in the old script, the word for *family*, and that he does not think that it will need to be corrected.
+* Keep a few eyes on the Levee and the Army's offices, and pay them ?if can_acquire("informants")
+  $ do acquire("informants")
+  $ cunning_brutal += 1
+  It is done by Hanno, with a ledger, in an afternoon: a clerk at the Custom House, a sergeant in the provost's office, a boy at the telegraph who has a very good ear. They are paid in small sums, and told nothing. By the end of the week, the house knows what the Army has decided about every freed person in the Parish, a day before the Army does.
+* Take another room, and fit it for those who must sleep in the day and cannot be found ?if can_acquire("hidden_chamber")
+  $ do acquire("hidden_chamber")
+  $ secrecy += 1
+  It is a room behind a room, behind a wall that has been papered by a man who has been told that he is a very good paperhanger and nothing else. There is a bed, a lock, and a lamp that may be lit from the inside. Hanno puts a small brass tag on the door, of the kind used for linen. It reads *Spare*.
+* That will do for tonight
+  -> :family_done
+-> :the_family
+:family_done
+<~
+
+# dawn
+## The seventeenth
+The rain has gone. It is a wet, bright, glittering morning, as the others of the city tell it, with every roof steaming and every gutter running, and the bells, and every window open on a street that has forgotten how to be quiet.
+It is confirmed. The war is over. A general in a farmhouse in Virginia has put his name to a paper, and the others are following. It is a Monday, and every church in the city is full by seven. In the afternoon the news from Washington comes in over the wire, in a dozen different forms, each worse than the last, and it is not for some time that the town understands that the President has been shot, and is dead. Nobody cheers. The bells stop. The silence that follows is a very strange silence indeed, and it runs the length of the Mississippi.
+?if b4.refuge == "sheltered"
+  The Mobile families have been three days in the house. They have eaten, and slept, and been looked at, in the street, by a good many people who have understood. Fontenot's sister comes to the door at noon, with a child by the hand. She says that the Gulf house will remember it, in the Chapter, and in the Compact, and in every place where it has a voice. She says that she was told that the sixth blood was a very strong thing. She says that she had not been told that it was kind.
+?elif b4.refuge == "shipped"
+  A cable comes at noon from Havana, in a Spanish clerk's hand. It says that forty persons, in good health, have been landed on the quay, and have been taken in by a gentleman of the name of Alvarado, who has asked for nothing. It adds, in Fontenot's own hand, in four words, that they are safe, and that he is obliged.
+?else
+  The shell bank is empty at noon. The wagons have gone on, to the west, by the Opelousas road, with the money and the bread. There is a note under the door, in a woman's hand, that says only *We are gone to Texas. We have not forgotten.* It is not at all clear whether this is a promise or a threat.
+?end
+?if b4.peace == "sworn"
+  A letter comes from Belle Rive in the afternoon, in Beaumont's upright hand. It is three lines. It says that the river houses are quiet, and that he has sent word to the Teche house that it is to be quiet also, and that he has been told that it has not been pleased. He adds that he has put the Compact's box in his own study, under his own lamp, for the night.
+?elif b4.peace == "terms"
+  The Teche house is summoned. It is done by a very correct card, left in the afternoon, which says that the elder Delorme will appear before the Chapter in a month's time, to answer for certain things. It is left with a small bow, by a servant, who says that his master will be unable to attend the interview, being indisposed. It is, you gather, a very diplomatic kind of indisposition.
+?else
+  There is no word from Belle Rive. It is a good deal more noticeable than a word would have been. The Teche house's sign, a ring with a pearl in it, is chalked in the afternoon on the step of the school, a good deal larger than before. Honorine cleans it off, with a brush, in a quarter of an hour, with a good deal of vigor, and says nothing whatever.
+?end
+?if b4.physician == "family"
+  Dr. Armand is at breakfast, in his shirt sleeves, with a small black cat on his knee that has made itself at home. He says that he finds he sleeps very well in a house in which nobody is breathing. He says that he cannot account for it. He says that he has, on the whole, been extremely happy.
+?elif b4.physician == "practice"
+  The brass plate is on the door by noon. It says, in plain letters, *Dr. L. Armand, Physician and Surgeon.* There is a child in the waiting room by one. By three there are nine persons, and a dog.
+?else
+  Armand is gone by noon. He has left a note on the table, in a small, tidy hand. It says that he has gone to walk, and that he does not know where, and that he will be back. It adds a postscript, in a smaller hand still, to say that he has taken the black bag, and would be obliged if somebody would feed the cat.
+?end
+?if b4.warehouse == "rebuilt"
+  Jules sends a note at four. It says that the company flag has been flown at half mast over the new furnaces, for the President, and that every man of the crew has asked to come in to work tonight, to be doing something with his hands.
+?end
+?if b4.seal == "trap"
+  There is a slip from Charleston, without a signature, in the evening post. *The one who matters is on the road. He will be in New Orleans before the autumn.*
+?end
+It is the seventeenth of April, a Monday, and the most extraordinary day that the century has produced so far.
+$ do rest()
+=> next

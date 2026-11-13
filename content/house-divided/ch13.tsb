@@ -1,0 +1,249 @@
+// Book Four, Chapter 13 (session 46). March 1864: the new State government, a guest from Pearl Street, the Chapter of the river houses, the free men's petition.
+// Opens with no phase (the swearing in, the packet), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a long dawn.
+// Reads b4.circle, b4.coven_home, b4.firm, b4.fontenot, b4.defense, b4.school, b4.labor, b4.seal. Sets b4.guest, b4.chapter and b4.petition.
+// Ends with rest() and => next, which pauses until chapter 14 exists (or carries on into it).
+@chapter b4c13
+@title The Man from Pearl Street
+@version 1
+
+# start
+## March
+$ b4.guest = "wharf"
+$ b4.chapter = "absent"
+$ b4.petition = "apart"
+$ do discover("the_new_state_government")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is the second week of March, and there are four things that want doing tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## The swearing in
+It is a bright, wet, windy March, and on the fourth the new Governor of Louisiana is sworn in, under the live oaks of Lafayette Square, with a band, and a great many flags, and a number of gentlemen on a platform who look as though they have been asked to hold something heavy. The General is there. A choir of schoolchildren sings. It is, by any plain reckoning, a government of the State, and it is elected by about as many persons as would fill the Opera House on a bad night. You read about it in the morning paper, in the Rue Royale, in the first hour of the dark.
+The city has the look of a place that has been told that the thing is over, and is waiting, politely, to be shown. There are Guards in the street in their blue, and a great many more freed people in it than there were a year ago. There is a smell of new paint, and wet wool, and coal smoke. In the Marigny a man is selling oranges from a barrow and a great many opinions.
+A card is left at the house in the middle of the evening, by a boy from the packet company, on thick cream paper. It is in a small, neat, sarcastic hand. *The Gulf was very rough and the food was very bad and I find that I have arrived. I shall be at the foot of Canal Street at midnight, and shall wait there, quite patiently, until about a quarter past.* It is signed with a single initial.
+<~
+
+# hunger
+## The warm dark
+* Go down to the Levee at the end of the night, where the cotton rolls are, and the rats, and the men who sleep among them
+  $ do feed("animal")
+  $ humanity += 1
+  It is a wide black busy place, with lanterns, and drays, and the long gray sound of the water. The rats are very large and very trustful. You take what you need in the lee of a stack of bales, and the old night watchman, who sees it from a hundred yards off, looks very carefully at the river.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  He is a young Irish drayman, who has been told by a priest that it is a mortal sin and by a friend that it is two dollars, and has decided that the friend is better informed. He is very polite about it, and asks, at the end, whether it would be convenient to come on Thursdays.
+* Take a man from the saloons of the Rampart, one of the hundred who will not be missed
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is a sutler's clerk, with a pocket full of paper that he is not entitled to, and he does not wake. It is not an interesting thing, and it is done quickly, in an alley, in the rain. You leave him against a wall with his coat buttoned, and walk a long way home.
+<~
+
+# night
+## The long night
+:night
+?if actions_left() == 3
+  It is a mild, damp, windy night, with a great deal of cloud going over the moon and the smell of the river everywhere. You have, tonight, the whole of the dark.
+?elif actions_left() == 2
+  The clocks strike midnight, one after another, in no agreement, over all the roofs of the city.
+?else
+  There is an hour left, and the first gray over the Lake, and a milk cart going by on the stones. You have one thing left to do.
+?end
+* Go down to the foot of Canal Street, where a card said midnight [once] ?if actions_left() > 0
+  ~> guest
+  $ do act()
+* Ride to Belle Rive, where the river houses sit in Chapter on the matter of the Teche [once] ?if actions_left() > 0
+  ~> chapter
+  $ do act()
+* Go to the hall in the Tremé, where the free men are drawing up a petition [once] ?if actions_left() > 0
+  ~> petition
+  $ do act()
+* See to the family, and what it needs [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# guest
+## The foot of Canal Street
+$ do chart("neworleans.wharf")
+It is a long wet pier with a gas lamp at the end of it, and a pile of trunks, and a small, slight, dark young man in a very good traveling coat, sitting on the biggest of them, with his hat on his knee and a book in his hand that he is not reading. He looks up as you come out of the dark. He does not seem at all surprised. He has a thin, quick, sharp, amused face, and eyes of an extraordinary age.
+"Well," says Mr. Crane. "You are taller than I expected, and you have a great many more servants. You will forgive me. I have been on a boat for eleven days with a Presbyterian."
+He gets down off the trunk. He holds out a hand in a kid glove, and it is cold, and perfectly steady. He says that he has come on his own account, and on another's, and that the second is in his breast pocket, and may be opened at leisure.
+:the_guest
+* Take him up to the house, and give him the best room, and the run of the family
+  $ b4.guest = "housed"
+  $ humanity += 1
+  $ standing += 1
+  $ secrecy -= 1
+  The trunks go up in the cart, and he goes up in the carriage, and talks the whole of the way, in the small, dry, rapid voice, about Pearl Street, and the Hudson ferries, and the New York mob, which he found most instructive. He looks at the hall for some time. "It is a thing that I have not seen," he says. "A house that is lived in." He says it very lightly, and does not look at you.
+  ?if coven_size() > 0 and b4.circle != "stay"
+    Fiammetta is on the stair, to look at him. He bows to her with great gravity. Prisca puts out a hand, and he takes it, and they are, for ten minutes, in perfect silence, in the hall, two old women of business who have recognized each other. At the end of it Prisca says that she will put the kettle on, which she has never in her life done, and goes out.
+  ?end
+* Walk him to the hotel on the Rue Saint Charles, and talk on the way, and leave him his own door
+  $ b4.guest = "wharf"
+  $ standing += 1
+  $ secrecy += 1
+  You walk him up through the sleeping streets with a boy and a barrow behind. He asks a hundred sharp questions, about the Compact, and the river houses, and the General, and listens to every answer, with his head on one side. At the door of the hotel he says that it is a very civil thing to be given the pavement, and not a house, and that he will remember it. He goes up the steps with his book under his arm.
+* Take him to a quiet room above a chandler's, and ask him a number of things before he has seen the family
+  $ b4.guest = "tested"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  $ humanity -= 1
+  It is a bare, clean, shuttered little room, with two chairs and a candle. You ask him, with great courtesy, about the letter, and Thorne, and the Senate's correspondence, and what exactly it is that has brought a man of his habits to a city of his enemies. He answers all of it, in a dry, easy, perfectly level voice, and with a faint amusement that does not alter once. At the end of an hour you are almost sure that you have been told the truth. You are quite sure that you have been told a great deal less than the whole of it.
+$ do discover("the_atlantic_houses")
+<~
+
+# chapter
+## The Chapter at Belle Rive
+$ do chart("neworleans.beaumont")
+The long salon at Belle Rive has been cleared of its furniture and set with chairs in a half circle, under three chandeliers, and every one of them is occupied. There are the houses of the river: the Bayou Road, the Attakapas, the lower coast, an old couple from the Pontchartrain shore who have not been to a Chapter in forty years. There is a brown, silent, very watchful man from Mobile, in the back, in a corner, who has been brought, plainly, as a guest. At the foot of the room, on two plain chairs, with the elbows, are the Delormes, and the pearl at the elder's hand shines in the lamplight like an eye.
+Monsieur Beaumont rises. He is in black, and has never in his life looked so old, nor so entirely in command. He reads the Compact. He reads it from the beginning, aloud, in French, in the old words, and every one of the persons in the room, in a long unbroken stillness, listens as to a lesson. He says, at the end, that a house has come to the door of a house that has signed it, at night, with iron. He says that he wishes to know what the Chapter proposes to do.
+?if b4.defense == "stood"
+  They have all heard of the hall. It is not said. It is in the way that a number of them do not look at you.
+?elif b4.defense == "struck"
+  They have all heard of the steamer. It is a very quiet room, and the younger Delorme, at the back, does not look at you at all.
+?elif b4.defense == "parleyed"
+  They have all heard of the carriage that came to Gravier Street at four in the morning. There is, in the room, a very faint rustle of surprise, and a great deal of respect, and one cold, slow, sidelong look from the elder of the Delormes.
+?else
+  There is a rumor, in the room, that something was done to the house. It is a rumor with a very large number of tellings, and not one of them is the same.
+?end
+:the_chapter
+* Stand with Beaumont, and give your voice that the Compact be kept, and the Teche house rebuked in its own name
+  $ b4.chapter = "stood"
+  $ standing += 2
+  $ humanity += 1
+  $ cunning_brutal += 1
+  It is a short speech. You say that you are a new thing in the city, and a late one, and that you have, on that account, no great love of customs, but that this one has the merit of having stopped a good many throats being cut. You say the Compact is the only wall that the river has. There is a murmur. Beaumont inclines his head to you, quite slowly, and it is the first time that you have seen him do it to anyone. The Chapter votes, in the old way, with a white stone and a black. The black ones are the Teche's, and two others. The Delormes are fined, in silver, and in a thing that is a good deal more costly, which is a seat.
+* Speak for the sixth blood, and the family's right to a place at the table, and let the Teche house be answered as the Compact says
+  $ b4.chapter = "spoke"
+  $ standing += 1
+  $ secrecy -= 2
+  $ cunning_brutal += 1
+  You say it in plain French, standing, without a paper. You say that there is a family of the sixth blood in the city, and that it is the only one that is known, and that it has been, for ten years, a thing in the shadow of the river. You say that it is not going to be so any longer. There is no sound at all. You are not sure that a single person in the room has breathed. It is the old couple from the Pontchartrain shore who speak first. "Well," says the old woman, in a cracked, delighted, perfectly audible voice, "it is about time." It is, a little, the end of the Chapter. The house of the Teche is answered. The house of the family is seated.
+* Stay away, and send a card of regret, and let the river do as it will
+  $ b4.chapter = "absent"
+  $ secrecy += 2
+  $ standing -= 1
+  $ humanity -= 1
+  You send Pompée with the card at six, and sit in the study, with the lamp low, and listen to the clock. It is a very civil decision. It is also, you are well aware, the decision of a person who has found a great many reasons. Hanno comes to the door, near midnight, and looks at you for a moment over his spectacles, and says nothing, and goes away.
+$ do discover("the_chapter_of_the_river_houses")
+<~
+
+# petition
+## The hall in the Tremé
+$ do chart("neworleans.treme")
+It is the back room of a long low cypress house in the Rue Saint Claude, with a hundred chairs and fifty men standing, and gas, and a very great deal of tobacco smoke. They are free men of the Tremé, and of the Marigny, and of the Lake, in their black coats, with their watch chains, and they are drawing up, in the plain manner of men who have been drawing up papers for a hundred years, a petition to the President of the United States.
+It asks for the vote. It asks, in a perfectly measured French and English, that those who have been free since before the Americans, and have paid taxes, and have owned houses, and who have this winter put a regiment into the field, should be counted. The Colonel is in the chair. Dr. Armand sits at the end of the platform in his uniform, very straight. Honorine is at the table with a pen.
+?if b4.school == "built"
+  There are a good many young faces in the gallery, and a good many of them have, you notice, a slate.
+?end
+?if b4.labor == "land"
+  There is an old woman in a clean headcloth on the front bench, with a girl at her elbow. They have come in from the Bayou road in a cart. They have never been in a hall.
+?end
+:the_petition
+* Fund the delegation to Washington, and pay for the journey and the lawyers
+  $ b4.petition = "funded"
+  $ humanity += 2
+  $ standing += 1
+  $ secrecy -= 1
+  $ do earn(-8)
+  It is done at the end of the evening, through the treasurer, in a small plain envelope, and it is not announced. Two men of the hall, a cigar maker and a dentist, are to go north by the Cuba packet in a week with the petition and a letter of introduction to the senator from Massachusetts. The treasurer does not say a word of thanks. He looks at the envelope for a very long time, and puts it into his coat.
+* Sign it, in your own name, with the free families, and say nothing more
+  $ b4.petition = "signed"
+  $ humanity += 1
+  $ standing -= 1
+  $ secrecy -= 1
+  It is brought to you across the room, on a board, with a pen. You sign it, below the cigar maker, in a clear hand: a name that has been in the city five years, and is, to the persons around you, a most curious thing to find among the others. There is a small murmur. The Colonel in the chair says nothing at all, and looks at the paper with the plain, grave, courteous attention that a man gives to a witness.
+* Listen from the back, and leave before the signing
+  $ b4.petition = "apart"
+  $ secrecy += 2
+  $ humanity -= 2
+  You stand at the back, under the stair, with your hat in your hand, and hear the whole of it read. It is a very good paper. It is, you think, a better paper than any that you have ever signed. You leave before the pen is passed, by the door at the side, and in the Rue Saint Claude, in the damp, you stand a long time under the lamp, as though you had been waiting for a thing, and it had gone by.
+$ do discover("the_petition_of_the_free_men")
+<~
+
+# family
+## The long table
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  ?if b4.coven_home == "raised"
+    The house on Gravier Street is warm, and lit, and a good deal more crowded than it was. There are a number of new faces at the long table: a free carpenter from the Tremé, who has been hired to put in shelves, and two girls from the school with copybooks, and a stout cook. Fiammetta is teaching one of the girls to play at draughts. Hanno has a ledger in front of him the size of a tombstone.
+  ?elif b4.coven_home == "hidden"
+    The back rooms are quiet, and each has a small lamp, and a plate, and a chair. It is a house of a dozen doors. You find the family in the second of them, around a table, very quiet, with a pot of coffee, and Prisca is reading aloud, in a low voice, from a newspaper.
+  ?else
+    The long room in the Marigny is warm. The windows are open, for the first time in a year, to let in the spring. There is a vase of early jasmine on the table, and Fiammetta has put it there, and says that it is nothing.
+  ?end
+  ?if b4.firm == "coven"
+    Prisca says that the Ice Company is, at present, a great deal too small for the demand. She has found a warehouse on the Levee, with a good cellar, and a very bad roof, and she means to have it. She says it as another person would announce a christening.
+  ?end
+?elif coven_size() > 0
+  The house is quiet. They are a long way off. There is a letter on the table in a hand that you know, which has been there some days.
+?else
+  The house is quiet, and the lamps are low. You find that you have been standing in the hall for some time, looking at a chair.
+?end
+:the_family
+* Send Prisca to the Levee, to buy the warehouse with the cold cellar [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca") and task("prisca") == ""
+  $ do send("prisca", "negotiate", 1)
+  Prisca puts on a hat which she has not worn in a hundred years. She says that she has never yet been refused a roof, and that she does not mean to begin with one that leaks.
+* Send Fiammetta to the Chapter, to hear what is said in the carriages after [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta") and task("fiammetta") == ""
+  $ do send("fiammetta", "scout", 1)
+  Fiammetta says that she will be as quiet as a mouse. She goes up the stair three at a time to get her cloak, and comes down it a good deal more slowly, as a person of consequence.
+* Put Hanno to the Ice Company's books, to find where the money goes ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "business")
+  Hanno looks at the ledger for a long moment. He says that it is the first time in two hundred years that he has been asked to make a thing profitable, and that he is not entirely sure that he does not like it. He sharpens a pencil.
+* Open the old drains and cellars under the Marigny into one long way out, for the family's use ?if can_acquire("escape_tunnels")
+  $ do acquire("escape_tunnels")
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  It is done by Prisca, if she is there, and Hanno, if he is, with the free families of the Marigny, who have a great number of cousins and a great number of cellars. There is a loft above a Greek grocer's, and a cellar in a church, and a brick drain behind a coffin maker's that comes out, a quarter of a mile away, in a bed of reeds. It is, you reflect, a good thing, to have somewhere to go.
+* Set up a hall for the family's young, where the old can teach them what they ought to know ?if can_acquire("training_hall")
+  $ do acquire("training_hall")
+  $ humanity += 1
+  $ standing += 1
+  It is the back of the cotton press, with the floor swept, and a very long mirror, and a rack. Prisca teaches how to read a ledger, and Hanno how to read a face, and Fiammetta, with a great deal of dignity, how to fall from a roof. It is, plainly, a school. It is a great deal more than a house had any need of.
+* That will do for tonight
+  -> :family_done
+-> :the_family
+:family_done
+<~
+
+# dawn
+## The nineteenth
+It is a soft pearl dawn, with a haze on the river, and every bell in the city going at once, and the first of the market carts.
+?if b4.guest == "housed"
+  Mr. Crane comes down to breakfast, at four in the afternoon, in a dressing gown that he did not bring with him. He says that he has been through every room in the house, and has found a great many things of interest, and that the cellar is, in his professional opinion, quite the best that he has seen south of Philadelphia. He pours himself a cup of coffee that he does not drink. He says that it is a thing that he had forgotten about, the sound of other people.
+?elif b4.guest == "tested"
+  A note comes from the chandler's at noon, in the small neat hand. It says that he has been interrogated by experts, and found it very restful, and that he would be delighted to dine, if it is convenient, on any night that you are not planning to ask him a thing.
+?else
+  A note comes from the hotel in the Rue Saint Charles, in the small neat hand. It says that he has been most civilly received, and has been to the Cathedral, and has found it very much too large, and that he would be very glad to be given the freedom of the family, if it is a thing that the family thinks it can bear.
+?end
+?if b4.chapter == "stood"
+  The Chapter's result is in the morning post, a small notice in the Compact's old script. The Teche house is rebuked in its own name, and is to pay in silver, and to give up the seat on the Bayou road. Beaumont has written a short courteous line at the foot, in his own hand. It says only that the house of the family is welcome at his table. It is a thing that you read twice.
+?elif b4.chapter == "spoke"
+  There is a card on the hall table in the morning. It is edged with black and is a great deal too large. It says that the Chapter of the river houses has the honor to inform the house of the sixth blood that it has been seated, in the second row, at the left of the Pontchartrain shore. It is a very odd thing to be given a seat. It is, plainly, a thing that will be talked about for a long time.
+?else
+  The news of the Chapter comes in at noon, from Pompée, who has had it from a groom. The Teche house has been rebuked, and fined, and has, he says, a great deal to say about the house of the family, which was not there. It is a thing that is said, he adds, very quietly, in the stable yards.
+?end
+?if b4.petition == "funded"
+  A note comes from Captain Wren at noon, in a plain square hand. It says that the two men from the hall have gone aboard the Cuba packet, and that he has been told, in the strictest confidence, that the envelope was a thick one. He does not ask where it came from. He adds that he has never, in fourteen months, seen a clerk of the Treasury look so thoughtful.
+?elif b4.petition == "signed"
+  There is a notice in the evening paper, small, and underneath a very great deal of other matter. It says that the petition of the free men has been signed by two hundred and nine persons, and forwarded. Wren has put a line in pencil at the foot. *Your name is very much the odd one out. I think that it will be noticed.*
+?end
+Dr. Armand comes to the door at noon, with his bag and his orders. He is to rejoin the regiment at Port Hudson. He says that he has come to say that he is going, and to say, in his dry Paris voice, that he has found it a good deal harder than he expected. He shakes hands, in the old Tremé manner, with both of his, and goes down the steps very straight.
+There is a card from Mobile, with a few lines in a heavy square hand. *I shall be at the Compact's table in the autumn. I find that I have a great deal to say.* It is signed with an F.
+?if b4.seal == "trap"
+  Under it, folded small, there is a slip from Charleston. It says, *The false letter was answered a second time, by someone with a good deal more authority than the first. Be careful.*
+?end
+It is the nineteenth of March, and the day of Saint Joseph, and the Italians are making altars in the street.
+$ do rest()
+=> next
