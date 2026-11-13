@@ -275,6 +275,7 @@ function showFrame() {
   }
   for (const p of frame.paragraphs) {
     if (p.kind === 'h') story.append(h('h2', { class: 'story-h' }, inline(p.text)));
+    else if (p.kind === 'coven') story.append(h('aside', { class: 'coven-note' }, inline(p.text)));
     else if (p.kind === 'quote') story.append(h('blockquote', {}, inline(p.text)));
     else story.append(h('p', {}, inline(p.text)));
   }

@@ -93,6 +93,15 @@ export function setTask(ctx, id, task) {
   if (!m.task) m.taskResult = '';
 }
 
+/** Send a member on a mission. Used by $ do send() and the Coven tab. */
+export function sendMission(ctx, id, kind, risk = 2) {
+  const m = get(ctx, id);
+  if (!present(m)) throw new EngineError(`$ do send("${id}"): they are not available`);
+  if (m.mission && !m.mission.outcome) throw new EngineError(`$ do send("${id}"): already on a mission`);
+  const r = Math.max(1, Math.min(3, Math.round(risk)));
+  m.mission = { kind, risk: r, left: r >= 3 || kind === 'retrieve' ? 2 : 1, outcome: '' };
+}
+
 export const circle = {
   fns: {
     in_circle: { spec: ['person'], fn: (ctx, id) => present(sysOf(ctx).circle[id]) },
@@ -175,16 +184,7 @@ export const circle = {
         if (status !== 'active') logDecision(ctx, `fate.${id}`, status);
       },
     },
-    send: {
-      spec: ['person', MISSIONS, 'number?'],
-      fn(ctx, id, kind, risk = 2) {
-        const m = get(ctx, id);
-        if (!present(m)) throw new EngineError(`$ do send("${id}"): they are not available`);
-        if (m.mission && !m.mission.outcome) throw new EngineError(`$ do send("${id}"): already on a mission`);
-        const r = Math.max(1, Math.min(3, Math.round(risk)));
-        m.mission = { kind, risk: r, left: r >= 3 || kind === 'retrieve' ? 2 : 1, outcome: '' };
-      },
-    },
+    send: { spec: ['person', MISSIONS, 'number?'], fn: (ctx, id, kind, risk = 2) => sendMission(ctx, id, kind, risk) },
     debrief: {
       spec: ['person'],
       fn(ctx, id) {
@@ -277,6 +277,7 @@ export function recordTasks(ctx, results) {
   for (const m of Object.values(sysOf(ctx).circle)) {
     const r = results.find((x) => x.id === m.id);
     m.taskResult = r ? r.outcome : '';
+    m.taskReported = !r;
   }
 }
 

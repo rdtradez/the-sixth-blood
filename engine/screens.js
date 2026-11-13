@@ -3,7 +3,7 @@
 
 import { CONTENT_FNS } from './content.js';
 import { loreOf, entryUnlocked, originalKnown } from './systems/lore.js';
-import { TASKS, taskProblem } from './systems/circle.js';
+import { TASKS, MISSIONS, taskProblem } from './systems/circle.js';
 
 const FATE_WORDS = { alive: 'Alive', dead: 'Dead', turned: 'Turned', missing: 'Missing', gone: 'Gone from your life' };
 const MEMBER_WORDS = { active: '', left: 'Left your coven', dead: 'Dead', captured: 'Captured', betrayed: 'Betrayed you' };
@@ -166,6 +166,8 @@ export const TASK_INFO = {
   watch: { label: 'Keep watch', text: 'Listen to the city while you sleep, and bring you news when you wake.' },
 };
 const TASK_RESULT_WORDS = { success: 'It went well.', partial: 'It went partly well.', failed: 'It did not go well.' };
+export const MISSION_LABELS = { scout: 'Scout the city', protect: 'Guard something', negotiate: 'Speak for you', hunt: 'Hunt someone down', retrieve: 'Fetch something' };
+export const RISK_LABELS = { 1: 'Carefully', 2: 'Boldly', 3: 'Recklessly' };
 const MISSION_WORDS = { scout: 'scouting', protect: 'guarding', negotiate: 'negotiating', hunt: 'hunting', retrieve: 'retrieving something' };
 const MISSION_RESULT_WORDS = { success: 'Came back with what you asked.', partial: 'Came back with part of it.', injured: 'Came back hurt.', missing: 'Did not come back.' };
 
@@ -177,6 +179,7 @@ export function covenView(state, content) {
   const s = state?.sys;
   if (!s) return { members: [], tasks: [], covenCount: 0 };
   const ctx = ctxOf(state, content);
+  const actionsLeft = s.phase?.left ?? 0;
   const members = Object.values(s.circle ?? {}).filter((m) => Object.hasOwn(content.people, m.id)).map((m) => {
     const active = m.status === 'active';
     const notes = [];
@@ -200,7 +203,9 @@ export function covenView(state, content) {
       active,
       task: m.task || '',
       lastTask: m.taskResult ? `${TASK_INFO[m.task]?.label ?? 'Last task'}: ${TASK_RESULT_WORDS[m.taskResult] ?? ''}`.trim() : '',
+      away: Boolean(m.mission),
       canTask: active && !taskProblem(m),
+      canSend: active && !taskProblem(m) && !m.mission && actionsLeft > 0,
       joinedIn: bookTitle(content, m.joined),
     };
   });
@@ -210,5 +215,9 @@ export function covenView(state, content) {
     members,
     tasks: TASKS.map((id) => ({ id, ...TASK_INFO[id] })),
     covenCount: members.filter((m) => m.active).length,
+    missions: MISSIONS.map((id) => ({ id, label: MISSION_LABELS[id] })),
+    risks: Object.entries(RISK_LABELS).map(([id, label]) => ({ id: Number(id), label })),
+    actionsLeft,
+    phase: s.phase?.kind ?? '',
   };
 }

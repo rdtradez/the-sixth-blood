@@ -487,3 +487,38 @@ test('schema 5 saves gain empty task fields', () => {
   assert.equal(s.sys.circle.a.task, '');
   assert.equal(s.sys.circle.a.taskResult, '');
 });
+
+test('a mission sent from the Coven tab spends an action, and the next chapter tells how it went', async () => {
+  const src = {
+    t1: `${H('t1')}\n# start\n$ do keeper("prisca", "steward", 90)\n$ do phase("night", 2)\nHub {actions_left()}.\n* Wait ?if actions_left() > 0\n  $ do act()\n  Waited.\n$ do end_phase()\n$ do rest()\n=> next\n`,
+    t2: `${H('t2')}\n# start\nSecond chapter.\n---\n=> endbook\n`,
+  };
+  const game = await sysGame(src);
+  await game.newGame({ book: 'burning-city', seed: 7 });
+  assert.equal(game.coven().members[0].canSend, true);
+  game.sendOnMission('prisca', 'scout', 1);
+  assert.equal(S(game).phase.left, 1);
+  assert.equal(game.coven().members[0].away, true);
+  assert.throws(() => game.sendOnMission('prisca', 'scout', 1), /already on a mission/);
+  await game.choose(0);
+  await game.continue().catch(() => {});
+  let frame = game.frame;
+  if (frame.wait !== 'page' || !frame.paragraphs.some((p) => p.kind === 'coven')) frame = await game.continue().catch(() => game.frame);
+  const news = (game.frame.paragraphs ?? []).filter((p) => p.kind === 'coven');
+  assert.equal(news.length, 1, JSON.stringify(game.frame));
+  assert.match(news[0].text, /Prisca|prisca/i);
+  assert.equal(S(game).circle.prisca.mission, null, 'the report clears the mission');
+});
+
+test('after a sleep the next chapter tells how each standing task went, once', async () => {
+  const game = await sysGame({
+    end: SLEEP_END(['$ do keeper("prisca", "steward", 90)', '$ do coven_task("prisca", "business")', '$ do steward("prisca")'].join('\n')),
+  });
+  await game.newGame({ book: 'burning-city', seed: 3 });
+  const ctxState = game.state;
+  const { covenNews } = await import('../engine/coven-news.js');
+  const first = covenNews(ctxState, game.content);
+  assert.equal(first.length, 1);
+  assert.match(first[0].text, /interests while you rested/);
+  assert.deepEqual(covenNews(ctxState, game.content), []);
+});

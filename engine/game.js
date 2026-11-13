@@ -14,7 +14,9 @@ import { EngineError, clone } from './util.js';
 import { readSettings, checkSetting } from './settings.js';
 import { mapsFor } from './maps.js';
 import { peopleView, codexView, familyView, achievementsView, covenView } from './screens.js';
-import { setTask, TASKS } from './systems/circle.js';
+import { setTask, sendMission, TASKS, MISSIONS } from './systems/circle.js';
+import { spendActions } from './systems/life.js';
+import { covenNews } from './coven-news.js';
 import { evaluateAchievements } from './achievements.js';
 import { creationOptions, fitHero, lookChoices, compatiblePaths } from './creation.js';
 import { describeLook, lookFromVars, lookVars, seededRandom } from './looks.js';
@@ -503,7 +505,10 @@ export class Game {
     st.book = this.chapterMeta[id].bookId;
     this.#markReached(st.book, this.chapterMeta[id].index);
     this.runner = new Runner(chapter, st, this.#env());
+    // The coven's news is what happened before the chapter began, so read it before the chapter runs.
+    const news = covenNews(st, this.content);
     this.runner.start(scene);
+    if (news.length && st.frame?.paragraphs) st.frame.paragraphs.unshift(...news);
     this.#checkpoint(true);
     return st.frame;
   }
@@ -654,6 +659,22 @@ export class Game {
   maps(state = this.viewState()) { return state ? mapsFor(state, this.content) : []; }
   family(state = this.viewState()) { return state ? familyView(state, this.content) : []; }
   coven(state = this.viewState()) { return covenView(state, this.content); }
+
+  /**
+   * The Coven tab: send a member on a mission, spending one action of the day or night in progress.
+   * The result is told at the start of the next chapter.
+   */
+  sendOnMission(id, kind, risk = 2) {
+    if (!this.state) throw new EngineError('no game in progress');
+    if (!MISSIONS.includes(kind)) throw new EngineError(`unknown mission "${kind}"`);
+    const ctx = { state: this.state, vars: this.state.vars, content: this.content };
+    const phase = this.state.sys?.phase;
+    if (!phase || phase.left < 1) throw new EngineError('there is no action left to send anyone');
+    sendMission(ctx, id, kind, risk);
+    spendActions(ctx, 1);
+    if (this.runner && this.state.frame?.wait === 'choices') this.runner.resume(); // the hub's choices may have changed
+    this.#checkpoint(false);
+  }
 
   /** The Coven tab: give a member a standing task for the long sleep ("none" stands them down). Saves at once. */
   setCovenTask(id, task) {
