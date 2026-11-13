@@ -65,6 +65,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 35: Book Three chapters 13 and 14
 - [x] Session 36: Book Three chapters 15 and 16
 - [x] Session 37: Book Three chapters 17 and 18
+- [x] Session 39: the New Orleans and Collesanto (1859) maps for Book Four
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
@@ -490,3 +491,8 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The hero cannot see the day. The tenth of Thermidor is told at dusk, and the closing scene is played in the small hours.
 - Tests: `tests/book3j.test.js` plays both chapters down every choice and flag value, for every earlier state that they read, and checks the end of the book, the sleep, the journal and the no dashes, no braces and no daylight rules. `tests/book3.test.js` now expects twenty written chapters and a finished book. `tests/book3i.test.js` now stops at chapter 19 where it used to rely on the pause after chapter 18.
 - Plans are in `SPOILERS/crown-of-ashes.md`.
+
+### Session 39 notes (for the next session)
+
+- `app/maps/neworleans.html` draws New Orleans and Collesanto as they stand in 1859 (the approved preview). `engine/maps.js` gains `neworleans` (`wharf`, `bank`, `lots`, `sugar`, `school`, `valere`, `haven`, `beaumont`, `market`, `treme`, `velati`, `roadhome`) and `collesanto4` (`farm`, `square`, `villa`, `press`, `gate`, `refuge`, `crypt`, `road`), both for book `house-divided` on page `neworleans`. Book Four chapters chart sites with `$ do chart("neworleans.bank")`.
+- Site ids are unique across the two maps of the book. `sw.js` caches the new page (`VERSION` is `tsb-13`). London, Chicago and New York follow the same pattern.

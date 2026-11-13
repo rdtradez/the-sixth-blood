@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sixth Blood: City Map</title>
+<style>
+@font-face{font-family:'Cinzel';font-weight:400 600;src:url(../../fonts/cinzel-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Cinzel';font-weight:700;src:url(../../fonts/cinzel-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:'Fell';font-style:normal;src:url(../../fonts/eb-garamond-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Fell';font-style:italic;src:url(../../fonts/eb-garamond-latin-400-italic.woff2) format('woff2')}
+:root{--ink:#2a1b10;--paper:#e6d3a3;--blood:#9b1b1b;--gold:#b8892b;--ember:#d2561c;--night:#0e0b0a;--char:#1c1715}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--night);color:#e9dcc0;font-family:'Fell',Georgia,serif;overflow:hidden}
+#app{display:flex;flex-direction:column;height:100%}
+header{padding:10px 14px 6px;border-bottom:2px solid #2a9c9c;background:var(--char)}
+h1{margin:0;font:700 15px 'Cinzel',Georgia,serif;letter-spacing:.12em;color:var(--gold)}
+header p{margin:2px 0 0;font-size:12px;color:#b9a888}
+.bar{display:flex;flex-wrap:wrap;gap:6px;padding:8px 14px;background:var(--char);border-bottom:1px solid #3a2e24;align-items:center}
+.bar .grp{display:flex;gap:4px;align-items:center}
+.bar label.t{font:500 10px 'Cinzel',serif;letter-spacing:.1em;color:#8d7c5f;margin-right:2px}
+button{font:500 12px 'Fell',Georgia,serif;color:#e9dcc0;background:#2a211b;border:1px solid #4d3d2e;border-radius:4px;padding:6px 10px;cursor:pointer}
+button.on{background:var(--blood);border-color:#c33;color:#fff}
+button.firebtn.on{background:var(--ember);border-color:#f80;color:#1a0d05}
+#stage{position:relative;flex:1;min-height:0;overflow:hidden;touch-action:none;background:#120e0c;cursor:grab}
+#stage.drag{cursor:grabbing}
+#view{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+svg.map{display:none;width:1600px;height:1100px}
+svg.map.show{display:block}
+#zoom{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:4px}
+#zoom button{width:34px;height:34px;padding:0;font-size:18px}
+#card{position:absolute;left:10px;right:10px;bottom:10px;max-width:460px;background:rgba(20,15,12,.94);border:1px solid var(--gold);border-radius:6px;padding:10px 12px;display:none}
+#card h3{margin:0 0 3px;font:700 13px 'Cinzel',serif;letter-spacing:.08em;color:var(--gold)}
+#card .k{font-size:11px;color:#a08f70;margin-bottom:4px;font-style:italic}
+#card p{margin:0;font-size:13px;line-height:1.35}
+#card .x{position:absolute;right:6px;top:4px;border:0;background:none;font-size:16px;padding:2px 6px}
+#note{font-size:11px;color:#8d7c5f;padding:4px 14px 8px;background:var(--char);border-top:1px solid #3a2e24}
+/* map styling */
+.lbl{font-family:'Fell',Georgia,serif;fill:var(--ink);paint-order:stroke;stroke:#e6d3a3;stroke-width:3.5px;stroke-linejoin:round}
+.lbl.it{font-style:italic}
+.rgn{font-family:'Cinzel',Georgia,serif;fill:#5a3b22;opacity:.62;letter-spacing:.35em;paint-order:stroke;stroke:#e6d3a3;stroke-width:2px}
+.mk{cursor:pointer}
+.mk .halo{fill:#e6d3a3;opacity:.0;transition:opacity .2s}
+.mk:hover .halo,.mk.sel .halo{opacity:.65}
+.mk.hid{display:none}
+.mk{transition:opacity .35s}
+.fire{opacity:0;transition:opacity .8s;pointer-events:none}
+.after .fire{opacity:1}
+.after .ember{animation:fl 2.2s infinite alternate}
+@keyframes fl{from{opacity:.25}to{opacity:1}}
+.house rect.b{fill:#cdb27a;stroke:#2a1b10;stroke-width:.6}
+.house rect.r{fill:#9a5a35;stroke:#2a1b10;stroke-width:.5}
+.after .h-heavy rect.b,.after .h-half rect.b{fill:#3b2f28}
+.after .h-heavy rect.r,.after .h-half rect.r{fill:#241a15}
+.rotating{transition:all .6s}
+body.embed header,body.embed #note,body.embed .grp.disc{display:none}
+body.embed .bar{padding:6px 10px}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+  <h1>THE SIXTH BLOOD &middot; BOOK FOUR: A HOUSE DIVIDED</h1>
+  <p>Map preview for approval. Tap any gold, red or ember marker. Drag to move, pinch or use + and - to zoom.</p>
+</header>
+<div class="bar">
+  <div class="grp"><label class="t">MAP</label>
+    <button id="tabRome" class="on">New Orleans</button><button id="tabCol">Collesanto</button></div>
+  <div class="grp disc"><label class="t">DISCOVERED</label>
+    <button data-st="0">Arrival</button><button data-st="1">Settling in</button><button data-st="2" class="on">Fully charted</button></div>
+  <div class="grp"><button id="fireBtn" class="firebtn">After the fire</button></div>
+</div>
+<div id="stage">
+  <div id="view">
+    <svg id="rome" class="map show" viewBox="0 0 1600 1100" xmlns="http://www.w3.org/2000/svg"></svg>
+    <svg id="col" class="map" viewBox="0 0 1600 1100" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+  <div id="zoom"><button id="zi">+</button><button id="zo">&minus;</button><button id="zr" style="font-size:12px">fit</button></div>
+  <div id="card"><button class="x" id="cx">&times;</button><h3 id="ct"></h3><div class="k" id="ck"></div><p id="cd"></p></div>
+</div>
+<div id="note">Placement of invented sites (havens, Collis properties, the Collesanto layout) is a proposal for your approval. Real landmarks follow New Orleans from 1859 into Reconstruction. Real historical figures stay in the background.</div>
+</div>
+
+<script>
+// ---------- tiny helpers ----------
+const NS='http://www.w3.org/2000/svg';
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function el(p,tag,a,txt){const e=document.createElementNS(NS,tag);if(a)for(const k in a)if(a[k]!=null)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;p.appendChild(e);return e}
+function cr(pts,close){let d='M'+pts[0][0]+','+pts[0][1];const n=pts.length;for(let i=0;i<n-1;i++){const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(n-1,i+2)];
+ d+=' C'+(p1[0]+(p2[0]-p0[0])/6)+','+(p1[1]+(p2[1]-p0[1])/6)+' '+(p2[0]-(p3[0]-p1[0])/6)+','+(p2[1]-(p3[1]-p1[1])/6)+' '+p2[0]+','+p2[1]}return d}
+function sample(pts,per){const out=[],n=pts.length;for(let i=0;i<n-1;i++){const p0=pts[Math.max(0,i-1)],p1=pts[i],p2=pts[i+1],p3=pts[Math.min(n-1,i+2)];
+ for(let s=0;s<per;s++){const u=s/per,u2=u*u,u3=u2*u;
+ const c=(a,b,c2,d)=>.5*((2*b)+(-a+c2)*u+(2*a-5*b+4*c2-d)*u2+(-a+3*b-3*c2+d)*u3);
+ out.push([c(p0[0],p1[0],p2[0],p3[0]),c(p0[1],p1[1],p2[1],p3[1])])}}out.push(pts[n-1]);return out}
+function inEll(x,y,e){const a=(e.rot||0)*Math.PI/180,dx=x-e.x,dy=y-e.y,c=Math.cos(-a),s=Math.sin(-a);const u=dx*c-dy*s,v=dx*s+dy*c;return (u*u)/(e.rx*e.rx)+(v*v)/(e.ry*e.ry)}
+
+// ---------- shared defs (paper, filters) ----------
+function defs(svg,id){
+ const d=el(svg,'defs');
+ d.innerHTML=`
+ <filter id="paper${id}" x="0" y="0" width="100%" height="100%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="4" result="n"/>
+  <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.35  0 0 0 0 0.24  0 0 0 0 0.12  0 0 0 0.22 0"/>
+ </filter>
+ <filter id="blot${id}"><feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="3" seed="9"/><feColorMatrix type="matrix" values="0 0 0 0 0.45 0 0 0 0 0.3 0 0 0 0 0.12 0 0 0 1.6 -0.55"/></filter>
+ <filter id="rough${id}"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="2" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="9"/></filter>
+ <filter id="rough2${id}"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="7" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="22"/><feGaussianBlur stdDeviation="6"/></filter>
+ <filter id="edge${id}" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" seed="3" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="30"/></filter>
+ <radialGradient id="vig${id}" cx="50%" cy="50%" r="72%"><stop offset="55%" stop-color="#5a3a14" stop-opacity="0"/><stop offset="100%" stop-color="#3a2108" stop-opacity=".62"/></radialGradient>
+ <radialGradient id="paperg${id}" cx="50%" cy="45%" r="75%"><stop offset="0" stop-color="#ecdcb0"/><stop offset="1" stop-color="#d9c08a"/></radialGradient>
+ <linearGradient id="crease${id}" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".47" stop-color="#3a2108" stop-opacity=".10"/><stop offset=".5" stop-color="#fff" stop-opacity=".10"/><stop offset=".53" stop-color="#3a2108" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
+ <radialGradient id="burnH${id}"><stop offset="0" stop-color="#e0541a" stop-opacity=".72"/><stop offset=".6" stop-color="#a02d10" stop-opacity=".45"/><stop offset="1" stop-color="#5a1a08" stop-opacity="0"/></radialGradient>
+ <radialGradient id="burnL${id}"><stop offset="0" stop-color="#e0721a" stop-opacity=".42"/><stop offset=".65" stop-color="#a04a10" stop-opacity=".26"/><stop offset="1" stop-color="#5a2a08" stop-opacity="0"/></radialGradient>
+ <clipPath id="clip${id}"><rect x="52" y="52" width="1496" height="996"/></clipPath>
+ <symbol id="tree${id}" viewBox="-6 -8 12 14"><path d="M0,-7 C5,-6 6,0 2,1 C4,2 2,4 0,3 C-2,4 -4,2 -2,1 C-6,0 -5,-6 0,-7Z" fill="#6f7a45" stroke="#2a1b10" stroke-width=".7"/><path d="M0,3V6" stroke="#2a1b10" stroke-width=".9"/></symbol>
+ <symbol id="cedar${id}" viewBox="-7 -12 14 20"><path d="M0,-11 L-5,-3 L-2,-3 L-6,3 L-1,3 L-1,7 L1,7 L1,3 L6,3 L2,-3 L5,-3Z" fill="#3f5a38" stroke="#2a1b10" stroke-width=".7"/></symbol>
+ <symbol id="olive${id}" viewBox="-5 -6 10 12"><ellipse cx="0" cy="-2" rx="4.5" ry="3.5" fill="#8a9166" stroke="#2a1b10" stroke-width=".6"/><path d="M0,1V5" stroke="#2a1b10" stroke-width=".8"/></symbol>`;
+}
+function paper(svg,id,W,H){
+ el(svg,'rect',{width:W,height:H,fill:'#1a1310'});
+ const g=el(svg,'g',{filter:`url(#edge${id})`});
+ el(g,'rect',{x:14,y:14,width:W-28,height:H-28,fill:`url(#paperg${id})`});
+ el(svg,'rect',{x:14,y:14,width:W-28,height:H-28,filter:`url(#paper${id})`,opacity:.9});
+ // age blotches
+ const b=el(svg,'g',{opacity:.5});
+ el(b,'rect',{x:14,y:14,width:W-28,height:H-28,filter:`url(#blot${id})`,opacity:.55});
+ el(svg,'rect',{x:14,y:14,width:W-28,height:H-28,fill:`url(#vig${id})`});
+ el(svg,'rect',{x:14,y:14,width:W-28,height:H-28,fill:`url(#crease${id})`});
+}
+function frame(svg,W,H,title,sub,id){
+ const g=el(svg,'g',{fill:'none',stroke:'#2a1b10'});
+ el(g,'rect',{x:40,y:40,width:W-80,height:H-80,'stroke-width':3});
+ el(g,'rect',{x:50,y:50,width:W-100,height:H-100,'stroke-width':1});
+ [[40,40],[W-40,40],[40,H-40],[W-40,H-40]].forEach(([x,y])=>{
+  const sx=x<W/2?1:-1,sy=y<H/2?1:-1;
+  el(g,'path',{d:`M${x},${y} l${22*sx},0 M${x},${y} l0,${22*sy} M${x+8*sx},${y+8*sy} l${34*sx},0 M${x+8*sx},${y+8*sy} l0,${34*sy}`,'stroke-width':1.4});
+  el(g,'circle',{cx:x+16*sx,cy:y+16*sy,r:4,fill:'#9b1b1b',stroke:'#2a1b10','stroke-width':1});
+ });
+}
+function compass(svg,x,y,s){
+ const g=el(svg,'g',{transform:`translate(${x},${y}) scale(${s})`,stroke:'#2a1b10','stroke-width':1.2});
+ el(g,'circle',{r:62,fill:'none','stroke-width':1});el(g,'circle',{r:52,fill:'none','stroke-width':.6});
+ el(g,'path',{d:'M0,-100 L10,-10 L0,0 L-10,-10Z M0,100 L10,10 L0,0 L-10,10Z',fill:'#e6d3a3'});
+ el(g,'path',{d:'M100,0 L10,10 L0,0 L10,-10Z M-100,0 L-10,10 L0,0 L-10,-10Z',fill:'#e6d3a3'});
+ el(g,'path',{d:'M0,-100 L10,-10 L0,0Z M0,100 L-10,10 L0,0Z M100,0 L10,-10 L0,0Z M-100,0 L-10,10 L0,0Z',fill:'#9b1b1b'});
+ el(g,'path',{d:'M-52,-52 L0,0 L52,52 M52,-52 L0,0 L-52,52',fill:'none','stroke-width':.7});
+ const t=(x,y,s)=>el(g,'text',{x,y,'text-anchor':'middle','font-family':'Cinzel,serif','font-size':20,fill:'#2a1b10',stroke:'none','font-weight':700},s);
+ t(0,-110,'N');t(0,128,'S');t(122,7,'E');t(-122,7,'W');
+}
+function scalebar(svg,x,y,len,label){
+ const g=el(svg,'g',{stroke:'#2a1b10','stroke-width':1.4,fill:'#2a1b10'});
+ el(g,'path',{d:`M${x},${y} h${len} v8 h-${len}Z`,fill:'#e6d3a3'});
+ for(let i=0;i<4;i++)el(g,'rect',{x:x+i*len/4,y,width:len/4,height:8,fill:i%2?'#e6d3a3':'#2a1b10'});
+ el(g,'text',{x:x+len/2,y:y+26,'text-anchor':'middle','font-family':'IM Fell English,serif','font-size':14,stroke:'none'},label);
+}
+function cartouche(svg,x,y,title,sub,sub2,fs){
+ const g=el(svg,'g',{transform:`translate(${x},${y})`});
+ el(g,'path',{d:'M0,0 h420 v150 h-420Z',fill:'#e6d3a3',stroke:'#2a1b10','stroke-width':3,opacity:.92});
+ el(g,'path',{d:'M8,8 h404 v134 h-404Z',fill:'none',stroke:'#2a1b10','stroke-width':1});
+ el(g,'text',{x:210,y:76,'text-anchor':'middle','font-family':'Cinzel,serif','font-size':fs||64,'font-weight':700,fill:'#2a1b10','letter-spacing':fs?'.1em':'.18em'},title);
+ el(g,'text',{x:210,y:106,'text-anchor':'middle','font-family':'IM Fell English SC,IM Fell English,serif','font-size':17,fill:'#7a1414','letter-spacing':'.1em'},sub);
+ el(g,'text',{x:210,y:130,'text-anchor':'middle','font-family':'IM Fell English,serif','font-style':'italic','font-size':15,fill:'#2a1b10'},sub2);
+}
+function lbl(p,x,y,t,o){o=o||{};const e=el(p,'text',{x,y,'text-anchor':o.a||'middle',class:'lbl'+(o.it?' it':''),'font-size':o.s||13,transform:o.r?`rotate(${o.r} ${x} ${y})`:null},t);return e}
+function rgn(p,x,y,t,s,r){el(p,'text',{x,y,'text-anchor':'middle',class:'rgn','font-size':s||26,transform:r?`rotate(${r} ${x} ${y})`:null},t)}
+
+// ---------- hills & houses ----------
+function hill(p,h,R){
+ const g=el(p,'g',{transform:`rotate(${h.rot||0} ${h.x} ${h.y})`});
+ el(g,'ellipse',{cx:h.x,cy:h.y,rx:h.rx,ry:h.ry,fill:'#d8c08a',opacity:.55,stroke:'#2a1b10','stroke-width':1,'stroke-opacity':.55});
+ [.8,.6,.38].forEach(k=>el(g,'ellipse',{cx:h.x+h.rx*.05*(1-k),cy:h.y-h.ry*.04,rx:h.rx*k,ry:h.ry*k,fill:'none',stroke:'#2a1b10','stroke-width':.7,'stroke-opacity':.38}));
+ for(let a=0;a<Math.PI*2;a+=0.14){
+  const lit=Math.cos(a-0.9)>0?1:.5, k=.8+R()*.1, ln=(.1+.16*lit)+R()*.05;
+  const x1=h.x+h.rx*Math.cos(a),y1=h.y+h.ry*Math.sin(a),x2=h.x+h.rx*(1-ln)*Math.cos(a),y2=h.y+h.ry*(1-ln)*Math.sin(a);
+  el(g,'path',{d:`M${x1},${y1} L${x2},${y2}`,stroke:'#2a1b10','stroke-width':.8,opacity:.5*lit+.15});
+ }
+}
+function houses(p,d,R,avoid,riv,tag){
+ const g=el(p,'g',{class:'house'});let placed=0,tries=0;
+ while(placed<d.n&&tries<d.n*20){tries++;
+  const a=R()*Math.PI*2,r=Math.sqrt(R());
+  const x=d.x+Math.cos(a)*r*d.rx,y=d.y+Math.sin(a)*r*d.ry;
+  if(avoid&&avoid.some(e=>inEll(x,y,e)<1))continue;
+  if(riv&&riv.some(q=>(q[0]-x)**2+(q[1]-y)**2<(q[2]+10)**2))continue;
+  const w=5+R()*5,h=4+R()*4,rot=(R()-.5)*50;
+  const cls='h-'+(d.burn==='heavy'?'heavy':d.burn==='damaged'&&R()<.5?'half':'none');
+  const hh=el(g,'g',{transform:`translate(${x},${y}) rotate(${rot})`,class:cls});
+  el(hh,'rect',{class:'b',x:-w/2,y:-h/2,width:w,height:h});
+  el(hh,'rect',{class:'r',x:-w/2,y:-h/2,width:w,height:h*.45});
+  placed++;
+ }
+}
+
+// ---------- markers ----------
+const KIND={
+ collis:{col:'#b8892b',name:'Collis property'},
+ haven:{col:'#9b1b1b',name:'Haven'},
+ key:{col:'#d2561c',name:'Key site'},
+ rumor:{col:'#6b5a3c',name:'Rumoured site'}
+};
+function marker(p,m,sel){
+ const g=el(p,'g',{class:'mk',transform:`translate(${m.x},${m.y})`,'data-st':m.stage,'data-id':m.id});
+ el(g,'circle',{class:'halo',r:30});
+ const k=KIND[m.kind];
+ if(m.kind==='rumor'){
+  el(g,'circle',{r:13,fill:'#e6d3a3',stroke:k.col,'stroke-width':2,'stroke-dasharray':'3 3'});
+  el(g,'text',{y:5,'text-anchor':'middle','font-family':'IM Fell English,serif','font-size':17,fill:k.col,'font-style':'italic'},'?');
+ }else{
+  el(g,'circle',{r:13,fill:k.col,stroke:'#2a1b10','stroke-width':2});
+  el(g,'circle',{r:9.5,fill:'none',stroke:'#f3e3b8','stroke-width':.8,opacity:.8});
+  if(m.kind==='collis'){el(g,'path',{d:'M-6,4 Q0,-8 6,4Z',fill:'#f3e3b8'});el(g,'circle',{cx:0,cy:-5,r:2.2,fill:'#f3e3b8'});
+   for(let i=0;i<6;i++){const a=i*Math.PI/3;el(g,'path',{d:`M${Math.cos(a)*3.8},${-5+Math.sin(a)*3.8} L${Math.cos(a)*5.6},${-5+Math.sin(a)*5.6}`,stroke:'#f3e3b8','stroke-width':.8})}}
+  if(m.kind==='haven')el(g,'path',{d:'M-4.5,6 V-1 A4.5,4.5 0 0 1 4.5,-1 V6Z',fill:'#1a0e0a',stroke:'#f3e3b8','stroke-width':1});
+  if(m.kind==='key')el(g,'path',{d:'M0,-7 L2,-2 L7,-2 L3,1.5 L4.5,7 L0,3.8 L-4.5,7 L-3,1.5 L-7,-2 L-2,-2Z',fill:'#f3e3b8'});
+ }
+ lbl(g,0,m.ly||28,m.name,{s:13});
+ g.addEventListener('click',e=>{e.stopPropagation();showCard(m,g)});
+ return g;
+}
+
+// ---------- NEW ORLEANS, 1859 to the late 1860s ----------
+const CFG={
+ seed:1859,accent:'#2a9c9c',accent2:'#f2efe6',waterColor:'#86a9a8',
+ title:'NEW ORLEANS',sub:'A HOUSE DIVIDED',sub2:'Anno Domini MDCCCLIX to MDCCCLXVIII',titleSize:40,scale:'Mille (about a mile)',
+ lakes:[{x:1010,y:20,rx:560,ry:150,label:{t:'L\u00a0A\u00a0K\u00a0E\u00a0\u00a0\u00a0P\u00a0O\u00a0N\u00a0T\u00a0C\u00a0H\u00a0A\u00a0R\u00a0T\u00a0R\u00a0A\u00a0I\u00a0N',x:1010,y:98,s:26}}],
+ waters:[
+  {pts:[[40,330],[200,470],[360,600],[540,720],[760,800],[960,820],[1160,790],[1340,720],[1480,620],[1600,540]],w0:84,w1:70,label:{t:'T\u00a0H\u00a0E\u00a0\u00a0\u00a0M\u00a0I\u00a0S\u00a0S\u00a0I\u00a0S\u00a0S\u00a0I\u00a0P\u00a0P\u00a0I',x:470,y:662,r:34,s:22}},
+  {pts:[[790,150],[770,250],[745,340],[735,430]],w0:14,w1:12,label:{t:'Bayou St. John',x:712,y:290,r:-82,s:13}},
+  {pts:[[735,430],[775,500],[820,575]],w0:9,w1:9},
+  {pts:[[560,110],[548,250],[552,400],[585,540]],w0:16,w1:16,label:{t:'New Basin Canal',x:520,y:330,r:-86,s:13}}
+ ],
+ parks:[
+  {x:912,y:630,rx:26,ry:18,trees:6},
+  {x:672,y:706,rx:34,ry:20,trees:8},
+  {x:400,y:560,rx:74,ry:30,trees:20}
+ ],
+ fields:[{x:170,y:365,w:150,h:70,rot:36},{x:290,y:452,w:120,h:48,rot:36}],
+ marsh:[{x:660,y:225,rx:150,ry:40,n:50},{x:1300,y:330,rx:200,ry:110,n:70},{x:930,y:300,rx:60,ry:90,n:30},{x:1100,y:935,rx:300,ry:45,n:50}],
+ districts:[
+  {x:930,y:715,rx:105,ry:58,n:300},{x:680,y:665,rx:120,ry:60,n:260},{x:860,y:565,rx:105,ry:42,n:170},
+  {x:1110,y:715,rx:95,ry:50,n:150},{x:1300,y:660,rx:90,ry:40,n:70},{x:420,y:535,rx:115,ry:62,n:130},
+  {x:320,y:480,rx:60,ry:30,n:40},{x:760,y:905,rx:130,ry:40,n:110}
+ ],
+ avoid:[{x:912,y:630,rx:30,ry:20},{x:672,y:706,rx:36,ry:22},{x:950,y:745,rx:26,ry:22},{x:885,y:712,rx:30,ry:20},{x:775,y:738,rx:36,ry:20},{x:1038,y:760,rx:28,ry:16},{x:640,y:640,rx:26,ry:20},{x:788,y:600,rx:24,ry:18},{x:400,y:560,rx:74,ry:30}],
+ grids:[{x:930,y:712,w:190,h:110,rot:6,nx:8,ny:4},{x:680,y:668,w:220,h:100,rot:12,nx:6,ny:3},{x:1110,y:718,w:170,h:90,rot:4,nx:5,ny:3},{x:860,y:565,w:190,h:76,rot:-8,nx:6,ny:2}],
+ rails:[{pts:[[1175,160],[1160,400],[1130,600],[1100,780]],n:'Pontchartrain Railroad',lx:1198,ly:420,r:-88}],
+ roads:[
+  {pts:[[792,790],[700,690],[640,620],[585,540]],n:'Canal Street',lx:700,ly:650,r:-50,w:12},
+  {pts:[[1065,792],[1020,690],[960,600],[890,500],[800,445],[738,430]],n:'Esplanade',lx:1008,ly:640,r:-62,w:8}
+ ],
+ landmarks:[
+  {t:'cathedral',x:950,y:745,s:.6,n:'St. Louis Cathedral',ly:32,ls:12},
+  
+  {t:'block',x:1040,y:754,s:.8,n:'French Market',ly:-20,ls:11,it:1},
+  {t:'palace',x:775,y:742,s:.9},
+  {t:'church',x:640,y:640,s:.7,n:'Charity Hospital',ly:-22,ls:11,it:1},
+  {t:'cemetery',x:788,y:600,s:.45,n:'St. Louis No. 1',ly:26,ls:11,it:1},
+  {t:'cemetery',x:600,y:478,s:.55,n:'Cypress Grove',ly:28,ls:11,it:1},
+  {t:'cemetery',x:470,y:604,s:.4,n:'Lafayette Cemetery',ly:24,ls:11,it:1},
+  {t:'steamboat',x:640,y:742,rot:20},{t:'steamboat',x:722,y:768,rot:20},{t:'steamboat',x:935,y:808,rot:5},
+  {t:'steamboat',x:1060,y:802,rot:-4},{t:'steamboat',x:1260,y:745,rot:-20},{t:'steamboat',x:1380,y:700,rot:-35},
+  {t:'ship',x:1440,y:662,rot:-35,s:.9}
+ ],
+ regions:[{x:868,y:684,t:'VIEUX CARRE',s:13},{x:915,y:536,t:'TREME',s:15},{x:1115,y:668,t:'MARIGNY',s:14},{x:690,y:628,t:'AMERICAN SECTOR',s:13,r:-35},{x:430,y:446,t:'GARDEN DISTRICT',s:15},{x:760,y:950,t:'ALGIERS',s:20}],
+ labels:[{x:150,y:505,t:'upriver to Baton Rouge',r:41},{x:1478,y:700,t:'downriver to the Gulf',r:-31},{x:1198,y:190,t:'Milneburg',s:12}],
+ sites:[
+  {id:'wharf',name:'Collis wharf',kind:'collis',x:838,y:776,stage:1,ly:32,desc:'A levee berth and a counting shed where cotton, sugar and passengers change hands. Steamboats are the fastest money on the river.'},
+  {id:'bank',name:'Collis bank',kind:'collis',x:700,y:704,stage:1,ly:-22,desc:'Offices in the American quarter, where the new money keeps its books. A bank is a way to hear everything.'},
+  {id:'lots',name:'Garden lots',kind:'collis',x:505,y:548,stage:2,desc:'Empty lots upriver among the new gardens, cheap and rising. Land is patient, as you are.'},
+  {id:'sugar',name:'Sugar land upriver',kind:'collis',x:190,y:372,stage:2,ly:-22,desc:'Cane land along the levee road. Who works it, and how they are treated, is yours to decide.'},
+  {id:'school',name:'Treme school',kind:'collis',x:800,y:545,stage:2,ly:-22,desc:'A plain schoolhouse for the children of free and freed families. Teaching is a slow investment, and a dangerous one.'},
+  {id:'valere',name:'Keeper house',kind:'key',x:935,y:690,stage:0,ly:-22,desc:'The keeper family’s house in the Quarter, behind a green door and a courtyard. They have kept your name through centuries and oceans, and they will tell you what you missed.'},
+  {id:'haven',name:'Your haven',kind:'haven',x:1135,y:742,stage:1,ly:32,desc:'Nobody digs cellars here, the water is too close. Your haven is a walled courtyard house with a windowless room, and a family tomb as a second bed.'},
+  {id:'beaumont',name:'Beaumont house',kind:'key',x:415,y:505,stage:2,ly:-22,desc:'The seat of the old Southern blood: a white gallery, a long drive and a household that is never seen by day.'},
+  {id:'market',name:'Auction rotunda',kind:'key',x:850,y:742,stage:1,ly:-22,desc:'People are sold every morning under the dome of the St. Louis Hotel and the arcades of Chartres Street. It is the largest slave market in America, and the whole city stands on it or beside it.'},
+  {id:'treme',name:'Congo Square',kind:'key',x:905,y:598,stage:1,ly:-22,desc:'The free people of colour keep their own churches, musicians, trades and long memories here. They will judge you by what you do.'},
+  {id:'velati',name:'A reading room?',kind:'rumor',x:1000,y:700,stage:2,ly:-22,desc:'Rumoured. The order that watches your kind is said to keep a quiet room somewhere near the cathedral.'},
+  {id:'roadhome',name:'Passage to Collesanto',kind:'key',x:1440,y:590,stage:0,ly:-22,desc:'The river carries letters and cargo to the Gulf, and from there by sea to Genoa. Word from Collesanto takes two months, a little less by steam.'}
+ ],
+ col:{sub:'Rebuilt and thriving · 1859',houses:230,walled:true,sites:[
+  {id:'farm',name:'Valerio house',kind:'key',x:470,y:645,stage:0,desc:'The keeper family’s stone house, enlarged twice. Seven generations have watched this hill.'},
+  {id:'square',name:'Shrine of the guardian saint',kind:'key',x:640,y:560,stage:0,desc:'The shrine has its own bell now. Festival day is the one day each year the whole village is in the square at once.'},
+  {id:'villa',name:'The villa above',kind:'key',x:790,y:300,stage:0,ly:-22,desc:'Still shuttered. Roses climb the wall that no one has planted.'},
+  {id:'press',name:'Collis olive press',kind:'collis',x:360,y:520,stage:1,desc:'The press and cellar have grown again. The wine goes to the coast by cart and to the world by sea.'},
+  {id:'gate',name:'Village gate',kind:'key',x:600,y:650,stage:1,desc:'Stone gate, tower and bell. Strangers are asked their business before they are asked their name.'},
+  {id:'refuge',name:'School and refuge',kind:'key',x:712,y:612,stage:2,ly:30,desc:'A long house by the church where children are taught and strangers in trouble are given a bed. The village made its own rules for it.'},
+  {id:'crypt',name:'Crypt beneath the villa',kind:'haven',x:850,y:360,stage:2,ly:30,desc:'The old resting place, kept dry and quiet by the keeper family.'},
+  {id:'road',name:'Road to the coast',kind:'key',x:640,y:990,stage:0,ly:-22,desc:'The post road now reaches a telegraph office, and a railway is promised. Letters across the ocean take two months.'}
+ ]}
+};
+const ROME_SITES=CFG.sites;
+const COL_SITES=CFG.col.sites;
+
+function polyPath(pts){return 'M'+pts.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' L')+'Z'}
+function waterPoly(pts,w0,w1){
+ const rs=sample(pts,14),L=[],Rr=[],rc=[];
+ rs.forEach((p,i)=>{const a=rs[Math.max(0,i-1)],b=rs[Math.min(rs.length-1,i+1)];let dx=b[0]-a[0],dy=b[1]-a[1];const m=Math.hypot(dx,dy)||1;dx/=m;dy/=m;
+  const w=(w0+(w1-w0)*i/rs.length+Math.sin(i*.5)*1.5)/2;L.push([p[0]-dy*w,p[1]+dx*w]);Rr.push([p[0]+dy*w,p[1]-dx*w]);rc.push([p[0],p[1],w])});
+ return {d:polyPath(L.concat(Rr.reverse())),rc};
+}
+function glyph(p,t,s){
+ const g=el(p,'g',{transform:`scale(${s||1})`});const ink={stroke:'#2a1b10','stroke-width':1.6};
+ const B='#e8dcc0',T='#d4b57a';
+ if(t==='church'){el(g,'rect',{x:-16,y:-6,width:32,height:16,fill:B,...ink});el(g,'rect',{x:16,y:-16,width:8,height:26,fill:B,...ink});el(g,'path',{d:'M16,-16 l4,-9 l4,9',fill:T,...ink});}
+ else if(t==='cathedral'){el(g,'rect',{x:-22,y:-4,width:44,height:20,fill:B,...ink});el(g,'rect',{x:-22,y:-20,width:11,height:20,fill:B,...ink});el(g,'rect',{x:11,y:-20,width:11,height:20,fill:B,...ink});el(g,'path',{d:'M-5,-4 V-14 l5,-8 l5,8 V-4',fill:T,...ink});}
+ else if(t==='dome'){el(g,'rect',{x:-24,y:2,width:48,height:16,fill:B,...ink});el(g,'path',{d:'M-18,2 a18,18 0 0 1 36,0Z',fill:'#8e9a8a',...ink});el(g,'path',{d:'M0,-16 v-8 M-3,-21 h6',stroke:'#2a1b10','stroke-width':1.6});for(let i=-12;i<=12;i+=6)el(g,'path',{d:`M${i},2 L${i*.55},-12`,stroke:'#e8dcc0','stroke-width':1})}
+ else if(t==='palace'){el(g,'rect',{x:-30,y:-9,width:60,height:22,fill:T,...ink});for(let i=-26;i<=26;i+=7)el(g,'path',{d:`M${i},-9 v22`,stroke:'#2a1b10','stroke-width':.9});el(g,'path',{d:'M-30,-9 h60',...ink});}
+ else if(t==='tower'){el(g,'rect',{x:-6,y:-30,width:12,height:40,fill:B,...ink});el(g,'path',{d:'M-8,-30 h16 l-3,-8 h-10Z',fill:T,...ink});}
+ else if(t==='fort'){el(g,'rect',{x:-24,y:-18,width:48,height:36,fill:T,...ink});[[-24,-18],[24,-18],[-24,18],[24,18]].forEach(([x,y])=>el(g,'circle',{cx:x,cy:y,r:9,fill:B,...ink}));el(g,'rect',{x:-9,y:-9,width:18,height:18,fill:B,...ink})}
+ else if(t==='block'){el(g,'rect',{x:-16,y:-10,width:32,height:20,fill:T,...ink});}
+ else if(t==='cemetery'){el(g,'rect',{x:-34,y:-24,width:68,height:48,fill:'#e0d4b0',...ink});for(let i=0;i<4;i++)for(let j=0;j<3;j++){el(g,'rect',{x:-28+i*15,y:-17+j*14,width:10,height:8,fill:B,stroke:'#2a1b10','stroke-width':1});el(g,'path',{d:`M${-28+i*15},${-17+j*14} l5,-4 l5,4`,fill:'none',stroke:'#2a1b10','stroke-width':.9})}}
+ else if(t==='statue'){el(g,'path',{d:'M-8,12 h16 l-3,-14 h-10Z',fill:T,...ink});el(g,'path',{d:'M0,-2 v-14 l8,-8 M-5,-14 h10',stroke:'#2a1b10','stroke-width':1.6,fill:'none'})}
+ else if(t==='steamboat'){el(g,'path',{d:'M-30,6 L30,6 L24,14 L-26,14Z',fill:'#e8dcc0',...ink});el(g,'rect',{x:-22,y:-3,width:40,height:9,fill:B,...ink});el(g,'rect',{x:-14,y:-10,width:20,height:7,fill:T,...ink});el(g,'rect',{x:-19,y:-22,width:4,height:19,fill:'#2a1b10'});el(g,'rect',{x:2,y:-22,width:4,height:19,fill:'#2a1b10'});el(g,'path',{d:'M-17,-24 q-6,-8 2,-12 M4,-24 q-6,-8 2,-12',stroke:'#2a1b10','stroke-width':1.2,fill:'none',opacity:.6});el(g,'circle',{cx:-30,cy:9,r:6,fill:T,...ink})}
+ else if(t==='ship'){el(g,'path',{d:'M-26,4 L26,4 L18,14 L-20,14Z',fill:T,...ink});el(g,'path',{d:'M0,4 V-30 M-14,4 V-20 M14,4 V-20',stroke:'#2a1b10','stroke-width':1.6});[[-14,-20],[0,-30],[14,-20]].forEach(([x,y])=>el(g,'path',{d:`M${x-9},${y+2} q9,6 18,0 v16 q-9,6 -18,0Z`,fill:B,...ink}))}
+ else if(t==='gate'){el(g,'rect',{x:-9,y:-9,width:18,height:18,fill:'#c9a864',...ink});el(g,'path',{d:'M-4,7 v-6 a4,4 0 0 1 8,0 v6',fill:'#2a1b10'})}
+ return g;
+}
+function buildCity(){
+ const C=CFG;const svg=document.getElementById('rome');const id='r';const W=1600,H=1100;const R=rng(C.seed||7);
+ defs(svg,id);paper(svg,id,W,H);
+ const world=el(svg,'g',{id:'rworld','clip-path':'url(#clipr)'});
+ const WC=C.waterColor||'#8fae9a';
+ (C.lakes||[]).forEach(l=>{el(world,'ellipse',{cx:l.x,cy:l.y,rx:l.rx,ry:l.ry,fill:C.waterColor||'#8fae9a',stroke:'#2a1b10','stroke-width':2.4});el(world,'ellipse',{cx:l.x,cy:l.y,rx:l.rx-8,ry:l.ry-8,fill:'none',stroke:'#e6d3a3','stroke-width':3,opacity:.3});
+  for(let i=0;i<40;i++){const a=R()*6.28,r=Math.sqrt(R())*.85;const x=l.x+Math.cos(a)*l.rx*r,y=l.y+Math.sin(a)*l.ry*r;el(world,'path',{d:`M${x-8},${y} q4,-4 8,0 t8,0`,fill:'none',stroke:'#3b5a5c','stroke-width':.9,opacity:.6})}
+  if(l.label)lbl(world,l.label.x,l.label.y,l.label.t,{it:1,s:l.label.s||24})});
+ let rivSeg=[];
+ (C.waters||[]).forEach(w=>{const wp=waterPoly(w.pts,w.w0||34,w.w1||34);
+  el(world,'path',{d:wp.d,fill:w.fill||WC,stroke:'#2a1b10','stroke-width':2,opacity:.95});el(world,'path',{d:wp.d,fill:'none',stroke:'#e6d3a3','stroke-width':6,opacity:.3});
+  for(let i=6;i<wp.rc.length-6;i+=3){const p=wp.rc[i];el(world,'path',{d:`M${p[0]-8},${p[1]} q4,-4 8,0 t8,0`,fill:'none',stroke:'#3b5a5c','stroke-width':.9,opacity:.6,transform:`rotate(${(R()-.5)*30} ${p[0]} ${p[1]})`})}
+  rivSeg=rivSeg.concat(wp.rc.filter((_,i)=>i%2===0));
+  if(w.label)lbl(world,w.label.x,w.label.y,w.label.t,{it:1,s:w.label.s||22,r:w.label.r||0});});
+ (C.islands||[]).forEach(l=>{el(world,'ellipse',{cx:l.x,cy:l.y,rx:l.rx,ry:l.ry,transform:`rotate(${l.rot||0} ${l.x} ${l.y})`,fill:'#e0cc98',stroke:'#2a1b10','stroke-width':2.2});});
+ (C.hills||[]).forEach(h=>{hill(world,h,R);lbl(world,h.lx||h.x,h.ly||h.y-h.ry-8,h.n,{it:1,s:14})});
+ (C.parks||[]).forEach(p=>{const g=el(world,'g',{});
+  if(p.rect)el(g,'rect',{x:p.x,y:p.y,width:p.w,height:p.h,fill:'#9aa874',stroke:'#2a1b10','stroke-width':1.4,opacity:.8,transform:p.rot?`rotate(${p.rot} ${p.x+p.w/2} ${p.y+p.h/2})`:null});
+  else el(g,'ellipse',{cx:p.x,cy:p.y,rx:p.rx,ry:p.ry,fill:'#9aa874',stroke:'#2a1b10','stroke-width':1.4,opacity:.8,transform:p.rot?`rotate(${p.rot} ${p.x} ${p.y})`:null});
+  const cx=p.rect?p.x+p.w/2:p.x,cy=p.rect?p.y+p.h/2:p.y,rx=p.rect?p.w/2:p.rx,ry=p.rect?p.h/2:p.ry;
+  for(let i=0;i<(p.trees||12);i++){const x=cx+(R()*2-1)*rx*.85,y=cy+(R()*2-1)*ry*.85;el(world,'use',{href:'#tree'+id,x:x-6,y:y-8,width:12,height:14})}
+  if(p.label)lbl(world,cx,cy+4,p.label,{it:1,s:p.ls||13});});
+ (C.fields||[]).forEach(f=>{const g=el(world,'g',{transform:`translate(${f.x},${f.y}) rotate(${f.rot||0})`});el(g,'rect',{x:-f.w/2,y:-f.h/2,width:f.w,height:f.h,fill:'#c9c27a',stroke:'#2a1b10','stroke-width':1.2,opacity:.85});for(let y=-f.h/2+6;y<f.h/2;y+=7)el(g,'path',{d:`M${-f.w/2+2},${y} h${f.w-4}`,stroke:'#6f7a45','stroke-width':1.2,opacity:.7})});
+ (C.marsh||[]).forEach(m=>{for(let i=0;i<m.n;i++){const a=R()*6.28,r=Math.sqrt(R());const x=m.x+Math.cos(a)*r*m.rx,y=m.y+Math.sin(a)*r*m.ry;el(world,'path',{d:`M${x},${y} v-7 M${x-3},${y-4} l3,-4 M${x+3},${y-4} l-3,-4 M${x-9},${y+3} h18`,stroke:'#5d6b3c','stroke-width':1,fill:'none',opacity:.75})}});
+ const hg=el(world,'g',{});
+ const avoid=C.avoid||[];
+ (C.districts||[]).forEach(d=>{d.burn='none';houses(hg,d,R,avoid,d.noRiv?null:rivSeg)});
+ (C.walls||[]).forEach(w=>{const d=cr(w.closed?w.pts.concat([w.pts[0]]):w.pts);
+  el(world,'path',{d,fill:'none',stroke:'#2a1b10','stroke-width':w.w||5.5,opacity:.85});el(world,'path',{d,fill:'none',stroke:'#e6d3a3','stroke-width':(w.w||5.5)-2.5});
+  if(w.towers!==false)sample(w.closed?w.pts.concat([w.pts[0]]):w.pts,6).forEach((q,i)=>{if(i%3===1)el(world,'rect',{x:q[0]-5,y:q[1]-5,width:10,height:10,fill:'#d4b57a',stroke:'#2a1b10','stroke-width':1.4})})});
+ (C.gates||[]).forEach(g=>{const gg=el(world,'g',{transform:`translate(${g.x},${g.y})`});glyph(gg,'gate',1);lbl(world,g.x+(g.ox||0),g.y+(g.oy||-16),g.n,{it:1,s:12})});
+ (C.roads||[]).forEach(r=>{const d=cr(r.pts);const w=r.w||5;el(world,'path',{d,fill:'none',stroke:'#2a1b10','stroke-width':w+2.4,opacity:.75});el(world,'path',{d,fill:'none',stroke:'#e6d3a3','stroke-width':w});if(r.n)lbl(world,r.lx,r.ly,r.n,{it:1,s:13,r:r.r||0})});
+ (C.grids||[]).forEach(q=>{const g=el(world,'g',{transform:`translate(${q.x},${q.y}) rotate(${q.rot||0})`});for(let i=0;i<=q.ny;i++){const y=-q.h/2+q.h*i/q.ny;el(g,'path',{d:`M${-q.w/2},${y} H${q.w/2}`,stroke:'#e6d3a3','stroke-width':3,opacity:.85})}for(let i=0;i<=q.nx;i++){const x=-q.w/2+q.w*i/q.nx;el(g,'path',{d:`M${x},${-q.h/2} V${q.h/2}`,stroke:'#e6d3a3','stroke-width':3,opacity:.85})}});
+ (C.rails||[]).forEach(r=>{const d=cr(r.pts);el(world,'path',{d,fill:'none',stroke:'#2a1b10','stroke-width':3});el(world,'path',{d,fill:'none',stroke:'#2a1b10','stroke-width':9,'stroke-dasharray':'2 8',opacity:.85});if(r.n)lbl(world,r.lx,r.ly,r.n,{it:1,s:12,r:r.r||0})});
+ (C.streets||[]).forEach(s=>el(world,'path',{d:cr(s),fill:'none',stroke:'#e6d3a3','stroke-width':4,opacity:.85}));
+ (C.bridges||[]).forEach(b=>{const a=(b.a||90)*Math.PI/180,dx=Math.cos(a)*(b.len||30),dy=Math.sin(a)*(b.len||30);
+  el(world,'path',{d:`M${b.x-dx},${b.y-dy} L${b.x+dx},${b.y+dy}`,stroke:'#2a1b10','stroke-width':(b.w||9)+4.5});el(world,'path',{d:`M${b.x-dx},${b.y-dy} L${b.x+dx},${b.y+dy}`,stroke:'#e6d3a3','stroke-width':b.w||9});
+  if(b.n)lbl(world,b.x+(b.ox||0),b.y+(b.oy||-40),b.n,{it:1,s:12})});
+ (C.landmarks||[]).forEach(m=>{const g=el(world,'g',{transform:`translate(${m.x},${m.y})${m.rot?` rotate(${m.rot})`:''}`});glyph(g,m.t,m.s||1);if(m.n)lbl(world,m.x+(m.lx||0),m.y+(m.ly||34),m.n,{it:m.it,s:m.ls||13})});
+ (C.regions||[]).forEach(r=>rgn(world,r.x,r.y,r.t,r.s||26,r.r||0));
+ (C.labels||[]).forEach(l=>lbl(world,l.x,l.y,l.t,{it:l.it!==false,s:l.s||13,r:l.r||0,a:l.a}));
+ [...world.children].filter(c=>c.tagName==='text').forEach(t=>world.appendChild(t));
+ const mk=el(world,'g',{id:'rmarkers'});C.sites.forEach(m=>marker(mk,m));
+ compass(svg,1470,175,.9);scalebar(svg,430,1000,240,C.scale);
+ cartouche(svg,80,76,C.title,C.sub,C.sub2,C.titleSize);
+ const lg=el(svg,'g',{transform:'translate(88,880)'});
+ el(lg,'rect',{x:0,y:0,width:300,height:178,fill:'#e6d3a3',stroke:'#2a1b10','stroke-width':2,opacity:.92});
+ el(lg,'text',{x:150,y:26,'text-anchor':'middle','font-family':'Cinzel,serif','font-size':15,'font-weight':700,fill:'#2a1b10','letter-spacing':'.15em'},'LEGEND');
+ let ly=58;[['collis','Collis property'],['haven','Haven'],['key','Key site'],['rumor','Rumoured site']].forEach(([k,t])=>{const gg=el(lg,'g',{transform:`translate(34,${ly})`});
+  if(k==='rumor'){el(gg,'circle',{r:11,fill:'#e6d3a3',stroke:KIND[k].col,'stroke-width':2,'stroke-dasharray':'3 3'})}else{el(gg,'circle',{r:11,fill:KIND[k].col,stroke:'#2a1b10','stroke-width':2})}
+  el(lg,'text',{x:62,y:ly+5,'font-family':'IM Fell English,serif','font-size':15,fill:'#2a1b10'},t);ly+=30});
+ frame(svg,W,H);
+}
+
+// ---------- COLLESANTO, 1788 ----------
+function buildCol(){
+ const svg=document.getElementById('col');const id='c';const W=1600,H=1100;const R=rng(23);
+ defs(svg,id);paper(svg,id,W,H);const world=el(svg,'g',{'clip-path':'url(#clipc)'});
+ const H0={x:760,y:480,rx:560,ry:340,rot:-8};
+ // big hill
+ const g=el(world,'g',{transform:`rotate(${H0.rot} ${H0.x} ${H0.y})`});
+ for(let k=1;k>.12;k-=.11){el(g,'ellipse',{cx:H0.x+(1-k)*120,cy:H0.y-(1-k)*90,rx:H0.rx*k,ry:H0.ry*k,fill:k===1?'#d8c08a':'none',opacity:k===1?.5:1,stroke:'#2a1b10','stroke-width':k===1?1.4:.8,'stroke-opacity':.5})}
+ for(let a=0;a<6.28;a+=.075){const lit=Math.cos(a-.9)>0?1:.5,ln=.1+.2*lit*R();const x1=H0.x+H0.rx*Math.cos(a),y1=H0.y+H0.ry*Math.sin(a);
+  el(g,'path',{d:`M${x1},${y1} L${H0.x+H0.rx*(1-ln)*Math.cos(a)},${H0.y+H0.ry*(1-ln)*Math.sin(a)}`,stroke:'#2a1b10','stroke-width':.8,opacity:.45*lit+.12})}
+ rgn(world,1010,118,'MONS COLLESANTVS',30,0);
+ // stream
+ const st=[[200,300],[250,420],[260,540],[320,640],[300,760],[360,880],[480,960],[640,1010]];
+ el(world,'path',{d:cr(st),fill:'none',stroke:'#2a1b10','stroke-width':16});el(world,'path',{d:cr(st),fill:'none',stroke:'#9db0a2','stroke-width':12});
+ lbl(world,205,420,'Rivus',{it:1,s:14,r:-80});
+ // road
+ const rd=[[640,1070],[630,980],[560,900],[610,820],[560,740],[600,650],[650,590]];
+ el(world,'path',{d:cr(rd),fill:'none',stroke:'#2a1b10','stroke-width':9.5});el(world,'path',{d:cr(rd),fill:'none',stroke:'#e6d3a3','stroke-width':6});
+ // villa track
+ const tr=[[650,590],[710,520],[690,450],[760,400],[790,330]];
+ el(world,'path',{d:cr(tr),fill:'none',stroke:'#2a1b10','stroke-width':6,'stroke-dasharray':'8 5'});
+ // terraces: olives west
+ for(let row=0;row<7;row++){const y0=420+row*34;for(let i=0;i<14;i++){const x=330+i*28+row*10,y=y0+Math.sin(i*.5)*5;if(x<640&&Math.hypot(x-470,y-645)>62)el(world,'use',{href:'#olive'+id,x:x-5,y:y-6,width:10,height:12})}}
+ // vineyards east
+ for(let i=0;i<10;i++){const x=900+i*26;el(world,'path',{d:`M${x},560 q-6,50 -20,110`,stroke:'#6f7a45','stroke-width':2.2,fill:'none',opacity:.85});el(world,'path',{d:`M${x},560 q-6,50 -20,110`,stroke:'#2a1b10','stroke-width':.5,fill:'none'})}
+ lbl(world,990,720,'Vineae',{it:1,s:14});
+ // wheat fields south
+ for(let r=0;r<5;r++){for(let i=0;i<22;i++){const x=280+i*30,y=780+r*28;if(Math.hypot(x-470,y-645)>30&&x>340)el(world,'path',{d:`M${x},${y} v-8 M${x-2},${y-5} l2,-3 l2,3`,stroke:'#8a6a28','stroke-width':1.1,fill:'none'})}}
+ lbl(world,820,880,'Wheat fields',{it:1,s:14});
+ // cedar groves north
+ for(let i=0;i<46;i++){const a=R()*6.28,r=Math.sqrt(R());el(world,'use',{href:'#cedar'+id,x:460+Math.cos(a)*r*180-7,y:310+Math.sin(a)*r*70-12,width:14,height:22})}
+ lbl(world,455,380,'Cedri',{it:1,s:14});
+ // oaks
+ for(let i=0;i<30;i++){const a=R()*6.28,r=Math.sqrt(R());el(world,'use',{href:'#tree'+id,x:1000+Math.cos(a)*r*140-6,y:340+Math.sin(a)*r*120-8,width:12,height:14})}
+ // village houses
+ const hv=el(world,'g',{class:'house'});
+ for(let i=0;i<CFG.col.houses;i++){const a=R()*6.28,r=Math.sqrt(R());const x=625+Math.cos(a)*r*150,y=565+Math.sin(a)*r*72;
+  if(Math.hypot(x-640,y-560)<28||Math.hypot(x-470,y-645)<40||Math.abs(x-(600+Math.sin((y-560)/40)*10))<7&&y>570)continue;
+  const burn=(x<630&&R()<.8)?'h-heavy':'h-none';
+  const w=8+R()*7,h=7+R()*5,rot=(R()-.5)*40;const hh=el(hv,'g',{transform:`translate(${x},${y}) rotate(${rot})`,class:burn});
+  el(hh,'rect',{class:'b',x:-w/2,y:-h/2,width:w,height:h});el(hh,'rect',{class:'r',x:-w/2,y:-h/2,width:w,height:h*.45})}
+ // patchwork fields (south east)
+ for(let i=0;i<14;i++){const x=900+(i%5)*95+R()*10,y=770+Math.floor(i/5)*90+R()*10,w=70+R()*18,h=60+R()*16;
+  el(world,'path',{d:`M${x},${y} h${w} v${h} h-${w}Z`,fill:i%3?'#d9c07c':'#c9b878',stroke:'#2a1b10','stroke-width':1.2,opacity:.8});
+  for(let l=6;l<h;l+=7)el(world,'path',{d:`M${x+2},${y+l} h${w-4}`,stroke:'#2a1b10','stroke-width':.5,opacity:.4})}
+ for(let i=0;i<24;i++){const a=R()*6.28,r=Math.sqrt(R());el(world,'use',{href:'#tree'+id,x:1250+Math.cos(a)*r*140-6,y:880+Math.sin(a)*r*80-8,width:12,height:14})}
+ el(world,'ellipse',{cx:1180,cy:630,rx:44,ry:20,fill:'#9db0a2',stroke:'#2a1b10','stroke-width':1.6});lbl(world,1180,668,'Lacus',{it:1,s:13});
+ // village wall with towers
+ {const wc=[];for(let a=0;a<6.2832;a+=.2){wc.push([625+Math.cos(a)*185,575+Math.sin(a)*98])}wc.push(wc[0]);
+  const wd=cr(wc);el(world,'path',{d:wd,fill:'none',stroke:'#2a1b10','stroke-width':7});el(world,'path',{d:wd,fill:'none',stroke:'#e6d3a3','stroke-width':4});
+  wc.forEach((q,i)=>{if(i%3===0)el(world,'rect',{x:q[0]-6,y:q[1]-6,width:12,height:12,fill:'#d4b57a',stroke:'#2a1b10','stroke-width':1.6})});
+  el(world,'rect',{x:590,y:662,width:22,height:18,fill:'#c9a864',stroke:'#2a1b10','stroke-width':2});}
+ // church with bell tower
+ el(world,'rect',{x:668,y:538,width:26,height:18,fill:'#e8dcc0',stroke:'#2a1b10','stroke-width':1.6});el(world,'rect',{x:695,y:526,width:8,height:30,fill:'#e8dcc0',stroke:'#2a1b10','stroke-width':1.4});
+ // farm
+ el(world,'rect',{x:452,y:635,width:36,height:22,fill:'#cdb27a',stroke:'#2a1b10','stroke-width':1.8});el(world,'rect',{x:452,y:635,width:36,height:9,fill:'#9a5a35',stroke:'#2a1b10','stroke-width':1.2});el(world,'rect',{x:490,y:648,width:16,height:12,fill:'#cdb27a',stroke:'#2a1b10','stroke-width':1.2});
+ // well and shrine
+ el(world,'circle',{cx:640,cy:560,r:9,fill:'#9db0a2',stroke:'#2a1b10','stroke-width':1.8});el(world,'path',{d:'M672,548 h14 v-10 l-7,-8 l-7,8Z',fill:'#e6d3a3',stroke:'#2a1b10','stroke-width':1.4});
+ // villa (large)
+ const v=el(world,'g',{transform:'translate(790,290)'});
+ el(v,'rect',{x:-58,y:-30,width:116,height:60,fill:'#e6d3a3',stroke:'#2a1b10','stroke-width':2.4});el(v,'rect',{x:-40,y:-14,width:80,height:28,fill:'#d4b57a',stroke:'#2a1b10','stroke-width':1.4});
+ for(let i=0;i<9;i++)el(v,'path',{d:`M${-52+i*13},-30 v-5`,stroke:'#2a1b10','stroke-width':2});
+ el(v,'path',{d:'M-58,-30 h116',stroke:'#2a1b10','stroke-width':2.4});
+ for(let i=0;i<10;i++)el(v,'circle',{cx:-27+i*6,cy:0,r:1.2,fill:'#6f7a45'});
+ // labels
+ lbl(world,640,530,'Forum Vici',{it:1,s:13});
+ lbl(world,580,510,'Collesanto',{s:20});
+ lbl(world,420,600,'Olivae',{it:1,s:14});
+
+ [...world.children].filter(c=>c.tagName==='text').forEach(t=>world.appendChild(t));
+ const mk=el(world,'g',{id:'cmarkers'});COL_SITES.forEach(m=>marker(mk,m));
+ compass(svg,1470,175,.9);scalebar(svg,1240,1000,240,'About a mile');
+ cartouche(svg,80,76,'COLLESANTO','THE HOLY HILL',CFG.col.sub,46);
+ const lg=el(svg,'g',{transform:'translate(88,880)'});
+ el(lg,'rect',{x:0,y:0,width:300,height:178,fill:'#e6d3a3',stroke:'#2a1b10','stroke-width':2,opacity:.92});
+ el(lg,'text',{x:150,y:26,'text-anchor':'middle','font-family':'Cinzel,serif','font-size':15,'font-weight':700,fill:'#2a1b10','letter-spacing':'.15em'},'LEGEND');
+ let ly=58;[['collis','Collis property'],['haven','Haven'],['key','Key site'],['rumor','Rumoured site']].forEach(([k,t])=>{const gg=el(lg,'g',{transform:`translate(34,${ly})`});
+  if(k==='rumor'){el(gg,'circle',{r:11,fill:'#e6d3a3',stroke:KIND[k].col,'stroke-width':2,'stroke-dasharray':'3 3'})}else{el(gg,'circle',{r:11,fill:KIND[k].col,stroke:'#2a1b10','stroke-width':2})}
+  el(lg,'text',{x:62,y:ly+5,'font-family':'IM Fell English,serif','font-size':15,fill:'#2a1b10'},t);ly+=30});
+ frame(svg,W,H);
+}
+
+// ---------- UI ----------
+let stageNo=2,cur='rome',after=false,sel=null,visible=null,fireSeen=false;
+if(location.search.includes('embed'))document.body.classList.add('embed');
+const stage=document.getElementById('stage'),view=document.getElementById('view');
+let T={k:.3,x:0,y:0};
+function applyT(){view.style.transform=`translate(${T.x}px,${T.y}px) scale(${T.k})`}
+function fit(){const w=stage.clientWidth,h=stage.clientHeight;const k=Math.min(w/1600,h/1100);T={k,x:(w-1600*k)/2,y:(h-1100*k)/2};applyT()}
+function zoomAt(f,cx,cy){const nk=Math.max(.15,Math.min(3,T.k*f));const r=nk/T.k;T.x=cx-(cx-T.x)*r;T.y=cy-(cy-T.y)*r;T.k=nk;applyT()}
+const ptrs=new Map();let last=null,pd=0;
+let moved=0;
+stage.addEventListener('pointerdown',e=>{ptrs.set(e.pointerId,[e.clientX,e.clientY]);moved=0;last=[e.clientX,e.clientY];if(ptrs.size===2){const [a,b]=[...ptrs.values()];pd=Math.hypot(a[0]-b[0],a[1]-b[1])}});
+stage.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId))return;ptrs.set(e.pointerId,[e.clientX,e.clientY]);
+ if(ptrs.size===1){moved+=Math.abs(e.clientX-last[0])+Math.abs(e.clientY-last[1]);if(moved>6&&!stage.hasPointerCapture(e.pointerId)){stage.setPointerCapture(e.pointerId);stage.classList.add('drag')}if(moved<=6)return;T.x+=e.clientX-last[0];T.y+=e.clientY-last[1];last=[e.clientX,e.clientY];applyT()}
+ else if(ptrs.size===2){const [a,b]=[...ptrs.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);const r=stage.getBoundingClientRect();if(pd)zoomAt(d/pd,(a[0]+b[0])/2-r.left,(a[1]+b[1])/2-r.top);pd=d}});
+const up=e=>{ptrs.delete(e.pointerId);stage.classList.remove('drag');last=ptrs.size===1?[...ptrs.values()][0]:null;pd=0};
+stage.addEventListener('pointerup',up);stage.addEventListener('pointercancel',up);
+stage.addEventListener('wheel',e=>{e.preventDefault();const r=stage.getBoundingClientRect();zoomAt(e.deltaY<0?1.15:1/1.15,e.clientX-r.left,e.clientY-r.top)},{passive:false});
+document.getElementById('zi').onclick=()=>zoomAt(1.3,stage.clientWidth/2,stage.clientHeight/2);
+document.getElementById('zo').onclick=()=>zoomAt(1/1.3,stage.clientWidth/2,stage.clientHeight/2);
+document.getElementById('zr').onclick=fit;
+window.addEventListener('resize',fit);
+
+function refresh(){
+ document.querySelectorAll('.mk').forEach(g=>{const id=g.dataset.id,m=[...ROME_SITES,...COL_SITES].find(s=>s.id===id);let hide=visible?!visible.has(id):+g.dataset.st>stageNo;if(m.burnOnly&&!after)hide=true;g.classList.toggle('hid',hide)});
+ document.getElementById('fireBtn').style.display=fireSeen?'':'none';
+ document.querySelectorAll('svg.map').forEach(s=>s.classList.toggle('after',after));
+ if(sel&&sel.classList.contains('hid'))hideCard();
+}
+document.querySelectorAll('[data-st]').forEach(b=>{if(b.tagName==='BUTTON')b.onclick=()=>{stageNo=+b.dataset.st;document.querySelectorAll('button[data-st]').forEach(x=>x.classList.toggle('on',x===b));refresh()}});
+document.getElementById('fireBtn').onclick=e=>{after=!after;e.target.classList.toggle('on',after);refresh()};
+function setMap(m){cur=m;document.getElementById('rome').classList.toggle('show',m==='rome');document.getElementById('col').classList.toggle('show',m==='col');
+ document.getElementById('tabRome').classList.toggle('on',m==='rome');document.getElementById('tabCol').classList.toggle('on',m==='col');hideCard()}
+document.getElementById('tabRome').onclick=()=>setMap('rome');document.getElementById('tabCol').onclick=()=>setMap('col');
+function showCard(m,g){if(sel)sel.classList.remove('sel');sel=g;g.classList.add('sel');
+ document.getElementById('ct').textContent=m.name;document.getElementById('ck').textContent=KIND[m.kind].name;document.getElementById('cd').textContent=m.desc;document.getElementById('card').style.display='block'}
+function hideCard(){document.getElementById('card').style.display='none';if(sel)sel.classList.remove('sel');sel=null}
+document.getElementById('cx').onclick=hideCard;
+stage.addEventListener('click',e=>{if(!e.target.closest('.mk'))hideCard()});
+
+window.addEventListener('message',e=>{if(e.source!==parent||!e.data||e.data.type!=='map')return;
+ visible=new Set(e.data.visible||[]);fireSeen=Boolean(e.data.fire);if(!fireSeen)after=false;refresh()});
+buildCity();buildCol();refresh();fit();
+if(parent!==window)parent.postMessage({type:'map-ready'},'*');
+</script>
+</body>
+</html>
