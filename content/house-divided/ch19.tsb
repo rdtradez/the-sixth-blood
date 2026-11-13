@@ -1,0 +1,348 @@
+// Book Four, Chapter 19 (session 49). All Saints' Eve 1866: the river's seat, the school's door, the Velati agent's box, the family, and the question in the city of the dead.
+// Opens with no phase (the autumn after the Institute), a short hunger scene that only runs if must_feed() is true, then one night phase of three actions out of four, then the cemetery as a fixed scene, then a dawn.
+// Reads b4.circle, b4.coven_home, b4.stand, b4.institute, b4.compact, b4.teche, b4.atlantic, b4.truth, b4.march, b4.aftermath, b4.watcher, b4.proof, b4.seal, b4.confession, b4.firm. Sets b4.seat, b4.pledge, b4.hand and b4.answer.
+// Ends with rest() and => next, which carries on to chapter 20.
+@chapter b4c19
+@title All Saints
+@version 1
+
+# start
+## The thirty first of October
+$ b4.seat = "refused"
+$ b4.pledge = "open"
+$ b4.hand = "kept"
+$ b4.answer = "keeping"
+$ do discover("all_saints_in_new_orleans")
+~> arrival
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is dusk on the eve of All Saints, and there are four things that want doing before midnight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# arrival
+## All Saints' Eve
+It is the best week of the New Orleans year, and it is the week of the dead. The cemeteries are whitewashed. Every tomb in the city has been scrubbed and lime washed since the first of the month, by families, with buckets, in their good clothes, laughing, and the whole of the Rue Saint Claude smells of wet chalk and chrysanthemums. There is a florist's cart at every corner. The candle sellers have sold out twice.
+It is three months since the Institute, and the city has not got over it, and is behaving as though it had. The General of the Army has called it by its name, in a telegram, and the telegram has been read in the North. There is a great election in a week, and the thing is spoken of at every table in Ohio as a reason. In the Tremé, the school has a waiting list of three hundred. In the Rue Royale, the shutters are open again, and the white families are saying that it was the fault of the agitators, and have stopped looking at their own hands.
+?if b4.stand == "broke"
+  The Chapter of the river houses sat on the fourteenth of August, in the great drawing room at Belle Rive, with every blind drawn. It was not a trial. It named the family as outside the Compact, and let it be known that no river house was to sit at its table or ship by its boats. It has been very quiet since. That is how the old blood makes war.
+?elif b4.stand == "kept"
+  The Compact has held, in the letter, and in your word, and the river houses have not forgiven you for what you did not do on the Rue Dryades, and have not forgotten that you could have. It is a very strange sort of peace. Everybody is polite. A servant at Belle Rive has been seen weeping into a bucket.
+?else
+  The Compact has been neither kept nor broken, and has been discussed, in three drawing rooms and a boat, as a question of grammar. It is the sort of thing that the river houses can talk of for a century.
+?end
+You have been in New Orleans seven years. You are, by the standard of the age, almost a native.
+?if coven_size() > 0 and b4.circle != "stay"
+  The family is in the house, and every one of them is occupied with the dead. Prisca has a list of the family's graves in the old St. Louis, a very short list, and a very long list of the ones that she says are hers by adoption. Fiammetta is carrying a bucket of lime wash, with a brush, and is white to the elbows. Hanno is making out a receipt for a dozen candles.
+?end
+There is a note on the table in the counting house, on a plain half sheet, in a clean quick hand, in Latin. It is not sealed. It says, *The old city. Midnight. I have my answer ready, I hope that you have yours.*
+The comma is in the right place.
+<~
+
+# hunger
+## The lime and the lamps
+* Walk down to the wharf, where the cats are, and take what the cats will not miss
+  $ do feed("animal")
+  $ humanity += 1
+  It is a thin sort of supper, with a great deal of fur in it. A one eyed tabby, a veteran of the wharf, who has sat on the Ice Company's ledger on every working day for three years, watches you do it with the weary tolerance of a colleague.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a laundress of the Marigny, on her feet since four, and she wants to be quick about it, because her sister is waiting with a basket of chrysanthemums. She counts the money, and says that she supposes that the dead can wait a quarter of an hour. She says that they have had a good deal of practice.
+* Take a man from the saloon on the Rue Chartres, who has been telling the room that it was all a great pity and that it was done by the wrong sort
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is a florid, kindly looking person, with a gold watch chain, who has told the story four times in four versions. He does not tell it a fifth. He is found at midnight on the steps of the Cathedral, in a very sound sleep, with a chrysanthemum in his buttonhole that he does not remember buying.
+<~
+
+# night
+## The eve
+:night
+?if actions_left() == 3
+  The lamps are lit in the whole of the old town, in every window, in memory of the dead, and the streets are full of persons going to the cemeteries with flowers and baskets and children, in a soft October dusk that smells of smoke, and lime, and the river.
+?elif actions_left() == 2
+  It is ten, and the candles are lit in the cities of the dead, and from the end of the Rue Basin they look, from a distance, like a whole town that has been left on, with the lamps burning, by somebody who meant to come back.
+?else
+  It is a quarter to midnight. The crowds are thinning. There is one thing left, and it is not on the list.
+?end
+* Go to Belle Rive, where Beaumont has asked you to sit with the river houses, and hear what they want of the winter [once] ?if actions_left() > 0
+  ~> seat
+  $ do act()
+* Walk to the school in the Tremé, where Honorine is waiting with her mother's lamp and a question that she has put off [once] ?if actions_left() > 0
+  ~> school
+  $ do act()
+* Go to the room above the counting house, where the Velati agent has laid out a box of letters and asked you to look at the commas [once] ?if actions_left() > 0
+  ~> agent
+  $ do act()
+* See to the family, and what it needs [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> cemetery
+?end
+-> :night
+
+# seat
+## Belle Rive
+$ do chart("neworleans.beaumont")
+They have put the seat in the middle of the table. It is a chair of black walnut, with arms, very old, very plain, and it is the chair in which the Chapter of the river houses has not sat for forty years because nobody has been willing to sit in it. It is where the Compact is read. It is where, in the old days, the oldest of the old blood of the river sat to judge the rest. It has a cushion on it, which somebody has put there tonight, in an agony of tact.
+There are six of them. Beaumont, gray and heavy and sleepless, with Isaure at his shoulder in black. Madame Lachapelle, in her great shawl, with a cane. Two others of the river whom you have met at suppers. And a very young one of the Gulf house, who has come up from Mobile on the steamer with a letter, and who stands against the wall in the manner of a person trying to be a coat.
+?if b4.teche == "answered"
+  The elder Delorme is not there. His chair has been taken out. Everybody has noticed. Nobody says so.
+?elif b4.teche == "truce"
+  The elder Delorme is there, with his cane, and a pie in a napkin, which he has brought for Beaumont, and which nobody will touch.
+?else
+  The Teche house is not there. It has not been asked. The empty place has been laid.
+?end
+They stand, as you come in. It is not a courtesy. You have been aware of it for some time, in the house, in the street, in the tavern, and you have never known how to say it: that the old blood stands up in the presence of the sixth, without being asked to, and without knowing that they are doing it, as the body takes a step back from a fire. You can feel it in the room, like a pressure at the back of the neck. They are quite old and quite strong, and every one of them is afraid.
+Beaumont says it. He says it plainly, for a man in a lace collar. He says that the river houses are a shambles. He says that they cannot keep their own children from the street, nor their own sons from the lynch law, and that the Chapter no longer has the weight to hold a Compact, even a bad one. He says that the war has left the old houses ruined, and that the Atlantic houses are looking at the river with an eye to a purchase, and that the Gulf is half dead. He says that there is one house in the whole of the South that is not afraid, and has the blood to keep what it makes, and has, in the sight of the whole of the city, taken a stand.
+He says that he would like you to sit in the chair.
+:the_seat
+* Sit in the chair, and take the river's seat, and make the Chapter into a court that every house, old and new, must answer to, with the sixth blood to keep it [once]
+  $ b4.seat = "held"
+  $ standing += 3
+  $ cunning_brutal += 1
+  $ velati_regard -= 1
+  You sit. It is not at all comfortable. It was not meant to be. The cushion slides, and a young woman at the wall catches it. Nobody breathes. Isaure goes, quite quietly, to the sideboard, and brings you a glass, as one brings a glass to a person who has been made a king and is going to have to be told so.
+  You say that the Chapter will sit on the first Monday of every month. You say that every house of the river will send a clerk. You say that it will hear a complaint from any person who has a blood debt, or a grievance, or a child out of a window, and that it will not be asked to hear it twice. You say that the family will keep the roll. Beaumont closes his eyes. He says, very low, that he did not think that anybody would say yes, and that he does not at all know whether he is glad.
+* Give the seat to Beaumont, on written terms: the Compact enforced against his own house first, and the Chapter open to the family's clerk [once]
+  $ b4.seat = "lent"
+  $ humanity += 1
+  $ standing += 1
+  $ do earn(-1)
+  Beaumont reads the terms twice. He has the face of a man who has been handed a bill that he has been dreading for a year, and who finds that it is, to his surprise, in his own handwriting. He says that he will take the chair. He says that it will not be what it was, and that it will be worse, and that it will be honest. He signs. He gives you back the pen with a very small bow. Madame Lachapelle says, quite loudly, that it is the first sensible thing that has been said in this room since the Mexican war.
+* Say that you will take no seat, and no chair, and no part in a court of the old blood, and that the family will keep its own house [once]
+  $ b4.seat = "refused"
+  $ secrecy += 2
+  $ humanity -= 1
+  There is a long silence. The young one of the Gulf house, against the wall, lets out a breath that she did not know she had. Beaumont nods slowly. He says that he was afraid that you would say that, and that he is, to his shame, relieved. Madame Lachapelle says that it is the answer of a person who has seen what a chair does to a man. She says that she would give a great deal to have given it herself, in eighteen twelve.
+?if b4.seat == "held" and coven_size() > 0 and b4.circle != "stay"
+  Prisca, who has come in behind you and has been standing against the door with her parasol, says at your ear that she will see to the roll. She says it with an air of the keenest private pleasure. She says that she has not been given a roll since Florence.
+?end
+$ do discover("the_river_houses_in_1866")
+<~
+
+# school
+## The Tremé
+$ do chart("neworleans.school")
+There is a lamp in the window, and the door is open, and there is a smell of chalk and of candle grease. The school has been scrubbed, all of it, from the front steps to the cellar, for the day of the dead. There are chrysanthemums on every desk. There is a row of small hats on pegs, and a row of small shoes under them, and a map of the world on the wall that someone has hung upside down, and nobody has had the heart to correct.
+Honorine is at the teacher's desk, with her sleeves rolled up, and a ledger, and a very small glass of something dark. She does not rise. She has been, since the thirtieth of July, a different sort of person: composed, rather thin, with a gaze that she did not have before. She has not once been unkind.
+?if b4.march == "walked"
+  She says that she has read the copybook again. She says that she wrote *Not yet* in it, on the thirty first, and that she is not sure that she meant it.
+?end
+?if b4.aftermath == "hospital"
+  There is a stain on the floorboards by the stove that will not scrub out. She has put a chair on it.
+?elif b4.aftermath == "names"
+  There is a copy of the sworn sheet on the wall behind her, framed, in a plain deal frame. It has been signed, by a number of persons, a second time.
+?else
+  There is a map on the wall with a line drawn on it in red chalk, from the Lake to the railway, and every station with a name. It is the Ice Company's. She has copied it out for the children.
+?end
+She says that she has something to say, and that it is the sort of thing that is easier to say to a person across a desk. She says that she has noticed everything. She has noticed that the family's doors are never open before sunset. She has noticed that there is a person in the house who is called Prisca who has been the same age as her grandmother for as long as there has been a Prisca. She has noticed that a man was seen to hold the stair of the Institute with his bare hands, or that a story was told. She says that she is a schoolmistress, and that it is her whole profession to notice.
+?if b4.truth == "all"
+  She says that you told her all of it, in the spring, and that she has been thinking about it for six months, and that she has come to a few conclusions. She says that the first is that she was told the truth, and that she is, in a very odd way, grateful.
+?elif b4.truth == "half"
+  She says that you told her half of it, in the spring, and that she has been working out the other half from the evidence. She says that she is rather good at it.
+?else
+  She says that you told her nothing at all, in the spring, and that she has found that a great many things can be told by a person's silence, if one is patient, and that she has been very patient.
+?end
+She says that the school is going to grow, and that it is going to need a deed, and a sponsor, and a roof, and that there are people in this city who would like very much to burn all three. She says that she would like to know what you want of it. She says that she would like to be told, before she is asked to be grateful.
+:the_school
+* Deed the school to her outright, the building, the lots and the endowment, in her own name, with the family's name nowhere on the paper [once]
+  $ b4.pledge = "deeded"
+  $ humanity += 2
+  $ standing -= 1
+  $ do earn(-6)
+  She reads it standing. She reads it twice. She says that she is a free woman of color, and that the law of the State of Louisiana will not, in the present temper of the legislature, long suffer a woman of color to hold a school under her own name. She says that she knows it. She says that she is going to do it all the same. She puts the deed in the drawer of the desk, and turns the key, and puts the key down her dress. She says that it is the most frightening gift that anyone has ever given her, and that she accepts it.
+* Offer her the keeper's oath, as the family gives it: a sworn friend of the house, who knows, and stays human, and is protected by every one of the family's hands, and whom the family will never call on without asking [once]
+  $ b4.pledge = "sworn"
+  $ humanity += 1
+  $ bond.armand += 1
+  ?if lone()
+    $ loyalty.keepers += 10
+  ?end
+  She hears the whole of it, with her chin in her hand. She asks three questions, and every one of them is a good one. She asks what a keeper is called upon to do, and what she is forbidden to say, and what the family owes her if she says no. She says that she will take it, but that she would like it to be written that the school is a school, and not an annex. You write it. She signs it with a steel pen, in a very firm upright hand, and underneath it, a little smaller, she writes the date, and the word *witnessed*.
+* Say that the door is open, and always will be, and that you will ask nothing, and promise nothing, and come when you are sent for [once]
+  $ b4.pledge = "open"
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  She looks at you for a long time. She says that it is a very poor sort of offer, and a very honest one, and that she supposes that she had better take it. She says that she will keep the lamp in the window, and that the day she turns it down she will send a note. She takes a pencil, and writes, quite slowly, on the edge of the ledger, *Door open*. Then she writes, underneath, *Not forever*.
+$ do discover("the_free_schools_of_the_treme")
+<~
+
+# agent
+## The room above the counting house
+$ do chart("neworleans.valere")
+The Velati agent has laid it all out on the table, in rows. There are nineteen letters. They are the Resident's post, copied in her own hand, from the Charleston and the Gulf packets and the River, and the dates run, in a long careful chain, from the winter of eighteen fifty nine to last week.
+?if b4.watcher == "open"
+  She has not asked you in for three months. She has asked you in tonight. She says that she is not sure that she can explain why, except that it has begun to seem to her a good deal less dangerous than the alternative.
+?elif b4.watcher == "guarded"
+  She has the door open and a chair at the table, and a pistol, quite visibly, in the drawer. She says that she did not expect you to take it as a discourtesy. She says that she has not had so much practice in trust.
+?else
+  She has her back to the wall and the table between you. She says that she does not expect to be thanked for this, and that she has not decided yet whether to be sorry.
+?end
+She says that every letter has the same hand in the corner. It is not the Resident's. It is a small, deliberate, ugly, correcting hand, which has set a comma in the margin of every packet that has gone through the Resident's office since the spring of eighteen sixty two. It has been there, she says, longer than that. She has been back through the files of the old consulate. It has been there, with a gap of nine years, since the fall of the Bastille.
+She says that it is not a person. It is a position. It has been held by a number of hands. It is, she says, the thing that is called, in the Aventine records, the Scribe, and nobody in the Senate has ever been able to say whose it is.
+?if b4.seal == "wrote"
+  She says that the letter that you wrote to the Senate in the war has the comma in it, at the end. It was put there afterwards. She says that she has measured it.
+?elif b4.seal == "trap"
+  She says that the trap that you set for the seal in the war has been sprung, and has been very well put back, and that she would have liked to meet the person who did it.
+?else
+  She says that you did not answer the Senate's letter in the war, and that it was answered for you.
+?end
+?if b4.proof == "memory"
+  She says that she has not forgotten what she showed you from the stair, and she would like it noted that she has been wondering ever since which of the two of you it has done more harm to.
+?end
+She has a list. It has three names on it. They are the three persons in the Resident's office, over the years, who have had the keys. One of them is dead. One of them is in Rome. One of them is, she says, in a place that she is not prepared to say.
+:the_agent
+* Write a letter to the Resident, with every comma exactly where it ought to be, and see who corrects it [once]
+  $ b4.hand = "trap"
+  $ cunning_brutal += 2
+  $ velati_regard += 1
+  She reads it, and her eyebrows rise by a hair. She says that it is the most elegant thing that she has seen done with a pen. She says that it will take a month to get to the right person, and a month back. She says that she will watch. She folds it into the Resident's packet with a quite particular care. She says that the Scribe will not be able to leave it alone. She says that it is, in her experience, the only vice that the Aventine office has ever been able to induce in a clerk.
+* Take the three names, and give them to her to carry to Rome, under the whole Senate's seal, and in your own hand [once]
+  $ b4.hand = "named"
+  $ velati_regard += 3
+  $ secrecy -= 1
+  She does not move for a moment. She says that you are aware that she will have to give it up, and that it is a thing that cannot be taken back. She says that it will be read in Rome by persons who have not been told anything for four hundred years, and that it will be read in a very bad light. She takes the sheet. She takes a long breath. She says that she is sixty one years in the service, and has never before been trusted with a name.
+* Say nothing, and keep the box, and the names, and the commas, for later [once]
+  $ b4.hand = "kept"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  She looks at the box. She looks at you. She says that it is a very wise thing, to hold a thing that nobody knows that you have, and a very lonely one. She says that she has the habit of it herself. She locks the drawer. She says that she will keep a copy, in a safe place, and that if she is ever found with her throat cut it will be sent to you.
+$ do discover("the_scribe")
+<~
+
+# family
+## The long room
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  ?if b4.coven_home == "raised"
+    The great hall on Gravier Street has its doors open, and a candle in every window. The family is in the yard. They have set out a table, and a cloth, and a long row of small cups, and a plate of the black sweet cakes that the cook calls the dead men's bread. It is a thing that they have decided that the house is to do, every year, on this night, for as long as it has a roof.
+  ?elif b4.coven_home == "hidden"
+    The little back rooms are lit, one after another, along the passage, and the free families of the street have come through in their Sunday clothes, with food in napkins, to sit with the family and the dead. It is quite quiet. A very old woman is telling a story, in a low voice, about a river.
+  ?else
+    The long room in the Marigny has a candle in every window and a chrysanthemum in a jar. The family is gathered at the table. There are three of them, or four, and it is a quiet house, and a pleasant one.
+  ?end
+  It is Hanno who speaks. He says that he has been keeping an account, and that it has occurred to him that the family has been in New Orleans for seven years. He says that it is the longest that he has stayed in any one place, since Carthage. He says that he does not at all know what to do with the feeling.
+?elif coven_size() > 0
+  The house is quiet. They are a long way off. There is a wreath on the table in brown paper, which Prisca has sent from wherever she is, and a card.
+?else
+  The house is quiet. You sit a while at the table with your hands in front of you. The gray cat on the sill is awake, and has the air of a person who has been told something in confidence.
+?end
+:the_family
+* Send Prisca to the river houses' widows, with a basket and a list, to learn who among the old blood is in want, and what they would sell [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca") and task("prisca") == ""
+  $ do send("prisca", "negotiate", 2)
+  Prisca says that it is the best errand that she has had in a century. She takes the basket, and the list, and a pound of the best tea, and goes out in her third best bonnet, to be kind, in a quite deliberate and calculating fashion, to nine very old ladies of the river who have not been called upon since the war.
+* Send Fiammetta to the Rue Dauphine, to see the three young ones of the house who have not yet learned to feed, and show them how it is done without a dead man [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta") and task("fiammetta") == ""
+  $ do send("fiammetta", "scout", 2)
+  Fiammetta goes with a face of extreme and terrifying responsibility. She has been a fledgling for four hundred years and has never been asked to teach a thing, and she has made, you perceive, a list. She says that she is going to be very patient, and that if anyone laughs she is going to hit them.
+* Set Hanno to the firm's books and the coven's, and to the question of what the whole family is worth if it were all put in a single boat [once] ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "business")
+  Hanno takes out a pencil, and a very long sheet. He says that he has been waiting for years for somebody to ask him this, and that he has already, in a sense, done it. He says that the answer is going to surprise nobody, and distress everyone, and that he is going to enjoy the whole of the afternoon.
+* Raise a house for the family, proper, with a hall and a roof and a name over the door, where whoever comes to it, from the river or the road, may be given a bed [once] ?if can_acquire("coven_house")
+  $ do acquire("coven_house")
+  $ standing += 2
+  $ humanity += 1
+  It takes the whole of the evening, and the whole of a long line of persons whose names you will never know. It is not a very large house. It is a very good one. Prisca walks through it, at the end, with her gloves in her hand, and says that she can think of no house in the whole of her experience that has been made for so little reason, and with so much, and that she is going to cry, in her room, later, at her leisure.
+* Give the fledglings a hall of their own, with a master of arms, and a master of letters, and a rule against any of them feeding alone [once] ?if can_acquire("training_hall")
+  $ do acquire("training_hall")
+  $ humanity += 1
+  It is a long low room above the ice houses, with sawdust on the floor and a blackboard. Fiammetta has put her name on the door in chalk. She has put the word *Master* in front of it, and then crossed it out, and put *Mistress*, and then crossed that out, and put *Fiammetta*. She says that it is only for now.
+* Put an honest sum into a vault of your own, under a bank that does not ask the name, in case the family should ever need to leave in the night ?if can_acquire("vaults")
+  $ do acquire("vaults")
+  $ secrecy += 1
+  It is done in the back of a Greek's counting house, in cash, in twenty minutes. The Greek says that he has been waiting for twenty years for a customer who would put in more than he took out. He says that it makes him nervous.
+* That will do for the family
+  -> :family_done
+-> :the_family
+:family_done
+<~
+
+# cemetery
+## The old city
+$ do chart("neworleans.lots")
+It is a quarter to twelve when you get to the old cemetery on the Rue Basin, and it has the look of a city on the night of a coronation. The tombs are white. They stand close, in their narrow lanes, like houses in a quarter, and every house has a candle, and a pot of flowers, and a card. There are people everywhere, as there always are, in the dark, sitting on the steps of the vaults, with their hats on their knees, and a flask. It is not a mournful place. It is a very well attended one.
+He is on a bench by the wall of the oldest row, under a cypress, with his hat on his knee. He has a lantern at his feet. He has brought flowers, a bunch of the yellow chrysanthemums of the Rue Dauphine, and he has put them, with a certain exactness, on a very small vault with no name on it. He rises, as you come up, with the small old courtesy.
+?if b4.confession == "struck"
+  There is a bruise along his jaw, the color of a plum, which has not faded in six months. It is, you suppose, the only one that he has had in a very long time. He wears it as he wears the brown coat.
+?elif b4.confession == "heard"
+  He nods, as he would to a person across a table in a good house. He does not say that he is glad to see you. It is understood.
+?else
+  He does not mention the garden. He holds out his hand, as one does to a person at a funeral, and does not seem to mind in the least whether you take it.
+?end
+?if coven_size() > 0 and b4.circle != "stay"
+  They have come, the three of them, to put flowers on the graves, and they are standing, quite near, in the next lane, with a lantern. He looks at them. He looks at them for a long time. Prisca, who has been the same age as a monument for nine hundred years, looks back, and then, to your very great astonishment, drops him a small, grave, perfect curtsey. He bows. It is the bow of a man who has been bowed to by queens, and was never so moved. Fiammetta, behind her, has her fists clenched. Hanno says, quite audibly, that it is exceedingly interesting.
+  "They are yours," says Cassian. He says it in Latin. "That is the thing that I did not expect. I thought that you would be alone."
+?end
+He says that he has the question that he said that he would put. He says that he has been rehearsing it for a very long time, and that he has been turning it over since a village, in the south, where he asked you what you would do with a place. He says that it was a good question, and that it was the wrong one, and that the right one is this.
+He says, "What is a house for?"
+He says that he does not mean the house of the sixth blood only. He means the thing. He means a Chapter, and a Compact, and a school, and a bank, and a family of the old blood in a long room with a cat. He says that he has watched them all, for eighteen centuries, and that every one of them has been, at some time, a house for something, and that every one has died of having forgotten what.
+:the_question
+* "A house is a shelter. It is for the ones who have no other, and it is for them before it is for us." [once]
+  $ b4.answer = "shelter"
+  $ humanity += 2
+  $ standing += 1
+  He nods. He says that it is what a good man would say, and that it is a thing that has, in his experience, been said at the founding of every house that has ever been burnt. He says that it is not an argument against it.
+* "A house is a strength. It is for being so strong that nobody has to ask leave to be what they are." [once]
+  $ b4.answer = "strength"
+  $ cunning_brutal += 2
+  $ standing += 2
+  $ humanity -= 1
+  He nods. He says that it is the answer of a man who has stood in a stair with his own back for a wall. He says that it is a thing that has, in his experience, been said at the founding of every house that has ever become a tyranny. He says that it is not an argument against it either.
+* "A house is a promise. It is a thing kept across years, for the ones who come after, and it is only what it keeps." [once]
+  $ b4.answer = "keeping"
+  $ humanity += 1
+  $ secrecy += 1
+  $ standing += 1
+  He is silent for a long time. He says that it is the answer that he had hoped for, and the one that he gave himself, a long time ago, in a grain office, on the coast of Italy, when he was a clerk and a slave and a man of twenty six. He says that he has not, in all this time, been sure that he kept it.
+He says that he said that he would give you his name, and that he does not keep many of his promises, but that he is old enough to have been taught that it is the one that matters. He says it as one says a street address. It is quite short. It is Nikanor. It is Greek. He says that it is the name that was given to a boy in a clerk's house at Ostia, who kept the tallies of the grain, and who could write four hands, and who was not free. He says that he has not heard it in eighteen centuries, and that it is a good deal stranger to hear than he had thought.
+You hear it. You hear a whole life in it, as one hears a house in a key.
+$ do discover("nikanor_of_ostia")
+?if b4.answer == "shelter"
+  "Keep it," he says. "Keep the door. It is the one thing that I have never been able to do." He looks down the long white lane of the dead. "It will cost you everything, in the end. It is the only thing that is worth it."
+?elif b4.answer == "strength"
+  "Have a care," he says. "It is a very good house that is built of strength, and a very poor one to live in. I should like to see what you do with it." He says it without a particle of unkindness.
+?else
+  "Then keep it," he says. "Keep it past the lifetime of every person who is in it. I will not be there. Somebody will have to be." He takes up the lantern. "I did not do the thing on the Rue Dryades, and I did not prevent it. I have been, in my time, a good deal more guilty of the second."
+?end
+He says that he will go. He says that he has a thing to do in the north, and that it will take him a good many years, and that he does not think that he will come again, in this city. He says that he thinks that he will see you in London. He says that he knows what the sixth blood does when it wakes, and that it is going to be needed.
+He picks up the lantern. He puts on his hat. He walks away down the long white lane, among the tombs and the candles, between the families with their baskets, and nobody looks at him, and by the end of the row you cannot be certain that you have ever seen him at all.
+There is a candle on the small vault with no name. It is burning very steadily. You stand a while beside it.
+-> dawn
+
+# dawn
+## All Saints
+It is a bright, windy, blue morning, with a cold edge to it, the first real morning of the autumn, and the bells are ringing in every church in the city. The people are coming back from Mass with their flowers. The cemeteries are open. The tombs are full of the sound of children, and of the particular cheerfulness of a city that has buried its dead and is going to have dinner.
+?if b4.seat == "held"
+  The first sitting of the Chapter is called for the first Monday of the month. The roll has been drawn up in the night by Prisca, in fair copy, and it is on the table of the counting house, under a stone. It has forty seven names. It is the first time that anyone has seen the whole of the river written down in one place.
+?elif b4.seat == "lent"
+  Beaumont's clerk has been at the counting house since seven with a copy of the terms, to be witnessed. He is a nervous young man with ink on his cuffs. He says that his master has not slept, and that he has been walking up and down the gallery at Belle Rive since two, saying the word *honest* to the portraits.
+?else
+  There is no word from Belle Rive. It is the silence of a house that has been refused, and has, on reflection, found that it is not as sorry as it thought.
+?end
+?if b4.pledge == "deeded"
+  There is a printed card in the post. It is from the school, in a plain upright hand, and it says that the school will open as usual, under the direction of Honorine Armand, and that it is hoped that the community will support it.
+?elif b4.pledge == "sworn"
+  There is a note under the door in a firm upright hand, with a small drawing in the margin of a lamp. It says only, *Witnessed.*
+?else
+  There is a bag of coffee on the step, from the school, with a note. It says that the door is still open. It does not say for how long.
+?end
+?if b4.hand == "named"
+  The agent's boat sailed at dawn, with a letter in the Senate's pouch. It was the first time that she had left the city in six years. She did not say goodbye.
+?elif b4.hand == "trap"
+  The letter went into the Resident's packet at six, with a comma in every place that it belonged. There is nothing to do now but wait for it to be corrected.
+?else
+  The box is in the drawer, and the key is in her pocket, and it is not mentioned.
+?end
+?if b4.firm == "coven"
+  The Ice Company's wagons are out early, with a wreath on every one, for the dead of the Institute. They go down the river road in a long line. It is not a thing that anyone has asked for.
+?end
+It is the first of November, 1866, and a Thursday, and you have been awake for a very long time.
+There is a message by the first post, in a clean quick hand, which is not in Latin. It is in Greek. It is two words. It says, *Keep it.*
+There is no comma.
+$ do rest()
+=> next

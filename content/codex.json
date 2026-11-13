@@ -859,6 +859,30 @@
       "title": "The infirmary in the Tremé",
       "book": "house-divided",
       "text": "On the night of 30 July the school and its neighbors became a hospital of a hundred and sixty beds. It was run by a schoolmistress, a physician with one arm in a bandage, and anyone who could hold a basin."
+    },
+    "all_saints_in_new_orleans": {
+      "category": "lore",
+      "title": "All Saints in New Orleans",
+      "book": "house-divided",
+      "text": "On the first of November the families of the city whitewash the tombs, light candles and bring chrysanthemums to the cemeteries, and stay late. The night before is a quiet festival of its own."
+    },
+    "the_free_schools_of_the_treme": {
+      "category": "places",
+      "title": "The free schools of the Treme",
+      "book": "house-divided",
+      "text": "After the war the free families of color kept schools of their own in rented halls and back rooms, against the law's neglect and often its hostility. Some had a waiting list of hundreds."
+    },
+    "the_scribe": {
+      "category": "lore",
+      "title": "The Scribe",
+      "book": "house-divided",
+      "text": "An office, not a person, in the old Velati records. Whoever holds it reads the Senate's post, and leaves a mark in the margin. Nobody in Rome can say whose hand it is."
+    },
+    "nikanor_of_ostia": {
+      "category": "people",
+      "title": "Nikanor of Ostia",
+      "book": "house-divided",
+      "text": "A clerk of a grain office on the coast of Italy, born a slave, who kept the tallies and could write four hands. It is the name your maker gave you on All Saints' Eve, 1866."
     }
   }
 }
