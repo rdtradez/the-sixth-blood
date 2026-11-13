@@ -3654,6 +3654,195 @@
       "major": false,
       "default": "none",
       "note": "Chapter 20: whether he left a letter at the house in the rue Saint-Jacques"
+    },
+    "b4.trouble": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "fled",
+        "fought",
+        "talked"
+      ],
+      "book": "house-divided",
+      "default": "none",
+      "note": "Chapter 1: how he got out of being woken early (none if he was not)"
+    },
+    "b4.first_feed": {
+      "kind": "enum",
+      "values": [
+        "animal",
+        "donor",
+        "human",
+        "none"
+      ],
+      "book": "house-divided",
+      "default": "animal",
+      "note": "Chapter 1: how he took the first meal of the age (none if he went without)"
+    },
+    "b4.emperor": {
+      "kind": "enum",
+      "values": [
+        "bluffed",
+        "asked",
+        "blustered"
+      ],
+      "book": "house-divided",
+      "default": "bluffed",
+      "note": "Chapter 1: how he took the news of the Emperor"
+    },
+    "b4.books": {
+      "kind": "enum",
+      "values": [
+        "trusted",
+        "audited"
+      ],
+      "book": "house-divided",
+      "default": "trusted",
+      "note": "Chapter 1: trusted the steward's books or audited them"
+    },
+    "b4.estate": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "held",
+        "sale",
+        "inquiry"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "unseen",
+      "note": "Chapter 1: what he ordered for the sugar estate and the people on it (unseen unless the long sleep was a dark order)"
+    },
+    "b4.street": {
+      "kind": "enum",
+      "values": [
+        "read",
+        "spoke",
+        "watched"
+      ],
+      "book": "house-divided",
+      "default": "watched",
+      "note": "Chapter 1: how he met the age on the first night"
+    },
+    "b4.circle": {
+      "kind": "enum",
+      "values": [
+        "all",
+        "ahead",
+        "stay"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "stay",
+      "note": "Chapter 1: whether the coven (or a keeper, on the lone path) comes with him, follows later as his arm, or stays"
+    },
+    "b4.crane_reply": {
+      "kind": "enum",
+      "values": [
+        "burned",
+        "kept",
+        "answered"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "burned",
+      "note": "Chapter 1: what he did with Crane's letter"
+    },
+    "b4.passage": {
+      "kind": "enum",
+      "values": [
+        "cabin",
+        "hold",
+        "cargo"
+      ],
+      "book": "house-divided",
+      "default": "cabin",
+      "note": "Chapter 1: how he crossed the Atlantic"
+    },
+    "b4.planter": {
+      "kind": "enum",
+      "values": [
+        "heard",
+        "crossed",
+        "charmed"
+      ],
+      "book": "house-divided",
+      "default": "heard",
+      "note": "Chapter 2: how he answered Colonel Dufresne on the packet"
+    },
+    "b4.doctor": {
+      "kind": "enum",
+      "values": [
+        "talked",
+        "helped",
+        "avoided"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "avoided",
+      "note": "Chapter 2: what he did for Dr. Armand on the packet"
+    },
+    "b4.photograph": {
+      "kind": "enum",
+      "values": [
+        "sat",
+        "refused",
+        "hid"
+      ],
+      "book": "house-divided",
+      "default": "refused",
+      "note": "Chapter 2: the photograph at the levee"
+    },
+    "b4.valere": {
+      "kind": "enum",
+      "values": [
+        "sworn",
+        "trusted",
+        "distant"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "trusted",
+      "note": "Chapter 2: how much he told the Valere of Louisiana"
+    },
+    "b4.venture": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "steamboats",
+        "banking",
+        "sugar",
+        "schools",
+        "cotton"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 2: the first Collis venture in New Orleans"
+    },
+    "b4.auction": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "stood",
+        "bought"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 2: what he did at the dealer's yard on Baronne Street"
+    },
+    "b4.haven": {
+      "kind": "enum",
+      "values": [
+        "tomb",
+        "rented",
+        "built"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "tomb",
+      "note": "Chapter 2: where he lies by day in New Orleans"
     }
   }
 }

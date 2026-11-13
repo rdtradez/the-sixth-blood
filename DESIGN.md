@@ -66,6 +66,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 36: Book Three chapters 15 and 16
 - [x] Session 37: Book Three chapters 17 and 18
 - [x] Session 39: the New Orleans and Collesanto (1859) maps for Book Four
+- [x] Session 40: Book Four chapters 1 and 2
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
@@ -496,3 +497,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 
 - `app/maps/neworleans.html` draws New Orleans and Collesanto as they stand in 1859 (the approved preview). `engine/maps.js` gains `neworleans` (`wharf`, `bank`, `lots`, `sugar`, `school`, `valere`, `haven`, `beaumont`, `market`, `treme`, `velati`, `roadhome`) and `collesanto4` (`farm`, `square`, `villa`, `press`, `gate`, `refuge`, `crypt`, `road`), both for book `house-divided` on page `neworleans`. Book Four chapters chart sites with `$ do chart("neworleans.bank")`.
 - Site ids are unique across the two maps of the book. `sw.js` caches the new page (`VERSION` is `tsb-13`). London, Chicago and New York follow the same pattern.
+
+### Session 40 notes (Book Four, chapters 1 and 2)
+
+- Book Four ("house-divided") begins. Chapters `b4c01` and `b4c02` are in `content/house-divided/` (`ch01.tsb`, `ch02.tsb`). The manifest entry is `"incomplete": true`, so the game pauses on "To be continued" after chapter 2 and carries on by itself when chapter 3 is added.
+- Chapter 1 reads the chained `wake()` report (place, steward, outcome, who woke him, and the orders of the long sleep) for every combination. He wakes in Paris (haven or tomb) or on the hill, so chapter 1 ends by setting out for Le Havre and chapter 2 is the crossing and New Orleans. Chapter 1 is a night phase of three actions out of four and ends with `rest()` and `=> next`. Chapter 2 opens with no phase (the crossing, a night on deck, the levee), has a short hunger scene that only runs if `must_feed()` is true on entry, then one night phase of three actions out of four and a short dawn; it ends with `rest()` and `=> next`, which pauses until chapter 3 exists. Chapter 3 should read hunger, standing and secrecy as chapter 2 left them.
+- New decision flags use the `b4.` prefix and are registered in `content/flags.json` with `book`, `major` where later chapters care, and a quick start `default`: `b4.trouble`, `b4.first_feed`, `b4.emperor`, `b4.books`, `b4.estate`, `b4.street`, `b4.circle`, `b4.crane_reply`, `b4.passage` (chapter 1) and `b4.planter`, `b4.doctor`, `b4.photograph`, `b4.valere`, `b4.venture`, `b4.auction`, `b4.haven` (chapter 2). `b4.circle` says whether the coven (or a keeper, on the lone path) came with him, follows later, or stayed; later chapters should read it with `coven_size()`.
+- The coven is offered work from the first chapters: chapter 1 asks where it goes, chapter 2 offers a coven house (`acquire("coven_house")`) and standing tasks (`coven_task`) for Prisca, Fiammetta and Hanno if they are in the circle. Later chapters should use the Coven tab's tasks and missions in scenes (havens to build out, businesses, rival covens).
+- The manifest, hero alias (`Monsieur Colline`) and company name (`Colline et Compagnie`, in `content/rules.json`) are set for the book. New people (`content/people.json`): Honoré Valère, Filippo Valerio, Aurélien Valère, H. Crane, Dr. Léonce Armand and Philomène. New codex entries: New Orleans in 1859, the Second Empire, the river houses, the free people of color, cotton and the slave economy, and the Exchange and the yards. Content notes: both chapters carry `blood` and `slavery`.
+- Chapter 2 charts `neworleans.wharf`, `neworleans.valere`, `neworleans.bank`, `neworleans.lots`, `neworleans.haven`, `neworleans.beaumont` and, if the school is founded, `neworleans.school`; chapter 1 charts `collesanto4.road` when he leaves the hill. It uses `invest()` (the `nola.*` ventures) and can call `earn()`. No fights, no new engine behavior, so no new schema or migration.
+- Tests: `tests/book4.test.js` plays both chapters from eight kinds of waking and every passage, circle, venture, auction and haven, with and without a coven, for four origins and paths, and checks the no dashes, no braces and no daylight rules.
+- Plans are in `SPOILERS/house-divided.md`.
