@@ -74,6 +74,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 45: Book Four chapters 11 and 12
 - [x] Session 46: Book Four chapters 13 and 14
 - [x] Session 47: Book Four chapters 15 and 16
+- [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
@@ -584,4 +585,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New codex entries: the surrender of 1865, the fall of Mobile, the river houses after the war, the doctor come home, the winter laws of 1865, the Atlantic court, the Black Codes. Content notes: chapter 15 `blood`, `slavery`, `war`; chapter 16 `blood`, `slavery`. No new engine behavior, so no schema or migration.
 - Tests: `tests/book4.test.js` plays chapters 15 and 16 down every circle, waking, haven, firm, Gulf answer and warehouse, takes every recorded choice, and expects sixteen chapters.
 - Sessions 43 to 46 were not merged when this session started, so the session 47 branch is stacked on session 46. Merge them in order.
+- Plans are in `SPOILERS/house-divided.md`.
+
+### Session 48 notes (Book Four, chapters 17 and 18)
+
+- Chapters `b4c17` and `b4c18` are in `content/house-divided/` (`ch17.tsb`, `ch18.tsb`), about 10,000 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 18. Chapter 17 has the usual shape (an opening with no phase, a short hunger scene that only runs if `must_feed()` is true, one night phase of three actions out of four, and a long dawn). Chapter 18 is the first Book Four chapter built round a day phase: a morning of three actions out of four, then one fixed scene at noon, then a choice in the evening, then the dawn. The hero reads the heat of the day as no weakness, as in the earlier books of the Burning City.
+- Coven focus, as the owner asked: both chapters put the family and its houses at the center. Each has errands for Prisca and Fiammetta and a task for Hanno while he has none. Holdings offered only on the lone path through `can_acquire`: `relic_vault` (chapter 17) and `shell_identities` (chapter 18). Coven path players have no unused holding left in these chapters, so the errands carry the coven's part.
+- New decision flags (`b4.` prefix, registered): `b4.confession`, `b4.proof`, `b4.truth`, `b4.convention` (chapter 17) and `b4.stand`, `b4.march`, `b4.troops`, `b4.institute`, `b4.aftermath` (chapter 18). `b4.confession`, `b4.truth`, `b4.stand`, `b4.institute` and `b4.aftermath` are the ones later chapters should read first. Chapter 19 should read `b4.stand` together with `b4.institute`.
+- New codex entries: the Freedmen's Bureau, the convention of 1866, the Mechanics' Institute, the river houses in 1866, the free men of color, and three more. Content notes: chapter 17 `blood`, `slavery`; chapter 18 `blood`, `violence`, `slavery`, `war`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book4.test.js` plays chapters 17 and 18 down every circle, waking, haven, Velati and Compact answer, takes every recorded choice (including every road at the noon scene and in the evening), checks the errands and the lone path holdings, and expects eighteen chapters. The chapter 16 test no longer expects a pause.
+- Sessions 43 to 47 were not merged when this session started (pull requests #42, #43 and #44 are open, and the session 47 branch has no pull request), so the session 48 branch is stacked on session 47. Merge them in order.
 - Plans are in `SPOILERS/house-divided.md`.

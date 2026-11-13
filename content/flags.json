@@ -4420,6 +4420,115 @@
       "major": true,
       "default": "left",
       "note": "Chapter 15: the Gulf house's families on the Lake road after the fall of Mobile"
+    },
+    "b4.confession": {
+      "kind": "enum",
+      "values": [
+        "heard",
+        "struck",
+        "left"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 17: the maker's confession in the Cathedral garden"
+    },
+    "b4.proof": {
+      "kind": "enum",
+      "values": [
+        "memory",
+        "told",
+        "none"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 17: the proof of the confession, from the Velati agent"
+    },
+    "b4.truth": {
+      "kind": "enum",
+      "values": [
+        "all",
+        "half",
+        "none"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 17: what he told Honorine at the school"
+    },
+    "b4.convention": {
+      "kind": "enum",
+      "values": [
+        "paper",
+        "lodged",
+        "apart"
+      ],
+      "book": "house-divided",
+      "major": false,
+      "default": "apart",
+      "note": "Chapter 17: the family's part in the summer convention"
+    },
+    "b4.stand": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "broke",
+        "letter"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "letter",
+      "note": "Chapter 18: Beaumont's call of the first article on the morning of 30 July"
+    },
+    "b4.march": {
+      "kind": "enum",
+      "values": [
+        "walked",
+        "carried",
+        "watched"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "watched",
+      "note": "Chapter 18: the procession from the Treme on 30 July"
+    },
+    "b4.troops": {
+      "kind": "enum",
+      "values": [
+        "pressed",
+        "wired",
+        "none"
+      ],
+      "book": "house-divided",
+      "major": false,
+      "default": "none",
+      "note": "Chapter 18: the attempt to get the Army into the street on 30 July"
+    },
+    "b4.institute": {
+      "kind": "enum",
+      "values": [
+        "held",
+        "led",
+        "ran",
+        "watched"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "ran",
+      "note": "Chapter 18: what he did at the Mechanics' Institute at noon"
+    },
+    "b4.aftermath": {
+      "kind": "enum",
+      "values": [
+        "hospital",
+        "names",
+        "north"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "hospital",
+      "note": "Chapter 18: the evening after the Institute, in the school in the Treme"
     }
   }
 }

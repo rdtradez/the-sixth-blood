@@ -1,0 +1,323 @@
+// Book Four, Chapter 17 (session 48). May 1866: the maker comes to New Orleans and says what he did in the fire; the proof; the school; the summer's convention.
+// The confession is the opening (no phase). Then a short hunger scene that only runs if must_feed() is true, then one night phase of three actions out of four, and a long dawn.
+// Reads b4.circle, b4.coven_home, b4.firm, b4.honorine, b4.watcher, b4.seal, b4.petition, b4.codes, b4.court, b4.teche, b4.physician, b4.school. Sets b4.confession, b4.proof, b4.truth and b4.convention.
+// Ends with rest() and => next, which pauses until chapter 18 exists (the manifest entry is incomplete).
+@chapter b4c17
+@title The Man Who Answered
+@version 1
+
+# start
+## A box of wax
+$ b4.confession = "left"
+$ b4.proof = "none"
+$ b4.truth = "none"
+$ b4.convention = "apart"
+$ do discover("the_freedmens_bureau")
+~> arrival
+~> garden
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is not yet one in the morning, and there are four things that want doing before it is light, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# arrival
+## The sixteenth of May
+It is the middle of a hot damp spring, the roses over on every wall in the Faubourg Marigny, and the whole city smelling of river mud and of the oranges that the schooners bring up from the Gulf. There is a new kind of quiet about it. The war has been over for a year, and it has not yet been decided what it was for.
+The Legislature has gone home. The Bureau has opened an office on the Rue Camp, with a flag, and a very long queue. In the Tremé, the school has a hundred and ten pupils, and a waiting list, and a roof that does not leak. There is talk of a convention in the summer. It is not a thing that anyone in a good coat will say aloud.
+?if b4.teche == "truce"
+  The elder Delorme has sent a pie, twice, by a servant who does not know how to carry it. It has been eaten both times. Fiammetta says that it is the only pie she has ever met that has apologized.
+?elif b4.teche == "answered"
+  The Chapter sat in January, and the elder Delorme stood up in it, in his own person, and read every fire, and every ring, and paid. It was not a thing that anybody present has forgotten. The Teche house has been very quiet since. It has the look of a thing that has been sentenced to be good.
+?else
+  The Teche house is a shut door in the country, with a ring on the gate. A cart goes by it, now and then, with its driver's eyes front. Nobody has gone in. Nobody has come out.
+?end
+There has been no letter from Charleston for a month. You have begun, a little, to hope.
+The box comes at dusk. It is not much of a box: a small flat thing of dark wood, the size of a prayer book, with no mark on it, left on the step of the counting house by a boy who had been given a silver dollar and who does not know by whom. It is not sealed. There is nothing inside it but a tablet of wax in a frame, of the old kind, such as a Roman schoolboy would have carried, and in the wax, in a clean quick hand that you have not seen for eighteen hundred years, two words of Latin.
+*Venio. Sede.*
+I come. Sit.
+You sit for a long time with it on your knee. You know the hand. You would know it in the dark, and you have, many times. It was the hand that wrote, in the ashes of a hearth in Collesanto, in the first week, the only instruction that you were ever given. *Do not tell them who made you.*
+<~
+
+# garden
+## The garden behind the Cathedral
+$ do chart("neworleans.wharf")
+It is midnight, and the garden is empty, and it is full of jasmine. There is a low iron gate, and a gravel walk, and a pair of lamps, and the great gray flank of the Cathedral going up into the dark. There is a bench under the magnolia. There is a man on it.
+He is not what you had imagined, and you had imagined him a great many ways. He is a middling man, in a good brown coat, rather worn at the cuffs, with a gray hat on his knee and a stick laid across the bench beside him. He might be fifty. He has the face that a good clerk has, or a very old priest: a face that you have to look at twice, and then cannot stop looking at, and cannot afterwards describe. He is reading, by the lamp, a copy of the Valère paper, with the whole of his attention, and with a faint, pleased, critical frown, as one reads a thing that one has been told is good.
+He does not look up. He says, in Latin, in the voice of a man asking after the weather, "You have let them put a comma in the wrong place on the second page."
+Then he folds the paper, and puts it on the bench, and stands, with a small old courtesy, and looks at you.
+It is the face from the villa. It has not aged by an hour. It has been, in the meantime, a priest of Lyon, and a physician of Vienna, and a banker of Amsterdam, and a good many others, and it wears the present name, which is a plain one, like a hat. He says that it is Caron, here, Monsieur Caron, of Bordeaux, in wine. He says that he has been in the city nine days. He says that he has walked a great deal of it. He says that he has seen the market on the Rue Chartres, and the Exchange, and the school in the Tremé, and the house on Gravier Street, and he has spent an hour, last Thursday, looking at the portrait of the sixth blood's house that is, he understands, being painted for a lady. He says that it is a very good house. He says it more simply than anything that you have ever heard him say.
+[captured freed house_slave] He says it standing very close to the iron gate, and you see him look, for just a moment, down the Rue Royale, towards the rotunda, and you see that he knows exactly what he is looking at, and has seen it, in a great many other places, and for a great many centuries, from a good many sides.
+He says that he has been told that you are looking for him. He says that he has been told, by a good many persons, a great many things that he has not troubled to deny. He says that there was a letter, from Charleston, that was written to deceive somebody, and that it was answered, by him, because it is a habit of his to read the Resident's post, and has been since the spring of eighteen sixty two, and that he thought it would be a courtesy.
+He says that he has come to say a thing that he has not said for eighteen centuries.
+:the_garden
+He says it as he says everything, quite level. He says that he has watched you for a long time, and that he is going to tell you what became of {pg("spouse", "your husband", "your wife", "your spouse")}, {spouse.name}, in the fire at Collesanto, because you have been told a story, and it was not true, and it was his.
+"Your {pg("spouse", "husband", "wife", "spouse")} did not die of the fire," says Cassian.
+* Hit him, and keep hitting him, with everything the sixth blood has, in the open garden
+  $ b4.confession = "struck"
+  $ humanity -= 2
+  $ cunning_brutal += 3
+  $ secrecy -= 2
+  $ do witness(1)
+  You do not decide to. There is a sound in the garden like a falling door. The first blow takes him in the face and he goes back against the Cathedral wall, and does not raise a hand, and the second brings him down on one knee in the gravel, and the third is not a blow so much as an opening of something, in you, that has been shut since a night in the Roman summer. The jasmine is on the ground. A lamp has gone over. You do not know how many there are. A gardener in the doorway of the sacristy, with a rake, has crossed himself and gone back in.
+  When it is over, he is on his knees, and bleeding, and he has not defended himself in the least. He wipes his mouth. He looks at his hand. There is something in his face that you do not recognize at first, because you have never seen it there. It is pride. He says, quite gently, that it was a great deal better than he had hoped. He says that in the whole of the line, in eighteen hundred years, no one has done that to him, and that he had begun to think no one could. He says, "Now let me finish."
+  You let him. He does it kneeling, which is not a thing that he arranged.
+* Hear him out, standing, every word, and say nothing at all until it is done
+  $ b4.confession = "heard"
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  You stand with your hands at your sides. It is the hardest thing that you have done in eighteen centuries.
+* Say that you do not want it, and walk out of the garden, and leave him on his bench
+  $ b4.confession = "left"
+  $ secrecy += 1
+  $ humanity -= 1
+  $ cunning_brutal -= 1
+  You say that you have heard enough. It is not true. You turn, and you go down the gravel to the gate, and you put your hand on the iron, which is cool. You are very nearly through it when he speaks again, quite quietly, behind you, in the old Latin, with no more weight than a man reading out a date. He says that the fire did not touch {spouse.them}. He says that he did. He says that it was before the villa fell, and that it was by hand. He says the name of the night. You stand with your back to him. You do not turn. You do not go.
+?if b4.confession == "heard" or b4.confession == "struck"
+  He says it in order, as a thing is said that has been rehearsed for a very long time and has been found, in the end, to be impossible to improve. He says that he had traced the branch for three hundred years. He says that when the Igniferi came up the hill he was already at the door of the house in the village, and that {spouse.name} was awake, and alone, with the children in the next room, and had a knife. He says that {spouse.they} {spouse.were} not afraid. He says that he had not meant to be seen.
+  He says that he took {spouse.their} blood. He says that he had need of it. He says that he had said to himself that it was for the children, who would be safe if he did it quickly, and he says that he does not any longer believe this. It was the only part, he says, of the whole of his life, that he would undo.
+  He says that the blood went into you, two nights after, in the cup, with his own, on the floor of the villa, and that it made you what you are, and that it is why you wake. "I did not turn you for chance," says Cassian. "I turned you for what was in you. I turned you with what was in her."
+  ?if b4.confession == "struck"
+    He says that it is, he supposes, right that it should have been said on his knees.
+  ?end
+?end
+He is silent a while. The Cathedral clock strikes the quarter, in the dark, slow, and a long way off, a mule is complaining.
+You ask why. It is the only thing that you can ask.
+He does not at once answer. He says that he has had eighteen centuries to find the reason, and that it has been three in turn, and that he has never decided which was the true one, and thinks that they were all of them true. He says that it was a warning: that love is the one thing that makes a vampire of the old line weak, and that he had watched it destroy the sixth for a hundred years before he was turned, and had wished you to be spared. He says that it was a test: that the blood of the sixth must be taken in grief, or it does not hold, and that he had to know whether you would break. He says that it was a mercy, of a kind: that the Igniferi would have burned {spouse.name} alive, in the village, in front of the children, and that he had made it quick.
+"I am not asking you to forgive it," says Cassian. "I am telling you before you hear it from a worse mouth. There is a worse mouth. It is in your own house. It has been, I think, in your own house a good deal longer than I have been in your city."
+You ask him whose.
+"I do not yet know," he says. He is quite level. He is looking, for the first time, not at you, but at the Cathedral, and at the lamps. "Somebody has been reading the Resident's letters since long before I began to. Somebody who knows the sixth blood, and the Velati, and the hour at which the seals are changed. I read them in the spring of 'sixty two, and the fold was already wrong. Whoever it was had been there for a century. He writes a very good hand. I did not like it."
+He picks up his hat. He puts it on. He says that he is going to give you a night, and several weeks, and perhaps a summer, and that he is not going to ask you for anything. He says that in the autumn he will ask for a single answer, to a single question, and that you will know it when it comes.
+*The old man on the bench is gone before the clock has finished the half hour. The paper is on the bench, with a very small pencil mark in the margin of the second page, at a comma. It is, you find, the wrong one.*
+<~
+
+# hunger
+## The warm dark
+* Go down to the Levee, where the cotton rolls are, and the rats, and take what the wharf will not miss
+  $ do feed("animal")
+  $ humanity += 1
+  It is a dull business, with a great deal of mud in it. A black cat, a tomcat of the wharves, with a torn ear, regards you for some time with deep suspicion, and then allows it. You sit on a cotton bale afterwards, with your hands between your knees, and look at the river, which is going out very slowly, and carrying a good deal of the city with it.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a seamstress from the Rue Burgundy, a free woman, with a Bureau paper that she shows you before anything else, proudly, in a cracked oilcloth case. She takes the money, and counts it twice, and says that she has been paid in coin on a Tuesday for the first time in her life, and that it is a thing that she means to get used to.
+* Take a man from the saloon on the Rue Royale, who has been telling the room what ought to be done with the Bureau
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is a stout, loud, red man, with a great many opinions and a sword cane. He does not mention them again. He is found at dawn in a doorway on the Rue Bourbon, quite whole, quite asleep, and smiling in a gentle, vacant way that his friends find a great improvement.
+<~
+
+# night
+## The long night
+:night
+?if actions_left() == 3
+  It is the dead of the night, hot and still, the lamps haloed, and the whole of the Vieux Carré smelling of jasmine and drains. You walk out of the garden a good deal more slowly than you came into it.
+?elif actions_left() == 2
+  The hour before the false dawn. The bells are silent, and a long way down the river a steamer is blowing, three long and one short, for a landing that it cannot see.
+?else
+  There is an hour left, and the east is graying over the Algiers shore. You have one thing left to do.
+?end
+* Go to the room above the counting house, where the Velati agent keeps a book, and ask what the old blood remembers [once] ?if actions_left() > 0
+  ~> proof
+  $ do act()
+* Walk to the school in the Tremé, where there is a lamp still lit, and a woman who has not gone to bed [once] ?if actions_left() > 0
+  ~> school
+  $ do act()
+* Go to the Bureau on the Rue Camp, where Captain Wren has a desk, and the convention is being discussed in whispers [once] ?if actions_left() > 0
+  ~> bureau
+  $ do act()
+* See to the family, and what it needs [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# proof
+## What the blood remembers
+$ do chart("neworleans.valere")
+?if b4.watcher == "open"
+  {watcher.They} {watcher.are} awake, in the room above the counting house, with the shutters open, and the ledgers piled on the floor in a rampart, and a lamp. {watcher.They} {watcher.have} the look of a person who has not slept in a month and has found it unobjectionable. It has been nearly four hundred years.
+?elif b4.watcher == "guarded"
+  The room above the counting house has been quite still for a long while, and then there is a small sound, and {watcher.they} {watcher.are} sitting in the corner on a trunk, with a book on {watcher.their} knee and an expression of great politeness. {watcher.They} {watcher.have} been there, you think, since before you came up the stair.
+?else
+  The room is empty. It has been empty for months. There is a bed, made, and a lamp, and a book on the table with a slip in it, and nobody has touched either since the autumn. You stand in the door of it a long time. Then there is a voice behind you, on the stair. "I was not sure that you would come back," says {watcher.they}. "I was not sure that I would."
+?end
+You say who has been in the Cathedral garden. {watcher.They} do{watcher.es} not ask for details.
+It was in Florence, in the spring of seventy eight, that the agent was taken. It is not a thing that you have ever been told in order. {watcher.They} {watcher.were} a clerk, then, with a lens and a stub of lead. {watcher.They} {watcher.were} turned, not killed, by a man whom {watcher.they} never forgot, and who, afterwards, in the cellar, in the dark, for the length of a single night, showed {watcher.them} a thing, to keep.
+"It is all still there," {watcher.they} say{watcher.s}. "It is a thing that the blood keeps. I have not wanted to look at it in nearly four hundred years. I would rather that you did not take my word. There are two ways. I may tell you what I saw. Or you may drink, and see it yourself, as it was, from the stair."
+:the_proof
+* Drink, and see it yourself: the stair, the cellar, the house in the village, the night [once]
+  $ b4.proof = "memory"
+  $ hunger += 6
+  $ humanity -= 1
+  It is not what you expected, and you did not know what you expected. It is a taste of old iron and wet stone, and then it is a stair, in a house that is not yours, in a language that has not been spoken for a thousand years, and a lamp in a hand. It is a night in Florence, and under it, as a coin is under a floor, it is a night in a village. You see it from a doorway. You see it all. It is exactly what he has said, in all but the single thing that he did not say, which is that {spouse.name} looked up, at the last, as he came in, and smiled at him. You do not know what that means. You think that you will not for a very long time.
+  {watcher.They} hold{watcher.s} your hand through the whole of it, and does not speak.
+* Let {watcher.them} tell it, in {watcher.their} own words, and believe it or not as it falls [once]
+  $ b4.proof = "told"
+  $ humanity += 1
+  $ secrecy += 1
+  {watcher.They} tell{watcher.s} it, quite flat, in the manner of a person who is reading out a deposition. It takes twenty minutes. It agrees, in every detail that matters, with what was said in the garden. It adds a number of small things that he did not say: the color of a curtain, a sound on a stair, the smell of bread in the house. It is these that persuade you. A man who was rehearsing would not have thought of the bread.
+* Say that it is enough, that you believe him, and that you do not wish to look [once]
+  $ b4.proof = "none"
+  $ secrecy += 1
+  $ cunning_brutal -= 1
+  {watcher.They} nod{watcher.s}. {watcher.They} close{watcher.s} the book. There is a long and not uncomfortable silence, in which you both look at the lamp. Then {watcher.they} say{watcher.s}, very quietly, that it is the first time in nearly four hundred years that anyone has declined to be told, and that it is a relief.
+?if b4.watcher == "open"
+  {watcher.They} say{watcher.s}, at the door, that the person {watcher.they} trust{watcher.s} has written at last. {watcher.They} do{watcher.es} not say what was in it. {watcher.They} say{watcher.s}, after a moment, that the seal on it was the right way about, and that it was the first time that it had been in a year.
+?end
+$ do discover("the_blood_remembers")
+<~
+
+# school
+## The lamp in the Tremé
+$ do chart("neworleans.school")
+It is half past two in the morning, and there is a lamp still lit in the back room of the society. The street is empty. A dog is asleep on the step, and does not trouble to get up. The door is on the latch, which it never is.
+Honorine is at the long table, with a red pencil, and a pile of copybooks, and the air of a woman who is correcting the sixty-third of a hundred and ten and has no intention of stopping. She has a shawl over her shoulders and her sleeves pushed up. She looks up when you come in. It is a long, level, unhurried look, and it takes in, you perceive, a good deal.
+"You have been told something," says Honorine.
+?if b4.honorine == "walked"
+  She puts down the pencil. She says it as one would say a thing that one has been saying to oneself for a month.
+?else
+  She says it quite lightly. She says that she is not in the least surprised, and that she has been waiting, with considerable interest, to see what you would do with it.
+?end
+She says that she is a schoolmistress, and that she has been a schoolmistress for eleven years, and that it is the whole of her trade to notice. She says that she has noticed that you do not eat, and do not age, and have not, in six years, been seen in the same light twice. She says that she has noticed what the lamps do when you come in. She says that she has, on a number of occasions, mentioned to her brother that she did not wish to be told, and that she finds, tonight, rather to her surprise, that she wishes it.
+:the_truth
+* Tell her all of it: what you are, how long, who made you, and what he did in the fire, and what he said tonight [once]
+  $ b4.truth = "all"
+  $ humanity += 2
+  $ secrecy -= 3
+  $ bond.honorine += 4
+  It takes till four. You tell it in order, which is not easy, and not quite in French, and not quite in any other language. She does not interrupt. She sits with her chin in her hand, and her red pencil in the other, and she does not move it once. When you have done she is silent for some time. Then she says, in a perfectly steady voice, that she has been teaching children for eleven years that the only thing that can be said of a man's past is that it is his, and that it is not him. She says that she had not supposed that she would ever have to put it to the test.
+  ?if b4.confession != "left"
+    She says that she wishes to say one thing about the matter of what the old man said, concerning love, and the weakness of those who have it. She says that it is the stupidest sentence that she has heard from a person of any age, in any language, in a long life of listening to stupid sentences. She says that she should like very much to have a conversation with him.
+  ?else
+    She says that she does not think much of a man who gives a thing like that to another, in the dark, in half a sentence, and then goes. She says that she should like to have a conversation with him.
+  ?end
+  ?if b4.honorine == "walked"
+    She puts out her hand across the copybooks. It is a small, hard, ink stained hand, and it is quite cold. You take it. She says that she does not want to be kept safe. She says that she wants to be kept informed.
+  ?end
+* Tell her what you are, and that you are old, and that it is a long story, and leave the fire out of it [once]
+  $ b4.truth = "half"
+  $ secrecy -= 1
+  $ bond.honorine += 2
+  $ cunning_brutal += 1
+  You say it quite plainly, as a doctor says a diagnosis. You say that you are old, and you do not die in the common way, and that you have been a good many places. You do not say who made you. You do not say what became of the one you loved. She hears it with her head a little on one side. She says at the end that it is very much what she had thought, and a good deal less than she had feared. She says, quite gently, that you have left something out, and that she will not ask.
+* Say that it is a matter of the firm, and that you are tired, and ask if there is any coffee [once]
+  $ b4.truth = "none"
+  $ secrecy += 2
+  $ humanity -= 1
+  $ bond.honorine -= 2
+  She looks at you for the length of a very long breath. She says that there is coffee. She gets up, and puts the kettle on the stove, with her back to you, and says nothing whatever for ten minutes. When she brings it, she sets the cup down rather carefully on the table, at some distance, and says that she hopes that it is hot enough. It is a courtesy. It is, you think, the most precise rebuke that you have ever received.
+?if b4.truth == "all" or b4.truth == "half"
+  A child's boot is on the table, among the copybooks. It has a hole in the toe, and a small round patch of leather, sewn on, in a dark thread, in a very neat stitch. She has been mending it. She says, to nobody, that the child will not know what she has heard tonight, and that she is glad of it.
+?end
+$ do discover("the_school_in_the_treme")
+<~
+
+# bureau
+## The Bureau on the Rue Camp
+$ do chart("neworleans.market")
+The Bureau keeps late hours, in these months, and it is full at three in the morning. There is a lamp in every window of the old cotton factor's counting room that the Army has taken for it. The stairs are full of persons asleep on them, with their papers in their hands. A clerk in a sergeant's coat is writing, very fast, in a great flat ledger, the names of three hundred persons who have walked to the city since Easter, and who have never had a name written down by anybody who did not mean to sell it.
+Wren is at the end of the long room, at a plain deal desk, with a cold pipe, and a lamp, and a stack of papers a foot high. He has not been to bed. He does not rise. He says, in his flat mild Illinois voice, that he supposes that you have come to hear about the convention, and that he would be glad if you would sit down on the box.
+He says that the old Convention of sixty four was never dissolved, and is to be called again on the thirtieth of July, in the Mechanics' Institute on the Rue Dryades, to rewrite the constitution so that every man in the State may vote. He says that it is a very legal thing. He says that it is the plainest legal thing that was ever proposed, and that the Mayor has said, in a public place, that he does not intend to allow it.
+He says that he has been told by a judge that the Mayor has no power to prevent it. He says that he has been told by the Mayor that the judge has no power to enforce it. He says that he has asked the General for troops to be in the street on the day, and has been told that it is a civil matter.
+He says it all, as he says everything, without the least emphasis. It is, for a moment, rather like listening to a man read out a bill of lading for a ship that he has seen go down.
+:the_bureau
+* Offer the Valère paper, and the whole of its press, for the whole of the month, to say plainly what the convention is, and who has called it [once]
+  $ b4.convention = "paper"
+  $ standing += 2
+  $ secrecy -= 2
+  $ humanity += 1
+  He puts down the pipe. He says that it will be the most public thing that the family has ever done. He says that he was asked, three months ago, by a person in Washington, whether he thought that you could be got to do it, and that he said that he did not know, but that he would find out. He writes a note, and puts it in a drawer. Aurélien has the first column set by eleven the next morning. It is quite calm. It is headed, in plain black type, *WHY THE CONVENTION MEETS.*
+* Quietly find beds, across the whole of the Tremé and the Marigny, for any delegate or any guest of the convention who has no place to be on the night before [once]
+  $ b4.convention = "lodged"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ standing += 1
+  $ do earn(-4)
+  It is done through the free families, and the Greek, and a great many persons who do not wish to be named. By the end of the week there are two hundred and forty places in the faubourgs where a man may sleep who has come in from the country, and may be got out of the city by a back way, if the need arises. Wren says that it is the sort of thing that nobody thanks one for, because nobody will know. He says that it is the best sort.
+* Say that it is the Army's business, and the Bureau's, and not the family's, and that it will do nothing that the river could call a breach [once]
+  $ b4.convention = "apart"
+  $ secrecy += 2
+  $ humanity -= 1
+  He looks at you quite steadily for a moment. He does not say what he thinks. He says that he quite understands, and he writes something down. It is a very short note. He puts it, not in the drawer, but in his pocket.
+$ do discover("the_convention_of_1866")
+<~
+
+# family
+## The long room
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  ?if b4.coven_home == "raised"
+    The house on Gravier Street is dark, except for a light on the stair. They have been waiting up, in the great hall, in a ring of chairs, in the manner of a family which has been told that a thing has happened and has not been told what. Prisca is at the table with a very small glass of Madeira. Hanno is at the far end, by the cedar, quite upright. Fiammetta is sitting on the floor, with her knees up, wearing a look of the deepest and most reluctant interest.
+  ?elif b4.coven_home == "hidden"
+    The little back rooms are all lit, one after another, along the passage, with a glow in each like a row of patient eyes. They are all awake. They have come through, one at a time, in their stockings, and are sitting in the kitchen, round the stove, with the free families' children asleep in a heap on the settle.
+  ?else
+    They are in the long room in the Marigny, with the shutters closed, and the lamps turned low, and no pretense of sleep. Fiammetta has taken her shoes off, and is balancing, with the greatest care, an empty glass on her head.
+  ?end
+  Fiammetta says that she had a visitor on the Rue Dauphine at nine. She says that he was a quiet gentleman in a brown coat, with a gray hat, and that he said a thing to her in Italian. She says that it was a quite old Italian, so old that she had to think, and that it was the Italian of her great grandmother's grandmother's Latin. She says that he said that she had the family's eyes. She says that he bowed, and went. She says that she had not at all known whether to be frightened, and that she had been, rather, flattered, and that she is a good deal ashamed of it.
+  Prisca says nothing for a time. She says at last that she has dealt with a number of very old gentlemen, in her life, who have said that sort of thing, and that it has generally been in the interest of a loan.
+?elif coven_size() > 0
+  The house is quiet. They are a long way off, and it is the middle of the night. There is a parcel on the table, in a very small neat hand, that has not been opened. It is a Roman lamp, of red clay, in a cloth. There is no letter. You put it on the mantel, and you do not at once look away from it.
+?else
+  The house is very quiet. You sit a long while in the dark with your hands on the table. There is a cat on the sill, a gray one, from nowhere, that has taken to coming in. It looks at you, and decides, and goes to sleep.
+?end
+:the_family
+* Send Prisca to the Resident's correspondents, quietly, to find whose hand the seals have been in [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca") and task("prisca") == ""
+  $ do send("prisca", "scout", 2)
+  Prisca says that she has been waiting for forty years for somebody to ask her to read another person's mail on purpose. She puts on her gloves. She says that she will be back in a week with the name of every clerk in the Western Sea who has been paid to look away.
+* Send Fiammetta to the Tremé, to sit about the school until the summer, and to see that nobody comes to it who is not a child [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta") and task("fiammetta") == ""
+  $ do send("fiammetta", "protect", 1)
+  Fiammetta says that she is a good deal better at that than at most things, and that she has already taught the three oldest girls to throw a knife. She says that it was not exactly her idea. She goes at once, whistling, and a stray dog in the street goes with her.
+* Set Hanno to watch the family's doors, and its papers, and every person who comes to either, until further notice ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "watch")
+  Hanno says nothing. He gets up, and takes his hat from the peg, and goes to stand at the end of the passage, in the dark, with his hands behind his back. He has stood at doors for a good many centuries, and is, you perceive, a good deal better at it than anybody else on the premises.
+* Put a stout cellar under the counting house for the things the family has been given, or kept, or has found, and a lock upon it ?if can_acquire("relic_vault")
+  $ do acquire("relic_vault")
+  $ secrecy += 1
+  It is dug in a week by a Dalmatian and his sons, who are paid by the foot, and ask no question. It has an oak door, and an iron one, and a very good lock. There is a niche in it, in the shape of a book. You put in it a small dark frame, with two words of Latin in wax. You do not look at it very long.
+* That will do for tonight
+  -> :family_done
+-> :the_family
+:family_done
+<~
+
+# dawn
+## A hot gray morning
+It is a hot gray morning, without a breath, with the river lying like a sheet of lead. The first carts are going down to the market. A priest is sweeping the steps of the Cathedral. A great many pigeons are on the gravel in the garden. Nobody is on the bench.
+?if b4.confession == "struck"
+  The gardener of the sacristy has put the lamp up. He has swept the gravel. He has set the jasmine in a pot. He looks at you as you pass with the face of a man who has resolved, in the night, to believe whatever he is told in the morning.
+?end
+?if b4.proof == "memory"
+  You have it still, behind your eyes, in the first light, a stair and a lamp and a smile. It will go. You do not wish it to.
+?elif b4.proof == "told"
+  You go over it again, on the walk home, a detail at a time. The bread. The curtain. The stair.
+?else
+  You have not looked. You find that it does not make it any lighter.
+?end
+?if b4.truth == "all"
+  A copybook is left on the doorstep at seven by a small boy in a red cap, wrapped in a handkerchief. It is open at a page. It says, in a large round hand, *TO BE CONTINUED.* There is a small, firm, upright H in the corner, and, in the margin, in a tiny writing that you must hold to the light, *Come to supper on Sunday. I will not ask a single question that you cannot answer.*
+?elif b4.truth == "half"
+  A note comes at eight, in a neat ruled hand, on a half sheet of school paper. It says that the school is closed on Sunday, and that she will be at home, and that she keeps a table.
+?else
+  There is nothing from the school. There is, at nine, a bag of coffee, in a paper, with a card. It says *For the firm.* It is not at all unfriendly. It is not anything else, either.
+?end
+?if b4.convention == "paper"
+  The first column of the Valère paper is on every wall of the Faubourg by noon, in plain black type, under the title, with a note in the margin in Aurélien's neatest hand saying that he is not in the least afraid. A man in a gray hat has been seen reading it, at the corner of the Rue Chartres, with a very long face. He has been seen to take a pencil to it.
+?elif b4.convention == "lodged"
+  The list of beds is in a drawer, in Wren's hand, with no name on it, and two hundred and forty marks. There are three more that came in at dawn.
+?else
+  Wren's note comes at nine, in the flat hand, by the Army post. It says that he understands. It adds, in a postscript, that he has asked the General again, for the third time, and been refused for the third.
+?end
+A letter comes at noon, by the packet, in a gray cover, from the Resident. It is, as you perceive at once, sealed rightly. It says in a chiselled Latin that the Resident has been informed that a person of the old line is in the parish, and that the Resident begs to be told whether the person is known to you. It is dated three weeks ago. It has, in the corner, in a different hand, a very small mark. It is a comma, in the wrong place.
+You look at it for a long time.
+If you have understood him rightly, the old man did not write it. He is not, at present, in a position to be asked.
+It is Thursday the seventeenth of May, 1866, and eleven weeks to the thirtieth of July.
+$ do rest()
+=> next

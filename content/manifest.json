@@ -821,6 +821,26 @@
             "blood",
             "slavery"
           ]
+        },
+        {
+          "id": "b4c17",
+          "file": "house-divided/ch17.tsb",
+          "title": "The Man Who Answered",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
+        },
+        {
+          "id": "b4c18",
+          "file": "house-divided/ch18.tsb",
+          "title": "The Mechanics' Institute",
+          "notes": [
+            "blood",
+            "violence",
+            "slavery",
+            "war"
+          ]
         }
       ],
       "incomplete": true

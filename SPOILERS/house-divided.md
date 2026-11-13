@@ -169,3 +169,26 @@ Dawn: the court's ruling, the sheriff and the yard, the Teche house's answer, Cr
 Hooks: the Chapter in January; the Charleston arrival; the convention of 1866 and the massacre; Cassian's confession and Collis's hardest test later in the book.
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 17, "The Man Who Answered" (`b4c17`, session 48)
+
+16 May 1866. A box of wax at the counting house door, two words of Latin in the old hand. Opening (no phase): the garden behind the Cathedral at midnight; Cassian, in New Orleans as Monsieur Caron of Bordeaux, a middling man in a worn brown coat who corrects a comma in the Valere paper. He tells him what he did in the fire: the spouse did not die of the fire, Cassian took the blood by hand before the villa fell, and it went into the hero in the cup on the night he was turned (the spouse's blood is what made him; Cassian says it was a warning, a test and a mercy, and never decided which). `b4.confession`: struck him (he does not defend himself, and is proud of it), heard him out standing, or walked out (and hears the one sentence at the gate). Cassian also says that he answered the false letter from Charleston ("the one who matters"), that he has read the Resident's post since the spring of 1862, and that when he first read it the fold was already wrong: someone has been reading it for a century, whose hand he disliked. He promises a single question in the autumn.
+
+Night phase, three of four: the room above the counting house (the Velati agent was turned by Cassian in Florence in 1478 and carries what he showed her in her blood; `b4.proof`: drank it and saw it from the stair, had her tell it, or declined; reads `b4.watcher`; the spouse smiled at him at the end), the school in the Treme (Honorine has noticed everything; `b4.truth`: told her all, told her half, or said nothing; reads `b4.honorine`), the Bureau on the Rue Camp (Wren and the convention called for 30 July at the Mechanics' Institute; `b4.convention`: offered the paper, lodged the delegates quietly, or stood apart), and the family (Fiammetta met a man in a brown coat who told her she had the family's eyes; Prisca, Fiammetta and Hanno errands; relic vault on the lone path).
+
+Dawn: the proof's aftermath, a copybook or a note or a bag of coffee from the school, the convention's answer, and a Resident's letter (properly sealed, but with a comma in the wrong place in the corner: the same hand as the false seal; Cassian did not write it).
+
+Hooks: Cassian's question in October; the hand that reads the Resident's letters (the Scribe, hidden among the Velati; Roan is still undecided); Honorine; the agent's book; the convention on 30 July.
+
+Flagged to the owner (spoiler light): this is the confession the design doc plans for this book. Nothing else changes the big picture and no major character dies.
+
+## Chapter 18, "The Mechanics' Institute" (`b4c18`, session 48)
+
+30 July 1866. The convention meets and the city turns on it. The family's morning is a day phase of three of four: Beaumont asks that the first article of the Compact be kept (the family to stay off the Rue Dryades until dark; `b4.stand`: kept it, broke it, or kept it to the letter as a private gentleman; reads `b4.compact`, `b4.peace`), the procession in the Treme (`b4.march`: walked at its head, lent every wagon of the Ice Company for the wounded, or watched), the Bureau (`b4.troops`: pressed the Colonel in person, wired the facts by four roads, or stayed out), and the family (Prisca to the Mayor's secretary, Fiammetta to the school door, Hanno to keep the books of the day, shell identities on the lone path). Then the noon scene is fixed: the Mechanics' Institute (`b4.institute`: held the stair in the open with the sixth blood and seven witnesses, led forty one out through the cellars, ran for the Army, or, if he kept the article, stood at the edge of the street and watched). Then the evening in the school (`b4.aftermath`: opened the family's house as a hospital of a hundred and forty beds, printed the sworn names under the family's own name, or moved the survivors north by the Ice Company's boats). The count is something more than forty dead and a hundred and forty wounded; no major character dies, and Armand is wounded in the arm. Origin variants for captured, freed and house slave, and for the north African and Egyptian heroes, run through the noon scene.
+
+Dawn: the aftermath of whichever road, Honorine's copybook if he walked at the head of the procession, a note from Beaumont if he kept the article or Lucien with the Chapter's summons if he broke it, and a letter from Cassian: he was in the Cathedral garden with the doors shut, did not do this, and will ask his question in October. The comma in the margin is in the right place this time.
+
+Hooks: the Chapter of the river houses (broken Compact or kept one); Cassian's October question and his true name; the Scribe (Resident, Velati, the hand that reads the post); Honorine and the family after the thirtieth; the Army, the inquiry and Reconstruction; the sleep from New Orleans (chapters 19 and 20).
+
+Flagged to the owner (spoiler light): the thirtieth of July is a historical massacre and is played seriously. Nothing changes the big picture and no major character dies.
+
