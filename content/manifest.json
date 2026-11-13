@@ -802,6 +802,25 @@
             "slavery",
             "war"
           ]
+        },
+        {
+          "id": "b4c15",
+          "file": "house-divided/ch15.tsb",
+          "title": "The Bells of April",
+          "notes": [
+            "blood",
+            "slavery",
+            "war"
+          ]
+        },
+        {
+          "id": "b4c16",
+          "file": "house-divided/ch16.tsb",
+          "title": "The Winter Laws",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
         }
       ],
       "incomplete": true

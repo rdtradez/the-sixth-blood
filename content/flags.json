@@ -4348,6 +4348,78 @@
       "major": true,
       "default": "moved",
       "note": "Chapter 14: the Ice Company warehouse after the Teche house's visits"
+    },
+    "b4.peace": {
+      "kind": "enum",
+      "values": [
+        "sworn",
+        "terms",
+        "broke"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "terms",
+      "note": "Chapter 15: Beaumont's request that the Compact hold for a year"
+    },
+    "b4.physician": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "practice",
+        "own"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "own",
+      "note": "Chapter 15: what became of Dr. Armand when he was mustered out"
+    },
+    "b4.court": {
+      "kind": "enum",
+      "values": [
+        "argued",
+        "written",
+        "denied"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "denied",
+      "note": "Chapter 16: the Atlantic court's sitting on the Teche house's complaint"
+    },
+    "b4.codes": {
+      "kind": "enum",
+      "values": [
+        "hired",
+        "sheltered",
+        "petitioned"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "petitioned",
+      "note": "Chapter 16: the freed people in the yard on the night the winter laws bite"
+    },
+    "b4.teche": {
+      "kind": "enum",
+      "values": [
+        "truce",
+        "answered",
+        "broken"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "broken",
+      "note": "Chapter 16: the elder Delorme's Christmas Eve offer at Belle Rive"
+    },
+    "b4.refuge": {
+      "kind": "enum",
+      "values": [
+        "sheltered",
+        "shipped",
+        "left"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 15: the Gulf house's families on the Lake road after the fall of Mobile"
     }
   }
 }

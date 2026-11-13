@@ -769,6 +769,48 @@
       "title": "The ice company warehouse",
       "book": "house-divided",
       "text": "A brick shed on the Levee with a deep cellar holds hundreds of tons of ice cut in New England. It is the only place in the city that stays cool in September, and it has enemies."
+    },
+    "the_surrender_of_1865": {
+      "category": "lore",
+      "title": "The surrender of 1865",
+      "book": "house-divided",
+      "text": "In April 1865 the armies of the Confederacy lay down their arms one after another. In New Orleans the news comes by wire and newspaper, each version contradicting the last, and then the news of the President's death follows it."
+    },
+    "the_fall_of_mobile": {
+      "category": "lore",
+      "title": "The fall of Mobile",
+      "book": "house-divided",
+      "text": "Mobile is taken in the second week of April 1865. Its defenders march out, and families of the lower Gulf take to the roads with nothing but what they can carry."
+    },
+    "the_river_houses_after_the_war": {
+      "category": "lore",
+      "title": "The river houses after the war",
+      "book": "house-divided",
+      "text": "The great houses of the river lost with the Confederacy. Their old master asks the Compact for a year to come to terms with a world in which they are the beaten party."
+    },
+    "the_doctor_come_home": {
+      "category": "lore",
+      "title": "The doctor come home",
+      "book": "house-divided",
+      "text": "Dr. Armand is mustered out of the Army after three years of service in the hospitals. He has no regiment and does not yet know how to be a private person."
+    },
+    "the_winter_laws_of_1865": {
+      "category": "lore",
+      "title": "The winter laws of 1865",
+      "book": "house-divided",
+      "text": "The new Legislature passes laws that treat a free person without an employer as a vagrant who may be hired out by the sheriff, and forbid laborers to leave before the year ends. Freed people see in them the old order in new coats."
+    },
+    "the_atlantic_court": {
+      "category": "lore",
+      "title": "The Atlantic court",
+      "book": "house-divided",
+      "text": "The court of the Atlantic houses sits at the request of a party, in a hotel parlor, with three judges, a clerk and a pitcher of water."
+    },
+    "the_black_codes": {
+      "category": "lore",
+      "title": "The Black Codes",
+      "book": "house-divided",
+      "text": "After the war, Southern legislatures write laws on vagrancy, labor contracts and apprenticeship that bind freed people to employers. The Army in some districts overrides them."
     }
   }
 }

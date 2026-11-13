@@ -149,3 +149,23 @@ Dawn: the vote, the coven's morning, a letter from Wren, Armand's second return,
 Hooks: Cassian's confession and Collis's hardest test come later in the book; the sixth of November and the voting of the winter; Reconstruction and the massacre of 1866.
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 15, "The Bells of April" (`b4c15`, session 47)
+
+April 1865. Lee's surrender, the fall of Mobile, the President's death in the news. Night phase, three of four: the shell bank on the Lake road (the Gulf house's families on foot; the sixth blood lifts a wagon; `b4.refuge`: took them into the house, shipped them on the firm's boats, or sent them on with money; reads `b4.gulf`, `b4.firm`, `b4.coven_home`), the family's door (Beaumont on foot asks the Compact to hold for a year; `b4.peace`: swore it, set terms, or broke with him; reads `b4.chapter`, `b4.atlantic`), the Treme road (Armand mustered out; `b4.physician`: took him into the house as its physician, set him up in a surgery, or let him choose; reads `b4.hospital`, `b4.honorine`), and the family (errands, `informants`, `hidden_chamber`).
+
+Dawn: the Mobile families' fate, Beaumont's and the Teche house's answer, Armand's morning, the news from Washington.
+
+Hooks: the Teche house before the Chapter in a month; Fontenot's debt or grudge; the Charleston arrival; the summer convention of 1866.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 16, "The Winter Laws" (`b4c16`, session 47)
+
+Christmas Eve 1865. The Legislature's vagrancy and labor laws; the Atlantic court sits on the Teche house's complaint; the elder Delorme's offer. Night phase, three of four: the hotel parlor (a court of three; `b4.court`: argued in person, answered in writing, or denied the court's authority; reads `b4.atlantic`), the Levee yard (two hundred freed people before the sheriff's list; `b4.codes`: hired them on the family's own contract, sheltered and sent them north, or carried it to the General; reads `b4.warehouse`, `b4.petition`), Belle Rive (`b4.teche`: truce, a reckoning at the Chapter, or ended it in his house by the sixth blood's strength, without killing him; reads `b4.peace`, `b4.defense`), and the family (errands, `front_business`, `safehouses`).
+
+Dawn: the court's ruling, the sheriff and the yard, the Teche house's answer, Crane at the door if the articles were refused, Wren's warning about July 1866, a Charleston slip if the false letter was sent.
+
+Hooks: the Chapter in January; the Charleston arrival; the convention of 1866 and the massacre; Cassian's confession and Collis's hardest test later in the book.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.

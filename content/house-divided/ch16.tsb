@@ -1,0 +1,282 @@
+// Book Four, Chapter 16 (session 47). December 1865: the Atlantic court sits at the hotel, the Legislature's new laws and the freed people's labor, the Teche house's last move, the family's winter.
+// Opens with no phase (the winter city and the laws), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a long dawn.
+// Reads b4.circle, b4.coven_home, b4.firm, b4.atlantic, b4.peace, b4.petition, b4.warehouse, b4.defense, b4.refuge, b4.physician, b4.seal. Sets b4.court, b4.codes and b4.teche.
+// Ends with rest() and => next, which pauses until chapter 17 exists (the manifest entry is incomplete).
+@chapter b4c16
+@title The Winter Laws
+@version 1
+
+# start
+## December
+$ b4.court = "denied"
+$ b4.codes = "petitioned"
+$ b4.teche = "broken"
+$ do discover("the_winter_laws_of_1865")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is the twenty fourth of December, and there are four things that want doing tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## The winter laws
+It is a cold wet Christmas, as the Gulf makes them, with a raw wind off the Lake and the smell of coal smoke and oranges. The town is lit, with a hard sort of cheer, as a ship is lit that has come through a storm and does not yet know what is the matter with the rudder.
+The new Legislature has been sitting since the autumn, and it has been very busy. It has passed a great many laws in a great many weeks. They are written in very careful English. They say that a free person who has no master, and no work, and no home that the parish approves, is a vagrant, and that a vagrant may be hired out by the sheriff for the year. They say that a laborer who leaves his employer before the year is out shall forfeit his wages. They say a good deal about apprentices. The word *slave* does not appear in any of it. A black man on the Levee, reading a handbill, says to another, quite gently, that he has seen this coat before, and that it has been turned.
+Three notes come in the evening post. One is in the black, heavy, upright hand of Elias Thorne, on the hotel's paper, and says that the court of the Atlantic houses has come to sit, at the request of a party, in the parlor of the Rue Saint Charles, at midnight. The second is from Jules, on the Levee, in a large careful hand, and says that there are two hundred men in the yard, and it is not yet a week to Christmas. The third is on a plain card, left by hand at the door, with a small ring and a pearl impressed in black wax, and says: *The elder Delorme will receive the house on the night before Christmas, at Belle Rive, alone.*
+<~
+
+# hunger
+## The warm dark
+* Go down to the stable of the Rue Dauphine, where the cab horses stand, and take what the hostler will not miss
+  $ do feed("animal")
+  $ humanity += 1
+  It is a long low warm place, smelling of hay and wet leather, and the horses shift against the cold. A great gray cab horse puts his head over the stall as you come in, and stands for it, very patient, with the steam going up from his nostrils. You lean on the partition for a time afterwards. The bells for the midnight service have begun.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a laundress, from the Marigny, with big red hands, who has been left, by the new law, in a most uncertain position with respect to her employer. She takes the money. She says that it is the only Christmas present she has had this year, and that she means to spend it on a goose.
+* Take a man from the Legislature's own supper, at the hotel on the Rue Royale
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is a lean, pale, pious planter from the Teche country who has been speaking for an hour on the subject of the proper discipline of the laboring classes. He does not speak of it again. He is found at five, in the lobby, in an easy chair, quite unharmed, quite deeply asleep, with a great mild look on his face, and he is observed, over the next month, to vote, on three occasions, in a perfectly confusing way.
+<~
+
+# night
+## The long night
+:night
+?if actions_left() == 3
+  It is cold, and clear, with a hard bright frost on the banquettes, and every church in the town has its door open and its lamps lit. A choir somewhere is singing in Latin, and a drunken man is singing in English, a little way off, a different thing.
+?elif actions_left() == 2
+  The cold comes down harder. The Levee has lit its braziers, and the men sit round them in rows, in their blankets, with their hands out. They do not talk very much. They watch.
+?else
+  There is an hour left, and the frost has thickened, and the bells have stopped, and a gray veil is coming up out of the river. You have one thing left to do.
+?end
+* Go to the hotel on the Rue Saint Charles, where a court of three has come to sit on the family [once] ?if actions_left() > 0
+  ~> court
+  $ do act()
+* Go down to the Levee, to the yard, and the two hundred men who have nowhere to be [once] ?if actions_left() > 0
+  ~> codes
+  $ do act()
+* Ride out to Belle Rive, where the elder Delorme will receive the house alone [once] ?if actions_left() > 0
+  ~> teche
+  $ do act()
+* See to the family, and what it needs [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# court
+## The court of the Atlantic houses
+$ do chart("neworleans.bank")
+It is the same bare shuttered parlor, with the green baize table, and the pink map. The decanter of water is the same. The three persons at the table are not. Thorne is in the center, tall, and very pale, and he has put a black cloth over the Bible. On his right there is a small round woman of sixty in a Quaker bonnet, from Philadelphia, who has the largest and calmest gray eyes that you have ever seen in a face. On his left is a bald, quiet man with a gold eyeglass, who is a house of the Chesapeake. There is a clerk. He is writing.
+Crane is at the end of the table, not as a judge. He is in the chair of the person who is accused. He gets up when you come in, and, with a bow of great correctness, gives it to you.
+?if b4.atlantic == "signed"
+  Thorne says, in his dry level voice, that the family has a seat on this court, and that it will not be used. He says that a seat is a thing that may be stood upon, and a thing that may be stood before, and that tonight it is the second.
+?elif b4.atlantic == "bargained"
+  Thorne says that the family's door is protected by the articles, and shall be, and that the complaint does not touch it. He says that it touches everything else.
+?else
+  Thorne says, with his hands folded, that the family has declined to be a party to the articles, and that this court therefore has no authority over it whatever. He says that he has come, nevertheless, because he is a man who prefers to hear a thing in a room.
+?end
+The complaint is a short one. It has been laid by the Teche house, in a very good hand, with the elder Delorme's seal. It says that the family of the sixth blood has, over six years, raised the free people of color against the old order of the river, and has hidden the persons of its own house under the roofs of the free, and that it has by the use of a strength that no other house possesses made the Compact a dead letter. It asks for a ruling. It does not ask what the ruling shall be.
+The Quaker woman says, without looking up, that it is a very interesting complaint, and that she has not often seen a person accused of being too strong. She says it quite without malice.
+:the_court
+* Argue it yourself, in the open, in your own name, and say who the family is
+  $ b4.court = "argued"
+  $ standing += 2
+  $ humanity += 1
+  $ secrecy -= 2
+  It takes an hour. You say that the family is seven, or nine, or eleven, depending on how one counts, and has never in any year made war on a house. You say that the free people of the Tremé are not an army, and are not hidden, and are the neighbors. You say that a thing that is strong is not for that reason a wrong, and that if the Compact has been made a dead letter, it was not by this family. The Quaker lady puts down her pen. The man of the Chesapeake takes off his eyeglass. Thorne says, at the end, that the court will rule in the morning, and that he thinks, for the first time in a long life, that he is going to enjoy writing it.
+* Answer in writing, point by point, a very long and exact brief, and say nothing in the room
+  $ b4.court = "written"
+  $ cunning_brutal += 2
+  $ standing += 1
+  $ secrecy += 1
+  It is Hanno's brief, and Prisca's, and a number of persons' who were asked to look at it in the night. It is forty pages. It is in an exquisite hand. It cites every clause of the Compact, and four precedents, and the plain letter of the articles. It is read into the record by the clerk, at a very even pace, over two hours and ten minutes. At the end of it the man of the Chesapeake says that it is the best-drawn defense that he has ever heard in a court of any kind. Thorne says that it is, however, the work of a family that will not be looked at.
+* Stand on the old law, and say that the Compact is the Compact's, and no court of Boston can try a house of the river
+  $ b4.court = "denied"
+  $ secrecy += 2
+  $ humanity -= 1
+  $ standing -= 1
+  You say it quite politely. You say that the court is a new thing, and has been made by a few persons, in a hotel, in the course of a war. You say that the family will answer to the Compact, and to the Chapter, and to nobody else. There is a pause. The Quaker lady says that she has been wondering when somebody would say that, and that she is glad it was done civilly. Thorne closes the book. He says that the court will record that the party declined to appear, and that it will rule in his absence, and that he is sorry for it. He says that he was a good deal younger when he was last refused.
+$ do discover("the_atlantic_court")
+<~
+
+# codes
+## The yard on the Levee
+$ do chart("neworleans.lots")
+It is a long gray yard behind the Ice Company's cold room, and it is quite full. There are two hundred of them, in the frost, in the light of a great many braziers: men in old Army coats, and women in shawls, and a great many children, sitting in rows on the cobbles. There are a few who are standing. They are standing at the back, with their arms folded, in the manner of persons who have decided that if they are to be arrested they will be arrested standing.
+?if b4.warehouse == "rebuilt"
+  Jules is on a barrel in the middle of the yard, with a lantern, and a list. He has been up since two. He is hoarse. He says that every man here has been seen by the free families, and that every man has a name, and that it is the only list in the city which he is sure that no sheriff can read.
+?elif b4.warehouse == "guarded"
+  Brault's carbines are at the gate: eight stout men, in a row, who have been told to keep the yard quiet, and have not been told how. They look rather as though they have been given a very large cat to hold.
+?else
+  The Algiers cellar is a long way across the river. The yard on the Levee has been left to the crew, and there are no more than four of them, and an old man with a dog. It has been, since the burning, the most empty yard in the city. Tonight it has two hundred in it. They have come, evidently, in the hope that there was somebody.
+?end
+The sheriff has been, and gone. He has said, in a very reasonable voice, that the law is the law, and that he will be back in the morning with a list. It is a good deal longer than the one that Jules has.
+Every one of them looks at you.
+:the_codes
+* Hire them, every man and woman who comes, on a contract the family writes: wages by the month, a school hour, and no master over them but the work
+  $ b4.codes = "hired"
+  $ humanity += 2
+  $ standing += 1
+  $ secrecy -= 2
+  $ do earn(-5)
+  It is written on the head of a barrel, in the lantern light, in two languages, in an hour, by the clerk and by Jules and by a woman of the school who writes a fine round hand. It is a very odd sort of paper. It says, among other things, that the laborer may leave. It says that he may be paid in coin. It says that he may not be struck. It is read aloud, twice. Jules asks, at the end, whether there is any man who wishes to know what it means. Nobody does. A great gray-bearded man at the front, in a Union overcoat, takes off his cap, and holds it, and is the first to put his mark on it.
+* Take the ones who have no place, secretly, into the family's safe rooms, a few at a time, and send them north
+  $ b4.codes = "sheltered"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  $ standing += 1
+  $ do earn(-3)
+  It is done by lanterns, and signals, and a great number of small, quiet arrangements, over the whole of the night. The free families of the Tremé take the women and children. The Ice Company's wagons take the men, in the sawdust, in ones and twos. By dawn there are eighty gone, in every direction, to every place that Wren's friends in the North can be made to answer for. It is, in the plain sense, a flight. It is also a thing that the sheriff cannot prove.
+* Carry it to the General, and put the free families' names under it, and ask the Army to say what the law is
+  $ b4.codes = "petitioned"
+  $ standing += 2
+  $ secrecy -= 1
+  $ cunning_brutal -= 1
+  ?if b4.petition == "funded" or b4.petition == "signed"
+    You go in the cold, in a carriage, at three in the morning, to the great house on the Rue Royale where the General sleeps, with seven of the free men of the Tremé and the paper that went to Washington last March. They are heard. It is done by a very sleepy aide, a boy of twenty, with a candle, and then by the General himself, in a dressing gown, who reads the handbill with a face like a stone, and says nothing for a long time. At the end he says that he will not undertake to say what the Legislature may do. He says that he may undertake to say who is to be arrested in his district, and by whom.
+  ?else
+    You go in the cold, in a carriage, at three in the morning, with a paper that Hanno has written in the carriage and seven of the free men, whom you have never properly met, and who have a very proper idea of what is to be said. They are heard, after an hour, by a sleepy aide, and then by the General, in a dressing gown, who reads the handbill with a face like a stone. He says that he will not undertake to say what the Legislature may do. He says that he may undertake to say who is to be arrested in his district, and by whom.
+  ?end
+$ do discover("the_black_codes")
+<~
+
+# teche
+## Belle Rive
+$ do chart("neworleans.beaumont")
+It is a long cold ride, in the frost, along the river road, past a great many dark plantations, with the levee on one side and the cane stubble on the other, white with rime. Belle Rive is not lit. It is a low, long, white, silent house under its oaks, with the Spanish moss hanging motionless, and a single window, at the end, with a lamp.
+The elder Delorme is alone. It is, you perceive, quite true. He is sitting in a high-backed chair by a fire, in a plain dark coat, with a decanter at his elbow that he has not touched. He is a long gray hollow man, with a face like a hatchet, who has a very bright black eye. He does not rise. He says, in a dry sweet low voice, that it is very good of you to ride so far, on such a night, to see a man who has set fire to your warehouse.
+?if b4.peace == "sworn"
+  He says that Beaumont has asked him, in the plainest terms, to leave you alone, and that he has said that he would think about it, and that this is the thinking.
+?elif b4.peace == "terms"
+  He says that he has been told that he must answer for the rings and the fires, in the Chapter, in a month, and that he has not had a night's sleep since. He says that he supposes that you are here to see how it looks on him.
+?else
+  He says that the river houses have been abandoned by their only friend, and that he has therefore been obliged to arrange his own defense, and that he is aware that it has not been conducted with perfect grace.
+?end
+?if b4.defense == "unwatched"
+  He says, with a dry smile, that he regrets the arm of your young woman. He says that he had not meant it to be a lasting thing. He says that he had not at the time known how fast she would heal.
+?end
+He says that it is Christmas Eve, and that he is old, and that he has been, for six years, afraid. He says that the Teche house has lost everything that the war did not take, and that he has on his mantel the one thing that he can still give. He says that it is an offer.
+:the_teche
+* Accept: a truce, on the old terms, and a seat at the long table of the family for the whole of the winter
+  $ b4.teche = "truce"
+  $ humanity += 2
+  $ standing += 1
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  It is a very strange, quiet, awkward business. He rises, with a great creaking of the knees, and holds out a hand, and you take it. It is as dry and as light as paper. He says that he had not meant to be forgiven. He says that he supposes he shall have to learn how it is done. He sits down again. He says, after a little, that it is a very long time since anyone sat in this room with him. He asks whether it is true that the family keeps a school.
+* Answer him: the fires and rings, every one, at the Chapter, by name, and the house to pay what it has burned
+  $ b4.teche = "answered"
+  $ standing += 2
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  You say that you will accept no truce that is not a reckoning. You give him a list. It has been made by Hanno, and by Jules, and by a woman of the school who has remembered every fire in six years, and it is a very exact list. He reads it by the fire, slowly, with an air of remote interest. He says that it is all quite correct. He says that he will answer for it in January, at the Chapter, in his own person, and that he will pay it in silver. He says that he never supposed that a thing could be so precisely done.
+* Refuse him, and end it tonight, here, in his own house, with what the sixth blood can do
+  $ b4.teche = "broken"
+  $ humanity -= 3
+  $ cunning_brutal += 3
+  $ standing += 1
+  $ secrecy += 1
+  He says, quite calmly, that he was afraid that you would say that. He does not rise. The rest is very short. It is not a fight. There is nothing in that room, or in that house, or in the whole of the Parish, that can stand against what you are, and he has known it for a long time, and so have you. You take the seal from his hand. You take the ring from the mantel. You take, in the cellar, the whole of the house's silver, and the roll of its people, and the deed. He is alive when you leave him. He is sitting in the same chair, with the fire gone out, and his face is not at all what you expected. You ride home in the frost. You do not look back.
+$ do discover("the_teche_house")
+<~
+
+# family
+## The long table
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  ?if b4.coven_home == "raised"
+    The house on Gravier Street has the look, on Christmas Eve, of a household that has been invited to a great many parties and has decided to have its own. There is a tree in the great hall, a young cedar, hung with paper stars from the school. Fiammetta is on a ladder, putting a candle on the top. Hanno is holding the ladder, with an expression of the most acute misgiving. Prisca is in the great chair with a very large account book, at which she is not looking.
+  ?elif b4.coven_home == "hidden"
+    The little back rooms are full of the smell of cloves and orange peel, and the free families of the street have come through, one at a time, with something in a napkin. There is no tree. There is a very small, very bright candle in every window of the passage, and every one is lit.
+  ?else
+    They are in the long room in the Marigny, with a fire, and the shutters closed on the frost, and a good deal of food. A bottle is opened, and set down, and not touched. Fiammetta is teaching a child to cheat at cards.
+  ?end
+  ?if b4.refuge == "sheltered"
+    Fontenot's sister has stayed for the winter, with two of the Gulf's children, and has been put to keeping the poultry. She says that it is a very lowly office. She says that she is happier in it than she has been in six years.
+  ?end
+  ?if b4.physician == "family"
+    Dr. Armand has hung a stocking on the door of his room, as a joke. It has been filled by Fiammetta with a number of small, strange, and mostly inedible objects. He says that he has never been so astonished in his life, and keeps every one.
+  ?end
+?elif coven_size() > 0
+  The house is quiet and the lamps are low. They are a long way off, and it is Christmas. There is a parcel on the table, in brown paper, wrapped in string, in a hand that you know. You have not opened it. You do not, tonight, open it.
+?else
+  The house is very quiet on this particular night of the year. Somewhere a long way off there is a choir, and you sit and listen to it, a very long time, in the dark.
+?end
+:the_family
+* Send Prisca to the Legislature's lobby, to find out which laws are meant and which are only written [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca") and task("prisca") == ""
+  $ do send("prisca", "negotiate", 1)
+  Prisca says that a lobby is the one room in the world in which she has never been at a loss. She puts on her second best gloves. She says that she will be back at dawn, with the whole of it, and a lot of men who will wish they had said less.
+* Send Fiammetta to walk the Tremé till morning, and see that no sheriff makes a mistake [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta") and task("fiammetta") == ""
+  $ do send("fiammetta", "scout", 1)
+  Fiammetta says that she will do it with enormous pleasure. She is out of the door before it has been fully opened. A moment after, from the street, there is a light, high, delighted whistle, which is not at all like anything that has been heard on the Rue Ursulines before.
+* Set Hanno to run the family's books through the winter, and the Ice Company's with them ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "business")
+  Hanno says that it will be a great comfort. He says that he has found, in the last six months, that he is no longer at all frightened of a column of figures, and that he supposes that it is a thing that one may be happy with. He opens a fresh ledger, with a great flourish, and writes in it, in the old script, a single word.
+* Buy a respectable shop on the Rue Chartres, for a counting room and a face the sheriff can read ?if can_acquire("front_business")
+  $ do acquire("front_business")
+  $ secrecy += 1
+  $ standing += 1
+  It is a hardware shop, with a green door, and a window full of kettles, and an old Alsatian behind the counter, who sells it for a very fair price, and stays on, with his pipe, to run it. He says that he has never asked a customer what he wanted the nails for, and does not mean to begin. There is, in the back, a room with a good safe, and a desk, and a lamp.
+* Make a net of safe doors across the town, from the Marigny to the Garden District ?if can_acquire("safehouses")
+  $ do acquire("safehouses")
+  $ secrecy += 1
+  $ humanity += 1
+  It is done through the free families, and through the Greek, and through a very remarkable number of persons who have never been asked and who have been waiting a long time to be. By the end of the week there are fifteen doors in the city, in every ward, that open at the right knock, and ask no question, and have a bed. It is a great quiet thing. It does not, for a moment, feel like a plot.
+* That will do for tonight
+  -> :family_done
+-> :the_family
+:family_done
+<~
+
+# dawn
+## Christmas morning
+The frost is thick, and white, and the sky, as the others will tell you, is a hard clear blue. The bells begin at six and do not stop. Every church in New Orleans is full, and in the Tremé the school has a service of its own, in a yard, with a great many children and a very bad harmonium.
+?if b4.court == "argued"
+  The court's ruling is delivered at eight, by hand, in a long cream envelope, in Thorne's black hand. It says, in nine lines, that the complaint is dismissed. It says that the court finds that the sixth blood is a strong thing, and that a thing is not a crime for being strong. It says that the family is to be left in peace. It adds, in a postscript in a rounder hand, signed by the Quaker lady, *Friend, thee did very well. Come to Philadelphia.*
+?elif b4.court == "written"
+  The ruling comes at eight, in a plain envelope. It dismisses the complaint, on the grounds of the brief, in four lines. It adds, in a second paragraph in Thorne's own hand, that the court does not believe that it has seen the whole of the family, and that it hopes, at some later date, to be introduced.
+?else
+  A clerk comes to the door at eight, with a sealed paper. It records, in a brief and formal hand, that the party declined to appear, and that the court's finding, in absence, is that the complaint has been heard and is not proved. It is not a judgment against the family. It is also, evidently, not a judgment for it. It has the look of something that is being kept.
+?end
+?if b4.codes == "hired"
+  Jules comes in at nine, with his cap in his hand, to say that a hundred and ninety persons were taken on in the night, and that eleven more arrived at dawn. He says that the sheriff came at six, with his list, and read the contract at the gate, twice, and went away. He says that the sheriff did not, at the end, seem to know how to arrest a man for having an employer.
+?elif b4.codes == "sheltered"
+  A card comes from Philadelphia, in the afternoon, by the telegraph, from a person who signs only *A friend of Mr. Wren.* It says that eighty persons have arrived, in good health, and that there are beds. It does not say how many are still on the road.
+?else
+  The General's order is posted on every wall at noon, on stiff buff paper, and read aloud in the Place d'Armes by a lieutenant with a very loud voice. It says that, in the District of Louisiana, no person shall be arrested as a vagrant under the late Act who is the holder of a written contract of labor, or the bearer of a certificate of residence from a free family of the parish. It is, on the whole, a very small order. It is read by every person in the Tremé before the evening.
+?end
+?if b4.teche == "truce"
+  A very old man comes to the house at four in the afternoon, in a closed carriage, with a small parcel. He says that he has been told that there is to be a Christmas dinner. The carriage waits. He is there until nine.
+?elif b4.teche == "answered"
+  The elder Delorme's silver arrives at noon in six boxes, with the roll of the fires, and a short note, in his dry sweet hand. It says that he will see you in January, at the Chapter. It adds, in a very small postscript, that it was the most civil thing that anybody had done to him in a year.
+?else
+  The Teche house is silent. A cart goes out to Belle Rive in the afternoon, from the Levee, with Jules's cousin, who is a carter. He comes back at dusk, very pale. He says that the house is shut. He says that there is smoke from the chimney, but nobody in the yard. He says that there is a ring, with a pearl in it, nailed to the gate, upside down.
+?end
+?if b4.atlantic == "refused"
+  Crane has stayed in the town. He comes to the door at six in the evening, in his kid gloves, with a parcel, and says that he is here, not as a delegate, but as a person who dislikes Christmas in hotels. He is let in. He says, in the passage, that the court has been very rude about you, in the proper places, and that he has told Thorne it was entirely his own fault.
+?end
+?if b4.peace == "sworn"
+  Beaumont has sent a basket from Belle Rive, with a ham, and a very old bottle, and a card that says *With the thanks of the river.* It is the first thing that has come out of that house in six years that has not had a seal on it.
+?end
+?if b4.physician == "practice"
+  Armand comes to the door, in a good black coat, at five, with a very large cake that has been given him by a patient. He says that he has seen thirty one persons in a week, and eleven of them could not pay, and that it has been, on the whole, the happiest week of his life.
+?elif b4.physician == "own"
+  There is a note from Armand in the afternoon, very short, from the Alabama country. It says that he is walking, and that he has found that it does him good, and that he will be back by the spring, and that he has taken the cat.
+?end
+A letter comes by the evening post, in Wren's thin bright hand, from the North. It says that the news is bad, and that there are talks of a new convention in the summer, in the Mechanics' Institute, to give the vote to the free men, and that the old party of the Legislature means to prevent it by any means. It says, in the last line, *Be careful in July.*
+?if b4.seal == "trap"
+  A slip from Charleston arrives in the dark, unsigned, with a Christmas postmark. *He has landed. He is in the city. He has been in the city three days.*
+?end
+It is Christmas Day, 1865, and a Monday, and very cold, and the bells go on until the night.
+$ do rest()
+=> next
