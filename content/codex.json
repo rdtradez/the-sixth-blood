@@ -667,6 +667,60 @@
       "title": "The river houses in the war",
       "book": "house-divided",
       "text": "Southern vampire houses follow their states into the war and hold part of the trenches at Port Hudson. They do not fight like soldiers, and they do not forget who has helped them."
+    },
+    "the_river_opens": {
+      "category": "lore",
+      "title": "The river opens",
+      "book": "house-divided",
+      "text": "Vicksburg falls on 4 July 1863 and Port Hudson on 9 July. The whole Mississippi is in Union hands, and New Orleans is joined to the upper valley again."
+    },
+    "the_first_open_summer": {
+      "category": "lore",
+      "title": "The first open summer",
+      "book": "house-divided",
+      "text": "With the river open, shuttered warehouses are sold for almost nothing and merchants of every kind come back to the Levee to rebuild their trade."
+    },
+    "the_ice_trade": {
+      "category": "lore",
+      "title": "The ice trade",
+      "book": "house-divided",
+      "text": "Ice shipped from Boston in sawdust is worth more than cotton in a Gulf summer. Whoever holds the first cold warehouse on the open river holds a good deal of the city."
+    },
+    "the_mobile_house": {
+      "category": "lore",
+      "title": "The Mobile house",
+      "book": "house-divided",
+      "text": "A small house of the Gulf coast, beaten at Port Hudson and cut off by the blockade. It wants the Compact to name it a house in its own right."
+    },
+    "the_returning_guards": {
+      "category": "lore",
+      "title": "The returning Guards",
+      "book": "house-divided",
+      "text": "After Port Hudson the wounded of the Native Guards come down the river by hospital boat to the Treme, where the free families wait for them at the landing."
+    },
+    "the_free_labor_system": {
+      "category": "lore",
+      "title": "The free labor system",
+      "book": "house-divided",
+      "text": "General Banks orders that freed people on the sugar estates be paid a small wage and bound to the plantation for a year by passes. Many call it slavery under a new name."
+    },
+    "the_teche_house": {
+      "category": "lore",
+      "title": "The Teche house",
+      "book": "house-divided",
+      "text": "A river house of the Teche country, led by the Delorme brothers, who do not wish the Compact written again and will pay in iron to prevent it."
+    },
+    "the_labor_contracts": {
+      "category": "lore",
+      "title": "The labor contracts",
+      "book": "house-divided",
+      "text": "Contracts read aloud in the yards of the sugar estates in winter 1863 set wages, passes and a year of work. Some estates add schools or land, most do not."
+    },
+    "the_school_in_the_treme": {
+      "category": "lore",
+      "title": "The school in the Treme",
+      "book": "house-divided",
+      "text": "Honorine Armand keeps a school for the children of the free families and the freed, supported by a society of the Treme, and the lamp in its window is lit every night."
     }
   }
 }

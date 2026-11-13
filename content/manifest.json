@@ -764,6 +764,25 @@
             "slavery",
             "war"
           ]
+        },
+        {
+          "id": "b4c11",
+          "file": "house-divided/ch11.tsb",
+          "title": "The River Opens",
+          "notes": [
+            "blood",
+            "slavery",
+            "war"
+          ]
+        },
+        {
+          "id": "b4c12",
+          "file": "house-divided/ch12.tsb",
+          "title": "The Winter House",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
         }
       ],
       "incomplete": true

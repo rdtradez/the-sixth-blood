@@ -109,3 +109,23 @@ Hooks: Lucien's debt or grudge; Wren's suspicion; Armand's arm; Honorine; the Re
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
 
+## Chapter 11, "The River Opens" (`b4c11`, session 45)
+
+July 1863. Vicksburg and Port Hudson fall, the river opens. Gaspard Fontenot of Mobile (the silent man of the winter supper in chapter 4, beaten at Port Hudson, eleven of nineteen left, on parole) leaves a card: he wants the Compact to name the lower Gulf a house in its own right. Night phase, three of four: the old cotton press on Gravier Street (the coven's haven built out, `b4.coven_home`: raised as a second house with a hall and a hidden cellar, hidden as a net of small rooms behind the free families, or kept and given to the hospital), the Levee (the ice and steamboat company, `b4.firm`: the family's own company run by the household, partnered with Brault, or alone), the garden behind the Cathedral (`b4.fontenot`: parleyed as equals, showed the sixth blood, or refused; reads `b4.works`), the Treme landing (Armand comes home on the first hospital boat, `b4.homecoming`: carried, sat, or apart; reads `b4.hospital` and `b4.honorine`).
+
+Dawn: the haven and firm in the morning, Fontenot's letter (postscript points at a river house that wants no new Compact, seen at Madame Lachapelle's door), a copybook from Honorine, Wren on a pass for Fontenot, an unsigned note: the river is open in both directions.
+
+Hooks: Fontenot at the next Compact table; the Teche house (the Delorme brothers) who want the old Compact kept; Madame Lachapelle; the firm's income and cold warehouse; Honorine and Armand.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 12, "The Winter House" (`b4c12`, session 45)
+
+December 1863. The first frost and the Delorme sign (a river pearl in black iron) left on the step. Night phase, three of four: keep watch on the haven (the elder Delorme and four of the Teche house come at two in the morning; `b4.defense`: stood at the door and fought with the family behind him, struck first at their boat, or sent for Beaumont and made him answer for the Compact; if unwatched the coven holds the house alone and Fiammetta is hurt but will recover), the sugar estate (the Army's labor contract read in the yard; Belle Isle if held, otherwise Sans Souci; `b4.labor`: bought the land for the people through the free families, signed and added wages and a school, or signed nothing), the school's Christmas supper (`b4.christmas`: sat in the kept chair, brought a gift, or stayed a quarter hour), the family (errands and the informants and hidden chamber holdings).
+
+Dawn: the haven after the night, the contract's consequence, the Ice Company's first quarter, a lantern from Wren, a letter from Crane (he is coming) and a note from Charleston if the false letter was sent.
+
+Hooks: Beaumont's answer to the Teche house at the next Chapter; Crane's arrival; the Charleston house; the land deeds and the Army; Fontenot's spring return; Armand returning to duty; the Red River campaign and the new State convention in 1864.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+

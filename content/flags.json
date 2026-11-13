@@ -4191,6 +4191,91 @@
       "major": true,
       "default": "apart",
       "note": "Chapter 10: the night before the assault at the school in the Treme"
+    },
+    "b4.coven_home": {
+      "kind": "enum",
+      "values": [
+        "raised",
+        "hidden",
+        "kept"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 11: what he made of the old cotton press on Gravier Street"
+    },
+    "b4.firm": {
+      "kind": "enum",
+      "values": [
+        "coven",
+        "partner",
+        "alone"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "alone",
+      "note": "Chapter 11: the ice and steamboat company on the open river"
+    },
+    "b4.fontenot": {
+      "kind": "enum",
+      "values": [
+        "parleyed",
+        "showed",
+        "refused"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 11: the gentleman of Mobile in the garden behind the Cathedral"
+    },
+    "b4.homecoming": {
+      "kind": "enum",
+      "values": [
+        "carried",
+        "sat",
+        "apart"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "apart",
+      "note": "Chapter 11: the wounded surgeon landed at the Treme"
+    },
+    "b4.defense": {
+      "kind": "enum",
+      "values": [
+        "stood",
+        "struck",
+        "parleyed",
+        "unwatched"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "unwatched",
+      "note": "Chapter 12: the night the Teche house came to the family"
+    },
+    "b4.labor": {
+      "kind": "enum",
+      "values": [
+        "land",
+        "wages",
+        "apart"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "apart",
+      "note": "Chapter 12: the Army labor contract read at the sugar estate"
+    },
+    "b4.christmas": {
+      "kind": "enum",
+      "values": [
+        "table",
+        "gift",
+        "apart"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "apart",
+      "note": "Chapter 12: Christmas supper at the school in the Treme"
     }
   }
 }

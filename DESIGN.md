@@ -71,6 +71,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 42: Book Four chapters 5 and 6
 - [x] Session 43: Book Four chapters 7 and 8
 - [x] Session 44: Book Four chapters 9 and 10
+- [x] Session 45: Book Four chapters 11 and 12
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
@@ -552,3 +553,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Tests: `tests/book4.test.js` plays chapters 9 and 10 down every circle, waking, river house answer and agent answer, takes every recorded choice, and expects ten chapters.
 - Session 43's pull request (#41) was not yet merged when this session started, so the session 44 branch is stacked on it. Merge #41 first.
 - Plans are in `SPOILERS/house-divided.md`.
+
+### Session 45 notes (Book Four, chapters 11 and 12)
+
+- Chapters `b4c11` and `b4c12` are in `content/house-divided/` (`ch11.tsb`, `ch12.tsb`). The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 12. Same shape as chapters 3 to 10. Chapter 12 has a separate `fight` scene (`fight("elder", 2)`) called from the night action.
+- Coven focus, as the owner asked: both chapters put the family, its havens, its business and a rival house at the center. Three of the four night actions in chapter 11 and two of four in chapter 12 touch the coven, and what the family does when the hero is not there changes the dawn (chapter 12, `b4.defense == "unwatched"`). Haven holdings (`coven_house`, `hidden_chamber`, `escape_tunnels`, `informants`) are offered only through `can_acquire`, so lone paths and low funds skip them cleanly.
+- New decision flags (`b4.` prefix, registered): `b4.coven_home`, `b4.firm`, `b4.fontenot`, `b4.homecoming` (chapter 11) and `b4.defense`, `b4.labor`, `b4.christmas` (chapter 12). `b4.coven_home`, `b4.firm`, `b4.fontenot` and `b4.defense` are the ones later chapters should read first.
+- New person `fontenot` (met in chapter 11). New codex entries: the open river, the first open summer, the ice trade, the Mobile house, the returning Guards, the free labor system, the Teche house, labor contracts, the school in the Treme. Content notes: chapter 11 `blood`, `slavery`, `war`; chapter 12 `blood`, `slavery`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book4.test.js` plays chapters 11 and 12 down every circle, waking, haven, firm and estate branch, takes every recorded choice, runs the fight with several seeds, and expects twelve chapters.
+- Sessions 43 and 44 (pull requests #41 and #42) were not merged when this session started, so the session 45 branch is stacked on them. Merge #41, then #42, then this one.
+- Plans are in `SPOILERS/house-divided.md`.
+
