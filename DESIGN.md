@@ -68,6 +68,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 39: the New Orleans and Collesanto (1859) maps for Book Four
 - [x] Session 40: Book Four chapters 1 and 2
 - [x] Session 41: Book Four chapters 3 and 4
+- [x] Session 42: Book Four chapters 5 and 6
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
@@ -518,4 +519,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Chapter 4 has one short fight (`fight("fledgling", 2)`), with every outcome written. New people (`content/people.json`): Augustin Beaumont, Lucien Beaumont and Madame Célestine Lachapelle. New codex entries: the Compact of the River and the election of 1860. Content notes: both chapters carry `blood` and `slavery`. No new engine behavior, so no schema or migration.
 - Chapter 3 charts `neworleans.beaumont`, `haven`, `treme`, `market` and `bank`; chapter 4 charts `beaumont`, `haven`, `treme` and `wharf`.
 - Tests: `tests/book4.test.js` now plays chapters 3 and 4 down every circle, auction, paper and choice, with and without a coven, and every way of meeting the fight.
+- Plans are in `SPOILERS/house-divided.md`.
+
+### Session 42 notes (Book Four, chapters 5 and 6)
+
+- Chapters `b4c05` and `b4c06` are in `content/house-divided/` (`ch05.tsb`, `ch06.tsb`), about 11,000 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 6. Same shape as chapters 3 and 4: an opening with no phase, a short hunger scene that only runs if `must_feed()` is true on entry, one night phase of three actions out of four, and a closing scene ending in `rest()` and `=> next`.
+- New decision flags (`b4.` prefix, registered with `book`, `major` where later chapters care, and a quick start `default`): `b4.envoy`, `b4.levy`, `b4.shelter` (chapter 5) and `b4.thorne`, `b4.blockade`, `b4.raid`, `b4.guards` (chapter 6). `b4.levy` and `b4.shelter` are the ones later chapters should read first.
+- The coven is used in both chapters. Chapter 5 reads the chapter 4 errand and offers haven build out (`escape_tunnels`, `informants`, `safehouses`) and standing tasks (`guard` for Fiammetta, `business` for Prisca). Chapter 6 puts the coven's errand to work at the Bayou St. John and gives the river houses a rival house to quarrel with. The firm's nine boats now carry real choices. Both chapters treat `b4.circle == "stay"` as the coven being far away.
+- Chapter 6 has one short fight (`fight("fledgling", 2)`), with every outcome written, in its own scene (`yard`). New people (`content/people.json`): Septimus Roan, Elias Thorne and Honorine Armand. New codex entries: the secession of Louisiana, the Senate now, the free colored registration law, the blockade, the Northern houses, the river houses and the Native Guards. Content notes: both chapters carry `blood` and `slavery`. No new engine behavior, so no schema or migration.
+- Chapter 5 charts `neworleans.bank`, `market`, `roadhome` and `haven`; chapter 6 charts `bank`, `wharf`, `roadhome` and `treme`.
+- Tests: `tests/book4.test.js` plays chapters 5 and 6 down every circle, houses answer, shelter, blockade and choice, with and without a coven, and every way of meeting the raid. Because earlier chapters now flow on into later ones, the chapter 1 to 4 tests also play to the end of the book so far.
 - Plans are in `SPOILERS/house-divided.md`.

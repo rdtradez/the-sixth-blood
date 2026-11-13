@@ -444,6 +444,24 @@
       "name": "Madame Célestine Lachapelle",
       "title": "Of the Bayou St. John",
       "bio": "Small, old, in gray silk, with a house of six on a bayou and a door that is never quite locked. Once the equal of the river house. Now its inconvenience."
+    },
+    "roan": {
+      "gender": "m",
+      "name": "Septimus Roan",
+      "title": "Resident of the Senate of Blood for the Western Sea",
+      "bio": "A small, dry, gray clerk of nine hundred years who writes Latin like a chisel and has ink on one finger. He speaks for a Senate that is now a correspondence."
+    },
+    "thorne": {
+      "gender": "m",
+      "name": "Elias Thorne",
+      "title": "Of Messrs. Thorne and Pickering, India Wharf, Boston",
+      "bio": "Tall, fair, grave, in a black coat that has not changed cut in forty years. A New England vampire of two centuries with a small Bible and a long memory of Salem."
+    },
+    "honorine": {
+      "gender": "f",
+      "name": "Honorine Armand",
+      "title": "Schoolmistress of the Tremé",
+      "bio": "Dr. Armand's elder sister. Tall, composed, with a Paris vowel and her sleeves always pushed up. Runs the school in the society's back room and says what she means."
     }
   }
 }

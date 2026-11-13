@@ -1,4 +1,4 @@
-// Sessions 40 and 41: Book Four, chapters 1 to 4. Played from different wake reports and down the branches. (This file says what is guaranteed, not what happens.)
+// Sessions 40 to 42: Book Four, chapters 1 to 6. Played from different wake reports and down the branches. (This file says what is guaranteed, not what happens.)
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -81,11 +81,11 @@ const coven = (g) => {
   }
 };
 
-test('Book Four lists its four written chapters and is still incomplete', async () => {
+test('Book Four lists its six written chapters and is still incomplete', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'house-divided');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 4);
+  assert.equal(book.chapterCount, 6);
 });
 
 test('chapter 1 plays through every kind of waking and reaches chapter 2', async () => {
@@ -296,7 +296,8 @@ test('chapter 4 takes each choice and records it', async () => {
 
 test('the errand sends a coven member out on a mission', async () => {
   const run = await play('b4c04', {}, { ...START, 'b4.circle': 'all' }, [/coven's table/, /Send Prisca/], { sys: coven });
-  assert.ok(run.game.state.sys.circle.prisca.mission || run.vars['b4.errand'] === 'scout');
+  // Later chapters play on and the mission resolves, so what lasts is the recorded errand.
+  assert.ok(['scout', 'protect'].includes(run.vars['b4.errand']));
   clean(run);
 });
 
@@ -305,6 +306,90 @@ test('every way of meeting Lucien in the yard plays to the end', async () => {
     for (const seed of [1, 3, 7]) {
       const run = await play('b4c04', {}, { ...START, 'b4.circle': 'all' }, [/river house, where the houses/, /stand where you are asked/, re], { sys: coven, seed });
       assert.match(run.text, /Lucien/);
+      clean(run);
+    }
+  }
+});
+
+const CH5 = { 'b4.circle': 'all', 'b4.compact': 'signed', 'b4.houses': 'pledged', 'b4.rival': 'allied', 'b4.errand': 'scout', 'b4.papers': 'forged', 'b4.paper': 'silent' };
+
+test('chapter 5 plays through every circle, houses answer and waking, and carries on into chapter 6', async () => {
+  for (const circle of ['all', 'ahead', 'stay']) {
+    for (const hunger of [10, 90]) {
+      for (const houses of ['pledged', 'conditional', 'withheld']) {
+        for (const rival of ['heard', 'allied', 'told']) {
+          const run = await play('b4c05', {}, { ...START, hunger, 'b4.circle': circle, 'b4.houses': houses, 'b4.rival': rival, 'b4.errand': circle === 'stay' ? 'none' : 'scout' }, [], { sys: circle === 'stay' ? null : coven });
+          assert.match(run.text, /Septimus Roan|Resident/);
+          assert.match(run.text, /blockade|Federal|Passes/);
+          assert.equal(run.frame.wait, 'book_end');
+          assert.equal(run.frame.pending, true);
+          clean(run);
+        }
+      }
+    }
+  }
+});
+
+test('chapter 5 takes each choice and records it', async () => {
+  const sets = [
+    ['b4.envoy', [['heard', /no quarrel with the Senate/], ['bargained', /Offer neutrality/], ['refused', /has not earned a promise/]], /Senate's Resident/],
+    ['b4.levy', [['gave', /Give the state what it asks/], ['lent', /Lend it/], ['refused', /not at the state's disposal/]], /Exchange, where the river houses/],
+    ['b4.shelter', [['hid', /has room, and take them in/], ['sent', /Offer passage/], ['left', /cannot take a hand/]], /Bayou St. John, to Madame/],
+  ];
+  for (const [flag, branches, night] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b4c05', {}, { ...START, wealth: 400000, ...CH5 }, [night, re, /That will do/], { sys: coven });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('the coven house in chapter 5 can be built out and given its posts', async () => {
+  const run = await play('b4c05', {}, { ...START, wealth: 900000, ...CH5, 'b4.errand': 'protect' }, [/haven and the coven's quarter/, /Open a way out/, /a few eyes/, /second house/, /Set Fiammetta/, /Ask Prisca/, /That will do/], { sys: coven });
+  assert.equal(run.game.state.sys.circle.fiammetta.task, 'guard');
+  assert.equal(run.game.state.sys.circle.prisca.task, 'business');
+  clean(run);
+});
+
+test('chapter 6 plays through every circle, blockade choice and waking, and pauses at the end of the book so far', async () => {
+  for (const circle of ['all', 'ahead', 'stay']) {
+    for (const hunger of [10, 90]) {
+      for (const shelter of ['hid', 'sent', 'left']) {
+        for (const wants of [[], [/Run the Passes/], [/carry people north/]]) {
+          const run = await play('b4c06', {}, { ...START, hunger, 'b4.circle': circle, 'b4.shelter': shelter, 'b4.rival': 'allied', 'b4.errand': circle === 'stay' ? 'none' : 'protect', 'b4.papers': 'forged' }, wants, { sys: circle === 'stay' ? null : coven });
+          assert.match(run.text, /blockade|Passes/);
+          assert.equal(run.frame.wait, 'book_end');
+          assert.equal(run.frame.pending, true);
+          clean(run);
+        }
+      }
+    }
+  }
+});
+
+test('chapter 6 takes each choice and records it', async () => {
+  const sets = [
+    ['b4.thorne', [['listened', /keep both doors open/], ['traded', /Trade: give him/], ['turned', /of no side by nature/]], /Thorne of Boston/],
+    ['b4.blockade', [['tied', /Lay them up/], ['ran', /Run the Passes/], ['hid', /carry people north/]], /nine idle boats/],
+    ['b4.raid', [['warned', /Send word, by a boy/], ['watched', /watch what the houses do/]], /Bayou St. John, where something/],
+    ['b4.guards', [['funded', /Pay for the Guards/], ['warned', /Tell them, plainly/], ['apart', /not your quarrel/]], /Tremé, to Dr/],
+  ];
+  for (const [flag, branches, night] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b4c06', {}, { ...START, wealth: 400000, ...CH5, 'b4.shelter': 'hid' }, [night, re, /That is all/], { sys: coven });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('every way of meeting the raid on the Bayou plays to the end', async () => {
+  for (const re of [/Go for the nearest/, /Use the dark/, /Say Lucien/, /^Go$/, /old blood/]) {
+    for (const seed of [1, 3, 7]) {
+      const run = await play('b4c06', {}, { ...START, ...CH5, 'b4.rival': 'allied' }, [/Bayou St. John, where something/, /under the protection of Colline/, re], { sys: coven, seed });
+      assert.equal(run.vars['b4.raid'], 'defended');
+      assert.match(run.text, /Lachapelle/);
       clean(run);
     }
   }

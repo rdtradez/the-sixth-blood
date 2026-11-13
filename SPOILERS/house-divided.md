@@ -47,3 +47,24 @@ Dawn: the bells, the news by wire that the Illinois lawyer has the election, a l
 Hooks: secession in January; the houses' choice; the errand's debrief; Armand's people; the Senate's agent.
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 5, "The Envoy and the Convention" (`b4c05`, session 42)
+
+January 1861, the night before Louisiana votes itself out. The Senate's seal opened: Septimus Roan, Resident of the Senate of Blood for the Western Sea (a dry gray clerk of nine hundred years), calls at the counting house at midnight. The Senate is now a correspondence, wants the Veil kept through the coming war, and is embarrassed, not threatened, by a daywalker of the erased line (`b4.envoy`: heard, bargained for a letter of protection and a debt, refused). Night phase, three of four: the envoy, the Exchange and the river house at three in the morning (the first article of the Compact comes due: the firm's nine boats and bank for the state's arming; `b4.levy`: gave, lent at a rate, refused; reads `b4.houses` and `b4.compact`), the Bayou St. John (Madame Lachapelle shelters eleven free people the new registration law will hunt; `b4.shelter`: hid under the cooperage, sent north by the lake, left; reads `b4.rival`), the Marigny haven (the errand's debrief; escape tunnels, informants, safehouses; Fiammetta to the guard, Prisca to the business).
+
+Dawn: twenty one guns for the state; chalk or silence on the door by the levy; a notice in the Valere paper for friends of Madame L.; Crane's letter from Havana.
+
+Hooks: the Senate's debt and Roan's parting warning (not wise to be the only one of anything); Fortier's memory of the sixth in Lyon; Lucien's smile if the levy was refused; the free families; Crane.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 6, "The Blockade" (`b4c06`, session 42)
+
+Late May 1861, the first Federal ship off the Passes. Elias Thorne of Boston (a New England vampire of two hundred years, a Salem survivor) comes under a factor's flag to say that the Northern houses want a friend on the river and that the war will end the trade at a terrible price (`b4.thorne`: listened, traded the river houses' roads for a clear road, turned away; a map and a warning from "a person in New York who is not Mr. Crane"). Night phase, three of four: Thorne, the nine idle boats (`b4.blockade`: tied up and crews paid, ran the Passes for the dark money, carried people north; Captain Brault), the Bayou St. John (the river houses raid Madame Lachapelle's house, Lucien with them; `b4.raid`: defended it and fought, warned the river house through a boy, watched; if the errand sent Fiammetta she is already on the icehouse rail), the Tremé (the free men's Native Guards; Armand's brother a lieutenant; Honorine, his sister and the schoolmistress, introduced; `b4.guards`: funded, warned them, kept apart).
+
+Dawn: coal smoke from the Passes; a card from Madame L. or Beaumont or a broken door; a note from Thorne with a postscript from "the person who told me to write": watch the Senate's man, the one everyone trusts. This seeds Roan as a figure to doubt (he may be the Scribe's creature or the Scribe's cover) without deciding it.
+
+Hooks: Roan; Honorine (a possible love); Lucien's grudge and the river houses' war footing; the Native Guards and the fall of the city in 1862; Brault's boats; Crane and Thorne as rivals; the free families on the lake.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
