@@ -68,11 +68,11 @@ const WAKES = [
   { place: 'tomb', steward: 'keepers', outcome: 'woken_early', by: 'steward' },
 ];
 
-test('Book Three lists its written chapters and is not yet finished', async () => {
+test('Book Three lists its twenty chapters and is finished', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'crown-of-ashes');
-  assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 18);
+  assert.equal(book.incomplete, false);
+  assert.equal(book.chapterCount, 20);
 });
 
 test('chapter 1 plays through for every kind of waking and reaches chapter 2', async () => {
@@ -139,11 +139,11 @@ test('a quick start wake, with no investments, leaves the sugar and the island u
   assert.equal(quick.vars['b3.crane_offer'], 'unseen');
 });
 
-test('chapter 2 plays through for every waking, reaches the pause, and is free of dashes and braces', async () => {
+test('chapter 2 plays through for every waking, reaches chapter 3, and is free of dashes and braces', async () => {
   for (const wake of WAKES) {
     for (const valerii of ['sworn', 'trusted', 'distant']) {
-      const run = await play('b3c02', wake, { 'b2.valerii': valerii, wealth: 40000 });
-      assert.equal(run.frame.pending, true, JSON.stringify(wake));
+      const run = await play('b3c02', wake, { 'b2.valerii': valerii, wealth: 40000 }, [], { stopAt: 'b3c03' });
+      assert.equal(run.game.state.chapter, 'b3c03', JSON.stringify(wake));
       assert.match(run.text, /Hôtel de Saint-Aubin/);
       clean(run);
     }

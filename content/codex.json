@@ -511,6 +511,18 @@
       "title": "The twenty first of Brumaire",
       "book": "crown-of-ashes",
       "text": "The eleventh of November 1793, in the Year Two. A sitting of the Tribunal ran late, and the last cart came to the Place of the Revolution by torchlight. What the crowd saw there is still told in Paris, and not agreed."
+    },
+    "the_ninth_of_thermidor": {
+      "category": "lore",
+      "title": "The ninth of Thermidor",
+      "book": "crown-of-ashes",
+      "text": "The night of the twenty seventh of July 1794, in the Year Two, on which the Convention turned on its Committee and the Terror ended in a day. The Commune rang the tocsin, the Guard went over by the stair, and in Paris nobody was able to say, until the carts had gone, which paper was the true one."
+    },
+    "the_priestess_awake": {
+      "category": "lore",
+      "title": "The Lady of the third cellar",
+      "book": "crown-of-ashes",
+      "text": "The Priestess line's eldest, who slept in the rosemary under the Hotel de Saint-Aubin and wrote the court's doings on a slate. She woke in the small hours of the eleventh of Thermidor, in the last days of July 1794, and released the Prince. She has said that she has a great deal to attend to, and that it will keep."
     }
   }
 }

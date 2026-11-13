@@ -3559,6 +3559,101 @@
       "major": true,
       "default": "watched",
       "note": "Chapter 18: what he did when the guillotined man sat up"
+    },
+    "b3.court": {
+      "kind": "enum",
+      "values": [
+        "held",
+        "pushed",
+        "left"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 19: what he said to the court in the hall of the Hotel de Saint-Aubin on the night of the ninth of Thermidor (left if he did not go)"
+    },
+    "b3.quarry": {
+      "kind": "enum",
+      "values": [
+        "opened",
+        "shut",
+        "led"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "shut",
+      "note": "Chapter 19: what he did about the Cadets in the quarry on the night of the ninth of Thermidor (shut if he did not go)"
+    },
+    "b3.thermidor": {
+      "kind": "enum",
+      "values": [
+        "commune",
+        "convention",
+        "neither"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "neither",
+      "note": "Chapter 19: which proclamation the house printed on the night of the ninth of Thermidor (neither if he did not go)"
+    },
+    "b3.report": {
+      "kind": "enum",
+      "values": [
+        "written",
+        "lied",
+        "refused"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "lied",
+      "note": "Chapter 19: what he gave the Senate's officer for the report on the Veil (lied if he did not go)"
+    },
+    "b3.prince": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "yielded"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "yielded",
+      "note": "Chapter 19: what he did when the Lady released the Prince"
+    },
+    "b3.lady": {
+      "kind": "enum",
+      "values": [
+        "knelt",
+        "answered",
+        "stood"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "answered",
+      "note": "Chapter 19: how he met the Lady when she woke"
+    },
+    "b3.last_night": {
+      "kind": "enum",
+      "values": [
+        "house",
+        "quarry",
+        "court",
+        "alone"
+      ],
+      "book": "crown-of-ashes",
+      "major": true,
+      "default": "alone",
+      "note": "Chapter 20: how he spent the last night before the sleep"
+    },
+    "b3.letter": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "none"
+      ],
+      "book": "crown-of-ashes",
+      "major": false,
+      "default": "none",
+      "note": "Chapter 20: whether he left a letter at the house in the rue Saint-Jacques"
     }
   }
 }
