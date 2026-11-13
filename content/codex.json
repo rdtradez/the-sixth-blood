@@ -811,6 +811,78 @@
       "title": "The Black Codes",
       "book": "house-divided",
       "text": "After the war, Southern legislatures write laws on vagrancy, labor contracts and apprenticeship that bind freed people to employers. The Army in some districts overrides them."
+    },
+    "the_freedmens_bureau": {
+      "category": "lore",
+      "title": "The Freedmen's Bureau",
+      "book": "house-divided",
+      "text": "An Army office set up in 1865 to feed freed people, register labor contracts, open schools and hear complaints. In New Orleans it keeps a long queue and a longer ledger."
+    },
+    "the_blood_remembers": {
+      "category": "lore",
+      "title": "What the blood remembers",
+      "book": "house-divided",
+      "text": "A turned vampire keeps, in the blood, whatever was shown to them on the night they were turned. A vampire of the sixth line can drink it and see it as it was. It can be shown falsely only by someone very old."
+    },
+    "the_convention_of_1866": {
+      "category": "lore",
+      "title": "The convention of 1866",
+      "book": "house-divided",
+      "text": "The Constitutional Convention of 1864 was never dissolved. Its members were called to meet again on 30 July 1866 at the Mechanics' Institute to extend the vote to every man in the State. The Mayor said he would not allow it."
+    },
+    "the_mechanics_institute": {
+      "category": "places",
+      "title": "The Mechanics' Institute",
+      "book": "house-divided",
+      "text": "A plain brick hall of two stories on the Rue Dryades, used for lectures, meetings and, in 1866, for the State's convention."
+    },
+    "the_river_houses_in_1866": {
+      "category": "lore",
+      "title": "The river houses in 1866",
+      "book": "house-divided",
+      "text": "Six years after the Compact, the houses of the river still keep their old rules and their old fears. Their first article still binds the sixth blood to stand at the river's side when asked."
+    },
+    "the_free_men_of_color": {
+      "category": "lore",
+      "title": "The free men of color",
+      "book": "house-divided",
+      "text": "Before the war, the free people of color of Louisiana were a large and educated class of artisans, clerks and soldiers. After it, many of their sons came home in Union blue, wanting the vote."
+    },
+    "the_thirtieth_of_july": {
+      "category": "lore",
+      "title": "The thirtieth of July, 1866",
+      "book": "house-divided",
+      "text": "The day a lawful convention was attacked by the Mayor's police and a crowd, outside and inside the Mechanics' Institute. More than forty died, most of them Union veterans. A Congress that had been undecided stopped being so."
+    },
+    "the_ward_infirmary": {
+      "category": "places",
+      "title": "The infirmary in the Tremé",
+      "book": "house-divided",
+      "text": "On the night of 30 July the school and its neighbors became a hospital of a hundred and sixty beds. It was run by a schoolmistress, a physician with one arm in a bandage, and anyone who could hold a basin."
+    },
+    "all_saints_in_new_orleans": {
+      "category": "lore",
+      "title": "All Saints in New Orleans",
+      "book": "house-divided",
+      "text": "On the first of November the families of the city whitewash the tombs, light candles and bring chrysanthemums to the cemeteries, and stay late. The night before is a quiet festival of its own."
+    },
+    "the_free_schools_of_the_treme": {
+      "category": "places",
+      "title": "The free schools of the Treme",
+      "book": "house-divided",
+      "text": "After the war the free families of color kept schools of their own in rented halls and back rooms, against the law's neglect and often its hostility. Some had a waiting list of hundreds."
+    },
+    "the_scribe": {
+      "category": "lore",
+      "title": "The Scribe",
+      "book": "house-divided",
+      "text": "An office, not a person, in the old Velati records. Whoever holds it reads the Senate's post, and leaves a mark in the margin. Nobody in Rome can say whose hand it is."
+    },
+    "nikanor_of_ostia": {
+      "category": "people",
+      "title": "Nikanor of Ostia",
+      "book": "house-divided",
+      "text": "A clerk of a grain office on the coast of Italy, born a slave, who kept the tallies and could write four hands. It is the name your maker gave you on All Saints' Eve, 1866."
     }
   }
 }

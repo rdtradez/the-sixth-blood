@@ -1,0 +1,373 @@
+// Book Four, Chapter 18 (session 48). 30 July 1866: the convention meets at the Mechanics' Institute and the city turns on it. The family's morning, the noon on the Rue Dryades, the evening in the Tremé.
+// Opens with no phase (the heat, the summons), a short hunger scene that only runs if must_feed() is true, then a day phase of three actions out of four (the morning), then the Institute as a climax scene, then the evening's choice, then a long dawn.
+// Reads b4.circle, b4.coven_home, b4.compact, b4.peace, b4.teche, b4.honorine, b4.truth, b4.convention, b4.petition, b4.codes, b4.physician, b4.confession, b4.lucien. Sets b4.stand, b4.march, b4.troops, b4.institute and b4.aftermath.
+// Ends with rest() and => next, which pauses until chapter 19 exists (the manifest entry is incomplete).
+@chapter b4c18
+@title The Mechanics' Institute
+@version 1
+
+# start
+## The thirtieth of July
+$ b4.stand = "letter"
+$ b4.march = "watched"
+$ b4.troops = "none"
+$ b4.institute = "ran"
+$ b4.aftermath = "hospital"
+$ do discover("the_mechanics_institute")
+~> morning
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("day", 3)
+It is not yet seven, and there are four things that want doing before noon, and time for three. {cap(voice("hunger"))}.
+-> hub
+
+# morning
+## Monday
+It is the hottest morning of a hot summer. There is no wind at all. The river lies flat and brown, and the smell of it comes a long way up into the town, and the iron of the balconies is warm to the hand at six.
+There is something in the air that has nothing to do with the weather. It is the quiet of a city that has made up its mind. Shutters that are generally open are shut. The bars are doing a very early trade, and are not at all noisy. At the corner of the Rue Royale, a man with a long ledger face, who sells newspapers, has put away every paper but one, and is standing in front of it.
+The Mayor's police have been called out in full. Their coats are buttoned in this heat. The Army, as you learned at three in the morning, from Wren, is in its barracks, below the town, and has been told that it is a civil matter.
+A card is brought to the door at a quarter to seven by a boy in a gray livery, on a silver tray. It is in a very beautiful hand. It has a river house's pearl at the corner, and it says, *Monsieur Beaumont requests, with the greatest regret, that the house of the sixth blood will be so good as to receive him, or to be received, before eight. The first article.*
+<~
+
+# hunger
+## The warm dark
+* Go down to the stables of the Rue Dauphine, where the cab horses stand, and take what the hostler will not miss
+  $ do feed("animal")
+  $ humanity += 1
+  It is very hot in the stable, and the horses stamp, and flick their ears, and stand for it, quite patient. A boy asleep in the straw does not wake. You stand in the doorway afterwards, in the gray first light, with a hand on the frame, and you do not at all like how still the street is.
+* Send for a willing donor, and pay for the morning
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a laundress, who does the family's sheets, and she takes it with a good deal of impatience, and a great deal of grace. She says that she will be at the Institute at noon with her husband, and her two brothers, and the whole of her church. She says that she is not afraid, because there are so many of them, and goes off with the money in her glove.
+* Take a man from the lobby of the hotel on the Rue Royale, who has been drinking since four, and telling the clerk what the day will bring
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is a heavy man with a revolver under his coat. He will not need it. He is found in an alley at nine, quite whole, quite asleep, the revolver neatly unloaded beside him, and does not, in the course of the day, take part in anything.
+<~
+
+# hub
+## The morning
+:hub
+?if actions_left() == 3
+  The shadows are still long, and blue, and the heat has not yet begun to bite. The streets are filling with persons in their best clothes.
+?elif actions_left() == 2
+  It is nine, and the heat has begun. The pavements hold it. There is a drum, in the distance, somewhere in the Tremé, and a good deal of singing.
+?else
+  It is eleven, and the city has stopped. Every awning is down. Somewhere a bell begins, and it is a long time before you understand that it is for noon, and that it is, for once, ten minutes early.
+?end
+* Go to Belle Rive, to the river house, where Beaumont is waiting to ask the first article of the Compact [once] ?if actions_left() > 0
+  ~> beaumont
+  $ do act()
+* Go to the Tremé, where the procession is forming behind the school, and the whole faubourg in its Sunday coats [once] ?if actions_left() > 0
+  ~> march
+  $ do act()
+* Go to the Bureau on the Rue Camp, where Wren is trying for the last time to get the Army out of its barracks [once] ?if actions_left() > 0
+  ~> troops
+  $ do act()
+* See to the family, and what it needs [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> institute
+?end
+-> :hub
+
+# beaumont
+## The first article
+$ do chart("neworleans.beaumont")
+He does not keep you waiting. He is in the gallery, in the early light, in a dark coat, with the whole of a long white house behind him, silent and shuttered, and he is standing. Isaure is beside him, very upright, in gray, with a fan that she is not using. Lucien is at the end of the gallery, with his back to the rail, looking at the river. He does not turn.
+Beaumont says, with the great simple courtesy that has never failed him in six years, that it is the thirtieth of July, and that he knows what he is asking, and that he would very much rather be asking it of somebody else.
+?if b4.compact == "signed"
+  He says that the first article was signed by the sixth blood, at the river house, in a better year, in the presence of seven houses. He says that it provides that the family shall stand at the river's side when it is asked. He says that he is asking.
+?elif b4.compact == "bargained"
+  He says that the first article was signed, on terms, at the river house, and that the terms were fair, and that they provided that the family should stand at the river's side when it was asked, for a price. He says that the price has been paid. He says that he is asking.
+?else
+  He says that the family did not sign the Compact, and he does not pretend that it did. He says that he has come to ask as a neighbor, and as a man who has stood on his own gallery for six years and not been refused a single civil thing. He says that he is aware that it is not at all the same.
+?end
+He says that the river's side, today, is the Mayor's. He says that the Mayor has asked the river houses for nothing, which is what the Mayor does when he is most afraid of being refused. He says that the river houses will not be in the street, for his own house, at least, has given its word. He says that he does not ask you to approve. He says that he asks only that the family keep its house, and its face, and its strength, away from the Rue Dryades until it is dark.
+"I am aware of what is being done," says Beaumont. He is white to the lips. "I am aware of it, and I have not the power to stop it. I have the power to stop one thing only, and it is a war between the river and the sixth blood. I do not think the city could bear both."
+Lucien says, to the river, with his back turned, that he would be glad if somebody would say no.
+?if b4.peace == "broke"
+  Isaure says nothing at all. She has not forgiven the winter.
+?end
+:the_stand
+* Give him your word, and keep the article to the letter and past it: nobody of the house, in any guise, on the Rue Dryades, until dark [once]
+  $ b4.stand = "kept"
+  $ humanity -= 3
+  $ standing += 2
+  $ secrecy += 2
+  $ cunning_brutal -= 1
+  He takes your hand. He holds it for a long while, in both of his, and his are cold, and shake. He says that he will remember this, in the Chapter, in the Compact, and in any other thing that may be asked of him. He does not say that it was good. Isaure puts her fan to her mouth. Lucien turns round at last. He looks at you. He has the face of a very young man who is in the act of learning what his house is for.
+* Tell him that the Compact ends at the first man dead in the street, and that the family is going, now, and he may write to the Chapter as he sees fit [once]
+  $ b4.stand = "broke"
+  $ humanity += 2
+  $ standing -= 2
+  $ secrecy -= 2
+  $ cunning_brutal += 2
+  You say it very civilly. You say that the article was made for a thing that you had not understood when you signed it, and that you understand it now, and that you do not mean to be bound by it, in this, in front of any court in the world. Beaumont closes his eyes. He says that he had known that you would say it. He says that he would have said it himself, in a better house. Isaure takes his arm. Lucien is smiling, in a strange stiff painful way, at the river. He says, to nobody, "Finally."
+* Say that the house of the sixth blood will send nobody, and will be seen nowhere, and that you will be a private gentleman with a purse and a cane, in nobody's name, wherever you please [once]
+  $ b4.stand = "letter"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  $ standing -= 1
+  $ humanity += 1
+  He hears it out. He says, very gently, that it is an exceedingly narrow interpretation. He says that he has spent a great deal of his life in the study of such interpretations, and he has never yet met one that he did not respect. He says that he will not be able to defend it in the Chapter, and that he will not be asked to. He says that it is, in the circumstances, the only thing that he has been offered in the last year that he is able to accept. Lucien has stopped smiling. He is looking at you with an expression of the deepest and most reluctant respect.
+$ do discover("the_river_houses_in_1866")
+<~
+
+# march
+## The Tremé on the thirtieth
+$ do chart("neworleans.treme")
+The procession is forming behind the school, in the great sandy yard, in the dust, and it is a good deal larger than anyone had said. There are a hundred and thirty, or a hundred and forty, in ranks, in their Army coats, with the buttons polished, and every man's boots blacked. They have a flag. They have a fife, and a drum, and a very large boy with a bugle, and a banner, in white paint, on a bed sheet, that says in a clear hand *EQUAL RIGHTS.* The women have come to see them off. They are in their best, in white, with their hats pinned, and children on every hip.
+Honorine is at the gate with a list, and a pencil, and a face as composed as a stone. She is counting them. She says, to you, without turning, that there are a hundred and thirty eight, and that she has had a hundred and thirty eight copybooks in her desk since March, and that she knows every one of their hands.
+?if b4.honorine == "walked" and b4.truth != "none"
+  She turns. She looks at you for a long moment. She says, very low, in a voice that is for you alone, that she is not afraid, and that she would like to be told the truth about whether she should be.
+?end
+Armand is by the wall, with his bag. It is a black bag, an old one, and it has a brass catch, and he is putting into it, one by one, with great precision, the contents of a surgery. He says that he is going as a physician, and not a delegate. He says that he has a good many friends in the procession, and a notion about what a march of freedmen is going to be asked to walk through. He says that he is quite calm. He drops a roll of lint, and picks it up, and puts it into the bag a second time.
+:the_march
+* Walk with them, at the head, in your good coat, in the open, as one of the family, with the free families' banner above you [once]
+  $ b4.march = "walked"
+  $ humanity += 2
+  $ standing += 2
+  $ secrecy -= 3
+  $ do witness(2)
+  The fife begins. It is a tune that you do not know, very slow, in a minor key, that the men take up under their breath as a hymn. The great gate is opened. You go through it, at the head, between the drum and the boy with the bugle, with a hundred and thirty eight men behind you, in step, in the blaze of the morning. The women are standing in the street. A very old man, at a door, takes off his hat. The crowd on the pavement is silent. It is the silence of a thing that is still deciding.
+* Lend every wagon and every cart of the Ice Company, and the family's own, to stand in the side streets with straw, and water, and lint, behind the lines [once]
+  $ b4.march = "carried"
+  $ cunning_brutal += 1
+  $ standing += 1
+  $ secrecy += 1
+  $ do earn(-4)
+  Jules has been up since three. He has twelve wagons in the yard, and he has put straw in all of them, and kegs of ice, and rows of buckets, and a man with a whip. He says, in his large careful hand, on a barrel top, where they are to stand. He says that he does not know what the day will be. He says that he has been in the Ice Company's cold room for four years, and that he thinks he has been getting ready for something, and that he would be obliged if it were not this.
+* Stand by the wall, and give them your hand as they go by, one at a time, and do not go with them [once]
+  $ b4.march = "watched"
+  $ secrecy += 2
+  $ humanity -= 1
+  They go by in ranks. Some of them look at you. Some do not. A great gray bearded man in a Union overcoat, whom you have seen on the Levee, gives you a short nod. He says, as he passes, with perfect courtesy, that he will see you on the other side. You are not at all sure what he means.
+$ do discover("the_free_men_of_color")
+<~
+
+# troops
+## The Bureau at nine
+$ do chart("neworleans.market")
+The Bureau is quite empty. The whole of the long room has been cleared, and the lamps are out, and the great flat ledger lies closed on its desk with a cloth over it. The sergeant has gone. There is one chair, in the middle of the floor, with a man in it, and the man is Wren.
+He has been up since the day before. He has the look of a man who has been given a great deal of bad news in a flat even voice, and has repeated it, in the same voice, to a great number of persons who did not wish to hear. He says that he has been to the General's headquarters three times in the night, and been told that the General is in Mississippi. He says that the Colonel who is in his place has said that it is a civil matter. He says that the telegraph to Washington is down. He says that it is a thing that happens. He says it has happened a good deal, lately, at convenient times.
+He says that the barracks below the town hold nine hundred men, with a battery, and that they would be at the Institute in twenty five minutes at a double march, if anyone were able to give the order, and that nobody within reach of him is.
+He says that he is not asking you for anything. He says that it is the rule of his life never to ask a man for what he knows that he cannot give. He says that he thought that you might like to know the figure.
+:the_troops
+* Go to the Colonel yourself, in the barracks, and put the city's case to him in your own name, with the whole of the family's weight and money behind it [once]
+  $ b4.troops = "pressed"
+  $ standing += 2
+  $ secrecy -= 1
+  $ cunning_brutal -= 1
+  The Colonel is a plain stout man with a short beard and a bad cough, who receives you in his shirt sleeves. It takes forty minutes. At the end of it he says that he cannot move without an order, and that he will undertake to have the order at hand, in a drawer, in his own hand, by the time that it is wanted. He says that he does not need to be told what the Mayor's police are going to do. He says that he has a notion, and that he does not like it, and that it is the best that he can do. He holds out his hand. He says that he will have the battery harnessed by noon.
+* Write the plain facts, in a long exact message, to the Governor, to Washington, and to the Radical men of the North, and put it in the hands of four persons, by four roads [once]
+  $ b4.troops = "wired"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  $ standing += 1
+  It is done at the Bureau's desk by Wren and yourself with the cold pipe and a bottle of ink. It is a letter of nine hundred words, without a single adjective, of the kind that persons in power cannot afterwards say that they did not read. It goes by the Cuba packet, and the Mobile train, and two private messengers who will not stop. It will arrive in the course of the week. Wren says that it will be quite useless, today. He says that it will be a good deal harder, afterwards, for anyone to pretend that they did not know.
+* Thank him, and say that it is the Army's affair, and that you will be of no use to it [once]
+  $ b4.troops = "none"
+  $ secrecy += 2
+  $ humanity -= 1
+  He says that he understands. It is, you notice, the third time in the course of the night that he has said it to somebody. He rises, and straightens his coat, and puts his cold pipe in his pocket, and goes out to the street, to stand on the corner of the Rue Camp, with his hands behind him, and watch the people go by. He does not say what he is going to do. He says only that somebody ought to be there to see.
+<~
+
+# family
+## The long room
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  ?if b4.coven_home == "raised"
+    The great hall on Gravier Street is empty and the doors are open, and the light comes across the floor in a bar. They are in the yard. They have dragged out chairs, and a table, and a good many cups. There is no question of going to bed. Prisca has put on her best gray silk, and is eating a peach, with her gloves on. Fiammetta is sitting on the wall with her heels drumming. Hanno is standing very straight in the shade of the archway with his hat in his hand. You perceive that they have decided that it is going to be a day that one dresses for.
+  ?elif b4.coven_home == "hidden"
+    The little back rooms are all open, and the free families of the street are in them, with their hats on, in their Sunday clothes, with a very great deal of food in napkins. They are sitting along the passage in a row, quite quiet. The family has made room. Fiammetta has taken a baby from somebody and is walking up and down with it, and is, for the first time in her life, silent.
+  ?else
+    They are in the long room in the Marigny, with the shutters open for once, and the light on the floor. Nobody has slept. Prisca has her gloves on, and is eating a peach. Fiammetta has been trying, for an hour, to teach a very old tortoise to sit up.
+  ?end
+  They have been told what the day is. They are all of them looking at you. It is Prisca who speaks, quite calmly, with her peach stone in her hand. She says that she has seen a good many days, in a long life, and that she has never in her experience been able to say in advance which of them would be remembered. She says that it is not, as a rule, the one that one dresses for.
+?elif coven_size() > 0
+  The house is quiet and the shutters are open. They are a long way off. It is a very hot, bright, deserted morning. There is a parcel on the table in brown paper that has not been opened. You do not, today, open it.
+?else
+  The house is very quiet. You sit a while at the table with your hands in front of you. The cat on the sill, the gray one, is awake, and watching you, with the grave attention of a creature that has understood that something is going to happen.
+?end
+:the_family
+* Send Prisca to the Mayor's secretary and his friends, to find out, by any road, what has been promised to the police, and by whom [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca") and task("prisca") == ""
+  $ do send("prisca", "negotiate", 2)
+  Prisca says that it is a most enlivening change from the ordinary run of her mornings. She takes her second best parasol, and a very pretty reticule, and the whole of her sweet, shrewd, tranquil, deadly charm, and goes out to find the man who has the order in his pocket.
+* Send Fiammetta to stand beside the school, and to see that if the street comes to the Tremé the street does not come to the children [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta") and task("fiammetta") == ""
+  $ do send("fiammetta", "protect", 2)
+  Fiammetta does not whistle. She says, with the extreme composure of the very young, that she is going to stand at the door of the school, and that she is not going to move from it, whatever she is told, by whoever tells her, until it is dark. She puts down the baby. She goes. She does not run.
+* Set Hanno to keep the books of the day, and every name that is given him, and every name that is not ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "watch")
+  Hanno takes out a new ledger, with a flourish. He has been, he says, keeping a book of such days for the greater part of three thousand years, and it has occurred to him that nobody has ever read it. He says that he thinks that somebody ought to, in the end. He writes, very small, at the top of the first page, the date.
+* Buy a set of papers, and seals, and names, in a cellar on the Rue Burgundy, for any person who may wish to leave the Parish tonight ?if can_acquire("shell_identities")
+  $ do acquire("shell_identities")
+  $ secrecy += 2
+  $ humanity += 1
+  It is done in ten minutes by a very old Alsatian printer, in his shirt, who asks no question, and who has not looked at a customer's face in forty years. He says that he has been waiting for somebody to ask him for a good many years, and that he did not at all like the thought that it would be today. He says that the ink will be dry by noon. He says that he has a cousin in Cincinnati.
+* That will do for the morning
+  -> :family_done
+-> :the_family
+:family_done
+<~
+
+# institute
+## The Rue Dryades
+$ do chart("neworleans.lots")
+It is noon, and the street is white with the glare. The heat comes up off the pavement like the breath of an oven. The Mechanics' Institute is a plain tall brick building of two stories, with a pediment, and tall windows, every one of them open, and a number of fans going. Inside it, in the hall upstairs, the convention sits. There are twenty five, or thirty, in their black coats. They are very small, from the street, in the great tall windows. Somebody is speaking. It is a thin, even, dry voice, like a clerk reading out a lease.
+There are police at the corner. There is a crowd. It is a much larger crowd than the procession, and it is not at all dressed for a Sunday. It has the quiet, patient, expectant look that you have seen, in the Colosseum, at about the time when the beasts are let in.
+The procession comes up the street from the Tremé, with the fife and the drum, and the flag, and the bed sheet banner, in ranks, in good step. It stops at the Institute. It is cheered, by the delegates, from the windows. It is, in a very short while, answered.
+You will not afterwards be able to say who fired the first shot. It is a thing that the whole city will argue about for years. It is a small flat sound, like a stick, at the end of a street, and in the next moment the world has changed.
+?if b4.march == "walked"
+  You are at the head of the column, and you are the first to see it. A policeman in a buttoned blue coat has lowered his revolver, and is, with a perfectly composed face, taking aim at the old man in the Union overcoat on your left.
+?elif b4.march == "carried"
+  You are at the corner of the Rue Dryades and the Rue Perdido, with Jules, on the box of the first wagon, and you see the whole of it from a hundred yards: the column, the crowd, the little puff of smoke on the pavement, and the line of blue coats going forward.
+?else
+  You are across the street, in a doorway, in the shade of an awning, and you see the whole of it, as one sees a thing in a very good glass. It is quite silent, for a moment. Then it is not.
+?end
+[captured freed house_slave] You know this. You know it in the body, before the mind: the particular sound of a crowd that has been told, by persons in good coats, that it is permitted. You have heard it before, on the other side of a rope.
+[north_african egyptian] You have seen a good deal of what the cities of the world do to the ones who are not meant to be in them. You have never got used to it.
+The police charge the procession. The crowd, behind them, comes after. There is a rush of men to the doors of the Institute, and the windows are full of faces, and the revolvers are being fired into them.
+:the_institute
+?if b4.stand == "kept"
+  You have given your word. It is in your mouth like a stone. You are standing at the edge of the Rue Dryades, in your own coat, with your own hands at your sides, and a gentleman's cane, and it is a perfectly open question whether you have ever, in eighteen centuries, been so strong.
+?end
+* Go in at the doors, in the open, and stand at the foot of the stair, and hold it, with everything the sixth blood has, in the sight of the street ?if b4.stand != "kept"
+  $ b4.institute = "held"
+  $ humanity += 3
+  $ standing += 1
+  $ secrecy -= 5
+  $ hunger += 10
+  $ do witness(7)
+  It is not a thing that you can afterwards describe accurately. There is a policeman, and then there are several. There is the heat, and the smell of powder, and the stair, with its worn brass rail. You take the first man by his coat and lift him, and he goes through the glass of the door into the street. You take the second by his belt. There are shots. There is a good deal of noise. A great many people, in the course of the next twenty minutes, are going to say that they saw a single man hold the stairs of the Mechanics' Institute against fifty. They are going to be asked how. Not one of them is going to be able to say.
+  Behind you, on the stair, they are coming down. The delegates, in their black coats, with their hands over their heads. A very old man, with a Bible. A boy with a pen still in his hand. You do not look round. You hold the stair until the last of them has gone down it, and out, through the cellar and the coal hole and the yard, into the arms of the free families, who are waiting in the alley with their shawls.
+  ?if b4.march == "carried"
+    Jules and the wagons are at the back. It is a very great mercy that the straw was there.
+  ?end
+* Go in by the back, through the cellars of the free families, with the keys, and lead as many out as can be led, by the coal hole and the alley, in silence, one at a time
+  $ b4.institute = "led"
+  $ humanity += 2
+  $ cunning_brutal += 1
+  $ standing += 2
+  $ secrecy += 1
+  $ hunger += 4
+  The cellars of the Rue Dryades run, as everyone has always known and nobody has ever said, from one end of the block to the other. You have the keys. You have, from a night of work with the free families, a map. You go in through a coal hole at the back of the house next door, and along a brick passage, and up a ladder, and into the hall by a trap behind the platform, and for twenty minutes, in the noise and the smoke, you take out, one at a time, by the hand, in the dark, as many as you can find. It is slow work. It is the most delicate of your life. It is not, you perceive, a thing that anybody will see.
+  When it is done you have counted forty one. You do not count the rest.
+* Run for the barracks, as fast as the sixth blood can run, and bring the Army back by the collar
+  $ b4.institute = "ran"
+  $ hunger += 12
+  $ standing += 1
+  $ secrecy -= 1
+  $ do witness(1)
+  You have never run so fast. The city is a blur of white walls and blue shadows. A man on the Rue Esplanade is going to say, for the rest of his days, that he saw a gray blur go by him like a bullet, and that it left a draught. You are at the barracks in four minutes. The gate is open. The Colonel is on the steps.
+  ?if b4.troops == "pressed"
+    He has the order in his hand, in his own writing, and the battery is harnessed. He says that he has been standing there since eleven, with his watch. He says, "Where?" You tell him. The first company is on the road in under a minute.
+  ?elif b4.troops == "wired"
+    He has not got an order. He listens to you for as long as it takes to say it, and then he says a short, plain, sulphurous word, and calls for his sword, and says that he supposes he may be hanged for it. The first company is on the road in four minutes. It is, even so, a good deal too late for a good many.
+  ?else
+    He listens, and says that he cannot move without an order. You stand in front of him. You say, quietly, a thing that has not been said to a colonel in a century. He says it is irregular. He calls his adjutant. The first company is on the road in nine minutes.
+  ?end
+  You run back at the head of it. It is not a thing that you will be able to explain.
+* Stand at the edge of the street, with your hands at your sides, as you have promised, and keep the article, and watch ?if b4.stand == "kept"
+  $ b4.institute = "watched"
+  $ humanity -= 5
+  $ secrecy += 3
+  $ standing += 1
+  $ cunning_brutal -= 2
+  It is the longest quarter of an hour of your life. You do not move. You are a man in a good coat, with a cane, at the edge of the pavement in the glare. You see everything. You see the delegates thrown from the windows. You see the old man with the Bible, and what is done to him. You see a boy of nineteen, in an Army coat, with his arms in the air, shot twice, and then a third time, quite slowly, on the steps. You see Armand, on his knees, with his black bag, in the middle of the street, in the dust, with a policeman standing over him, and you see him go on working, with his head down, and the policeman, for some reason, hesitate.
+  It is a thing that will be with you. It is, you think, exactly what Cassian meant.
+?if b4.institute == "watched"
+  You do not remember walking home. You are on the step. The gate is open. Somebody has put a cup of water into your hand. You do not drink it.
+?end
+$ do discover("the_thirtieth_of_july")
+-> evening
+
+# evening
+## The evening
+$ do chart("neworleans.treme")
+It is nine in the evening, and the heat has not broken, and the sky is the color of an old bruise. The police and the mob are gone from the Rue Dryades. The Army is in the streets. A corporal on the corner of the Rue Camp is saying, to nobody, that he did not know it could be so quiet.
+The school in the Tremé has its doors open, and every lamp in it lit. They are bringing them in. They have been bringing them since two. They come on doors, and on shutters, and on the backs of men who are bleeding on to their own shoulders. There are a hundred and sixty on the floor of the schoolroom, in the dim, in rows, and the benches have been pushed against the wall.
+Honorine is in the middle of it, in her shirt sleeves, with a bucket, and a great gray rag. She has been on her feet for seven hours. She is quite composed. She is very white. She says, as you come in, without looking up, "I should like to be told whether you can do anything."
+?if b4.institute == "watched"
+  She looks at you then. She knows. It is not a thing that you have told her. She says nothing at all. She turns back to the bucket.
+?elif b4.institute == "held"
+  She looks up at you, and then at your coat, which is torn, and at your hands, and she says nothing, and puts out one wet red hand, and holds your sleeve for the length of a breath.
+?end
+?if b4.physician == "family"
+  Armand is on his knees at the far end, with his coat off, and his arm bandaged to the elbow, and his black bag open. He has been sewing since four. He looks up. He says a single word, which is your name.
+?else
+  Armand is on his knees at the far end, with his coat off, and his arm bandaged to the elbow, and his black bag open. He has been sewing since four. He looks up, and says nothing at all, and goes on.
+?end
+:the_evening
+* Open the family's house, and the school's neighbors', and every bed in the Tremé, for the wounded, and bring them, with the Ice Company's wagons and every family hand [once]
+  $ b4.aftermath = "hospital"
+  $ humanity += 3
+  $ standing += 1
+  $ secrecy -= 2
+  $ do earn(-6)
+  It takes the whole night. The house on Gravier Street is a hospital by midnight, with a hundred and forty on every bed, and every pallet, and the floor of the great hall, and the family in their shirt sleeves, with basins. Prisca is writing letters for the ones who cannot hold a pen. Hanno has found a way to keep the names. Fiammetta has fallen asleep standing up, with a child in her arms, and nobody has the heart to move her.
+  ?if b4.march == "carried"
+    Jules has made nine trips with the wagons since two o'clock. He is gray. He will not sit down. He says, at four in the morning, that he has never in his life been so glad of an ice cart.
+  ?end
+* Take the sworn names of the dead and the wounded, and the facts, one by one, from the witnesses, and have the Valère press print them by dawn, under a full signature, with the family's name
+  $ b4.aftermath = "names"
+  $ standing += 3
+  $ secrecy -= 2
+  $ cunning_brutal += 1
+  $ humanity += 1
+  It is done in the schoolroom, over the benches, with Aurélien, in his apron, with his lens, and a clerk, and a notary who has been found, in his bed, and brought. It takes seven hours. It is dry, and exact, and without an adjective. A hundred and sixteen persons give their names, in their own words, to be put into print, and a great many of them say, as they sign, that they would rather not be named, and then do it. By five in the morning there are four thousand copies, on a hand press, drying on a clothes line, in the yard. Aurélien says that it is the best work that the house has ever done. He does not say it as though he were pleased.
+* Move the ones who cannot stay in the parish, quietly, by night, on the Ice Company's boats, under the names of the Rue Burgundy, and send them north
+  $ b4.aftermath = "north"
+  $ cunning_brutal += 2
+  $ secrecy += 2
+  $ humanity += 1
+  $ standing += 1
+  $ do earn(-4)
+  ?if holds("shell_identities")
+    The Alsatian's papers are dry. You have a hundred and ten of them. You fill in the names in the schoolroom, one at a time, by the light of a lamp, while Armand, with one arm, sews up the men who are going to wear them. By two in the morning there are three boats at the Levee, loaded with ice, with sawdust, and with a good many persons under both. By dawn there are no persons in the Tremé who are in any danger of the sheriff.
+  ?else
+    You have no papers. You make do. It is done by lanterns, and signals, and a great number of small, quiet arrangements. The free families take the women and children, and the Ice Company's wagons take the men, in the sawdust, under the ice, in ones and twos, to the boats, and the boats to the lake, and the lake to the railway, and the railway to Cincinnati. By dawn there is nobody left in the school who cannot be accounted for to a sheriff.
+  ?end
+$ do discover("the_ward_infirmary")
+-> dawn
+
+# dawn
+## The thirty first
+It is a gray, close, motionless dawn, with a low sky, and the whole of the city smelling of powder and wet straw. There is nobody in the street. The bells do not ring. The shutters of the Rue Royale are closed, every one, and behind them, you suspect, the whole of the white city is sitting up, in the dark, and not saying what it thinks.
+The count will not be given for a month. It will be, in the end, something more than forty dead, and a hundred and forty wounded, of whom the greater part were men who had served the Union in the war, and had walked up the street to ask that they might have a vote. There will be an inquiry. It will be a very long one.
+?if b4.institute == "held"
+  The story of the stair is in every mouth by seven. It has already been improved. A man on the Rue Chartres is saying that it was a giant. A woman, at a well, is saying that it was an angel, and that it had a gentleman's cane. Wren, at the Bureau, with a cold pipe, says to nobody in particular that he is going to need to find a very large number of persons who are prepared to say that they did not see it. He says it quite without surprise. He says it very much as a man says it who has found, to his relief, a use for a kind of person that he did not know that he had.
+  ?if b4.stand == "broke"
+    There is a note in a very beautiful hand, delivered at six by a gray livery, on a silver tray. It says only, *The Chapter will sit on the fourteenth.* It does not say what for. Lucien, who delivers it, does not meet your eye. He says that he has been told to wait for an answer. He says, in a low voice, that he hopes that there will not be one.
+  ?end
+?elif b4.institute == "led"
+  Forty one persons are in the cellars of the Marigny, and the Tremé, and the lofts of the Greek's, and the shuttered house on the Rue Ursulines, and every one of them is alive. They will be moved, in ones and twos, in the course of the week. Nobody will be able to say how they got out. The Mayor will say that there was nobody in the building but a few agitators, and a great many of them are going to believe it. It is not the sort of victory that gets into the newspapers. It is the sort that one has.
+?elif b4.institute == "ran"
+  The Army came late, and came hard, and held the streets by two. There was no second charge. The Colonel has written, in a very short letter to the General, that he has taken the Mechanics' Institute, and put the Mayor's police under guard, and it will be a matter for the courts. It will, in the end, be a matter for nobody. It is the thing that you ran for, and you got it, and there is a good deal more than that to say about it.
+?else
+  Nobody has said a word to you. Honorine's door was shut at five. The families of the Tremé, as you walked home, did not look up. A woman at a window, with a child, looked at you for a long time, and then closed the shutter, quite gently. You stand in the hall, in your own house, and you find that it is a good deal quieter than it was.
+  ?if b4.stand == "kept"
+    There is a note from Beaumont, in a very unsteady hand, delivered at dawn by Isaure herself, who has come on foot. It says only, *I have not slept. I do not think that I shall. I am more grateful than I can say, and I have never in my life been so ashamed.*
+  ?end
+?end
+?if b4.aftermath == "hospital"
+  The family's house is full of the sleeping and the stitched. Armand has not left the great hall since seven the evening before. Honorine has been asleep on a table, with her head on her arm, in a chair, with a very small child in her lap, since four.
+?elif b4.aftermath == "names"
+  The first sheet is on every wall of the city by six. It is in plain black type, under the name of the Valère press, and it says, in two columns, who was killed, and who was wounded, and by whom, and where, and it is signed. The Mayor's friends have been seen reading it, at the corner of the Rue Chartres, with the faces of men who have found their own handwriting on a bill.
+?else
+  The Ice Company's boats have been gone five hours. There are a hundred and ten persons on the lake, and the railway, and a great many of them are asleep. A telegram arrives from Cincinnati at nine. It says that the first boat has landed, and that the people on it are fed.
+?end
+?if b4.march == "walked"
+  Honorine's copybook is on the step. It is a very small, very plain one. It is open at a page that has not got a single line on it. In the corner, in pencil, in a small firm upright hand, she has written, *Not yet.* Then underneath, rather smaller, in the same hand, *But I have not shut the door.*
+?end
+There is a letter, by hand, at ten, on a plain half sheet, without a seal. It is in a clean quick hand that you know, in Latin.
+*I did not do this. I did not do it, and I could not have prevented it, and I was in the Cathedral garden at noon on the thirtieth, with the doors shut, and a newspaper, and heard it all from the next street. I have heard it before. I have heard it in a good many cities. I asked you once, in a village, what you would do with a place. I will not ask you today whether you would have done better. I think that you have, on the whole, a good deal of an answer. I will ask you in October. Have it ready.*
+There is no signature. There is, in the margin, a comma. It is in the right place, this time.
+It is the thirty first of July, 1866, and a Tuesday, and the heat has not broken.
+$ do rest()
+=> next

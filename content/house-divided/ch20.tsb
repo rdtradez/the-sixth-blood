@@ -1,0 +1,263 @@
+// Book Four, Chapter 20 (session 49). The long quiet: the last night in New Orleans, the standing charge to the family, the things to leave behind, and the sleep to London.
+// No phases. Calls rest() once and then sleeps the whole of new_orleans_to_london. Closes with => next, which ends the book (the Velati journal is written and Book Five unlocks).
+// Reads b4.seat, b4.pledge, b4.hand, b4.answer, b4.stand, b4.institute, b4.haven, b4.circle, b4.coven_home and the circle. Sets b4.last_night, b4.charge and b4.letter. The engine logs the sleep itself (steward.house-divided, orders.house-divided, sleep.house-divided).
+// What the sleep did is not shown here: Book Five's opening reads wake().
+@chapter b4c20
+@title The Long Quiet
+@version 1
+
+# start
+## The spring of 1867
+$ b4.last_night = "alone"
+$ b4.charge = "keep"
+$ b4.letter = "none"
+$ _place = "haven"
+$ _guard_n = 0
+$ do chart("neworleans.bank")
+It is the second week of March, 1867, and the cherry laurels are in flower along the Esplanade, and the Congress has done what it said that it would. There is to be an Army, and five districts, and a great registering of men. It is said in the Rue Royale that it is the end of civilization, and said in the Tremé, in a much lower voice, in a good many kitchens, that it is the beginning of something that has not got a name yet. Both are, you perceive, a little premature. It is going to be a long time.
+The school has four hundred pupils, and a second floor. The levee is loud with the first of the spring boats. In the Marigny the family's house has been scrubbed from the cellar to the garret, as it is every March, and smells of beeswax and of the mud of the river, and of the fig tree in the yard, which has put out a leaf.
+?if b4.seat == "held"
+  The Chapter has sat on the first Monday of every month since November, in the chair of black walnut, with the roll of forty seven names, and the river houses are not what they were. They are a good deal more afraid, and a good deal less cruel. It is, you suppose, the usual result.
+?elif b4.seat == "lent"
+  Beaumont has sat in the chair since the first of November, on written terms, with a clerk of the family's at his elbow. It has been a trying winter. He has begun to look ten years younger.
+?else
+  The river houses are managing as they can, without a seat, and without a court, and with a very great deal of correspondence. It is not at all certain that it will last. It is not at all certain that it will not.
+?end
+The thing that has been a growing weight in your coat all winter is a plain fact. You have been in New Orleans for seven years. You have done in it what could be done. It is time that you went, as you have gone before, to the cellar, and let the world go on without you for a while, and see what it will make of itself.
+It is the thing that you do. You have done it in Rome and Florence and Paris. It is no easier. You find that, this time, you mind a good deal more.
+-> last_night
+
+# last_night
+## The last night
+The days are drawing out, and the nights are not long, and you have until the dawn. You have, by your own count, four or five persons whom you would like to see.
+* Go to the school in the Tremé, and sit on the steps with Honorine, and watch the lamps being lit in the street
+  $ b4.last_night = "school"
+  $ humanity += 2
+  $ bond.armand += 1
+  ?if b4.pledge == "deeded"
+    She has had the deed framed, and hung in the hall, among the maps, and has put it, quite deliberately, a little crooked. She says that she is told that it is the only way to stop a person walking by without looking.
+  ?elif b4.pledge == "sworn"
+    She has the oath in a drawer of the desk, in a folder, among the register of the infants. She says that she looks at it, from time to time, on a bad afternoon, as one looks at an umbrella that one has put by.
+  ?else
+    She has not moved the lamp. She says that the door is still open and that it is a great nuisance, because the cat from next door has found out.
+  ?end
+  She does not say goodbye. She is not a person who does. She says that she will be an old woman when you wake, if she is anything, and that she hopes that you will have the good sense to remember her young. She gives you a small stub of pencil, quite worn down, from the first copybook. She says that she is not at all sure what a person should do with it. She says that she thinks that you should write something down.
+* Sit in the long room with the family, and eat the dead men's bread, and say nothing in particular
+  $ b4.last_night = "family"
+  $ humanity += 1
+  $ standing += 1
+  ?if coven_size() > 0 and b4.circle != "stay"
+    They have laid the table in the yard, under the fig tree, by lanterns, with a good deal too much food. Nobody has said what it is for. Prisca sits at the head, in the gray silk, with her gloves on, and pours out the wine with an air of great finality. Fiammetta, who has been told about the sleep, and has been trying very hard to be sensible about it, sits at the foot, and eats an entire loaf. Hanno has brought out a very old bottle that he says is Falernian, and that he says is not.
+    It is Hanno who raises the glass. He says that he has seen a great many people go to bed, in his time. He says that it has never once got easier. He says that he proposes the next time, and that he will be there.
+  ?else
+    The house is very quiet. You eat at the long table by yourself, with the gray cat on the sill, and a candle. It is not at all a sad meal. It is a well cooked one. You find that you have grown very fond of the house.
+  ?end
+* Walk down to the levee with Armand, and watch the boats come in, and talk about nothing
+  $ b4.last_night = "levee"
+  $ humanity += 1
+  $ bond.armand += 1
+  ?if b4.physician == "family"
+    He is in his own coat, with his bag, and his arm, which has never quite healed, held a little stiffly. He says that he has been sewing up the family's friends for six years. He says that he has begun to think of himself, to his considerable surprise, as a person who belongs. He says that it is an astonishing sensation, after the Army.
+  ?elif b4.physician == "practice"
+    He is in his own coat, with his bag, and a plate on his door that he is very proud of. He says that the practice has two hundred names on the book, and that he is at last in a position to be rude to the ones who do not pay.
+  ?else
+    He is in his shirt sleeves, on a cotton bale, with his bag open at his feet, and the whole of the river going by in the dusk. He says that he has been thinking about what he would like to have done, and that it is a very short list, and that you are on it twice.
+  ?end
+  The boats come in. They come in as they have always done, at the end of a spring day, all lamps and smoke and hoarse bells, and the levee fills with the people who have been waiting. A man in a straw hat is selling oranges. A child has been given a lamb. You sit on the cotton, with the doctor, and watch it come in, and do not say what you are watching it for.
+* Walk by yourself through the old city, past the whitewashed tombs, and be quiet
+  $ b4.last_night = "alone"
+  $ cunning_brutal += 1
+  $ humanity += 1
+  The cemetery is very still. The candles have gone, long since, and the chrysanthemums, and the tombs stand in their narrow lanes in a pale gray glimmer, like a town that has been put to bed. You find the very small vault with no name. There is a yellow flower on it, quite fresh, that you did not bring.
+  ?if b4.answer == "shelter"
+    You say aloud, to nobody, what a house is for. It sounds, in the empty lane, a good deal less like an answer than it did.
+  ?elif b4.answer == "strength"
+    You say aloud, to nobody, what a house is for. You find that you are not so sure of it as you were. You find that you are, a little, afraid of how sure you were.
+  ?else
+    You say aloud, to nobody, what a house is for. A mocking bird, on the cypress, begins to sing, quite suddenly, at two in the morning, as they do in the spring. It goes on for some time.
+  ?end
+-> table
+
+# table
+## The things to leave behind
+You have a sheet of the counting house's paper, and a pen, and a candle. It is the most important thing that you will write in this century, and it is a list. It has five lines. A place, a person, an order, a guard, and a charge to the family. There is a sixth, which does not have a price.
+You take them one by one.
+~> place
+~> steward
+~> orders
+~> guard
+?if coven_size() > 0 and b4.circle != "stay"
+  ~> charge
+?end
+~> letter
+-> cellar
+
+# place
+## Where you will lie
+There are three places, as there always are. There is the haven in the city, under the counting house, where the family is, and the school is, and the river, in a house that has been, for seven years, the nearest thing to a home. There is the hill. The cellar under the great house at Collesanto, with its bar on the inside of the door, and the village above it, a very long way across the sea. And there is a tomb, a sealed vault in the old city, with no name on it, that has a good deal to be said for it, among the dead, who do not ask.
+* The haven under the counting house, where the family is
+  $ do rest_place("haven")
+  $ _place = "haven"
+  $ secrecy -= 1
+  You write it down. It is the choice of a person who has begun to believe that he lives somewhere. You find that you feel like a man who has taken a room, for a very long stay, in a house that he has come to like, and has put his name on the door.
+* The cellar under the great house, on the hill
+  $ do rest_place("collesanto")
+  $ _place = "collesanto"
+  $ bond.ginevra += 1
+  You write it down. It is the answer that you have given before. It is a long way to go, in the dark, in a box, in the hold of a ship. You find that you are not at all sorry. It is the one place in the world where the door is barred from the inside.
+* The tomb in the old city, where no one will think to look
+  $ do rest_place("tomb")
+  $ _place = "tomb"
+  $ humanity -= 1
+  $ cunning_brutal -= 1
+  You write it down. It is the safest of the three, and the loneliest. You tell yourself that it is only for a time, in the voice that you have heard other people use. You think of a vault with no name, and a yellow flower. You do not think that you will be alone.
+<~
+
+# steward
+## Who will hold what is yours
+There will be a fortune, a firm with a fleet of boats and a warehouse, a school's endowment, and a great number of papers, and no one to say yes or no. It is the habit of the age to say that everything will be different. It must be put in someone's hands. There are those who love you, and those who are good at it, and the whole of the art is to know which is which.
+* The Merchant house, as a bank and a trust, under the old seal, with the Valère counting house as its agent in the city
+  $ do steward("bank")
+  $ bond.prisca += 1
+  You write it down. It is a cold choice, and a sound one, and it does not depend upon a heart. It has survived the Medici, and the Inquisition, and the Revolution, and it will, you suppose, survive the Reconstruction. A letter goes to Amsterdam by the morning boat. It is answered, in due time, in a hand like an abacus. It says that Prisca has noted the arrangement, and that she regrets the war, in a sentence, and that she will be exact.
+* Prisca, in her own person, to hold it for you ?if in_circle("prisca") and member("prisca", "status") == "active"
+  $ do steward("prisca")
+  $ bond.prisca += 4
+  $ standing += 1
+  You write her name, and she reads it at the table in the long room, with her gloves on. She reads it for a long time. "I shall be exact," she says. "It is the only thing that I have ever been good at. I have found, lately, that I should like to be good at one other." She folds it. She says that she is afraid, and that she does not say it often.
+  "Of what?" you say.
+  "Of being thanked," says Prisca, and goes out, rather fast, as she did the last time.
+* Hanno, in his own person, with the books, and the firm, and the whole long account ?if in_circle("hanno") and member("hanno", "status") == "active"
+  $ do steward("hanno")
+  $ bond.hanno += 4
+  $ standing += 1
+  You write his name, and he reads it with a face of the most complete delight. He says that it is, in the whole of a long career, the first time that anyone has put the whole account in one place. He says that he has been waiting for three thousand years to be asked, and that he does not for a moment propose to be sensible about it. He takes out a new ledger. He writes, in small neat Punic, at the top of the first page, the date.
+* Fiammetta, in her own person, with Prisca at her elbow, to learn it as she goes ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+  $ do steward("fiammetta")
+  $ bond.fiammetta += 4
+  $ humanity += 1
+  You write her name, and you watch her read it. She is not able, for some time, to speak. She says that you know that she is hopeless with figures, and she says it in the voice of a person who has already decided to learn them. She says that she will keep the books, and the house, and the school's roof, and that she will not drink the stock. She hits you, quite hard, on the arm. It is, in the family, a form of address.
+* Thibault, who is good with money and has no family to forget it for ?if in_circle("thibault") and member("thibault", "status") == "active"
+  $ do steward("thibault")
+  $ bond.thibault += 3
+  You write his name, and he accepts it with the dignity of a person who has been waiting for exactly this and would never say. He says that he has a good head for a ledger and a poor one for a feast, and that it is the right way round for a steward.
+* The keepers, the sworn families of the house, and the families after them ?if in_circle("ginevra") or in_circle("tommaso") or in_circle("fiammetta")
+  $ do steward("keepers")
+  $ bond.ginevra += 2
+  $ loyalty.keepers += 15
+  ?if lone() and can_acquire("keeper_oath")
+    $ do acquire("keeper_oath")
+  ?end
+  You write it down. It is a very long time to ask of a family, and you think of it as you write: the names, and the long line of them running down the years like water, each one told the same few things and taught the same few signs. They will have seen a long and difficult peace, from a kitchen. They will say that it was all in the weather.
+<~
+
+# orders
+## What is to be done with it
+There is the matter of the order. It is what a steward is to do with a fortune that has a long while to grow, in a country that is going to go through a good deal. It can be kept, or it can be sown. It can be done honestly, or only profitably.
+* Play it safe: land in the North, and rents, and honest paper, and let it grow slowly
+  $ do orders("safe")
+  $ humanity += 1
+  $ standing += 1
+  It is the order of a man who intends to wake and find the same house. It is not exciting. It is an order to buy farms and brick houses in towns that have no history, and to hold them, and to write nothing down that need not be written, and to distrust, above all, any bond that has the word *Confederate* on it.
+* Grow it aggressively: railways, steamers, and the great new banks of the North
+  $ do orders("aggressive")
+  $ cunning_brutal += 1
+  $ standing += 1
+  It is a bolder thing. It is an order to lend to the railways, and to insure the ships, and to buy what is cheap in the wreck of the South and sell what is dear in the peace. It will be a good deal richer. It will be a good deal more visible. It is like leaving a lamp in a window, and trusting that nobody will ask whose it is.
+* Take the dark ventures, which pay the most, and ask no questions
+  $ do orders("dark")
+  $ cunning_brutal += 3
+  $ humanity -= 3
+  $ velati_regard -= 2
+  You write it. It takes a long time, and you do not enjoy the writing. It is the order for the convict lease, and the war debts, and the sugar, and the whole quiet trade in the labor of men whom nobody has yet found a legal word for. It is the order that gives the greatest return and will have a great deal of blood on it. You tell yourself that it is only money. You are quite aware that you have heard this before, in the voices of a number of men whom you did not like, in a long room, on the Rue Royale, over a very good dinner.
+<~
+
+# guard
+## What stands between
+It is a thing that must be paid for, and it is dearer than it was, because the whole world is. There are traps, which are cheap, and bribes, which are not, and guardians, which are neither, and cannot be had without a good reason and a great deal of gold.
+:guard
+* Lay traps in the ways in: a drain, a false stair, a few cunning things in the brick [once] ?if wealth >= 80
+  $ do protection("traps")
+  $ _guard_n += 1
+  The man who does it is a mason of the Marigny, a free man of color, a quiet fellow with a very exact eye, who has built more false stairs than a theatre. He is very pleased with the drain. He has to be told twice that the lane to the school is not to be trapped.
+* Pay the people who would otherwise ask questions: the ward's clerk, the police captain's man, a priest or two [once] ?if wealth >= 160
+  $ do protection("bribes")
+  $ _guard_n += 1
+  $ secrecy += 2
+  It is a long list, in Hanno's neat hand. It is done with a great deal of politeness and a number of small leather purses, and it works, as such things do, for as long as the people in the purses are alive.
+* Hire guardians: a company of good men, sworn, to hold the road as long as the money lasts [once] ?if wealth >= 240
+  $ do protection("guardians")
+  $ _guard_n += 1
+  They are old soldiers of the Native Guards, who have been paid in promises and would like to be paid in anything. Their sergeant is a gaunt, grave man with one ear, who looks at the door, and the stair, and the bar, and says that it will do. You have heard that said before, in another century, by a man with a limp. It occurs to you that the profession is a very conservative one.
+* That will do
+  <~
+-> :guard
+
+# charge
+## What the family is to do
+It is the line that you have never had to write before. You are going to be a long time, and they are not going to be gone, and you have never in your life told a family what to do for twenty years. You have had a council, or a quarrel, or a supper. You have never had to write it down.
+It is what the family does, while you are asleep, that will matter.
+* Keep the house: the hall, the firm, the school's roof, and the whole of the river that the family has made, and wait for you
+  $ b4.charge = "keep"
+  $ standing += 2
+  $ humanity += 1
+  You write it plainly. It is what Prisca would do without being asked, and what she has not been asked. It is the whole of the house, held for as long as there is a house to hold, with the lamp in the window, and the school's account paid on the first of every quarter. You write that nobody is to go to the Chapter alone. You write that the roll is to be kept. You write that the door is to stay open.
+* Send a hand ahead, north and across the water, to find a house in the great cities, and be there when the age turns
+  $ b4.charge = "north"
+  $ cunning_brutal += 1
+  $ standing += 1
+  $ do earn(-2)
+  You write it with some care. It is a thing that nobody has ever done for you, and that you have always wished that they had: that someone should go ahead, and learn the city, and take a lease, and find out which of the persons in it are not to be trusted, so that when you wake there is a door that you know the way to. You say that it is to be done slowly. You say that it is to be done in the Thames, or in whatever has become of it. You write that nobody is to be brave on your behalf.
+* Scatter: let each go their own way, and write on the first of every January, and meet when you wake
+  $ b4.charge = "scatter"
+  $ secrecy += 3
+  $ humanity -= 1
+  You write it plainly, and it is a hard thing to write. It is the safest. It is a house with no walls, which cannot be burned. You say that nobody is to look for anybody. You say that every first of January there is to be a letter, in a plain envelope, to the counting house, saying only that the writer is alive. You find, at the end of it, that you have written the word *family* four times, and crossed out three.
+<~
+
+# letter
+## A word
+It is the last of the lines, and the only one that does not have a price. You have a sheet of paper, and a pen, and a seal, and you have a little time.
+* Write a letter, to be kept in the house, and given to whoever comes to the door and asks for it in the name of the sixth blood
+  $ b4.letter = "left"
+  $ humanity += 1
+  $ standing += 1
+  It takes the whole of an hour. You write it three times and burn two. The one that you leave is short. It says that you are not able to say everything, and that you are sorry for some of it, and that the house is to give a bed and a cup and no questions to anyone who comes to the door with a very small bright key, or with a yellow flower, or with nothing at all and a good reason. It says that it is not a promise of anything. It says that it is only a door.
+  You put a comma at the end of the last sentence, in the right place, and then you look at it, for a very long time, and you leave it where it is.
+* Write nothing
+  $ b4.letter = "none"
+  $ cunning_brutal += 1
+  You look at the paper for a long time. You do not know what you would put on it. You fold it in half, and put it in the candle, and watch it curl.
+<~
+
+# cellar
+## The last room
+It is the end of the night. The house is asleep. You go down through the quiet rooms in your bare feet with a lamp, and the stairs are cold, and the brick is as it was.
+?if _place == "collesanto"
+  It is the hill that you see, at the last, which is a thing that you did not expect: the wet green roof, and a fire in a round house, and a woman's voice singing. You do not know whether it is a memory or a thing that you have made. It does not matter. You hold it.
+?elif _place == "tomb"
+  It is a very small room, and very cold, and the door is a stone. You set the lamp on the floor and look at it. It is a thing that you have been told by a great number of persons is the safest place in the world. You find that you are able to believe it, and that you are not at all consoled.
+?else
+  It is the cellar under the counting house. It smells of old paper and of the river, and of the fig leaves that have been brought in on somebody's coat. There are the ledgers, in the dark, and a barrel of Madeira, and a little glimmer of a pewter jug. It is the nearest thing that you have had to a home since a hill in the south, and you notice that you have begun to be sorry.
+?end
+?if b4.last_night == "school"
+  You think of a woman on a step, in the lamplight, who will be an old woman by the time you wake, if she is anything, and of a very small stub of pencil in your coat. It is a thing that is going to be here when you are not.
+?elif b4.last_night == "family"
+  You think of a long table under a fig tree, and a man raising a glass, and a loaf of bread eaten whole. It is not at all certain that anybody is going to be told how it comes out.
+?elif b4.last_night == "levee"
+  You think of a doctor on a cotton bale, and the boats coming in, and a child with a lamb. It is a very small thing, and quite enough.
+?else
+  You think of a vault with no name, and a yellow flower, and a mocking bird singing at two in the morning. It is a thing that you hold. You hold it as one holds a coin that one has been told is lucky.
+?end
+?if b4.charge == "north" and coven_size() > 0 and b4.circle != "stay"
+  You think of one of the family on a ship, by morning, going up the river to the sea, with a trunk and a list. You hope that it will not be the one who is least careful. It is, you suspect, quite likely to be.
+?elif b4.charge == "scatter" and coven_size() > 0 and b4.circle != "stay"
+  You think of an envelope on the first of January, in a plain hand, with nothing in it but a name. You find that you are already counting.
+?end
+The last thing that you hear is the house, very faint, down there under the brick. It is a sound that you have lived in like water for seven years, the bells, and the stair, and a voice at the end of a passage, and it goes on, steady and quiet and entirely unaware of you. You listen to it go on.
+$ do rest()
+$ do sleep("new_orleans_to_london")
+You close your eyes.
+It is not like sleep. It is like being put down, very gently, by a large hand. There is a long quiet fall, and the sound of the house goes away, not all at once but one beat at a time, like lamps put out down a long street, and the dark is complete and warm and asks nothing of you at all.
+Somewhere in it, very far off, there is a sound like a stick of chalk, set down on a slate. It comes once. It does not come again. You are, by then, a good way down, and you do not think about it.
+=> next

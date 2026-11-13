@@ -1,4 +1,4 @@
-// Sessions 40 to 47: Book Four, chapters 1 to 16. Played from different wake reports and down the branches. (This file says what is guaranteed, not what happens.)
+// Sessions 40 to 48: Book Four, chapters 1 to 18. Played from different wake reports and down the branches. (This file says what is guaranteed, not what happens.)
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -20,9 +20,9 @@ async function newGame() {
   return game;
 }
 
-async function drive(game, frame, wants = []) {
+async function drive(game, frame, wants = [], stopAt = null) {
   const pages = [];
-  for (let i = 0; i < 3000 && frame.wait !== 'book_end'; i++) {
+  for (let i = 0; i < 3000 && frame.wait !== 'book_end' && !(stopAt && game.state.chapter === stopAt); i++) {
     pages.push(...texts(frame));
     if (frame.wait === 'choices') {
       let at = 0;
@@ -39,7 +39,7 @@ async function drive(game, frame, wants = []) {
   return { game, frame, text: pages.join('\n'), vars: game.state.vars };
 }
 
-async function play(chapter, wake, vars, wants = [], { sys = null, seed = 3 } = {}) {
+async function play(chapter, wake, vars, wants = [], { sys = null, seed = 3, stopAt = null } = {}) {
   const game = await newGame();
   game.setSetting('dev', true);
   await game.startBook('burning-city', { from: 'new', hero: HERO, seed });
@@ -48,7 +48,7 @@ async function play(chapter, wake, vars, wants = [], { sys = null, seed = 3 } = 
   for (const [k, v] of Object.entries(vars)) dev.setVar(game, k, v);
   if (sys) sys(game);
   const frame = await dev.jump(game, chapter, { keep: true });
-  return drive(game, frame, wants);
+  return drive(game, frame, wants, stopAt);
 }
 
 const clean = (run) => {
@@ -81,11 +81,11 @@ const coven = (g) => {
   }
 };
 
-test('Book Four lists its sixteen written chapters and is still incomplete', async () => {
+test('Book Four lists its twenty written chapters and is finished', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'house-divided');
-  assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 16);
+  assert.equal(book.incomplete, false);
+  assert.equal(book.chapterCount, 20);
 });
 
 test('chapter 1 plays through every kind of waking and reaches chapter 2', async () => {
@@ -158,7 +158,6 @@ test('chapter 2 plays through every passage, circle and waking, and pauses at th
           const run = await play('b4c02', { orders }, { ...START, hunger, 'b4.passage': passage, 'b4.circle': circle, 'b4.estate': orders === 'dark' ? 'held' : 'unseen' }, []);
           assert.match(run.text, /Beaumont/, `${passage} ${circle} ${orders}`);
           assert.equal(run.frame.wait, 'book_end');
-          assert.equal(run.frame.pending, true);
           clean(run);
         }
       }
@@ -232,7 +231,6 @@ test('chapter 3 plays through every circle, auction and crane reply, and runs on
           assert.match(run.text, /Beaumont/, `${circle} ${auction} ${reply}`);
           assert.match(run.text, /returns|Illinois/);
           assert.equal(run.frame.wait, 'book_end');
-          assert.equal(run.frame.pending, true);
           clean(run);
         }
       }
@@ -271,7 +269,6 @@ test('chapter 4 plays through every circle, paper and waking, and pauses at the 
         const run = await play('b4c04', {}, { ...START, hunger, 'b4.circle': circle, 'b4.auction': 'bought' }, wants, { sys: circle === 'stay' ? null : coven });
         assert.match(run.text, /Illinois lawyer/);
         assert.equal(run.frame.wait, 'book_end');
-        assert.equal(run.frame.pending, true);
         clean(run);
       }
     }
@@ -322,7 +319,6 @@ test('chapter 5 plays through every circle, houses answer and waking, and carrie
           assert.match(run.text, /Septimus Roan|Resident/);
           assert.match(run.text, /blockade|Federal|Passes/);
           assert.equal(run.frame.wait, 'book_end');
-          assert.equal(run.frame.pending, true);
           clean(run);
         }
       }
@@ -360,7 +356,6 @@ test('chapter 6 plays through every circle, blockade choice and waking, and paus
           const run = await play('b4c06', {}, { ...START, hunger, 'b4.circle': circle, 'b4.shelter': shelter, 'b4.rival': 'allied', 'b4.errand': circle === 'stay' ? 'none' : 'protect', 'b4.papers': 'forged' }, wants, { sys: circle === 'stay' ? null : coven });
           assert.match(run.text, /blockade|Passes/);
           assert.equal(run.frame.wait, 'book_end');
-          assert.equal(run.frame.pending, true);
           clean(run);
         }
       }
@@ -406,7 +401,6 @@ test('chapter 7 plays through every circle, houses answer and waking, and carrie
           assert.match(run.text, /forts|fleet/);
           assert.match(run.text, /Occupation|Provost/);
           assert.equal(run.frame.wait, 'book_end');
-          assert.equal(run.frame.pending, true);
           clean(run);
         }
       }
@@ -448,7 +442,6 @@ test('chapter 8 plays through every circle, exodus, estate and waking, and pause
           const run = await play('b4c08', {}, { ...START, hunger, ...CH8, 'b4.circle': circle, 'b4.exodus': exodus, 'b4.fires': fires, 'b4.estate': exodus === 'kept' ? 'held' : 'unseen' }, [], { sys: circle === 'stay' ? null : coven });
           assert.match(run.text, /Wren/);
           assert.equal(run.frame.wait, 'book_end');
-          assert.equal(run.frame.pending, true);
           clean(run);
         }
       }
@@ -474,7 +467,7 @@ test('chapter 8 takes each choice and records it', async () => {
 });
 
 test('the coven in chapter 8 can be sent out and the house built up', async () => {
-  const run = await play('b4c08', {}, { ...START, wealth: 900000, ...CH8 }, [/See to the coven/, /Send Prisca to the Treasury/, /Send Fiammetta to stand watch/, /blood supply/, /training hall/, /That will do/], { sys: coven });
+  const run = await play('b4c08', {}, { ...START, wealth: 900000, ...CH8 }, [/See to the coven/, /Send Prisca to the Treasury/, /Send Fiammetta to stand watch/, /blood supply/, /training hall/, /That will do/], { sys: coven, stopAt: 'b4c09' });
   assert.ok(run.game.state.sys.holdings?.blood_network || JSON.stringify(run.game.state.sys).includes('blood_network'));
   clean(run);
 });
@@ -490,7 +483,6 @@ test('chapter 9 plays through every circle, waking, return of the agent and rive
           const run = await play('b4c09', {}, { ...START, hunger, ...CH9, 'b4.circle': circle, 'b4.lucien': lucien, 'b4.honorine': honorine }, [], { sys: circle === 'stay' ? null : coven });
           assert.match(run.text, /Colline|knock/);
           assert.equal(run.frame.wait, 'book_end');
-          assert.equal(run.frame.pending, true);
           clean(run);
         }
       }
@@ -516,7 +508,7 @@ test('chapter 9 takes each choice and records it', async () => {
 });
 
 test('the coven in chapter 9 can be sent out and the house built up', async () => {
-  const run = await play('b4c09', {}, { ...START, wealth: 900000, ...CH9 }, [/See to the coven/, /Send Prisca to the Treasury/, /Send Fiammetta to the Lake road/, /blood supply/, /training hall/, /That will do/], { sys: coven });
+  const run = await play('b4c09', {}, { ...START, wealth: 900000, ...CH9 }, [/See to the coven/, /Send Prisca to the Treasury/, /Send Fiammetta to the Lake road/, /blood supply/, /training hall/, /That will do/], { sys: coven, stopAt: 'b4c10' });
   assert.ok(JSON.stringify(run.game.state.sys).includes('blood_network'));
   clean(run);
 });
@@ -531,7 +523,6 @@ test('chapter 10 plays through every circle, waking and river house answer, and 
           const run = await play('b4c10', {}, { ...START, hunger, ...CH10, 'b4.circle': circle, 'b4.lucien': lucien, 'b4.watcher': watcher }, [], { sys: circle === 'stay' ? null : coven });
           assert.match(run.text, /Port Hudson|Guards/);
           assert.equal(run.frame.wait, 'book_end');
-          assert.equal(run.frame.pending, true);
           clean(run);
         }
       }
@@ -648,7 +639,7 @@ test('the fight at the door can be won, talked down or lost without breaking the
 });
 
 test('the coven in chapter 12 can be sent out and the house built up', async () => {
-  const run = await play('b4c12', {}, { ...START, wealth: 900000, ...CH12 }, [/See to the family/, /Send Prisca to the Treasury/, /Send Fiammetta down the river road/, /Put Hanno to the watch/, /Put a few eyes/, /Lay a stair/, /That will do/], { sys: coven });
+  const run = await play('b4c12', {}, { ...START, wealth: 900000, ...CH12 }, [/See to the family/, /Send Prisca to the Treasury/, /Send Fiammetta down the river road/, /Put Hanno to the watch/, /Put a few eyes/, /Lay a stair/, /That will do/], { sys: coven, stopAt: 'b4c13' });
   assert.ok(JSON.stringify(run.game.state.sys).includes('informants'));
   clean(run);
 });
@@ -687,7 +678,7 @@ test('chapter 13 takes each choice and records it', async () => {
 });
 
 test('the coven in chapter 13 can be sent out and the house built up', async () => {
-  const run = await play('b4c13', {}, { ...START, wealth: 900000, ...CH13 }, [/See to the family/, /Send Prisca to the Levee/, /Send Fiammetta to the Chapter/, /Put Hanno to the Ice/, /Open the old drains/, /Set up a hall/, /That will do/], { sys: coven });
+  const run = await play('b4c13', {}, { ...START, wealth: 900000, ...CH13 }, [/See to the family/, /Send Prisca to the Levee/, /Send Fiammetta to the Chapter/, /Put Hanno to the Ice/, /Open the old drains/, /Set up a hall/, /That will do/], { sys: coven, stopAt: 'b4c14' });
   assert.ok(JSON.stringify(run.game.state.sys).includes('escape_tunnels'));
   clean(run);
 });
@@ -726,7 +717,7 @@ test('chapter 14 takes each choice and records it', async () => {
 });
 
 test('the coven in chapter 14 can be sent out and the house built up', async () => {
-  const run = await play('b4c14', {}, { ...START, wealth: 900000, ...CH14 }, [/See to the family/, /Send Prisca to Madame/, /Send Fiammetta to watch/, /Set Hanno to guard/, /Build a blood supply/, /Fit a vault/, /That will do/], { sys: coven });
+  const run = await play('b4c14', {}, { ...START, wealth: 900000, ...CH14 }, [/See to the family/, /Send Prisca to Madame/, /Send Fiammetta to watch/, /Set Hanno to guard/, /Build a blood supply/, /Fit a vault/, /That will do/], { sys: coven, stopAt: 'b4c15' });
   assert.ok(JSON.stringify(run.game.state.sys).includes('blood_network'));
   clean(run);
 });
@@ -767,14 +758,14 @@ test('chapter 15 takes each choice and records it', async () => {
 });
 
 test('the coven in chapter 15 can be sent out and the house built up', async () => {
-  const run = await play('b4c15', {}, { ...START, wealth: 900000, ...CH15 }, [/See to the family/, /Send Prisca to the Army/, /Send Fiammetta up the Lake road/, /Set Hanno to keep the house's books/, /Keep a few eyes/, /Take another room/, /That will do/], { sys: coven });
+  const run = await play('b4c15', {}, { ...START, wealth: 900000, ...CH15 }, [/See to the family/, /Send Prisca to the Army/, /Send Fiammetta up the Lake road/, /Set Hanno to keep the house's books/, /Keep a few eyes/, /Take another room/, /That will do/], { sys: coven, stopAt: 'b4c16' });
   assert.ok(JSON.stringify(run.game.state.sys).includes('informants'));
   clean(run);
 });
 
 const CH16 = { ...CH15, 'b4.refuge': 'sheltered', 'b4.peace': 'sworn', 'b4.physician': 'family' };
 
-test('chapter 16 plays through every circle, house, firm and Gulf answer, and pauses at the end of the book so far', async () => {
+test('chapter 16 plays through every circle, house, firm and warehouse, and carries on into chapter 17', async () => {
   for (const circle of ['all', 'ahead', 'stay']) {
     for (const hunger of [10, 90]) {
       for (const home of ['raised', 'hidden', 'kept']) {
@@ -782,8 +773,6 @@ test('chapter 16 plays through every circle, house, firm and Gulf answer, and pa
           for (const warehouse of ['rebuilt', 'guarded', 'moved']) {
             const run = await play('b4c16', {}, { ...START, hunger, ...CH16, 'b4.circle': circle, 'b4.coven_home': home, 'b4.firm': firm, 'b4.warehouse': warehouse }, [], { sys: circle === 'stay' ? null : coven });
             assert.match(run.text, /Legislature|Christmas/);
-            assert.equal(run.frame.wait, 'book_end');
-            assert.equal(run.frame.pending, true);
             clean(run);
           }
         }
@@ -810,7 +799,238 @@ test('chapter 16 takes each choice and records it', async () => {
 });
 
 test('the coven in chapter 16 can be sent out and the house built up', async () => {
-  const run = await play('b4c16', {}, { ...START, wealth: 900000, ...CH16 }, [/See to the family/, /Send Prisca to the Legislature/, /Send Fiammetta to walk/, /Set Hanno to run the family's books/, /Buy a respectable shop/, /Make a net of safe doors/, /That will do/], { sys: coven });
+  const run = await play('b4c16', {}, { ...START, wealth: 900000, ...CH16 }, [/See to the family/, /Send Prisca to the Legislature/, /Send Fiammetta to walk/, /Set Hanno to run the family's books/, /Buy a respectable shop/, /Make a net of safe doors/, /That will do/], { sys: coven, stopAt: 'b4c17' });
   assert.ok(JSON.stringify(run.game.state.sys).includes('front_business'));
   clean(run);
+});
+
+const CH17 = { ...CH16, 'b4.court': 'argued', 'b4.codes': 'hired', 'b4.teche': 'truce' };
+
+test('chapter 17 plays through every circle, house, haven and Velati answer, and carries on into chapter 18', async () => {
+  for (const circle of ['all', 'ahead', 'stay']) {
+    for (const hunger of [10, 90]) {
+      for (const home of ['raised', 'hidden', 'kept']) {
+        for (const watcher of ['open', 'guarded', 'refused']) {
+          const run = await play('b4c17', {}, { ...START, hunger, ...CH17, 'b4.circle': circle, 'b4.coven_home': home, 'b4.watcher': watcher }, [], { sys: circle === 'stay' ? null : coven });
+          assert.match(run.text, /Venio|Cathedral|Caron/);
+          assert.match(run.text, /Dryades|Institute/);
+          clean(run);
+        }
+      }
+    }
+  }
+});
+
+test('chapter 17 takes each choice and records it', async () => {
+  const garden = [['heard', /Hear him out/], ['struck', /Hit him, and keep hitting/], ['left', /walk out of the garden/]];
+  for (const [value, re] of garden) {
+    const run = await play('b4c17', {}, { ...START, wealth: 900000, ...CH17 }, [re], { sys: coven });
+    assert.equal(run.vars['b4.confession'], value, `confession ${value}`);
+    clean(run);
+  }
+  const sets = [
+    ['b4.proof', [['memory', /Drink, and see it yourself/], ['told', /Let .* tell it/], ['none', /Say that it is enough/]], /Go to the room above the counting house/],
+    ['b4.truth', [['all', /Tell her all of it/], ['half', /Tell her what you are/], ['none', /Say that it is a matter of the firm/]], /Walk to the school in the Trem/],
+    ['b4.convention', [['paper', /Offer the Valère paper/], ['lodged', /Quietly find beds/], ['apart', /Say that it is the Army's business/]], /Go to the Bureau on the Rue Camp/],
+  ];
+  for (const watcher of ['open', 'guarded', 'refused']) {
+    for (const [flag, branches, night] of sets) {
+      for (const [value, re] of branches) {
+        const run = await play('b4c17', {}, { ...START, wealth: 900000, ...CH17, 'b4.watcher': watcher }, [night, re, /That will do/], { sys: coven });
+        assert.equal(run.vars[flag], value, `${flag} ${value}`);
+        clean(run);
+      }
+    }
+  }
+});
+
+test('the coven in chapter 17 can be sent out, and a lone path can lock away the relics', async () => {
+  const run = await play('b4c17', {}, { ...START, wealth: 900000, ...CH17 }, [/See to the family/, /Send Prisca to the Resident/, /Send Fiammetta to the Trem/, /Set Hanno to watch/, /That will do/], { sys: coven });
+  assert.match(run.text, /read another person's mail/);
+  assert.match(run.text, /throw a knife/);
+  assert.match(run.text, /stand at doors|stand at the end of the passage/);
+  clean(run);
+  const lone = await play('b4c17', {}, { ...START, wealth: 900000, ...CH17 }, [/See to the family/, /Put a stout cellar/, /That will do/], { sys: (g) => { g.state.sys.path = 'lone'; } });
+  assert.ok(JSON.stringify(lone.game.state.sys).includes('relic_vault'));
+  clean(lone);
+});
+
+const CH18 = { ...CH17, 'b4.confession': 'heard', 'b4.proof': 'told', 'b4.truth': 'all', 'b4.convention': 'paper' };
+
+test('chapter 18 plays through every circle, house and Compact, and carries on into chapter 19', async () => {
+  for (const circle of ['all', 'ahead', 'stay']) {
+    for (const hunger of [10, 90]) {
+      for (const home of ['raised', 'hidden', 'kept']) {
+        for (const compact of ['signed', 'bargained', 'refused']) {
+          const run = await play('b4c18', {}, { ...START, hunger, ...CH18, 'b4.circle': circle, 'b4.coven_home': home, 'b4.compact': compact }, [], { sys: circle === 'stay' ? null : coven });
+          assert.match(run.text, /Mechanics|Dryades/);
+          assert.match(run.text, /All Saints|Nikanor|dead men/);
+          clean(run);
+        }
+      }
+    }
+  }
+});
+
+test('chapter 18 takes each morning choice and records it', async () => {
+  const sets = [
+    ['b4.stand', [['kept', /Give him your word/], ['broke', /Tell him that the Compact ends/], ['letter', /Say that the house of the sixth blood will send nobody/]], /Go to Belle Rive/],
+    ['b4.march', [['walked', /Walk with them, at the head/], ['carried', /Lend every wagon/], ['watched', /Stand by the wall/]], /Go to the Trem/],
+    ['b4.troops', [['pressed', /Go to the Colonel yourself/], ['wired', /Write the plain facts/], ['none', /Thank him, and say that it is the Army/]], /Go to the Bureau on the Rue Camp/],
+  ];
+  for (const compact of ['signed', 'bargained', 'refused']) {
+    for (const [flag, branches, hub] of sets) {
+      for (const [value, re] of branches) {
+        const run = await play('b4c18', {}, { ...START, wealth: 900000, ...CH18, 'b4.compact': compact }, [hub, re, /That will do/], { sys: coven });
+        assert.equal(run.vars[flag], value, `${flag} ${value}`);
+        clean(run);
+      }
+    }
+  }
+});
+
+test('chapter 18 takes each choice at the Institute and in the evening, down every road', async () => {
+  const stands = [
+    ['kept', /Give him your word/, [['watched', /Stand at the edge of the street/], ['led', /Go in by the back/], ['ran', /Run for the barracks/]]],
+    ['letter', /Say that the house of the sixth blood will send nobody/, [['held', /Go in at the doors/], ['led', /Go in by the back/], ['ran', /Run for the barracks/]]],
+    ['broke', /Tell him that the Compact ends/, [['held', /Go in at the doors/], ['led', /Go in by the back/], ['ran', /Run for the barracks/]]],
+  ];
+  const evenings = [['hospital', /Open the family's house/], ['names', /Take the sworn names/], ['north', /Move the ones who cannot stay/]];
+  for (const troops of ['pressed', 'wired', 'none']) {
+    for (const [stand, standRe, ways] of stands) {
+      for (const [inst, instRe] of ways) {
+        for (const [after, afterRe] of evenings) {
+          const want = [/Go to Belle Rive/, standRe, instRe, afterRe, /That will do/];
+          const run = await play('b4c18', {}, { ...START, wealth: 900000, ...CH18, 'b4.troops': troops }, want, { sys: coven });
+          assert.equal(run.vars['b4.stand'], stand, `stand ${stand}`);
+          assert.equal(run.vars['b4.institute'], inst, `institute ${inst}`);
+          assert.equal(run.vars['b4.aftermath'], after, `aftermath ${after}`);
+          clean(run);
+        }
+      }
+    }
+  }
+});
+
+test('the coven in chapter 18 can be sent out, and a lone path buys papers and uses them in the evening', async () => {
+  const run = await play('b4c18', {}, { ...START, wealth: 900000, ...CH18 }, [/See to the family/, /Send Prisca to the Mayor/, /Send Fiammetta to stand/, /Set Hanno to keep/, /That will do/], { sys: coven });
+  assert.match(run.text, /second best parasol/);
+  assert.match(run.text, /not going to move from it/);
+  assert.match(run.text, /keeping a book of such days/);
+  clean(run);
+  const lone = await play('b4c18', {}, { ...START, wealth: 900000, ...CH18 }, [/See to the family/, /Buy a set of papers/, /Move the ones who cannot stay/, /That will do/], { sys: (g) => { g.state.sys.path = 'lone'; } });
+  assert.ok(JSON.stringify(lone.game.state.sys).includes('shell_identities'));
+  assert.match(lone.text, /Alsatian's papers are dry/);
+  clean(lone);
+});
+
+const CH19 = { ...CH18, 'b4.stand': 'letter', 'b4.institute': 'held', 'b4.aftermath': 'hospital' };
+
+test('chapter 19 plays through every circle, house, Compact and Velati answer, and carries on into chapter 20', async () => {
+  for (const circle of ['all', 'ahead', 'stay']) {
+    for (const hunger of [10, 90]) {
+      for (const home of ['raised', 'hidden', 'kept']) {
+        for (const stand of ['kept', 'broke', 'letter']) {
+          const run = await play('b4c19', {}, { ...START, hunger, ...CH19, 'b4.circle': circle, 'b4.coven_home': home, 'b4.stand': stand }, [], { sys: circle === 'stay' ? null : coven });
+          assert.match(run.text, /What is a house for/);
+          assert.match(run.text, /Nikanor/);
+          clean(run);
+        }
+      }
+    }
+  }
+});
+
+test('chapter 19 takes each choice and records it', async () => {
+  const answers = [['shelter', /A house is a shelter/], ['strength', /A house is a strength/], ['keeping', /A house is a promise/]];
+  for (const [value, re] of answers) {
+    const run = await play('b4c19', {}, { ...START, wealth: 900000, ...CH19 }, [re], { sys: coven });
+    assert.equal(run.vars['b4.answer'], value, `answer ${value}`);
+    clean(run);
+  }
+  const sets = [
+    ['b4.seat', [['held', /Sit in the chair/], ['lent', /Give the seat to Beaumont/], ['refused', /take no seat/]], /Go to Belle Rive/],
+    ['b4.pledge', [['deeded', /Deed the school/], ['sworn', /Offer her the keeper's oath/], ['open', /the door is open/]], /Walk to the school in the Trem/],
+    ['b4.hand', [['trap', /Write a letter to the Resident/], ['named', /Take the three names/], ['kept', /Say nothing, and keep the box/]], /Go to the room above the counting house/],
+  ];
+  for (const watcher of ['open', 'guarded', 'refused']) {
+    for (const [flag, branches, night] of sets) {
+      for (const [value, re] of branches) {
+        const run = await play('b4c19', {}, { ...START, wealth: 900000, ...CH19, 'b4.watcher': watcher }, [night, re, /That will do/], { sys: coven });
+        assert.equal(run.vars[flag], value, `${flag} ${value}`);
+        clean(run);
+      }
+    }
+  }
+});
+
+test('the coven in chapter 19 can be sent out and housed, and a lone path can lay down a vault', async () => {
+  const run = await play('b4c19', {}, { ...START, wealth: 900000, ...CH19 }, [/See to the family/, /Send Prisca to the river houses/, /Send Fiammetta to the Rue Dauphine/, /Set Hanno to the firm/, /Raise a house for the family/, /Give the fledglings a hall/, /That will do/], { sys: coven, stopAt: 'b4c20' });
+  assert.match(run.text, /best errand that she has had in a century/);
+  assert.match(run.text, /extreme and terrifying responsibility/);
+  assert.match(run.text, /most of the afternoon|whole of the afternoon/);
+  assert.ok(JSON.stringify(run.game.state.sys).includes('coven_house'));
+  clean(run);
+  const lone = await play('b4c19', {}, { ...START, wealth: 900000, ...CH19 }, [/See to the family/, /Put an honest sum into a vault/, /That will do/], { sys: (g) => { g.state.sys.path = 'lone'; } });
+  assert.ok(JSON.stringify(lone.game.state.sys).includes('vaults'));
+  clean(lone);
+});
+
+const CH20 = { ...CH19, 'b4.seat': 'held', 'b4.pledge': 'sworn', 'b4.hand': 'named', 'b4.answer': 'keeping' };
+
+test('chapter 20 ends the book, sleeps to London, writes the journal and unlocks Book Five', async () => {
+  const run = await play('b4c20', {}, { ...START, wealth: 900000, ...CH20 }, [], { sys: coven });
+  assert.equal(run.frame.wait, 'book_end');
+  clean(run);
+  const wake = run.game.state.sys.sleep.wake;
+  assert.equal(wake.gap, 'new_orleans_to_london');
+  assert.equal(wake.years, 20);
+  assert.equal(run.game.state.booksDone.includes('house-divided'), true);
+  assert.ok(run.game.state.journal.some((e) => e.kind === 'velati' && e.book === 'house-divided'), 'the journal entry is written');
+  assert.equal(run.game.library().find((b) => b.id === 'whitechapel-hunt').unlocked, true);
+});
+
+test('chapter 20 plays every last night, place, steward, orders, guard, charge and letter', async () => {
+  const nights = [[/sit on the steps with Honorine/, 'school'], [/Sit in the long room with the family/, 'family'], [/Walk down to the levee with Armand/, 'levee'], [/Walk by yourself through the old city/, 'alone']];
+  for (const answer of ['shelter', 'strength', 'keeping']) {
+    for (const pledge of ['deeded', 'sworn', 'open']) {
+      for (const [re, value] of nights) {
+        const run = await play('b4c20', {}, { ...START, ...CH20, 'b4.answer': answer, 'b4.pledge': pledge }, [re], { sys: coven });
+        assert.equal(run.frame.wait, 'book_end', `${answer} ${pledge} ${value}`);
+        assert.equal(run.vars['b4.last_night'], value);
+        clean(run);
+      }
+    }
+  }
+  for (const [re, place] of [[/The haven under the counting house/, 'haven'], [/The cellar under the great house/, 'collesanto'], [/The tomb in the old city/, 'tomb']]) {
+    const run = await play('b4c20', {}, { ...START, ...CH20 }, [re], { sys: coven });
+    assert.equal(run.game.state.sys.sleep.history.at(-1).place, place);
+  }
+  for (const [re, who] of [[/Merchant house, as a bank/, 'bank'], [/Prisca, in her own person/, 'prisca'], [/Hanno, in his own person/, 'hanno'], [/Fiammetta, in her own person/, 'fiammetta']]) {
+    const run = await play('b4c20', {}, { ...START, ...CH20 }, [re], { sys: coven });
+    assert.equal(run.game.state.sys.sleep.history.at(-1).steward, who);
+    assert.equal(run.game.state.sys.sleep.history.at(-1).gap, 'new_orleans_to_london');
+    assert.equal(run.frame.wait, 'book_end');
+  }
+  for (const [re, orders] of [[/Play it safe/, 'safe'], [/Grow it aggressively/, 'aggressive'], [/Take the dark ventures/, 'dark']]) {
+    const run = await play('b4c20', {}, { ...START, ...CH20 }, [re], { sys: coven });
+    assert.equal(run.game.state.sys.sleep.history.at(-1).orders, orders);
+  }
+  for (const [re, value] of [[/Keep the house/, 'keep'], [/Send a hand ahead/, 'north'], [/Scatter/, 'scatter']]) {
+    const run = await play('b4c20', {}, { ...START, ...CH20 }, [re], { sys: coven });
+    assert.equal(run.vars['b4.charge'], value);
+    clean(run);
+  }
+  for (const [re, value] of [[/Write a letter, to be kept/, 'left'], [/Write nothing/, 'none']]) {
+    const run = await play('b4c20', {}, { ...START, ...CH20 }, [re], { sys: coven });
+    assert.equal(run.vars['b4.letter'], value);
+  }
+  const lone = await play('b4c20', {}, { ...START, ...CH20, 'b4.circle': 'stay' }, [], { sys: (g) => { g.state.sys.path = 'lone'; } });
+  assert.equal(lone.frame.wait, 'book_end');
+  assert.equal(lone.vars['b4.charge'], 'keep');
+  clean(lone);
+  const bare = await play('b4c20', {}, { ...START, wealth: 5000, ...CH20 }, [/That will do/], { sys: coven });
+  const guarded = await play('b4c20', {}, { ...START, wealth: 5000, ...CH20 }, [/Lay traps/, /Pay the people/, /Hire guardians/], { sys: coven });
+  assert.equal(bare.frame.wait, 'book_end');
+  assert.equal(guarded.frame.wait, 'book_end');
 });
