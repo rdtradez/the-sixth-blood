@@ -370,7 +370,7 @@ test('systems state survives a save and load mid mission', async () => {
 });
 
 test('schema 2 saves upgrade to the current schema with empty systems', async () => {
-  assert.equal(SCHEMA, 5);
+  assert.equal(SCHEMA, 6);
   assert.deepEqual(SCHEMA_MIGRATIONS[2]({ vars: {} }).sys, createSys());
   const storage = new MemoryStorage();
   const src = { t1: `${H('t1')}\n# start\nOne.\n---\nTwo {coven_size()}.\n---\n=> endbook\n` };
@@ -421,4 +421,69 @@ test('the systems engine test book plays to the end with a journal and no warnin
   assert.equal(game.state.journal.at(-1).kind, 'velati');
   assert.equal(game.systems().circle.length, 2);
   assert.deepEqual(warnings, []);
+});
+
+// ---- Coven tasks and the Coven tab -------------------------------------------------------------
+
+const B2 = { book: 'blood-and-gold' };
+
+test('a member tasked to the business raises income, a mission stops it, and standing down ends it', async () => {
+  const game = await run([
+    '$ wealth = 500', '$ do invest("rome.insulae")', '$ do keeper("prisca", "steward", 80)',
+    'A {income()}.', '$ do coven_task("prisca", "business")', 'B {income()} "{task("prisca")}".',
+    '$ do send("prisca", "scout", 1)', 'C {income()}.', '$ do rest()', '$ do debrief("prisca")',
+    '$ do coven_task("prisca", "none")', 'D {income()} "{task("prisca")}".',
+  ].join('\n'));
+  const [a, b, c, d] = texts(game.frame).map((t) => t.match(/\d+/)[0]);
+  assert.ok(Number(b) > Number(a), 'the coven adds to income');
+  assert.equal(c, a, 'away on a mission, they do not work the business');
+  assert.equal(d, a);
+  assert.match(texts(game.frame)[1], /"business"/);
+});
+
+test('a task cannot go to someone outside the circle or no longer active', async () => {
+  await assert.rejects(run('$ do coven_task("prisca", "guard")'), /not in the circle/);
+  await assert.rejects(run(['$ do keeper("prisca", "steward")', '$ do member_fate("prisca", "left")', '$ do coven_task("prisca", "guard")'].join('\n')), /not available/);
+});
+
+test('standing tasks run through the long sleep, are reported on waking, and stay set in the next book', async () => {
+  const game = await sysGame({ end: SLEEP_END(['$ do keeper("prisca", "steward", 90)', '$ do coven_task("prisca", "watch")', '$ do steward("prisca")'].join('\n')) });
+  await game.newGame({ book: 'burning-city', seed: 3 });
+  assert.ok(['success', 'partial', 'failed'].includes(S(game).circle.prisca.taskResult));
+  assert.equal(S(game).circle.prisca.task, 'watch');
+  assert.equal(typeof S(game).sleep.wake.intel, 'number');
+  assert.equal(S(game).sleep.wake.tasks[0].id, 'prisca');
+});
+
+test('guard lowers the danger of the sleep, and a member who acts alone ignores the task', async () => {
+  const setup = (loyalty) => ['$ do keeper("prisca", "steward", ' + loyalty + ')', '$ do coven_task("prisca", "guard")'].join('\n');
+  const margins = [];
+  for (const [loyalty, task] of [[95, true], [95, false], [10, true]]) {
+    const game = await sysGame({ t1: `${H('t1')}\n# start\n${setup(loyalty)}\n${task ? '' : '$ do coven_task("prisca", "none")'}\n---\n=> endbook\n` });
+    await game.newGame({ book: 'burning-city', seed: 5 });
+    const ctx = { state: game.state, vars: game.state.vars, content: game.content, rand: () => 0.5 };
+    margins.push(resolveSleep(ctx, undefined));
+  }
+  assert.ok(margins[0].margin > margins[1].margin, 'a guard makes the sleep safer');
+  assert.equal(margins[2].tasks[0].outcome, 'failed');
+  assert.equal(margins[2].margin, margins[1].margin);
+});
+
+test('the Coven tab lists members, what they are doing and the task options, and the game saves a change', async () => {
+  const game = await run('$ do keeper("prisca", "steward", 80)');
+  game.setCovenTask('prisca', 'business');
+  const view = game.coven();
+  assert.equal(view.members.length, 1);
+  assert.equal(view.members[0].task, 'business');
+  assert.match(view.members[0].doing, /work the business/i);
+  assert.deepEqual(view.tasks.map((t) => t.id), ['guard', 'business', 'watch']);
+  assert.throws(() => game.setCovenTask('prisca', 'dance'), /unknown task/);
+  game.setCovenTask('prisca', 'none');
+  assert.equal(game.coven().members[0].task, '');
+});
+
+test('schema 5 saves gain empty task fields', () => {
+  const s = SCHEMA_MIGRATIONS[5]({ sys: { circle: { a: { id: 'a' } } } });
+  assert.equal(s.sys.circle.a.task, '');
+  assert.equal(s.sys.circle.a.taskResult, '');
 });

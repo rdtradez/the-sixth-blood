@@ -3,6 +3,7 @@
 
 import { CONTENT_FNS } from './content.js';
 import { loreOf, entryUnlocked, originalKnown } from './systems/lore.js';
+import { TASKS, taskProblem } from './systems/circle.js';
 
 const FATE_WORDS = { alive: 'Alive', dead: 'Dead', turned: 'Turned', missing: 'Missing', gone: 'Gone from your life' };
 const MEMBER_WORDS = { active: '', left: 'Left your coven', dead: 'Dead', captured: 'Captured', betrayed: 'Betrayed you' };
@@ -157,4 +158,57 @@ export function achievementsView(profile, content) {
     at: earned[id] ?? null,
     secret: Boolean(def.secret),
   }));
+}
+
+export const TASK_INFO = {
+  guard: { label: 'Guard your rest', text: 'Watch over the place where you sleep, so you are less likely to be found.' },
+  business: { label: 'Work the business', text: 'Take a hand in your ventures, so they pay more now and you wake richer after the long sleep.' },
+  watch: { label: 'Keep watch', text: 'Listen to the city while you sleep, and bring you news when you wake.' },
+};
+const TASK_RESULT_WORDS = { success: 'It went well.', partial: 'It went partly well.', failed: 'It did not go well.' };
+const MISSION_WORDS = { scout: 'scouting', protect: 'guarding', negotiate: 'negotiating', hunt: 'hunting', retrieve: 'retrieving something' };
+const MISSION_RESULT_WORDS = { success: 'Came back with what you asked.', partial: 'Came back with part of it.', injured: 'Came back hurt.', missing: 'Did not come back.' };
+
+/**
+ * The Coven tab: everyone sworn to you, what they are doing now, and the standing task each has for
+ * the long sleep. No numbers are shown; loyalty and strength stay in the story's voice.
+ */
+export function covenView(state, content) {
+  const s = state?.sys;
+  if (!s) return { members: [], tasks: [], covenCount: 0 };
+  const ctx = ctxOf(state, content);
+  const members = Object.values(s.circle ?? {}).filter((m) => Object.hasOwn(content.people, m.id)).map((m) => {
+    const active = m.status === 'active';
+    const notes = [];
+    if (m.kind === 'keeper') notes.push('Keeper');
+    else notes.push('Coven');
+    if (m.sire === 'hero') notes.push('Your blood');
+    if (m.daywalk) notes.push('Walks in daylight');
+    if (m.injured) notes.push('Hurt');
+    if (!active) notes.push(MEMBER_WORDS[m.status] || m.status);
+    let doing = '';
+    if (active && m.mission && !m.mission.outcome) doing = `Away, ${MISSION_WORDS[m.mission.kind] ?? 'on an errand'}.`;
+    else if (active && m.mission?.outcome) doing = MISSION_RESULT_WORDS[m.mission.outcome] ?? '';
+    else if (active && m.task) doing = `Will ${TASK_INFO[m.task].label.toLowerCase()} while you sleep.`;
+    else if (active) doing = 'At your side.';
+    return {
+      id: m.id,
+      name: CONTENT_FNS.name(ctx, m.id),
+      role: m.role || '',
+      notes,
+      doing,
+      active,
+      task: m.task || '',
+      lastTask: m.taskResult ? `${TASK_INFO[m.task]?.label ?? 'Last task'}: ${TASK_RESULT_WORDS[m.taskResult] ?? ''}`.trim() : '',
+      canTask: active && !taskProblem(m),
+      joinedIn: bookTitle(content, m.joined),
+    };
+  });
+  const order = (m) => (m.active ? 0 : 1);
+  members.sort((a, b) => order(a) - order(b));
+  return {
+    members,
+    tasks: TASKS.map((id) => ({ id, ...TASK_INFO[id] })),
+    covenCount: members.filter((m) => m.active).length,
+  };
 }

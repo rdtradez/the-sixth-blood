@@ -17,6 +17,13 @@
 // Missions resolve at rest after 1 chapter (2 for risk 3 or retrieve). Outcomes come from the
 // member's age, role, loyalty and the risk, with a seeded roll.
 //
+// Standing tasks, kept through a long sleep (set from the Coven tab or the story):
+//   $ do coven_task("lucia", "business")      guard, business or watch; "none" stands them down. Kept through the long sleep.
+//   task("lucia"), task_result("lucia")       the standing task, and how it went at the last sleep: success, partial or failed
+//   business: while awake they work his ventures (income() rises with each hand, see businessHands()); asleep they grow the fortune.
+//   guard lowers the danger of the sleep, watch brings news (wake("intel") on waking).
+//   A member who acts behind his back (acts_alone) ignores the task.
+//
 // Their own missions:
 //   $ do quest("lucia", "lost_brother")       the member has a personal quest
 //   $ do quest_answer("lucia", "join")        approve, refuse or join: changes loyalty
@@ -30,6 +37,7 @@ export const STATUSES = ['active', 'left', 'dead', 'captured', 'betrayed'];
 export const MISSIONS = ['scout', 'protect', 'negotiate', 'hunt', 'retrieve'];
 export const MEMBER_FIELDS = ['status', 'role', 'line', 'kind', 'sire', 'joined', 'quest'];
 export const QUEST_ANSWERS = ['approve', 'refuse', 'join'];
+export const TASKS = ['guard', 'business', 'watch'];
 
 const present = (m) => m && (m.status === 'active');
 
@@ -65,8 +73,24 @@ function add(ctx, id, m, loyalty) {
   const s = sysOf(ctx);
   const old = s.circle[id];
   if (old && present(old)) throw new EngineError(`"${id}" is already in the circle`);
-  s.circle[id] = { id, injured: false, mission: null, quest: null, role: '', status: 'active', joined: ctx.state.book, ...m };
+  s.circle[id] = { id, injured: false, mission: null, quest: null, task: '', taskResult: '', role: '', status: 'active', joined: ctx.state.book, ...m };
   ctx.state.vars[`loyalty.${id}`] = Math.max(0, Math.min(100, Math.round(loyalty)));
+}
+
+/** Why this member cannot be given a standing task, or null. */
+export function taskProblem(m) {
+  if (!m) return 'they are not in the circle';
+  if (!present(m)) return 'they are not available';
+  return null;
+}
+
+/** Set (or clear, with "none") a member's standing task. Used by $ do coven_task() and the Coven tab. */
+export function setTask(ctx, id, task) {
+  const m = get(ctx, id);
+  const p = taskProblem(m);
+  if (p) throw new EngineError(`$ do coven_task("${id}"): ${p}`);
+  m.task = task === 'none' ? '' : task;
+  if (!m.task) m.taskResult = '';
 }
 
 export const circle = {
@@ -89,6 +113,8 @@ export const circle = {
     sired_this_book: { spec: [], fn: (ctx) => sysOf(ctx).sired[ctx.state.book] ?? 0 },
     on_mission: { spec: ['person'], fn: (ctx, id) => Boolean(sysOf(ctx).circle[id]?.mission && !sysOf(ctx).circle[id].mission.outcome) },
     mission: { spec: ['person'], fn: (ctx, id) => sysOf(ctx).circle[id]?.mission?.outcome ?? '' },
+    task: { spec: ['person'], fn: (ctx, id) => sysOf(ctx).circle[id]?.task ?? '' },
+    task_result: { spec: ['person'], fn: (ctx, id) => sysOf(ctx).circle[id]?.taskResult ?? '' },
     quest_state: { spec: ['person'], fn: (ctx, id) => sysOf(ctx).circle[id]?.quest?.state ?? '' },
     acts_alone: {
       spec: ['person'],
@@ -138,13 +164,14 @@ export const circle = {
         add(ctx, id, { kind: 'keeper', line: 'human', sire: '', tier: 0, daywalk: true, role }, loyalty);
       },
     },
+    coven_task: { spec: ['person', [...TASKS, 'none']], fn: (ctx, id, task) => setTask(ctx, id, task) },
     assign_role: { spec: ['person', 'text'], fn: (ctx, id, role) => { get(ctx, id).role = role; } },
     member_fate: {
       spec: ['person', STATUSES],
       fn(ctx, id, status) {
         const m = get(ctx, id);
         m.status = status;
-        if (status !== 'active') m.mission = null;
+        if (status !== 'active') { m.mission = null; m.task = ''; m.taskResult = ''; }
         if (status !== 'active') logDecision(ctx, `fate.${id}`, status);
       },
     },
@@ -225,4 +252,36 @@ export function restCircle(ctx, report) {
 /** On waking from a long sleep: injuries have healed. */
 export function wakeCircle(ctx) {
   for (const m of Object.values(sysOf(ctx).circle)) { m.injured = false; m.mission = null; }
+}
+
+/**
+ * The long sleep: every member with a standing task works at it. Returns what each did and the
+ * totals the sleep uses (guard lowers danger, business grows the fortune, watch brings news).
+ * Does not change members; applySleep records the results.
+ */
+export function taskEffects(ctx) {
+  const out = { guard: 0, business: 0, watch: 0, results: [] };
+  for (const m of Object.values(sysOf(ctx).circle)) {
+    if (!present(m) || !m.task) continue;
+    const alone = stat(ctx, `loyalty.${m.id}`) < rule(ctx, 'coven.actsAloneBelow', 30);
+    const score = memberPower(ctx, m) + Math.floor(stat(ctx, `loyalty.${m.id}`) / 25) + roll(ctx, 6) - rule(ctx, 'coven.taskDifficulty', 4);
+    const outcome = alone ? 'failed' : score >= 7 ? 'success' : score >= 4 ? 'partial' : 'failed';
+    out[m.task] += outcome === 'success' ? 2 : outcome === 'partial' ? 1 : 0;
+    out.results.push({ id: m.id, task: m.task, outcome });
+  }
+  return out;
+}
+
+/** After a sleep: remember how each standing task went. Members with no task have nothing to report. */
+export function recordTasks(ctx, results) {
+  for (const m of Object.values(sysOf(ctx).circle)) {
+    const r = results.find((x) => x.id === m.id);
+    m.taskResult = r ? r.outcome : '';
+  }
+}
+
+/** Members who are working his ventures now: active, tasked to the business, at home and not acting behind his back. */
+export function businessHands(ctx) {
+  return Object.values(sysOf(ctx).circle).filter((m) => present(m) && m.task === 'business' && !(m.mission && !m.mission.outcome)
+    && stat(ctx, `loyalty.${m.id}`) >= rule(ctx, 'coven.actsAloneBelow', 30)).length;
 }

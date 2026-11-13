@@ -13,7 +13,8 @@ import { makeContent, CONTENT_FNS, CONTENT_COMMAND_NAMES, voiceDef } from './con
 import { EngineError, clone } from './util.js';
 import { readSettings, checkSetting } from './settings.js';
 import { mapsFor } from './maps.js';
-import { peopleView, codexView, familyView, achievementsView } from './screens.js';
+import { peopleView, codexView, familyView, achievementsView, covenView } from './screens.js';
+import { setTask, TASKS } from './systems/circle.js';
 import { evaluateAchievements } from './achievements.js';
 import { creationOptions, fitHero, lookChoices, compatiblePaths } from './creation.js';
 import { describeLook, lookFromVars, lookVars, seededRandom } from './looks.js';
@@ -652,6 +653,15 @@ export class Game {
   codex(state = this.viewState()) { return codexView(state, this.content); }
   maps(state = this.viewState()) { return state ? mapsFor(state, this.content) : []; }
   family(state = this.viewState()) { return state ? familyView(state, this.content) : []; }
+  coven(state = this.viewState()) { return covenView(state, this.content); }
+
+  /** The Coven tab: give a member a standing task for the long sleep ("none" stands them down). Saves at once. */
+  setCovenTask(id, task) {
+    if (!this.state) throw new EngineError('no game in progress');
+    if (task !== 'none' && !TASKS.includes(task)) throw new EngineError(`unknown task "${task}"`);
+    setTask({ state: this.state, vars: this.state.vars, content: this.content }, id, task);
+    this.#checkpoint(false);
+  }
 
   // ---- Saving ---------------------------------------------------------------------------
 
