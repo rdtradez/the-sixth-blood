@@ -11,6 +11,14 @@ The owner plays the game and wants to be surprised by chapter level choices and 
 - Build reports stay spoiler free, for example: "Book One, Chapters 3 and 4 done, about 8,000 words, ready to play".
 - Anything that would change the big picture (killing a major character early, altering a core lore rule) is flagged to the owner first, in a spoiler light way.
 
+## The coven (owner's design direction)
+
+- The coven is a family, not a staff list. Write its members with warmth, history with the hero and their own wants.
+- The coven is the hero's arm when he is not present: what they do while he is away or asleep should matter in the story, not only in the numbers.
+- It is the only known coven of the sixth bloodline. That makes it rare and precious, and the world should treat it that way.
+- Once a coven is started it is a significant part of the story in every later book. Keepers (sworn humans) are kept apart from the turned.
+- The engine side exists (Coven tab, standing tasks, a report at each chapter start, missions). Book sessions should add scenes that use it.
+
 ## Commands
 
 - `npm test` runs the test suites. `npm run check` validates every chapter in the manifest. Run both before committing.
