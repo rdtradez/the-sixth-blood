@@ -70,6 +70,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 41: Book Four chapters 3 and 4
 - [x] Session 42: Book Four chapters 5 and 6
 - [x] Session 43: Book Four chapters 7 and 8
+- [x] Session 44: Book Four chapters 9 and 10
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
@@ -540,4 +541,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Chapter 7 uses `romance("honorine")` on one path. New person (`content/people.json`): Captain Thaddeus Wren. New codex entries: the fall of New Orleans, the burning of the cotton, the Occupation, the oath of allegiance and the contraband camps. Content notes: both chapters carry `blood` and `slavery`. No fights, no new engine behavior, so no schema or migration.
 - Chapter 7 charts `neworleans.wharf`, `beaumont`, `haven` and `treme`; chapter 8 charts `bank`, `roadhome`, `haven` (twice).
 - Tests: `tests/book4.test.js` plays chapters 7 and 8 down every circle, exodus, fires and waking, with and without a coven, takes every recorded choice (chapter 8 both with and without the sleepers kept), and expects eight chapters.
+- Plans are in `SPOILERS/house-divided.md`.
+
+### Session 44 notes (Book Four, chapters 9 and 10)
+
+- Chapters `b4c09` and `b4c10` are in `content/house-divided/` (`ch09.tsb`, `ch10.tsb`). The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 10. Same shape as chapters 3 to 8: an opening with no phase, a short hunger scene that only runs if `must_feed()` is true on entry, one night phase of three actions out of four, and a closing scene ending in `rest()` and `=> next`.
+- New decision flags (`b4.` prefix, registered): `b4.watcher`, `b4.seal`, `b4.school` (chapter 9) and `b4.hospital`, `b4.works`, `b4.waiting` (chapter 10). `b4.watcher`, `b4.works` and `b4.waiting` are the ones later chapters should read first.
+- The coven is used in both chapters: errands for Prisca and Fiammetta, Hanno's tasks only while he has none, and the blood network and training hall while they can still be acquired. Both read `b4.circle == "stay"` as the coven being far away.
+- Chapter 9 brings back the Velati agent (`watcher`, gender and name from the existing person entry) and reads `b2.watcher_bond`. Chapter 10 uses `romance("honorine", "together")` on one path. New codex entries: the new General, Port Hudson, the hospital boats, the river houses in the war. Content notes: both carry `blood` and `slavery`, chapter 10 also `war`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book4.test.js` plays chapters 9 and 10 down every circle, waking, river house answer and agent answer, takes every recorded choice, and expects ten chapters.
+- Session 43's pull request (#41) was not yet merged when this session started, so the session 44 branch is stacked on it. Merge #41 first.
 - Plans are in `SPOILERS/house-divided.md`.

@@ -745,6 +745,25 @@
             "blood",
             "slavery"
           ]
+        },
+        {
+          "id": "b4c09",
+          "file": "house-divided/ch09.tsb",
+          "title": "The Lamp and the Fold",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
+        },
+        {
+          "id": "b4c10",
+          "file": "house-divided/ch10.tsb",
+          "title": "Port Hudson",
+          "notes": [
+            "blood",
+            "slavery",
+            "war"
+          ]
         }
       ],
       "incomplete": true

@@ -4119,6 +4119,78 @@
       "major": true,
       "default": "returned",
       "note": "Chapter 8: Lucien at the Marigny gate"
+    },
+    "b4.watcher": {
+      "kind": "enum",
+      "values": [
+        "open",
+        "guarded",
+        "refused"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "guarded",
+      "note": "Chapter 9: how he received the returning Velati agent"
+    },
+    "b4.seal": {
+      "kind": "enum",
+      "values": [
+        "wrote",
+        "trap",
+        "silent"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "silent",
+      "note": "Chapter 9: what he did about the Senate letter sealed twice"
+    },
+    "b4.school": {
+      "kind": "enum",
+      "values": [
+        "built",
+        "lent",
+        "apart"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "apart",
+      "note": "Chapter 9: what he did for the school in the Treme"
+    },
+    "b4.hospital": {
+      "kind": "enum",
+      "values": [
+        "went",
+        "sent",
+        "money"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "money",
+      "note": "Chapter 10: the hospital boat for the wounded of Port Hudson"
+    },
+    "b4.works": {
+      "kind": "enum",
+      "values": [
+        "warned",
+        "told",
+        "silent"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "silent",
+      "note": "Chapter 10: what he did with the river house letter from the works at Port Hudson"
+    },
+    "b4.waiting": {
+      "kind": "enum",
+      "values": [
+        "sat",
+        "read",
+        "apart"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "apart",
+      "note": "Chapter 10: the night before the assault at the school in the Treme"
     }
   }
 }

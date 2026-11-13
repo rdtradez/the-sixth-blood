@@ -643,6 +643,30 @@
       "title": "The contraband camps",
       "book": "house-divided",
       "text": "As the army moves up the bayous, people from the sugar parishes walk to the Union lines at Camp Parapet and elsewhere. In September 1862 the free men of the Native Guards are mustered into Federal service."
+    },
+    "the_new_general": {
+      "category": "lore",
+      "title": "The new General",
+      "book": "house-divided",
+      "text": "In December 1862 General Butler is recalled and replaced by General Banks, a Massachusetts politician sent to be liked. The army prepares to move up the river toward Port Hudson."
+    },
+    "port_hudson": {
+      "category": "lore",
+      "title": "Port Hudson",
+      "book": "house-divided",
+      "text": "A Confederate fortress on a bluff above the Mississippi, held under siege by Union forces from May to July 1863. Its fall, with Vicksburg, opens the whole river."
+    },
+    "the_hospital_boats": {
+      "category": "lore",
+      "title": "The hospital boats",
+      "book": "house-divided",
+      "text": "During the siege of Port Hudson steamboats carry surgeons, ice and nurses upriver from New Orleans to the landing at Springfield, where the wounded are laid in rows in a field."
+    },
+    "the_river_houses_in_the_war": {
+      "category": "lore",
+      "title": "The river houses in the war",
+      "book": "house-divided",
+      "text": "Southern vampire houses follow their states into the war and hold part of the trenches at Port Hudson. They do not fight like soldiers, and they do not forget who has helped them."
     }
   }
 }

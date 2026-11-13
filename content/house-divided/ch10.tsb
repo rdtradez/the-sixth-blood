@@ -1,0 +1,238 @@
+// Book Four, Chapter 10 (session 44). Late May 1863: the siege of Port Hudson, the Guards, a boat upriver, a letter from the river house.
+// Opens with no phase (the city waiting, then the word from the river), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a long dawn.
+// Reads b4.circle, b4.lucien, b4.honorine, b4.camp, b4.school, b4.watcher, b4.seal, b4.guards and the circle. Sets b4.hospital, b4.works and b4.waiting.
+// Ends with rest() and => next, which pauses until chapter 11 exists (the manifest entry is incomplete).
+@chapter b4c10
+@title Port Hudson
+@book house-divided
+@version 1
+
+# start
+## May
+$ b4.hospital = "money"
+$ b4.works = "silent"
+$ b4.waiting = "apart"
+$ do discover("port_hudson")
+~> city
+---
+?if must_feed()
+  ~> hunger
+?end
+$ do phase("night", 3)
+It is the end of May, and there are four things that want doing tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# city
+## The siege
+It has been a spring of waiting, and the whole of the city has done it in the same way, with its ears.
+The fleet has gone up the river, and the army with it, and a great fortress on a bluff above a bend, a hundred and fifty miles off, is being surrounded by thirty thousand men who have never done it before. The city has the news in pieces, by wire and boat and rumor, in the order in which it is the least reliable. The guns can be heard on certain nights, when the wind is from the north, as a kind of faint stroking against the windows, like a very large cat. Nobody mentions it. Everybody listens.
+The Guards went in the first week of March. They have been, since then, at a landing called Springfield, and a camp on the Bayou Sara road, digging, and drilling, and being given the worst of the work by officers who have not made up their minds about them. They are to be tried on the twenty seventh. It is a thing that the whole of the Tremé knows, and that the Army has not announced.
+The word comes at four in the afternoon, by a boy from the Lake road. It is a very short note, in Armand's hand, on the back of a ration chit. *Tomorrow, at dawn. Tell her myself, if I can. If not, tell her that I was not afraid. L.A.*
+You stand with it in your hand for a long time.
+<~
+
+# hunger
+## The warm dark
+* Take a gelding from the Quartermaster's yard, a tired gray, and do it gently
+  $ do feed("animal")
+  $ humanity += 1
+  The gray has been lame for a week and is waiting to be shot, and does not know it. It takes the sugar with a very great deal of dignity. You leave a note for the farrier, which says that the horse is better than it looks, and you hope that he will believe it.
+* Send for a willing donor, and pay for the night
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a nurse of the Charity Hospital, off duty, in a gray shawl, with a face like a closed door. She is not afraid. She says that a person who has been three nights in a ward can be a donor without noticing, and that she will not notice, and takes the money for the ward.
+* Hunt the Rampart, where the wounded come in off the boats
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  It is not a very good night to be hungry. The boats have been coming down from Baton Rouge, with the fever cases, and the Rampart is full of men who are neither well nor ill. You find one asleep who is a good deal nearer the one than the other, and you are not proud of it. He wakes at dawn, weak, in a doorway, with a story, and is put on the next boat.
+<~
+
+# night
+## The night before
+:night
+?if actions_left() == 3
+  It is a hot, thick night, and the guns are going, to the north, a long way off, in a kind of low continuous mutter. The frogs are going along the Bayou St. John.
+?elif actions_left() == 2
+  It has gone quiet. It is the worst thing. The guns have stopped, and the whole of the city, as one person, has stopped to hear if they will begin again.
+?else
+  There is a thin gray coming up over the Lake, and a great many people are going to Mass who have not been in six months. You have one thing left.
+?end
+* Take the steamboat upriver tonight, with surgeons and ice, to the landing at Springfield [once] ?if actions_left() > 0
+  ~> hospital
+  $ do act()
+* Answer the river house, which has written from inside the works at Port Hudson [once] ?if actions_left() > 0
+  ~> works
+  $ do act()
+* Go to the Tremé, where a woman is going to need somebody when the list comes [once] ?if actions_left() > 0
+  ~> waiting
+  $ do act()
+* See to the coven, and the house [once] ?if actions_left() > 0
+  ~> house
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# hospital
+## The boat
+$ do chart("neworleans.wharf")
+Captain Brault has the *Marie Laure* under steam at the Levee, with fires banked and a great white bank of ice from a Boston ship stowed in her hold under sawdust. He is a short, square, grizzled man, who ran the Passes for a year, and he looks at the list of what you want to put aboard, and at you, and says that it is a very good list, and that a boat that carries it is going to be fired on by both sides.
+There are eleven surgeons, from the Charity Hospital and the Tremé, in the cabin, in their shirtsleeves, with their cases on their knees. There are forty crates of lint, bandage and chloroform. There are, by the stove, six women of the Tremé who are going to nurse, and who have been told that they will not be allowed to, and have come anyway.
+?if b4.camp == "funded" or b4.camp == "deeded"
+  Among them is a girl of fourteen with a very straight back, who has, you understand, run a ward at Camp Parapet for six months. She looks at you with grave, polite, adult composure, and says that she has brought her own scissors.
+?end
+:the_hospital
+* Go up with them, in the dark, and take a ward yourself at the landing
+  $ b4.hospital = "went"
+  $ humanity += 3
+  $ secrecy -= 2
+  $ standing += 1
+  It is eleven hours up the river in the hot dark, with the engine thudding and the shore going by like a long black wall, and when the boat comes in at the landing at four in the morning there is a very great deal of light. It is not a battle that you will describe. It is a place where a great many people are brought in on doors, and laid down, in rows, in a field, under torches. You have more strength than any ten of the orderlies, and you carry. You carry for six hours, until the sky is white, and nobody asks you your name. A surgeon of the Tremé, with his sleeves to the shoulder, says over a table, quite quietly, to nobody, "He came up on the boat." It is the only thanks that you want.
+* Send the boat and the surgeons, and stay in the city, and do what can be done from here
+  $ b4.hospital = "sent"
+  $ standing += 1
+  $ cunning_brutal += 1
+  $ do earn(-4)
+  You stand on the Levee in the dark, and watch her go, a long low shape with a plume of sparks, and a lamp at the stern, up into the black. It is a very curious thing to have done, to have put eleven surgeons and a hold of ice into a night, and to be left with the sound of a paddle. At dawn you send the *Marie Laure*'s sister up as well, with sugar and a barrel of lime, and a note, for whoever finds it, that says only that it is from a friend.
+* Pay for it, and send the boat, and keep out of it altogether
+  $ b4.hospital = "money"
+  $ secrecy += 2
+  $ humanity -= 1
+  $ do earn(-3)
+  You write the draft in the counting house, and Brault takes it, and gives you a short, level look that has a good deal of the Passes in it. "It is a very handsome draft," he says. He puts it in his coat. He does not say any more. The boat goes up in the dark with eleven surgeons, and six women, and a hold of ice, and not one of them knows whose it was.
+$ do discover("the_hospital_boats")
+<~
+
+# works
+## The letter
+$ do chart("neworleans.beaumont")
+The letter has come down the river by a rider, over a hundred and fifty miles of bad road, in the lining of a boot. It is written in Lucien's hand, a good deal steadier than it was in the winter, on a sheet torn from a ledger. It is dated the twentieth.
+?if b4.lucien == "bargained"
+  *Monsieur, the Compact is read again, and I am the person who carries it, and I am obliged by it to write.*
+?elif b4.lucien == "returned"
+  *Monsieur, I do not forget a thing. I write because there is a thing that I owe, and I should like to be the one that pays it.*
+?else
+  *Monsieur, I am aware that I have no claim. I write because there is nobody else that I can write to who will understand.*
+?end
+It says that the river houses are in the works at Port Hudson. It says that there are nineteen of them, of the lower river, under the command of a gentleman of Mobile, and that they are, as Beaumont has taught them, holding the left of the line. It says that they have been in the trenches for six weeks. It says, with no change of tone at all, that they have been told that on the morning of the twenty seventh a negro brigade will come at the right of the works, across the bayou, in column, over the open ground, and that they have been told it by a Union deserter who has been, for some days, a guest.
+It says that Lucien does not like it. It does not say why.
+It gives, at the end, in a careful small hand, the places of three batteries, and the line of the ditch, and the hour. It says that the information is not for sale, and that he does not know why he is sending it to a man who owes his house nothing.
+:the_works
+* Send word back at once, through the same rider, that the river must keep out of the right of the line, and that the Compact will be remembered by the house that remembers it
+  $ b4.works = "warned"
+  $ standing += 1
+  $ humanity += 1
+  $ cunning_brutal += 1
+  $ secrecy -= 1
+  It is three lines. You write it as a person writes a bill of lading, in a flat plain hand, with no adjective in it. It says that the house of the sixth stands at the river's side, as it was signed, and that this is not a thing a house does against its own. It says that it is possible for nineteen persons to be in the wrong end of a trench on a particular morning. The rider takes it, and nods, and goes, and you do not learn, until a good while later, that he was never able to be sure what you meant by it.
+* Take the places of the batteries to Captain Wren tonight, and let the army do what it will with them
+  $ b4.works = "told"
+  $ cunning_brutal += 2
+  $ humanity -= 2
+  $ standing += 1
+  $ secrecy -= 1
+  He reads it twice, in the counting house, by the lamp, with a pencil. He does not say a word. Then he says, in a voice that you have not heard from him before, "I shall see that it reaches the right man. I shall not say whose it is." He folds it into the notebook. He looks at you, gravely, for a moment, with the plain patient eyes. "It will not be believed," he says. "It is too exact." He puts on his hat. At the door he says, as an afterthought, "I should not like to be you, tomorrow, if it is."
+* Keep it, and say nothing to either side, and let the morning be what it is
+  $ b4.works = "silent"
+  $ secrecy += 2
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  You burn the letter in the grate, a corner at a time, and watch it go, and the hours go with it. It is the correct thing. It is the thing that the Compact does not forbid. It is the thing that every careful person, in every century, has done, in every city, on the night before a battle, and it is not a thing that it is possible to feel well about. You sit with the ashes until it is light.
+$ do discover("the_river_houses_in_the_war")
+<~
+
+# waiting
+## The school at night
+$ do chart("neworleans.school")
+The school has the doors open, and every lamp in the Tremé lit in it, and the benches pushed back against the walls. There are forty women in it, and a few old men. Nobody is speaking. They have brought their sewing. A great many of them are not sewing; they have the cloth in their laps, and their hands on it, and are looking at the door.
+Honorine is at the back, at the long table, with a lamp and a list, and a pencil. It is not a list that has any names yet. It is a blank ruled sheet, with a heading. She has put the heading on it, very neatly, in the round upright hand that you know, and has not been able to go on. She looks up when you come in. It is a long, level look, and there is nothing at all in it that is afraid.
+?if b4.honorine == "walked"
+  "I thought that you would come," she says, in a voice that does not shake. "I did not ask. I hoped."
+?else
+  "It was good of you to come," she says, in a voice that is quite steady, and a great deal thinner than it was.
+?end
+:the_waiting
+* Sit with her until it is light, and say nothing, and be there
+  $ b4.waiting = "sat"
+  $ humanity += 2
+  $ secrecy += 1
+  You sit beside her at the long table. It is an hour before either of you says anything. Then she says, in a quiet matter of fact voice, that she does not believe in a God who would let it happen, and that she is going to pray anyway, and she does, aloud, in French, very quickly, as one says a sum. You hold her hand, which is very cold. The guns do not begin. At four in the morning the clock on the schoolroom wall, which has not gone in three years, strikes once.
+  ?if b4.honorine == "walked"
+    $ do romance("honorine", "together")
+  ?end
+* Read the copybooks aloud to the children, who have been brought and will not go to sleep
+  $ b4.waiting = "read"
+  $ humanity += 1
+  $ standing += 1
+  There are nine of them, on a quilt, under the long table, in their nightgowns, with the blank, serious, magnificent patience of children who have been told to be good. You read to them out of the primer, in your best French, and a very small girl in a red shawl corrects your accent. By the third page there is not one that is awake. Honorine, at the end of the table, has her face in her hands, and is shaking, quite silently, and is trying very hard not to be seen.
+* Stay for an hour, and leave the school to the neighbors, and go home to your ledgers
+  $ b4.waiting = "apart"
+  $ secrecy += 1
+  $ humanity -= 1
+  You stay an hour, and say all the correct things in a low voice, and are thanked. It is a thing that you are quite well able to do. You walk home through the empty streets, with the lamps going, and a long way off, in the north, as you open your own gate, the guns begin.
+$ do discover("the_native_guards")
+<~
+
+# house
+## The long room
+$ do chart("neworleans.haven")
+?if coven_size() > 0 and b4.circle != "stay"
+  The coven is in the long room, with the shutters closed, and the lamp turned down, and nobody pretending to read. Hanno has a pot of coffee that has gone cold. Fiammetta, or whoever is the youngest, has her knees under her chin on the sofa.
+  It is the sort of night on which a family is shown to be one. Nobody has said what it is that they are waiting for. They have simply all, without being asked, come into the same room.
+  ?if b4.watcher == "open" or b4.watcher == "guarded"
+    There is a place laid at the end of the table, with a small leather bag beside it, that nobody has cleared away.
+  ?end
+?elif coven_size() > 0
+  The house is quiet. They are a long way off. You hear the guns, once, a very long way, and wonder if they are hearing them too.
+?else
+  The house is quiet and the shutters are closed. A moth is going against the lamp. You find yourself listening to it, as though it were saying something.
+?end
+:the_house
+* Send Prisca upriver with the firm's drafts, to buy whatever the hospitals need at any price [once] ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and not on_mission("prisca") and task("prisca") == ""
+  $ do send("prisca", "negotiate", 1)
+  Prisca says that she has never in her life bought lint at any price, and that she is looking forward to it. She does not smile. She puts on her gloves.
+* Send Fiammetta to the landing at Springfield, to carry [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta") and task("fiammetta") == ""
+  $ do send("fiammetta", "protect", 1)
+  Fiammetta looks at you for a very long moment, and then, without a word, takes her cloak off the hook and goes. It is the only time you have seen her not make a remark.
+* Put Hanno to the lists, so that the names are had the hour they are known ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
+  $ do coven_task("hanno", "watch")
+  Hanno says that it is a very terrible thing, a list, and that a man who has the keeping of it ought to be a very careful one. He goes to the study. He takes a clean pen.
+* Lay a blood supply on, through the hospital and the slaughter yards ?if can_acquire("blood_network")
+  $ do acquire("blood_network")
+  $ humanity += 1
+  $ secrecy += 1
+  It is done through the surgeon of the Charity Hospital, who has, this week, a good deal to do and is glad of an arrangement that takes one thing from him.
+* That will do for tonight
+  -> :house_done
+-> :the_house
+:house_done
+<~
+
+# dawn
+## The twenty seventh
+The guns begin at dawn, a long way off, in the north, and go on all day.
+It is not a thing that can be described by anyone who has not heard it. It is a continuous, shaking, heavy, endless muttering, in the ground and in the windows and in the glass in the cupboard, like a dark thing turning in a very large bed. It does not stop at noon. It does not stop in the afternoon. It stops at about six, in a long, breathless, dreadful gap, and then begins again, a little further off.
+?if b4.hospital == "went"
+  You are, in the morning, on the other side of it. You hear it from a field, among doors, with a lantern, and the sound of it is not a thing that has any place at all in the sentence.
+?end
+The word comes on the twenty ninth, by the boat. It comes in pieces, as the worst news always does, and is put together afterwards in the Tremé, in the schoolroom, aloud, off a list.
+The Guards went in at ten in the morning, across the bayou, in column, over open ground, against the right of the works, under a fire that did not let up. They went in six times. They did not break. They did not take the works. They left a great many on the ground, who could not be brought off, in the heat, for a week.
+?if b4.works == "warned"
+  There was, you hear, no one in the left of the line, to speak of, in the hour of the first attack. The river houses had been moved. It is not said by whom.
+?elif b4.works == "told"
+  A battery on the right was, you hear, found, at the third assault, silent and spiked. It is a thing that is spoken of in an undertone, in the Army, as a piece of extraordinary luck. A captain on the Provost Marshal's staff has been seen to look very grave.
+?else
+  You have, you find, in the grate in the counting house, a very small pile of ash that you have not been able to bring yourself to sweep.
+?end
+?if b4.waiting == "sat"
+  Honorine does not cry until the list is read out, and then it is in a single long breath, without a sound. She has her pencil. She writes it down. She writes it all down, name by name, with her left hand holding the right.
+?elif b4.waiting == "read"
+  The children are sent home before the list is read. It is Honorine who sends them, and she does it with a gentleness that nobody in the room will ever forget.
+?end
+Armand's name is not on the list of the dead. It is not on the list of the missing. It is, in the end, found, on a third list, in a different hand, at the foot of the page for the wounded at Springfield, with a line after it that you read twice. *Surgeon, Lieutenant. Left arm. Will recover.*
+There is a letter in the afternoon, in the Resident's hand, on the cream paper, with the seal on the right side of the fold. It says that the Senate has noted with approval the Resident's friend in New Orleans, and that he is warmly commended to the Veil. It is, you think, the first letter in a year that is in the right order, and you find that it is the one that you trust the least.
+$ do rest()
+=> next

@@ -88,3 +88,24 @@ Dawn: the first frost, the consequences of the oath, the camp's reply, the river
 Hooks: the Compact's new terms or the debt; Wren; Honorine; the camp and the deed; the Senate's seal and the Scribe; Butler's recall in December; the Native Guards at Port Hudson in 1863.
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 9, "The Lamp and the Fold" (`b4c09`, session 44)
+
+January 1863, the new General. The Velati agent (turned in 1478) returns after nearly four centuries, having been told by a person the Order trusts that the Senate Resident's seal is on the wrong way about (`b4.watcher`: told everything, guarded, sent away). The printer Aurelien reads the Resident's letter under a lens: sealed once, opened and sealed again, so someone has the Resident's letters before they reach the hero (`b4.seal`: wrote to the Resident, answered with a false letter, said nothing). The school in the Treme needs a roof (`b4.school`: built it himself, lent through the society, sat and read copybooks; romance with Honorine deepens if walked and not apart). House: the coven, Compact terms, errands.
+
+Dawn: the agent's note or a message in a ledger, the answers to the seal, a copybook from the school, the Guards ordered upriver in March.
+
+Hooks: who intercepts the Resident's letters (Scribe's creature or cover, Roan still undecided); the agent's loyalties and the Order; Honorine; the false letters' replies (one from Charleston).
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 10, "Port Hudson" (`b4c10`, session 44)
+
+Late May 1863, the siege. Armand's note the evening before the Guards' assault on 27 May. Night phase, three of four: the hospital boat (Brault's *Marie Laure*, surgeons and ice to Springfield Landing; `b4.hospital`: went and carried, sent, paid only), Lucien's letter from the works (nineteen river house vampires on the left of the line; he gives the hour and the batteries; `b4.works`: warned Lucien to keep out of the right, told Wren, burned it), the school at night (`b4.waiting`: sat with Honorine, read to the children, stayed an hour). House: Prisca and Fiammetta upriver, Hanno to the lists.
+
+Dawn: the assault fails after six charges; consequences of `b4.works` in the aftermath; Armand wounded and will recover; a Resident's letter, in order this time, that he trusts least.
+
+Hooks: Lucien's debt or grudge; Wren's suspicion; Armand's arm; Honorine; the Resident's letter; the fall of Port Hudson in July.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
