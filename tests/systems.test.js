@@ -473,13 +473,15 @@ test('the Coven tab lists members, what they are doing and the task options, and
   const game = await run('$ do keeper("prisca", "steward", 80)');
   game.setCovenTask('prisca', 'business');
   const view = game.coven();
-  assert.equal(view.members.length, 1);
-  assert.equal(view.members[0].task, 'business');
-  assert.match(view.members[0].doing, /work the business/i);
+  assert.equal(view.members.length, 0, 'a sworn human is a keeper, not one of the turned');
+  assert.equal(view.keepers.length, 1);
+  assert.equal(view.covenCount, 0);
+  assert.equal(view.keepers[0].task, 'business');
+  assert.match(view.keepers[0].doing, /work the business/i);
   assert.deepEqual(view.tasks.map((t) => t.id), ['guard', 'business', 'watch']);
   assert.throws(() => game.setCovenTask('prisca', 'dance'), /unknown task/);
   game.setCovenTask('prisca', 'none');
-  assert.equal(game.coven().members[0].task, '');
+  assert.equal(game.coven().keepers[0].task, '');
 });
 
 test('schema 5 saves gain empty task fields', () => {
@@ -495,10 +497,10 @@ test('a mission sent from the Coven tab spends an action, and the next chapter t
   };
   const game = await sysGame(src);
   await game.newGame({ book: 'burning-city', seed: 7 });
-  assert.equal(game.coven().members[0].canSend, true);
+  assert.equal(game.coven().keepers[0].canSend, true);
   game.sendOnMission('prisca', 'scout', 1);
   assert.equal(S(game).phase.left, 1);
-  assert.equal(game.coven().members[0].away, true);
+  assert.equal(game.coven().keepers[0].away, true);
   assert.throws(() => game.sendOnMission('prisca', 'scout', 1), /already on a mission/);
   await game.choose(0);
   await game.continue().catch(() => {});
@@ -521,4 +523,12 @@ test('after a sleep the next chapter tells how each standing task went, once', a
   assert.equal(first.length, 1);
   assert.match(first[0].text, /interests while you rested/);
   assert.deepEqual(covenNews(ctxState, game.content), []);
+});
+
+test('someone he has turned is listed in the coven, apart from the keepers', async () => {
+  const game = await run(['$ do keeper("ginevra", "matriarch of the hill", 70)', '$ do keeper("aelia", "keeper in the making", 60)', '$ do sire("aelia", "fledgling")'].join('\n'), B2);
+  const view = game.coven();
+  assert.deepEqual(view.members.map((m) => m.id), ['aelia']);
+  assert.deepEqual(view.keepers.map((m) => m.id), ['ginevra']);
+  assert.equal(view.covenCount, 1);
 });

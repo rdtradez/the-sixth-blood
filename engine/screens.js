@@ -177,7 +177,7 @@ const MISSION_RESULT_WORDS = { success: 'Came back with what you asked.', partia
  */
 export function covenView(state, content) {
   const s = state?.sys;
-  if (!s) return { members: [], tasks: [], covenCount: 0 };
+  if (!s) return { members: [], keepers: [], tasks: [], covenCount: 0 };
   const ctx = ctxOf(state, content);
   const actionsLeft = s.phase?.left ?? 0;
   const members = Object.values(s.circle ?? {}).filter((m) => Object.hasOwn(content.people, m.id)).map((m) => {
@@ -186,7 +186,7 @@ export function covenView(state, content) {
     if (m.kind === 'keeper') notes.push('Keeper');
     else notes.push('Coven');
     if (m.sire === 'hero') notes.push('Your blood');
-    if (m.daywalk) notes.push('Walks in daylight');
+    if (m.daywalk && m.kind !== 'keeper') notes.push('Walks in daylight');
     if (m.injured) notes.push('Hurt');
     if (!active) notes.push(MEMBER_WORDS[m.status] || m.status);
     let doing = '';
@@ -211,10 +211,15 @@ export function covenView(state, content) {
   });
   const order = (m) => (m.active ? 0 : 1);
   members.sort((a, b) => order(a) - order(b));
+  // The turned are the coven. Sworn humans are kept apart, so nobody is mistaken for one of the turned.
+  const kind = Object.fromEntries(Object.values(s.circle ?? {}).map((m) => [m.id, m.kind]));
+  const coven = members.filter((m) => kind[m.id] !== 'keeper');
+  const keepers = members.filter((m) => kind[m.id] === 'keeper');
   return {
-    members,
+    members: coven,
+    keepers,
     tasks: TASKS.map((id) => ({ id, ...TASK_INFO[id] })),
-    covenCount: members.filter((m) => m.active).length,
+    covenCount: coven.filter((m) => m.active).length,
     missions: MISSIONS.map((id) => ({ id, label: MISSION_LABELS[id] })),
     risks: Object.entries(RISK_LABELS).map(([id, label]) => ({ id: Number(id), label })),
     actionsLeft,
