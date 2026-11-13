@@ -4035,6 +4035,90 @@
       "major": false,
       "default": "apart",
       "note": "Chapter 6: the Native Guards of the Tremé"
+    },
+    "b4.fires": {
+      "kind": "enum",
+      "values": [
+        "burned",
+        "hoarded",
+        "opened"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "burned",
+      "note": "Chapter 7: the firm's cotton and sugar on the night the fleet passes the forts"
+    },
+    "b4.exodus": {
+      "kind": "enum",
+      "values": [
+        "rode",
+        "stayed",
+        "kept"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "stayed",
+      "note": "Chapter 7: the river houses leave the city; the hero rides, stays, or keeps the sleepers"
+    },
+    "b4.vigil": {
+      "kind": "enum",
+      "values": [
+        "school",
+        "paper",
+        "home"
+      ],
+      "book": "house-divided",
+      "major": false,
+      "default": "home",
+      "note": "Chapter 7: what the coven did on the night of the fall"
+    },
+    "b4.honorine": {
+      "kind": "enum",
+      "values": [
+        "walked",
+        "helped",
+        "apart"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "apart",
+      "note": "Chapter 7: the night at the school in the Treme"
+    },
+    "b4.provost": {
+      "kind": "enum",
+      "values": [
+        "swore",
+        "neutral",
+        "refused"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "neutral",
+      "note": "Chapter 8: the oath demanded by the Provost Marshal's staff"
+    },
+    "b4.camp": {
+      "kind": "enum",
+      "values": [
+        "deeded",
+        "funded",
+        "apart"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "apart",
+      "note": "Chapter 8: the people of Camp Parapet"
+    },
+    "b4.lucien": {
+      "kind": "enum",
+      "values": [
+        "returned",
+        "held",
+        "bargained"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "returned",
+      "note": "Chapter 8: Lucien at the Marigny gate"
     }
   }
 }

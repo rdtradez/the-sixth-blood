@@ -613,6 +613,36 @@
       "title": "The Native Guards",
       "book": "house-divided",
       "text": "A regiment of free men of color, raised in the spring of 1861 and drilled in blue coats on the Plains of Mexico. They are the only free men in Louisiana to be given a gun by their government."
+    },
+    "the_fall_of_new_orleans": {
+      "category": "lore",
+      "title": "The fall of New Orleans",
+      "book": "house-divided",
+      "text": "On the morning of 24 April 1862 a Federal fleet passes Forts Jackson and St. Philip in the dark and anchors off the levee the next day. The Confederate troops withdraw, the city is left to its mayor, and the Union flag follows within days."
+    },
+    "the_burning_of_the_cotton": {
+      "category": "lore",
+      "title": "The burning of the cotton",
+      "book": "house-divided",
+      "text": "As the fleet approaches, the city's cotton is rolled onto the levee and burned by order, with steamboats and an unfinished ironclad set alight on the river. Sugar and molasses run in the gutters, and the poor of the Irish Channel gather it."
+    },
+    "the_occupation": {
+      "category": "lore",
+      "title": "The Occupation",
+      "book": "house-divided",
+      "text": "From May 1862 the city is governed by General Butler, who cleans the streets, feeds the poor from army stores, hangs a man for tearing down the flag, and is hated by the best families. Many of the old houses leave for the upper river."
+    },
+    "the_oath": {
+      "category": "lore",
+      "title": "The oath of allegiance",
+      "book": "house-divided",
+      "text": "The Occupation requires residents to register and swear to the United States. Foreigners may register with their consuls instead. Those who refuse have their property inventoried."
+    },
+    "the_contraband_camps": {
+      "category": "lore",
+      "title": "The contraband camps",
+      "book": "house-divided",
+      "text": "As the army moves up the bayous, people from the sugar parishes walk to the Union lines at Camp Parapet and elsewhere. In September 1862 the free men of the Native Guards are mustered into Federal service."
     }
   }
 }

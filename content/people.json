@@ -462,6 +462,12 @@
       "name": "Honorine Armand",
       "title": "Schoolmistress of the Tremé",
       "bio": "Dr. Armand's elder sister. Tall, composed, with a Paris vowel and her sleeves always pushed up. Runs the school in the society's back room and says what she means."
+    },
+    "wren": {
+      "gender": "m",
+      "name": "Captain Thaddeus Wren",
+      "title": "Of the Provost Marshal's staff, Department of the Gulf",
+      "bio": "A spare, sunburnt Illinois lawyer in a worn infantry coat, who reads a city's paper the way other men read faces. Plain, patient, and never in a hurry to be clever."
     }
   }
 }

@@ -727,6 +727,24 @@
             "blood",
             "slavery"
           ]
+        },
+        {
+          "id": "b4c07",
+          "file": "house-divided/ch07.tsb",
+          "title": "The Forts",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
+        },
+        {
+          "id": "b4c08",
+          "file": "house-divided/ch08.tsb",
+          "title": "The Occupation",
+          "notes": [
+            "blood",
+            "slavery"
+          ]
         }
       ],
       "incomplete": true

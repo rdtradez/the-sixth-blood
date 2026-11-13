@@ -68,3 +68,23 @@ Hooks: Roan; Honorine (a possible love); Lucien's grudge and the river houses' w
 
 Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
 
+
+## Chapter 7, "The Forts" (`b4c07`, session 43)
+
+The night of 24 April 1862. The fleet passes Forts Jackson and St. Philip, the bells ring, the city burns its own cotton and boats on the levee, the Confederate army withdraws and the river houses leave for the upper river. Night phase, three of four: the levee (the lieutenant's order, `b4.fires`: burned, hoarded under the Marigny wall, or the sheds opened to the hungry of the Irish Channel), Belle Rive (Beaumont invokes the first article of the Compact; eight wagons and not enough of them; `b4.exodus`: rode with the wagons to Carrollton, stayed, or kept the three sleepers who cannot be moved in the Marigny cellar, which makes the hero the keeper of the river house's heart), the Marigny (the coven on the night of the guns; a hidden chamber and the vaults; Fiammetta to the school, `b4.vigil` = school, or Prisca to move the firm's paper into gold and Havana drafts, `b4.vigil` = paper; Hanno to the watch), the school in the Tremé (Honorine with fifty children and a lamp; `b4.honorine`: walked her home at dawn and began a romance, helped (the cellar and a guard), or apart).
+
+Dawn: the fleet at anchor off the levee, sugar in the gutters; if the sleepers were kept, Pompee and Isaure bring six boxes into the cellar. A card from Captain Wren of the Provost Marshal's staff, with a line from Crane on the back.
+
+Hooks: the sleepers in the cellar (the heart of a house, to be returned, held or traded); Lucien's grudge, now with a debt; Honorine (a possible love); Wren; Crane's letters; the cotton under the wall if hoarded.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
+
+## Chapter 8, "The Occupation" (`b4c08`, session 43)
+
+October 1862, the city under General Butler. Captain Thaddeus Wren (an Illinois lawyer, plain and patient, Thorne's name in his notebook) calls. Night phase, three of four: the Provost (the oath, `b4.provost`: swore, registered as a French subject, or refused and faced an inventory; reads `b4.fires`), Camp Parapet (the people of the sugar parishes walking in; the Native Guards mustered into Federal service, Armand's brother in blue; if the sugar estate was held, an old woman from Belle Isle says "Master"; `b4.camp`: deeded land to the people, funded the camp, or gave a purse and stayed apart), the Marigny gate (Lucien, ragged and wounded, Belle Rive taken by a Wisconsin regiment; if the sleepers were kept, he asks first after them; `b4.lucien`: returned them and sheltered him, held them and refused him, or bargained and wrote the Compact again on new terms, with the lower river in the keeping of the house of the sixth), the long room (the coven at supper, Prisca to the Treasury agents, Fiammetta to the camp, the blood network, the training hall, Hanno to the books).
+
+Dawn: the first frost, the consequences of the oath, the camp's reply, the river house's reply, a card from Honorine if walked, and a letter from the Senate's Resident whose seal is impressed on the wrong side of the fold. This deepens the doubt of Roan seeded in chapter 6.
+
+Hooks: the Compact's new terms or the debt; Wren; Honorine; the camp and the deed; the Senate's seal and the Scribe; Butler's recall in December; the Native Guards at Port Hudson in 1863.
+
+Flagged to the owner (spoiler light): nothing changes the big picture and no major character dies.
