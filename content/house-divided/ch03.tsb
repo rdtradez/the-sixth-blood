@@ -1,11 +1,12 @@
 // Book Four, Chapter 3 (session 41). The first Friday of March 1860: supper at the river house, and a night in the city.
 // Opens with no phase (the answer to the card, the supper and the Compact), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and a letter at dawn.
+// Names only the members who are in the coven; the business lead (business_lead()) speaks for the family and makes the introductions (b4.lead_intro).
 // Reads b4.circle, b4.haven, b4.auction, b4.valere, b4.crane_reply and the circle. Sets b4.supper, b4.compact, b4.armand, b4.rival and b4.office.
-// Ends with rest() and => next.
+// Sets also b4.lead_intro. Ends with rest() and => next.
 @chapter b4c03
 @title The First Friday
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## The answer
@@ -14,6 +15,12 @@ $ b4.compact = "bargained"
 $ b4.armand = "patient"
 $ b4.rival = "heard"
 $ b4.office = "none"
+$ b4.lead_intro = "none"
+$ b4.gift_focus = "none"
+$ _lead = ""
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
 $ do meet("beaumont")
 ~> answer
 ---
@@ -32,8 +39,12 @@ It is past midnight when the carriage sets you down in the Rue Royale, and the w
 ## Ten o'clock
 It is the first Friday in March, and at ten o'clock the knocker goes, three taps and then one. It is the same man, the gray headed servant in the blue coat, and he has the same card, and he has a good deal more patience than anyone should be asked for. He says, to the air above Aurélien's shoulder, that Monsieur Beaumont is at home, and will be pleased to see Monsieur Colline at supper, and has sent the carriage.
 Nobody in the house is able to speak. The old aunt, from the stair, says only that it is as well to go, since it is a thing that is going to be done in any case, and that a man should walk through the front door of a house like that on his own feet, with his hat in his hand, and not be fetched.
+$ _cravat = "One of them"
+?if _lead != ""
+  $ _cravat = name(_lead)
+?end
 ?if coven_size() > 0 and b4.circle == "ahead"
-  The others came up the river in the second week of February, in crates marked as pianos, and are in the loft above the printing office, where they have been very well behaved. They watch you dress with a kind of grave, family attention. Prisca does your cravat, which you have not asked for, and tells you that you are to remember that he is a host, and that a host is a man who has already decided.
+  The others came up the river in the second week of February, in crates marked as pianos, and are in the loft above the printing office, where they have been very well behaved. They watch you dress with a kind of grave, family attention. {_cravat} does your cravat, which you have not asked for, and tells you that you are to remember that he is a host, and that a host is a man who has already decided.
 ?elif coven_size() > 0 and b4.circle == "all"
   They stand in the hall, in the lamplight, the whole small family of you, and watch you go down the steps to the carriage with expressions that you could not have described a century ago, and can now. You are not going alone. You are going, you understand, with all of them behind you, and you are the only one who is to be seen.
 ?elif b4.circle == "stay"
@@ -158,9 +169,28 @@ Beaumont sees you to the carriage himself. He stands a moment under the lamp, ba
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
   It is a different thing, now, to come in by the gate. There is a light at the back of the house, and a smell of something being cooked that is not for any of you, which is for the cook, who is a human woman and has been told to ask no questions and has, with great firmness, not asked. There is a murmur of voices upstairs, low and unhurried, the sound of people who are living in a place and not merely hiding in it.
-  They gather in the long room, when you come, without being called, as a family does. Prisca has a ledger. Fiammetta has a small blade, and a lemon, and is peeling it. Hanno, in the corner, has a column of figures that goes the whole way down a page. They have all, it appears, been waiting for the one subject, and they come to it with the greatest tact and some hurry. Beaumont has had them watched since Tuesday, and the watchers have been watched, and they have a good deal to say.
+  They gather in the long room, when you come, without being called, as a family does.
+  ?if in_circle("prisca") and member("prisca", "status") == "active"
+    Prisca has a ledger.
+  ?end
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+    Fiammetta has a small blade, and a lemon, and is peeling it.
+  ?end
+  ?if in_circle("thibault") and member("thibault", "status") == "active"
+    Thibault has the day book open on his knee, and is pretending that he has not been listening at the door.
+  ?end
+  ?if in_circle("hanno") and member("hanno", "status") == "active"
+    Hanno, in the corner, has a column of figures that goes the whole way down a page.
+  ?end
+  ?if _lead != ""
+    {name(_lead)} has the floor, as someone does who has been running the family's business for sixty years, and gives the report of the city before anyone has asked: who sits in the Exchange, which of the Valère's neighbors can be trusted with a secret and which with a debt, and which doors in the Tremé open from the inside.
+  ?end
+  They have all, it appears, been waiting for the one subject, and they come to it with the greatest tact and some hurry. Beaumont has had them watched since Tuesday, and the watchers have been watched, and they have a good deal to say.
   ?if b4.circle == "ahead"
-    You say that you are glad they came. It is a very short speech, and it is received with a great deal of attention. Fiammetta stops peeling. After a moment, without looking up, she says that it is a good deal better than the hill, and goes back to the lemon, and her ears are red.
+    You say that you are glad they came. It is a very short speech, and it is received with a great deal of attention.
+    ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+      Fiammetta stops peeling. After a moment, without looking up, she says that it is a good deal better than the hill, and goes back to the lemon, and her ears are red.
+    ?end
   ?end
   There is a good deal of work to be done in a house that is going to be lived in, and there is, you find, a good deal of money to be spent on it. It is the sort of work that a family is made of.
 ?elif coven_size() > 0
@@ -189,10 +219,73 @@ $ do chart("neworleans.haven")
 * Set Hanno to the books of the coven and the firm ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") != "business"
   $ do coven_task("hanno", "business")
   Hanno takes it in the way that a man takes a gift of a good tool, with a nod and no thanks. By the second night he has found a clerk at the bank who has been cooking an account, and has declined, with a certain refinement, to do anything about it that would be of use to the clerk.
+* Ask {name(_lead)} to make the introductions the city will need [once] ?if _lead != "" and b4.circle != "stay"
+  $ b4.lead_intro = "done"
+  $ standing += 1
+  $ do discover("the_river_covens")
+  {name(_lead)} takes a clean sheet and writes four names on it without stopping. A physician of the Tremé who has been the free people's doctor for twenty years and answers every letter. A printer on Chartres Street who knows what the planters say when they think the press is off. The head clerk of the Exchange, who can be had for a good lunch and a better rumor. And the widow of a pilot, on the Bayou, who has taken in people that the river houses want back. "Not in that order of danger," {name(_lead)} says. "And in the order that I would see them, if I were you."
+* Learn what the family can do, and what it will be asked to do [once] ?if coven_size() > 0 and b4.circle != "stay"
+  ~> gifts_night
 * That will do for tonight
   -> :house_done
 -> :the_works
 :house_done
+<~
+
+# gifts_night
+## What the family can do
+The long room has a courtyard behind it, high-walled and open to the stars, and you take the family out into it, one by one, in the hour before the dawn, and ask each of them to show you.
+?if has_gift("old_blood")
+  It is the old blood, you understand, that they are showing you, whatever else they do. Each of them is stronger than a fledgling of that age has any right to be, and it is yours, and they know it, and nobody says so.
+?end
+?if gift_holder("strength") != ""
+  {name(gift_holder("strength"))} lifts a cart axle out of the dirt with one hand and sets it down again with an apology to the flagstones.
+?end
+?if gift_holder("charm") != ""
+  {name(gift_holder("charm"))} asks the cook, without raising {pg(gift_holder("charm"), "his", "her", "their")} voice, for a thing that the cook does not at all wish to give, and the cook gives it, and is puzzled for an hour afterward.
+?end
+?if gift_holder("shadows") != ""
+  {name(gift_holder("shadows"))} crosses the courtyard in plain view of three people, and not one of them, afterward, can say that anyone crossed it.
+?end
+?if gift_holder("merchants_eye") != ""
+  {name(gift_holder("merchants_eye"))} looks at the cook's account book for the length of a breath, and says what the cook is cheating the grocer out of, and why, and what to do about it that will do no harm.
+?end
+?if gift_holder("memory") != ""
+  {name(gift_holder("memory"))} recites the whole of the Valère letter book, in order, from the first page to the last, with the dates, and stops only when you tell {pg(gift_holder("memory"), "him", "her", "them")} to.
+?end
+?if gift_holder("healing") != ""
+  {name(gift_holder("healing"))} takes a splinter out of the stable boy's hand, and the boy never feels it, and is told to go to bed.
+?end
+You know your own gifts, of course, and you do not show them. There is a limit, even in a family, to what is done in a courtyard, and the old blood is the family's, and not the city's.
+Then, since it is a house that has to be run and not merely admired, it is asked which of the gifts the family should work at, this season, so that they will be sharper by the time that they are wanted.
+:the_gifts
+* Strength, for the night that comes to the door ?if gift_holder("strength") != ""
+  $ b4.gift_focus = "strength"
+  $ cunning_brutal += 1
+  They train in the long gallery until the lamps burn low. It is not a gentle thing to watch. It is, you notice, a good deal like a family at a game.
+* Charm, for the rooms where a voice is the only door ?if gift_holder("charm") != ""
+  $ b4.gift_focus = "charm"
+  $ standing += 1
+  They practice on each other first, and then on the cook, who has begun to be very careful what she says yes to.
+* Shadows, for the streets and the stairs ?if gift_holder("shadows") != ""
+  $ b4.gift_focus = "shadows"
+  $ secrecy += 1
+  They go out in pairs, and come back with a number of things that were not meant to be taken, and a number of things that were not meant to be seen.
+* The merchant's eye, for the Exchange and the books ?if gift_holder("merchants_eye") != ""
+  $ b4.gift_focus = "merchants_eye"
+  $ standing += 1
+  They sit at the Exchange in turn, under the dome, among the top hats, and by the end of the week they can tell you which of the planters is about to be ruined, three days before the planter.
+* Memory, for the letters and the secrets ?if gift_holder("memory") != ""
+  $ b4.gift_focus = "memory"
+  $ cunning_brutal += 1
+  They read everything. They are given the Valère letter book, and the newspapers, and the lists of the Exchange, and by the end of the month there is nothing that has passed through the house that they do not know.
+* Healing, for the wounded and the hunted ?if gift_holder("healing") != ""
+  $ b4.gift_focus = "healing"
+  $ humanity += 1
+  The Tremé hears of it in a week. It is not meant to. A physician comes to the back door with a very polite note and a man on a hurdle, and does not ask what the house is.
+* Let them be as they are
+  $ b4.gift_focus = "none"
+  They go back to their work, relieved, and a little disappointed, in the way of people who have been shown a thing and then not asked for it.
 <~
 
 # treme

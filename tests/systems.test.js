@@ -370,7 +370,7 @@ test('systems state survives a save and load mid mission', async () => {
 });
 
 test('schema 2 saves upgrade to the current schema with empty systems', async () => {
-  assert.equal(SCHEMA, 6);
+  assert.equal(SCHEMA, 7);
   assert.deepEqual(SCHEMA_MIGRATIONS[2]({ vars: {} }).sys, createSys());
   const storage = new MemoryStorage();
   const src = { t1: `${H('t1')}\n# start\nOne.\n---\nTwo {coven_size()}.\n---\n=> endbook\n` };
@@ -531,4 +531,79 @@ test('someone he has turned is listed in the coven, apart from the keepers', asy
   assert.deepEqual(view.members.map((m) => m.id), ['aelia']);
   assert.deepEqual(view.keepers.map((m) => m.id), ['ginevra']);
   assert.equal(view.covenCount, 1);
+});
+
+// ---- The business lead, gifts and the village helpers ----------------------------------------------
+
+test('the member best at business is the business lead, and can be set to run it', async () => {
+  const game = await run([
+    'A "{business_lead()}".',
+    '$ do sire("aelia", "scout")',
+    '$ do recruit("prisca", "merchant", 2, "business", 80)',
+    'B "{business_lead()}" "{task("prisca")}".',
+    '$ do appoint_lead()',
+    'C "{task("prisca")}" "{member("prisca", "role")}".',
+  ].join('\n'), { book: 'blood-and-gold' });
+  const lines = texts(game.frame);
+  assert.equal(lines[0], 'A "".');
+  assert.equal(lines[1], 'B "prisca" "".');
+  assert.equal(lines[2], 'C "business" "business".');
+});
+
+test('someone who acts behind his back is never the business lead', async () => {
+  const game = await run([
+    '$ do recruit("prisca", "merchant", 3, "business", 10)',
+    '$ do sire("aelia", "scout")',
+    'A "{business_lead()}".',
+  ].join('\n'), { book: 'blood-and-gold' });
+  assert.equal(texts(game.frame)[0], 'A "aelia".');
+});
+
+test('the lead runs the coven news line, once, and a sleep counts their work for more', async () => {
+  const game = await run(['$ do recruit("prisca", "merchant", 2, "business", 90)', '$ do appoint_lead()', 'A "{lead_result()}".'].join('\n'), { book: 'blood-and-gold' });
+  assert.equal(texts(game.frame)[0], 'A "".');
+  assert.equal(S(game).circle.prisca.task, 'business');
+});
+
+test('gifts: the hero walks in daylight, the old blood comes in Book Two, members take theirs from line and role', async () => {
+  const one = await run('A {has_gift("daywalking")} {has_gift("old_blood")}.');
+  assert.equal(texts(one.frame)[0], 'A yes no.');
+  const two = await run([
+    'A {has_gift("old_blood")} {has_gift("charm")}.',
+    '$ do recruit("prisca", "merchant", 2, "business")',
+    '$ do sire("aelia", "guard")',
+    'B {member_has_gift("prisca", "shadows")} {member_has_gift("prisca", "merchants_eye")} {member_has_gift("aelia", "strength")} {member_has_gift("aelia", "old_blood")} {gift_count("prisca")}.',
+    '$ do grant_gift("hero", "charm")',
+    '$ do grant_gift("aelia", "memory")',
+    'C {has_gift("charm")} {member_has_gift("aelia", "memory")}.',
+  ].join('\n'), { book: 'blood-and-gold' });
+  const lines = texts(two.frame);
+  assert.equal(lines[0], 'A yes no.');
+  assert.equal(lines[1], 'B yes yes yes yes 2.');
+  assert.equal(lines[2], 'C yes yes.');
+});
+
+test('granting a gift to someone outside the circle is an error that says what to do', async () => {
+  await assert.rejects(run('$ do grant_gift("prisca", "charm")'), /not in the circle/);
+});
+
+test('the coven view lists the hero\'s gifts, each member\'s gifts and who runs the business', async () => {
+  const game = await run(['$ do recruit("prisca", "merchant", 2, "business", 80)', '$ do appoint_lead()'].join('\n'), { book: 'blood-and-gold' });
+  const view = game.coven();
+  assert.ok(view.heroGifts.some((g) => g.id === 'daywalking'));
+  const prisca = view.members.find((m) => m.id === 'prisca');
+  assert.ok(prisca.notes.includes('Runs the business'));
+  assert.ok(prisca.gifts.some((g) => g.id === 'merchants_eye'));
+});
+
+test('schema 6 saves gain the hero\'s gifts list', () => {
+  assert.deepEqual(SCHEMA_MIGRATIONS[6]({ sys: {} }).sys.gifts, []);
+  assert.deepEqual(createSys().gifts, []);
+});
+
+test('the village helpers say what can be built now', async () => {
+  const game = await run('A {can_build_any()} "{village_next()}".', { vars: { wealth: 0 } });
+  assert.equal(texts(game.frame)[0], 'A no "".');
+  const rich = await run('A {can_build_any()} "{village_next()}".', { vars: { wealth: 999 } });
+  assert.match(texts(rich.frame)[0], /^A (yes|no) "/);
 });

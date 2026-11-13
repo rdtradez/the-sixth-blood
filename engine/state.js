@@ -2,7 +2,7 @@
 
 import { createSys } from './systems/sys-state.js';
 
-export const SCHEMA = 6; // bump when the shape of state changes, and add a schema migration
+export const SCHEMA = 7; // bump when the shape of state changes, and add a schema migration
 export const ENGINE_VERSION = '0.4.0';
 
 /**
@@ -78,6 +78,11 @@ export const SCHEMA_MIGRATIONS = {
   // 5 -> 6 (coven tab): standing tasks for circle members (sleep tasks and how they went).
   5(state) {
     for (const m of Object.values(state.sys?.circle ?? {})) { m.task ??= ''; m.taskResult ??= ''; }
+    return state;
+  },
+  // 6 -> 7 (gifts): the hero's gifts beyond his own (sys.gifts). Members' gifts are derived and need nothing.
+  6(state) {
+    if (state.sys) state.sys.gifts ??= [];
     return state;
   },
 };

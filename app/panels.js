@@ -56,6 +56,7 @@ export function covenPanel(game, rerender) {
       h('div', { class: 'who' }, h('span', { class: 'pname' }, m.name), m.role ? h('span', { class: 'ptitle' }, m.role) : null),
       h('div', { class: 'notes' }, [...m.notes, m.joinedIn ? `Joined in ${m.joinedIn}` : ''].filter(Boolean).join(' · ')),
       m.doing ? h('p', { class: 'bio' }, m.doing) : null,
+      m.gifts?.length ? h('p', { class: 'bio' }, `Gifts: ${m.gifts.map((g) => g.name).join(', ')}.`) : null,
       m.lastTask ? h('p', { class: 'bio' }, m.lastTask) : null,
       m.active ? select : null,
       m.active && !m.away ? sendRow(game, view, m, rerender) : null,
@@ -63,6 +64,8 @@ export function covenPanel(game, rerender) {
   };
   return [
     h('h2', {}, 'Coven'),
+    view.heroGifts?.length ? h('h3', {}, 'Your gifts') : null,
+    ...(view.heroGifts ?? []).map((g) => h('p', { class: 'bio' }, `${g.name}. ${g.text}`)),
     view.members.length
       ? h('p', { class: 'count' }, `${view.covenCount} ${view.covenCount === 1 ? 'is' : 'are'} with you`)
       : empty('You have turned no one yet. When you do, they are kept here.'),

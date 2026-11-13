@@ -5,6 +5,7 @@
 //   $ do build("well")        pays the cost (scaled to the era) and adds the building
 //   built("well"), can_build("well")
 //   $ do send_home(50)        send coin home (scaled to the era): prosperity grows with it
+//   can_build_any(), village_next()   anything buildable now; the earliest building that can be built now (or "")
 //   village_defense()         how well Collesanto can protect itself (and him, if he sleeps there)
 // Buildings keep working while he sleeps, and the village grows a little in every long sleep.
 
@@ -32,6 +33,8 @@ export const village = {
   fns: {
     built: { spec: ['building'], fn: (ctx, id) => Object.hasOwn(sysOf(ctx).village.built, id) },
     can_build: { spec: ['building'], fn: (ctx, id) => problem(ctx, id) === null },
+    can_build_any: { spec: [], fn: (ctx) => Object.keys(cat(ctx).buildings).some((id) => problem(ctx, id) === null) },
+    village_next: { spec: [], fn: (ctx) => Object.keys(cat(ctx).buildings).find((id) => problem(ctx, id) === null) ?? '' },
     village_defense: { spec: [], fn: (ctx) => villageDefense(ctx) },
   },
   commands: {

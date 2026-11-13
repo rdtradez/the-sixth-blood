@@ -2,15 +2,19 @@
 // Reads the chained wake report (place, steward, outcome, orders) and plays a waking for each. Woken early gets its own opening and a short trouble scene.
 // Order: waking, hunger, the steward's report (with the Emperor beat), then one night phase of three actions out of four, then dawn and the road to the sea.
 // He wakes in Paris (the haven under the shop, or the tomb) or on the hill in Tuscany, so the chapter ends with rest() and => next into chapter 2 (the crossing and New Orleans).
-// Reads wake(), b3.keeper, b3.crane_offer and the circle. Sets b4.trouble, b4.first_feed, b4.emperor, b4.books, b4.estate, b4.street, b4.circle, b4.crane_reply and b4.passage.
+// The coven fronts the waking: business_lead() (the member best at business) holds the lantern, gives the report and lays out the desk (b4.lead_desk, b4.lead_pick). Without a coven the old stewards speak as before.
+// Reads wake(), b3.keeper, b3.crane_offer and the circle. Sets b4.lead_desk, b4.lead_pick, b4.village (the hill's letter), b4.trouble, b4.first_feed, b4.emperor, b4.books, b4.estate, b4.street, b4.circle, b4.crane_reply and b4.passage.
 @chapter b4c01
 @title A Letter from the River
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## The seventh waking
 $ b4.trouble = "none"
+$ b4.lead_desk = "approved"
+$ b4.lead_pick = "none"
+$ b4.village = "waited"
 $ b4.first_feed = "animal"
 $ b4.emperor = "bluffed"
 $ b4.books = "trusted"
@@ -21,6 +25,7 @@ $ b4.crane_reply = "burned"
 $ b4.passage = "cabin"
 $ _hill = 0
 $ _reader = "Anselme's grandson"
+$ _lead = ""
 ?if wake("place") == "collesanto"
   $ _hill = 1
 ?end
@@ -30,6 +35,13 @@ $ _reader = "Anselme's grandson"
   $ _reader = "Honoré"
 ?elif wake("steward") == "prisca"
   $ _reader = "Prisca"
+?end
+?if coven_size() > 0 and wake("by") != "steward"
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader = name(_lead)
+  $ do meet(_lead)
 ?end
 ?if _reader == "Honoré"
   $ do meet("honore")
@@ -46,6 +58,11 @@ $ _reader = "Anselme's grandson"
 ---
 ~> report
 ---
+?if _lead != ""
+  ~> desk
+  $ do appoint_lead()
+  ---
+?end
 $ do phase("night", 3)
 It is a night in the first week of November, in the year eighteen hundred and fifty nine, and there are, by your own reckoning, four things in it that want doing and time for three. {cap(voice("hunger"))}.
 -> night
@@ -59,7 +76,7 @@ It is a night in the first week of November, in the year eighteen hundred and fi
     You wake to a cough, a polite one, and the smell of lamp oil and wet plaster. There is a gentleman at the foot of the bed in a good gray overcoat, and a clerk behind him with a measuring chain, and two laborers who are looking at the ceiling with the particular blankness of men who have found something and do not want to be asked. The gentleman is a commissioner of works. He has a plan, in a tube, and a list, and the room that you are lying in is on the list, in red.
     "Forgive me," he says. "I am obliged to ask, in the name of the Prefect, who is the owner of this cellar."
   ?else
-    Somebody is shaking you. It is a thing that nobody has done in a very long time, and it is being done by {_reader}, in a traveling coat, with the face of a man who has come a long way to do something that he has been telling himself for a week is the right thing. "Forgive me, Monsieur," you hear. "I was to wake you if the house was threatened. I think that it is threatened. I think that I may be the threat."
+    Somebody is shaking you. It is a thing that nobody has done in a very long time, and it is being done by {_reader}, in a traveling coat, with the face of someone who has come a long way to do something that he has been telling himself for a week is the right thing. "Forgive me, Monsieur," you hear. "I was to wake you if the house was threatened. I think that it is threatened. I think that I may be the threat."
     A gentleman came to the counting house in the spring, it seems. He gave no name, and could not afterward be described. He asked for a small favor, a letter carried to a certain address with a key folded in it, and it was done, and then there was a long, cold, sleepless week.
   ?end
 ?else
@@ -70,7 +87,9 @@ It is a night in the first week of November, in the year eighteen hundred and fi
   ?else
     You wake in the tomb, and the stone is moved. Cold, clean, stale air comes in, with a slice of lantern light in it and a smell of lime. It is a chamber cut in the rock under the faubourg, with no door but the one, and somebody has taken a great deal of care to open it from the right side, and a good deal less ceremony than you would have liked.
   ?end
-  ?if wake("steward") == "prisca"
+  ?if _lead != ""
+    ~> lead_waking
+  ?elif wake("steward") == "prisca"
     The person holding the lantern is small and exact, in a traveling cloak of excellent cloth, with a steel pen behind one ear and an abacus in her sleeve. She does not breathe. She has not, for some time, bothered to pretend to. "Sixty five years and four months," says Prisca. "It is a very awkward number. I should like it understood that I have been keeping the books for the whole of it and that I have enjoyed perhaps one afternoon."
   ?elif wake("steward") == "keepers"
     The man holding the lantern is lean and brown, in a black coat, with the habit of looking at the floor first. He has Aelia's chin. You have seen that chin on a hundred faces in a thousand years, and every time it goes through you like a nail. "Filippo Valerio," he says, in the Tuscan of a gentleman farmer, with a small stiff bow. "Of the hill. Forgive me, Signore. I was taught what to say, and my father taught me, and his mother taught him, and I have been saying it to the wall for a month in case I forgot."
@@ -80,6 +99,67 @@ It is a night in the first week of November, in the year eighteen hundred and fi
     The young man holding the lantern is plump and pink, in a good brown coat, with a small iron bound purse in the blue of the Merchant house on his belt, and a nervous manner. "Roux," he says. "The house of Roux, in the rue Vivienne, which was once Prisca's and is now, by a quirk of the century, rather my own. My grandfather kept the account and my father kept the account, and I am afraid that I shall have to be the one to tell you that the account is, in one respect, somewhat larger than it was."
   ?end
 ?end
+<~
+
+# lead_waking
+?if _lead == "fiammetta"
+  The person holding the lantern is small and dark and quick, in a gray traveling dress with the sleeves pushed back, and she has the look of someone who has not stopped working since the last time you saw her. She has your blood, and she has Tommaso's eyes, and she has been seventeen for a very long while. She has also, you learn in the next minute, made herself into a banker. "Sixty five years," says Fiammetta, "and four months. I kept count. Somebody had to. Do not get up. I want you to see the books before you see anything else, because I have been very good and I want it noticed."
+?elif _lead == "prisca"
+  The person holding the lantern is small and exact, in a traveling cloak of excellent cloth, with a steel pen behind one ear and an abacus in her sleeve. She does not breathe. She has not, for some time, bothered to pretend to. "Sixty five years and four months," says Prisca. "It is a very awkward number. I have kept the books for the whole of it and I should like it understood that the house is the better for it, and that I have enjoyed perhaps one afternoon."
+?elif _lead == "thibault"
+  The person holding the lantern is a long, quiet man of a hundred years, grown into his hands, in a good black coat with ink on the cuff, and he has been waiting for you to wake for so long that he has rehearsed what to say and forgotten it. "Sixty five years," says Thibault Marchand. "I have the figures. I have not much else prepared. I was a cooper's boy, and I find that I am a banker, and I cannot say which of us is more astonished."
+?elif _lead == "hanno"
+  The person holding the lantern is a gaunt, patient man in a very old coat, with a pen behind his ear and a small book in his hand, and he says nothing at all for a long moment. Then he opens the book to a page marked with a ribbon, turns it round so that you can read it, and points. It is a sum. It is, you realize, the sum of what the house is worth, written out in a hand like a row of iron nails, and it is a good deal larger than it was.
+?elif _lead == "tiro"
+  The person holding the lantern is young in the face and not at all young in the eyes, in a plain merchant's coat, with the iron bound purse of the Merchant house at his belt. "Sixty five years," says Tiro. "Prisca taught me that a house is only as honest as its books, and I have kept them like a man who expected to be inspected by her. Welcome back, Master. I have a great deal to show you."
+?else
+  The person holding the lantern is {_reader}, of your coven, with the look of someone who has been running a house for a long time on instructions left by a person who was asleep, and who is very glad that the person is now awake and can be asked. {_reader} bows, and does not wait to be spoken to. "Sixty five years," {pg(_lead, "he", "she", "they")} says. "The books are in the next room, and so is a chair."
+?end
+<~
+
+# desk
+## What was done while you slept
+$ b4.lead_desk = "approved"
+When the Emperor has been disposed of, and the money, {_reader} puts three papers on the table, squares them with one finger, and waits to be told that you are ready.
+?if wake("place") == "collesanto"
+  The first is the charter of the banking house in Florence, which {_reader} established in your name and the house's, with a vault, a brass plate, nine clerks and a reputation for never having lost a deposit. It stands, {pg(_lead, "he", "she", "they")} says, on the credit of the hill.
+?else
+  The first is the charter of the banking house in the rue Vivienne, which {_reader} established in your name and the house's, with a vault, a brass plate, nine clerks and a reputation for never having lost a deposit. It stands, {pg(_lead, "he", "she", "they")} says, on the credit of the shop.
+?end
+The second is a bundle of letters from Aurélien Valère of the Rue Royale, eleven years of them, each answered by return. {_reader} has made the two houses, by post, a single counting table, and has done it so quietly that the Prefect's own banker has not noticed. "The Valère know that the master of the Colline is alive and keeps strange hours," says {_reader}. "They believe that I speak for you in everything that is not a secret. Which, as of tonight, is a thing that you may correct."
+The third is a list, in two columns, headed *Offers*. Three prospects from the river, each put to the house by Aurélien and none of them yet answered: a share in a line of steamboats, a larger stake in the Valère bank, and a school fund for the free families of the Faubourg. {_reader} has not chosen between them. "It is your money, and your name," {_reader} says. "I have only made sure that you are offered."
+:the_choice
+* Approve the banking house and the correspondence as written, and thank {_reader} in so many words
+  $ b4.lead_desk = "approved"
+  $ standing += 1
+  {_reader} receives it with the expression of someone who has been hoping for exactly four words and has been given a speech. It is not a great thing, to say that a thing was well done. It is a great deal more than most of the world ever hears.
+* Take the third paper first, and choose among the offers
+  $ b4.lead_desk = "picked"
+  $ cunning_brutal += 1
+  ~> offers
+* Go through every paper yourself, and send each back marked in the margin
+  $ b4.lead_desk = "pressed"
+  $ cunning_brutal += 1
+  $ standing -= 1
+  It takes the rest of the quarter hour and a good deal more. {_reader} answers every mark in the margin, steadily and without being asked twice, and at the end of it you have found three small things to correct and one large thing that was exactly right. It is not an insult. It is, you suspect, very nearly what {_reader} expected, and a little of what {_reader} wanted.
+<~
+
+# offers
+## The offers
+:the_offers
+* The steamboats, the long boats of the river
+  $ b4.lead_pick = "boats"
+  $ do earn(-2)
+  {_reader} writes it down. They pay nine, and they pay in a way that makes a person sleep. They also carry cotton, and what is carried with it, and you hear, in your own thoughts, the first small creak of a thing that you will have to answer for.
+* The bank, a larger stake in the Valère house
+  $ b4.lead_pick = "bank"
+  $ standing += 1
+  {_reader} writes it down. A bank pays eight and asks no one what they do with the money, which is a sort of virtue and a sort of vice. It would put the family in the Valère counting house as partners, and not merely in the post.
+* The school fund, for the free families
+  $ b4.lead_pick = "school"
+  $ humanity += 1
+  $ do earn(-1)
+  {_reader} writes it down, and for a moment the pen stops. It is the one that pays nothing. It is also, says {_reader}, the one that the Valère wrote about on the fifth page of the eleventh letter, with a sentence that was crossed out and then written again.
 <~
 
 # trouble
@@ -139,7 +219,7 @@ It is a night in the first week of November, in the year eighteen hundred and fi
 
 # report
 ## Sixty five years
-You are taken up out of the dark, and fed, and washed, and set in a chair, and {_reader} sits opposite with a candle and a small thick book and the expression of a man who is going to be extremely brief about a matter of a very great length.
+You are taken up out of the dark, and fed, and washed, and set in a chair, and {_reader} sits opposite with a candle and a small thick book and the expression of someone who is going to be extremely brief about a matter of a very great length.
 ?if _reader == "Prisca"
   "I shall be exact," says Prisca, "since it is the only thing at which I am ever any use."
 ?end
@@ -149,7 +229,7 @@ Sixty five years is a long time to put into a quarter of an hour, and {_reader} 
 * Say that you had understood that there was an Emperor already, and ask after his health
   $ b4.emperor = "bluffed"
   $ standing += 1
-  "The Emperor is very well," says {_reader}, with the face of a man who has been asked a thing that he is not sure he ought to answer. "He is, of course, the nephew." There is a short, delicate pause. "Of the other one. Who is dead. For thirty eight years." You nod gravely, as a man does who knew it, and the pause gets a little longer.
+  "The Emperor is very well," says {_reader}, with the face of someone who has been asked a thing that is not sure to be safe to answer. "He is, of course, the nephew." There is a short, delicate pause. "Of the other one. Who is dead. For thirty eight years." You nod gravely, as a man does who knew it, and the pause gets a little longer.
 * Ask which one
   $ b4.emperor = "asked"
   $ adjustment += 2
@@ -158,12 +238,12 @@ Sixty five years is a long time to put into a quarter of an hour, and {_reader} 
   $ b4.emperor = "blustered"
   $ cunning_brutal += 1
   $ standing -= 1
-  It is a sentence you would have made, in your day, about a number of rulers, and been right nine times in ten. {_reader} agrees, in the manner of a man who has found that it is a good deal safer to agree with this particular customer. You are left with a faint and uneasy impression that you have been, for the first time in your life, the person in the room who was behind the times.
+  It is a sentence you would have made, in your day, about a number of rulers, and been right nine times in ten. {_reader} agrees, in the manner of someone who has found that it is a good deal safer to agree with this particular customer. You are left with a faint and uneasy impression that you have been, for the first time in your life, the person in the room who was behind the times.
 The money, {_reader} says, is the next thing, and is easier.
 ?if wake("outcome") == "prospered"
   It is a good deal richer than the book said that it should be. The war years, which were hard on everybody, were kind to the house, by a combination of good steward and bad luck for others, and there is a note at the foot of the page that says, with real feeling, that it was not a thing to be proud of and that {_reader} is proud of it all the same.
 ?elif wake("outcome") == "losses"
-  It is not as rich as it should be. The war years were hard on everybody and harder on the house, and there is a column of figures that {_reader} reads in the flat quick voice of a man who has been waiting a long time to be shouted at. You find that you do not wish to shout. A fortune is a living thing, and it was left in a century that had a good deal of fire.
+  It is not as rich as it should be. The war years were hard on everybody and harder on the house, and there is a column of figures that {_reader} reads in the flat quick voice of someone who has been waiting a long time to be shouted at. You find that you do not wish to shout. A fortune is a living thing, and it was left in a century that had a good deal of fire.
 ?elif wake("outcome") == "woken_early"
   It is not the money that ought to have been, since the stewardship ended before it was meant to, and there is a good deal that has been left half done. You will have to be a little careful for the next few years, and rather quick.
 ?else
@@ -251,6 +331,32 @@ The second ledger is the house's own, the running account. The third is a small 
 
 # books_end
 $ do discover("the_crescent_city")
+?if can_build("infirmary") or can_build("granary") or wealth > 0
+  ~> hill_letter
+?end
+<~
+
+# hill_letter
+## A letter from the hill
+Between the second ledger and the third there is a letter that the books did not account for, in the careful hand of the keepers of the hill, with a thumbprint in the corner where someone has been holding the paper down against the wind. The village is well, it says, and has grown, and has a good many more mouths than it had when you lay down. It does not ask for anything. It says only that the winter was hard, and that the old women have been saying, in the church porch, that it would be a mercy if the hill had somewhere to put the sick that was not a barn.
+:the_hill
+* Pay for an infirmary on the hill, with a physician's room and a ward ?if can_build("infirmary")
+  $ b4.village = "built"
+  $ do build("infirmary")
+  $ humanity += 1
+  You write the sum, and sign it, and it goes into the post as a thing that costs a great deal less than it seems. It is a long, low, whitewashed building, in the end, with eight beds and a stove, and a woman from the village who has been a midwife for thirty years to run it. It will be there long after the thing that built it has been forgotten, and that, you reflect, is nearly the only kind of monument that you have ever liked.
+* Pay for a granary against the bad years, with a lock and a ledger ?if can_build("granary")
+  $ b4.village = "built"
+  $ do build("granary")
+  $ standing += 1
+  It is a dull thing, a granary, and the best investment that you will make this year. The hill will have bread when the valley does not, and a ledger to show who was given what, and a lock whose key is held by three people at once. You are told that the old women have already begun to quarrel about who is to be the third.
+* Send coin to the hill, and let the village choose ?if wealth > 0
+  $ b4.village = "sent"
+  $ do send_home(30)
+  It is the lazy kindness, and also, often, the wisest. The village will spend it on whatever it most lacks, which will not be what you would have guessed. There will be a letter in the spring that tells you what it was.
+* Write that you have read the letter, and that you will think of it
+  $ b4.village = "waited"
+  It is not a refusal. It is something like the opposite, and not quite a promise, and the writer, when it reaches the hill, will know the difference exactly.
 <~
 
 # street
@@ -297,6 +403,9 @@ $ do discover("the_second_empire")
   ?if in_circle("hanno") and member("hanno", "status") == "active"
     Hanno has a pen and a very small book, and says, you are sure, nothing.
   ?end
+  ?if _lead != ""
+    {_reader} has the head of the table, as someone does who has had it for sixty years, with the books open at {pg(_lead, "his", "her", "their")} elbow and a bundle of letters from Louisiana beside them. It is {_reader} who tells you what the others only look: that the house has been writing to the Valère of the river for eleven years, that the Valère know the master's name only as a very old friend of the house, and that the family has made up its mind to go if you go.
+  ?end
   There is a map, with a river on it, drawn by someone who has never seen a river that size. They have been told where you are going, and they have views.
   :the_choice
   * Take them all with you, and let the family come to the river
@@ -338,6 +447,9 @@ $ do meet("crane")
 The first is from New Orleans, from the Rue Royale, in a clear upright commercial hand, and is signed by a cousin of the house whom you do not know. His name is Aurélien Valère. He writes to the master of the house, in a French that has been a little rubbed by the river, to say that the family of Louisiana has done its best, that it has been nine and forty years in that country, and that there is a matter which cannot be put in a letter.
 > There is a gentleman who calls at the counting house at ten o'clock on the first Friday of the month. He asks, very civilly, whether the Colline of the rue Saint-Jacques has woken. He says that the house of Beaumont would be honored. We have said that we do not know the name. He said that he did not think that we were very good at it.
 > I do not say that you should come. I say only that there are four hundred thousand people in Louisiana, of whom a third are free and a third are not, and that a great many of them are afraid, and that I believe that this is not the usual sort of fear.
+?if _lead != ""
+  Folded into it is a note in {_reader}'s own hand, which has the speed and economy of someone who writes a letter a day: *I have written to him every month for eleven years. He is honest, frightened and very good at figures. Believe the second and third, and be gentle with the first. I have told him nothing of what you are. That is yours to say, or not to say, to his face.*
+?end
 The second is on thick cream paper, from New York, with a Pearl Street direction and a small, neat, sarcastic hand. It has been in the book of the house for a year and a day. It is signed *H. Crane*.
 ?if b3.crane_offer == "considered"
   > My dear Colline, I hold the island, as you know, in a manner of speaking, and I cannot think why it should not be held a little more handsomely if we were to speak. It has been a very pleasant sixty years. I should have said so before, but you were not, I understand, in a condition to receive me.

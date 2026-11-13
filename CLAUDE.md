@@ -18,6 +18,11 @@ The owner plays the game and wants to be surprised by chapter level choices and 
 - It is the only known coven of the sixth bloodline. That makes it rare and precious, and the world should treat it that way.
 - Once a coven is started it is a significant part of the story in every later book. Keepers (sworn humans) are kept apart from the turned.
 - The engine side exists (Coven tab, standing tasks, a report at each chapter start, missions). Book sessions should add scenes that use it.
+- Front and center: each book's waking is voiced by the coven's business lead (`business_lead()`), who holds the lantern, gives the report and lays out the desk. The coven and the hero's human family are already in contact when he wakes, and the lead makes the introductions in each new city.
+- Never write a scene that names a coven member without checking they are in the coven (`in_circle("name")` and an active status). A player's coven may be any mix of Prisca, Fiammetta, Hanno, Thibault, Tiro and the rest. Run `npm run coven-names` to find lines that do not check.
+- Gifts: the hero and every member have named gifts (`has_gift`, `member_has_gift`, `gift_holder`). Every book should give them real moments.
+- Each book opening carries a village beat: a letter from the hill with a build, send or wait choice.
+- In every chapter plan, at least one coven member is in the chapter's main thread with their own want.
 
 ## Commands
 

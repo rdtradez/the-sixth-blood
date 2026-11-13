@@ -210,3 +210,10 @@ March 1867, the Reconstruction Acts. The last night (the school, the family, the
 
 Hooks: the family that stays, goes north or scatters; Cassian in London; the Scribe; the Panic of 1873 in the sleep.
 
+
+
+## Coven rework (session 50)
+
+Chapters 1 to 3 now put the business lead at the waking (lantern, report, desk with `b4.lead_desk` and `b4.lead_pick`), in letters with Aurélien already, at the wharf if the coven came, warming the Exchange, and making the introductions (`b4.lead_intro`). Chapter 1 also carries the hill's letter (`b4.village`) and chapter 3 the family's gifts night (`b4.gift_focus`).
+
+Still to do, in pairs: chapters 4 to 20 name Prisca, Fiammetta and Hanno in group scenes whether or not they are in the player's coven (about 107 lines, listed by `npm run coven-names`). Each pair should check every named member with `in_circle()`, let the business lead and the other members present carry those beats instead, call on the family's gifts (`gift_holder()`), and give the lead and one other member a want of their own that moves the chapter.

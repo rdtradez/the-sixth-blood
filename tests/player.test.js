@@ -169,7 +169,7 @@ test('quick start marks quick lore as already known', () => {
 });
 
 test('schema 3 saves gain the lore state', async () => {
-  assert.equal(SCHEMA, 6);
+  assert.equal(SCHEMA, 7);
   assert.deepEqual(SCHEMA_MIGRATIONS[3]({ sys: {} }).sys.lore, { codex: {}, kin: {} });
   const storage = new MemoryStorage();
   const game = await realGame({ storage });
