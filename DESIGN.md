@@ -75,6 +75,8 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 46: Book Four chapters 13 and 14
 - [x] Session 47: Book Four chapters 15 and 16
 - [x] Session 48: Book Four chapters 17 and 18
+- [x] Session 49: Book Four chapters 19 and 20; Book Four is complete (journal, recap and sleep to London)
+- [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
 
@@ -595,4 +597,15 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New codex entries: the Freedmen's Bureau, the convention of 1866, the Mechanics' Institute, the river houses in 1866, the free men of color, and three more. Content notes: chapter 17 `blood`, `slavery`; chapter 18 `blood`, `violence`, `slavery`, `war`. No new engine behavior, so no schema or migration.
 - Tests: `tests/book4.test.js` plays chapters 17 and 18 down every circle, waking, haven, Velati and Compact answer, takes every recorded choice (including every road at the noon scene and in the evening), checks the errands and the lone path holdings, and expects eighteen chapters. The chapter 16 test no longer expects a pause.
 - Sessions 43 to 47 were not merged when this session started (pull requests #42, #43 and #44 are open, and the session 47 branch has no pull request), so the session 48 branch is stacked on session 47. Merge them in order.
+- Plans are in `SPOILERS/house-divided.md`.
+
+### Session 49 notes (Book Four, chapters 19 and 20)
+
+- Chapters `b4c19` and `b4c20` are in `content/house-divided/` (`ch19.tsb`, `ch20.tsb`), about 7,500 words together. **Book Four is finished at twenty chapters**: `"incomplete"` is removed from the manifest, so the book now ends, writes its journal (`journal/house-divided.tsb`, in the voice of the Senate's agent at New Orleans) and unlocks Book Five. The manifest entry has a spoiler light `recap` for quick starts into Book Five.
+- Chapter 19 has the usual shape (an opening with no phase, a short hunger scene that only runs if `must_feed()` is true, one night phase of three actions out of four, a fixed closing scene every player plays, and a dawn). Chapter 20 has no phases: it calls `rest()` once and then `sleep("new_orleans_to_london")` (twenty years), and closes with `=> next`. The wake report is not shown in Book Four; Book Five's opening reads `wake()`.
+- Coven focus, as the owner asked: both chapters put the family and the river houses at the center. Chapter 19 has errands for Prisca, Fiammetta and Hanno and offers `coven_house`, `training_hall` (coven path) and `vaults` (through `can_acquire`). Chapter 20 adds a standing charge to the family for the sleep (`b4.charge`), shown only when `coven_size() > 0` and `b4.circle` is not `stay`. Prisca, Hanno, Fiammetta and Thibault can each be the steward, as well as the bank and the keepers.
+- New decision flags (`b4.` prefix, registered): `b4.seat`, `b4.pledge`, `b4.hand`, `b4.answer` (chapter 19) and `b4.last_night`, `b4.charge`, `b4.letter` (chapter 20). `b4.seat`, `b4.answer`, `b4.charge` and `b4.hand` are the ones Book Five should read first.
+- New codex entries: All Saints in New Orleans, the free schools of the Tremé, the Scribe, and one person entry. Content notes: chapter 19 `blood`, `slavery`; chapter 20 `slavery`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book4.test.js` plays chapters 19 and 20 down every circle, house, Compact, Velati answer, last night, place, steward, order, guard, charge and letter, and checks the end of the book, the sleep, the journal and the unlock. The old tests that expected a pause after chapter 18 now carry on into chapter 19, and the coven holdings tests stop at the next chapter (`stopAt`), because the sleep drops city holdings.
+- Session 48 was not merged when this session started (pull request #46 is open), so the session 49 branch is stacked on session 48. Merge them in order.
 - Plans are in `SPOILERS/house-divided.md`.

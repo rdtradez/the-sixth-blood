@@ -1,0 +1,66 @@
+// The Velati journal for Book Four, A House Divided (session 49). Runs at the end of the book on a copy of the state; its paragraphs become one journal entry.
+// Written in the voice of the Senate's agent at New Orleans, from the report-book that she kept above a counting house on the Rue Royale. No choices allowed. Reads decisions, never recomputes them.
+@chapter b4_journal
+@title Velati Journal: A House Divided
+@book house-divided
+@version 1
+
+# start
+## From the report-book of the Senate's agent at New Orleans
+> Set down in New Orleans, in the Aventine shorthand, in a room over a counting house. For the Senate, and for no one else.
+I was sent to the Resident's office at Charleston in the fall of 1861, and was sent from there to this city in the winter of 1862 to see what was being said in it. I have to report that what was being said in it was a great deal, in a great many voices, and that the greater part of it was about the price of cotton.
+?if b4.institute == "held"
+  I was in the Rue Dryades on the thirtieth of July, at a window. I saw a stair held by one person, in the open, in a torn coat, for a quarter of an hour, against a mob. I have written down what I saw, and I should like it noted that I did not believe it.
+?elif b4.institute == "led"
+  I was in the Rue Dryades on the thirtieth of July, at a window. I did not see the cellars. I have been told by seven persons, separately, in the weeks since, that forty one people were got out of the Institute by a back way. I have not been able to find any two of them who agree on how.
+?elif b4.institute == "ran"
+  I was in the Rue Dryades on the thirtieth of July, at a window. I saw the hero go down the street at a speed that I have not been able to account for, towards the barracks, and I saw the Army come. It came late. I have put in the report that it came.
+?else
+  I was in the Rue Dryades on the thirtieth of July, at a window. I saw the hero at the edge of the street, with his hands at his sides. I have not put in the report what I thought. I should like it to be known that I did not at any time suppose that it was easy.
+?end
+?if b4.confession == "struck"
+  I have the account of the garden behind the Cathedral from the gardener, who is a Velati agent of the third rank and a very bad liar. He says that he saw a man struck, and that the man did not rise. He says that the man, afterwards, thanked the hero.
+?elif b4.confession == "heard"
+  I have the account of the garden behind the Cathedral from the gardener, who is a Velati agent of the third rank. He says that two men sat on a bench for the best part of the night. He says that one of them was reading the Valère paper, and the other, afterwards, was crying.
+?else
+  I have the account of the garden behind the Cathedral from the gardener, who is a Velati agent of the third rank. He says that one man walked out of the gate. He says that the other stayed on the bench a long time with his hat on his knee.
+?end
+?if b4.proof == "memory"
+  I have to enter, in the interests of honesty, that I showed the hero a thing, from a stair, in a book, in my own blood. I did it of my own will. I have been told by the Senate that it was a breach of the Veil. I should say that it is the first time that I have been of any use.
+?elif b4.proof == "told"
+  I have to enter, in the interests of honesty, that I told the hero a thing, in my own words, in a plain room, with a lamp. It took the whole of the night. I have not repeated it.
+?end
+I have also to report on the hand in the corner of the Resident's post.
+?if b4.hand == "named"
+  I was given three names, in the hero's own hand, at the end of October, and have carried them to Rome under the Senate's seal. I do not know what has been done with them. I do not expect to be told.
+?elif b4.hand == "trap"
+  I carried a letter, with every comma in its right place, to the Resident's packet, at the end of October. I should say that it is a quite elementary trap. I should say that I do not think that it has failed.
+?else
+  I have kept the box, and a copy, and have told nobody. I should like it known that this is a very lonely business. I should also like it known that I have found that I am rather good at it.
+?end
+I have to say, finally, of the city, that it has been a house divided, and I think that it is still. I think that the part of it that was kept by the sixth blood, in a long room in the Marigny, is the only part of it that I should care to be shut up in during a fire.
+?if b4.seat == "held"
+  I have to add that the river houses sit in a Chapter, on the first Monday of every month, in a chair of black walnut, and that the chair is occupied. I have never seen it done in my life. I have been told that it was last done before the Revolution.
+?elif b4.seat == "lent"
+  I have to add that the river houses sit in a Chapter, on the first Monday of every month, under the terms of a paper that the hero wrote. It is the first time in my experience that the old blood has been asked to read what it signs.
+?else
+  I have to add that the river houses have been left, as the hero chose, to their own devices. They have been very much occupied with them.
+?end
+?if b4.pledge == "sworn"
+  There is a schoolmistress in the Tremé who holds the keeper's oath of the house. She is the best informed person in the city. I should be a good deal happier if she were on our side.
+?elif b4.pledge == "deeded"
+  There is a schoolmistress in the Tremé who holds a school in her own name, by a deed that I have seen, and that the Legislature will not honor. She does not need it to. I should say that she is the only real power in the faubourg.
+?end
+This is the last page.
+> The book was recovered by the Aventine watch from a room over a counting house in the Rue Royale, in the spring of 1868. It was on the table, under a stone. The last page is in a calmer hand. It says, in one line, that the writer has gone to see about a school.
+?if b4.letter == "left"
+  A letter is said to be kept in a house in the Marigny, to be given up to whoever asks for it in the name of the sixth blood. It has not been asked for.
+?end
+?if b4.answer == "shelter"
+  > In the margin, in another hand, in Greek, in very small letters, there is a note. It says that a house is a shelter, and that this is the right answer, and that it has been the cause of every great grief in the history of the world. It is not signed. There is a comma in the margin. It is in the right place.
+?elif b4.answer == "strength"
+  > In the margin, in another hand, in Greek, in very small letters, there is a note. It says that a house is a strength, and that this is the answer of a person who has not yet been tired. It is not signed. There is a comma in the margin. It is in the right place.
+?else
+  > In the margin, in another hand, in Greek, in very small letters, there is a note. It says that a house is a promise, and that this is the answer that he gave himself, once, and has been trying to keep. It is not signed. There is a comma in the margin. It is in the right place.
+?end
+=> endbook

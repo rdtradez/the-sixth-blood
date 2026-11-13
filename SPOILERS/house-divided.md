@@ -192,3 +192,21 @@ Hooks: the Chapter of the river houses (broken Compact or kept one); Cassian's O
 
 Flagged to the owner (spoiler light): the thirtieth of July is a historical massacre and is played seriously. Nothing changes the big picture and no major character dies.
 
+## Chapter 19, "All Saints" (`b4c19`, session 49)
+
+31 October 1866, the eve of All Saints. The city whitewashes its tombs. Night phase, three of four: Belle Rive (`b4.seat`: sat in the black walnut chair and made the Chapter a court, gave the seat to Beaumont on written terms, or refused any seat; the old blood stands in the sixth blood's presence without being asked), the school (`b4.pledge`: deeded it to Honorine, offered her the keeper's oath, or left the door open), the Velati agent's room (`b4.hand`: she shows nineteen letters with the same correcting hand in the corner, the Scribe is an office and not a person, three names held the keys; he set a comma trap, gave the names to Rome, or kept the box), and the family (errands, `coven_house`, `training_hall`, `vaults`).
+
+Fixed scene: the old cemetery at midnight. Cassian asks what a house is for (`b4.answer`: shelter, strength, or keeping) and gives his true name: Nikanor, a slave clerk of a grain office at Ostia, born a slave, who kept the tallies and wrote four hands. He saw the family there (Prisca curtseys). He leaves for the north and says he will see the hero in London.
+
+Dawn: the Chapter's roll or Beaumont's clerk, the school's note, the agent's boat or box, a Greek note that says "Keep it."
+
+Hooks: Cassian in London; the Scribe (still unnamed; Roan is still undecided); Honorine's school; the river houses; the charge to the family.
+
+Flagged to the owner: Cassian's true name (Nikanor, a freedman's trade and a slave's birth) is invented here because the design doc's text was not available to this session. Change it in chapter 19 and the codex entry if the design doc says otherwise. Nothing else changes the big picture and no major character dies.
+
+## Chapter 20, "The Long Quiet" (`b4c20`, session 49)
+
+March 1867, the Reconstruction Acts. The last night (the school, the family, the levee with Armand, or alone in the cemetery), then the place, the steward (bank, Prisca, Hanno, Fiammetta, Thibault, keepers), the orders, the guard, the standing charge to the family (`b4.charge`: keep the house, send a hand north to find a house in the great cities, or scatter and write every January), a letter, and the sleep to London (twenty years).
+
+Hooks: the family that stays, goes north or scatters; Cassian in London; the Scribe; the Panic of 1873 in the sleep.
+

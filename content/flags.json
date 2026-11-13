@@ -4529,6 +4529,90 @@
       "major": true,
       "default": "hospital",
       "note": "Chapter 18: the evening after the Institute, in the school in the Treme"
+    },
+    "b4.seat": {
+      "kind": "enum",
+      "values": [
+        "held",
+        "lent",
+        "refused"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 19: the river houses' walnut chair, at Belle Rive on All Saints' Eve"
+    },
+    "b4.pledge": {
+      "kind": "enum",
+      "values": [
+        "deeded",
+        "sworn",
+        "open"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "open",
+      "note": "Chapter 19: what he gave Honorine for the school in the Treme"
+    },
+    "b4.hand": {
+      "kind": "enum",
+      "values": [
+        "trap",
+        "named",
+        "kept"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 19: what he did with the Velati agent's box of Resident letters and the three names"
+    },
+    "b4.answer": {
+      "kind": "enum",
+      "values": [
+        "shelter",
+        "strength",
+        "keeping"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "keeping",
+      "note": "Chapter 19: his answer to the maker's October question, what a house is for"
+    },
+    "b4.last_night": {
+      "kind": "enum",
+      "values": [
+        "school",
+        "family",
+        "levee",
+        "alone"
+      ],
+      "book": "house-divided",
+      "major": false,
+      "default": "alone",
+      "note": "Chapter 20: how he spent the last night in New Orleans"
+    },
+    "b4.charge": {
+      "kind": "enum",
+      "values": [
+        "keep",
+        "north",
+        "scatter"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "keep",
+      "note": "Chapter 20: the standing charge he left the family for the sleep"
+    },
+    "b4.letter": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "none"
+      ],
+      "book": "house-divided",
+      "major": false,
+      "default": "none",
+      "note": "Chapter 20: whether he left a letter at the house in the Marigny"
     }
   }
 }
