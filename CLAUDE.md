@@ -38,4 +38,5 @@ The owner plays the game and wants to be surprised by chapter level choices and 
 - Renaming or repurposing a flag or stat: bump `contentVersion` in `content/manifest.json` and add a content migration.
 - Editing a released chapter: bump its `@version`.
 - Every path through a scene ends in `->`, `<~` or `=>`. The checker warns about scenes that can run off their end.
+- Venture menus (where the player chooses what to invest in) must loop: each option is `[once]` and hidden unless `can_invest()`, each purchase jumps back to the menu label, and a final option ends it. The player may buy several ventures as long as the wealth is there.
 - Add a test for every new engine behavior, especially anything that touches saves.
