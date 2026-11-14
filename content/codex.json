@@ -1057,6 +1057,30 @@
       "title": "The First Voice",
       "book": "whitechapel-hunt",
       "text": "A pressure rather than a voice, felt by those who sit long at the lamp in the wall. It seems very old and very patient."
+    },
+    "bloody_sunday": {
+      "category": "places",
+      "title": "Trafalgar Square, 13 November 1887",
+      "book": "whitechapel-hunt",
+      "text": "The forbidden meeting of the unemployed that the police and the Life Guards broke up in an afternoon. Hundreds were hurt, and the hospitals were full by dark."
+    },
+    "the_second_page": {
+      "category": "lore",
+      "title": "The Second Page",
+      "book": "whitechapel-hunt",
+      "text": "A folded sheet found in the lining of Cassian's letter case, sealed with a small lamp. It named a Tuesday and a place, and asked that the sixth of the line bring the family."
+    },
+    "the_eighty_four_cards": {
+      "category": "lore",
+      "title": "The Eighty Four Cards",
+      "book": "whitechapel-hunt",
+      "text": "One card for each first Tuesday of seven years, kept by the firm in Lime Street for a client who never gave a name. Seven years is a term of apprenticeship in the old law."
+    },
+    "the_burned_card": {
+      "category": "lore",
+      "title": "The Burned Card",
+      "book": "whitechapel-hunt",
+      "text": "The freehold the white faced client offered, burned in the counting house stove. The ash kept its shape and did not blow away."
     }
   }
 }
