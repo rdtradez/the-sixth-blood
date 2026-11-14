@@ -61,3 +61,14 @@ Ch 13, "The Convalescent", 6 October 1887. If the lid was sealed, a late waking 
 Ch 14, "The Lamp in the Wall", 13 October. Opening: the report. Night, three of four: Cable Street (Nell Pardoe, the third death: old blood cure, transfusion, sit with her, `b5.ward`); the young houses call in the roofs (a seat at the Court, a charter under the firm with Fiammetta's house, or the debt called paid, `b5.seat`); Houndsditch (the Order's report to Rome: his letter, as seen, or hushed, `b5.report`); Bishopsgate (look, buy the brewery lease, send the family, `b5.wall`). Closing, fixed: the chamber, the lamp, the thing that turns over below; Cassian white and saying he was not told; the cracked peg (`b5.peg`: took it for the Collection, Court silver on the door, left for Lisle to study).
 
 Hooks left: twelve more anchors and who else is feeding the god; Cassian's plan and what he was not told; Lisle's learning; the Court's chair for the young; the Order's report in Rome; Nell Pardoe; the peg.
+
+## Chapters 15 and 16 (session 58)
+
+Lore added: the thirteen lamps are "hinges", not tombs or prisons; Lisle can feel all of them and draws the ring. Cassian was led to London by a letter that was "placed" in his mind, signed with a lamp. The first lamp to go out is the one by the great lake in the west (the Chicago link for Book Six), blown out by something that does not breathe. The white faced client of the firm (the eighty four cards, first Tuesday) is the god's agent, and asks for the eighty fifth signature; he walks off on the river.
+
+Ch 15, "The Chain", 20 October 1887. Opening: the report. Night, three of four: the attic (Lisle's map; copy for the family, a copy to the Court, `b5.map`); the leads (Cassian: trust him, have him write the letter down, let him go, `b5.cass`); Cable Street (Ada Pardoe, Nell's sister: keeper, shop, the truth, `b5.nell`); the firm (insurance, electric, underground ventures, house builds, lead task). Closing, fixed: the house in the attic; a lamp "went out at eleven" in the west (`b5.dark`: send one of the family, warn the Court and Rome, wait and watch).
+
+Ch 16, "The First Tuesday", 1 November. Opening: the report. Night, three of four: Mayfair (the Court sits with the young at its table; tell all, half or none, `b5.sitting`); the Club's master calls (ally, truce or call the notes, `b5.pall`); the wall (sit with Lisle, a Court scholar, or a guard on the stair, `b5.lessons`); the council (Prisca west, Hanno into the Club's counting house, Fiammetta as the house's face, the lead guarding, house builds, `b5.arm`). Closing, fixed: the first Tuesday at Lime Street, the white faced client and the eighty fifth card (`b5.client`: sign, refuse, follow).
+
+Hooks left: the dark lamp in the west and whoever went; the god's agent and the first Tuesday of December; the Court's chair for the young; the Club's debts or alliance; Lisle at the wall and the second lamp; Cassian and the letter; Nell or Ada in the house.
+
