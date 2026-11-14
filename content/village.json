@@ -13,6 +13,8 @@
     "shelters": { "book": "unchained", "name": "Hidden cellars and shelters", "cost": 10, "prosperity": 1, "defense": 3 },
     "wine_label": { "book": "unchained", "name": "The Collesanto wine label", "cost": 10, "prosperity": 6, "defense": 0, "requires": ["winery"] },
     "infirmary": { "book": "house-divided", "name": "An infirmary for the hill", "cost": 25, "prosperity": 5, "defense": 0 },
-    "granary": { "book": "house-divided", "name": "A granary against the bad years", "cost": 20, "prosperity": 4, "defense": 1, "requires": ["farms"] }
+    "granary": { "book": "house-divided", "name": "A granary against the bad years", "cost": 20, "prosperity": 4, "defense": 1, "requires": ["farms"] },
+    "mill": { "book": "whitechapel-hunt", "name": "A mill on the stream", "cost": 22, "prosperity": 6, "defense": 0 },
+    "lamps": { "book": "whitechapel-hunt", "name": "Lamps for the lane and the church", "cost": 12, "prosperity": 3, "defense": 1 }
   }
 }

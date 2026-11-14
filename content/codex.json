@@ -883,6 +883,72 @@
       "title": "Nikanor of Ostia",
       "book": "house-divided",
       "text": "A clerk of a grain office on the coast of Italy, born a slave, who kept the tallies and could write four hands. It is the name your maker gave you on All Saints' Eve, 1866."
+    },
+    "the_gilded_city": {
+      "category": "lore",
+      "title": "The Gilded Age in Louisiana",
+      "book": "whitechapel-hunt",
+      "text": "The long, quiet settling of accounts that followed the war. The troops went home, the old men came back to the statehouse, and a new set of laws put the freed people back where they had been, by degrees and by paper."
+    },
+    "the_electric_age": {
+      "category": "lore",
+      "title": "The electric age",
+      "book": "whitechapel-hunt",
+      "text": "Arc lamps on the street corners, wires overhead, a voice in a box on a desk. By 1887 the cities are lit all night, and a creature of the dark finds it has to learn to be invisible in the glare."
+    },
+    "the_london_covens": {
+      "category": "lore",
+      "title": "The London covens",
+      "book": "whitechapel-hunt",
+      "text": "London is the oldest great city of the north, and its covens are the oldest of its kind. They keep to a custom of presenting strangers, and they keep their rivalries long."
+    },
+    "the_jubilee_year": {
+      "category": "lore",
+      "title": "The Jubilee year",
+      "book": "whitechapel-hunt",
+      "text": "Queen Victoria has reigned fifty years in 1887, and the whole Empire hangs out flags. In the East of London the flags are rather fewer."
+    },
+    "the_city_of_london": {
+      "category": "places",
+      "title": "The City of London",
+      "book": "whitechapel-hunt",
+      "text": "The square mile of banks, insurers, shipping offices and merchants' counting houses, with more money in it than any place on earth and hardly anyone sleeping in it."
+    },
+    "the_east_end_hospitals": {
+      "category": "places",
+      "title": "The hospitals of the East End",
+      "book": "whitechapel-hunt",
+      "text": "The London Hospital and its poor relations, with a queue at the door every morning of the year, a great deal of carbolic, and too few beds."
+    },
+    "the_opium_trade": {
+      "category": "lore",
+      "title": "The opium trade",
+      "book": "whitechapel-hunt",
+      "text": "The old business of the river: poppy from India, shipped to the docks of Limehouse and Poplar, sold in the dens by the river, and ignored by everyone who profits."
+    },
+    "whitechapel": {
+      "category": "places",
+      "title": "Whitechapel",
+      "book": "whitechapel-hunt",
+      "text": "A square mile of lanes and lodging houses east of Aldgate, packed with tailors, dockers, matchgirls and new arrivals from Poland and Ireland. The gas stops at the edge of it."
+    },
+    "the_court_of_lamps": {
+      "category": "lore",
+      "title": "The Court of Lamps",
+      "book": "whitechapel-hunt",
+      "text": "The oldest coven of London, centered on a house in Mayfair. It keeps the old custom that a stranger is presented to the Court, and holds a long memory for those who are not."
+    },
+    "the_free_dispensaries": {
+      "category": "places",
+      "title": "The free dispensaries",
+      "book": "whitechapel-hunt",
+      "text": "Charity clinics that gave the poor of the East End advice and medicine for the price of a ticket from a subscriber. Consumption killed about one Londoner in six, and the queues began before dawn."
+    },
+    "the_jubilee_bonfires": {
+      "category": "lore",
+      "title": "The Jubilee bonfires",
+      "book": "whitechapel-hunt",
+      "text": "On 21 June 1887, the night of the Queen's Golden Jubilee, a chain of bonfires was lit on hills across the kingdom, and the poor of every London street laid out tables of paper and trestles for the day."
     }
   }
 }

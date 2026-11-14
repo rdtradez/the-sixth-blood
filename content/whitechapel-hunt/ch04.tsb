@@ -1,0 +1,312 @@
+// Book Five, Chapter 4 (session 52). Jubilee Night, 21 June 1887.
+// Opens with no phase (the family and the lead lay out the night), then a short hunger scene that only runs if must_feed(), then one night phase of three actions out of four, a fixed closing scene every player plays, and a dawn.
+// The coven fronts the night: the Court's reception, the street feast and the informants, the clinic, the family at the doors. Reads b5.court, b5.haven, b5.tuesday, b5.crosses, b5.gray, b5.mortuary. Names are always checked with in_circle().
+// Sets b5.price, b5.feast, b5.physician, b5.doors and b5.cassian. Uses acquire("informants"), coven_task(), discover(), meet(), witness().
+// Ends with rest() and => next, which pauses until chapter 5 exists (the manifest entry is incomplete).
+@chapter b5c04
+@title Jubilee Night
+@book whitechapel-hunt
+@version 1
+
+# start
+## The night of the bonfires
+$ b5.price = "refused"
+$ b5.feast = "watched"
+$ b5.physician = "refused"
+$ b5.doors = "left"
+$ b5.cassian = "wait"
+$ _lead = ""
+$ _reader_name = "the young keeper"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+?if must_feed()
+  ~> hunger
+  ---
+?end
+~> opening
+---
+$ do phase("night", 3)
+It is the twenty first of June, and the whole of England is lit. {cap(voice("hunger"))}.
+-> night
+
+# opening
+## The Jubilee
+$ do discover("the_jubilee_bonfires")
+There are bonfires on every hill from Cornwall to the Cheviots, and a chain of them in Surrey that you can see from a roof, one beyond another, going away into the dark like beads. There are flags on every cab. There are children in the Mile End Road with paper crowns, and an old woman selling hot chestnuts under an arch of lanterns, who is singing to herself about the Queen.
+?if _lead != ""
+  {_reader_name} has laid the night out like a map. It is a family habit now, and an endearing one. There are four doors, and the house can take you to three of them. There is the Court, which has asked for you again, in a very correct note. There is Stepney, where Miss Aldous has laid a table in the street and wants the family to sit at it. There is Commercial Road, where a man in a white muffler has said that you may bring whom you please. And there are the eight doors on the plan, which are going to be left alone for the first time in a fortnight, if you do not decide otherwise.
+  "I do not want to choose for you," {name(_lead)} says. "I should like to be asked."
+?else
+  There are four things that want doing, and you have time for three: the Court, which has asked for you again, in a very correct note; Stepney, where Miss Aldous has laid a table in the street; Commercial Road, where a man in a white muffler has said that you may come; and the eight doors on the plan.
+?end
+<~
+
+# hunger
+## The first thing
+* Go out among the crowd at Mile End, and take a drunk who is singing and will not remember ?if wake("outcome") != "woken_early"
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  It is the easiest feeding that you have ever had. Nobody in the crowd looks twice at a man who is helping a friend into a doorway, and the friend goes home with a headache and a brand new conviction that he saw the Queen.
+* Ask the family for a bottle, from the cellar
+  $ do feed("donor")
+  $ do earn(-2)
+  ?if coven_size() > 0
+    It is brought to you in a glass, by someone who does not make a remark, and who has kept the cellar stocked with a care that you do not deserve and are very grateful for.
+  ?else
+    It comes from a hospital porter, in a ginger beer bottle, at an extortionate price, on the night of all nights when the whole of the city has a thirst.
+  ?end
+* Hunt the cats of the fish wharves, in the flare of the bonfires
+  $ do feed("animal")
+  $ humanity += 1
+  They are quick, and wild, and there are a great many of them, and nobody in the city is looking at the ground tonight.
+* Go without, in the light of all those fires
+  $ humanity += 1
+  $ cunning_brutal += 1
+  It is a bad night to go hungry. Every light in London seems to have been lit in order to remind you.
+<~
+
+# night
+## The twenty first
+:night
+?if actions_left() == 3
+  The sky is orange over the whole of the East, and the roofs are crowded with people looking at it.
+?elif actions_left() == 2
+  The rockets begin. They go up from Parliament Hill, and Primrose Hill, and every common in the city, and the sky is a window with a fire behind it.
+?else
+  The bonfires are going down, and the crowds have gone soft with drink and singing, and you have one thing left that you have time for.
+?end
+* Go to the Court, in Mayfair, on the Queen's night [once] ?if actions_left() > 0
+  ~> court
+  $ do act()
+* Go to Stepney, and sit at the table in the street [once] ?if actions_left() > 0
+  ~> feast
+  $ do act()
+* Go to the dispensary in Commercial Road [once] ?if actions_left() > 0
+  ~> clinic
+  $ do act()
+* Watch the eight doors, under the bonfires [once] ?if actions_left() > 0
+  ~> doors
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> closing
+?end
+-> :night
+
+# court
+## The Court on the Queen's night
+$ do discover("the_court_of_lamps")
+?if b5.court == "called" and coven_size() > 0
+  You go in form, with the family at your back, and the footman in plum livery takes the whole party's cards, which he has been told to do, with the face of a man who has been shown a miracle and means to bear it well.
+?elif b5.court == "regrets"
+  You have been a fortnight in the city without presenting yourself, and the footman's face, as he takes your coat, is expressionless with a very precise degree of disapproval.
+?else
+  The footman takes your coat and your card and shows you in, and does not say that you are late.
+?end
+It is a very grand evening. The long drawing room is hung with lamps, each in its ring of thorns, and in the middle of it, on a table, there is a model of the Queen's crown made of sugar. There are forty people, of whom thirty one do not breathe. There is a quartet in the gallery playing something by Mozart that has been arranged, not very well, for the occasion.
+Lady Marchmont receives you in the window. She wears gray silk, and a single diamond, and an expression of the greatest affability, which you have already learned is the one that precedes a request.
+"There is a person in the East End," she says, "who is doing a thing which is against the oldest law of this city. It is a law that has not been broken since the year of the Fire. It is a law against meddling with the blood of mortals for any purpose but one. I will not say what the purpose is. I shall say that he is doing it in my city, to my poor, and that I should like him brought to me."
+"Alive," she says. "I do not mean to have him killed. The Court tries its own."
+:the_price
+* Say that you will bring him, if he can be found, and if he is guilty
+  $ b5.price = "agreed"
+  $ standing += 2
+  $ secrecy -= 1
+  She inclines her head, and for a moment there is no affability in her face at all. It is the face of a very old person who has been waiting for an answer to a question that she was afraid to ask. "Thank you," she says. "It is a great deal more than I had hoped for from a stranger."
+* Refuse, and say that you do not do the Court's errands
+  $ b5.price = "refused"
+  $ cunning_brutal += 2
+  $ standing -= 1
+  The room, for a moment, is quite silent. She does not frown. She looks at you with an interest that is plainly a good deal more dangerous than anger. "Of course," she says. "You are a very new person. We shall try again."
+* Say that you will bring him, but that your friend Cassian comes first
+  $ b5.price = "bargained"
+  $ cunning_brutal += 1
+  $ standing += 1
+  "Cassian," she says, as if turning over a coin. "I do not have him, Mr. Collins. If I had, I should have told you at once, for it would be a very good bargain." She says it so simply that you find that you believe her. It is, you realize, the first thing that she has said that night that you do.
+?if b5.court == "called" and coven_size() > 0
+  ?if in_circle("prisca") and member("prisca", "status") == "active"
+    Prisca, at your shoulder, says nothing at all, and looks at the Court's lamps one by one, and counts them. She tells you afterward that there are eleven, and that she would very much like to know the name of the twelfth.
+  ?end
+?end
+<~
+
+# feast
+## Stepney
+$ do meet("ruth")
+It is a long table down the middle of the street, made of doors and trestles and a plank laid on two barrels, covered with paper and lit by three hundred jam jar lanterns. Miss Aldous has done it herself, in the way that things are done in the East End, by a conspiracy of widows. There is a ham, and a mountain of bread and butter, and a barrel of small beer, and a cake with the Queen's face in sugar that a baker's boy has sat up all night to ice.
+Children are everywhere. A very small girl in a tin crown informs you that she is the Queen. You say that you are honored. She says that she will see about it.
+?if coven_size() > 0
+  The family sits at the table with the street. It is something that you have not seen them do, and it is a good deal harder than the Court. They are very much afraid, you realize, of doing it badly. And then a child puts a paper hat on Hanno's head, and nobody has to be afraid of anything for an hour.
+?end
+:the_feast
+* Pay for the feast, and for another, and tell Miss Aldous to buy what she wants for the street [once]
+  $ b5.feast = "hosted"
+  $ do earn(-3)
+  $ humanity += 2
+  $ standing += 1
+  Ruth looks at the purse for a long moment and then up at you, and you see that you have done something that she did not expect. She says that it will feed two hundred people for a week. She says that it will also be talked about in every kitchen in Stepney by morning. She says that she does not think that you meant the second thing, and that she is glad of it.
+* Take your place at the table, and listen
+  $ b5.feast = "joined"
+  $ secrecy += 1
+  $ humanity += 1
+  You sit. You listen. A great deal of the East End is said to you, in an hour, in the form of grievances and recipes and the ages of a number of children. It is the greatest intelligence that you have been given in London. It does not come with a name or a date. It comes with a slice of cake.
+* Stand at the edge, and watch the street
+  $ b5.feast = "watched"
+  $ cunning_brutal += 1
+  It is a good vantage. You count the doorways, the windows, the roofs, and the number of people who are not eating. There are four. They are all watching you, and each of them is trying not to.
+?if can_acquire("informants")
+  ~> landladies
+?end
+<~
+
+# landladies
+Ruth waits until the cake has gone round. Then she takes you into the kitchen, with the door closed, and tells you, in her plain level voice, that there are in Stepney and Whitechapel something over two hundred landladies, and that she knows every one of them, and that each of them knows every one of her lodgers. She says that it has never occurred to anyone to ask them to tell what they know.
+:the_landladies
+* Ask her to build it, and pay for what it costs [once] ?if can_acquire("informants")
+  $ do acquire("informants")
+  $ standing += 1
+  $ do discover("whitechapel")
+  She nods, once. By the end of the week there is a network of teapots in every lane from Aldgate to Limehouse, and a word that goes round in an hour, and a very large number of women who have been asked, for the first time in their lives, for their opinion.
+* Say that it is too much to ask of her
+  $ humanity += 1
+  She smiles, rather sadly, and says that she thought that you might say so. She says that it will be there when you want it.
+<~
+
+# clinic
+## The dispensary in Commercial Road
+$ do meet("ashe")
+$ do discover("the_free_dispensaries")
+It is a long low shop that has been a chandler's, with the sign still over the door and a new brass plate beneath it, and a queue. The queue goes round the corner and into the next street. It is eleven o'clock on the night of the Jubilee, with the whole of London drunk and singing, and there are two hundred women standing in a line in the dark, and every one of them is coughing.
+?if b5.tuesday == "met"
+  The gentleman in the white muffler is at the door. He bows, and takes you through the queue, past the benches and the screens and the smell of carbolic, into a back room that has been a kitchen.
+?elif b5.tuesday == "followed"
+  The gentleman in the white muffler is at the door, and does not seem to be surprised that you have your clerk's card. He takes you through the queue into a back room that has been a kitchen.
+?else
+  A thin boy with a lantern says that you are expected, and takes you through the queue into a back room that has been a kitchen.
+?end
+There is a man at a deal table writing in a ledger. He is very tall, and very thin, with a long gray face, a black coat, shirt sleeves rolled to the elbow, and the hands of a surgeon. He is old. He is older than Lady Marchmont. You know it by the quiet of him, and the way that the room arranges itself around him, and by the smell of the blood that he has been working with, which is the one that you tasted in the shed.
+"Mr. Collins," he says. "Of the sixth line. I have been hoping for you for some time. I am called Ashe, here. I am not a very good host. Will you sit?"
+:the_clinic
+* Ask him straight out whether he killed the women
+  $ do witness(1)
+  He puts down the pen. He does not flinch. "Two of them," he says. "I should like to say that it was not so. It was. The third was not me."
+  He tells it plainly. For a hundred years he has treated the consumptive poor of the city, by day and by night, with whatever he had. In the spring of eighty six he found that a very small dose of old blood, a spoonful, given into a woman's mouth, checks the sickness for a month. He found that a larger dose cures it, and that a larger dose still kills her, in a night, quietly, of a fever of the heart. He took the blood of the women, to learn what the sickness did to it, in a very small measure, a pint, and returned them to their beds, and two of them did not wake. He closed the wounds himself, and he has not slept since.
+  "The third one," he says. "She was not one of mine. I never saw her. She was on my list, but she had not been to the dispensary for a month. Someone took her pint, and used my stitch, and my ticket, and left her in a doorway for the constable to find. I think that someone is using me as a hand."
+* Look at the queue, and say nothing, and wait for him to speak
+  $ do witness(1)
+  $ humanity += 1
+  He understands. He looks at the door, where the coughing is. "It kills one in six," he says. "The doctors know nothing. They send them to Margate, and give them cod liver oil, and wait. I have been a physician for nine hundred years. I would not have thought that I should be driven to this, by a cough."
+  He tells you the rest. It is the whole of it, the blood, the pint, the two who did not wake, and the third who was not his. He tells it as a thing that he has said to himself a thousand times, in a room at night, and has not before had a listener for.
+~> blood_ask
+<~
+
+# blood_ask
+"I have a request," Ashe says. "It is not a thing that I ask lightly. My blood is old, and it is the wrong kind. It checks the sickness and it will not cure it. I have been told, for three hundred years, that the sixth line is a legend. I think that there is a thing in it that the others lack. I should like a pint."
+:the_blood
+* Give it freely, from your own arm
+  $ b5.physician = "gave"
+  $ humanity += 2
+  $ hunger += 15
+  $ do witness(1)
+  He does it with the hands of a man who has done it ten thousand times, and with the tenderness of a man who has not forgotten the first. He takes a pint, and he warms it, and he carries it out into the dispensary, to a woman of forty on a bench, who has been coughing blood into a handkerchief since Easter. She takes a spoonful. She does not say anything. She breathes, once, very deep, and then again, and the whole of the queue goes quiet. She asks, after a moment, if there is any bread.
+* Refuse, and say that you will not be a well for him to draw on
+  $ b5.physician = "refused"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  He bows. It is not a thing that he can reasonably resent. "You are quite right," he says. "I should have refused myself. You will forgive an old man for asking."
+* Send for a member of the family, who has the old blood, and let them choose ?if gift_holder("old_blood") != ""
+  $ b5.physician = "family"
+  $ standing += 1
+  $ humanity += 1
+  $ do witness(1)
+  ?if gift_holder("old_blood") != ""
+    {name(gift_holder("old_blood"))} comes in from the street, where the family has been waiting, and sits down at the table, and rolls up a sleeve before anyone has asked. "He is ours," {pg(gift_holder("old_blood"), "he", "she", "they")} says, to you, not to Ashe. "The blood is ours. It is for us to say." The Physician takes a spoonful, no more, and carries it out to the benches. There is a long silence, and then, from somewhere in the queue, someone begins, absurdly, to laugh.
+  ?end
+?if b5.physician == "gave" or b5.physician == "family"
+  Ashe comes back to the kitchen after an hour with his hands shaking, and he sits for a long while without speaking. "It holds," he says. "It holds, and it is going to hold. I do not know for how long." He looks at you. "I shall do nothing with it that you would not do yourself. I swear it on the books of my line."
+?end
+<~
+
+# doors
+## The eight doors
+It is a poor way to keep the Jubilee, and a very good way of keeping a promise. You go from street to street, under the glow of the bonfires, among the drunk and the happy and the lost. Every door is bolted. Every window is dark. The women inside are asleep, or pretending to be, with the sound of the singing coming in through the cracks.
+?if b5.crosses == "watched" and coven_size() > 0
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+    Fiammetta has been at the third door for four nights, in the shadow of a cart, in a man's cap, with a flask of tea. She says that nothing has come, and that she did not expect it to, and that it is the quiet that she does not like.
+  ?else
+    The family has kept its watch, by hour and by street, and nothing has come. It is the quiet that you do not like.
+  ?end
+?elif b5.crosses == "warned"
+  Ruth's women have done their work. A shutter opens a hand's breadth at the sixth door, a face looks out, and it closes again with an audible sound of relief.
+?else
+  You are alone with the eight. You have never felt so thin.
+?end
+At the seventh door, in a court off Flower and Dean Street, a man is standing in the shadow with his back to the wall and a black bag in his hand.
+:the_man
+* Step out, and take him by the arm
+  $ b5.doors = "stopped"
+  $ cunning_brutal += 1
+  $ do witness(1)
+  He is a young man, about twenty five, with a straw colored mustache and a clean collar, and a doctor's bag. He does not struggle. He says, in a breathless, perfectly respectable voice, that he is an assistant at the London Hospital, and that he has been sent by the dispensary to see to a Mrs. Reilly in the room above. He has a card, and it is Ashe's. It is also, the ink says, a very recent forgery.
+* Follow him, and let him go up the stair
+  $ b5.doors = "followed"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  He goes up. You hear a door open, and a woman's voice, drowsy and polite, and the murmur of a conversation. It lasts four minutes. When he comes down he is carrying the bag a little more heavily. You have the strange sense that you have let something pass that you ought to have stopped, and you do not know what.
+* Wait for the family, and take him together ?if coven_size() > 0
+  $ b5.doors = "stopped"
+  $ standing += 1
+  They come out of the dark from three sides at once, and the young man goes, rather suddenly, still. He is not, you see, afraid of them. He is afraid of the ones behind them. He says something, in a small hoarse voice, and it is the name of a street, and a number, and the word "Quill".
+<~
+
+# closing
+## Midnight
+$ do meet("quill")
+It is a quarter to midnight when you go up to the roof. It is a flat leaded roof, in whatever part of London you have made a home, and the whole of the city lies below you in a bowl of light. There are bonfires on Highgate and Hampstead, and a great rocket going up from Primrose Hill, and in the East a hundred small red fires, like the eyes of animals.
+There is a man at the chimney stack. He has his hat in his hand and a thick umbrella under his arm. He has the look of a man who has climbed three flights in the dark and has a bad knee.
+"Mr. Collins," says Quill. "I beg your pardon. I will not stay." He holds out a letter.
+It is sealed with a plain wafer. It is in a hand that you know.
+> *I am alive. I am among those who do not wish me to be. They will not harm me, for what they want is you. Do not come for me until you know whom you are fighting. Do not trust the lamps. Do not trust a doctor. Do not trust me, if I write again. C.*
+"I did not read it," says Quill. "I have an idea of what it says. It came to me by the hand of a boy who did not know the house. The one who holds your friend is not the Court, sir, and I should be astonished if it were the gentleman in Commercial Road. I am sorry. I should like to be more help."
+The rockets go up. The city is lit like a stage. He waits.
+:the_letter
+* Say that you will go and find him tonight
+  $ b5.cassian = "seek"
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  Quill shakes his head, once, very gently. "I would not, sir," he says. "I would sooner be wrong in daylight." You go anyway, for an hour, into the streets under the fires, and you find a green door, and a locked room, and a smell of carbolic and old blood. It is empty. You have the strong sense of a person who has just gone out.
+* Say that you will answer, and name a time and a place
+  $ b5.cassian = "trade"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  You write on the back of the letter, in pencil, in the old tongue, and give it to Quill. He folds it into his hat as if it were a thing that he had done a great many times. "I shall see that it goes," he says. "I do not say that it will arrive."
+* Say that you will take no step, and wait for them to show their hand
+  $ b5.cassian = "wait"
+  $ humanity += 1
+  $ standing += 1
+  It is the hardest of the three, and Quill sees it. "It is what a good policeman would do," he says. "It is also what a very good friend would do not to, and I am sorry for the difference." He puts his hat on. He goes down the stair, whistling, and you hear the hymn tune go away down the street, in step with the bonfires.
+?if coven_size() > 0
+  ?if _lead != "" and in_circle(_lead) and member(_lead, "status") == "active"
+    When he has gone, {name(_lead)} comes up the stair behind you and puts a shawl over your shoulders, which you do not need. {pg(_lead, "he", "she", "they")} does not ask what is in the letter. "We are here," {pg(_lead, "he", "she", "they")} says. It is the whole of the speech, and it is the whole of what a family is for.
+  ?end
+?end
+-> dawn
+
+# dawn
+## Before the dark ends
+There is a gray at the edge of the sky, and the last of the fires have fallen in, and the streets are full of paper flags and broken lanterns and sleepers. A bell strikes somewhere for a quarter, and a crowd of people who have been up all night go home singing.
+?if b5.physician == "gave" or b5.physician == "family"
+  Somewhere in Commercial Road a woman is eating bread, and it is quite likely the best bread that she has ever tasted.
+?elif b5.price == "agreed"
+  You have promised the Court a man. You have not yet decided that you will keep it.
+?else
+  You have two requests, and a letter, and a question.
+?end
+You think that there is going to be a very great deal more.
+$ do rest()
+=> next

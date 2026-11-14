@@ -76,6 +76,8 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 47: Book Four chapters 15 and 16
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 49: Book Four chapters 19 and 20; Book Four is complete (journal, recap and sleep to London)
+- [x] Session 52: Book Five chapters 3 and 4
+- [x] Session 51: Book Five chapters 1 and 2
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -624,3 +626,31 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Choices whose options are not mutually exclusive (businesses, boats, people sent) should be `[once]` loops with a closing option, like the venture menus. Book Four chapter 6 (`@version 3`) now lets the nine boats do several things at once; `b4.blockade` keeps its values, with the most committed one (carrying people, then running the Passes) winning.
 - Multi pick pass: 22 more menus across Books One to Four and the Lost Centuries interludes were turned into `[once]` loops with a closing option ("That is the whole of it"), in Book One chapters 9, 11 and 19, Book Two chapters 8, 13, 14 and 16, Book Three chapters 10, 13 and 15, Book Four chapters 1, 5, 8, 12, 13, 15 and 16 (chapter 1 twice), and interludes 1, 3 and 4. Where an option is a refusal or a step back, it stays exclusive and only shows before anything else is picked. The flag keeps its old values and the most committed pick wins. Each edited chapter's `@version` is bumped. The tests' `drive` helpers take the closing option by default.
 
+### Session 51b notes (more ways to sire in Book Four)
+
+- Book Four chapters 15, 18 and 20 (`@version 3`) now offer the Dark Gift. Each offer is hidden unless `can_sire()` (the engine's two a book still applies) and the person is not already in the circle: chapter 15 (the physician, if he lives in the family's house), chapter 18 (the schoolmistress, the morning after) and chapter 20 (either of them, on the last night at the school). Each can also be declined or put off.
+- New registered flags: `b4.armand_gift` and `b4.honorine_gift` (`none`, `given`, `kept`; major). A sired person joins the circle as a fledgling of the sixth line and can be the business lead in Book Five.
+- Test: `tests/book4.test.js` plays each offer, a decline, and the cap.
+
+
+### Session 51 notes (Book Five, chapters 1 and 2)
+
+- Book Five ("whitechapel-hunt") begins. Chapters `b5c01` and `b5c02` are in `content/whitechapel-hunt/` (`ch01.tsb`, `ch02.tsb`), about 10,000 words together. The manifest entry is `"incomplete": true`, so the game pauses on "To be continued" after chapter 2 and carries on by itself when chapter 3 is added.
+- Chapter 1 reads the chained `wake()` report (place, steward, outcome, orders) and plays a waking for each: the cellar in the Marigny, the tomb, or the hill. The business lead voices the waking, the report and the desk (`b5.lead_desk`); the desk offers the London ventures in a loop so several can be taken. It is one night phase of three actions out of four (books and the hill letter, the street, the household and the family's gifts, the letters) and a dawn where he chooses his passage. It ends with `rest()` and `=> next`. Chapter 2 is the crossing, the landing, a hunger scene that only runs if `must_feed()`, introductions by the lead, one night phase of three actions out of four (the firm and its ventures, the East End, a roof for the family, the card from the Court) and a short dawn.
+- New decision flags (`b5.` prefix, registered): `b5.trouble`, `b5.lead_desk`, `b5.lead_pick`, `b5.village`, `b5.first_feed`, `b5.books`, `b5.street`, `b5.circle`, `b5.summons`, `b5.passage` (chapter 1) and `b5.dock`, `b5.hale`, `b5.house`, `b5.body`, `b5.haven`, `b5.court` (chapter 2). `b5.circle` says whether the coven (or a keeper) crosses with him, follows or stays; read it with `coven_size()`. `b4.charge` and `b4.pledge` are read in chapter 1.
+- Coven focus, as the owner asked: the lead and the family front the waking and the landing, introduce the people he needs to know, and take standing tasks (`coven_task`) and a house (`acquire("coven_house")`) in London; a rival coven, the Court of Lamps, is introduced. Names are always checked with `in_circle()`; `npm run coven-names` is clean for the new files.
+- Village: two buildings for the book were added to `content/village.json` (`mill`, `lamps`). Hero alias for the book is `Mr. Collins`; the firm is `Collins & Hale`.
+- New people (`content/people.json`): Edmund Hale, Ruth Aldous and Lady Marchmont. New codex entries: the Gilded Age in Louisiana, the electric age, the London covens, the Jubilee year, the City of London, the East End hospitals, the opium trade, Whitechapel and the Court of Lamps. Content notes: chapter 1 `blood`, chapter 2 `blood` and `violence`. No new engine behavior, so no schema or migration.
+- No London map yet: the London page is not in the repo (the approved preview is kept outside it), so these chapters do not chart sites. A maps session should add it, as session 39 did for New Orleans; later chapters can then chart.
+- Tests: `tests/book5.test.js` plays both chapters from eight wakings, hungry and not, with and without a coven, and takes every choice.
+- Plans are in `SPOILERS/whitechapel-hunt.md`.
+
+### Session 52 notes (Book Five, chapters 3 and 4)
+
+- Chapters `b5c03` and `b5c04` are in `content/whitechapel-hunt/` (`ch03.tsb`, `ch04.tsb`), about 7,000 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 4. Same shape as chapters 1 and 2: an opening with no phase (chapter 3 the lead's report, chapter 4 the family laying out the night), a short hunger scene that only runs if `must_feed()` is true, one night phase of three actions out of four, and a dawn. Chapter 4 adds a fixed closing scene every player plays.
+- New decision flags (`b5.` prefix, registered): `b5.mortuary`, `b5.crosses`, `b5.tuesday`, `b5.gray` (chapter 3) and `b5.price`, `b5.feast`, `b5.physician`, `b5.doors`, `b5.cassian` (chapter 4). `b5.crosses`, `b5.price`, `b5.physician` and `b5.cassian` are the ones later chapters should read first.
+- Coven focus, as the owner asked: the lead reports a week of the family's work at the start of chapter 3, and Prisca, Fiammetta and Hanno each carry a thread (the plan read like a ledger, the doors watched, the firm). Fiammetta takes the `guard` task if the family keeps watch. In chapter 4 the family goes to the Court, sits at the Stepney street table, and can build the landladies' network (`acquire("informants")`, through `can_acquire`). A member with the `old_blood` gift can give blood to the Physician. Names are always checked with `in_circle()`; `npm run coven-names` is clean for the new files.
+- Historic investments: two new London ventures, `london.electric` and `london.stores`, offered in chapter 3 in a loop so several can be taken.
+- New people (`content/people.json`): Dr. Ashe (the Physician) and Mr. Quill. New codex entries: the free dispensaries and the Jubilee bonfires. Content notes: chapter 3 `blood`, `violence`; chapter 4 `blood`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book5b.test.js` plays both chapters hungry and not, with and without a coven, and takes every recorded choice; `tests/book5.test.js` now expects four chapters.
+- Plans are in `SPOILERS/whitechapel-hunt.md`. Sessions 51 and 51b (pull requests #54 and #55) were not merged when this session started, so the session 52 branch is stacked on session 51.

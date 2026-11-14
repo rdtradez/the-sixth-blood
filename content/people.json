@@ -7,7 +7,8 @@
       "aliases": {
         "blood-and-gold": "Signor del Colle",
         "crown-of-ashes": "Monsieur Colline",
-        "house-divided": "Monsieur Colline"
+        "house-divided": "Monsieur Colline",
+        "whitechapel-hunt": "Mr. Collins"
       },
       "surnames": {
         "burning-city": "Valerius",
@@ -474,6 +475,36 @@
       "name": "Gaspard Fontenot",
       "title": "Of the house of Mobile",
       "bio": "A mild, gray, scholarly vampire of a hundred and sixty years, with a short beard and spectacles he does not need. Beaten at Port Hudson, and prudent enough to know what he has left."
+    },
+    "hale": {
+      "gender": "m",
+      "name": "Edmund Hale",
+      "title": "Solicitor, of Lime Street",
+      "bio": "A tall spare lawyer of fifty with clean gray hands and a cautious heart, who has kept the firm's books for seven years without once seeing the principal."
+    },
+    "ruth": {
+      "gender": "f",
+      "name": "Ruth Aldous",
+      "title": "Of the house in Stepney",
+      "bio": "A plain, kind, watchful young woman sent ahead by the family, who has made herself a landlady, a nurse and the nearest thing the East End has to a confessor."
+    },
+    "marchmont": {
+      "gender": "f",
+      "name": "Lady Marchmont",
+      "title": "Head of the Court of Lamps, Mayfair",
+      "bio": "Small, white and upright, in gray silk and a great deal of lace, the oldest coven head in London. She does not ask, and she has been told that you are coming."
+    },
+    "ashe": {
+      "gender": "m",
+      "name": "Dr. Ashe",
+      "title": "The Physician, of the dispensary in Commercial Road",
+      "bio": "A very tall, thin, gray faced healer of the oldest line, who has treated the consumptive poor of London for a hundred years and has run out of ways to do it."
+    },
+    "quill": {
+      "gender": "m",
+      "name": "Mr. Quill",
+      "title": "A man in a gray overcoat",
+      "bio": "Thickset and weathered, a mortal of fifty with a policeman's patience and a bad knee, who has counted Cassian for a year and whistles hymn tunes."
     }
   }
 }
