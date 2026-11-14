@@ -991,6 +991,30 @@
       "title": "The Crypt of Christ Church",
       "book": "whitechapel-hunt",
       "text": "Beneath Hawksmoor's great white church in Spitalfields, a low crypt of pillars and black flagstones, long used by the parish and, for sixty years, by something else."
+    },
+    "the_hidden_hand": {
+      "category": "people",
+      "title": "The Hidden Hand",
+      "book": "whitechapel-hunt",
+      "text": "The one who has kept the twelfth lamp lit for three hundred years was not a stranger. He was the Court's own Warden of the Lamps, who could not bear to let a friend die."
+    },
+    "the_order_of_cedar": {
+      "category": "people",
+      "title": "The Order of Cedar",
+      "book": "whitechapel-hunt",
+      "text": "The Velati's arm in the streets: old soldiers and young devout men who carry a splinter of Lebanon cedar and a duty to use it."
+    },
+    "the_roof_watch": {
+      "category": "lore",
+      "title": "The Roof Watch",
+      "book": "whitechapel-hunt",
+      "text": "On Michaelmas 1887 the young houses of London stood on the roofs round Christ Church for a stranger's sleeper. It was the first time they had been asked to keep anything."
+    },
+    "the_sleeper": {
+      "category": "people",
+      "title": "The Sleeper",
+      "book": "whitechapel-hunt",
+      "text": "The twelfth of the Court of Lamps, laid down in 1587 by the other eleven. A gentleman of the Elizabethan age, with a ring of old coin gold, who did not die and could not be killed."
     }
   }
 }

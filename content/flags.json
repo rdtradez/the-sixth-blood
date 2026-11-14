@@ -5339,6 +5339,114 @@
       "major": true,
       "default": "refused",
       "note": "Chapter 10: his answer to the Chairman in the crypt"
+    },
+    "b5.hand": {
+      "kind": "enum",
+      "values": [
+        "exposed",
+        "shielded",
+        "quiet"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "quiet",
+      "note": "Chapter 11: what the Court did with the hidden hand that kept the twelfth lamp lit"
+    },
+    "b5.muster": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "some",
+        "all"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 11: how many of the young houses were asked to stand the roofs"
+    },
+    "b5.mabbott": {
+      "kind": "enum",
+      "values": [
+        "allied",
+        "warned",
+        "against"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "warned",
+      "note": "Chapter 11: where the retired sergeant stands before the Order arrives"
+    },
+    "b5.vigil": {
+      "kind": "enum",
+      "values": [
+        "all",
+        "few",
+        "alone"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "alone",
+      "note": "Chapter 11: who goes down into the crypt with him"
+    },
+    "b5.stair": {
+      "kind": "enum",
+      "values": [
+        "court",
+        "held",
+        "opened"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "held",
+      "note": "Chapter 12: how the Court was met at the north door"
+    },
+    "b5.roofs": {
+      "kind": "enum",
+      "values": [
+        "allies",
+        "alone",
+        "club"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "allies",
+      "note": "Chapter 12: who held the roofs around the church"
+    },
+    "b5.order": {
+      "kind": "enum",
+      "values": [
+        "stood",
+        "parleyed",
+        "fought"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "parleyed",
+      "note": "Chapter 12: how the Order's three from Rome were met"
+    },
+    "b5.sat": {
+      "kind": "enum",
+      "values": [
+        "sat",
+        "spoke",
+        "left"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 12: whether he sat with the sleeper before the waking"
+    },
+    "b5.waking": {
+      "kind": "enum",
+      "values": [
+        "gave",
+        "family",
+        "sealed"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "gave",
+      "note": "Chapter 12: the waking of the sleeper, his own blood, the family's, or sealed again"
     }
   }
 }

@@ -1,0 +1,301 @@
+// Book Five, Chapter 12 (session 56). Michaelmas, the twenty ninth of September 1887.
+// Opens with no phase (the family and the lead lay out the night), then a short hunger scene that only runs if must_feed(), then one night phase of three actions out of four, a fixed waking in the crypt that every player plays, and a dawn.
+// The coven fronts the chapter: the family holds the doors, the haven is where the sleeper is brought afterward, the business lead has kept the firm quiet and the books square, and the strong blood of the hero and his sired gives the waking its force. Rival covens are the heart of it (the Court of Lamps at the north door, the young houses and the Club on the roofs, the Order's three from Rome). Reads b5.vigil, b5.hand, b5.muster, b5.mabbott, b5.offer, b5.congress, b5.club, b5.hesketh, b5.cedar, b5.young. Names are always checked with in_circle().
+// Sets b5.stair, b5.roofs, b5.order, b5.sat and b5.waking. Uses send(), coven_task(), discover(), meet(), witness(), earn(), has_gift(), member_has_gift(), gift_holder().
+// Ends with rest() and => next, which pauses until chapter 13 exists (the manifest entry is incomplete).
+@chapter b5c12
+@title Michaelmas
+@book whitechapel-hunt
+@version 1
+
+# start
+## Michaelmas
+$ b5.stair = "held"
+$ b5.roofs = "allies"
+$ b5.order = "parleyed"
+$ b5.sat = "left"
+$ b5.waking = "gave"
+$ _lead = ""
+$ _reader_name = "the young keeper"
+$ _held = 0
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+?if must_feed()
+  ~> hunger
+  ---
+?end
+?if coven_size() > 0
+  ~> layout
+  ---
+?end
+$ do phase("night", 3)
+It is Michaelmas, the twenty ninth of September, and the night is clear and cold, with a thin moon over Spitalfields like a pared fingernail. The sleeper is to be woken at midnight. There are four things to see to before it, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# hunger
+## The first thing
+* Take a drunk carter at the corner of Folgate Street, snoring on his sacks ?if wake("outcome") != "woken_early"
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is rank with gin and horse. He does not stir. In the morning he will say that he has had the strangest dream, and will not say what it was.
+* Buy a bottle from the Sexton, who does not ask
+  $ do feed("donor")
+  $ do earn(-2)
+  He wraps it in a pillowcase. It is the most considerate transaction of your night.
+* Go down to the market and the cats
+  $ do feed("animal")
+  $ humanity += 1
+  A tom with a split ear and a very dignified manner, under a barrow of cabbages. It is not what you wanted. It is enough.
+* Go without, and let the edge have its way
+  $ humanity += 1
+  $ cunning_brutal += 1
+  It is a bright cold hunger, and the whole of the night is a little sharper than it was, as if it had been drawn in with a fine pen.
+<~
+
+# layout
+## The night, laid out
+?if _lead != "" and in_circle(_lead) and member(_lead, "status") == "active"
+  {name(_lead)} has chalked the night on the kitchen table, in four doors, with a tin mug on each corner. There is a good deal of good sense in it, and there is a margin, in the corner, in a small neat hand, in which is written the single word *tea*.
+?end
+?if b5.vigil == "all"
+  The family has put on its coats, and the good boots, and has said nothing about it. It is like watching a household get ready for a wedding.
+?elif b5.vigil == "few"
+  The family has chosen. Those who are going down are very quiet, and those who are staying have begun to move the furniture, with great purpose, in the direction of the doors.
+?else
+  The family has come round to it, as a family does, with a great deal of tea. It is a thing that you may do alone. It is not a thing that they intend to let you do unattended.
+?end
+?if b5.hand == "shielded"
+  Lord Vane is up, and dressed, and has been given a chair by the window. He has a very small bag, with a razor in it, and a book of hours.
+?end
+?if b5.offer == "sprung"
+  The Chairman has been brought down from the lower room, with his hat in his hand, and a family on either side. He has not once asked to be let go. He has asked to be let go to the church.
+?end
+<~
+
+# night
+## The night of the waking
+:night
+?if actions_left() == 3
+  The light goes out of the sky very slowly, and the lamps of Commercial Street come on, one by one, each with a small pop, like a row of shy candles.
+?elif actions_left() == 2
+  There is a hard bright moon now, and the whole of Spitalfields is made of silver and ink.
+?else
+  The church is a great white sail in the dark, and there is no wind in it at all.
+?end
+* Go to the north door, where the Court has come [once] ?if actions_left() > 0
+  ~> north
+  $ do act()
+* Go up on the roofs, where the young houses are standing [once] ?if actions_left() > 0
+  ~> roofs
+  $ do act()
+* Go to the south door, where three men have come from Rome [once] ?if actions_left() > 0
+  ~> south
+  $ do act()
+* Go down early, and sit with the sleeper in the lamplight [once] ?if actions_left() > 0
+  ~> sit
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> closing
+?end
+-> :night
+
+# north
+## The north door
+$ do meet("marchmont")
+Lady Marchmont has come, with the Eleven. She has not asked leave. She is in the lane behind the church in a plain black cloak, with the ten of the Court behind her in a line, and the line goes back into the dark beyond the lamp. It is the first time that the whole of the Court has been seen in the streets of London since the Great Fire.
+?if b5.hand == "exposed"
+  She has Lord Vane's lamp in her hands, with the flame hooded, and she carries it as one carries a child.
+?end
+"I have come to ask for the key of the crypt," she says, "and I have come to ask it in front of witnesses, so that nobody shall say that the Court was not civil." She is very pale. "He was ours. We put him down. It is for us to see that he is put right."
+:the_court
+* Give her the door, and let the Court stand at the foot of the stair [once]
+  $ b5.stair = "court"
+  $ standing += 2
+  $ humanity += 1
+  She bows, a very small and very grateful bow. The Eleven go down in a line, in order of age, and take their places along the wall like the pillars of a second crypt. Nobody has told them that they may. It is a thing that the family will not forget, and nor, you think, will they.
+* Let her in, but keep the stair, and a hand on the door [once]
+  $ b5.stair = "held"
+  $ cunning_brutal += 1
+  $ standing += 1
+  "That is quite reasonable," says Lady Marchmont, with a ghost of her old dryness. "It is exactly what I should have said, in your place." She goes down, with two, and leaves eight in the lane, in the cold, being very good.
+* Turn her away at the door, in front of all of them, and say that the Court has had three hundred years [once]
+  $ b5.stair = "opened"
+  $ cunning_brutal += 2
+  $ standing -= 1
+  It is a very quiet thing to say, and it is heard in the lane like a thrown plate. She does not argue. She turns and stands, with her back to the door, with her face to her own Court, and she says, in her thin clear voice, that they will wait. They wait. It is a most uncomfortable sort of waiting.
+?if coven_size() > 0 and in_circle("fiammetta") and member("fiammetta", "status") == "active"
+  Fiammetta, at your elbow, puts a hand on Lady Marchmont's sleeve, for a moment, quite lightly, and says in Italian that it is cold, and that there is a stove. It is not at all the sort of thing that is said to the head of the Court of Lamps. Lady Marchmont looks down at the hand. She does not move her arm.
+?end
+<~
+
+# roofs
+## The roofs of Brushfield Street
+$ do discover("the_roof_watch")
+They are all up there, in the starlight, in their best, and the rain has left the slates very bright. It is a curious sight. There are the Wapping boys, in guernseys. There are the eleven from Nine Elms, who are sitting in a line with their knees up and their faces turned to the moon, in a sort of rapture. There are fourteen of the Gaslight Club, in evening dress, on the leads, with a hamper.
+?if b5.muster == "all"
+  They have made a ring. It goes right round the church, from the Commercial Street roofs to the Fournier Street leads, and there is nowhere in it that a man could pass unseen. They are grave and happy and a little ashamed to be so.
+?elif b5.muster == "some"
+  There are enough, but only just. There is a gap, along the Fournier Street side, with nobody in it but the wind.
+?else
+  There are very few. They are dotted about, rather forlornly, with the look of guests who have come to a party that nobody else has heard of.
+?end
+:the_leads
+* Walk the ring, and thank them each by name, and put your own people in the gaps [once]
+  $ b5.roofs = "allies"
+  $ standing += 2
+  $ humanity += 1
+  It takes the better part of an hour, and the whole of the vocabulary of gratitude, and the result is a ring of the young, thickly standing, who have been looked in the face. Hesketh, at the end of the line, says that it is a very odd thing to be thanked, and that he is not at all sure that he likes it, and that he would like to be thanked again.
+* Take the high leads yourself, and let nobody else stand there [once]
+  $ b5.roofs = "alone"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  There is nothing on the high leads but a weathercock and the whole of London. You stand under the cock, in the cold, and see the church, and the lanes, and the little lamps of the watchers in the dark, and it is the clearest that anything has been all year.
+* Give the roofs to Lord Hesketh, and the glory with them [once] ?if b5.club == "allied" or b5.club == "played" or b5.hesketh == "welcomed" or b5.congress == "backed"
+  $ b5.roofs = "club"
+  $ humanity += 1
+  Hesketh goes pink to the ears. He makes a very short speech, with a gardenia, and a flourish, and at the end of it the fourteen give a sort of cheer, which is a cheer in the way that a sigh is a gale. It is the sweetest sound that you have heard in London.
+?if coven_size() > 0 and in_circle("prisca") and member("prisca", "status") == "active"
+  Prisca walks the whole of the line, after you, with her hands in her sleeves, and stops by every one of the young, and says a word to each. She is a hundred and eighty years older than the oldest of them. They stand up straight.
+?end
+<~
+
+# south
+## The south door
+$ do meet("mabbott")
+There are three of them, in plain gray coats, with the collars up, and a long flat case apiece, in the lee of the Fournier Street wall. They are not old soldiers. The youngest is perhaps twenty five and has the face of a very devout choirboy. The eldest has a scar from the corner of the mouth to the ear, and eyes like pale glass. They have not drawn anything. They have only stood.
+?if b5.mabbott == "allied"
+  Sergeant Mabbott is with them, with a book, and the air of a man who has been explaining a thing for the last hour to people who did not wish to hear it.
+?elif b5.mabbott == "against"
+  Sergeant Mabbott is with them, and has not looked at you. He has his hand in his coat.
+?else
+  Sergeant Mabbott is a little way off, in a doorway, with his pipe, and looks as though he would give a good deal to be somewhere else.
+?end
+"It is a thing that cannot wake," says the eldest, in good plain English. "It is not for us to say what it is. It is for us to say that it will not." He has not raised his voice. "We have been told that you are not to be fought. We have been told that you are to be stopped. We are very sorry."
+:the_gray
+* Stand in front of them, and say that if there is to be a stake it will have to go through you first [once]
+  $ b5.order = "stood"
+  $ humanity += 1
+  $ velati_regard += 1
+  He regards you for a long while with the pale eyes. "That would be a very great sin," he says at last. "I do not think that I shall commit it." He does not put the case down. He does not open it. He tells the others, in Latin, to stand, and they stand.
+* Ask the eldest to come and see for himself, and bring the sergeant with his book [once]
+  $ b5.order = "parleyed"
+  $ velati_regard += 2
+  $ cunning_brutal += 1
+  There is a long and very formal silence. Then the eldest nods, once, and takes off his hat. "We shall go down," he says, "and we shall stand. We shall have our case. We shall not open it unless there is cause." It is a bargain. It is the bargain of a man who has decided, for the first time in thirty years, to look.
+* Have the family take the lane, and the walls, and make sure that the case does not leave its owner [once] ?if coven_size() > 0
+  $ b5.order = "fought"
+  $ cunning_brutal += 2
+  $ velati_regard -= 2
+  It is not a brawl. It is a series of small hard moments in the dark, quite without noise, and when it is over the three are sitting against the wall with their wrists tied and their cases in a pile. Nobody is dead. The youngest is crying, very quietly, as a child cries after a quarrel in the nursery.
+?if has_gift("healing") or has_gift("old_blood")
+  When it is over, you kneel by the choirboy, and the old blood in you is a little warm, and he lets you look at the cut on his scalp, and it closes, and he stops crying, and looks at you as at a miracle that has been very rude.
+?end
+<~
+
+# sit
+## With the sleeper
+$ do discover("the_sleeper")
+There is nobody in the crypt but the sleeper, and a single lamp, and the pillars going away in the dark like a petrified wood. The sheet has been drawn back to the shoulders. It is a man's face, grave and fine, with a clipped beard of the time of Elizabeth, and the cheeks of a man who is thirty, and the skin of one who has been dead a very long time. He has a ring on his hand with a stone in it the color of an old coin.
+:the_sitting
+* Sit with him, and say nothing, and let him have the company [once]
+  $ b5.sat = "sat"
+  $ humanity += 2
+  You sit on the end of a tin chest with your hands between your knees, in the lamplight, for the better part of an hour. There is nothing to be heard. Then, very slightly, there is the faintest of sounds, like a page turned in the next room, and the flame of the lamp leans toward him, and straightens.
+  ?if has_gift("old_blood")
+    It is the old blood. It knows him. It does not say that it does.
+  ?end
+* Speak to him, plainly, and tell him the year and the name of the Queen [once]
+  $ b5.sat = "spoke"
+  $ cunning_brutal += 1
+  $ standing += 1
+  You tell him that it is the year of the Jubilee, and the name of the Queen, and that Spain has been a long time quiet, and that there is a great deal of gas. You say it very slowly. You do not know if he hears it. The ring, on his hand, in the lamplight, for a moment, is a shade less cold.
+* Do not stay. It is not a place to be alone in [once]
+  $ b5.sat = "left"
+  $ secrecy += 1
+  You go up the stair again, quickly, into the clean cold air, and you do not look back. It is not cowardice. It is a thing that you have learned: that a house that has waited three hundred years may be allowed another hour.
+?if coven_size() > 0 and in_circle("hanno") and member("hanno", "status") == "active"
+  Hanno has put a camp stool at the foot of the stair, and a flask, and an old blanket, and is sitting in the dark with his hat on his knees, being as quiet and large as a piece of furniture.
+?end
+<~
+
+# closing
+## Midnight
+$ do witness(0)
+It is midnight. The bells of Christ Church, which have been silent since the evening, strike twelve very slowly, one after another, with a long wait between, and the sound goes out over the roofs like a hand opening.
+The door is open. The stair is lit. The Chairman is at the foot of it, with his hat in his hand, exactly as he said.
+?if b5.vigil == "all" and coven_size() > 0
+  The family comes down behind you, in a line, in its good coats, and fills the crypt as water fills a glass. They stand at the pillars, and they are very still.
+?elif b5.vigil == "few" and coven_size() > 0
+  A few of the family come down with you, a pace behind, and take their places at the pillars. The rest are above, and you can feel them, in the stones.
+?else
+  You go down alone, as you said, and the stair is very long.
+?end
+?if b5.stair == "court"
+  The Eleven are along the north wall, in black, in order of age, each with a hooded lamp, like a row of statues of old judges.
+?elif b5.stair == "held"
+  Lady Marchmont is at the end of the south wall, with two of her own, quite still. She inclines her head. It is a small civil movement, and all that there is time for.
+?else
+  There are no members of the Court in the crypt. There is the sound of them, overhead, in the lane, waiting.
+?end
+?if b5.order == "stood" or b5.order == "parleyed"
+  The three in gray coats are at the stair foot, with the cases at their feet, and the eldest has his hat off.
+?end
+The sleeper lies on the stone, with the sheet drawn back, and the long shape of him seems to take up the whole of the dark. The Chairman lays down his hat on the tin chest.
+"I have thought about this for three hundred years," he says, "and I find that I have nothing to say. It is the old blood, in a cup, and then it is a matter between you and him." He steps back. "I shall be very much obliged."
+:the_waking
+* Open your own wrist, and give him the cup yourself, and be the face that he sees [once]
+  $ b5.waking = "gave"
+  $ humanity += 1
+  $ standing += 2
+  It is very slow, and very cold, and it hurts a good deal more than you thought. The blood goes into the cup, dark, with the old thick shine of the sixth line, and you hold his head, as a nurse might, and you say nothing at all.
+* Ask the family to give beside you, a cup from each, so that the line is in him from all sides [once] ?if coven_size() > 0
+  $ b5.waking = "family"
+  $ humanity += 1
+  $ standing += 3
+  $ cunning_brutal += 1
+  They come, one at a time, in the lamplight, each in turn, and each opens a wrist and gives. It is a thing that none of them would have thought that they could do, and every one does it very simply. It is the line, the whole of it, in a cup, and when it is poured the lamp on the stone leaps up, as at a great wind.
+* Refuse the cup, and let the Court's silver seal him again, in front of the Chairman [once]
+  $ b5.waking = "sealed"
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  $ standing += 1
+  "I thought that you might," says the Chairman, very quietly, and he does not look at you. "It is, I suppose, the sensible thing." Lady Marchmont, at the wall, with a very pale face, takes a step forward, and the silver is brought, and the lid is eased down, and the lamp on the stone burns very small. Nobody speaks. It is the longest silence of the year.
+-> dawn
+
+# dawn
+## Before the dark ends
+?if b5.waking == "gave" or b5.waking == "family"
+  He opens his eyes. They are gray, and they are quite clear, and they look at the roof of the crypt, and at you, and he says, in a voice like a drawer being opened, in the English of Marlowe, "Is it the day?" You tell him that it is not. He says that it is a great pity, and that he had hoped to see it. He lies a while, with his hand on his chest. Then he says, "Whose blood is this?"
+  You tell him. He is silent. "There was a first," he says at last, "before the six. He left things. I should like, before I do anything else, to see whether you have found them." He closes his eyes, as a man does who has said enough. It is not sleep. It is the thing that comes before a very long conversation.
+  ?if b5.waking == "family"
+    The family is round the stone, in the lamplight, with their wrists bound and their faces shining. Something has happened to them. It is nothing that you can name. They are, all of them, a little stronger, and a little more alike.
+  ?end
+  ?if b5.stair == "court"
+    Lady Marchmont stands over him, with her lamp, and she is weeping, in her thin dry way, without any noise at all.
+  ?end
+  ?if b5.hand == "shielded"
+    Lord Vane has come down the stair, uninvited, and is on his knees by the stone. He does not say anything. He does not need to.
+  ?end
+?else
+  The silver is on the lid, and the lid is on the stone, and the lamp is a small blue point. It is done. It is correct. You go up the stair with the family, and nobody speaks, and at the top the air is very clean and sharp, and over the roofs the sky has the long gray look of a thing that has been put off.
+  The Chairman has not gone. He is on the church steps, with his hat in his hand, in the gray light, with the face of a man who has been told that there is no more hope. "It will not hold," he says. "It will not. It was not made to hold a thing that has been woken once." He puts on his hat. "I shall be at the dispensary," he says, "if anybody needs a doctor."
+?end
+?if b5.roofs == "club"
+  Lord Hesketh is sitting on the steps of the church, with a gardenia, and a cold, and an expression of perfect contentment.
+?elif b5.roofs == "allies"
+  The young houses come down off the roofs, in the gray, by the ladders, in ones and twos, and shake each other by the hand.
+?end
+?if b5.order == "fought"
+  There are three men in gray coats in the house in Fitzroy Square, in the lower room, being given soup. They have not said a word.
+?elif b5.order == "stood" or b5.order == "parleyed"
+  The three in gray stand at the church door, hats in their hands, and the eldest comes up to you and says, in plain English, that he will write to Rome that he has seen a thing that he does not understand, and that he did not strike it.
+?end
+Somewhere in the City a clock is striking, with an air of great discretion, five. It is the thirtieth of September, and Michaelmas is over.
+$ do rest()
+=> next

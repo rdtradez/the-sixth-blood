@@ -963,6 +963,23 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b5c11",
+          "file": "whitechapel-hunt/ch11.tsb",
+          "title": "Michaelmas Eve",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c12",
+          "file": "whitechapel-hunt/ch12.tsb",
+          "title": "Michaelmas",
+          "notes": [
+            "blood",
+            "violence"
+          ]
         }
       ],
       "incomplete": true

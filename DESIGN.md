@@ -82,6 +82,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 54: Book Five chapters 7 and 8
 - [x] Session 55: Book Five chapters 9 and 10
 - [x] Session 51: Book Five chapters 1 and 2
+- [x] Session 56: Book Five chapters 11 and 12
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -669,3 +670,11 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New people (`content/people.json`): Sir Julian Venn and Frances Venn. New codex entries: the Gaslight Club, the underground railways and Fitzroy Square. Content notes: chapter 5 `blood`, chapter 6 `blood`, `violence`. No new engine behavior, so no schema or migration.
 - Tests: `tests/book5c.test.js` plays both chapters hungry and not, with and without a coven, and takes every recorded choice; `tests/book5.test.js` now expects six chapters.
 - Plans are in `SPOILERS/whitechapel-hunt.md`. Sessions 51, 51b and 52 were merged into main together at the start of this session.
+
+### Session 56 notes (Book Five, chapters 11 and 12)
+
+- Chapters `b5c11` and `b5c12` are in `content/whitechapel-hunt/` (`ch11.tsb`, `ch12.tsb`), about 8,000 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 12. Same shape as chapters 9 and 10: an opening with no phase (the lead's report, then the family laying out the night), a short hunger scene that only runs if `must_feed()` is true, one night phase of three actions out of four, a fixed closing scene every player plays, and a dawn.
+- The coven fronts both chapters: the family hears the terms and goes down into the crypt, the lead runs the firm, the haven is built out (hall, front business, blood network, several ventures allowed), and rival covens are the heart of it (the Court of Lamps, the young houses, the Gaslight Club, the Order's watchers). Hanno or the lead sees to the sleeper's room; the family's blood is an option at the waking.
+- New decision flags (`b5.` prefix, registered, major): `b5.hand`, `b5.muster`, `b5.mabbott`, `b5.vigil` (chapter 11) and `b5.stair`, `b5.roofs`, `b5.order`, `b5.sat`, `b5.waking` (chapter 12). New codex entries: four. No schema or migration. Tests in `tests/book5f.test.js`.
+- Plans are in `SPOILERS/whitechapel-hunt.md`.
+
