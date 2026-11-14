@@ -5132,6 +5132,129 @@
       "major": true,
       "default": "refused",
       "note": "Chapter 6: his answer to Frances Venn and the key"
+    },
+    "b5.hesketh": {
+      "kind": "enum",
+      "values": [
+        "welcomed",
+        "warned",
+        "shut"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "shut",
+      "note": "Chapter 7: how he met Lord Hesketh of the Gaslight Club"
+    },
+    "b5.build": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "house",
+        "safe",
+        "hall"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 7: what he built for the family (the last pick; several may be taken)"
+    },
+    "b5.list": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "names",
+        "house",
+        "guest"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 7: what he asked of Frances Venn about the dinner"
+    },
+    "b5.plan": {
+      "kind": "enum",
+      "values": [
+        "cellar",
+        "guest",
+        "family"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "cellar",
+      "note": "Chapter 7: how he means to enter Fitzroy Square"
+    },
+    "b5.ashe": {
+      "kind": "enum",
+      "values": [
+        "helped",
+        "warned",
+        "left"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 8: his dealings with Dr. Ashe before the dinner"
+    },
+    "b5.dispensary": {
+      "kind": "enum",
+      "values": [
+        "asked",
+        "taken",
+        "watched",
+        "left"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 8: what he did at the Cable Street dispensary"
+    },
+    "b5.way": {
+      "kind": "enum",
+      "values": [
+        "key",
+        "force",
+        "silver"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "key",
+      "note": "Chapter 8: how he got into Fitzroy Square"
+    },
+    "b5.cellar": {
+      "kind": "enum",
+      "values": [
+        "walked",
+        "family",
+        "carried"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "walked",
+      "note": "Chapter 8: how he freed Cassian from the silver"
+    },
+    "b5.chairman": {
+      "kind": "enum",
+      "values": [
+        "unseen",
+        "faced",
+        "named"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "unseen",
+      "note": "Chapter 8: how he met the ninth guest"
+    },
+    "b5.venn": {
+      "kind": "enum",
+      "values": [
+        "spared",
+        "shamed",
+        "taken"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "spared",
+      "note": "Chapter 8: what became of Sir Julian Venn"
     }
   }
 }

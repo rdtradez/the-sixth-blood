@@ -517,6 +517,18 @@
       "name": "Frances Venn",
       "title": "The surgeon's daughter",
       "bio": "Thirty and plain and straight, with her father's gray eyes, who has paid a man for two years to watch her father and cannot bear what he has found."
+    },
+    "hesketh": {
+      "gender": "m",
+      "name": "Lord Hesketh",
+      "title": "Head of the Gaslight Club, Pall Mall",
+      "bio": "A fair, charming man of thirty with a gardenia in his coat, who runs the young coven of fourteen and is quite honest about being a liar."
+    },
+    "chairman": {
+      "gender": "m",
+      "name": "The Chairman",
+      "title": "The ninth guest",
+      "bio": "A tall, courteous, stooping man in a gray scarf with a perfectly forgettable face, for whom a chair at Sir Julian Venn's table is always kept."
     }
   }
 }

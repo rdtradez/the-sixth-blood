@@ -929,6 +929,23 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b5c07",
+          "file": "whitechapel-hunt/ch07.tsb",
+          "title": "The Long Table",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c08",
+          "file": "whitechapel-hunt/ch08.tsb",
+          "title": "The Ninth Chair",
+          "notes": [
+            "blood",
+            "violence"
+          ]
         }
       ],
       "incomplete": true
