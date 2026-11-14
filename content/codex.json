@@ -1081,6 +1081,24 @@
       "title": "The Burned Card",
       "book": "whitechapel-hunt",
       "text": "The freehold the white faced client offered, burned in the counting house stove. The ash kept its shape and did not blow away."
+    },
+    "the_rogue_fledgling": {
+      "category": "lore",
+      "title": "The Rogue Fledgling",
+      "book": "whitechapel-hunt",
+      "text": "A flower seller made a vampire in panic by the master of the Gaslight Club, unbound and unfed, who killed twice in Commercial Street before she was found in a cold store in Black Eagle Street. The Court's law makes a house answer for a made thing that runs within its ground."
+    },
+    "the_silent_west": {
+      "category": "lore",
+      "title": "The Silent West",
+      "book": "whitechapel-hunt",
+      "text": "A cable from Chicago in the first week of 1889: the lamp by the lake has not gone out but moved, and a man in the stockyards is asking for the sixth line by name and paying in gold of a date before the Republic."
+    },
+    "the_house_that_followed": {
+      "category": "lore",
+      "title": "The House That Followed",
+      "book": "whitechapel-hunt",
+      "text": "The answer sent west on the last night in London: that the house is coming, and will wake in the lakeside city, and that the family is to be ready."
     }
   }
 }

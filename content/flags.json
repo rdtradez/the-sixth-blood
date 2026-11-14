@@ -5773,6 +5773,102 @@
       "major": true,
       "default": "terms",
       "note": "Chapter 18: what he did with the eighty fifth card"
+    },
+    "b5.trail": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "net",
+        "hounds"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "net",
+      "note": "Chapter 19: how the hunt for the Commercial Street fledgling was run"
+    },
+    "b5.master": {
+      "kind": "enum",
+      "values": [
+        "court",
+        "shield",
+        "notes"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "court",
+      "note": "Chapter 19: what was done with the master of the Gaslight Club"
+    },
+    "b5.nights": {
+      "kind": "enum",
+      "values": [
+        "surety",
+        "grace",
+        "none"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "grace",
+      "note": "Chapter 19: what the Court granted, or was refused, for the hunt"
+    },
+    "b5.maggie": {
+      "kind": "enum",
+      "values": [
+        "ended",
+        "ward",
+        "court"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "court",
+      "note": "Chapter 19: what became of the fledgling Maggie Tuck"
+    },
+    "b5.last_night": {
+      "kind": "enum",
+      "values": [
+        "attic",
+        "wall",
+        "cass",
+        "maggie"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "attic",
+      "note": "Chapter 20: where the last night in London was spent"
+    },
+    "b5.west": {
+      "kind": "enum",
+      "values": [
+        "follow",
+        "hold",
+        "silent"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "hold",
+      "note": "Chapter 20: the answer to the cable from Chicago"
+    },
+    "b5.charge": {
+      "kind": "enum",
+      "values": [
+        "keep",
+        "west",
+        "scatter"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "keep",
+      "note": "Chapter 20: the standing charge to the family for the sleep"
+    },
+    "b5.farewell": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "none"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 20: whether a letter was left in the house"
     }
   }
 }
