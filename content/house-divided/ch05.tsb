@@ -5,11 +5,15 @@
 @chapter b4c05
 @title The Envoy and the Convention
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## The seal
 $ b4.envoy = "heard"
+$ _writer = "the house"
+?if business_lead() != ""
+  $ _writer = name(business_lead())
+?end
 $ b4.levy = "lent"
 $ b4.shelter = "left"
 $ do discover("the_secession_of_louisiana")
@@ -95,7 +99,7 @@ He does not ask for an oath. He asks, with great delicacy, whether Monsieur Coll
   $ secrecy += 2
   $ velati_regard += 1
   $ standing += 1
-  He inclines his head by exactly the right distance. "That is what Prisca's letters said," he says. "That you were a man who could be told a thing once." There is a pause, and a small dry cough that might have been the beginning of a laugh. "I shall write it that way. It will be the first thing I have been able to say about the sixth in a hundred years that did not cause a flutter." He takes up his hat. It is evident that you have been, in some measure, a relief.
+  He inclines his head by exactly the right distance. "That is what {_writer}'s letters said," he says. "That you were a man who could be told a thing once." There is a pause, and a small dry cough that might have been the beginning of a laugh. "I shall write it that way. It will be the first thing I have been able to say about the sixth in a hundred years that did not cause a flutter." He takes up his hat. It is evident that you have been, in some measure, a relief.
 * Offer neutrality in the war, in exchange for a letter, in the Senate's hand, that the house of the sixth is not to be touched
   $ b4.envoy = "bargained"
   $ cunning_brutal += 2
@@ -192,8 +196,8 @@ There are, in the back room, eleven people. They are sitting on the floor and on
   $ humanity -= 2
   $ do earn(-2)
   She receives the purse without looking at it. Nobody in the back room looks up. The girl of fourteen, however, does, and looks at you, with a steady, grave, dark eye, for what seems a very long time. It is not contempt. You would almost prefer it if it were. It is the look of a person who is making a note. Madame sees you to the door, and says, quite gently, that every house has its limit, and that she does not think the less of Monsieur for knowing his. She does not say that she thinks the more.
-?if b4.errand == "protect" and in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
-  As you go, Madame says, "Your little Italian was here before you." She means Fiammetta. "She sat on the gallery for an hour, with a lemon, and said nothing, and went away. I have not had a visitor so well behaved since my husband." It is a small, warm, dry sentence, and it tells you where she has been.
+?if b4.errand == "protect" and b4.errand_who != "" and b4.errand_who != 0 and in_circle(b4.errand_who) and member(b4.errand_who, "status") == "active" and not on_mission(b4.errand_who)
+  As you go, Madame says, "Your quiet one was here before you." She means {name(b4.errand_who)}. "{pg(b4.errand_who, "He", "She", "They")} sat on the gallery for an hour, very straight, and said nothing, and went away. I have not had a visitor so well behaved since my husband." It is a small, warm, dry sentence, and it tells you where {pg(b4.errand_who, "he", "she", "they")} has been.
 ?end
 $ do discover("the_free_people_of_color_law")
 <~
@@ -201,12 +205,31 @@ $ do discover("the_free_people_of_color_law")
 # house
 ## The Marigny
 $ do chart("neworleans.haven")
+$ _lead = business_lead()
+$ _watch = gift_holder("strength")
+?if _watch == "" or _watch == _lead
+  $ _watch = ""
+  ?if cast(2) != ""
+    $ _watch = cast(2)
+  ?elif cast(1) != ""
+    $ _watch = cast(1)
+  ?end
+?end
 ?if coven_size() > 0 and b4.circle != "stay"
-  The coven is awake, and in the long room, and not at all asleep. It is a thing that a house knows, in the grain of the floor, on the night before a country goes to war: it is a very small thing, and it is the whole of the house. Hanno has laid out the ledgers on the dining table in the order of their danger. Prisca has opened a map. Fiammetta is sitting in the window, with her chin on her hand, watching the street.
-  ?if b4.errand == "scout" and in_circle("prisca") and member("prisca", "status") == "active" and not on_mission("prisca")
-    Prisca has come home. She says, without looking up from the map, that the river houses have eleven roads out of the city, and that three of them are watched, and that two of the watchers are paid by the same man, who is not a vampire and is a good deal more frightening. She puts a thin finger on the paper. It is a very exact map. It has the sleep habits of every dog on the Bayou Road in the margin.
-  ?elif b4.errand == "protect" and in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
-    Fiammetta has been back for two nights, and has not said very much about it. She says only that Dr. Armand has a very good lock, and a very bad habit of not using it, and that she has been told, with great firmness, that she is not to sit on his step. She sat on it anyway. It is plain, from the way that she says it, that she has begun to be fond of a person for whom she has no intention of admitting it.
+  The coven is awake, and in the long room, and not at all asleep. It is a thing that a house knows, in the grain of the floor, on the night before a country goes to war: it is a very small thing, and it is the whole of the house.
+  ?if cast_count() >= 1
+    {name(cast(1))} has laid out the ledgers on the dining table in the order of their danger.
+  ?end
+  ?if cast_count() >= 2
+    {name(cast(2))} has opened a map.
+  ?end
+  ?if cast_count() >= 3
+    {name(cast(3))} is sitting in the window, with {pg(cast(3), "his", "her", "their")} chin on {pg(cast(3), "his", "her", "their")} hand, watching the street.
+  ?end
+  ?if b4.errand == "scout" and b4.errand_who != "" and b4.errand_who != 0 and in_circle(b4.errand_who) and member(b4.errand_who, "status") == "active" and not on_mission(b4.errand_who)
+    {name(b4.errand_who)} has come home. {pg(b4.errand_who, "He", "She", "They")} {pg(b4.errand_who, "says", "says", "say")}, without looking up from the map, that the river houses have eleven roads out of the city, and that three of them are watched, and that two of the watchers are paid by the same man, who is not a vampire and is a good deal more frightening. A finger goes down on the paper. It is a very exact map. It has the sleep habits of every dog on the Bayou Road in the margin.
+  ?elif b4.errand == "protect" and b4.errand_who != "" and b4.errand_who != 0 and in_circle(b4.errand_who) and member(b4.errand_who, "status") == "active" and not on_mission(b4.errand_who)
+    {name(b4.errand_who)} has been back for two nights, and has not said very much about it. {pg(b4.errand_who, "He", "She", "They")} {pg(b4.errand_who, "says", "says", "say")} only that Dr. Armand has a very good lock, and a very bad habit of not using it, and that {pg(b4.errand_who, "he", "she", "they")} {pg(b4.errand_who, "has", "has", "have")} been told, with great firmness, not to sit on his step. It was sat on anyway. It is plain, from the way that it is said, that {pg(b4.errand_who, "he", "she", "they")} {pg(b4.errand_who, "has", "has", "have")} begun to be fond of a person for whom there is no intention of admitting it.
   ?end
   There is, in the room, the thing that has been in every war house in the world: a plan. They are going to need more than a good lock. They have been talking, in your absence, in the way that a family does when the head of it is out, and they have come to a number of conclusions, none of which is at all what you expected.
 ?elif coven_size() > 0
@@ -223,18 +246,18 @@ $ do chart("neworleans.haven")
   $ do acquire("informants")
   $ cunning_brutal += 1
   $ secrecy += 1
-  It costs a good deal less than you would have thought, and is worth a good deal more. There is always, in a city, a person who has seen a thing and not been asked. You find three in the first week, and a fourth is brought to you, a little grudgingly, by Hanno, who has been trying to prevent himself from enjoying it.
+  It costs a good deal less than you would have thought, and is worth a good deal more. There is always, in a city, a person who has seen a thing and not been asked. You find three in the first week, and a fourth is brought to you, a little grudgingly, by one of the family, who has been trying very hard not to enjoy it.
 * Take a second house, a plain one, on the Bayou Road, as a place to be found in ?if can_acquire("safehouses")
   $ do acquire("safehouses")
   $ secrecy += 1
   $ do earn(-2)
   It is a dull little house, with a green door and a cistern, and a woman who comes in by the day to air it. It has no mirror, no portrait, no book, no sign that anyone has ever lived in it. It is an excellent place, as a former Roman remarks, to be mistaken for somebody else.
-* Set Fiammetta to the watch of the Marigny house ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and task("fiammetta") != "guard"
-  $ do coven_task("fiammetta", "guard")
-  Fiammetta says that she has been waiting to be asked, which is a thing that she says about everything, and is a good deal more often true than anyone has liked to say. She goes out into the courtyard at once, and walks the wall, and comes back in with a very long, very sharp, very unnecessary knife. You do not ask where she found it.
-* Ask Prisca to carry the firm's paper through the war ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and task("prisca") != "business"
-  $ do coven_task("prisca", "business")
-  Prisca takes it as she has taken every ledger that has ever been given to her, with a very small, very tidy nod, and a pencil. She says that a war is the best time in the world to be a quiet woman with a good abacus. She says that she has made a great deal of money in a great many wars and has hated every one. You have the impression, without being told, that it is a thing she has not said aloud for a very long time.
+* Set {name(_watch)} to the watch of the Marigny house ?if _watch != "" and b4.circle != "stay" and task(_watch) != "guard"
+  $ do coven_task(_watch, "guard")
+  {name(_watch)} says that it has been waiting to be asked, which is a thing that is said about everything, and is a good deal more often true than anyone has liked to say. Out into the courtyard {pg(_watch, "he", "she", "they")} {pg(_watch, "goes", "goes", "go")} at once, and walks the wall, and comes back in with a very long, very sharp, very unnecessary knife. You do not ask where it was found.
+* Ask {name(_lead)} to carry the firm's paper through the war ?if _lead != "" and b4.circle != "stay" and task(_lead) != "business"
+  $ do coven_task(_lead, "business")
+  {name(_lead)} takes it as every ledger that has ever been given has been taken, with a very small, very tidy nod, and a pencil. A war, {pg(_lead, "he", "she", "they")} {pg(_lead, "says", "says", "say")}, is the best time in the world to be quiet with a good abacus, and money has been made in a great many wars by someone who has hated every one. You have the impression, without being told, that it is a thing not said aloud for a very long time.
 * That will do for tonight
   -> :house_done
 -> :the_works

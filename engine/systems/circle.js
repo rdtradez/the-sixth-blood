@@ -9,6 +9,7 @@
 //   $ do member_fate("lucia", "left")         active, left, dead, captured, betrayed
 //   in_circle("lucia"), member("lucia", "status"), member_power("lucia"), daywalker("lucia")
 //   coven_size(), circle_size(), can_sire(), sired_this_book()
+//   cast_count(), cast(n)                     the active coven in a steady order (the business lead first), for scenes that name whoever is really there
 //   business_lead(), lead_result()            the member best at business, and how their last sleep task went
 //   $ do appoint_lead()                       set that member to run the business (the business task)
 //
@@ -66,6 +67,14 @@ export function businessAptitude(ctx, m) {
   return memberPower(ctx, m) + Math.floor(stat(ctx, `loyalty.${m.id}`) / 25)
     + (m.role === 'business' ? 3 : 0) + (m.task === 'business' ? 2 : 0)
     + (gifts.includes('merchants_eye') ? 3 : 0) + (m.line === 'merchant' ? 2 : 0);
+}
+
+/** The active turned members who can be named in a scene: the business lead first, then by aptitude. */
+export function castIds(ctx) {
+  const lead = leadId(ctx);
+  const pool = vampires(sysOf(ctx)).filter((m) => m.id !== lead);
+  pool.sort((a, b) => businessAptitude(ctx, b) - businessAptitude(ctx, a) || (a.id < b.id ? -1 : 1));
+  return [...(lead ? [lead] : []), ...pool.map((m) => m.id)];
 }
 
 /** The id of the coven member best at business (the one who runs it), or "". Turned members only; nobody who acts behind his back. */
@@ -139,6 +148,8 @@ export const circle = {
     coven_size: { spec: [], fn: (ctx) => vampires(sysOf(ctx)).length },
     circle_size: { spec: [], fn: (ctx) => Object.values(sysOf(ctx).circle).filter(present).length },
     can_sire: { spec: [], fn: (ctx) => sireProblem(ctx) === null },
+    cast_count: { spec: [], fn: (ctx) => castIds(ctx).length },
+    cast: { spec: ['number'], fn: (ctx, n) => castIds(ctx)[n - 1] ?? '' },
     business_lead: { spec: [], fn: (ctx) => leadId(ctx) },
     lead_result: { spec: [], fn: (ctx) => sysOf(ctx).circle[leadId(ctx)]?.taskResult ?? '' },
     sired_this_book: { spec: [], fn: (ctx) => sysOf(ctx).sired[ctx.state.book] ?? 0 },

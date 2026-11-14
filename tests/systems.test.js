@@ -607,3 +607,16 @@ test('the village helpers say what can be built now', async () => {
   const rich = await run('A {can_build_any()} "{village_next()}".', { vars: { wealth: 999 } });
   assert.match(texts(rich.frame)[0], /^A (yes|no) "/);
 });
+
+test('cast() names whoever is really in the coven, the business lead first', async () => {
+  const game = await run([
+    'A {cast_count()} "{cast(1)}".',
+    '$ do recruit("hanno", "merchant", 1, "business", 80)',
+    '$ do sire("aelia", "scout")',
+    '$ do recruit("prisca", "merchant", 3, "business", 90)',
+    'B {cast_count()} "{cast(1)}" "{cast(3)}" "{cast(4)}".',
+  ].join('\n'), { book: 'blood-and-gold' });
+  const lines = texts(game.frame);
+  assert.equal(lines[0], 'A 0 "".');
+  assert.match(lines[1], /^B 3 "prisca" "[a-z]+" "".$/);
+});

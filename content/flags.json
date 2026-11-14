@@ -4689,6 +4689,12 @@
       "major": false,
       "default": "none",
       "note": "Chapter 3: which of the family's gifts he had them work at this season"
+    },
+    "b4.errand_who": {
+      "kind": "text",
+      "book": "house-divided",
+      "note": "Chapter 4: which member of the coven went on the errand (the id), or empty",
+      "default": ""
     }
   }
 }
