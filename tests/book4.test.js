@@ -405,9 +405,10 @@ test('chapter 5 takes each choice and records it', async () => {
 });
 
 test('the coven house in chapter 5 can be built out and given its posts', async () => {
-  const run = await play('b4c05', {}, { ...START, wealth: 900000, ...CH5, 'b4.errand': 'protect' }, [/haven and the coven's quarter/, /Open a way out/, /a few eyes/, /second house/, /Set Fiammetta/, /Ask Prisca/, /That will do/], { sys: coven });
-  assert.equal(run.game.state.sys.circle.fiammetta.task, 'guard');
-  assert.equal(run.game.state.sys.circle.prisca.task, 'business');
+  const run = await play('b4c05', {}, { ...START, wealth: 900000, ...CH5, 'b4.errand': 'protect' }, [/haven and the coven's quarter/, /Open a way out/, /a few eyes/, /second house/, /to the watch of the Marigny/, /to carry the firm's paper/, /That will do/], { sys: coven });
+  const circle = run.game.state.sys.circle;
+  assert.ok(Object.values(circle).some((m) => m.task === 'guard'), 'someone is set to the watch');
+  assert.ok(Object.values(circle).some((m) => m.task === 'business'), 'the lead carries the paper');
   clean(run);
 });
 
@@ -1097,3 +1098,19 @@ test('chapter 20 plays every last night, place, steward, orders, guard, charge a
   assert.equal(bare.frame.wait, 'book_end');
   assert.equal(guarded.frame.wait, 'book_end');
 });
+
+test('chapters 4 to 6 name only the coven that exists, and the errand follows whoever went', async () => {
+  const run = await play('b4c05', {}, { ...START, wealth: 400000, ...CH5, 'b4.errand': 'protect', 'b4.errand_who': 'thibault' }, [/That will do/], { sys: pair, stopAt: 'b4c06' });
+  assert.doesNotMatch(run.text, /Prisca|Hanno|Tiro/);
+  assert.match(run.text, /Thibault/);
+  clean(run);
+});
+
+for (let n = 7; n <= 20; n++) {
+  const id = (k) => `b4c${String(k).padStart(2, '0')}`;
+  test(`chapter ${n} names only the members of a Fiammetta and Thibault coven`, async () => {
+    const run = await play(id(n), {}, { ...START, wealth: 900000, 'b4.circle': 'all' }, [], { sys: pair, stopAt: n < 20 ? id(n + 1) : null });
+    assert.doesNotMatch(run.text, /\b(Prisca|Hanno|Tiro)\b/);
+    clean(run);
+  });
+}

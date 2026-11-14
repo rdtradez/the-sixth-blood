@@ -5,7 +5,7 @@
 @chapter b4c09
 @title The Lamp and the Fold
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## January
@@ -182,13 +182,21 @@ $ do discover("the_native_guards")
 ## The long room
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
-  The coven is in the long room, and the long room has become, over the winter, the part of the house that is lived in. There is a fire, and a sofa that nobody sits on, and a map of the lower river that Hanno has pinned to the wall with a row of colored tacks, and a great deal of paper.
+  ?if in_circle("hanno")
+    The coven is in the long room, and the long room has become, over the winter, the part of the house that is lived in. There is a fire, and a sofa that nobody sits on, and a map of the lower river that Hanno has pinned to the wall with a row of colored tacks, and a great deal of paper.
+  ?end
   ?if b4.lucien == "bargained"
-    Prisca has the new terms of the Compact open on her knee, and is reading them for the fourth time, with an expression of remote and complete professional admiration. She says that she has never in six hundred years seen a document so well drafted by a man who was bleeding on a doorstep.
+    ?if in_circle("prisca")
+      Prisca has the new terms of the Compact open on her knee, and is reading them for the fourth time, with an expression of remote and complete professional admiration. She says that she has never in six hundred years seen a document so well drafted by a man who was bleeding on a doorstep.
+    ?end
   ?elif b4.lucien == "held"
-    Fiammetta has put an extra bar on the shutters of the long room, and a second on the gate, and does not say why. She has, you notice, taken to sleeping with her back to a wall.
+    ?if in_circle("fiammetta")
+      Fiammetta has put an extra bar on the shutters of the long room, and a second on the gate, and does not say why. She has, you notice, taken to sleeping with her back to a wall.
+    ?end
   ?else
-    Hanno has a letter from the river houses, in the Natchez hand, that he will not let anyone else read. He says only that it is polite, and that he finds the politeness more alarming than an insult.
+    ?if in_circle("hanno")
+      Hanno has a letter from the river houses, in the Natchez hand, that he will not let anyone else read. He says only that it is polite, and that he finds the politeness more alarming than an insult.
+    ?end
   ?end
   It is a family. You have long since stopped being surprised by it. It is a good deal more precious than any of the things it has cost.
 ?elif coven_size() > 0
@@ -212,7 +220,9 @@ $ do chart("neworleans.haven")
   $ do acquire("training_hall")
   $ cunning_brutal += 1
   $ standing += 1
-  The carriage house has a good floor, as Prisca has pointed out. In a week it is a long bare room with a rack of foils and a sand pit, and a regular sound, in the small hours, of someone being patiently thrown on the floor.
+  ?if in_circle("prisca")
+    The carriage house has a good floor, as Prisca has pointed out. In a week it is a long bare room with a rack of foils and a sand pit, and a regular sound, in the small hours, of someone being patiently thrown on the floor.
+  ?end
 * Put Hanno at the books, for the whole of the war ?if in_circle("hanno") and b4.circle != "stay" and member("hanno", "status") == "active" and task("hanno") == ""
   $ do coven_task("hanno", "business")
   Hanno receives it with the grave, tired, delighted air of a man who has been given a gift that he had not ventured to ask for. He goes into the study, and the door closes behind him softly, like a bolt shot on a very large safe.

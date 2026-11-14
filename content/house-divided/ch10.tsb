@@ -5,7 +5,7 @@
 @chapter b4c10
 @title Port Hudson
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## May
@@ -180,7 +180,21 @@ $ do discover("the_native_guards")
 ## The long room
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
-  The coven is in the long room, with the shutters closed, and the lamp turned down, and nobody pretending to read. Hanno has a pot of coffee that has gone cold. Fiammetta, or whoever is the youngest, has her knees under her chin on the sofa.
+  ?if in_circle("fiammetta") and in_circle("hanno")
+    The coven is in the long room, with the shutters closed, and the lamp turned down, and nobody pretending to read. Hanno has a pot of coffee that has gone cold. Fiammetta, or whoever is the youngest, has her knees under her chin on the sofa.
+  ?elif cast_count() > 0
+    $ _lead = business_lead()
+    $ _g = gift_holder("charm")
+    ?if _lead != ""
+      {name(_lead)} brings you the quiet version of the news first, and the loud version after, which is the right order.
+    ?end
+    ?if _g != "" and _g != _lead
+      {name(_g)} has the nervous ones laughing within a quarter hour, and they do not know that they have been handled.
+    ?end
+    ?if _g == "" or _g == _lead
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
+  ?end
   It is the sort of night on which a family is shown to be one. Nobody has said what it is that they are waiting for. They have simply all, without being asked, come into the same room.
   ?if b4.watcher == "open" or b4.watcher == "guarded"
     There is a place laid at the end of the table, with a small leather bag beside it, that nobody has cleared away.

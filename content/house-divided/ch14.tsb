@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 15 exists (the manifest entry is incomplete).
 @chapter b4c14
 @title The Free State
-@version 1
+@version 2
 
 # start
 ## September
@@ -25,7 +25,9 @@ It is the first week of September, and there are four things that want doing ton
 ## The convention
 It has been a long, hot, hard summer, and it is ending as they end in New Orleans, with a great deal of rain. The convention has sat since April, in the Mechanics' Institute, and has been as quarrelsome as a family. It has written a constitution. It says, in the first of its articles, in a perfectly plain French and English, that slavery is abolished in the State of Louisiana. It is to be voted on the sixth. Every man who is allowed to vote has an opinion, and a number of those who are not allowed have had to be restrained from giving it.
 The war has gone a good way north. A Red River campaign has been fought, and lost, and a great many of the Guards have been in it, and a number have come back, and some have not. The town is crowded with the maimed and the idle and the contractors. There are posters on every wall. There is a smell of wet paper, and hot sugar, and the river at its lowest.
-Three cards come in the evening post. One is from the Mobile gentleman, who is in the city, and asks, with great punctilio, to be put on the Compact's table. One is from the Hotel on the Rue Saint Charles, in the small neat hand, and says only: *I have something to show you which I should prefer not to say in a letter.* The third, in a clerk's hand, from the Levee, says that the warehouse that Mrs. Prisca bought in the spring has had a visit from a man who did not give his name.
+?if in_circle("prisca")
+  Three cards come in the evening post. One is from the Mobile gentleman, who is in the city, and asks, with great punctilio, to be put on the Compact's table. One is from the Hotel on the Rue Saint Charles, in the small neat hand, and says only: *I have something to show you which I should prefer not to say in a letter.* The third, in a clerk's hand, from the Levee, says that the warehouse that Mrs. Prisca bought in the spring has had a visit from a man who did not give his name.
+?end
 <~
 
 # hunger
@@ -79,7 +81,9 @@ $ do chart("neworleans.haven")
 ?if b4.coven_home == "raised"
   It is in the great hall on Gravier Street, and it has never, in all its life, been so full. The long table has been pulled out to its whole length, with every lamp lit, and the Compact itself, in a box of plain wood, set down in the middle of it.
 ?elif b4.coven_home == "hidden"
-  It is in the largest of the back rooms, with the doors open on the passage, and a lamp at every one. The table has been brought in, in pieces, and put together by Hanno, with a spirit level.
+  ?if in_circle("hanno")
+    It is in the largest of the back rooms, with the doors open on the passage, and a lamp at every one. The table has been brought in, in pieces, and put together by Hanno, with a spirit level.
+  ?end
 ?else
   It is in the long room in the Marigny, with the shutters closed and the table pulled out into the middle of the floor.
 ?end
@@ -156,7 +160,9 @@ $ do discover("the_atlantic_compact")
 $ do chart("neworleans.lots")
 It is a long gray brick shed on the Levee, with a new roof, and an iron door, and a great black cavern of a cellar under it, thirty feet deep, in which the Ice Company keeps six hundred tons of Wenham ice in sawdust. It is a very cool, very dim, very peaceful place, and it is the only one in New Orleans in which a person may, in September, be entirely comfortable.
 ?if b4.firm == "coven"
-  The crew are in the yard: twenty four men of the Tremé and the Marigny, in their aprons, with their tongs. The foreman is a free man called Jules, a big, quiet fellow with a gray beard. He has been with the company since the first quarter, and he is, you have been told, the only man in the city who has ever been able to make Prisca laugh.
+  ?if in_circle("prisca")
+    The crew are in the yard: twenty four men of the Tremé and the Marigny, in their aprons, with their tongs. The foreman is a free man called Jules, a big, quiet fellow with a gray beard. He has been with the company since the first quarter, and he is, you have been told, the only man in the city who has ever been able to make Prisca laugh.
+  ?end
 ?elif b4.firm == "partner"
   The crew are Brault's. There are twenty of them in the yard in their aprons, and two of the Brault clerks at a table, with a ledger, and the look of men who have been told to be pleasant.
 ?else
@@ -193,12 +199,28 @@ $ do discover("the_ice_company_warehouse")
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
   ?if b4.coven_home == "raised"
-    The house on Gravier Street has the look, tonight, of a household in a rainstorm: every lamp lit, every door open, a number of wet coats on every peg. Fiammetta is on the banister, in her stocking feet, reading a letter aloud, in a high voice, to a girl of the school. Hanno is writing. Prisca is in the great chair, with her hands folded, and the look of a woman who has just won an argument and is deciding what to do with it.
+    ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+      The house on Gravier Street has the look, tonight, of a household in a rainstorm: every lamp lit, every door open, a number of wet coats on every peg. Fiammetta is on the banister, in her stocking feet, reading a letter aloud, in a high voice, to a girl of the school. Hanno is writing. Prisca is in the great chair, with her hands folded, and the look of a woman who has just won an argument and is deciding what to do with it.
+    ?elif cast_count() > 0
+      $ _lead = business_lead()
+      $ _g = gift_holder("memory")
+      ?if _lead != ""
+        {name(_lead)} has the firm's papers in order, counted twice, and says what the house can bear and what it cannot.
+      ?end
+      ?if _g != "" and _g != _lead
+        {name(_g)} can say, without a page, who owed what to whom in this city a generation ago, and does.
+      ?end
+      ?if _g == "" or _g == _lead
+        Your own people are about you, those who are yours, and nobody has to be asked.
+      ?end
+    ?end
   ?else
     They are in the long room, with the windows open on the rain, and a lamp lit, and every chair taken. It is very hot. Nobody has said a word for a quarter of an hour, and it is, you think, the most comfortable silence that you have ever sat in.
   ?end
   ?if b4.guest == "housed"
-    Crane is on the sofa, with his feet up, reading Prisca's ledger. He says that she has a most astonishing hand.
+    ?if in_circle("prisca")
+      Crane is on the sofa, with his feet up, reading Prisca's ledger. He says that she has a most astonishing hand.
+    ?end
   ?end
 ?elif coven_size() > 0
   The house is quiet and the lamps are low. They are a long way off. There is a letter on the table, in a hand that you know, which you have not yet opened.
@@ -223,7 +245,9 @@ $ do chart("neworleans.haven")
 * Fit a vault in the cellar for the family's papers and the Compact's box ?if can_acquire("vaults")
   $ do acquire("vaults")
   $ cunning_brutal += 1
-  It is a room under a room, with an iron door and a good lock. Hanno puts in, on the first night, the Compact in its box of plain wood, and the Articles of the Atlantic, if they have been signed, and the deeds of the Tremé school. He says that it is a thing that is a very great comfort to a ledger.
+  ?if in_circle("hanno")
+    It is a room under a room, with an iron door and a good lock. Hanno puts in, on the first night, the Compact in its box of plain wood, and the Articles of the Atlantic, if they have been signed, and the deeds of the Tremé school. He says that it is a thing that is a very great comfort to a ledger.
+  ?end
 * That will do for tonight
   -> :family_done
 -> :the_family
@@ -251,12 +275,16 @@ The vote was taken yesterday. It was not close. The constitution is adopted. Sla
 ?if b4.warehouse == "rebuilt"
   Jules sends a note at noon, in a large careful hand. It says that the first of the new furnaces is lit, and that the company's name has been painted over the door, in letters four feet high. He has put the names of the partners below it, in smaller ones. He has put, at the end, in the smallest, the name of the house.
 ?elif b4.warehouse == "guarded"
-  Prisca's account of the quarter comes in at noon, with a note in her fine plain hand. The profits are up by a third. She says that they are not, in her view, to be trusted, and that it is a very comfortable thing to be on the right side of a number.
+  ?if in_circle("prisca")
+    Prisca's account of the quarter comes in at noon, with a note in her fine plain hand. The profits are up by a third. She says that they are not, in her view, to be trusted, and that it is a very comfortable thing to be on the right side of a number.
+  ?end
 ?else
   The Algiers cellar is not as good as the Levee's. It is damp, and it is a mile from anywhere, and Jules has said, to the man who brought the carts, that he will see them all damned before he lights a fire in it. It is, however, a place that nobody has chalked.
 ?end
 ?if b4.defense == "unwatched" and b4.coven_home != "kept"
-  Fiammetta's arm has quite healed. She says that it was nothing, and has been showing the scar to the girls of the school.
+  ?if in_circle("fiammetta")
+    Fiammetta's arm has quite healed. She says that it was nothing, and has been showing the scar to the girls of the school.
+  ?end
 ?end
 ?if b4.petition == "funded" or b4.petition == "signed"
   There is a letter on the evening post, from Washington, in a plain square hand that is not Wren's. It is from a Senator's secretary. It says that the petition of the free men of Louisiana has been received, and read, with attention, and laid before the President. It does not say what he said.

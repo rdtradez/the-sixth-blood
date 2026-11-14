@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 16 exists (the manifest entry is incomplete).
 @chapter b4c15
 @title The Bells of April
-@version 1
+@version 2
 
 # start
 ## April
@@ -93,7 +93,21 @@ You pick up the tail of the last wagon, which has gone down at the axle in the s
   $ standing += 1
   $ secrecy -= 2
   ?if b4.coven_home == "raised"
-    They are in the great hall on Gravier Street by three in the morning, thirty at a time, in their wet boots. Prisca does the counting, with a pencil, at the door. Fiammetta takes the children to the kitchen, and makes, out of nothing, a very great quantity of porridge. Hanno finds, in the cellar, forty blankets that he has been told for a year that he did not own.
+    ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+      They are in the great hall on Gravier Street by three in the morning, thirty at a time, in their wet boots. Prisca does the counting, with a pencil, at the door. Fiammetta takes the children to the kitchen, and makes, out of nothing, a very great quantity of porridge. Hanno finds, in the cellar, forty blankets that he has been told for a year that he did not own.
+    ?elif cast_count() > 0
+      $ _lead = business_lead()
+      $ _g = gift_holder("merchants_eye")
+      ?if _lead != ""
+        {name(_lead)} lays the sum before you without being asked, and {pg(_lead, "his", "her", "their")} finger does not shake on the figure.
+      ?end
+      ?if _g != "" and _g != _lead
+        {name(_g)} has priced the room in a glance, and the people in it, and is rarely wrong about either.
+      ?end
+      ?if _g == "" or _g == _lead
+        Your own people are about you, those who are yours, and nobody has to be asked.
+      ?end
+    ?end
   ?elif b4.coven_home == "hidden"
     They come in by the back passage, in twos and threes, in the rain, past a door that has not been opened for a stranger since it was built. The free families of the Marigny are waiting in the little rooms with lamps and soup. A woman from the Tremé says to the first child that she is not to be afraid of the dark, because the dark in this house is on her side.
   ?else
@@ -145,7 +159,9 @@ He says that the war is over, and that he lost it. He says that the river houses
   $ humanity += 1
   $ secrecy -= 1
   $ cunning_brutal -= 1
-  He does not expect it. You can see that he does not. Hanno brings the box, and the old man puts his hand on the lid, and says the words, in an old river French that is not quite like any other. You say them after him. It is a short oath. When it is done he sits for some time with his hand on the wood, and then, very gently, takes it away. He says, "I was told that you were a hard man. It is a thing I have never been so glad to be wrong about."
+  ?if in_circle("hanno")
+    He does not expect it. You can see that he does not. Hanno brings the box, and the old man puts his hand on the lid, and says the words, in an old river French that is not quite like any other. You say them after him. It is a short oath. When it is done he sits for some time with his hand on the wood, and then, very gently, takes it away. He says, "I was told that you were a hard man. It is a thing I have never been so glad to be wrong about."
+  ?end
 * Give the year, for a price: the Teche house made to answer for the feud, and the river houses' people opened to the family's own eye
   $ b4.peace = "terms"
   $ standing += 2
@@ -206,9 +222,15 @@ $ do discover("the_doctor_come_home")
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
   ?if b4.coven_home == "raised"
-    The house on Gravier Street is awake, as it is on the night of any great piece of news: every door open, a pot on the range, and a number of persons in every room talking at the same time. Fiammetta is on the stair, with a copy of the paper, reading it aloud, with commentary. Hanno is trying to write the news down. Prisca sits very upright in the great chair, with a glass of nothing, and says that she has seen four wars end, and that this is the first that she has ever been tempted to believe.
+    ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+      The house on Gravier Street is awake, as it is on the night of any great piece of news: every door open, a pot on the range, and a number of persons in every room talking at the same time. Fiammetta is on the stair, with a copy of the paper, reading it aloud, with commentary. Hanno is trying to write the news down. Prisca sits very upright in the great chair, with a glass of nothing, and says that she has seen four wars end, and that this is the first that she has ever been tempted to believe.
+    ?elif cast_count() > 0
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
   ?else
-    They are in the long room, with the windows open, and the bells coming in at them from every quarter of the town. Nobody speaks very much. Prisca has made tea, which nobody drinks. It is, you think, a very peaceful kind of excitement.
+    ?if in_circle("prisca")
+      They are in the long room, with the windows open, and the bells coming in at them from every quarter of the town. Nobody speaks very much. Prisca has made tea, which nobody drinks. It is, you think, a very peaceful kind of excitement.
+    ?end
   ?end
   ?if b4.guest == "housed"
     There is a letter from New York on the sideboard, in a small neat hand. It says that Crane is sorry to have missed the bells, and has had them rung for him, in a small way, at a church on Pearl Street.
@@ -231,11 +253,15 @@ $ do chart("neworleans.haven")
 * Keep a few eyes on the Levee and the Army's offices, and pay them ?if can_acquire("informants")
   $ do acquire("informants")
   $ cunning_brutal += 1
-  It is done by Hanno, with a ledger, in an afternoon: a clerk at the Custom House, a sergeant in the provost's office, a boy at the telegraph who has a very good ear. They are paid in small sums, and told nothing. By the end of the week, the house knows what the Army has decided about every freed person in the Parish, a day before the Army does.
+  ?if in_circle("hanno")
+    It is done by Hanno, with a ledger, in an afternoon: a clerk at the Custom House, a sergeant in the provost's office, a boy at the telegraph who has a very good ear. They are paid in small sums, and told nothing. By the end of the week, the house knows what the Army has decided about every freed person in the Parish, a day before the Army does.
+  ?end
 * Take another room, and fit it for those who must sleep in the day and cannot be found ?if can_acquire("hidden_chamber")
   $ do acquire("hidden_chamber")
   $ secrecy += 1
-  It is a room behind a room, behind a wall that has been papered by a man who has been told that he is a very good paperhanger and nothing else. There is a bed, a lock, and a lamp that may be lit from the inside. Hanno puts a small brass tag on the door, of the kind used for linen. It reads *Spare*.
+  ?if in_circle("hanno")
+    It is a room behind a room, behind a wall that has been papered by a man who has been told that he is a very good paperhanger and nothing else. There is a bed, a lock, and a lamp that may be lit from the inside. Hanno puts a small brass tag on the door, of the kind used for linen. It reads *Spare*.
+  ?end
 * That will do for tonight
   -> :family_done
 -> :the_family

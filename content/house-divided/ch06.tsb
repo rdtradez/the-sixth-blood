@@ -5,7 +5,7 @@
 @chapter b4c06
 @title The Blockade
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## May
@@ -164,8 +164,8 @@ They have not set the house on fire. It is a fine point, and it is quite possibl
 ?if b4.rival == "allied"
   She does not look at you. She is too proud for that. But you see her draw a long, small breath, and you know that she has seen, over the Delorme shoulders, in the dark under the oaks, a figure she did not expect to see.
 ?end
-?if b4.errand == "protect" and in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
-  Fiammetta is already there. She is sitting on the rail of the old icehouse, a dozen yards from the gallery, in the dark, with her knees drawn up, and she has been watching them for some time. She meets your eye across the yard. She does not smile, and she does not say a word. She raises one eyebrow by perhaps a sixteenth of an inch.
+?if b4.errand == "protect" and b4.errand_who != "" and b4.errand_who != 0 and in_circle(b4.errand_who) and member(b4.errand_who, "status") == "active" and not on_mission(b4.errand_who)
+  {name(b4.errand_who)} is already there, sitting on the rail of the old icehouse, a dozen yards from the gallery, in the dark, with the knees drawn up, and has been watching them for some time. {pg(b4.errand_who, "He", "She", "They")} {pg(b4.errand_who, "meets", "meets", "meet")} your eye across the yard. There is no smile, and not a word. One eyebrow rises by perhaps a sixteenth of an inch.
 ?end
 :the_raid
 * Walk into the lamplight and say that this house is under the protection of Colline et Compagnie
@@ -226,7 +226,7 @@ $ do fight("fledgling", 2)
   $ standing -= 3
   $ humanity -= 1
 ?else
-  It goes badly. They are fast, and angry, and several, and for a short bad time the yard is a place of cold hands and swinging lamps. It is Fiammetta, or Madame, or the cat, or a stroke of pure luck, who ends it. You are on the gallery steps, on your hands and knees, bleeding on the old boards, and the raiders are going back into the trees. Madame, standing over you, with her lamp, says in a voice quite free of any reproach that you are a very brave person, and that she would be obliged if you would not do it again.
+  It goes badly. They are fast, and angry, and several, and for a short bad time the yard is a place of cold hands and swinging lamps. It is someone of the family, or Madame, or the cat, or a stroke of pure luck, who ends it. You are on the gallery steps, on your hands and knees, bleeding on the old boards, and the raiders are going back into the trees. Madame, standing over you, with her lamp, says in a voice quite free of any reproach that you are a very brave person, and that she would be obliged if you would not do it again.
   $ standing -= 1
 ?end
 <~

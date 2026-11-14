@@ -1,17 +1,19 @@
 // Book Four, Chapter 4 (session 41). The night of the presidential election, 6 November 1860.
 // Opens with no phase (the city under torches, then the paper), a short hunger scene that only runs if must_feed() is true on entry, then one night phase of three actions out of four, and the news at dawn.
-// Reads b4.circle, b4.compact, b4.supper, b4.rival, b4.armand, b4.office, b4.auction and the circle. Sets b4.paper, b4.houses, b4.errand and b4.papers.
+// Reads b4.circle, b4.compact, b4.supper, b4.rival, b4.armand, b4.office, b4.auction and the circle. Sets b4.paper, b4.houses, b4.errand, b4.errand_who and b4.papers.
+// The coven's family scene names only who is really in the coven (cast(), business_lead()), never a fixed trio.
 // Ends with rest() and => next, which pauses until chapter 5 exists (the manifest entry is incomplete).
 @chapter b4c04
 @title The Night of the Returns
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## The sixth of November
 $ b4.paper = "silent"
 $ b4.houses = "conditional"
 $ b4.errand = "none"
+$ b4.errand_who = ""
 $ b4.papers = "refused"
 $ do discover("the_election_of_1860")
 ~> city
@@ -180,25 +182,62 @@ $ do fight("fledgling", 2)
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
   They are in the long room at the back of the house, with a fire in the grate and the shutters closed and a pot on the hob, which nobody is going to eat. It is the Marigny hour, the hour between the late and the early, when the whole of a quiet street is asleep. It is a thing that has not occurred to you until now, that you have been coming home, for some months, to a lit window.
-  They have, it appears, been having an argument. It is an old one, and conducted at a low pitch, and it is a thing that you have heard before in other forms in other houses: it is a quarrel about money that is really a quarrel about who is trusted. Hanno says that the firm has twenty thousand in a bank that is going to fail. Fiammetta says that she does not see why a thing that has been paid is to be taken back. Prisca says nothing, with great firmness, and darns a glove.
-  You sit down. They look at you, all three, with the faces of children who have been caught at a thing, and have not for a moment supposed that you would mind. It is a very strange, warm, grave thing to be the head of a house.
+  They have, it appears, been having an argument. It is an old one, and conducted at a low pitch, and it is a thing that you have heard before in other forms in other houses: it is a quarrel about money that is really a quarrel about who is trusted.
+  ?if cast_count() >= 1
+    {name(cast(1))}, who has the books, says that the firm has twenty thousand in a bank that is going to fail.
+  ?end
+  ?if cast_count() >= 2
+    {name(cast(2))} says that {pg(cast(2), "he", "she", "they")} does not see why a thing that has been paid is to be taken back.
+  ?end
+  ?if cast_count() >= 3
+    {name(cast(3))} says nothing, with great firmness, and darns a glove.
+  ?end
+  You sit down. They look at you, all of them, with the faces of children who have been caught at a thing, and have not for a moment supposed that you would mind. It is a very strange, warm, grave thing to be the head of a house.
   ?if b4.compact == "signed" or b4.houses == "pledged"
-    You tell them what has been said at Belle Rive, or the half of it. It goes round the table, and settles, and nobody speaks. Prisca puts down the glove. "It is a very old sort of promise," she says, "and a thing that is easy to keep until it is asked." She does not say anything more.
+    You tell them what has been said at Belle Rive, or the half of it. It goes round the table, and settles, and nobody speaks. {name(cast(1))} puts down the pen. "It is a very old sort of promise," {pg(cast(1), "he", "she", "they")} {pg(cast(1), "says", "says", "say")}, "and a thing that is easy to keep until it is asked." There is nothing more said.
   ?else
-    You tell them what has been said at Belle Rive, or the half of it. Hanno is the first to speak. He says that a man who will not be counted is a man who is going to be counted anyway, and that it is a thing that he would not, himself, have said, and that he would not, himself, have been in the least sorry to hear.
+    You tell them what has been said at Belle Rive, or the half of it. {name(cast(1))} is the first to speak. {pg(cast(1), "He", "She", "They")} {pg(cast(1), "says", "says", "say")} that a person who will not be counted is a person who is going to be counted anyway, and that it is a thing that {pg(cast(1), "he", "she", "they")} would not, {pg(cast(1), "himself", "herself", "themselves")}, have said, and would not have been in the least sorry to hear.
+  ?end
+  $ _scout = ""
+  $ _guard = ""
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
+    $ _guard = "fiammetta"
+  ?end
+  ?if in_circle("prisca") and member("prisca", "status") == "active" and not on_mission("prisca") and _guard != "prisca"
+    $ _scout = "prisca"
+  ?end
+  ?if _scout == ""
+    ?if cast(1) != "" and cast(1) != _guard and not on_mission(cast(1))
+      $ _scout = cast(1)
+    ?elif cast(2) != "" and cast(2) != _guard and not on_mission(cast(2))
+      $ _scout = cast(2)
+    ?elif cast(3) != "" and cast(3) != _guard and not on_mission(cast(3))
+      $ _scout = cast(3)
+    ?end
+  ?end
+  ?if _guard == ""
+    ?if cast(1) != "" and cast(1) != _scout and not on_mission(cast(1))
+      $ _guard = cast(1)
+    ?elif cast(2) != "" and cast(2) != _scout and not on_mission(cast(2))
+      $ _guard = cast(2)
+    ?elif cast(3) != "" and cast(3) != _scout and not on_mission(cast(3))
+      $ _guard = cast(3)
+    ?end
   ?end
   They have, between them, an idea. It is a modest one. There is a great deal that a family can do in a night, while the master is at his sugar.
   :the_errand
-  * Send Prisca to learn the river houses' roads and their watchers [once] ?if in_circle("prisca") and member("prisca", "status") == "active" and not on_mission("prisca")
+  * Send {name(_scout)} to learn the river houses' roads and their watchers [once] ?if _scout != ""
     $ b4.errand = "scout"
-    $ do send("prisca", "scout", 1)
-    Prisca takes her gloves, and does not say that she has been waiting for it. She is in the door before you have finished. She says that she will be a week, and will be very dull, and that a person who is dull is a person nobody has ever once been afraid of.
-  * Send Fiammetta to stand watch over the Tremé, and Dr. Armand's door [once] ?if in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
+    $ b4.errand_who = _scout
+    $ do send(_scout, "scout", 1)
+    {name(_scout)} takes {pg(_scout, "his", "her", "their")} gloves, and does not say that {pg(_scout, "he", "she", "they")} has been waiting for it. {pg(_scout, "He", "She", "They")} {pg(_scout, "is", "is", "are")} in the door before you have finished, and says that it will be a week, and very dull, and that a person who is dull is a person nobody has ever once been afraid of.
+  * Send {name(_guard)} to stand watch over the Tremé, and Dr. Armand's door [once] ?if _guard != ""
     $ b4.errand = "protect"
-    $ do send("fiammetta", "protect", 1)
-    Fiammetta gets up at once, and puts down the lemon, which she has been peeling for an hour, and says that she has a very small, very fierce, entirely personal objection to a city in which a doctor may not sleep. It is the longest speech that you have ever had from her. She goes out by the window.
+    $ b4.errand_who = _guard
+    $ do send(_guard, "protect", 1)
+    {name(_guard)} gets up at once, and says that {pg(_guard, "he", "she", "they")} {pg(_guard, "has", "has", "have")} a very small, very fierce, entirely personal objection to a city in which a doctor may not sleep. It is the longest speech that you have ever had from {pg(_guard, "him", "her", "them")}. {pg(_guard, "He", "She", "They")} {pg(_guard, "goes", "goes", "go")} out by the window.
   * Keep them home tonight, and let them be a family [once]
-    The fire is low, and you put on a log, and Hanno finds a bottle that is not at all what it seems, and Fiammetta, with the greatest solemnity, tells a story about the hill. It is an old story, and not at all funny, and by the end of it everyone has laughed. It is the quietest evening that you have had in a century. You do not mean to forget it.
+    The fire is low, and you put on a log, and someone finds a bottle that is not at all what it seems, and someone else, with the greatest solemnity, tells a story about the hill. It is an old story, and not at all funny, and by the end of it everyone has laughed. It is the quietest evening that you have had in a century. You do not mean to forget it.
   * That is all [once]
     -> :family_done
   -> :the_errand

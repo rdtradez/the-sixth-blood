@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 19 exists (the manifest entry is incomplete).
 @chapter b4c18
 @title The Mechanics' Institute
-@version 1
+@version 2
 
 # start
 ## The thirtieth of July
@@ -183,13 +183,35 @@ He says that he is not asking you for anything. He says that it is the rule of h
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
   ?if b4.coven_home == "raised"
-    The great hall on Gravier Street is empty and the doors are open, and the light comes across the floor in a bar. They are in the yard. They have dragged out chairs, and a table, and a good many cups. There is no question of going to bed. Prisca has put on her best gray silk, and is eating a peach, with her gloves on. Fiammetta is sitting on the wall with her heels drumming. Hanno is standing very straight in the shade of the archway with his hat in his hand. You perceive that they have decided that it is going to be a day that one dresses for.
+    ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+      The great hall on Gravier Street is empty and the doors are open, and the light comes across the floor in a bar. They are in the yard. They have dragged out chairs, and a table, and a good many cups. There is no question of going to bed. Prisca has put on her best gray silk, and is eating a peach, with her gloves on. Fiammetta is sitting on the wall with her heels drumming. Hanno is standing very straight in the shade of the archway with his hat in his hand. You perceive that they have decided that it is going to be a day that one dresses for.
+    ?elif cast_count() > 0
+      $ _lead = business_lead()
+      $ _g = gift_holder("shadows")
+      ?if _lead != ""
+        {name(_lead)} has a short list of what can wait and a shorter one of what cannot.
+      ?end
+      ?if _g != "" and _g != _lead
+        {name(_g)} is already at the edge of the room, so still that you had counted one fewer, and it is a comfort.
+      ?end
+      ?if _g == "" or _g == _lead
+        Your own people are about you, those who are yours, and nobody has to be asked.
+      ?end
+    ?end
   ?elif b4.coven_home == "hidden"
-    The little back rooms are all open, and the free families of the street are in them, with their hats on, in their Sunday clothes, with a very great deal of food in napkins. They are sitting along the passage in a row, quite quiet. The family has made room. Fiammetta has taken a baby from somebody and is walking up and down with it, and is, for the first time in her life, silent.
+    ?if in_circle("fiammetta")
+      The little back rooms are all open, and the free families of the street are in them, with their hats on, in their Sunday clothes, with a very great deal of food in napkins. They are sitting along the passage in a row, quite quiet. The family has made room. Fiammetta has taken a baby from somebody and is walking up and down with it, and is, for the first time in her life, silent.
+    ?end
   ?else
-    They are in the long room in the Marigny, with the shutters open for once, and the light on the floor. Nobody has slept. Prisca has her gloves on, and is eating a peach. Fiammetta has been trying, for an hour, to teach a very old tortoise to sit up.
+    ?if in_circle("fiammetta") and in_circle("prisca")
+      They are in the long room in the Marigny, with the shutters open for once, and the light on the floor. Nobody has slept. Prisca has her gloves on, and is eating a peach. Fiammetta has been trying, for an hour, to teach a very old tortoise to sit up.
+    ?elif cast_count() > 0
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
   ?end
-  They have been told what the day is. They are all of them looking at you. It is Prisca who speaks, quite calmly, with her peach stone in her hand. She says that she has seen a good many days, in a long life, and that she has never in her experience been able to say in advance which of them would be remembered. She says that it is not, as a rule, the one that one dresses for.
+  ?if in_circle("prisca")
+    They have been told what the day is. They are all of them looking at you. It is Prisca who speaks, quite calmly, with her peach stone in her hand. She says that she has seen a good many days, in a long life, and that she has never in her experience been able to say in advance which of them would be remembered. She says that it is not, as a rule, the one that one dresses for.
+  ?end
 ?elif coven_size() > 0
   The house is quiet and the shutters are open. They are a long way off. It is a very hot, bright, deserted morning. There is a parcel on the table in brown paper that has not been opened. You do not, today, open it.
 ?else
@@ -310,7 +332,11 @@ Honorine is in the middle of it, in her shirt sleeves, with a bucket, and a grea
   $ standing += 1
   $ secrecy -= 2
   $ do earn(-6)
-  It takes the whole night. The house on Gravier Street is a hospital by midnight, with a hundred and forty on every bed, and every pallet, and the floor of the great hall, and the family in their shirt sleeves, with basins. Prisca is writing letters for the ones who cannot hold a pen. Hanno has found a way to keep the names. Fiammetta has fallen asleep standing up, with a child in her arms, and nobody has the heart to move her.
+  ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+    It takes the whole night. The house on Gravier Street is a hospital by midnight, with a hundred and forty on every bed, and every pallet, and the floor of the great hall, and the family in their shirt sleeves, with basins. Prisca is writing letters for the ones who cannot hold a pen. Hanno has found a way to keep the names. Fiammetta has fallen asleep standing up, with a child in her arms, and nobody has the heart to move her.
+  ?elif cast_count() > 0
+    Your own people are about you, those who are yours, and nobody has to be asked.
+  ?end
   ?if b4.march == "carried"
     Jules has made nine trips with the wagons since two o'clock. He is gray. He will not sit down. He says, at four in the morning, that he has never in his life been so glad of an ice cart.
   ?end

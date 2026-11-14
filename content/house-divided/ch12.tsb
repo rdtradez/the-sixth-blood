@@ -5,7 +5,7 @@
 @chapter b4c12
 @title The Winter House
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## December
@@ -86,7 +86,21 @@ $ do chart("neworleans.haven")
   The house in the Marigny is dark, and the courtyard shining with frost. There is a cat on the wall. There is a smell of woodsmoke from the next street, and the shutters of the long room have been closed.
 ?end
 ?if coven_size() > 0 and b4.circle != "stay"
-  The family is up. It is the most striking thing about them. Nobody has been told. Prisca is sitting very upright in the hall with her gloves on and her hands folded, as if for a train. Hanno has locked the study, and the vaults, and has put on a very old coat with a pistol in the pocket that he plainly does not know how to use. Fiammetta is on the stair, with her knees up, and has been there since eleven, with her knife across them. She looks up as you come in. "I was not going to be left," she says. It is the whole of the speech.
+  ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+    The family is up. It is the most striking thing about them. Nobody has been told. Prisca is sitting very upright in the hall with her gloves on and her hands folded, as if for a train. Hanno has locked the study, and the vaults, and has put on a very old coat with a pistol in the pocket that he plainly does not know how to use. Fiammetta is on the stair, with her knees up, and has been there since eleven, with her knife across them. She looks up as you come in. "I was not going to be left," she says. It is the whole of the speech.
+  ?elif cast_count() > 0
+    $ _lead = business_lead()
+    $ _g = gift_holder("shadows")
+    ?if _lead != ""
+      {name(_lead)} has kept the house's business moving through all of it, and says so only when asked.
+    ?end
+    ?if _g != "" and _g != _lead
+      {name(_g)} is already at the edge of the room, so still that you had counted one fewer, and it is a comfort.
+    ?end
+    ?if _g == "" or _g == _lead
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
+  ?end
   It is, you think, a thing that you are not able to say anything about, and you do not.
 ?else
   You are alone in it. It is a very large place to hold alone. You light no lamp at all.
@@ -107,7 +121,11 @@ He is a Delorme. It is the elder of the brothers of the Teche, with the elbows, 
   $ cunning_brutal += 2
   $ humanity -= 1
   You go out by the carriage house, and over the wall, and along the Levee in the dark with the frost cracking under your boots, to a long low steamer at the foot of Esplanade with her lights out. There are four of the Teche house aboard. They are not expecting anything. It is done in a very short time, and with a good deal of quiet, and at the end of it there are four men on the foredeck who are not dead, and who are, in the plain sense of the word, very much embarrassed. You leave a card on the capstan. It says, in your own hand, *The house is awake.* It is the old river way of speaking, and every one of them will know it.
-  When you come back to the house, at four, it is quiet. The family is in the hall. Nobody has been hurt, which is, you suspect, more a matter of the family's temper than of your own. Fiammetta says that she is a little disappointed, and Prisca looks at her.
+  ?if in_circle("fiammetta") and in_circle("prisca")
+    When you come back to the house, at four, it is quiet. The family is in the hall. Nobody has been hurt, which is, you suspect, more a matter of the family's temper than of your own. Fiammetta says that she is a little disappointed, and Prisca looks at her.
+  ?elif cast_count() > 0
+    Your own people are about you, those who are yours, and nobody has to be asked.
+  ?end
 * Send the family's own word to the house of Beaumont, and let him do what the Compact requires
   $ b4.defense = "parleyed"
   $ standing += 1
@@ -143,7 +161,9 @@ $ do fight("elder", 2)
 ?if fight_result() == "won"
   It is over very soon after that. There is a sound that you know, a long, small, final sound, like a door pulled to. The elder Delorme is on his knees on the stone, with one hand on his breast, looking up at you with a face that has gone through three kinds of surprise, and arrived at a fourth.
   ?if coven_size() > 0 and b4.circle != "stay"
-    The others have not moved. They have found, in the hall, three persons they had not counted on, and have, in the way of men who have been in a war, done the arithmetic. One of them says, very quietly, that it is not a thing that was said to be so. Prisca says, from the chair, in a perfectly level voice, that it is a pity, and that he will see himself out.
+    ?if in_circle("prisca")
+      The others have not moved. They have found, in the hall, three persons they had not counted on, and have, in the way of men who have been in a war, done the arithmetic. One of them says, very quietly, that it is not a thing that was said to be so. Prisca says, from the chair, in a perfectly level voice, that it is a pity, and that he will see himself out.
+    ?end
   ?end
   $ standing += 2
   $ cunning_brutal += 1
@@ -236,12 +256,18 @@ $ do discover("the_school_in_the_treme")
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
   ?if b4.coven_home == "raised"
-    They are in the hall of the house on Gravier Street, at the long table, with the lamp turned up and a fire in the great hearth. It is the first winter that there has been a hearth. It makes a great difference. Fiammetta is asleep on the bench, with her head on her arm. Hanno is doing sums, and has been doing them for some time, and has a very peaceful face. There are, you think, a good many ways of being a family, and this is one of them.
+    ?if in_circle("fiammetta") and in_circle("hanno")
+      They are in the hall of the house on Gravier Street, at the long table, with the lamp turned up and a fire in the great hearth. It is the first winter that there has been a hearth. It makes a great difference. Fiammetta is asleep on the bench, with her head on her arm. Hanno is doing sums, and has been doing them for some time, and has a very peaceful face. There are, you think, a good many ways of being a family, and this is one of them.
+    ?elif cast_count() > 0
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
   ?else
     They are in the long room, with the shutters closed and a fire lit, and a pot of coffee on the hob. It is a very quiet evening. There is a chess board on the table with the pieces in a position that nobody is able to explain.
   ?end
   ?if b4.firm == "coven"
-    Prisca has the books of the Ice Company open at her elbow. She says that they have made four thousand dollars in the first month, and that it is shameful, and that she is going to do better. She has, you notice, a spot of ink on one finger. It is the first time that you have ever seen her with anything on her hands.
+    ?if in_circle("prisca")
+      Prisca has the books of the Ice Company open at her elbow. She says that they have made four thousand dollars in the first month, and that it is shameful, and that she is going to do better. She has, you notice, a spot of ink on one finger. It is the first time that you have ever seen her with anything on her hands.
+    ?end
   ?end
 ?elif coven_size() > 0
   The house is quiet. They are a long way off. There is a letter on the table, in a hand that you know, four pages long, which you have not yet had time to open.
@@ -267,7 +293,11 @@ $ do chart("neworleans.haven")
   $ do acquire("hidden_chamber")
   $ cunning_brutal += 1
   $ humanity += 1
-  It is Hanno, if he is there, who knows of the old drain, and Prisca, if she is, who says that it will cost three times what it should, and that she will get it for two. It is a narrow brick stair, going down, with a turn in it, and a door at the bottom that opens on a place that you will not describe. It is the sort of thing that a family keeps, in a cold winter, for the night when it is needed, and hopes not to use.
+  ?if in_circle("hanno") and in_circle("prisca")
+    It is Hanno, if he is there, who knows of the old drain, and Prisca, if she is, who says that it will cost three times what it should, and that she will get it for two. It is a narrow brick stair, going down, with a turn in it, and a door at the bottom that opens on a place that you will not describe. It is the sort of thing that a family keeps, in a cold winter, for the night when it is needed, and hopes not to use.
+  ?elif cast_count() > 0
+    Your own people are about you, those who are yours, and nobody has to be asked.
+  ?end
 * That will do for tonight
   -> :family_done
 -> :the_family
@@ -278,15 +308,25 @@ $ do chart("neworleans.haven")
 ## The twenty first
 It is a hard white dawn, with a thin film of ice on the water barrels, and a long low smoke over the river, and the bells.
 ?if b4.defense == "stood"
-  Nobody has been killed. It is the first thing that you learn, and it is the one that matters. The house is quiet, and the broken latch has been mended by a carpenter who was told that it was a mouse. Hanno sweeps the hall. Fiammetta, on the stair, is asleep, with her knife across her knees, and a very small crooked smile.
+  ?if in_circle("fiammetta") and in_circle("hanno")
+    Nobody has been killed. It is the first thing that you learn, and it is the one that matters. The house is quiet, and the broken latch has been mended by a carpenter who was told that it was a mouse. Hanno sweeps the hall. Fiammetta, on the stair, is asleep, with her knife across her knees, and a very small crooked smile.
+  ?elif cast_count() > 0
+    Your own people are about you, those who are yours, and nobody has to be asked.
+  ?end
 ?elif b4.defense == "struck"
   A boy comes at six from the Levee, with the news that the steamer at the foot of Esplanade has cast off in the night, and gone down the river, with her fires banked and a man at the wheel who is not looking behind him. It is said that she carried the Delormes. It is a very short, quiet story, and it is told on the Levee in an undertone.
 ?elif b4.defense == "parleyed"
   A letter comes from Belle Rive, at nine, in a very fine old hand, on thick paper, with a seal of black wax. It is two lines. It says that the house of the Teche has been informed that the Compact is to be read at the next Chapter, and that it will be asked to attend. There is a postscript, in a younger, harder hand, that says only, *I am sorry.* It is signed with a very small L.
 ?else
-  The word comes at six, from Hanno, in a note under the study door, that it has been a quiet night, and that nothing has happened that is worth the paper. It is a good deal of understatement. You find, in the hall, the next morning, a broken latch, and a carpet turned back, and on the wall, a long dark stain that has been scrubbed. There are small drops of blood on the stair, in a line, going down.
+  ?if in_circle("hanno")
+    The word comes at six, from Hanno, in a note under the study door, that it has been a quiet night, and that nothing has happened that is worth the paper. It is a good deal of understatement. You find, in the hall, the next morning, a broken latch, and a carpet turned back, and on the wall, a long dark stain that has been scrubbed. There are small drops of blood on the stair, in a line, going down.
+  ?end
   ?if coven_size() > 0 and b4.circle != "stay"
-    They tell you, afterwards, at breakfast. It was five of them, and the family was in the hall, and nobody was told. Fiammetta was cut across the arm, quite deeply, and it has been bound up by Prisca, who did it very badly and refuses to say so. Hanno put a pistol ball through a Delorme's hat. It was Prisca, in the end, who said the name of the house, and the name of the blood, in a perfectly level voice, and the Teche men went out through the river door in a very careful line. The family held. It was, you think, the thing that you would have wished, and the thing that you would have wished never to be asked of them. Fiammetta, with her arm in a sling, says that it is nothing, and that she has never in her life been so well.
+    ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+      They tell you, afterwards, at breakfast. It was five of them, and the family was in the hall, and nobody was told. Fiammetta was cut across the arm, quite deeply, and it has been bound up by Prisca, who did it very badly and refuses to say so. Hanno put a pistol ball through a Delorme's hat. It was Prisca, in the end, who said the name of the house, and the name of the blood, in a perfectly level voice, and the Teche men went out through the river door in a very careful line. The family held. It was, you think, the thing that you would have wished, and the thing that you would have wished never to be asked of them. Fiammetta, with her arm in a sling, says that it is nothing, and that she has never in her life been so well.
+    ?elif cast_count() > 0
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
   ?else
     You find that the house has been entered, and walked through, and left, and that nothing has been taken at all. It is a thing that has been done, very slowly, as a message, by persons who have been told to be polite. You sit in the hall until dawn.
   ?end
@@ -299,7 +339,9 @@ It is a hard white dawn, with a thin film of ice on the water barrels, and a lon
   A note comes from the Army at noon. It says that the contract has been read at the estate, and that the people have declined to sign it, and that the Army regrets. It does not say what the Army is going to do. You are not at all sure that it knows.
 ?end
 ?if b4.firm == "coven"
-  The first quarter's figures of the Ice Company are in the morning post. They are not at all what a company of seven persons who sleep in the day have any right to expect. Prisca has written, at the bottom, in a fine plain hand, *We are going to need a bigger warehouse.* It is underlined, twice.
+  ?if in_circle("prisca")
+    The first quarter's figures of the Ice Company are in the morning post. They are not at all what a company of seven persons who sleep in the day have any right to expect. Prisca has written, at the bottom, in a fine plain hand, *We are going to need a bigger warehouse.* It is underlined, twice.
+  ?end
 ?end
 Captain Wren is in the hall at noon with his hat in his hand. He says, in his plain, mild, Illinois voice, that he has been on the Provost Marshal's staff for fourteen months and that a great deal of his work has been to be told things by persons who did not wish to be seen telling them. He says that it has occurred to him that a house with a good many windows ought to have a lamp. He leaves a small brass lantern with a shutter on the hall table, and goes out. It is a thing that you look at for a long time.
 There is a letter on the evening post, in a small neat sarcastic hand, with a London postmark, which has taken three months, and which is the first for a year that you have been entirely glad to see. It is from Mr. Crane. It is three lines. It says that he is told that you have a house, and a family, and a firm, and an ice trade, and that he has the greatest respect for the first and the greatest suspicion of the rest. It says that he is coming. It does not say when.
