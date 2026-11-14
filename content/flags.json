@@ -5677,6 +5677,102 @@
       "major": true,
       "default": "refused",
       "note": "Chapter 16: what he did when the white faced client asked for his signature"
+    },
+    "b5.square": {
+      "kind": "enum",
+      "values": [
+        "roofs",
+        "aid",
+        "bought"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "roofs",
+      "note": "Chapter 17: what he did in Trafalgar Square on the night of the great meeting"
+    },
+    "b5.chair": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "surety",
+        "ours"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "alone",
+      "note": "Chapter 17: how the young houses came to sit at the Court (alone, under his surety, or under Fiammetta's charter)"
+    },
+    "b5.watcher": {
+      "kind": "enum",
+      "values": [
+        "letter",
+        "turned",
+        "court"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "letter",
+      "note": "Chapter 17: what became of the Order's watcher in the Club's cellar"
+    },
+    "b5.letter": {
+      "kind": "enum",
+      "values": [
+        "burned",
+        "read",
+        "lisle"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "burned",
+      "note": "Chapter 17: what he did with the second page in Cassian's letter case"
+    },
+    "b5.trap": {
+      "kind": "enum",
+      "values": [
+        "table",
+        "trap",
+        "bare"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "table",
+      "note": "Chapter 18: how the counting house in Lime Street was made ready"
+    },
+    "b5.witness": {
+      "kind": "enum",
+      "values": [
+        "court",
+        "silver",
+        "young"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "court",
+      "note": "Chapter 18: who sat as witness at the first Tuesday of December"
+    },
+    "b5.reading": {
+      "kind": "enum",
+      "values": [
+        "told",
+        "one",
+        "scholar"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "told",
+      "note": "Chapter 18: how much he asked Lisle about the white faced client"
+    },
+    "b5.terms": {
+      "kind": "enum",
+      "values": [
+        "terms",
+        "burned",
+        "court"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "terms",
+      "note": "Chapter 18: what he did with the eighty fifth card"
     }
   }
 }

@@ -547,6 +547,12 @@
       "name": "Lord Vane",
       "title": "Warden of the Lamps",
       "bio": "A gentle, stooping old lord with a book of hours, who kept a friend's lamp lit for three hundred years against the sentence of the whole Court."
+    },
+    "lamb": {
+      "gender": "m",
+      "name": "Inspector Lamb",
+      "title": "Of A Division",
+      "bio": "A big, sandy, tired inspector of the Metropolitan Police with a bandaged hand, who would like very much to be a good man in a bad week."
     }
   }
 }

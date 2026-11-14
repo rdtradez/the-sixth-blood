@@ -72,3 +72,13 @@ Ch 16, "The First Tuesday", 1 November. Opening: the report. Night, three of fou
 
 Hooks left: the dark lamp in the west and whoever went; the god's agent and the first Tuesday of December; the Court's chair for the young; the Club's debts or alliance; Lisle at the wall and the second lamp; Cassian and the letter; Nell or Ada in the house.
 
+
+## Chapters 17 and 18 (session 59)
+
+Lore added: the white faced client is a "tenant", a clerk of the god that holds a lease and cannot do otherwise; the eighty four cards are eighty four first Tuesdays, a term of seven years (an apprenticeship in the old law), and the eighty fifth is the "freehold" that would have the firm and the sixth line "kept". The second page in Cassian's letter case is a summons, "a receipt": the line has been counted. Whoever is draining women in Commercial Street is neither the Court's nor the house's.
+
+Ch 17, "Bloody Sunday", 13 November 1887, the Trafalgar Square meeting in the background (fictional Inspector Lamb in front). Opening: the report. Night, three of four: the Square (carry the wounded to Ashe's dispensaries, take the roofs and keep the young houses off the crowd, or buy Lamb, `b5.square`); Mayfair (the Court gives the young a chair for seven years if a house stands surety: himself, nobody, or the young under Fiammetta's charter, `b5.chair`); the Club's cellar (the Order's watcher Pym: turn him, hand him to the Court, let him post his letter, `b5.watcher`); the firm (new ventures london.telephone and london.cables, house builds, lead task). Closing, fixed: the second page (`b5.letter`: read aloud, burn it, take it to Lisle).
+
+Ch 18, "The Eighty Fifth Card", 6 December. Opening: the report. Night, three of four: Lime Street (trap with cedar and silver, a laid table, or an emptied house, `b5.trap`); Mayfair (the Court's three as witnesses, the Court's silver and no witnesses, or the young houses as witnesses, `b5.witness`); the cellar (ask Lisle everything, one question, or put the scholar with him, `b5.reading`); the long table (Prisca, Hanno and Fiammetta placed, lead guards, ventures, house builds). Closing, fixed: the tenant and the card (`b5.terms`: burn it, lay it before the Court, write his own condition). Dawn: a woman found drained in Commercial Street, not the Court's work.
+
+Hooks left: the Commercial Street killer (the rogue fledgling of the book's title) and who made them; the tenant's report and what the "others" are; the Court's chair for the young and the surety; Pym and Rome; the silent west; Cassian summoned; Lisle's counting of the line.

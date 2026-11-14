@@ -85,6 +85,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 56: Book Five chapters 11 and 12
 - [x] Session 57: Book Five chapters 13 and 14
 - [x] Session 58: Book Five chapters 15 and 16
+- [x] Session 59: Book Five chapters 17 and 18
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -693,4 +694,12 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The coven fronts both chapters: the family copies and keeps the map, takes in a bled woman's sister, and is sent out as the hero's arm (or kept at home) when a lamp goes dark; the lead runs the firm (several ventures, house builds and a standing task are all allowed); Fiammetta, Hanno and Prisca each have a task in chapter 16's council. Rival covens are the heart of chapter 16 (the Court of Lamps' first sitting with the young houses, the Gaslight Club's master, the Order's watcher).
 - New decision flags (`b5.` prefix, registered, major): `b5.map`, `b5.cass`, `b5.nell`, `b5.dark` (chapter 15) and `b5.sitting`, `b5.pall`, `b5.lessons`, `b5.arm`, `b5.client` (chapter 16). Four new codex entries. No schema or migration. Tests in `tests/book5h.test.js`; `tests/book5.test.js` now expects sixteen chapters.
 - Sessions 56 and 57 (pull requests #61 and #62) were not merged when this session started, so the session 58 branch is stacked on session 57.
+- Plans are in `SPOILERS/whitechapel-hunt.md`.
+
+### Session 59 notes (Book Five, chapters 17 and 18)
+
+- Chapters `b5c17` and `b5c18` are in `content/whitechapel-hunt/` (`ch17.tsb`, `ch18.tsb`), about 11,500 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 18. Same shape as chapters 15 and 16: an opening with no phase (the lead's report), a short hunger scene that only runs if `must_feed()` is true, one night phase of three actions out of four, a fixed closing scene every player plays, and a dawn.
+- The coven fronts both chapters: the family carries the wounded, takes the roofs or keeps the young houses in line, Fiammetta's charter house can stand as the young houses' own surety, the lead runs the firm (several ventures, house builds and a standing task are all allowed), and Prisca, Hanno and Fiammetta each have a place at chapter 18's long table. Rival covens are the heart of both (the Court of Lamps and its chair for the young, the Gaslight Club's cellar and the Order's watcher in it, the young houses in the street).
+- New decision flags (`b5.` prefix, registered, major): `b5.square`, `b5.chair`, `b5.watcher`, `b5.letter` (chapter 17) and `b5.trap`, `b5.witness`, `b5.reading`, `b5.terms` (chapter 18). New ventures `london.telephone` and `london.cables`, offered in loops so several can be taken. New person: Inspector Lamb. Four new codex entries. No schema or migration. Tests in `tests/book5i.test.js`; `tests/book5.test.js` now expects eighteen chapters.
+- Sessions 56, 57 and 58 (pull requests #61, #62 and #63) were not merged when this session started, so the session 59 branch is stacked on session 58.
 - Plans are in `SPOILERS/whitechapel-hunt.md`.
