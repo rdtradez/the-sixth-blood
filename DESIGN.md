@@ -76,6 +76,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 47: Book Four chapters 15 and 16
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 49: Book Four chapters 19 and 20; Book Four is complete (journal, recap and sleep to London)
+- [x] Session 52: Book Five chapters 3 and 4
 - [x] Session 51: Book Five chapters 1 and 2
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
@@ -631,3 +632,12 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Tests: `tests/book5.test.js` plays both chapters from eight wakings, hungry and not, with and without a coven, and takes every choice.
 - Plans are in `SPOILERS/whitechapel-hunt.md`.
 
+### Session 52 notes (Book Five, chapters 3 and 4)
+
+- Chapters `b5c03` and `b5c04` are in `content/whitechapel-hunt/` (`ch03.tsb`, `ch04.tsb`), about 7,000 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 4. Same shape as chapters 1 and 2: an opening with no phase (chapter 3 the lead's report, chapter 4 the family laying out the night), a short hunger scene that only runs if `must_feed()` is true, one night phase of three actions out of four, and a dawn. Chapter 4 adds a fixed closing scene every player plays.
+- New decision flags (`b5.` prefix, registered): `b5.mortuary`, `b5.crosses`, `b5.tuesday`, `b5.gray` (chapter 3) and `b5.price`, `b5.feast`, `b5.physician`, `b5.doors`, `b5.cassian` (chapter 4). `b5.crosses`, `b5.price`, `b5.physician` and `b5.cassian` are the ones later chapters should read first.
+- Coven focus, as the owner asked: the lead reports a week of the family's work at the start of chapter 3, and Prisca, Fiammetta and Hanno each carry a thread (the plan read like a ledger, the doors watched, the firm). Fiammetta takes the `guard` task if the family keeps watch. In chapter 4 the family goes to the Court, sits at the Stepney street table, and can build the landladies' network (`acquire("informants")`, through `can_acquire`). A member with the `old_blood` gift can give blood to the Physician. Names are always checked with `in_circle()`; `npm run coven-names` is clean for the new files.
+- Historic investments: two new London ventures, `london.electric` and `london.stores`, offered in chapter 3 in a loop so several can be taken.
+- New people (`content/people.json`): Dr. Ashe (the Physician) and Mr. Quill. New codex entries: the free dispensaries and the Jubilee bonfires. Content notes: chapter 3 `blood`, `violence`; chapter 4 `blood`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book5b.test.js` plays both chapters hungry and not, with and without a coven, and takes every recorded choice; `tests/book5.test.js` now expects four chapters.
+- Plans are in `SPOILERS/whitechapel-hunt.md`. Sessions 51 and 51b (pull requests #54 and #55) were not merged when this session started, so the session 52 branch is stacked on session 51.

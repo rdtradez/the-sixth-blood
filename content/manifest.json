@@ -895,6 +895,23 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b5c03",
+          "file": "whitechapel-hunt/ch03.tsb",
+          "title": "The Eleven Crosses",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        },
+        {
+          "id": "b5c04",
+          "file": "whitechapel-hunt/ch04.tsb",
+          "title": "Jubilee Night",
+          "notes": [
+            "blood"
+          ]
         }
       ],
       "incomplete": true

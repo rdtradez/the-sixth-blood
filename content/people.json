@@ -493,6 +493,18 @@
       "name": "Lady Marchmont",
       "title": "Head of the Court of Lamps, Mayfair",
       "bio": "Small, white and upright, in gray silk and a great deal of lace, the oldest coven head in London. She does not ask, and she has been told that you are coming."
+    },
+    "ashe": {
+      "gender": "m",
+      "name": "Dr. Ashe",
+      "title": "The Physician, of the dispensary in Commercial Road",
+      "bio": "A very tall, thin, gray faced healer of the oldest line, who has treated the consumptive poor of London for a hundred years and has run out of ways to do it."
+    },
+    "quill": {
+      "gender": "m",
+      "name": "Mr. Quill",
+      "title": "A man in a gray overcoat",
+      "bio": "Thickset and weathered, a mortal of fifty with a policeman's patience and a bad knee, who has counted Cassian for a year and whistles hymn tunes."
     }
   }
 }
