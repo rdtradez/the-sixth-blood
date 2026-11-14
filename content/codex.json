@@ -967,6 +967,30 @@
       "title": "Fitzroy Square",
       "book": "whitechapel-hunt",
       "text": "A quiet Georgian square north of Oxford Street, favored by physicians and architects. In 1887 it was one of the best addresses in London."
+    },
+    "the_twelfth_lamp": {
+      "category": "lore",
+      "title": "The Twelfth Lamp",
+      "book": "whitechapel-hunt",
+      "text": "The Court of Lamps keeps eleven lamps and a twelfth plinth. The old covens say it is a custom. It is a count: the twelfth was put to sleep in 1587, and his lamp has been lit ever since."
+    },
+    "the_young_houses": {
+      "category": "people",
+      "title": "The Young Houses",
+      "book": "whitechapel-hunt",
+      "text": "The covens of London under a hundred years old, who hold no seat in Mayfair. In 1887 seventeen of them gathered at the Gaslight Club to ask what they wanted."
+    },
+    "the_cedar_stake": {
+      "category": "lore",
+      "title": "The Cedar Stake",
+      "book": "whitechapel-hunt",
+      "text": "A thin splinter of reddish cedar, from Lebanon, which halts a vampire where he stands. The Velati keep it as their one sure weapon."
+    },
+    "the_crypt_of_christ_church": {
+      "category": "places",
+      "title": "The Crypt of Christ Church",
+      "book": "whitechapel-hunt",
+      "text": "Beneath Hawksmoor's great white church in Spitalfields, a low crypt of pillars and black flagstones, long used by the parish and, for sixty years, by something else."
     }
   }
 }

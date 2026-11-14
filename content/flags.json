@@ -5255,6 +5255,90 @@
       "major": true,
       "default": "spared",
       "note": "Chapter 8: what became of Sir Julian Venn"
+    },
+    "b5.stay": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "watched",
+        "village"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 9: where Cassian mends, in the haven among the family, watched, or on the hill"
+    },
+    "b5.eleven": {
+      "kind": "enum",
+      "values": [
+        "told",
+        "bargained",
+        "held"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "held",
+      "note": "Chapter 9: what he told the Court of Lamps about the twelfth lamp"
+    },
+    "b5.congress": {
+      "kind": "enum",
+      "values": [
+        "chair",
+        "backed",
+        "refused"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 10: his part at the Gaslight Club's congress of the young houses"
+    },
+    "b5.young": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "some",
+        "many"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 10: how many of the young houses he dealt with (the most committed pick wins)"
+    },
+    "b5.cedar": {
+      "kind": "enum",
+      "values": [
+        "stopped",
+        "spoke",
+        "watched"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "watched",
+      "note": "Chapter 10: what he did when the Velati put a cedar stake in a Club fledgling"
+    },
+    "b5.crypt": {
+      "kind": "enum",
+      "values": [
+        "entered",
+        "scouted",
+        "left"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 10: how he looked at the crypt of Christ Church before the twentieth"
+    },
+    "b5.offer": {
+      "kind": "enum",
+      "values": [
+        "heard",
+        "refused",
+        "sprung"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 10: his answer to the Chairman in the crypt"
     }
   }
 }
