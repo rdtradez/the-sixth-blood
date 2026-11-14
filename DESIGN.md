@@ -86,6 +86,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 57: Book Five chapters 13 and 14
 - [x] Session 58: Book Five chapters 15 and 16
 - [x] Session 59: Book Five chapters 17 and 18
+- [x] Session 61: the Chicago and Collesanto (1923) maps for Book Six
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -274,7 +275,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - `tests/interlude-b.test.js` covers the chain end and the chapter order; `tests/book1.test.js` first night checks use `stopAt: 'lc01'`.
 - Plans are in `SPOILERS/lost-centuries.md`.
 
-- Maps (session 6): the Map tab in the menu shows `app/maps/city.html` (procedural SVG: Rome and Collesanto, with an After the fire toggle) in an iframe and tells it which sites to show. Sites per map are listed in `engine/maps.js`; `roadhome`, the farm, square, villa and road start charted. Chapters add places with `$ do chart("rome.warehouse")` and can test `charted("rome.warehouse")`. Charted places live in `sys.lore.sites` (SCHEMA 5). Later books add their city to `engine/maps.js` and `city.html`; the approved standalone previews for Florence (done), Paris (done), New Orleans, London, Chicago and New York are kept outside the repo until their sessions.
+- Maps (session 6): the Map tab in the menu shows `app/maps/city.html` (procedural SVG: Rome and Collesanto, with an After the fire toggle) in an iframe and tells it which sites to show. Sites per map are listed in `engine/maps.js`; `roadhome`, the farm, square, villa and road start charted. Chapters add places with `$ do chart("rome.warehouse")` and can test `charted("rome.warehouse")`. Charted places live in `sys.lore.sites` (SCHEMA 5). Later books add their city to `engine/maps.js` and `city.html`; the approved standalone previews for Florence (done), Paris, New Orleans and Chicago (done), London and New York are kept outside the repo until their sessions.
 
 ### Session 17 notes (for the next session)
 
@@ -703,3 +704,8 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New decision flags (`b5.` prefix, registered, major): `b5.square`, `b5.chair`, `b5.watcher`, `b5.letter` (chapter 17) and `b5.trap`, `b5.witness`, `b5.reading`, `b5.terms` (chapter 18). New ventures `london.telephone` and `london.cables`, offered in loops so several can be taken. New person: Inspector Lamb. Four new codex entries. No schema or migration. Tests in `tests/book5i.test.js`; `tests/book5.test.js` now expects eighteen chapters.
 - Sessions 56, 57 and 58 (pull requests #61, #62 and #63) were not merged when this session started, so the session 59 branch is stacked on session 58.
 - Plans are in `SPOILERS/whitechapel-hunt.md`.
+
+### Session 61 notes (Book Six maps)
+
+- `app/maps/chicago.html` draws Chicago and Collesanto as they stand in 1923 (the approved preview). `engine/maps.js` gains `chicago` (`exchange`, `yards`, `depot`, `tower`, `club`, `valere`, `haven`, `goldcoast`, `bronzeville`, `pilsen`, `velati`, `roadhome`) and `collesanto5` (`farm`, `square`, `villa`, `press`, `gate`, `refuge`, `crypt`, `road`), both for book `relics-lost-god` on page `chicago`. Book Six chapters chart sites with `$ do chart("chicago.exchange")`.
+- Site ids are unique across the two maps of the book (a test checks this). `sw.js` caches the new page (`VERSION` is `tsb-17`). London and New York still need their maps.
