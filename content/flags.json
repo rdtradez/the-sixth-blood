@@ -5567,6 +5567,116 @@
       "major": true,
       "default": "left",
       "note": "Chapter 14: what became of the cracked cedar peg and the lamp in the wall"
+    },
+    "b5.map": {
+      "kind": "enum",
+      "values": [
+        "head",
+        "kept",
+        "court",
+        "both"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "head",
+      "note": "Chapter 15: what became of the sleeper's map of the twelve lamps"
+    },
+    "b5.cass": {
+      "kind": "enum",
+      "values": [
+        "free",
+        "trusted",
+        "written"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "free",
+      "note": "Chapter 15: how Cassian was treated after the wall"
+    },
+    "b5.nell": {
+      "kind": "enum",
+      "values": [
+        "shop",
+        "keeper",
+        "truth"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "shop",
+      "note": "Chapter 15: what the house did for the sister of the bled woman"
+    },
+    "b5.dark": {
+      "kind": "enum",
+      "values": [
+        "wait",
+        "sent",
+        "warned",
+        "kept"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "kept",
+      "note": "Chapter 15: how the house answered the first lamp going out"
+    },
+    "b5.sitting": {
+      "kind": "enum",
+      "values": [
+        "half",
+        "told",
+        "silent"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "half",
+      "note": "Chapter 16: how much he told the Court at its first sitting with the young"
+    },
+    "b5.pall": {
+      "kind": "enum",
+      "values": [
+        "truce",
+        "allied",
+        "broke"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "truce",
+      "note": "Chapter 16: his settlement with the master of the Gaslight Club"
+    },
+    "b5.lessons": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "together",
+        "court",
+        "guarded"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "alone",
+      "note": "Chapter 16: who sat with the sleeper at the wall"
+    },
+    "b5.arm": {
+      "kind": "enum",
+      "values": [
+        "home",
+        "west"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "home",
+      "note": "Chapter 16: whether the family sent one of its own west"
+    },
+    "b5.client": {
+      "kind": "enum",
+      "values": [
+        "refused",
+        "signed",
+        "followed"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 16: what he did when the white faced client asked for his signature"
     }
   }
 }

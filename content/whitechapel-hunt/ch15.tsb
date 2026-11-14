@@ -1,0 +1,386 @@
+// Book Five, Chapter 15 (session 58). The twentieth of October 1887, a week after the lamp in the wall.
+// Opens with no phase (the lead's report), a short hunger scene that only runs if must_feed(), then one night phase of three actions out of four, a fixed closing every player plays, and a dawn.
+// The coven fronts the chapter: the family copies and keeps the sleeper's map, the lead runs the firm (ventures, house builds and a standing task are all allowed), a bled woman's sister is taken in by the house, and the family is sent out as the hero's arm when a lamp goes dark. Rival covens are present in the report and the closing (the Court of Lamps, the young houses, the Gaslight Club, the Order in Rome). Reads b5.peg, b5.ward, b5.seat, b5.lisle, b5.wall, b5.report, b5.vane, b5.first, b5.club, b5.stay. Names are always checked with in_circle().
+// Sets b5.map, b5.cass, b5.nell and b5.dark. Uses send(), coven_task(), acquire(), invest(), discover(), meet(), witness(), has_gift(), member_has_gift(), holds().
+// Ends with rest() and => next, which carries on into chapter 16.
+@chapter b5c15
+@title The Chain
+@book whitechapel-hunt
+@version 1
+
+# start
+## The twentieth of October
+$ b5.map = "head"
+$ b5.cass = "free"
+$ b5.nell = "shop"
+$ b5.dark = "wait"
+$ _lead = ""
+$ _reader_name = "the young keeper"
+$ _fed = 0
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+?if must_feed()
+  ~> hunger
+  ---
+?end
+?if coven_size() > 0
+  ~> report
+  ---
+?end
+$ do phase("night", 3)
+It is the twentieth of October, and the fog has gone out of London overnight and left a sky as clean and cold as a plate. There are four things that want seeing to, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# hunger
+## The first thing
+* Take a lamplighter on his round in Gower Street, with his pole over his shoulder ?if wake("outcome") != "woken_early"
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He sings under his breath. He is still singing, a little thickly, when he is found sitting on a step with his hat on his knee, a street further on, three lamps behind.
+* Send down to the stillroom for a bottle, wrapped in a ham cloth
+  $ do feed("donor")
+  $ do earn(-2)
+  It comes up in a basket under a clean napkin, borne by a boy who has been told that it is a tonic and has formed his own view.
+* Go out to the mews, where the stable cat keeps her kittens
+  $ do feed("animal")
+  $ humanity += 1
+  She has six, in a hamper, and permits you one look at them and no more. It is a thing like being let into a vestry.
+* Go without, and make a hard bright thing of it
+  $ humanity += 1
+  $ cunning_brutal += 1
+  The cold, clear night does not help. Every pulse in the square is a small drum, and you hold to the rail of the area like a man in a gale.
+<~
+
+# report
+## The week, from the head of the table
+?if _lead != "" and in_circle(_lead) and member(_lead, "status") == "active"
+  {name(_lead)} has put the week in three piles on the baize: the firm, the house and the rest. The pile marked the rest is the highest. "I have run out of heads for it," {pg(_lead, "he", "she", "they")} says, and smiles, and does not look as though it is a joke.
+?end
+The wall at Bishopsgate has been kept, by day and by night, by somebody who does not mind the weather. It is Hanno's idea, or Prisca's, or the whole house's. Nobody can say who thought of it first, and it is very much the family's way.
+?if b5.peg == "took"
+  The cedar peg lies in its handkerchief in the strongroom, on the second shelf, between the deeds and the Bible. The family has taken to saying good evening to it in passing. It is not clear that they know that they do.
+?elif b5.peg == "sealed"
+  The Court's silver is on the cedar door, and a man of the Court sits by it in the evenings with a lamp and a pipe, in a coat very much too thin. He is relieved at two. He has been given a rug.
+?else
+  Lisle goes down to the wall, an hour at a time, with a rug and a pencil and two of the family on the stair. He has come back each time a little less white and a little more afraid, which the Chairman says is the right way round.
+?end
+?if b5.ward == "healed"
+  Nell Pardoe has been up, in a chair, in the kitchen at Cable Street. She has asked, twice, whether the gentleman with the spoon is quite well.
+?elif b5.ward == "transfused"
+  Nell Pardoe is sitting up in bed, thin and cross, and has begun to inform the whole ward of the things that are wrong with it. The Chairman is delighted.
+?else
+  There was a funeral at Bethnal Green on Monday. It was small, and it was paid for, though the family does not know by whom.
+?end
+?if b5.seat == "seat"
+  The Court has sent for the young houses, and the young houses have not yet dared to go. Hesketh has had his coat pressed three times.
+?elif b5.seat == "charter"
+  A gray gown has moved into the house on the East End side, and the house has acquired, in a week, a ledger, a cat, and a reputation.
+?else
+  The young houses have been very quiet. It is the quiet of a thing that has not yet decided to be angry.
+?end
+?if b5.report == "letter"
+  A note has come over the water from Rome, in the Latin of the very best Velati clerks. It is polite. It acknowledges the letter. It says that the writer is surprised, and would not like to say any more than that.
+?elif b5.report == "hushed"
+  The Houndsditch boarding house has taken a new lodger, a man with an open face who is not in orders at all, and who has been seen to count the chimneys.
+?end
+?if b5.vane == "pleaded" or b5.vane == "judged"
+  The Warden has written, from Hampstead, to say that he has found that he is fond of a particular robin.
+?end
+?if b5.club == "allied"
+  The Club has sent round a hamper, and a card, and a young man to sit in the hall and wait for an answer to the card. He has been there three days. He has made friends with the porter.
+?elif b5.club == "refused"
+  The Club has been quiet, which is unlike it, and is paying the firm's bills a day early, which is worse.
+?end
+<~
+
+# night
+## The night
+:night
+?if actions_left() == 3
+  The house is lit in every window, and the family is at its chores in the long dusk like a crew at the start of a watch.
+?elif actions_left() == 2
+  The hour has gone round. In the square the trees have given up their leaves and stand about in the lamplight like men who have been robbed.
+?else
+  It is very late. Somewhere on the river a steamer is hooting, over and over, as if it had lost something.
+?end
+* Go up to the attic, where Lisle is drawing a map [once] ?if actions_left() > 0
+  ~> map
+  $ do act()
+* Go out on the leads, where Cassian has been all night [once] ?if actions_left() > 0
+  ~> cass
+  $ do act()
+* Go to Cable Street, where a girl has come asking for a dead woman's wages [once] ?if actions_left() > 0
+  ~> nell
+  $ do act()
+* Sit down with the books and see to the firm [once] ?if actions_left() > 0
+  ~> firm
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> closing
+?end
+-> :night
+
+# map
+## The attic
+$ do discover("the_chain")
+It is the room under the slates, with a skylight and a deal table, and he has covered the whole of the table with the backs of old circulars. He has a pencil in each hand and one behind his ear. He has been at it since the sun went down. He does not look up when you come in, but he does draw out a chair.
+"I did not know that I knew it," says Lisle. "That is the wonder. I thought it was a thing that I had made up, in the dark, to keep myself from going out. It was not. It was there. It has been there for three hundred years, in the body, like a tune." He turns the page. It is a ring of small crosses on a round sheet, and beside each, in a minute and perfect hand, a name that has not been a name in two thousand years. "Here is the one under Bishopsgate. Here is the one in the island city, under the old fort, and the one by the river that is two rivers. Here is the one under the sea. I do not know how the sea is to be reached. I only know that it is."
+There is a long silence.
+"They are not tombs," he says. "They are not prisons. They are *hinges*."
+:the_map
+* Have the family copy it, a clean copy for the strongroom, and a second for the house to keep in its head [once]
+  ?if b5.map == "court"
+    $ b5.map = "both"
+  ?else
+    $ b5.map = "kept"
+  ?end
+  $ humanity += 1
+  $ standing += 1
+  ?if coven_size() > 0
+    ?if in_circle("prisca") and member("prisca", "status") == "active"
+      Prisca takes the table, and a ruler, and a bottle of the good ink, and does it in a single night, in a fair clear hand, with Lisle correcting her Latin and her pronouncing his. They are, you think, the happiest that you have yet seen either of them.
+    ?else
+      {_reader_name} takes the table, and a ruler, and does it in a single night, with the rest of the house in a ring about the lamp, learning it by heart in twos. It is a very odd sight, and a good one.
+    ?end
+  ?else
+    You copy it yourself, in a neat hand, and put it in the strongroom. It is lonely work, and there is no one to say that it is a good copy.
+  ?end
+  -> :the_map
+* Send a copy to the Court of Lamps, in Lady Marchmont's own hand, and ask for hers in return [once]
+  ?if b5.map == "kept"
+    $ b5.map = "both"
+  ?else
+    $ b5.map = "court"
+  ?end
+  $ secrecy -= 1
+  $ cunning_brutal -= 1
+  $ standing += 1
+  It is a very difficult letter to write, and you write it six times. The seventh is a line and a half and says that the writer believes that the Court would wish to know, and would wish that he knew it first. Lisle reads it over your shoulder. "It is a handsome one," he says, with difficulty. "She will be offended. It is the right thing."
+  -> :the_map
+* That is enough for tonight
+?if has_gift("shadows")
+  You stand in the corner of the room for a quarter of an hour before he sees you, and when you look at the map from the shadow it is a different thing. It is not a ring at all. It has a shape. The crosses are the points of something that was meant to be drawn in a single line.
+?end
+<~
+
+# cass
+## The leads
+$ do meet("cassian")
+The roof is a flat of old lead with a low parapet, and a view of every chimney in the West End. He is sitting with his back to a stack and his knees up, in his shirtsleeves, in the cold, like a boy. There are four candle ends in a row by his boot, and a book that has not been opened.
+"I am the oldest thing in this house, after the lamp," says Cassian. "I made you, and I made nothing of it. I have been telling myself that it was a duty, and that I would be told, in the end, what it was for." He laughs, quite softly. "I thought that I was the one with the plan."
+He does not look at you. Across the roofs the dome of St. Paul's has the faint blue of a pearl in the starlight.
+"There was a letter," he says. "It was not from the Court, and it was not from Rome. It came to me in Spitalfields, in a hand that I had never seen, with a drawing of a lamp at the foot, and it told me where to look, and when. It was a good letter. It was an *educated* letter. It was the most persuasive thing that I have read in a century." He picks at the lead. "I have been trying to remember it word for word, and I find that I cannot. It was not remembered. It was *placed*."
+?if b5.stay == "village"
+  "I had hoped to go home to the hill," he says. "I do not think that I should be let."
+?end
+:the_roof
+* Tell him everything, now, the map and the lamps and what Lisle has said, and ask him to stand with the family [once]
+  $ b5.cass = "trusted"
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  $ standing += 1
+  He listens to the whole of it with his chin on his knee. When it is over he is quiet a long time. "That is a great deal to hand to a man who walked into a trap with his eyes open," he says. Then he stands, and puts his coat on, and straightens it, with the old courtesy. "I shall be extremely careful of it."
+  ?if coven_size() > 0
+    Below, in the area, a window is thrown up, and somebody calls up the leads, in a low voice, that there is cocoa. It is, for a vampire, a perfectly meaningless sentence. Cassian goes down to it as though he had been invited to a feast.
+  ?end
+* Have him write down every word that he can remember of the letter, and every face, and put it in the strongroom with the map [once]
+  $ b5.cass = "written"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  It takes him until four. It is nine pages, and all of it wrong, in the way that a drawing is wrong when it is made of a thing seen once in a dream. At the foot of the last he draws a lamp. His hand shakes. He looks at the lamp for a long time, and then, with great care, he draws a cross through it.
+* Let him go where he likes, and ask nothing [once]
+  $ b5.cass = "free"
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  "That is either a very great kindness or a very great mistake," he says, "and I do not care to know which." He puts out three of the four candles. "I shall be here at dawn. I mean to be. I should like it to be known that I mean to be."
+?if coven_size() > 0 and in_circle("fiammetta") and member("fiammetta", "status") == "active"
+  Fiammetta has come up to the roof in the middle of it, in her gray gown, with a shawl, and a cup, and has sat down beside him without saying anything at all. He takes the cup. It is the first time in your knowledge that she has touched him.
+?end
+<~
+
+# nell
+## Cable Street
+It is a young woman in the passage outside the dispensary, in a black bonnet that has been turned twice. She has a basket on her arm and she has the look of one who has walked all the way from Bethnal Green and does not mean to be sent away. She is, you see at once, very like her sister.
+?if b5.ward == "left"
+  Her name is Ada Pardoe, and she has heard from the matron that a gentleman sat up with Nell at the last. She has come to say that she is obliged, and to ask, quite steadily, whether there was a wage owing, and whether it was kept.
+?else
+  Her name is Ada Pardoe, and she has come to look at the gentleman who is said to have given Nell a cure, and to say that she does not hold with it, whatever it was, and that she is grateful.
+?end
+"They said that she was done for," she says. "They said that there was a doctor that was making the women ill. I was told by a lady in the Mission that it was the devil. I do not think that it is the devil. I think that it is a gentleman. I think that you are all gentlemen."
+It is not said as a compliment.
+:the_sister
+* Offer her a place in the house, as a keeper, sworn, with a room and a wage, and a share of what is known [once]
+  $ b5.nell = "keeper"
+  $ humanity += 1
+  $ standing += 1
+  $ do discover("keepers_oath")
+  She takes a long time over it. She says that she will see the house first. She says it very politely, and with great firmness, and in the end she stays to supper, and eats a great deal, and tells the cook that the pudding is heavy. She is, from that hour, very much of the house.
+* Set her up in a shop in Bethnal Green, with a year's rent paid and no questions asked [once]
+  $ b5.nell = "shop"
+  $ do earn(-1)
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  It is a small shop, with a bow window, and she hangs a bonnet in it the very next day. It is the most hopeful object in the whole of the East End.
+* Sit down with her in the kitchen, and tell her the truth, as much of it as she can carry [once]
+  $ b5.nell = "truth"
+  $ humanity += 2
+  $ secrecy -= 2
+  She hears it all with her hands in her lap. At the end she is quite white, and quite still, and says, in a small level voice, "Then I am to understand that there are a great many of you." She puts her bonnet straight. "I had thought as much." It is the bravest thing that you have seen all year.
+?if coven_size() > 0 and in_circle("hanno") and member("hanno", "status") == "active"
+  Hanno has found the girl a chair, and a blanket, and has put the kettle on without being asked. He stands by the fire with his arms folded and watches her like a man who has seen a great many people come to a great many doors.
+?elif _lead != "" and in_circle(_lead) and member(_lead, "status") == "active"
+  {name(_lead)} has taken the basket, and found a plate, and is quite plainly doing the one thing that a house can do for a person who has come to the wrong door in the right way.
+?end
+<~
+
+# firm
+## The books
+:the_books
+The room behind the kitchen is warm, and the baize is green, and the papers of the quarter are laid out in the lamplight in the order that {_reader_name} likes them. Mr. Hale has sent round a note that says, in a tiny hand, that he is *entirely at your disposal*, and has underlined it.
+* Put money into the insurance, the great old risks and the little new ones [once] ?if can_invest("london.insurance")
+  $ do invest("london.insurance")
+  Mr. Hale reads the figures very slowly, twice, and says that it is the first time in his life that he has felt that the City is a place of reason. He does not appear to find that this makes him happy.
+  -> :the_books
+* Put money into the electric light, the dynamos and the lamps in the new streets [once] ?if can_invest("london.electric")
+  $ do invest("london.electric")
+  It has the great modern virtue of making everything very bright indeed. The clerk wishes it to be known that there is a switch in the counting house, and that it is not to be touched.
+  -> :the_books
+* Put money into the underground railways, and the new lines under the river [once] ?if can_invest("london.underground")
+  $ do invest("london.underground")
+  It is a very odd thing to own a hole, but there is a great deal to be said for it. The family goes down on the first train, in a body, in its hats, and is delighted.
+  -> :the_books
+* Build out the house for the winter [once]
+  ~> house
+  -> :the_books
+* Set the business lead to work the firm, while the house has its mind on other things [once] ?if coven_size() > 0
+  $ do coven_task(_lead, "business")
+  {name(_lead)} takes the ledger and the second pen, and a calm and slightly wolfish look, and says that there will be a good deal done in the course of the week, and that it is to be hoped that you will not inquire into the details.
+  -> :the_books
+* That is the lot
+<~
+
+# house
+## The house, for the winter
+:the_winter
+?if coven_size() > 0
+  The family has been consulted, in advance, and has produced a list of its own, on the back of a laundry bill, in four hands.
+?end
+* Put in a vault, a deep dry room for the things that must not be lost [once] ?if can_acquire("vaults")
+  $ do acquire("vaults")
+  $ secrecy += 1
+  It is dug under the scullery, to nobody's very great alarm, by a firm of men who are told that it is for wine. It will keep a great deal of wine. It will keep a great many other things.
+  -> :the_winter
+* Cut an escape tunnel from the cellar to the mews, wide enough for a man and a coffin [once] ?if can_acquire("escape_tunnels")
+  $ do acquire("escape_tunnels")
+  $ secrecy += 1
+  The mews, when they break through, is found to have an ancient and quite unexpected drain. The family adopts it. It is, in the end, a great success.
+  -> :the_winter
+* Set up a training hall, for the young of the house to learn their gifts [once] ?if can_acquire("training_hall")
+  $ do acquire("training_hall")
+  $ standing += 1
+  $ humanity += 1
+  It is the long attic, with the beams out and the floor sanded and a great many mats. The first lesson is a disaster. The second is a good deal better.
+  -> :the_winter
+* Open a front business, a shop with a bell and a clerk, so that the house has a face [once] ?if can_acquire("front_business")
+  $ do acquire("front_business")
+  $ secrecy += 1
+  $ do earn(1)
+  It is a chemist's, which the family, in conclave, decided was the least suspicious thing that they could possibly be. The sign in the window says *Pure Drugs*. Fiammetta has put a cat in the window and it has not left.
+  -> :the_winter
+* Lay down a blood network, with a clean supply and a safe road for it [once] ?if can_acquire("blood_network")
+  $ do acquire("blood_network")
+  $ humanity += 1
+  It is a great arrangement of porters and hospital orderlies and a very sound young man at the Smithfield market, and it runs, in a week, like a watch. Nobody in it knows what it is for. It is a tidy thing, and an honest one.
+  -> :the_winter
+* That is enough building for one night
+<~
+
+# closing
+## The attic, at midnight
+$ do witness(0)
+It is the hour when the house, having done its work, lets itself go quiet, and a draft goes round the landing, and the long-case clock in the hall decides that it is a quarter to the hour and says so.
+Lisle has called the house up to the attic. It has taken a good while. They have come up one flight at a time, the family and the keepers in a long slow file, with lamps, and have found places among the boxes and along the walls. There is not much room. Somebody has brought a cushion for the Chairman, who has not been asked.
+?if coven_size() > 0
+  The family is there, from the oldest to the youngest, in a ring about the table and the map, with its lamps held low, like a council of old pilgrims about a fire. It is the first time that the whole of it has been in the one room. It does not seem to have quite realized how many it is.
+?end
+?if b5.map == "court" or b5.map == "both"
+  A messenger of the Court stands at the head of the stair with his hat in his hand, an old man in a black coat, who has been told that he may listen and that he is not to say a word.
+?end
+?if b5.cass == "trusted"
+  Cassian has taken the place at the right hand of the table, and has been given a pencil.
+?elif b5.cass == "written"
+  Cassian is at the back, by the door, with his nine pages folded in his pocket and the look of a man who has put down a very heavy parcel.
+?end
+Lisle has a lamp of his own, a very small one, which he sets in the middle of the map. He does not speak for a long moment. When he does it is not to the room.
+"It went out at eleven," he says.
+Nobody asks what. He puts his finger on a cross at the western edge of the paper, by a long flat water, and a mark that is a good deal larger than the rest.
+"There was a lamp there. It had been lit since before the place had a name. It was kept by something that was not a man and was not a beast, and it has stood quite alone for nine thousand years, and has not once gone out." He draws a breath, which he does not need, and which shakes. "It is out. It has not been broken. It has been *blown out*. By a thing that does not have breath."
+?if has_gift("old_blood")
+  The old blood in you has gone quite still, in the way that a horse goes still in a field before a storm, and you know, with no other proof, that he is not mistaken.
+?end
+?if coven_size() > 0 and has_gift("shadows")
+  The shadows in the attic have drawn in toward the little lamp, all together, as a flock turns. The family has seen it. It has not said a word.
+?end
+You look at the map. It is a very long way. It is eleven days by the quick steamers and the quick trains, and there is a town on that water, a great raw, rich, filthy, glittering town of two hundred thousand souls, which nobody in the room has ever seen.
+:the_dark
+* Send one of the family, with a purse and a letter, by the fast boat, to see what has happened [once] ?if coven_size() > 0
+  $ b5.dark = "sent"
+  $ standing += 1
+  $ humanity -= 1
+  ?if in_circle("prisca") and member("prisca", "status") == "active"
+    $ do send("prisca", "scout", 1)
+    Prisca is on her feet before you have finished. "I shall want my small trunk," she says, "and the good gloves, and a map of the town, and three books on the stockyards." She has, you notice, been waiting for years to be asked to go somewhere that would surprise her.
+  ?elif in_circle("fiammetta") and member("fiammetta", "status") == "active"
+    $ do send("fiammetta", "scout", 1)
+    Fiammetta says nothing at all. She puts her gray gown over her arm, and goes quietly downstairs, and is heard in the hall, a minute later, asking the porter for a timetable.
+  ?else
+    $ do send(_lead, "scout", 1)
+    {name(_lead)} puts down the pencil, quite gently, and says that it will do the thing, and that there is a great deal in the firm that can be left to the second clerk.
+  ?end
+  -> :the_dark
+* Write to the Court, and to the Velati in Rome, in your own hand, and tell them that the first lamp is out [once]
+  ?if b5.dark != "sent"
+    $ b5.dark = "warned"
+  ?end
+  $ secrecy -= 1
+  $ standing += 1
+  $ cunning_brutal -= 1
+  It is a hard letter to write, and it is not signed with anything that a cautious man would sign. When it has been sealed the house is quite silent. It is the first time that it has said, in so many words, to the world, that there is a thing that wants watching.
+  -> :the_dark
+* Sit still, and watch the other eleven, and learn what the thing is before anyone goes anywhere near it [once]
+  ?if b5.dark == "wait"
+    $ b5.dark = "kept"
+  ?end
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  Lisle's lips move. He nods, slowly, as a man nods who has been told a thing that he has half decided himself. "It will not want to be hurried," he says. "It has all the time in the world. It is only that we have not."
+  -> :the_dark
+* That is all that can be done tonight
+-> dawn
+
+# dawn
+## Before the dark ends
+You go down in the order in which you came up, with the lamps, and nobody says a word until the first landing. Then somebody laughs, quite suddenly, at nothing, and somebody else says that it is the cocoa, and the whole house, one after another, down the stair, laughs, in a low, helpless, shaken sort of way.
+?if b5.dark == "sent"
+  There is a hansom at the door at five. It has a small trunk on the roof, tied with a rope, and a good deal of luggage inside. It goes off down the square in the gray light with a very busy and a very resolute noise.
+?elif b5.dark == "warned"
+  A boy goes off down the road, at the first hint of the light, with two letters in his cap, running very fast.
+?else
+  The map is rolled, and tied, and put on the second shelf of the strongroom, next to the peg or the place where the peg would be. It is surprising how much it weighs.
+?end
+?if b5.nell == "keeper"
+  There is a young woman in the kitchen who has been given an apron and a very large pair of oven gloves, and has just said to the cook that the pudding was, after all, perfectly good.
+?elif b5.nell == "shop"
+  There is a bonnet in the window of a very small shop in Bethnal Green, turned to the east to catch the first of the sun.
+?else
+  There is a girl in a black bonnet on the step, with an empty basket, who has asked if she might come again.
+?end
+"I should like to go and look at the one under the Thames," says Lisle, at your elbow, after a while. "Not yet. I only should like to say it." He takes his hat. He is quite steady. He looks, for the first time since he woke, like a man who has not been put away. "It is very good to have something to be afraid of."
+$ do rest()
+=> next

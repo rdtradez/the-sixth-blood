@@ -81,11 +81,11 @@ const coven = (g) => {
   }
 };
 
-test('Book Five lists its fourteen written chapters and is incomplete', async () => {
+test('Book Five lists its sixteen written chapters and is incomplete', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'whitechapel-hunt');
   assert.equal(book.incomplete, true);
-  assert.equal(book.chapterCount, 14);
+  assert.equal(book.chapterCount, 16);
 });
 
 test('chapters 1 and 2 play through every kind of waking, hungry or not, with and without a coven', async () => {

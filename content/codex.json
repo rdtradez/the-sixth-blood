@@ -1033,6 +1033,30 @@
       "title": "The Chamber in the Wall",
       "book": "whitechapel-hunt",
       "text": "Under a cooper's yard at Bishopsgate, in a stretch of Roman wall, there is a round room with a cedar door and a black clay lamp that has burned since before the city."
+    },
+    "the_chain": {
+      "category": "lore",
+      "title": "The Chain of Lamps",
+      "book": "whitechapel-hunt",
+      "text": "Thirteen black clay lamps, one under Bishopsgate and twelve elsewhere, were lit before the six drank. The sleeper calls them hinges, and they are failing."
+    },
+    "keepers_oath": {
+      "category": "people",
+      "title": "The Keeper's Oath",
+      "book": "whitechapel-hunt",
+      "text": "A sworn human of a house is kept apart from its turned, with a room, a wage and a share of what is known, and has the right to leave."
+    },
+    "the_wall_reading": {
+      "category": "lore",
+      "title": "Reading the Wall",
+      "book": "whitechapel-hunt",
+      "text": "The thing in the cedar room is not a book but a kind of weather. It tells what has been and is, and it is a danger to sit still before it alone."
+    },
+    "the_first_voice": {
+      "category": "lore",
+      "title": "The First Voice",
+      "book": "whitechapel-hunt",
+      "text": "A pressure rather than a voice, felt by those who sit long at the lamp in the wall. It seems very old and very patient."
     }
   }
 }

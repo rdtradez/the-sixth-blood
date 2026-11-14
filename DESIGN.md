@@ -84,6 +84,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 51: Book Five chapters 1 and 2
 - [x] Session 56: Book Five chapters 11 and 12
 - [x] Session 57: Book Five chapters 13 and 14
+- [x] Session 58: Book Five chapters 15 and 16
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -684,4 +685,12 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Chapters `b5c13` and `b5c14` are in `content/whitechapel-hunt/` (`ch13.tsb`, `ch14.tsb`), about 8,500 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 14. Same shape as chapters 11 and 12. Chapter 13 has an extra late scene that runs only if the waking in chapter 12 was sealed.
 - The coven fronts both chapters: the family nurses the guest and the last of the bled women, the lead runs the firm (several ventures, house builds and a standing task are all allowed), Fiammetta can ask for a house of her own among the young houses, and the family goes down into the wall. Rival covens are the heart of it (the Court of Lamps and its Warden, the young houses and their claim, the Order's three, the Gaslight Club).
 - New decision flags (`b5.` prefix, registered, major): `b5.lid`, `b5.lisle`, `b5.meeting`, `b5.vane`, `b5.first` (chapter 13) and `b5.ward`, `b5.seat`, `b5.report`, `b5.wall`, `b5.peg` (chapter 14). New people: `lisle`, `vane`. New codex entries: four. New collection piece: `cedar_peg`. No schema or migration. Tests in `tests/book5g.test.js`.
+- Plans are in `SPOILERS/whitechapel-hunt.md`.
+
+### Session 58 notes (Book Five, chapters 15 and 16)
+
+- Chapters `b5c15` and `b5c16` are in `content/whitechapel-hunt/` (`ch15.tsb`, `ch16.tsb`), about 8,500 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 16. Same shape as chapters 13 and 14: an opening with no phase (the lead's report), a short hunger scene that only runs if `must_feed()` is true, one night phase of three actions out of four, a fixed closing scene every player plays, and a dawn.
+- The coven fronts both chapters: the family copies and keeps the map, takes in a bled woman's sister, and is sent out as the hero's arm (or kept at home) when a lamp goes dark; the lead runs the firm (several ventures, house builds and a standing task are all allowed); Fiammetta, Hanno and Prisca each have a task in chapter 16's council. Rival covens are the heart of chapter 16 (the Court of Lamps' first sitting with the young houses, the Gaslight Club's master, the Order's watcher).
+- New decision flags (`b5.` prefix, registered, major): `b5.map`, `b5.cass`, `b5.nell`, `b5.dark` (chapter 15) and `b5.sitting`, `b5.pall`, `b5.lessons`, `b5.arm`, `b5.client` (chapter 16). Four new codex entries. No schema or migration. Tests in `tests/book5h.test.js`; `tests/book5.test.js` now expects sixteen chapters.
+- Sessions 56 and 57 (pull requests #61 and #62) were not merged when this session started, so the session 58 branch is stacked on session 57.
 - Plans are in `SPOILERS/whitechapel-hunt.md`.
