@@ -5021,6 +5021,117 @@
       "major": true,
       "default": "wait",
       "note": "Chapter 4: how he answered Cassian's letter"
+    },
+    "b5.quill": {
+      "kind": "enum",
+      "values": [
+        "trusted",
+        "pressed",
+        "watched"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "watched",
+      "note": "Chapter 5: how he dealt with Mr. Quill and his employer"
+    },
+    "b5.club": {
+      "kind": "enum",
+      "values": [
+        "allied",
+        "played",
+        "refused"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 5: his answer to the Gaslight Club, the younger coven"
+    },
+    "b5.vault": {
+      "kind": "enum",
+      "values": [
+        "vaults",
+        "tunnels",
+        "none"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "none",
+      "note": "Chapter 5: what he built out for the family's haven"
+    },
+    "b5.errand": {
+      "kind": "enum",
+      "values": [
+        "eight",
+        "square",
+        "firm",
+        "none"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "none",
+      "note": "Chapter 5: which errand the family was sent on"
+    },
+    "b5.squeeze": {
+      "kind": "enum",
+      "values": [
+        "paid",
+        "fought",
+        "ceded",
+        "family"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "ceded",
+      "note": "Chapter 6: how the firm answered the Club's squeeze on its paper"
+    },
+    "b5.fitzroy": {
+      "kind": "enum",
+      "values": [
+        "roofs",
+        "watched",
+        "bought",
+        "left"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "left",
+      "note": "Chapter 6: how he looked at the house in Fitzroy Square"
+    },
+    "b5.audience": {
+      "kind": "enum",
+      "values": [
+        "given",
+        "pressed",
+        "stalled"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "stalled",
+      "note": "Chapter 6: how much he told Lady Marchmont"
+    },
+    "b5.eight": {
+      "kind": "enum",
+      "values": [
+        "moved",
+        "guarded",
+        "left"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 6: what he did for the eight ticketed women"
+    },
+    "b5.frances": {
+      "kind": "enum",
+      "values": [
+        "promised",
+        "bargained",
+        "refused"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "refused",
+      "note": "Chapter 6: his answer to Frances Venn and the key"
     }
   }
 }

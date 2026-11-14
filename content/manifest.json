@@ -912,6 +912,23 @@
           "notes": [
             "blood"
           ]
+        },
+        {
+          "id": "b5c05",
+          "file": "whitechapel-hunt/ch05.tsb",
+          "title": "The Gaslight Club",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c06",
+          "file": "whitechapel-hunt/ch06.tsb",
+          "title": "Fitzroy Square",
+          "notes": [
+            "blood",
+            "violence"
+          ]
         }
       ],
       "incomplete": true

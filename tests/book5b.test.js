@@ -74,7 +74,7 @@ test('chapters 3 and 4 play through, hungry or not, with and without a coven, an
   for (const chapter of ['b5c03', 'b5c04']) {
     for (const hunger of [10, 90]) {
       for (const circle of [0, 1]) {
-        const run = await play(chapter, {}, { ...START, hunger }, [], { sys: circle ? coven : null, stopAt: chapter === 'b5c03' ? 'b5c04' : null });
+        const run = await play(chapter, {}, { ...START, hunger }, [], { sys: circle ? coven : null, stopAt: chapter === 'b5c03' ? 'b5c04' : 'b5c05' });
         assert.match(run.text, chapter === 'b5c03' ? /first week of June/ : /twenty first of June/);
         if (!circle) assert.doesNotMatch(run.text, /Prisca|Fiammetta|Hanno/);
         clean(run);
