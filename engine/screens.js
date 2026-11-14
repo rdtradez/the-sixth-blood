@@ -3,7 +3,8 @@
 
 import { CONTENT_FNS } from './content.js';
 import { loreOf, entryUnlocked, originalKnown } from './systems/lore.js';
-import { TASKS, MISSIONS, taskProblem } from './systems/circle.js';
+import { TASKS, MISSIONS, taskProblem, leadId } from './systems/circle.js';
+import { GIFTS, memberGifts, heroGifts } from './systems/gifts.js';
 
 const FATE_WORDS = { alive: 'Alive', dead: 'Dead', turned: 'Turned', missing: 'Missing', gone: 'Gone from your life' };
 const MEMBER_WORDS = { active: '', left: 'Left your coven', dead: 'Dead', captured: 'Captured', betrayed: 'Betrayed you' };
@@ -177,16 +178,17 @@ const MISSION_RESULT_WORDS = { success: 'Came back with what you asked.', partia
  */
 export function covenView(state, content) {
   const s = state?.sys;
-  if (!s) return { members: [], keepers: [], tasks: [], covenCount: 0 };
+  if (!s) return { members: [], keepers: [], tasks: [], covenCount: 0, heroGifts: [] };
   const ctx = ctxOf(state, content);
   const actionsLeft = s.phase?.left ?? 0;
+  const lead = leadId(ctx);
   const members = Object.values(s.circle ?? {}).filter((m) => Object.hasOwn(content.people, m.id)).map((m) => {
     const active = m.status === 'active';
     const notes = [];
     if (m.kind === 'keeper') notes.push('Keeper');
     else notes.push('Coven');
     if (m.sire === 'hero') notes.push('Your blood');
-    if (m.daywalk && m.kind !== 'keeper') notes.push('Walks in daylight');
+    if (m.id === lead) notes.push('Runs the business');
     if (m.injured) notes.push('Hurt');
     if (!active) notes.push(MEMBER_WORDS[m.status] || m.status);
     let doing = '';
@@ -207,6 +209,7 @@ export function covenView(state, content) {
       canTask: active && !taskProblem(m),
       canSend: active && !taskProblem(m) && !m.mission && actionsLeft > 0,
       joinedIn: bookTitle(content, m.joined),
+      gifts: memberGifts(m).map((g) => ({ id: g, name: GIFTS[g].name, text: GIFTS[g].text })),
     };
   });
   const order = (m) => (m.active ? 0 : 1);
@@ -220,6 +223,7 @@ export function covenView(state, content) {
     keepers,
     tasks: TASKS.map((id) => ({ id, ...TASK_INFO[id] })),
     covenCount: coven.filter((m) => m.active).length,
+    heroGifts: heroGifts(ctx).map((g) => ({ id: g, name: GIFTS[g].name, text: GIFTS[g].hero ?? GIFTS[g].text })),
     missions: MISSIONS.map((id) => ({ id, label: MISSION_LABELS[id] })),
     risks: Object.entries(RISK_LABELS).map(([id, label]) => ({ id: Number(id), label })),
     actionsLeft,

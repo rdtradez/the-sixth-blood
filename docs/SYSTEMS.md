@@ -138,6 +138,12 @@ Every member is a person in `content/people.json`; loyalty is `loyalty.<id>`.
 
 **The coven's news.** At the start of every chapter the engine tells the player, before the chapter's own words, what the coven did since the last one (`engine/coven-news.js`): missions that finished, how each standing task went through a sleep, a member now working the business, and a member who has stopped answering. Each piece is told once. Chapters need no script for this. The Coven tab can also send a member on a mission (`game.sendOnMission`), which spends one action of the current phase just as `$ do send()` plus `$ do act()` does in a script, so the Coven tab and the chapters share the same missions.
 
+**The business lead.** `business_lead()` is the coven member best at business (strength, loyalty, the business task or role, a merchant's eye, the Merchant line; nobody who acts behind his back), or `""`. `$ do appoint_lead()` sets that member to the `business` task. `lead_result()` is how their last sleep task went. Their business work counts for one more than anyone else's in a sleep. Every book's waking is voiced by the lead when there is one: they hold the lantern, give the report and lay out a short desk of decisions. Never write a scene that names a coven member without checking `in_circle()` (run `npm run coven-names` to find lines that do).
+
+**Gifts** (`gifts.js`). `has_gift("daywalking")` for the hero, `member_has_gift("fiammetta", "charm")`, `gift_holder("strength")` (an active coven member who has it, or `""`), `gift_count()`, and `$ do grant_gift("hero" or an id, "memory")`. Gifts: daywalking, old_blood, shadows, merchants_eye, strength, charm, memory, healing. A member's gifts come from their line, the old blood and a gift of their own if the hero turned them, their role, and anything the story grants. They show in the Coven tab, with the hero's own gifts at the top. Scenes should call on them.
+
+**The village.** `can_build_any()` and `village_next()` say what can be built now. Each book opening should carry a letter from the hill with a real choice (build, send coin, or wait).
+
 Member power is their age tier when they joined plus one per book since, plus one if he sired them (the old blood), plus training.
 
 ## Bonds (`bonds.js`)

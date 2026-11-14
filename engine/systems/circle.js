@@ -9,6 +9,8 @@
 //   $ do member_fate("lucia", "left")         active, left, dead, captured, betrayed
 //   in_circle("lucia"), member("lucia", "status"), member_power("lucia"), daywalker("lucia")
 //   coven_size(), circle_size(), can_sire(), sired_this_book()
+//   business_lead(), lead_result()            the member best at business, and how their last sleep task went
+//   $ do appoint_lead()                       set that member to run the business (the business task)
 //
 // Assigned missions, sent in a day or night action instead of acting himself:
 //   $ do send("lucia", "scout", 2)            scout, protect, negotiate, hunt, retrieve; risk 1 to 3
@@ -32,6 +34,7 @@
 
 import { sysOf, cat, rule, bump, stat, bookNumber, roll, logDecision } from './core.js';
 import { EngineError } from '../util.js';
+import { memberGifts } from './gifts.js';
 
 export const STATUSES = ['active', 'left', 'dead', 'captured', 'betrayed'];
 export const MISSIONS = ['scout', 'protect', 'negotiate', 'hunt', 'retrieve'];
@@ -50,11 +53,28 @@ function get(ctx, id) {
 /** A member's strength: their age tier at joining, plus every book since, plus the old blood if he sired them. */
 export function memberPower(ctx, m) {
   if (m.kind === 'keeper') return 1;
-  let p = m.tier + Math.max(0, bookNumber(ctx) - bookNumber(ctx, m.joined));
+  let p = (m.tier ?? 1) + Math.max(0, bookNumber(ctx) - bookNumber(ctx, m.joined));
   if (m.sire === 'hero') p += 1;
   if (m.sire === 'hero' && m.tier <= 1 && Object.hasOwn(sysOf(ctx).holdings, 'training_hall')) p += 1;
   if (m.injured) p -= 1;
   return p;
+}
+
+/** How good a member is at running the house's business: strength, loyalty, role, task, line and gift. */
+export function businessAptitude(ctx, m) {
+  const gifts = memberGifts(m);
+  return memberPower(ctx, m) + Math.floor(stat(ctx, `loyalty.${m.id}`) / 25)
+    + (m.role === 'business' ? 3 : 0) + (m.task === 'business' ? 2 : 0)
+    + (gifts.includes('merchants_eye') ? 3 : 0) + (m.line === 'merchant' ? 2 : 0);
+}
+
+/** The id of the coven member best at business (the one who runs it), or "". Turned members only; nobody who acts behind his back. */
+export function leadId(ctx) {
+  const lim = rule(ctx, 'coven.actsAloneBelow', 30);
+  const pool = vampires(sysOf(ctx)).filter((m) => stat(ctx, `loyalty.${m.id}`) >= lim);
+  if (!pool.length) return '';
+  pool.sort((a, b) => businessAptitude(ctx, b) - businessAptitude(ctx, a) || bookNumber(ctx, a.joined) - bookNumber(ctx, b.joined) || (a.id < b.id ? -1 : 1));
+  return pool[0].id;
 }
 
 function vampires(s) {
@@ -119,6 +139,8 @@ export const circle = {
     coven_size: { spec: [], fn: (ctx) => vampires(sysOf(ctx)).length },
     circle_size: { spec: [], fn: (ctx) => Object.values(sysOf(ctx).circle).filter(present).length },
     can_sire: { spec: [], fn: (ctx) => sireProblem(ctx) === null },
+    business_lead: { spec: [], fn: (ctx) => leadId(ctx) },
+    lead_result: { spec: [], fn: (ctx) => sysOf(ctx).circle[leadId(ctx)]?.taskResult ?? '' },
     sired_this_book: { spec: [], fn: (ctx) => sysOf(ctx).sired[ctx.state.book] ?? 0 },
     on_mission: { spec: ['person'], fn: (ctx, id) => Boolean(sysOf(ctx).circle[id]?.mission && !sysOf(ctx).circle[id].mission.outcome) },
     mission: { spec: ['person'], fn: (ctx, id) => sysOf(ctx).circle[id]?.mission?.outcome ?? '' },
@@ -171,6 +193,16 @@ export const circle = {
       spec: ['person', 'text?', 'number?'],
       fn(ctx, id, role = '', loyalty = 60) {
         add(ctx, id, { kind: 'keeper', line: 'human', sire: '', tier: 0, daywalk: true, role }, loyalty);
+      },
+    },
+    appoint_lead: {
+      spec: [],
+      fn(ctx) {
+        const id = leadId(ctx);
+        if (!id) return;
+        const m = sysOf(ctx).circle[id];
+        m.task = 'business';
+        if (!m.role) m.role = 'runs the business';
       },
     },
     coven_task: { spec: ['person', [...TASKS, 'none']], fn: (ctx, id, task) => setTask(ctx, id, task) },
@@ -261,12 +293,13 @@ export function wakeCircle(ctx) {
  */
 export function taskEffects(ctx) {
   const out = { guard: 0, business: 0, watch: 0, results: [] };
+  const lead = leadId(ctx);
   for (const m of Object.values(sysOf(ctx).circle)) {
     if (!present(m) || !m.task) continue;
     const alone = stat(ctx, `loyalty.${m.id}`) < rule(ctx, 'coven.actsAloneBelow', 30);
     const score = memberPower(ctx, m) + Math.floor(stat(ctx, `loyalty.${m.id}`) / 25) + roll(ctx, 6) - rule(ctx, 'coven.taskDifficulty', 4);
     const outcome = alone ? 'failed' : score >= 7 ? 'success' : score >= 4 ? 'partial' : 'failed';
-    out[m.task] += outcome === 'success' ? 2 : outcome === 'partial' ? 1 : 0;
+    out[m.task] += (outcome === 'success' ? 2 : outcome === 'partial' ? 1 : 0) + (m.task === 'business' && m.id === lead && outcome !== 'failed' ? 1 : 0);
     out.results.push({ id: m.id, task: m.task, outcome });
   }
   return out;

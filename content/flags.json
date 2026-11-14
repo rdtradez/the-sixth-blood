@@ -4613,6 +4613,82 @@
       "major": false,
       "default": "none",
       "note": "Chapter 20: whether he left a letter at the house in the Marigny"
+    },
+    "b4.lead_desk": {
+      "kind": "enum",
+      "values": [
+        "approved",
+        "picked",
+        "pressed"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "approved",
+      "note": "Chapter 1: how he took the coven's account of what was done in the sleep: approved as written, chose among the offers, or went through it all himself"
+    },
+    "b4.lead_pick": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "boats",
+        "bank",
+        "school"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 1: which of the river's offers he chose at the desk, if any"
+    },
+    "b4.lead_intro": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "done"
+      ],
+      "book": "house-divided",
+      "major": false,
+      "default": "none",
+      "note": "Chapter 3: whether the coven's business lead made the introductions the city would need"
+    },
+    "b3.lead_desk": {
+      "kind": "enum",
+      "values": [
+        "heard",
+        "pressed",
+        "alone"
+      ],
+      "book": "crown-of-ashes",
+      "major": false,
+      "default": "heard",
+      "note": "Chapter 1: how he took the coven business lead's counsel at the waking"
+    },
+    "b4.village": {
+      "kind": "enum",
+      "values": [
+        "waited",
+        "built",
+        "sent"
+      ],
+      "book": "house-divided",
+      "major": false,
+      "default": "waited",
+      "note": "Chapter 1: what he did about the hill's letter: waited, built something there, or sent coin"
+    },
+    "b4.gift_focus": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "strength",
+        "charm",
+        "shadows",
+        "merchants_eye",
+        "memory",
+        "healing"
+      ],
+      "book": "house-divided",
+      "major": false,
+      "default": "none",
+      "note": "Chapter 3: which of the family's gifts he had them work at this season"
     }
   }
 }

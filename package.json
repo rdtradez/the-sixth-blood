@@ -7,6 +7,7 @@
   "scripts": {
     "test": "node --test \"tests/*.test.js\"",
     "check": "node tools/check.js",
-    "walk": "node tools/walk.js"
+    "walk": "node tools/walk.js",
+    "coven-names": "node tools/coven-names.js content/house-divided"
   }
 }

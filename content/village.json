@@ -11,6 +11,8 @@
     "refuge": { "book": "crown-of-ashes", "name": "A refuge for those fleeing the Terror", "cost": 25, "prosperity": 4, "defense": 1 },
     "winery": { "book": "whitechapel-hunt", "name": "The winery", "cost": 20, "prosperity": 8, "defense": 0, "requires": ["vineyard"] },
     "shelters": { "book": "unchained", "name": "Hidden cellars and shelters", "cost": 10, "prosperity": 1, "defense": 3 },
-    "wine_label": { "book": "unchained", "name": "The Collesanto wine label", "cost": 10, "prosperity": 6, "defense": 0, "requires": ["winery"] }
+    "wine_label": { "book": "unchained", "name": "The Collesanto wine label", "cost": 10, "prosperity": 6, "defense": 0, "requires": ["winery"] },
+    "infirmary": { "book": "house-divided", "name": "An infirmary for the hill", "cost": 25, "prosperity": 5, "defense": 0 },
+    "granary": { "book": "house-divided", "name": "A granary against the bad years", "cost": 20, "prosperity": 4, "defense": 1, "requires": ["farms"] }
   }
 }

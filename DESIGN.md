@@ -609,3 +609,11 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Tests: `tests/book4.test.js` plays chapters 19 and 20 down every circle, house, Compact, Velati answer, last night, place, steward, order, guard, charge and letter, and checks the end of the book, the sleep, the journal and the unlock. The old tests that expected a pause after chapter 18 now carry on into chapter 19, and the coven holdings tests stop at the next chapter (`stopAt`), because the sleep drops city holdings.
 - Session 48 was not merged when this session started (pull request #46 is open), so the session 49 branch is stacked on session 48. Merge them in order.
 - Plans are in `SPOILERS/house-divided.md`.
+
+### Session 50 notes (coven front and center, gifts, village)
+
+- Engine: `business_lead()`, `lead_result()` and `$ do appoint_lead()` in `engine/systems/circle.js` (the member best at business runs it; their work counts for more in a sleep). New `engine/systems/gifts.js` (gifts for the hero and each member, `has_gift`, `member_has_gift`, `gift_holder`, `gift_count`, `$ do grant_gift`). `can_build_any()` and `village_next()` in `village.js`. The Coven tab shows the hero's gifts, each member's gifts and who runs the business.
+- Save shape: `SCHEMA` is 7 (adds `sys.gifts`; migration 6 to 7). Members' gifts are derived and need nothing stored. Two buildings were added to `content/village.json` for Book Four.
+- Content: Book Three chapter 1 and Book Four chapters 1 to 3 were reworked (`@version 2`) so the business lead voices the waking, the coven and the family are already in contact, and names are checked against the real coven. New registered flags: `b3.lead_desk`, `b4.lead_desk`, `b4.lead_pick`, `b4.village`, `b4.lead_intro`, `b4.gift_focus`. Book Four chapters 1 to 3 also carry a hill letter and a gifts scene.
+- New tool: `npm run coven-names` lists story lines that name a coven member without checking `in_circle()`. Book Four chapters 4 to 20 still have such lines and are to be reworked in pairs (see `SPOILERS/house-divided.md`).
+- Tests: `tests/systems.test.js` covers the lead, gifts, the coven view, the schema step and the village helpers; `tests/book4.test.js` plays the new scenes.

@@ -5,6 +5,7 @@
 //   collis      ventures, wealth, holdings, coven or lone path
 //   village     Collesanto's buildings and prosperity
 //   circle      coven roster, keepers, assigned missions, members' own quests
+//   gifts       the hero's gifts and each member's
 //   bonds       people met, fates, romances and how they ended
 //   originals   the six originals tracker
 //   collection  pieces for the New York museum
@@ -24,6 +25,7 @@ import { combat, tierNames } from './combat.js';
 import { collis, restCollis, income } from './collis.js';
 import { village, villageDefense } from './village.js';
 import { circle, restCircle, memberPower } from './circle.js';
+import { gifts } from './gifts.js';
 import { bonds } from './bonds.js';
 import { originals, quickOriginals, originalRecord } from './originals.js';
 import { collection } from './collection.js';
@@ -36,7 +38,7 @@ import { createSys } from './sys-state.js';
 
 export { createSys };
 
-export const SYSTEMS = { life, combat, collis, village, circle, bonds, originals, collection, sleep, lore, looks };
+export const SYSTEMS = { life, combat, collis, village, circle, gifts, bonds, originals, collection, sleep, lore, looks };
 
 const REST_FIELDS = ['income', 'kills', 'witnesses', 'missions'];
 

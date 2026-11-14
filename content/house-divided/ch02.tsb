@@ -1,11 +1,12 @@
 // Book Four, Chapter 2 (session 40). The crossing, and the levee at New Orleans, in January 1860.
 // Opens with no phase: forty odd days at sea (the cabin, the hold or the crate), a night on deck with a planter and a doctor, and the arrival at the levee with a photograph. Then one night phase of three actions out of four, and a card at dawn.
-// Reads b4.passage, b4.circle, b4.estate, wake("orders") and the circle. Sets b4.planter, b4.doctor, b4.photograph, b4.valere, b4.venture, b4.auction and b4.haven.
+// The coven's business lead (business_lead()) is already in letters with Aurélien: at the wharf if the coven came, by letter otherwise; they vouch at the Rue Royale table and give the Exchange its warm start (b4.lead_pick).
+// Reads b4.passage, b4.circle, b4.lead_pick, b4.estate, wake("orders") and the circle. Sets b4.planter, b4.doctor, b4.photograph, b4.valere, b4.venture, b4.auction and b4.haven.
 // Ends with rest() and => next, which pauses until chapter 3 exists (the manifest entry is incomplete).
 @chapter b4c02
 @title The Levee
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## Forty three days
@@ -16,6 +17,10 @@ $ b4.valere = "trusted"
 $ b4.venture = "none"
 $ b4.auction = "left"
 $ b4.haven = "tomb"
+$ _lead = ""
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
 ~> crossing
 ~> deck
 ---
@@ -110,6 +115,13 @@ It is the sixth of January. There is music coming from somewhere in the city, a 
     Behind you, shouldering a bag as large as himself, there is a boy of nineteen with Aelia's chin, who has been sick for thirty one days and is now standing perfectly straight, in a state of the most complete wonder, with his mouth open.
   ?end
 ?end
+?if _lead != "" and b4.circle == "all"
+  {name(_lead)} comes up out of the hold behind you before the crates are down, shakes out a coat that has been folded for forty days, and walks straight past you to Aurélien with both hands out. "Monsieur Valère," says {name(_lead)}, in the French of someone who has been writing it every month for eleven years. "You are shorter than your letters." Aurélien, who has been waiting on a wharf for an hour and a half, makes a sound that is half a laugh and half something else, and takes both hands.
+?elif _lead != "" and b4.circle == "ahead"
+  Aurélien has a letter in his breast pocket, and takes it out and puts it in your hand before he has said a word. It is from {name(_lead)}, left with the packet at Le Havre, and it says in four lines that the house is yours, that Aurélien is to be believed, and that a seat is being kept.
+?elif _lead != ""
+  Aurélien has a letter in his breast pocket, and takes it out and puts it in your hand before he has said a word. It is from {name(_lead)}, who has stayed behind to keep the house, and who writes in three lines that Aurélien is to be believed, and that the books of the river are to be kept as faithfully as the books of Paris.
+?end
 There is a small commotion at the foot of the gangway. A man in a velvet jacket, with a camera on legs, has set up a black cloth on a tripod under a gas lamp, and is calling out for gentlemen who would care to have their likeness taken, a dollar, in the new collodion, very quick, ready for the morning, a keepsake of the arrival. He has seen you, and has leaped at you with the passionate attachment of a man who has found a very good coat.
 :the_photograph
 * Sit for him, and be astonished at yourself
@@ -186,6 +198,9 @@ Aurélien tells the story, very quietly, as a man tells a story who has told it 
   You find that you have gone quite still. There was a sum of money, a long time ago, that went to a small society in Paris that met in a back room on the Quai de la Mégisserie and wished to see a thing ended that had not yet had the grace to end. You had never, you realize, thought about where it went afterward. It is a very strange and very particular feeling to be told, in a banana scented courtyard, that it went somewhere.
 ?end
 Then, over the coffee, it is asked.
+?if _lead != "" and b4.circle == "all"
+  {name(_lead)}, at your elbow, says before anyone else can that you will tell them, or you will not, and that either way {pg(_lead, "he", "she", "they")} has vouched for you to this house for eleven years and does not mean to be made a liar of by a cup of coffee.
+?end
 "What are you?" says the old aunt. She says it perfectly plainly, in a voice that has no fear in it at all, and the whole table goes still. "We have been told the stories. We have kept the key, and we have kept the rosemary, and we have said the words for a hundred years. I should like to be told."
 :the_choice
 * Tell them everything, from Rome to the cellar, and let them decide
@@ -211,7 +226,11 @@ $ do discover("the_free_people_of_color")
 $ do chart("neworleans.bank")
 You go out into the Rue Royale at the hour when the ball is at its height, and the whole of the street is full of people in masks, and the Exchange, which never closes, is lit as bright as a cathedral. It is a great domed hall, of marble and mahogany, in the Hotel, and the floor of it is a sea of top hats. Everyone is shouting, and everything is for sale. There are bills on Liverpool, and bills on Havre, and bills on New York. There are men standing on chairs, calling out cotton in a sort of chant. It is, you realize, the center of the world.
 It is also, you realize, the largest slave market in America. The talk is of cotton, and it is also of sugar, and of freight, and of human beings, and the last of them is spoken of with no more feeling than the others. A man is selling a young cook with a good character. A man is buying a blacksmith. It goes on, in the same bright voice, on the floor of a hall that has a cupola and a gilded balcony, and a fountain, and no one in it appears to see anything wrong.
-Aurélien's partner, a heavy gentleman with a bad leg named Monsieur Rochefort, takes you in hand with a distant, soothing competence, and walks you through it. There is, he says, a great deal of money to be had. There is a bank, which pays eight. There are the steamboats, which pay nine, and pay it in a way that makes a man sleep soundly. There is sugar, which pays six, and which is, he adds, in a lower voice, the only one of the lot that a man cannot do without having a plantation. There is a plan, on the books, for a school for freed families, which Monsieur Rochefort mentions with a certain apologetic reluctance, as a thing that a man does on his deathbed. And there is cotton.
+Aurélien's partner, a heavy gentleman with a bad leg named Monsieur Rochefort, takes you in hand with a distant, soothing competence, and walks you through it. There is, he says, a great deal of money to be had.
+?if _lead != ""
+  Rochefort, you learn, is {name(_lead)}'s correspondent too. He has not, he says, been so well written to since the Emperor was a child, and he has kept a clerk's whole drawer for the house's letters. It has made the introduction a thing of ten minutes, and the rest of the hour his.
+?end
+There is a bank, which pays eight. There are the steamboats, which pay nine, and pay it in a way that makes a man sleep soundly. There is sugar, which pays six, and which is, he adds, in a lower voice, the only one of the lot that a man cannot do without having a plantation. There is a plan, on the books, for a school for freed families, which Monsieur Rochefort mentions with a certain apologetic reluctance, as a thing that a man does on his deathbed. And there is cotton.
 "Cotton," says Rochefort, "pays fifteen. It is the great fortune of the age. It is also," and here he looks, with a certain delicacy, at the floor, "the one in which a man must not look at what he is buying."
 :the_venture
 * Put the money into steamboats, and the river
@@ -275,6 +294,11 @@ Aurélien's partner, a heavy gentleman with a bad leg named Monsieur Rochefort, 
   $ b4.venture = "none"
   $ cunning_brutal -= 1
   Rochefort is gratified, in the manner of a man who has been spared an embarrassment, and says that the Exchange will be there in the morning. You find that you believe him. It is a hall that has not moved for a century, and does not intend to.
+?if _lead != "" and ((b4.lead_pick == "boats" and b4.venture == "steamboats") or (b4.lead_pick == "bank" and b4.venture == "banking") or (b4.lead_pick == "school" and b4.venture == "schools"))
+  Rochefort slides a paper across the table without being asked. It has been drawn up since the autumn, on {name(_lead)}'s word, with the terms already softened by eleven letters of good conduct. It is, he says, a pleasure to be asked for what has already been prepared.
+  $ standing += 1
+  $ do earn(1)
+?end
 <~
 
 # depot
@@ -365,6 +389,9 @@ Aurélien has the grace to find this extremely awkward. "It is where the family 
   * Put one of them to the business, and the books [once] ?if in_circle("hanno") and member("hanno", "status") == "active"
     $ do coven_task("hanno", "business")
     Hanno takes the ledgers, in the dark, without a word, and goes to a corner, and begins. By morning there is a note on your table, in a hand like a row of iron nails, which says, in six words, what is the matter with every account in the house.
+  * Name {name(_lead)} head of the house's business, with the books and the Valère letters [once] ?if _lead != "" and task(_lead) != "business"
+    $ do appoint_lead()
+    {name(_lead)} takes the first ledger from the stack and the first letter from the bundle, and says that it is a good deal nicer to be asked than to have been doing it anyway. By morning there is a list on your table, in two hands, one of them Aurélien's.
   * That is enough for now
     -> haven_done
   -> :the_house

@@ -4,7 +4,7 @@
 
 import { CONTENT_FNS } from './content.js';
 import { income } from './systems/collis.js';
-import { businessHands } from './systems/circle.js';
+import { businessHands, leadId } from './systems/circle.js';
 
 const MISSION = {
   scout: {
@@ -61,6 +61,7 @@ export function covenNews(state, content) {
   const ctx = { state, vars: state.vars, content };
   const out = [];
   const book = state.book;
+  const lead = leadId(ctx);
   for (const m of Object.values(s.circle ?? {})) {
     if (!Object.hasOwn(content.people ?? {}, m.id)) continue;
     const n = CONTENT_FNS.name(ctx, m.id);
@@ -85,7 +86,9 @@ export function covenNews(state, content) {
     }
     // Working the business while awake: told once a book.
     if (m.task === 'business' && m.noted.business !== book && businessHands(ctx) > 0 && income(ctx) > 0) {
-      tell('{n} has taken a hand in your ventures, and the takings have risen with it.');
+      tell(m.id === lead
+        ? '{n} runs your business now, and answers for it: the books are open on the table when you want them.'
+        : '{n} has taken a hand in your ventures, and the takings have risen with it.');
       m.noted.business = book;
     }
     // Someone no longer answering: told once a book.

@@ -1,11 +1,12 @@
 // Book Three, Chapter 1 (session 29). The sixth waking, in November 1788.
 // Reads the chained wake report (place, steward, outcome, and the investments of the sleep) and plays a waking for each. Woken early gets its own opening and a short trouble scene.
 // Order: waking, hunger, the steward's report (with the king beat), then one night phase of three actions out of four, then dawn and the road north.
+// When the coven has a business lead who is not the steward who woke him, the lead lays out the house's counsel after the report (b3.lead_desk).
 // He wakes in Tuscany (the hill, the Florence haven or the tomb), so the chapter ends with rest() and => next into chapter 2 (Paris). Reads wake(), wake_invest(), lc.sunwalk, b2.street, b2.merchant_fate and b2.fiammetta_end.
 @chapter b3c01
 @title The Year of the Hail
 @book crown-of-ashes
-@version 1
+@version 2
 
 # start
 ## The sixth waking
@@ -17,6 +18,14 @@ $ b3.sugar = "unseen"
 $ b3.crane_offer = "unseen"
 $ b3.street = "watched"
 $ b3.prisca_reply = "formal"
+$ b3.lead_desk = "heard"
+$ _lead = ""
+?if coven_size() > 0 and wake("by") != "steward"
+  $ _lead = business_lead()
+?end
+?if _lead == "fiammetta" and wake("steward") == "fiammetta"
+  $ _lead = ""
+?end
 $ _fed = 0
 $ _city = 0
 $ _reader = "Anselme"
@@ -38,6 +47,11 @@ $ _reader = "Anselme"
 ---
 ~> report
 ---
+?if _lead != ""
+  ~> lead_desk
+  $ do appoint_lead()
+  ---
+?end
 $ do phase("night", 3)
 It is a night in the back end of November, in the year seventeen hundred and eighty eight, and there are, by your own reckoning, four things in it that want doing and time for three. {cap(voice("hunger"))}.
 -> night
@@ -74,6 +88,26 @@ It is a night in the back end of November, in the year seventeen hundred and eig
     There is a plump young man with a lantern. He is in a good brown coat with ink on the cuffs, and he wears a small iron-bound purse of the Merchant house's blue, and he is doing a thing that he was told as a boy he would one day be asked to do, and has never quite believed in. "Anselme Roux," he says, "of the house of the Merchant, in the rue Vivienne. The house is honored. The house has been waiting, in one fashion and another, for a very long while. I am to say: the account is open."
   ?end
 ?end
+<~
+
+# lead_desk
+## The coven's counsel
+When the book is shut, {name(_lead)} comes in from the next room, where the family has been waiting, and sits down across the table as an equal, which in the house has long been understood. {name(_lead)} has been running the house's business through the sleep, with the steward's books open beside the coven's own, and has some views on the Paris house, and on the hill, and on the state of the kingdom, that the steward was too respectful to offer.
+"Three things," says {name(_lead)}. "That the Paris house be kept open and dull, since it will be watched. That the hill be told the master is awake, at the proper time and by the proper person. And that nothing be signed, in the matter of the sugar, until you have heard all of it."
+:the_choice
+* Take the counsel as given, and thank {name(_lead)} for putting it so plainly
+  $ b3.lead_desk = "heard"
+  $ standing += 1
+  {name(_lead)} bows, with the very slight reluctance of someone who is not used to being thanked by the person who owns the house. It is a small thing to do, and costs nothing, and you will not forget how it was received.
+* Ask {name(_lead)} what was left out, and what the steward would not say
+  $ b3.lead_desk = "pressed"
+  $ cunning_brutal += 1
+  There is a pause, and then a long, quiet and exact account of three small things that the steward did not mention and one large thing that the steward could not have known. You are glad that you asked. It is the sort of knowledge that a family has, and a servant does not.
+* Say that you will decide for yourself, and ask them to wait in the next room
+  $ b3.lead_desk = "alone"
+  $ cunning_brutal += 2
+  $ standing -= 1
+  {name(_lead)} goes, without a word, with the manner of someone who has been dismissed from a room that has been theirs to keep for sixty years. It is not a thing that you meant. You will notice, in the morning, that the lamps have been trimmed with unusual care.
 <~
 
 # trouble

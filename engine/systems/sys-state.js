@@ -24,6 +24,7 @@ export function createSys() {
     items: {}, // id -> { book, displayed, lost }
     sleep: { plan: null, wake: null, history: [] },
     lore: { codex: {}, kin: {}, sites: {} }, // id -> { book, chapter } / id -> { book, status } / "map.site" -> { book, chapter } (sessions 4, 6)
+    gifts: [], // gifts the story has given the hero beyond his own (engine/systems/gifts.js)
     lastRest: null,
   };
 }

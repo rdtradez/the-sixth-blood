@@ -140,6 +140,33 @@ test('chapter 1 offers a coven its three courses', async () => {
   }
 });
 
+test('chapter 1: the coven lead gives the report, lays out the desk and takes each answer', async () => {
+  for (const lead of ['fiammetta', 'thibault', 'hanno', 'prisca']) {
+    const sys = (g) => {
+      coven(g);
+      const s = g.state.sys;
+      if (!s.circle[lead]) s.circle[lead] = { id: lead, kind: 'vampire', line: 'merchant', tier: 1, injured: false, mission: null, quest: null, task: '', taskResult: '', role: '', status: 'active', joined: 'blood-and-gold' };
+      for (const id of Object.keys(s.circle)) g.state.vars[`loyalty.${id}`] = id === lead ? 95 : 60;
+      s.circle[lead].role = 'business';
+      s.circle[lead].tier = 5;
+    };
+    for (const [desk, re] of [['approved', /Approve the banking house/], ['picked', /Take the third paper first/], ['pressed', /Go through every paper yourself/]]) {
+      const run = await play('b4c01', {}, START, [/The steamboats/, re], { sys, stopAt: 'b4c02' });
+      assert.equal(run.vars['b4.lead_desk'], desk, `${lead} ${desk}`);
+      assert.match(run.text, /What was done while you slept|banking house/, lead);
+      assert.equal(run.game.state.sys.circle[lead].task, 'business', lead);
+      if (desk === 'picked') assert.equal(run.vars['b4.lead_pick'], 'boats');
+      clean(run);
+    }
+  }
+});
+
+test('chapter 1 without a coven still has a steward speak, and no desk', async () => {
+  const run = await play('b4c01', { steward: 'keepers' }, START, []);
+  assert.doesNotMatch(run.text, /What was done while you slept/);
+  assert.equal(run.vars['b4.lead_desk'], 'approved');
+});
+
 test('chapter 1 handles being woken early with each way out', async () => {
   for (const by of ['hunters', 'government', 'steward']) {
     for (const [value, re] of [['fled', /Slip out/], ['fought', /Put out the lamp/], ['talked', /what the weather is like/]]) {
@@ -260,6 +287,42 @@ test('the coven house in chapter 3 can be built out and given its posts', async 
   assert.equal(run.game.state.sys.circle.prisca.task, 'watch');
   assert.equal(run.game.state.sys.circle.hanno.task, 'business');
   clean(run);
+});
+
+// A coven of two, as one player has it: the first fledgling of the hill and the ward from Book Three.
+const pair = (g) => {
+  const s = g.state.sys;
+  s.path = 'coven';
+  s.circle.fiammetta = { id: 'fiammetta', kind: 'vampire', line: 'sixth', sire: 'hero', tier: 1, injured: false, mission: null, quest: null, task: 'business', taskResult: '', role: 'fledgling of the hill', status: 'active', joined: 'blood-and-gold' };
+  s.circle.thibault = { id: 'thibault', kind: 'vampire', line: 'sixth', sire: 'hero', tier: 1, injured: false, mission: null, quest: null, task: 'business', taskResult: '', role: '', status: 'active', joined: 'crown-of-ashes' };
+  g.state.vars['loyalty.fiammetta'] = 80;
+  g.state.vars['loyalty.thibault'] = 80;
+};
+
+test('chapter 3 names only the members who are in the coven, and the lead makes the introductions', async () => {
+  const run = await play('b4c03', {}, { ...START, wealth: 400000, ...CH3 }, [/Ask .* to make the introductions/, /That will do/], { sys: pair, stopAt: 'b4c04' });
+  assert.doesNotMatch(run.text, /Prisca|Hanno/);
+  assert.match(run.text, /Fiammetta|Thibault/);
+  assert.equal(run.vars['b4.lead_intro'], 'done');
+  clean(run);
+});
+
+test('chapter 3 shows what the family can do and takes the gift to work at', async () => {
+  for (const [value, re] of [['strength', /^Strength, for/], ['merchants_eye', /merchant's eye/], ['none', /Let them be as they are/]]) {
+    const run = await play('b4c03', {}, { ...START, wealth: 400000, ...CH3 }, [/Learn what the family can do/, re, /That will do/], { sys: pair });
+    assert.match(run.text, /What the family can do|show you/);
+    assert.equal(run.vars['b4.gift_focus'], value, value);
+    clean(run);
+  }
+});
+
+test('chapter 1 carries the hill letter: build, send, or wait', async () => {
+  for (const [value, re] of [['built', /Pay for an infirmary/], ['sent', /Send coin to the hill/], ['waited', /Write that you have read the letter/]]) {
+    const run = await play('b4c01', {}, { ...START, wealth: 120000, hunger: 10 }, [/Go through the books/, /Take the books on trust/, re], { sys: pair });
+    assert.equal(run.vars['b4.village'], value, value);
+    if (value === 'built') assert.ok(run.game.state.sys.village.built.infirmary);
+    clean(run);
+  }
 });
 
 test('chapter 4 plays through every circle, paper and waking, and pauses at the end of the book so far', async () => {
