@@ -949,6 +949,24 @@
       "title": "The Jubilee bonfires",
       "book": "whitechapel-hunt",
       "text": "On 21 June 1887, the night of the Queen's Golden Jubilee, a chain of bonfires was lit on hills across the kingdom, and the poor of every London street laid out tables of paper and trestles for the day."
+    },
+    "the_gaslight_club": {
+      "category": "lore",
+      "title": "The Gaslight Club",
+      "book": "whitechapel-hunt",
+      "text": "A younger coven of fourteen, none above two hundred years old, with a house in Pall Mall, friends in the City and a taste for the new age of gas, wire and railways. It sees the Court of Lamps as an antique that has outstayed its rent."
+    },
+    "the_underground_railways": {
+      "category": "lore",
+      "title": "The underground railways",
+      "book": "whitechapel-hunt",
+      "text": "The Metropolitan and the District lines ran steam trains through cut and cover tunnels beneath London, full of smoke and sulphur, and were being joined into a circle by the late 1880s."
+    },
+    "fitzroy_square": {
+      "category": "places",
+      "title": "Fitzroy Square",
+      "book": "whitechapel-hunt",
+      "text": "A quiet Georgian square north of Oxford Street, favored by physicians and architects. In 1887 it was one of the best addresses in London."
     }
   }
 }

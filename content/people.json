@@ -505,6 +505,18 @@
       "name": "Mr. Quill",
       "title": "A man in a gray overcoat",
       "bio": "Thickset and weathered, a mortal of fifty with a policeman's patience and a bad knee, who has counted Cassian for a year and whistles hymn tunes."
+    },
+    "venn": {
+      "gender": "m",
+      "name": "Sir Julian Venn",
+      "title": "A consulting surgeon",
+      "bio": "A great, grave, white haired surgeon of Fitzroy Square, with a theory about the blood and a very large number of dispensary tickets."
+    },
+    "frances": {
+      "gender": "f",
+      "name": "Frances Venn",
+      "title": "The surgeon's daughter",
+      "bio": "Thirty and plain and straight, with her father's gray eyes, who has paid a man for two years to watch her father and cannot bear what he has found."
     }
   }
 }

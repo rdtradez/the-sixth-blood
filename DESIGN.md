@@ -76,6 +76,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 47: Book Four chapters 15 and 16
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 49: Book Four chapters 19 and 20; Book Four is complete (journal, recap and sleep to London)
+- [x] Session 53: Book Five chapters 5 and 6
 - [x] Session 52: Book Five chapters 3 and 4
 - [x] Session 51: Book Five chapters 1 and 2
 - [x] Session 48: Book Four chapters 17 and 18
@@ -654,3 +655,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New people (`content/people.json`): Dr. Ashe (the Physician) and Mr. Quill. New codex entries: the free dispensaries and the Jubilee bonfires. Content notes: chapter 3 `blood`, `violence`; chapter 4 `blood`. No new engine behavior, so no schema or migration.
 - Tests: `tests/book5b.test.js` plays both chapters hungry and not, with and without a coven, and takes every recorded choice; `tests/book5.test.js` now expects four chapters.
 - Plans are in `SPOILERS/whitechapel-hunt.md`. Sessions 51 and 51b (pull requests #54 and #55) were not merged when this session started, so the session 52 branch is stacked on session 51.
+
+### Session 53 notes (Book Five, chapters 5 and 6)
+
+- Chapters `b5c05` and `b5c06` are in `content/whitechapel-hunt/` (`ch05.tsb`, `ch06.tsb`), about 7,500 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 6. Same shape as chapters 3 and 4: an opening with no phase (the lead's report), a short hunger scene that only runs if `must_feed()` is true, one night phase of three actions out of four, and a dawn. Chapter 6 adds a fixed closing scene every player plays.
+- New decision flags (`b5.` prefix, registered): `b5.quill`, `b5.club`, `b5.vault`, `b5.errand` (chapter 5) and `b5.squeeze`, `b5.fitzroy`, `b5.audience`, `b5.eight`, `b5.frances` (chapter 6). `b5.quill`, `b5.club`, `b5.squeeze`, `b5.audience`, `b5.eight` and `b5.frances` are the ones later chapters should read first.
+- Coven focus, as the owner asked: a rival coven, the Gaslight Club, is introduced and can be allied with, played or refused, and it squeezes the firm in chapter 6 (the family can fight it with Hanno at the ledgers, or decide together). The lead reports each month; the family can build out the house (vaults, escape tunnels), and Prisca, Fiammetta and Hanno can each be sent on an errand in chapter 5 with a mission (`send`), whose results are read in chapter 6. In chapter 6 the family can keep watches by relays and at the doors. Names are always checked with `in_circle()`; `npm run coven-names` is clean for the new files.
+- Bloodline: the hero's and the family's gifts count in the scenes (a `shadows` holder gets a moment in chapter 6).
+- Historic investments: two new London ventures, `london.tea` and `london.underground`, offered in chapter 5 in a loop so several can be taken. The book's `escape_tunnels` holding (path `any`) is offered with the vaults; `safehouses` is a lone path holding and is not used.
+- New people (`content/people.json`): Sir Julian Venn and Frances Venn. New codex entries: the Gaslight Club, the underground railways and Fitzroy Square. Content notes: chapter 5 `blood`, chapter 6 `blood`, `violence`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book5c.test.js` plays both chapters hungry and not, with and without a coven, and takes every recorded choice; `tests/book5.test.js` now expects six chapters.
+- Plans are in `SPOILERS/whitechapel-hunt.md`. Sessions 51, 51b and 52 were merged into main together at the start of this session.

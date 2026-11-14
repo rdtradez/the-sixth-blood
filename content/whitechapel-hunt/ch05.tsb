@@ -1,0 +1,274 @@
+// Book Five, Chapter 5 (session 53). The first weeks of July, 1887.
+// Opens with no phase (the lead's report, if there is a coven), then a short hunger scene that only runs if must_feed(), then one night phase of three actions out of four, then a short dawn.
+// The coven fronts the chapter: the lead's report, a rival coven (the Gaslight Club) courting and squeezing the family, the family's house and business, missions for Prisca, Fiammetta and Hanno. Reads b5.cassian, b5.price, b5.physician, b5.haven, b5.doors, b5.gray. Names are always checked with in_circle().
+// Sets b5.quill, b5.club, b5.vault and b5.errand. Uses invest() (london.tea, london.underground, several allowed), acquire(), send(), coven_task(), discover(), meet(), witness().
+// Ends with rest() and => next, which pauses until chapter 6 exists (the manifest entry is incomplete).
+@chapter b5c05
+@title The Gaslight Club
+@book whitechapel-hunt
+@version 1
+
+# start
+## July
+$ b5.quill = "watched"
+$ b5.club = "refused"
+$ b5.vault = "none"
+$ b5.errand = "none"
+$ _lead = ""
+$ _reader_name = "the young keeper"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+?if must_feed()
+  ~> hunger
+  ---
+?end
+?if coven_size() > 0
+  ~> report
+  ---
+?end
+$ do phase("night", 3)
+It is the first week of July, and London has begun to smell of hot stone and horses. There are four things in the night that want doing and time for three. {cap(voice("hunger"))}.
+-> night
+
+# hunger
+## The first thing
+* Take a clerk who is walking home alone through the Minories, and will not remember ?if wake("outcome") != "woken_early"
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is whistling something from the Gilbert and Sullivan, and does not stop until his knees go. He wakes up on a bench with a sore neck and a strong feeling of goodwill toward the whole human race, which does not quite undo it.
+* Buy a quart from the porter at the London Hospital, who has a cousin and a ginger beer bottle
+  $ do feed("donor")
+  $ do earn(-2)
+  It is dearer than it was in June. Everything is, in this heat. He takes the money with the air of a man who has been asked a favor by an honorable person, and has decided to be one back.
+* Go down to the cattle lairs at the Foreign Market, where the beasts wait for morning
+  $ do feed("animal")
+  $ humanity += 1
+  They are patient, and warm, and frightened, and it is a poor thing to do. You do it as gently as you can, and a drover on the far side of the pens sees nothing at all, which is the kindest thing that anyone does for anyone that night.
+* Go without, and let the heat of the night do what it will
+  $ humanity += 1
+  $ cunning_brutal += 1
+  It is a heavy, close, airless night, and the hunger sits in it like a stone in a boot.
+<~
+
+# report
+## The family reports
+?if b5.haven == "house" or b5.haven == "warehouse"
+  The report is given in the haven, at the long table, with every window open for the heat and every curtain drawn against the street.
+?else
+  The report is given in the rooms above Lime Street, with the gas turned down and the window open on a yard full of wet cats.
+?end
+{_reader_name} has two notebooks now, and a third, small and black, which is held a little apart.
+?if in_circle("prisca") and member("prisca", "status") == "active"
+  Prisca has found the thing that she says she would have found in a week in Rome and has taken a month to find in London. Someone is buying the paper of the small men of Whitechapel: the chandlers, the lodging house keepers, the lamp makers. They are buying it quietly, through four solicitors, at a fair price, and every one of the four solicitors has the same clerk. "It is not a thing that a hospital does," she says. "It is what a house does."
+?end
+?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+  Fiammetta has been followed. She is not alarmed by it. She is professionally insulted. She says that the one who followed her was a woman, very good, in a bonnet, who was not the least afraid of her, and who raised her hat to her at the end of the third night, as one raises it to a colleague.
+?end
+?if in_circle("hanno") and member("hanno", "status") == "active"
+  Hanno has had a visitor at the firm. He was a pleasant young gentleman in a gray topper who admired the books, and the clerk, and the ink, and who said that his masters would be happy to take the whole of Collins and Hale off Mr. Hale's hands, at a premium, with the sincerest respect. He left a card. Hanno puts it on the table. It is a very good card. It has a lamp on it, of the new kind, burning gas.
+?end
+?if _lead != "" and in_circle(_lead) and member(_lead, "status") == "active"
+  {name(_lead)} closes the third notebook. "They are called the Gaslight Club," {pg(_lead, "he", "she", "they")} says. "They are a coven, and they are younger than the Court and a great deal hungrier. They have a house in Pall Mall, and a good many friends in the City, and they would very much like to be, as it were, introduced." The word is held in the air a moment, like a thing that might be dropped. "We thought that you should be the one to say whether we are."
+?end
+?if b5.cassian == "trade"
+  There is also, on the table, a short note in pencil that came to the firm by a boy who did not know the house. It says only: *Gower Street. Number nine. Ask for the gentleman with the umbrella.*
+?end
+<~
+
+# night
+## The first weeks of July
+:night
+?if actions_left() == 3
+  It is full dark, and the lamps are lit, and the air is as thick as soup.
+?elif actions_left() == 2
+  There is lightning over Essex, a long way off, and no thunder.
+?else
+  The east has gone the color of an old pearl, and the first carts are coming in from Kent, and you have one thing left that you have time for.
+?end
+* Go to Gower Street, where the man with the umbrella lodges [once] ?if actions_left() > 0
+  ~> quill
+  $ do act()
+* Go to Pall Mall, to the Gaslight Club [once] ?if actions_left() > 0
+  ~> club
+  $ do act()
+* Go to the family, the firm and the house, and see what they need [once] ?if actions_left() > 0
+  ~> house
+  $ do act()
+* Send the family out, to see what can be seen [once] ?if actions_left() > 0
+  ~> errand
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# quill
+## Gower Street
+$ do meet("quill")
+It is a tall plain house of the kind that has been let to medical students for sixty years. The stair smells of boiled cabbage and carbolic. On the second landing, behind a door with a card that says only Mr. Quill, a gas jet is lit and a kettle is on.
+?if b5.gray == "faced"
+  He is not surprised. He sets a second cup on the table, and does not apologize for it having no tea in it.
+?else
+  He opens the door before you have knocked, with his umbrella under his arm and his hat already on. "I thought that you might come to see where I lived," he says. "I have been rather hoping that you would."
+?end
+He sits down, and puts his bad knee up on a stool. He has the air of a man who has been carrying something heavy for a long time, and has just been told that he may put it down.
+"I am not a free agent, sir," he says. "I have an employer. I should like to say her name, and I should like to say that it is no pleasure to me to say it. She is Miss Frances Venn, of Fitzroy Square. She is the daughter of Sir Julian Venn, the consulting surgeon, who has been in the papers a good deal since his lecture on the consumption. She has employed me for two years, to watch her father."
+He lets it lie a moment.
+"He is a very great man, Mr. Collins. I wish to say that, because it is the whole of the trouble. He has a theory, and the theory is that the cure for the wasting sickness is in the blood of a certain kind of person. He has a very small circle of friends who are willing to pay for it. He has a very large number of tickets from the dispensaries, which he buys by the hundredweight, through a society, to find women who are suitable. And he has, in a room in his own cellar, a patient. I have never seen him. I have only seen the nurse who goes in."
+:the_quill
+* Take him at his word, and ask him to bring his mistress to you [once]
+  $ b5.quill = "trusted"
+  $ standing += 1
+  $ humanity += 1
+  He looks at you for a long moment, and then, quite suddenly, he laughs. It is an odd, creaking, relieved sound. "She will be astonished," he says. "She has been telling me for a year that it would end by someone coming to her door in a cab. I did not expect it to be you. I did not expect it to be so kind."
+* Press him, with the whole of what you are, for the number of the house and the name of the nurse [once]
+  $ b5.quill = "pressed"
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  $ do witness(1)
+  It is not a thing that you are proud of. He does not struggle, and he does not resent it. He gives you the number, and the nurse's name, which is Mrs. Tolliver, and the hour of the door, which is a quarter past two, and he sits afterward with his hands on his knees, rather gray. "I would sooner you had asked," he says. "I should have said it all the same."
+* Say that you will think it over, and leave him to his kettle [once]
+  $ b5.quill = "watched"
+  $ secrecy += 1
+  He nods. It is the answer that he expected, and he does not seem to mind it. "Of course," he says. "A man in your position would. I shall be in Gower Street, sir. I am generally in Gower Street."
+~> quill_end
+<~
+
+# quill_end
+?if b5.cassian == "trade"
+  He gives you, when you rise to go, a small folded square that was left for you at the door of the house: Cassian's hand again, in the old tongue, three words. *Not yet. Listen.*
+?end
+?if in_circle("prisca") and member("prisca", "status") == "active" and b5.quill != "watched"
+  Prisca, who has come with you as far as the street, says that she has read Mr. Quill, as one reads a ledger, and that his figures do not lie. It is the highest praise that she knows.
+?end
+<~
+
+# club
+## Pall Mall
+$ do discover("the_gaslight_club")
+It is a plain, tall, honest looking house, with six lit windows and a lamp in the portico, of the new kind, that does not flicker. It is a club for gentlemen, to look at. The brass plate says so. The porter has the manner of a person who has been told to expect you, and is disappointed that you are punctual.
+There are fourteen of them. They are young, as the Court counts it: not one is above two hundred. They are well dressed and well fed, and they are very much alive in a way that the Court has forgotten how to be. At the head of the room, in an armchair, with a glass in his hand that has never held anything but blood, there is a handsome fair man of about thirty, in evening dress, with a gardenia in his coat.
+"Mr. Collins," says Lord Hesketh. "Of the sixth line! We thought that you were a story. I do apologize. It is a very rude thing to say to a man's face, but I find that I have never been able to say anything to a man's back."
+He is charming. It is a thing that you must keep in mind, throughout. He is the most charming creature that you have met in a century, and he is quite plainly a very good liar, and you are not at all sure that it is not the same thing.
+"We are the new sort of people," he says. "We have electric light, and the telephone, and the Metropolitan Railway, and we think that the Court is a very beautiful antique that has outstayed its rent. Marchmont will tell you that we are vulgar. She will not tell you that we are in the right. We should like to be your friends. And we should like, if it is not too much to ask, to have the use of the firm."
+:the_club
+* Say that the family will ally with the Club, and that you will sit at its table [once]
+  $ b5.club = "allied"
+  $ standing -= 1
+  $ cunning_brutal += 1
+  $ secrecy -= 1
+  He raises the glass. The room raises fourteen. "To the sixth line," says Hesketh, "and to the new century, which begins a good deal sooner than the Queen supposes." You notice that no one at the table has asked you a single thing about the Physician, or about Cassian, or about what you do in the East End. It is a very courteous omission.
+* Say that you will play the Club against the Court, and that you will tell neither [once]
+  $ b5.club = "played"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  "A very old trick," he says, delighted. "And a very good one. We shall both pretend that we have not noticed." He bows to you, rather deeply, in the manner of a fencer who has been pleased with a thrust. You have the clear impression that you have been outplayed, and that you have been told so as a gift.
+* Refuse, and say that the family is not for sale [once]
+  $ b5.club = "refused"
+  $ standing += 1
+  $ humanity += 1
+  He is not angry. He is amused, and a little wistful. "Then we shall be your rivals," he says, "which is the second best thing. I hope that you will find us worthy of the honor." He sees you to the door himself, which is a courtesy that he does not pay to many, and on the step he says, in a low voice, "Do be careful of the Court. It is such a very old house, and it has such very old rooms."
+?if b5.club != "refused" and coven_size() > 0
+  ?if _lead != "" and in_circle(_lead) and member(_lead, "status") == "active"
+    {name(_lead)} says nothing on the way home. It is not a silence that you would care to interrupt. When you reach the house, {pg(_lead, "he", "she", "they")} says, rather carefully, that the family will do as you decide, and that {pg(_lead, "he", "she", "they")} thinks that you ought to have asked.
+  ?end
+?end
+<~
+
+# house
+## The house, and the firm
+?if coven_size() > 0
+  The family has taken to a certain kind of evening. It is a long table, and a lamp, and an hour in which everyone in the house says what they need, and what they would like to do, and what is making them afraid. It is a thing that none of them did before, and that none of them could now do without.
+?else
+  It is a quiet night in the firm. Mr. Hale has left the ledgers out, and a decanter, and a note that says that he will be in at nine.
+?end
+:the_house
+* Put money into tea, the new grocers who are selling it by the packet, to the whole of the country [once] ?if can_invest("london.tea")
+  $ do invest("london.tea")
+  $ humanity += 1
+  It is the humblest money in London. It is made by a Scotsman with a sandwich board, who has discovered that if you sell the same leaf for a penny less to a hundred thousand women, you are a very rich man indeed. You buy a handful of shares in the morning's blend, and sleep very well on it.
+  -> :the_house
+* Put money into the underground railways, which are digging a circle beneath the city [once] ?if can_invest("london.underground")
+  $ do invest("london.underground")
+  $ secrecy += 1
+  $ do discover("the_underground_railways")
+  It is a hole with a train in it. It is full of steam and smoke and sulphur and people in hats, and it is the most dismal enterprise that you have ever seen, and you have been in the catacombs. You sign for a block of the Metropolitan District. Somebody ought to own the dark.
+  -> :the_house
+* Build vaults under the house, with a door that is not on any plan [once] ?if can_acquire("vaults")
+  $ do acquire("vaults")
+  $ b5.vault = "vaults"
+  $ secrecy += 1
+  ?if coven_size() > 0
+    It is the family's idea, and the family's money, and the family's masonry, and it takes three weeks. There is a stair, and a landing, and a lock that turns the wrong way, and a long cool room under the tide line where the whole of them could, if it came to it, lie down together in the dark.
+  ?else
+    It takes three weeks, and a mason who does not ask. There is a stair, and a landing, and a lock that turns the wrong way, and a long cool room under the tide line where a person could lie down in the dark and not be found.
+  ?end
+  -> :the_house
+* Dig a way out from the cellar under three yards, to the stair of a chapel, a stable and a chandler's [once] ?if can_acquire("escape_tunnels")
+  $ do acquire("escape_tunnels")
+  $ b5.vault = "tunnels"
+  $ standing += 1
+  It is the sort of thing that is not done by the street, but by the stair, and the yard, and the back wall. There are three doors at the far end, each in a different lane, each with a bolt and a lamp and a loaf of bread, and a name on the plate that is not yours. It will be a long time before anyone in London learns what they are for.
+  -> :the_house
+* That will do for tonight
+<~
+
+# errand
+## The family goes out
+?if coven_size() == 0
+  You have no one to send. You walk it yourself, from one lane to the next, in the heat, and you come home with a great deal of dust on your boots and nothing in your hands.
+  $ b5.errand = "none"
+  <~
+?end
+It is a thing that you have not asked of them before. It is a trifling thing, in the scale of a city, and a very great thing in the scale of a family. They are looking at you as a people look who have waited for a long time to be asked.
+:the_errand
+* Send Fiammetta to the doors of the eight, to see them safely through the hot nights [once] ?if in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
+  $ do send("fiammetta", "protect", 1)
+  $ b5.errand = "eight"
+  $ standing += 1
+  She is gone before you have finished the sentence. She has a basket, a cap, a flask, and a measuring stick, and a plain expression of someone who is glad to be of use.
+  -> :the_errand
+* Send Prisca to the four solicitors, to read their books, and the books of the man who pays them [once] ?if in_circle("prisca") and member("prisca", "status") == "active" and not on_mission("prisca")
+  $ do send("prisca", "scout", 1)
+  $ b5.errand = "square"
+  $ cunning_brutal += 1
+  She takes her gloves and her very best manner. "I shall be perfectly dreadful," she says, and she is quite plainly looking forward to it.
+  -> :the_errand
+* Send Hanno to hold the firm against the Club, with an open ledger and a clean conscience [once] ?if in_circle("hanno") and member("hanno", "status") == "active" and not on_mission("hanno")
+  $ do send("hanno", "negotiate", 1)
+  $ b5.errand = "firm"
+  $ secrecy += 1
+  He nods, and puts on his hat. He walks, rather ponderously, down the stair, in the manner of a heavy man who has been given something light to do, and who intends to do it very well indeed.
+  -> :the_errand
+* Let them rest, and keep the house, and the long table [once]
+  $ humanity += 1
+  You say it is enough for a night. It is the right thing, and they know it, and they will tell one another afterward, in low voices in the kitchen, that it was kindly meant.
+* That is all of it
+<~
+
+# dawn
+## Before the dark ends
+There is a gray at the edge of the sky, and the heat has not broken. The first carts are on the stones, and a woman in Stepney is putting a pail of water on the step to cool.
+?if b5.quill == "trusted"
+  You have a name, and an address, and a daughter who is going to come to a door in a cab. It is more than you had at dusk.
+?elif b5.quill == "pressed"
+  You have a number, and a nurse, and an hour. You have also the memory of a gray tired face that said it would sooner have been asked.
+?else
+  You have a name, and a street, and a man with a kettle who is waiting.
+?end
+?if b5.club == "allied"
+  You have a handsome new friend, and a new kind of enemy, and you are not certain which is which.
+?elif b5.club == "played"
+  You are playing two houses against each other. It is a game for a person with a very long memory and a very fast hand.
+?else
+  You have, in Pall Mall, a rival who has been charming about it.
+?end
+You think that there is going to be a very great deal more.
+$ do rest()
+=> next
