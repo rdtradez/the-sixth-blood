@@ -878,7 +878,26 @@
           "collesanto": 65
         }
       },
-      "chapters": []
+      "chapters": [
+        {
+          "id": "b5c01",
+          "file": "whitechapel-hunt/ch01.tsb",
+          "title": "The Year of the Jubilee",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c02",
+          "file": "whitechapel-hunt/ch02.tsb",
+          "title": "Collins and Hale",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        }
+      ],
+      "incomplete": true
     },
     {
       "id": "relics-lost-god",

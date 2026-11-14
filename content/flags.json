@@ -4695,6 +4695,199 @@
       "book": "house-divided",
       "note": "Chapter 4: which member of the coven went on the errand (the id), or empty",
       "default": ""
+    },
+    "b5.trouble": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "fled",
+        "fought",
+        "talked"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "none",
+      "note": "Chapter 1: how he met being woken early, if he was"
+    },
+    "b5.lead_desk": {
+      "kind": "enum",
+      "values": [
+        "approved",
+        "picked",
+        "pressed"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "approved",
+      "note": "Chapter 1: how he took the coven's account of the sleep: approved as written, chose among the offers, or went through it all himself"
+    },
+    "b5.lead_pick": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "some"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "none",
+      "note": "Chapter 1: whether he took any of the London offers at the desk"
+    },
+    "b5.village": {
+      "kind": "enum",
+      "values": [
+        "waited",
+        "built",
+        "sent"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "waited",
+      "note": "Chapter 1: his answer to the letter from the hill"
+    },
+    "b5.first_feed": {
+      "kind": "enum",
+      "values": [
+        "animal",
+        "donor",
+        "human",
+        "none"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "animal",
+      "note": "Chapter 1: how he fed on waking"
+    },
+    "b5.books": {
+      "kind": "enum",
+      "values": [
+        "trusted",
+        "audited"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "trusted",
+      "note": "Chapter 1: whether he took the family's books on trust"
+    },
+    "b5.street": {
+      "kind": "enum",
+      "values": [
+        "read",
+        "spoke",
+        "watched"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "watched",
+      "note": "Chapter 1: how he took in the changed world"
+    },
+    "b5.circle": {
+      "kind": "enum",
+      "values": [
+        "all",
+        "ahead",
+        "stay"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "stay",
+      "note": "Chapter 1: whether the coven (or a keeper) crosses with him, follows later, or stays in New Orleans"
+    },
+    "b5.summons": {
+      "kind": "enum",
+      "values": [
+        "coming",
+        "asked",
+        "wait"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "asked",
+      "note": "Chapter 1: his answer to his maker's letter from London"
+    },
+    "b5.passage": {
+      "kind": "enum",
+      "values": [
+        "cabin",
+        "hold",
+        "steerage"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "cabin",
+      "note": "Chapter 1: how he crossed the Atlantic"
+    },
+    "b5.dock": {
+      "kind": "enum",
+      "values": [
+        "hale",
+        "family",
+        "ruth",
+        "none"
+      ],
+      "book": "whitechapel-hunt",
+      "major": false,
+      "default": "hale",
+      "note": "Chapter 2: who met him at the London docks"
+    },
+    "b5.hale": {
+      "kind": "enum",
+      "values": [
+        "trusted",
+        "tested"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "trusted",
+      "note": "Chapter 2: how he treated Edmund Hale, his London partner"
+    },
+    "b5.house": {
+      "kind": "enum",
+      "values": [
+        "entered",
+        "watched",
+        "spoke"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "watched",
+      "note": "Chapter 2: what he did at his maker's empty rooms in Spitalfields"
+    },
+    "b5.body": {
+      "kind": "enum",
+      "values": [
+        "looked",
+        "passed",
+        "sent"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "passed",
+      "note": "Chapter 2: what he did when he found the dead woman in the doorway"
+    },
+    "b5.haven": {
+      "kind": "enum",
+      "values": [
+        "warehouse",
+        "house",
+        "rooms"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "rooms",
+      "note": "Chapter 2: where he took his first London haven"
+    },
+    "b5.court": {
+      "kind": "enum",
+      "values": [
+        "called",
+        "alone",
+        "regrets",
+        "sent"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "regrets",
+      "note": "Chapter 2: how he answered Lady Marchmont's card"
     }
   }
 }

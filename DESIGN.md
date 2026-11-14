@@ -76,6 +76,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 47: Book Four chapters 15 and 16
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 49: Book Four chapters 19 and 20; Book Four is complete (journal, recap and sleep to London)
+- [x] Session 51: Book Five chapters 1 and 2
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -617,3 +618,16 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Content: Book Three chapter 1 and Book Four chapters 1 to 3 were reworked (`@version 2`) so the business lead voices the waking, the coven and the family are already in contact, and names are checked against the real coven. New registered flags: `b3.lead_desk`, `b4.lead_desk`, `b4.lead_pick`, `b4.village`, `b4.lead_intro`, `b4.gift_focus`. Book Four chapters 1 to 3 also carry a hill letter and a gifts scene.
 - New tool: `npm run coven-names` lists story lines that name a coven member without checking `in_circle()`. Book Four chapters 4 to 20 still have such lines and are to be reworked in pairs (see `SPOILERS/house-divided.md`).
 - Tests: `tests/systems.test.js` covers the lead, gifts, the coven view, the schema step and the village helpers; `tests/book4.test.js` plays the new scenes.
+
+### Session 51 notes (Book Five, chapters 1 and 2)
+
+- Book Five ("whitechapel-hunt") begins. Chapters `b5c01` and `b5c02` are in `content/whitechapel-hunt/` (`ch01.tsb`, `ch02.tsb`), about 10,000 words together. The manifest entry is `"incomplete": true`, so the game pauses on "To be continued" after chapter 2 and carries on by itself when chapter 3 is added.
+- Chapter 1 reads the chained `wake()` report (place, steward, outcome, orders) and plays a waking for each: the cellar in the Marigny, the tomb, or the hill. The business lead voices the waking, the report and the desk (`b5.lead_desk`); the desk offers the London ventures in a loop so several can be taken. It is one night phase of three actions out of four (books and the hill letter, the street, the household and the family's gifts, the letters) and a dawn where he chooses his passage. It ends with `rest()` and `=> next`. Chapter 2 is the crossing, the landing, a hunger scene that only runs if `must_feed()`, introductions by the lead, one night phase of three actions out of four (the firm and its ventures, the East End, a roof for the family, the card from the Court) and a short dawn.
+- New decision flags (`b5.` prefix, registered): `b5.trouble`, `b5.lead_desk`, `b5.lead_pick`, `b5.village`, `b5.first_feed`, `b5.books`, `b5.street`, `b5.circle`, `b5.summons`, `b5.passage` (chapter 1) and `b5.dock`, `b5.hale`, `b5.house`, `b5.body`, `b5.haven`, `b5.court` (chapter 2). `b5.circle` says whether the coven (or a keeper) crosses with him, follows or stays; read it with `coven_size()`. `b4.charge` and `b4.pledge` are read in chapter 1.
+- Coven focus, as the owner asked: the lead and the family front the waking and the landing, introduce the people he needs to know, and take standing tasks (`coven_task`) and a house (`acquire("coven_house")`) in London; a rival coven, the Court of Lamps, is introduced. Names are always checked with `in_circle()`; `npm run coven-names` is clean for the new files.
+- Village: two buildings for the book were added to `content/village.json` (`mill`, `lamps`). Hero alias for the book is `Mr. Collins`; the firm is `Collins & Hale`.
+- New people (`content/people.json`): Edmund Hale, Ruth Aldous and Lady Marchmont. New codex entries: the Gilded Age in Louisiana, the electric age, the London covens, the Jubilee year, the City of London, the East End hospitals, the opium trade, Whitechapel and the Court of Lamps. Content notes: chapter 1 `blood`, chapter 2 `blood` and `violence`. No new engine behavior, so no schema or migration.
+- No London map yet: the London page is not in the repo (the approved preview is kept outside it), so these chapters do not chart sites. A maps session should add it, as session 39 did for New Orleans; later chapters can then chart.
+- Tests: `tests/book5.test.js` plays both chapters from eight wakings, hungry and not, with and without a coven, and takes every choice.
+- Plans are in `SPOILERS/whitechapel-hunt.md`.
+
