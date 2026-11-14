@@ -76,6 +76,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 47: Book Four chapters 15 and 16
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 49: Book Four chapters 19 and 20; Book Four is complete (journal, recap and sleep to London)
+- [x] Session 54: Book Five chapters 7 and 8
 - [x] Session 53: Book Five chapters 5 and 6
 - [x] Session 52: Book Five chapters 3 and 4
 - [x] Session 51: Book Five chapters 1 and 2
