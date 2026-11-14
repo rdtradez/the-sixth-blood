@@ -1,0 +1,369 @@
+// Book Five, Chapter 2 (session 51). The crossing and London, late May 1887.
+// Opens with no phase (the crossing, the landing), then a short hunger scene that only runs if must_feed(), then one night phase of three actions out of four, then a short dawn.
+// The coven fronts the arrival: the business lead (or whoever is with him) introduces Mr. Hale and the card from the Court. Reads b5.circle, b5.summons, b5.passage, b4.charge.
+// Sets b5.dock, b5.hale, b5.house, b5.body, b5.haven and b5.court. Uses invest() (the london.* ventures, several allowed), acquire(), coven_task() and send(). Ends with rest() and => next, which pauses until chapter 3 exists (the manifest entry is incomplete).
+@chapter b5c02
+@title Collins and Hale
+@book whitechapel-hunt
+@version 1
+
+# start
+## The crossing
+$ b5.dock = "hale"
+$ b5.hale = "trusted"
+$ b5.house = "watched"
+$ b5.body = "passed"
+$ b5.haven = "rooms"
+$ b5.court = "regrets"
+$ _lead = ""
+$ _with = 0
+$ _reader_name = "the young keeper"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+?if b5.circle == "all" or b5.summons == "wait"
+  $ _with = 1
+?end
+~> crossing
+---
+~> landing
+?if must_feed()
+  ---
+  ~> hunger
+?end
+---
+?if _lead != "" and _with == 1
+  ~> introductions
+  ---
+?end
+$ do phase("night", 3)
+It is the last week of May, in the year of the Jubilee, and the city is hanging out flags in a fog. There are four things in the night that want doing and time for three. {cap(voice("hunger"))}.
+-> night
+
+# crossing
+?if b5.passage == "hold"
+  The case is stenciled with the name of a company that does not exist, and lined with a hand's depth of Louisiana earth, and you are lowered into the hold of a steamer with a lot of cotton and a lot of canned oysters and two hundred cases of a patent medicine. You hear the whole of the Atlantic through three inches of oak. It is, for the first four nights, very much like being a child in a cradle. For the last six it is much like being buried.
+?elif b5.passage == "steerage"
+  You cross in the great room under the water line, among eighty families who are going the other way, from the old country to the new. Nobody asks where you are going. A woman from Cork gives you a heel of bread, and a boy of eight shows you, with an air of enormous expertise, how to hold on when the ship rolls. You are the only passenger on the ship who is not seasick. It is noticed.
+?else
+  The cabin is on the leeward side, with a brass lamp and a porthole, and a steward who has been paid not to knock before dusk. You walk the promenade deck alone in the evenings, and a gentleman from Boston discusses with you, at length, the question of whether the new electric lights on the saloon are good for the digestion.
+?end
+?if _with == 1 and _lead != ""
+  On the sixth night {_reader_name} comes up on deck with a shawl, as if for the air, and stands beside you at the rail and says nothing for a long time. It is {name(_lead)}'s way. Then, quite suddenly, {pg(_lead, "he", "she", "they")} says that the house in the Marigny was the first place that was ever theirs, and that {pg(_lead, "he", "she", "they")} had thought that it would be the last. You say that you know. It is the whole of the conversation, and it is a great deal.
+?elif _with == 1
+  On the sixth night the young keeper comes up on deck with a shawl, as if for the air, and stands beside you at the rail and says nothing for a long time. Then, quite suddenly, she says that her grandmother was afraid that she would be cold, and that she is not.
+?else
+  You have the rail to yourself on most nights, and the whole dark sea, and an immense sky with all its lamps lit. You think of the family. It is not a lonely thing, to be a day's work away from a house with a lamp in the window. It is something else, and you find that you have a good deal of time in which to learn the name for it.
+?end
+<~
+
+# landing
+## The Pool of London
+It is gray, and it is raining, and it is half past nine at night, and the ship comes up the Thames in the dark between two rows of lamps like a stage. There is a smell of coal and tar and rotting vegetables and a thousand kinds of fish, and a great, low, enormous sound, as of a beast breathing in its sleep. You are told by a steward that it is the city.
+The docks are a forest of masts and cranes and sheds, with electric lights at the gates, and men going to and fro with trolleys, and a clerk in a bowler hat with a lantern calling out the names of consignments in a high flat tenor. You come down the gangway in a crowd of shouting strangers, with your hat pulled down and the name of a company on your trunk.
+?if b5.summons == "wait" and coven_size() > 0
+  $ b5.dock = "family"
+  They are there. They have been there, you learn, for two days, in shifts, with a closed carriage and a flask of something warm, and the whole of the family comes forward in the glare of the arc lamp at once, and nobody makes a speech. It is not at all what a coven is supposed to look like. It looks like a family come to meet someone at a station.
+?elif b5.summons == "coming"
+  $ b5.dock = "hale"
+  He is exactly where the letter said that he would be, at the foot of the third crane, in a black overcoat with an umbrella furled across his arm, a tall spare man of fifty, with a lawyer's stoop and a lawyer's clean gray hands, who has plainly been told to look for someone with no luggage. He steps forward, and says, "Mr. Collins?" in the cautious tone of a man who has just guessed.
+?elif b4.charge == "north"
+  $ b5.dock = "ruth"
+  There is a young woman at the head of the gangway in a plain gray dress and a good hat, with her hands folded, who has been waiting for you, you learn, since the tide table first showed the name of your ship. "Miss Aldous," she says. "From the house in Stepney. We have not been introduced. I have been told what to say, and I have been saying it to the mirror for nine years."
+?else
+  $ b5.dock = "none"
+  Nobody is there. You had not told them the ship, and you stand for a moment in the rain with your trunk at your feet, in the largest city on earth, as anonymous as a coin. It is an odd sensation. It is also, you realize, the first time in twenty years that you have been in a place where nobody knows what you are.
+?end
+~> hale_name
+<~
+
+# hale_name
+$ do meet("hale")
+?if b5.dock == "none"
+  A cab takes you, after an argument about a shilling, to the lane by the river where the brass plate is, and it is Mr. Hale, in his shirtsleeves at eleven at night, who opens the door.
+?end
+?if b4.charge == "north"
+  $ do meet("ruth")
+?end
+<~
+
+# introductions
+## The people you must know
+{_reader_name} is a good deal more at ease in this city than you are, and has plainly made a study of it by letter. In the closed carriage, with the rain on the roof and the gas lamps going by like a string of pearls, you are given what a coven is for: a list.
+First there is Mr. Edmund Hale, of Lime Street, solicitor, who has the honor to be the principal's partner in everything but the secret. He does not know. He has been told that you are eccentric, and nocturnal, and rich, and that your people are a good deal more devoted to you than you would perhaps be to them. He has, {name(_lead)} says, been told no lies, which is a thing that {pg(_lead, "he", "she", "they")} is proud of.
+?if b4.charge == "north"
+  Then there is Miss Ruth Aldous, of the house in Stepney, who was sent ahead by the family in the year seventy and has made herself the house's eyes in the East End: a landlady, a nurse, and the closest thing in London to a priest. She is mortal. She knows a good deal. She is the most dangerous person you will meet this week, because she is kind.
+?end
+Then there is a card.
+It is on stiff cream pasteboard, with an engraved crest of a lamp in a ring of thorns, and it was left at the door of the firm three weeks ago by a footman in plum livery. It says, in a fine copperplate, that Lady Marchmont would be honored by the presence of the principal of the house of Collins and Hale at her house in Mayfair on the first night that is convenient, and that she looks forward to a conversation that has been awaited for a very long time. It is not a question.
+"She is the head of the Court," says {_reader_name}. "The oldest of the London covens, by some centuries. She does not ask. She has been told that you are on the way, and that you are of the sixth line, and she has wished, I think, to be the first."
+<~
+
+# hunger
+## The first thing
+* Go down to the river, and take a lamplighter's boy who will not remember ?if wake("outcome") != "woken_early"
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  It is quick, in a lane where nobody lingers, with the Thames slapping at the stones behind. He will go home with a headache and a shilling in his boot that was not there, and tell his mother that he fell.
+* Pay a hospital porter for a bottle, no questions
+  $ do feed("donor")
+  $ do earn(-2)
+  He is a stout cheerful man with a brogue, and a trade in what is left behind, and he does not ask. It is in a stone ginger beer bottle with a cork. It is cold, and it is dreadful, and it is sufficient.
+* Hunt the rats of the dock, and be glad that they are many
+  $ do feed("animal")
+  $ humanity += 1
+  It is a poor feast and a very long one, and the dock is generous. By the end of it you have a very good opinion of the Port of London and a very poor one of your own dignity.
+* Go without, and let it gnaw
+  $ humanity += 1
+  $ cunning_brutal += 1
+  You tell them to wait. It is a stubborn thing, and a bad way to meet a city.
+<~
+
+# night
+## The first night
+:night
+?if actions_left() == 3
+  The night is young, and the city is very large.
+?elif actions_left() == 2
+  The night is half gone. The clocks have been striking for an hour in a great many places at once, none of them agreeing.
+?else
+  There is a gray in the east, that is not yet a color, and the first drays have begun on the stones, and you have one thing left that you have time for.
+?end
+* Go to Lime Street, and the firm [once] ?if actions_left() > 0
+  ~> firm
+  $ do act()
+* Go east, and see the streets of Whitechapel [once] ?if actions_left() > 0
+  ~> east
+  $ do act()
+* Find a roof for yourself and the family [once] ?if actions_left() > 0
+  ~> roof
+  $ do act()
+* Answer the card from Mayfair [once] ?if actions_left() > 0
+  ~> court
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# firm
+## Lime Street
+$ do discover("the_city_of_london")
+It is a narrow house of soot colored brick, between a marine insurer and a tea merchant, with a brass plate that has been polished every day for seven years by someone who does not know why. Mr. Hale lights the gas himself, and brings out three ledgers and a decanter of sherry that he does not drink, and sits down on the far side of a partners' desk with the look of a man who has rehearsed this for a month.
+"I shall be frank, Mr. Collins," he says. "I have kept this account for seven years and I have never met the principal. I have taken the family's word that he exists, and I have taken the bank's word that he pays. I find myself, now, very much hoping that I was right."
+:the_hale
+* Say that he was, and thank him, and sign what he has laid out
+  $ b5.hale = "trusted"
+  $ standing += 2
+  He signs the next page, with a hand that is trembling very slightly, and does not look up for some time. "I have not had so good a night in seven years," he says. "I wish my father could have seen it."
+* Say that you will take his word, and ask what he has not written down
+  $ b5.hale = "tested"
+  $ cunning_brutal += 1
+  He is quiet. Then he says that there is one thing, a small thing, a client who is not a client, a gentleman of the old sort with a white face, who comes on the first Tuesday of every month and leaves a card and goes away. He has kept the cards. There are eighty four of them. The gentleman has never once signed.
+:the_venture
+Hale has three things to be decided, he says, and he lays them out in a row on the green leather like a man dealing a hand. He has a cautious heart and a keen eye. The city, he says, has more money in it than any place on earth, and a great deal of it is in motion.
+* Put money into shipping, the long boats and the warehouses of the river [once] ?if can_invest("london.shipping")
+  $ do invest("london.shipping")
+  $ standing += 1
+  Four ships, and a quarter share in a fifth, and a wharf at Wapping with a crane. It is a good plain thing. It also gives the firm what it wants most of all, which is a reason to have a dock with a lamp on it at all hours, where a case can be unloaded on any night without a question.
+  -> :the_venture
+* Take a share in the railways, the new lines to the coast and the North [once] ?if can_invest("london.railways")
+  $ do invest("london.railways")
+  $ standing += 1
+  $ cunning_brutal += 1
+  It is the great fortune of the age, and a plain one. Hale shows you a map of the lines, with the new ones in red like veins, and you find to your surprise that you are in love with it. It is a very large machine, and you have been looking at large machines for a thousand years.
+  -> :the_venture
+* Take a stake in the underwriting rooms, and the insurance of the ships [once] ?if can_invest("london.insurance")
+  $ do invest("london.insurance")
+  $ standing += 2
+  It is the business of every fear that has ever sailed out of a harbor, and the oldest game in the City. You sign a policy that insures a cargo of tea against the loss of the ship, and you reflect that it is very much the same thing that you do for the family.
+  -> :the_venture
+* Supply the hospitals, with bandages, carbolic and glass [once] ?if can_invest("london.medical")
+  $ do invest("london.medical")
+  $ humanity += 1
+  $ do discover("the_east_end_hospitals")
+  It pays very little, and you are not sorry. The London Hospital is a mile east, with a thousand beds and a queue at its door every morning of the year, and it will have the best carbolic in England by the end of the month.
+  -> :the_venture
+* Take the opium, which pays the most, and ask no more [once] ?if can_invest("london.opium")
+  $ do invest("london.opium")
+  $ humanity -= 5
+  $ cunning_brutal += 2
+  $ do discover("the_opium_trade")
+  Hale does not look up. It is the one of the lot that is a business of the dock and the dark, and the poppies, and the houses by the river where men lie down on benches and do not rise. It pays more than the rest together. You sign, and the ink dries, and you have a share of the Limehouse trade that you will have to answer for.
+  -> :the_venture
+* That will do for tonight
+-> firm_end
+
+# firm_end
+<~
+
+# east
+## The streets of the East
+$ do discover("whitechapel")
+You walk. It is the only way to learn a city, and you have always been very good at it. You come out of Aldgate under a great pale arch of electric lamps, and the gas stops, and the other thing begins.
+It is a city of streets that are not streets: lanes between lines of houses so close that the eaves nearly meet, with a gutter that runs in the middle, and doorways, and yards, and steps leading down into rooms that are not rooms. There are cabinet makers, and tailors, and men with barrows, and a great many small shops with the signs in a language that you have never seen written. There are children on the pavement at midnight, in flocks. There are women in the doorways, young and old, with an expression that you have seen on the faces of the dead.
+The lodging houses have their names painted over the doors, and their prices: fourpence the bed, twopence the rope. You pass a man asleep on his feet, leaning on a line stretched across a room. It is cheaper, you learn from a boy, than lying down.
+A woman in a doorway says something to you in a voice that has been used too much. A gentleman goes by in a silk hat, to somewhere he should not be, and does not look at her at all. In a hundred yards you have counted three hundred and forty people, and not one who looks at the sky.
+~> cassian_house
+<~
+
+# cassian_house
+## The address in Spitalfields
+The house is the fourth on a lane, with a green door, and a window with a flowerpot in it, and the number that was at the head of a letter. The door is not locked. It is a thing that a man of his age would never do.
+Inside there are two rooms, very clean, with a table laid for two, a cold pot of tea, and a lamp that has been burning for a week and gone out. There is a bookcase with eleven books on it in four languages. On the mantel, in a frame, there is a lock of hair tied with a ribbon, and a slip of paper in a hand that you know.
+> *Wait for me. Do not go east of Aldgate alone.*
+A neighbor is on the stair, a gray, quick, stringy woman with her hands under her apron and a face like a kind hatchet. She says that he went out on the Thursday, and that he said he would be back by supper, and that he has been a very good lodger for four years, though he does keep very odd hours. She says that a gentleman came in a closed carriage the Friday after and went through the rooms, and did not take anything, and left the door as you see it.
+:the_house
+* Go through the rooms yourself, and be thorough
+  $ b5.house = "entered"
+  $ do witness(1)
+  $ cunning_brutal += 1
+  It takes the better part of an hour. You are not looking for anything in particular, and so you find it: a hollow in the wall behind the bookcase, a pen and a bottle of red ink, a book with the leaves cut out and a plan of the streets of Whitechapel drawn in the hollow, marked with eleven small crosses in a hand that is not his. The crosses are in a pattern. You do not yet know what the pattern is for.
+* Wait in the dark, and watch the lane
+  $ b5.house = "watched"
+  $ secrecy += 1
+  You wait. It is a very quiet street. For two hours nothing happens, and at the third a man goes by in a gray overcoat, and looks up at the window, and goes on, and you have the odd, cold sense of having been counted. You are quite sure that you were meant to feel it.
+* Take the neighbor aside, kindly, and ask what she has seen
+  $ b5.house = "spoke"
+  $ standing += 1
+  $ humanity += 1
+  She tells you, in the end, as people do who have been listened to, a good deal more than she meant. A girl who used to sell flowers at the corner is gone. Another has not been seen at the lodging house since the week before Easter. They say that it is the drink, and the Lord, and the gin. She says that it is not.
+~> body
+<~
+
+# body
+## A doorway
+It is nearly three when you hear the whistle. It comes from the end of the lane, a high, hysterical, ragged sound, and then another, and a heavy boot on the stones. By the time that you have come round the corner there is a small knot of people at the mouth of a court, and a constable with a bull's eye lantern, who is a very young man and quite white.
+She is a woman of thirty or perhaps of forty, who looks, in the light of the lantern, like a tired child. She lies in a doorway in a gray shawl, with her hands folded, and there is no blood on the stones, and there is no wound that you can see. Her face is perfectly peaceful. She is as white as a candle.
+The constable says that she is the third that he has had this month, and that the surgeon says that it is her heart.
+It is not her heart. You know, before you have bent down, what it is. There is a small mark behind the ear, healed over, and under it a place where the blood has been taken, neatly, and with great skill, by someone who did not enjoy it.
+:the_body
+* Kneel by her, and look closely
+  $ b5.body = "looked"
+  $ do witness(1)
+  $ humanity += 1
+  You kneel in the wet, with the constable's lantern at your shoulder, and you look. It is the work of one of your own kind, you are quite certain, and it is not done in hunger. It is done with an instrument. The wound has been closed afterward, tenderly, with a thing like a stitch of silk. It is not an act of appetite. It is an act of care. It makes you angrier than anything you have yet seen.
+* Walk by, and leave her to the constable
+  $ b5.body = "passed"
+  $ secrecy += 1
+  $ humanity -= 1
+  It is the careful thing, and you do it, and it is the first time in your long life that you have walked past a body in the dark and been ashamed of it before you had reached the end of the street. You tell yourself that you will come back. You do not tell yourself when.
+* Send a message to the house, to see to her decently ?if coven_size() > 0
+  $ b5.body = "sent"
+  $ standing += 1
+  $ humanity += 1
+  It is a small thing, and it is not nothing. By morning there is a decent coffin and a priest and a notice in the parish register, all paid for by an account that nobody can trace, and a family in Bethnal Green has been told that their daughter is to be buried with her name.
+<~
+
+# roof
+## A roof
+You have to sleep somewhere, and the family must be put somewhere, and the choice, in this city, is a matter of money and also of memory. The firm has been looking for twenty years. It has found three.
+:the_haven
+* A warehouse by the river at Wapping, with a cellar to the water, and a dock of one's own
+  $ b5.haven = "warehouse"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  It has a cellar that goes down below the tide line, behind a door that is not on the plan, and a crane on the roof, and a smell that discourages visitors. It is as safe as anything in London can be. It is also, you reflect, a place that no family would ever call home, and you tell yourself that you will think of something.
+* A tall house in Stepney, with a garden at the back and a view of the whole of the East ?if b4.charge == "north" or coven_size() > 0
+  $ b5.haven = "house"
+  $ standing += 1
+  It is a tall, narrow, dark red house, with a lamp over the door, a very old pear tree, and a cellar that the previous owner used to keep a mule in. It has been kept for you for nine years by someone who loved it. It is a home, and it will be, you suspect, a target.
+* Rooms above the firm in Lime Street, discreet and dull, and near the money
+  $ b5.haven = "rooms"
+  $ standing += 1
+  $ cunning_brutal -= 1
+  It is the cautious thing. It is the right thing for a banker, and the wrong thing for anyone else. Mr. Hale will be astonished to find that his partner has taken the second floor, and has curtains.
+?if coven_path() and can_acquire("coven_house")
+  ~> family_house
+?elif can_acquire("hidden_chamber")
+  $ do acquire("hidden_chamber")
+?end
+~> tasks
+<~
+
+# family_house
+:the_family
+* Take a house for the family as well, with room for all of them and a hall [once] ?if coven_path() and can_acquire("coven_house")
+  $ do acquire("coven_house")
+  $ standing += 1
+  It is a thing that a family needs, and has rarely been given. It has a long table, and a door that locks from the inside, and a hall that smells of coal smoke and beeswax. You notice that it has been furnished, in advance, by someone who has a very good eye for what people like.
+* Put a front over the stables, a livery and a farrier with a sign [once] ?if can_acquire("front_business")
+  $ do acquire("front_business")
+  $ secrecy += 1
+  It is a perfectly honest business. It has seven horses and a very good farrier, and in the loft above the hay there is a room that is entered by no stair.
+* That is enough for now
+  <~
+-> :the_family
+
+# tasks
+?if coven_size() > 0
+  The family are all of them eager, in the odd, unspoken way of a people who have spent twenty years on a patient errand and are at last allowed to do something with their hands.
+  ?if in_circle("prisca") and member("prisca", "status") == "active"
+    Prisca wants the books of the East End: who owes what to whom, and which landlords are paid and which are not. She says that a city can be read like a ledger, from the bottom.
+    $ do coven_task("prisca", "watch")
+  ?end
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+    Fiammetta wants the door. She says that she will not be surprised by a London again, and she has already walked the lane twice with a measuring stick.
+    $ do coven_task("fiammetta", "guard")
+  ?end
+  ?if in_circle("hanno") and member("hanno", "status") == "active"
+    Hanno wants the firm. He has said so with a nod. He has been looking at the ledgers of Collins and Hale in the way that an old dog looks at a new hearth.
+    $ do coven_task("hanno", "business")
+  ?end
+  They are your arm in a city where you do not yet have a hand. It is the oldest of your instincts and the most necessary. You tell them that nobody is to act alone. They agree, in the voices of people who have been agreeing to that for a very long time.
+?end
+<~
+
+# court
+## The card
+$ do discover("the_london_covens")
+$ do meet("marchmont")
+You have a good evening coat, and a hired carriage, and an engraved card. It is a large house in a square in Mayfair, white stucco, with a canopy and a lamp and a footman in plum livery who stands in the door with the face of a man who has been expecting someone else.
+Lady Marchmont receives in a long drawing room at the back, with the curtains drawn and a very good fire, and eleven people in it, none of whom breathe. She is small and white and straight, in gray silk, with a great deal of lace and an old, plain, penetrating face, and she sits in a high chair without any ceremony.
+"Mr. Collins," she says. "Of the sixth line. I had thought that the line was a legend. I have been wrong about a number of things, and it is always a pleasure to find a new one."
+The room has gone very still. You are being weighed, and you can feel the scale.
+"There is a custom," she says. "A stranger who comes to London is presented to the Court. It is not a law. It is merely very old, and the Court is very fond of it, and has a number of ways of showing its displeasure with those who do not keep it."
+:the_court
+* Accept the courtesy, and present yourself in form, with the family at your back ?if coven_size() > 0
+  $ b5.court = "called"
+  $ standing += 2
+  $ do discover("the_court_of_lamps")
+  She is plainly pleased, and plainly surprised, and covers both with a gracious bend of the head. The room breathes out, in a manner of speaking. She looks past you at the family, and her eyes, which are very old, rest on each of them in turn. "A coven of the sixth blood," she says, softly. "In my drawing room. I did not think that I should live to see it. I wish that I had put on the other gown."
+* Accept the courtesy, alone, and say that the family is not yet ready for the Court ?if coven_size() > 0
+  $ b5.court = "alone"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  She hears you out, and nods slowly. It is the answer of a man who has something to protect, and she respects it. She says that the door is open, and that it will be open on any night that you are ready to bring them. It is as courteous as a threat can be.
+* Accept the courtesy, but say that you will present yourself in your own time
+  $ b5.court = "regrets"
+  $ cunning_brutal += 2
+  $ standing -= 1
+  The room turns, very slightly, as a field of corn does in a wind. Lady Marchmont smiles. It is the smile of a woman who has been defied by better, and has outlived them. "Of course," she says. "In your own time. London has so very much of it."
+* Say nothing, and let the family answer ?if coven_size() > 0
+  $ b5.court = "sent"
+  $ standing += 1
+  ~> family_answers
+<~
+
+# family_answers
+?if in_circle("prisca") and member("prisca", "status") == "active"
+  Prisca steps forward, a small gray figure, and curtsies, which is a thing that you have never seen her do, and says in a tone of perfect, level courtesy that the principal is occupied, and that the house of Collins and Hale will do itself the honor of presenting its compliments in form. Lady Marchmont looks at her for a long time. She says that she has met, in a long life, three people who could do that in that tone. She says that Prisca is the fourth.
+?elif in_circle("fiammetta") and member("fiammetta", "status") == "active"
+  Fiammetta steps forward, small and quick and dark, and says in a clear voice that the principal is occupied, and that the family will be honored to call, and that in the meantime they should be very grateful for a cup of tea. It is quite the wrong thing to say, and exactly right. Lady Marchmont laughs, once, like a bell, and sends for the tea.
+?else
+  {_reader_name} steps forward, and bows, and says with great simplicity that the principal is occupied, and that the family is honored. It is not a clever speech. It is a plain, sincere one, and the room responds to it better than to any cleverness.
+?end
+<~
+
+# dawn
+## Before the dark ends
+$ do discover("the_jubilee_year")
+There is a gray at the edge of the sky, and the first drays on the stones, and the strange, constant, enormous sound of London waking up and finding itself a city. The house, wherever it is, is asleep. The lamp in the window is lit.
+You have been in London for one night. There is a firm, and a roof, and a card, and a woman in a doorway, and a lock of hair in a frame. There is a man who has not come home. You think that there is going to be a good deal more.
+$ do rest()
+=> next

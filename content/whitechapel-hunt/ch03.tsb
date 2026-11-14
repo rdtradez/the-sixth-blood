@@ -1,0 +1,269 @@
+// Book Five, Chapter 3 (session 52). The first week of June, 1887.
+// Opens with no phase (the lead's report, if there is a coven), then a short hunger scene that only runs if must_feed(), then one night phase of three actions out of four, then a short dawn.
+// The coven fronts the report and works the crosses. Reads b5.haven, b5.court, b5.body, b5.house, b5.hale. Names are always checked with in_circle().
+// Sets b5.mortuary, b5.crosses, b5.tuesday and b5.gray. Uses invest() (london.electric, london.stores, several allowed), coven_task(), discover(), meet(), witness().
+// Ends with rest() and => next, which pauses until chapter 5 exists (the manifest entry is incomplete).
+@chapter b5c03
+@title The Eleven Crosses
+@book whitechapel-hunt
+@version 1
+
+# start
+## A week in London
+$ b5.mortuary = "walked"
+$ b5.crosses = "alone"
+$ b5.tuesday = "missed"
+$ b5.gray = "let"
+$ _lead = ""
+$ _reader_name = "the young keeper"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+?if must_feed()
+  ~> hunger
+  ---
+?end
+?if coven_size() > 0
+  ~> report
+  ---
+?end
+$ do phase("night", 3)
+It is the first week of June, and the city is hanging out more flags for the Queen. There are four things in the night that want doing and time for three. {cap(voice("hunger"))}.
+-> night
+
+# hunger
+## The first thing
+* Cross to the river stairs and take a drunken waterman who will not remember ?if wake("outcome") != "woken_early"
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is sitting on the stairs with his boots off, singing to the tide. It is over before the verse is. You leave him a coin in his hat, which does not undo it, and which you do anyway.
+* Buy a quart of blood from a slaughterman at Aldgate, who has a cousin in the trade
+  $ do feed("donor")
+  $ do earn(-2)
+  He wipes his hands on his apron and does not ask what it is for. It is in a pail with a lid, and it is still warm, and it is the first thing in London that has tasted of home.
+* Walk the stables behind the cabmen's rank, where the horses are patient
+  $ do feed("animal")
+  $ humanity += 1
+  A cab horse puts its great head against your shoulder and permits it. It is the most dignified feeding of your life and you are a little ashamed of how much you enjoy it.
+* Go without, and let it gnaw
+  $ humanity += 1
+  $ cunning_brutal += 1
+  You tell it to wait. It is a stubborn thing, and a hungry night is a clear one.
+<~
+
+# report
+## The family reports
+?if b5.haven == "house" or b5.haven == "warehouse"
+  The report is given in the haven, at the long table, by lamplight, with the shutters closed and a loaf in the middle that nobody is eating.
+?else
+  The report is given in the rooms above Lime Street, after Mr. Hale has gone home, with the curtains drawn and the gas turned low.
+?end
+{_reader_name} has a notebook, and the notebook has tabs. It is plain that the family has been busy in the manner of a people who have waited twenty years to be useful.
+?if in_circle("prisca") and member("prisca", "status") == "active"
+  Prisca has read the East End for a week, as she would a ledger from the bottom up. She says that the landlords of Whitechapel fall into three kinds, the greedy, the frightened and the kind, and that the kind are the ones who are going to ruin. She says that every one of the eleven crosses on Cassian's plan is a house with a free dispensary ticket pinned inside the door of one of its rooms.
+?end
+?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+  Fiammetta has walked the doors. She says it plainly, as a thing she is not proud of: she has walked all eleven, twice, with a measuring stick and a basket of oranges, and she has been looked at, from three windows, by someone who was not a neighbor.
+?end
+?if in_circle("hanno") and member("hanno", "status") == "active"
+  Hanno has the firm. He says that Mr. Hale is as honest as a plumb line, and as frightened as a man who has been alone with a secret for seven years, and that the white faced gentleman's cards, eighty four of them, are on a very good stock that is not sold in London.
+?end
+?if _lead != "" and in_circle(_lead) and member(_lead, "status") == "active"
+  {name(_lead)} closes the notebook. "It is, I think, a thing that a family can do," {pg(_lead, "he", "she", "they")} says. "We cannot do it all. But there is not one of us who will sit in a drawing room while eleven women are marked."
+?end
+It is not a briefing so much as a vow, and you notice, with a small private surprise, that you are being asked what you would like to do about it.
+<~
+
+# night
+## The first week
+:night
+?if actions_left() == 3
+  It is full dark, and the lamps are lit, and the whole of the night is in front of you.
+?elif actions_left() == 2
+  Bow Bells strike one, and Aldgate answers, and Stepney a little after, none of them agreeing.
+?else
+  The east has gone the color of a pearl, the first carts are on the stones, and you have one thing left that you have time for.
+?end
+* Go to the mortuary shed, and see the three [once] ?if actions_left() > 0
+  ~> mortuary
+  $ do act()
+* Take the plan of the eleven crosses, and walk it [once] ?if actions_left() > 0
+  ~> crosses
+  $ do act()
+* Go to Lime Street, for the first Tuesday [once] ?if actions_left() > 0
+  ~> tuesday
+  $ do act()
+* Find the man in the gray overcoat [once] ?if actions_left() > 0
+  ~> gray
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# mortuary
+## The shed behind the workhouse
+$ do discover("the_east_end_hospitals")
+It is a brick shed with a slate roof, in a yard behind the infirmary, with a lamp over the door that no one has lit in weeks. There are three tables, three sheets and, at the far end, a sink, a stove and a very small man with a pipe who is the keeper of the dead of the parish and has opinions about all of them.
+:the_door
+* Pay the porter, who has a tin box and a weakness for good tobacco
+  $ b5.mortuary = "porter"
+  $ do earn(-1)
+  $ cunning_brutal += 1
+  He takes the tobacco and the half sovereign with the dignity of a man being given his due. He says that he has not seen a gentleman in this shed since the last time the Queen's coroner was in a hurry, and that the ladies are on the three tables, and that he is going to step out and look at the moon.
+* Send word to Mr. Hale, who has a friend, a surgeon, who owes him a kindness
+  $ b5.mortuary = "surgeon"
+  $ standing += 1
+  Dr. Pell is a stout, bald, rosy man of fifty who arrives in a hansom in an evening coat, with a bag, and apologizes to the porter for the hour. He says that he is the divisional surgeon's assistant and that it is perfectly proper. He does not ask why a gentleman of the firm wishes to see three dead women. He is exceedingly careful not to.
+* Go in by yourself, after the porter's lamp goes out, and let the dark be a door
+  $ b5.mortuary = "walked"
+  $ secrecy += 1
+  ?if gift_holder("shadows") != ""
+    {name(gift_holder("shadows"))} goes in first, and comes out, and says that the porter is asleep with his pipe in his hand and will remember nothing but a draft. It takes less than a minute. It is the work of a people who have been practicing at it for a very long time.
+  ?else
+    The lock is an old one, and the dark is a very old friend. You are in, and the shed is as quiet as a church, and as cold.
+  ?end
+~> the_three
+<~
+
+# the_three
+## Three tables
+They are three women, none of them young, and none of them old. One is dark, one fair, one so thin that the sheet seems to have no one under it. They have been washed by someone who was not unkind. They have the look that the very poor have in death, of having been let off at last.
+On each of them, behind the left ear, there is a small neat scar that the parish surgeon has taken for a boil.
+:the_work
+* Look closely at the wound, and take its measure
+  $ do witness(1)
+  $ cunning_brutal += 1
+  It is not a bite. It is a cut, very fine, made with a blade that has never been dull, and then closed with a single stitch of silk, so small that you have to bend to see it. The edges have been bathed in carbolic. On the lip of the third one there is a thread of blood that was missed, and you touch it with a fingertip, and put the finger to your tongue.
+  ?if has_gift("old_blood")
+    It is the blood of one of your own. You know it with the part of you that knew the old tongue before you had a name for it. It is a physician's line, patient and clean and bitter, and it is older than anything that you have met in London. It is not a thing that the Court would have in its drawing room. You find that you are holding the edge of the table.
+  ?else
+    It is the blood of one of your own kind, and it is bitter and clean and strangely old. It is not a hunter's blood. You do not know what it is.
+  ?end
+* Search the clothes, which lie folded on the stool
+  $ do witness(1)
+  $ standing += 1
+  The porter has kept them, as he keeps everything, in a numbered bundle. There is a thimble, a rosary of bone, a crust, and in each of the three bundles, in a pocket or a stocking, there is a ticket. It is of buff pasteboard, printed in black: ADMIT ONE, FREE DISPENSARY, COMMERCIAL ROAD, in a plain hand, and under it, in a doctor's pencil, the name of the bearer and a date. Each date is in the month before she died.
+* Cover them again, and stand a moment with them
+  $ humanity += 2
+  You do not say anything. It is an old habit, and it has always seemed to you the most honest of the offices. When you come out into the yard it is raining, and you find that the porter has come back and is waiting by the door with his hat in his hand.
+?if b5.mortuary == "surgeon"
+  Dr. Pell, who has said almost nothing for an hour, says on the step that he has been a surgeon for twenty seven years and has never seen a ligature so fine. He says that he would give his right hand to know the man. He says that he supposes that it is a very bad thing to say.
+?end
+<~
+
+# crosses
+## Eleven doors
+$ do discover("whitechapel")
+It is on a sheet of good paper, which you have copied twice. The streets are very plain: Fournier, Hanbury, Flower and Dean, Commercial Road, a court off the Whitechapel High Street with a name that no one will say. There are eleven crosses in a red ink that has not faded. Three of them have been ringed with a pen that is not the same as the hand that drew the crosses.
+?if in_circle("prisca") and member("prisca", "status") == "active"
+  Prisca reads the plan over your shoulder, in lamplight, with one finger on each cross. She says that they are not houses. They are rooms. She says that each is the room of one woman, and that the woman is not a drunkard or a lodger or a streetwalker, but has a thing in common with the others, and that the thing is that she is ill. It is a thing that a landlady can tell, and a doctor can tell, and a woman who reads ledgers for a living can tell from the rent book, by the third week of a cough.
+?end
+You walk it, with the family, or without, house by house, in the small hours, and you find what Cassian found. There are eleven doors, and behind them there are eleven women, and three of them are in the churchyard. Eight are alive. They are asleep, in rooms the size of a bed, with the window shut against the night air. Each of them coughs, a little, in her sleep.
+It is the pale sickness, the consumption, the thing that kills one Londoner in six, and that has taken, you understand with a coldness that begins at the base of the spine, every one of the women on the map.
+:the_eight
+* Warn them, kindly, through Miss Aldous and the landladies of Stepney
+  $ b5.crosses = "warned"
+  $ standing += 1
+  $ humanity += 1
+  Ruth Aldous, or the family, or a kind letter slid under the door, does it very well. By morning every one of the eight has been told, by a woman she trusts, that she is to keep her door bolted, and not to go anywhere with a gentleman who has a bag. It is a small shield. It is also, you reflect, a warning to whoever is watching that someone is watching back.
+* Keep watch on the eight doors, in turns, and let nothing come near them ?if coven_size() > 0
+  $ b5.crosses = "watched"
+  $ cunning_brutal += 1
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+    $ do coven_task("fiammetta", "guard")
+    Fiammetta takes the first three doors without being asked, and sets the others among the family by hour and by street. She says that it will not hold forever. She says that it will hold for a month, and that a month is a very long time to a person who is sick.
+  ?else
+    You set the family on the doors, by hour and by street, in turns. It will not hold forever. It will hold for a month, and a month is a long time to a woman who is sick.
+  ?end
+* Take the plan to the Court, and let Lady Marchmont deal with it
+  $ b5.crosses = "court"
+  $ standing += 1
+  $ secrecy -= 1
+  It is the proper thing. It is a thing that a stranger does who has been told to present himself, and it is a courtesy and a confession. A footman takes the paper on a silver tray. The answer, when it comes at dawn, is two lines, in a copperplate hand, that thank you for your trouble and say that the matter is in hand.
+<~
+
+# tuesday
+## The first Tuesday
+$ do discover("the_city_of_london")
+Mr. Hale has the gas lit at nine, and a fire, and a plate of cold chicken that he has put out for a guest who does not eat it. He is nervous in the manner of a man who has waited a long time for a thing to happen and is not sure that he wishes it to. He says that it is the seventh, and that the gentleman is a punctual man.
+At a quarter to ten, in a black coat and a white silk muffler, with a face like candle wax and a pair of very pale eyes, a tall gentleman comes in at the street door, and takes off his hat to Mr. Hale, and then, quite precisely, to you.
+He is one of your own kind. He is very old, and very tired, and he has the air of a person who has been walking for a very long time to deliver a letter that he is afraid to deliver. He puts a card on the green leather.
+"Eighty five," says Mr. Hale, faintly.
+:the_card
+* Say that you are the principal, and that you will hear the message
+  $ b5.tuesday = "met"
+  $ standing += 1
+  $ do discover("the_free_dispensaries")
+  "My master," the gentleman says, in a soft, rather formal voice, "would be glad of an hour of your time. He is not a man who sends for people. He has asked me to say that he knows what you saw in the shed, and that he can show you the rest. On the night of the Jubilee, at the dispensary in Commercial Road, any hour after eleven. You may bring whom you please. He asks only that you come and look at what is being done." He bows, and goes out, and Mr. Hale lets out a breath like a man who has been holding it for seven years.
+* Let Mr. Hale's clerk follow him out, and walk behind the clerk
+  $ b5.tuesday = "followed"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  It is the careful thing. The clerk is a thin boy with a hat too large for him, and he does it well for three streets, and then he is not there. You find him at the corner of Aldgate, rather pale, with the card in his hand, which the gentleman has pressed into it without breaking stride. It has a red cross on it, and a date, and an address in Commercial Road.
+* Do not answer, and let the card lie with the others
+  $ b5.tuesday = "missed"
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  You do not take it up. He waits a moment, and then he inclines his head, as to a person whose decision has been understood, and goes. Mr. Hale picks up the card after he has gone and turns it over. It has a red cross on it, in the very small hand of someone who has had to write many things quickly.
+~> papers
+<~
+
+# papers
+:the_papers
+Mr. Hale, relieved or not, turns with a lawyer's grace to a matter that is only business. He says that the City has found two new things to be excited about, and that he would not have mentioned them but for a feeling that the principal is the kind of man who likes to be asked.
+* Put money into the electric light, the new companies that are lighting the streets and the great houses [once] ?if can_invest("london.electric")
+  $ do invest("london.electric")
+  $ standing += 1
+  $ do discover("the_electric_age")
+  It is a business of copper and glass, and men with sleeves rolled to the elbow, and a very new kind of noise. You sign for a dozen shares in a company that is stringing wire down the Embankment, and you walk home in the first night that you have ever seen without a shadow.
+  -> :the_papers
+* Take a share in the great shops, the new drapers and the emporiums of Oxford Street and the Strand [once] ?if can_invest("london.stores")
+  $ do invest("london.stores")
+  $ secrecy += 1
+  It is an honest, bustling, bright kind of money. It is made in daylight by women with a good eye for lace and men with a strong back, and you reflect that it is the only business in London that has a front door that is open to everyone.
+  -> :the_papers
+* That will do for tonight
+<~
+
+# gray
+## The man in the gray overcoat
+You have seen him twice in a week, and you have decided, in the manner of old creatures, that it is a thing to be settled. He does not hide. It is the most disturbing thing about him. He walks on the same side of a street as you do, forty yards behind, with his hands in his pockets and a thick umbrella under his arm, and he does not look at you at all.
+:the_gray
+* Follow him, to see where he goes
+  $ b5.gray = "followed"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  He walks for an hour. He goes through three squares, and a market, and an alley between two churches, and stops at a pie shop to buy a hot pie, which he does not eat. He goes up a stair in Marylebone, and into a room, and puts out a light, and does not come out. It is a very ordinary room. There is a locked drawer in the desk, and a brass plate by the door with no name on it at all.
+* Step out ahead of him, into the lamplight, and say good evening
+  $ b5.gray = "faced"
+  $ standing += 1
+  $ do meet("quill")
+  He stops. He is a man of about fifty, thickset, with a tired weathered face and gray eyes, and a certain air of having been a policeman once and not minding that it shows. "Mr. Collins," he says. "Quill. I wondered if it would be tonight." He does not seem to find it an extraordinary thing to be speaking to a creature who does not need to breathe. He has the manner of a man who has long since stopped being surprised.
+  "I counted your friend," he says, "for the better part of a year. Mr. Cassian, of Spitalfields. A good lodger and a bad liar. I will tell you what I told him, which is that I am not his enemy, and that I am not yours. He went east of Aldgate on a Thursday, to the third of the doors, and I did not see him come out. I should like to know where he went as much as you."
+  "And the Court?" you say. Mr. Quill smiles, in the manner of a man who has been asked the wrong question rather well. "Ah," he says. "I would not look in Mayfair, sir. That is where everyone looks."
+  $ do witness(1)
+* Let him go by, and watch him go
+  $ b5.gray = "let"
+  $ secrecy += 1
+  It is the unadventurous thing, and a long time later you will have to decide whether it was wise. He goes by within a yard of you. He does not turn his head. He is whistling, very softly, a hymn tune, and when he has gone you find that the whole of his walk has been in step with yours.
+<~
+
+# dawn
+## Before the dark ends
+There is a gray at the edge of the sky, and the first drays on the stones, and the smell of baking from a thousand kitchens. The house, wherever it is, is asleep. The lamp in the window is lit.
+?if b5.crosses == "court"
+  You have given the plan to the Court, and the Court has said that the matter is in hand. It is a statement that you find that you do not wholly believe.
+?elif b5.crosses == "warned" or b5.crosses == "watched"
+  Eight women are asleep with their doors bolted, and a woman in a doorway has been given a name in a parish book. It is not enough. It is not nothing.
+?else
+  There are eight women asleep in eight small rooms, and you are the only one in London who is certain that they are in danger.
+?end
+You think of a man in a white muffler and a card with a red cross. There are fourteen nights to the Jubilee.
+$ do rest()
+=> next
