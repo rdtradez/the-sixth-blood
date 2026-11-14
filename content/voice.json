@@ -48,7 +48,10 @@
         { "id": "comfortable", "upTo": 2000, "short": "comfortable", "say": "you have money enough to be careless with it", "status": "Collis keeps you comfortable, with a little set aside." },
         { "id": "rich", "upTo": 25000, "short": "rich", "say": "your coffers are deep", "status": "Collis is rich, and its name opens doors." },
         { "id": "fortune", "upTo": 500000, "short": "a fortune", "say": "you command a fortune", "status": "Collis commands a fortune that bankers whisper about." },
-        { "id": "empire", "short": "an empire", "say": "your wealth could buy a crown", "status": "Your fortune could buy a crown, and some say it already has." }
+        { "id": "empire", "upTo": 1500000, "short": "an empire", "say": "your wealth could buy a crown", "status": "Your fortune could buy a crown, and some say it already has." },
+        { "id": "treasury", "upTo": 5000000, "short": "a royal treasury", "say": "your vaults rival a throne's", "status": "Your house holds more than most crowns do. Kings borrow from you and resent the ledger." },
+        { "id": "sovereign", "upTo": 25000000, "short": "beyond kings", "say": "no king could match your wealth", "status": "No throne could match your vaults. Rulers court you, and fear what you might buy next." },
+        { "id": "legend", "short": "past counting", "say": "your wealth is past counting", "status": "Your wealth is past counting, and the world has stopped trying." }
       ]
     },
     "collesanto": {
