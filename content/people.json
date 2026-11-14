@@ -553,6 +553,12 @@
       "name": "Inspector Lamb",
       "title": "Of A Division",
       "bio": "A big, sandy, tired inspector of the Metropolitan Police with a bandaged hand, who would like very much to be a good man in a bad week."
+    },
+    "maggie": {
+      "gender": "f",
+      "name": "Maggie Tuck",
+      "title": "A Flower Seller",
+      "bio": "A nineteen year old flower seller from Wentworth Street, turned in a panic and left to run, who only wanted to be warm."
     }
   }
 }

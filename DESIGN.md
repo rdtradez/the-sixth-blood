@@ -86,6 +86,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 57: Book Five chapters 13 and 14
 - [x] Session 58: Book Five chapters 15 and 16
 - [x] Session 59: Book Five chapters 17 and 18
+- [x] Session 60: Book Five chapters 19 and 20; Book Five is complete (journal, recap and sleep to Chicago)
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -702,4 +703,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The coven fronts both chapters: the family carries the wounded, takes the roofs or keeps the young houses in line, Fiammetta's charter house can stand as the young houses' own surety, the lead runs the firm (several ventures, house builds and a standing task are all allowed), and Prisca, Hanno and Fiammetta each have a place at chapter 18's long table. Rival covens are the heart of both (the Court of Lamps and its chair for the young, the Gaslight Club's cellar and the Order's watcher in it, the young houses in the street).
 - New decision flags (`b5.` prefix, registered, major): `b5.square`, `b5.chair`, `b5.watcher`, `b5.letter` (chapter 17) and `b5.trap`, `b5.witness`, `b5.reading`, `b5.terms` (chapter 18). New ventures `london.telephone` and `london.cables`, offered in loops so several can be taken. New person: Inspector Lamb. Four new codex entries. No schema or migration. Tests in `tests/book5i.test.js`; `tests/book5.test.js` now expects eighteen chapters.
 - Sessions 56, 57 and 58 (pull requests #61, #62 and #63) were not merged when this session started, so the session 59 branch is stacked on session 58.
+- Plans are in `SPOILERS/whitechapel-hunt.md`.
+
+### Session 60 notes (Book Five, chapters 19 and 20)
+
+- Chapters `b5c19` and `b5c20` are in `content/whitechapel-hunt/` (`ch19.tsb`, `ch20.tsb`), about 8,000 words together. **Book Five is finished at twenty chapters**: `"incomplete"` is removed from the manifest, so the book now ends, writes its journal (`journal/whitechapel-hunt.tsb`, in the voice of the Senate's agent in London) and unlocks the next book. The manifest entry has a spoiler light `recap` for quick starts into Book Six.
+- Chapter 19 has the usual shape (an opening with no phase, a short hunger scene that only runs if `must_feed()` is true, one night phase of three actions out of four, a fixed closing scene every player plays, and a dawn). Chapter 20 has no phases: a last night, a fixed scene, the lines of the sleep (place, steward, orders, invest, guard, charge, letter), then `rest()` and `sleep("london_to_chicago")` (thirty five years), closing with `=> next`. The wake report is not shown in Book Five; the next book's opening reads `wake()`. The invest scene offers the seven options of the `london_to_chicago` gap and allows several.
+- The coven fronts both chapters: the family is the net in the streets, Prisca, Hanno and Fiammetta each have a task in chapter 19's council, the lead runs the firm (several ventures, house builds and a standing task are all allowed), the rival covens are the heart of chapter 19, and chapter 20 charges the family for the sleep (`b5.charge`, shown only when `coven_size() > 0` and `b5.circle` is not `stay`). Names are always checked with `in_circle()`; `npm run coven-names` is clean for the new files.
+- New decision flags (`b5.` prefix, registered, major): `b5.trail`, `b5.master`, `b5.nights`, `b5.maggie` (chapter 19) and `b5.last_night`, `b5.west`, `b5.charge`, `b5.farewell` (chapter 20). `b5.maggie`, `b5.master`, `b5.west` and `b5.charge` are the ones the next book should read first. New person: Maggie Tuck. Three new codex entries. Content notes: chapter 19 `blood`, `violence`; chapter 20 `blood`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book5j.test.js` plays both chapters hungry and fed, with and without a coven, takes every recorded choice, and checks the end of the book, the sleep, the journal and the invest scene; `tests/book5.test.js` now expects twenty chapters and a complete book.
+- Sessions 56 to 59 (pull requests #61 to #65) were not merged when this session started, so the session 60 branch is stacked on session 59. Merge them in order.
 - Plans are in `SPOILERS/whitechapel-hunt.md`.
