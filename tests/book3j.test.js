@@ -208,3 +208,16 @@ test('the journal for Book Three reads the earlier choices', async () => {
   assert.match(text, /did not kneel/);
   assert.doesNotMatch(text, /[–—]/);
 });
+
+test('chapter 20 offers the ventures of the long sleep to New Orleans, one or many, and carries them to the wake report', async () => {
+  const none = await play('b3c20', { ...START, ...EARLIER }, [/That will do/, /That will do/]);
+  assert.equal(none.frame.wait, 'book_end');
+  assert.deepEqual(none.game.state.sys.sleep.wake.invest, []);
+  clean(none);
+  const some = await play('b3c20', { ...START, ...EARLIER }, [/Buy land on the lower river/, /first railways/, /That will do/]);
+  assert.deepEqual(some.game.state.sys.sleep.wake.invest, ['land_before_purchase', 'first_railways']);
+  clean(some);
+  const all = await play('b3c20', { ...START, ...EARLIER }, [/lower river/, /canal/, /first railways/, /cotton mills/, /diggings/, /governments that are at war/, /Buy a share in cotton/, /That will do/]);
+  assert.equal(all.game.state.sys.sleep.wake.invest.length, 7);
+  clean(all);
+});

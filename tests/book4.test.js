@@ -436,7 +436,7 @@ test('chapter 6 takes each choice and records it', async () => {
   ];
   for (const [flag, branches, night] of sets) {
     for (const [value, re] of branches) {
-      const run = await play('b4c06', {}, { ...START, wealth: 400000, ...CH5, 'b4.shelter': 'hid' }, [night, re, /That is all/], { sys: coven });
+      const run = await play('b4c06', {}, { ...START, wealth: 400000, ...CH5, 'b4.shelter': 'hid' }, [night, re, /nine boats settled/, /That is all/], { sys: coven });
       assert.equal(run.vars[flag], value, `${flag} ${value}`);
       clean(run);
     }
@@ -1114,3 +1114,27 @@ for (let n = 7; n <= 20; n++) {
     clean(run);
   });
 }
+
+test('chapter 20 offers the post war ventures, lets the player sow in several and carries them to the wake report', async () => {
+  const none = await play('b4c20', {}, { ...START, ...CH20 }, [/That will do/, /That will do/], { sys: coven });
+  assert.equal(none.frame.wait, 'book_end');
+  assert.deepEqual(none.game.state.sys.sleep.wake.invest, []);
+  clean(none);
+  const some = await play('b4c20', {}, { ...START, ...CH20 }, [/oil refiner in Cleveland/, /new banking house in New York/, /Buy land and brick in Chicago/, /That will do/], { sys: coven });
+  assert.equal(some.frame.wait, 'book_end');
+  assert.deepEqual(some.game.state.sys.sleep.wake.invest, ['cleveland_oil', 'new_york_bank', 'chicago_rebuilt']);
+  clean(some);
+  const all = await play('b4c20', {}, { ...START, ...CH20 }, [/oil refiner in Cleveland/, /new banking house/, /Pittsburgh steelmaker/, /sleeping cars/, /Buy land and brick in Chicago/, /speaking wire/, /Northern Pacific/, /Hire out guards/, /That will do/], { sys: coven });
+  assert.equal(all.game.state.sys.sleep.wake.invest.length, 8);
+  clean(all);
+});
+
+test('chapter 6 lets the nine boats do more than one thing', async () => {
+  const run = await play('b4c06', {}, { ...START, wealth: 400000, ...CH5, 'b4.shelter': 'hid' }, [/nine idle boats/, /Lay them up/, /Run the Passes/, /carry people north/, /nine boats settled/, /That is all/], { sys: coven });
+  assert.equal(run.vars['b4.blockade'], 'hid');
+  assert.match(run.text, /Brault's boat, the \*Colline\*/);
+  assert.match(run.text, /Three of your boats are gone/);
+  clean(run);
+  const ranOnly = await play('b4c06', {}, { ...START, wealth: 400000, ...CH5, 'b4.shelter': 'hid' }, [/nine idle boats/, /Run the Passes/, /nine boats settled/, /That is all/], { sys: coven });
+  assert.equal(ranOnly.vars['b4.blockade'], 'ran');
+});

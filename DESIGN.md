@@ -617,3 +617,9 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Content: Book Three chapter 1 and Book Four chapters 1 to 3 were reworked (`@version 2`) so the business lead voices the waking, the coven and the family are already in contact, and names are checked against the real coven. New registered flags: `b3.lead_desk`, `b4.lead_desk`, `b4.lead_pick`, `b4.village`, `b4.lead_intro`, `b4.gift_focus`. Book Four chapters 1 to 3 also carry a hill letter and a gifts scene.
 - New tool: `npm run coven-names` lists story lines that name a coven member without checking `in_circle()`. Book Four chapters 4 to 20 still have such lines and are to be reworked in pairs (see `SPOILERS/house-divided.md`).
 - Tests: `tests/systems.test.js` covers the lead, gifts, the coven view, the schema step and the village helpers; `tests/book4.test.js` plays the new scenes.
+
+### Period investments in the long sleeps and multi pick choices (notes for the next session)
+
+- `content/sleep.json`: the gaps `paris_to_new_orleans`, `new_orleans_to_london` and `london_to_chicago` now carry `investments` (period ventures and a few traps), and the player may sow in as many as they like. Chapter 20 of Book Three (`@version 2`) and Book Four (`@version 3`) offer them in a new `invest` scene; Book Five's chapter 20 must add the same scene for `london_to_chicago`. Later openings can read `wake_invest("id")`.
+- Choices whose options are not mutually exclusive (businesses, boats, people sent) should be `[once]` loops with a closing option, like the venture menus. Book Four chapter 6 (`@version 3`) now lets the nine boats do several things at once; `b4.blockade` keeps its values, with the most committed one (carrying people, then running the Passes) winning.
+

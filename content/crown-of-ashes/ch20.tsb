@@ -1,11 +1,12 @@
 // Book Three, Chapter 20 (session 38). The long quiet: the last night in Paris, the four things to leave behind, and the sleep to New Orleans.
 // No phases. Calls rest() once and then sleeps the whole of paris_to_new_orleans. Closes with => next, which ends the book (the Velati journal is written and Book Four unlocks).
 // Reads b3.prince, b3.lady, b3.court, b3.quarry, b3.keeper, b3.rising, b3.report and the circle. Sets b3.last_night and b3.letter. The engine logs the sleep itself (steward.crown-of-ashes, orders.crown-of-ashes, sleep.crown-of-ashes).
+// The invest scene offers the seven options of the paris_to_new_orleans gap (content/sleep.json); the player may sow in as many as they like. Book Four's opening can read wake_invest("land_before_purchase") and the rest.
 // What the sleep did is not shown here: Book Four's opening reads wake().
 @chapter b3c20
 @title The Long Quiet
 @book crown-of-ashes
-@version 1
+@version 2
 
 # start
 ## The last of Thermidor
@@ -82,11 +83,12 @@ It is not to be long. It is August, and the nights are short, and you have a thi
 
 # table
 ## The four things
-You have a sheet of the shop's paper, and a quill, and a candle, and it is the most important thing that you shall write in this century, and it is a list. It has four lines in it. A place, a person, an order, a guard. There is a fifth, which does not have a price.
+You have a sheet of the shop's paper, and a quill, and a candle, and it is the most important thing that you shall write in this century, and it is a list. It has five lines in it. A place, a person, an order, the things that might be sown, a guard. There is a sixth, which does not have a price.
 You take them one by one.
 ~> place
 ~> steward
 ~> orders
+~> invest
 ~> guard
 ~> letter
 -> cellar
@@ -169,6 +171,37 @@ There is the matter of the order. It is what a steward is to do with a fortune t
   $ velati_regard -= 2
   You write it. It takes a long time, and you do not enjoy the writing. It is the order for the plantation notes, and the war contracts, and the quiet trade that nobody has named, the order that gives the greatest return and will have a great deal of blood on it. You tell yourself that it is only money. You are quite aware that you have heard this before, in the voices of a number of men whom you did not like.
 <~
+
+# invest
+## What is to be sown
+There is a last thing that wants a line. The world is not what it was in the old kingdom, and the long quiet is longer than you have yet slept in a single piece. There are things that are growing in the new world, and in the north of England, that will be very large indeed by the time that you wake. A man might sow in as many of them as he likes.
+:invest
+* Buy land on the lower river in the south of the new world, that no one is quite sure whose it is, and that is likely to be sold within a year [once]
+  $ do sleep_invest("land_before_purchase")
+  It is a swamp. It is a great deal of swamp, with a few sugar fields and a small, shabby town on a bend. The agent says that it is going to be French, and then Spanish, and then French again, and then something else, and that the land will remain exactly where it is. You find that you like the agent.
+* Put money into a canal that is to be dug across the whole of the state of New York [once]
+  $ do sleep_invest("erie_canal")
+  It is the kind of enterprise that people say cannot be done, and is done. You have seen it done before, with an aqueduct, in the time of Augustus. It is not a thing that you are able to resist.
+* Take a share in the first railways, which are two rails and a kettle, and which every sensible man says are a toy [once]
+  $ do sleep_invest("first_railways")
+  $ standing += 1
+  You were shown a drawing of the engine. It was something like a very angry teapot on wheels. You have not been so pleased with a drawing since the dome in Florence.
+* Buy into the cotton mills of the north of England, where the machines run all night and the children run with them [once]
+  $ do sleep_invest("english_mills")
+  It is the most profitable thing that has been done in the world for a century, and it is done by small people in very bad light. You tell yourself that it is only a share. You tell yourself it quite often.
+* Send supplies and a little money to the diggings, where a man in California has found gold in a river [once]
+  $ do sleep_invest("california_gold")
+  It is a thing that will turn out, you suspect, to make a few men very rich and a great many men very poor, and the ones who sell the shovels will do the best of all. You buy the shovels.
+* Lend to the governments that are at war, for as long as the war goes on and a little afterwards [once]
+  $ do sleep_invest("war_bonds")
+  It is the oldest trade in the world, and it has never been so easy. A kingdom needs money, and says that it will pay it back, and you have lived long enough to know what a kingdom's word is worth. It is, however, a good deal more than a republic's.
+* Buy a share in cotton, and the ground it grows on, and the people who are made to work it, which the Americans say is the whole future of their country [once]
+  $ do sleep_invest("cotton_and_slavery")
+  $ velati_regard -= 1
+  You know exactly what it is. You have known since Rome. You are told, again, by a very polite man, that it is the soundest thing in the world, and you sign again, and you are aware as you do it that you have promised something that is going to be a good deal more expensive than the money.
+* That will do
+  <~
+-> :invest
 
 # guard
 ## What stands between
