@@ -1065,7 +1065,25 @@
           "collesanto": 72
         }
       },
-      "chapters": []
+      "chapters": [
+        {
+          "id": "b6c01",
+          "file": "relics-lost-god/ch01.tsb",
+          "title": "The Letters from the Lake",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c02",
+          "file": "relics-lost-god/ch02.tsb",
+          "title": "LaSalle Street",
+          "notes": [
+            "blood"
+          ]
+        }
+      ],
+      "incomplete": true
     },
     {
       "id": "unchained",

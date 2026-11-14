@@ -1,0 +1,458 @@
+// Book Six, Chapter 2 (session 62). The crossing and Chicago, early April 1924.
+// Opens with no phase (the crossing, the landing), then a short hunger scene that only runs if must_feed(), then one night phase of three actions out of four, then a short dawn with a fixed closing scene.
+// The coven fronts the arrival: the business lead (or Dora Valer, the keeper) makes the introductions. Reads b6.circle, b6.passage, b6.crane, b5.charge.
+// Sets b6.dock, b6.cab, b6.exchange, b6.walk, b6.haven, b6.call and b6.coin. Uses invest() (the chicago.* ventures, several allowed), acquire(), coven_task(), chart() and send(). Ends with rest() and => next, which pauses until chapter 3 exists (the manifest entry is incomplete).
+@chapter b6c02
+@title LaSalle Street
+@book relics-lost-god
+@version 1
+
+# start
+## The crossing
+$ b6.dock = "alone"
+$ b6.cab = "ask"
+$ b6.exchange = "kept"
+$ b6.walk = "bronzeville"
+$ b6.haven = "brownstone"
+$ b6.call = "regrets"
+$ b6.coin = "kept"
+$ _lead = ""
+$ _with = 0
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+?if b6.circle == "all"
+  $ _with = 1
+?end
+?if _with == 1 and _lead != ""
+  $ b6.dock = "lead"
+?elif b5.charge == "west" or coven_size() == 0 or _lead == ""
+  $ b6.dock = "dora"
+?end
+~> crossing
+---
+~> landing
+?if must_feed()
+  ---
+  ~> hunger
+?end
+---
+~> introductions
+---
+$ do phase("night", 3)
+It is the first week of April, in the year nineteen twenty four, and the city is a great, hot, noisy, unlit furnace of a place with a cold lake at its back. There are four things in the night that want doing and time for three. {cap(voice("hunger"))}.
+-> night
+
+# crossing
+?if b6.passage == "hold"
+  The case is stenciled with the name of a company that does not exist, and lined with a hand's depth of English earth, and you are lowered into the hold of a great Cunarder with a good deal of tinned salmon and four hundred crates of Scotch whisky that are all, the manifest says, medicinal. You hear the whole of the Atlantic through three inches of oak. It is, for the first four nights, very much like being a child in a cradle. For the last three it is much like being buried.
+?elif b6.passage == "steerage"
+  You cross in third class, in a long white painted room smelling of carbolic and boiled cabbage, among two hundred families who are going the other way from the way that families once went. Nobody asks where you are going. A woman from Galway gives you a heel of bread, and a boy of eight shows you, with an air of enormous expertise, how to read the tide of the sea by the way the soup moves. You are the only passenger on the ship who is not seasick. It is noticed.
+?else
+  The cabin is on the leeward side, with a brass lamp, a bath and a porthole, and a steward who has been paid not to knock before dusk. You walk the promenade deck alone in the evenings, and a gentleman from Philadelphia discusses with you, at length, the question of whether the ship will be dry from the moment that it passes the twelve mile line, or from the moment that it passes the first bar. He is for the bar. He has a good deal of faith in the bar.
+?end
+?if _with == 1 and _lead != ""
+  On the fifth night {_reader_name} comes up on deck with a shawl, as if for the air, and stands beside you at the rail and says nothing for a long time. It is {name(_lead)}'s way. Then, quite suddenly, {pg(_lead, "he", "she", "they")} says that the house in Lime Street was the first place that was ever theirs, and that {pg(_lead, "he", "she", "they")} had thought that it would be the last. You say that you know. It is the whole of the conversation, and it is a great deal.
+?elif _with == 1
+  On the fifth night the young keeper comes up on deck with a shawl, as if for the air, and stands beside you at the rail and says nothing for a long time. Then, quite suddenly, she says that her grandmother was afraid that she would be cold, and that she is not.
+?else
+  You have the rail to yourself on most nights, and the whole dark sea, and an immense sky with all its lamps lit. You think of the family. It is not a lonely thing, to be a week's work away from a house with a lamp in the window. It is something else, and you find that you have a good deal of time in which to learn the name for it.
+?end
+On the sixth day the ship goes dry. You know the moment, because a steward comes along the saloon with a tray of bottles and a face of the deepest sorrow, and takes every one away.
+<~
+
+# landing
+## The long road west
+You are put ashore in New York at dusk, in a swarm of noise and cranes, under a sky that is nothing but towers, and you are put on a train. It is called the Twentieth Century Limited, and it is, the conductor says, the fastest in the world, and it has a red carpet laid for the passengers on the platform, which you are given to understand is a courtesy and not a joke. You sleep through the greater part of a night and a day in a berth with a curtain, and wake with the sun going down on a flat gray immensity of water, and the whole of the country going by in a blur of steel and smoke, and then a great ugly splendid city standing on the shore.
+It is LaSalle Street Station, and the carriage is a long time stopping.
+?if b6.dock == "lead"
+  {_reader_name} is at your elbow, in a good traveling coat, with the face of someone who has done this a good many times and wishes to look as though it were the first. On the platform, a little apart, under the great clock, a square dark woman in a gray hat is holding a card with a single word on it, and the word, in a firm black hand, is *COLLINS*.
+?elif b6.dock == "dora"
+  There is only one person on the platform who is looking for you. She is a square dark woman of thirty in a gray hat, under the great clock, holding a card with a single word on it, and the word, in a firm black hand, is *COLLINS*. She does not look at the faces. She looks at the eyes.
+?else
+  There is nobody on the platform who is looking for you, and you walk the whole length of it, under the great clock, before you see, standing in the shadow of a pillar, a square dark woman in a gray hat holding a card with a single word on it, and the word, in a firm black hand, is *COLLINS*. She has not made a sound. She has been, you learn, standing there for three trains.
+?end
+"Dora Valer," she says, and does not offer a hand, since there is a good deal of hat in the way. "I should know you anywhere. My grandfather told me that I should. I did not believe him. He was right."
+$ do meet("dora")
+$ do chart("chicago.valere")
+There is a motor cab at the curb, with a driver in a leather cap who has opened the door and is holding it with an air of enormous, delighted authority. You have not ridden in one. You have a great deal to learn about it, and it is going to be a very short ride.
+:the_cab
+* Climb in as if you had done it every day of your life
+  $ b6.cab = "bluff"
+  $ cunning_brutal += 1
+  $ adjustment += 1
+  You sit down with a great air of ease, and put your hat on your knee, and say, "To the house, if you please." The driver says "Which house?" and you say that you will know it when you see it. It is a sentence that a very sure man says, and you will be very sure for four blocks, until the cab turns a corner on two wheels and you take hold of the strap and do not let go.
+* Ask the driver how it works, and whether it is safe
+  $ b6.cab = "ask"
+  $ standing += 1
+  $ adjustment += 3
+  He is delighted. He tells you for six blocks, with an air of the deepest affection, about the spark and the gear and the crank and the clutch, and a cousin who was killed by the crank, and a brother who was killed by the clutch, and he is so obviously a man who loves his work that you have, by the end of it, quite forgotten to be alarmed.
+* Pay him in advance, with a coin out of your coat, and tell him to keep the rest
+  $ b6.cab = "gold"
+  $ do earn(-1)
+  $ secrecy -= 1
+  He looks at it for a long time. It is a gold florin of Florence, with a lily on it, which you have carried since the Medici. He bites it. He sits down on the running board. He says that he will drive you anywhere in the whole of the United States, and may he ask what year it is, and does the gentleman know that gold is not legal tender. Dora says, with great calm, that the gentleman is an eccentric, and takes the coin away, and gives the man a dollar, and a look.
+<~
+
+# introductions
+## The people you must know
+{_reader_name} is a good deal more at ease in this city than you are, or has plainly made a study of it by letter. In the long dark motor, with the lamps going by like a string of pearls and the sound of a great many cars, you are given what a coven, or a keeper, is for: a list.
+First there is the house itself. It is a tall narrow brick house, with a long porch and a lamp, in a street of such houses on the Near North Side, and it belongs to the Valers, who have kept your name across thirty years of correspondence and eighteen hundred of blood. Dora keeps it. She is a lawyer's secretary, which is a thing that a woman can be in Chicago, and she has, she says, no illusions, a great many typewriters, and a very good view of the river.
+Then there is Mrs. Cordelia Moten, of Bronzeville, a teacher, who is not of the family, and is not of the house, and is the nearest thing to a conscience that the house has in the whole of the Middle West. She will want to meet you. She has been, Dora says, waiting for you for a good deal longer than she has been willing to say.
+Then there is Mr. Marcel Prosper, who plays the clarinet and sleeps through the day. He will want to meet you at about three in the morning. He has a song that he would like you to hear.
+Then there is Mr. Ames.
+"Mr. Ames," says {_reader_name}, "is Mr. Crane's man in Chicago. He is pale, and polite, and he has called at the Exchange four times this week. He has said that Mr. Crane does not wish to presume. I did not like him, but I could not think of a reason."
+$ do meet("ames")
+Then there is a card.
+It is on stiff cream pasteboard, with an engraved crest of a cedar in a ring, and it was left at the door of the Exchange three weeks ago, by a chauffeur in dove gray livery, who would not give his name. It says, in a fine copperplate, that Mrs. Cornelia Pell would be honored by the presence of the principal of the Collins Exchange at her house on the Lake Shore Drive on the first night that is convenient, and that she looks forward to a conversation that has been awaited for a very long time. It is not a question.
+"She is the head of the old house on the lake," says {_reader_name}. "The oldest of the Chicago covens, by some decades. She is not unkind. She is not in the habit of being refused."
+$ do meet("pell")
+$ do discover("the_lake_shore_house")
+<~
+
+# hunger
+## The first thing
+* Send down to the Yards for a can of it, quick and warm, as the city does
+  $ do feed("animal")
+  $ humanity += 1
+  It is a thing that this city does better than any other. The Yards kill, on a good day, a hundred thousand animals, and there is a trade in what is left, and a boy on a bicycle arrives in a quarter of an hour with a covered tin pail and a receipt for it. You drink it standing at a window with the blind drawn. You do not think of the receipt.
+* Ask for a willing arm, from the house's own people
+  $ do feed("donor")
+  $ do earn(-2)
+  The house keeps a few for exactly this, men and women who are paid well and told that they are being bled by a doctor. The one who comes is a Polish teamster with forearms like loaves, who offers his wrist and studies the ceiling with great attention. "Is it very bad, Sir?" he says. You tell him that it is not, and it is nearly true.
+* Take one of the passing strangers, who will not know
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is a young man in a straw boater and a very tight collar, walking home from a dance hall by the wrong street, and he is so thoroughly full of gin that he will, in the morning, remember nothing at all. It is quick and quiet and you are very good at it, which is the part that you mind.
+* Go without, and let it gnaw
+  $ humanity += 1
+  $ cunning_brutal += 1
+  You tell them to wait. It is not wisdom. It is a small, stubborn reluctance to begin the age with an apology, and it is a great deal less comfortable than it sounds.
+<~
+
+# night
+## The first night
+:night
+?if actions_left() == 3
+  The night is young, and the city is very large.
+?elif actions_left() == 2
+  The night is half gone. The clocks have been striking for an hour in a great many places at once, none of them agreeing, and somewhere to the south a brass band is playing something with a good deal of drum in it.
+?else
+  There is a gray in the east, that is not yet a color, and the first of the milk wagons have begun on the brick, and you have one thing left that you have time for.
+?end
+* Go to LaSalle Street, and the Exchange [once] ?if actions_left() > 0
+  ~> firm
+  $ do act()
+* Walk the city, and see for yourself where it lives [once] ?if actions_left() > 0
+  ~> walk
+  $ do act()
+* Find a roof for yourself and the family [once] ?if actions_left() > 0
+  ~> roof
+  $ do act()
+* Answer the card from the lake shore [once] ?if actions_left() > 0
+  ~> call
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# firm
+## LaSalle Street
+$ do chart("chicago.exchange")
+It is a narrow gray limestone front, between a brokerage and a trust company, a block from the Board of Trade, with a great brass door and a plate that has been polished every day for fifteen years by someone who does not know why. Mr. Ames is not here. A bookkeeper of sixty, with a green eyeshade, is lighting the lamps, and brings out three ledgers and a ticker tape that is nearly the length of the room.
+"I shall be frank, Mr. Collins," he says. "I have kept this account for fifteen years and I have never met the principal. I have taken the family's word that you exist, and I have taken the bank's word that you pay. I find myself, now, very much hoping that I was right."
+:the_exchange
+* Say that he was, and thank him, and sign what he has laid out
+  $ b6.exchange = "kept"
+  $ standing += 1
+  He is, for a moment, utterly silent. Then he takes off the green eyeshade, and wipes it, and puts it on again, and says that it is an honor. It is not at all an exaggeration. It is the gravest thing that has been said to him in fifteen years.
+* Go through every ledger, line by line, and ask what is not written
+  $ b6.exchange = "pressed"
+  $ cunning_brutal += 1
+  He has not been asked, in fifteen years, and he answers it with a good deal of dignity. At the end of it you are quite sure that nothing has been hidden, and that you have hurt the feelings of an honest man. It is a thing that you will not need to do twice.
+The house has seen a good many ways of making money in a dry and growing city, and the bookkeeper has them in a list. He has not yet given his opinion of any of them. He gives it, now, in a short and careful sentence, that it is a very good moment to put money in anything.
+:the_ventures
+* Real estate, the new apartment blocks, and the lots along the boulevards [once] ?if can_invest("chicago.realestate")
+  $ do invest("chicago.realestate")
+  $ standing += 1
+  It is the sound thing, in a city that is building as fast as it can build. Brick, and stone, and a great deal of wire in the walls. It is the oldest trade in the world, and the best, and you find that you are rather pleased.
+  -> :the_ventures
+* The stockyards, a share in the packing houses and the pens ?if can_invest("chicago.stockyards")
+  $ do invest("chicago.stockyards")
+  $ cunning_brutal += 1
+  $ do discover("the_stockyards")
+  It is a loud, hot, cheap, difficult business, and a very steady one, and the whole of the country eats from it. You are told, with an air of apology, that the work is dangerous and the wages low. You write that down. It is, you think, one of the things that you will be asked about.
+  -> :the_ventures
+* Jazz, a share in the clubs and the dance halls of the South Side [once] ?if can_invest("chicago.jazz")
+  $ do invest("chicago.jazz")
+  $ humanity += 1
+  $ do discover("the_dry_city")
+  The bookkeeper says it with a straight face, and the straight face is for your benefit. It is where the music is, and where the money is, and where, you gather, a great deal else is. It will not be dull. There is a man who plays the clarinet.
+  -> :the_ventures
+* The wireless, radio stations and the sets that hear them [once] ?if can_invest("chicago.radio")
+  $ do invest("chicago.radio")
+  $ standing += 1
+  It is a new thing, and nobody yet knows how to sell it, and everybody wants one. There is a station on the roof of a hotel that has been on the air for a year and a half, and has no revenue, and an audience of eight hundred thousand. You find that you want one.
+  -> :the_ventures
+* Motorcars, a dealer and a garage on every boulevard [once] ?if can_invest("chicago.motorcars")
+  $ do invest("chicago.motorcars")
+  $ adjustment += 2
+  It is, you are told, the sanest thing that a person could do with money. A man buys one and then he buys a second to get out of the way of the first. The firm will have a showroom on Michigan Avenue before the summer, with a salesman who has been to the war.
+  -> :the_ventures
+* Community investment in Bronzeville, loans and shares in the banks, the theatres and the press of the Black Belt [once] ?if can_invest("chicago.bronzeville")
+  $ do invest("chicago.bronzeville")
+  $ humanity += 2
+  $ standing += 1
+  $ do chart("chicago.bronzeville")
+  The bookkeeper does not say anything for a moment. It is not a thing that the Exchange has done, and it is not a thing that pays. It is also, he says, in a voice from which all the expression has been very carefully removed, a thing that a good many men with a good deal more money than the firm have been asked to do and have not. He will draw it up in the morning.
+  -> :the_ventures
+* Bootlegging, a quiet share in a trade that the whole city drinks to [once] ?if can_invest("chicago.bootlegging")
+  $ do invest("chicago.bootlegging")
+  $ cunning_brutal += 2
+  $ do discover("the_dry_city")
+  The bookkeeper says it as if it were a smell. It is the richest thing in the city, and it is run by men who shoot each other in the street, and the firm's share would be small and sound and silent. It would also be the first thing in the Exchange's books that you would not want read aloud.
+  -> :the_ventures
+* Gambling, the wheels and the tables behind a hundred doors [once] ?if can_invest("chicago.gambling")
+  $ do invest("chicago.gambling")
+  $ cunning_brutal += 2
+  The bookkeeper does not say anything at all. He looks at the ticker. It will pay, and it will pay in cash, and the people who are paid are the people who should not be. You ask whether he has a view, and he says, with great dignity, that he is a Methodist.
+  -> :the_ventures
+* That will do for tonight
+  $ do chart("chicago.depot")
+-> firm_end
+
+# firm_end
+<~
+
+# walk
+## The first walk
+$ do discover("the_northbound_families")
+The city is, as it turns out, very large, and has three faces, and you have a night to see one. The family has pressed a map into your hand, in three colors, with a good many lines on it that nobody has drawn before. Dora has written, in the margin, in a quick square hand, *you cannot see all of it*.
+:the_walk
+* Take the elevated train south, to Bronzeville, where the new city of the Black Belt is making itself
+  $ b6.walk = "bronzeville"
+  $ do chart("chicago.bronzeville")
+  $ humanity += 2
+  ~> bronzeville
+  -> walk_end
+* Go west, to Pilsen, where the wooden cottages and the church steeples are, and the new arrivals live
+  $ b6.walk = "pilsen"
+  $ do chart("chicago.pilsen")
+  $ humanity += 1
+  ~> pilsen
+  -> walk_end
+* Go to the Yards, where the whole of the country is killed and cut and canned
+  $ b6.walk = "yards"
+  $ do chart("chicago.yards")
+  $ cunning_brutal += 1
+  ~> yards
+  -> walk_end
+
+# walk_end
+<~
+
+# bronzeville
+## State Street
+You are met at the foot of the stair by a woman in a gray coat, with a hat she has plainly been wearing since before the war, and with a way of standing that makes the whole of the pavement lean slightly toward her. "Mr. Collins," says Cordelia Moten. "I am not at all sure that I believe it. I am glad to be told that I should."
+She takes you down State Street, which is a mile of lit windows and loud music. There is a bank, and a newspaper, and a movie house with a gilded front, and four churches in a single block, and a great many people on the pavement at one in the morning, as bright and as proud as a street can be. A lady in a white fur is dropping a nickel in a blind man's hat. A young man with a rolled up newspaper under his arm is arguing about the vote. In a doorway, at the end of the block, a thin quick young man in a derby, with a long black case, looks up as you go by and turns the color of a pecan.
+"That," says Cordelia, "is Marcel. He has a song for you. Do not let him sing it in the street."
+$ do meet("cordelia")
+$ do meet("marcel")
+:the_belt
+* Ask what the people of the Belt most need, and listen
+  $ standing += 2
+  $ humanity += 1
+  It takes the better part of an hour and she does not once lower her voice. They need houses, which are not sold to them except at a price. They need banks which will lend to them. They need a hospital, and a school that does not teach their children that they are worth less. They need, above all, the other thing, which she names at the end with great precision. They need somebody who will not take their rent and then call it kindness.
+* Go in to the club and hear the song, out of the cold [once]
+  $ cunning_brutal -= 1
+  $ adjustment += 2
+  It is a long low room with a bandstand and a great many tables and an air of loud, smoky joy, and no drink, in the strict sense, of any kind, on any of them. Marcel has the clarinet out of the case before you have sat down. It is a tune that is very old, and very slow, and has, under it, a figure that you know. You have heard it before, a very long time ago, in a cellar in Rome. You sit very still. When the song is over you ask who paid for it, and he says that he does not know. He says that the man wore gloves.
+* Say nothing of money, and ask to see the school
+  $ humanity += 2
+  $ standing += 1
+  It is a three story brick building on a side street, with a bell, and a flag, and a hand lettered sign, and it is the best kept thing that you have seen in the whole of the city. She takes you up into a classroom full of empty desks, with a map of the world on the wall, and the whole of it in chalk. She does not tell you what it cost. She says only that her great aunt would have known the smell of it.
+<~
+
+# pilsen
+## Eighteenth Street
+The streets are narrower, and the houses wooden, and the language, on one side of the street, is Czech, and on the other Polish, and over the whole, from the steeples of eleven churches, the bells are saying the hour in three different ways. A priest with a lantern, a very large gentle man with a face like a loaf, stands under a doorway and watches you pass with the remote benevolence of someone who has seen a good many men go by in the night and has prayed for all of them.
+"You are new," he says, in an English that has been made in a hurry. "The people of this parish are in the yards all day, and the mills all night, and they are very tired. If you are a man of business, I will tell you that they will work for what they are given. If you are a man of God, I will tell you that they will pray for what they are not."
+There is a tavern at the corner with its shutters closed and its lamps lit and the sound of a concertina, and a foreman with a split lip sitting on the step with his boots off. He tells you, quite readily, for a cigarette that you have not got, that there has been a stranger in the Yards since the fall, in a gray overcoat, with a very quiet voice and very old money, who has been asking the pen men whether they know the name of a family. They have said that they do not. He has not shouted. He has gone on asking. Nobody likes him, and nobody has seen him eat.
+:the_parish
+* Leave the priest a gift for the parish, and say nothing about where it came from
+  $ do earn(-1)
+  $ humanity += 1
+  $ standing += 1
+  He takes it with a courtly nod, and puts it, without looking, in the sleeve of his cassock. He says that he will mention nothing, and that he will pray for the giver, and that God, who is a good deal quicker than the Church, will have the particulars already.
+* Ask the foreman for the stranger's name
+  $ cunning_brutal += 1
+  He does not have it. He has, instead, a description: a pale gentleman, and a hat, and a gold coin in his glove that he turns over in his fingers while he talks. The coin has a face on it. The foreman has seen it. He says that it was not the face of any king.
+<~
+
+# yards
+## The Yards
+$ do discover("the_stockyards")
+You smell them from a mile away, and by the time that you have come to the gate the smell is a kind of weather. It is five hundred acres of wooden pens and brick sheds and overhead runways, with the lights burning all night and the whole of it alive with the noise of animals who have not yet been told. A man in a long bloody apron with a notebook, who is the night foreman, lets you in at the Exchange Avenue gate because you are the man from the Exchange, and because Dora has sent a note.
+He takes you, with a certain gloomy pride, down the long killing floors, where the work goes on in four shifts, and the line of the dead goes by on its hooks, and a thousand men are cutting and splitting and trimming it in a single movement. The whole of Chicago, he says, eats here. He says it as a man who is not sure that it is a compliment.
+It is the most efficient slaughterhouse in the world. It is also, you reflect, the only place on earth where a creature like you could stand in a room full of blood and be, for a quarter of an hour, perfectly unremarkable.
+:the_yards
+* Ask the foreman, quietly, about the wages and the men
+  $ humanity += 1
+  $ standing += 1
+  He tells you, because nobody has asked in a long time. It is a good deal worse than the bookkeeper said, and a good deal better than the men believe. The union has been broken twice. There is a boy of fifteen with two fingers gone, on the floor below, who is very good at his work and does not mean to be sorry.
+* Ask for a drink of the warm, at the end of the line, from the foreman's own cup ?if hunger > 25
+  $ do feed("animal")
+  $ cunning_brutal -= 1
+  He does not ask what it is for. He has been in the Yards twenty five years, and he has learned that there are a great many reasons for a man to ask for a cup of hot blood at three in the morning and that none of them are his business. It is the most ordinary transaction that you have had in a week, and you find that you are grateful for it.
+* Stand at the end of the long gallery, over the pens, and listen
+  $ cunning_brutal += 1
+  $ do power("minor")
+  It is a very old gift, and it costs you something, and the whole of the yard goes quiet. The cattle in the pens lift their heads. Under the noise of the machines, under the long groan of ten thousand animals in a single mass, there is a note that you have heard once before, in a vault under a hill in Rome. It is very faint. It comes from the west, from the lake. It is not a sound. It is, you think, a kind of attention.
+<~
+
+# roof
+## A roof
+You have to sleep somewhere, and the family must be put somewhere, and the choice, in this city, is a matter of money and also of memory. The Exchange has been looking for fifteen years. It has found three.
+:the_haven
+* A brownstone on the South Side, with a coal chute that is never used, a back stair, and a room with no windows
+  $ b6.haven = "brownstone"
+  $ do chart("chicago.haven")
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  It is a tall narrow house, in a quiet street of tall narrow houses, with a lamp over the door and a very old elm in the yard. It has been kept for you for nine years by someone who has not been told why, and the lower floors have been rebuilt by a contractor who was paid not to ask. It is as safe as anything in Chicago can be. It is also, you reflect, a house that a family could be happy in, and you tell yourself that you will think of something.
+* A floor of vaults in a new building on LaSalle Street, over the Exchange, with a lift that nobody asks about
+  $ b6.haven = "tower"
+  $ do chart("chicago.tower")
+  $ standing += 1
+  $ secrecy += 1
+  It is the proud thing. It is a great steel and limestone floor, with doors a foot thick and a lamp that burns all night, and every man in the Loop will know that the Exchange has a vault. It is the right thing for a banker, and the wrong thing for anyone who would rather not be asked about it.
+* The keeper house on the Near North Side, with Dora, a long porch, and a cellar that she has been cleaning for thirty years ?if coven_size() > 0 or b5.charge == "west"
+  $ b6.haven = "keepers"
+  $ standing += 1
+  $ humanity += 1
+  It is the oldest of the answers. It is the family's own house, and it has a great many doors and a great deal of company, and a typewriter in every room. Dora does not say anything at all. She goes up the stair, and comes down again, with a key that she has had in a drawer since nineteen eleven.
+?if coven_path() and can_acquire("coven_house")
+  ~> family_house
+?elif can_acquire("hidden_chamber")
+  $ do acquire("hidden_chamber")
+?end
+~> tasks
+<~
+
+# family_house
+:the_family
+* Take a house for the family as well, with room for all of them and a hall [once] ?if coven_path() and can_acquire("coven_house")
+  $ do acquire("coven_house")
+  $ standing += 1
+  It is a thing that a family needs, and has rarely been given. It has a long table, and a door that locks from the inside, and a hall that smells of coal smoke and beeswax. You notice that it has been furnished, in advance, by someone who has a very good eye for what people like.
+* Put a front over the garage, a taxicab company with a sign and a dozen cabs [once] ?if can_acquire("front_business")
+  $ do acquire("front_business")
+  $ secrecy += 1
+  It is a perfectly honest business. It has twelve cabs and a very good mechanic, and in the loft above the repair shop there is a room that is entered by no stair.
+* That is enough for now
+  <~
+-> :the_family
+
+# tasks
+?if coven_size() > 0
+  The family are all of them eager, in the odd, unspoken way of a people who have spent thirty five years on a patient errand and are at last allowed to do something with their hands.
+  ?if in_circle("prisca") and member("prisca", "status") == "active"
+    Prisca wants the river and the railways: who ships what, to whom, and which of them is paid. She says that a city can be read like a ledger, from the bottom, and that this one has been written in a very large hand.
+    $ do coven_task("prisca", "watch")
+  ?end
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+    Fiammetta wants the door. She says that she will not be surprised by a Chicago, and she has already walked the block twice with a measuring stick and found three ways in that nobody has thought about.
+    $ do coven_task("fiammetta", "guard")
+  ?end
+  ?if in_circle("hanno") and member("hanno", "status") == "active" and _lead != "hanno"
+    Hanno wants the Exchange. He has said so with a nod. He has been looking at the ticker in the way that an old dog looks at a new hearth.
+    $ do coven_task("hanno", "business")
+  ?end
+  ?if in_circle("thibault") and member("thibault", "status") == "active" and _lead != "thibault"
+    Thibault wants the telephone exchange, and the men who listen at it. He has been learning how it works from a boy of twelve, and is, he says, the first vampire in history to be taught anything by an elevator operator.
+    $ do coven_task("thibault", "watch")
+  ?end
+  ?if in_circle("honorine") and member("honorine", "status") == "active"
+    Honorine wants the school, on the South Side, and says that she knows exactly what it is going to need. It is a thing that nobody has asked her, and she has an answer already, in three parts.
+  ?end
+  ?if in_circle("armand") and member("armand", "status") == "active"
+    Armand wants the hospital, a good one, and an hour with every physician in the city who can be induced to talk.
+  ?end
+  They are your arm in a city where you do not yet have a hand. It is the oldest of your instincts and the most necessary. You tell them that nobody is to act alone. They agree, in the voices of people who have been agreeing to that for a very long time.
+?end
+<~
+
+# call
+## The card
+$ do chart("chicago.goldcoast")
+$ do discover("the_lake_shore_house")
+You have a good evening coat, and a hired car, and an engraved card. It is a long drive on the lake, a mile of lamplit limestone and dark water, with a wind off the lake as cold as a knife. The house, at the end, is of red brick and gray stone, with a lawn and a gate and a driver in a dove gray uniform who stands in the road with the face of a man who has been expecting someone else.
+Mrs. Pell receives in a long drawing room at the back, with the curtains drawn and a very good fire, and nine people in it, none of whom breathe. She is small and silver haired and straight, in gray silk, with a string of pearls and an old, plain, penetrating face, and she sits in a high chair without any ceremony.
+"Mr. Collins," she says. "Of the sixth line. I had thought the line was a story. I have been wrong about a number of things, and it is always a pleasure to find a new one."
+The room has gone very still. You are being weighed, and you can feel the scale.
+"There is a custom," she says. "A stranger who comes to Chicago is presented to the house. It is not a law. It is merely very old, and the house is very fond of it. The city is a large one, and a great deal of it is not ours, and there are, I should tell you, three or four other persons who would very much like to know whether you mean to take any of theirs. I find that it is cheaper to ask."
+:the_call
+* Present yourself in form, with a gift and a courteous speech, and let her put you where she will ?if wealth > 0
+  $ b6.call = "form"
+  $ standing += 2
+  $ cunning_brutal -= 1
+  $ do earn(-1)
+  She is pleased, and she lets it be seen. The speech is a small one and the gift is large, and the whole of the room relaxes by an exact degree. She tells you, over the course of an hour and a glass of something warm and red, how the city is divided: the Lake Shore for the hospitals and the orchestras, the Yards for the strong arm, the Loop, which is open, for whoever has the nerve, and Mr. Crane, who has none of it and owns a good deal. She does not say that this is a kindness. It is a map, and it is a very good one.
+* Go alone, and say that you have come to be looked at, and to look ?if b6.circle != "all"
+  $ b6.call = "alone"
+  $ cunning_brutal += 1
+  $ standing += 1
+  She raises one white eyebrow. It is, you gather, a thing that is rarely said to her, and she takes it with the air of a woman who has been offered an unfamiliar dish and finds that she likes it. You look. You are looked at. At the end of an hour you have been told a good deal, in a tone of the lightest courtesy, which you will have to work out for yourself.
+* Bring the family into the room, and let her see what the sixth line makes ?if coven_size() > 0 and b6.circle == "all"
+  $ b6.call = "family"
+  $ cunning_brutal += 1
+  $ standing += 3
+  $ secrecy -= 1
+  $ do discover("the_lake_shore_house")
+  It is a large thing to do, and she knows it. They file in behind you, one by one, in their good clothes, and they are, you think, a great deal more than she expected. The stillness of the room changes. One of the nine, a very young man with an expensive face, takes a step back without noticing that he has done so. The sixth line makes its own, and she can see it. She says that the house will be glad of the acquaintance, and she means exactly what she says, and the way in which she means it is not at all comfortable.
+  ?if gift_holder("strength") != ""
+    {name(gift_holder("strength"))} has, without a word, put one hand on the back of a chair that would, in the ordinary way, have held four men, and it has come, with a small crack, off the floor.
+  ?end
+  ?if gift_holder("charm") != ""
+    {name(gift_holder("charm"))} has made a remark about the pearls, and the old woman, who has not been complimented in thirty years, has colored.
+  ?end
+* Send regrets, by a clerk, with a note, and a promise to call when the Exchange is in order
+  $ b6.call = "regrets"
+  $ cunning_brutal += 1
+  $ standing -= 2
+  $ secrecy += 1
+  It is an answer that Chicago understands, and does not like. She does not say what she thinks. She says, in a voice that carries to the end of the room, that Mr. Collins is an admirable man of business, and that the house has every confidence, and that the house will, of course, be watching.
+<~
+
+# dawn
+## Before the dark ends
+$ do discover("the_coin_by_the_yards")
+There is a gray at the edge of the sky, and a great flat white light off the lake, and the first of the milk carts, and the strange, constant, enormous sound of Chicago, which never stops, getting up. The house, wherever it is, is asleep. The lamp in the window is lit.
+You have been in Chicago for one night. There is an Exchange, and a roof, and a card, and a school, and a man in the Yards who has been asking for you in a gray overcoat, and a song that you heard once before in a cellar in Rome. You think that there is going to be a good deal more.
+There is a small, square box of black paper on the step, tied with a gray ribbon. It was not there when you left. Nobody at the house saw who brought it. It is not heavy. Inside, in a nest of cotton, there is a gold coin.
+It is very old, and larger than it should be, with a head on one side, and no king's name. It is a woman's head, or a man's, or neither, with a cap of leaves, and the eyes are closed. On the other side there is a single figure, in the shape of six rays, one of them red. Under it there is a card in a plain, quiet, exact hand.
+> *The Yards, on Saturday, at the hour of the second shift. I should like to explain what it is for. Do come. A friend.*
+:the_coin
+* Keep it, and tell nobody, and go
+  $ b6.coin = "kept"
+  $ cunning_brutal += 1
+  It is the oldest of the instincts, and you have it in the bone. A coin is a coin. A friend is a thing that you will decide on Saturday. You put it in your coat, over the heart, where it lies cold and quiet, and does not warm.
+* Have it melted down in the Exchange's furnace before breakfast, and send word that the answer is no
+  $ b6.coin = "melted"
+  $ cunning_brutal += 1
+  $ humanity += 1
+  It is the oldest of the refusals, and a great pity. A clerk, who does not ask, does it in the cellar, in a crucible, in an hour, and it runs out like a little yellow sun. You do not tell him what it was. You are left with a gleaming bar in your hand, which is nothing at all, and a sound in your head, as of a very large door being shut a long way off.
+* Show it to the family, and to Dora, and let them see it, and ask what each of them thinks
+  $ b6.coin = "shown"
+  $ standing += 1
+  $ humanity += 1
+  It goes round the table in the early gray, from hand to hand, and nobody says anything for a long time. Dora puts a finger on the head and takes it away. She says that her grandfather had a drawing of that face, in a book, and that he would not say where it came from. It is, you gather, a great deal more than a coin.
+$ do rest()
+=> next

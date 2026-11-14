@@ -88,6 +88,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 59: Book Five chapters 17 and 18
 - [x] Session 60: Book Five chapters 19 and 20; Book Five is complete (journal, recap and sleep to Chicago)
 - [x] Session 61: the Chicago and Collesanto (1923) maps for Book Six
+- [x] Session 62: Book Six chapters 1 and 2
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -719,3 +720,15 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 
 - `app/maps/chicago.html` draws Chicago and Collesanto as they stand in 1923 (the approved preview). `engine/maps.js` gains `chicago` (`exchange`, `yards`, `depot`, `tower`, `club`, `valere`, `haven`, `goldcoast`, `bronzeville`, `pilsen`, `velati`, `roadhome`) and `collesanto5` (`farm`, `square`, `villa`, `press`, `gate`, `refuge`, `crypt`, `road`), both for book `relics-lost-god` on page `chicago`. Book Six chapters chart sites with `$ do chart("chicago.exchange")`.
 - Site ids are unique across the two maps of the book (a test checks this). `sw.js` caches the new page (`VERSION` is `tsb-17`). London and New York still need their maps.
+
+### Session 62 notes (Book Six, chapters 1 and 2)
+
+- Chapters `b6c01` and `b6c02` are in `content/relics-lost-god/` (`ch01.tsb`, `ch02.tsb`), about 13,000 words together. The manifest entry for Book Six lists them and is `"incomplete": true` until the book is finished.
+- Chapter 1 is the waking in London or on the hill, voiced by the business lead (the desk is `b6.lead_desk`; the London firm takes several answers, `b6.london`), the report, one night phase of three actions out of four (the books and the village letter, the new world, the household and the family's gifts, the letters from the west) and a dawn where he chooses his passage. It ends with `rest()` and `=> next`. Chapter 2 is the crossing, the landing in Chicago, a hunger scene that only runs if `must_feed()`, introductions by the lead (or the keeper Dora Valer), one night phase of three actions out of four (the Exchange and its ventures, a first walk, a roof for the family, the card from the lake shore) and a dawn with a fixed closing scene.
+- New decision flags (`b6.` prefix, registered): `b6.trouble`, `b6.lead_desk`, `b6.london`, `b6.village`, `b6.first_feed`, `b6.books`, `b6.street`, `b6.circle`, `b6.crane`, `b6.passage` (chapter 1) and `b6.dock`, `b6.cab`, `b6.exchange`, `b6.walk`, `b6.haven`, `b6.call`, `b6.coin` (chapter 2). `b6.circle` says whether the coven (or a keeper) crosses with him, follows or stays. `b6.lead_desk`, `b6.first_feed`, `b6.circle`, `b6.crane`, `b6.walk`, `b6.haven`, `b6.call` and `b6.coin` are the ones later chapters should read first.
+- Content: the Collis name for Book Six is Collins Exchange (`content/rules.json`) and the hero's alias is Mr. Collins; two new Chicago ventures, `chicago.radio` and `chicago.motorcars`, offered in chapter 2 in a loop with the existing ones so several can be taken (the banks wait for the crash); two new Collesanto buildings, `paved_road` and `cooperative`; five new people (Dora Valer, Cordelia Moten, Marcel Prosper, Mrs. Pell, Mr. Ames); five new codex entries. No engine change, schema or migration.
+- The coven fronts both chapters. Names are always checked with `in_circle()`; `npm run coven-names` is clean for the new files. Chapter 2 charts `chicago.valere`, `chicago.exchange`, `chicago.bronzeville`, `chicago.pilsen`, `chicago.yards`, `chicago.haven`, `chicago.tower`, `chicago.depot` and `chicago.goldcoast` as the player reaches them.
+- Tests: `tests/book6.test.js` plays both chapters from every kind of wake report, hungry and fed, with and without a coven, takes every recorded choice, and checks the venture loop and the family in the room.
+- Sessions 60 and 61 (branches `session-60` and `session-61`) were not merged when this session started, so the session 62 branch contains both. Merge them in the usual order.
+- Plans are in `SPOILERS/relics-lost-god.md`.
+

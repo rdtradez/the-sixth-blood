@@ -8,7 +8,7 @@
         "blood-and-gold": "Signor del Colle",
         "crown-of-ashes": "Monsieur Colline",
         "house-divided": "Monsieur Colline",
-        "whitechapel-hunt": "Mr. Collins"
+        "whitechapel-hunt": "Mr. Collins", "relics-lost-god": "Mr. Collins"
       },
       "surnames": {
         "burning-city": "Valerius",
@@ -559,6 +559,36 @@
       "name": "Maggie Tuck",
       "title": "A Flower Seller",
       "bio": "A nineteen year old flower seller from Wentworth Street, turned in a panic and left to run, who only wanted to be warm."
+    },
+    "dora": {
+      "gender": "f",
+      "name": "Dora Valer",
+      "title": "Of the keeper house, Near North Side",
+      "bio": "A brisk, square, dark woman of thirty, a lawyer's secretary by day, who has kept the Valer name in Chicago since her grandfather brought it over on a ship. She writes a plain, quick hand and never wastes a sentence on the weather."
+    },
+    "cordelia": {
+      "gender": "f",
+      "name": "Cordelia Moten",
+      "title": "A teacher of Bronzeville",
+      "bio": "Honorine Armand's great niece, who came north from the Tremé in a railway coach in the Great Migration and now teaches school on the South Side. She remembers a story about a man who paid for a roof."
+    },
+    "marcel": {
+      "gender": "m",
+      "name": "Marcel Prosper",
+      "title": "A clarinettist",
+      "bio": "Philomène's great grandson, a thin quick young man out of New Orleans who plays every night in a South Side cabaret and sleeps through every morning."
+    },
+    "pell": {
+      "gender": "f",
+      "name": "Mrs. Cornelia Pell",
+      "title": "Of the lake shore house",
+      "bio": "A silver haired lady of old Chicago money, a patron of hospitals and orchestras, who has run the lake shore for longer than the lake shore has had a name."
+    },
+    "ames": {
+      "gender": "m",
+      "name": "Mr. Ames",
+      "title": "Mr. Crane's man in Chicago",
+      "bio": "A smooth, pale, immaculate man in a gray suit who smiles at the right moments and has never been seen to eat."
     }
   }
 }
