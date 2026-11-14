@@ -4,7 +4,7 @@
 @chapter b3c02
 @title The House in the Rue Saint-Jacques
 @book crown-of-ashes
-@version 1
+@version 2
 
 # start
 ## The road north
@@ -220,18 +220,25 @@ She is very quick. She lays it out in twenty minutes: the presses, which are six
 "I have worked it out," she says, "for fun. I did not suppose that there would be a reason."
 ?if can_invest("paris.printing") or can_invest("paris.wine")
   :the_venture
-  * Put the money of the house into the presses, and make them the best in Paris ?if can_invest("paris.printing")
+  * Put the money of the house into the presses, and make them the best in Paris [once] ?if can_invest("paris.printing")
     $ do invest("paris.printing")
-    $ b3.venture = "printing"
+    ?if b3.venture == "none"
+      $ b3.venture = "printing"
+    ?end
     $ bond.adelaide += 2
     She does not say anything. She turns the second ledger face up and writes a line in it, with her tongue between her teeth. It is a plan for a seventh press, a new house, a bindery, and a stock of Dutch type, and it takes up eleven pages, and it is, you find, perfectly sound. "I thought that you would say that," she says. "I only hoped that you would say it before the spring."
-  * Put the money into the wine, which is quiet, and sells in any weather ?if can_invest("paris.wine")
+    -> :the_venture
+  * Put the money into the wine, which is quiet, and sells in any weather [once] ?if can_invest("paris.wine")
     $ do invest("paris.wine")
-    $ b3.venture = "wine"
+    ?if b3.venture == "none"
+      $ b3.venture = "wine"
+    ?end
     $ secrecy += 1
     She writes it down in a very flat hand. It is, she says, a good choice. It is a great deal safer than printing, and a great deal duller, and she will see to it that a cousin in Burgundy is told. You have the impression that you have disappointed her a little, and that she thinks the better of you for it.
-  * Put nothing in, yet. Wait, and look
-    $ b3.venture = "none"
+    -> :the_venture
+  * That is enough for now ?if b3.venture != "none"
+    She closes the second ledger, and turns the key, and says that it is a good beginning.
+  * Put nothing in, yet. Wait, and look ?if b3.venture == "none"
     $ cunning_brutal -= 1
     She nods, and says, as one says a thing that has been agreed, that it is only a fortnight. You have the distinct feeling that a fortnight is, in her mind, about as long as a decade is in yours.
 ?else

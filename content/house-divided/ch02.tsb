@@ -6,7 +6,7 @@
 @chapter b4c02
 @title The Levee
 @book house-divided
-@version 2
+@version 3
 
 # start
 ## Forty three days
@@ -233,68 +233,59 @@ Aurélien's partner, a heavy gentleman with a bad leg named Monsieur Rochefort, 
 There is a bank, which pays eight. There are the steamboats, which pay nine, and pay it in a way that makes a man sleep soundly. There is sugar, which pays six, and which is, he adds, in a lower voice, the only one of the lot that a man cannot do without having a plantation. There is a plan, on the books, for a school for freed families, which Monsieur Rochefort mentions with a certain apologetic reluctance, as a thing that a man does on his deathbed. And there is cotton.
 "Cotton," says Rochefort, "pays fifteen. It is the great fortune of the age. It is also," and here he looks, with a certain delicacy, at the floor, "the one in which a man must not look at what he is buying."
 :the_venture
-* Put the money into steamboats, and the river
-  $ b4.venture = "steamboats"
-  ?if can_invest("nola.steamboats")
-    $ do invest("nola.steamboats")
-    $ standing += 1
-    It is a good thing, and a plain one. Five boats, and a half share in a sixth, and a name on the side of a paddle box in red letters a foot high: the *Aurélie*, and the *Marguerite*, and the *Colline*. They go up as far as Cairo, and down as far as the Balize, and carry whatever is put in them. You do not think about what that is.
-  ?else
-    $ b4.venture = "none"
-    You do not have, quite, the money that the thing wants, and Rochefort says that it is very sensible to wait.
+* Put the money into steamboats, and the river [once] ?if can_invest("nola.steamboats")
+  $ do invest("nola.steamboats")
+  ?if b4.venture == "none"
+    $ b4.venture = "steamboats"
   ?end
-* Put it into the bank, and take the interest
-  $ b4.venture = "banking"
-  ?if can_invest("nola.banking")
-    $ do invest("nola.banking")
-    $ standing += 2
-    $ cunning_brutal += 1
-    It is the thing that you know best, and you are astonished at how much of it is the same. There is a counting room, and a vault, and a clerk with a green shade. You are told in the second hour that nine in ten of the loans on the books are against the security of persons, and you note it, and you note that you were not, in the first hour, surprised.
-  ?else
-    $ b4.venture = "none"
-    You do not have, quite, the money that the thing wants, and Rochefort says that it is very sensible to wait.
+  $ standing += 1
+  It is a good thing, and a plain one. Five boats, and a half share in a sixth, and a name on the side of a paddle box in red letters a foot high: the *Aurélie*, and the *Marguerite*, and the *Colline*. They go up as far as Cairo, and down as far as the Balize, and carry whatever is put in them. You do not think about what that is.
+  -> :the_venture
+* Put it into the bank, and take the interest [once] ?if can_invest("nola.banking")
+  $ do invest("nola.banking")
+  ?if b4.venture == "none"
+    $ b4.venture = "banking"
   ?end
-* Take a share in the sugar, on the old plan
-  $ b4.venture = "sugar"
-  ?if can_invest("nola.sugar")
-    $ do invest("nola.sugar")
-    $ humanity -= 2
-    $ standing += 1
-    He is quite right. It is the one of the lot that is, by nature, a thing for the plantation. You sign, and the ink dries, and you have bought a share in a mill. You tell yourself that a mill is a mill. You tell yourself that a mill is a great deal better than a field, and that you will see to the rest. You have heard that voice before. It is a good voice, and it is always, in the end, very wrong.
-  ?else
-    $ b4.venture = "none"
-    You do not have, quite, the money that the thing wants, and Rochefort says that it is very sensible to wait.
+  $ standing += 2
+  $ cunning_brutal += 1
+  It is the thing that you know best, and you are astonished at how much of it is the same. There is a counting room, and a vault, and a clerk with a green shade. You are told in the second hour that nine in ten of the loans on the books are against the security of persons, and you note it, and you note that you were not, in the first hour, surprised.
+  -> :the_venture
+* Take a share in the sugar, on the old plan [once] ?if can_invest("nola.sugar")
+  $ do invest("nola.sugar")
+  ?if b4.venture == "none"
+    $ b4.venture = "sugar"
   ?end
-* Buy land, and found a school for the freed families, which will pay almost nothing
-  $ b4.venture = "schools"
-  ?if can_invest("nola.schools")
-    $ do invest("nola.schools")
-    $ humanity += 3
-    $ standing -= 2
-    $ do chart("neworleans.school")
-    Rochefort is so surprised that he takes his spectacles off. He says that it is the first time in the history of the firm. He says it a second time, with feeling. There is a lot, in the Faubourg Tremé, on a street of small houses, with a long low building on it that was once a bakery. It is not a great thing. It is not even a good investment. It is, however, a thing that a man could look at, in a hundred years, and be able to say what it was for.
-  ?else
-    $ b4.venture = "none"
-    You do not have, quite, the money that the thing wants, and Rochefort says that it is very sensible to wait.
+  $ humanity -= 2
+  $ standing += 1
+  He is quite right. It is the one of the lot that is, by nature, a thing for the plantation. You sign, and the ink dries, and you have bought a share in a mill. You tell yourself that a mill is a mill. You tell yourself that a mill is a great deal better than a field, and that you will see to the rest. You have heard that voice before. It is a good voice, and it is always, in the end, very wrong.
+  -> :the_venture
+* Buy land, and found a school for the freed families, which will pay almost nothing [once] ?if can_invest("nola.schools")
+  $ do invest("nola.schools")
+  ?if b4.venture == "none"
+    $ b4.venture = "schools"
   ?end
-* Take the cotton, which pays the most, and do not look
-  $ b4.venture = "cotton"
-  ?if can_invest("nola.cotton")
-    $ do invest("nola.cotton")
-    $ do discover("the_cotton_economy")
-    $ cunning_brutal += 3
-    $ velati_regard -= 2
-    $ do earn(4)
-    It is signed in a minute. It is quite the easiest thing that you have ever done. The money begins, at once, to be made: you can feel it, in the room, like a pressure change. A clerk shakes your hand. Rochefort, you notice, does not. You are, in the course of an evening, the owner of a number of things which you will not be able to see, in a place that you will not go, and every one of them is a person.
-  ?else
-    $ b4.venture = "none"
-    You do not have, quite, the money that the thing wants, and Rochefort says that it is very sensible to wait.
+  $ humanity += 3
+  $ standing -= 2
+  $ do chart("neworleans.school")
+  Rochefort is so surprised that he takes his spectacles off. He says that it is the first time in the history of the firm. He says it a second time, with feeling. There is a lot, in the Faubourg Tremé, on a street of small houses, with a long low building on it that was once a bakery. It is not a great thing. It is not even a good investment. It is, however, a thing that a man could look at, in a hundred years, and be able to say what it was for.
+  -> :the_venture
+* Take the cotton, which pays the most, and do not look [once] ?if can_invest("nola.cotton")
+  $ do invest("nola.cotton")
+  ?if b4.venture == "none"
+    $ b4.venture = "cotton"
   ?end
-* Say that you will think about it
-  $ b4.venture = "none"
+  $ do discover("the_cotton_economy")
+  $ cunning_brutal += 3
+  $ velati_regard -= 2
+  $ do earn(4)
+  It is signed in a minute. It is quite the easiest thing that you have ever done. The money begins, at once, to be made: you can feel it, in the room, like a pressure change. A clerk shakes your hand. Rochefort, you notice, does not. You are, in the course of an evening, the owner of a number of things which you will not be able to see, in a place that you will not go, and every one of them is a person.
+  -> :the_venture
+* Say that you will think about it ?if b4.venture == "none"
   $ cunning_brutal -= 1
   Rochefort is gratified, in the manner of a man who has been spared an embarrassment, and says that the Exchange will be there in the morning. You find that you believe him. It is a hall that has not moved for a century, and does not intend to.
-?if _lead != "" and ((b4.lead_pick == "boats" and b4.venture == "steamboats") or (b4.lead_pick == "bank" and b4.venture == "banking") or (b4.lead_pick == "school" and b4.venture == "schools"))
+* That is enough for today ?if b4.venture != "none"
+  Rochefort closes the book with the air of a man who has had a good morning, and says that the Exchange will be there in the morning, and that so, he trusts, will you.
+?if _lead != "" and ((b4.lead_pick == "boats" and owns("nola.steamboats")) or (b4.lead_pick == "bank" and owns("nola.banking")) or (b4.lead_pick == "school" and owns("nola.schools")))
   Rochefort slides a paper across the table without being asked. It has been drawn up since the autumn, on {name(_lead)}'s word, with the terms already softened by eleven letters of good conduct. It is, he says, a pleasure to be asked for what has already been prepared.
   $ standing += 1
   $ do earn(1)
