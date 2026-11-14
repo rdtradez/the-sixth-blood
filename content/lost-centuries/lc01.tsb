@@ -4,7 +4,7 @@
 @chapter lc01
 @title The Salarian Gate
 @book burning-city
-@version 1
+@version 2
 
 # start
 ## Up from the dark
@@ -195,28 +195,47 @@ There is a Gothic captain on the near bank of the gate, in a mail shirt that has
 $ do meet("wisand")
 It is the most Christian thing that you will see all night, and it is done by a man who does not know what the word means.
 You have a few minutes before the first of the soldiers is through the gate, and there is more than one thing that you could do with them.
-* Watch it, and learn what is to be learned
-  $ lc.gate = "watched"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Watch it, and learn what is to be learned [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ lc.gate = "watched"
+    $ _mp_rank = 1
+  ?end
   $ cunning_brutal -= 1
   You stay on the wall and you watch the Goths come in, in their hundreds, through the dark, with their horses and their cooking pots and their stolen torches, and you learn what a sack looks like at the beginning, before it has a name. It is not a rush. It is not a flood. It is a tired army, in a strange city, doing what it was told it might, in a very ordinary way, and some of it is quite bad, and some of it is very bad, and some of it is a man in a mail shirt who stops to hold a door for a woman with a child.
   You count the doors. You count the lamps. It is not heroism; it is bookkeeping. It is, you find, what you have.
-* Take people in: the old vaults, the Emporium cellars, anywhere that has a good door
-  $ lc.gate = "sheltered"
+* Take people in: the old vaults, the Emporium cellars, anywhere that has a good door [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ lc.gate = "sheltered"
+    $ _mp_rank = 3
+  ?end
   $ humanity += 2
   $ standing += 1
   You go down off the wall and into the lane under the Sallustian hill, and you start knocking on doors. It is a good deal harder than it sounds. They have heard the gate, and they are afraid, and a stranger knocking at midnight, in the dark, saying *Come with me* is the oldest trick in the world. You say it anyway. You say it forty times. You get, in the end, nineteen people: three families, an old priest, a boy with a goat, and a very fat man who insists on bringing his lyre. You take them by lane after lane to a cellar under the river wall, and shut them in, and tell them not to open the door to anyone until the sun is well up.
   "Who shall we say?" says the old priest, at the last, in the dark, with his hand on the bar.
   "A neighbour," you say. It is not at all a lie.
-* Go down among it, and feed
-  $ lc.gate = "fed"
+* Go down among it, and feed [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ lc.gate = "fed"
+    $ _mp_rank = 2
+  ?end
   $ do feed("human")
   $ humanity -= 3
   $ cunning_brutal += 3
   $ _fed = 1
   You are, you reflect, very hungry, and it is the first night in three hundred years that nobody will count. It is a dreadful thing to know. It is a worse thing to find that it is true. You go down the lane behind the gate, where the first of the houses are burning, and you find what a sack leaves behind: the dying, in doorways, in ones and twos, with nobody coming. You do not take the living. You do not kill. You kneel in the ash and you take what is going to be taken anyway, from the ones who are past it, and you say nothing at all. It is not murder. It is not mercy. It is the plain and terrible thing that it is.
   It is also, you find, the first time in a long while that you have been entirely full. You do not at all enjoy it, and you remember it very clearly.
-* Stand at the head of the lane, and stop a few of them
-  $ lc.gate = "fought"
+* Stand at the head of the lane, and stop a few of them [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 4
+    $ lc.gate = "fought"
+    $ _mp_rank = 4
+  ?end
   $ do kill("human")
   $ do witness(1)
   $ standing += 1
@@ -224,6 +243,10 @@ You have a few minutes before the first of the soldiers is through the gate, and
   There is a little knot of soldiers, perhaps eight, with a ram, at the door of a house with a lamp in the window. It is not a church. They have, you gather, been told that it is a rich man's house. It is, in fact, a baker's, and the baker is behind the door, and his wife is behind the baker, and a small girl with a bread peel is behind her.
   You do not fight well. You have not done it in three hundred years. You do it, instead, very quickly. When it is over, there are three of them on the ground, and the rest have run, and the baker opens the door and sees you, standing in the lane with their blood on you, in the light of a burning house, with a face like a very old saint. He does not say anything. He shuts the door.
   It is the right thing to have done. It will be, you think, in a rather peculiar way, the thing for which you are remembered.
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 ~> gate_end
 <~
 
@@ -288,8 +311,15 @@ $ do meet("valeria")
   A tall woman with a stole, who has Aelia's way of standing and Felix's nose, looks at you across the torches. She has never seen you in her life. She is a Valeria of the hill, she says, and she is not at all sure who you are, or by what right, and there are Goths on the Salarian road. She says it in the tone of a person who has been awake for two days.
 ?end
 The Goths have sent a man ahead, a young one, to the square, with a message and a very bad temper. The village does not know what to do. It is a thing that you are able to do something about.
-* Meet the Goths on the road, and make them go round
-  $ lc.hill = "defended"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_2
+* Meet the Goths on the road, and make them go round [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ lc.hill = "defended"
+    $ _mp_rank = 3
+  ?end
   $ do fight("human", 2)
   $ cunning_brutal += 2
   $ standing += 1
@@ -300,20 +330,32 @@ The Goths have sent a man ahead, a young one, to the square, with a message and 
   ?else
     One of them cuts you across the shoulder before the rest decide to go round. It heals in a quarter of an hour. It is a poor thing to have done.
   ?end
-* Pay them off with grain, and the village's goodwill
-  $ lc.hill = "parleyed"
+* Pay them off with grain, and the village's goodwill [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ lc.hill = "parleyed"
+    $ _mp_rank = 2
+  ?end
   $ do earn(-5)
   $ do send_home(5)
   $ humanity += 1
   It is a long and awkward business, in the square, with the young Goth sitting on a mounting block with a mug of the thin red wine that Valeria's wife has brought him, and Valeria translating, in a mixture of Latin and a kind of sign language. You name a number of sacks. He names a larger number. In the end it is a great deal less than the village would have lost, and a great deal more than it can afford. You write a draft on the Merchant house, in the torchlight, on a sheet of the parish's best paper, and he reads it, with his lips moving, and puts it in his boot.
   It will be redeemed, in a manner of speaking. It will not be by Goths.
-* Hide them: the cellar, the old quarry, the sheep paths
-  $ lc.hill = "hidden"
+* Hide them: the cellar, the old quarry, the sheep paths [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ lc.hill = "hidden"
+    $ _mp_rank = 1
+  ?end
   $ do send_home(3)
   $ standing += 1
   It is not a thing that the hill has done for three hundred years, and it knows exactly how. There is a plan. It has been written down, and handed down, in a family, with the stole and the lamp: the old cellar for the old, the quarry for the young, the sheep paths for the men with swords. By dawn the village is empty. It is, you reflect, a good plan, and it is not a thing that a village should have to know.
   The Goths find a hill with nobody on it, and a number of cold hearths. They take what they can. They burn one barn, out of temper, and the roof of one house. They go.
   $ do village_harm(4)
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_2
+-> :mp_more_2
+:mp_done_2
 ~> hill_end
 <~
 

@@ -1,10 +1,11 @@
 // Book Four, Chapter 20 (session 49). The long quiet: the last night in New Orleans, the standing charge to the family, the things to leave behind, and the sleep to London.
 // No phases. Calls rest() once and then sleeps the whole of new_orleans_to_london. Closes with => next, which ends the book (the Velati journal is written and Book Five unlocks).
 // Reads b4.seat, b4.pledge, b4.hand, b4.answer, b4.stand, b4.institute, b4.haven, b4.circle, b4.coven_home and the circle. Sets b4.last_night, b4.charge and b4.letter. The engine logs the sleep itself (steward.house-divided, orders.house-divided, sleep.house-divided).
+// The invest scene offers the eight options of the new_orleans_to_london gap (content/sleep.json); the player may sow in as many as they like. Book Five's opening can read wake_invest("cleveland_oil") and the rest.
 // What the sleep did is not shown here: Book Five's opening reads wake().
 @chapter b4c20
 @title The Long Quiet
-@version 2
+@version 3
 
 # start
 ## The spring of 1867
@@ -94,11 +95,12 @@ The days are drawing out, and the nights are not long, and you have until the da
 
 # table
 ## The things to leave behind
-You have a sheet of the counting house's paper, and a pen, and a candle. It is the most important thing that you will write in this century, and it is a list. It has five lines. A place, a person, an order, a guard, and a charge to the family. There is a sixth, which does not have a price.
+You have a sheet of the counting house's paper, and a pen, and a candle. It is the most important thing that you will write in this century, and it is a list. It has six lines. A place, a person, an order, the new ventures that might be sown, a guard, and a charge to the family. There is a seventh, which does not have a price.
 You take them one by one.
 ~> place
 ~> steward
 ~> orders
+~> invest
 ~> guard
 ?if coven_size() > 0 and b4.circle != "stay"
   ~> charge
@@ -187,6 +189,42 @@ There is the matter of the order. It is what a steward is to do with a fortune t
   $ velati_regard -= 2
   You write it. It takes a long time, and you do not enjoy the writing. It is the order for the convict lease, and the war debts, and the sugar, and the whole quiet trade in the labor of men whom nobody has yet found a legal word for. It is the order that gives the greatest return and will have a great deal of blood on it. You tell yourself that it is only money. You are quite aware that you have heard this before, in the voices of a number of men whom you did not like, in a long room, on the Rue Royale, over a very good dinner.
 <~
+
+# invest
+## What is to be sown
+There is a thing that you did not expect to find on the paper. It is that the world, in the last two years, has begun to make new fortunes at a speed that you have not seen since Florence. The war has made the North a great machine, and the machine has not been turned off. There are men in Cleveland and New York and Pittsburgh, most of them under forty, who are starting something, and the house's agents in the North write that a share taken now, in the first years, may be worth a house by the time that you wake. Most of it will fail. Some of it will not. It is a long sleep, and you may sow as widely as you like.
+:invest
+* Put a share into an oil refiner in Cleveland, a sober young man who keeps his books in his own hand [once]
+  $ do sleep_invest("cleveland_oil")
+  The agent says that nobody expects very much of it, and that the young man does not drink, and does not gamble, and writes down every cent. You remember that you have been told the same thing, in Florence, about a wool merchant. You put your name to a small piece of paper and are surprised to find that you are pleased.
+* Back a new banking house in New York, with an old London name behind it and a great deal of railway paper in the safe [once]
+  $ do sleep_invest("new_york_bank")
+  $ standing += 1
+  It is a house that will be asked, in time, to lend to governments. The partner who receives you is a very large man with a very red nose, who says little and who looks at your signature for a long time, as if it were a coin that he was thinking of biting. You are given a glass of port. It is, you realise, the first time that anyone has looked at you in this fashion since Cosimo.
+* Take a share in a Pittsburgh steelmaker, a Scotsman with a great many bridges and a great deal of conscience, for a man who has none [once]
+  $ do sleep_invest("pittsburgh_steel")
+  The Scotsman is said to give away libraries. He is also said to pay his men a good deal less than a library costs. You decide that it is not your place to find out which of these is the truth, and sign, and are not at all sure that this is a thing you ought to have decided.
+* Buy a part of the sleeping cars that are being built for the long railways, for those who would like to cross a continent in a bed [once]
+  $ do sleep_invest("palace_cars")
+  It is not a romantic choice, and it is a very sound one. You like it a good deal. It is the first time in your life that you have put money into a thing for the reason that you would have liked to ride in it.
+* Buy land and brick in Chicago, where the fire has taken the whole city and the whole city is being built again, higher [once]
+  $ do sleep_invest("chicago_rebuilt")
+  $ standing += 1
+  It is a long way up a long lake, and it smells of wet lumber and cattle. You have never been there. The agent says that it is the only city in the country where a man can lose everything in October and be a landlord by the spring. You do not know why you find that so moving.
+* Put money into a speaking wire, and the patents on it, from a professor who is rather deaf [once]
+  $ do sleep_invest("telephone_patents")
+  It is a thing that does not seem possible. You are shown a box, and a wire, and a boy at the other end of a room, and you hear a voice come out of it that says your name wrongly. The agent says that this is a great advance on the telegraph. You say that you are inclined to agree.
+* Buy the bonds for the Northern Pacific, which a famous banker is selling to everyone with a pocket, and which are the safest thing in the country, he says [once]
+  $ do sleep_invest("northern_pacific")
+  The banker is a man of great energy and great teeth. He is not in the least a liar. He is only a man who has been right for so long that he has stopped being able to imagine what it would be to be wrong. A clerk of the house has written in the margin, in very small letters: *Please do not.* You sign it anyway. You are not sure why.
+* Hire out guards for the mines and the mills, and let the companies build the towns where the men must live and buy [once]
+  $ do sleep_invest("company_towns")
+  $ cunning_brutal += 1
+  $ velati_regard -= 1
+  It pays very well. It pays well because the men who are to be guarded are not in a position to say what they think of it, and the company is, in the most literal sense, the only shop. You do not take pleasure in it. You do not ask any questions. These are, you recall, the two things that you promised yourself you would never do at the same time.
+* That will do
+  <~
+-> :invest
 
 # guard
 ## What stands between

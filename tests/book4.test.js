@@ -25,7 +25,7 @@ async function drive(game, frame, wants = [], stopAt = null) {
   for (let i = 0; i < 3000 && frame.wait !== 'book_end' && !(stopAt && game.state.chapter === stopAt); i++) {
     pages.push(...texts(frame));
     if (frame.wait === 'choices') {
-      let at = 0;
+      let at = Math.max(0, frame.choices.findIndex((c) => /^(That is the whole of it|That is the nine boats settled)/.test(c.text)));
       for (const want of wants) {
         const hit = frame.choices.findIndex((c) => want.test(c.text));
         if (hit >= 0) { at = hit; break; }
@@ -436,7 +436,7 @@ test('chapter 6 takes each choice and records it', async () => {
   ];
   for (const [flag, branches, night] of sets) {
     for (const [value, re] of branches) {
-      const run = await play('b4c06', {}, { ...START, wealth: 400000, ...CH5, 'b4.shelter': 'hid' }, [night, re, /That is all/], { sys: coven });
+      const run = await play('b4c06', {}, { ...START, wealth: 400000, ...CH5, 'b4.shelter': 'hid' }, [night, re, /nine boats settled/, /That is all/], { sys: coven });
       assert.equal(run.vars[flag], value, `${flag} ${value}`);
       clean(run);
     }
@@ -1114,3 +1114,38 @@ for (let n = 7; n <= 20; n++) {
     clean(run);
   });
 }
+
+test('chapter 20 offers the post war ventures, lets the player sow in several and carries them to the wake report', async () => {
+  const none = await play('b4c20', {}, { ...START, ...CH20 }, [/That will do/, /That will do/], { sys: coven });
+  assert.equal(none.frame.wait, 'book_end');
+  assert.deepEqual(none.game.state.sys.sleep.wake.invest, []);
+  clean(none);
+  const some = await play('b4c20', {}, { ...START, ...CH20 }, [/oil refiner in Cleveland/, /new banking house in New York/, /Buy land and brick in Chicago/, /That will do/], { sys: coven });
+  assert.equal(some.frame.wait, 'book_end');
+  assert.deepEqual(some.game.state.sys.sleep.wake.invest, ['cleveland_oil', 'new_york_bank', 'chicago_rebuilt']);
+  clean(some);
+  const all = await play('b4c20', {}, { ...START, ...CH20 }, [/oil refiner in Cleveland/, /new banking house/, /Pittsburgh steelmaker/, /sleeping cars/, /Buy land and brick in Chicago/, /speaking wire/, /Northern Pacific/, /Hire out guards/, /That will do/], { sys: coven });
+  assert.equal(all.game.state.sys.sleep.wake.invest.length, 8);
+  clean(all);
+});
+
+test('chapter 6 lets the nine boats do more than one thing', async () => {
+  const run = await play('b4c06', {}, { ...START, wealth: 400000, ...CH5, 'b4.shelter': 'hid' }, [/nine idle boats/, /Lay them up/, /Run the Passes/, /carry people north/, /nine boats settled/, /That is all/], { sys: coven });
+  assert.equal(run.vars['b4.blockade'], 'hid');
+  assert.match(run.text, /Brault's boat, the \*Colline\*/);
+  assert.match(run.text, /Three of your boats are gone/);
+  clean(run);
+  const ranOnly = await play('b4c06', {}, { ...START, wealth: 400000, ...CH5, 'b4.shelter': 'hid' }, [/nine idle boats/, /Run the Passes/, /nine boats settled/, /That is all/], { sys: coven });
+  assert.equal(ranOnly.vars['b4.blockade'], 'ran');
+});
+
+test('choices that can be combined take several picks, and the most committed one is recorded', async () => {
+  const camp = await play('b4c08', {}, { ...START, wealth: 400000, ...CH8, 'b4.exodus': 'kept' }, [/Camp Parapet, where the people/, /Fund the camp/, /Deed the land/, /That is the whole of it/, /That will do/], { sys: coven });
+  assert.equal(camp.vars['b4.camp'], 'deeded');
+  clean(camp);
+  const petition = await play('b4c13', {}, { ...START, wealth: 900000, ...CH13, 'b4.defense': 'stood' }, [/Go to the hall in the Trem/, /Sign it, in your own name/, /Fund the delegation/, /That is the whole of it/, /That will do/], { sys: coven });
+  assert.equal(petition.vars['b4.petition'], 'funded');
+  clean(petition);
+  const apart = await play('b4c13', {}, { ...START, wealth: 900000, ...CH13, 'b4.defense': 'stood' }, [/Go to the hall in the Trem/, /Listen from the back/, /That will do/], { sys: coven });
+  assert.equal(apart.vars['b4.petition'], 'apart');
+});

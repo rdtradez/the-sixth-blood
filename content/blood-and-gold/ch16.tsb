@@ -6,7 +6,7 @@
 @chapter b2c16
 @title The Eve
 @book blood-and-gold
-@version 1
+@version 2
 
 # start
 ## Holy Saturday
@@ -81,23 +81,39 @@ The great church is empty. It is the strangest thing that you have seen in it. T
 You walk it slowly, as you walked a camp once, from the west door to the east. It is a very large space and a very simple one. It has a great many pillars. It has a north door and a south door and a door to each of the sacristies, and a stair, behind the choir, to the loft, and a high gallery where nobody ever goes. It has a place, just before the high altar, where a family of the first consequence will kneel at the Elevation, with their backs to the whole of the nave.
 There are very few places in it where a man who knew his business could not be killed, and fewer still where one could not be saved, if the right people stood in the right places, and they were very quick.
 :the_duomo
-* Measure it: the doors, the stair, the loft, and the sacristy that has another door
-  $ b2.duomo = "measured"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Measure it: the doors, the stair, the loft, and the sacristy that has another door [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b2.duomo = "measured"
+    $ _mp_rank = 1
+  ?end
   $ cunning_brutal -= 1
   $ secrecy += 1
   $ standing += 1
   It takes the better part of the morning. You walk the pillars, and count your paces between them, and climb the stair to the loft, where there is a space behind a shutter from which a very good archer, or a person with a very good view, could see the whole of the choir. You go down the second stair, behind the sacristy. It comes out in a courtyard. There is a very small door, very old, which has been oiled.
-* Give the sacristan a florin, and ask him to bar the north door for the Mass
-  $ b2.duomo = "barred"
+* Give the sacristan a florin, and ask him to bar the north door for the Mass [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b2.duomo = "barred"
+    $ _mp_rank = 2
+  ?end
   $ do earn(-2)
   $ bond.bartolo += 1
   $ secrecy -= 1
   The sacristan weighs the florin in his palm like a man with a doubtful egg. He says that it is irregular. He says that it is against the custom. He says that he has never in forty years been asked, and that a man who was prepared to pay a florin for the door to be barred would be very likely prepared to pay two. You pay two. He says, with great dignity, that he will see what can be done, and puts them both away.
-* Kneel in the Lady Chapel, by the nun, for an hour, and leave the church to God
+* Kneel in the Lady Chapel, by the nun, for an hour, and leave the church to God ?if _mp_n == 0
   $ b2.duomo = "prayed"
   $ humanity += 2
   $ secrecy += 1
   It is not a thing that you have done for a very long time. You kneel, in the cold, on the stone, in a church which is full of the particular silence of a place that has had a great many prayers said in it, and you do not say anything at all. At the end of the hour the nun gets up, and looks at you, and says in a very small flat voice that she has seen you here before. You have never been in this church. She goes away, and you do not follow her.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 <~
 
 # nanni

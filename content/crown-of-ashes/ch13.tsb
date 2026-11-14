@@ -4,7 +4,7 @@
 @chapter b3c13
 @title The Dark of the Moon
 @book crown-of-ashes
-@version 1
+@version 2
 
 # start
 ## The last of July
@@ -308,8 +308,15 @@ It is a damp, mild, rather ordinary night, with a light rain in it, and a smell 
 There is a letter on the table in the counting room. It is from the Merchant house in the rue Vivienne, and it is cordial. It says that the Army of the North will want, by midsummer, forty thousand pairs of shoes, and flour for sixty thousand men, and a great many horses, and that the Minister of War has not got any of it, and has not got the money to pay for it, and has been told, by a person in the Treasury, to ask the houses of the city. It says that Collis has been named. It says that the terms are not what might be wished, and that the paper in which they are to be paid is the assignat, which is a thing that is now worth, in the Bourse, a good deal less than it says. It says that the Merchant house in Amsterdam has taken the liberty of thinking of a second way.
 Adélaïde has read it. She has marked the margin, in pencil, with two small crosses. She says that she is not able to say which of the two is the more disagreeable.
 :the_war
-* Take the contract for the Army of the North, and be paid in paper
-  $ b3.war = "contract"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Take the contract for the Army of the North, and be paid in paper [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b3.war = "contract"
+    $ _mp_rank = 2
+  ?end
   $ standing += 2
   $ humanity -= 2
   $ cunning_brutal += 1
@@ -318,8 +325,12 @@ Adélaïde has read it. She has marked the margin, in pencil, with two small cro
   $ do chart("paris.counting")
   $ do discover("the_declaration_of_war")
   You say that you will do it. You say it at the desk, in the lamplight, with a good deal less conviction than you show. It is a good contract. It will clothe, and feed, and shoe, a very great number of persons who are going to die, and it will pay, in a currency that is going to die with them, a profit that is very nearly real. Adélaïde writes the order, and sands it, and does not look up. She says that she will go to Rouen herself, for the leather. She says that it is a very fine thing to be useful, and that she has been told so, in the past, by a great many tailors.
-* Put the house's reserves into gold, and send them to Amsterdam
-  $ b3.war = "gold"
+* Put the house's reserves into gold, and send them to Amsterdam [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b3.war = "gold"
+    $ _mp_rank = 1
+  ?end
   $ secrecy += 1
   $ cunning_brutal += 2
   $ standing -= 1
@@ -328,7 +339,7 @@ Adélaïde has read it. She has marked the margin, in pencil, with two small cro
   $ do chart("paris.counting")
   $ do discover("the_declaration_of_war")
   It is a matter of a night, and four letters, and a certain amount of arranging. You turn the paper into gold, at a loss, which the Bourse enjoys, and the gold into bills on Amsterdam, and the bills into a very small packet that goes out of the city at dawn in a bookseller's cart, in a bale of Voltaire. It is, as the Merchant house says, a second way. It is not, you reflect, a way that anybody would be proud of. Adélaïde, when she hears of it, says that it is a good thing that somebody in the house has the sense to be ashamed.
-* Leave Collis out of it, and let the war be somebody else's
+* Leave Collis out of it, and let the war be somebody else's ?if _mp_n == 0
   $ b3.war = "none"
   $ humanity += 1
   $ standing -= 1
@@ -337,6 +348,11 @@ Adélaïde has read it. She has marked the margin, in pencil, with two small cro
   $ do chart("paris.counting")
   $ do discover("the_declaration_of_war")
   You say that you will not. You put the letter in the drawer, under the second ledger, with the Section's files, if there are any, and the Prince's card. It is a very small gesture, in the matter of forty thousand pairs of shoes, and it costs about what it ought. Étienne, who has been brought down in a chair, and sits at the foot of the table in a shawl, says, in a voice like a dry leaf, that in his experience a house is judged by what it declines. He says it to the lamp. Then he says that he is very tired.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 There is a knock at the yard door, at one, a plain knock, three times, the same that the Prince's footman uses. It is Ottaviano. He has no hat, and no coach, and his gray coat is wet through, and he says, with great calm, in the doorway, that he has been sent to say that the hand has moved.
 It was only for a moment. It made one stroke, and stopped. It was a thing like a letter, a single upright, such as one makes at the beginning of a word. He says that the Prince was in the cellar and saw it. He says that he sat down on the floor.
 He says that the Prince does not ask you to come tonight. He says that he thought that you should know.

@@ -4,7 +4,7 @@
 @chapter b3c15
 @title The Second of September
 @book crown-of-ashes
-@version 1
+@version 2
 
 # start
 ## The last of August
@@ -160,8 +160,15 @@ It is the Commune's, and it is a great ugly house with a hundred windows, all li
   You have the file that you kept, the lever, the thin buff folder that Garnier would have burned. It is a thing that has a use. You put it in your coat.
 ?end
 There are five hundred names, on the long list of the Abbaye. There are a hundred and fifty on the list for the rue de Vaugirard. It is a thing that is done very quickly, at a quarter past two, by a very small man at a very big table, who reads them aloud with a pencil.
-* Go by the back stair to the families, and warn them
-  $ b3.arrests = "warned"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Go by the back stair to the families, and warn them [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ b3.arrests = "warned"
+    $ _mp_rank = 3
+  ?end
   $ humanity += 2
   $ secrecy -= 2
   $ standing += 1
@@ -169,8 +176,12 @@ There are five hundred names, on the long list of the Abbaye. There are a hundre
   $ do chart("paris.counting")
   $ do discover("the_second_of_september")
   You copy out eleven names. You go to the houses. It is a thing that takes two hours and the whole of your ingenuity, and a great deal of knocking at doors that open on a chain. You say, to a woman in a nightcap, and to a man with a candle, and to a child in a shirt who is the only one to answer, that it will be well to be out of the house by the morning, and out of the quarter, and out of Paris if there is a way. Some do not believe you. Some of them are, by the morning, gone. It is not very much. It is a thing that you can say that you did.
-* Pay a clerk to strike six names from the list
-  $ b3.arrests = "struck"
+* Pay a clerk to strike six names from the list [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b3.arrests = "struck"
+    $ _mp_rank = 2
+  ?end
   $ do earn(-3)
   $ cunning_brutal += 2
   $ standing += 1
@@ -178,14 +189,22 @@ There are five hundred names, on the long list of the Abbaye. There are a hundre
   $ do chart("paris.counting")
   $ do discover("the_second_of_september")
   It is a matter of a purse, and a flat-faced young man, and a cup of wine at the Café de la Régence, where you are two gentlemen of leisure. He does it neatly. He draws a line through the names with a very ordinary pen, and puts in the margin, in a very clerkly hand, that they have been released on the order of a Section. It is a thing that is done, he says, every day. You do not ask about the other four hundred and ninety.
-* Copy the list, and say nothing of it
-  $ b3.arrests = "kept"
+* Copy the list, and say nothing of it [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b3.arrests = "kept"
+    $ _mp_rank = 1
+  ?end
   $ secrecy += 2
   $ cunning_brutal += 2
   $ humanity -= 1
   $ do chart("paris.counting")
   $ do discover("the_second_of_september")
   It takes you the better part of an hour, in a corner, in a cold light, with a borrowed pen. It is a list of the whole of the prisoners of Paris, with the reason for each. It is the sort of thing that a person who would one day be asked, in the course of a long century, for the names of the dead, would be very glad to have. You put it in your coat. You do not look at the clerks. They do not look at you.
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 <~
 
 # shop

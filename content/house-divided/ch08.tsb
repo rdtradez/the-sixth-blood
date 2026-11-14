@@ -5,7 +5,7 @@
 @chapter b4c08
 @title The Occupation
 @book house-divided
-@version 2
+@version 3
 
 # start
 ## October
@@ -143,27 +143,43 @@ Her brother is behind her, at the edge of the light. He is in a blue coat, a new
   In the dark by a tent post, a girl of fourteen with a very straight back is bandaging a boy's foot. She does not look up. She has, you think, more or less run the camp for a week.
 ?end
 :the_camp
-* Deed the land: the lots on the Lake road, and the sugar land you hold, to the people of the camp, in a form that they can keep
-  $ b4.camp = "deeded"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Deed the land: the lots on the Lake road, and the sugar land you hold, to the people of the camp, in a form that they can keep [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b4.camp = "deeded"
+    $ _mp_rank = 2
+  ?end
   $ humanity += 3
   $ standing -= 2
   $ secrecy -= 2
   $ do earn(-8)
   It takes three weeks, and four lawyers, and a good deal of the Captain's patience, and when it is done there are two hundred and forty acres, in plain lots, on the Lake road and the river, in the names of the people who are living on them, in a book at the Parish Court. It is not a gift. It is a deed. It cannot be taken back by anyone but a court, and the court has, for the first time in a century, a General who will not read the book upside down. Honorine, at the end of it, comes up to you at the edge of the tents, at night, and says nothing at all. She only takes your hand, as if it were a thing that she had been meaning to ask to borrow, and holds it for a long minute, and gives it back.
-* Fund the camp: tents, a doctor, meal, a school, paid for out of the firm's account, so long as the army needs it
-  $ b4.camp = "funded"
+* Fund the camp: tents, a doctor, meal, a school, paid for out of the firm's account, so long as the army needs it [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b4.camp = "funded"
+    $ _mp_rank = 1
+  ?end
   $ humanity += 2
   $ standing += 1
   $ do earn(-4)
   ?if in_circle("hanno")
     It is a plain, large, sensible, boring thing, and is very much what is wanted. Armand's friends find the doctor, and Hanno's books find the meal, and in a week the camp has a long shed with a stove, and a table, and a good clean ward, and a school with a real blackboard, and a number of persons who are, for the first time in some months, in the habit of eating. You do not stay to be thanked. It is a thing you have learned, in the years, that the thing which is wanted is the thing which is least thanked.
   ?end
-* Give them what you have in your purse, tonight, and go back to the city and stay out of it
+* Give them what you have in your purse, tonight, and go back to the city and stay out of it ?if _mp_n == 0
   $ b4.camp = "apart"
   $ secrecy += 1
   $ humanity -= 1
   $ do earn(-1)
   You put the purse in the schoolmistress's hand, and she looks at the weight of it, and at you, and says, "Thank you," in the grave level voice of a person recording a transaction. She does not say that it is not enough. She says only, "We shall remember that someone came." You ride back toward the city in the dark with the sound of the alphabet behind you, one letter after another, like beads on a string.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 $ do discover("the_contraband_camps")
 <~
 

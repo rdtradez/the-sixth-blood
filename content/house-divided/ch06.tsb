@@ -5,12 +5,15 @@
 @chapter b4c06
 @title The Blockade
 @book house-divided
-@version 2
+@version 3
 
 # start
 ## May
 $ b4.thorne = "listened"
 $ b4.blockade = "tied"
+$ _ran = 0
+$ _hid = 0
+$ _boats_n = 0
 $ b4.raid = "watched"
 $ b4.guards = "apart"
 $ do discover("the_blockade")
@@ -127,32 +130,42 @@ It is a thing you can see for yourself, in the lamp. It is not a decision for a 
 ?if b4.shelter == "hid"
   Among them, you notice, with a quiet lift of the heart, there is a girl of fourteen with a very straight back, who has been sent, apparently, by a certain old woman on a certain bayou to look at the boats.
 ?end
+There are nine boats, and nothing says that they must all do the same thing. A boat can be laid up, and another can run, and another can carry people, if you have the stomach and the money for all of it.
 :the_blockade
-* Lay them up, pay the crews a month, and wait for the war to be over
-  $ b4.blockade = "tied"
+* Lay them up, pay the crews a month, and wait for the war to be over [once]
+  $ _boats_n += 1
   $ secrecy += 1
   $ standing += 1
   $ do earn(-4)
   Brault takes it with an air of slightly baffled relief, as a man receives a gift that he had not been prepared to ask for. The crews are paid in the lamplight on the wharf, from a strong box, in gold, and there is a moment of real, incredulous, simple pleasure that you do not at all expect. A man gets up on the rail, and says that the Colline firm is a house to ship in. You do not tell him that it is the only thing you could think of that did not cost somebody's life.
-* Run the Passes: a boat a week, cotton out and gold in, and ask no questions of the cargo
-  $ b4.blockade = "ran"
+* Run the Passes: a boat a week, cotton out and gold in, and ask no questions of the cargo [once]
+  $ _boats_n += 1
+  $ _ran = 1
+  ?if b4.blockade != "hid"
+    $ b4.blockade = "ran"
+  ?end
   $ cunning_brutal += 2
   $ humanity -= 3
   $ standing += 3
   $ do earn(6)
   $ do discover("the_cotton_economy")
   Brault laughs, a short, rusty laugh. "I'll have her out by Thursday," he says. "She's a mud turtle of a boat, but she knows the bar at Pass a l'Outre like her own mother." It is the beginning of a very profitable season. It is a season of fast boats, and dark nights, and a large amount of money. It is a season, too, of cotton bales that came from somewhere, and were picked by somebody, and by the end of it you do not like to look at the columns of the ledger.
-* Put the boats to another use: carry people north by the lakes and the Gulf, before the doors shut
+* Put the boats to another use: carry people north by the lakes and the Gulf, before the doors shut [once]
+  $ _boats_n += 1
   $ b4.blockade = "hid"
+  $ _hid = 1
   $ humanity += 3
   $ secrecy -= 2
   $ standing -= 3
   $ do earn(-5)
   Brault looks at you for a long moment, and takes off his hat, and holds it. "Well, now," he says. "That's a thing I did not expect." It is a business of the dead of the moon, and false papers, and a Spanish captain who has been paid more than he is worth, and, in the end, three boats and a great deal of quiet, and ninety people in the holds who have gone, in the dark, one night in June, a very long way from home. You never learn their names. It is the thing about the whole of it that you are proudest of, and the thing that cost you most.
-?if coven_size() > 0 and b4.circle != "stay" and in_circle("hanno") and member("hanno", "status") == "active"
-  Hanno has come down from the counting house with the books, and stands at your elbow, and says, in the gravest voice that you have ever heard from him, that he has been in three wars of this kind. He says that he has never seen a firm survive one by being clever. He says that the only firms that survive are the ones that, at the end, have something to be forgiven for that they can afford.
-?end
-<~
+* That is the nine boats settled ?if _boats_n > 0
+  Brault puts his hat on, and takes it off again, and says that he will tell the captains. It is, he says, a good deal more than most firms manage in a war, which is to decide what it is for.
+  ?if coven_size() > 0 and b4.circle != "stay" and in_circle("hanno") and member("hanno", "status") == "active"
+    Hanno has come down from the counting house with the books, and stands at your elbow, and says, in the gravest voice that you have ever heard from him, that he has been in three wars of this kind. He says that he has never seen a firm survive one by being clever. He says that the only firms that survive are the ones that, at the end, have something to be forgiven for that they can afford.
+  ?end
+  <~
+-> :the_blockade
 
 # bayou
 ## The shell road
@@ -271,11 +284,13 @@ $ do discover("the_native_guards")
 ## The first ship
 The light comes up thin and white over the river, and it is, for the first time in several weeks, a morning that smells of something other than cotton. It smells of coal smoke. It comes from the south, from the direction of the Passes, in a long low smear across the east, and the harbor police, on the levee, are standing in a row with their hands shading their eyes.
 It is the first of them. She is a long way off, a black speck with a plume of dirty smoke, standing slowly in toward the Head of the Passes, and she has been seen by the pilots, and by the idle crews on the nine boats, and by every man on the levee, and a great quiet has gone over the city like a hand. A woman in the Rue Royale, hanging out a wash, has stopped, with a sheet in her hands, and is looking south.
-?if b4.blockade == "ran"
+?if _ran
   Brault's boat, the *Colline*, is down the river in the dark with a hold full of cotton. You do not know where she is. You wait for her, in the way that a man waits for the first cock crow, and find that you are less afraid for the boat than for yourself.
-?elif b4.blockade == "hid"
+?end
+?if _hid
   Three of your boats are gone. They went in the dark of the moon, with the lights out, and have not been heard of since. It is a hard thing to be sure that they are safe. It is the only way to be sure that they are free.
-?else
+?end
+?if _ran == 0 and _hid == 0
   The nine boats are at the wharf, in their row, with their crews asleep on deck. They look, in the dawn, like a line of toys that a child has put away.
 ?end
 ?if b4.raid == "defended"

@@ -3,7 +3,7 @@
 @chapter b1c09
 @title A Very Bright Summer
 @book burning-city
-@version 1
+@version 2
 
 # start
 ## The full moon of Julius
@@ -156,28 +156,48 @@ $ do meet("naevia")
 Naevia's shop is shut for the noon. She lets you in by the back, in her apron, with a cloth in her hand, and looks at your face, and puts the cloth down.
 "Say it," she says.
 :the_subura
-* Go door to door, in daylight, and tell them yourself
-  $ b1.evacuated = "many"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Go door to door, in daylight, and tell them yourself [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ b1.evacuated = "many"
+    $ _mp_rank = 3
+  ?end
   $ secrecy -= 2
   $ humanity += 1
   $ do witness(1)
   It is the strangest afternoon you have had since you died. You go from stair to stair with Naevia at your side, a man in a good tunic and a freedwoman in an apron, saying one sentence. Be out of your house tonight. Be out by the second watch. Sleep in the fields. Sleep on the river. Some of them laugh. A man throws a shoe. An old woman takes your hand in both of hers, and looks at you with a face like an old coin, and says, "I know. I have been saying it since the spring." She has been saying it since the spring. Nobody has listened to her. By dusk, perhaps a third of the street has a bundle at its door. It is not enough. You are quite sure it is more than anyone would have thought to do.
-* Tell Naevia, and let her tell them
-  $ b1.evacuated = "some"
+* Tell Naevia, and let her tell them [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b1.evacuated = "some"
+    $ _mp_rank = 2
+  ?end
   $ bond.naevia += 2
   $ secrecy += 1
   She listens to the whole of it with her arms folded. At the end she says, slowly, "You have the look of a man who is not lying and who has not slept." She takes off her apron. "I am not a great one for the quarter. But the quarter likes me, and I know who talks to whom." She goes out into the heat. You wait in the cool of the shop for three hours, and she comes back with her sandals in her hand and her face burnt, and says only, "Some. Not all. They do not like to be told." It is a good deal more than you could have done.
-* Pay the criers and the watchmen, and say nothing yourself
+* Pay the criers and the watchmen, and say nothing yourself [once]
+  $ _mp_n += 1
   $ do earn(-8)
-  $ b1.evacuated = "some"
+  ?if _mp_rank < 1
+    $ b1.evacuated = "some"
+    $ _mp_rank = 1
+  ?end
   $ cunning_brutal -= 1
   $ secrecy += 2
   It is very simple, with coin. A man who will cry a fire at dusk in a street where there is none is a man who can be bought for a day's wages, and the criers of the Subura are the cheapest in the city. They will go out at the hour you name. They will cry that the Tiber is rising, which it has been known to do, and that the low streets will be wet by midnight. It is a lie. It will move some of them. You are surprised, and a little bit ashamed, at how little it costs.
-* Say to her only that she should not sleep in the shop tonight
+* Say to her only that she should not sleep in the shop tonight ?if _mp_n == 0
   $ bond.naevia += 1
   $ defiance += 1
   $ b1.evacuated = "none"
   She looks at you for a long time. "That is all?" she says. "That is all you will tell me?" You say it is. She nods. "I shall remember you said it," she says, with a terrible gentleness. "It was a very small thing to say." She is right. You go out into the street with it in your hands.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 <~
 
 # vaults
