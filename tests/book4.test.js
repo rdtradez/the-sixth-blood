@@ -1114,3 +1114,25 @@ for (let n = 7; n <= 20; n++) {
     clean(run);
   });
 }
+
+test('Book Four offers the Dark Gift to Armand and Honorine, up to the two a book allows', async () => {
+  const START4 = { hunger: 10, wealth: 120000 };
+  const armand = await play('b4c15', {}, { ...START4, 'b4.physician': 'family' }, [/Give him the gift/], { stopAt: 'b4c16' });
+  assert.equal(armand.vars['b4.armand_gift'], 'given');
+  assert.equal(armand.game.state.sys.circle.armand.kind, 'vampire');
+  assert.equal(armand.game.state.sys.circle.armand.sire, 'hero');
+  clean(armand);
+  const kept = await play('b4c15', {}, { ...START4, 'b4.physician': 'family' }, [/physician in the daylight/], { stopAt: 'b4c16' });
+  assert.equal(kept.vars['b4.armand_gift'], 'kept');
+  assert.equal(kept.game.state.sys.circle.armand, undefined);
+  const honorine = await play('b4c18', {}, START4, [/Give her the gift/], { stopAt: 'b4c19' });
+  assert.equal(honorine.vars['b4.honorine_gift'], 'given');
+  assert.equal(honorine.game.state.sys.circle.honorine.kind, 'vampire');
+  clean(honorine);
+  const full = await play('b4c18', {}, START4, [/Give her the gift/], { stopAt: 'b4c19', sys: (g) => { g.state.sys.sired['house-divided'] = 2; } });
+  assert.doesNotMatch(full.text, /What she asked|should like to know what it is to be tired/);
+  assert.equal(full.game.state.sys.circle.honorine, undefined);
+  const last = await play('b4c20', {}, START4, [/Give Honorine the gift/, /sit on the steps with Honorine|Go to the school/]);
+  assert.equal(last.vars['b4.honorine_gift'], 'given');
+  clean(last);
+});

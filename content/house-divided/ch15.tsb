@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 16 exists (the manifest entry is incomplete).
 @chapter b4c15
 @title The Bells of April
-@version 2
+@version 3
 
 # start
 ## April
@@ -293,6 +293,9 @@ It is confirmed. The war is over. A general in a farmhouse in Virginia has put h
 ?else
   Armand is gone by noon. He has left a note on the table, in a small, tidy hand. It says that he has gone to walk, and that he does not know where, and that he will be back. It adds a postscript, in a smaller hand still, to say that he has taken the black bag, and would be obliged if somebody would feed the cat.
 ?end
+?if b4.physician == "family" and can_sire() and not in_circle("armand")
+  ~> armand_offer
+?end
 ?if b4.warehouse == "rebuilt"
   Jules sends a note at four. It says that the company flag has been flown at half mast over the new furnaces, for the President, and that every man of the crew has asked to come in to work tonight, to be doing something with his hands.
 ?end
@@ -302,3 +305,25 @@ It is confirmed. The war is over. A general in a farmhouse in Virginia has put h
 It is the seventeenth of April, a Monday, and the most extraordinary day that the century has produced so far.
 $ do rest()
 => next
+
+# armand_offer
+## The doctor at the table
+He is still at the table when you come in, in the last of the dark, with the cat and a cup of coffee that he has not touched, and he does not look up. He says that he has been counting something that he does not generally count, which is the number of people he has not been able to save. "It is forty one, this year," says Dr. Armand. "I was taught at the Faculty that it was a small number. I have found that it is not a small number when you know their names."
+He turns the cup a quarter turn on its saucer. He says that he has noticed that he works better in the dark, and that he has stopped pretending that he has not, and that he has been thinking, for some weeks, about the thing that the family does. He says that he does not say yes. He says that he should like it explained to him, plainly, as one physician to another, why he should not.
+:the_gift
+* Give him the gift, here at the table, with the cat watching
+  $ b4.armand_gift = "given"
+  $ do sire("armand", "physician of the Tremé")
+  $ bond.armand += 3
+  $ humanity -= 3
+  $ secrecy -= 1
+  He insists on finishing the coffee first, and on writing a note to his sister, which he puts under the cup. It is quiet and quick, and a good deal less terrible than he has been told, because you have thought about it for a very long time. When it is done he sits quite still, and then holds up his own hands in the lamp and turns them over, slowly, like a man examining a new instrument. "Oh," he says. "It is much quieter." The cat has not moved. It has, you notice, been watching him, and has decided something.
+* Tell him that a physician in the daylight is worth more to the faubourg than one in the dark
+  $ b4.armand_gift = "kept"
+  $ humanity += 1
+  He laughs, softly, and it is a relief to both of you. He says that he thought that you would say that, and that he is annoyed to find that he agrees. He says that he will ask again at fifty, if he is spared, and that you are to be ready.
+* Say that it is his to ask for, and that you will not be the one to offer it again
+  $ b4.armand_gift = "kept"
+  $ standing += 1
+  He considers it with his chin on his hand. He says that it is the answer of a man who has been asked for a great many things and has begun to be careful. He says that he will remember it.
+<~

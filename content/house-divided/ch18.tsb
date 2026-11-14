@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 19 exists (the manifest entry is incomplete).
 @chapter b4c18
 @title The Mechanics' Institute
-@version 2
+@version 3
 
 # start
 ## The thirtieth of July
@@ -391,9 +391,34 @@ The count will not be given for a month. It will be, in the end, something more 
 ?if b4.march == "walked"
   Honorine's copybook is on the step. It is a very small, very plain one. It is open at a page that has not got a single line on it. In the corner, in pencil, in a small firm upright hand, she has written, *Not yet.* Then underneath, rather smaller, in the same hand, *But I have not shut the door.*
 ?end
+?if can_sire() and not in_circle("honorine")
+  ~> honorine_offer
+?end
 There is a letter, by hand, at ten, on a plain half sheet, without a seal. It is in a clean quick hand that you know, in Latin.
 *I did not do this. I did not do it, and I could not have prevented it, and I was in the Cathedral garden at noon on the thirtieth, with the doors shut, and a newspaper, and heard it all from the next street. I have heard it before. I have heard it in a good many cities. I asked you once, in a village, what you would do with a place. I will not ask you today whether you would have done better. I think that you have, on the whole, a good deal of an answer. I will ask you in October. Have it ready.*
 There is no signature. There is, in the margin, a comma. It is in the right place, this time.
 It is the thirty first of July, 1866, and a Tuesday, and the heat has not broken.
 $ do rest()
 => next
+
+# honorine_offer
+## What she asked
+Honorine wakes at nine, with the child gone from her lap and the print of a small hand on her sleeve, and finds you by the door. She has not slept enough to be polite. "I have buried eleven people since Monday," she says. "I have been tired for thirty years, and I find that I should like to know what it is to be tired by choice."
+She does not ask in so many words. She says that she has been counting the years that are left to her against the number of children in the Tremé who cannot read, and that the sum does not come out.
+:the_gift
+* Give her the gift, in the schoolroom, among the stitched
+  $ b4.honorine_gift = "given"
+  $ do sire("honorine", "schoolmistress of the Tremé")
+  $ bond.armand += 1
+  $ humanity -= 3
+  $ secrecy -= 1
+  She asks that the lamp be left lit. It is quiet and quick, and when it is done she lies for a long moment with her eyes open, looking at the ceiling, where there is a damp patch in the shape of Louisiana that she has been meaning to have seen to for six years. "There," she says, with a small dry laugh. "I have the time to have it seen to." She is, of all things, a little shy. She asks you not to tell her brother until she has worked out what to say.
+* Tell her no, and that a school is open in the daytime, and that it needs her in it
+  $ b4.honorine_gift = "kept"
+  $ humanity += 1
+  She takes it in silence, for a long time, and nods. She says that it is true, and that she hates it, and that it is the reason that she was going to ask. She says that she will keep the door open, and that she knows the way to the house.
+* Give her your word instead, that you will ask her again when the school can stand without her
+  $ b4.honorine_gift = "kept"
+  $ standing += 1
+  She says that it is a very long word, and that she will hold you to it. She puts out her hand, and you shake it, like two people closing a contract, which it is.
+<~

@@ -617,3 +617,10 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Content: Book Three chapter 1 and Book Four chapters 1 to 3 were reworked (`@version 2`) so the business lead voices the waking, the coven and the family are already in contact, and names are checked against the real coven. New registered flags: `b3.lead_desk`, `b4.lead_desk`, `b4.lead_pick`, `b4.village`, `b4.lead_intro`, `b4.gift_focus`. Book Four chapters 1 to 3 also carry a hill letter and a gifts scene.
 - New tool: `npm run coven-names` lists story lines that name a coven member without checking `in_circle()`. Book Four chapters 4 to 20 still have such lines and are to be reworked in pairs (see `SPOILERS/house-divided.md`).
 - Tests: `tests/systems.test.js` covers the lead, gifts, the coven view, the schema step and the village helpers; `tests/book4.test.js` plays the new scenes.
+
+### Session 51b notes (more ways to sire in Book Four)
+
+- Book Four chapters 15, 18 and 20 (`@version 3`) now offer the Dark Gift. Each offer is hidden unless `can_sire()` (the engine's two a book still applies) and the person is not already in the circle: chapter 15 (the physician, if he lives in the family's house), chapter 18 (the schoolmistress, the morning after) and chapter 20 (either of them, on the last night at the school). Each can also be declined or put off.
+- New registered flags: `b4.armand_gift` and `b4.honorine_gift` (`none`, `given`, `kept`; major). A sired person joins the circle as a fledgling of the sixth line and can be the business lead in Book Five.
+- Test: `tests/book4.test.js` plays each offer, a decline, and the cap.
+
