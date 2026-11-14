@@ -4,7 +4,7 @@
 // What the sleep did is not shown here: Book Five's opening reads wake().
 @chapter b4c20
 @title The Long Quiet
-@version 1
+@version 2
 
 # start
 ## The spring of 1867
@@ -47,8 +47,22 @@ The days are drawing out, and the nights are not long, and you have until the da
   $ humanity += 1
   $ standing += 1
   ?if coven_size() > 0 and b4.circle != "stay"
-    They have laid the table in the yard, under the fig tree, by lanterns, with a good deal too much food. Nobody has said what it is for. Prisca sits at the head, in the gray silk, with her gloves on, and pours out the wine with an air of great finality. Fiammetta, who has been told about the sleep, and has been trying very hard to be sensible about it, sits at the foot, and eats an entire loaf. Hanno has brought out a very old bottle that he says is Falernian, and that he says is not.
-    It is Hanno who raises the glass. He says that he has seen a great many people go to bed, in his time. He says that it has never once got easier. He says that he proposes the next time, and that he will be there.
+    ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+      They have laid the table in the yard, under the fig tree, by lanterns, with a good deal too much food. Nobody has said what it is for. Prisca sits at the head, in the gray silk, with her gloves on, and pours out the wine with an air of great finality. Fiammetta, who has been told about the sleep, and has been trying very hard to be sensible about it, sits at the foot, and eats an entire loaf. Hanno has brought out a very old bottle that he says is Falernian, and that he says is not.
+      It is Hanno who raises the glass. He says that he has seen a great many people go to bed, in his time. He says that it has never once got easier. He says that he proposes the next time, and that he will be there.
+    ?elif cast_count() > 0
+      $ _lead = business_lead()
+      $ _g = gift_holder("memory")
+      ?if _lead != ""
+        {name(_lead)} lays out the ledger for the quarter, and the page is clean.
+      ?end
+      ?if _g != "" and _g != _lead
+        {name(_g)} can say, without a page, who owed what to whom in this city a generation ago, and does.
+      ?end
+      ?if _g == "" or _g == _lead
+        Your own people are about you, those who are yours, and nobody has to be asked.
+      ?end
+    ?end
   ?else
     The house is very quiet. You eat at the long table by yourself, with the gray cat on the sill, and a candle. It is not at all a sad meal. It is a well cooked one. You find that you have grown very fond of the house.
   ?end
@@ -119,7 +133,9 @@ There will be a fortune, a firm with a fleet of boats and a warehouse, a school'
 * The Merchant house, as a bank and a trust, under the old seal, with the Valère counting house as its agent in the city
   $ do steward("bank")
   $ bond.prisca += 1
-  You write it down. It is a cold choice, and a sound one, and it does not depend upon a heart. It has survived the Medici, and the Inquisition, and the Revolution, and it will, you suppose, survive the Reconstruction. A letter goes to Amsterdam by the morning boat. It is answered, in due time, in a hand like an abacus. It says that Prisca has noted the arrangement, and that she regrets the war, in a sentence, and that she will be exact.
+  ?if in_circle("prisca")
+    You write it down. It is a cold choice, and a sound one, and it does not depend upon a heart. It has survived the Medici, and the Inquisition, and the Revolution, and it will, you suppose, survive the Reconstruction. A letter goes to Amsterdam by the morning boat. It is answered, in due time, in a hand like an abacus. It says that Prisca has noted the arrangement, and that she regrets the war, in a sentence, and that she will be exact.
+  ?end
 * Prisca, in her own person, to hold it for you ?if in_circle("prisca") and member("prisca", "status") == "active"
   $ do steward("prisca")
   $ bond.prisca += 4
@@ -132,7 +148,7 @@ There will be a fortune, a firm with a fleet of boats and a warehouse, a school'
   $ bond.hanno += 4
   $ standing += 1
   You write his name, and he reads it with a face of the most complete delight. He says that it is, in the whole of a long career, the first time that anyone has put the whole account in one place. He says that he has been waiting for three thousand years to be asked, and that he does not for a moment propose to be sensible about it. He takes out a new ledger. He writes, in small neat Punic, at the top of the first page, the date.
-* Fiammetta, in her own person, with Prisca at her elbow, to learn it as she goes ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+* Fiammetta, in her own person, with Prisca at her elbow, to learn it as she goes ?if in_circle("fiammetta") and member("fiammetta", "status") == "active" and in_circle("prisca")
   $ do steward("fiammetta")
   $ bond.fiammetta += 4
   $ humanity += 1
@@ -184,7 +200,9 @@ It is a thing that must be paid for, and it is dearer than it was, because the w
   $ do protection("bribes")
   $ _guard_n += 1
   $ secrecy += 2
-  It is a long list, in Hanno's neat hand. It is done with a great deal of politeness and a number of small leather purses, and it works, as such things do, for as long as the people in the purses are alive.
+  ?if in_circle("hanno")
+    It is a long list, in Hanno's neat hand. It is done with a great deal of politeness and a number of small leather purses, and it works, as such things do, for as long as the people in the purses are alive.
+  ?end
 * Hire guardians: a company of good men, sworn, to hold the road as long as the money lasts [once] ?if wealth >= 240
   $ do protection("guardians")
   $ _guard_n += 1
@@ -201,7 +219,9 @@ It is what the family does, while you are asleep, that will matter.
   $ b4.charge = "keep"
   $ standing += 2
   $ humanity += 1
-  You write it plainly. It is what Prisca would do without being asked, and what she has not been asked. It is the whole of the house, held for as long as there is a house to hold, with the lamp in the window, and the school's account paid on the first of every quarter. You write that nobody is to go to the Chapter alone. You write that the roll is to be kept. You write that the door is to stay open.
+  ?if in_circle("prisca")
+    You write it plainly. It is what Prisca would do without being asked, and what she has not been asked. It is the whole of the house, held for as long as there is a house to hold, with the lamp in the window, and the school's account paid on the first of every quarter. You write that nobody is to go to the Chapter alone. You write that the roll is to be kept. You write that the door is to stay open.
+  ?end
 * Send a hand ahead, north and across the water, to find a house in the great cities, and be there when the age turns
   $ b4.charge = "north"
   $ cunning_brutal += 1

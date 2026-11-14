@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 14 exists (or carries on into it).
 @chapter b4c13
 @title The Man from Pearl Street
-@version 1
+@version 2
 
 # start
 ## March
@@ -87,7 +87,21 @@ He gets down off the trunk. He holds out a hand in a kid glove, and it is cold, 
   $ secrecy -= 1
   The trunks go up in the cart, and he goes up in the carriage, and talks the whole of the way, in the small, dry, rapid voice, about Pearl Street, and the Hudson ferries, and the New York mob, which he found most instructive. He looks at the hall for some time. "It is a thing that I have not seen," he says. "A house that is lived in." He says it very lightly, and does not look at you.
   ?if coven_size() > 0 and b4.circle != "stay"
-    Fiammetta is on the stair, to look at him. He bows to her with great gravity. Prisca puts out a hand, and he takes it, and they are, for ten minutes, in perfect silence, in the hall, two old women of business who have recognized each other. At the end of it Prisca says that she will put the kettle on, which she has never in her life done, and goes out.
+    ?if in_circle("fiammetta") and in_circle("prisca")
+      Fiammetta is on the stair, to look at him. He bows to her with great gravity. Prisca puts out a hand, and he takes it, and they are, for ten minutes, in perfect silence, in the hall, two old women of business who have recognized each other. At the end of it Prisca says that she will put the kettle on, which she has never in her life done, and goes out.
+    ?elif cast_count() > 0
+      $ _lead = business_lead()
+      $ _g = gift_holder("strength")
+      ?if _lead != ""
+        {name(_lead)} lays out the ledger for the quarter, and the page is clean.
+      ?end
+      ?if _g != "" and _g != _lead
+        {name(_g)} has taken the door, and a door that {name(_g)} holds is a door that is held.
+      ?end
+      ?if _g == "" or _g == _lead
+        Your own people are about you, those who are yours, and nobody has to be asked.
+      ?end
+    ?end
   ?end
 * Walk him to the hotel on the Rue Saint Charles, and talk on the way, and leave him his own door
   $ b4.guest = "wharf"
@@ -135,7 +149,9 @@ Monsieur Beaumont rises. He is in black, and has never in his life looked so old
   $ secrecy += 2
   $ standing -= 1
   $ humanity -= 1
-  You send Pompée with the card at six, and sit in the study, with the lamp low, and listen to the clock. It is a very civil decision. It is also, you are well aware, the decision of a person who has found a great many reasons. Hanno comes to the door, near midnight, and looks at you for a moment over his spectacles, and says nothing, and goes away.
+  ?if in_circle("hanno")
+    You send Pompée with the card at six, and sit in the study, with the lamp low, and listen to the clock. It is a very civil decision. It is also, you are well aware, the decision of a person who has found a great many reasons. Hanno comes to the door, near midnight, and looks at you for a moment over his spectacles, and says nothing, and goes away.
+  ?end
 $ do discover("the_chapter_of_the_river_houses")
 <~
 
@@ -177,14 +193,24 @@ $ do discover("the_petition_of_the_free_men")
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
   ?if b4.coven_home == "raised"
-    The house on Gravier Street is warm, and lit, and a good deal more crowded than it was. There are a number of new faces at the long table: a free carpenter from the Tremé, who has been hired to put in shelves, and two girls from the school with copybooks, and a stout cook. Fiammetta is teaching one of the girls to play at draughts. Hanno has a ledger in front of him the size of a tombstone.
+    ?if in_circle("fiammetta") and in_circle("hanno")
+      The house on Gravier Street is warm, and lit, and a good deal more crowded than it was. There are a number of new faces at the long table: a free carpenter from the Tremé, who has been hired to put in shelves, and two girls from the school with copybooks, and a stout cook. Fiammetta is teaching one of the girls to play at draughts. Hanno has a ledger in front of him the size of a tombstone.
+    ?elif cast_count() > 0
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
   ?elif b4.coven_home == "hidden"
-    The back rooms are quiet, and each has a small lamp, and a plate, and a chair. It is a house of a dozen doors. You find the family in the second of them, around a table, very quiet, with a pot of coffee, and Prisca is reading aloud, in a low voice, from a newspaper.
+    ?if in_circle("prisca")
+      The back rooms are quiet, and each has a small lamp, and a plate, and a chair. It is a house of a dozen doors. You find the family in the second of them, around a table, very quiet, with a pot of coffee, and Prisca is reading aloud, in a low voice, from a newspaper.
+    ?end
   ?else
-    The long room in the Marigny is warm. The windows are open, for the first time in a year, to let in the spring. There is a vase of early jasmine on the table, and Fiammetta has put it there, and says that it is nothing.
+    ?if in_circle("fiammetta")
+      The long room in the Marigny is warm. The windows are open, for the first time in a year, to let in the spring. There is a vase of early jasmine on the table, and Fiammetta has put it there, and says that it is nothing.
+    ?end
   ?end
   ?if b4.firm == "coven"
-    Prisca says that the Ice Company is, at present, a great deal too small for the demand. She has found a warehouse on the Levee, with a good cellar, and a very bad roof, and she means to have it. She says it as another person would announce a christening.
+    ?if in_circle("prisca")
+      Prisca says that the Ice Company is, at present, a great deal too small for the demand. She has found a warehouse on the Levee, with a good cellar, and a very bad roof, and she means to have it. She says it as another person would announce a christening.
+    ?end
   ?end
 ?elif coven_size() > 0
   The house is quiet. They are a long way off. There is a letter on the table in a hand that you know, which has been there some days.
@@ -205,12 +231,20 @@ $ do chart("neworleans.haven")
   $ do acquire("escape_tunnels")
   $ cunning_brutal += 1
   $ secrecy += 1
-  It is done by Prisca, if she is there, and Hanno, if he is, with the free families of the Marigny, who have a great number of cousins and a great number of cellars. There is a loft above a Greek grocer's, and a cellar in a church, and a brick drain behind a coffin maker's that comes out, a quarter of a mile away, in a bed of reeds. It is, you reflect, a good thing, to have somewhere to go.
+  ?if in_circle("hanno") and in_circle("prisca")
+    It is done by Prisca, if she is there, and Hanno, if he is, with the free families of the Marigny, who have a great number of cousins and a great number of cellars. There is a loft above a Greek grocer's, and a cellar in a church, and a brick drain behind a coffin maker's that comes out, a quarter of a mile away, in a bed of reeds. It is, you reflect, a good thing, to have somewhere to go.
+  ?elif cast_count() > 0
+    Your own people are about you, those who are yours, and nobody has to be asked.
+  ?end
 * Set up a hall for the family's young, where the old can teach them what they ought to know ?if can_acquire("training_hall")
   $ do acquire("training_hall")
   $ humanity += 1
   $ standing += 1
-  It is the back of the cotton press, with the floor swept, and a very long mirror, and a rack. Prisca teaches how to read a ledger, and Hanno how to read a face, and Fiammetta, with a great deal of dignity, how to fall from a roof. It is, plainly, a school. It is a great deal more than a house had any need of.
+  ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+    It is the back of the cotton press, with the floor swept, and a very long mirror, and a rack. Prisca teaches how to read a ledger, and Hanno how to read a face, and Fiammetta, with a great deal of dignity, how to fall from a roof. It is, plainly, a school. It is a great deal more than a house had any need of.
+  ?elif cast_count() > 0
+    Your own people are about you, those who are yours, and nobody has to be asked.
+  ?end
 * That will do for tonight
   -> :family_done
 -> :the_family

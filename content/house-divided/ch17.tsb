@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 18 exists (the manifest entry is incomplete).
 @chapter b4c17
 @title The Man Who Answered
-@version 1
+@version 2
 
 # start
 ## A box of wax
@@ -28,7 +28,9 @@ It is not yet one in the morning, and there are four things that want doing befo
 It is the middle of a hot damp spring, the roses over on every wall in the Faubourg Marigny, and the whole city smelling of river mud and of the oranges that the schooners bring up from the Gulf. There is a new kind of quiet about it. The war has been over for a year, and it has not yet been decided what it was for.
 The Legislature has gone home. The Bureau has opened an office on the Rue Camp, with a flag, and a very long queue. In the Tremé, the school has a hundred and ten pupils, and a waiting list, and a roof that does not leak. There is talk of a convention in the summer. It is not a thing that anyone in a good coat will say aloud.
 ?if b4.teche == "truce"
-  The elder Delorme has sent a pie, twice, by a servant who does not know how to carry it. It has been eaten both times. Fiammetta says that it is the only pie she has ever met that has apologized.
+  ?if in_circle("fiammetta")
+    The elder Delorme has sent a pie, twice, by a servant who does not know how to carry it. It has been eaten both times. Fiammetta says that it is the only pie she has ever met that has apologized.
+  ?end
 ?elif b4.teche == "answered"
   The Chapter sat in January, and the elder Delorme stood up in it, in his own person, and read every fire, and every ring, and paid. It was not a thing that anybody present has forgotten. The Teche house has been very quiet since. It has the look of a thing that has been sentenced to be good.
 ?else
@@ -255,14 +257,34 @@ $ do discover("the_convention_of_1866")
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
   ?if b4.coven_home == "raised"
-    The house on Gravier Street is dark, except for a light on the stair. They have been waiting up, in the great hall, in a ring of chairs, in the manner of a family which has been told that a thing has happened and has not been told what. Prisca is at the table with a very small glass of Madeira. Hanno is at the far end, by the cedar, quite upright. Fiammetta is sitting on the floor, with her knees up, wearing a look of the deepest and most reluctant interest.
+    ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+      The house on Gravier Street is dark, except for a light on the stair. They have been waiting up, in the great hall, in a ring of chairs, in the manner of a family which has been told that a thing has happened and has not been told what. Prisca is at the table with a very small glass of Madeira. Hanno is at the far end, by the cedar, quite upright. Fiammetta is sitting on the floor, with her knees up, wearing a look of the deepest and most reluctant interest.
+    ?elif cast_count() > 0
+      $ _lead = business_lead()
+      $ _g = gift_holder("healing")
+      ?if _lead != ""
+        {name(_lead)} brings you the quiet version of the news first, and the loud version after, which is the right order.
+      ?end
+      ?if _g != "" and _g != _lead
+        {name(_g)} goes quietly round the room with a cloth and a basin, and sets right what the night has cost.
+      ?end
+      ?if _g == "" or _g == _lead
+        Your own people are about you, those who are yours, and nobody has to be asked.
+      ?end
+    ?end
   ?elif b4.coven_home == "hidden"
     The little back rooms are all lit, one after another, along the passage, with a glow in each like a row of patient eyes. They are all awake. They have come through, one at a time, in their stockings, and are sitting in the kitchen, round the stove, with the free families' children asleep in a heap on the settle.
   ?else
-    They are in the long room in the Marigny, with the shutters closed, and the lamps turned low, and no pretense of sleep. Fiammetta has taken her shoes off, and is balancing, with the greatest care, an empty glass on her head.
+    ?if in_circle("fiammetta")
+      They are in the long room in the Marigny, with the shutters closed, and the lamps turned low, and no pretense of sleep. Fiammetta has taken her shoes off, and is balancing, with the greatest care, an empty glass on her head.
+    ?end
   ?end
-  Fiammetta says that she had a visitor on the Rue Dauphine at nine. She says that he was a quiet gentleman in a brown coat, with a gray hat, and that he said a thing to her in Italian. She says that it was a quite old Italian, so old that she had to think, and that it was the Italian of her great grandmother's grandmother's Latin. She says that he said that she had the family's eyes. She says that he bowed, and went. She says that she had not at all known whether to be frightened, and that she had been, rather, flattered, and that she is a good deal ashamed of it.
-  Prisca says nothing for a time. She says at last that she has dealt with a number of very old gentlemen, in her life, who have said that sort of thing, and that it has generally been in the interest of a loan.
+  ?if in_circle("fiammetta") and in_circle("prisca")
+    Fiammetta says that she had a visitor on the Rue Dauphine at nine. She says that he was a quiet gentleman in a brown coat, with a gray hat, and that he said a thing to her in Italian. She says that it was a quite old Italian, so old that she had to think, and that it was the Italian of her great grandmother's grandmother's Latin. She says that he said that she had the family's eyes. She says that he bowed, and went. She says that she had not at all known whether to be frightened, and that she had been, rather, flattered, and that she is a good deal ashamed of it.
+    Prisca says nothing for a time. She says at last that she has dealt with a number of very old gentlemen, in her life, who have said that sort of thing, and that it has generally been in the interest of a loan.
+  ?elif cast_count() > 0
+    Your own people are about you, those who are yours, and nobody has to be asked.
+  ?end
 ?elif coven_size() > 0
   The house is quiet. They are a long way off, and it is the middle of the night. There is a parcel on the table, in a very small neat hand, that has not been opened. It is a Roman lamp, of red clay, in a cloth. There is no letter. You put it on the mantel, and you do not at once look away from it.
 ?else

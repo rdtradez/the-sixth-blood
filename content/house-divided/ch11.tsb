@@ -5,7 +5,7 @@
 @chapter b4c11
 @title The River Opens
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## July
@@ -84,8 +84,22 @@ $ do chart("neworleans.haven")
 It is a long, ugly, honest building of brick, four stories high, with iron shutters and a loading door like a barn, and it has been standing empty since April, when its owner, a cotton factor with a flag on his hat, left the city for a place that he did not name. The price is absurd. The factor's agent, a thin, nervous, perfectly courteous little man, offers it at a figure that would have made a younger man laugh, and then lowers it twice, without being asked, while looking at his boots.
 There is a cellar under it that goes down two floors, to a place of vaulted brick and iron columns, in which the cotton was kept for the damp, and which is, as a result, one of the driest rooms in the city. It has no windows at all. It has a drain to the old Carondelet canal. It is a thing that you would be perfectly able to walk through, without comment, a hundred times, and never notice, in the dark, that you had had the idea.
 ?if coven_size() > 0 and b4.circle != "stay"
-  They come to look at it, all of them, in the dusk, in a straggling line, as a family goes to look at a house that it has not yet admitted that it is going to buy. Fiammetta runs straight down into the cellar, and is heard, for some time, shouting at the end of it, for the pleasure of the echo. Prisca goes slowly round with a pencil and says that the floors are sound, and the roof is very bad, and that a house with a roof like that has no business to cost anything, and that she will buy it. Hanno stands in the middle of the great upper floor, with his hat in his hands, and says nothing at all for a long time.
-  "It is the first one," he says, at last, "that has had room." He does not say for what. He does not need to.
+  ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+    They come to look at it, all of them, in the dusk, in a straggling line, as a family goes to look at a house that it has not yet admitted that it is going to buy. Fiammetta runs straight down into the cellar, and is heard, for some time, shouting at the end of it, for the pleasure of the echo. Prisca goes slowly round with a pencil and says that the floors are sound, and the roof is very bad, and that a house with a roof like that has no business to cost anything, and that she will buy it. Hanno stands in the middle of the great upper floor, with his hat in his hands, and says nothing at all for a long time.
+    "It is the first one," he says, at last, "that has had room." He does not say for what. He does not need to.
+  ?elif cast_count() > 0
+    $ _lead = business_lead()
+    $ _g = gift_holder("healing")
+    ?if _lead != ""
+      {name(_lead)} has a short list of what can wait and a shorter one of what cannot.
+    ?end
+    ?if _g != "" and _g != _lead
+      {name(_g)} goes quietly round the room with a cloth and a basin, and sets right what the night has cost.
+    ?end
+    ?if _g == "" or _g == _lead
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
+  ?end
 ?elif coven_size() > 0
   They are a long way off. You walk through it alone, in the dusk, and your steps go on after you into the cellar, and you think that it would hold a good many, and that it will be a good while before they are all in the same room.
 ?else
@@ -104,7 +118,9 @@ There is a cellar under it that goes down two floors, to a place of vaulted bric
   ?else
     $ do earn(-6)
   ?end
-  It takes three weeks, in the end, and a great many men who are told that the owner is a gentleman of retired habits. The roof goes first, and then the floors, and then, with a good deal of coughing, the long table, which is carried in through the loading door by eight men and is, in the end, left half a foot too long for any door in the building. There is a hall with a hearth big enough to roast a calf. There are rooms upstairs, with beds in them that nobody has asked for, and in the cellar, behind an iron column that swings if you know where to lean on it, there is another. Nobody mentions that. You hear Prisca, if she is there, tell the mason, quite sweetly, that he has done his work well, and that he will forget it by Michaelmas, and the mason, who has been paid in a way that he does not understand, agrees that he certainly will.
+  ?if in_circle("prisca")
+    It takes three weeks, in the end, and a great many men who are told that the owner is a gentleman of retired habits. The roof goes first, and then the floors, and then, with a good deal of coughing, the long table, which is carried in through the loading door by eight men and is, in the end, left half a foot too long for any door in the building. There is a hall with a hearth big enough to roast a calf. There are rooms upstairs, with beds in them that nobody has asked for, and in the cellar, behind an iron column that swings if you know where to lean on it, there is another. Nobody mentions that. You hear Prisca, if she is there, tell the mason, quite sweetly, that he has done his work well, and that he will forget it by Michaelmas, and the mason, who has been paid in a way that he does not understand, agrees that he certainly will.
+  ?end
 * Spread the family through the city instead, in small rooms behind free families' houses, on the Bayou Road, on the Lake, in the Tremé, so that no one house can be found
   $ b4.coven_home = "hidden"
   $ secrecy += 2
@@ -141,9 +157,13 @@ There is, behind him, in the lamplight, a long white shape under a tarpaulin, an
   ?if in_circle("prisca") and b4.circle != "stay" and member("prisca", "status") == "active" and task("prisca") == ""
     $ do coven_task("prisca", "business")
   ?end
-  It is drawn up on the foredeck, on a ship's biscuit box, by lantern, by a person who is not Prisca and a good deal like her. It is called the Pontchartrain and Mississippi Ice and Transport Company, and it has seven partners, none of whom, as it turns out, is a man who can be called on in the daytime. The river has had, in its time, a great many companies run by a great many sorts of persons, and none of them has ever been asked. There are twenty boats by the end of the month, and a great deal of ice, and, in the open end of the warehouse at Gravier Street, if you have it, a long cold room in which a great many things may be kept, for a great many reasons, that have nothing to do with fish.
+  ?if in_circle("prisca")
+    It is drawn up on the foredeck, on a ship's biscuit box, by lantern, by a person who is not Prisca and a good deal like her. It is called the Pontchartrain and Mississippi Ice and Transport Company, and it has seven partners, none of whom, as it turns out, is a man who can be called on in the daytime. The river has had, in its time, a great many companies run by a great many sorts of persons, and none of them has ever been asked. There are twenty boats by the end of the month, and a great deal of ice, and, in the open end of the warehouse at Gravier Street, if you have it, a long cold room in which a great many things may be kept, for a great many reasons, that have nothing to do with fish.
+  ?end
   ?if coven_size() > 0 and b4.circle != "stay"
-    It is the family's. You hear Fiammetta, from the end of the Levee, tell a drayman that she is a director, and the drayman, who does not believe it, gives her a very good price on a barrow of lemons.
+    ?if in_circle("fiammetta")
+      It is the family's. You hear Fiammetta, from the end of the Levee, tell a drayman that she is a director, and the drayman, who does not believe it, gives her a very good price on a barrow of lemons.
+    ?end
   ?end
 * Back Brault's boats alone, with a draft, and take a share in what comes
   $ b4.firm = "partner"
@@ -186,7 +206,9 @@ He rises. He is not tall. He has a very mild, long, scholarly face, with a short
   $ cunning_brutal += 2
   It is a small thing. It is done without any effort at all. You do not rise. You do not raise your voice. You look at the candle in its glass, and it goes out, and the whole garden, in a single breath, goes colder by ten degrees, and every leaf on the fig tree turns in the same direction. It is the old blood, and it does what it does. He does not move. He is a hundred and sixty years old, and has seen a good many things, and does not, therefore, show it. Only his spectacles, which have slipped, are, for a little while, a very little crooked. "I see," he says, at last, quite mildly. "That is what Madame Lachapelle meant." He puts his hat on. He says that he will not trouble you again, except by letter. It is a statement that has, you notice, a great deal of respect in it, and a good deal more of fear.
   ?if coven_size() > 0 and b4.circle != "stay"
-    There is, at the wall behind the fig tree, as you leave, a pale small shape that you recognize, in a cloak, with a knife that she has not taken out. It is Fiammetta, who has been there since dusk, and who says, as you pass, with great composure, that she has not been of any use, and that she is extremely glad.
+    ?if in_circle("fiammetta")
+      There is, at the wall behind the fig tree, as you leave, a pale small shape that you recognize, in a cloak, with a knife that she has not taken out. It is Fiammetta, who has been there since dusk, and who says, as you pass, with great composure, that she has not been of any use, and that she is extremely glad.
+    ?end
   ?end
 * Refuse to see him, and send word by the gate that the house of the sixth does not receive a stranger by night
   $ b4.fontenot = "refused"
@@ -236,7 +258,9 @@ It is a gray, warm, wet dawn, with a mist over the river, and a smell of steamer
 ?if b4.coven_home == "raised"
   The house on Gravier Street is awake. It has, in four hours, taken on the manner of a house that has lived in a place for a long time, which is a thing that a house may do very quickly, if enough persons have walked through it. There are lights in the upper rooms. There is a smell of coffee in the hall. Somebody has found a piano, which is out of tune, and somebody is playing it, badly, with great spirit, at a quarter to six in the morning.
   ?if coven_size() > 0 and b4.circle != "stay"
-    Hanno comes to find you, in the cellar, to say that the room is dry, and that it is, as far as he is able to judge, a good deal safer than the old house, and that he has put a bottle of the Valère wine on the mantelpiece of the hall, in case anyone should wish to christen it. It is, you think, the first time that he has ever sounded like a man at home.
+    ?if in_circle("hanno")
+      Hanno comes to find you, in the cellar, to say that the room is dry, and that it is, as far as he is able to judge, a good deal safer than the old house, and that he has put a bottle of the Valère wine on the mantelpiece of the hall, in case anyone should wish to christen it. It is, you think, the first time that he has ever sounded like a man at home.
+    ?end
   ?end
 ?elif b4.coven_home == "hidden"
   There is a knock at the kitchen door at dawn, and a child, of the Lake, with a note from a cooper, to say that the loft is ready. It is not signed. It is written in a careful round hand that you have seen before, on a copybook. You have a net. It is not a house. It is a good deal better.

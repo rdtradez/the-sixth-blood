@@ -5,7 +5,7 @@
 @chapter b4c07
 @title The Forts
 @book house-divided
-@version 1
+@version 2
 
 # start
 ## Guns
@@ -149,7 +149,21 @@ Isaure, on the steps, has said nothing. She has a gray shawl around her, and she
   $ humanity += 1
   He does not answer for so long that you think he has not heard. Then he takes off his hat, and holds it in both hands, and looks at it. "It is a thing that no one has asked of another for four hundred years," he says, "and a thing that no one has offered. A sleeper is a house's heart. It is the one thing that a house does not put in the hands of another." His voice is not quite steady. "You understand that you would be able to do with them what you like." You say that you do. "Yes," says Beaumont. "That is why I am saying yes." Isaure, on the steps, has put a hand to her mouth.
   ?if b4.circle != "stay" and coven_size() > 0
-    You send the boy for Prisca and Hanno. It is a thing that a family can do and a staff cannot.
+    ?if in_circle("hanno") and in_circle("prisca")
+      You send the boy for Prisca and Hanno. It is a thing that a family can do and a staff cannot.
+    ?elif cast_count() > 0
+      $ _lead = business_lead()
+      $ _g = gift_holder("strength")
+      ?if _lead != ""
+        {name(_lead)} has the firm's papers in order, counted twice, and says what the house can bear and what it cannot.
+      ?end
+      ?if _g != "" and _g != _lead
+        {name(_g)} has taken the door, and a door that {name(_g)} holds is a door that is held.
+      ?end
+      ?if _g == "" or _g == _lead
+        Your own people are about you, those who are yours, and nobody has to be asked.
+      ?end
+    ?end
   ?end
 $ do discover("the_river_houses")
 <~
@@ -158,9 +172,13 @@ $ do discover("the_river_houses")
 ## The Marigny, on the night of the guns
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
-  They are all awake, in the long room, in their traveling things, with the lamps trimmed low. It is a fine, small, steady sight. Hanno has the ledgers in two canvas bags, and has put his hat on the table to keep from walking out with it. Prisca is sitting at the window with her gloves in her lap, and a pistol that you did not know she owned, looking down the street. Fiammetta is not sitting. She is going very rapidly from door to door, with a lamp, shooting bolts, and comes to a halt in front of you, a little out of breath.
-  "I have counted," she says. "We have nineteen doors and eleven windows, and I do not like four of them." She puts her chin up. "They are a family, are they not? They will not be taking the house. I have decided."
-  It is the sort of speech that is better for being a little ridiculous. Prisca does not smile, but she lays the pistol on the sill, and it is a good deal more of a vote than a smile.
+  ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+    They are all awake, in the long room, in their traveling things, with the lamps trimmed low. It is a fine, small, steady sight. Hanno has the ledgers in two canvas bags, and has put his hat on the table to keep from walking out with it. Prisca is sitting at the window with her gloves in her lap, and a pistol that you did not know she owned, looking down the street. Fiammetta is not sitting. She is going very rapidly from door to door, with a lamp, shooting bolts, and comes to a halt in front of you, a little out of breath.
+    "I have counted," she says. "We have nineteen doors and eleven windows, and I do not like four of them." She puts her chin up. "They are a family, are they not? They will not be taking the house. I have decided."
+    It is the sort of speech that is better for being a little ridiculous. Prisca does not smile, but she lays the pistol on the sill, and it is a good deal more of a vote than a smile.
+  ?elif cast_count() > 0
+    Your own people are about you, those who are yours, and nobody has to be asked.
+  ?end
 ?elif coven_size() > 0
   The house is dark. The coven is a long way off, and you have not been able, tonight, to ask them what they would do. You walk the long room with a candle, and find, when you have gone the length of it twice, that you have set out chairs.
 ?else
@@ -175,7 +193,9 @@ $ do chart("neworleans.haven")
   $ do acquire("vaults")
   $ secrecy += 1
   $ do earn(-2)
-  You think of it as a little sad that a house should be so sure of its fate. You do it, nonetheless: two feet of stone, three of earth, the whole of the firm's reserve in iron boxes with Hanno's seal on each, and a plate of plain slate over the door. It is the soundest thing that you have done in the war. It will not feel so, in the morning.
+  ?if in_circle("hanno")
+    You think of it as a little sad that a house should be so sure of its fate. You do it, nonetheless: two feet of stone, three of earth, the whole of the firm's reserve in iron boxes with Hanno's seal on each, and a plate of plain slate over the door. It is the soundest thing that you have done in the war. It will not feel so, in the morning.
+  ?end
 * Send Fiammetta to the Tremé, to stand at the door of the school through the nights between the flags [once] ?if in_circle("fiammetta") and b4.circle != "stay" and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
   $ b4.vigil = "school"
   $ do send("fiammetta", "protect", 1)
@@ -247,9 +267,13 @@ It is very quiet. A woman who had been shouting at them from the bank has stoppe
   The great house at Belle Rive is dark when you pass it, going home. The wagons have gone. There is a single lamp in the window of the upper gallery, and as you go by it is put out.
 ?end
 ?if b4.vigil == "school"
-  Fiammetta has not come back. A note has been pushed under the door in a round, clumsy, delighted hand. It says, *The soldiers came. They went. I did not have to bite anybody. The lady has given me a slate.*
+  ?if in_circle("fiammetta")
+    Fiammetta has not come back. A note has been pushed under the door in a round, clumsy, delighted hand. It says, *The soldiers came. They went. I did not have to bite anybody. The lady has given me a slate.*
+  ?end
 ?elif b4.vigil == "paper"
-  On the table in the hall, there is a very small, very tidy packet in Prisca's hand, tied with tape. It is a bank draft on Havana for the whole of the firm's paper, and a receipt, and a note that says, *He was very frightened. He was very fair. I did not have to do anything at all.*
+  ?if in_circle("prisca")
+    On the table in the hall, there is a very small, very tidy packet in Prisca's hand, tied with tape. It is a bank draft on Havana for the whole of the firm's paper, and a receipt, and a note that says, *He was very frightened. He was very fair. I did not have to do anything at all.*
+  ?end
 ?end
 ?if b4.honorine == "walked"
   You find that you have been smiling for a block and a half, and stop. It is not at all the thing for a night of such events. You cannot, for the life of you, remember what it was that she said about the girl who taught her to read.

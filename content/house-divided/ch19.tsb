@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which carries on to chapter 20.
 @chapter b4c19
 @title All Saints
-@version 1
+@version 2
 
 # start
 ## The thirty first of October
@@ -35,7 +35,21 @@ It is three months since the Institute, and the city has not got over it, and is
 ?end
 You have been in New Orleans seven years. You are, by the standard of the age, almost a native.
 ?if coven_size() > 0 and b4.circle != "stay"
-  The family is in the house, and every one of them is occupied with the dead. Prisca has a list of the family's graves in the old St. Louis, a very short list, and a very long list of the ones that she says are hers by adoption. Fiammetta is carrying a bucket of lime wash, with a brush, and is white to the elbows. Hanno is making out a receipt for a dozen candles.
+  ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+    The family is in the house, and every one of them is occupied with the dead. Prisca has a list of the family's graves in the old St. Louis, a very short list, and a very long list of the ones that she says are hers by adoption. Fiammetta is carrying a bucket of lime wash, with a brush, and is white to the elbows. Hanno is making out a receipt for a dozen candles.
+  ?elif cast_count() > 0
+    $ _lead = business_lead()
+    $ _g = gift_holder("strength")
+    ?if _lead != ""
+      {name(_lead)} has kept the house's business moving through all of it, and says so only when asked.
+    ?end
+    ?if _g != "" and _g != _lead
+      {name(_g)} has taken the door, and a door that {name(_g)} holds is a door that is held.
+    ?end
+    ?if _g == "" or _g == _lead
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
+  ?end
 ?end
 There is a note on the table in the counting house, on a plain half sheet, in a clean quick hand, in Latin. It is not sealed. It says, *The old city. Midnight. I have my answer ready, I hope that you have yours.*
 The comma is in the right place.
@@ -121,7 +135,9 @@ He says that he would like you to sit in the chair.
   $ humanity -= 1
   There is a long silence. The young one of the Gulf house, against the wall, lets out a breath that she did not know she had. Beaumont nods slowly. He says that he was afraid that you would say that, and that he is, to his shame, relieved. Madame Lachapelle says that it is the answer of a person who has seen what a chair does to a man. She says that she would give a great deal to have given it herself, in eighteen twelve.
 ?if b4.seat == "held" and coven_size() > 0 and b4.circle != "stay"
-  Prisca, who has come in behind you and has been standing against the door with her parasol, says at your ear that she will see to the roll. She says it with an air of the keenest private pleasure. She says that she has not been given a roll since Florence.
+  ?if in_circle("prisca")
+    Prisca, who has come in behind you and has been standing against the door with her parasol, says at your ear that she will see to the roll. She says it with an air of the keenest private pleasure. She says that she has not been given a roll since Florence.
+  ?end
 ?end
 $ do discover("the_river_houses_in_1866")
 <~
@@ -141,7 +157,9 @@ Honorine is at the teacher's desk, with her sleeves rolled up, and a ledger, and
 ?else
   There is a map on the wall with a line drawn on it in red chalk, from the Lake to the railway, and every station with a name. It is the Ice Company's. She has copied it out for the children.
 ?end
-She says that she has something to say, and that it is the sort of thing that is easier to say to a person across a desk. She says that she has noticed everything. She has noticed that the family's doors are never open before sunset. She has noticed that there is a person in the house who is called Prisca who has been the same age as her grandmother for as long as there has been a Prisca. She has noticed that a man was seen to hold the stair of the Institute with his bare hands, or that a story was told. She says that she is a schoolmistress, and that it is her whole profession to notice.
+?if in_circle("prisca")
+  She says that she has something to say, and that it is the sort of thing that is easier to say to a person across a desk. She says that she has noticed everything. She has noticed that the family's doors are never open before sunset. She has noticed that there is a person in the house who is called Prisca who has been the same age as her grandmother for as long as there has been a Prisca. She has noticed that a man was seen to hold the stair of the Institute with his bare hands, or that a story was told. She says that she is a schoolmistress, and that it is her whole profession to notice.
+?end
 ?if b4.truth == "all"
   She says that you told her all of it, in the spring, and that she has been thinking about it for six months, and that she has come to a few conclusions. She says that the first is that she was told the truth, and that she is, in a very odd way, grateful.
 ?elif b4.truth == "half"
@@ -227,9 +245,13 @@ $ do chart("neworleans.haven")
   ?else
     The long room in the Marigny has a candle in every window and a chrysanthemum in a jar. The family is gathered at the table. There are three of them, or four, and it is a quiet house, and a pleasant one.
   ?end
-  It is Hanno who speaks. He says that he has been keeping an account, and that it has occurred to him that the family has been in New Orleans for seven years. He says that it is the longest that he has stayed in any one place, since Carthage. He says that he does not at all know what to do with the feeling.
+  ?if in_circle("hanno")
+    It is Hanno who speaks. He says that he has been keeping an account, and that it has occurred to him that the family has been in New Orleans for seven years. He says that it is the longest that he has stayed in any one place, since Carthage. He says that he does not at all know what to do with the feeling.
+  ?end
 ?elif coven_size() > 0
-  The house is quiet. They are a long way off. There is a wreath on the table in brown paper, which Prisca has sent from wherever she is, and a card.
+  ?if in_circle("prisca")
+    The house is quiet. They are a long way off. There is a wreath on the table in brown paper, which Prisca has sent from wherever she is, and a card.
+  ?end
 ?else
   The house is quiet. You sit a while at the table with your hands in front of you. The gray cat on the sill is awake, and has the air of a person who has been told something in confidence.
 ?end
@@ -247,11 +269,15 @@ $ do chart("neworleans.haven")
   $ do acquire("coven_house")
   $ standing += 2
   $ humanity += 1
-  It takes the whole of the evening, and the whole of a long line of persons whose names you will never know. It is not a very large house. It is a very good one. Prisca walks through it, at the end, with her gloves in her hand, and says that she can think of no house in the whole of her experience that has been made for so little reason, and with so much, and that she is going to cry, in her room, later, at her leisure.
+  ?if in_circle("prisca")
+    It takes the whole of the evening, and the whole of a long line of persons whose names you will never know. It is not a very large house. It is a very good one. Prisca walks through it, at the end, with her gloves in her hand, and says that she can think of no house in the whole of her experience that has been made for so little reason, and with so much, and that she is going to cry, in her room, later, at her leisure.
+  ?end
 * Give the fledglings a hall of their own, with a master of arms, and a master of letters, and a rule against any of them feeding alone [once] ?if can_acquire("training_hall")
   $ do acquire("training_hall")
   $ humanity += 1
-  It is a long low room above the ice houses, with sawdust on the floor and a blackboard. Fiammetta has put her name on the door in chalk. She has put the word *Master* in front of it, and then crossed it out, and put *Mistress*, and then crossed that out, and put *Fiammetta*. She says that it is only for now.
+  ?if in_circle("fiammetta")
+    It is a long low room above the ice houses, with sawdust on the floor and a blackboard. Fiammetta has put her name on the door in chalk. She has put the word *Master* in front of it, and then crossed it out, and put *Mistress*, and then crossed that out, and put *Fiammetta*. She says that it is only for now.
+  ?end
 * Put an honest sum into a vault of your own, under a bank that does not ask the name, in case the family should ever need to leave in the night ?if can_acquire("vaults")
   $ do acquire("vaults")
   $ secrecy += 1
@@ -275,8 +301,12 @@ He is on a bench by the wall of the oldest row, under a cypress, with his hat on
   He does not mention the garden. He holds out his hand, as one does to a person at a funeral, and does not seem to mind in the least whether you take it.
 ?end
 ?if coven_size() > 0 and b4.circle != "stay"
-  They have come, the three of them, to put flowers on the graves, and they are standing, quite near, in the next lane, with a lantern. He looks at them. He looks at them for a long time. Prisca, who has been the same age as a monument for nine hundred years, looks back, and then, to your very great astonishment, drops him a small, grave, perfect curtsey. He bows. It is the bow of a man who has been bowed to by queens, and was never so moved. Fiammetta, behind her, has her fists clenched. Hanno says, quite audibly, that it is exceedingly interesting.
-  "They are yours," says Cassian. He says it in Latin. "That is the thing that I did not expect. I thought that you would be alone."
+  ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+    They have come, the three of them, to put flowers on the graves, and they are standing, quite near, in the next lane, with a lantern. He looks at them. He looks at them for a long time. Prisca, who has been the same age as a monument for nine hundred years, looks back, and then, to your very great astonishment, drops him a small, grave, perfect curtsey. He bows. It is the bow of a man who has been bowed to by queens, and was never so moved. Fiammetta, behind her, has her fists clenched. Hanno says, quite audibly, that it is exceedingly interesting.
+    "They are yours," says Cassian. He says it in Latin. "That is the thing that I did not expect. I thought that you would be alone."
+  ?elif cast_count() > 0
+    Your own people are about you, those who are yours, and nobody has to be asked.
+  ?end
 ?end
 He says that he has the question that he said that he would put. He says that he has been rehearsing it for a very long time, and that he has been turning it over since a village, in the south, where he asked you what you would do with a place. He says that it was a good question, and that it was the wrong one, and that the right one is this.
 He says, "What is a house for?"
@@ -318,7 +348,9 @@ There is a candle on the small vault with no name. It is burning very steadily. 
 ## All Saints
 It is a bright, windy, blue morning, with a cold edge to it, the first real morning of the autumn, and the bells are ringing in every church in the city. The people are coming back from Mass with their flowers. The cemeteries are open. The tombs are full of the sound of children, and of the particular cheerfulness of a city that has buried its dead and is going to have dinner.
 ?if b4.seat == "held"
-  The first sitting of the Chapter is called for the first Monday of the month. The roll has been drawn up in the night by Prisca, in fair copy, and it is on the table of the counting house, under a stone. It has forty seven names. It is the first time that anyone has seen the whole of the river written down in one place.
+  ?if in_circle("prisca")
+    The first sitting of the Chapter is called for the first Monday of the month. The roll has been drawn up in the night by Prisca, in fair copy, and it is on the table of the counting house, under a stone. It has forty seven names. It is the first time that anyone has seen the whole of the river written down in one place.
+  ?end
 ?elif b4.seat == "lent"
   Beaumont's clerk has been at the counting house since seven with a copy of the terms, to be witnessed. He is a nervous young man with ink on his cuffs. He says that his master has not slept, and that he has been walking up and down the gallery at Belle Rive since two, saying the word *honest* to the portraits.
 ?else

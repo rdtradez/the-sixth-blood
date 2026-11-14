@@ -1105,3 +1105,12 @@ test('chapters 4 to 6 name only the coven that exists, and the errand follows wh
   assert.match(run.text, /Thibault/);
   clean(run);
 });
+
+for (let n = 7; n <= 20; n++) {
+  const id = (k) => `b4c${String(k).padStart(2, '0')}`;
+  test(`chapter ${n} names only the members of a Fiammetta and Thibault coven`, async () => {
+    const run = await play(id(n), {}, { ...START, wealth: 900000, 'b4.circle': 'all' }, [], { sys: pair, stopAt: n < 20 ? id(n + 1) : null });
+    assert.doesNotMatch(run.text, /\b(Prisca|Hanno|Tiro)\b/);
+    clean(run);
+  });
+}

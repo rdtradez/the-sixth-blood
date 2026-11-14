@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 17 exists (the manifest entry is incomplete).
 @chapter b4c16
 @title The Winter Laws
-@version 1
+@version 2
 
 # start
 ## December
@@ -99,7 +99,21 @@ The Quaker woman says, without looking up, that it is a very interesting complai
   $ cunning_brutal += 2
   $ standing += 1
   $ secrecy += 1
-  It is Hanno's brief, and Prisca's, and a number of persons' who were asked to look at it in the night. It is forty pages. It is in an exquisite hand. It cites every clause of the Compact, and four precedents, and the plain letter of the articles. It is read into the record by the clerk, at a very even pace, over two hours and ten minutes. At the end of it the man of the Chesapeake says that it is the best-drawn defense that he has ever heard in a court of any kind. Thorne says that it is, however, the work of a family that will not be looked at.
+  ?if in_circle("hanno") and in_circle("prisca")
+    It is Hanno's brief, and Prisca's, and a number of persons' who were asked to look at it in the night. It is forty pages. It is in an exquisite hand. It cites every clause of the Compact, and four precedents, and the plain letter of the articles. It is read into the record by the clerk, at a very even pace, over two hours and ten minutes. At the end of it the man of the Chesapeake says that it is the best-drawn defense that he has ever heard in a court of any kind. Thorne says that it is, however, the work of a family that will not be looked at.
+  ?elif cast_count() > 0
+    $ _lead = business_lead()
+    $ _g = gift_holder("charm")
+    ?if _lead != ""
+      {name(_lead)} has already seen to the accounts, and to the three letters that would otherwise have been yours to write.
+    ?end
+    ?if _g != "" and _g != _lead
+      {name(_g)} has the nervous ones laughing within a quarter hour, and they do not know that they have been handled.
+    ?end
+    ?if _g == "" or _g == _lead
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
+  ?end
 * Stand on the old law, and say that the Compact is the Compact's, and no court of Boston can try a house of the river
   $ b4.court = "denied"
   $ secrecy += 2
@@ -145,7 +159,9 @@ Every one of them looks at you.
   ?if b4.petition == "funded" or b4.petition == "signed"
     You go in the cold, in a carriage, at three in the morning, to the great house on the Rue Royale where the General sleeps, with seven of the free men of the Tremé and the paper that went to Washington last March. They are heard. It is done by a very sleepy aide, a boy of twenty, with a candle, and then by the General himself, in a dressing gown, who reads the handbill with a face like a stone, and says nothing for a long time. At the end he says that he will not undertake to say what the Legislature may do. He says that he may undertake to say who is to be arrested in his district, and by whom.
   ?else
-    You go in the cold, in a carriage, at three in the morning, with a paper that Hanno has written in the carriage and seven of the free men, whom you have never properly met, and who have a very proper idea of what is to be said. They are heard, after an hour, by a sleepy aide, and then by the General, in a dressing gown, who reads the handbill with a face like a stone. He says that he will not undertake to say what the Legislature may do. He says that he may undertake to say who is to be arrested in his district, and by whom.
+    ?if in_circle("hanno")
+      You go in the cold, in a carriage, at three in the morning, with a paper that Hanno has written in the carriage and seven of the free men, whom you have never properly met, and who have a very proper idea of what is to be said. They are heard, after an hour, by a sleepy aide, and then by the General, in a dressing gown, who reads the handbill with a face like a stone. He says that he will not undertake to say what the Legislature may do. He says that he may undertake to say who is to be arrested in his district, and by whom.
+    ?end
   ?end
 $ do discover("the_black_codes")
 <~
@@ -179,7 +195,9 @@ He says that it is Christmas Eve, and that he is old, and that he has been, for 
   $ standing += 2
   $ cunning_brutal += 2
   $ secrecy += 1
-  You say that you will accept no truce that is not a reckoning. You give him a list. It has been made by Hanno, and by Jules, and by a woman of the school who has remembered every fire in six years, and it is a very exact list. He reads it by the fire, slowly, with an air of remote interest. He says that it is all quite correct. He says that he will answer for it in January, at the Chapter, in his own person, and that he will pay it in silver. He says that he never supposed that a thing could be so precisely done.
+  ?if in_circle("hanno")
+    You say that you will accept no truce that is not a reckoning. You give him a list. It has been made by Hanno, and by Jules, and by a woman of the school who has remembered every fire in six years, and it is a very exact list. He reads it by the fire, slowly, with an air of remote interest. He says that it is all quite correct. He says that he will answer for it in January, at the Chapter, in his own person, and that he will pay it in silver. He says that he never supposed that a thing could be so precisely done.
+  ?end
 * Refuse him, and end it tonight, here, in his own house, with what the sixth blood can do
   $ b4.teche = "broken"
   $ humanity -= 3
@@ -195,17 +213,25 @@ $ do discover("the_teche_house")
 $ do chart("neworleans.haven")
 ?if coven_size() > 0 and b4.circle != "stay"
   ?if b4.coven_home == "raised"
-    The house on Gravier Street has the look, on Christmas Eve, of a household that has been invited to a great many parties and has decided to have its own. There is a tree in the great hall, a young cedar, hung with paper stars from the school. Fiammetta is on a ladder, putting a candle on the top. Hanno is holding the ladder, with an expression of the most acute misgiving. Prisca is in the great chair with a very large account book, at which she is not looking.
+    ?if in_circle("fiammetta") and in_circle("hanno") and in_circle("prisca")
+      The house on Gravier Street has the look, on Christmas Eve, of a household that has been invited to a great many parties and has decided to have its own. There is a tree in the great hall, a young cedar, hung with paper stars from the school. Fiammetta is on a ladder, putting a candle on the top. Hanno is holding the ladder, with an expression of the most acute misgiving. Prisca is in the great chair with a very large account book, at which she is not looking.
+    ?elif cast_count() > 0
+      Your own people are about you, those who are yours, and nobody has to be asked.
+    ?end
   ?elif b4.coven_home == "hidden"
     The little back rooms are full of the smell of cloves and orange peel, and the free families of the street have come through, one at a time, with something in a napkin. There is no tree. There is a very small, very bright candle in every window of the passage, and every one is lit.
   ?else
-    They are in the long room in the Marigny, with a fire, and the shutters closed on the frost, and a good deal of food. A bottle is opened, and set down, and not touched. Fiammetta is teaching a child to cheat at cards.
+    ?if in_circle("fiammetta")
+      They are in the long room in the Marigny, with a fire, and the shutters closed on the frost, and a good deal of food. A bottle is opened, and set down, and not touched. Fiammetta is teaching a child to cheat at cards.
+    ?end
   ?end
   ?if b4.refuge == "sheltered"
     Fontenot's sister has stayed for the winter, with two of the Gulf's children, and has been put to keeping the poultry. She says that it is a very lowly office. She says that she is happier in it than she has been in six years.
   ?end
   ?if b4.physician == "family"
-    Dr. Armand has hung a stocking on the door of his room, as a joke. It has been filled by Fiammetta with a number of small, strange, and mostly inedible objects. He says that he has never been so astonished in his life, and keeps every one.
+    ?if in_circle("fiammetta")
+      Dr. Armand has hung a stocking on the door of his room, as a joke. It has been filled by Fiammetta with a number of small, strange, and mostly inedible objects. He says that he has never been so astonished in his life, and keeps every one.
+    ?end
   ?end
 ?elif coven_size() > 0
   The house is quiet and the lamps are low. They are a long way off, and it is Christmas. There is a parcel on the table, in brown paper, wrapped in string, in a hand that you know. You have not opened it. You do not, tonight, open it.

@@ -220,4 +220,4 @@ Still to do, in pairs: chapters 4 to 20 name Prisca, Fiammetta and Hanno in grou
 
 
 ## Coven rework progress
-Chapters 1 to 6 now use cast(), business_lead() and b4.errand_who, no fixed names. Chapters 7 to 20 remain (run npm run coven-names --list), then add gift and village beats.
+Chapters 1 to 20 now check the real coven before naming anyone, and each chapter's gathering has a lead beat and a gift beat. Books Five to Seven should be written this way from the start. Book Three keeps its fixed story cast on purpose.
