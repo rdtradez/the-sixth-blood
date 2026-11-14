@@ -83,6 +83,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 55: Book Five chapters 9 and 10
 - [x] Session 51: Book Five chapters 1 and 2
 - [x] Session 56: Book Five chapters 11 and 12
+- [x] Session 57: Book Five chapters 13 and 14
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -678,3 +679,9 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New decision flags (`b5.` prefix, registered, major): `b5.hand`, `b5.muster`, `b5.mabbott`, `b5.vigil` (chapter 11) and `b5.stair`, `b5.roofs`, `b5.order`, `b5.sat`, `b5.waking` (chapter 12). New codex entries: four. No schema or migration. Tests in `tests/book5f.test.js`.
 - Plans are in `SPOILERS/whitechapel-hunt.md`.
 
+### Session 57 notes (Book Five, chapters 13 and 14)
+
+- Chapters `b5c13` and `b5c14` are in `content/whitechapel-hunt/` (`ch13.tsb`, `ch14.tsb`), about 8,500 words together. The manifest entry stays `"incomplete": true`, so the game pauses on "To be continued" after chapter 14. Same shape as chapters 11 and 12. Chapter 13 has an extra late scene that runs only if the waking in chapter 12 was sealed.
+- The coven fronts both chapters: the family nurses the guest and the last of the bled women, the lead runs the firm (several ventures, house builds and a standing task are all allowed), Fiammetta can ask for a house of her own among the young houses, and the family goes down into the wall. Rival covens are the heart of it (the Court of Lamps and its Warden, the young houses and their claim, the Order's three, the Gaslight Club).
+- New decision flags (`b5.` prefix, registered, major): `b5.lid`, `b5.lisle`, `b5.meeting`, `b5.vane`, `b5.first` (chapter 13) and `b5.ward`, `b5.seat`, `b5.report`, `b5.wall`, `b5.peg` (chapter 14). New people: `lisle`, `vane`. New codex entries: four. New collection piece: `cedar_peg`. No schema or migration. Tests in `tests/book5g.test.js`.
+- Plans are in `SPOILERS/whitechapel-hunt.md`.

@@ -5447,6 +5447,126 @@
       "major": true,
       "default": "gave",
       "note": "Chapter 12: the waking of the sleeper, his own blood, the family's, or sealed again"
+    },
+    "b5.lid": {
+      "kind": "enum",
+      "values": [
+        "gave",
+        "family",
+        "chairman"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "gave",
+      "note": "Chapter 13: how the sleeper was woken after the silver failed, if the lid was sealed"
+    },
+    "b5.lisle": {
+      "kind": "enum",
+      "values": [
+        "guest",
+        "court",
+        "hidden"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "guest",
+      "note": "Chapter 13: what the sleeper is to the house in his first week"
+    },
+    "b5.meeting": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "between",
+        "apart"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "between",
+      "note": "Chapter 13: how Cassian and the sleeper were allowed to meet"
+    },
+    "b5.vane": {
+      "kind": "enum",
+      "values": [
+        "pleaded",
+        "judged",
+        "silent"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "silent",
+      "note": "Chapter 13: his part in the Court's judgment of its Warden"
+    },
+    "b5.first": {
+      "kind": "enum",
+      "values": [
+        "agreed",
+        "scouted",
+        "waited"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "agreed",
+      "note": "Chapter 13: his answer to the sleeper's wish to go back to the wall"
+    },
+    "b5.ward": {
+      "kind": "enum",
+      "values": [
+        "healed",
+        "transfused",
+        "left"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 14: what he did for the last of the bled women at the dispensary"
+    },
+    "b5.seat": {
+      "kind": "enum",
+      "values": [
+        "seat",
+        "charter",
+        "nothing"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "nothing",
+      "note": "Chapter 14: his answer to the young houses calling in the roofs"
+    },
+    "b5.report": {
+      "kind": "enum",
+      "values": [
+        "letter",
+        "seen",
+        "hushed"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "seen",
+      "note": "Chapter 14: what went to Rome with the Order's three"
+    },
+    "b5.wall": {
+      "kind": "enum",
+      "values": [
+        "looked",
+        "bought",
+        "sent"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "looked",
+      "note": "Chapter 14: how he approached the old wall at Bishopsgate"
+    },
+    "b5.peg": {
+      "kind": "enum",
+      "values": [
+        "took",
+        "sealed",
+        "left"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "left",
+      "note": "Chapter 14: what became of the cracked cedar peg and the lamp in the wall"
     }
   }
 }
