@@ -4695,6 +4695,30 @@
       "book": "house-divided",
       "note": "Chapter 4: which member of the coven went on the errand (the id), or empty",
       "default": ""
+    },
+    "b4.armand_gift": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "given",
+        "kept"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "none",
+      "note": "The Dark Gift for Armand (chapters 15 and 20): given, or kept mortal"
+    },
+    "b4.honorine_gift": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "given",
+        "kept"
+      ],
+      "book": "house-divided",
+      "major": true,
+      "default": "none",
+      "note": "The Dark Gift for Honorine (chapters 18 and 20): given, or kept mortal"
     }
   }
 }

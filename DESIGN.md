@@ -624,3 +624,9 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Choices whose options are not mutually exclusive (businesses, boats, people sent) should be `[once]` loops with a closing option, like the venture menus. Book Four chapter 6 (`@version 3`) now lets the nine boats do several things at once; `b4.blockade` keeps its values, with the most committed one (carrying people, then running the Passes) winning.
 - Multi pick pass: 22 more menus across Books One to Four and the Lost Centuries interludes were turned into `[once]` loops with a closing option ("That is the whole of it"), in Book One chapters 9, 11 and 19, Book Two chapters 8, 13, 14 and 16, Book Three chapters 10, 13 and 15, Book Four chapters 1, 5, 8, 12, 13, 15 and 16 (chapter 1 twice), and interludes 1, 3 and 4. Where an option is a refusal or a step back, it stays exclusive and only shows before anything else is picked. The flag keeps its old values and the most committed pick wins. Each edited chapter's `@version` is bumped. The tests' `drive` helpers take the closing option by default.
 
+### Session 51b notes (more ways to sire in Book Four)
+
+- Book Four chapters 15, 18 and 20 (`@version 3`) now offer the Dark Gift. Each offer is hidden unless `can_sire()` (the engine's two a book still applies) and the person is not already in the circle: chapter 15 (the physician, if he lives in the family's house), chapter 18 (the schoolmistress, the morning after) and chapter 20 (either of them, on the last night at the school). Each can also be declined or put off.
+- New registered flags: `b4.armand_gift` and `b4.honorine_gift` (`none`, `given`, `kept`; major). A sired person joins the circle as a fledgling of the sixth line and can be the business lead in Book Five.
+- Test: `tests/book4.test.js` plays each offer, a decline, and the cap.
+

@@ -43,6 +43,7 @@ The days are drawing out, and the nights are not long, and you have until the da
     She has not moved the lamp. She says that the door is still open and that it is a great nuisance, because the cat from next door has found out.
   ?end
   She does not say goodbye. She is not a person who does. She says that she will be an old woman when you wake, if she is anything, and that she hopes that you will have the good sense to remember her young. She gives you a small stub of pencil, quite worn down, from the first copybook. She says that she is not at all sure what a person should do with it. She says that she thinks that you should write something down.
+  ~> last_gift
 * Sit in the long room with the family, and eat the dead men's bread, and say nothing in particular
   $ b4.last_night = "family"
   $ humanity += 1
@@ -319,3 +320,25 @@ You close your eyes.
 It is not like sleep. It is like being put down, very gently, by a large hand. There is a long quiet fall, and the sound of the house goes away, not all at once but one beat at a time, like lamps put out down a long street, and the dark is complete and warm and asks nothing of you at all.
 Somewhere in it, very far off, there is a sound like a stick of chalk, set down on a slate. It comes once. It does not come again. You are, by then, a good way down, and you do not think about it.
 => next
+
+# last_gift
+?if can_sire() and (not in_circle("honorine") or not in_circle("armand"))
+  Then, at the very end, on the step, with the lamps lit and the cat from next door sitting between you, she says something that she has plainly been carrying all evening. She says that twenty years is a long time to leave a school, and a longer time to leave a family, and that she would not mind, if it were put to her, being there when you woke.
+  :the_last_gift
+  * Give Honorine the gift, here on the steps, before you sleep ?if not in_circle("honorine")
+    $ b4.honorine_gift = "given"
+    $ do sire("honorine", "schoolmistress of the Tremé")
+    $ bond.armand += 1
+    $ humanity -= 3
+    She does not look at the street. She looks at the lamps, all the way down it, the whole length of the Tremé, until the last of them goes blurred, and she says, quite steadily, that she would like to remember them.
+  * Offer it to her brother, who is inside, and has said that he would ask ?if not in_circle("armand")
+    $ b4.armand_gift = "given"
+    $ do sire("armand", "physician of the Tremé")
+    $ bond.armand += 3
+    $ humanity -= 3
+    He comes out onto the step with his bag, and listens, and is not at all surprised. He says that he has been expecting it since the spring, and that he would like to be given it where the school can hear.
+  * Tell her that the school will want her mortal and old and loved, and that you will remember her young
+    $ humanity += 1
+    She nods once. It is what she expected, and she is not sorry to have asked.
+?end
+<~
