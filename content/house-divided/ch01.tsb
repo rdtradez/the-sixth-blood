@@ -7,7 +7,7 @@
 @chapter b4c01
 @title A Letter from the River
 @book house-divided
-@version 2
+@version 3
 
 # start
 ## The seventh waking
@@ -147,19 +147,38 @@ The third is a list, in two columns, headed *Offers*. Three prospects from the r
 # offers
 ## The offers
 :the_offers
-* The steamboats, the long boats of the river
-  $ b4.lead_pick = "boats"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* The steamboats, the long boats of the river [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b4.lead_pick = "boats"
+    $ _mp_rank = 1
+  ?end
   $ do earn(-2)
   {_reader} writes it down. They pay nine, and they pay in a way that makes a person sleep. They also carry cotton, and what is carried with it, and you hear, in your own thoughts, the first small creak of a thing that you will have to answer for.
-* The bank, a larger stake in the Valère house
-  $ b4.lead_pick = "bank"
+* The bank, a larger stake in the Valère house [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b4.lead_pick = "bank"
+    $ _mp_rank = 2
+  ?end
   $ standing += 1
   {_reader} writes it down. A bank pays eight and asks no one what they do with the money, which is a sort of virtue and a sort of vice. It would put the family in the Valère counting house as partners, and not merely in the post.
-* The school fund, for the free families
-  $ b4.lead_pick = "school"
+* The school fund, for the free families [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ b4.lead_pick = "school"
+    $ _mp_rank = 3
+  ?end
   $ humanity += 1
   $ do earn(-1)
   {_reader} writes it down, and for a moment the pen stops. It is the one that pays nothing. It is also, says {_reader}, the one that the Valère wrote about on the fifth page of the eleventh letter, with a sentence that was crossed out and then written again.
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 <~
 
 # trouble
@@ -340,23 +359,43 @@ $ do discover("the_crescent_city")
 ## A letter from the hill
 Between the second ledger and the third there is a letter that the books did not account for, in the careful hand of the keepers of the hill, with a thumbprint in the corner where someone has been holding the paper down against the wind. The village is well, it says, and has grown, and has a good many more mouths than it had when you lay down. It does not ask for anything. It says only that the winter was hard, and that the old women have been saying, in the church porch, that it would be a mercy if the hill had somewhere to put the sick that was not a barn.
 :the_hill
-* Pay for an infirmary on the hill, with a physician's room and a ward ?if can_build("infirmary")
-  $ b4.village = "built"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_2
+* Pay for an infirmary on the hill, with a physician's room and a ward [once] ?if can_build("infirmary")
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b4.village = "built"
+    $ _mp_rank = 2
+  ?end
   $ do build("infirmary")
   $ humanity += 1
   You write the sum, and sign it, and it goes into the post as a thing that costs a great deal less than it seems. It is a long, low, whitewashed building, in the end, with eight beds and a stove, and a woman from the village who has been a midwife for thirty years to run it. It will be there long after the thing that built it has been forgotten, and that, you reflect, is nearly the only kind of monument that you have ever liked.
-* Pay for a granary against the bad years, with a lock and a ledger ?if can_build("granary")
-  $ b4.village = "built"
+* Pay for a granary against the bad years, with a lock and a ledger [once] ?if can_build("granary")
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b4.village = "built"
+    $ _mp_rank = 2
+  ?end
   $ do build("granary")
   $ standing += 1
   It is a dull thing, a granary, and the best investment that you will make this year. The hill will have bread when the valley does not, and a ledger to show who was given what, and a lock whose key is held by three people at once. You are told that the old women have already begun to quarrel about who is to be the third.
-* Send coin to the hill, and let the village choose ?if wealth > 0
-  $ b4.village = "sent"
+* Send coin to the hill, and let the village choose [once] ?if wealth > 0
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b4.village = "sent"
+    $ _mp_rank = 1
+  ?end
   $ do send_home(30)
   It is the lazy kindness, and also, often, the wisest. The village will spend it on whatever it most lacks, which will not be what you would have guessed. There will be a letter in the spring that tells you what it was.
-* Write that you have read the letter, and that you will think of it
+* Write that you have read the letter, and that you will think of it ?if _mp_n == 0
   $ b4.village = "waited"
   It is not a refusal. It is something like the opposite, and not quite a promise, and the writer, when it reaches the hill, will know the difference exactly.
+  -> :mp_done_2
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_2
+-> :mp_more_2
+:mp_done_2
 <~
 
 # street

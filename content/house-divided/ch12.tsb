@@ -5,7 +5,7 @@
 @chapter b4c12
 @title The Winter House
 @book house-divided
-@version 2
+@version 3
 
 # start
 ## December
@@ -194,25 +194,41 @@ There is an old woman at the front, in a clean headcloth, with her arms folded. 
   There is a girl beside her, nine or ten, with a copybook under her arm, in a round upright hand. It is the first that you have seen of the Tremé on the estate. She looks at you with enormous gravity.
 ?end
 :the_labor
-* Buy the land at the Treasury's sale, through the free families of the Tremé, and put the title into the names of the people who work it
-  $ b4.labor = "land"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Buy the land at the Treasury's sale, through the free families of the Tremé, and put the title into the names of the people who work it [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b4.labor = "land"
+    $ _mp_rank = 2
+  ?end
   $ humanity += 3
   $ standing -= 1
   $ secrecy -= 2
   $ do earn(-12)
   It is done through Captain Wren's clerk, and a notary of the Tremé with very large cuffs, and eleven free men of the parish who put their names down as trustees. It takes a fortnight. It is, in the strict sense, not at all clear that it is legal, and it is, in the plain sense, not at all clear that it is not. The Treasury sells the land at the end of the month. The title is put into a long, narrow, blue envelope. Nobody reads it aloud. The old woman in the headcloth holds the envelope for a very long time without opening it, and then gives it, with great formality, to the girl with the copybook, and says that she is to read it, and that she is to read every word.
-* Sign the Army's contract, and add to it out of your own pocket: double wages, a school, and the pass torn up
-  $ b4.labor = "wages"
+* Sign the Army's contract, and add to it out of your own pocket: double wages, a school, and the pass torn up [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b4.labor = "wages"
+    $ _mp_rank = 1
+  ?end
   $ humanity += 1
   $ standing += 2
   $ cunning_brutal += 1
   $ do earn(-7)
   You sign it on the clerk's box, in a clear plain hand, under the General's name, with a pen that is frozen. Then you take the pencil from behind the clerk's ear, and write, in the margin, in block letters, the things that you propose to add, and the clerk, who is not a stupid young man, reads them with his lips moving, and says that it is highly irregular, and that he supposes the General will not mind. You tear the pass in half in front of the yard. It is not applauded. It is looked at, in complete silence, by two hundred people, who have all stopped breathing. It is a very much better sound than applause.
-* Sign nothing, and let the Army and the people work it out between them
+* Sign nothing, and let the Army and the people work it out between them ?if _mp_n == 0
   $ b4.labor = "apart"
   $ secrecy += 2
   $ humanity -= 3
   You tell the clerk that you will think it over, which is a thing that a gentleman says. You walk back to the carriage through the frozen yard. Nobody stops you. Nobody says a word. At the gate a very old man, in a coat with the sleeves cut off, takes his hat off, and holds it. It is a courtesy. It is the one thing that you are unable to look at. You are in the carriage, and in the road, and a good mile on before you realize that you have not breathed.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 $ do discover("the_labor_contracts")
 <~
 

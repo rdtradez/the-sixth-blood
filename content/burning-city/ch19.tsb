@@ -4,7 +4,7 @@
 @chapter b1c19
 @title Ash and Accounts
 @book burning-city
-@version 1
+@version 2
 @next b1c20
 
 # start
@@ -136,24 +136,43 @@ She does not offer you a cup. She puts the abacus between you like a chaperone.
 ?else
   "It has your name," she says, "or the shape of one. That is a risk. It is also an asset. It is the one in the book that will still be worth something in a hundred years, and I am not at all sure that it should be given up."
 ?end
-* Leave it in the house's hands, to keep and to lend
-  $ b1.collis_legacy = "house"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Leave it in the house's hands, to keep and to lend [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b1.collis_legacy = "house"
+    $ _mp_rank = 1
+  ?end
   $ bond.prisca += 3
   $ standing += 1
   $ do hide_collis(true)
   "Good," says Prisca, and means it, and for once does not trouble to hide that she does. She makes a note, a short one, and sands it. "It will be here. It will be kept in a name that is not yours. When you want it, ask for it, and I shall be pleased to be surprised." She looks at the biscuit for the first time. "I have never in my life been given anything that I was not afraid I should have to give back. I find that I am not afraid."
-* Keep it as your own, under Hanno's books, and let it grow
-  $ b1.collis_legacy = "yours"
+* Keep it as your own, under Hanno's books, and let it grow [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b1.collis_legacy = "yours"
+    $ _mp_rank = 2
+  ?end
   $ bond.prisca -= 1
   $ cunning_brutal -= 2
   "Of course," says Prisca, with a dry exactness. "It is yours." She makes the note. It is a long one. "It will be a good deal more trouble. A thing that has a face is a thing that can be followed. I shall tell Hanno to give it a very dull face." She almost smiles. "He has, I am sorry to say, a great gift for it."
-* Send the greater part of it to the hill, and let Collis serve Collesanto
-  $ b1.collis_legacy = "village"
+* Send the greater part of it to the hill, and let Collis serve Collesanto [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ b1.collis_legacy = "village"
+    $ _mp_rank = 3
+  ?end
   $ do send_home(8)
   $ collesanto += 3
   $ standing -= 1
   $ bond.prisca += 1
   She puts down the stylus. She looks at you for a long time. "The hill is a poor investment," she says at last. "It is a thing that I should say to anybody. It will not pay. It will be a hundred years before it pays, and then it will pay in ways that cannot be written in a ledger." She picks up the stylus again. "I do not say that I disapprove. I say that I shall have to learn a new column."
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 ?if in_circle("prisca") and member("prisca", "status") == "active"
   She sits back. It is the first time that you have seen her do it. The abacus slides a little on the table, and she does not put it right.
   "There is another thing," she says. "You will want someone to hold what is yours while you are gone. I will not say it is I. I will only say that I have a very good head for the work, and that the house is old, and that it has been, in its time, the only thing in Rome that was not for sale." She moves a bead, and moves it back. "You need not answer. You have a little while. I shall not ask again."

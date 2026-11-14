@@ -4,7 +4,7 @@
 @chapter b3c10
 @title The Lady Who Sleeps
 @book crown-of-ashes
-@version 1
+@version 2
 
 # start
 ## The fifth
@@ -181,8 +181,15 @@ There is a man in an apron at the head of the rue de Charonne who says that ther
 ?elif b3.grain == "hoarded"
   Adélaïde has pointed out, in the course of the evening, with some reserve, that the house is very well provided at present, at one remove, in a stone shed.
 ?end
-* Send a cart of the house's bread, and a second, and put the shop's name on it
-  $ b3.march = "bread"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Send a cart of the house's bread, and a second, and put the shop's name on it [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b3.march = "bread"
+    $ _mp_rank = 1
+  ?end
   $ humanity += 3
   $ standing += 2
   $ bond.adelaide += 1
@@ -190,8 +197,12 @@ There is a man in an apron at the head of the rue de Charonne who says that ther
   $ do chart("paris.counting")
   $ do chart("paris.rebels")
   It is eleven carts before you have done. It is Aubry's boys, and the printers, and the shop's own apprentices, with a long chain of lanterns, and the house's name on the tilts in great plain black letters, which Étienne, in his nightshirt, does not at all approve. It costs a sum that Adélaïde enters, in the end, with a certain look, as a loss. The bread goes down the rue de Charonne, from hand to hand, in the light of the candles. Nobody speaks. There is a long, low, grateful sound, like the sound of a great many people eating very slowly. You see the girl with the ribbon in her teeth take a loaf from a cart and, instead of eating it, hold it against her chest, and shut her eyes.
-* Give the Cadets muskets from the house's stores
-  $ b3.march = "armed"
+* Give the Cadets muskets from the house's stores [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b3.march = "armed"
+    $ _mp_rank = 2
+  ?end
   $ cunning_brutal += 3
   $ humanity -= 2
   $ defiance += 2
@@ -199,13 +210,18 @@ There is a man in an apron at the head of the rue de Charonne who says that ther
   $ bond.severin += 2
   $ do chart("paris.rebels")
   It is not bread. It is not a thing that you should do. You do it in an hour, through the back door of the shop, with the help of four of the boys and a handcart. There are forty muskets, with the Liège stamp, and a thousand rounds. They go into the cellar of the brewery under a heap of old sacking. It is a good deal more than the Cadets have ever had. They look at it, in the candlelight, the whole of them, with the expression of a congregation that has been handed, instead of the sacrament, a dish of raw meat. Nobody says that it is a bad thing. Nobody says that it is not.
-* Do nothing, and go home to your own door
+* Do nothing, and go home to your own door ?if _mp_n == 0
   $ b3.march = "none"
   $ cunning_brutal += 1
   $ secrecy += 2
   $ standing -= 1
   $ humanity -= 1
   It is a decision that is made by a great many persons in a great many houses in Paris that night. You close the shutter. You hear the women on the doorsteps of the brewery, and the voice of a child, a thin, steady voice, that begins to count out loud the number of the cobbles. It is the loneliest sound that you have ever heard. It goes on for nearly an hour.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 <~
 
 # night

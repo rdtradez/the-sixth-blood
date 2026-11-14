@@ -3,7 +3,7 @@
 @chapter b1c11
 @title The Old Quarry
 @book burning-city
-@version 1
+@version 2
 
 # start
 ## The third day
@@ -112,13 +112,21 @@ You go down the lane with her. The cobbler's shop is as small as a cupboard and 
 "It is very kind," he says, "but you must not." He says it quite gently. "You do not know what you would be doing."
 You know exactly what you would be doing.
 :the_cobbler
-* Take them to the house's cellars, and hide them there until it is over
-  $ b1.refuge = "hid"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Take them to the house's cellars, and hide them there until it is over [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b1.refuge = "hid"
+    $ _mp_rank = 2
+  ?end
   $ secrecy -= 2
   $ standing -= 1
   $ humanity += 3
   It is not clever, and it is not safe, and it is what you do. You wait until the dusk comes on, and the lane is quiet, and you take them through the burned back ways, one by one, with their shawls over their heads and the small girl's hand in yours, down to the cellar grate and the long cool dark of the Emporium. The house sees them come. It says nothing. Hanno brings a lamp, and then he seems to think better of the lamp, and brings bread instead. The younger girl looks at you over the rim of a cup, with her eyes very wide, and says, in a perfectly clear voice, that you are very cold. Her mother hushes her. You tell her that it is the cellar, and she nods, with the grave good sense of the very young, and does not believe it at all.
-* Pay for a berth, and put them on a ship at Ostia
+* Pay for a berth, and put them on a ship at Ostia [once]
+  $ _mp_n += 1
   ?if wealth >= 10
     $ b1.refuge = "shipped"
     $ do earn(-10)
@@ -131,11 +139,16 @@ You know exactly what you would be doing.
     $ secrecy -= 2
     $ humanity += 3
   ?end
-* Tell him that you are sorry, and walk away
+* Tell him that you are sorry, and walk away ?if _mp_n == 0
   $ b1.refuge = "none"
   $ humanity -= 2
   $ defiance -= 1
   You tell him that you are sorry. It is true, and it is no use. He says that it is quite all right. He says it as one says it to a child that has dropped a cup. You go out into the lane, and Naevia is standing by the door with her broom, looking at you with her old unfooled face, and she does not say anything at all, and it is the worst thing that she could have done. At dusk you hear the soldiers on the lane. You do not hear anything else. You have very good ears, and it is a thing that you would give a great deal not to have had.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 ?if b1.refuge == "none"
   You do not go back along that lane again for a long time.
 ?end

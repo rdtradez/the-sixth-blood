@@ -39,4 +39,5 @@ The owner plays the game and wants to be surprised by chapter level choices and 
 - Editing a released chapter: bump its `@version`.
 - Every path through a scene ends in `->`, `<~` or `=>`. The checker warns about scenes that can run off their end.
 - Venture menus (where the player chooses what to invest in) must loop: each option is `[once]` and hidden unless `can_invest()`, each purchase jumps back to the menu label, and a final option ends it. The player may buy several ventures as long as the wealth is there.
+- Any choice whose options are not mutually exclusive (businesses, boats, people sent, aid given) is a `[once]` loop with a closing option that appears after the first pick, so the player may do several. Keep an existing enum flag by letting the most committed pick win.
 - Add a test for every new engine behavior, especially anything that touches saves.

@@ -26,7 +26,7 @@ async function drive(game, frame, wants = []) {
   for (let i = 0; i < 3000 && frame.wait !== 'book_end'; i++) {
     pages.push(...texts(frame));
     if (frame.wait === 'choices') {
-      let at = 0;
+      let at = Math.max(0, frame.choices.findIndex((c) => /^(That is the whole of it|That is the nine boats settled)/.test(c.text)));
       for (const want of wants) {
         const hit = frame.choices.findIndex((c) => want.test(c.text));
         if (hit >= 0) { at = hit; break; }

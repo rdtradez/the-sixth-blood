@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 14 exists (or carries on into it).
 @chapter b4c13
 @title The Man from Pearl Street
-@version 2
+@version 3
 
 # start
 ## March
@@ -167,24 +167,40 @@ It asks for the vote. It asks, in a perfectly measured French and English, that 
   There is an old woman in a clean headcloth on the front bench, with a girl at her elbow. They have come in from the Bayou road in a cart. They have never been in a hall.
 ?end
 :the_petition
-* Fund the delegation to Washington, and pay for the journey and the lawyers
-  $ b4.petition = "funded"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Fund the delegation to Washington, and pay for the journey and the lawyers [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b4.petition = "funded"
+    $ _mp_rank = 2
+  ?end
   $ humanity += 2
   $ standing += 1
   $ secrecy -= 1
   $ do earn(-8)
   It is done at the end of the evening, through the treasurer, in a small plain envelope, and it is not announced. Two men of the hall, a cigar maker and a dentist, are to go north by the Cuba packet in a week with the petition and a letter of introduction to the senator from Massachusetts. The treasurer does not say a word of thanks. He looks at the envelope for a very long time, and puts it into his coat.
-* Sign it, in your own name, with the free families, and say nothing more
-  $ b4.petition = "signed"
+* Sign it, in your own name, with the free families, and say nothing more [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b4.petition = "signed"
+    $ _mp_rank = 1
+  ?end
   $ humanity += 1
   $ standing -= 1
   $ secrecy -= 1
   It is brought to you across the room, on a board, with a pen. You sign it, below the cigar maker, in a clear hand: a name that has been in the city five years, and is, to the persons around you, a most curious thing to find among the others. There is a small murmur. The Colonel in the chair says nothing at all, and looks at the paper with the plain, grave, courteous attention that a man gives to a witness.
-* Listen from the back, and leave before the signing
+* Listen from the back, and leave before the signing ?if _mp_n == 0
   $ b4.petition = "apart"
   $ secrecy += 2
   $ humanity -= 2
   You stand at the back, under the stair, with your hat in your hand, and hear the whole of it read. It is a very good paper. It is, you think, a better paper than any that you have ever signed. You leave before the pen is passed, by the door at the side, and in the Rue Saint Claude, in the damp, you stand a long time under the lamp, as though you had been waiting for a thing, and it had gone by.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 $ do discover("the_petition_of_the_free_men")
 <~
 

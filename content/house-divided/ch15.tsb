@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 16 exists (the manifest entry is incomplete).
 @chapter b4c15
 @title The Bells of April
-@version 2
+@version 3
 
 # start
 ## April
@@ -87,8 +87,15 @@ It is two miles up the Lake road, where the shell bank runs out into the cypress
 The Army has been along the road twice. It has taken the wagons, and the horses, and a ledger. It has not yet understood what it has in its hands.
 You pick up the tail of the last wagon, which has gone down at the axle in the shell, and lift it, with one hand, and hold it a long minute, while a boy puts a log under. It is a thing you have not thought about. The sixth blood does not tire. There is a silence round the fire, and a child laughs.
 :the_refuge
-* Bring them in: the house on the town side, every room of it, and the cellar and the school beside it
-  $ b4.refuge = "sheltered"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Bring them in: the house on the town side, every room of it, and the cellar and the school beside it [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b4.refuge = "sheltered"
+    $ _mp_rank = 2
+  ?end
   $ humanity += 2
   $ standing += 1
   $ secrecy -= 2
@@ -114,8 +121,12 @@ You pick up the tail of the last wagon, which has gone down at the axle in the s
     They are put in the long room in the Marigny, and in the stable, and in the two rooms over the carriage house. It is not enough. The free families of the street come out with beds. By morning there is not a mattress left on the block, and the whole neighborhood knows, and has not said one word.
   ?end
   It is a great, plain, tiring kindness, and it is not safe. It is done, at four in the morning, by a very small family, for a house that has not so far done it any good.
-* Put them on the firm's boats for Havana, at the family's cost, and the family's name on none of the papers
-  $ b4.refuge = "shipped"
+* Put them on the firm's boats for Havana, at the family's cost, and the family's name on none of the papers [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b4.refuge = "shipped"
+    $ _mp_rank = 1
+  ?end
   $ standing += 1
   $ cunning_brutal += 1
   $ do earn(-5)
@@ -127,13 +138,18 @@ You pick up the tail of the last wagon, which has gone down at the axle in the s
     It is done through a Greek on the Levee who owns three small schooners and a reputation. It is done badly, and at four times the price. Two of the boats go out in the night. One is turned back at the bar by a patrol, and has to be got off by hand, and the Mobile families come back up the road in the dawn, with the children, and do not look at you.
   ?end
   It is, in the plain sense, a deliverance. It is also a way of not having them in the house.
-* Say that the family is a small one, and cannot take forty, and give what money it can
+* Say that the family is a small one, and cannot take forty, and give what money it can ?if _mp_n == 0
   $ b4.refuge = "left"
   $ secrecy += 2
   $ humanity -= 2
   $ standing -= 1
   $ do earn(-1)
   It is perfectly true. You say it, and put the purse into the sister's hand, and she takes it, and looks at it, and says that it is very handsome. You say that you will send a wagon with bread. She nods. She says, quite gently, that she was brought up to believe that a house of the blood did not turn away a house of the blood. She does not say it as a reproach. She says it as one says a date.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 $ do discover("the_fall_of_mobile")
 <~
 

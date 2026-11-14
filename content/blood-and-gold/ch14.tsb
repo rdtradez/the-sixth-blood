@@ -6,7 +6,7 @@
 @chapter b2c14
 @title The Hill by Daylight
 @book blood-and-gold
-@version 1
+@version 2
 
 # start
 ## A letter from Tommaso
@@ -79,24 +79,40 @@ You look at it for a long time. Tommaso stands in the door with his lantern held
 You turn the little key over in your fingers. It is the same pattern as the lock. The wards are a little worn, as they would be by years of use, and it has the smooth, dark look of a thing that has been carried a long time in a pocket. It means that a second key has been made, a long while ago, or that there was always one more than the hill believed.
 "There are three keys," says Tommaso, very low. "There is mine, and my mother's, and the one that you have, and I have counted them every night this week, and I should like not to think about it."
 :the_cellar
-* Change the lock, with a smith of the Arte, and give three keys: Tommaso's, Ginevra's and yours
-  $ b2.shrine = "relocked"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Change the lock, with a smith of the Arte, and give three keys: Tommaso's, Ginevra's and yours [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b2.shrine = "relocked"
+    $ _mp_rank = 2
+  ?end
   $ bond.tommaso += 1
   $ secrecy += 1
   $ do earn(-5)
   It is the sensible thing, and it is dull, and it is sufficient for a great many nights. The smith comes from Florence the next morning with a satchel of tools and a face like a boiled egg, and does not ask a question. By evening there is a new brass lock on the little door, and the old one hangs on a nail in the sacristy, where anyone who cared to look might see it.
-* Set a watch on the shrine, six men with a bell, by night, in turns
-  $ b2.shrine = "guarded"
+* Set a watch on the shrine, six men with a bell, by night, in turns [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b2.shrine = "guarded"
+    $ _mp_rank = 1
+  ?end
   $ bond.tommaso += 2
   $ standing += 1
   $ do earn(-3)
   He nods slowly. It is the answer that he had been hoping for and had not liked to ask for. By dark there are six of the hill's young men sitting on the step of the shrine with cudgels and a flask, very much on their dignity, and a small bell on a cord. The village, which has been wondering for three days what has been going on, takes it as a great honor.
-* Leave the shrine to the keeping of Ginevra, who has kept it since before the walls were built
+* Leave the shrine to the keeping of Ginevra, who has kept it since before the walls were built ?if _mp_n == 0
   $ b2.shrine = "trusted"
   $ bond.ginevra += 3
   $ bond.tommaso -= 1
   $ secrecy -= 1
   He does not argue. He looks, for an instant, as a man looks who has been relieved of a burden and has also been told that he is not the one that carries it. "She will keep it," he says, at last. "She has never lost a key in her life." He goes to find her, and you stand in the little cold cellar, with the clean place on the floor in front of you, and the key in its box.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 <~
 
 # walls

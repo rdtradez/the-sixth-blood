@@ -6,7 +6,7 @@
 @chapter b2c08
 @title The Seller of Thread
 @book blood-and-gold
-@version 1
+@version 2
 
 # start
 ## A small matter at the third hour
@@ -183,25 +183,41 @@ They want the same thing, it appears. It is a very simple one. They have each, i
   You do not say anything. You are thinking of a man at a side door, and of an old ducat that smelled of a house without a fire. You listened to him, and you let him go. It seems a good deal less clever than it did.
 ?end
 :the_paper
-* Warn Ser Bartolo, privately, that someone is buying the ground out from under the Pazzi, and that it will not stay quiet
-  $ b2.pazzi_paper = "warned"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Warn Ser Bartolo, privately, that someone is buying the ground out from under the Pazzi, and that it will not stay quiet [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b2.pazzi_paper = "warned"
+    $ _mp_rank = 2
+  ?end
   $ standing += 1
   $ secrecy -= 1
   $ humanity += 1
   $ bond.prisca += 1
   You wait until Raniero has gone, with his rings and his bows, and the door is shut. Then you say it, in a low voice, to the ceiling, as he likes it said. Bartolo does not turn a hair. He looks at the plaster for a considerable time. "I thank the Signore," he says. "It will be mentioned. I do not say to whom." He goes out very slowly, with the pouch hanging at his belt, and you see that his hand, as he lifts the latch, is not quite steady.
-* Buy a little of the paper yourself, at forty, and see where it goes
-  $ b2.pazzi_paper = "profited"
+* Buy a little of the paper yourself, at forty, and see where it goes [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b2.pazzi_paper = "profited"
+    $ _mp_rank = 1
+  ?end
   $ cunning_brutal += 2
   $ do earn(25)
   $ humanity -= 1
   $ secrecy += 1
   It is a perfectly proper investment. It is the kind of thing that a bank is for. You have Benedetto draw up the paper, and sign it, and by the ninth hour you have bought, in a series of very small and very discreet purchases, a quiet corner of the same debt that the stranger has been buying. It is not, you tell yourself, a bet. It is merely a very good seat. You do not ask what the play is.
-* Say that you have heard nothing, and see them both to the door
+* Say that you have heard nothing, and see them both to the door ?if _mp_n == 0
   $ b2.pazzi_paper = "silent"
   $ secrecy += 1
   $ cunning_brutal += 1
   They go, one after the other, with a long, politely disappointed look at the room. It is a very correct answer. It is the answer of a house that would like to see how the thing falls out, and the whole of the quarter will know, by evening, that the Banca del Colle is not a place where one gets a straight word.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 <~
 
 # dusk

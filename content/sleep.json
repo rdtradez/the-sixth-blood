@@ -139,7 +139,53 @@
      "name": "The Napoleonic Wars",
      "risk": 1
     }
-   ]
+   ],
+   "investments": {
+    "land_before_purchase": {
+     "name": "Land on the lower Mississippi, bought before anyone knows whose it will be",
+     "growth": 1.3,
+     "risk": 0,
+     "flag": "the old land on the river"
+    },
+    "erie_canal": {
+     "name": "The great canal across New York",
+     "growth": 1.2,
+     "risk": 0,
+     "flag": "the canal"
+    },
+    "first_railways": {
+     "name": "The first American railways",
+     "growth": 1.4,
+     "risk": 0,
+     "flag": "the first railways"
+    },
+    "english_mills": {
+     "name": "The cotton mills of Lancashire",
+     "growth": 1.5,
+     "risk": 0,
+     "humanity": 3,
+     "flag": "the mills"
+    },
+    "california_gold": {
+     "name": "Supplies and land for the California gold rush",
+     "growth": 1.3,
+     "risk": 1,
+     "flag": "the gold"
+    },
+    "war_bonds": {
+     "name": "Bonds for the governments at war",
+     "growth": 1.3,
+     "risk": 1,
+     "flag": "the war bonds"
+    },
+    "cotton_and_slavery": {
+     "name": "Cotton, and the slave economy that grows it",
+     "growth": 1.9,
+     "risk": 1,
+     "humanity": 15,
+     "flag": "the cotton"
+    }
+   }
   },
   "new_orleans_to_london": {
    "from": "house-divided",
@@ -153,7 +199,58 @@
      "name": "The Panic of 1873",
      "risk": 1
     }
-   ]
+   ],
+   "investments": {
+    "cleveland_oil": {
+     "name": "An oil refiner in Cleveland, and the company he is starting",
+     "growth": 1.5,
+     "risk": 0,
+     "flag": "the Cleveland oil company"
+    },
+    "new_york_bank": {
+     "name": "A new banking house in New York, with a great name behind it",
+     "growth": 1.4,
+     "risk": 0,
+     "flag": "the New York bank"
+    },
+    "pittsburgh_steel": {
+     "name": "A Pittsburgh steelmaker, and the bridges he builds",
+     "growth": 1.4,
+     "risk": 0,
+     "flag": "the steel"
+    },
+    "palace_cars": {
+     "name": "Sleeping cars for the long railways",
+     "growth": 1.25,
+     "risk": 0,
+     "flag": "the sleeping cars"
+    },
+    "chicago_rebuilt": {
+     "name": "Land and brick in Chicago, after the fire",
+     "growth": 1.2,
+     "risk": 0,
+     "flag": "the rebuilt city on the lake"
+    },
+    "telephone_patents": {
+     "name": "A speaking wire, and the patents on it",
+     "growth": 1.3,
+     "risk": 1,
+     "flag": "the telephone"
+    },
+    "northern_pacific": {
+     "name": "Railroad bonds for the Northern Pacific, sold by a famous banker",
+     "growth": 0.6,
+     "risk": 2,
+     "flag": "the bonds that failed"
+    },
+    "company_towns": {
+     "name": "Mine and mill guards, and the company towns that hire them",
+     "growth": 1.6,
+     "risk": 1,
+     "humanity": 8,
+     "flag": "the company towns"
+    }
+   }
   },
   "london_to_chicago": {
    "from": "whitechapel-hunt",
@@ -172,7 +269,52 @@
      "name": "The 1918 influenza",
      "risk": 1
     }
-   ]
+   ],
+   "investments": {
+    "electric_light": {
+     "name": "The electric companies that light the cities",
+     "growth": 1.4,
+     "risk": 0,
+     "flag": "the electric light"
+    },
+    "steel_combine": {
+     "name": "The great steel combine",
+     "growth": 1.3,
+     "risk": 0,
+     "flag": "the steel combine"
+    },
+    "motor_company": {
+     "name": "A Detroit motor company that wants to build cars for everyone",
+     "growth": 1.8,
+     "risk": 1,
+     "flag": "the motor company"
+    },
+    "mail_order": {
+     "name": "A Chicago mail order house, selling to every farm in the country",
+     "growth": 1.3,
+     "risk": 0,
+     "flag": "the mail order house"
+    },
+    "flying_machines": {
+     "name": "Flying machines",
+     "growth": 1.4,
+     "risk": 1,
+     "flag": "the flying machines"
+    },
+    "wireless": {
+     "name": "The wireless, and the stations that will talk to every house",
+     "growth": 1.3,
+     "risk": 0,
+     "flag": "the wireless"
+    },
+    "munitions": {
+     "name": "Shells and powder for the war",
+     "growth": 1.7,
+     "risk": 1,
+     "humanity": 8,
+     "flag": "the munitions"
+    }
+   }
   }
  }
 }
