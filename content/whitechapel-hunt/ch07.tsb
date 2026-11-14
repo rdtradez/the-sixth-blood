@@ -148,7 +148,11 @@ It is the last week of August. The heat has gone out of the city in a single nig
     $ b5.build = "safe"
   ?end
   $ secrecy += 1
-  Prisca does it, with a plan and a pencil, in one afternoon, and does not allow anyone to see the addresses. They are small and bad and perfectly dry, and each has a bolt, a blanket, and a tin of biscuit. They are, she says, the first rooms in London that the Court has not counted.
+  ?if in_circle("prisca") and member("prisca", "status") == "active"
+    Prisca does it, with a plan and a pencil, in one afternoon, and does not allow anyone to see the addresses. They are small and bad and perfectly dry, and each has a bolt, a blanket, and a tin of biscuit. They are, she says, the first rooms in London that the Court has not counted.
+  ?else
+    The family does it, with a plan and a pencil, in one afternoon, and nobody is allowed to see the addresses. They are small and bad and perfectly dry, and each has a bolt, a blanket, and a tin of biscuit. They are, the family says, the first rooms in London that the Court has not counted.
+  ?end
   -> :the_house
 * Build a hall in the warehouse, with a floor for practice, and a place where the young can learn what they are [once] ?if can_acquire("training_hall")
   $ do acquire("training_hall")
@@ -156,7 +160,11 @@ It is the last week of August. The heat has gone out of the city in a single nig
     $ b5.build = "hall"
   ?end
   $ cunning_brutal += 1
-  It is a long bare room with a boarded floor and a beam to hang from and no windows at all. Hanno builds the whole of it, with his own hands, in nine days. He says nothing about it and he is seen to touch every board.
+  ?if in_circle("hanno") and member("hanno", "status") == "active"
+    It is a long bare room with a boarded floor and a beam to hang from and no windows at all. Hanno builds the whole of it, with his own hands, in nine days. He says nothing about it and he is seen to touch every board.
+  ?else
+    It is a long bare room with a boarded floor and a beam to hang from and no windows at all. The family builds the whole of it, with their own hands, in nine days. Nobody says anything about it, and every one of them is seen to touch every board.
+  ?end
   ?if gift_holder("strength") != ""
     {name(gift_holder("strength"))} tries the beam on the first night, and the beam, which is a good deal of English oak, makes a small apologetic noise. Hanno says that he will put in another.
   ?end

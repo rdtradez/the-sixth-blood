@@ -1,0 +1,289 @@
+// Book Five, Chapter 10 (session 55). Mid September, 1887, and the night of the twentieth.
+// Opens with no phase (the lead's report on the fortnight), then a short hunger scene that only runs if must_feed(), then one night phase of three actions out of four, a fixed closing run in the crypt that every player plays, and a dawn.
+// The coven fronts the chapter: the family sits beside him at the congress, the business lead carries the firm's side of every bargain with the young houses, the haven is where the allies are fed and housed, and the family goes down into the crypt with him. Rival covens are the heart of it (the Gaslight Club's congress, three young houses, the Court). Reads b5.stay, b5.eleven, b5.hesketh, b5.club, b5.build, b5.chairman, b5.venn. Names are always checked with in_circle().
+// Sets b5.congress, b5.young, b5.cedar, b5.crypt and b5.offer. Uses send(), coven_task(), discover(), meet(), witness(), earn(), has_gift(), gift_holder().
+// Ends with rest() and => next, which pauses until chapter 11 exists (the manifest entry is incomplete).
+@chapter b5c10
+@title The Congress
+@book whitechapel-hunt
+@version 1
+
+# start
+## The middle of September
+$ b5.congress = "refused"
+$ b5.young = "none"
+$ b5.cedar = "watched"
+$ b5.crypt = "left"
+$ b5.offer = "refused"
+$ _lead = ""
+$ _reader_name = "the young keeper"
+$ _allies = 0
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+?if must_feed()
+  ~> hunger
+  ---
+?end
+?if coven_size() > 0
+  ~> report
+  ---
+?end
+$ do phase("night", 3)
+It is the nineteenth of September, and the leaves in the squares have begun to go the color of old brass. There is a congress tonight at Pall Mall, a hunter in the streets of Aldgate, and a crypt that wants to be visited tomorrow. There are four things in the night, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# hunger
+## The first thing
+* Take a cab-washer in Houndsditch, asleep on a bench with his sponge in his lap ?if wake("outcome") != "woken_early"
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He smells of soap and horse. He does not wake. He will be told by his wife that he talked in his sleep, and he will say that it is a sort of sickness.
+* Buy a bottle from the slaughterman at Aldgate
+  $ do feed("donor")
+  $ do earn(-2)
+  It is in the stone jar. It has a new label, which says *lard*, and he does not meet your eye.
+* Go down to the Thames and the gulls
+  $ do feed("animal")
+  $ humanity += 1
+  A rat in the lee of a barge, and a pigeon with a bad wing. You are neither fed nor ashamed.
+* Go without, and let the edge have its way
+  $ humanity += 1
+  $ cunning_brutal += 1
+  It is a cold fine hunger, like a high wind, and everything in London is a very long way off and perfectly clear.
+<~
+
+# report
+## The fortnight, from the head of the table
+?if _lead != "" and in_circle(_lead) and member(_lead, "status") == "active"
+  {name(_lead)} has the paper in order, and a list, and a look of cheerful dread.
+  The word has gone round the young houses, by the kind of quiet that is louder than a shout, that there is a house in Fitzroy Square where the Court has been told to wait in the hall. Seventeen young covens have asked to be heard. They are all of them under a hundred years old, and none of them has a seat in Mayfair, and they have been waiting, as the young do, for someone to ask what they wanted.
+?end
+?if b5.stay == "village"
+  Cassian has gone to the hill. There is a postcard on the hall table, with a view of a chapel on it, and a single line in a hand like a spider's: *the vine is in fruit*.
+?elif b5.stay == "watched"
+  Cassian is up, and shaved, and has begun to walk the garden at dusk with a rug on his arm and an expression of weary scientific interest in the cats. The family keeps its distance and keeps an eye.
+?else
+  Cassian has asked for a book. It is a cookery book, in French. He is reading it, in bed, with a pencil, and has made notes.
+?end
+?if b5.eleven == "told"
+  The Court has been in council for twelve days. Nobody has been told the result. Four of the eleven lamps, Lady Marchmont says in a short note, have been trimmed.
+?elif b5.eleven == "bargained"
+  The Court has kept to its half of the bargain, so far. There is a carriage at the end of Fitzroy Square every night, empty, with the blinds drawn.
+?else
+  The Court has been very quiet. It is not the quiet of an animal that is asleep.
+?end
+?if b5.club == "allied" or b5.hesketh == "welcomed"
+  Lord Hesketh has been to tea. He brought a cake, and talked of the weather, and said, on the doorstep, in the most casual way possible, that the congress would be tonight, and that he did hope that Mr. Collins would see his way.
+?elif b5.club == "played"
+  Lord Hesketh has sent a card to each of the two houses that you have been dealing with, and one to you. It is the same card. He is very fair.
+?else
+  Lord Hesketh has sent a card, with a gardenia, and a very short line in a very good hand. *I shall quite understand if you do not come*.
+?end
+<~
+
+# night
+## The night of the congress
+:night
+?if actions_left() == 3
+  There is a fog coming in off the river, a low yellow bank of it, with the lamps standing in it like flowers in a jar.
+?elif actions_left() == 2
+  The fog is up to the first-floor windows, and the cabs go through it with a sound like muffled drums.
+?else
+  The fog is a wall. You cannot see the end of your own arm, and there is one thing left that you have time for.
+?end
+* Go to Pall Mall, where the congress is sitting [once] ?if actions_left() > 0
+  ~> congress
+  $ do act()
+* Go to the young houses, in their own rooms, one at a time [once] ?if actions_left() > 0
+  ~> houses
+  $ do act()
+* Go to Aldgate, where a man with a long coat is walking very quietly [once] ?if actions_left() > 0
+  ~> cedar
+  $ do act()
+* Go to Spitalfields, where a church stands on its own in the fog [once] ?if actions_left() > 0
+  ~> spital
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> closing
+?end
+-> :night
+
+# congress
+## Pall Mall
+$ do meet("hesketh")
+$ do discover("the_young_houses")
+The Gaslight Club has taken down its partitions for the night. It is one great gilded room, lit with a hundred candles in the old fashion, because the new lamps are, as Hesketh says, not a thing that one can make a speech by. There are seventeen houses in it, and they are on chairs, in rows, in their best, like the pupils of an extremely sinister school. They stop talking when you come in.
+?if coven_size() > 0
+  The family comes in behind you in a body. It is a thing that the room notices at once. There is a murmur, and it is not a hostile one. They have never seen a coven walk in together. They have, most of them, never seen one walk in at all.
+?end
+Lord Hesketh, on the platform, in a white waistcoat, with a gardenia, is perfectly at his ease. "Gentlemen," he says, "and ladies. We have all of us been told, for a very long time, that there are eleven who sit and the rest who wait. I propose that we ask the one person in London who has been waiting to be asked what he thinks."
+:the_floor
+* Take the chair, on terms: that the congress is for the young houses, and not for the Club, and that nothing is done in it that cannot be said in the street [once]
+  $ b5.congress = "chair"
+  $ standing += 2
+  $ cunning_brutal += 1
+  There is a pause, and then a very young woman at the back begins to clap, slowly, and the room, a little startled, follows her. Hesketh's smile does not alter by a hair. It is a very fine smile. It is also, you notice, the smile of a man who has just been outplayed by someone he did not wish to oppose.
+* Stand at Hesketh's side, and say that you are his guest, and let him keep the chair [once]
+  $ b5.congress = "backed"
+  $ humanity += 1
+  $ standing += 1
+  "I am much obliged," says Hesketh, softly, as you pass him. "It is a thing that I shall remember." He means it. It is not at all the same as being grateful, and you are quite aware of the difference.
+* Decline, and say that you have no wish to lead anything, and that the young houses had better lead themselves [once]
+  $ b5.congress = "refused"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  The room is not pleased. It is not angry. It has the look of a congregation whose preacher has said that there is no heaven, and that they are to go and be good anyway. A great many of them are thinking about it. One, near the front, is writing it down.
+?if coven_size() > 0 and in_circle("prisca") and member("prisca", "status") == "active"
+  Prisca, beside you, murmurs that it is very much the way that the Merchant line began, and that she does not at all know whether it is a good thing to be reminded.
+?end
+<~
+
+# houses
+## The young houses
+Three of the seventeen will not wait for a speech. They have each sent a boy with a scrap of paper, and a place, and an hour, and you have time for all three.
+:the_houses
+* Go to the Ropewalk house in Wapping, where the coven keeps a lodging house for the sailors it does not eat [once]
+  $ _allies += 1
+  $ standing += 1
+  $ humanity += 1
+  It is a hard, kind, cold house of eight, with a mother who is nineteen and who has not been called by her name in a century. They want a quay, and a clerk, and a way to ship a coffin that does not look like one. It is the first thing that Collins and Hale has been asked for, in London, that it can do perfectly well.
+  -> :the_houses
+* Go to the Nine Elms house, who keep the railway sheds and have not been seen by a human being in a year [once]
+  $ _allies += 1
+  $ secrecy += 1
+  They are eleven, and silent, and thin, and they work in the dark under the arches, and they say, all of them, in turn, that they would like to see the sun again. It is a thing that you can do nothing about, and they know it. They have asked anyway, to see what you would say. You say that you will think of it. It is the truth.
+  -> :the_houses
+* Go to the Hampstead house, who have a pretty villa, a piano, and a quarrel [once]
+  $ _allies += 1
+  $ cunning_brutal += 1
+  It is a family of five, with a mother and a father and three who were not sired for it, and they have been fighting for forty years about a matter that nobody can any longer recall. They want you to settle it. You settle it. It takes an hour, and a plate of seed cake, and it is not at all a matter of the heart.
+  -> :the_houses
+* That is all that there is time for
+?if _allies == 1
+  $ b5.young = "some"
+?elif _allies >= 2
+  $ b5.young = "many"
+?end
+?if b5.young == "many"
+  They talk, afterwards, in the streets. It is said in Wapping that the sixth blood has come to London, and it is said in Nine Elms, and in Hampstead, and in a dozen places that you did not go. The word is out. It will not go back.
+?end
+<~
+
+# cedar
+## Aldgate
+$ do discover("the_cedar_stake")
+$ do meet("mabbott")
+The man is in a long coat with the collar up, and a hat, and he is quite alone. He is walking very slowly behind a boy of perhaps twenty, who is a Club fledgling, and who has been drinking, and who does not know that he is being walked. It is very quiet in the fog. The man's right hand is inside his coat.
+You know him. It is the retired sergeant of police from the coffee stall, who has been so glad of ten shillings.
+He steps. It is a quick short step, quite without hurry, as a man might step to a gate. There is something pale in his hand. It is not a stake. It is a long thin splinter of reddish wood, no thicker than a pencil, and he puts it into the boy's back under the left shoulder, and the boy stops. He does not fall. He stands there with his mouth open, as a clock stands that has been halted, and there is a smell, very sharp, of a cedar chest.
+:the_stake
+* Stop him, and take the splinter, and ask what it is [once]
+  $ b5.cedar = "stopped"
+  $ cunning_brutal += 1
+  $ velati_regard -= 1
+  He does not run. He is an old soldier. He lays the splinter in your hand, and he says that it is cedar, from Lebanon, and that it was in a box that a very old man gave him in the year that Her Majesty was crowned. He says that it holds a thing that cannot be held. He is very calm. "I have kept a book," he says, "of what I have seen. I should like to go on keeping it."
+* Say who you are, and ask him to come and talk [once]
+  $ b5.cedar = "spoke"
+  $ velati_regard += 2
+  $ humanity += 1
+  He looks at you for a long time, in the fog, with the stake still in the boy. "Aye," he says. "I thought it might be you." He draws it, carefully, and the boy folds up on the pavement like a coat. "The Order has been looking at you since Rome," he says. "I have been told that you do not eat children. It has been a great comfort."
+* Let it be, and watch what he does, and where he goes [once]
+  $ b5.cedar = "watched"
+  $ do witness(1)
+  $ secrecy += 1
+  He draws it, and lays the boy in a doorway with a coat over him, as gently as a nurse. He walks away up Houndsditch, in no hurry, to a house with a green door, and goes in. It is a house you will know again.
+?if has_gift("old_blood") or has_gift("shadows")
+  You are very still in the fog, and he never sees you. There is a thing in the line that makes the dark kinder to its own.
+?end
+?if coven_size() > 0 and in_circle("hanno") and member("hanno", "status") == "active"
+  Hanno, who has come to the corner with a cart, looks at the splinter for a long time, and says that it is the first thing in London that has made him think of home, and that he does not like it at all.
+?end
+<~
+
+# spital
+## Christ Church
+$ do discover("the_crypt_of_christ_church")
+It stands up out of the fog on its own, white and huge, like the end of a long argument, and the spire goes up into the yellow and does not appear to stop. It is shut. There is a faint chill coming up from the crypt, which is not the chill of cold stone.
+:the_church
+* Go down by the area stair, and see what the crypt has in it [once]
+  $ b5.crypt = "entered"
+  $ cunning_brutal += 1
+  $ do witness(1)
+  It is a very large low place, in the dark, with pillars like trunks and a floor of old black flags, and there are things in it. There are rows of long chests, in the dark, with lids. They are not coffins. They are made of tin. They are quite empty, and each of them has, at its head, a tiny stopped lamp. At the far end of the crypt, on a stone, there is a long shape under a sheet, as still as a carving. It is not breathing. It is not dead.
+  ?if has_gift("old_blood")
+    It knows that you are there. It is not a thing that you can say, or prove. The sheet does not move. The air does.
+  ?end
+* Send the family's eyes round the building, and wait in the fog [once]
+  $ b5.crypt = "scouted"
+  $ secrecy += 1
+  ?if coven_size() > 0 and in_circle("prisca") and member("prisca", "status") == "active"
+    $ do send("prisca", "scout", 1)
+    Prisca walks it, twice, in a bonnet, with a basket, and counts every door. She comes back to the corner and says that there are four ways in, and that the Chairman has left them all open, and that she does not at all like it.
+  ?else
+    You walk it, twice, with your hat down, and count every door. There are four ways in. They are all open. You do not like it at all.
+  ?end
+* Leave it for tomorrow night, and go and have a cup of tea [once]
+  $ b5.crypt = "left"
+  $ humanity += 1
+  There is a coffee stall in the Commercial Street with a lamp in a jar. The man at it says that it is a funny sort of a night, and you agree, and drink a thing that is not tea.
+<~
+
+# closing
+## The twentieth
+$ do witness(0)
+It is midnight. There is a fog so thick that the spire has no top, and the whole of the church seems to stand on nothing. The door at the head of the stair is open. It is the Chairman's way. There is no one in the nave. There is a smell of old candle, and tin, and, under it, of something that has been asleep for a great while.
+?if coven_size() > 0
+  The family goes down with you, one behind another, in their coats, in the fog, and nobody has said that they would. It is a thing that you notice only when you reach the foot of the stair, and turn, and they are all there.
+?end
+The crypt is lit by a single lamp, on the stone, at the foot of the long shape under the sheet. The Chairman is sitting on the end of a tin chest with his hat on his knee. He rises, very courteously, when you come.
+"Mr. Collins," he says. "I am obliged. I did not know that you would come." He gestures to the shape, quite as one might gesture to a patient in a ward. "I am going to wake him," he says. "I should like very much for you to be here. I should like it to be done by someone who is a good deal more sensible than I am."
+He tells you what he wants. It is very simple, and very reasonable, and he does not ask for anything for himself.
+:the_offer
+* Hear him out, to the end, and say nothing [once]
+  $ b5.offer = "heard"
+  $ cunning_brutal += 1
+  $ standing += 1
+  He talks for a quarter of an hour, quietly, with his long hand on the lid of a tin chest. It is a very plain account of a very great thing, and it is not once hurried, and when it is done there is a silence in the crypt that the whole family could have heard a pin drop in.
+* Tell him that you will not be a party to it, and that the sleeper will lie where he lies [once]
+  $ b5.offer = "refused"
+  $ humanity += 2
+  $ standing += 1
+  "I thought that you would say that," says the Chairman, with real regret. "It is quite right. It is also quite useless. He is going to wake, Mr. Collins. It is merely whether he wakes among friends." He bows. It is a very exact bow, and it is the bow of a man at the end of a very long patience.
+* Have the family close the stair, and take him, here, in his own crypt [once] ?if coven_size() > 0
+  $ b5.offer = "sprung"
+  $ cunning_brutal += 2
+  $ humanity -= 1
+  It is done in a breath. The stair is shut, and the doors, and the family is in the shadows in a ring, and the Chairman does not move. He does not look afraid. He looks, if anything, disappointed. "It is a pity," he says. "It is such a very ordinary thing to do."
+-> dawn
+
+# dawn
+## Before the dark ends
+You come up out of the crypt into the fog, and there is a faint gray over Spitalfields, and the stones of the church are wet, and a milk cart is going down Commercial Street at a walk.
+?if b5.offer == "heard"
+  You have a thing to think about, and you have it by heart, and it is a thing that you will not put down.
+?elif b5.offer == "sprung"
+  There is a small bright mark on the stair where something has been dropped, and a gray scarf, and no one in the crypt but the sleeper.
+?else
+  The Chairman stood at the foot of the stair and watched you go, with his hat in his hand. He did not speak. He was, you think, the loneliest man that you have ever seen.
+?end
+?if b5.congress == "chair"
+  There are seventeen houses in London who have a name to write at the foot of a petition. It is yours.
+?elif b5.congress == "backed"
+  Hesketh has the chair, and the house, and the gardenia, and a very great debt. It is a debt of an unusual kind, in that he does not know that he has it.
+?else
+  The young houses are talking among themselves, in the dark, and it is a sound that you have never heard before, which is the sound of the leaderless beginning to lead.
+?end
+?if b5.cedar == "spoke"
+  A man with a green door has a book, and you are in it.
+?elif b5.cedar == "stopped"
+  There is a splinter of cedar in your pocket. You can feel it, like a fine cold needle, through the cloth.
+?end
+There is a long shape under a sheet, in the dark, that has been asleep since fifteen eighty-seven, and a lamp that has burned beside it for three hundred years. Somewhere in London a clock is striking, with great deliberation, five.
+$ do rest()
+=> next

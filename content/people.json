@@ -529,6 +529,12 @@
       "name": "The Chairman",
       "title": "The ninth guest",
       "bio": "A tall, courteous, stooping man in a gray scarf with a perfectly forgettable face, for whom a chair at Sir Julian Venn's table is always kept."
+    },
+    "mabbott": {
+      "gender": "m",
+      "name": "Sergeant Mabbott",
+      "title": "The retired sergeant",
+      "bio": "A stout, calm, gray-whiskered pensioner of the Metropolitan Police who keeps a book of what he has seen, and a splinter of cedar in his coat."
     }
   }
 }

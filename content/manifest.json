@@ -946,6 +946,23 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b5c09",
+          "file": "whitechapel-hunt/ch09.tsb",
+          "title": "The Eleven",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c10",
+          "file": "whitechapel-hunt/ch10.tsb",
+          "title": "The Congress",
+          "notes": [
+            "blood",
+            "violence"
+          ]
         }
       ],
       "incomplete": true

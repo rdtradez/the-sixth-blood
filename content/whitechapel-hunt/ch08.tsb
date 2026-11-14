@@ -2,7 +2,7 @@
 // Opens with no phase (the lead's report and the family's plan), then a short hunger scene that only runs if must_feed(), then one night phase of three actions out of four before the dinner, then a fixed run of scenes every player plays: the dinner or the area door, the cellar, the ninth chair, and a dawn.
 // The coven fronts the chapter: the family goes with him, the business lead keeps the firm's door and the cab, the haven is where the rescued come home. Reads b5.plan, b5.list, b5.frances, b5.hesketh, b5.build, b5.eight, b5.audience, b5.cassian, b5.physician. Names are always checked with in_circle().
 // Sets b5.ashe, b5.dispensary, b5.way, b5.venn and b5.chairman. Uses coven_task(), send(), discover(), meet(), witness(), earn(), has_gift(), member_has_gift(), gift_holder().
-// Ends with rest() and => next, which pauses until chapter 9 exists (the manifest entry is incomplete).
+// Ends with rest() and => next, which continues into chapter 9.
 @chapter b5c08
 @title The Ninth Chair
 @book whitechapel-hunt
