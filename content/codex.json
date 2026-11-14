@@ -972,7 +972,7 @@
       "category": "lore",
       "title": "The Twelfth Lamp",
       "book": "whitechapel-hunt",
-      "text": "The Court of Lamps keeps eleven lamps and a twelfth plinth. The old covens say it is a custom. It is a count: the twelfth was put to sleep in 1587, and his lamp has been lit ever since."
+      "text": "The Court of Lamps keeps twelve lamps, and for three hundred years only eleven were lit by the Court. The twelfth burned in a room in Mayfair that nobody was allowed to enter."
     },
     "the_young_houses": {
       "category": "people",
@@ -1015,6 +1015,24 @@
       "title": "The Sleeper",
       "book": "whitechapel-hunt",
       "text": "The twelfth of the Court of Lamps, laid down in 1587 by the other eleven. A gentleman of the Elizabethan age, with a ring of old coin gold, who did not die and could not be killed."
+    },
+    "the_third_death": {
+      "category": "people",
+      "title": "The Third Death",
+      "book": "whitechapel-hunt",
+      "text": "A physician's long work cost three lives, a mistake, a method and a woman in a Cable Street ward. He did not forgive himself for any of them."
+    },
+    "the_old_blood_cure": {
+      "category": "lore",
+      "title": "The Old Blood Cure",
+      "book": "whitechapel-hunt",
+      "text": "A few drops of sixth line blood, in a spoon, will mend a body bled almost to its end. It is not a method. It is a gift, and it cannot be made in a jar."
+    },
+    "the_wall_chamber": {
+      "category": "places",
+      "title": "The Chamber in the Wall",
+      "book": "whitechapel-hunt",
+      "text": "Under a cooper's yard at Bishopsgate, in a stretch of Roman wall, there is a round room with a cedar door and a black clay lamp that has burned since before the city."
     }
   }
 }

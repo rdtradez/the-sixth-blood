@@ -980,6 +980,22 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b5c13",
+          "file": "whitechapel-hunt/ch13.tsb",
+          "title": "The Convalescent",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c14",
+          "file": "whitechapel-hunt/ch14.tsb",
+          "title": "The Lamp in the Wall",
+          "notes": [
+            "blood"
+          ]
         }
       ],
       "incomplete": true
