@@ -617,3 +617,8 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Content: Book Three chapter 1 and Book Four chapters 1 to 3 were reworked (`@version 2`) so the business lead voices the waking, the coven and the family are already in contact, and names are checked against the real coven. New registered flags: `b3.lead_desk`, `b4.lead_desk`, `b4.lead_pick`, `b4.village`, `b4.lead_intro`, `b4.gift_focus`. Book Four chapters 1 to 3 also carry a hill letter and a gifts scene.
 - New tool: `npm run coven-names` lists story lines that name a coven member without checking `in_circle()`. Book Four chapters 4 to 20 still have such lines and are to be reworked in pairs (see `SPOILERS/house-divided.md`).
 - Tests: `tests/systems.test.js` covers the lead, gifts, the coven view, the schema step and the village helpers; `tests/book4.test.js` plays the new scenes.
+
+### Session 50 notes (London map)
+
+- `app/maps/london.html` draws London and Collesanto as they stand in 1887 (the approved preview). `engine/maps.js` gains `london` (`bank`, `wharf`, `works`, `lots`, `valere`, `haven`, `yard`, `market`, `velati`, `roadhome`) and `collesanto5` (`farm`, `square`, `villa`, `press`, `gate`, `refuge`, `crypt`, `road`), both for book `whitechapel-hunt` on page `london`. Book Five chapters chart sites with `$ do chart("london.bank")`.
+- Site ids are unique across the two maps of the book. `sw.js` caches the new page (`VERSION` is `tsb-17`). Chicago and New York follow the same pattern.
