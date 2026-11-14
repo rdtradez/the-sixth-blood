@@ -4,7 +4,7 @@
 // Ends with rest() and => next, which pauses until chapter 17 exists (the manifest entry is incomplete).
 @chapter b4c16
 @title The Winter Laws
-@version 2
+@version 3
 
 # start
 ## December
@@ -137,22 +137,37 @@ It is a long gray yard behind the Ice Company's cold room, and it is quite full.
 The sheriff has been, and gone. He has said, in a very reasonable voice, that the law is the law, and that he will be back in the morning with a list. It is a good deal longer than the one that Jules has.
 Every one of them looks at you.
 :the_codes
-* Hire them, every man and woman who comes, on a contract the family writes: wages by the month, a school hour, and no master over them but the work
-  $ b4.codes = "hired"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Hire them, every man and woman who comes, on a contract the family writes: wages by the month, a school hour, and no master over them but the work [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b4.codes = "hired"
+    $ _mp_rank = 1
+  ?end
   $ humanity += 2
   $ standing += 1
   $ secrecy -= 2
   $ do earn(-5)
   It is written on the head of a barrel, in the lantern light, in two languages, in an hour, by the clerk and by Jules and by a woman of the school who writes a fine round hand. It is a very odd sort of paper. It says, among other things, that the laborer may leave. It says that he may be paid in coin. It says that he may not be struck. It is read aloud, twice. Jules asks, at the end, whether there is any man who wishes to know what it means. Nobody does. A great gray-bearded man at the front, in a Union overcoat, takes off his cap, and holds it, and is the first to put his mark on it.
-* Take the ones who have no place, secretly, into the family's safe rooms, a few at a time, and send them north
-  $ b4.codes = "sheltered"
+* Take the ones who have no place, secretly, into the family's safe rooms, a few at a time, and send them north [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b4.codes = "sheltered"
+    $ _mp_rank = 2
+  ?end
   $ cunning_brutal += 1
   $ secrecy += 1
   $ standing += 1
   $ do earn(-3)
   It is done by lanterns, and signals, and a great number of small, quiet arrangements, over the whole of the night. The free families of the Tremé take the women and children. The Ice Company's wagons take the men, in the sawdust, in ones and twos. By dawn there are eighty gone, in every direction, to every place that Wren's friends in the North can be made to answer for. It is, in the plain sense, a flight. It is also a thing that the sheriff cannot prove.
-* Carry it to the General, and put the free families' names under it, and ask the Army to say what the law is
-  $ b4.codes = "petitioned"
+* Carry it to the General, and put the free families' names under it, and ask the Army to say what the law is [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ b4.codes = "petitioned"
+    $ _mp_rank = 3
+  ?end
   $ standing += 2
   $ secrecy -= 1
   $ cunning_brutal -= 1
@@ -163,6 +178,10 @@ Every one of them looks at you.
       You go in the cold, in a carriage, at three in the morning, with a paper that Hanno has written in the carriage and seven of the free men, whom you have never properly met, and who have a very proper idea of what is to be said. They are heard, after an hour, by a sleepy aide, and then by the General, in a dressing gown, who reads the handbill with a face like a stone. He says that he will not undertake to say what the Legislature may do. He says that he may undertake to say who is to be arrested in his district, and by whom.
     ?end
   ?end
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 $ do discover("the_black_codes")
 <~
 

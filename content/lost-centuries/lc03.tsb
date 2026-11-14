@@ -4,7 +4,7 @@
 @chapter lc03
 @title The Second Rome
 @book burning-city
-@version 2
+@version 3
 
 # start
 ## Up again
@@ -194,23 +194,39 @@ It is not from Valeria. She is a hundred and twenty years gone. It is from the h
 There is a postscript. *We have built a chapel. The bishop's man said that it was a martyr's. We did not correct him. The people call the one in the cellar the Sleeper, and pray to him on the first of the month. It is a harmless thing. I thought that you would wish to know.*
 You read it twice. It is not clear to you whether it is the funniest or the saddest thing that you have ever read. It is, you think, probably both.
 There is a thing that you can do. It is not a large thing, from this distance. It is the only thing there is.
-* Send what you can in coin, and a draft for grain
-  $ lc.hill_537 = "sent"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Send what you can in coin, and a draft for grain [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ lc.hill_537 = "sent"
+    $ _mp_rank = 1
+  ?end
   $ do earn(-6)
   $ do send_home(6)
   $ humanity += 1
   Nikephoros writes the draft. It is a good one, on a good house, and will be honoured, if the war permits, by a Roman banker in Ravenna. It is the first time in your life that you have sent a letter by sea, and you find that you are standing at the door of the room, afterwards, with your hand on the jamb, for rather longer than the thing deserves.
-* Send men: paid guards from the quays, with a captain who has served under the Emperor's general
-  $ lc.hill_537 = "guarded"
+* Send men: paid guards from the quays, with a captain who has served under the Emperor's general [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ lc.hill_537 = "guarded"
+    $ _mp_rank = 2
+  ?end
   $ do earn(-10)
   $ standing += 1
   $ cunning_brutal += 1
   It is a bigger commitment than a draft. Nikephoros knows a man. The man knows a captain, a lean quiet Isaurian with an old wound, who has done this before, and thinks the price is fair. They sail in the morning, twelve of them, with the winter wind behind them, and a letter, and a good deal of private doubt. You do not ask about the war. You do not want to know.
-* There is nothing to be done from here. Keep the letter
+* There is nothing to be done from here. Keep the letter ?if _mp_n == 0
   $ lc.hill_537 = "ignored"
   $ do village_harm(5)
   $ humanity -= 1
   It is, you tell yourself, perfectly true. It is a thing that nobody could do anything about. You fold the letter, very small, and put it in your sleeve. You carry it with you for a good many days, and you do not look at it, and you do not forget what it said.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 ~> house_end
 <~
 

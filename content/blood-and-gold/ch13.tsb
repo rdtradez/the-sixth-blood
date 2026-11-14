@@ -6,7 +6,7 @@
 @chapter b2c13
 @title The Brother at San Miniato
 @book blood-and-gold
-@version 1
+@version 2
 
 # start
 ## The weeks before the great feast
@@ -235,24 +235,40 @@ Ser Bartolo has not been in a hurry in the whole of the time that you have known
 He tells it very quietly. The Medici bank had the papal accounts in Rome, which is the best business in Christendom. They had them until a month ago, when the Holy See transferred them, by a single letter, with a short and civil and unmistakable courtesy, to another house. It is not a thing that a bank can fight. It is a very large sum of money, and a very large amount of good name, and the other house is one that you know. It is not hard to see where the money is going. A good many people in Florence are taking a lively interest in what happens to a house that has lost the Pope.
 "The paper that the Medici owe is good," says Bartolo, "and it will be good. But it will be a spring, I think, or a summer, before it is seen to be. I need a certain sum of coin for ninety days. It would be a great kindness. I do not offer an interest that you will think very fine." He turns the cup in his fingers. "I do not know anyone else to ask. It has been a very odd Lent."
 :the_bartolo
-* Lend it at a fair rate, in the name of the house, and let the whole of the Arte del Cambio see you do it
-  $ b2.medici_paper = "lent"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Lend it at a fair rate, in the name of the house, and let the whole of the Arte del Cambio see you do it [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b2.medici_paper = "lent"
+    $ _mp_rank = 2
+  ?end
   $ do earn(-30)
   $ standing += 2
   $ secrecy -= 1
   $ bond.bartolo += 3
   He does not say very much. He writes out the receipt with a hand that is not quite as steady as it was, and sands it, and gives it to you, and holds your hand a little longer than is quite the custom. "It will be remembered," he says. "I am not speaking of the loan." You think, going down the stair, that it is exactly the sort of thing that a very careful bank is made to do, and that no one has ever got rich by it.
-* Buy a good quantity of the Medici paper at a discount, quietly, through Benedetto, and hold it
-  $ b2.medici_paper = "bought"
+* Buy a good quantity of the Medici paper at a discount, quietly, through Benedetto, and hold it [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b2.medici_paper = "bought"
+    $ _mp_rank = 1
+  ?end
   $ do earn(25)
   $ bond.bartolo -= 2
   $ standing -= 1
   It is a perfectly legal and perfectly sound transaction. The paper is good, and the discount is large, and in a year it will be at par. Bartolo does not know what is being done, for a day or two, and when he does he writes you a very short and very courteous letter, and it is not a letter that is meant to be answered. You put it in the strong room with the rest of the paper. It is good paper.
-* Say that you are not able, and that the house of the Colle does not lend in Lent to either party
+* Say that you are not able, and that the house of the Colle does not lend in Lent to either party ?if _mp_n == 0
   $ b2.medici_paper = "aloof"
   $ bond.bartolo -= 1
   $ secrecy += 1
   He nods, as a man nods who has been told the price of a thing. "It was a great deal to ask," he says. "I shall find another way." He does not look reproachful. He looks as a man does who has said to himself in advance that this might happen, and has not quite managed to believe it. "It is a very hard time to be a banker," says Bartolo. "I hope it will not be a very much harder one."
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 ?if b2.loan == "pazzi" and b2.medici_paper == "lent"
   He looks at you for a moment, with his pleasant, tired, intelligent eyes, and says nothing about the fact that you carry the letters of credit of the house across the street. It is not a thing that needs to be said.
 ?end

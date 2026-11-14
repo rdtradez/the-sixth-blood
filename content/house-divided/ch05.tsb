@@ -5,7 +5,7 @@
 @chapter b4c05
 @title The Envoy and the Convention
 @book house-divided
-@version 2
+@version 3
 
 # start
 ## The seal
@@ -176,26 +176,42 @@ There are, in the back room, eleven people. They are sitting on the floor and on
   She does not say what she wants. She is too proud for that. But she looks, for a moment, at the eleven people in the back room, and you see that she has made up her mind that you are going to be asked, and that she is not going to ask it.
 ?end
 :the_shelter
-* Say that the Colline haven has room, and take them in, under the cooperage
-  $ b4.shelter = "hid"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Say that the Colline haven has room, and take them in, under the cooperage [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ b4.shelter = "hid"
+    $ _mp_rank = 2
+  ?end
   $ humanity += 3
   $ secrecy -= 2
   $ standing -= 2
   $ do earn(-3)
   She looks at you for a long moment. It is not at all the way that a great lady looks at a benefactor. It is the look of one old soldier to another, across a field where a very small thing has happened. "It will be known," she says. "It will be known in a week. They count the bread." You say that you know. She nods once, and calls the cooper. It takes the whole of the rest of the night. The carriage goes out in the dark, and comes back, and goes again, and a sleepy child is handed across a threshold in the Marigny, wrapped in your own coat. You put the key of the carriage arch into the cooper's hand yourself.
-* Offer passage: the firm's boats, and a captain who can be trusted, by the lake to the north
-  $ b4.shelter = "sent"
+* Offer passage: the firm's boats, and a captain who can be trusted, by the lake to the north [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ b4.shelter = "sent"
+    $ _mp_rank = 1
+  ?end
   $ humanity += 2
   $ secrecy += 1
   $ do earn(-4)
   $ cunning_brutal += 1
   "It is cleaner," says Madame, after some thought. "It is not as kind as the other thing. They will be a long way from home." She looks at the girl of fourteen, who has been listening with her hands folded and her face quite still. "They will have to be a long way from home in any case." There is a schooner at Milneburg, you say, and a captain who owes the firm a good deal. It is three nights before the thing is done, and by the end of it you have taken, from your own accounts, a good deal of a year's profit and put it into the hold of a lake boat with a crate of lamp oil and eleven passengers, and you have a letter, sealed, in a very large round hand, from the girl of fourteen, who has asked that you read it later.
-* Say that you cannot take a hand in it, and leave a sum for her house
+* Say that you cannot take a hand in it, and leave a sum for her house ?if _mp_n == 0
   $ b4.shelter = "left"
   $ secrecy += 2
   $ humanity -= 2
   $ do earn(-2)
   She receives the purse without looking at it. Nobody in the back room looks up. The girl of fourteen, however, does, and looks at you, with a steady, grave, dark eye, for what seems a very long time. It is not contempt. You would almost prefer it if it were. It is the look of a person who is making a note. Madame sees you to the door, and says, quite gently, that every house has its limit, and that she does not think the less of Monsieur for knowing his. She does not say that she thinks the more.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 ?if b4.errand == "protect" and b4.errand_who != "" and b4.errand_who != 0 and in_circle(b4.errand_who) and member(b4.errand_who, "status") == "active" and not on_mission(b4.errand_who)
   As you go, Madame says, "Your quiet one was here before you." She means {name(b4.errand_who)}. "{pg(b4.errand_who, "He", "She", "They")} sat on the gallery for an hour, very straight, and said nothing, and went away. I have not had a visitor so well behaved since my husband." It is a small, warm, dry sentence, and it tells you where {pg(b4.errand_who, "he", "she", "they")} has been.
 ?end

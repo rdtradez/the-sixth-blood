@@ -25,7 +25,7 @@ async function drive(game, frame, wants = [], stopAt = null) {
   for (let i = 0; i < 3000 && frame.wait !== 'book_end' && !(stopAt && game.state.chapter === stopAt); i++) {
     pages.push(...texts(frame));
     if (frame.wait === 'choices') {
-      let at = 0;
+      let at = Math.max(0, frame.choices.findIndex((c) => /^(That is the whole of it|That is the nine boats settled)/.test(c.text)));
       for (const want of wants) {
         const hit = frame.choices.findIndex((c) => want.test(c.text));
         if (hit >= 0) { at = hit; break; }
@@ -1137,4 +1137,15 @@ test('chapter 6 lets the nine boats do more than one thing', async () => {
   clean(run);
   const ranOnly = await play('b4c06', {}, { ...START, wealth: 400000, ...CH5, 'b4.shelter': 'hid' }, [/nine idle boats/, /Run the Passes/, /nine boats settled/, /That is all/], { sys: coven });
   assert.equal(ranOnly.vars['b4.blockade'], 'ran');
+});
+
+test('choices that can be combined take several picks, and the most committed one is recorded', async () => {
+  const camp = await play('b4c08', {}, { ...START, wealth: 400000, ...CH8, 'b4.exodus': 'kept' }, [/Camp Parapet, where the people/, /Fund the camp/, /Deed the land/, /That is the whole of it/, /That will do/], { sys: coven });
+  assert.equal(camp.vars['b4.camp'], 'deeded');
+  clean(camp);
+  const petition = await play('b4c13', {}, { ...START, wealth: 900000, ...CH13, 'b4.defense': 'stood' }, [/Go to the hall in the Trem/, /Sign it, in your own name/, /Fund the delegation/, /That is the whole of it/, /That will do/], { sys: coven });
+  assert.equal(petition.vars['b4.petition'], 'funded');
+  clean(petition);
+  const apart = await play('b4c13', {}, { ...START, wealth: 900000, ...CH13, 'b4.defense': 'stood' }, [/Go to the hall in the Trem/, /Listen from the back/, /That will do/], { sys: coven });
+  assert.equal(apart.vars['b4.petition'], 'apart');
 });

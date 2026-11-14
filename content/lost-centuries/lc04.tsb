@@ -4,7 +4,7 @@
 @chapter lc04
 @title The Year of the Pestilence
 @book burning-city
-@version 1
+@version 2
 
 # start
 ## Up again
@@ -92,21 +92,37 @@ It is the spring of 1348, though nobody has told you so. You learn it from the b
 ## The lane
 You go down in the dark, in your plain old cloak, and the first door that you try is opened by a woman who thinks that you are the priest.
 It is a poor house, and four of them are in it, on straw. The smell of it is something that you have not met in a thousand years, and your body, which is not a thing that gets ill, nevertheless tells you very firmly to leave.
-* Stay, and carry water and straw until dawn
-  $ lc.village_1348 = "sheltered"
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Stay, and carry water and straw until dawn [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ lc.village_1348 = "sheltered"
+    $ _mp_rank = 1
+  ?end
   $ humanity += 3
   $ secrecy -= 1
   It is not much. It is a bucket, and a rag, and a great many trips. By morning two of them are better and one is not, and the woman has stopped asking who you are. It is the longest night's work that you have done in a century.
-* Pay for a doctor from the town, and leave the coin on the sill
-  $ lc.village_1348 = "sheltered"
+* Pay for a doctor from the town, and leave the coin on the sill [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ lc.village_1348 = "sheltered"
+    $ _mp_rank = 1
+  ?end
   $ do earn(-3)
   $ humanity += 1
   The doctor takes the coin and says that he will come. He does not. It is, by the look of him, the better part of wisdom, and you are not at all sure that you blame him.
-* Tell them to shut the door and keep away from the hill
+* Tell them to shut the door and keep away from the hill ?if _mp_n == 0
   $ lc.village_1348 = "turned_away"
   $ cunning_brutal += 1
   $ humanity -= 1
   It is sensible advice. It is exactly what you would tell a stranger. You hear the bar go across behind you, and you stand on the step for some time, being sensible.
+  -> :mp_done_1
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
 <~
 
 # chapel
