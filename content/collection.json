@@ -12,6 +12,7 @@
     "merchants_token": { "book": "blood-and-gold", "name": "A copper balance" },
     "old_ducat": { "book": "blood-and-gold", "name": "An old gold ducat" },
     "gray_ring": { "book": "blood-and-gold", "name": "A thin gold ring with a rain-gray stone" },
-    "sixth_border": { "book": "blood-and-gold", "name": "A scrap of the sixth border" }
+    "sixth_border": { "book": "blood-and-gold", "name": "A scrap of the sixth border" },
+    "cedar_peg": { "book": "whitechapel-hunt", "name": "A cracked cedar peg from the wall at Bishopsgate" }
   }
 }

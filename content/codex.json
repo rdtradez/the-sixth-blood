@@ -972,7 +972,7 @@
       "category": "lore",
       "title": "The Twelfth Lamp",
       "book": "whitechapel-hunt",
-      "text": "The Court of Lamps keeps eleven lamps and a twelfth plinth. The old covens say it is a custom. It is a count: the twelfth was put to sleep in 1587, and his lamp has been lit ever since."
+      "text": "The Court of Lamps keeps twelve lamps, and for three hundred years only eleven were lit by the Court. The twelfth burned in a room in Mayfair that nobody was allowed to enter."
     },
     "the_young_houses": {
       "category": "people",
@@ -991,6 +991,96 @@
       "title": "The Crypt of Christ Church",
       "book": "whitechapel-hunt",
       "text": "Beneath Hawksmoor's great white church in Spitalfields, a low crypt of pillars and black flagstones, long used by the parish and, for sixty years, by something else."
+    },
+    "the_hidden_hand": {
+      "category": "people",
+      "title": "The Hidden Hand",
+      "book": "whitechapel-hunt",
+      "text": "The one who has kept the twelfth lamp lit for three hundred years was not a stranger. He was the Court's own Warden of the Lamps, who could not bear to let a friend die."
+    },
+    "the_order_of_cedar": {
+      "category": "people",
+      "title": "The Order of Cedar",
+      "book": "whitechapel-hunt",
+      "text": "The Velati's arm in the streets: old soldiers and young devout men who carry a splinter of Lebanon cedar and a duty to use it."
+    },
+    "the_roof_watch": {
+      "category": "lore",
+      "title": "The Roof Watch",
+      "book": "whitechapel-hunt",
+      "text": "On Michaelmas 1887 the young houses of London stood on the roofs round Christ Church for a stranger's sleeper. It was the first time they had been asked to keep anything."
+    },
+    "the_sleeper": {
+      "category": "people",
+      "title": "The Sleeper",
+      "book": "whitechapel-hunt",
+      "text": "The twelfth of the Court of Lamps, laid down in 1587 by the other eleven. A gentleman of the Elizabethan age, with a ring of old coin gold, who did not die and could not be killed."
+    },
+    "the_third_death": {
+      "category": "people",
+      "title": "The Third Death",
+      "book": "whitechapel-hunt",
+      "text": "A physician's long work cost three lives, a mistake, a method and a woman in a Cable Street ward. He did not forgive himself for any of them."
+    },
+    "the_old_blood_cure": {
+      "category": "lore",
+      "title": "The Old Blood Cure",
+      "book": "whitechapel-hunt",
+      "text": "A few drops of sixth line blood, in a spoon, will mend a body bled almost to its end. It is not a method. It is a gift, and it cannot be made in a jar."
+    },
+    "the_wall_chamber": {
+      "category": "places",
+      "title": "The Chamber in the Wall",
+      "book": "whitechapel-hunt",
+      "text": "Under a cooper's yard at Bishopsgate, in a stretch of Roman wall, there is a round room with a cedar door and a black clay lamp that has burned since before the city."
+    },
+    "the_chain": {
+      "category": "lore",
+      "title": "The Chain of Lamps",
+      "book": "whitechapel-hunt",
+      "text": "Thirteen black clay lamps, one under Bishopsgate and twelve elsewhere, were lit before the six drank. The sleeper calls them hinges, and they are failing."
+    },
+    "keepers_oath": {
+      "category": "people",
+      "title": "The Keeper's Oath",
+      "book": "whitechapel-hunt",
+      "text": "A sworn human of a house is kept apart from its turned, with a room, a wage and a share of what is known, and has the right to leave."
+    },
+    "the_wall_reading": {
+      "category": "lore",
+      "title": "Reading the Wall",
+      "book": "whitechapel-hunt",
+      "text": "The thing in the cedar room is not a book but a kind of weather. It tells what has been and is, and it is a danger to sit still before it alone."
+    },
+    "the_first_voice": {
+      "category": "lore",
+      "title": "The First Voice",
+      "book": "whitechapel-hunt",
+      "text": "A pressure rather than a voice, felt by those who sit long at the lamp in the wall. It seems very old and very patient."
+    },
+    "bloody_sunday": {
+      "category": "places",
+      "title": "Trafalgar Square, 13 November 1887",
+      "book": "whitechapel-hunt",
+      "text": "The forbidden meeting of the unemployed that the police and the Life Guards broke up in an afternoon. Hundreds were hurt, and the hospitals were full by dark."
+    },
+    "the_second_page": {
+      "category": "lore",
+      "title": "The Second Page",
+      "book": "whitechapel-hunt",
+      "text": "A folded sheet found in the lining of Cassian's letter case, sealed with a small lamp. It named a Tuesday and a place, and asked that the sixth of the line bring the family."
+    },
+    "the_eighty_four_cards": {
+      "category": "lore",
+      "title": "The Eighty Four Cards",
+      "book": "whitechapel-hunt",
+      "text": "One card for each first Tuesday of seven years, kept by the firm in Lime Street for a client who never gave a name. Seven years is a term of apprenticeship in the old law."
+    },
+    "the_burned_card": {
+      "category": "lore",
+      "title": "The Burned Card",
+      "book": "whitechapel-hunt",
+      "text": "The freehold the white faced client offered, burned in the counting house stove. The ash kept its shape and did not blow away."
     }
   }
 }

@@ -34,6 +34,8 @@
     "london.stores": { "book": "whitechapel-hunt", "name": "The great shops", "cost": 8000, "income": 900 },
     "london.tea": { "book": "whitechapel-hunt", "name": "Tea, sold by the packet", "cost": 6000, "income": 650 },
     "london.underground": { "book": "whitechapel-hunt", "name": "The underground railways", "cost": 12000, "income": 1500 },
+    "london.telephone": { "book": "whitechapel-hunt", "name": "The telephone exchanges", "cost": 7000, "income": 800 },
+    "london.cables": { "book": "whitechapel-hunt", "name": "The submarine cables", "cost": 10000, "income": 1100 },
     "london.opium": { "book": "whitechapel-hunt", "name": "The opium trade", "cost": 14000, "income": 2600, "dark": true, "humanity": 5, "velati": 3 },
 
     "chicago.banks": { "book": "relics-lost-god", "name": "Banks bought after the crash", "cost": 40000, "income": 4200 },

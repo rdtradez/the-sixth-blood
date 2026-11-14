@@ -1,0 +1,302 @@
+// Book Five, Chapter 11 (session 56). The week after the crypt, the twenty seventh of September 1887, Michaelmas Eve.
+// Opens with no phase (the lead's report on the week), then a short hunger scene that only runs if must_feed(), then one night phase of three actions out of four, a fixed closing supper every player plays, and a dawn.
+// The coven fronts the chapter: the family hears the Chairman's terms with him, the business lead keeps the firm and the books, the haven is built out for the sleeper's waking, and the family mans the roofs. Rival covens are the heart of it (the Court of Lamps and its hidden hand, the young houses, the Gaslight Club, the Order's watcher). Reads b5.offer, b5.congress, b5.young, b5.cedar, b5.stay, b5.club, b5.hesketh, b5.eleven, b5.chairman. Names are always checked with in_circle().
+// Sets b5.hand, b5.muster, b5.mabbott and b5.vigil. Uses send(), coven_task(), acquire(), invest(), discover(), meet(), witness(), earn(), has_gift(), gift_holder().
+// Ends with rest() and => next, which pauses until chapter 12 exists (the manifest entry is incomplete).
+@chapter b5c11
+@title Michaelmas Eve
+@book whitechapel-hunt
+@version 1
+
+# start
+## The twenty seventh of September
+$ b5.hand = "quiet"
+$ b5.muster = "none"
+$ b5.mabbott = "warned"
+$ b5.vigil = "alone"
+$ _lead = ""
+$ _reader_name = "the young keeper"
+$ _helped = 0
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+?if must_feed()
+  ~> hunger
+  ---
+?end
+?if coven_size() > 0
+  ~> report
+  ---
+?end
+$ do phase("night", 3)
+It is the evening before Michaelmas, and the rooks are going home over the roofs of Spitalfields in long ragged strings. The sleeper is to be woken tomorrow night. There are four things to see to tonight, and time for three. {cap(voice("hunger"))}.
+-> night
+
+# hunger
+## The first thing
+* Take a lamplighter's boy, asleep on a step in Bishopsgate with his ladder across his knees ?if wake("outcome") != "woken_early"
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He smells of paraffin and cold. He will wake with a headache, and a conviction that he has been out too late, and will be right.
+* Buy a bottle at the back door of the Royal London
+  $ do feed("donor")
+  $ do earn(-2)
+  The porter takes the money and does not count it. The bottle is warm, which is not a thing that you wish to think about.
+* Walk to the river and the dogs
+  $ do feed("animal")
+  $ humanity += 1
+  A lurcher with a torn ear, who is very sorry for himself, and a gull with no opinion at all.
+* Go without, and let the edge have its way
+  $ humanity += 1
+  $ cunning_brutal += 1
+  It is a cold fine hunger, and the rooks are very loud, and each of them seems to be speaking to you personally.
+<~
+
+# report
+## The week, from the head of the table
+?if _lead != "" and in_circle(_lead) and member(_lead, "status") == "active"
+  {name(_lead)} has the books open, and the pen behind an ear, and a look of someone who has not been to bed. The family has had a week. It has been the kind of week in which a household finds out what it is for.
+?end
+?if b5.offer == "heard"
+  The Chairman's account has been told, in the kitchen, over and over, by everyone who was in the crypt, and each time it is a little shorter and a little more frightening. The family has stopped arguing about whether it is true. They are arguing about what it costs.
+?elif b5.offer == "sprung"
+  The Chairman is in the lower room of the haven, on a chair, with a cup of tea. He has not tried a door. He has asked for his spectacles, and a pencil, and the family, who do not know what else to do with a prisoner who is so entirely polite, have given him both.
+?else
+  The Chairman has not been seen since the crypt. There is a card on the hall table every morning, with a lamp drawn on it, and nothing written. The family has started to leave a saucer of milk out for it, on principle.
+?end
+?if b5.congress == "chair"
+  The young houses have begun to send their petitions to Fitzroy Square. There is a basket of them in the hall. Somebody has made a very neat index.
+?elif b5.congress == "backed"
+  Lord Hesketh has been to tea three times in the week. He is, apparently, perfectly happy to be seen to be the host, and to be seen to be in your debt.
+?else
+  The young houses are meeting in each other's kitchens. The family hears of it from the butcher.
+?end
+?if b5.cedar == "spoke" or b5.cedar == "stopped"
+  There has been a note from the green door in Houndsditch, in a careful copperplate. It says only that the writer would be obliged by an hour.
+?end
+?if b5.eleven == "told"
+  The Court has been in session every night. Lady Marchmont has written to say that she is not at liberty to say what has been decided, and that she is writing so that you may know that she is not at liberty.
+?elif b5.eleven == "bargained"
+  The Court has kept its word, and its distance, and one of its carriages in the square.
+?else
+  The Court has been quiet, in the way that a stove is quiet.
+?end
+<~
+
+# night
+## The night before
+:night
+?if actions_left() == 3
+  The lamps are lit early, and the whole of the City has a yellow, held breath about it.
+?elif actions_left() == 2
+  It is raining, a small thin rain that does not so much fall as hang.
+?else
+  The church clocks are going round, one after another, with the faint embarrassment of clocks that are all slightly wrong.
+?end
+* Go to Mayfair, to the room of the lamps [once] ?if actions_left() > 0
+  ~> court
+  $ do act()
+* Go to the young houses and the Club, and ask who will stand a roof [once] ?if actions_left() > 0
+  ~> muster
+  $ do act()
+* Go to the green door in Houndsditch [once] ?if actions_left() > 0
+  ~> green
+  $ do act()
+* Stay at the house, and put it in order for tomorrow [once] ?if actions_left() > 0
+  ~> house
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> closing
+?end
+-> :night
+
+# court
+## The twelfth plinth
+$ do discover("the_hidden_hand")
+Lady Marchmont receives you standing, in the room with the lamps, with ten of the eleven in a half ring behind her. The eleventh is not there. His lamp, on its plinth, is burning with a perfectly steady flame, as it has done since the time of the Armada, and his chair has been taken out of the room, and set against the wall, with its face to it.
+"We have found the hand," she says. "We found it in our own house. It is Lord Vane. He has been our Warden of the Lamps for two hundred and ten years. It was he who trimmed the twelfth, every year, on the same night. We thought that it was a duty, and that it kept the sleeper asleep. It kept him alive." She does not raise her voice. "He says that he could not bear to let him die. He says that he told no one because he knew that we would have let him."
+Lord Vane is in the next room, with a guard of two. You can hear him, through the door, being politely sorry.
+:the_judgment
+* Say that a man who kept a friend alive for three centuries has done what the Court ought to have done, and ask that he be left to the family's care [once]
+  $ b5.hand = "shielded"
+  $ humanity += 1
+  $ standing += 1
+  Lady Marchmont looks at you for a long moment. It is not at all a friendly look, and it is not at all an angry one. "It is a thing that you may say," she says, "since you are not of the Court. I shall not be able to say it." She goes to the door and opens it, and Lord Vane, who is a small man with a very good coat and a face like a tired clerk, bows to you in the passage. He has not been out in company for a century and a half.
+* Say that the Court must judge its own, and that you will stand witness, and nothing more [once]
+  $ b5.hand = "exposed"
+  $ cunning_brutal += 1
+  $ standing += 2
+  It is done in the lamp room, in a quarter of an hour, in low voices, under the eleven small flames. It is quite correct. It is not cruel. When it is over, the twelfth plinth has a ring of tallow round the base that was not there, and Lord Vane's chair has been put in the passage with the others that nobody sits in.
+* Say nothing, and leave the Court to its own house [once]
+  $ b5.hand = "quiet"
+  $ secrecy += 1
+  The ten look at one another. Lady Marchmont, with great dignity, says that the Court is obliged to the sixth blood for its discretion, and that it will remember it. It is clear that she does not know yet what she is going to remember.
+?if coven_size() > 0 and in_circle("prisca") and member("prisca", "status") == "active"
+  Prisca, who has stood at the door all this while with her hands in her sleeves, says on the stair that she has been in a good many rooms with a great many old families in them, and that this is the first in which they have all been, at once, afraid of the same small thing.
+?end
+<~
+
+# muster
+## Who will stand a roof
+The young houses have been told. They have talked of nothing else for a week. It is another thing to ask them to stand in the rain for a stranger's sleeper, and you do not ask. You tell them what is to be done, and why, and you let them say.
+:the_muster
+* Go to the Ropewalk house in Wapping, and ask for hands on the river stair [once]
+  $ _helped += 1
+  $ standing += 1
+  The mother of eight, who is nineteen and has not been asked for anything in a century, says that she will send four, and a skiff. She does not say that it is a favor. She says that it is a thing that the Ropewalk would like to be seen to have done.
+  -> :the_muster
+* Go to the Nine Elms house, and ask for the arches and the dark [once]
+  $ _helped += 1
+  $ secrecy += 1
+  They say that they know every drain from Vauxhall to the Tower, and that they will keep them. They say it in turn, all eleven, and they say it as if it were a promise. It is the first thing that anyone in London has asked of them that they were glad to do.
+  -> :the_muster
+* Go to Pall Mall, and ask the Club for the roofs of Brushfield Street [once] ?if b5.club == "allied" or b5.club == "played" or b5.hesketh == "welcomed" or b5.congress == "backed"
+  $ _helped += 1
+  $ standing += 1
+  Lord Hesketh, at his desk, with a gardenia, listens to the whole thing with the face of a man who has been handed a very great present and is looking for the string. "Fourteen," he says. "On the roofs. In the rain. For the honor of the thing." He rings for the carriage. "I shall have to be very good, I suppose, for an evening."
+  -> :the_muster
+* Send the family down the whole of the line, with a card from you to each [once] ?if coven_size() > 0
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+    $ do send("fiammetta", "protect", 1)
+    Fiammetta takes the cards, and a bag of buns, and a very sharp hat, and she is a good deal more persuasive than you could have been, because everyone she speaks to has always wished to be adopted by her.
+  ?else
+    $ do coven_task(_lead, "business")
+    {name(_lead)} takes the cards down the line, house by house, and leaves the firm's card with each, and the hint of a small and permanent favor.
+  ?end
+  $ _helped += 1
+  -> :the_muster
+* That will do
+?if _helped == 1
+  $ b5.muster = "some"
+?elif _helped >= 2
+  $ b5.muster = "all"
+?end
+?if b5.muster == "all"
+  By midnight it is round the whole of the East End, from mouth to mouth, that the sixth blood has a night, and that anyone who would like to be in it may stand a roof. It is the first time in three hundred years that the young have been asked to keep anything for the old.
+?end
+<~
+
+# green
+## Houndsditch
+$ do meet("mabbott")
+$ do discover("the_order_of_cedar")
+It is a very clean small house, with a green door, and a brass knocker in the shape of a hand, and Sergeant Mabbott opens it himself, in his shirtsleeves, with a pipe. He has been expecting you since the boy in the doorway. There is a kettle on the hob, and a table with a cloth, and on the table a ledger with a black cover, and beside the ledger a long flat box of cedar.
+"I have written to the Order," he says. "I do not say that I have done right. I say that it is what I do." He puts the pipe down. "Three of them are coming on the night train from Rome. They are not like me. They are not old soldiers. They have been told that a thing is going to wake in a church in Spitalfields, and they have been told what it is for."
+:the_sergeant
+* Tell him the whole of it, and ask him to stand with you, and not against [once]
+  $ b5.mabbott = "allied"
+  $ velati_regard += 2
+  $ humanity += 1
+  He listens to it, quite without moving, for a very long time, and at the end of it he takes up the cedar box, and shuts it, and puts it on the dresser, and says that he is seventy years old and has never yet been asked to stand with anyone. "I shall be at the church," he says. "I shall have no stake. I shall have a book. I think that I may be of more use to the three from Rome than to you." He nods. "I shall tell them what I have seen."
+* Tell him that the sleeper will not be harmed, and that the Order had better wait [once]
+  $ b5.mabbott = "warned"
+  $ velati_regard += 1
+  $ cunning_brutal += 1
+  "I shall tell them so," says Mabbott, with a certain care. "I shall not say that they will believe it."
+* Tell him to keep out of Spitalfields, and that you will not answer for him if he does not [once]
+  $ b5.mabbott = "against"
+  $ velati_regard -= 2
+  $ cunning_brutal += 1
+  He looks at you, and then at the kettle, which has begun to sing. "I am an old man," he says. "I have been told that before, by better. I shall make my own arrangements." He does not seem offended. He seems like a man who has been told a thing that he has already put in a column.
+?if has_gift("old_blood")
+  You feel it as you go, down the step, in the rain: the faint wrongness of the cedar in the house behind you, like a thorn in a stocking, and under it the dry, long note that the sleeper has begun to make in your sleep.
+?end
+<~
+
+# house
+## The house
+There is a great deal to be done in a house that has a guest to wake, and the family is already at it. You may be the last in the house to be told that you may help.
+:the_house
+* Add a hall in the warehouse for the young, with a floor for practice [once] ?if can_acquire("training_hall")
+  $ do acquire("training_hall")
+  $ humanity += 1
+  $ standing += 1
+  It is a long barn of a place, under the iron roof, with a floor sprung on cork, and by midnight there are four of the young houses on it, learning, with great solemnity, how to fall down.
+  -> :the_house
+* Put a front business at the sign of a respectable name [once] ?if can_acquire("front_business")
+  $ do acquire("front_business")
+  $ secrecy += 1
+  The family calls it Pell and Sons. There are no sons, and no Pell, but there is a very real brass plate, and a very real bell, and a very real clerk, who has been told that the firm deals in lamps.
+  -> :the_house
+* Open a blood network in the hospitals, so that nobody in the house need hunt again this winter [once] ?if can_acquire("blood_network")
+  $ do acquire("blood_network")
+  $ humanity += 1
+  It is a matter of porters, of kindly nurses, of a small regular payment and a smaller regular silence. It does not feel like wealth. It feels, a good deal more, like peace.
+  -> :the_house
+* Put money into the electric light, the dynamos and the cable [once] ?if can_invest("london.electric")
+  $ do invest("london.electric")
+  Mr. Hale puts down his pen and says that it will light the whole of the Strand, and that he does not like what it will do to the dark. He signs anyway.
+  -> :the_house
+* Put money into the Underground, the cut and the cover and the steam [once] ?if can_invest("london.underground")
+  $ do invest("london.underground")
+  The deep lines are not built yet, and the shallow lines are full of smoke. The firm buys a share in a hole in the ground. It is the oldest sort of vampire business there is, and it feels very natural.
+  -> :the_house
+* Put money into insurance, the sort that pays on the death of other people [once] ?if can_invest("london.insurance")
+  $ do invest("london.insurance")
+  It has a very respectable name and a clock in the hall. Mr. Hale remarks that there is a satisfying symmetry in it, and does not explain.
+  -> :the_house
+* Send one of the family to see to the sleeper's room [once] ?if coven_size() > 0
+  ?if in_circle("hanno") and member("hanno", "status") == "active"
+    $ do send("hanno", "protect", 1)
+    Hanno takes a trunk of tools and a lamp and goes down into the crypt by the area stair, and is gone eight hours, and comes back with plaster in his hair and a grave look. He says that the room is sound, and that the walls are very old, and that he has put a second lantern in a niche, in case.
+  ?else
+    $ do coven_task(_lead, "business")
+    {name(_lead)} goes down to the crypt with a lantern, a rule and a list, and comes back with the dimensions of everything, and a recommendation for a brazier.
+  ?end
+  -> :the_house
+* That is all that can be done tonight
+<~
+
+# closing
+## The supper
+$ do witness(0)
+There is a supper, at the long table in the kitchen, at which nobody is hungry and everyone eats. The rain has stopped. The Chairman's last note has come, by no hand at all, on the plate by your place. It is quite short.
+*Midnight tomorrow. The cup is the old blood, and the face is yours. The rest is a matter for the house. I shall wait at the foot of the stair, with my hat in my hand.*
+?if coven_size() > 0
+  The family reads it round the table. They do it in silence, passing it from hand to hand, and when it comes back it is a little damp, and nobody says why.
+?end
+:the_vigil
+* Say that the family will go down with you, all of it, as it did before [once] ?if coven_size() > 0
+  $ b5.vigil = "all"
+  $ humanity += 1
+  $ standing += 1
+  Somebody says that they had meant to. Somebody says that they would have gone down anyway, and that it was only courtesy that had made them wait to be asked. There is a very small, very warm silence, which the cat, who is on the dresser, breaks.
+* Say that a few will go down, and the rest will keep the doors [once] ?if coven_size() > 0
+  $ b5.vigil = "few"
+  $ cunning_brutal += 1
+  They choose, as a family does, without speaking, by a look. It is not at all a difficult matter. It is, after a century of practice, the easiest thing that they do.
+* Say that you will go down alone, with the cup, and the face, and nothing else [once]
+  $ b5.vigil = "alone"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  It is not a thing that is quite agreed to. Nobody says that you are wrong. A cup of tea is put down at your elbow, and it is the strongest argument that anyone makes.
+-> dawn
+
+# dawn
+## Before the dark ends
+There is a gray wash over the roofs, and a barrow in Brushfield Street, and the first of the milk. It is Michaelmas, and the geese are going to market, in a long squawking line, with the air of persons who have been told too much.
+?if b5.hand == "shielded"
+  Lord Vane is in the back parlor of the haven, with a rug on his knees, and a book. He has asked, very humbly, whether he may be present. It is the first thing that he has asked for in two hundred years.
+?elif b5.hand == "exposed"
+  Somewhere in Mayfair there is a plinth with a ring of tallow on it, and a Court that has just done a hard thing correctly. It will not forgive you for having seen it.
+?else
+  The Court is silent, and the Warden's chair is against the wall, and the twelfth plinth is empty and clean.
+?end
+?if b5.muster == "all"
+  There are young houses on every roof between Aldgate and Shoreditch, and a skiff at the river stair, and a very faint sound all night, in the dark, of persons trying to be quiet.
+?elif b5.muster == "some"
+  There are a few friends on the roofs, and a few at the stair, and room, in the dark, for more.
+?end
+?if b5.mabbott == "allied"
+  A pipe is going in a window in Houndsditch, and a book is open.
+?elif b5.mabbott == "against"
+  There is a green door in Houndsditch, and it has been locked on the inside.
+?end
+There is a tin lamp in a crypt, burning very low, and a long shape under a sheet, and in the dark of the house, beside the cat, a family getting ready for a very long night.
+$ do rest()
+=> next

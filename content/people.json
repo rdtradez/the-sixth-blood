@@ -535,6 +535,24 @@
       "name": "Sergeant Mabbott",
       "title": "The retired sergeant",
       "bio": "A stout, calm, gray-whiskered pensioner of the Metropolitan Police who keeps a book of what he has seen, and a splinter of cedar in his coat."
+    },
+    "lisle": {
+      "gender": "m",
+      "name": "Everard Lisle",
+      "title": "The sleeper",
+      "bio": "A gray eyed gentleman of thirty, once of Gray's Inn and once of the Court of Lamps, who speaks the English of Marlowe and has been asleep since 1587."
+    },
+    "vane": {
+      "gender": "m",
+      "name": "Lord Vane",
+      "title": "Warden of the Lamps",
+      "bio": "A gentle, stooping old lord with a book of hours, who kept a friend's lamp lit for three hundred years against the sentence of the whole Court."
+    },
+    "lamb": {
+      "gender": "m",
+      "name": "Inspector Lamb",
+      "title": "Of A Division",
+      "bio": "A big, sandy, tired inspector of the Metropolitan Police with a bandaged hand, who would like very much to be a good man in a bad week."
     }
   }
 }

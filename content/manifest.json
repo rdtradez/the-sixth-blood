@@ -963,6 +963,71 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b5c11",
+          "file": "whitechapel-hunt/ch11.tsb",
+          "title": "Michaelmas Eve",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c12",
+          "file": "whitechapel-hunt/ch12.tsb",
+          "title": "Michaelmas",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        },
+        {
+          "id": "b5c13",
+          "file": "whitechapel-hunt/ch13.tsb",
+          "title": "The Convalescent",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c14",
+          "file": "whitechapel-hunt/ch14.tsb",
+          "title": "The Lamp in the Wall",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c15",
+          "file": "whitechapel-hunt/ch15.tsb",
+          "title": "The Chain",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c16",
+          "file": "whitechapel-hunt/ch16.tsb",
+          "title": "The First Tuesday",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c17",
+          "file": "whitechapel-hunt/ch17.tsb",
+          "title": "Bloody Sunday",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b5c18",
+          "file": "whitechapel-hunt/ch18.tsb",
+          "title": "The Eighty Fifth Card",
+          "notes": [
+            "blood"
+          ]
         }
       ],
       "incomplete": true
