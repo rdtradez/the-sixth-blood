@@ -1,0 +1,56 @@
+// The Velati journal for Book Five, The Whitechapel Hunt (session 60). Runs at the end of the book on a copy of the state; its paragraphs become one journal entry.
+// Written in the voice of the Senate's agent in London, from a report kept in a room over a hatter's in the Strand. No choices allowed. Reads decisions, never recomputes them.
+@chapter b5_journal
+@title Velati Journal: The Whitechapel Hunt
+@book whitechapel-hunt
+@version 1
+
+# start
+## From the report of the Senate's agent in London
+> Set down in London, in the Aventine shorthand, in a room over a hatter's in the Strand. For the Senate, and for no one else.
+I was posted to this city in the spring of 1880, with instructions to observe the Court of Lamps and to do nothing at all that the Court would notice. I have done the second very well. I regret to report that the first has become, in the past two years, a considerable occupation.
+?if b5.terms == "burned"
+  On the sixth of December 1887 I was in the street outside Lime Street, in a hired cab, with a rug. I did not see the counting house. I was told afterwards, by the cabman, who is a Velati agent of the fourth rank and a poor liar, that a card was burned in a stove, and that the ash kept its shape. I have not been able to find a precedent.
+?elif b5.terms == "court"
+  On the sixth of December 1887 I was in the street outside Lime Street, in a hired cab, with a rug. I did not see the counting house. I have seen the card, since, under glass in Mayfair, and I have been permitted to read it. I should like it noted that I read it twice, and that I did not afterwards find it easy to sleep.
+?else
+  On the sixth of December 1887 I was in the street outside Lime Street, in a hired cab, with a rug. I did not see the counting house. I have a copy of the condition that was written on the back of the card, in the commercial hand of the firm. I have read it a great many times. It is the most remarkable thing that I have ever seen a young person write.
+?end
+?if b5.maggie == "ended"
+  I have the account of the cold store in Black Eagle Street from the Court's own porter. He says that the girl was ended gently, by the hero's own hand, and that the whole yard took off its hat. I have put in the report that the law was satisfied. I have not put in what I think of the law.
+?elif b5.maggie == "ward"
+  I have the account of the cold store in Black Eagle Street from the Court's own porter. He says that the girl was taken in, by the hero, on the hero's own word, and given blood out of a cup, and put to bed. I have put in the report that a rogue was answered for. I have not put in that I went, the next week, to look at the window.
+?else
+  I have the account of the cold store in Black Eagle Street from the Court's own porter. He says that the girl was given to the Court, openly, with the master of the Club beside her, and that she thanked them for coming. I have not been able to find out what became of her. I have been told that she reads.
+?end
+?if b5.master == "notes"
+  The Club's notes were called in a single night. I have been shown the paper. It is remarkably clean.
+?elif b5.master == "shield"
+  The master of the Club was put under the hero's protection, and has sent a present twice a month since. It is the first time in thirty years that I have heard of the Club being grateful.
+?else
+  The master of the Club was taken before the Court by the arm, and was fined, and put under a warden. He has been seen at a concert.
+?end
+?if b5.chair == "ours"
+  The young houses have a charter, and a house to keep it in, and a woman at the head of it whom the Court has begun, with obvious reluctance, to respect.
+?elif b5.chair == "surety"
+  The young houses have a chair at the Court for seven years, on the hero's surety. It is an experiment. I have taken a small bet on it.
+?else
+  The young houses have a chair at the Court, and nobody has stood surety for them, and I am told that they have never been so careful.
+?end
+?if b5.watcher == "turned"
+  The Order's man in the Club's cellar now writes to Rome what the house has agreed that he shall. I do not propose to put in this report what I think of that, in case it is read.
+?elif b5.watcher == "court"
+  The Order's man in the Club's cellar has been taken into the Court's library, and is said to have written a history. I have asked for a copy.
+?else
+  The Order's man in the Club's cellar was allowed to post his letter. Rome has not answered. It is the longest silence that I have recorded.
+?end
+I have to enter, at the end, that on the second of January 1889 a cable arrived in Lime Street from Chicago, and that I was not shown it. I have it, nonetheless, from the hatter's boy, who has a cousin at the cable office. It says that a lamp has moved. I enter it here, in the shorthand, and in the hope that someone at the Senate knows what it means.
+?if b5.west == "follow"
+  The hero cabled back that the house was coming.
+?elif b5.west == "silent"
+  The hero did not answer. I find that I take this as a worse sign than anything in the cable.
+?else
+  The hero cabled back that the house would wait and watch.
+?end
+He has gone into the cellar. The family has put out the lamps. I have signed this, and sealed it, and I shall go on watching the door until somebody tells me to stop.
+=> endbook

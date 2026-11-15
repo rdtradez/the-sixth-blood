@@ -559,3 +559,20 @@ test('maps: Book Four shows New Orleans and Collesanto on the New Orleans page, 
   assert.deepEqual(maps.map((m) => m.id), ['neworleans', 'collesanto4']);
   assert.ok(maps.every((m) => m.page === 'neworleans'));
 });
+
+test('maps: Book Six shows Chicago and Collesanto on the Chicago page, with no site id shared between the two', async () => {
+  const { mapView, mapsFor, siteKnown, MAPS } = await import('../engine/maps.js');
+  const { createState } = await import('../engine/state.js');
+  const st = createState();
+  st.sys.lore = { codex: {}, kin: {}, sites: { 'chicago.haven': { book: 'relics-lost-god', chapter: null } } };
+  assert.deepEqual(mapView(st, 'chicago').sites, ['haven', 'roadhome']);
+  assert.deepEqual(mapView(st, 'collesanto5').sites, ['farm', 'square', 'villa', 'road']);
+  assert.equal(siteKnown('chicago.exchange'), true);
+  assert.equal(siteKnown('chicago.press'), false);
+  assert.equal(siteKnown('collesanto5.refuge'), true);
+  assert.deepEqual(MAPS.chicago.sites.filter((s) => MAPS.collesanto5.sites.includes(s)), []);
+  st.book = 'relics-lost-god';
+  const maps = mapsFor(st, null);
+  assert.deepEqual(maps.map((m) => m.id), ['chicago', 'collesanto5']);
+  assert.ok(maps.every((m) => m.page === 'chicago'));
+});

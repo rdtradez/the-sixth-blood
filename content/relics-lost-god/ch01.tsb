@@ -1,0 +1,515 @@
+// Book Six, Chapter 1 (session 62). The ninth waking, in the last week of March 1924, thirty five years after London.
+// Reads the chained wake report (place, steward, outcome, orders, invest) and plays a waking for each: the cellar under the counting house in London, the churchyard tomb, or the hill in Tuscany.
+// The coven fronts the waking: business_lead() holds the lantern, gives the report and lays out the desk (b6.lead_desk, b6.london). Without a coven the steward speaks.
+// Reads b5.maggie, b5.cass, b5.west, b5.charge, b5.farewell. Sets b6.trouble, b6.lead_desk, b6.london, b6.village, b6.first_feed, b6.books, b6.street, b6.circle, b6.crane and b6.passage.
+// Order: waking, hunger, report, desk, then one night phase of three actions out of four, then dawn and the passage west. Ends with rest() and => next.
+@chapter b6c01
+@title The Letters from the Lake
+@book relics-lost-god
+@version 1
+
+# start
+## The ninth waking
+$ b6.trouble = "none"
+$ b6.lead_desk = "approved"
+$ b6.london = "agents"
+$ b6.village = "waited"
+$ b6.first_feed = "animal"
+$ b6.books = "trusted"
+$ b6.street = "watched"
+$ b6.circle = "stay"
+$ b6.crane = "cool"
+$ b6.passage = "liner"
+$ _hill = 0
+$ _reader = "Harold Hale"
+$ _lead = ""
+?if wake("place") == "collesanto"
+  $ _hill = 1
+?end
+?if wake("steward") == "prisca"
+  $ _reader = "Prisca"
+?elif wake("steward") == "fiammetta"
+  $ _reader = "Fiammetta"
+?elif wake("steward") == "hanno"
+  $ _reader = "Hanno"
+?elif wake("steward") == "thibault"
+  $ _reader = "Thibault"
+?elif wake("steward") == "keepers"
+  $ _reader = "Ruth Aldous the younger"
+?end
+?if coven_size() > 0 and wake("by") != "steward"
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader = name(_lead)
+  $ do meet(_lead)
+?end
+~> waking
+?if wake("outcome") == "woken_early"
+  ~> trouble
+?end
+?if must_feed()
+  ~> hunger
+?end
+---
+~> report
+---
+?if _lead != ""
+  ~> desk
+  $ do appoint_lead()
+  ---
+?end
+$ do phase("night", 3)
+It is a night in the last week of March, in the year nineteen hundred and twenty four, and there are four things in it that want doing and time for three. {cap(voice("hunger"))}.
+-> night
+
+# waking
+?if wake("outcome") == "woken_early"
+  ?if wake("by") == "hunters"
+    You do not wake so much as get interrupted. A door that has been shut for thirty five years is opened with a crowbar and a great deal of swearing, and there are three men with electric torches, a canvas bag and a camera on a tripod. They have been told that a rich man's vault, forgotten in the war, is to be cleared for a bank. They have not, by the look of them, been told what is in it.
+  ?elif wake("by") == "government"
+    You wake to the smell of fresh paint and the sound of a pneumatic drill. A young man in a bowler hat, with a clipboard, a tape measure and a letter from the Ministry of Works, is reading out the dimensions of your room to a second young man, who writes them down, and who has stopped, in the middle of a figure, because the thing that he is measuring has opened its eyes.
+  ?else
+    Somebody is shaking you, and it is {_reader}, in a raincoat, with a face of the color of tallow. "Forgive me," you hear. "I was told to wake you only if the house were in danger. I think it is. I think that there is something I do not understand, and that you may."
+  ?end
+?else
+  ?if wake("place") == "collesanto"
+    You wake in the cellar on the hill, and the first thing that you know is a smell of petrol, and under it woodsmoke, and cut stone, and something sweet that you cannot place. The bar on the inside of the door has been oiled. There is a lamp, with a glass shade, burning without a flame, and a chair, and a loaf under a cloth, and through the stone above you a gramophone is playing, quite badly, a tune that you have never heard, while a girl sings along to it in a dialect that you know and words that you do not.
+  ?elif wake("place") == "tomb"
+    You wake in the tomb in the old churchyard, and the stone is moved from the right side, with care, by someone who has sat for a long time rehearsing the angle. Cold air comes in, smelling of wet leaves and coal smoke and a thing like burnt sugar. Somewhere beyond the wall a heavy engine is going by, without any horses, and the bell on the tower strikes the hour, a little late, as if it were embarrassed.
+  ?else
+    You wake in the cellar under the counting house in Lime Street, and the first thing that you know is a hum. It is in the brick, and in the floor, and in the iron of the bed, a low steady quiver as if the whole house were purring. Overhead a great many people are walking about, quickly, and a bell rings, and a woman's voice says something very loudly and cheerfully in a language that is almost English.
+  ?end
+  ?if _lead != ""
+    ~> lead_waking
+  ?elif wake("steward") == "keepers"
+    The young woman holding the lantern wears her hair cropped like a boy's and a skirt that stops at the knee, and has a pencil behind one ear and Ruth Aldous's way of standing, as if the floor were hers. "Margaret Aldous," she says. "Of the keepers. My grandmother taught me what to say, and I have said it to the cat every night since Christmas, and the cat is quite tired of it."
+  ?else
+    The gentleman holding the lantern is fifty, gray at the temples, in a quiet dark suit, and has the Hale jaw. "Harold Hale," he says. "My grandfather kept the firm, and my father after him, and I have the honor to be the third. I was told, Sir, that I should know you by your eyes. I am afraid that I do."
+  ?end
+?end
+<~
+
+# lead_waking
+?if _lead == "fiammetta" and in_circle("fiammetta")
+  The person holding the lantern is small and dark and quick, in a plain gray frock that stops at the knee, with her hair cut short and a pen behind her ear, and she has your blood in her and the hill in her eyes. "Thirty five years," says Fiammetta. "And I kept count. Do not get up. I want you to see the books before you see anything else, because I have been very good and I want it noticed."
+?elif _lead == "prisca" and in_circle("prisca")
+  The person holding the lantern is small and exact, in a tailored suit of excellent gray wool, with a steel pen behind one ear and an abacus in her pocket, which she has declined to give up in the face of the adding machine. "Thirty five years, two months and nine days," says Prisca. "It is an awkward number, and I have kept the books for all of it. I should like it noted that the house is the better for it, and that I have enjoyed perhaps two afternoons."
+?elif _lead == "thibault" and in_circle("thibault")
+  The person holding the lantern is long and quiet, grown fully into his hands, in a dark coat with ink on the cuff, and he has been waiting so long to say this that he has forgotten how it went. "Thirty five years," says Thibault. "I have the figures. I was a cooper's boy, and I find that I am a banker, and I find that I have learned to use a telephone, and I cannot tell which of these astonishes me the most."
+?elif _lead == "hanno" and in_circle("hanno")
+  The person holding the lantern is gaunt and patient, in a very old coat, with a small book in his hand, and he says nothing at all for a long moment. Then he opens the book to a ribboned page, turns it so that you can read, and points. It is the sum of the house, in a hand like a row of iron nails, and it is a great deal larger than it was.
+?elif _lead == "tiro" and in_circle("tiro")
+  The person holding the lantern is young in the face and not at all young in the eyes, in a plain suit and a soft hat that he has forgotten to take off. "Thirty five years," says Tiro. "I was taught that a house is only as honest as its books, and I have kept them as if she were due to inspect them. Welcome back, Master. I have a great deal to show you, and half of it hums."
+?elif _lead == "honorine"
+  The person holding the lantern is straight and grave, in a dark dress with a white collar, and has the air of someone who has been teaching a very large class for a very long time and has just been told that it may go home. "Thirty five years," says Honorine. "The school stands. The house stands. I have kept the accounts of both, and there is not a line in them that I should be ashamed to read aloud. Come and be told."
+?elif _lead == "armand"
+  The person holding the lantern is lean and courteous, with a physician's black bag at his feet and a physician's habit of looking at you for a symptom. "Thirty five years," says Armand. "I have learned a great deal. I do not think you will believe how much of it is plumbing. I shall tell you at once that the house is well, and the books are well, and that you are, if you will permit me, a very strange color."
+?else
+  The person holding the lantern is {_reader}, of your coven, with the look of someone who has run a house for a long time on the orders of a sleeper. {_reader} bows, and does not wait to be spoken to. "Thirty five years," {pg(_lead, "he", "she", "they")} says. "The books are in the next room, and so is a chair."
+?end
+<~
+
+# trouble
+## Interrupted
+?if wake("by") == "hunters"
+  They have seen your eyes open. One of them says a word in Flemish, and one of them drops the camera, and the flash powder goes off with a flat white crack that makes you flinch, and then sit up, and then laugh, because it is only a light, a very good one, and nobody has told them that it is not the thing that they were promised.
+?elif wake("by") == "government"
+  The young man with the clipboard has seen your eyes open, and has gone the color of paper. He writes something down. He then, with great courage, takes a step toward the bed, and asks to be told who is the owner of this room.
+?else
+  {_reader} has seen your eyes open, and has gone the color of milk. Up the stair, in the passage, somebody is coming whom nobody mentioned.
+?end
+:the_choice
+* Slip out in the dark, and leave them an empty bed
+  $ b6.trouble = "fled"
+  $ secrecy += 1
+  It is the oldest of the answers, and you are good at it. There is a way out through the drain, and a wall that was never as solid as it looked, and by the time the torches find the bed you are in a wet alley under a sky with a great many more wires in it than you remember, and a great many fewer horses, with your coat over your arm.
+* Put out the lamp, and be a thing in the dark that they are sorry to have met
+  $ b6.trouble = "fought"
+  $ cunning_brutal += 3
+  $ do power("minor")
+  $ do witness(1)
+  It takes less than a minute, and nobody is killed. You are not proud of it. You are not sorry either. It is a very odd thing to be as strong as you are, and to be so thoroughly out of practice at being it.
+* Sit up, and ask them politely what year it is
+  $ b6.trouble = "talked"
+  $ cunning_brutal -= 2
+  $ standing += 1
+  It is a sentence that has served you for nearly two thousand years, and it is harder to say with a mouth made of dust, and the effect is exactly as it always was. There is a pause. There is a short, wild laugh. By the time the first of them has found his voice the whole affair has become a thing that can be explained with money.
+<~
+
+# hunger
+## The first thing
+* Take what the house has kept for you, a young goat ?if wake("outcome") != "woken_early"
+  $ b6.first_feed = "animal"
+  $ do feed("animal")
+  $ humanity += 1
+  It is a good goat, and has been fed on clover, and somebody has taken the trouble to give it a name. It is a strange thing to be waited on. You take it gratefully, and with an apology, and it is the apology that stays with you.
+* Ask for a willing arm ?if wake("outcome") != "woken_early"
+  $ b6.first_feed = "donor"
+  $ do feed("donor")
+  $ do earn(-2)
+  The house keeps a few for exactly this, men and women who are paid well and told that they are being bled by a doctor, which is nearer the truth than it used to be. The one who comes is a tram conductor with forearms like loaves, who offers his wrist and studies the ceiling with great attention. "Is it very bad, Sir?" he says. You tell him that it is not, and it is nearly true.
+* Take one of the passing strangers, who will not know
+  $ b6.first_feed = "human"
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  It is quick and quiet and you are very good at it, which is the part that you mind. He is a clerk in a bowler hat, walking home from a picture palace by the wrong street, and when he goes on an hour from now he will think that he was taken faint. The strength comes back at once, like a debt repaid.
+* Go without, and let it gnaw
+  $ b6.first_feed = "none"
+  $ humanity += 1
+  $ cunning_brutal += 1
+  You tell them to wait. It is not wisdom. It is a small, stubborn reluctance to begin another age with an apology, and it is a good deal less comfortable than it sounds.
+<~
+
+# report
+## Thirty five years
+You are taken up out of the dark, and fed, and washed, and set in a chair, and {_reader} sits opposite with a candle, because you have asked for one, and an electric lamp, because it is better, and a small thick book, with the expression of someone who is going to be very brief about a matter of great length.
+Thirty five years is a short time to a man like you and a long time to a world. The old Queen is dead, and her son, and his son's son is on the throne. A war came, the worst there has ever been, and ran for four years across the whole of Europe, and took ten million men out of the world like pegs out of a board. Then a plague came behind it, a kind of influenza, that took more. The men who came home from the one are not the men who went, and the women who stayed have cut off their hair and taken the vote, or most of it, and nobody has yet been able to explain to you, to your satisfaction, why that last should have taken so long.
+?if wake("outcome") == "prospered"
+  The house is richer than the book said that it would be. The war years, which ruined a great many, were kind to the house, by good stewardship and other people's bad luck, and there is a note at the foot of the page, in a hand that is trying not to gloat.
+?elif wake("outcome") == "losses"
+  The house is not as rich as it should be. There is a column of figures that {_reader} reads in the flat quick voice of someone who has been waiting a long time to be shouted at. You find that you do not wish to shout. You find that you are mostly interested in the next page.
+?elif wake("outcome") == "woken_early"
+  The house is not the money that it ought to have been, since the keeping ended before it was meant to, and a good deal is half done. You will have to be careful for a few years, and quick.
+?else
+  The house is very nearly what was said. It came through the war with a few scratches and the same number of ledgers, and there is something restful in a thing that has done exactly what it promised.
+?end
+?if wake_invest("munitions")
+  There is a line in the second ledger that {_reader} reads aloud without any inflection at all. It is the line for the shells. They were bought and made by a firm that you were told would be a prudent holding, in the year that the war began, and they were very good shells, and a great many of them were used. It is a profit that the house has never spent, and it sits in a column by itself, like a guest nobody has quite been able to ask to leave.
+?end
+?if wake_invest("motor_company")
+  There is another line, a happier one. The Detroit house that you were told wanted to put a carriage in every barn has put one in a great many, and the house holds a share of them. It is, {_reader} says, the soundest thing that you own. It is also, {_reader} adds with a faint look of alarm, what all that noise in the street is.
+?end
+?if wake_invest("electric_light") or wake_invest("wireless")
+  The lamp on the table is not a thing that you will have to take on trust. The house put money into the light, and into the wireless, and both have grown, and both are, at this moment, in the room. The man with a whistle in the box in the corner is, {_reader} says, a kind of news.
+?end
+?if b5.charge == "west"
+  The hand that was sent west in the year eighty nine did what a hand should. It took a lease on the lake, learned a city, and wrote every quarter, and married there, and died there, in the winter of nineteen fifteen, with a letter still in the post. There is a granddaughter. The family has kept up the correspondence, in her own hand, ever since.
+?elif b5.charge == "scatter"
+  There are thirty five letters, one for every January, from every member of the family who went into the world when you slept, tied in green ribbon. They have kept their word. Nobody has looked for anybody, and every first of the year there has been a plain envelope, and in it a single line, saying that the writer was alive. There are four that did not come. You are told which, and in what years, and you do not at once say anything.
+?else
+  The household kept faith. The hall in Lime Street has had its lamp lit in the window every night for thirty five years, and the account has been paid on the first of every quarter, and the roll of the family has been kept, in a clear hand, in a book that is very much thicker than it was.
+?end
+?if b5.maggie == "ward"
+  Nothing has been heard of Maggie Tuck since the year ninety three, except one postcard, with a view of Brighton, which says that she is well and is not to be looked for, and which has no stamp.
+?elif b5.maggie == "court"
+  The note from Mayfair has come on the first of every month for thirty five years, on cream paper, in a hand that has changed, twice, and that has never been anything but civil. It says only that she is well. It says now that she has been given a book of her own.
+?end
+?if b5.cass == "trusted"
+  There has been, every Christmas, a card with no name on it, of a robin on a branch, posted in a different city each year, and on the back, in an old and beautiful hand, a single line. *Still here.* It is, you gather, a promise.
+?end
+?if _hill == 1
+  The hill, {_reader} says, has changed by growing, and by being, for the first time in its life, afraid. There was a war, and the men of the valley went to it, and a third did not come home. There is a stone in the square with the names on it, and a girl who sets flowers on it every Sunday, in a coat too large for her. The railway is out of use. The house on the hill has a telephone. It is, the village agrees, the saint's.
+?end
+There is a pause, and a little cough.
+"There is also," says {_reader}, "the matter of the letters."
+<~
+
+# desk
+## What was done while you slept
+$ b6.lead_desk = "approved"
+When the report is done, {_reader} puts three papers on the table, squares them with one finger, and waits to be told that you are ready.
+The first is a charter, in Illinois, of a house of business called the Collins Exchange, which the family established by letter in the year nine, in your name, with a brass plate on LaSalle Street, a clerk who could read a ticker, and a name for paying its bills. It is, {_reader} says, a very good house, and a very strange one, and not a bit like London.
+The second is a letter in a woman's hand, on lined paper, that does not say what the first one says but says it a good deal more simply. It is from Chicago. It says that the house is expected.
+The third is a note on the firm in Lime Street, which the Hale family has kept for three lives, and which has no need of you any longer, except as a name on the plate. It would, {_reader} says, be a kindness to settle what is to be done with it before the ship sails.
+:the_choice
+* Approve the Exchange and the letter as written, and thank {_reader} in so many words
+  $ b6.lead_desk = "approved"
+  $ standing += 1
+  {_reader} receives it with the look of someone who was hoping for four words and has been given a speech. It is not a great thing, to say that something was well done. It is more than most people hear in a lifetime.
+* Go through every paper yourself, and send each back marked in the margin
+  $ b6.lead_desk = "pressed"
+  $ cunning_brutal += 1
+  $ standing -= 1
+  It takes the rest of the quarter hour and a good deal more. {_reader} answers every mark in the margin, steadily, and at the end of it you have found three small things to correct and one large thing that was exactly right. It is not an insult. It is, you suspect, very nearly what {_reader} expected.
+* Say that it is the best house you have ever owned, and ask {_reader} how it was done
+  $ b6.lead_desk = "thanked"
+  $ humanity += 1
+  $ standing += 1
+  It is a question that has not been put to {_reader} in some time. The answer takes twenty minutes, and a good deal of tea that nobody drinks, and it is, to your surprise, extremely good. There is a great deal that a person can build in thirty five years, in the dark, with nobody looking, if they have been told that it matters.
+~> london_firm
+<~
+
+# london_firm
+## The firm in Lime Street
+:the_london
+* Keep the Hales as the London agents, on the old terms, with a quiet word to Mr. Harold [once]
+  ?if b6.london == "agents"
+    $ b6.london = "agents"
+  ?end
+  $ standing += 1
+  {_reader} writes it down. It is the plainest answer, and the one that the Hales will not at all believe. They have been trusted by a stranger for three generations. It is, you think, as good a way as any to be remembered.
+  -> :the_london
+* Settle a pension on the clerks who kept faith in the dark years, and on their widows [once]
+  ?if b6.london == "agents"
+    $ b6.london = "pension"
+  ?end
+  $ do earn(-2)
+  $ humanity += 1
+  It is not a great deal of money, and it will mean more to the people who get it than anything else you do this year. {_reader} is, for a moment, silent. Then the pen goes on. A great many of the names in the margin, it appears, were already known.
+  -> :the_london
+* Move the firm's reserve west, to the Exchange, and let London be a brass plate [once]
+  $ b6.london = "west"
+  $ cunning_brutal += 1
+  $ do earn(3)
+  It is a hard, sound, business sort of thing to do, and it will be remembered in Lime Street as a kind of departure. It will also buy a great deal of Chicago. {_reader} writes it down, and at the foot of the page, quite small, adds a mark which you take to be an apology.
+  -> :the_london
+* That will do
+  <~
+-> :the_london
+
+# night
+## The first night
+:night
+?if actions_left() == 3
+  The night is young, and so, you think, are you, which is absurd.
+?elif actions_left() == 2
+  The night has a long way to go, and the lamp has begun to gutter, and {_reader} has begun to look at the clock, which is an object that you are not yet used to.
+?else
+  There is a gray in the sky that is not yet a color, and the first of the motor lorries have begun, and you have one thing left that you have time for.
+?end
+* Go through the books [once] ?if actions_left() > 0
+  ~> books
+  $ do act()
+* Go out, and look at the world [once] ?if actions_left() > 0
+  ~> street
+  $ do act()
+* Gather the household [once] ?if actions_left() > 0
+  ~> household
+  $ do act()
+* Open the letters from the west [once] ?if actions_left() > 0
+  ~> letters
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# books
+## The ledger
+{_reader} has laid them out on the table, three of them, in a descending order of bulk, and sits very still while you read.
+?if wake("orders") == "dark"
+  The first is the long ledger of what was done in your name, and it is hard to read, because it is so clean. The ventures of the dark sort have paid beautifully. They have also been paid for by people whom you are not going to meet, in places that you will not be shown, and it is all in a neat commercial hand with a note at the foot that says, *As the law requires*.
+  You close it. You do not mention the note. {_reader} does not either, which is a mercy and a worse thing.
+?elif wake("orders") == "aggressive"
+  The first is the long ledger of what was done in your name, and it is bold, and handsome, and rather alarming. The house has lent to railways and insured ships and bought, in the wreck of the war, what was cheap, and sold what was dear in the peace. It is rich. It is also owed a very great deal by a great many people who are not going to pay.
+?else
+  The first is the long ledger of what was done in your name, and it is the plainest that you have ever read. Rents, farms, a few good houses with good walls, and a share in a number of dull, durable things that the war did not manage to kill.
+?end
+The second ledger is the house's running account. The third is a small book bound in green, which is the family's private note of what has been done *for* you, and not in your name, and it is not very long.
+:the_choice
+* Take the books on trust, and thank {_reader}
+  $ b6.books = "trusted"
+  $ standing += 1
+  {_reader} lets out a long breath, and looks very much younger. It is a small thing to say that you trust someone. You find that it is worth rather more than the interest.
+* Go through them line by line, and ask what is not written
+  $ b6.books = "audited"
+  $ cunning_brutal += 1
+  It takes an hour. {_reader} answers every question, steadily, and at the end you are quite sure that nothing has been hidden, and that you have hurt the feelings of an honest person. It is a thing that you will not need to do twice.
+-> books_end
+
+# books_end
+$ do discover("the_dry_city")
+?if can_build_any() or wealth > 0
+  ~> hill_letter
+?end
+<~
+
+# hill_letter
+## A letter from the hill
+Between the second ledger and the third there is a letter that the books did not account for, in the careful hand of the keepers of the hill, with a thumbprint in the corner where someone has held the paper down against the wind. The village is well. There is a good deal that it could use, and the writer, who is plainly ashamed of asking, has listed them in order of shame.
+:the_hill
+* Pay for a paved road down to the railway, which the carts have worn to a ditch ?if can_build("paved_road")
+  $ b6.village = "built"
+  $ do build("paved_road")
+  $ standing += 1
+  It is a dull thing, a road, and the best use of money that you will find this year. The valley has been sending its wine to the station in a cart that loses a barrel in three, and in the autumn there will be a lorry on the hill that nobody owes anyone for.
+* Pay for a growers' cooperative and a press house, so that the valley sells together ?if can_build("cooperative")
+  $ b6.village = "built"
+  $ do build("cooperative")
+  $ humanity += 1
+  You are told in the next letter that the old women have stopped quarreling over the price of grapes. You are told in the one after that they have started quarreling over the chair. It is, for a few coins, the most visible peace that you have ever bought.
+* Send coin to the hill, and let the village choose ?if wealth > 0
+  $ b6.village = "sent"
+  $ do send_home(30)
+  It is the lazy kindness, and also, often, the wisest. The village will spend it on whatever it most lacks, which will not be what you would have guessed. There will be a letter in the spring that tells you what it was.
+* Write that you have read the letter, and that you will think of it
+  $ b6.village = "waited"
+  It is not a refusal. It is something like the opposite, and not quite a promise, and the writer will know the difference exactly.
+<~
+
+# street
+## The new world
+?if _hill == 1
+  You go up through the village in the dark, and it is a thing that you would not have known. There are lamps in some of the windows, burning without any flame, and a new wall, and a notice on the church door about the vote, and under it a smaller one in a priest's hand about the cinema in the next town. A boy with a torch follows you for a hundred yards, and then, with great dignity, asks whether it is true that the saint can fly.
+?else
+  You go out by the lane to the Embankment, and you stand on the pavement, and it is not the street. There is a bus, painted red, going by on its own, with a lit window and a boy hanging on the back. There are wires, and a motor taxi, and a lamp on a pole that makes the whole road as white as a plate. A girl in a dress to her knees and a hat like a bell, with her hair cut short, walks by arm in arm with two young men, and is laughing, and is smoking, and does not look at you at all.
+?end
+There is a newspaper, as there always is, and a man to read it aloud, as there is not always.
+:the_choice
+* Take a paper, and read the news
+  $ b6.street = "read"
+  $ adjustment += 3
+  There is a great deal, in very small print. A king has opened an exhibition at Wembley. A party of working men has formed a government, for the first time in the history of the country, and nobody knows whether it will last the spring. The Americans have made drink illegal across their whole continent, and a thirsty world is making a fortune out of it. The world has grown a great deal smaller and a great deal faster and, you think, rather sadder, and a good deal more amused by it.
+* Talk to the man who is reading it, and ask what he thinks
+  $ b6.street = "spoke"
+  $ standing += 1
+  $ adjustment += 2
+  He is a young clerk, thin, with a gassed man's cough and a good opinion of the future. He tells you that it is all coming up, and that the wireless will end the next war before it starts, and that his cousin went to Chicago on a boat and has not written, which is either a very good sign or a very bad one. He says that it is a lively place. He says that it is a dry city, and a wet one.
+* Walk on, and watch the faces
+  $ b6.street = "watched"
+  $ cunning_brutal -= 1
+  $ adjustment += 2
+  It is the old art, and a good one. You watch the faces go by in the electric glare, and what is carried, and how the poor are dressed, and after half an hour you have learned that there are fewer men than there should be, and a great many women, and that the ones who came home have found a way to be quiet in a crowd.
+$ do discover("the_northbound_families")
+<~
+
+# household
+## Your people
+?if coven_size() > 0
+  They have been waiting, as the family does, in the room above, and when you come up the stair there is a small unmistakable hush, of the sort that follows a person who has been missed. It is not a thing that you are good at. You find that you do not mind.
+  ?if in_circle("prisca") and member("prisca", "status") == "active"
+    Prisca is at the end of the table, with her abacus, pretending to read.
+  ?end
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+    Fiammetta has put herself where she can see the door, and has her hands on the table, flat, the way a person does who has been carrying something for a very long time and has put it down.
+  ?end
+  ?if in_circle("thibault") and member("thibault", "status") == "active"
+    Thibault is in the corner, grown into his hands, and looks at you as if he were waiting to be told that he is not allowed to be glad.
+  ?end
+  ?if in_circle("hanno") and member("hanno", "status") == "active"
+    Hanno has a pen and a very small book, and says, you are sure, nothing.
+  ?end
+  ?if in_circle("tiro") and member("tiro", "status") == "active"
+    Tiro has been put in charge of the telephone, and is guarding it like a sentry.
+  ?end
+  ?if in_circle("honorine") and member("honorine", "status") == "active"
+    Honorine has found the one chair in the room that is not a modern one, and sits in it, bolt upright, in the manner of a person who intends to correct the grammar of a great many speeches.
+  ?end
+  ?if in_circle("armand") and member("armand", "status") == "active"
+    Armand has a stethoscope round his neck and a medical journal open at the knee, and is looking at the rest of the table with the open delight of a man who has been waiting thirty five years to compare notes.
+  ?end
+  ?if _lead != ""
+    {_reader} has the head of the table, as someone does who has had it for thirty five years, with the books open and a map of the great lakes at {pg(_lead, "his", "her", "their")} elbow, and tells you, without being asked, what the others only look.
+  ?end
+  They have all agreed on one thing in your absence, and they say it in chorus, and then look embarrassed. You are not to go to Chicago alone.
+  ~> gifts_night
+  :the_choice
+  * Take them all with you, and let the family cross the sea
+    $ b6.circle = "all"
+    $ do discover("the_lake_shore_house")
+    $ standing += 1
+    It is a large decision. A family that comes ashore all at once will be noticed by a city, and this is a city that notices. It is also a very different thing from a man alone. You tell them that you will not have anybody left in a cellar. A silence follows, and then something that would be a cheer in less careful people.
+  * Go first, and let them follow when you have found them a roof
+    $ b6.circle = "ahead"
+    $ cunning_brutal += 1
+    You tell them that you will send for them, and that they are the arm that you leave behind: your eyes, your counting house, and the thing that does not sleep when you do. There is a short protest. Then, which is better, there is a list of things that each of them will do before you write.
+  * Leave them here, with the business and the hill, and go alone
+    $ b6.circle = "stay"
+    $ cunning_brutal += 2
+    $ humanity -= 1
+    You say that Chicago is not a place for the whole of the house, which is true, and that it is a very long way, which is true, and that you will write, which is the answer of someone who has begun to put the weight of a thing on other people and does not like it.
+?else
+  There is no coven. There is the house, which is a great deal more of a thing than you had counted on, and has met you in the room above with the quiet of a family that has been waiting for you for thirty five years.
+  The oldest says, in the voice of a woman who has not been asked her opinion in a very long time, that the keepers have talked it over and somebody is going with you.
+  :the_keepers
+  * Let a keeper go with you, a young one, as a secretary
+    $ b6.circle = "all"
+    $ do discover("the_lake_shore_house")
+    $ standing += 1
+    $ humanity += 1
+    They send a young woman of twenty, a typist, with a small bag and a very good hand and a look of pure terror held in place by pure determination. You tell her that she is not to call you Master. She says that she will try. She has, you can see, a notebook in the bag already, and has written on the first page *Things I Must Not Say*.
+  * Ask them to write, and to hold the house, and go alone
+    $ b6.circle = "stay"
+    $ cunning_brutal += 1
+    They agree, in the voices of people who have agreed to that for a very long time, and will go on agreeing to it after you are gone.
+?end
+<~
+
+# gifts_night
+?if has_gift("old_blood")
+  The family are not like other people's. You have known it since the first of them turned, but it is a different thing to see it across a table: a gleam in them, a steadiness, as if they had been cut from a single piece of old wood.
+?end
+?if gift_holder("strength") != ""
+  {name(gift_holder("strength"))} lifts a cast iron radiator off the wall, because it was in the way, and sets it down with an apology to the floor.
+?end
+?if gift_holder("charm") != ""
+  {name(gift_holder("charm"))} asks the housekeeper, without raising {pg(gift_holder("charm"), "his", "her", "their")} voice, for a thing that the housekeeper does not at all wish to give, and the housekeeper gives it, and is puzzled for an hour afterward.
+?end
+?if gift_holder("shadows") != ""
+  {name(gift_holder("shadows"))} crosses the room in plain view of three people, under the electric light, and not one of them, afterward, can say that anyone crossed it.
+?end
+?if gift_holder("merchants_eye") != ""
+  {name(gift_holder("merchants_eye"))} looks once at the second ledger and says, in a pleasant voice, which page has been altered, and by whom, and how much he is owed for his trouble.
+?end
+?if gift_holder("memory") != ""
+  {name(gift_holder("memory"))} recites, without being asked, the whole of the previous year's letters from Chicago, line by line, and says that the thing that was not said in them is the most interesting.
+?end
+?if gift_holder("healing") != ""
+  {name(gift_holder("healing"))} takes one look at the housekeeper's hand, and says what is wrong with it, and has set it right by the time the housekeeper has noticed.
+?end
+<~
+
+# letters
+## The letters from the west
+There are four, and the last is a telegram.
+$ do meet("dora")
+$ do meet("cordelia")
+$ do meet("marcel")
+$ do meet("crane")
+The first is from the keeper house on the Near North Side, in a plain, quick, square hand, and it is signed *Dora Valer*.
+> Sir. I am the granddaughter of the man who went out in 'eighty nine. I have the books, and the keys, and the Exchange on LaSalle Street, and I do not much like any of it, and I do it very well. I am to tell you the following, in order of importance, and you must forgive me if it is not in order of interest. First, the lake is very still. It has been still since the winter of the great snow, and the old men on the shore say that it was never so before. Second, there is a man in the Yards who has been asking since the autumn, in a plain good humored voice, for a family of the sixth line by name. He offers a gold coin, very old, with a head on it that no one will name. Nobody who has gone to look has come back with an account that fits. Third, the city. I should like very much to tell you about the city, but it would take the night.
+?if b5.west == "follow"
+  She adds a postscript, in a smaller hand, that she has been expecting you ever since the cable of eighty eight, and that she did not at all believe in it, and has kept a bed aired for thirty five years in case.
+?elif b5.west == "hold"
+  She adds a postscript, in a smaller hand, that the family has been told to wait, and watch, and that she has watched, and would like to be allowed to say what she has seen.
+?else
+  She adds a postscript, in a smaller hand, that nobody sent anything, in eighty eight, and that the family went on anyway.
+?end
+The second is on cheap blue paper, from a school on the South Side, in the hand of a woman who has taught a good many children to write.
+> Dear Sir. My great aunt Honorine used to say that a man once paid for a roof, and that the roof held, and that the man did not wish to be thanked. I was a girl in the Tremé when the trains began, and my mother put me on one with a basket and a hymn book. There are a great many of us here now, from Louisiana and Mississippi and Georgia, and we have made a city inside the city, with our own banks and our own churches and our own newspaper. We have a great deal that we need. We have a great deal more that we can do. I do not know what you are. I know that my aunt thought that you were a friend. Cordelia Moten.
+The third is on the back of a bill of fare, in pencil, with a stain that is probably wine and a drawing of a clarinet.
+> Hello, Mister. My mama's grandmother cooked in your house in the Marigny, which makes you family or a debt, and in New Orleans those are the same. I play the clarinet every night in a place on State Street where a man can get anything he wants at a price, and I sleep through every morning, which I am told is a family failing. I am writing because there is a piece of news. Somebody has been paying the band to play a particular song, over and over, in the small hours, and it is not a song I know. I think it is a song that is very old. Marcel Prosper.
+The fourth is a telegram, on the yellow form, and it was sent the day before yesterday.
+> WELCOME BACK. CHICAGO IS LOVELY. I OWN HALF OF IT. CRANE.
+:the_reply
+* Cable back that you will come, and that you are glad of the half [once]
+  $ b6.crane = "warm"
+  $ standing += 1
+  It is a short cable, and it costs the earth, and you send it with a smile that you do not quite mean. It is a great deal better to be on good terms with a person who owns half a city than to be on any terms at all. You also find, to your surprise, that part of the smile is real.
+* Cable back one line: that you will inspect the half [once]
+  $ b6.crane = "cool"
+  $ cunning_brutal += 1
+  It is the answer that Crane will understand best, which is why you send it. He will laugh. He will also keep the cable, in a drawer, in a locked safe, in a building that is very high. It will be a long game, and you have just opened.
+* Send no answer, and let him wonder [once]
+  $ b6.crane = "silent"
+  $ cunning_brutal += 2
+  It is the oldest of the discourtesies and the cheapest. It will cost you nothing at all for a month, and may cost you a good deal by the spring.
+$ do discover("the_coin_by_the_yards")
+<~
+
+# dawn
+## Before the dark ends
+There is a gray at the edge of the sky, and the first buses, and the strange, constant, enormous sound of London waking up and finding itself a city that is not the one it was. The house is awake and does not know it.
+You have been in the world for one night. There is a firm, and a house on a lake, and four letters, and a man who is asking in the stockyards for a family that is, as far as you know, yours. You think that there is going to be a good deal more.
+There is a cab at the door, with the family's trunk on it, and a ticket for a ship that sails from Southampton on the evening tide.
+:the_passage
+* Take a cabin on a great liner, under your own name, with a sealed trunk
+  $ b6.passage = "liner"
+  $ do earn(-1)
+  $ standing += 1
+  It is the way that a gentleman does it, and the cabin is on the leeward side, with a lamp and a bath and a steward who has been paid never to knock before dusk. It will cost a good deal and be remembered by nobody. You will cross the whole ocean in a bed that is not yours, in a century that is.
+* Go as freight, in a case, in the hold, and let the ship carry you like a crate of wine
+  $ b6.passage = "hold"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  It is the way that your kind has always done it, and there is a coldness to it that does not go away. The case is lined with soil, and stenciled with the name of a company, and you will cross the ocean listening to the thump of a ship's turbines through three inches of oak.
+* Cross in third class, quick and plain, and be a passenger in the dark ?if wealth > 0
+  $ b6.passage = "steerage"
+  $ cunning_brutal -= 1
+  $ adjustment += 2
+  It is the cheapest and the most crowded, and by night you will be a quiet man in a corner of a great room full of other people's hopes, and you will be astonished at how much it moves you.
+$ do rest()
+=> next

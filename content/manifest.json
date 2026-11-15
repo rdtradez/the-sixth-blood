@@ -1028,9 +1028,27 @@
           "notes": [
             "blood"
           ]
+        },
+        {
+          "id": "b5c19",
+          "file": "whitechapel-hunt/ch19.tsb",
+          "title": "The Fledgling",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        },
+        {
+          "id": "b5c20",
+          "file": "whitechapel-hunt/ch20.tsb",
+          "title": "The Silent West",
+          "notes": [
+            "blood"
+          ]
         }
       ],
-      "incomplete": true
+      "journal": "journal/whitechapel-hunt.tsb",
+      "recap": "You woke in a city of gas and fog, with a family about you who had already made a house of it, and a firm in Lime Street with a solicitor's name on the door. You learned what a coven of the old kind was, and what the young ones wanted, and who would sit at whose table. You went down into the wall, and found a lamp that was a hinge, and met a man in a black coat who held a lease. You were offered a card, eighty five times over, and answered it in your own way. A girl in Commercial Street was made and lost, and found. Then a cable came from the west, and you put your affairs in other hands, and lay down once more to wait out a long and dreadful century."
     },
     {
       "id": "relics-lost-god",
@@ -1047,7 +1065,42 @@
           "collesanto": 72
         }
       },
-      "chapters": []
+      "chapters": [
+        {
+          "id": "b6c01",
+          "file": "relics-lost-god/ch01.tsb",
+          "title": "The Letters from the Lake",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c02",
+          "file": "relics-lost-god/ch02.tsb",
+          "title": "LaSalle Street",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c03",
+          "file": "relics-lost-god/ch03.tsb",
+          "title": "The Second Shift",
+          "notes": [
+            "blood",
+            "violence"
+          ]
+        },
+        {
+          "id": "b6c04",
+          "file": "relics-lost-god/ch04.tsb",
+          "title": "The Man in Gloves",
+          "notes": [
+            "blood"
+          ]
+        }
+      ],
+      "incomplete": true
     },
     {
       "id": "unchained",

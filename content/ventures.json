@@ -45,6 +45,8 @@
     "chicago.bronzeville": { "book": "relics-lost-god", "name": "Community investment in Bronzeville", "cost": 20000, "income": 900 },
     "chicago.bootlegging": { "book": "relics-lost-god", "name": "Bootlegging", "cost": 30000, "income": 6000, "dark": true, "humanity": 3, "velati": 2 },
     "chicago.gambling": { "book": "relics-lost-god", "name": "Gambling", "cost": 25000, "income": 4500, "dark": true, "humanity": 3, "velati": 2 },
+    "chicago.radio": { "book": "relics-lost-god", "name": "Radio stations, and the sets to hear them", "cost": 30000, "income": 3000 },
+    "chicago.motorcars": { "book": "relics-lost-god", "name": "Motor dealerships and garages on the boulevards", "cost": 28000, "income": 2800 },
 
     "ny.realestate": { "book": "unchained", "name": "Real estate", "cost": 150000, "income": 15000 },
     "ny.equity": { "book": "unchained", "name": "Private equity", "cost": 200000, "income": 21000 },

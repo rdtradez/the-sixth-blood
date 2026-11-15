@@ -5774,6 +5774,401 @@
       "major": true,
       "default": "terms",
       "note": "Chapter 18: what he did with the eighty fifth card"
+    },
+    "b5.trail": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "net",
+        "hounds"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "net",
+      "note": "Chapter 19: how the hunt for the Commercial Street fledgling was run"
+    },
+    "b5.master": {
+      "kind": "enum",
+      "values": [
+        "court",
+        "shield",
+        "notes"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "court",
+      "note": "Chapter 19: what was done with the master of the Gaslight Club"
+    },
+    "b5.nights": {
+      "kind": "enum",
+      "values": [
+        "surety",
+        "grace",
+        "none"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "grace",
+      "note": "Chapter 19: what the Court granted, or was refused, for the hunt"
+    },
+    "b5.maggie": {
+      "kind": "enum",
+      "values": [
+        "ended",
+        "ward",
+        "court"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "court",
+      "note": "Chapter 19: what became of the fledgling Maggie Tuck"
+    },
+    "b5.last_night": {
+      "kind": "enum",
+      "values": [
+        "attic",
+        "wall",
+        "cass",
+        "maggie"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "attic",
+      "note": "Chapter 20: where the last night in London was spent"
+    },
+    "b5.west": {
+      "kind": "enum",
+      "values": [
+        "follow",
+        "hold",
+        "silent"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "hold",
+      "note": "Chapter 20: the answer to the cable from Chicago"
+    },
+    "b5.charge": {
+      "kind": "enum",
+      "values": [
+        "keep",
+        "west",
+        "scatter"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "keep",
+      "note": "Chapter 20: the standing charge to the family for the sleep"
+    },
+    "b5.farewell": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "none"
+      ],
+      "book": "whitechapel-hunt",
+      "major": true,
+      "default": "none",
+      "note": "Chapter 20: whether a letter was left in the house"
+    },
+    "b6.trouble": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "fled",
+        "fought",
+        "talked"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 1: how he met being woken early"
+    },
+    "b6.lead_desk": {
+      "kind": "enum",
+      "values": [
+        "approved",
+        "pressed",
+        "thanked"
+      ],
+      "book": "relics-lost-god",
+      "default": "approved",
+      "note": "Chapter 1: how the desk was received",
+      "major": true
+    },
+    "b6.london": {
+      "kind": "enum",
+      "values": [
+        "agents",
+        "west",
+        "pension"
+      ],
+      "book": "relics-lost-god",
+      "default": "agents",
+      "note": "Chapter 1: what became of the London firm"
+    },
+    "b6.village": {
+      "kind": "enum",
+      "values": [
+        "built",
+        "sent",
+        "waited"
+      ],
+      "book": "relics-lost-god",
+      "default": "waited",
+      "note": "Chapter 1: the answer to the letter from the hill"
+    },
+    "b6.first_feed": {
+      "kind": "enum",
+      "values": [
+        "animal",
+        "donor",
+        "human",
+        "none"
+      ],
+      "book": "relics-lost-god",
+      "default": "animal",
+      "note": "Chapter 1: the first feeding after the waking",
+      "major": true
+    },
+    "b6.books": {
+      "kind": "enum",
+      "values": [
+        "trusted",
+        "audited"
+      ],
+      "book": "relics-lost-god",
+      "default": "trusted",
+      "note": "Chapter 1: how the books were read"
+    },
+    "b6.street": {
+      "kind": "enum",
+      "values": [
+        "read",
+        "spoke",
+        "watched"
+      ],
+      "book": "relics-lost-god",
+      "default": "watched",
+      "note": "Chapter 1: the first look at the new world"
+    },
+    "b6.circle": {
+      "kind": "enum",
+      "values": [
+        "all",
+        "ahead",
+        "stay"
+      ],
+      "book": "relics-lost-god",
+      "default": "stay",
+      "note": "Chapter 1: whether the coven (or a keeper) crosses with him, follows or stays",
+      "major": true
+    },
+    "b6.crane": {
+      "kind": "enum",
+      "values": [
+        "warm",
+        "cool",
+        "silent"
+      ],
+      "book": "relics-lost-god",
+      "default": "cool",
+      "note": "Chapter 1: the answer to Crane's wire",
+      "major": true
+    },
+    "b6.passage": {
+      "kind": "enum",
+      "values": [
+        "liner",
+        "hold",
+        "steerage"
+      ],
+      "book": "relics-lost-god",
+      "default": "liner",
+      "note": "Chapter 1: how he crossed"
+    },
+    "b6.dock": {
+      "kind": "enum",
+      "values": [
+        "lead",
+        "dora",
+        "alone"
+      ],
+      "book": "relics-lost-god",
+      "default": "lead",
+      "note": "Chapter 2: who met him in Chicago"
+    },
+    "b6.exchange": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "pressed"
+      ],
+      "book": "relics-lost-god",
+      "default": "kept",
+      "note": "Chapter 2: how he took the exchange house"
+    },
+    "b6.walk": {
+      "kind": "enum",
+      "values": [
+        "bronzeville",
+        "pilsen",
+        "yards"
+      ],
+      "book": "relics-lost-god",
+      "default": "bronzeville",
+      "note": "Chapter 2: where the first walk through the city went",
+      "major": true
+    },
+    "b6.haven": {
+      "kind": "enum",
+      "values": [
+        "brownstone",
+        "tower",
+        "keepers"
+      ],
+      "book": "relics-lost-god",
+      "default": "brownstone",
+      "note": "Chapter 2: where the house sleeps in Chicago",
+      "major": true
+    },
+    "b6.call": {
+      "kind": "enum",
+      "values": [
+        "form",
+        "alone",
+        "family",
+        "regrets"
+      ],
+      "book": "relics-lost-god",
+      "default": "regrets",
+      "note": "Chapter 2: how he answered the card from the lake shore",
+      "major": true
+    },
+    "b6.coin": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "melted",
+        "shown"
+      ],
+      "book": "relics-lost-god",
+      "default": "kept",
+      "note": "Chapter 2: what he did with the coin left at the door",
+      "major": true
+    },
+    "b6.cab": {
+      "kind": "enum",
+      "values": [
+        "bluff",
+        "ask",
+        "gold"
+      ],
+      "book": "relics-lost-god",
+      "default": "ask",
+      "note": "Chapter 2: how he met the first motor cab in Chicago"
+    },
+    "b6.papers": {
+      "kind": "enum",
+      "values": [
+        "shared",
+        "close",
+        "hill"
+      ],
+      "book": "relics-lost-god",
+      "default": "shared",
+      "note": "Chapter 3: what he did with the grandfather's drawing of the face"
+    },
+    "b6.rudek": {
+      "kind": "enum",
+      "values": [
+        "bargained",
+        "paid",
+        "warned"
+      ],
+      "book": "relics-lost-god",
+      "default": "bargained",
+      "note": "Chapter 3: how he met the Yards house's daytime man",
+      "major": true
+    },
+    "b6.company": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "family"
+      ],
+      "book": "relics-lost-god",
+      "default": "alone",
+      "note": "Chapter 3: whom he took to the Yards on Saturday"
+    },
+    "b6.tallis": {
+      "kind": "enum",
+      "values": [
+        "listened",
+        "pressed",
+        "held"
+      ],
+      "book": "relics-lost-god",
+      "default": "listened",
+      "note": "Chapter 3: how he met the man in the gray overcoat",
+      "major": true
+    },
+    "b6.song": {
+      "kind": "enum",
+      "values": [
+        "waited",
+        "followed",
+        "spoke"
+      ],
+      "book": "relics-lost-god",
+      "default": "waited",
+      "note": "Chapter 4: how he met the man in gloves"
+    },
+    "b6.ames": {
+      "kind": "enum",
+      "values": [
+        "bargain",
+        "partner",
+        "refuse"
+      ],
+      "book": "relics-lost-god",
+      "default": "bargain",
+      "note": "Chapter 4: his answer to Crane's man",
+      "major": true
+    },
+    "b6.benefit": {
+      "kind": "enum",
+      "values": [
+        "watched",
+        "funded",
+        "declined"
+      ],
+      "book": "relics-lost-god",
+      "default": "watched",
+      "note": "Chapter 4: the Oriental Institute's benefit",
+      "major": true
+    },
+    "b6.rivals": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "talked",
+        "bought",
+        "guarded"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 4: what the family did about the rival houses (the most committed pick wins)"
+    },
+    "b6.lamp": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "told",
+        "watched"
+      ],
+      "book": "relics-lost-god",
+      "default": "left",
+      "note": "Chapter 4: the light on the lake"
     }
   }
 }

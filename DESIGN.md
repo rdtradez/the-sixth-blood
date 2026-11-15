@@ -86,6 +86,10 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 57: Book Five chapters 13 and 14
 - [x] Session 58: Book Five chapters 15 and 16
 - [x] Session 59: Book Five chapters 17 and 18
+- [x] Session 60: Book Five chapters 19 and 20; Book Five is complete (journal, recap and sleep to Chicago)
+- [x] Session 61: the Chicago and Collesanto (1923) maps for Book Six
+- [x] Session 62: Book Six chapters 1 and 2
+- [x] Session 63: Book Six chapters 3 and 4
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -274,7 +278,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - `tests/interlude-b.test.js` covers the chain end and the chapter order; `tests/book1.test.js` first night checks use `stopAt: 'lc01'`.
 - Plans are in `SPOILERS/lost-centuries.md`.
 
-- Maps (session 6): the Map tab in the menu shows `app/maps/city.html` (procedural SVG: Rome and Collesanto, with an After the fire toggle) in an iframe and tells it which sites to show. Sites per map are listed in `engine/maps.js`; `roadhome`, the farm, square, villa and road start charted. Chapters add places with `$ do chart("rome.warehouse")` and can test `charted("rome.warehouse")`. Charted places live in `sys.lore.sites` (SCHEMA 5). Later books add their city to `engine/maps.js` and `city.html`; the approved standalone previews for Florence (done), Paris (done), New Orleans, London, Chicago and New York are kept outside the repo until their sessions.
+- Maps (session 6): the Map tab in the menu shows `app/maps/city.html` (procedural SVG: Rome and Collesanto, with an After the fire toggle) in an iframe and tells it which sites to show. Sites per map are listed in `engine/maps.js`; `roadhome`, the farm, square, villa and road start charted. Chapters add places with `$ do chart("rome.warehouse")` and can test `charted("rome.warehouse")`. Charted places live in `sys.lore.sites` (SCHEMA 5). Later books add their city to `engine/maps.js` and `city.html`; the approved standalone previews for Florence (done), Paris, New Orleans and Chicago (done), London and New York are kept outside the repo until their sessions.
 
 ### Session 17 notes (for the next session)
 
@@ -703,3 +707,40 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New decision flags (`b5.` prefix, registered, major): `b5.square`, `b5.chair`, `b5.watcher`, `b5.letter` (chapter 17) and `b5.trap`, `b5.witness`, `b5.reading`, `b5.terms` (chapter 18). New ventures `london.telephone` and `london.cables`, offered in loops so several can be taken. New person: Inspector Lamb. Four new codex entries. No schema or migration. Tests in `tests/book5i.test.js`; `tests/book5.test.js` now expects eighteen chapters.
 - Sessions 56, 57 and 58 (pull requests #61, #62 and #63) were not merged when this session started, so the session 59 branch is stacked on session 58.
 - Plans are in `SPOILERS/whitechapel-hunt.md`.
+
+### Session 60 notes (Book Five, chapters 19 and 20)
+
+- Chapters `b5c19` and `b5c20` are in `content/whitechapel-hunt/` (`ch19.tsb`, `ch20.tsb`), about 8,000 words together. **Book Five is finished at twenty chapters**: `"incomplete"` is removed from the manifest, so the book now ends, writes its journal (`journal/whitechapel-hunt.tsb`, in the voice of the Senate's agent in London) and unlocks the next book. The manifest entry has a spoiler light `recap` for quick starts into Book Six.
+- Chapter 19 has the usual shape (an opening with no phase, a short hunger scene that only runs if `must_feed()` is true, one night phase of three actions out of four, a fixed closing scene every player plays, and a dawn). Chapter 20 has no phases: a last night, a fixed scene, the lines of the sleep (place, steward, orders, invest, guard, charge, letter), then `rest()` and `sleep("london_to_chicago")` (thirty five years), closing with `=> next`. The wake report is not shown in Book Five; the next book's opening reads `wake()`. The invest scene offers the seven options of the `london_to_chicago` gap and allows several.
+- The coven fronts both chapters: the family is the net in the streets, Prisca, Hanno and Fiammetta each have a task in chapter 19's council, the lead runs the firm (several ventures, house builds and a standing task are all allowed), the rival covens are the heart of chapter 19, and chapter 20 charges the family for the sleep (`b5.charge`, shown only when `coven_size() > 0` and `b5.circle` is not `stay`). Names are always checked with `in_circle()`; `npm run coven-names` is clean for the new files.
+- New decision flags (`b5.` prefix, registered, major): `b5.trail`, `b5.master`, `b5.nights`, `b5.maggie` (chapter 19) and `b5.last_night`, `b5.west`, `b5.charge`, `b5.farewell` (chapter 20). `b5.maggie`, `b5.master`, `b5.west` and `b5.charge` are the ones the next book should read first. New person: Maggie Tuck. Three new codex entries. Content notes: chapter 19 `blood`, `violence`; chapter 20 `blood`. No new engine behavior, so no schema or migration.
+- Tests: `tests/book5j.test.js` plays both chapters hungry and fed, with and without a coven, takes every recorded choice, and checks the end of the book, the sleep, the journal and the invest scene; `tests/book5.test.js` now expects twenty chapters and a complete book.
+- Sessions 56 to 59 (pull requests #61 to #65) were not merged when this session started, so the session 60 branch is stacked on session 59. Merge them in order.
+- Plans are in `SPOILERS/whitechapel-hunt.md`.
+### Session 61 notes (Book Six maps)
+
+- `app/maps/chicago.html` draws Chicago and Collesanto as they stand in 1923 (the approved preview). `engine/maps.js` gains `chicago` (`exchange`, `yards`, `depot`, `tower`, `club`, `valere`, `haven`, `goldcoast`, `bronzeville`, `pilsen`, `velati`, `roadhome`) and `collesanto5` (`farm`, `square`, `villa`, `press`, `gate`, `refuge`, `crypt`, `road`), both for book `relics-lost-god` on page `chicago`. Book Six chapters chart sites with `$ do chart("chicago.exchange")`.
+- Site ids are unique across the two maps of the book (a test checks this). `sw.js` caches the new page (`VERSION` is `tsb-17`). London and New York still need their maps.
+
+### Session 62 notes (Book Six, chapters 1 and 2)
+
+- Chapters `b6c01` and `b6c02` are in `content/relics-lost-god/` (`ch01.tsb`, `ch02.tsb`), about 13,000 words together. The manifest entry for Book Six lists them and is `"incomplete": true` until the book is finished.
+- Chapter 1 is the waking in London or on the hill, voiced by the business lead (the desk is `b6.lead_desk`; the London firm takes several answers, `b6.london`), the report, one night phase of three actions out of four (the books and the village letter, the new world, the household and the family's gifts, the letters from the west) and a dawn where he chooses his passage. It ends with `rest()` and `=> next`. Chapter 2 is the crossing, the landing in Chicago, a hunger scene that only runs if `must_feed()`, introductions by the lead (or the keeper Dora Valer), one night phase of three actions out of four (the Exchange and its ventures, a first walk, a roof for the family, the card from the lake shore) and a dawn with a fixed closing scene.
+- New decision flags (`b6.` prefix, registered): `b6.trouble`, `b6.lead_desk`, `b6.london`, `b6.village`, `b6.first_feed`, `b6.books`, `b6.street`, `b6.circle`, `b6.crane`, `b6.passage` (chapter 1) and `b6.dock`, `b6.cab`, `b6.exchange`, `b6.walk`, `b6.haven`, `b6.call`, `b6.coin` (chapter 2). `b6.circle` says whether the coven (or a keeper) crosses with him, follows or stays. `b6.lead_desk`, `b6.first_feed`, `b6.circle`, `b6.crane`, `b6.walk`, `b6.haven`, `b6.call` and `b6.coin` are the ones later chapters should read first.
+- Content: the Collis name for Book Six is Collins Exchange (`content/rules.json`) and the hero's alias is Mr. Collins; two new Chicago ventures, `chicago.radio` and `chicago.motorcars`, offered in chapter 2 in a loop with the existing ones so several can be taken (the banks wait for the crash); two new Collesanto buildings, `paved_road` and `cooperative`; five new people (Dora Valer, Cordelia Moten, Marcel Prosper, Mrs. Pell, Mr. Ames); five new codex entries. No engine change, schema or migration.
+- The coven fronts both chapters. Names are always checked with `in_circle()`; `npm run coven-names` is clean for the new files. Chapter 2 charts `chicago.valere`, `chicago.exchange`, `chicago.bronzeville`, `chicago.pilsen`, `chicago.yards`, `chicago.haven`, `chicago.tower`, `chicago.depot` and `chicago.goldcoast` as the player reaches them.
+- Tests: `tests/book6.test.js` plays both chapters from every kind of wake report, hungry and fed, with and without a coven, takes every recorded choice, and checks the venture loop and the family in the room.
+- Sessions 60 and 61 (branches `session-60` and `session-61`) were not merged when this session started, so the session 62 branch contains both. Merge them in the usual order.
+- Plans are in `SPOILERS/relics-lost-god.md`.
+
+### Session 63 notes (Book Six, chapters 3 and 4)
+
+- Chapters `b6c03` and `b6c04` are in `content/relics-lost-god/` (`ch03.tsb`, `ch04.tsb`), about 7,000 words together. The manifest entry for Book Six lists four chapters and stays `"incomplete": true`.
+- Chapter 3 opens with the business lead's week report, plays one day phase of two actions out of three, then a fixed Saturday night, then a short dawn. Chapter 4 opens with a call and the report, plays one night phase of three actions out of four, then a short dawn. Both end with `rest()` and `=> next`.
+- New decision flags (`b6.` prefix, registered): `b6.papers`, `b6.rudek`, `b6.company`, `b6.tallis` (chapter 3) and `b6.song`, `b6.ames`, `b6.benefit`, `b6.rivals`, `b6.lamp` (chapter 4). `b6.rudek`, `b6.tallis`, `b6.ames` and `b6.benefit` are major. `b6.rivals` is a multi pick loop where the most committed pick wins (guarded over bought over talked).
+- Content: four new people (Tallis, Rudek, Calloway, Whitcombe), four codex entries, and one collection piece (`ray_coin`, obtained in chapter 3 when the coin was kept or shown and the tenant was held). No engine change, schema or migration.
+- The coven fronts both chapters (lead's report, a member sent to the Yards gate, family in the room, the rival houses loop). Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
+- Tests: `tests/book6.test.js` now covers chapters 3 and 4.
+- Sessions 60 to 62 (pull requests #67 to #69) were not merged when this session started, so the session 63 branch is stacked on session 62. Merge them in order.
+- Plans are in `SPOILERS/relics-lost-god.md`.
+

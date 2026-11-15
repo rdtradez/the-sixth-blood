@@ -15,6 +15,8 @@
     "infirmary": { "book": "house-divided", "name": "An infirmary for the hill", "cost": 25, "prosperity": 5, "defense": 0 },
     "granary": { "book": "house-divided", "name": "A granary against the bad years", "cost": 20, "prosperity": 4, "defense": 1, "requires": ["farms"] },
     "mill": { "book": "whitechapel-hunt", "name": "A mill on the stream", "cost": 22, "prosperity": 6, "defense": 0 },
-    "lamps": { "book": "whitechapel-hunt", "name": "Lamps for the lane and the church", "cost": 12, "prosperity": 3, "defense": 1 }
+    "lamps": { "book": "whitechapel-hunt", "name": "Lamps for the lane and the church", "cost": 12, "prosperity": 3, "defense": 1 },
+    "paved_road": { "book": "relics-lost-god", "name": "A paved road down to the railway", "cost": 22, "prosperity": 5, "defense": 0 },
+    "cooperative": { "book": "relics-lost-god", "name": "A growers' cooperative and a press house", "cost": 26, "prosperity": 6, "defense": 0, "requires": ["farms"] }
   }
 }

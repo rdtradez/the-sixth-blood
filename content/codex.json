@@ -1081,6 +1081,78 @@
       "title": "The Burned Card",
       "book": "whitechapel-hunt",
       "text": "The freehold the white faced client offered, burned in the counting house stove. The ash kept its shape and did not blow away."
+    },
+    "the_rogue_fledgling": {
+      "category": "lore",
+      "title": "The Rogue Fledgling",
+      "book": "whitechapel-hunt",
+      "text": "A flower seller made a vampire in panic by the master of the Gaslight Club, unbound and unfed, who killed twice in Commercial Street before she was found in a cold store in Black Eagle Street. The Court's law makes a house answer for a made thing that runs within its ground."
+    },
+    "the_silent_west": {
+      "category": "lore",
+      "title": "The Silent West",
+      "book": "whitechapel-hunt",
+      "text": "A cable from Chicago in the first week of 1889: the lamp by the lake has not gone out but moved, and a man in the stockyards is asking for the sixth line by name and paying in gold of a date before the Republic."
+    },
+    "the_house_that_followed": {
+      "category": "lore",
+      "title": "The House That Followed",
+      "book": "whitechapel-hunt",
+      "text": "The answer sent west on the last night in London: that the house is coming, and will wake in the lakeside city, and that the family is to be ready."
+    },
+    "the_dry_city": {
+      "category": "lore",
+      "title": "The Dry City",
+      "book": "relics-lost-god",
+      "text": "The country has made drink a crime, and Chicago has made the crime a trade. Where a thing is forbidden and wanted, the old houses of the blood have always found that the money runs to whoever is brave and quiet."
+    },
+    "the_northbound_families": {
+      "category": "lore",
+      "title": "The Northbound Families",
+      "book": "relics-lost-god",
+      "text": "Since the war the railways have carried families out of the South by the thousand, and a good many of the people who once owed the house a debt, or a kindness, have come with them to the cities on the lake."
+    },
+    "the_lake_shore_house": {
+      "category": "bloodlines",
+      "title": "The Lake Shore House",
+      "book": "relics-lost-god",
+      "text": "The oldest coven in Chicago keeps a mansion on the lake shore, a charity or two, and a very long memory. It does not hold the whole city. It holds a good part of what the city is proud of."
+    },
+    "the_coin_by_the_yards": {
+      "category": "lore",
+      "title": "The Coin by the Yards",
+      "book": "relics-lost-god",
+      "text": "A man in the stockyards has been asking for a family of the sixth line by name, and offering a gold coin of a date before the Republic for a thing that he will not describe."
+    },
+    "the_stockyards": {
+      "category": "places",
+      "title": "The Stockyards",
+      "book": "relics-lost-god",
+      "text": "Five hundred acres on the South Side where the whole of the country's meat is killed, cut and canned. It runs all night under electric light, and a creature like you may stand in the middle of it and be, for once, unremarkable."
+    },
+    "the_tenants": {
+      "category": "lore",
+      "title": "The Tenants",
+      "book": "relics-lost-god",
+      "text": "A man in a gray overcoat who does not eat, does not sleep and does not age, and says that he is not a vampire. He says that the house he lives in is not his. The vampire world has no word for him."
+    },
+    "the_six_rays": {
+      "category": "lore",
+      "title": "The Six Rays",
+      "book": "relics-lost-god",
+      "text": "A gold coin older than the Republic: a head in a cap of leaves, eyes shut, and on the reverse six rays, one of them red. Your family's old figure, the sun with six rays and one red, is not a coincidence."
+    },
+    "the_yards_house": {
+      "category": "bloodlines",
+      "title": "The Yards House",
+      "book": "relics-lost-god",
+      "text": "The strong arm of Chicago's vampires, led by Augustin Rudek. It holds the stockyards, the packers' union and the docks, and takes what it wants from anyone it can frighten."
+    },
+    "the_oriental_institute": {
+      "category": "places",
+      "title": "The Oriental Institute",
+      "book": "relics-lost-god",
+      "text": "The University of Chicago's house of the ancient East, which has dug in Mesopotamia since the war. It is short of money for the seventh season."
     }
   }
 }
