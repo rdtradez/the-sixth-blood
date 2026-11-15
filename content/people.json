@@ -614,6 +614,12 @@
       "name": "Dr. Nora Whitcombe",
       "title": "Of the Oriental Institute",
       "bio": "A brisk Assyriologist in sensible shoes who has spent six winters in Mesopotamian trenches and wants a patron for the seventh."
+    },
+    "nell": {
+      "gender": "f",
+      "name": "Nell Pardoe",
+      "title": "A bonnet maker of Bethnal Green",
+      "bio": "Twenty six, white lipped and clear eyed, bled for a year by a gentle hand. She minds her manners even when dying. Her sister Ada lives in Bethnal Green."
     }
   }
 }

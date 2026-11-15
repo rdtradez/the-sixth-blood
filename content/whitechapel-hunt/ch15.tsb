@@ -6,7 +6,7 @@
 @chapter b5c15
 @title The Chain
 @book whitechapel-hunt
-@version 1
+@version 2
 
 # start
 ## The twentieth of October
@@ -71,6 +71,8 @@ The wall at Bishopsgate has been kept, by day and by night, by somebody who does
 ?end
 ?if b5.ward == "healed"
   Nell Pardoe has been up, in a chair, in the kitchen at Cable Street. She has asked, twice, whether the gentleman with the spoon is quite well.
+?elif b5.ward == "sired"
+  Nell Pardoe has taken the back room at Cable Street, with the shutters closed, and has begun, with great seriousness, to learn what the family does. She has asked whether a fledgling may keep a bonnet shop, and has been told that it is a splendid idea.
 ?elif b5.ward == "transfused"
   Nell Pardoe is sitting up in bed, thin and cross, and has begun to inform the whole ward of the things that are wrong with it. The Chairman is delighted.
 ?else
@@ -209,6 +211,8 @@ He does not look at you. Across the roofs the dome of St. Paul's has the faint b
 It is a young woman in the passage outside the dispensary, in a black bonnet that has been turned twice. She has a basket on her arm and she has the look of one who has walked all the way from Bethnal Green and does not mean to be sent away. She is, you see at once, very like her sister.
 ?if b5.ward == "left"
   Her name is Ada Pardoe, and she has heard from the matron that a gentleman sat up with Nell at the last. She has come to say that she is obliged, and to ask, quite steadily, whether there was a wage owing, and whether it was kept.
+?elif b5.ward == "sired"
+  Her name is Ada Pardoe, and she has been told that Nell is very ill and cannot be seen by day. She has come to look at the gentleman who has had the nursing of her, and to say that she does not hold with secrets, whatever they are, and that she will be told them in time.
 ?else
   Her name is Ada Pardoe, and she has come to look at the gentleman who is said to have given Nell a cure, and to say that she does not hold with it, whatever it was, and that she is grateful.
 ?end

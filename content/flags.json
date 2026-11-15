@@ -5513,7 +5513,8 @@
       "values": [
         "healed",
         "transfused",
-        "left"
+        "left",
+        "sired"
       ],
       "book": "whitechapel-hunt",
       "major": true,

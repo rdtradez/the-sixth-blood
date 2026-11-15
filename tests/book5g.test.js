@@ -141,3 +141,11 @@ test('chapter 14 gives Fiammetta her house and lets him keep the cedar peg', asy
   assert.ok(run.game.state.sys.items.cedar_peg);
   clean(run);
 });
+
+test('chapter 14 lets him give the Dark Gift to the last bled woman', async () => {
+  const run = await play('b5c14', {}, START, [/Cable Street/, /offer her the Dark Gift/], {});
+  assert.equal(run.vars['b5.ward'], 'sired');
+  assert.ok(run.game.state.sys.circle.nell, 'Nell joins the circle');
+  assert.equal(run.game.state.sys.circle.nell.sire, 'hero');
+  clean(run);
+});
