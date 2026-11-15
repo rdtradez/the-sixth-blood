@@ -6,7 +6,7 @@
 @chapter b5c14
 @title The Lamp in the Wall
 @book whitechapel-hunt
-@version 1
+@version 2
 
 # start
 ## The thirteenth of October
@@ -150,6 +150,13 @@ She is awake. She looks at you with a clear sort of courtesy, and says that she 
   ?else
     It is done as best it can be, with a stranger's blood from a hurried errand and a nurse's hands. She rallies, and sinks, and rallies. By the morning she is no worse. It is a poor thing, to have a method and no supplies.
   ?end
+* Tell her what you are, plainly, and offer her the Dark Gift, since the lamp is nearly out and she has a right to choose [once] ?if can_sire() and not in_circle("nell")
+  $ b5.ward = "sired"
+  $ do sire("nell", "bonnet maker of Bethnal Green")
+  $ bond.nell += 3
+  $ humanity -= 3
+  $ secrecy -= 1
+  She listens with her eyes on the ceiling. She says that she has been bled by a gentleman for a year and has been told nothing at all, and that she would like very much to be told something, and that she would like it to be true. You tell her. She says, at the end, with great composure, that it is a good deal more than the Mission lady said. It is quiet, and quick, and it is done by the small hours. The Chairman has turned his back to the room and is making a great business of the stove. When she opens her eyes they are quite clear, and she says that she is hungry, and that she knows now what for, and that she would like her sister not to be told yet.
 * Sit with her, and hold her hand, and let it be as it will [once]
   $ b5.ward = "left"
   $ humanity += 1
@@ -357,6 +364,8 @@ You go up the stair in the order that you came down, and nobody speaks. At the t
 ?end
 ?if b5.ward == "healed"
   A messenger from Cable Street is at the gate before you reach the end of the lane, a boy in a muffler, with a note. It is from the Chairman. It says that she has taken broth, and that she has asked for her bonnet.
+?elif b5.ward == "sired"
+  A messenger from Cable Street is at the gate with a note, in the Chairman's hand. It says that she has slept the day through in the back room, that she has asked for her bonnet and a very dark veil, and that he does not propose to ask what has been done, being a man who has done a good deal himself.
 ?elif b5.ward == "transfused"
   A messenger from Cable Street is at the gate with a note, in the Chairman's hand. It says that the pulse is steady, and that it is too early to say, and that it is, on the whole, a good deal better than he had allowed himself to hope.
 ?else

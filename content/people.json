@@ -553,6 +553,12 @@
       "name": "Inspector Lamb",
       "title": "Of A Division",
       "bio": "A big, sandy, tired inspector of the Metropolitan Police with a bandaged hand, who would like very much to be a good man in a bad week."
+    },
+    "nell": {
+      "gender": "f",
+      "name": "Nell Pardoe",
+      "title": "A bonnet maker of Bethnal Green",
+      "bio": "Twenty six, white lipped and clear eyed, bled for a year by a gentle hand. She minds her manners even when dying. Her sister Ada lives in Bethnal Green."
     }
   }
 }
