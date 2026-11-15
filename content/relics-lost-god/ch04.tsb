@@ -1,0 +1,270 @@
+// Book Six, Chapter 4 (session 63). Late April 1924: the song, Crane's man, the Institute's benefit and the rival houses.
+// Opens with a call from Marcel and the lead's report, then one night phase of three actions out of four, then a short dawn with the light on the lake.
+// The coven fronts the rival houses: the lead talks, the family buys, guards and listens, and the loop lets several be done. Names are always checked with in_circle().
+// Reads b6.circle, b6.crane, b6.coin, b6.tallis, b6.rudek, b6.company, b6.call. Sets b6.song, b6.ames, b6.benefit, b6.rivals and b6.lamp.
+// Uses invest-style earn(), acquire(), coven_task(), meet(), discover(), chart(). Ends with rest() and => next, which pauses until chapter 5 exists (the manifest entry is incomplete).
+@chapter b6c04
+@title The Man in Gloves
+@book relics-lost-god
+@version 1
+
+# start
+## The telephone
+$ b6.song = "waited"
+$ b6.ames = "bargain"
+$ b6.benefit = "watched"
+$ b6.rivals = "none"
+$ b6.lamp = "left"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> weeks
+---
+$ do phase("night", 3)
+It is a night at the end of April, warm and wet, and the lake is a long black shadow at the edge of the town. There are four things that want doing, and strength for three. {cap(voice("hunger"))}.
+-> night
+
+# weeks
+The telephone in the front hall is an upright black thing on a bracket, with a mouthpiece like a daffodil, and until this month you had not used one. It rings at three in the morning. It is Marcel Prosper, who is whispering, because he is in a closet.
+"He is here," he says. "The man in gloves. He is in the back booth. He has paid for the song again. I thought that you should know."
+Then the line goes dead, with a click, and it is, you find, a very large sound in a very small house.
+Three weeks have gone by since the Yards.
+?if b6.tallis == "held"
+  Mr. Tallis has spent them in the keeper cellar, in a good chair, reading the *Tribune* from end to end, and has asked for nothing. He has told you everything that he knows, which is less than he would like and more than is safe. He has not once tried the door.
+?else
+  Mr. Tallis has not been seen. The card stands on the mantel, and nobody touches it.
+?end
+?if b6.rudek == "paid"
+  A side of beef arrived on the Tuesday, with Mr. Rudek's compliments, in a refrigerated cart. It is the nearest thing to an apology that the Yards have ever made.
+?elif b6.rudek == "bargained"
+  A note came from the Yards house on Wednesday. It says only that Mr. Rudek is a plain man and would like to know what Mr. Collins wants. It has been left unanswered, as a thing that cannot, with propriety, be answered quickly.
+?else
+  There has been no word from the Yards. Two of the Exchange's clerks have been followed to and from work, by men who have not troubled to be subtle.
+?end
+?if _lead != ""
+  {_reader_name} lays out the weeks in order, at the long table, with a ledger. The Exchange has made, in three weeks, what a bank would take a season to make. Two clubs on the South Side have been squeezed on their leases by men who do not say whose men they are. A rival house has been asking, very civilly, what the Collins Exchange pays its guards.
+?else
+  Dora lays out the weeks at the long table, with a ledger and a cup of strong tea that she does not offer to share. The Exchange has done well. Two clubs on the South Side have been squeezed on their leases by men whom nobody will name.
+?end
+?if b6.crane == "warm"
+  Mr. Crane's wire came on the Monday. It said *GLAD YOU ARE HERE STOP DO NOT BELIEVE THE LOCAL ADVICE STOP*, and Mr. Ames has called twice since to ask if you got it.
+?elif b6.crane == "cool"
+  Mr. Crane has not wired again. Mr. Ames has called three times, and been very polite to the bookkeeper.
+?else
+  Mr. Crane has not been answered. His man has called five times. He is, the bookkeeper says, a man who is learning patience from somewhere, and it is clearly not a thing that he likes.
+?end
+<~
+
+# night
+## The fourth week
+:night
+?if actions_left() == 3
+  The night is just beginning. It is a good night for people who have business.
+?elif actions_left() == 2
+  There is rain on the roof, and the lamps are blurred, and the trams go by in a long slow line.
+?else
+  It is very late, and the town has gone to its ugly sleep, and you have strength for a single thing more.
+?end
+* Go to the club in the back of the South Side, and hear what the clarinet has to say [once] ?if actions_left() > 0
+  ~> club
+  $ do act()
+* Meet Mr. Ames, at the Exchange, at last [once] ?if actions_left() > 0
+  ~> ames
+  $ do act()
+* Go to Orchestra Hall, for the University's benefit [once] ?if actions_left() > 0
+  ~> benefit
+  $ do act()
+* Set the family to the matter of the rival houses [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# club
+## The back booth
+$ do chart("chicago.club")
+$ do meet("marcel")
+It is a long low basement room with a bandstand and a thick blue smoke, off a side street in the Black Belt, with a hand lettered sign that says *Prosper's* in a flourish and a bouncer who is not at all the size you would expect. There is a band, a cornet and a trombone and a young man with a clarinet who is playing, with his eyes shut, a tune of surpassing sadness. It is not, quite, the tune. It is its shape. It goes under the other tunes, in the long dark bass of the piano, like a river under a bridge.
+You know the figure. You have known it since a vault in Rome. It is a rising line of six notes, and a seventh that does not belong, and the seventh is a half step flat.
+In the back booth there is a man in a long black coat, with a hat on the table, and gloves. He is sitting very straight. He has a glass of something clear that he is not drinking. He is, you notice, not Mr. Ames. Ames is pale and smooth, and wears a gray suit, and has a hand like a very clean saucer. This man's hands are covered to the wrist in calfskin, and he has not taken them off, and nobody has ever seen him do it. He is looking at the bandstand as a man looks at a clock.
+:the_booth
+* Take the table by the wall, and watch him, and say nothing
+  $ b6.song = "waited"
+  $ cunning_brutal += 1
+  You are a long time in the smoke. At two he stands. He lays a bill on the cloth, as heavy as a tombstone, and he leaves a sheet of ruled music paper under the glass. He goes up the stair, with his hat, in a perfectly quiet and even tread. You go to the booth. The sheet is written in a very small, neat, accurate hand, and it is the whole of the figure, from the first note to the last, in two keys. You have not seen it written before. You have only heard it.
+* Follow him out, and keep to the dark
+  $ b6.song = "followed"
+  $ cunning_brutal += 1
+  $ secrecy -= 1
+  $ do meet("calloway")
+  He is not hard to follow. He walks like a man who does not think that he is being followed, and has not been, for fifty years. He goes north, by the elevated, to the Loop, and down a side street between a hotel and a hat shop, and in at a plain steel door, under a lamp, with a doorman who touches his cap. Over the lintel there is a small gilt sign. It says *The Calloway Room*. It is, you know, the nearest thing that the Loop has to a court.
+* Sit down in the booth across from him, and ask him what he wants
+  $ b6.song = "spoke"
+  $ standing += 1
+  $ cunning_brutal += 1
+  He does not start. He looks at you, with a pair of very mild eyes, and says, in a pleasant voice, with a trace of something old in it, that he wants to hear the song. He has paid for it, he says, every Tuesday since January. It is a simple wish. He is not at all sure why it should be thought remarkable. He gets up. He leaves a sheet of music on the table. He puts his hat on, and touches the brim, and goes, and you find that you have let him.
+:the_after_song
+* Ask Marcel what he knows of the man
+  Marcel is quite white under the brown. He knows nothing. He has played it for the man every Tuesday, and has been paid a hundred dollars each time, and has not asked why. He says that he has been taught the song by his grandfather's grandfather, in a cabin in the Tremé, and that he did not know what it was for. He says it is a very old one. It is the only one, he says, that he has never been able to play badly.
+* Take the sheet of music, and go, and ask nothing
+  $ cunning_brutal += 1
+  $ do discover("the_six_rays")
+  It is in your coat, against your heart, next to nothing.
+<~
+
+# ames
+## Crane's man
+$ do chart("chicago.exchange")
+Mr. Ames comes at midnight, by appointment, to the long gray room over the Exchange, and he is very punctual. He wears a gray suit and a gray homburg and a gray tie, and he takes the chair that is offered and sits in it as if it were a throne. He has not yet, in this room, been seen to eat or drink, and he does not ask for either.
+He is very smooth. He has the manner of a man who has been trained at a very good school, at some expense, to be unmemorable. He says, "I will not waste your time. Mr. Crane would like to propose an arrangement."
+?if b6.crane == "warm"
+  He says it with the ease of a man who is sure of a welcome.
+?elif b6.crane == "cool"
+  He says it with the ease of a man who has been told what to expect, and has rehearsed.
+?else
+  He says it, you note, a little more carefully than he would have wished.
+?end
+The arrangement is a plain one. Chicago has too many houses and not enough room. Mr. Crane owns, as he has said, half of it: the hotels, the rail yards, a dozen banks, and a very large part of the Loop that is not what it appears to be. He would be glad to see the Collins Exchange have a share of it, on terms. He would be glad to see his friends in the city better acquainted. He does not say what he wants for it. It is, you think, the whole of the offer.
+:the_offer
+* Take the share, and a seat at the table, and say that the Exchange will be a friend
+  $ b6.ames = "partner"
+  $ do earn(5)
+  $ standing += 2
+  $ cunning_brutal += 1
+  $ secrecy -= 1
+  He is, plainly, delighted, and does not know how to show it. He has a number written on the inside of his cuff, and he gives it to you, with a small bow. He says that Mr. Crane will be glad. It is a thing that he has said, you gather, a great many times, and rarely had cause to.
+* Bargain, and name your own terms, and say that the Exchange will be nobody's friend until it knows its own mind
+  $ b6.ames = "bargain"
+  $ cunning_brutal += 1
+  $ standing += 1
+  It is a long conversation. He has been told what to concede, and what not, and he concedes it, a little at a time, with great skill, and by the end of it you have an understanding. It is not a friendship. It is a ledger, in two hands, and the Exchange's is the better.
+* Say that the Exchange has no need of Mr. Crane's half, and that Mr. Crane is welcome to it
+  $ b6.ames = "refuse"
+  $ cunning_brutal += 1
+  $ standing -= 1
+  $ secrecy += 1
+  He does not move. He does not alter his expression in the least, and it is the single most alarming thing about him. He says, at last, that he will convey it. He rises. He puts on the gray homburg. At the door, he turns, and says, as if it had only just occurred to him, "You will want to be careful of the Loop, Mr. Collins. It is a very exposed part of town."
+<~
+
+# benefit
+## Orchestra Hall
+$ do discover("the_oriental_institute")
+$ do chart("chicago.goldcoast")
+It is a great creamy auditorium on Michigan Avenue with a hundred chandeliers, and the whole of the city that matters has put on its best to be seen in it, and to hear, with an air of improving itself, a Brahms symphony and a short lecture on the Assyrians. The lecturer is a small, quick, brisk woman in sensible shoes, with a pair of spectacles on a chain, who has dug in the sand for six winters and has no patience whatever with chandeliers.
+Her name is Dr. Nora Whitcombe. She speaks for twenty minutes on the cuneiform tablets of Nippur and the temples of Ur and the city, in the north, that nobody has yet found, and she does it with such unaffected passion that the room, which came to be seen, forgets to look at itself. Then she says, with a briskness that is not at all affected, that the University has no more money for the seventh season. She says that it will be a pity. She says that there is a place, in the north, where she has reason to think that the oldest temple in the world is waiting under forty feet of sand, and that she would give her right arm for another season.
+$ do meet("whitcombe")
+Mrs. Cornelia Pell is in the third row, in gray silk, with her pearls and a silent, enormous escort. She does not look at you. She has, you see, subscribed three thousand dollars. She leaves the sum, in plain figures, on a card on her seat, for everyone to read.
+?if b6.call == "regrets"
+  She inclines her head to you, at the interval, the exact width of a hair, and no more.
+?elif b6.call == "family"
+  She comes to you at the interval, with her silent escort, and takes your arm, and says, in a voice that is perfectly audible, that she is delighted to see Mr. Collins and his family so interested in the sciences.
+?else
+  She inclines her head to you, at the interval, with an interested and faintly amused expression, as one might to a promising pupil.
+?end
+:the_season
+* Write a cheque for the whole of the seventh season, and ask Dr. Whitcombe to come and see you
+  $ b6.benefit = "funded"
+  $ do earn(-4)
+  $ standing += 2
+  $ humanity += 1
+  $ do discover("the_oriental_institute")
+  The room does not applaud. It has too much manners. It goes quiet, in an interested, calculating, slightly aghast way, and one by one a number of heads turn. Dr. Whitcombe comes to you across the foyer at a half run, in her sensible shoes, with her spectacles swinging, and says, "You are the Exchange? The Collins? I did not know that there was a Collins." She says that she would like to show you a map.
+  ?if b6.tallis != "listened" and b6.tallis != "held"
+    You do not tell her what you think is going to come out of the sand.
+  ?else
+    You do not tell her what you have been told is going to come out of the sand. It would be unkind.
+  ?end
+* Put in a modest sum, with the rest, and listen to what she says
+  $ b6.benefit = "watched"
+  $ do earn(-1)
+  $ standing += 1
+  She thanks you without effusion. She says that it is a great help, and that she will need a good deal more, and that she does not expect it. She says it as a woman who has been told no a great many times and is no longer afraid of the word.
+* Say nothing, and put nothing in the plate, and go
+  $ b6.benefit = "declined"
+  $ cunning_brutal += 1
+  $ standing -= 1
+  Nobody remarks it. It is Chicago, and it is a plate. But you find, going down the great stair into the wet and the lights of the avenue, that you have the strangest feeling that you have declined to be present at something.
+<~
+
+# family
+## The rival houses
+It is, at bottom, a matter of leases. Three clubs on State Street, a garage in Pilsen, and the little brick school on the side street have all of them been raised, in the last month, by a landlord who does not exist and can never be found. Somebody is making it difficult to be a friend of the Exchange. The house on the lake is above such things. The Yards would not trouble to be subtle. The Loop, which keeps the ground between, is known for being very civil about it.
+?if coven_size() > 0
+  The family has taken it as their own. They sit round the long table in the keeper house in the rain, with the ledgers, and the lamp, and the quiet exactness of people who have never been given a problem of this size and are going to be delighted by it.
+?else
+  Dora sets it out in order, on the long table, with a ledger and a ruler. She has, she says, no illusions. She has several friends in the Recorder's office.
+?end
+:the_rivals
+* Send {_reader_name} to Miss Calloway's house, with a gift and a courteous question [once]
+  ?if b6.rivals == "none"
+    $ b6.rivals = "talked"
+  ?end
+  $ standing += 1
+  $ do meet("calloway")
+  ?if _lead != ""
+    {_reader_name} goes to the Loop in a very good gray suit and comes back at four in the morning with the look of a woman who has been out-talked and found, to her surprise, that she enjoyed it. It is a very civil house. Miss Ruth Calloway has said that she knows nothing about any leases, that she is a friend to every honest man in the city, and that if anyone has been squeezing a friend of Mr. Collins she will be very much surprised. She was not at all surprised. She asked what the Exchange pays its guards.
+  ?else
+    Dora goes to the Loop in a hired cab, with a polite note, and comes back with a polite note. It is a very civil house. It says that Miss Ruth Calloway knows nothing about any leases.
+  ?end
+  -> :the_rivals
+* Buy the leases, quietly, through three shell companies, before anyone can raise them again [once]
+  ?if b6.rivals != "guarded"
+    $ b6.rivals = "bought"
+  ?end
+  $ do earn(-2)
+  $ cunning_brutal += 1
+  $ standing += 1
+  It takes a week of money and a night of lawyers. At the end of it the clubs on State Street, the garage in Pilsen and the little brick school are all of them owned, through a firm that does not exist, by a firm that does not either, which is Dora's. It is the oldest of the instruments, and the best, and you find that it does not feel like a victory. It feels like a roof.
+  -> :the_rivals
+* Set a guard on the clubs, and on the school, and let it be seen [once]
+  $ b6.rivals = "guarded"
+  $ standing += 1
+  $ secrecy -= 1
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
+    $ do coven_task("fiammetta", "guard")
+    Fiammetta has taken the school. She has walked it twice with a measuring stick, and has found three ways in, and has stationed a man at each of them. She says that she has never in her life been given so pleasant a job.
+  ?elif in_circle("thibault") and member("thibault", "status") == "active" and not on_mission("thibault")
+    $ do coven_task("thibault", "guard")
+    Thibault has taken the clubs. He has put a boy on every telephone and a man on every door. He says that it is a very modern kind of guard.
+  ?else
+    Dora has found twelve men from the keepers' lodge, who have never been paid to do anything of the kind and are very pleased to be. They are big, and slow, and honest, and the whole of Bronzeville has noticed them.
+  ?end
+  ?if can_acquire("informants")
+    $ do acquire("informants")
+  ?end
+  -> :the_rivals
+* That will do for the family tonight ?if b6.rivals != "none"
+  <~
+-> :the_rivals
+
+# dawn
+## The light on the lake
+$ do discover("the_six_rays")
+It is the gray before the day, and there is a mist on the water. You have walked to the foot of the street and out along the breakwater, because you could not think, and because you wanted to be somewhere that is not a room. It is a quarter to five. The whole of the lake is the color of a pearl.
+Far out, on the water, a mile or two from the shore, there is a light.
+It is not a ship's. It is a single steady yellow point, as of a lamp in a window, and it is on the water and not above it, and it is not at all as it should be. It is moving. It is moving, very slowly, to the south, along the edge of the town, as if it were being carried. It was not there last night. It is, you know, with perfect and terrible certainty, the lamp that was by the lake. It has not gone out. It is only that it has gone onto the lake.
+:the_lamp
+* Tell the family, and Cordelia, and let them see it
+  $ b6.lamp = "told"
+  $ standing += 1
+  $ humanity += 1
+  You wake the house. It is a thing that you rarely do, and they come out in their coats, in the cold, and stand along the breakwater in a long dark line, and look. Cordelia comes by the first tram, with her hat pinned on crooked, and does not speak. It goes on for an hour. Nobody can say what it is. Nobody can say that it is not.
+* Watch it, alone, until it goes
+  $ b6.lamp = "watched"
+  $ cunning_brutal += 1
+  It goes, at last, a little before the sun. It does not go out. It is simply, at one moment, a little fainter, and then a little farther, and then there is nothing on the water but the light of the sky. You stand a long time with your hands in your pockets. There is a taste of something in your mouth like an old coin.
+* Leave it, and turn your back, and go home
+  $ b6.lamp = "left"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  It is the oldest of the instincts, and not always a bad one. There are things that a man will not look at straight. You walk home along the empty street, and you do not turn, and you are very conscious, the whole of the way, of the light on your back.
+$ do rest()
+=> next

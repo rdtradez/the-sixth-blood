@@ -81,11 +81,11 @@ const coven = (g) => {
   }
 };
 
-test('Book Six lists chapters one and two and is still incomplete', async () => {
+test('Book Six lists chapters one to four and is still incomplete', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'relics-lost-god');
   assert.ok(book.incomplete);
-  assert.equal(book.chapterCount, 2);
+  assert.equal(book.chapterCount, 4);
 });
 
 test('chapters 1 and 2 play through every kind of waking, hungry or not, with and without a coven', async () => {
@@ -175,5 +175,72 @@ test('no scene names a coven member who is not in the circle', async () => {
   for (const circle of [0, 1]) {
     const run = await play('b6c02', {}, START, [], { sys: circle ? coven : null, flags: { 'b6.circle': circle ? 'all' : 'stay' } });
     if (!circle) assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno/);
+  }
+});
+
+test('chapters 3 and 4 play through every kind of waking, with and without a coven', async () => {
+  for (const wake of WAKES.slice(0, 4)) {
+    for (const circle of [0, 1]) {
+      for (const [chapter, re] of [['b6c03', /Yards|second shift/], ['b6c04', /telephone|lake/]]) {
+        const run = await play(chapter, wake, { ...START, hunger: 20 }, [], { sys: circle ? coven : null, flags: { 'b6.circle': circle ? 'all' : 'stay' } });
+        assert.match(run.text, re);
+        assert.equal(run.frame.wait, 'book_end');
+        clean(run);
+      }
+    }
+  }
+});
+
+test('chapter 3 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.papers', [['shared', /Tell the family everything/], ['close', /Keep it to yourself/], ['hill', /send the copy to the hill/]], /grandfather's book/],
+    ['b6.rudek', [['paid', /Pay the compliment/], ['bargained', /questions of your own/], ['warned', /learn the stranger|learn your habits/]], /day office/],
+    ['b6.company', [['alone', /Go alone/], ['family', /Bring the family/]], null],
+    ['b6.tallis', [['listened', /Listen to him/], ['pressed', /Press him/], ['held', /Take him, and hold him/]], null],
+  ];
+  for (const [flag, branches, day] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b6c03', {}, START, day ? [re, day] : [re], { sys: coven, flags: { 'b6.circle': 'all' }, stopAt: 'b6c04' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapter 3 sends a family member ahead to the gate', async () => {
+  const run = await play('b6c03', {}, START, [/Send one of the family/, /Fiammetta, who will see/, /Let the day end/], { sys: coven, flags: { 'b6.coin': 'kept' }, stopAt: 'b6c04' });
+  assert.match(run.text, /find the second gate/);
+  clean(run);
+});
+
+test('chapter 4 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.song', [['waited', /Take the table by the wall/], ['followed', /Follow him out/], ['spoke', /Sit down in the booth/]], /club in the back/],
+    ['b6.ames', [['partner', /Take the share/], ['bargain', /Bargain, and name/], ['refuse', /no need of Mr. Crane/]], /Meet Mr. Ames/],
+    ['b6.benefit', [['funded', /cheque for the whole/], ['watched', /modest sum/], ['declined', /put nothing in the plate/]], /Orchestra Hall/],
+    ['b6.lamp', [['told', /Tell the family, and Cordelia/], ['watched', /Watch it, alone/], ['left', /Leave it, and turn/]], null],
+  ];
+  for (const [flag, branches, night] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b6c04', {}, { hunger: 10, wealth: 900000 }, night ? [re, night] : [re], { sys: coven, stopAt: 'b6c05' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapter 4 lets the family do several things about the rival houses and the most committed wins', async () => {
+  const picks = [/Set the family to the matter/, /Send .* to Miss Calloway/, /Buy the leases/, /Set a guard/, /That will do for the family/];
+  const run = await play('b6c04', {}, { hunger: 10, wealth: 900000 }, picks, { sys: coven });
+  assert.equal(run.vars['b6.rivals'], 'guarded');
+  const talk = await play('b6c04', {}, { hunger: 10, wealth: 900000 }, [/Set the family to the matter/, /Send .* to Miss Calloway/, /Buy the leases/, /That will do for the family/]);
+  assert.equal(talk.vars['b6.rivals'], 'bought');
+  clean(run);
+});
+
+test('chapters 3 and 4 never name a coven member who is not in the circle', async () => {
+  for (const chapter of ['b6c03', 'b6c04']) {
+    const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' } });
+    assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
   }
 });

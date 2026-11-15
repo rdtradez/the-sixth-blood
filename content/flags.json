@@ -6065,6 +6065,109 @@
       "book": "relics-lost-god",
       "default": "ask",
       "note": "Chapter 2: how he met the first motor cab in Chicago"
+    },
+    "b6.papers": {
+      "kind": "enum",
+      "values": [
+        "shared",
+        "close",
+        "hill"
+      ],
+      "book": "relics-lost-god",
+      "default": "shared",
+      "note": "Chapter 3: what he did with the grandfather's drawing of the face"
+    },
+    "b6.rudek": {
+      "kind": "enum",
+      "values": [
+        "bargained",
+        "paid",
+        "warned"
+      ],
+      "book": "relics-lost-god",
+      "default": "bargained",
+      "note": "Chapter 3: how he met the Yards house's daytime man",
+      "major": true
+    },
+    "b6.company": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "family"
+      ],
+      "book": "relics-lost-god",
+      "default": "alone",
+      "note": "Chapter 3: whom he took to the Yards on Saturday"
+    },
+    "b6.tallis": {
+      "kind": "enum",
+      "values": [
+        "listened",
+        "pressed",
+        "held"
+      ],
+      "book": "relics-lost-god",
+      "default": "listened",
+      "note": "Chapter 3: how he met the man in the gray overcoat",
+      "major": true
+    },
+    "b6.song": {
+      "kind": "enum",
+      "values": [
+        "waited",
+        "followed",
+        "spoke"
+      ],
+      "book": "relics-lost-god",
+      "default": "waited",
+      "note": "Chapter 4: how he met the man in gloves"
+    },
+    "b6.ames": {
+      "kind": "enum",
+      "values": [
+        "bargain",
+        "partner",
+        "refuse"
+      ],
+      "book": "relics-lost-god",
+      "default": "bargain",
+      "note": "Chapter 4: his answer to Crane's man",
+      "major": true
+    },
+    "b6.benefit": {
+      "kind": "enum",
+      "values": [
+        "watched",
+        "funded",
+        "declined"
+      ],
+      "book": "relics-lost-god",
+      "default": "watched",
+      "note": "Chapter 4: the Oriental Institute's benefit",
+      "major": true
+    },
+    "b6.rivals": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "talked",
+        "bought",
+        "guarded"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 4: what the family did about the rival houses (the most committed pick wins)"
+    },
+    "b6.lamp": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "told",
+        "watched"
+      ],
+      "book": "relics-lost-god",
+      "default": "left",
+      "note": "Chapter 4: the light on the lake"
     }
   }
 }

@@ -1,18 +1,61 @@
 {
   "note": "Pieces for the Collis Collection, the New York museum. Book sessions add pieces as the story invents them (id, book, name). These come from the design doc.",
   "items": {
-    "gladius": { "book": "burning-city", "name": "A gladius" },
-    "florence_portrait": { "book": "blood-and-gold", "name": "The Florence portrait" },
-    "press_pamphlet": { "book": "crown-of-ashes", "name": "A pamphlet from his press" },
-    "doctors_instruments": { "book": "whitechapel-hunt", "name": "The doctor's instruments" },
-    "lost_love_letter": { "book": "house-divided", "name": "A letter from a lost love" },
-    "god_relic": { "book": "relics-lost-god", "name": "A relic of the god" },
-    "great_church_tessera": { "book": "burning-city", "name": "A gold tessera from the Great Church" },
-    "remembrancers_tally": { "book": "blood-and-gold", "name": "The Remembrancer's tally" },
-    "merchants_token": { "book": "blood-and-gold", "name": "A copper balance" },
-    "old_ducat": { "book": "blood-and-gold", "name": "An old gold ducat" },
-    "gray_ring": { "book": "blood-and-gold", "name": "A thin gold ring with a rain-gray stone" },
-    "sixth_border": { "book": "blood-and-gold", "name": "A scrap of the sixth border" },
-    "cedar_peg": { "book": "whitechapel-hunt", "name": "A cracked cedar peg from the wall at Bishopsgate" }
+    "gladius": {
+      "book": "burning-city",
+      "name": "A gladius"
+    },
+    "florence_portrait": {
+      "book": "blood-and-gold",
+      "name": "The Florence portrait"
+    },
+    "press_pamphlet": {
+      "book": "crown-of-ashes",
+      "name": "A pamphlet from his press"
+    },
+    "doctors_instruments": {
+      "book": "whitechapel-hunt",
+      "name": "The doctor's instruments"
+    },
+    "lost_love_letter": {
+      "book": "house-divided",
+      "name": "A letter from a lost love"
+    },
+    "god_relic": {
+      "book": "relics-lost-god",
+      "name": "A relic of the god"
+    },
+    "great_church_tessera": {
+      "book": "burning-city",
+      "name": "A gold tessera from the Great Church"
+    },
+    "remembrancers_tally": {
+      "book": "blood-and-gold",
+      "name": "The Remembrancer's tally"
+    },
+    "merchants_token": {
+      "book": "blood-and-gold",
+      "name": "A copper balance"
+    },
+    "old_ducat": {
+      "book": "blood-and-gold",
+      "name": "An old gold ducat"
+    },
+    "gray_ring": {
+      "book": "blood-and-gold",
+      "name": "A thin gold ring with a rain-gray stone"
+    },
+    "sixth_border": {
+      "book": "blood-and-gold",
+      "name": "A scrap of the sixth border"
+    },
+    "cedar_peg": {
+      "book": "whitechapel-hunt",
+      "name": "A cracked cedar peg from the wall at Bishopsgate"
+    },
+    "ray_coin": {
+      "book": "relics-lost-god",
+      "name": "A coin of the six rays"
+    }
   }
 }

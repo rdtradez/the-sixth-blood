@@ -8,7 +8,8 @@
         "blood-and-gold": "Signor del Colle",
         "crown-of-ashes": "Monsieur Colline",
         "house-divided": "Monsieur Colline",
-        "whitechapel-hunt": "Mr. Collins", "relics-lost-god": "Mr. Collins"
+        "whitechapel-hunt": "Mr. Collins",
+        "relics-lost-god": "Mr. Collins"
       },
       "surnames": {
         "burning-city": "Valerius",
@@ -589,6 +590,30 @@
       "name": "Mr. Ames",
       "title": "Mr. Crane's man in Chicago",
       "bio": "A smooth, pale, immaculate man in a gray suit who smiles at the right moments and has never been seen to eat."
+    },
+    "tallis": {
+      "gender": "m",
+      "name": "Mr. Tallis",
+      "title": "The man in the gray overcoat",
+      "bio": "A tall, pale, courteous man with a very quiet voice and a gold coin in his glove, who has been asking in the Yards for the sixth line. He is not a vampire. Nobody has seen him eat or sleep."
+    },
+    "rudek": {
+      "gender": "m",
+      "name": "Augustin Rudek",
+      "title": "Of the Yards house",
+      "bio": "A huge, slow, courteous butcher's son of Bohemian blood who has run the Yards house since the war and holds that anything not nailed down by blood belongs to the strongest."
+    },
+    "calloway": {
+      "gender": "f",
+      "name": "Ruth Calloway",
+      "title": "Of the Loop",
+      "bio": "A quick, bright, expensively dressed woman who keeps the open ground of the Loop, a dozen speakeasies and a wholesale interest in the men who drink in them."
+    },
+    "whitcombe": {
+      "gender": "f",
+      "name": "Dr. Nora Whitcombe",
+      "title": "Of the Oriental Institute",
+      "bio": "A brisk Assyriologist in sensible shoes who has spent six winters in Mesopotamian trenches and wants a patron for the seventh."
     }
   }
 }

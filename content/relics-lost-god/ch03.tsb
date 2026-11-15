@@ -1,0 +1,282 @@
+// Book Six, Chapter 3 (session 63). The week after landing, and Saturday at the Yards, April 1924.
+// Opens with the business lead's week report, then one day phase of two actions out of three, then the Saturday night climax at the Yards, then a short dawn.
+// The coven fronts the week and stands in the Yards: the lead reports, a family member can be sent ahead, and the family can come to the gallery. Names are always checked with in_circle().
+// Reads b6.circle, b6.haven, b6.call, b6.coin, b6.walk, b5.charge. Sets b6.papers, b6.rudek, b6.company and b6.tallis.
+// Uses send(), meet(), discover(), obtain(), chart(), power(), earn(). Ends with rest() and => next, which pauses until chapter 5 exists (the manifest entry is incomplete).
+@chapter b6c03
+@title The Second Shift
+@book relics-lost-god
+@version 1
+
+# start
+## The week
+$ b6.papers = "shared"
+$ b6.rudek = "bargained"
+$ b6.company = "alone"
+$ b6.tallis = "listened"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> week
+---
+$ do phase("day", 2)
+It is Friday afternoon, and the sun is a white coin over the lake, and the town is at work. There are three things in the day that want doing, and strength for two of them, and a gold coin's invitation waiting for the second shift tomorrow night.
+-> day
+
+# week
+?if b6.haven == "tower"
+  The vaults over the Exchange have been fitted by a hundred men who were all told it was for a safe deposit company, and every one of them believed it.
+?elif b6.haven == "keepers"
+  The keeper house on the Near North Side has been, in six days, the busiest address in the ward. Dora has found a way to have a cellar bricked, a boiler installed, and a locksmith dismissed, all without anyone in the street having seen a single thing.
+?else
+  The brownstone on the South Side has a new lock on every door and a very old elm in the yard that nobody has been allowed to trim.
+?end
+?if _lead != ""
+  {_reader_name} gives the week's account in the long front room, with a lamp and a pot of tea that nobody drinks. It is a short account and a dense one. The Exchange has been open six days and has taken eleven callers, three of whom were policemen, two of whom were not, and one of whom left a card that said only *Pell*. The ticker has run. The vaults have held. {pg(_lead, "He", "She", "They")} {pg(_lead, "has", "has", "have")} heard, from three sources that do not know each other, that the Yards are talking.
+  ?if b6.call == "family"
+    The house on the lake has sent a basket of hothouse grapes and a note, which is not a courtesy. It is a receipt.
+  ?elif b6.call == "form"
+    The house on the lake has sent a short, warm, perfectly civil note. It says that the house hopes that Mr. Collins found the evening instructive.
+  ?elif b6.call == "alone"
+    The house on the lake has sent nothing at all, which is, {_reader_name} says, the most interesting message that it could have sent.
+  ?else
+    The house on the lake has not forgiven the clerk. It has been politely, thoroughly and invisibly present in every room that you have entered since.
+  ?end
+?else
+  Dora gives the week's account standing at the end of a long table, in a plain brown dress, with a ledger. It is short, and it is, she says, a good deal less than it ought to be, since she has had no one to tell her what the household needs.
+?end
+?if b6.coin == "melted"
+  The coin is a bar of gold in the Exchange's safe. The card is not. It stands against the clock on the mantel, where you put it, and you have noticed that every person who has come into the room has looked at it and then looked away.
+?elif b6.coin == "shown"
+  The coin has gone round the table so many times that it is warm. Nobody has said what they think of it. Everybody has an opinion.
+?else
+  The coin lies in your coat, over the heart, and does not warm.
+?end
+<~
+
+# day
+:day
+?if actions_left() == 2
+  There is a quiet in the house, as in any house the day after a long journey, and the matter of the stranger is not yet a thing that anyone has a word for.
+?else
+  The afternoon has begun to go over, and the shadows of the elevated railway have come down across the street in long black bars.
+?end
+* Go through Dora's grandfather's book, at the keeper house [once] ?if actions_left() > 0
+  ~> papers
+  $ do act()
+* Call on the Yards' day office, and the man who answers there [once] ?if actions_left() > 0
+  ~> haskell
+  $ do act()
+* Send one of the family to watch the gate until Saturday [once] ?if actions_left() > 0 and coven_size() > 0
+  ~> gate
+  $ do act()
+* Let the day end
+  $ do end_phase()
+?if in_phase() != ""
+  -> :day
+?end
+-> saturday
+
+# papers
+## The grandfather's book
+Dora has brought it from the cellar in both arms, wrapped in a sheet, and set it on the table as if it might otherwise leave. It is a tall, thin, soft backed book of lined paper, black with age, and it is the record of a man who kept a name for forty years across a sea and told no one why. The writing is a clerk's writing, small and slanted and as neat as print. Most of it is accounts. A hundred pages in, between a bill for coal and a note about a wedding, there is a drawing.
+It is done in pencil, with great care, from memory. It is a head, with a cap of leaves, and the eyes shut. Under it he has written, in a hand that has slipped a little, *this is the thing on the coin. I have seen it only once. I have been told never to say where.*
+$ do discover("the_six_rays")
+It is the face. It is, beyond any doubt, the same face that is now lying in your coat or in the Exchange's safe or going round the table in the early light, and it was drawn in eighteen eighty nine by a man who had been told, by somebody, what to watch for.
+:the_book
+* Tell the family everything that is in it, and put it on the table
+  $ b6.papers = "shared"
+  $ standing += 1
+  $ humanity += 1
+  Dora is very quiet. It is not a thing that her family has done in a hundred years, to put a secret on a table. She says that her grandfather would not have liked it. She says that he would, you gather, have been very proud.
+  ?if coven_size() > 0
+    The family reads it aloud, a page each, in a long evening round the lamp, as a family will, and it is the nearest thing to a feast that the house has had in some time.
+  ?end
+* Keep it to yourself, and ask Dora to say nothing
+  $ b6.papers = "close"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  She says that she will say nothing. She says it in the plain voice of a woman who has been saying it all her life, to everyone, about everything, and does not find it hard.
+* Copy it, and send the copy to the hill, with the keepers there
+  $ b6.papers = "hill"
+  $ do earn(-1)
+  $ collesanto += 1
+  $ secrecy += 1
+  It goes by a steamship and a country postman and a boy on a mule. It will be in the crypt at Collesanto by midsummer, in the hands of people who have been keeping what you do not know for eighteen hundred years. They will not ask what it is. They will make a place for it.
+<~
+
+# haskell
+## The Yards' day office
+$ do meet("rudek")
+$ do chart("chicago.yards")
+The Union Stock Yard and Transit Company keeps a long brick office on Exchange Avenue, with a flag over it and a clerk in every window. At a desk in the largest, under a map of the whole of the country in a shade of green, sits Mr. Thomas Haskell, who is very large, very red, very friendly, and has the look of a man who has never in his life been refused. He rises, and takes your hand in both of his, and sits you in a chair that has been placed lower than his.
+"Mr. Collins," he says. "I heard that you had come. I have heard it from everybody. I am a plain man, Mr. Collins, and I will say plainly that there is a gentleman who takes an interest in all that goes on in my yard, and that he would be very glad to know a friend of the firm. He does not come out in the daytime. He would like me to ask whether you would take supper."
+He does not say the name, and he does not need to. He has the manner of a man who works for something very large, and a little afraid of it, and very well paid.
+:the_day_office
+* Pay the compliment, with an envelope, and say that you will be glad to meet any friend of the firm
+  $ b6.rudek = "paid"
+  $ do earn(-1)
+  $ standing += 1
+  He does not look in the envelope. It is, you gather, a courtesy that is very rarely shown, and he is moved, and is made at once a little more wary, as a man is who has been given something by a stranger and cannot see what it is for.
+* Say that you will be glad to see him, and that you have a few questions of your own
+  $ b6.rudek = "bargained"
+  $ cunning_brutal += 1
+  $ standing += 1
+  He is a good deal relieved. He says that his friend is a plain man too. He does not say what the friend will think of a question.
+* Tell him, quite pleasantly, that a man who sends for a stranger had better learn the stranger's habits first
+  $ b6.rudek = "warned"
+  $ cunning_brutal += 2
+  $ standing -= 1
+  $ secrecy += 1
+  The big red face loses a little of its colour. He is not a coward, and does not look like one. He looks like a man who has been told, in a courteous voice, a thing that he will have to repeat, word for word, to someone he does not like. He says that he will see to it.
+<~
+
+# gate
+## The gate
+:the_gate
+* Fiammetta, who will see everything and be seen by nothing ?if in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
+  $ do send("fiammetta", "scout", 1)
+  Fiammetta puts on a plain brown coat and a man's cap, and goes out by the back, and is gone before the coat has finished swinging. She has said that she will find the second gate. She has said it in the tone of a woman who would be mortally offended if it did not exist.
+* Thibault, who will listen ?if in_circle("thibault") and member("thibault", "status") == "active" and not on_mission("thibault")
+  $ do send("thibault", "scout", 1)
+  Thibault says that he will find the telephone line, and the boy who listens at it, and the man who pays the boy, and that he will be home by morning. He has the air of a man who has been given at last a toy that he understands.
+* Hanno, who will count ?if in_circle("hanno") and member("hanno", "status") == "active" and not on_mission("hanno")
+  $ do send("hanno", "scout", 1)
+  Hanno will count the carts through the gate, and the men on the shift, and the number of shoes on the loading dock. He says that a place can be known by the number of its shoes. He is, in every case that you have ever tested it, perfectly right.
+* No one, after all
+  <~
+<~
+
+# saturday
+## The second shift
+$ do discover("the_coin_by_the_yards")
+The second shift begins at eleven. You can hear it from a mile. When the whistles go, a great wave of men in aprons goes in through the Exchange Avenue gate with the lamps at their backs and the pens before them, and the whole of the smell of the Yards rises into the cold air in a single column, as of a very large animal breathing out.
+?if coven_size() > 0 and b6.circle == "all"
+  {_reader_name} has said, in the front hall, quite flatly, that the family will not let you go alone. It is not a request.
+  :the_company
+  * Go alone, and let them wait in the cars at the gate
+    $ b6.company = "alone"
+    $ cunning_brutal += 1
+    They do not like it. They say so, with the exactness of people who have said it before. They are, at the end, as they have always been, your arm. They will be at the gate.
+  * Bring the family, and let the Yards see what it is dealing with
+    $ b6.company = "family"
+    $ standing += 2
+    $ secrecy -= 1
+    They go in with you, a little behind, in a long dark line, as a family goes to a christening. The men at the gate step back. It is not a thing that they decide.
+?else
+  $ b6.company = "alone"
+  There is no one at your shoulder. It is a long walk down the Exchange Avenue road with the lamps going out behind you.
+?end
+~> gallery
+---
+~> tallis
+---
+~> rudek_arrives
+---
+-> dawn
+
+# gallery
+## Over the pens
+The foreman of last week has been told, and he does not say a word. He takes you up a long iron stair to a gallery that runs the whole length of the killing floor, thirty feet above the cattle, in a smell and a heat that are like a hand on the face. It is the place where the buyers stand, in the daytime, to watch the pens fill. At the far end there is a table, and a lamp, and a pot of coffee that has been steaming for an hour and has not been touched.
+A tall man sits at the table in a gray overcoat, with his gloves on the cloth. He rises as you come.
+He is pale in a way that is not the paleness of the dead. It is more like the paleness of a thing that has been kept out of the weather. He has a long, quiet, bony face, and gray eyes, and a courtesy that has a great deal of patience in it. He does not offer to shake hands. He says, "Mr. Collins. It is very good of you to come. I am so very glad that you did not melt it."
+$ do meet("tallis")
+$ do discover("the_tenants")
+?if b6.coin == "melted"
+  You say that you did. He smiles, in a way that is the very opposite of smiling. "Yes," he says. "I know. It does not matter. It is not made of the gold." He sets a second coin on the table, and it is a perfect twin to the first, with the same face and six rays and one red one. "There are always more. It is the idea that is wanted."
+?end
+?if b6.company == "family" and coven_size() > 0
+  ?if gift_holder("shadows") != ""
+    {name(gift_holder("shadows"))} has gone, without a sound, to the stair behind him, and is a shade among the other shades on the wall, and he does not look round. He knows. It is in the line of his shoulders.
+  ?end
+  ?if gift_holder("strength") != ""
+    {name(gift_holder("strength"))} has put a hand on the iron rail of the gallery, and it has bent by an inch, quite slowly, in the heat. The man in gray looks at it, and then at you, and nods very slightly, as one who was told.
+  ?end
+?end
+<~
+
+# tallis
+## The coin
+He sits, and bids you sit, and pours you a cup of coffee that you do not drink. The pens below them have gone strangely quiet, a hundred yards of cattle with their heads lifted.
+"I will say what I am, since you will ask," says Mr. Tallis. "I am not one of yours. I do not feed, and I do not sleep, and I have not aged since the year of the Armistice at Compiègne, which was not the one that you are thinking of. I am a tenant. I live in a house which was never mine, and I pay my rent in errands. There are a few of us. It is not at all a thing that I am proud of."
+He turns the coin over, in a glove. He holds it so that you can see the six rays and the one that is red.
+"This is your family's figure," he says. "I think that you have known it, since a cellar in Rome. It is a very old thing. It is older than your line, and older than the five, and it was made, before any of you, to say who the house is for. The red ray is the sixth. It is the one that is not on the others. I have been asked to find who holds it."
+:the_tenant
+* Listen to him, and hear what he has been sent to say
+  $ b6.tallis = "listened"
+  $ standing += 1
+  $ humanity += 1
+  He is very grateful, and shows it by being exact. In the autumn the University of Chicago will lift a thing out of the ground that has been in the ground since before the first temple. It will come to this city in a crate with a label that says *Oriental Institute*. It is a fragment. It is not large. He is not able to say what it is, because he does not, himself, know, and he has been very carefully told not to guess. He has been told that the five will come for it. He has been told that the maker of the sixth line will come for it, and that no one can say which will come first. "I should like it," he says, "to be you. I think that I should be very much easier in my mind."
+* Press him, and ask the name of whoever sent him
+  $ b6.tallis = "pressed"
+  $ cunning_brutal += 2
+  $ do power("minor")
+  You do not raise your voice. You do not need to. The whole of the gallery has gone very cold, and the lamp has leaned, and the iron under your hand has begun, very slightly, to bend. He does not flinch. He goes, if anything, a little more pale, and a little more patient, as a man might who had been told in advance what he would be asked and had been unable to prepare an answer. "I cannot say a name," he says. "I should like to. I have not got one. It does not speak in words. It is the house." He draws a long breath that he does not need. "I will tell you what I can. In the autumn the University of Chicago will lift a thing out of the ground. The five will come for it. So will the maker of your line."
+* Take him, and hold him, and send for the family to take him home
+  $ b6.tallis = "held"
+  $ cunning_brutal += 2
+  $ standing += 1
+  $ secrecy -= 1
+  He does not resist. He lets you take him by the coat and he walks down the gallery stair beside you like a man in a dream, and he says, in a perfectly reasonable voice, that you are of course free to do as you please, and that he will be very glad to answer any question that he can, in a more comfortable room. It is the most unnerving thing that has happened to you in a week. You have never taken a prisoner who was glad of it.
+  In the end you do not need to take him anywhere. It is simply that you have said what you will do, and he has agreed to it, and the matter has the dreadful, orderly air of something that he has seen before, in another town, in another century, from the other side of a table.
+  He tells you what he knows, in the long front room, at a table, at four in the morning. It is the same, but for the number of things that he is careful not to say: that in the autumn the University of Chicago will lift a thing out of the ground, that the five will come for it, that the maker of your line will come for it.
+?if b6.coin == "kept" or b6.coin == "shown"
+  $ do obtain("ray_coin")
+?end
+He says one thing more, as he rises. "You will be asked a good many things this year, Mr. Collins. You will be asked to be a good man and you will be asked to be a strong one. I do not envy you. I have not been asked to be either, for a very long time."
+<~
+
+# rudek_arrives
+## The Yards house
+It is a quarter to two, and the second shift is at its height. There is a sound on the stair, below, like a barrel being rolled down it, and then there is a very large man standing at the foot of the gallery with a coat that does not fit and a face like a ham.
+Augustin Rudek is the size of a door. He is Bohemian, and was a butcher's son in Pilsen before he was a vampire, and has kept all the habits. He has six men with him, who are all of them as big as he is and all of them silent. He carries a cleaver, as another man might carry a cane.
+"I heard," he says, "that there was a stranger who was making a night of it in my house."
+$ do chart("chicago.yards")
+?if b6.rudek == "paid"
+  "You sent the envelope," he says. "That was good manners. I do not often see good manners. I thought that I should come and look at the man who has them."
+?elif b6.rudek == "bargained"
+  "You told Tom that you had questions," he says. "I have a great many myself. I thought that we might ask them in the same room."
+?else
+  "You told Tom," he says, "to learn your habits. I have come to learn them."
+?end
+The gray man has risen, quite calmly, and put on his gloves. He says to Rudek, in the same quiet voice, "I was just going." Rudek does not move. He does not look at the tenant. It is, you see with a cold start, as if the man in gray were not there at all. It is not that he cannot see him. It is that he has been taught, a long time ago, not to.
+:the_yards_house
+* Tell Rudek that you will see him in a more suitable place, on a more suitable day, and take your leave
+  $ standing += 1
+  $ cunning_brutal += 1
+  It is the voice of a man who has said it before, and Rudek hears it, and hates it, and respects it, and does not move for a long moment. Then he steps back, and lets you pass, with his six men on the stair, and none of them look at you. It is a victory and not a good one. You have not said that you will not take what he holds. You have said that you will be civil about it.
+* Say that the Yards will be as safe with you as with anyone, and offer him your hand
+  $ standing += 1
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  He looks at it for a very long time. Nobody has offered it. He takes it at last, in a paw like a side of beef, and holds it a little too long, and lets it go. "I will think about it," he says. It is, you gather, the most gracious thing that he has said in ten years.
+* Let him see what the sixth line is, and let the cattle go quiet again
+  $ cunning_brutal += 2
+  $ do power("major")
+  $ standing += 2
+  $ secrecy -= 1
+  It is not a thing that you decide. The whole of the building has gone silent, and the pens, and the machines, and the great slow engines of the killing floor, and in the silence there is nothing at all but the sound of your own breath and of his, and he has taken, very slowly, one step back. He has been big all his life. He has not, until now, been small. He does not forgive it. He will not forget it either.
+?if b6.company == "family" and coven_size() > 0
+  ?if gift_holder("charm") != ""
+    {name(gift_holder("charm"))} has stepped between, smiling, and said something about the cleaver, and Rudek, who has not been teased in twenty years, has very nearly laughed.
+  ?end
+?end
+<~
+
+# dawn
+## The end of the shift
+$ do discover("the_yards_house")
+The whistles go at seven. The long line of men comes out of the gate with their aprons over their arms and their faces gray, in the early light, and goes off in knots along the cold brick street. It is a thing that happens every morning in this city, and it will happen tomorrow, and the next day, and in a hundred years.
+You walk back toward the house in the gray. You have been given a name, and a warning, and a coin, and an enemy, and a thing that you will have to do before autumn that no one has been able to describe to you. There is a smell of coffee and horse dung and coal smoke. A boy is selling the morning paper at the corner and shouting something about a murder in the Loop.
+?if coven_size() > 0
+  The family is waiting at the end of the street. You do not have to tell them anything. They have been listening, for an hour, to the sound of the Yards, and they have heard it go quiet and then loud again, and they know.
+?else
+  Dora is waiting at the door in her good gray hat. She has been up all night, and does not say so. She says that there is a boiled egg, and that it is a long time since she was afraid for anyone, and that she was.
+?end
+$ do rest()
+=> next

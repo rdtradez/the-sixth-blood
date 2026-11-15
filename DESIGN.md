@@ -89,6 +89,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 60: Book Five chapters 19 and 20; Book Five is complete (journal, recap and sleep to Chicago)
 - [x] Session 61: the Chicago and Collesanto (1923) maps for Book Six
 - [x] Session 62: Book Six chapters 1 and 2
+- [x] Session 63: Book Six chapters 3 and 4
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -730,5 +731,16 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The coven fronts both chapters. Names are always checked with `in_circle()`; `npm run coven-names` is clean for the new files. Chapter 2 charts `chicago.valere`, `chicago.exchange`, `chicago.bronzeville`, `chicago.pilsen`, `chicago.yards`, `chicago.haven`, `chicago.tower`, `chicago.depot` and `chicago.goldcoast` as the player reaches them.
 - Tests: `tests/book6.test.js` plays both chapters from every kind of wake report, hungry and fed, with and without a coven, takes every recorded choice, and checks the venture loop and the family in the room.
 - Sessions 60 and 61 (branches `session-60` and `session-61`) were not merged when this session started, so the session 62 branch contains both. Merge them in the usual order.
+- Plans are in `SPOILERS/relics-lost-god.md`.
+
+### Session 63 notes (Book Six, chapters 3 and 4)
+
+- Chapters `b6c03` and `b6c04` are in `content/relics-lost-god/` (`ch03.tsb`, `ch04.tsb`), about 7,000 words together. The manifest entry for Book Six lists four chapters and stays `"incomplete": true`.
+- Chapter 3 opens with the business lead's week report, plays one day phase of two actions out of three, then a fixed Saturday night, then a short dawn. Chapter 4 opens with a call and the report, plays one night phase of three actions out of four, then a short dawn. Both end with `rest()` and `=> next`.
+- New decision flags (`b6.` prefix, registered): `b6.papers`, `b6.rudek`, `b6.company`, `b6.tallis` (chapter 3) and `b6.song`, `b6.ames`, `b6.benefit`, `b6.rivals`, `b6.lamp` (chapter 4). `b6.rudek`, `b6.tallis`, `b6.ames` and `b6.benefit` are major. `b6.rivals` is a multi pick loop where the most committed pick wins (guarded over bought over talked).
+- Content: four new people (Tallis, Rudek, Calloway, Whitcombe), four codex entries, and one collection piece (`ray_coin`, obtained in chapter 3 when the coin was kept or shown and the tenant was held). No engine change, schema or migration.
+- The coven fronts both chapters (lead's report, a member sent to the Yards gate, family in the room, the rival houses loop). Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
+- Tests: `tests/book6.test.js` now covers chapters 3 and 4.
+- Sessions 60 to 62 (pull requests #67 to #69) were not merged when this session started, so the session 63 branch is stacked on session 62. Merge them in order.
 - Plans are in `SPOILERS/relics-lost-god.md`.
 

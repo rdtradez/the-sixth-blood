@@ -1129,6 +1129,30 @@
       "title": "The Stockyards",
       "book": "relics-lost-god",
       "text": "Five hundred acres on the South Side where the whole of the country's meat is killed, cut and canned. It runs all night under electric light, and a creature like you may stand in the middle of it and be, for once, unremarkable."
+    },
+    "the_tenants": {
+      "category": "lore",
+      "title": "The Tenants",
+      "book": "relics-lost-god",
+      "text": "A man in a gray overcoat who does not eat, does not sleep and does not age, and says that he is not a vampire. He says that the house he lives in is not his. The vampire world has no word for him."
+    },
+    "the_six_rays": {
+      "category": "lore",
+      "title": "The Six Rays",
+      "book": "relics-lost-god",
+      "text": "A gold coin older than the Republic: a head in a cap of leaves, eyes shut, and on the reverse six rays, one of them red. Your family's old figure, the sun with six rays and one red, is not a coincidence."
+    },
+    "the_yards_house": {
+      "category": "bloodlines",
+      "title": "The Yards House",
+      "book": "relics-lost-god",
+      "text": "The strong arm of Chicago's vampires, led by Augustin Rudek. It holds the stockyards, the packers' union and the docks, and takes what it wants from anyone it can frighten."
+    },
+    "the_oriental_institute": {
+      "category": "places",
+      "title": "The Oriental Institute",
+      "book": "relics-lost-god",
+      "text": "The University of Chicago's house of the ancient East, which has dug in Mesopotamia since the war. It is short of money for the seventh season."
     }
   }
 }
