@@ -1279,6 +1279,54 @@
       "title": "The stern deck",
       "book": "relics-lost-god",
       "text": "On the half deck at the stern of the liner Veda was told something true before the east."
+    },
+    "mr_hale": {
+      "category": "people",
+      "title": "Mr. C. Hale",
+      "book": "relics-lost-god",
+      "text": "A mild clerk in a dark suit with a pen behind his ear, a hand and a pair of eyes in the service of \"C.\", who is not a tenant or a lord."
+    },
+    "the_marconi_room": {
+      "category": "places",
+      "title": "The wireless room",
+      "book": "relics-lost-god",
+      "text": "The hot closet at the top of the liner where the wires from Chicago and an unsigned one from Rome came in."
+    },
+    "the_family_watch": {
+      "category": "lore",
+      "title": "The family's watch",
+      "book": "relics-lost-god",
+      "text": "The family kept the doors, the hold and the wireless room of the liner, and found four unlisted crates with a gold stamp."
+    },
+    "the_light_at_sea": {
+      "category": "lore",
+      "title": "The light on the water",
+      "book": "relics-lost-god",
+      "text": "Mid ocean a gold light with no ship under it answered the song of six notes."
+    },
+    "cherbourg_quay": {
+      "category": "places",
+      "title": "The Quai de France",
+      "book": "relics-lost-god",
+      "text": "Where the tender landed in the rain, and where more than one person was watching the liner."
+    },
+    "the_letter_c": {
+      "category": "lore",
+      "title": "The letter at Cherbourg",
+      "book": "relics-lost-god",
+      "text": "C. wrote that he kept two chairs, that she has little time, and that the seventh coach of the Friday night train from Paris goes to the end of the line."
+    },
+    "the_harbour_window": {
+      "category": "lore",
+      "title": "The harbour window",
+      "book": "relics-lost-god",
+      "text": "The night in the hotel when the party decided who would go on east."
+    },
+    "the_road_east": {
+      "category": "lore",
+      "title": "The road east",
+      "book": "relics-lost-god",
+      "text": "The way the party left Cherbourg for the night train and its seventh coach."
     }
   }
 }

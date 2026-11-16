@@ -6716,6 +6716,97 @@
       "book": "relics-lost-god",
       "default": "ask",
       "note": "Chapter 16: what Veda was told on the stern"
+    },
+    "b6.hale": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "alone",
+        "card"
+      ],
+      "book": "relics-lost-god",
+      "default": "alone",
+      "note": "Chapter 17: how he called on Mr. C. Hale"
+    },
+    "b6.wire": {
+      "kind": "enum",
+      "values": [
+        "answer",
+        "short",
+        "silent"
+      ],
+      "book": "relics-lost-god",
+      "default": "answer",
+      "note": "Chapter 17: what he sent from the wireless room"
+    },
+    "b6.ship": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "cabins",
+        "hold",
+        "wire"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 17: where the family set its watch on the ship (most committed wins hold over wire over cabins)"
+    },
+    "b6.light": {
+      "kind": "enum",
+      "values": [
+        "sing",
+        "silent",
+        "bar"
+      ],
+      "book": "relics-lost-god",
+      "default": "silent",
+      "note": "Chapter 17: what was done about the light on the water",
+      "major": true
+    },
+    "b6.landing": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "first",
+        "watch"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 18: how the party came ashore at Cherbourg"
+    },
+    "b6.letter": {
+      "kind": "enum",
+      "values": [
+        "aloud",
+        "alone",
+        "burn"
+      ],
+      "book": "relics-lost-god",
+      "default": "aloud",
+      "note": "Chapter 18: what was done with the letter from C.",
+      "major": true
+    },
+    "b6.stay": {
+      "kind": "enum",
+      "values": [
+        "go",
+        "stay",
+        "choice"
+      ],
+      "book": "relics-lost-god",
+      "default": "go",
+      "note": "Chapter 18: whether Crane went on east"
+    },
+    "b6.road": {
+      "kind": "enum",
+      "values": [
+        "train",
+        "car",
+        "own"
+      ],
+      "book": "relics-lost-god",
+      "default": "train",
+      "note": "Chapter 18: the road taken east from Cherbourg"
     }
   }
 }

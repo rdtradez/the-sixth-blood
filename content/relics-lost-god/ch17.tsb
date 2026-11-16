@@ -1,0 +1,266 @@
+// Book Six, Chapter 17 (session 70). Late October 1924: four days at sea on the liner, with Mr. C. Hale somewhere in first class.
+// Opens with the business lead's report (or the house's, if the hero sailed alone), then one night phase of three actions out of four, then a dawn.
+// The coven fronts it: the family sails as the hero's arm and keeps the ship's doors, the wireless room and the hold. Names are always checked with in_circle().
+// Reads b6.circle, b6.east, b6.regent, b6.gray, b6.vow, b6.memory, b6.farewell, b6.callers. Sets b6.hale, b6.wire, b6.ship and b6.light.
+// Uses meet(), discover(), has_gift(), gift_holder(), coven_task(). Ends with rest() and => next.
+@chapter b6c17
+@title First Class
+@book relics-lost-god
+@version 1
+
+# start
+## The third day out
+$ b6.hale = "alone"
+$ b6.wire = "answer"
+$ b6.ship = "none"
+$ b6.light = "silent"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> report
+---
+~> morning
+---
+$ do phase("night", 3)
+Land is two nights off. {cap(voice("hunger"))}. Four things want doing, and strength for three.
+-> night
+
+# report
+?if b6.east == "all" and _lead != ""
+  {_reader_name} has taken a first class cabin as an office, and put a list on the writing desk, and has, in three days, learned the name of every steward, and the sleeping habits of most of the passengers. She says that the ship is a small city, and has all the troubles of one, and that the family has been quietly making itself useful in all of them.
+?elif b6.east == "few" and _lead != ""
+  A wire has come over the water from the house in Chicago, in {_reader_name}'s hand, by way of the wireless room: the Exchange is steady, the houses are civil, the schools are warm. It is brief, and it is the nicest thing you have been given in a week.
+?elif b6.east == "few"
+  The small party has made itself a corner of the saloon, and plays whist in it, and is already known to the stewards by name.
+?else
+  Crane has been keeping the book of the voyage, in his small neat hand, and hands it over at breakfast. It is a list of the first class passengers, with a word beside each, and the word beside most of them is "tiresome".
+?end
+?if b6.farewell == "seal"
+  There is a faint ease in it all, as of a thing left in safe keeping.
+?end
+There is no Mr. Hale. There is a cabin, and a card on its door that says only that, and a steward who has been in the service of the line for twenty years and who will not meet your eye.
+<~
+
+# morning
+## Veda and the sea
+She has been on deck every morning since New York, in the gray cardigan, at the same corner of the rail, with a rug over her knees that she does not need. She watches the sea the way another person watches a fire.
+?if b6.vow == "promise"
+  She has asked, twice, how long a ship takes to come back.
+?elif b6.vow == "ask"
+  She says that she has made a list of what she wants. It is a very short list, and the first item on it is the sea, and she has had it.
+?else
+  She says that she has stopped asking what is going to happen, and has begun to ask what she would like to happen, which is much more difficult.
+?end
+?if b6.gray == "turn"
+  The gray man has not been seen since the deck. She says that she does not believe he has gone.
+?elif b6.gray == "watch"
+  The gray man has been to breakfast four times and eaten nothing. She says that she has stopped finding it funny.
+?elif b6.gray == "press"
+  The gray man has not spoken to you since the night he stopped speaking in the middle of a sentence. She says it is the most alarming thing she has ever watched anybody not say.
+?end
+She says that she has been to the lamp, in her sleep. She says that the cold has begun to feel like an address.
+<~
+
+# night
+## Two nights out
+:night
+?if actions_left() == 3
+  The ship is rolling a little, in a long, deliberate, oily way, and the stewards walk the corridors with a hand on the wall. The first class has gone to bed early and complains of it.
+?elif actions_left() == 2
+  The wind has got up. A deckchair goes along the promenade by itself, and is retrieved by a boy, who is much admired.
+?else
+  It is the last hour before the dawn. You have strength for one more.
+?end
+* Knock on the door of Mr. C. Hale [once] ?if actions_left() > 0
+  ~> hale
+  $ do act()
+* Go up to the wireless room, where the wires from the shore come in [once] ?if actions_left() > 0
+  ~> wire
+  $ do act()
+* Set the family's watch on the ship [once] ?if actions_left() > 0
+  ~> ship
+  $ do act()
+* Go on deck with Veda, after midnight [once] ?if actions_left() > 0
+  ~> light
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# hale
+## The first class corridor
+$ do meet("chale")
+Cabin B 31 is at the end of a long carpeted corridor, under a lamp with a pink silk shade, and it is the only door on the passage that has no sound at all behind it: no radio, no snoring, no steward's cart. You have to stand a moment, to be sure that you are not deaf.
+?if b6.east == "all" and coven_size() > 0
+  The family has come down with you, as far as the turn of the corridor, and stands there looking, collectively, like a hedge.
+?end
+The card on the door says C. Hale, and the handwriting on it is the plain, round, patient hand of a clerk who is paid by the page.
+:the_hale
+* Knock, and say that you are the sixth, and that you would be glad to be let in, with the family at the corner of the passage ?if b6.east != "alone" and coven_size() > 0
+  $ b6.hale = "family"
+  $ standing += 1
+  $ cunning_brutal += 1
+  ?if gift_holder("strength") != ""
+    {name(gift_holder("strength"))} leans, very slightly, on the wall, and the whole corridor gets an idea of the wall.
+  ?end
+  The door opens before the second knock. The man inside is middle aged, mild and precise, in a very good dark suit, with a pen behind one ear, like a clerk in a countinghouse who has been told to look for something in the wall. He does not give his Christian name. He says that he has been expecting you since Wednesday, and that he was not sure whether you would knock, or break it, and that he has a decanter set out for either.
+* Knock, and go in alone, and leave the door open behind you
+  $ b6.hale = "alone"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  The man inside is middle aged, mild and precise, in a very good dark suit, with a pen behind one ear. He is at a small writing table, with a ledger open, and does not rise. He says that he thought you would come alone, because it was what he would have done, and that he hopes you will forgive him for having been right.
+* Slip a card under the door, and wait for him to come out [once] ?if b6.hale != "family"
+  $ b6.hale = "card"
+  $ humanity += 1
+  $ secrecy += 1
+  You write, on the back of a steward's menu, that you are in B 14, and that you would be glad of his company at his own convenience. You stand in the corridor for forty minutes. At the forty first, the door opens, and a man in a dark suit says that nobody has ever waited, and that he does not know what to do with a person who does.
+$ do discover("mr_hale")
+?if b6.hale == "card"
+  He says that he has been in the service of "C." for a very long time, and that he has never been given a more civil instruction than the one he was given for this.
+?else
+  He says that he has been in the service of "C." for a very long time.
+?end
+He says that he is not a tenant, and not a lord, and not a Hale of any house you have heard of. He is a hand, he says, and a pen, and a pair of eyes that were told to find a certain ship and a certain passenger, and to tell her a thing. He says that the thing is a letter, which he has been told to give at Cherbourg and not before, and that he is sorry. He says that he is wholly in earnest.
+He says that "C." has paid for his own fare, and the family's, and has bought a coach on a train, and that it is not a trap, because a man who wants to catch somebody does not pay so much.
+?if b6.hale == "family"
+  He pours a glass of something dark, and nobody takes it, and he drinks it himself with an air of mild regret.
+?end
+<~
+
+# wire
+## The Marconi room
+The wireless room is a small hot oily closet at the top of the ship, with an operator in a green eyeshade and a brass key, and a smell of dust burning on valves. The operator is nineteen, and has not been so much as spoken to since Halifax.
+He has three wires for you, and a fourth that is not addressed, and he says, quite earnestly, that he does not know where the fourth came from. He says that it was not in the book.
+?if b6.regent == "lead" and _lead != ""
+  The first is from {_reader_name}'s own deputy in the Exchange, dull, steady, signed twice.
+?elif b6.regent == "ames"
+  The first is from Mr. Ames, on the Exchange's paper, to say that the clocks have been seen to.
+?else
+  The first is from Dora Valer, in four lines, with an apology for each of them.
+?end
+The second is from Mrs. Pell, who says that the seal is in the safe, that she has slept with the key under her pillow, and that Josiah has gone down to the lamp every night to keep it company. The third is from Cordelia Moten, who has put it in capitals, in case of distance, that the roof is mended and that the children have their coats.
+The fourth is four words from Rome, in Latin, and unsigned.
+:the_wire
+* Wire back to every one of them, and mean it
+  $ b6.wire = "answer"
+  $ humanity += 2
+  $ standing += 1
+  You write four wires, and the operator counts them with the awe of a man who has never been handed so many words at once. You tell Mrs. Pell to keep the safe shut and Josiah in the garden. You tell Cordelia that the coats are the first thing, and the second is the roof. You tell Dora that she is not to apologise to anybody, and that she may begin with you.
+* Keep the answer short, and send only to the house, by the lead's code ?if _lead != "" and b6.east != "alone"
+  $ b6.wire = "short"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  {_reader_name} comes up and writes the answer in the house's code, in four groups of five, and the operator stares at her pencil as at a snake.
+* Send nothing at all, and tell the operator the ship has not got a message from you
+  $ b6.wire = "silent"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  The operator says that he has not got a message from you. He is nineteen, and he is very frightened, and he does it perfectly.
+$ do discover("the_marconi_room")
+?if b6.wire == "answer" or b6.wire == "short"
+  The Latin is read once, and then again. It says that the seventh has been sung, and that someone has been keeping the chair, and that she is cold, and that she should not be waited for.
+?else
+  You read the Latin once, and put it in your coat. It says that someone has been keeping the chair, and that she is cold.
+?end
+<~
+
+# ship
+## The family's watch
+$ do meet("crane")
+There is a ship's company of eleven hundred souls, and four decks, and a hold, and two funnels, and a stern that nobody is looking at. A person with a mind to watch it can watch very little of it at once. A family can do more.
+:the_ship
+* Set the family on the cabin corridors, in turns, as though they were each of them a polite dog [once]
+  ?if b6.ship == "none"
+    $ b6.ship = "cabins"
+  ?end
+  $ standing += 1
+  ?if coven_size() > 0 and b6.east != "alone"
+    $ do coven_task(_lead, "guard")
+    They take it up in pairs, in the ordinary tweeds of the first class, and nobody notices anything except that there has never been a ship so well tended. A steward is heard to say that the new gentlemen are very quiet.
+  ?else
+    Crane takes the first watch on the long corridor, with a book. He says that he has never been so useful in his life, and is not sure how he feels about it.
+  ?end
+  -> :the_ship
+* Send somebody down to the hold, where the cargo is kept, and where the gray man's cabin is not [once]
+  $ b6.ship = "hold"
+  $ cunning_brutal += 1
+  ?if gift_holder("shadows") != ""
+    {name(gift_holder("shadows"))} goes down the hatch with a pencil, and comes up three hours later with a list, a smear of grease and the cheerful face of a person who has seen a great many crates.
+  ?else
+    You go down yourself, with a lamp, and read the labels, and learn that a very great number of things in the world are in a ship's hold on their way to somewhere else.
+  ?end
+  There are four crates marked with a gold stamp that you have not seen since Rome. They are not on the manifest. They have already, you are told, been put off at Cherbourg by someone with a very good pen.
+  -> :the_ship
+* Station someone in the wireless room for the rest of the voyage [once]
+  ?if b6.ship != "hold"
+    $ b6.ship = "wire"
+  ?end
+  $ secrecy += 1
+  ?if coven_size() > 0 and b6.east != "alone"
+    A member of the family takes the operator a flask of coffee, and a chair, and the order, politely given, to read the sky for what comes in.
+  ?else
+    You ask Crane to sit in the wireless room with a newspaper, and to be impossible to tell from the furniture.
+  ?end
+  -> :the_ship
+* That will do for the ship tonight ?if b6.ship != "none"
+  $ do discover("the_family_watch")
+  <~
+-> :the_ship
+
+# light
+## The light on the water
+$ do meet("veda")
+There is no moon. The wake is a dim white road, going back into the dark, and the ship's wind goes down the back of the neck like a hand. Veda stands with her palms on the rail. She says, very quietly, that it has begun to hum.
+?if b6.memory == "lamp"
+  She says that it is the lamp in the hall, and that she can hear it through the iron of the hull, like a cello in the next room.
+?else
+  She says that it is not the engines.
+?end
+Then you see it. It is a long way off, on the starboard bow, low on the water, a single gold light, no bigger than a star, and it is steady, and there is no ship under it.
+She begins to sing. It is very soft, and it is the six notes. It stops at the sixth, as the song is meant to.
+:the_light
+* Sing the seventh, softly, across the water
+  $ b6.light = "sing"
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  ?if has_gift("old_blood")
+    The old blood in you rises like a tide at a sluice, and the seventh note goes out of you low and clear, and you feel it go, a long way, all the way across the sea.
+  ?end
+  The gold light rises a hand's breadth. Then it dips, as a man dips his hat. Veda lays her hand over her mouth, and says, through it, that it answered, that it was not ready to, and that it did.
+* Say nothing, and let her finish, and watch it go out of the dark
+  $ b6.light = "silent"
+  $ secrecy += 2
+  $ humanity += 1
+  She finishes, and the light hangs there a moment, and goes out, as a candle goes out in a room where somebody has opened a door. You stand at the rail until the cold has got into your hands. She does not say anything, and does not need to, and she takes your arm.
+* Ask her to stop, and take her inside, and bar the door
+  $ b6.light = "bar"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  She stops at once, and is a little ashamed, and does not argue. You sit with her in her cabin until the sky is gray. She says, near morning, that she is sorry, and that she is not at all sure that she was the one doing it.
+$ do discover("the_light_at_sea")
+<~
+
+# dawn
+## Land
+At seven there is a smudge in the east that is not a cloud. At eight it has a long low edge, and a lighthouse, and a line of gulls like pencil scratches. The ship's company comes on deck in coats and scarves and looks at it with the gentle disbelief of people who have been out of the sight of land for six days.
+?if b6.light == "sing"
+  Veda is at the rail. She says that it has been answering all night, at a great distance, on the very edge of hearing, and that she does not mind.
+?elif b6.light == "bar"
+  Veda is at the rail with a blanket round her shoulders, very pale, and she says that she is quite herself.
+?else
+  Veda is at the rail, and she has not slept, and she is smiling at the land.
+?end
+?if b6.east == "all" and coven_size() > 0
+  The family is on deck, all of them, with the trunks, in the order the lead has chosen. It is the first time anybody has seen them be ready for something.
+?end
+Crane comes up the companion with his hat on the back of his head, and a card between two fingers. He says that it was slipped under his door in the night, and that it is not the same hand as the one on the cabin. It is square, and heavy, and it has been written in a great hurry by a man who writes slowly.
+It says: "Cherbourg. Do not land without the letter."
+$ do rest()
+=> next

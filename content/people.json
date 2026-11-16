@@ -644,6 +644,12 @@
       "name": "Veda",
       "title": "The one kept in the first lamp",
       "bio": "A woman of the sixth house with ash coloured hair, put into the first lamp at Rome by Cassian and woken in Chicago, who knows only that she was kept to be wanted."
+    },
+    "chale": {
+      "gender": "m",
+      "name": "Mr. C. Hale",
+      "title": "First class, cabin B 31",
+      "bio": "A mild, precise man in a good dark suit with a pen behind one ear, who says he is a hand and a pair of eyes sent to give one letter and nothing more."
     }
   }
 }
