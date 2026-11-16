@@ -6807,6 +6807,144 @@
       "book": "relics-lost-god",
       "default": "train",
       "note": "Chapter 18: the road taken east from Cherbourg"
+    },
+    "b6.coach": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "alone",
+        "veda"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 19: how the seventh coach was read"
+    },
+    "b6.fur": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "ask",
+        "refuse"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 19: how he answered the woman in the fur"
+    },
+    "b6.wires": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "house",
+        "watch",
+        "rome"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 19: what he did with the train's wires (most committed wins rome over watch over house)"
+    },
+    "b6.window": {
+      "kind": "enum",
+      "values": [
+        "tell",
+        "ask",
+        "sleep"
+      ],
+      "book": "relics-lost-god",
+      "default": "tell",
+      "note": "Chapter 19: what was said to Veda at the window"
+    },
+    "b6.border": {
+      "kind": "enum",
+      "values": [
+        "hold",
+        "talk",
+        "shut"
+      ],
+      "book": "relics-lost-god",
+      "default": "hold",
+      "note": "Chapter 19: how the Order's man was met at the frontier"
+    },
+    "b6.gate": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "veda",
+        "alone"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 20: how the party went through the gate"
+    },
+    "b6.cassian": {
+      "kind": "enum",
+      "values": [
+        "trust",
+        "bargain",
+        "challenge"
+      ],
+      "book": "relics-lost-god",
+      "default": "trust",
+      "note": "Chapter 20: how he answered Cassian at the table",
+      "major": true
+    },
+    "b6.chair": {
+      "kind": "enum",
+      "values": [
+        "veda",
+        "hero",
+        "empty"
+      ],
+      "book": "relics-lost-god",
+      "default": "veda",
+      "note": "Chapter 20: who took the sixth chair",
+      "major": true
+    },
+    "b6.isaura": {
+      "kind": "enum",
+      "values": [
+        "ask",
+        "family",
+        "name"
+      ],
+      "book": "relics-lost-god",
+      "default": "ask",
+      "note": "Chapter 20: how the last keeper of the seventh chair was seen out",
+      "major": true
+    },
+    "b6.charge": {
+      "kind": "enum",
+      "values": [
+        "take",
+        "refuse",
+        "later"
+      ],
+      "book": "relics-lost-god",
+      "default": "later",
+      "note": "Chapter 20: what he said to Cassian's charge, to keep the seventh chair and the door",
+      "major": true
+    },
+    "b6.house": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "library",
+        "haven"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 20: what was done with the white house (most committed wins haven over library)"
+    },
+    "b6.longwatch": {
+      "kind": "enum",
+      "values": [
+        "house",
+        "chicago",
+        "newyork"
+      ],
+      "book": "relics-lost-god",
+      "default": "house",
+      "note": "Chapter 20: where the long watch is to be kept",
+      "major": true
     }
   }
 }

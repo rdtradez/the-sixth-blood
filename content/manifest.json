@@ -1211,9 +1211,27 @@
           "notes": [
             "blood"
           ]
+        },
+        {
+          "id": "b6c19",
+          "file": "relics-lost-god/ch19.tsb",
+          "title": "The Seventh Coach",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c20",
+          "file": "relics-lost-god/ch20.tsb",
+          "title": "The White Table",
+          "notes": [
+            "blood",
+            "grief"
+          ]
         }
       ],
-      "incomplete": true
+      "journal": "journal/relics-lost-god.tsb",
+      "recap": "You woke in a lake city of gangsters and jazz, with a family already at work and a name on a door on LaSalle Street. You were courted by the great houses of the city, and learned that something had been dug out of the ground that they all wanted. You went down under the lake and woke a lamp, and a wire came from Rome telling you to come east. You crossed the sea with the family at your back, and found at the end of a railway line the table that the whole matter had been about. When you came away, you knew where the long watch would be kept."
     },
     {
       "id": "unchained",

@@ -1,0 +1,302 @@
+// Book Six, Chapter 20 (session 71). The end of the line and the white table. Book Six ends here.
+// No phases: one fixed night in six scenes (the halt, the garden, the table, the chair, the keeper, the house) and a last dawn. The thirst scene only runs if must_feed().
+// The coven fronts it: the family comes up the garden as the hero's own house, sits at the edge of the white table, has a want of its own, and takes the white house into its keeping if the hero says so.
+// Reads b6.circle, b6.east, b6.coach, b6.fur, b6.window, b6.border, b6.letter, b6.stay, b6.vow, b6.light, b6.hall, b6.note, b6.regent. Sets b6.gate, b6.cassian, b6.chair, b6.isaura, b6.house, b6.charge and b6.longwatch.
+// Uses meet(), discover(), has_gift(), gift_holder(), must_feed(), feed(), coven_task(). Ends with rest() and => next. There is no sleep: the book ends and the next one opens on the long watch.
+@chapter b6c20
+@title The White Table
+@book relics-lost-god
+@version 1
+
+# start
+## The end of the line
+$ b6.gate = "family"
+$ b6.cassian = "trust"
+$ b6.chair = "veda"
+$ b6.isaura = "ask"
+$ b6.house = "none"
+$ _housed = 0
+$ b6.charge = "later"
+$ b6.longwatch = "house"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> halt
+---
+?if must_feed()
+  ~> thirst
+  ---
+?end
+~> garden
+---
+~> table
+---
+~> chair
+---
+~> keeper
+---
+~> house
+---
+-> dawn
+
+# halt
+## A station with no name
+There is no board on the platform. There is a stone halt with a lamp and a wooden bench, and a gate in a wall, and a long white road going away down a hill in the last of the light. Below the road, a great deal lower than you would have thought a railway could go, the sea is the color of milk.
+The train does not stay. It sighs, and gathers itself, and goes on without a whistle, and by the time its tail lamp has gone round the headland you are standing alone with your party in the cold.
+?if b6.fur == "family" or b6.fur == "ask"
+  Anneliese Roth is on the platform, in the gray fur, with a lantern, and she says without any greeting at all that the table is laid, and that she has been counting the minutes since Friday.
+?else
+  Anneliese Roth is on the platform, in the gray fur, with a lantern. She says that the table is laid, and that she would take it as a kindness if nobody mentioned the quay.
+?end
+?if b6.border == "hold"
+  There is, behind the train, a very small stir, on the next halt, where an Order man in glasses has got down from the second sleeping car, and stands with his case, looking after you. He does not come on.
+?end
+:the_halt
+* Go through the gate with the family around you, as one house ?if b6.east != "alone" and coven_size() > 0
+  $ b6.gate = "family"
+  $ standing += 2
+  $ humanity += 1
+  ?if b6.east == "all"
+    They come through the gate in the order the lead has chosen, as a body, in good wool, with no more noise than the leaves.
+  ?else
+    The family that came goes through the gate with you, the few that were chosen, and you realise that you are proud of every one of them.
+  ?end
+* Let Veda go first, and follow at her shoulder
+  $ b6.gate = "veda"
+  $ humanity += 2
+  She goes through the gate as a woman goes into her own kitchen in the dark. She puts out a hand to the third post on the left, and without looking, finds the latch.
+* Go through alone, and have the others wait by the wall for your signal
+  $ b6.gate = "alone"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  The gate is not locked. It does not creak. The gravel on the far side is raked as smooth as a sheet.
+$ do discover("the_end_of_the_line")
+<~
+
+# thirst
+## A last hunger
+It is a very long road for the hungry. The sea air is clean, and cold, and smells of salt and rosemary and a cooking fire somewhere high up in the hills.
+* Take the flask that the family has carried across Europe ?if b6.east != "alone" and coven_size() > 0
+  $ do feed("donor")
+  $ humanity += 1
+  It is warm still, from the pocket of the coat it was carried in. You drink it on the gravel with the sea at your back, and nobody speaks of it.
+* Take a goat from the terrace below the road, and leave a coin on the wall
+  $ do feed("animal")
+  $ secrecy += 1
+  It is a small, patient, irritable goat, and it takes the matter in much better part than a Christian would.
+* Hold it, and go on
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  You hold it, all the way up the garden. It is not pleasant. It is, you think, a little right.
+<~
+
+# garden
+## The white garden
+The garden goes down in terraces, with a spring running through it in a stone channel, and lemons in pots, and a pergola white with something that has no business in a November. There are lamps in the trees, small and old, and none of them is lit by a hand.
+At the lowest terrace, on a floor of white stone above the sea, there is a table. It is long, and round at the ends, and laid with a white cloth, and with seven places. Six of the chairs are worn, in the way of chairs that have been sat in by generations, and have been carried here from far off. The seventh stands a little apart from the rest, with its back to the sea. It is plain, and very old, and there is a rug over the arm.
+A woman is sitting in it.
+She is small, and very old, and very straight, in a gown the color of oatmeal, and her hands lie on the arms of the chair as if the arms were holding her up. Her eyes are closed. She looks like a person who has stayed awake a long time for a bell.
+Next to her, at the head of the table, in a plain chair of his own, a heavy man in a linen suit stands up.
+He has a square, tired, clever face, a weight of white in his hair and a pen behind his ear, and a hand that is square and very heavy. He looks at you, and then at Veda, and the whole of the garden seems to take a breath.
+?if has_gift("old_blood")
+  The old blood in you answers him before you do. It is not hostility. It is the recognition of a thing that has been very long in the world and is, as you are, glad of the company.
+?end
+He says, in the Latin of Rome as it was spoken before Nero, that you have come further than he thought you could.
+<~
+
+# table
+## What Cassian says
+$ do meet("cassian")
+$ do meet("veda")
+He does not offer his hand. He says that he is Cassian, that he is a good deal older than he looks, and that he has made a great many mistakes. He says that he has made one of them every day for two thousand years and has been very careful to learn from none.
+He says that he put a woman in a lamp, in Rome, on the night the city burned, to keep her from a fire that would have used her, and that he went on to do what he had to do. He says he does not ask to be forgiven for it. He says that he has kept her chair every day since, and the other beside it, and that he is very tired.
+Veda stands very straight at the end of the table. She says, in the same old Latin, that she remembers him. She says that he was kind, and that he lied to her, and that both things are true.
+?if b6.window == "tell"
+  She says that she has been told everything. She says that it was exactly the right size.
+?elif b6.window == "ask"
+  She says that she has asked for what she remembers, and has been told what she does not, and that she would very much like to start with the latter.
+?else
+  She says that she is rested, and that she is not afraid, and that she would like to hear him out before she decides what she is.
+?end
+:the_cassian
+* Trust him, and say that you came because he asked, and you will hear the rest at his table
+  $ b6.cassian = "trust"
+  $ humanity += 2
+  $ standing += 1
+  He closes his eyes a moment. He says that nobody has ever said that to him, and that he is not sure that he deserves it, and that he will try to.
+* Bargain with him: the chair, the house, and a fair price for two thousand years of silence
+  $ b6.cassian = "bargain"
+  $ cunning_brutal += 2
+  $ standing += 1
+  He laughs, a deep dry short laugh that sounds like a drawer closing. He says that he has not been bargained with in a thousand years. He says it is wonderfully refreshing, and that he will take the first offer, and not the second.
+* Challenge him: why Chicago, why the lamp, why the long game, and why now
+  $ b6.cassian = "challenge"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  He does not flinch. He says that it is the right question, and that he will answer it in order, and that it will take most of the night, and that he does not blame you in the least for asking it first.
+$ do discover("cassian_at_the_table")
+He tells it, in the end, as an old man tells a long story, with his hands. He says the lamps were hinges, and that the first of them was a door left open on a night when a god's attention was turned away. He says that he kept the six chairs and the seventh, and the whole of the east, as a man keeps a house against a gale, and that he sent a sixth of the family into the cold on purpose, in order that something would be there that the door could not take.
+?if b6.hall == "lit" or b6.note == "you" or b6.note == "family"
+  He says that the song was sung, in the end, by those who should have sung it. He says that it was heard in the east, and that the house here lit up from the top to the bottom.
+?end
+?if b6.light == "sing"
+  He says that the seventh note you sang on the water was the first answer he had had in eight hundred years, and that he wept for it, which he has not done since Tiberius.
+?end
+He says that it is not finished. He says that it will not be finished in your life, or in any life of the blood. He says the table is only as strong as its seventh chair, and that the seventh chair is dying.
+<~
+
+# chair
+## The sixth chair
+The sixth chair has been set at the right hand of the old woman, a little back, in the lamplight. It is the plainest of the six, worn to the shape of someone who has never been sat in it, and there is a white cloth over the arm. It has been waiting.
+Cassian says that it is hers, and that the seat should be taken by the one it was made for. He says that it is also, if you will, yours, as the head of the blood. He says it is a question of who sits.
+:the_chair
+* Let Veda take the sixth chair, and stand behind her, as the blood of her house
+  $ b6.chair = "veda"
+  $ humanity += 2
+  $ standing += 1
+  She does not hesitate. She goes to it, and sits, and puts her ash colored hands flat on the arms, and for a moment nothing in the world happens at all. Then the six lamps in the trees all come up together, small and gold and steady, and Anneliese Roth says very softly in a language of the old east that it is finished, at last, the first part of it.
+* Take the sixth chair yourself, as the head of the sixth blood, and set Veda at your side
+  $ b6.chair = "hero"
+  $ standing += 2
+  $ cunning_brutal += 1
+  The chair takes your weight as if it had been waiting for it. The lamps come up, slowly, one by one, and the last of them is not gold but red. Veda stands at your shoulder with her hands folded and her face quite calm, and says that it was always going to be one or the other, and that she is rather glad it is you.
+* Leave it empty tonight, and say that the chair is for the one who is ready, and not for the one who is merely here
+  $ b6.chair = "empty"
+  $ humanity += 1
+  $ secrecy += 1
+  Nobody moves. The old woman opens one eye. Cassian looks at you for a long time, and then, with some difficulty, he smiles. He says that he did the same thing himself, once, in a different garden, and that it is the first sign of a person who will be trusted with a chair.
+$ do discover("the_sixth_chair")
+?if b6.east != "alone" and coven_size() > 0 and _lead != ""
+  The family has stood all this while at the edge of the white stone, in the dark under the pergola, not quite part of the table and not at all outside it. {_reader_name} comes forward, then, on her own, and sets a small folding chair at the foot, and says nothing about it. Cassian looks at her, and at the chair, and says, to nobody in particular, that he has been wanting that for some time.
+?end
+<~
+
+# keeper
+## The last of the seventh
+$ do meet("isaura")
+The old woman in the seventh chair has not moved all this time. She opens her eyes, now, and they are very pale, and very clear, and not blind. She says that her name is Isaura. She says that she is the last who sat in the seventh chair, and that she has kept it a hundred and eleven years, and that she is going to stop.
+She says it quite lightly, as of an appointment. She says she has been waiting for the sixth to come to the table, so that the chair would not be left with nobody to see it. She says that she is not afraid, and that she is not, entirely, sorry, and that she would be glad of a few words.
+She speaks of the seventh chair as a woman speaks of a very old and difficult dog. She says that it is heavy, and not wicked, and that it must be sat in by someone who can bear to be looked at. She says it is the chair the god would have sat in, if the god had ever had the manners to come to dinner.
+:the_keeper
+* Ask her what she wants, in the time she has, and give it
+  $ b6.isaura = "ask"
+  $ humanity += 2
+  She thinks a long time. She says that she would like to hear the sea, with her eyes shut, with somebody holding her hand. She says that she would like to be told, once, that she did it well. She says she thinks that is all, and that it is a good deal.
+* Bring her into the family's keeping, in the house, and let her go in her own time, with her own people ?if b6.east != "alone" and coven_size() > 0
+  $ b6.isaura = "family"
+  $ humanity += 1
+  $ standing += 1
+  ?if gift_holder("healing") != ""
+    {name(gift_holder("healing"))} kneels by the chair, and puts a hand on the old woman's, and says, after a moment, that it cannot be mended, but it can be made gentle. Isaura says that is the kindest thing anybody has said to her since Victoria.
+  ?end
+  {_reader_name} sets down a rug and a pillow and a cup of something hot, and says in her ordinary voice that the family will see to it that she is not alone, and that she will not need to be anything but old. Isaura looks at the family for a long time, one after another, and says that she thinks Cassian has been wrong about at least one thing.
+* Let her go as she is, and say her name aloud, and stand by the chair
+  $ b6.isaura = "name"
+  $ humanity += 2
+  $ cunning_brutal -= 1
+  You say it. Isaura. And again. You say it in the Latin of her own house, which you have never heard, and which you find you know, and the old woman's face loosens like a hand that has let go of a rope.
+$ do discover("isaura")
+?if b6.isaura == "family"
+  She does not die tonight. She sleeps in a bed in the white house, with the window open to the sea, and the family sits up with her in turns.
+?else
+  She dies at the third hour, in the chair, with her hand in yours and the sea in her ears. It is, Cassian says, a very good death, and he has seen a great many.
+?end
+Cassian says that the seventh chair is empty now, or will be. He says that he cannot ask you to sit in it. He says that he can ask only that you keep it, and not let any other do it for you, and not let it be sat in by anyone who does not know what they are doing.
+:the_charge
+* Take it: say that the sixth blood will keep the seventh chair, and the table, and the door
+  $ b6.charge = "take"
+  $ standing += 2
+  $ humanity += 1
+  He bows his head, as an old man bows to a young one who has taken a coat off his shoulders. He says that he will not insult you with thanks. He says that he will tell you where the other lamps are, and what he knows of the god, and he asks that you do not hold him to the whole of it at once.
+* Refuse it: say that you will not be anyone's keeper, and that the door can find its own hinge
+  $ b6.charge = "refuse"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  He says that he thought you might. He says that he would have, at your age. He says it is a wise answer, and that it will cost a good deal, and that he is not sorry you gave it.
+* Ask for time: say that you will answer when you have seen what the table does by morning
+  $ b6.charge = "later"
+  $ humanity += 1
+  $ cunning_brutal += 1
+  He says that is the answer of someone who has read the books in the gray cloth. He says that he has all the time you want, and that it will not be enough, and that he will wait anyway.
+<~
+
+# house
+## The white house
+The house is a long low building of whitewashed stone on the headland above the garden, with a flat roof and a wide stair, and a library full of gray cloth books. It has twenty three rooms, and a kitchen the size of a barn, and no electric light at all. There is a cellar below it, dug in the rock, that is cool and dry and very quiet.
+Anneliese Roth shows you through it with the lantern. She says that Cassian built it in the year of the first Crusade, and has rebuilt it six times, and that it is yours, if you want it.
+:the_house
+* Make it a haven for the family, with a stair, a table and a cellar of their own [once]
+  ?if b6.house == "none" or b6.house == "library"
+    $ b6.house = "haven"
+  ?end
+  $ standing += 1
+  $ _housed += 1
+  ?if coven_size() > 0 and b6.east != "alone"
+    $ do coven_task(_lead, "guard")
+    {_reader_name} walks every room with a pencil. She says that it is the first house the family has ever been offered that nobody could burn, and she has taken the whole of the second floor for the family, and the cellar for those who are to sleep in it.
+  ?else
+    Crane walks the cellar with a candle, and says that it is the most defensible room he has ever been in, and he is not at all sure he likes the sound of that.
+  ?end
+  -> :the_house
+* Give the library to Veda, with the gray books, and let her keep the histories of the five houses [once]
+  ?if b6.house == "none"
+    $ b6.house = "library"
+  ?end
+  $ humanity += 1
+  $ _housed += 1
+  Veda reads the first line of the first gray book in a long low voice, and closes it, and says that she would like to begin with the fifth, who wrote the most and said the least. She is gone into the library, and does not come out.
+  -> :the_house
+* Set a standing guard on the road and the halt, with Roth's own people [once]
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  $ _housed += 1
+  Anneliese Roth says that the guard has been the same twelve for a hundred years, and that she would be pleased to make it thirteen.
+  -> :the_house
+* That is enough for the house ?if _housed > 0
+  $ do discover("the_white_house")
+  <~
+-> :the_house
+
+# dawn
+## The long watch
+The first light on the water is gray and then gold, and the sea in the east is a great white sheet with a single brown boat on it. The table is cleared. The six lamps in the trees have gone out, one by one, as the sun comes up, and the seventh, which was never lit, is dark as ever.
+You are in the cellar before the sun is over the hill, in a room with a stone bed and a rug and a window the width of a hand. The family has taken the rooms above. Veda is in the library, with the shutters drawn. Cassian has not gone to bed, and sits at the end of the white table with his pen, writing slowly, as a man writes a very long letter to someone who will not be born for a hundred years.
+?if b6.charge == "take"
+  He has left a letter on your pillow in a heavy, square, hurried hand. It begins "The long watch is yours," and ends with the name of a city that was not yet a city when he began to write.
+?elif b6.charge == "refuse"
+  He has left a note on your pillow in a heavy, square, hurried hand. It says that the door will find its own hinge, and that if it does not, he will be very sorry, and that he will keep a lamp lit for you in any case.
+?else
+  He has left a note on your pillow in a heavy, square, hurried hand. It says that he will wait, and that he is, with a good deal of effort, learning how.
+?end
+?if b6.east == "all" and coven_size() > 0
+  The family has set, on the ledge of the window, a small cup, a candle, and a note from {_reader_name} that says, in her plainest hand, "We held the house. Sleep."
+?end
+?if b6.stay == "stay"
+  Crane, at a telephone in Cherbourg, has sent a wire. It says that he has been the best telephone in France, and is now looking for a better employer.
+?else
+  Crane is on the terrace above, in an overcoat, with a glass of the house wine and a cigarette that he has not lit. He says that he has not enjoyed a thing so much in his life, and would like it never to happen again.
+?end
+The question of where the long watch is to be kept is a plain one. It is a question of where the family wants to live, and the hero wants to wake.
+:the_watch
+* Keep it here, in the white house, with the table and the chairs and the books
+  $ b6.longwatch = "house"
+  $ standing += 1
+  $ humanity += 1
+  The sea is loud in the cellar, a little, like blood in the ear.
+* Keep it in Chicago, on the lake, with the Exchange and the family and the lamp
+  $ b6.longwatch = "chicago"
+  $ standing += 1
+  $ cunning_brutal += 1
+  You think of the house on the lake, and the little pale lamp under it, and Mrs. Pell's six words.
+* Keep it in New York, with Crane, in a house on Pearl Street with a very small lamp in the window
+  $ b6.longwatch = "newyork"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  You think of a young shipper in an overcoat, in a doorway, who has never been to bed before dawn. You find you do not mind at all.
+$ do rest()
+=> next
