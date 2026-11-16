@@ -1,0 +1,188 @@
+// The Long Watch, chapter 3 (session 72). The 1960s: three leads on the originals, followed across a decade of the Cold War.
+// The coven is the hero's arm: the business lead keeps the files, a gift holder travels with him. Names come from business_lead() and gift_holder().
+// Reads original(...) states (asleep, awake, sealed, hidden, revealed), never writes them. Sets lw.leads (a multi pick loop counted by picks), lw.keep and lw.year.
+// One night phase of two actions out of three places, then dawn. Ends with rest() and => next, into the 1980s interludes (session 73).
+@chapter lw03
+@title The Leads
+@book unchained
+@version 1
+
+# start
+## The files
+$ lw.leads = "none"
+$ lw.keep = "coven"
+$ lw.year = "waited"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+$ _fed = 0
+$ _leads = 0
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> files
+---
+?if must_feed()
+  ~> hunger
+  ---
+?end
+$ do phase("night", 2)
+It is a winter night in the 1960s, in a city with the heating off, and the wire says three places. {cap(voice("hunger"))}. You have strength for two.
+-> night
+
+# files
+## The cabinet
+There is a steel cabinet in the back office of the house, with a lock that the family has not lost the key to in twenty years, and {_reader_name} opens it with a small, ceremonious gesture.
+Inside are folders. They are thin. They have been filled, over two thousand years, by a great many hands, and the most recent are typed. Each is a name, or a title, and a place, and a question mark.
+?if original("general") == "awake" or original("merchant") == "awake" or original("priestess") == "awake"
+  There are fewer question marks than there were. Some of the old folders have been closed, with a date, in {_reader_name}'s neat hand, and a word.
+?else
+  There are a great many question marks.
+?end
+The decade is a good one for questions. The world has put a man into orbit, and drawn a line across Berlin, and built, on every continent, a new kind of paper: visas, and files, and photographs, and a number for every living person. It is a wonderful time to be old and wary. It is a terrible time to hide.
+Three things have come in, across the winter, from three directions, and the keeper of the files has laid them in a row.
+<~
+
+# hunger
+## The bottle again
+$ _fed = 1
+Hunger, in the sixties, is mostly paper. The bank is a hospital in every city, a clean white room, and a clerk with a clipboard who does not look up.
+* Draw from the house's own cold store
+  $ do feed("bank")
+  $ humanity += 1
+  It is as dull as it ought to be, and you are, as always, faintly ashamed of how glad you are of it.
+* Go out to the docks and find a willing arm
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a night nurse, and she has an interesting life, and she tells you about it at some length. You have not forgotten how to listen.
+* Take what the night puts in your way
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  It is the oldest way. It is, you find, a long way from the others now, and the distance seems greater each decade.
+<~
+
+# night
+## Three folders
+:night
+?if actions_left() == 2
+  The first lamp in the office is on, and the radiator is making a noise like a distant argument. On the desk, in a row, are three folders, a postcard and a cup of cold tea.
+?else
+  It is very late, and the street below the office window is empty, and the second cup of tea is cold also.
+?end
+* The folder from Baghdad: a dig, a museum, and a temple that is not on the maps [once] ?if actions_left() > 0
+  ~> baghdad
+  $ do act()
+* The folder from Geneva: a bank box, in a name that has been paid for every year since 1815 [once] ?if actions_left() > 0
+  ~> geneva
+  $ do act()
+* The folder from Vienna: a reading room, and a man who has been watching it [once] ?if actions_left() > 0
+  ~> vienna
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# baghdad
+## The mound
+The letter says that a dig has opened a floor. It is not a large floor, and the people who opened it, a German professor and a girl from Chicago, have photographed it and gone to dinner. The photograph is in the folder. It shows a stone pavement, a groove in the stone, and the mark of a chain that has been laid across it, many times, for many years, and taken up again.
+$ _gh = gift_holder("memory")
+?if _gh != ""
+  {name(_gh)} looks at the photograph for a long time. It is the face of someone remembering a thing from a great way off. "I have seen that groove," {name(_gh)} says. "I do not know where. I do not think I was awake."
+?end
+* Go yourself, in the spring, with a letter from a museum, and look at the pavement
+  $ _leads += 1
+  $ cunning_brutal -= 1
+  $ velati_regard -= 1
+  It is hot, and bright, and very quiet. You put your hand flat on the groove at noon. It is the oldest stone that you have touched, and it is warm, and, if you are honest, it is a little too warm. You take your hand away, and the girl from Chicago, behind you, says, "Funny, isn't it?" and you say that it is.
+* Send a keeper with a camera, and a notebook, and a very small bribe
+  $ _leads += 1
+  $ do earn(-2)
+  $ secrecy += 1
+  The report comes back in a month. It is accurate, it is dull, and at the foot of the last page there is a line in the keeper's own writing that was not asked for: that the workmen will not dig on the east side, and will not say why.
+* Buy the dig, through a foundation, and put a guard on it
+  $ _leads += 1
+  $ do earn(-5)
+  $ standing += 1
+  $ secrecy -= 1
+  It is an expensive thing to own a hole in the ground in a country you have never lived in. But you will, from now on, be told first.
+<~
+
+# geneva
+## The box
+The bank in Geneva is a quiet, grey building, with a man at a desk who looks like a very good priest. The box is on the third floor, in a room with no windows. It has been rented, annually, in cash, in a name that no one has ever seen in the flesh. The rent is paid every January, a day early.
+The man at the desk tells you, with perfect courtesy, that he cannot tell you anything.
+* Wait, on the pavement, for a January, and see who pays it
+  $ _leads += 1
+  $ cunning_brutal -= 1
+  It takes eleven months. In the end the person who pays is a small, shabby man in a mackintosh, who carries the money in an envelope and who, on seeing you, takes his hat off, with the gesture of a man meeting an old customer. He says nothing. He goes in. You do not follow.
+* Open the box
+  $ _leads += 1
+  $ cunning_brutal += 2
+  $ secrecy -= 2
+  $ do power("minor")
+  It takes an hour, and a certain amount of firmness. The box is empty, except for a single card, handwritten, in a clean, firm, old-fashioned hand, which says only: "Not yet. Be patient. I am coming to you." It is, you think, rather rude.
+* Leave it, and let the bank keep its secret
+  $ _leads += 1
+  $ humanity += 1
+  $ velati_regard += 1
+  It is a very difficult thing to walk away from. The man at the desk says, as you go, that it is the sort of decision that the bank values in a customer. You are not at all sure what he means.
+<~
+
+# vienna
+## The reading room
+The reading room is in a library that is not on any list, in a building that was once a monastery, and the man who has been watching it is old, and thin, and dry, and very patient. He is a Velati. He is, you think, a good one.
+He has been at that table, with that book, for twenty years. He has not, in that time, so much as looked up.
+* Sit across from him, and ask for the book he has been reading
+  $ _leads += 1
+  $ velati_regard += 2
+  $ secrecy -= 1
+  He closes it. It is, you see, the great book of the watch, in a hundred hands. He opens it again at a page and turns it round, and there is a drawing in the margin that you recognize. It is you, in the dress of a legionary, and it is twenty-four hundred years old, if it is a day.
+* Leave a letter on the table, and go
+  $ _leads += 1
+  $ velati_regard += 1
+  $ standing += 1
+  It is a short letter, and a polite one. It says that the house of Collis has no quarrel with the Order of the Watch, and has, perhaps, a good many things to tell it. In a fortnight there is an answer, in a small neat hand, saying that the Order will think about it, and that it has been thinking about it for some time.
+* Take the book
+  $ _leads += 1
+  $ cunning_brutal += 2
+  $ velati_regard -= 3
+  $ secrecy -= 1
+  He does not resist. That is the worst of it. He looks at you, with a kind of weary gravity, and he says that the watch has been expecting this since Rome, and that he is sorry that it has come in his time.
+<~
+
+# dawn
+## The gray hour
+Dawn finds you at the window of the office with the three folders, and a view of the street. It is one of those nights when you can, if you stand very still, feel the length of the thing.
+?if original("general") == "awake" or original("merchant") == "awake" or original("priestess") == "awake" or original("physician") == "awake" or original("scribe") == "awake"
+  There are some who are already abroad, and you know it. You do not know what they want.
+?else
+  Nobody is awake who ought not to be. It is, you think, an uncomfortable kind of quiet.
+?end
+{_reader_name} comes in with the morning post, and puts a cup in front of you, and says that it will be a long decade.
+:the_year
+* Keep the watch with the family, and let the house do the reading
+  $ lw.keep = "coven"
+  $ standing += 1
+  It is the oldest arrangement the house has, and the best. You tell the family what you have seen, and the family, in its turn, tells you what it makes of it. By spring the cabinet has a second lock.
+* Keep the watch with the company, and let the files go into the books
+  $ lw.keep = "collis"
+  $ do earn(3)
+  $ secrecy -= 1
+  It is a perfectly legitimate use of an accountant. By the end of the decade Collis has the largest private collection of records of any kind on the continent, and not one of its auditors has ever asked why.
+* Keep the watch with the village, and let the keepers do the reading
+  $ lw.keep = "valer"
+  $ humanity += 1
+  It is a long way from the hill to the city, and the keepers have been reading letters for a thousand years. It is a slow thing, and a careful one, and the least likely to be noticed.
+?if _leads >= 2
+  $ lw.leads = "two"
+?elif _leads == 1
+  $ lw.leads = "one"
+?end
+$ lw.year = "kept"
+$ do rest()
+=> next

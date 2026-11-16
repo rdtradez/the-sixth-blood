@@ -92,6 +92,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 63: Book Six chapters 3 and 4
 - [x] Session 64: Book Six chapters 5 and 6
 - [x] Session 70: Book Six chapters 17 and 18
+- [x] Session 72: Long Watch interludes, 1937 to the 1960s (three chapters)
 - [x] Session 65: Book Six chapters 7 and 8
 - [x] Session 66: Book Six chapters 9 and 10
 - [x] Session 67: Book Six chapters 11 and 12
@@ -818,3 +819,13 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The coven fronts both chapters: the lead's report, the family keeping the ship's doors, hold and wireless room, going ashore first and setting the rooms and the road. Names are always checked with `in_circle()`; the coven-names check is clean for Book Six.
 - Tests: `tests/book6.test.js` now covers chapters 17 and 18 (and the chapter count).
 - This branch is stacked on session 69. Plans are in `SPOILERS/relics-lost-god.md`.
+
+### Session 72 notes (Long Watch interludes, 1937 to the 1960s)
+
+- Chapters `lw01`, `lw02` and `lw03` are in `content/long-watch/`, about 6,700 words together, each with a chapter journal in `content/journal/` (`lw-1937.tsb`, `lw-1943.tsb`, `lw-1960s.tsb`). They are unnumbered interludes, listed first in the Unchained manifest entry, which stays `"incomplete": true`.
+- Session 71 (Book Six chapters 19 and 20) is not built yet. The Long Watch plays only after Book Six is finished, and reads no Book Six flags, so it needs nothing from those chapters.
+- The hero stays awake through the Long Watch: no sleeps, no `wake()` reads. Each chapter ends with `rest()` and `=> next`. Session 73 adds the 1980s to 2000s chapters after `lw03`.
+- Each chapter opens with the business lead's report (Dora Valer's when there is no coven), plays one night phase of two actions out of three places, then a dawn. `lw01` carries the village letter. Gift holders and the lead stand the doors and gates. Names come from `business_lead()` and `gift_holder()`, so the coven-names check is clean.
+- New decision flags (`lw.` prefix, registered): `lw.supply`, `lw.door`, `lw.hill_1937`, `lw.shelter`, `lw.villa`, `lw.gate`, `lw.leads`, `lw.keep`, `lw.year`. `lw.supply`, `lw.shelter`, `lw.leads` and `lw.keep` are major. Multi pick choices (supply, shelter, leads) allow several picks.
+- Content: no new people, no engine change, schema or migration.
+- Tests: `tests/long-watch.test.js`. Plans are in `SPOILERS/long-watch.md`.

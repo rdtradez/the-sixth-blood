@@ -1,0 +1,27 @@
+// Velati journal for the Long Watch, Collesanto 1943 (session 72). Written when chapter lw02 ends, on a copy of the state. No choices.
+@chapter lw_journal_1943
+@title Velati Journal: Collesanto, 1943
+@book unchained
+@version 1
+
+# start
+## Report from a watcher on the Apennine ridge
+> Sent by the courier of the Order from a farm near the front, and copied at Vienna in the summer of 1946.
+I write from the hill that you asked me to keep an eye on, and I will be brief, as the courier will not wait.
+There is a village here with a saint. There is a house on the hill that is called his. I have watched it for six weeks, from the ridge, with a small glass and a thermos of bad coffee, and I have come to a conclusion that I did not expect.
+?if lw.shelter == "all"
+  There are people hidden on this hill, many of them, in the cellars, in the crypt, and along a goat road to the south. I have counted six families. I believe that the village has been feeding them for a year. I believe that a number of them have, this month, been taken out over the mountains by a guide who does not appear to tire.
+?elif lw.shelter == "many"
+  There are people hidden on this hill. I have counted four families. I do not know how many have gone south by the mule road, but I know that some have, and that it was done by night, by someone who did not leave tracks.
+?else
+  There are people hidden in the cellars. I have counted two families, and a boy with a violin. I do not think that the village has the means to keep them past winter. I think that it will try.
+?end
+?if lw.villa == "outwitted"
+  The officer in the manor has moved to the town. I am told it is because of a ghost. I do not believe in ghosts. I believe, however, in a very good storyteller.
+?elif lw.villa == "paid"
+  The officer in the manor has moved to the town. I have it from an orderly that he received a number on his cuff, from a stranger, and that it was the best offer of the war.
+?else
+  The officer in the manor has moved to the town. I have it from his driver, who is nineteen, that the major looked into a lamp and said that he would write the order in the morning. He has not been quite himself since.
+?end
+I have kept the watch, as I was told. I have not interfered. I do not know, tonight, whether that was right.
+=> endbook
