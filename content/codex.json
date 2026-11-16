@@ -1171,6 +1171,42 @@
       "title": "The Cantor",
       "book": "relics-lost-god",
       "text": "A man with a gold hand who sings a six note figure and a seventh that nobody has sung, to keep a lamp lit."
+    },
+    "the_crib": {
+      "category": "places",
+      "title": "The two mile crib",
+      "book": "relics-lost-god",
+      "text": "A granite fort in the lake off Chicago, over the water tunnel, with a sealed door in its lowest chamber."
+    },
+    "the_lamp_hall": {
+      "category": "places",
+      "title": "The room kept empty",
+      "book": "relics-lost-god",
+      "text": "A round hall under the lake, with six stone chairs, five worn and the sixth never sat in."
+    },
+    "the_five_signs": {
+      "category": "lore",
+      "title": "The five signs",
+      "book": "relics-lost-god",
+      "text": "Five signs cut into the arms of the worn chairs: a wheel with a missing spoke, a hand holding a branch, a ship with no mast, a sun with a face, and a door left a little open."
+    },
+    "crane_ledger": {
+      "category": "lore",
+      "title": "Crane's ledger",
+      "book": "relics-lost-god",
+      "text": "A flat black ledger with a ribbon at nineteen sixteen: a hundred dollars to the crib keeper, a mason's afternoon, and a closed eye over a coin."
+    },
+    "the_seventh_note": {
+      "category": "lore",
+      "title": "The seventh note",
+      "book": "relics-lost-god",
+      "text": "The figure has six notes. The seventh is a door held open, and only the sixth blood, or one who holds the door for it, can sing it."
+    },
+    "the_first_chair": {
+      "category": "lore",
+      "title": "The first chair",
+      "book": "relics-lost-god",
+      "text": "Under the pale house on the lake shore, a man sits in a plain oak chair with an open door cut in its arm, the last and quietest of the five houses."
     }
   }
 }

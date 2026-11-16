@@ -1,0 +1,231 @@
+// Book Six, Chapter 8 (session 65). A Friday in June 1924: the two mile crib, the door in the lowest chamber, and the room kept empty.
+// Plays four scenes in a fixed order (the shore, the descent, the door, the hall) and a short dawn. No night phase: it is one long night.
+// The coven fronts it: the family comes down with him or waits at the top, and the room kept empty becomes, if he chooses, the family's own. Names are always checked with in_circle().
+// Reads b6.circle, b6.map, b6.crates, b6.cantor, b6.tuesday, b6.tallis, b6.yards, b6.pell, b6.rivals, b6.houses. Sets b6.party, b6.watchers, b6.door and b6.hall.
+// Uses discover(), meet(), obtain(), chart(), coven_task(), has_gift(), gift_holder(), power(). Ends with rest() and => next.
+@chapter b6c08
+@title The Room Kept Empty
+@book relics-lost-god
+@version 1
+
+# start
+## The shore
+$ b6.party = "alone"
+$ b6.watchers = "followed"
+$ b6.door = "opened"
+$ b6.hall = "sealed"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+$ do chart("chicago.velati")
+At midnight the foot of the street is empty, and the breakwater runs out into a black that has stars in it. A launch is tied at the end, with a lantern. Dr. Whitcombe sits in the stern, in a man's coat, with a coil of rope on her knees and the cedar box beside her wrapped in a tarpaulin. She has brought a thermos. She holds it out as you come down the steps, and then remembers, and puts it away.
+?if b6.crates == "taken"
+  You have brought the disc. It is in your coat, against your ribs, and it is warm.
+?else
+  She has brought the disc. It is in a biscuit tin, on her lap, and she holds the tin with both hands.
+?end
+There are other lights on the shore. You can see, without turning, three sets of headlamps parked on the cinders behind the grain elevator, with their engines off, and a fourth a little farther down. The houses have been told, as they are always told. They have come to see.
+:the_company
+* Take the family, and let the houses see them come ?if b6.circle == "all" and coven_size() > 0
+  $ b6.party = "family"
+  $ standing += 2
+  $ secrecy -= 1
+  ?if _lead != ""
+    {_reader_name} steps down into the launch first, with the lantern, and holds the rope. The others come after, in order, without a word, as they would to a dinner. The watchers on the cinders do not move. You can feel the whole shore adding it up.
+  ?else
+    The family comes down the steps together, and the launch settles under them. On the cinders, the headlamps do not move.
+  ?end
+  ?if gift_holder("shadows") != ""
+    {name(gift_holder("shadows"))} looks once toward the elevator, and the nearest set of headlamps goes quite black, and does not come on again.
+  ?end
+* Take only Dr. Whitcombe, and go quietly
+  $ b6.party = "doctor"
+  $ humanity += 1
+  $ cunning_brutal += 1
+  She says nothing, but she sits a little straighter. It is, you think, the first time on this whole expedition that anyone has treated her as a colleague.
+* Go alone, and leave the family on the shore to hold the houses ?if coven_size() > 0
+  $ b6.party = "alone"
+  $ standing += 1
+  $ cunning_brutal += 1
+  ?if _lead != ""
+    {_reader_name} does not like it, and says so, in three words. Then {pg(_lead, "he", "she", "they")} {pg(_lead, "turns", "turns", "turn")} and walks back up the breakwater, with the others, to stand between the lake and the cinders, like a wall.
+  ?else
+    The family does not like it, and says so, and then walks back up the breakwater to stand between the lake and the cinders.
+  ?end
+* Take no one, and say that this is a thing that should be seen by as few as possible ?if coven_size() == 0
+  $ b6.party = "alone"
+  $ secrecy += 1
+  The launch is very small, and the water is very black.
+?if b6.party == "family" or b6.party == "alone"
+  ~> watchers
+?end
+---
+~> crib
+---
+~> door
+---
+~> hall
+---
+-> dawn
+
+# watchers
+## The headlamps
+$ do chart("chicago.yards")
+A man detaches himself from the nearest car and comes along the breakwater with his hat in his hand. It is Tom Haskell, from the Yards. He says that Mr. Rudek sends his respects. He says that Mr. Rudek was told to watch, and has not been told to do otherwise, and would like to know what you would have him do.
+?if b6.yards == "settled" or b6.yards == "traded" or b6.yards == "stood"
+  He says it very respectfully. It is, you gather, the manner of a house that has made up its mind.
+?end
+:the_watchers
+* Ask the Yards to hold the shore, and keep the others from the pier
+  $ b6.watchers = "held"
+  $ standing += 1
+  ?if b6.yards == "settled" or b6.yards == "traded"
+    $ do meet("rudek")
+    He touches his hat. He says that it will be done, and that Mr. Rudek says it is the first time anyone has asked the Yards for a favour in that way. Behind him, along the cinders, eight large men get out of their cars, and begin, quite slowly, to move the other three away.
+  ?else
+    He hesitates. He says that he will ask. After a minute a big man's shape gets out of the second car, with a long stride, and the Yards take the pier, and it is not quite clear for whose sake.
+  ?end
+* Say that the houses are welcome to watch, and that there is nothing to see
+  $ b6.watchers = "followed"
+  $ secrecy -= 1
+  He gives you a very long look, and goes back. He is not sure whether it is a good answer. He suspects that it is the one that will be remembered.
+* Let the family turn them back from the pier ?if b6.party == "family" and gift_holder("charm") != ""
+  $ b6.watchers = "turned"
+  $ standing += 1
+  {name(gift_holder("charm"))} goes up the breakwater, alone, with a hand in a pocket, and talks to four cars in turn. It takes eleven minutes. When {pg(gift_holder("charm"), "he", "she", "they")} {pg(gift_holder("charm"), "comes", "comes", "come")} back, every set of headlamps is off, and there is a smell of cigars.
+<~
+
+# crib
+## The two mile crib
+The crib is a squat granite fort standing in open water, with a lamp on its roof for the steamers, and a door, and an iron stair. The launch grates against it. The keeper has taken his night off. The door is unlocked.
+Inside there is a cold smell, of stone and oil and old lake. A lift, with a brass handle, goes down through the middle, to a landing at the head of the tunnel. The lift has been running for sixty years, and does not like carrying more than three.
+?if b6.party == "family"
+  You go down in turns, the family with the lantern, you last. The shaft is cold, and the sound of the lake gets thinner as it falls.
+?elif b6.party == "doctor"
+  You and Dr. Whitcombe go down together, in the lift, with the lantern between you. She keeps up a low steady murmur, in a language you do not know, and it takes you a little time to understand that she is reciting dates.
+?else
+  The lift is slow. It is a long way down, and when it stops it does so with a clank that you feel in your teeth.
+?end
+At the bottom there is a vaulted chamber with a lamp-hook and a brick floor. The tunnel runs away from it, west, under the water, for two miles to the city. The bricked-up door is in the east wall. It is smaller than you had thought, and very old. It is not brick at all. It is a slab of black stone, sealed to the wall with a copper rim, and in the middle of it, at the height of a man's chest, there is a round hollow, as broad as a dinner plate, with six rays cut round the edge and the sixth filled red.
+$ do discover("the_crib")
+:the_stone
+* Set the disc in the hollow, and turn it ?if b6.crates == "taken" or b6.crates == "opened"
+  $ b6.door = "opened"
+  $ do power("minor")
+  ?if b6.crates == "opened"
+    Dr. Whitcombe gives you the tin with both hands. It is the first thing she has ever given up without an argument.
+  ?end
+  The disc turns, and goes in, and the six rays catch, one after another, like a combination lock. There is a long low sound, as of a note held under water. The red ray, last, burns once, and the slab breathes out. It is not a door that opens. It is a door that is remembered, and goes.
+* Ask Dr. Whitcombe to set it, and stand behind her ?if b6.crates != "taken" and b6.crates != "opened"
+  $ b6.door = "opened"
+  She does it with both hands, and with a face you would remember. The slab breathes out.
+* Do not use the disc. Lay a palm against the stone, and let the blood answer
+  $ b6.door = "bloodline"
+  $ standing += 1
+  $ do power("major")
+  ?if has_gift("old_blood")
+    It answers at once. The old blood goes down your arm like a bell rope, and the stone takes it, and is warm, and the six rays brighten, and the red is the last. You had not known that the door would know you. It does, as a house knows the step of its own people.
+  ?else
+    It takes a long time. The stone is cold under your hand, and then it is not, and then something in it, very old, says in no language that you could ever write down that it has been waiting. The red ray lights.
+  ?end
+<~
+
+# door
+## The stair
+$ do discover("the_lamp_hall")
+Beyond the door there is a stair, and it goes down, and the air coming up it is dry and clean and smells faintly of olive oil.
+?if b6.tallis != "held" and b6.tallis != "pressed"
+  At the first landing there is a man in a gray overcoat, standing quite still, with his hat in his hand. He has not eaten, or aged, or slept. He says, politely, that he has been there since six. He says that he could not go further. He says that the door is not his, and that he would be grateful if you would remember that he did not try to open it.
+  $ do meet("tallis")
+  :the_tenant
+  * Ask him to come down with you, and keep him where you can see him
+    $ _tenant = 1
+    $ humanity += 1
+    He bows, and falls in behind you with the quiet of a man who has been kept waiting a long time. He does not breathe, which you had known, and he does not seem to throw a shadow on the wall, which you had not.
+  * Thank him, and tell him to wait for you at the top
+    $ standing += 1
+    He accepts this without a flicker. He turns, and goes up the stair, and the lamp does not catch him.
+  * Say nothing, and go on past, and let him stay where he is
+    $ cunning_brutal += 1
+    He does not follow. But you hear him, at the second turning, say something under his breath, in the voice of a man making a note.
+?elif b6.tallis == "held"
+  The man in the gray overcoat is in the keepers' cellar, a long way from here, with a guard on the door. You find that you are very glad of it.
+?else
+  The man in the gray overcoat is somewhere in this city, in the dark, with the knowledge of what you pressed him to say. You find that you are not at all sure that he is not on the stair behind you.
+?end
+?if b6.party == "family"
+  The family goes down behind you, in single file. Nobody speaks. At every turn, {_reader_name} touches the wall with one flat hand, as a woman touches a horse.
+?end
+<~
+
+# hall
+## The room that was kept empty
+The stair ends in a hall.
+It is not a vault. It is not a cave. It is a long, high, round-roofed room, cut from the bedrock under the lake, with a floor of black and white stone, and a ceiling painted a deep and living blue, and in it there are six great stone chairs set in a ring. Five have been sat in, and not for a very long time: a little dust, a little rubbed place on the arms. The sixth is perfect. It has never been touched. A lamp stands before it, on a tall bronze stem, a great shallow bowl with a wick of braided something that is not wool. It is not lit. It was lit once, a very long while ago, and the smell of it is still in the air.
+There is no treasure, and no coffin, and no relic, as such. The relic is the room.
+Dr. Whitcombe does not say a word. She stands at the foot of the stair with her hands at her sides, and tears running down her face, and a look that you do not forget. She says, at last, in a very small voice, that it is a great hall for a family, and that the family never came.
+?if b6.cantor == "sang" or b6.tuesday == "sang"
+  And from the far end of the room, from nowhere, from the roof of the stone, the six notes come. It is not a voice. It is the room itself, remembering how to be sung to. It stops, at the place where the seventh would go. It waits.
+?elif b6.tuesday == "asked"
+  You find that you are listening for the seventh note. The room is listening too.
+?else
+  The room is waiting. It is not a thing that you can mistake.
+?end
+$ do meet("sorrel")
+:the_hall
+* Sit in the sixth chair, and light the lamp ?if b6.cantor == "sang" or b6.door == "bloodline"
+  $ b6.hall = "lit"
+  $ humanity += 1
+  $ standing += 3
+  $ do power("major")
+  ?if can_acquire("hidden_chamber")
+    $ do acquire("hidden_chamber")
+  ?end
+  The chair is a perfect fit. It is not a throne. It is a place to sit down after a long walk. The lamp takes a spark from nowhere, and then a flame, and the flame is white and quiet, and the blue of the ceiling comes alive with small bright points. It is the whole sky, as seen from a hill in a country that has not got a name, on a night that was never forgotten.
+  ?if b6.party == "family"
+    The family stand in the door, and none of them knows where to look. {_reader_name} comes forward, at last, and puts a hand on the arm of the chair, and says, in a voice you have never heard from {pg(_lead, "him", "her", "them")}, that it is a house.
+  ?end
+* Open the hall to the family, as a house of their own, and leave the lamp unlit ?if coven_size() > 0
+  $ b6.hall = "house"
+  $ humanity += 2
+  $ standing += 2
+  ?if can_acquire("hidden_chamber")
+    $ do acquire("hidden_chamber")
+  ?end
+  ?if _lead != "" and not on_mission(_lead)
+    $ do coven_task(_lead, "guard")
+  ?end
+  It is not a decision of the hero. It is the family's, and they know it. They go in under the blue ceiling, one by one, and each of them chooses a place on the black and white floor, as a tenant chooses a room. Nobody sits in the sixth chair. Nobody has to say why. The room is a haven, and a hall, and a thing that the houses of Chicago will never be told about, and it is, for the first time in three thousand years, occupied.
+* Let Dr. Whitcombe have it, and set the Institute's seal on the door ?if b6.map == "gave" or b6.crates == "opened"
+  $ b6.hall = "institute"
+  $ humanity += 1
+  $ standing += 1
+  She does not speak. She takes off her hat. She writes, in her pocket notebook, with a trembling pencil, for a very long time. It will be the Institute's. It will be, you think, the finest thing it ever has, and it will not be allowed to look at a third of it.
+* Say that it is not yours, and seal it again, and tell no one
+  $ b6.hall = "sealed"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  The door breathes shut. The disc comes out into your hand. The red ray is dark. You do not know whether you have done a wise thing. You have, at least, done a careful one.
+<~
+
+# dawn
+## What was left on the lintel
+You come up into the grey with the lake wind in your hair. The launch is waiting, and the sky over the Michigan shore is the colour of dishwater, and every set of headlamps on the cinders is gone.
+?if b6.hall == "lit"
+  Behind you, a mile out, the little lamp that has sat on the lake all spring is not there. It has gone in. You can feel it, in the pit of the stomach, like a held breath let go.
+?elif b6.hall == "house"
+  Behind you, the family comes up the breakwater in the dawn, a little changed, as people are who have found a house.
+?elif b6.hall == "institute"
+  Dr. Whitcombe comes up the stair last, with her notebook held against her chest like a child.
+?else
+  The disc is in your coat. The lamp is still a mile out. You are, you reflect, no further and no nearer.
+?end
+There is one thing more, which you saw on the way out, and told no one. On the lintel of the black stone door, on the lake side, a hand has scratched a mark, very small and not at all old. It is the sign of a closed eye, over a coin, and below it a date. The date is nineteen sixteen.
+It is the second time you have met that mark. The first was in a cellar in Rome, under a vault, in a hand that you did not know.
+$ do rest()
+=> next

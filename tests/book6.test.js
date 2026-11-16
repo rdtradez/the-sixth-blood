@@ -81,11 +81,11 @@ const coven = (g) => {
   }
 };
 
-test('Book Six lists chapters one to six and is still incomplete', async () => {
+test('Book Six lists chapters one to twelve and is still incomplete', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'relics-lost-god');
   assert.ok(book.incomplete);
-  assert.equal(book.chapterCount, 6);
+  assert.equal(book.chapterCount, 12);
 });
 
 test('chapters 1 and 2 play through every kind of waking, hungry or not, with and without a coven', async () => {
@@ -301,5 +301,166 @@ test('chapters 5 and 6 never name a coven member who is not in the circle', asyn
   for (const chapter of ['b6c05', 'b6c06']) {
     const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' } });
     assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
+  }
+});
+
+test('chapter 7 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.map', [['family', /family should hear this/, /read the map/], ['alone', /Take the tracings away/, /read the map/], ['gave', /Give the whole of it/, /read the map/]]],
+    ['b6.heir', [['lent', /lend her one of its own/, /Answer the note/], ['kept', /Offer her a keeper/, /Answer the note/], ['declined', /not the Exchange's to lend/, /Answer the note/]]],
+    ['b6.tuesday', [['sang', /sing the six notes/, /viaduct/], ['listened', /listen, and do not interrupt/, /viaduct/], ['asked', /what the song is meant to do/, /viaduct/]]],
+  ];
+  for (const [flag, branches] of sets) {
+    for (const [value, re, night] of branches) {
+      const run = await play('b6c07', {}, { hunger: 10, wealth: 900000 }, [night, re], { sys: coven, flags: { 'b6.circle': 'all' }, stopAt: 'b6c08' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapter 7 lets the family take several roofs and trades and the most committed wins', async () => {
+  const picks = [/See to the family's roofs/, /keepers a lodge/, /cold storage works/, /old brewery/, /enough roofs/];
+  const run = await play('b6c07', {}, { hunger: 10, wealth: 900000 }, picks, { sys: coven, stopAt: 'b6c08' });
+  assert.equal(run.vars['b6.houses'], 'brewery');
+  clean(run);
+});
+
+test('chapter 8 plays down to the hall with and without a coven and records each choice', async () => {
+  const sets = [
+    ['b6.party', [['family', /Take the family/], ['doctor', /only Dr. Whitcombe/], ['alone', /Go alone/]]],
+    ['b6.hall', [['lit', /Sit in the sixth chair/], ['house', /Open the hall to the family/], ['institute', /Let Dr. Whitcombe have it/], ['sealed', /seal it again/]]],
+    ['b6.door', [['opened', /Set the disc/], ['bloodline', /Lay a palm/]]],
+  ];
+  for (const [flag, branches] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b6c08', {}, { hunger: 10, wealth: 900000 }, [re], { sys: coven, flags: { 'b6.circle': 'all', 'b6.cantor': 'sang', 'b6.map': 'gave' }, stopAt: 'b6c09' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+  const solo = await play('b6c08', {}, START, [], { sys: null, stopAt: 'b6c09' });
+  assert.equal(solo.vars['b6.party'], 'doctor');
+  clean(solo);
+});
+
+test('chapters 7 and 8 never name a coven member who is not in the circle', async () => {
+  for (const chapter of ['b6c07', 'b6c08']) {
+    const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' }, stopAt: 'b6c09' });
+    assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
+  }
+});
+
+test('chapter 9 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.chairs', [['family', /Take the drawings to the family/, /copied from the chair arms/], ['cantor', /Mr. Sorrel, at the water/, /copied from the chair arms/], ['kept', /keep the sheets close/, /copied from the chair arms/]]],
+    ['b6.respect', [['sworn', /place at the Exchange's table/, /what the Yards have to say/], ['paid', /Pay it in coin/, /what the Yards have to say/], ['declined', /nobody's friend and nobody's servant/, /what the Yards have to say/]]],
+    ['b6.pellsecret', [['shared', /the family will help/, /pale house/], ['kept', /keep her confidence/, /pale house/], ['pressed', /Press her to take you down/, /pale house/]]],
+  ];
+  for (const [flag, branches] of sets) {
+    for (const [value, re, night] of branches) {
+      const run = await play('b6c09', {}, { hunger: 10, wealth: 900000 }, [night, re], { sys: coven, flags: { 'b6.circle': 'all', 'b6.heir': 'lent' }, stopAt: 'b6c10' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapter 9 lets the family take several works and the most committed wins', async () => {
+  const picks = [/See what the family can be set to/, /Back Cordelia's school/, /guard on the dig/, /read the Loop's books/, /enough work/];
+  const run = await play('b6c09', {}, { hunger: 10, wealth: 900000 }, picks, { sys: coven, stopAt: 'b6c10' });
+  assert.equal(run.vars['b6.work'], 'ledgers');
+  clean(run);
+});
+
+test('chapter 9 plays each way the hall was left and each way the guest went', async () => {
+  for (const hall of ['lit', 'house', 'institute', 'sealed']) {
+    for (const heir of ['lent', 'kept', 'declined']) {
+      const run = await play('b6c09', {}, START, [/pale house/], { sys: coven, flags: { 'b6.circle': 'all', 'b6.hall': hall, 'b6.heir': heir }, stopAt: 'b6c10' });
+      clean(run);
+    }
+  }
+});
+
+test('chapter 10 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.depot', [['family', /Meet him with the family/], ['lead', /to take his bag/], ['alone', /Go alone/]]],
+    ['b6.half', [['share', /Take a share of the Loop/], ['asked', /Ask what he wants/], ['refused', /Refuse it, courteously/]]],
+    ['b6.ledger', [['told', /Tell him all of it/], ['half', /nothing of the room/], ['nothing', /been in no room/]]],
+    ['b6.lake', [['family', /walk the lake front all together/], ['alone', /Walk alone with him/]]],
+  ];
+  for (const [flag, branches] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b6c10', {}, { hunger: 10, wealth: 900000 }, [re], { sys: coven, flags: { 'b6.circle': 'all' }, stopAt: 'b6c11' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapters 9 and 10 never name a coven member who is not in the circle', async () => {
+  for (const chapter of ['b6c09', 'b6c10']) {
+    const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' }, stopAt: 'b6c11' });
+    assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
+    clean(run);
+  }
+});
+
+test('chapter 11 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.guest', [['family', /room in the family's own house/, /Twelfth Street viaduct/], ['exchange', /Keep him at the Exchange/, /Twelfth Street viaduct/], ['hotel', /Put him in a hotel/, /Twelfth Street viaduct/]]],
+    ['b6.singer', [['family', /Take her home to the family/, /Twelfth Street viaduct/], ['cantor', /Take her to Mr. Sorrel/, /Twelfth Street viaduct/], ['alone', /tell no one she exists/, /Twelfth Street viaduct/]]],
+    ['b6.rival', [['strength', /Let the family stand in the room/, /Ruth Calloway sent/], ['bought', /Buy the paper/, /Ruth Calloway sent/], ['terms', /no quarrel/, /Ruth Calloway sent/]]],
+    ['b6.watch', [['family', /and the family with you/, /pale house/], ['kept', /a matter of two houses/, /pale house/], ['houses', /bring the other houses/, /pale house/]]],
+  ];
+  for (const [flag, branches] of sets) {
+    for (const [value, re, night] of branches) {
+      const picks = flag === 'b6.guest' ? [re, night] : [night, re];
+      const run = await play('b6c11', {}, { hunger: 10, wealth: 900000 }, picks, { sys: coven, flags: { 'b6.circle': 'all', 'b6.hall': 'house' }, stopAt: 'b6c12' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapter 11 lets the family take several holdings and the most committed wins', async () => {
+  const picks = [/See to the family's roofs/, /Put keepers on the roofs/, /Buy the grain elevator/, /Open the lower rooms/, /enough for one August/];
+  const run = await play('b6c11', {}, { hunger: 10, wealth: 900000 }, picks, { sys: coven, flags: { 'b6.circle': 'all', 'b6.hall': 'house' }, stopAt: 'b6c12' });
+  assert.equal(run.vars['b6.holdings'], 'haven');
+  clean(run);
+});
+
+test('chapter 12 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.child', [['below', /Let her stand where she is/], ['above', /Send her up to the keepers/]]],
+    ['b6.sleeper', [['kindly', /what he would like/], ['cassian', /man in the hat/], ['lamps', /thirteen/]]],
+    ['b6.note', [['you', /Sing it yourself/], ['family', /Ask the family to sing/], ['child', /Let the child sing/]]],
+    ['b6.stair', [['family', /family hold the stair/], ['alone', /Go out alone/], ['yards', /Ask Mr. Rudek/], ['table', /Let Ruth Calloway see/]]],
+  ];
+  for (const [flag, branches] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b6c12', {}, { hunger: 10, wealth: 900000 }, [re], { sys: coven, flags: { 'b6.circle': 'all', 'b6.respect': 'sworn' }, stopAt: 'b6c13' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapters 11 and 12 play each way the earlier chapters went', async () => {
+  for (const chapter of ['b6c11', 'b6c12']) {
+    for (const hall of ['lit', 'house', 'institute', 'sealed']) {
+      for (const pellsecret of ['shared', 'kept', 'pressed']) {
+        const run = await play(chapter, {}, START, [], { sys: coven, flags: { 'b6.circle': 'all', 'b6.hall': hall, 'b6.pellsecret': pellsecret, 'b6.ledger': 'told' }, stopAt: 'b6c13' });
+        clean(run);
+      }
+    }
+  }
+});
+
+test('chapters 11 and 12 never name a coven member who is not in the circle', async () => {
+  for (const chapter of ['b6c11', 'b6c12']) {
+    const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' }, stopAt: 'b6c13' });
+    assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
+    clean(run);
   }
 });

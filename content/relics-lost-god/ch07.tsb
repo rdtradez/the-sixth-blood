@@ -1,0 +1,249 @@
+// Book Six, Chapter 7 (session 65). June 1924: the map on the box rim, the family's new roofs and trades, the lake shore house asking for a guest, the Tuesday song.
+// Opens with the business lead's report, then one night phase of three actions out of four, then a short dawn with a call from the Midway.
+// The coven fronts it: the lead reports, the family takes second havens and trades, one of them sits at the lake shore table as a guest, and the bloodline is felt in the song. Names are always checked with in_circle().
+// Reads b6.circle, b6.claim, b6.crates, b6.cantor, b6.pell, b6.yards, b6.bronzeville. Sets b6.map, b6.houses, b6.heir and b6.tuesday.
+// Uses earn(), discover(), meet(), chart(), coven_task(), has_gift(), gift_holder(). Ends with rest() and => next.
+@chapter b6c07
+@title The Door on the Box
+@book relics-lost-god
+@version 1
+
+# start
+## The season of grace
+$ b6.map = "family"
+$ b6.houses = "none"
+$ b6.heir = "declined"
+$ b6.tuesday = "listened"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> report
+---
+$ do phase("night", 3)
+It is the middle of June. The houses have given the Exchange its season, and the city is using it to look. There are four things that want doing, and strength for three. {cap(voice("hunger"))}.
+-> night
+
+# report
+?if _lead != ""
+  {_reader_name} has had the ledger open since dusk, and has, for once, a good deal to say that is not about money. The Parley has changed what the city sells to the Exchange. Landlords now bow. Two aldermen have sent baskets. A man who wanted forty thousand for a warehouse in March has sent word that he would be glad to reconsider, and has not said in which direction.
+  "We are being courted," says {_reader_name}, "which is better than being counted, and worse than being left alone."
+?else
+  Dora has had the ledger open since dusk. The Parley has changed what the city sells to the Exchange. Landlords now bow. Two aldermen have sent baskets. She says that they are being courted, which is better than being counted, and worse than being left alone.
+?end
+?if b6.claim == "house"
+  The papers are calling you the sixth house, and a stationer on Wabash has had a seal cut with six rays, which nobody ordered.
+?elif b6.claim == "peace"
+  The city has settled on calling you the quiet one. It is meant as praise by some and as a warning by others.
+?else
+  The city does not know what to call you, and the lack of a name is working in your favour, for now.
+?end
+?if b6.crates == "taken"
+  The disc is in the vault, wrapped in a bank clerk's flannel. It has been very quiet. You have found that you do not trust the quiet.
+?else
+  Dr. Whitcombe's disc is still in its room on the Midway, under the University's guard and the family's eye.
+?end
+?if b6.cantor == "sang"
+  Mr. Sorrel has not been seen since the Parley, but a card came to the door on Tuesday with a single line of music on it, and a hand's breadth of gold leaf pressed under the stamp.
+?elif b6.cantor == "refused"
+  Mr. Sorrel has not been seen since the Parley. Marcel says that the Tuesday song was played in a State Street basement last week by a different man, very badly, and that the whole room went quiet when the seventh note was left out.
+?else
+  Mr. Sorrel keeps to his Tuesdays. Marcel says that he sings by the water at the foot of the Twelfth Street viaduct, and that a small crowd has begun to gather who do not know why they came.
+?end
+<~
+
+# night
+## The long June evenings
+:night
+?if actions_left() == 3
+  The light lasts late, and the city is loud with it, and you wait for the dark with the patience of a man at a station.
+?elif actions_left() == 2
+  The street lamps are on, and the heat is going out of the brick. Somewhere a gramophone is playing the same eight bars over and over.
+?else
+  It is very late. The lake has gone the colour of slate, and you have strength for a single thing more.
+?end
+* Go to the Midway, and read the map on the rim of the box [once] ?if actions_left() > 0
+  ~> map
+  $ do act()
+* See to the family's roofs and trades, now that the city is courting [once] ?if actions_left() > 0
+  ~> houses
+  $ do act()
+* Answer the note from Mrs. Pell [once] ?if actions_left() > 0
+  ~> pell
+  $ do act()
+* Go down to the Twelfth Street viaduct on Tuesday, for the song [once] ?if actions_left() > 0
+  ~> song
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# map
+## What the rim says
+$ do chart("chicago.goldcoast")
+$ do meet("whitcombe")
+Dr. Whitcombe has cleared the long table in the basement and laid the cedar box on it, on its side, under a lamp. The copper strips have been taken off, and what they covered is cut into the wood all round the rim, in a line as fine as a hair. She has rubbed it with graphite, and pressed paper to it, and has fourteen sheets of tracing laid out in a row.
+"It is a coast," she says. "A shore, and a long curve of water, and one little square set out in the water, and a stair. I have been all night trying to make it Syria. It is not Syria." She taps the square. "Mr. Collins, I think this is a lake crib. I think someone, three thousand years ago, cut a map of a thing that did not yet exist, and put it in a box, and put the box in a floor."
+?if b6.crates == "taken"
+  She does not say a word about the disc. She does not need to. She looks at the place on the table where it should be, and then at you, and goes on.
+?end
+She has been to the city waterworks, in a hat, with a letter, and has learned that the two mile crib has a keeper, and an iron stair, and a door in its lowest chamber that has been bricked up since the tunnel was bored, in eighteen sixty four, because the men who bored it would not go through.
+:the_rim
+* Say that the family should hear this at once, and read it with them
+  $ b6.map = "family"
+  $ standing += 1
+  $ humanity += 1
+  ?if _lead != ""
+    {_reader_name} is sent for, and comes in with a lantern and a notebook, and reads the tracing the wrong way up, and then the right way, and says, quite calmly, that the little square is where the lamp has been all spring. The others come after, one by one, as the house does when it is wanted. Dr. Whitcombe, who has never seen a family at work, watches with a look of dawning, appalled delight.
+  ?else
+    Dora is sent for, and comes with a notebook, and reads the tracing the wrong way up, and then the right way, and says that her grandfather had a drawing very like it, in the back of a Bible.
+  ?end
+* Take the tracings away, and tell her that the Institute has had its share
+  $ b6.map = "alone"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  She gives them up with the air of a woman who has been giving up things for twenty years and is not yet used to it. You do not look back at her. You feel her not looking at you.
+* Give the whole of it to the University, and let her go down the stair with the Exchange's money at her back
+  $ b6.map = "gave"
+  $ humanity += 1
+  $ standing += 1
+  $ do earn(-1)
+  She does not thank you. She is too much a scholar for that, and too much a woman who has been refused. She sits down, with the lamp in her face, and says that it is the first time anyone has offered her an expedition that she was not expected to pay for.
+$ do discover("the_crib")
+<~
+
+# houses
+## A roof of its own
+$ do chart("chicago.haven")
+?if coven_size() > 0
+  The house on the South Side has become, in six weeks, a house of eight rooms and eleven opinions. It is not a place to sleep any longer. It is a place to be heard. {_reader_name} says it, gently, at the end of the table, with the notebook closed: the family would like somewhere that is theirs, and trades that are theirs, so that they need not always be the Exchange's guests.
+?else
+  Dora has put a folder on the table with the corner turned down. It holds three properties and two trades. She says that a man who is going to stay in a city had better have more than one door.
+?end
+:the_houses
+* Buy the old brewery on the South Branch, and make it a second house, with cellars the city has forgotten [once]
+  $ b6.houses = "brewery"
+  $ do earn(-3)
+  $ secrecy += 1
+  $ standing += 1
+  $ do chart("chicago.yards")
+  It is a long brick block of the kind that the Prohibition has emptied, with a copper still in the yard and a vaulted cellar like a church's crypt. It costs a good deal less than it should, because nobody wants a brewery. By Sunday it has a night porter, a kitchen, and a door in the third cellar that nobody can find unless they are shown.
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
+    $ do coven_task("fiammetta", "guard")
+    Fiammetta takes it as a gift. She walks the vaults with a candle for an hour and comes up saying that it has seven ways out, which is two more than she needs and one more than she has ever had.
+  ?elif in_circle("thibault") and member("thibault", "status") == "active" and not on_mission("thibault")
+    $ do coven_task("thibault", "guard")
+    Thibault is on the roof before midnight, with a pipe, cataloguing the neighbours. By the weekend he has a friend in the brewery's old union hall, and a way into every cellar on the block.
+  ?else
+    The keepers' lodge is given the brewery, and does not quite know what it is guarding, and is therefore very thorough.
+  ?end
+  -> :the_houses
+* Take the cold storage works on Canal Street, with its ice, its dark, and its slow trade in other people's food [once]
+  ?if b6.houses == "none" or b6.houses == "lodge"
+    $ b6.houses = "works"
+  ?end
+  $ do earn(-2)
+  $ standing += 1
+  It is the cleverest of the three. A vault that holds ten thousand frozen hogs holds one more thing without comment. It also brings in, in the first month, an income that surprises the ledger.
+  ?if _lead != "" and not on_mission(_lead)
+    $ do coven_task(_lead, "business")
+    {_reader_name} takes the works at once. {cap(pg(_lead, "he", "she", "they"))} {pg(_lead, "has", "has", "have")} a ledger for it before supper, and a manager, and a name for the trade that does not say what it is.
+  ?else
+    Dora finds a foreman who has been in the trade twenty years, and a partner who asks no questions, and the works hums.
+  ?end
+  -> :the_houses
+* Give the keepers a lodge of their own on the Near North Side, with a school room and a garden [once]
+  ?if b6.houses == "none"
+    $ b6.houses = "lodge"
+  ?end
+  $ do earn(-1)
+  $ humanity += 2
+  Dora Valer is given the deed in the front hall, by the family, with a good deal of ceremony, and says that she has been the keeper of this house for eleven years and has never been given a thing. She does not cry. She goes out to the garden and stays there until it is quite dark.
+  -> :the_houses
+* That is enough roofs for one June ?if b6.houses != "none"
+  <~
+-> :the_houses
+
+# pell
+## The pale house
+$ do chart("chicago.goldcoast")
+$ do meet("pell")
+The note is in a heavy cream envelope, and it asks for a quarter of an hour. It is not, therefore, a quarter of an hour. Mrs. Pell receives you in a small room at the back of the pale house, in a chair that is not the one she sat in at dinner, and she has a shawl across her knees.
+She says that she is going to ask a thing, and that she would be obliged if you would hear it all before answering. She says that the house has had no young for forty years, and that it will be, within her time, empty, and that its money will go to a hospital, and its name to a plaque. She says that she has no right to ask what she is about to ask. She says that she has looked at the Exchange's family for six weeks, from the ends of three tables, and has seen a thing she has not seen since the century turned.
+"I do not want an heir," she says. "I want a guest. Someone to sit at my table for a season, and be taught the manners of a house that has outlived all its reasons, and teach me, in return, what it is like to be young."
+:the_guest
+* Say that the family will lend her one of its own for a season, as a guest and not a hostage ?if coven_size() > 0
+  $ b6.heir = "lent"
+  $ standing += 2
+  $ humanity += 1
+  $ _guest = ""
+  ?if in_circle("thibault") and member("thibault", "status") == "active" and _lead != "thibault"
+    $ _guest = "thibault"
+  ?elif in_circle("fiammetta") and member("fiammetta", "status") == "active" and _lead != "fiammetta"
+    $ _guest = "fiammetta"
+  ?elif in_circle("hanno") and member("hanno", "status") == "active" and _lead != "hanno"
+    $ _guest = "hanno"
+  ?elif in_circle("prisca") and member("prisca", "status") == "active" and _lead != "prisca"
+    $ _guest = "prisca"
+  ?end
+  ?if _guest != ""
+    {name(_guest)} goes, in a clean collar, with one valise, and is very grave about it in the cab. It is not a loan. It is a seat, and the family keeps a seat at every table that will have one. {cap(pg(_guest, "he", "she", "they"))} {pg(_guest, "says", "says", "say")}, at the pale house's door, that {pg(_guest, "he", "she", "they")} will write on Sundays and that the house had better not be as dull as it looks.
+  ?else
+    The family chooses, among itself, with a long argument and a short vote, and the one who is chosen goes in a clean collar, with one valise, and says at the door that they will write on Sundays.
+  ?end
+  Mrs. Pell is not a woman who weeps. She puts a hand on the door frame and looks, for a moment, very much her years.
+* Offer her a keeper from the lodge, to be trained as her house's own, if she will have a human in a vampire's chair
+  $ b6.heir = "kept"
+  $ humanity += 2
+  $ standing += 1
+  She considers it for a long time, with her head a little on one side. She says that no one has offered her that, ever, and that she is a little ashamed of how much she wants it. She says that she will think. You gather that this means yes.
+* Say, with real regret, that the family is not the Exchange's to lend, and that she must find her young elsewhere
+  $ b6.heir = "declined"
+  $ cunning_brutal += 1
+  She inclines her head. She says that it is a perfectly honourable answer, and that she would have thought less of you if you had not been careful. The shawl, however, goes a little higher on her knees.
+<~
+
+# song
+## Tuesday by the water
+$ do chart("chicago.bronzeville")
+$ do meet("marcel")
+There is a crowd under the Twelfth Street viaduct, at ten, of a kind that Chicago has not made on purpose: a night watchman, a laundress with a basket, a man in a Pullman porter's cap, two children who should be in bed. They stand about on the cinders in the dark, quite silent, and do not look at each other. At the water's edge there is a figure in a long black coat with his back to them.
+He sings. It is not loud. It has the six notes of the figure, and the pattern of them is slow and worn, like a path in grass. Where the seventh should be, he stops, and the pause is so long that the laundress shifts her basket and sighs. Out on the lake, a mile or so away, the lamp brightens, and goes dull again, as a lung does.
+Marcel is at your elbow with his clarinet case under his arm. He says that he has come every week. He says that he has not been able to explain it to his wife.
+:the_tuesday
+* Stand at the water's edge, and sing the six notes with him, as quietly as you can
+  $ b6.tuesday = "sang"
+  $ humanity += 1
+  $ standing += 1
+  ?if has_gift("old_blood")
+    The old blood is in it before you are, a low level note under his, and the whole crowd feels it, as one feels the first low note of an organ in a floor. The lamp on the lake leans toward you. The cantor stops, and half turns, and his gold hand opens in his glove.
+  ?else
+    You have no great voice. But the six notes are not a thing that is sung with a voice, quite, and the sound that comes is true. The cantor does not turn. His shoulders do something that is almost relief.
+  ?end
+* Stand with the crowd, and listen, and do not interrupt
+  $ b6.tuesday = "listened"
+  $ humanity += 1
+  It is a strange hour, and a quiet one. When it is done, the crowd breaks up without a word, as people leave a church in which they do not know the creed. The cantor does not look round. He says, to the water, that it is kind of you to come, and that he has not been listened to since the war.
+* Wait until it is over, and go to him, and ask him what the song is meant to do
+  $ b6.tuesday = "asked"
+  $ cunning_brutal += 1
+  He puts on his glove. He says that it is meant to keep a door shut. He says that he has been doing it for thirty years and had hoped to be told, by now, that it was no longer needed. He says that Dr. Whitcombe is a very capable woman and that he is afraid of what she has found.
+<~
+
+# dawn
+## The call from the Midway
+It is nearly light when the telephone goes. The night porter brings it in on its long cord, with the expression of a man who has been told to wake no one and has done so. It is Dr. Whitcombe. She has not, she says, been to bed, and does not intend to.
+She has had the city waterworks' consent, in writing, signed by a clerk who has never read it. The keeper of the crib will take a night off on Friday, for a consideration, and the lift to the lower chamber will be left unlocked from midnight. She says it all in a rush, in one breath, and then is quiet.
+"I should like you to come," she says. "I do not know why. I think I should like to have someone with me who will not be astonished."
+?if b6.map == "gave"
+  She says that she has the Exchange's money, and that it has already bought a lamp, a coil of rope and an iron bar, and that she would like you to know she has not spent it on anything frivolous.
+?end
+Out of the east window the lake is turning pale. A little way out, past the breakwater, a small steady light sits on the water like a coin on a table.
+$ do rest()
+=> next

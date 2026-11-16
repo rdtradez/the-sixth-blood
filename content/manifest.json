@@ -1115,6 +1115,54 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b6c07",
+          "file": "relics-lost-god/ch07.tsb",
+          "title": "The Door on the Box",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c08",
+          "file": "relics-lost-god/ch08.tsb",
+          "title": "The Room Kept Empty",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c09",
+          "file": "relics-lost-god/ch09.tsb",
+          "title": "The Dust on the Arms",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c10",
+          "file": "relics-lost-god/ch10.tsb",
+          "title": "Mr. Crane Comes to Dinner",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c11",
+          "file": "relics-lost-god/ch11.tsb",
+          "title": "The Seventh Note",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c12",
+          "file": "relics-lost-god/ch12.tsb",
+          "title": "The First Chair",
+          "notes": [
+            "blood"
+          ]
         }
       ],
       "incomplete": true

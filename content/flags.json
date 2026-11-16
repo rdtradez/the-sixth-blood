@@ -6263,6 +6263,295 @@
       "default": "asked",
       "note": "Chapter 6: the cantor's seventh note",
       "major": true
+    },
+    "b6.map": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "alone",
+        "gave"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 7: what he did with the tracings of the box rim",
+      "major": true
+    },
+    "b6.houses": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "lodge",
+        "works",
+        "brewery"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 7: the family's second roofs and trades (most committed wins)"
+    },
+    "b6.heir": {
+      "kind": "enum",
+      "values": [
+        "declined",
+        "kept",
+        "lent"
+      ],
+      "book": "relics-lost-god",
+      "default": "declined",
+      "note": "Chapter 7: what he answered when the lake shore house asked for a guest",
+      "major": true
+    },
+    "b6.tuesday": {
+      "kind": "enum",
+      "values": [
+        "listened",
+        "sang",
+        "asked"
+      ],
+      "book": "relics-lost-god",
+      "default": "listened",
+      "note": "Chapter 7: how he met the Tuesday song"
+    },
+    "b6.party": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "doctor",
+        "family"
+      ],
+      "book": "relics-lost-god",
+      "default": "alone",
+      "note": "Chapter 8: who went down to the crib"
+    },
+    "b6.watchers": {
+      "kind": "enum",
+      "values": [
+        "followed",
+        "held",
+        "turned"
+      ],
+      "book": "relics-lost-god",
+      "default": "followed",
+      "note": "Chapter 8: what he did about the houses watching the shore"
+    },
+    "b6.door": {
+      "kind": "enum",
+      "values": [
+        "opened",
+        "bloodline"
+      ],
+      "book": "relics-lost-god",
+      "default": "opened",
+      "note": "Chapter 8: how the door was opened"
+    },
+    "b6.hall": {
+      "kind": "enum",
+      "values": [
+        "sealed",
+        "lit",
+        "house",
+        "institute"
+      ],
+      "book": "relics-lost-god",
+      "default": "sealed",
+      "note": "Chapter 8: what became of the room kept empty",
+      "major": true
+    },
+    "b6.chairs": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "family",
+        "cantor"
+      ],
+      "book": "relics-lost-god",
+      "default": "kept",
+      "note": "Chapter 9: what he did with the five signs from the chair arms"
+    },
+    "b6.respect": {
+      "kind": "enum",
+      "values": [
+        "declined",
+        "paid",
+        "sworn"
+      ],
+      "book": "relics-lost-god",
+      "default": "declined",
+      "note": "Chapter 9: how he answered the Yards' asking for respect",
+      "major": true
+    },
+    "b6.pellsecret": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "shared",
+        "pressed"
+      ],
+      "book": "relics-lost-god",
+      "default": "kept",
+      "note": "Chapter 9: what he did with Mrs. Pell's secret",
+      "major": true
+    },
+    "b6.work": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "school",
+        "dig",
+        "ledgers"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 9: the family's work (most committed wins)"
+    },
+    "b6.depot": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "lead",
+        "alone"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 10: how he met Mr. Crane at the depot"
+    },
+    "b6.half": {
+      "kind": "enum",
+      "values": [
+        "asked",
+        "share",
+        "refused"
+      ],
+      "book": "relics-lost-god",
+      "default": "asked",
+      "note": "Chapter 10: his answer to Mr. Crane's offer of a share of the Loop",
+      "major": true
+    },
+    "b6.ledger": {
+      "kind": "enum",
+      "values": [
+        "half",
+        "told",
+        "nothing"
+      ],
+      "book": "relics-lost-god",
+      "default": "half",
+      "note": "Chapter 10: how much he told Mr. Crane of the hall",
+      "major": true
+    },
+    "b6.lake": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "alone"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 10: who walked the lake front with Mr. Crane"
+    },
+    "b6.guest": {
+      "kind": "enum",
+      "values": [
+        "exchange",
+        "family",
+        "hotel"
+      ],
+      "book": "relics-lost-god",
+      "default": "exchange",
+      "note": "Chapter 11: where Mr. Crane was housed"
+    },
+    "b6.singer": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "family",
+        "cantor"
+      ],
+      "book": "relics-lost-god",
+      "default": "alone",
+      "note": "Chapter 11: what he did with the child singer",
+      "major": true
+    },
+    "b6.rival": {
+      "kind": "enum",
+      "values": [
+        "terms",
+        "strength",
+        "bought"
+      ],
+      "book": "relics-lost-god",
+      "default": "terms",
+      "note": "Chapter 11: how he answered Ruth Calloway's move on the Exchange",
+      "major": true
+    },
+    "b6.holdings": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "keepers",
+        "elevator",
+        "haven"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 11: the family's holdings (most committed wins haven over elevator over keepers)"
+    },
+    "b6.watch": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "family",
+        "houses"
+      ],
+      "book": "relics-lost-god",
+      "default": "kept",
+      "note": "Chapter 11: who he promised Mrs. Pell would be at the first chair"
+    },
+    "b6.child": {
+      "kind": "enum",
+      "values": [
+        "below",
+        "above",
+        "cantor"
+      ],
+      "book": "relics-lost-god",
+      "default": "below",
+      "note": "Chapter 12: where the child stood at the door"
+    },
+    "b6.sleeper": {
+      "kind": "enum",
+      "values": [
+        "kindly",
+        "cassian",
+        "lamps"
+      ],
+      "book": "relics-lost-god",
+      "default": "kindly",
+      "note": "Chapter 12: what he asked Josiah Pell"
+    },
+    "b6.note": {
+      "kind": "enum",
+      "values": [
+        "you",
+        "family",
+        "child"
+      ],
+      "book": "relics-lost-god",
+      "default": "you",
+      "note": "Chapter 12: who sang the seventh note",
+      "major": true
+    },
+    "b6.stair": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "family",
+        "yards",
+        "table"
+      ],
+      "book": "relics-lost-god",
+      "default": "alone",
+      "note": "Chapter 12: how the stair was held against the other houses",
+      "major": true
     }
   }
 }

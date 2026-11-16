@@ -1,0 +1,230 @@
+// Book Six, Chapter 9 (session 66). July 1924: the signs on the chair arms, the Yards asking for a bargain, the lake shore house's secret, the family's work.
+// Opens with the business lead's report (it changes with what he did with the hall), then one night phase of three actions out of four, then a dawn with Mr. Ames at the door.
+// The coven fronts it: the lead reports, a guest or keeper tells him Mrs. Pell's secret, and the family is sent to the dig, the ledgers and the school. Names are always checked with in_circle().
+// Reads b6.circle, b6.hall, b6.heir, b6.yards, b6.tuesday, b6.ames. Sets b6.chairs, b6.respect, b6.pellsecret and b6.work.
+// Uses earn(), discover(), meet(), chart(), coven_task(), has_gift(), gift_holder(). Ends with rest() and => next.
+@chapter b6c09
+@title The Dust on the Arms
+@book relics-lost-god
+@version 1
+
+# start
+## The week after
+$ b6.chairs = "kept"
+$ b6.respect = "declined"
+$ b6.pellsecret = "kept"
+$ b6.work = "none"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> report
+---
+$ do phase("night", 3)
+It is the middle of July, and the city is a kiln. The Exchange has four things asking for it, and strength for three. {cap(voice("hunger"))}.
+-> night
+
+# report
+?if _lead != ""
+  {_reader_name} meets you in the front hall with the ledger under one arm and the lantern in the other hand, and says that the week has been quiet in the way that a held breath is quiet.
+?else
+  Dora meets you in the front hall with the ledger under one arm, and says that the week has been quiet in the way that a held breath is quiet.
+?end
+?if b6.hall == "lit"
+  The lamp on the lake is gone. In its place, over the water, there is a faint steadiness in the dark, which the harbour pilots have begun to call the Good Light. Three of them have asked the Exchange whether it is a new buoy.
+?elif b6.hall == "house"
+  The hall under the lake has been given its first week as a home. Somebody has carried down a rug. Somebody else has carried it back up again, and then down. There is, you are told, an argument about the sixth chair that nobody will let you settle.
+?elif b6.hall == "institute"
+  Dr. Whitcombe has not left the lower chamber in six days. The Institute has sent two assistants, a photographer and a very large crate of lamp oil. She writes every evening, and her notes come up the lift in a biscuit tin.
+?else
+  The disc has been put back in the vault, and the vault has been very quiet. The lamp is still a mile out. You are no further and no nearer, and the city has begun to notice.
+?end
+?if b6.yards == "settled" or b6.yards == "traded" or b6.yards == "stood"
+  Mr. Haskell of the Yards has called twice, with his hat in his hand, and left word that Mr. Rudek would be grateful for a quarter of an hour.
+?end
+<~
+
+# night
+## The long heat
+:night
+?if actions_left() == 3
+  The heat has not broken. The brick gives it back all evening, and the whole South Side sits out on its steps in shirtsleeves, waiting for a wind from the lake.
+?elif actions_left() == 2
+  The streets have emptied a little. Somewhere a gramophone is playing the same eight bars, and a woman is singing along, slightly out of tune.
+?else
+  It is very late. The lake is flat, and has the heavy shine of a plate, and you have strength for one thing more.
+?end
+* Go down to the Midway, and look at what Dr. Whitcombe copied from the chair arms [once] ?if actions_left() > 0
+  ~> chairs
+  $ do act()
+* Hear what the Yards have to say, and what Mr. Rudek wants [once] ?if actions_left() > 0
+  ~> respect
+  $ do act()
+* Go to the pale house, and see what the season has done there [once] ?if actions_left() > 0
+  ~> pell
+  $ do act()
+* See what the family can be set to, now the city is watching [once] ?if actions_left() > 0
+  ~> work
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# chairs
+## Five signs and a blank
+$ do chart("chicago.goldcoast")
+$ do meet("whitcombe")
+Dr. Whitcombe has done the thing that scholars do, and has made the room into paper. Five sheets are pinned to the basement wall, one for each worn chair, and on each there is a drawing of what was cut into the stone of the arm, so small that she had to do it with a magnifying glass and a mirror.
+They are signs. The first is a wheel with a missing spoke. The second is a hand holding a branch. The third is a ship with no mast. The fourth is a sun with a face. The fifth is a door, and the door is a little open. Below the five, on a sixth sheet, there is a blank, and a ring of six rays.
+"They are not names," she says. "They are the houses. The five that sat. I think they are the five lines that were counted before yours." She has circled the open door, and written beside it, in a firm hand, a single question mark. "I have seen this one. I have not been able to remember where."
+:the_signs
+* Take the drawings to the family, and read them together
+  $ b6.chairs = "family"
+  $ standing += 1
+  $ humanity += 1
+  ?if _lead != ""
+    {_reader_name} lays the five sheets on the dining table, under the good lamp, and the others come in one by one. There is a good deal of talk. By two o'clock the family has an opinion on every sign but the door, and about the door they have an argument, and the argument is the best sign of all that the door matters.
+    ?if gift_holder("charm") != ""
+      {name(gift_holder("charm"))} looks at the drawing of the hand and the branch for a long time, and says quietly that Mr. Sorrel wears that, in gold, on a chain, under his shirt.
+    ?end
+  ?else
+    Dora studies them for an hour with a pencil behind her ear, and says that the door is on a hotel's headed notepaper. She cannot say which hotel.
+  ?end
+* Take the sheets to Mr. Sorrel, at the water, and ask him the names
+  $ b6.chairs = "cantor"
+  $ cunning_brutal += 1
+  $ do meet("sorrel")
+  He turns the sheets over in his gloved hand, one after another, as a man might look at old photographs of people he knew. He gives the names with great reluctance. The wheel was a house of the Danube. The hand and the branch were his own. The ship was lost at sea. The sun with the face was burned in a city whose name he will not say. Of the door, he will say only that it was the last, and the quietest, and that he is not certain it ended.
+* Thank her, and keep the sheets close, and say nothing to anyone
+  $ b6.chairs = "kept"
+  $ secrecy += 1
+  She does not argue. She rolls them in oilcloth, and ties them with string, and hands them over as one hands over a child. She says only that she will not forget what they said, and that you had better not either.
+$ do discover("the_crib")
+<~
+
+# respect
+## The Yards' quarter of an hour
+$ do chart("chicago.yards")
+$ do meet("rudek")
+Mr. Rudek receives you in the long, low, whitewashed office over the killing floor, which smells of lime and cold iron, at a table the size of a door. He is very large, and very slow, and very polite, and there is a tray of coffee on the table that he has not touched and does not intend to. He thanks you for coming. He says that he has been thinking about the shore.
+"A house that is asked a favour," he says, "has two choices. It can think itself a servant, or it can think itself a friend. I would be very much obliged if you would tell me which my house has been." He folds his hands. "I do not ask it unkindly. I ask it because I have eleven hundred men and boys, and I must tell them something."
+?if b6.watchers == "held"
+  He says that the Yards held the pier, as asked, and that it cost him an alderman and a promise to Mrs. Pell.
+?elif b6.watchers == "turned"
+  He says that your people turned his cars away without a shot, and that he has not been able to decide whether he is insulted.
+?end
+:the_bargain
+* Offer the Yards a place at the Exchange's table, with a share in the docks and a voice in its counsel
+  $ b6.respect = "sworn"
+  $ standing += 2
+  $ do earn(-1)
+  He sits very still. Then he lifts the coffee, and drinks it, for the first time, to the bottom, and sets down the cup. He says that nobody has asked the Yards to a table in forty years, and that he will not forget it. You are not at all sure that he is a man who forgets anything.
+* Pay it in coin, and generously, and say that the Exchange prefers to settle its accounts
+  $ b6.respect = "paid"
+  $ do earn(-2)
+  $ cunning_brutal += 1
+  He takes the envelope, and counts it, with a thumb like a sausage, without looking at it. He says that it is a handsome sum, and that he will see his men are paid. He does not say that it is enough, and you do not suppose it is meant to be.
+* Say that the Exchange is nobody's friend and nobody's servant, and that the favour was a courtesy
+  $ b6.respect = "declined"
+  $ cunning_brutal += 1
+  $ standing -= 1
+  He is quiet for a long while. Then he nods, very slowly, and says that he respects a man who knows his own mind, and that it is a pity, since the Yards have never been able to tell a man who knows his own mind from a man who is alone.
+<~
+
+# pell
+## The season at the pale house
+$ do chart("chicago.goldcoast")
+$ do meet("pell")
+?if b6.heir == "lent"
+  The family's guest meets you on the stairs of the pale house, in a clean collar, rather thinner than you remember, and says in a low voice that Mrs. Pell would like to see you, and that it is not at all what you think. Then, with a look, the guest adds that something has been learned, and that it will not keep.
+?elif b6.heir == "kept"
+  The keeper you sent is waiting at the foot of the stairs, with her hat in her hands and a face that has changed in a month. She says, very formally, that Mrs. Pell has been kind, and that she has been shown a room that is not in the plans of the house.
+?else
+  The pale house has not been kind to its mistress, since you refused her. The shawl is gone, and the cane has come out, and Mrs. Pell receives you in the same small back room with the look of a woman who has decided that there is nothing left to be careful for.
+?end
+Mrs. Pell sits very upright. She says that she will tell you a thing that no one living outside her house has been told, and that she would like you to understand that she tells it because she has decided to, and not because she was asked.
+"The house has had no young for forty years," she says, "because the house has one. He is under it. He has been asleep since eighteen eighty-six, in a room under the cellars, in a chair, and he is the first of us. We do not make young, Mr. Collins. We cannot. He sits in the chair, and he holds the line, and when he goes, the house goes." She looks at the cane in her hands. "He has begun to stir. It is the song, I think. It is the Tuesday song, coming through the earth."
+:the_secret
+* Say that the family will help, and that it should hear this, and take her at her word
+  $ b6.pellsecret = "shared"
+  $ humanity += 1
+  $ standing += 1
+  She looks at you for a long moment. She says that it is a thing a human woman might say, and that she had not thought to hear it in this house. She says that she will accept. It is very quiet in the room.
+* Say that you will keep her confidence, and tell no one, and watch the house from outside
+  $ b6.pellsecret = "kept"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  She inclines her head. She says that it is wise, and that it is also, perhaps, a little cold, and that she will not hold it against you.
+* Press her to take you down, and let you see the sleeper for yourself
+  $ b6.pellsecret = "pressed"
+  $ cunning_brutal += 2
+  $ standing -= 1
+  She goes very white. She says that she had thought, perhaps, that you were kinder than that, and that you have shown her she was right to be afraid. She stands, with the cane, and the interview is over.
+<~
+
+# work
+## The family's hands
+$ do chart("chicago.haven")
+?if coven_size() > 0
+  {_reader_name} has a list, and has had it for a week, and has been waiting to be asked for it. There are three places the family can put its hands, and not enough hands to do all three well.
+?else
+  Dora has a list. There are three places that a man with money and a quiet household might put a few reliable hands, and she has been waiting a week to be asked.
+?end
+:the_work
+* Put a guard on the dig under the Midway, and keep the Institute's men from being quietly bought [once]
+  ?if b6.work == "none"
+    $ b6.work = "dig"
+  ?end
+  $ do earn(-1)
+  $ standing += 1
+  ?if _lead != "" and gift_holder("strength") != "" and not on_mission(gift_holder("strength"))
+    $ do coven_task(gift_holder("strength"), "guard")
+    {name(gift_holder("strength"))} takes the first watch, in a canvas apron, as a labourer, and carries a bag of cement up the basement stairs one-handed, in front of the foreman, by accident.
+  ?else
+    The keepers' lodge supplies two men with night glasses and a thermos.
+  ?end
+  -> :the_work
+* Set the family to read the Loop's books, and learn what Mr. Crane's half is made of [once]
+  $ b6.work = "ledgers"
+  $ do earn(-1)
+  $ secrecy += 1
+  ?if _lead != "" and not on_mission(_lead)
+    $ do coven_task(_lead, "business")
+    {_reader_name} puts on a clerk's black sleeves and goes through the Loop with a fountain pen, and in four nights has a map of Mr. Crane's half of Chicago with a gap in it that is the shape of a man.
+  ?else
+    Dora finds a clerk at a bank on LaSalle Street who is willing to stay late, and in four nights has a map with a gap in it that is the shape of a man.
+  ?end
+  -> :the_work
+* Back Cordelia's school in Bronzeville with a wing, and a salaried teacher to run it [once]
+  ?if b6.work == "none"
+    $ b6.work = "school"
+  ?end
+  $ do earn(-1)
+  $ humanity += 2
+  Cordelia Moten opens the envelope in the school's cold little office, and reads it twice, and says that her great aunt would have wept. She says that she does not intend to. She goes out into the corridor, and there is a sound of someone, with great dignity, blowing a nose.
+  -> :the_work
+* That is enough work for one July ?if b6.work != "none"
+  <~
+-> :the_work
+
+# dawn
+## A card from the gray man
+Near dawn the night porter brings in a card on a salver, and stands very straight in the doorway, as if the card might do something. It is Mr. Ames's. It is, as usual, immaculate. On the back, in a small neat hand that is not his, someone has written a single line.
+"Friday, on the Twentieth Century. Please have the lamps ready. I will not need to be fed. H. C."
+Mr. Ames is at the door, in his gray homburg, with a bow like a spring being very carefully released. He says that Mr. Crane has decided to come himself. He says that Mr. Crane has not left New York in nine years.
+?if b6.ames == "partner"
+  He says it with the manner of a man delivering good news to a friend.
+?elif b6.ames == "refuse"
+  He says it with the manner of a man delivering bad news to an enemy, and hoping that it will not be taken as such.
+?else
+  He says it with the polite caution of a man who is not sure which sort of news it is.
+?end
+Out of the east window the lake is the colour of pewter, and very still.
+$ do rest()
+=> next

@@ -1,0 +1,257 @@
+// Book Six, Chapter 11 (session 67). August 1924: Mr. Crane's confession, the singer at the viaduct, Ruth Calloway's move against the Exchange, the lake shore house, the family's holdings.
+// Opens with the business lead's report and a short morning with Mr. Crane, then one night phase of three actions out of four, then a dawn with a summons from the pale house.
+// The coven fronts it: the lead reports, the family takes in the singer, answers the rival house with the bloodline's strength, and builds the haven and the holdings. Names are always checked with in_circle().
+// Reads b6.circle, b6.hall, b6.half, b6.ledger, b6.pellsecret, b6.houses, b6.respect. Sets b6.guest, b6.singer, b6.rival, b6.holdings and b6.watch.
+// Uses meet(), discover(), chart(), earn(), coven_task(), has_gift(), gift_holder(), power(). Ends with rest() and => next.
+@chapter b6c11
+@title The Seventh Note
+@book relics-lost-god
+@version 1
+
+# start
+## The guest of the Exchange
+$ b6.guest = "exchange"
+$ b6.singer = "alone"
+$ b6.rival = "terms"
+$ b6.holdings = "none"
+$ b6.watch = "kept"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> report
+---
+~> crane
+---
+$ do phase("night", 3)
+It is August, and the city has stopped pretending to sleep. The Exchange has four things asking for it, and strength for three. {cap(voice("hunger"))}.
+-> night
+
+# report
+?if _lead != ""
+  {_reader_name} is waiting in the hall with the lantern, and a face that has not been to bed, and says that the house has a guest who does not eat and a singer who does not sleep, and that it would like to be told which of the two is the more alarming.
+?else
+  Dora is waiting in the hall with the ledger, and says that the house has a guest who does not eat and a singer who does not sleep, and that she would like to be told which is the more alarming.
+?end
+?if b6.ledger == "told"
+  Mr. Crane has read the Exchange's books through twice, as a man reads a letter from home. He has asked, politely, for the loan of a pencil.
+?elif b6.ledger == "nothing"
+  Mr. Crane has been very civil about the lie. He has left a single sheet on your desk, ruled in red, with the word "when" written at the top and nothing under it.
+?else
+  Mr. Crane has been shown half of a room, and has spent four days walking round the other half.
+?end
+?if b6.half == "share"
+  Half the Loop has begun to arrive at the Exchange in boxes. Two clerks have fainted.
+?end
+<~
+
+# crane
+## Where he sleeps
+$ do chart("chicago.exchange")
+He is in the east gallery over the long gray room, in a chair he has not left for two days, with the curtains drawn and a gramophone going that is not playing anything. He rises when you come in. He is very young, in the light of one lamp, and very tired.
+"I said I should tell you why I came," says Mr. Crane. "I did, in part. In nineteen sixteen I heard a song from a crib on the lake, and I followed it down a stair that was not there, and a man in a hat was waiting at the bottom. He said that I was early. He said that I should come back in eight years, when the sixth had been found, and that I should bring a ledger. He was very courteous. I have not had a courteous thing said to me since." He looks at the floor. "He gave me my own name, in a hand that I thought was mine."
+He says that he will not go home until he has seen the lamp lit, and that he would like to know where in your house he may be put. He says it with an air of great delicacy, as if it were a very large favour that he was trying not to make into one.
+:the_guest
+* Give him a room in the family's own house, among the family ?if coven_size() > 0
+  $ b6.guest = "family"
+  $ humanity += 1
+  $ standing += 1
+  ?if _lead != ""
+    {_reader_name} has already aired the room. It is the back one, with the window over the garden, and a bed that nobody has to pretend to use. Mr. Crane stands in the door a long moment with his hat in his hand, and says that it has been a hundred and ten years since he slept under another man's roof, and that he is not at all sure he remembers the etiquette.
+  ?else
+    The back room is made ready, and Mr. Crane stands in the door a long moment with his hat in his hand, and says that it has been a hundred years since he slept under another man's roof.
+  ?end
+* Keep him at the Exchange, in the gallery, where Mr. Ames can see to him
+  $ b6.guest = "exchange"
+  $ cunning_brutal += 1
+  He inclines his head, as if you had passed a course. Mr. Ames, at the far end of the gallery, lets his shoulders down a quarter of an inch.
+* Put him in a hotel, with a good lock and a man on the door
+  $ b6.guest = "hotel"
+  $ secrecy += 1
+  $ standing -= 1
+  He says that he quite understands. He says that it is exactly what he would have done, and that he is a little hurt, and that the two are not at all in conflict.
+<~
+
+# night
+## A city with its windows open
+:night
+?if actions_left() == 3
+  The heat has settled in for the month. Every window on the South Side is open, and every radio, and under them all, from the direction of the viaduct, there is a thread of something that is not music.
+?elif actions_left() == 2
+  The streets are thinner, and the arc lamps buzz, and a night man is hosing the sidewalk outside the Exchange and looks, every little while, over his shoulder.
+?else
+  It is the grey hour of the dead, when even the speakeasies lock up. The lake lies very still, and you have strength for one thing more.
+?end
+* Go down to the Twelfth Street viaduct, and find who has been singing [once] ?if actions_left() > 0
+  ~> singer
+  $ do act()
+* Answer the card that Ruth Calloway sent up to the Exchange [once] ?if actions_left() > 0
+  ~> rival
+  $ do act()
+* See to the family's roofs, and what they ought to own now [once] ?if actions_left() > 0
+  ~> holdings
+  $ do act()
+* Go to the pale house, and hear what Mrs. Pell would have you hear [once] ?if actions_left() > 0
+  ~> pell
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# singer
+## Under the viaduct
+$ do chart("chicago.velati")
+$ do meet("tilly")
+She is on the cinders where Mr. Sorrel always stands, in a plain gray school dress, with her hair in two braids that have come undone. She is perhaps twelve. She has the face of someone who was twelve in nineteen sixteen and has not been told that it ended. She stops singing when you come down the bank. She does not run. She looks at you the way a child looks at the one grown person in the room who has not yet shouted at her.
+"I am Tilly," she says. "I was Tilly Marsh. I was in the choir of St. Anne's." She says that a man in a hat came on a Tuesday and said that she had a voice and that it would be wanted, and that she woke on the stairs a month ago, in the dark, with the six notes already in her mouth. "The seventh is not mine," she says. "It is only that I can hold the door for it."
+?if has_gift("old_blood")
+  She looks at your hand, and then at your face, and says that you have the same warm smell the room had, and that it made her think of bread.
+?end
+:the_child
+* Take her home to the family, and say that she is theirs to keep ?if coven_size() > 0
+  $ b6.singer = "family"
+  $ humanity += 2
+  $ standing += 1
+  ?if _lead != ""
+    {_reader_name} comes down the bank with a coat before you have finished asking, as if the coat had been waiting there. The child lets herself be wrapped. She says that she had thought it would be harder than that, and then that she is very hungry, and then, very small, that she does not want to be made to sing.
+    ?if gift_holder("healing") != ""
+      {name(gift_holder("healing"))} sits on the cinders beside her, and takes her two cold hands, and says nothing for a long time. When they stand, the child is asleep on her feet.
+    ?end
+  ?else
+    You take off your coat, and she lets you wrap it round her, and she says that she is very hungry.
+  ?end
+* Take her to Mr. Sorrel, who sings the figure, and ask what he knows of her
+  $ b6.singer = "cantor"
+  $ cunning_brutal += 1
+  $ do meet("sorrel")
+  He is at the water's edge before you reach it, and stands with his gloved hand over his mouth. He says that she is the first living voice that has ever carried the seventh in his hearing. He says it with something that is a great deal like grief, and then, more steadily, that he should like to teach her, if she will be taught, and that he would be very careful.
+* Talk to her alone, and tell no one she exists
+  $ b6.singer = "alone"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  She tells you where she has been sleeping, which is a coal cellar behind a church in Pilsen, and you pay the sexton, and she tells you what she remembers of the man in the hat, which is his gloves, and his gold, and the way he said her name as though it were a fine thing and a little sad.
+$ do discover("the_seventh_note")
+<~
+
+# rival
+## Ruth Calloway's afternoon
+$ do chart("chicago.exchange")
+$ do meet("calloway")
+Ruth Calloway has had the Exchange's grace for a season, and has used it. She is in the long gray room when you wake, in a hat like a very expensive teacup, with her ankles crossed and a ledger of her own on her knee. Mr. Ames has given her tea. She has not touched it, which is the first sign that she has come to be unpleasant.
+She says that her house has bought the lease of the brewery on Archer, and the Pilsen cold storage, and a good three quarters of the paper on the docks, and that she wished to tell you herself, since she is a woman of manners. She says that the family may keep its coffin in the cellar. She says that the Loop is not a place where one house sits at five tables.
+?if b6.houses == "brewery"
+  She says it with her eyes on the wall, since the brewery was the family's.
+?elif b6.houses == "works"
+  She says it with a pleasant face, since the cold storage was the family's.
+?end
+:the_rival
+* Let the family stand in the room, and let her feel what the bloodline weighs ?if coven_size() > 0
+  $ b6.rival = "strength"
+  $ standing += 2
+  $ cunning_brutal += 1
+  ?if gift_holder("strength") != ""
+    {name(gift_holder("strength"))} leans on the mantel, and the marble gives a quarter inch.
+  ?end
+  They come in without a word and stand along the wall, and nobody says anything for a great while. Ruth Calloway has been a vampire since the Fire. She has never in her life been looked at by a room like that. She sets down the ledger, and picks it up again, and her hand is quite steady, and that, you think, is the most remarkable thing about it.
+* Buy the paper from under her, at a price she cannot refuse in front of the Yards
+  $ b6.rival = "bought"
+  $ do earn(-3)
+  $ cunning_brutal += 1
+  She hears you out with great composure, and then asks, with a bright little smile, how in the world you mean to pay. You tell her. When she has stopped laughing, she says that it is a perfectly dreadful thing to be outbid by a gentleman who does not seem to need the money.
+* Say that the Exchange wants no quarrel, and that her house and yours might sit at one table
+  $ b6.rival = "terms"
+  $ humanity += 1
+  $ standing += 1
+  She considers it with her head on one side. She says that it is a very handsome offer, and the first she has had since the war. She says that she will not take it today. She says that she will take it, perhaps, on a day when it is less convenient to refuse.
+<~
+
+# holdings
+## What a family owns
+$ do chart("chicago.haven")
+?if coven_size() > 0
+  {_reader_name} has the deeds in a cigar box, and has had them all week, and has put a pencilled star beside the three that the family can afford. There is a good deal of argument about which are the more urgent. There is an equal amount of argument about whose idea it was.
+?else
+  Dora has the deeds in a cigar box, and a pencilled star beside the three that you can afford.
+?end
+:the_holdings
+* Open the lower rooms under the lake as the family's own haven, with a way down from the shore [once] ?if b6.hall == "house" or b6.hall == "lit"
+  $ b6.holdings = "haven"
+  $ do earn(-1)
+  $ standing += 1
+  ?if _lead != "" and gift_holder("strength") != "" and not on_mission(gift_holder("strength"))
+    $ do coven_task(gift_holder("strength"), "guard")
+    {name(gift_holder("strength"))} spends a week setting the stair, one stone at a time, with a spirit level and a great deal of cheerful abuse of the masons. The sixth chair has been dusted, and the five others left as they are. Nobody has said why.
+  ?else
+    The keepers set a stair and a door, and the sixth chair is dusted and left alone.
+  ?end
+  -> :the_holdings
+* Buy the grain elevator on the river, and the barges that serve it [once]
+  ?if b6.holdings == "none"
+    $ b6.holdings = "elevator"
+  ?end
+  $ do earn(-2)
+  $ standing += 1
+  ?if _lead != "" and not on_mission(_lead)
+    $ do coven_task(_lead, "business")
+    {_reader_name} takes the elevator on the first of the month, and by the fifteenth has found two thousand bushels that nobody had been counting, and a foreman who had been counting them for himself.
+  ?else
+    Dora takes the elevator on the first of the month, and by the fifteenth has found two thousand bushels that nobody was counting.
+  ?end
+  -> :the_holdings
+* Put keepers on the roofs of every house the family owns, with night glasses and a telephone [once]
+  $ b6.holdings = "keepers"
+  $ do earn(-1)
+  $ secrecy += 1
+  The keepers are given an evening to be told what they are guarding. They take it with the placid gravity of people who were raised in the country and have been waiting some time for a reason.
+  -> :the_holdings
+* That is enough for one August ?if b6.holdings != "none"
+  <~
+-> :the_holdings
+
+# pell
+## The cane and the candles
+$ do chart("chicago.goldcoast")
+$ do meet("pell")
+?if b6.pellsecret == "pressed"
+  The door of the pale house is opened by a maid, and shut again, and opened by Mrs. Pell, who has plainly come downstairs against her better judgement. She says that she had not meant to see you again, and that she has seen the sleeper turn over in his chair, and that her pride has become a very small thing.
+?elif b6.pellsecret == "shared"
+  Mrs. Pell is waiting in the hall with her hat on, which she has never done. She says that she has not slept, and that the house has not either, and that she is told this is a proof of friendship.
+?else
+  Mrs. Pell has not asked for you in three weeks. She sends now by a footman, and the note is only two words, in a hand that has shaken: "He wakes."
+?end
+She says that Mr. Josiah Pell turned in his chair on the night that the hall under the lake was lit, and again last Tuesday, when the child began singing, and that on Thursday he spoke. He said a single word. It was the name of the house.
+"He says that he will wake on the night that the seventh is sung," says Mrs. Pell. "He says that he will wake, and that he is not sure what will be left of him, and that you are to be there." She looks at the cane. "I have never been afraid for him before. I find it is very like being afraid for oneself."
+:the_watch
+* Say that you will be there, and the family with you, and that he will not wake alone
+  $ b6.watch = "family"
+  $ humanity += 1
+  $ standing += 1
+  She does not answer. She puts out her hand, and takes the sleeve of your coat, quite lightly, as one takes the arm of a stranger on a stair.
+* Say that you will be there, alone, and keep it a matter of two houses
+  $ b6.watch = "kept"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  She says that she had hoped you would say so, and that she is ashamed that she had.
+* Say that the seventh is Chicago's business too, and that the Exchange will bring the other houses
+  $ b6.watch = "houses"
+  $ standing += 2
+  $ secrecy -= 2
+  She looks at you for a long time. She says that she had never thought a young house would be brave enough to make a thing so large, and that it may be brave or may be a catastrophe, and that she will not know until Friday.
+$ do discover("the_first_chair")
+<~
+
+# dawn
+## A note under the door
+Near dawn you find it, shoved under the door of the Exchange by a hand that did not care to be seen. It is a single sheet of the pale house's blue paper, folded twice. It has no signature. It says, in a thin and careful script, that the first chair is under the house, and that the house will be opened to you on Friday at midnight, and that it is not, on any account, to be made a party.
+Out of the east window the lake is a sheet of tin. Somewhere on it a small light is burning, a little steadier than it was in the spring.
+?if b6.singer == "family" and coven_size() > 0
+  In the room at the back of the house, a child who has not slept in eight years has gone to sleep at last, under a quilt that somebody made up out of an old coat.
+?end
+$ do rest()
+=> next
