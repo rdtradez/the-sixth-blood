@@ -1,0 +1,216 @@
+// The Long Watch, chapter 4 (session 73). New York, 1987: the house on Wall Street, a haven to build and a rival house at the door.
+// The coven is the hero's arm: the business lead runs the desk and a gift holder stands beside him. Names come from business_lead() and gift_holder().
+// Sets lw.crash, lw.haven (multi pick loops, most committed wins) and lw.rival, plus lw.eighties. One night phase of two actions out of three places, then dawn.
+// Ends with rest() and => next, into the 1990s (lw05).
+@chapter lw04
+@title The Floor
+@book unchained
+@version 1
+
+# start
+## The desk
+$ lw.crash = "held"
+$ lw.haven = "none"
+$ lw.rival = "refused"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+$ _fed = 0
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> desk
+---
+?if must_feed()
+  ~> hunger
+  ---
+?end
+$ do phase("night", 2)
+It is October, and the city is loud with money, and the wire says three places. {cap(voice("hunger"))}. You have strength for two.
+-> night
+
+# desk
+## Forty floors up
+The firm has an office now on the thirty ninth floor of a tower in lower Manhattan, with a view of the harbor and a carpet that costs more than a village. {_reader_name} has run it since the spring. The telephones never stop, and the young men in braces call each other by their last names and do not, any of them, look at the window after dark.
+?if _lead != ""
+  {_reader_name} sets the morning's papers in front of you without being asked, in the order that matters, and says that the family is in the building, on three floors, and that nobody has had a night off since the summer.
+?else
+  {_reader_name} sets the morning's papers in front of you in the order that matters, and says that the keepers have sent three good clerks from the hill, and that the clerks are frightened of the elevators.
+?end
+Collis is an old name, and a quiet one, and this is the first decade in which a quiet name is worth a great deal of money. The market has gone up for five years. Everyone knows it will fall. Nobody knows when.
+<~
+
+# hunger
+## The long supper
+$ _fed = 1
+The city has a great many kinds of people in it, and the night has a great many hours. It is, in its way, the easiest country you have ever fed in.
+* Draw from the cold store under the building
+  $ do feed("bank")
+  $ humanity += 1
+  It is a plain white refrigerator in a plain white room, and nobody has ever wondered what it is for. You are glad of it, and a little tired of being glad.
+* Go down to the clubs and find someone who wants company
+  $ do feed("donor")
+  $ do earn(-2)
+  He is a very young man in a very loud shirt, and he thinks you are in the music business. You let him think so.
+* Take what the dark offers
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  There is a great deal of dark in a city of this size. It is not difficult. That is the trouble with it.
+<~
+
+# night
+## Three doors
+:night
+?if actions_left() == 2
+  The elevator is empty, and the floor below is lit, and on the desk are three things: a trading slip, a set of keys and a card, heavy and cream, with a name on it that you have not seen before.
+?else
+  The towers are going dark, one by one, and the cleaners are in the lobby, talking in Spanish about a football match.
+?end
+* The floor, where the market is shaking [once] ?if actions_left() > 0
+  ~> floor
+  $ do act()
+* The keys: a place of the house's own in the city [once] ?if actions_left() > 0
+  ~> haven
+  $ do act()
+* The card: a dinner, and a house that wants to be known [once] ?if actions_left() > 0
+  ~> rival
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# floor
+## Black Monday
+The numbers have been falling since the morning in Hong Kong, and by the afternoon in New York they are falling faster than the screens can show them. Men are shouting into telephones in the corridor. A boy in the mail room is crying. {_reader_name} stands at your elbow with a list of everything the house owns, and a pencil.
+$ _gh = gift_holder("merchants_eye")
+?if _gh != ""
+  {name(_gh)} reads the tape for a quarter of an hour, in silence, and then says what is going to happen, and in what order. It is not a prophecy. It is what a very old merchant's eye does when the fear is loud enough to hear.
+?end
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Sell what can be sold, and put the house in coin before the close [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ lw.crash = "sold"
+    $ _mp_rank = 1
+  ?end
+  $ do earn(2)
+  $ standing -= 1
+  It is clean, and cold, and exactly right. The house comes out of the day with every dollar it carried in, and nobody who has lost their shirt that afternoon will forget that Collis did not.
+* Hold, and lend to the firms that are drowning, at a fair rate [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ lw.crash = "held"
+    $ _mp_rank = 2
+  ?end
+  $ do earn(-3)
+  $ standing += 2
+  $ humanity += 1
+  It is the kind of lending that an old family can do, at the kind of rate that a young bank cannot. By the end of the week there are four houses in the city that owe Collis a courtesy, and one of them is crying with relief.
+* Buy, with everything the house has, the things that men are throwing away [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ lw.crash = "bought"
+    $ _mp_rank = 3
+  ?end
+  $ do earn(-6)
+  $ cunning_brutal += 1
+  $ secrecy -= 1
+  It is the oldest trick in the book. You have done it in Rome, in Florence, and in Paris in the year of the bread. It works because men are what they are. You do not enjoy it, and you do it well.
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
+<~
+
+# haven
+## The keys
+There is a brownstone in the east Sixties and a warehouse under the bridge in Brooklyn and a floor, in a tower that nobody wants, above the eightieth storey of a building that is still half empty. The agent has the keys to all three, and a patient face.
+?if coven_size() > 0
+  The family has already walked them. Each of them has an opinion, and the opinions are about what you would expect from a household that has lived in nine cities and has been burned out of four.
+?else
+  {_reader_name} has walked them already, with a clipboard, and has marked them in three colors.
+?end
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_2
+* The brownstone, with a garden and a cellar, for the family to be a household in [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ lw.haven = "brownstone"
+    $ _mp_rank = 1
+  ?end
+  $ do earn(-3)
+  $ humanity += 1
+  It has a kitchen at the back, and a long table, and a window on the garden. It is the first house in a century that you have wanted to come home to.
+* The warehouse, with a river at its back and a door that opens on the water [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ lw.haven = "warehouse"
+    $ _mp_rank = 2
+  ?end
+  $ do earn(-3)
+  $ secrecy += 1
+  It is ugly and enormous and nobody will ever ask what goes in. A family that wants to be left alone could do worse. It could not do much quieter.
+* The tower floor, high above everyone, with a lift that answers to you [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ lw.haven = "tower"
+    $ _mp_rank = 3
+  ?end
+  $ do earn(-5)
+  $ standing += 1
+  $ secrecy -= 1
+  It is a long way up. In the morning the sun comes up through glass the height of a house, and you pull the shutters with a feeling that is almost fond. At night it is the best view in the country, and it is all yours.
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_2
+-> :mp_more_2
+:mp_done_2
+<~
+
+# rival
+## The card
+The name on the card is Hollis, and the house that bears it has been in the city since the years after the Civil War. It is a coven. It is not of your line. It is the second oldest in the country, and the first to have noticed you.
+The dinner is in a room above a bank, with a table for twelve and a carpet like a lawn. There are four of them. They are very beautiful, and very courteous, and each one has a particular way of not looking at the others.
+$ _gh = gift_holder("shadows")
+?if _gh != ""
+  {name(_gh)} has gone ahead, as shadows do, and sits in the corner of the room unseen, and tells you afterwards that there were eleven in the building, not four.
+?end
+The head of the house is a woman called Maude Hollis, and she says, over the soup, that a city is not large enough for two families, and that she would like to know which she is dealing with.
+* Be courteous, and refuse nothing and promise nothing
+  $ lw.rival = "refused"
+  $ secrecy += 1
+  $ velati_regard += 1
+  It is the answer of a very old house to a very young one. She tilts her head, and decides that it is a refusal, and also that she will not be hurried.
+* Offer an arrangement: the city by halves, the markets by turns
+  $ lw.rival = "pact"
+  $ standing += 1
+  $ do earn(-2)
+  She laughs, once, as if it has surprised her. She says that the markets are a good place to begin. She says it will not be a long list.
+* Tell her that the house of Collis is the house of the sixth blood, and she may count the cost herself
+  $ lw.rival = "warned"
+  $ cunning_brutal += 2
+  $ standing += 2
+  $ secrecy -= 2
+  The room goes quiet, as a room does when a very old thing has been said aloud. Nobody moves. At the end of the table, one of the four, a young man with an unpleasant mouth, puts down his glass with great care.
+<~
+
+# dawn
+## The gray hour
+Dawn is a color that the towers do not allow. It comes up gray, and slowly, and the harbor takes it last.
+?if lw.rival == "warned"
+  You think of the room above the bank, and of eleven in a building that held four, and you feel, for the first time in a long while, that somebody else is playing the same game.
+?elif lw.rival == "pact"
+  You think of a table for twelve, and of a promise that nobody has written down, and you feel that it will hold for exactly as long as it suits them.
+?else
+  You think of a courteous woman who has decided to wait, and you think that she is the sort of person who is very good at it.
+?end
+{_reader_name} comes in with the first of the papers and says that, on the whole, it has been a very good week to be a quiet house.
+$ do rest()
+=> next

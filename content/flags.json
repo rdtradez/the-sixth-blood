@@ -6909,6 +6909,115 @@
       "book": "unchained",
       "default": "waited",
       "note": "Long Watch 3: internal marker that the 1960s decision was made"
+    },
+    "lw.crash": {
+      "kind": "enum",
+      "values": [
+        "sold",
+        "held",
+        "bought"
+      ],
+      "book": "unchained",
+      "default": "held",
+      "note": "Long Watch 4 (1987): what the house did on Black Monday (most committed pick wins, bought over held over sold)",
+      "major": true
+    },
+    "lw.haven": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "brownstone",
+        "warehouse",
+        "tower"
+      ],
+      "book": "unchained",
+      "default": "none",
+      "note": "Long Watch 4: the house's New York haven (most committed pick wins, tower over warehouse over brownstone)",
+      "major": true
+    },
+    "lw.rival": {
+      "kind": "enum",
+      "values": [
+        "refused",
+        "pact",
+        "warned"
+      ],
+      "book": "unchained",
+      "default": "refused",
+      "note": "Long Watch 4: what the hero told the Hollis house at dinner",
+      "major": true
+    },
+    "lw.card": {
+      "kind": "enum",
+      "values": [
+        "waited",
+        "alone",
+        "family"
+      ],
+      "book": "unchained",
+      "default": "waited",
+      "note": "Long Watch 5 (1990s): how he answered the Geneva letter",
+      "major": true
+    },
+    "lw.order": {
+      "kind": "enum",
+      "values": [
+        "refused",
+        "audience",
+        "family"
+      ],
+      "book": "unchained",
+      "default": "refused",
+      "note": "Long Watch 5: how he answered the Order's reply"
+    },
+    "lw.net": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "backed",
+        "house",
+        "wires"
+      ],
+      "book": "unchained",
+      "default": "none",
+      "note": "Long Watch 5: the machine (most committed pick wins, wires over house over backed)"
+    },
+    "lw.bailout": {
+      "kind": "enum",
+      "values": [
+        "stood",
+        "lent",
+        "let_fall"
+      ],
+      "book": "unchained",
+      "default": "stood",
+      "note": "Long Watch 6 (2000s): what the house did for the bank on Hudson Street",
+      "major": true
+    },
+    "lw.fall": {
+      "kind": "enum",
+      "values": [
+        "left",
+        "took",
+        "bought"
+      ],
+      "book": "unchained",
+      "default": "left",
+      "note": "Long Watch 6: what became of the Hollis house",
+      "major": true
+    },
+    "lw.ready": {
+      "kind": "enum",
+      "values": [
+        "quiet",
+        "told",
+        "alone",
+        "called"
+      ],
+      "book": "unchained",
+      "default": "quiet",
+      "note": "Long Watch 6: how he took the call from Geneva",
+      "major": true
     }
   }
 }

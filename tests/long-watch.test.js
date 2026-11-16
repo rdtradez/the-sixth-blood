@@ -1,4 +1,4 @@
-// Session 72: the Long Watch interludes (lw01 to lw03) at the start of Unchained. (This file says what is guaranteed, not what happens.)
+// Sessions 72 and 73: the Long Watch interludes (lw01 to lw06) at the start of Unchained. (This file says what is guaranteed, not what happens.)
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -48,10 +48,10 @@ test('the Long Watch chapters are unnumbered interludes at the start of Unchaine
   const game = new Game({ loader: real, storage: new MemoryStorage(), warn: () => {} });
   await game.init();
   const ids = dev.chapterList(game).filter((c) => c.id.startsWith('lw')).map((c) => c.id);
-  assert.deepEqual(ids, ['lw01', 'lw02', 'lw03']);
+  assert.deepEqual(ids, ['lw01', 'lw02', 'lw03', 'lw04', 'lw05', 'lw06']);
 });
 
-for (const chapter of ['lw01', 'lw02', 'lw03']) {
+for (const chapter of ['lw01', 'lw02', 'lw03', 'lw04', 'lw05', 'lw06']) {
   test(`${chapter} plays clean with and without a coven, fed and hungry, down every pick pattern`, async () => {
     for (const withCoven of [false, true]) {
       for (const hunger of [10, 90]) {
@@ -82,5 +82,30 @@ test('lw02 and lw03 register their flags with a quick start default', async () =
   for (const k of ['lw.supply', 'lw.door', 'lw.hill_1937', 'lw.shelter', 'lw.villa', 'lw.gate', 'lw.leads', 'lw.keep', 'lw.year']) {
     assert.equal(F[k].book, 'unchained');
     assert.ok('default' in F[k], k);
+  }
+});
+
+test('lw04 to lw06 register their flags with a quick start default', async () => {
+  const flags = JSON.parse((await import('node:fs')).readFileSync(join(root, 'content/flags.json'), 'utf8'));
+  const F = flags.flags ?? flags;
+  for (const k of ['lw.crash', 'lw.haven', 'lw.rival', 'lw.card', 'lw.order', 'lw.net', 'lw.bailout', 'lw.fall', 'lw.ready']) {
+    assert.equal(F[k].book, 'unchained');
+    assert.ok(F[k].values.includes(F[k].default), k);
+  }
+});
+
+test('lw04 and lw06 multi pick loops let several picks stand and the most committed win', async () => {
+  const all = (re) => (f) => { const i = f.choices.findIndex((c) => re.test(c.text)); return i >= 0 ? i : 0; };
+  const run = await play('lw04', { withCoven: true, pick: all(/Buy, with everything|tower floor|Tell her that the house/) });
+  assert.equal(run.vars['lw.crash'] === 'bought' || run.vars['lw.haven'] === 'tower' || run.vars['lw.rival'] === 'warned', true);
+  const end = await play('lw06', { withCoven: true, pick: all(/Take the house in|Tell the family/) });
+  assert.ok(['took', 'left', 'bought'].includes(end.vars['lw.fall']));
+  assert.ok(['quiet', 'told', 'alone', 'called'].includes(end.vars['lw.ready']));
+});
+
+test('lw04 to lw06 name the lead only when a coven stands behind them', async () => {
+  for (const ch of ['lw04', 'lw05', 'lw06']) {
+    assert.match((await play(ch)).text, /Dora Valer/);
+    assert.doesNotMatch((await play(ch, { withCoven: true })).text, /Dora Valer/);
   }
 });

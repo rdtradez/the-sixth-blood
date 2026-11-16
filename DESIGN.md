@@ -92,6 +92,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 63: Book Six chapters 3 and 4
 - [x] Session 64: Book Six chapters 5 and 6
 - [x] Session 70: Book Six chapters 17 and 18
+- [x] Session 73: Long Watch interludes, the 1980s to the 2000s
 - [x] Session 72: Long Watch interludes, 1937 to the 1960s (three chapters)
 - [x] Session 65: Book Six chapters 7 and 8
 - [x] Session 66: Book Six chapters 9 and 10
@@ -829,3 +830,14 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - New decision flags (`lw.` prefix, registered): `lw.supply`, `lw.door`, `lw.hill_1937`, `lw.shelter`, `lw.villa`, `lw.gate`, `lw.leads`, `lw.keep`, `lw.year`. `lw.supply`, `lw.shelter`, `lw.leads` and `lw.keep` are major. Multi pick choices (supply, shelter, leads) allow several picks.
 - Content: no new people, no engine change, schema or migration.
 - Tests: `tests/long-watch.test.js`. Plans are in `SPOILERS/long-watch.md`.
+
+### Session 73 notes (Long Watch interludes, the 1980s to the 2000s)
+
+- Chapters `lw04`, `lw05` and `lw06` are in `content/long-watch/`, about 5,800 words together, each with a chapter journal in `content/journal/` (`lw-1987.tsb`, `lw-1990s.tsb`, `lw-2000s.tsb`). They follow `lw03` in the Unchained manifest entry, which stays `"incomplete": true` (Book Seven's numbered chapters come after them).
+- Session 71 (Book Six chapters 19 and 20) is still on its own branch; this branch is stacked on session 72. The Long Watch reads no Book Six flags.
+- The hero stays awake: no sleeps, no `wake()` reads. Each chapter opens with the business lead's report (Dora Valer's when there is no coven), plays one night phase of two actions out of three places, then a dawn, and ends with `rest()` and `=> next`. `lw06` is the last interlude.
+- The coven is front and center: the lead runs the desk and the books, gift holders (merchants eye, shadows, memory, charm) stand beside the hero, and the family's New York haven is chosen in `lw04` and read again in `lw06`. Names come from `business_lead()` and `gift_holder()`; the coven-names check is clean for `content/long-watch`.
+- New decision flags (`lw.` prefix, registered): `lw.crash`, `lw.haven`, `lw.rival` (chapter 4), `lw.card`, `lw.order`, `lw.net` (chapter 5), `lw.bailout`, `lw.fall`, `lw.ready` (chapter 6). `lw.crash`, `lw.haven`, `lw.rival`, `lw.card`, `lw.bailout` and `lw.fall` are major. Multi pick loops (crash, haven, net) allow several picks and the most committed wins.
+- Content: no new people, no engine change, schema or migration. One small lore addition is flagged for the owner in `SPOILERS/long-watch.md`.
+- Tests: `tests/long-watch.test.js` now covers all six chapters. A Book Four test (`the coven house in chapter 3 can be built out`) failed intermittently in full runs and passed alone and on a clean rerun; it was not touched.
+- Plans are in `SPOILERS/long-watch.md`.
