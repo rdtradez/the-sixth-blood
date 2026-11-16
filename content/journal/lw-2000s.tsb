@@ -1,0 +1,26 @@
+// Velati journal for the Long Watch (session 73). Written when the chapter ends, on a copy of the state. No choices.
+@chapter lw_journal_2000s
+@title Velati Journal: The Last Ordinary Year
+@book unchained
+@version 1
+
+# start
+## Entry in the great book
+> Entered in the winter, by the reader of the third table, to be read by no one under the rank of keeper.
+There has been a great failing of banks in the western world. One house of long standing has come through it.
+?if lw.bailout == "lent"
+  It lent, openly, and took a bank for its pains. The street is afraid of it and has begun to say so in print.
+?elif lw.bailout == "stood"
+  It stood quietly behind a friend, and nobody was told. The friend is still open. The friend does not know whom to thank.
+?else
+  It let a friend fall, and bought the pieces. It is a thing that the Order has watched for two thousand years, and never learned to like.
+?end
+?if lw.fall == "took"
+  A rival house has been taken in. I did not think that I would live to write that sentence.
+?elif lw.fall == "bought"
+  A rival house has been bought, and scattered. It was done without malice. That is the worst of it.
+?else
+  A rival house has been let fall. Someone was watching, and did nothing, and I have written down who.
+?end
+The old man in Geneva has telephoned. I do not know what was said. I know that the whole Order has been awake since.
+=> endbook

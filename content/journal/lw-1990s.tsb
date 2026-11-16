@@ -1,0 +1,25 @@
+// Velati journal for the Long Watch (session 73). Written when the chapter ends, on a copy of the state. No choices.
+@chapter lw_journal_1990s
+@title Velati Journal: The Answer, Vienna
+@book unchained
+@version 1
+
+# start
+## Entry in the great book
+> Entered under the sign of the closed eye, by the reader of the third table.
+The Order has answered a letter that it received thirty years ago.
+?if lw.order == "audience"
+  The writer came in person, and sat at the long table, and answered three questions. The council has voted, nine to nothing, to write that down and to say no more about it.
+?elif lw.order == "family"
+  The writer sent his household, with a seal and a cake. The council was moved, and said so, and is ashamed of it.
+?else
+  The writer asked to be left alone. The council has noted it. The council has not agreed to anything.
+?end
+?if lw.card == "alone"
+  I am told that someone has been to a flat in Geneva and drunk from a cup that was not for him. I am told that the host was not at home.
+?elif lw.card == "family"
+  I am told that a household has watched a flat in Geneva for a week, and that a light was lit in it once. I am told that someone waved.
+?else
+  I am told that a letter from Geneva was refused, and has not been refused again.
+?end
+=> endbook

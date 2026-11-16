@@ -1,0 +1,186 @@
+// The Long Watch, chapter 5 (session 73). The 1990s: the card's sender, the Order's answer and the new machine.
+// The coven is the hero's arm: the business lead minds the house and the memory and shadows gift holders go with him. Names come from business_lead() and gift_holder().
+// Sets lw.card, lw.order and lw.net (a multi pick loop, most committed wins). One night phase of two actions out of three places, then dawn.
+// Reads lw.keep (who keeps the watch) and lw.rival (the Hollis house). Ends with rest() and => next, into the 2000s (lw06).
+@chapter lw05
+@title The Answer
+@book unchained
+@version 1
+
+# start
+## The post
+$ lw.card = "waited"
+$ lw.order = "refused"
+$ lw.net = "none"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+$ _fed = 0
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> post
+---
+?if must_feed()
+  ~> hunger
+  ---
+?end
+$ do phase("night", 2)
+It is the middle of the nineties, a Thursday in January, and the wire says three places. {cap(voice("hunger"))}. You have strength for two.
+-> night
+
+# post
+## Three envelopes
+The morning post, in the house, comes in a canvas bag with a leather strap, and has done since 1920. {_reader_name} lays it on the table in rows.
+Three envelopes are not like the others. One has a Swiss stamp, and a January postmark, and a hand that you know. One is cream, and old, and has the seal of a closed eye. One is from a young man in California, who writes very politely to say that he has a machine, and a company, and a question about money.
+?if lw.keep == "coven"
+  The cabinet in the back office has a third lock now, and a drawer of its own for this. {_reader_name} has put the Swiss envelope in it, as the rule is, and then, in a moment of weakness, has taken it out again.
+?elif lw.keep == "collis"
+  The records of the firm have a department now, and a young archivist, and a desk with a lamp. The department's note says only that the Swiss postmark matches seven earlier ones.
+?else
+  The keepers on the hill have sent the Swiss letter's twin, which came to them on the same day, from the same hand. It was not in their post for sixty years before.
+?end
+<~
+
+# hunger
+## The long supper
+$ _fed = 1
+* Draw from the cold store in the cellar
+  $ do feed("bank")
+  $ humanity += 1
+  It is a refrigerator and a clipboard. You have drunk from a gladiator's cup, and a duke's, and a priest's. It is a long way down to a clipboard.
+* Find someone in the night who wants to talk
+  $ do feed("donor")
+  $ do earn(-2)
+  She works in a shop that sells records, and she is very serious about a band you have never heard of. You come away with an opinion about it.
+* Take what the city offers
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  The streets are brighter than they were, and the cameras are everywhere. You are careful. It is a poor sort of hunting that has to be careful.
+<~
+
+# night
+## Three envelopes
+:night
+?if actions_left() == 2
+  The house is quiet, and the three envelopes lie in a row beside a cold cup, and a pair of reading glasses that you have no use for, and wear anyway.
+?else
+  It is very late, and a snowplow is going down the street, and somewhere a siren is going the other way.
+?end
+* The Swiss letter: a hand that has written to you before [once] ?if actions_left() > 0
+  ~> card
+  $ do act()
+* The seal of the closed eye: the Order's answer [once] ?if actions_left() > 0
+  ~> order
+  $ do act()
+* The young man in California: a machine, a company and a question about money [once] ?if actions_left() > 0
+  ~> net
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# card
+## January
+The letter is one line long. It says: "I am in Geneva. The door is open. Come alone if you can, and with company if you must." It is signed with an initial, and the initial is not a letter in any alphabet that you can name.
+$ _gh = gift_holder("memory")
+?if _gh != ""
+  {name(_gh)} turns the paper over, and over, and says that the hand is older than the paper, and that the ink is not ink.
+?end
+* Go alone, on the next flight, and knock on the door
+  $ lw.card = "alone"
+  $ cunning_brutal -= 1
+  $ secrecy -= 1
+  It is a flat in the old town, on the third floor, in a house with a green door. The door is open, as the letter said. The rooms are warm, and clean, and empty. On the table is a kettle, still hot, and two cups, and a card in the same hand: "I was here. I will not be long. Wait."
+* Go with the family, and take the building apart, quietly, from the outside first
+  $ lw.card = "family"
+  $ standing += 1
+  $ secrecy += 1
+  It takes a week, and a patient reading of the land registry, and two nights on a roof in the rain. Nobody comes or goes. On the last night a light goes on in the third floor, and goes out again after a minute, and someone, you are sure, has waved.
+* Do not go, and write back a polite refusal
+  $ lw.card = "waited"
+  $ humanity += 1
+  $ velati_regard += 1
+  The answer comes by return post, in the same hand: "As you like. I have waited longer than this." You are not sure whether you have been dismissed or forgiven.
+<~
+
+# order
+## The seal
+The cream envelope has been a long time on its way. It is an answer to a letter that you wrote in the sixties, and it is polite, and slow, and a good deal more candid than you expected.
+It says that the Order of the Watch has read your letter at six successive councils, and has not decided. It says that the old rule against interference is under review. It says that the Order has, for the first time in two thousand years, divided into those who think that the sixth blood is a thing to be feared, and those who think it is a thing to be kept.
+* Go to Vienna, and sit at the long table, and hear them out
+  $ lw.order = "audience"
+  $ velati_regard += 2
+  $ secrecy -= 1
+  They are nine, and they are old, and they ask you three questions and write down the answers. At the end of it a very old woman asks whether you have ever wanted the sixth blood to end. You say that you have wanted it every night for two thousand years. They write that down too.
+* Send the family, with a letter, and your seal, and stay at home
+  $ lw.order = "family"
+  $ standing += 1
+  $ velati_regard += 1
+  It is a delegation, and it is conducted like one. It comes home with a cake from a good Viennese bakery, and a list of seven names, and the impression that the Order is a great deal more frightened than it lets itself appear.
+* Tell them that the house of Collis has no wish to be known, and ask them to leave it be
+  $ lw.order = "refused"
+  $ secrecy += 2
+  $ velati_regard -= 1
+  The answer takes a year. It says that the Order has noted the request. It does not say that the Order will observe it.
+<~
+
+# net
+## The machine
+The young man in California is twenty six, and has very clean hands, and is the first person in the century to look at you across a desk with a kind of unselfconscious hope. He has a company that makes a way for computers to talk to one another. He thinks the world will run on it. He says that he needs two million dollars, and he is almost embarrassed to ask.
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Put in the money, in the name of a foundation, and ask for a seat on the board [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ lw.net = "backed"
+    $ _mp_rank = 1
+  ?end
+  $ do earn(-4)
+  $ standing += 1
+  It is a decision that a very old man makes about a very young one. It is wrong, very likely, in the particulars. It is right in the large, as the old bets are.
+* Open the house's books to the same machine, and put a family member at the keyboard [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ lw.net = "house"
+    $ _mp_rank = 2
+  ?end
+  $ do earn(2)
+  $ secrecy -= 1
+  The house has kept its ledgers in a hand for two thousand years. By the end of the year they are in a cabinet in a basement and a pair of discs in a drawer, and the family has taught itself, with great cheerfulness, to read a screen.
+* Buy the company that rents the wire, and a sheaf of the rest, and own the road [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ lw.net = "wires"
+    $ _mp_rank = 3
+  ?end
+  $ do earn(-7)
+  $ cunning_brutal += 1
+  $ standing += 2
+  $ secrecy -= 1
+  It is the oldest strategy in Rome: you do not buy the shop, you buy the road to it. Within five years every message on the continent will cross a bridge that you own. You do not read any of them. You do, every so often, think about it.
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
+<~
+
+# dawn
+## The gray hour
+Dawn finds you at the kitchen table, and {_reader_name} has put a cup of something hot in front of you, and a pair of reading glasses beside it.
+?if lw.rival == "warned"
+  There is a message on the machine from Maude Hollis. It is two words long, and it is a date.
+?elif lw.rival == "pact"
+  There is a message on the machine from Maude Hollis. It says that she is pleased with the new arrangement, and that she hopes you will come to dinner. It does not say that she is pleased with anything else.
+?else
+  There is a note from Maude Hollis on the table, and it says that the house has gone on being courteous, and that she hopes you have not mistaken it for something else.
+?end
+The decade is nearly over. The machines are in every room. The old things have stopped hiding, and have started, very slowly, to be forgotten. It is, you think, the most dangerous change that has ever been made to your kind.
+$ do rest()
+=> next
