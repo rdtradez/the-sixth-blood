@@ -1,0 +1,290 @@
+// Book Six, Chapter 5 (session 64). May 1924: the first crates, the Yards' supper, the lake shore dinner and Bronzeville.
+// Opens with the business lead's report, then one night phase of three actions out of four, then a short dawn with a card from the Loop.
+// The coven fronts it: the lead reports, the family guards the Institute, sits at the lake shore table and works in Bronzeville, and the bloodline shows in the Yards. Names are always checked with in_circle().
+// Reads b6.circle, b6.benefit, b6.rudek, b6.tallis, b6.rivals, b6.lamp. Sets b6.crates, b6.yards, b6.pell, b6.bronzeville and b6.invite.
+// Uses earn(), obtain(), meet(), discover(), chart(), coven_task(), has_gift(), gift_holder(). Ends with rest() and => next.
+@chapter b6c05
+@title What Came Out of the Sand
+@book relics-lost-god
+@version 1
+
+# start
+## The crates
+$ b6.crates = "guarded"
+$ b6.yards = "settled"
+$ b6.pell = "civil"
+$ b6.bronzeville = "none"
+$ b6.invite = "accepted"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> report
+---
+$ do phase("night", 3)
+It is the second week of May, and the lake wind has turned warm. There are four things that want doing, and strength for three. {cap(voice("hunger"))}.
+-> night
+
+# report
+?if _lead != ""
+  {_reader_name} is waiting at the long table with the ledger closed and a telegram open, which is not like {pg(_lead, "him", "her", "them")}. The Institute's first crates have come up the lake from Montreal. They are in the University's basement on the Midway, behind a door with three locks, and Dr. Whitcombe has not slept since Thursday.
+?else
+  Dora is waiting at the long table with a telegram open, and her tea untouched. The Institute's first crates have come up the lake from Montreal. They are in the University's basement on the Midway, behind a door with three locks, and Dr. Whitcombe has not slept since Thursday.
+?end
+?if b6.benefit == "funded"
+  The wire is addressed to you by name. It says *COME AND SEE WHAT YOUR SEASON BOUGHT STOP NORA WHITCOMBE*.
+?elif b6.benefit == "watched"
+  The wire is not to you. It is to the University's treasurer, and a clerk of the Exchange has copied it, as clerks do. It says only that the crates are in, and that she would like a guard.
+?else
+  The news is not to you at all. It came, as most things do, by way of a man who owes the Exchange a small favour, and he was not at all sure that he ought to have told it.
+?end
+?if b6.rivals == "guarded"
+  The guards on the clubs and the school have been quiet for three weeks, which is the longest quiet that Bronzeville has had since the war.
+?elif b6.rivals == "bought"
+  The leases are all in order. Nobody has raised a rent, and nobody has asked who owns the buildings, which is the beginning of a certain kind of peace.
+?else
+  The leases are still a trouble. It is a very civil trouble, and it goes on being civil.
+?end
+?if b6.lamp == "told"
+  Cordelia has been at the door twice, since the night on the breakwater, to ask if the light has been seen again. It has not. She does not say that this is better.
+?elif b6.lamp == "watched"
+  The light has not been seen again. You have gone out to the breakwater three times to be sure, and you have not told anyone.
+?end
+?if b6.rudek == "paid" or b6.rudek == "bargained"
+  A card has come from the Yards, with a brass edge. It asks for the honour of Mr. Collins's company at supper, and does not name a night.
+?else
+  A card has come from the Yards, in a hand that has had to be taught to be polite. It asks for the honour of Mr. Collins's company at supper, and says that a place has been laid.
+?end
+<~
+
+# night
+## The second week
+:night
+?if actions_left() == 3
+  The night is young, and warm, and smells of coal smoke and cut grass.
+?elif actions_left() == 2
+  The elevated has gone quiet, and a band is playing somewhere, very far off, a tune that you almost know.
+?else
+  It is very late, and the cats have the alleys, and you have strength for a single thing more.
+?end
+* Go to the Midway, and see what has come up out of the sand [once] ?if actions_left() > 0
+  ~> crates
+  $ do act()
+* Take supper at the Yards, as the card asks [once] ?if actions_left() > 0
+  ~> yards
+  $ do act()
+* Dine with Mrs. Pell, on the Gold Coast [once] ?if actions_left() > 0
+  ~> pell
+  $ do act()
+* Go to Bronzeville, and call on Cordelia Moten [once] ?if actions_left() > 0
+  ~> bronzeville
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# crates
+## The basement on the Midway
+$ do chart("chicago.goldcoast")
+$ do discover("the_crates")
+?if b6.benefit == "funded"
+  Dr. Whitcombe meets you at the foot of the basement stair with a lantern in one hand and a tin of cold cocoa in the other, and does not seem to know that she is holding either.
+?else
+  You are not expected. You come in by the coal door, in the dark, with a half closed mind, and the night watchman looks up from his newspaper, and then, with a small puzzled frown, does not.
+  $ do meet("whitcombe")
+  Dr. Whitcombe is at the far end of the basement with her sleeves rolled, and a lantern, and a crowbar. She looks up and sees a man in a good coat whom she did not let in. She is a practical woman. She says, "Well, you had better hold the lantern."
+?end
+?if gift_holder("charm") != "" and b6.benefit != "funded"
+  {name(gift_holder("charm"))} has come with you, and is, at the watchman's desk, being a very interesting person to talk to.
+?end
+There are nine crates. Eight of them are what the dig has always sent, in straw: potsherds, cylinder seals, a broken tablet of the kind that she calls a shopping list. The ninth is a long low box of cedar, bound in copper strips, and it was not packed by anyone who works for the Institute. It was packed by someone who wanted it kept very dry, and very still, and a very long way from the sun.
+"It came out of a floor," says Dr. Whitcombe. "Four feet under the temple floor, under a slab. My foreman would not touch it. He sent for a priest. We have not got one." She puts the crowbar in. "I am going to see what I have got."
+?if has_gift("old_blood")
+  The old blood in you has been awake since the stair. It is a thing like a held note, low and level, and as the lid comes up it rises.
+?else
+  Something in the blood stirs as the lid lifts, a thing like a held note, low and level.
+?end
+It is a disc of black stone, as broad as a dinner plate and as thick as a hand, polished like water. There are six rays cut round its edge, in a very fine line, and five are bare. The sixth is filled with a red glaze that is not paint, and has not faded in three thousand years. In the centre is a face, with a cap of leaves, and the eyes shut.
+Dr. Whitcombe says, very quietly, a word in a dead language. Then she says, in English, that she does not understand it, and that she is, for the first time in her life, rather afraid of a thing she has dug up.
+:the_disc
+* Help her open it fully, and let her read it by the lantern
+  $ b6.crates = "opened"
+  $ humanity += 1
+  $ standing += 1
+  She reads it aloud, a line at a time, off the rim, and it is not what either of you expected. It is not a curse, and it is not a king's name. It is a list of houses. There are six. Five have a word for them, and the sixth has a blank, left on purpose, with a mark beside it that she says is the sign for *waiting*. She sits down on a crate. "It was not for us," she says. "It was a room that was kept empty. Who keeps a room empty for three thousand years?"
+  $ do meet("whitcombe")
+* Take it, quietly, and leave her the eight crates and a cheque
+  $ b6.crates = "taken"
+  $ do earn(-2)
+  $ cunning_brutal += 1
+  $ secrecy -= 1
+  $ do obtain("disc_of_rays")
+  It is not at all difficult. She is a woman who has seen a great many things go missing from the sand, and she lets herself be persuaded, with a short bitter look, that this is a thing which belongs elsewhere. She says, "Do you know what it is?" You say that you do not. It is the first time that you have lied to her, and you are not sure that she believes it.
+* Say that it should go on a shelf and be seen, and set a guard on the room
+  $ b6.crates = "guarded"
+  $ standing += 1
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active" and not on_mission("fiammetta")
+    $ do coven_task("fiammetta", "guard")
+    Fiammetta takes the basement, and the roof, and the long dull corridor between, and puts a stick in the doorway as a gauge of who comes in and out. She says that it is the first honest work she has been given in a century.
+  ?elif in_circle("thibault") and member("thibault", "status") == "active" and not on_mission("thibault")
+    $ do coven_task("thibault", "guard")
+    Thibault has taken the Midway. He has a friend among the porters, and a friend among the professors, and, he says, a friend among the friends.
+  ?else
+    Dora finds six men from the keepers' lodge, who have never guarded anything of the kind, and are put in the University's own livery, and are very solemn about it.
+  ?end
+  Dr. Whitcombe is relieved, and a little suspicious. It is, she says, the first time anyone has put a guard on a thing for the sake of its being looked at.
+<~
+
+# yards
+## Supper at the Yards
+$ do chart("chicago.yards")
+$ do meet("rudek")
+The house of the Yards is built over the killing floor, in a long brick range with an iron balcony, and it has a dining room with a lamp over every place and not a single window. Mr. Rudek sits at the head of a very long table. He is vast. He has the arms of a man who lifted carcasses for thirty years before he died, and the stillness of a man who has lifted none since, and he wears a butcher's apron over his waistcoat, quite plainly, as a priest would wear a stole. At his left there is an empty chair.
+He does not rise. He says, in a slow, gravelly voice, with a trace of somewhere in the east, that he is glad to see Mr. Collins, and that he is told that Mr. Collins has been to see his son.
+?if b6.tallis == "held"
+  He does not say it. He looks at the ceiling. It is, you know, the direction of the keeper cellar, and the man in the gray overcoat.
+?end
+?if b6.rudek == "paid"
+  The compliment has been remembered. It is on the table, in the form of a very good side of beef, with a card.
+?elif b6.rudek == "warned"
+  The warning has been remembered too. There are eight men along the wall, none of whom has anything to do.
+?end
+"I am a plain man," says Mr. Rudek. "There was a stranger in my gallery, in my house, on my night, and you took him out from under my roof and did not ask. I was not insulted. I was *shown*. I would like to know what it was that I was shown."
+:the_supper
+* Settle it, and say that the Exchange will carry the Yards' paper for the season, at no interest
+  $ b6.yards = "settled"
+  $ do earn(-2)
+  $ standing += 1
+  He eats three bites of nothing, and puts down his fork. He says that it is a decent offer. He says it is a better one than the last man made, who was a banker, and did not live. It is, you gather, the nearest thing the Yards have to a handshake.
+* Stand, and let him see what the sixth line weighs
+  $ b6.yards = "stood"
+  $ standing += 2
+  $ secrecy -= 1
+  $ cunning_brutal += 1
+  He reaches across the table, quite slowly, to take your wrist, in the way of the old houses, and see what you are made of. He is a great deal stronger than he looks. You let him. And then he is not, quite, as strong as that.
+  ?if gift_holder("strength") != "" and b6.circle == "all"
+    {name(gift_holder("strength"))} is standing at your shoulder. {pg(gift_holder("strength"), "He", "She", "They")} {pg(gift_holder("strength"), "does", "does", "do")} not move. The long table creaks, by a hair, as if something had been added to it. The eight men along the wall step back, though nobody has told them to.
+  ?elif has_gift("old_blood")
+    The old blood goes up in you like a drawn bow. It is a very old strength, and it was never meant to be tried on a butcher. The table's iron fittings sing. A glass breaks, down at the far end. His great hand begins, slowly, and for the first time in forty years, to give.
+  ?else
+    You hold. It is not easy. The great hand is a vice. But it is not the strength that wins, in the end, so much as the plain fact that you are not afraid of it, and have not the least intention of being.
+  ?end
+  He lets go. He looks at his hand, and then at you, and he laughs, a short, astonished bark, and sits back in the chair. "Well," he says. "That is what the Lake Shore has been whispering about. I had thought it a fairy tale."
+* Trade him what you know of the stranger, and ask for his friendship in return
+  $ b6.yards = "traded"
+  $ cunning_brutal += 1
+  $ standing += 1
+  $ secrecy -= 1
+  He listens like a man hearing a long sum. He asks four questions, all of them good. At the end, he says that he did not know that the man did not eat, and that it changes a great deal, and that his house will owe you for it. He says it flatly, as a debt, in the way of a man who has paid every debt he ever owed, and has made a few enemies by it.
+<~
+
+# pell
+## The lake shore table
+$ do chart("chicago.goldcoast")
+$ do meet("pell")
+Mrs. Pell's house is a great pale limestone block on the Lake Shore Drive, with a ballroom that has not been danced in since the war, and a dining room with twenty chairs, in which, tonight, she has laid three. She is very small. She is in gray silk, with a rope of pearls, and a diamond brooch the size of a thumbnail, and she pours the soup herself, with the manner of an aunt at a christening.
+She speaks of the hospitals, and the symphony, and the weather. She speaks, at length, of the Orchestra Hall benefit. Then she says, in the same voice, with the soup, that she has been reading a book about an old family of Venice that did not survive the Napoleonic wars, and that the author thinks it a pity that families so often do not.
+She says that the lake shore has had no young for forty years. It is, she says, a very old house, and a very tired one. It has a great deal of money, and a great many manners, and nobody to leave either to.
+:the_dinner
+* Say that the Exchange would be glad to be a friend of the lake shore, and bring the family to her table
+  ?if coven_size() > 0
+    $ b6.pell = "allied"
+    $ standing += 2
+    $ humanity += 1
+    ?if _lead != ""
+      You send for {_reader_name}, and the others, and they come in a long quiet line to the pale house, and are each of them given a chair. It is a very large thing, to be given a chair in that house. Mrs. Pell looks at each in turn. She does not say what she thinks. She says that she has not seen a family at that table in forty years, and that she had forgotten how much room it takes.
+    ?else
+      The family comes to the pale house, one by one, and is given a chair, and the great dull table fills.
+    ?end
+  ?else
+    $ b6.pell = "allied"
+    $ standing += 1
+    You say that you will bring the family, as soon as there is one. She nods, with great gravity, and says that she will have the chairs dusted.
+  ?end
+* Be civil, and take nothing, and promise nothing
+  $ b6.pell = "civil"
+  $ standing += 1
+  $ cunning_brutal += 1
+  It is a very good dinner, and a very long one, and at the end of it you are no closer, and not much further, than at the soup. She is delighted. She has been out-manoeuvred by a master, and it is the highest compliment that she knows.
+* Say that the Exchange is nobody's heir, and has no wish to be anybody's friend at a table
+  $ b6.pell = "refused"
+  $ cunning_brutal += 1
+  $ standing -= 1
+  She lays down her spoon, very precisely. She says that it is a pity, and that she had hoped for better, and that it is of course quite within your rights. The footman comes in, soundlessly, with your coat. It is, you think, the first time that you have been shown out of a house in Chicago with such perfect politeness.
+<~
+
+# bronzeville
+## Cordelia's church
+$ do chart("chicago.bronzeville")
+$ do meet("cordelia")
+The church is a brick one, with a tin roof, on a side street off State, and it has a hall behind it that was a stable until the winter of nineteen eighteen. Cordelia Moten is standing in the doorway in her good hat, with a ledger under one arm and a ring of keys at her belt. She has taught the school there for eleven years. She has the quiet, precise cordiality of a woman who has been asked for a great deal, by a great many people, and gives it, and keeps count.
+She does not ask for anything. She walks you round the hall, instead, and shows you the roof, and the stove, and the forty small desks, and the shelf of books that she has collected out of other people's attics. She stops by the window. "It is a matter of three things," she says. "I do not say that you must."
+:the_hall
+* Pay for the hall to be mended, and the school to have a proper roof [once]
+  ?if b6.bronzeville == "none"
+    $ b6.bronzeville = "hall"
+  ?end
+  $ do earn(-1)
+  $ standing += 1
+  $ humanity += 1
+  The roof is mended in a week, by a firm that is told to charge the Exchange and does so, with a sort of cheerful dread. The children do not know whose money it is. Cordelia does, and is a little proud of it, and a little cross about it, and thanks you in exactly the proportion that it deserves.
+  -> :the_hall
+* Set up a clinic in the back room, with a doctor, and the family's help [once]
+  ?if b6.bronzeville != "school"
+    $ b6.bronzeville = "clinic"
+  ?end
+  $ do earn(-2)
+  $ humanity += 2
+  ?if gift_holder("healing") != ""
+    {name(gift_holder("healing"))} comes on the first night, in an apron, and takes a child's feverish hand, and holds it a minute, and gives it back well. The mother does not say a word. She sits down, on a bench, and weeps, quite quietly, into her coat. Cordelia looks at {pg(gift_holder("healing"), "him", "her", "them")} for a long moment. She does not ask. She says that the clinic will have a night nurse, and that nobody will ask any questions about her either.
+  ?else
+    A doctor from the South Side is found, who has been looking for exactly such a room for four years and cannot believe his luck. Cordelia stands with her arms folded and watches him unpack, as a hen watches a fox who has brought flowers.
+  ?end
+  -> :the_hall
+* Endow the school, so that no child in it will ever be sent away for a fee [once]
+  $ b6.bronzeville = "school"
+  $ do earn(-3)
+  $ standing += 1
+  $ humanity += 1
+  $ collesanto += 1
+  It is a large sum, and a quiet one, and it is put into a trust that nobody on the South Side can touch. Cordelia reads the paper twice. She puts it away in the ledger. She says that she was told, once, by a man in the church, that a thing given in the dark is the only gift that does not owe. She says it is the first time that she has believed it.
+  -> :the_hall
+* That is enough for tonight ?if b6.bronzeville != "none"
+  <~
+-> :the_hall
+
+# dawn
+## The card from the Loop
+It is the grey before the day, and the house is going to sleep around you, as a ship does at anchor. {cap(voice("hunger"))}. You are at the door of the cellar when the bell goes, once, very correctly, and the night porter comes in with a tray. On the tray is a plain white card with a gilt edge.
+It is from the Calloway Room, and in a very upright hand it says that the houses of Chicago will sit together on Thursday night, at eleven, under Miss Calloway's roof. It says that a seat has been laid for the sixth. It says that Miss Calloway would be obliged if Mr. Collins would bring nothing that cannot be left at the door.
+?if b6.crates == "opened" or b6.crates == "taken"
+  There is a postscript, in a different hand, small and hurried. It says *They know about the disc. I did not tell them. N.W.*
+?end
+Under the card there is a sheet of ruled music paper, in a very small, neat, accurate hand, with the figure written out. It has a seventh note, and a half step flat, and a mark beside it that you do not know.
+:the_answer
+* Send word that Mr. Collins will come
+  $ b6.invite = "accepted"
+  $ standing += 1
+  It is an ordinary answer, and a courteous one. It is sent with a boy and a nickel. You have the feeling, as you lie down, that it is the answer that was expected, and that this is not a good sign.
+* Send word that the family will come with him, since the family is not a thing that can be left at the door
+  $ b6.invite = "family"
+  $ standing += 2
+  $ secrecy -= 1
+  ?if coven_size() > 0
+    It is sent with a coachman and a very long silence. By the time the house has gone to sleep, you can hear, through the floor, the family begin to dress.
+  ?else
+    You do not, as yet, have a family to send. You send, instead, the keepers' lodge and a stout hired cab. It is, as an answer, a good deal more defiant than it sounds.
+  ?end
+* Send word that Mr. Collins will see the Loop when the Loop has come to see him
+  $ b6.invite = "declined"
+  $ cunning_brutal += 1
+  $ standing -= 1
+  The messenger is a long time going. You can feel, as you lie down, the whole of the city turn, slowly, to look.
+$ do rest()
+=> next

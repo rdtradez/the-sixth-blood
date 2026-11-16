@@ -1098,6 +1098,23 @@
           "notes": [
             "blood"
           ]
+        },
+        {
+          "id": "b6c05",
+          "file": "relics-lost-god/ch05.tsb",
+          "title": "What Came Out of the Sand",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c06",
+          "file": "relics-lost-god/ch06.tsb",
+          "title": "The Calloway Room",
+          "notes": [
+            "blood",
+            "violence"
+          ]
         }
       ],
       "incomplete": true

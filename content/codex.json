@@ -1153,6 +1153,24 @@
       "title": "The Oriental Institute",
       "book": "relics-lost-god",
       "text": "The University of Chicago's house of the ancient East, which has dug in Mesopotamia since the war. It is short of money for the seventh season."
+    },
+    "the_crates": {
+      "category": "lore",
+      "title": "The Ninth Crate",
+      "book": "relics-lost-god",
+      "text": "A cedar box bound in copper that came out of a floor under a temple. In it lay a black stone disc with six rays, five bare and one filled with red glaze, and a list of six houses with the sixth left blank."
+    },
+    "the_parley": {
+      "category": "places",
+      "title": "The Parley",
+      "book": "relics-lost-god",
+      "text": "The meeting of the houses of Chicago at the Calloway Room, held when a sixth line came to the city."
+    },
+    "the_cantor": {
+      "category": "lore",
+      "title": "The Cantor",
+      "book": "relics-lost-god",
+      "text": "A man with a gold hand who sings a six note figure and a seventh that nobody has sung, to keep a lamp lit."
     }
   }
 }

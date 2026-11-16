@@ -620,6 +620,12 @@
       "name": "Nell Pardoe",
       "title": "A bonnet maker of Bethnal Green",
       "bio": "Twenty six, white lipped and clear eyed, bled for a year by a gentle hand. She minds her manners even when dying. Her sister Ada lives in Bethnal Green."
+    },
+    "sorrel": {
+      "gender": "m",
+      "name": "Mr. Sorrel",
+      "title": "The cantor",
+      "bio": "A mild, courteous man in a long black coat who sings one old song every Tuesday and wears gloves on a hand that is not flesh."
     }
   }
 }

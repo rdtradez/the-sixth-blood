@@ -56,6 +56,10 @@
     "ray_coin": {
       "book": "relics-lost-god",
       "name": "A coin of the six rays"
+    },
+    "disc_of_rays": {
+      "book": "relics-lost-god",
+      "name": "A black stone disc of six rays"
     }
   }
 }
