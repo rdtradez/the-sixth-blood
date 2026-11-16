@@ -64,3 +64,11 @@ LORE ADDITION TO APPROVE: Veda, a woman of the hero's own (sixth) house, put int
 
 Hooks left: the east and the ship from New York; Crane going; what Veda is wanted for; the Institute stair (twelve more steps); Ruth Calloway's table; Tilly's place; the second light on the lake.
 
+
+## Chapters 15 and 16 (session 69)
+
+Ch 15, "The Ship on Thursday", October 1924. Opening: the lead's report (trunks, the houses' civility by `b6.callers`), a morning with Veda (housing by `b6.warm`). Night, three of four: who keeps the house (`b6.regent`: the lead with the seal, Mr. Ames, Dora Valer); Veda's memory of the sixth house, a white table in a garden by the sea and a seventh chair set apart (`b6.memory`: write it down, the lamp hall, let her be); the family's trades before sailing, a loop (`b6.leave`: school, tithes, guard; most committed wins guard over exchange over school); who sails (`b6.east`: all, few, alone). Dawn: the car to the train.
+
+Ch 16, "The Twentieth Century", Thursday. Fixed: LaSalle Street platform with the houses seeing him off (`b6.farewell`: words, the seal left with Mrs. Pell, none); pier fifty-nine; a hunger scene if needed; Tallis aboard in second class, saying his master is the thing the god keeps for a lamp, not dead, only not woken, and that the east chair is its last (`b6.gray`: hear, press, turn out, watch); the stern at three, Veda wanting something true (`b6.vow`: promise to bring her back, ask what she wants, say you do not know). Dawn: the purser's list has a Mr. C. Hale, first class, booked by wire from London and paid in advance.
+
+Hooks left: who Mr. C. Hale is (Cassian's alias "C." from the 1916 ledger); what the east chair holds and its keeper's little time; the white table; the tenants, six, the sixth unfound; Josiah and Mrs. Pell holding Chicago; Whitcombe's twelve more steps; the family's hold on the house.

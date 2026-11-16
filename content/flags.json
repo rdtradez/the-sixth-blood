@@ -6634,6 +6634,88 @@
       "book": "relics-lost-god",
       "default": "watch",
       "note": "Chapter 13: what was done about the Institute door"
+    },
+    "b6.regent": {
+      "kind": "enum",
+      "values": [
+        "lead",
+        "ames",
+        "dora"
+      ],
+      "book": "relics-lost-god",
+      "default": "lead",
+      "note": "Chapter 15: who keeps the house while he is away",
+      "major": true
+    },
+    "b6.memory": {
+      "kind": "enum",
+      "values": [
+        "ask",
+        "lamp",
+        "rest"
+      ],
+      "book": "relics-lost-god",
+      "default": "rest",
+      "note": "Chapter 15: how Veda was helped to remember the sixth house"
+    },
+    "b6.leave": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "school",
+        "exchange",
+        "guard"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 15: what the family's trades were set to before sailing (most committed wins guard over exchange over school)"
+    },
+    "b6.east": {
+      "kind": "enum",
+      "values": [
+        "all",
+        "few",
+        "alone"
+      ],
+      "book": "relics-lost-god",
+      "default": "alone",
+      "note": "Chapter 15: who sails east with him",
+      "major": true
+    },
+    "b6.farewell": {
+      "kind": "enum",
+      "values": [
+        "words",
+        "seal",
+        "none"
+      ],
+      "book": "relics-lost-god",
+      "default": "words",
+      "note": "Chapter 16: how he left the city's houses at the platform"
+    },
+    "b6.gray": {
+      "kind": "enum",
+      "values": [
+        "hear",
+        "press",
+        "turn",
+        "watch"
+      ],
+      "book": "relics-lost-god",
+      "default": "hear",
+      "note": "Chapter 16: what was done about the gray passenger",
+      "major": true
+    },
+    "b6.vow": {
+      "kind": "enum",
+      "values": [
+        "promise",
+        "ask",
+        "plain"
+      ],
+      "book": "relics-lost-god",
+      "default": "ask",
+      "note": "Chapter 16: what Veda was told on the stern"
     }
   }
 }
