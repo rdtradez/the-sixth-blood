@@ -6807,6 +6807,108 @@
       "book": "relics-lost-god",
       "default": "train",
       "note": "Chapter 18: the road taken east from Cherbourg"
+    },
+    "lw.supply": {
+      "kind": "enum",
+      "values": [
+        "public",
+        "paid",
+        "private"
+      ],
+      "book": "unchained",
+      "default": "public",
+      "note": "Long Watch 1 (1937): how the house took part in the blood bank (most committed pick wins, private over paid over public)",
+      "major": true
+    },
+    "lw.door": {
+      "kind": "enum",
+      "values": [
+        "self",
+        "lead",
+        "gift"
+      ],
+      "book": "unchained",
+      "default": "self",
+      "note": "Long Watch 1: who held the bank's public door"
+    },
+    "lw.hill_1937": {
+      "kind": "enum",
+      "values": [
+        "built",
+        "sent",
+        "waited"
+      ],
+      "book": "unchained",
+      "default": "waited",
+      "note": "Long Watch 1: the village letter of 1937"
+    },
+    "lw.shelter": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "few",
+        "many",
+        "all"
+      ],
+      "book": "unchained",
+      "default": "none",
+      "note": "Long Watch 2 (1943): how many of the hidden families the hero helped (counted by picks)",
+      "major": true
+    },
+    "lw.villa": {
+      "kind": "enum",
+      "values": [
+        "faced",
+        "outwitted",
+        "paid"
+      ],
+      "book": "unchained",
+      "default": "faced",
+      "note": "Long Watch 2: how the officer in the manor was moved on"
+    },
+    "lw.gate": {
+      "kind": "enum",
+      "values": [
+        "self",
+        "family"
+      ],
+      "book": "unchained",
+      "default": "self",
+      "note": "Long Watch 2: who stood the gate"
+    },
+    "lw.leads": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "one",
+        "two"
+      ],
+      "book": "unchained",
+      "default": "none",
+      "note": "Long Watch 3 (the 1960s): how many of three leads on the originals he followed",
+      "major": true
+    },
+    "lw.keep": {
+      "kind": "enum",
+      "values": [
+        "coven",
+        "collis",
+        "valer"
+      ],
+      "book": "unchained",
+      "default": "coven",
+      "note": "Long Watch 3: who keeps the watch on the originals' trail",
+      "major": true
+    },
+    "lw.year": {
+      "kind": "enum",
+      "values": [
+        "waited",
+        "kept"
+      ],
+      "book": "unchained",
+      "default": "waited",
+      "note": "Long Watch 3: internal marker that the 1960s decision was made"
     }
   }
 }

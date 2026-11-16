@@ -1,0 +1,26 @@
+// Velati journal for the Long Watch, the 1960s (session 72). Written when chapter lw03 ends, on a copy of the state. No choices.
+@chapter lw_journal_1960s
+@title Velati Journal: The Reading Room, Vienna
+@book unchained
+@version 1
+
+# start
+## Entry in the great book, in the hand of the reader of the third table
+> Entered under the sign of the closed eye, to be read by no one under the rank of keeper.
+There has been a visitor to the reading room, and I have written the whole of it down, as the rule requires, and a good deal that the rule does not.
+?if lw.keep == "valer"
+  A family of keepers in a village in the hills has taken up the reading of the old letters, and sends us copies. They are very good. They are, I think, better than ours.
+?elif lw.keep == "collis"
+  A company in the West has begun to buy and file records, of every kind, on a scale that has no precedent. I have told the Order that it is a trading house. I do not think that it is a trading house.
+?else
+  A household of long standing is keeping the old files, and has begun to send us notes. They are very careful notes. I have the impression that the writers have been at it longer than we have.
+?end
+?if lw.leads == "two"
+  I am told that the visitor followed two leads of three, and left the third on the desk. I am told that this was deliberate.
+?elif lw.leads == "one"
+  I am told that the visitor followed one lead of three, and that the others will wait.
+?else
+  I am told that the visitor followed none of the three. I am not sure whether that is wisdom or the opposite.
+?end
+It is the oldest instruction in the book that we do not interfere. I have kept it for forty years. I am beginning to think that the rule was written for easier times.
+=> endbook

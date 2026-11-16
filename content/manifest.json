@@ -1230,7 +1230,44 @@
           "collesanto": 82
         }
       },
-      "chapters": []
+      "chapters": [
+        {
+          "id": "lw01",
+          "interlude": true,
+          "file": "long-watch/lw01.tsb",
+          "title": "The Bank on Harrison Street",
+          "notes": [
+            "blood"
+          ],
+          "journal": "journal/lw-1937.tsb",
+          "journalTitle": "From the daybook of a night clerk"
+        },
+        {
+          "id": "lw02",
+          "interlude": true,
+          "file": "long-watch/lw02.tsb",
+          "title": "The Valley at War",
+          "notes": [
+            "war",
+            "violence",
+            "grief"
+          ],
+          "journal": "journal/lw-1943.tsb",
+          "journalTitle": "Report from a watcher on the ridge"
+        },
+        {
+          "id": "lw03",
+          "interlude": true,
+          "file": "long-watch/lw03.tsb",
+          "title": "The Leads",
+          "notes": [
+            "blood"
+          ],
+          "journal": "journal/lw-1960s.tsb",
+          "journalTitle": "Entry in the great book"
+        }
+      ],
+      "incomplete": true
     },
     {
       "id": "engine-test",

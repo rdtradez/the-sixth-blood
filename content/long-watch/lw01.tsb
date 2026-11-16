@@ -1,0 +1,210 @@
+// The Long Watch, chapter 1 (session 72). Chicago, 1937: the first blood bank, and the first year he has stayed awake.
+// Opens with the business lead's report (or the keepers' clerk, if there is no coven), a village letter, one night phase of two actions out of three places, then dawn.
+// The coven fronts it: the lead runs the bank's books, a gift holder works the night door. Names are checked with in_circle() or come from business_lead() and gift_holder().
+// Sets lw.supply (a multi pick loop, most committed wins), lw.door and lw.hill_1937. Reads wealth only. Ends with rest() and => next.
+@chapter lw01
+@title The Bank on Harrison Street
+@book unchained
+@version 1
+
+# start
+## The cold room
+$ lw.supply = "public"
+$ lw.door = "self"
+$ lw.hill_1937 = "waited"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+$ _fed = 0
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> report
+---
+~> hill_letter
+---
+?if must_feed()
+  ~> hunger
+  ---
+?end
+$ do phase("night", 2)
+It is the spring of 1937, and you have not lain down. Nothing has told you to. The nights have simply gone on, one after another, in a way that you are still learning to carry, and the city has gone on with them, through a crash and a repeal and a very long hard winter. {cap(voice("hunger"))}. Three places want you tonight, and you have strength for two.
+-> night
+
+# report
+{_reader_name} meets you at the foot of the stair with a lamp that does not need to be carried, and a folder that does.
+The folder is about blood. It is a new idea, and the city has taken to it the way it takes to everything, as a business. At the county hospital, on the West Side, a doctor has begun to keep blood in a cold room, drawn from donors, kept in bottles, to be given to strangers days afterward, and the newspapers have found a word for the room. They call it a bank. There are twelve donors a night on the long bench, and they are paid, and they are glad of the money, and nobody has yet asked whether the arrangement is sound.
+{_reader_name} has asked. The answer is in the folder, in a column of figures and a drawing of the cold room's door. It is the plainest thing in the world, and it is the end of a problem that your kind has had since the First Night: blood that comes in a bottle, with a label, and does not look back at you.
+?if _lead != ""
+  The family has been watching it for a year. {_reader_name} says that it is the first thing in two thousand years that the house has been afraid of and glad of at the same time.
+?else
+  The keepers have been watching it for a year. {_reader_name} says that the old women of the hill would call it a miracle, if anyone were fool enough to tell them what it is for.
+?end
+<~
+
+# hill_letter
+## A letter from the hill
+The letter that came with the folder is on thin paper, in a stamped envelope with a fascist eagle on the corner that someone has tried to cover with a postage stamp from a better year. The village is well. The village is watched. The letter says so in the careful way of people who know that letters are opened, and then, in a different hand, at the bottom, in the dialect that the censor will not read, it says what is needed.
+:the_hill
+* Pay for hidden cellars under the old houses, dug by the village's own hands ?if can_build("shelters")
+  $ lw.hill_1937 = "built"
+  $ do build("shelters")
+  $ secrecy += 1
+  It is a strange thing to be buying with a war not yet in sight. You are told that the work will be done by night, in the dead of the year, by men who will be paid in wine and told it is for the vines. You do not think that the vines will mind.
+* Pay for a lamp on every lane and the church tower, so that the hill is a place that people look at ?if can_build("lamps")
+  $ lw.hill_1937 = "built"
+  $ do build("lamps")
+  $ humanity += 1
+  It is the opposite of hiding, and you have never been quite sure whether that makes it the cleverer thing. The hill, in the evenings, will be the brightest place in forty miles, and nobody who looks up at it will think that anything is kept there.
+* Send coin to the hill, and let the village choose ?if wealth > 0
+  $ lw.hill_1937 = "sent"
+  $ do send_home(30)
+  It is the lazy kindness. The village will spend it on whatever it most lacks, which will not be what you would have guessed. There will be a letter in the autumn that tells you what it was.
+* Write that you have read the letter, and that you will think of it
+  $ lw.hill_1937 = "waited"
+  It is not a refusal. The keeper who reads it out in the kitchen will hear the difference, and so, you think, will the censor.
+<~
+
+# hunger
+## The bottle
+$ _fed = 1
+You have not fed in longer than you should, and the cold room is on {_reader_name}'s folder, in plain ink, with the key marked.
+* Go to the cold room and take what the ledger can spare
+  $ do feed("bank")
+  $ humanity += 1
+  It is a clerk's blood, or a stevedore's, or a boy's from the stockyards who wanted to see a doctor. It is cold, and flat, and has a label. It is, you find with some distress, the first meal in two thousand years that you have not had to forgive yourself for.
+* Ask for a willing arm, as the old way was
+  $ do feed("donor")
+  $ do earn(-2)
+  She is paid, and glad of it, and does not ask why. You are very careful with her, and it is, by comparison with the bottle, almost unbearably warm.
+* Take it from the first stranger on the street, and leave
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  It is quick, and nobody follows, and the street is as it was. It is the thing you have been doing for two thousand years, and for the first time you notice how long it takes to wash off.
+<~
+
+# night
+## The city
+:night
+?if actions_left() == 2
+  The cold hours come down on Harrison Street, and the lamps along the hospital wall come on in order, one after another, like a thing being counted. There are a great many people in a very small amount of light.
+?else
+  Past midnight, with the long bench still full and the radiators knocking, the city gives a long slow breath and does not let it out.
+?end
+* Go down to the cold room with the doctor's night clerk [once] ?if actions_left() > 0
+  ~> cold_room
+  $ do act()
+* Stand at the bank's door while it is open to the public [once] ?if actions_left() > 0
+  ~> door
+  $ do act()
+* Sit with the ledger, and decide what the house owns of this [once] ?if actions_left() > 0
+  ~> ledger
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# cold_room
+## The long bench
+The cold room is a basement with a refrigerator the size of a wardrobe. The doctor's clerk, a thin tired young man in a rubber apron, shows you the labels. Each has a name and a type and a date, and a line for the donor's own mark. There is a rule that nothing is kept longer than a week. There is a rule against selling it. The clerk says the second rule is observed less well than the first.
+$ _mp_n = 0
+$ _mp_rank = 0
+:mp_more_1
+* Fund the hospital's drive in the house's name, and ask for nothing [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 1
+    $ lw.supply = "public"
+    $ _mp_rank = 1
+  ?end
+  $ do earn(-3)
+  $ humanity += 2
+  $ standing += 1
+  It is a small cheque, and a poster, and a free sandwich for every donor. By Saturday there is a queue of forty on the pavement, in their good hats, and a photographer, and the clerk has stopped being tired. It is the best use of money that your family has found this year, and the dullest.
+* Pay donors at twice the county's rate, to come to a house of your own [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 2
+    $ lw.supply = "paid"
+    $ _mp_rank = 2
+  ?end
+  $ do earn(-4)
+  $ cunning_brutal += 1
+  $ secrecy -= 1
+  They come in a trickle, and then in a stream, and a few of them come back more often than the book allows. {_reader_name} puts a quiet stop to that, and the house is left, as every business is, with a ledger that it would not show a priest.
+* Take a cold store of your own, under the Yards, behind the packing house [once]
+  $ _mp_n += 1
+  ?if _mp_rank < 3
+    $ lw.supply = "private"
+    $ _mp_rank = 3
+  ?end
+  $ do earn(-6)
+  $ secrecy += 2
+  $ humanity -= 1
+  It is a steel door, and a refrigerator the size of a room, and a clerk who is paid for not being curious. There will never be an evening again when the house is hungry and does not know where to look. You tell yourself that it is only a pantry, and it is, and it is also the place where you have decided how much a stranger's blood will be worth.
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_1
+-> :mp_more_1
+:mp_done_1
+<~
+
+# door
+## The public door
+It is a pale green door, with a brass plate, and a nurse at a desk. On a good night forty people come to it, and every one of them has been told that they are doing a kindness and is slightly embarrassed about it.
+$ _gh = gift_holder("charm")
+?if _gh != ""
+  {name(_gh)} is at your shoulder, and has a word for each of them. It is not compulsion, and it is not quite not. It is only that it is a thing that {name(_gh)} has always been able to do, and in a queue of embarrassed people it is a kindness.
+?end
+* Let the family's gift hold the door, and stay in the street ?if _gh != ""
+  $ lw.door = "gift"
+  $ secrecy += 1
+  The queue goes in without a quarrel. The nurse says to the doctor, at four, that she has never had a quieter night, and the doctor says that it is the weather.
+* Let {_reader_name} take the door, with a clipboard and a manner ?if _lead != ""
+  $ lw.door = "lead"
+  $ standing += 1
+  {_reader_name} is born to it. By midnight the nurse is asking advice, and by morning the hospital's board has been told, by three separate people, that a very capable person from the Collis office has been of great help and would like to remain unnamed.
+* Take the door yourself, and watch each of them go in
+  $ lw.door = "self"
+  $ humanity += 1
+  $ velati_regard -= 1
+  You see a thousand of them, in one night, and every one is a person who has come to give away a pint of themselves. You have been feeding on people for two thousand years. It has never been a thing that was offered.
+<~
+
+# ledger
+## The books
+The books are in the cold room, in a safe, in a tin box, and the first three pages say what the bank is for.
+?if _lead != ""
+  {_reader_name} has written, in the margin, in a small neat hand, the word "lawful", and underlined it twice.
+?end
+The bank is not a secret. It is not a monopoly. It is a very large new thing that a very large number of people will use, and the question that the house has to answer is how much of it to own.
+* Own none of it, and sell the house's knowledge to the hospital as a consultancy
+  $ standing += 1
+  $ humanity += 1
+  The doctor is delighted. He does not ask where your family learned about the keeping of blood, and you do not say that it was learned the hard way.
+* Own a share of the company that makes the bottles and the cold boxes
+  $ do earn(5)
+  $ cunning_brutal += 1
+  It is the cleverest thing you have done in a decade. Every bank in the country will need a refrigerator, and the family will have been paid for each of them before the hospital has learned the word.
+* Own the bank, quietly, through a charity with a long board
+  $ do earn(-3)
+  $ secrecy += 2
+  $ velati_regard -= 1
+  It is a handsome board, with a bishop on it. By autumn, when someone asks who funds the second city bank, the answer will be a name that does not lead to yours.
+<~
+
+# dawn
+## The gray hour
+Dawn finds you on the hospital steps with a paper cup of something the nurse has called coffee. There is a queue already, and a milk cart, and a policeman with his collar up.
+?if lw.supply == "private"
+  Under the Yards, in the dark, a refrigerator hums. You can hear it from here, or you think you can.
+?elif lw.supply == "paid"
+  Somewhere across the river a donor is counting her coins on a kitchen table, and she will be back in nine days.
+?else
+  Forty people have gone in and out of a pale green door, and not one of them knows what they were for.
+?end
+It is not a victory. It is not at all clear that it is a good thing. It is only a quiet change in the oldest arrangement there is, and you stand on the steps with a paper cup, awake, and watch the city go in to work.
+$ do rest()
+=> next

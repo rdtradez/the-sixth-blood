@@ -14,4 +14,6 @@ Chapter plans for each book are written here, one file per book, before the chap
 
 `relics-lost-god.md` holds the Book Six notes.
 
+`long-watch.md` holds the Long Watch interlude notes.
+
 Standing rules for every chapter plan: a coven member is in the chapter's main thread; scenes call on the family's gifts; named members are always checked with `in_circle()`; each book opening has the business lead's report and desk, and a village letter.

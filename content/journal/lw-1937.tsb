@@ -1,0 +1,26 @@
+// Velati journal for the Long Watch, Chicago 1937 (session 72). Written when chapter lw01 ends, on a copy of the state. No choices.
+@chapter lw_journal_1937
+@title Velati Journal: Chicago, 1937
+@book unchained
+@version 1
+
+# start
+## From the daybook of a night clerk at the county hospital
+> Found between the pages of a ledger, in pencil, and copied into the book at Vienna the following year.
+I have kept the night book of the blood room for eleven months, and I do not often write in it anything that is not a number. I am writing this because I do not know where else to put it.
+?if lw.supply == "private"
+  There is a second cold store, under the Yards, that is not in any list that I have seen. I know of it because a man I trust has been paid not to speak of it. I do not know who owns it. I know that the bottles are labeled in a hand that I have seen on the margins of the old Roman letters.
+?elif lw.supply == "paid"
+  There is a house, across the river, that pays donors twice what we do. Some come back more often than the book allows. I have been told, by a very capable person, that this has been stopped. I believe that it has. I do not know why I believe it.
+?else
+  The Collis office has paid for our drive, and asked for nothing, and given a free sandwich to every donor. I have been a clerk for twenty years, and nothing in them has surprised me as much.
+?end
+?if lw.door == "gift"
+  On the busiest night of the spring the door was quiet. Forty came in, and not one of them quarreled. There was a person at the curb, who did nothing that I could see, and the whole queue went by as if on a river.
+?elif lw.door == "lead"
+  A person from the Collis office stood at our door with a clipboard on the busiest night, and the line moved faster than I have ever seen it, and I could not tell you what it was that they did.
+?else
+  Someone stood at our door through the whole night, a tall figure in a plain coat, and looked at every one of the donors as they went in. I did not see them eat or drink anything. I did not see them look away.
+?end
+The man in my watch has been told that he should expect a new thing in the world, and that its name will be a kindness. I do not know if he is right. I put this in the book in case he is.
+=> endbook

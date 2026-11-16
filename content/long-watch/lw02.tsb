@@ -1,0 +1,184 @@
+// The Long Watch, chapter 2 (session 72). Collesanto, 1943 to 1944: the war comes up the valley.
+// The coven is the hero's arm on the hill: a gift holder or the business lead stands the gate while he is on the road. Names come from business_lead() and gift_holder().
+// One night phase of two actions out of three places, then dawn. Sets lw.shelter (a multi pick loop counted by picks), lw.villa and lw.gate. Ends with rest() and => next.
+@chapter lw02
+@title The Valley at War
+@book unchained
+@version 1
+
+# start
+## The hill road
+$ lw.shelter = "none"
+$ lw.villa = "faced"
+$ lw.gate = "self"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+$ _fed = 0
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> arrival
+---
+?if must_feed()
+  ~> hunger
+  ---
+?end
+$ do phase("night", 2)
+It is the autumn of 1943, and the front has stopped in the mountains behind you and decided to stay. The valley has nothing left but its hill. {cap(voice("hunger"))}. There are three things the hill needs tonight, and you can give it two.
+-> night
+
+# arrival
+## The hill in the war
+You come up from the south in the back of a farm cart, under a tarpaulin, with a bag of salt, because it is the only vehicle that no one stops. {_reader_name} is waiting at the gate with a shaded lamp and a face that has had no sleep for a month.
+The village is smaller than it was. The men of the valley have gone to three armies, and the one that has come back is a boy, with one eye, who sits on the church step and is fed by everyone. The railway is gone. There is a German staff car in the square, with a flat tire and a driver asleep at the wheel. Up on the ridge, there is a light that comes on every night at ten, and goes out, and is answered from a different ridge, and nobody on the hill will say who it is for.
+{_reader_name} says it plainly. There are six families in the cellars who are not from here. There is an officer in the old manor, who has taken the villa for his staff. There is a priest who has stopped asking questions, and a village that has decided, as a village, to be very stupid.
+?if lw.hill_1937 == "built"
+  The work that you paid for in 1937 is the only reason that the cellars are as good as they are. {_reader_name} does not say so. You can tell by the way that the shelves are placed.
+?elif lw.hill_1937 == "sent"
+  The coin that you sent became, in the end, a second well, and a store of flour that was hidden in the bell tower. The old women say that the saint thought of it.
+?else
+  Nothing was built, and nothing was bought, and the village has done the whole of it with its hands. {_reader_name} has not said a word of reproach, and has not needed to.
+?end
+<~
+
+# hunger
+## What the hill can spare
+$ _fed = 1
+There is no donor. There is no bank. There is a cellar full of frightened people, and a hen house, and a pig that the village has been hiding from the Germans for a year.
+* Take the pig
+  $ do feed("animal")
+  $ humanity += 2
+  It is a very bad pig, and a very old one, and its owner will never be told. It is a long time since you have been so glad of a stranger's livestock.
+* Go to the bank in a city, by the road, in the night, and come back
+  $ do feed("bank")
+  $ secrecy -= 1
+  It takes the whole of a night. It is a clinical, cold, label on a bottle kind of thing, and you carry it up the hill in a thermos wrapped in a sweater, like a man bringing soup to the sick.
+* Go to the officers' villa and take one
+  $ do feed("human_kill")
+  $ cunning_brutal += 3
+  $ humanity -= 3
+  $ secrecy -= 2
+  The villa will say, in the morning, that the man went out to look at the sentries and was not seen again. They will turn the hill upside down. You tell yourself that it was a war and that he wore a uniform, and you notice that the line does not hold.
+<~
+
+# night
+## The village
+:night
+?if actions_left() == 2
+  The light on the ridge has come on, and gone out, and been answered. The valley is as quiet as the bottom of a well, and in every house the blackout is up and every lamp is out and the whole hill, you think, is holding one breath.
+?else
+  It is past midnight, and the staff car has gone, and in the dark of the church a very old woman is saying a rosary for four languages.
+?end
+* Go down to the cellars, where the strangers are [once] ?if actions_left() > 0
+  ~> cellars
+  $ do act()
+* Go up to the villa, where the officer is [once] ?if actions_left() > 0
+  ~> villa
+  $ do act()
+* Stand at the gate, and see who comes up the hill [once] ?if actions_left() > 0
+  ~> gate
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# cellars
+## The families
+There are six families, in three cellars, and they are from Rome, and from Livorno, and from a town that none of them will name. They are not many. They have been quiet for a very long time. There is a child with a violin that is not allowed to be played, and he holds it anyway, in his lap, with his hand on the strings.
+The keepers have rationed what there is. It is not enough. It is never enough.
+$ _mp_n = 0
+:mp_more_2
+* Take them food from your own stores, and the house's, down the long stair [once]
+  $ _mp_n += 1
+  $ do earn(-3)
+  $ humanity += 2
+  It is flour, and oil, and a ham, brought up from the bank in the town by a man who asks no questions, and carried down in the dark by people who have all stopped breathing for a minute. There is not enough to be happy about. There is enough, for a month, to be alive.
+* Move the smallest of them into the chapel crypt, where the old sleeper's rooms are [once]
+  $ _mp_n += 1
+  $ secrecy -= 1
+  $ humanity += 1
+  They do not like it. It is a tomb. The child with the violin looks at the stone and says that it is a very good place to hide something, and the keeper, who is nineteen, crosses herself and agrees.
+* Take two of the men out by the old mule road, to the Allied lines, in the night [once]
+  $ _mp_n += 1
+  $ cunning_brutal += 1
+  $ secrecy -= 1
+  It is eleven hours on a goat path in the dark, with a blanket round your shoulders, carrying a man's pack on top of your own. You do not tire. He does, and says so, and on the ridge, at four, the light on the far side answers you, and a very young American with a very bad accent says that he did not think anybody was still out.
+* That is the whole of it ?if _mp_n > 0
+  -> :mp_done_2
+-> :mp_more_2
+:mp_done_2
+?if _mp_n >= 3
+  $ lw.shelter = "all"
+?elif _mp_n == 2
+  $ lw.shelter = "many"
+?else
+  $ lw.shelter = "few"
+?end
+<~
+
+# villa
+## The staff
+The manor has its lamps lit, behind blackout cloth, and a sentry at the gate who is nineteen and homesick. The officer is a major, in his fifties, with an old family and a bad stomach and a collection of Etruscan pottery that he has put together out of the hill's own ploughed fields, and that he does not know is stolen from the saint.
+He receives you in the library, which is a thing that you built, in another century, for another reason. The shelves are full of his books now. It is a very strange feeling, to be a guest in your own house.
+* Tell him who you are, and what it would cost him to stay
+  $ lw.villa = "faced"
+  $ cunning_brutal += 2
+  $ secrecy -= 2
+  $ do power("major")
+  He does not scream. It would be a great deal easier if he did. He looks at the lamp, and at the shape of your shadow, and puts his glass down very carefully, and says that he is a Catholic and a patriot and a man of the old school, and that he will write the order for the move in the morning.
+* Sell him a story, a good one, with a ghost in it
+  $ lw.villa = "outwitted"
+  $ cunning_brutal -= 1
+  $ secrecy += 1
+  It is the easiest thing that you have done in a decade. The house is haunted. The last owner died there. There are noises in the cellar at night, and a draught that smells of old wine, and in forty minutes the major, who has a very good ear for a story, has decided that his staff would be better in the town.
+* Pay him, in a currency that nobody in Europe has seen in six years
+  $ lw.villa = "paid"
+  $ do earn(-5)
+  $ secrecy += 1
+  A Swiss account, in the name of a charity that does not exist, in a number that he writes on his cuff. He does not say what it is for. He does not need to. By the end of the month there is a convoy, and a driver, and a fresh set of orders.
+<~
+
+# gate
+## The gate
+You have been told that someone is coming. It is the light on the ridge, and the second light, and, at midnight, a long way off, a motor in low gear.
+$ _gh = gift_holder("shadows")
+$ _sh = gift_holder("strength")
+?if _gh != ""
+  {name(_gh)} has gone ahead of you, down the lane, and is nothing but an idea in the dark. It is a gift that has been of great use to the house, in a great many centuries. It is not often so beautiful to watch.
+?end
+* Let the family hold the gate, and go back to the cellars ?if _gh != "" or _sh != "" or _lead != ""
+  $ lw.gate = "family"
+  $ standing += 1
+  ?if _gh != ""
+    {name(_gh)} takes the lane, and the motor turns round at the first bend and goes back down the valley with its headlamps shining, and the driver, who is a boy, says in the morning that the road was haunted and that he would like to be transferred.
+  ?elif _sh != ""
+    {name(_sh)} stands in the lane with a branch across it, and a gesture, and a manner, and the motor stops, and the lorry behind it stops, and nobody in either of them is in the mood to argue with anybody that size.
+  ?else
+    {_reader_name} meets it at the gate with a lantern and a paper from the municipality that is, strictly, a forgery, and the soldier in the cab reads it by torchlight, and is too tired to disagree.
+  ?end
+* Stand at the gate yourself, and take whatever comes
+  $ lw.gate = "self"
+  $ cunning_brutal += 1
+  $ do power("minor")
+  It is a patrol, six men and a corporal, and they are lost, and cold, and frightened, and do not want to be on this hill. You do not want them here either. In the end you give them directions to the road. It is the whole of the war, in a single lane, at one in the morning.
+<~
+
+# dawn
+## The ridge
+Dawn comes up gray over the valley, and, for the first time in a month, there is no sound of engines. There is a dog, somewhere. There is a rooster, and a bell. It will not be over for another year, and it is, for this one morning, as if it had.
+?if lw.shelter == "all"
+  In the three cellars, with the doors open to the light, a child is playing a violin, very badly, and very softly, and the keepers are pretending to look at the roof.
+?elif lw.shelter == "many"
+  There are fewer in the cellar than there were. Some of them are on the mule road, and some are in a hay barn on the other side of the ridge, and the old women say that the saint had a hand in it.
+?else
+  The cellars are quiet. There is bread, and there is a lamp, and it is not enough, and it will have to do.
+?end
+{_reader_name} comes out onto the step with a mug, and for a moment you sit together on the wall, and watch the sun come up over a hill that you have owned for two thousand years.
+It is not a long watch. It is only one night of many. But you have kept it, and in the morning the village is still there.
+$ do rest()
+=> next
