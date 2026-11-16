@@ -1,0 +1,159 @@
+// Book Six, Chapter 10 (session 66). A Friday in July 1924: Mr. Crane comes to Chicago and to dinner.
+// Plays four scenes in a fixed order (the depot, the dinner, the ledger, the lake front) and a short dawn. No night phase: it is one long night.
+// The coven fronts it: the lead and the family receive him, sit at the table and read him. Names are always checked with in_circle().
+// Reads b6.circle, b6.crane, b6.ames, b6.hall, b6.work, b6.chairs. Sets b6.depot, b6.half, b6.ledger and b6.lake.
+// Uses meet(), discover(), chart(), has_gift(), gift_holder(), power(). Ends with rest() and => next.
+@chapter b6c10
+@title Mr. Crane Comes to Dinner
+@book relics-lost-god
+@version 1
+
+# start
+## The depot
+$ b6.depot = "family"
+$ b6.half = "asked"
+$ b6.ledger = "half"
+$ b6.lake = "family"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+$ do chart("chicago.depot")
+$ do meet("crane")
+The Twentieth Century comes in at dusk, a quarter of an hour late, with every blind in the last car drawn. The platform has been cleared. Mr. Ames stands at the end of it in his gray homburg, perfectly still, with a porter on either side who do not know what they are carrying.
+:the_platform
+* Meet him with the family, in a row, as one meets a guest of the house ?if b6.circle == "all" and coven_size() > 0
+  $ b6.depot = "family"
+  $ standing += 2
+  ?if _lead != ""
+    {_reader_name} goes forward first with the lantern, and the others fall in behind, and a very young man in a very good coat steps down out of the dark car, and looks at the row of them, and laughs. It is a short, genuine laugh, with something startled in it. He says that he had not been met by a family since he was twelve.
+  ?else
+    The family goes forward together, and a very young man in a very good coat steps down, and looks at them, and laughs, short and startled. He says that he had not been met by a family since he was twelve.
+  ?end
+* Send {_reader_name} to take his bag, and wait at the carriage ?if coven_size() > 0
+  $ b6.depot = "lead"
+  $ standing += 1
+  The young man gives up his bag with a nod, and a look at the one who takes it that is, you think, a little too long. He says that you have a very good steward. It is said lightly, and filed.
+* Go alone, and take him yourself
+  $ b6.depot = "alone"
+  $ cunning_brutal += 1
+  He is shorter than you had thought. He has the face of a boy who has been sixteen for a great many years, and the eyes of someone who has noticed that. He says, "You are the Collins. You look as though you had expected a bigger man."
+?if b6.crane == "warm"
+  He says that he was pleased by the wire. He says it as one admits to a vice.
+?elif b6.crane == "silent"
+  He says that he did not hear from you, and that he found it restful, and then that he found it suspicious, in that order.
+?else
+  He says that your answer was exactly as cool as he had hoped.
+?end
+---
+~> dinner
+---
+~> ledger
+---
+~> lake
+---
+-> dawn
+
+# dinner
+## The long gray room
+$ do chart("chicago.exchange")
+The dinner is in the long gray room over the Exchange, at a table laid for six. There is a great deal of silver, and four courses that nobody is going to eat, and a bottle that is for the look of it. Mr. Crane sits at the head, because he was put there, and looks about him with the expression of a man who has seen his own house in a mirror.
+?if b6.circle == "all" and coven_size() > 0
+  The family sits down on either side, and is, for once, very silent. Mr. Crane watches them as one watches an unfamiliar sort of bird.
+  ?if gift_holder("charm") != ""
+    {name(gift_holder("charm"))} says something low and kind, and he stops, with the fork in his hand, and says that nobody has been charming to him since the war, and that he had forgotten how it was done.
+  ?end
+?end
+He is tired. It comes through under the sarcasm, which is a good deal like seeing a good watch case with the back off. He says that he owns half of Chicago, and has owned it for eleven years, and that he finds it to be mostly a quantity of paper. He says that he would be grateful if somebody who was not afraid of him would take some of it away.
+?if b6.ames == "partner"
+  He says that Mr. Ames says the Exchange has been a good friend. He says it as if he were trying the word.
+?elif b6.ames == "refuse"
+  He says that Mr. Ames says the Exchange refused him. He says it with open delight.
+?end
+:the_half
+* Take a share of the Loop, on terms the Exchange would set
+  $ b6.half = "share"
+  $ do earn(4)
+  $ standing += 2
+  $ secrecy -= 1
+  He raises a glass of something clear that he does not drink, and says that he had been hoping for a man who knew what a share was. Behind him, Mr. Ames lets out a very small and very restrained breath.
+* Ask what he wants for it, and for the rest of what he is offering
+  $ b6.half = "asked"
+  $ cunning_brutal += 1
+  He looks at you with a kind of tired approval. He says that he wants to know what is under the lake. He says that it is the only thing in Chicago he does not own, and that it has begun to bother him.
+* Refuse it, courteously, and say that the Exchange will stand on its own
+  $ b6.half = "refused"
+  $ standing += 1
+  $ cunning_brutal += 1
+  He says that he supposed you would. He says that he made the offer in order to hear it refused, and that it is the first thing he has enjoyed since Prohibition.
+<~
+
+# ledger
+## 1916
+$ do discover("the_lamp_hall")
+When the plates are cleared, which takes a long time because they were never used, Mr. Crane takes a flat book out of his coat. It is a ledger, not large, bound in black cloth, and it has a ribbon in it at the year nineteen sixteen. He lays it open on the cloth between the candles, and turns it so that you can read it.
+It is a payment. It is not a large one. A hundred dollars, in cash, to the keeper of the two mile crib, for "the loan of the key for one night." Beside it, in another column, there is a mason's afternoon, three hundred dollars for a lintel, and in the margin, in a hand that is not Mr. Crane's, a little sign: a closed eye over a coin.
+"C.," says Mr. Crane. "He paid in gold. He asked that nobody enter the lowest room for a hundred years. He said it would be, as he put it, courteous." He turns the page. "I have been trying to find the man for eight years. I think you have been in the room."
+?if b6.hall == "lit"
+  He looks, for a moment, at the plate where the lamp ought to be, and says nothing, which is the most intelligent thing he has said all evening.
+?end
+:the_ledger
+* Tell him all of it: the hall, the chairs, the lamp, and the mark on the lintel
+  $ b6.ledger = "told"
+  $ humanity += 1
+  $ standing += 1
+  $ secrecy -= 1
+  He listens with his head on one side and his hands flat on the cloth, and does not once interrupt, which is the second most intelligent thing he has done. When you are finished, he says in a very small voice that it is a great deal. He says that he had thought it would be a vault.
+* Tell him about the door and the mark, and nothing of the room
+  $ b6.ledger = "half"
+  $ cunning_brutal += 1
+  He considers you for a long moment. He says that it is a very reasonable amount, and a very careful one, and that he will pretend it is enough. It is plain that he is not going to pretend for long.
+* Say that you have been in no room, and that you know nothing of any mark
+  $ b6.ledger = "nothing"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  ?if has_gift("old_blood")
+    His eyes go to your hand on the cloth, and rest there, and come back to your face. He says that it is a very remarkable thing, to be lied to by someone whose blood says otherwise, and that he will think about it for a week.
+  ?else
+    He says that of course not. He shuts the ledger, and puts it back in his coat, with a look of delicate, patient disappointment.
+  ?end
+<~
+
+# lake
+## The lake front
+$ do chart("chicago.velati")
+After midnight he asks to see the lake. He says that he has not seen a lake since he was alive, and that it is the one thing in Chicago he would not like to own.
+?if b6.circle == "all" and coven_size() > 0
+  :the_walk
+  * Take the family, and walk the lake front all together
+    $ b6.lake = "family"
+    $ humanity += 1
+    $ standing += 1
+    They go down to the water in a long untidy line, and nobody has told them how to arrange it. Mr. Crane walks last, with Mr. Ames a pace behind, and the young man looks from one to another, as if counting something he had stopped counting long ago.
+  * Walk alone with him, and let the family follow at a distance
+    $ b6.lake = "alone"
+    $ cunning_brutal += 1
+    The family stays on the steps. {_reader_name} lifts one hand, once, and then lets it fall.
+?else
+  $ b6.lake = "alone"
+  You walk down together, with Mr. Ames a pace behind.
+?end
+There is a light on the water. It is small and steady, out past the breakwater, like a coin on a table. He stands for a long time with his hands in his pockets, and says nothing, and the wind turns his collar.
+?if b6.hall == "lit"
+  It is not the lamp that was there in the spring. It is a quieter light, whiter, and it is, you realise, the one under the lake, seen through a mile of water, as a lit window is seen through a hill.
+?end
+"I have been alive three hundred years," says Mr. Crane, at last, "and I have never once been surprised by a house. I find I should like to be."
+Then he says that there is a thing he has to tell you, and he would like to say it where Mr. Ames cannot hear. He lowers his voice. He says that he has not been honest about why he came. He says that he came because, in nineteen sixteen, he was in Chicago, for one night, and heard the song.
+<~
+
+# dawn
+## Seven notes
+You come up from the shore in the grey. Mr. Crane has said his piece, and has gone back to the long gray room, and there is a car at the curb with the engine running. It is the hour at which no one, in any city, is quite sure what day it is.
+There is a sound, though. It comes from the direction of the Twelfth Street viaduct. It is a voice, singing, and it is not Mr. Sorrel's. It is higher, and smoother, and very young, and it is singing six notes, and a seventh.
+The seventh is not a note. It is more like a door held open. Out on the lake, a mile away, the little light brightens, and does not go dull again.
+$ do rest()
+=> next

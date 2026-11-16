@@ -92,6 +92,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 63: Book Six chapters 3 and 4
 - [x] Session 64: Book Six chapters 5 and 6
 - [x] Session 65: Book Six chapters 7 and 8
+- [x] Session 66: Book Six chapters 9 and 10
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -765,3 +766,13 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The coven fronts both chapters: the lead's report, second havens and trades for the family (guard and business standing tasks), a member lent to the lake shore house as a guest, the family going down with him or holding the shore, and the final room offered to the family as a haven. Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
 - Tests: `tests/book6.test.js` now covers chapters 7 and 8.
 - Plans are in `SPOILERS/relics-lost-god.md`.
+
+### Session 66 notes (Book Six, chapters 9 and 10)
+
+- Chapters `b6c09` and `b6c10` are in `content/relics-lost-god/` (`ch09.tsb`, `ch10.tsb`), about 5,500 words together. The manifest entry lists ten chapters and stays `"incomplete": true`.
+- Chapter 9 opens with the business lead's report, plays one night phase of three actions out of four, then a dawn. Chapter 10 is one fixed night in four scenes and a dawn. Both end with `rest()` and `=> next`.
+- New decision flags (`b6.` prefix, registered): `b6.chairs`, `b6.respect`, `b6.pellsecret`, `b6.work` (chapter 9) and `b6.depot`, `b6.half`, `b6.ledger`, `b6.lake` (chapter 10). `b6.respect`, `b6.pellsecret`, `b6.half` and `b6.ledger` are major. `b6.work` is a multi pick loop where the most committed pick wins (ledgers over dig over school).
+- Content: two codex entries. No engine change, schema or migration.
+- The coven fronts both chapters: the lead's report, the family's guest or keeper at the lake shore house, the family sent to the dig, the ledgers and the school, and the family receiving Mr. Crane at the depot and the table. Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
+- Tests: `tests/book6.test.js` now covers chapters 9 and 10.
+- This branch is stacked on session 65 (PR #72, not yet merged at the time). Plans are in `SPOILERS/relics-lost-god.md`.
