@@ -6552,6 +6552,88 @@
       "default": "alone",
       "note": "Chapter 12: how the stair was held against the other houses",
       "major": true
+    },
+    "b6.table": {
+      "kind": "enum",
+      "values": [
+        "seat",
+        "terms",
+        "refuse"
+      ],
+      "book": "relics-lost-god",
+      "default": "terms",
+      "note": "Chapter 13: what Ruth Calloway is to the family",
+      "major": true
+    },
+    "b6.place": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "sorrel",
+        "pale"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 13: where Tilly Marsh was placed"
+    },
+    "b6.warm": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "pale",
+        "blanket"
+      ],
+      "book": "relics-lost-god",
+      "default": "blanket",
+      "note": "Chapter 14: where Veda was first housed",
+      "major": true
+    },
+    "b6.kept": {
+      "kind": "enum",
+      "values": [
+        "plain",
+        "ask",
+        "gentle"
+      ],
+      "book": "relics-lost-god",
+      "default": "ask",
+      "note": "Chapter 14: how she was told the year and the houses"
+    },
+    "b6.callers": {
+      "kind": "enum",
+      "values": [
+        "receive",
+        "family",
+        "show",
+        "shut"
+      ],
+      "book": "relics-lost-god",
+      "default": "receive",
+      "note": "Chapter 14: how the other houses were met at the door",
+      "major": true
+    },
+    "b6.latch": {
+      "kind": "enum",
+      "values": [
+        "crane",
+        "you",
+        "wait"
+      ],
+      "book": "relics-lost-god",
+      "default": "wait",
+      "note": "Chapter 13: who lit the lamp under the lake, or whether it was left dark",
+      "major": true
+    },
+    "b6.crypt": {
+      "kind": "enum",
+      "values": [
+        "open",
+        "watch",
+        "mark"
+      ],
+      "book": "relics-lost-god",
+      "default": "watch",
+      "note": "Chapter 13: what was done about the Institute door"
     }
   }
 }

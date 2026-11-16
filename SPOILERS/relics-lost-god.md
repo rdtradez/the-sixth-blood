@@ -53,3 +53,14 @@ Ch 12, "The First Chair", Friday. Fixed: the cellar and the child at the door (`
 Lore added: Josiah says the lamps are hinges and the first lamp is a door left open for the sixth chair's kin, not the god; Cassian asked the house in 1916 to keep the sixth chair empty until the song was whole, saying he was keeping something safe; Tilly can hold the door for the seventh but the seventh is the sixth blood's.
 
 Hooks left: who Cassian is keeping the chair for and what came through the first lamp; Josiah awake and what is left of him; Tilly's place; Calloway's table; Rudek's stand; Crane and the lit lamp; the Institute's door; the family's haven under the lake; the go east summons.
+
+## Chapters 13 and 14 (session 68)
+
+Ch 13, "The Table", September 1924. Opening: the lead's report (eleven cards from the houses), Josiah awake at the pale house. Night, three of four: Ruth Calloway's table (`b6.table`: a seat, terms, refuse); the lamp under the lake with Crane (`b6.latch`: Crane lights it, the hero lights it, leave it dark and mind it); Tilly's place (`b6.place`: family, Sorrel's school, the pale house); the Institute's crypt door (`b6.crypt`: open and go down, watch, close with the family's mark). Dawn: a second wire from Rome, "Open the first lamp. She is cold."
+
+Ch 14, "The Door Left Open", late September. Fixed: the hall and the lamp opening; Veda, of the sixth house, kept in the first lamp by Cassian since Rome burned, to be woken by a hand she would know (`b6.kept`: tell all, ask first, tell gently); where she is housed (`b6.warm`: family, pale house, Exchange); the other houses at the door (`b6.callers`: receive, family, show Veda, shut). Dawn: she says a ship sails Thursday from New York, the chair in the east is cold and its keeper has little time; Crane will come.
+
+LORE ADDITION TO APPROVE: Veda, a woman of the hero's own (sixth) house, put into the first lamp by Cassian "the year Rome burned". She answers "the sixth chair's kin" from chapter 12's hooks. If this clashes with the planned Book Seven reveal, change her origin, not the chapter flow.
+
+Hooks left: the east and the ship from New York; Crane going; what Veda is wanted for; the Institute stair (twelve more steps); Ruth Calloway's table; Tilly's place; the second light on the lake.
+

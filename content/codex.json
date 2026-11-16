@@ -1207,6 +1207,42 @@
       "title": "The first chair",
       "book": "relics-lost-god",
       "text": "Under the pale house on the lake shore, a man sits in a plain oak chair with an open door cut in its arm, the last and quietest of the five houses."
+    },
+    "the_loop_table": {
+      "category": "lore",
+      "title": "The Loop table",
+      "book": "relics-lost-god",
+      "text": "Ruth Calloway's house and the lake shore house settled, after the seventh note, what a table is for and who sits at it."
+    },
+    "the_first_lamp": {
+      "category": "lore",
+      "title": "The first lamp",
+      "book": "relics-lost-god",
+      "text": "The bronze lamp that came to Chicago is a latch meant to be lifted from the inside, and something was kept within it."
+    },
+    "the_lamp_under_the_lake": {
+      "category": "lore",
+      "title": "The lamp under the lake",
+      "book": "relics-lost-god",
+      "text": "Under the lake shore lies a long cold hall with a plinth of dark stone, where the first lamp stands and the family keeps its watch."
+    },
+    "the_institute_stair": {
+      "category": "lore",
+      "title": "The Institute stair",
+      "book": "relics-lost-god",
+      "text": "Beneath the Oriental Institute a carved door gives onto a stair that has not been dug, warm, and smelling of resin and old sun."
+    },
+    "veda_kept": {
+      "category": "lore",
+      "title": "Veda, kept",
+      "book": "relics-lost-god",
+      "text": "Veda says that Cassian told her little and told it kindly: she was to be woken by a hand she would know, and go east."
+    },
+    "the_sixth_kin": {
+      "category": "lore",
+      "title": "The sixth chair's kin",
+      "book": "relics-lost-god",
+      "text": "Veda is of the sixth house, and so of the hero's own line. No one has sat in the sixth chair in Chicago for two thousand years."
     }
   }
 }

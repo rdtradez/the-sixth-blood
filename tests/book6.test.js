@@ -81,11 +81,11 @@ const coven = (g) => {
   }
 };
 
-test('Book Six lists chapters one to twelve and is still incomplete', async () => {
+test('Book Six lists chapters one to fourteen and is still incomplete', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'relics-lost-god');
   assert.ok(book.incomplete);
-  assert.equal(book.chapterCount, 12);
+  assert.equal(book.chapterCount, 14);
 });
 
 test('chapters 1 and 2 play through every kind of waking, hungry or not, with and without a coven', async () => {
@@ -460,6 +460,58 @@ test('chapters 11 and 12 play each way the earlier chapters went', async () => {
 test('chapters 11 and 12 never name a coven member who is not in the circle', async () => {
   for (const chapter of ['b6c11', 'b6c12']) {
     const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' }, stopAt: 'b6c13' });
+    assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
+    clean(run);
+  }
+});
+
+test('chapter 13 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.table', [['seat', /Give her a chair/], ['terms', /Settle terms/], ['refuse', /Refuse her/]]],
+    ['b6.latch', [['crane', /Let Mr. Crane light/], ['you', /Light it yourself/], ['wait', /Leave it dark/]]],
+    ['b6.place', [['family', /Make her one of the family/], ['pale', /Place her with the pale house/]]],
+    ['b6.crypt', [['open', /Open it properly/], ['watch', /Keep a watch/], ['mark', /Close it/]]],
+  ];
+  const night = { b6: { table: /Sit down at the table/, latch: /Go down to the lamp/, place: /Find Tilly/, crypt: /Answer the Institute/ } };
+  for (const [flag, branches] of sets) {
+    const key = flag.split('.')[1];
+    for (const [value, re] of branches) {
+      const run = await play('b6c13', {}, { hunger: 10, wealth: 900000 }, [night.b6[key], re], { sys: coven, flags: { 'b6.circle': 'all' }, stopAt: 'b6c14' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapter 14 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.kept', [['plain', /Tell her the whole of it/], ['ask', /Ask her first/], ['gentle', /only what she needs/]]],
+    ['b6.warm', [['family', /Give her the family/], ['pale', /Keep her at the pale house/], ['blanket', /Take her to the Exchange/]]],
+    ['b6.callers', [['receive', /Receive them/], ['family', /Have the family receive/], ['show', /Bring Veda down/], ['shut', /Send them away/]]],
+  ];
+  for (const [flag, branches] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b6c14', {}, { hunger: 10, wealth: 900000 }, [re], { sys: coven, flags: { 'b6.circle': 'all' }, stopAt: 'b6c15' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapters 13 and 14 play each way the earlier chapters went', async () => {
+  for (const chapter of ['b6c13', 'b6c14']) {
+    for (const stair of ['alone', 'family', 'yards', 'table']) {
+      for (const note of ['you', 'family', 'child']) {
+        const run = await play(chapter, {}, START, [], { sys: coven, flags: { 'b6.circle': 'all', 'b6.stair': stair, 'b6.note': note, 'b6.singer': 'cantor' }, stopAt: 'b6c15' });
+        clean(run);
+      }
+    }
+  }
+});
+
+test('chapters 13 and 14 never name a coven member who is not in the circle', async () => {
+  for (const chapter of ['b6c13', 'b6c14']) {
+    const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' }, stopAt: 'b6c15' });
     assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
     clean(run);
   }
