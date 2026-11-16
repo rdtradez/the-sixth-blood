@@ -1,0 +1,192 @@
+// Book Six, Chapter 12 (session 67). A Friday in August 1924: the lake shore house opens, the first chair wakes, the seventh note is sung, the stair is held.
+// Plays four scenes in a fixed order (the house, the chair, the note, the stair) and a short dawn. No night phase: it is one long night.
+// The coven fronts it: the family goes down, sings, holds the stair and shows the bloodline's strength. Names are always checked with in_circle().
+// Reads b6.circle, b6.watch, b6.singer, b6.pellsecret, b6.rival, b6.respect, b6.ledger, b6.hall, b6.holdings. Sets b6.child, b6.sleeper, b6.note and b6.stair.
+// Uses meet(), discover(), chart(), has_gift(), gift_holder(), power(). Ends with rest() and => next.
+@chapter b6c12
+@title The First Chair
+@book relics-lost-god
+@version 1
+
+# start
+## The house on the shore
+$ b6.child = "below"
+$ b6.sleeper = "kindly"
+$ b6.note = "you"
+$ b6.stair = "alone"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+$ do chart("chicago.goldcoast")
+$ do meet("pell")
+~> house
+---
+~> chair
+---
+~> note
+---
+~> stair
+---
+-> dawn
+
+# house
+## The cellar that is not in the plans
+The pale house stands very still at midnight, with every curtain drawn and a single lamp in the fanlight. Mrs. Pell herself opens the door, in black silk and a cameo, and does not say good evening. She leads the way down a back passage that smells of beeswax and cold stone, past the wine, past the coal, to a plain oak door that has been papered over for forty years and has lately had the paper torn away.
+?if b6.watch == "family" and b6.circle == "all" and coven_size() > 0
+  The family comes down behind in a long quiet file. {_reader_name} carries the lantern, and the others have left their hats on the hall table, as one does at a bedside.
+?elif b6.watch == "houses"
+  Mr. Rudek is in the hall with his hat in his big hands, and Ruth Calloway is on the sofa, glaring at the wall, and Dr. Whitcombe has been admitted on the strength of her sensible shoes. Mrs. Pell does not look at any of them. She has been very tactful about them, and it has cost her something.
+?else
+  You go down alone, as agreed, with Mrs. Pell a step ahead of you, and the stone steps are worn very smooth in the middle.
+?end
+The child is at the foot of the stair, already. She came, you gather, by herself, through the coal chute, in her gray school dress, and nobody had the heart to send her back. She stands with her back against the oak, with both hands flat on it, and her eyes closed. She says that it is humming.
+:the_child
+* Let her stand where she is, and hold the door for the note
+  $ b6.child = "below"
+  $ humanity += 1
+  ?if b6.singer == "family"
+    She nods, very gravely, like a girl who has been given a part in a play by someone she trusts.
+  ?else
+    She nods. She says, very low, that she thought you would.
+  ?end
+* Send her up to the keepers, and keep her out of it
+  $ b6.child = "above"
+  $ humanity += 1
+  $ cunning_brutal += 1
+  She goes without a word, and without any argument, and only at the turn of the stair does she look back. It is not a reproach. It is a look that has been practised on a great many people, and has never once been returned.
+* Ask Mr. Sorrel to stand with her, and have her taught the figure by someone who knows it ?if b6.singer == "cantor"
+  $ b6.child = "cantor"
+  $ cunning_brutal += 1
+  Mr. Sorrel, who was not asked to come and has plainly come anyway, takes the child's hand in his gloved one, and the two of them stand at the door like a very old man and a very young one, preparing to be introduced.
+Mrs. Pell lays her hand on the latch. She says that the house has not been inside for thirty-eight years. She says that she will go first, and that she would be obliged if nobody laughed.
+<~
+
+# chair
+## Josiah Pell
+$ do chart("chicago.haven")
+$ do meet("josiah")
+It is a small round room, no larger than a chapel. The walls are bare brick, whitewashed, and there is a single chair in the middle of the floor, a plain high-backed oak chair, with the sign of an open door cut into the arm. A man sits in it. He is, you would say, forty. He wears a frock coat of the eighties, and a stock, and his hands lie on the arms of the chair as if he had put them there that morning. His face is the quiet face of a man who has been listening for a very long time.
+His eyes open when the lantern comes in. They are pale, almost colourless, and perfectly clear, and they go not to Mrs. Pell but to you. He looks at you for a good while. Then, quite gently, as if he had been hoping to see it for years, he smiles.
+"Ah," says Josiah Pell. "A warm one. I had begun to think you would be cold." He has a dry, slow, Yankee voice, a little rusted. "You will forgive me if I do not rise. I find I have been sitting rather a long time."
+?if b6.pellsecret == "pressed"
+  He glances at Mrs. Pell, and then back to you, and says without any unkindness that his wife's niece has said you were rude. He says that he thinks it is a thing that can be forgiven, in a person who has been in a hurry.
+?end
+He says that his house was the last of the five, and the quietest, and that its sign is the open door because it was never any good at keeping anything shut. He says that the sixth was the one they had been left to wait for. He says that they did not know what she would be.
+:the_sleeper
+* Ask him, kindly, what he would like, and whether he is in pain
+  $ b6.sleeper = "kindly"
+  $ humanity += 2
+  $ standing += 1
+  He is silent a moment. He says that nobody has asked him that in forty years. He says that he would like to see the lake, and a cup of something hot, and his wife's niece's face by lamplight, and that he does not think any of it is too much to ask. Mrs. Pell, at the door, puts her handkerchief to her mouth.
+* Ask about the man in the hat who came in nineteen sixteen, and what he wanted of the house
+  $ b6.sleeper = "cassian"
+  $ cunning_brutal += 1
+  $ do discover("the_first_chair")
+  His smile goes away, politely. He says that the gentleman was very civil. He says that he sat on that floor, in this room, and asked that the sixth chair be kept empty until the song was whole, and that Josiah had said yes, because it was asked so nicely. "He said that he was keeping something safe," says Josiah. "I did not think to ask him from whom."
+* Ask about the lamps, the thirteen, and what the seventh note will do
+  $ b6.sleeper = "lamps"
+  $ cunning_brutal += 1
+  He shuts his eyes, and says what he can. He says that the lamps are hinges, and that a hinge is not a prison but a way of leaning, and that the first lamp is a door left a little open so that something might come through that is very much wanted, and not from the god. He says that what comes through will be the sixth chair's kin. He says that he has an idea who. He will not say.
+$ do discover("the_seventh_note")
+<~
+
+# note
+## Who sings
+$ do chart("chicago.velati")
+The sixth chair is not in this room, but its place is. Josiah says that you will feel it, and you do: a small pressure in the floor, like a held breath, at the foot of the chair. Mr. Sorrel, if he is here, will have stopped breathing. The child's hands are on the oak of the door. The note is a thing that cannot be taught, says Josiah. It can only be offered, and then somebody has to say yes.
+He says that it is a note of the sixth blood, and that the sixth is yours. He says that it may be sung by you, or sung for you, but that it must be sung by someone who is willing to be changed by it. He says that it will not hurt, for the most part.
+:the_note
+* Sing it yourself, with the door held open behind you
+  $ b6.note = "you"
+  $ cunning_brutal += 1
+  $ standing += 1
+  The note is not a sound. It begins as a pressure behind the breastbone, a warmth, as when one has been out in the cold and comes in. Then it is a sound after all, low, and a little out of tune with the world, and the whitewashed walls take it up and give it back with a sweetness that is unbearably old. In the chair, Josiah Pell closes his eyes, and the colour comes into his face like a tide.
+  ?if has_gift("old_blood")
+    Your blood knows it. It was waiting. It comes up like a thing remembering its own name, and there is a second voice under your own, very faint, that belongs to nobody in the room.
+  ?end
+* Ask the family to sing it with you, each in their own voice ?if b6.circle == "all" and coven_size() > 0
+  $ b6.note = "family"
+  $ humanity += 2
+  $ standing += 2
+  ?if _lead != ""
+    {_reader_name} is the first to join, in a plain true voice that had no intention of being heard, and then another, and then the whole house of them, one at a time, in no particular harmony. It is the worst singing ever offered up under Chicago, and the note takes it in like rain.
+  ?else
+    One by one, the family takes it up, in no particular harmony. It is the worst singing offered up under Chicago, and the note takes it in like rain.
+  ?end
+  ?if gift_holder("charm") != ""
+    {name(gift_holder("charm"))} sings with a lowered head, and the sound is so kind that the chair seems, briefly, to lean toward it.
+  ?end
+  ?if gift_holder("strength") != ""
+    {name(gift_holder("strength"))} sings low and level, a column of sound to set the others against, and the whitewash dusts down off the brick.
+  ?end
+  They have been the arm of the house for a long time, and they are the arm of it now. The note is not yours alone any more. It has a great many hands.
+* Let the child sing it, and hold the door for her yourself ?if b6.child == "below" or b6.child == "cantor"
+  $ b6.note = "child"
+  $ humanity += 2
+  $ cunning_brutal -= 1
+  Tilly Marsh takes her hands off the oak, and opens her eyes, and sings. It is the seventh, whole and quite unafraid, in the small bright voice of a girl who has done it a great many times in her sleep. You put your own hand flat to the door where she had hers, and feel the whole weight of the house lean on it, and hold.
+The seventh note goes out through the floor, and through the earth, and through the lake. It does not come back. It is, somewhere very far to the east, answered.
+<~
+
+# stair
+## The other houses
+$ do chart("chicago.exchange")
+You hear the noise before you reach the foot of the stair: boots on the paving, many of them, and a motor car's engine running, and above all of it a woman's voice, high and angry. The song has been heard in every house in Chicago that has anyone in it who can hear. The whole of the city's blood has woken up and is on the doorstep.
+?if b6.rival == "strength"
+  Ruth Calloway is at the head of her own men, in the street, in an evening coat, and she looks as though she has been up all night rehearsing what she will say, and has forgotten it.
+?elif b6.rival == "bought"
+  Ruth Calloway is at the head of her own men in the street, with her hat on crooked, and a face that has plainly been scheming for a week, and has been undone by a song.
+?else
+  Ruth Calloway is at the head of her own men in the street, and has come, she says, not to quarrel, but to be shown.
+?end
+Mr. Rudek's cars are at the corner, motors running, in a long black line. Mr. Rudek himself is standing on the sidewalk with his hat in his hand, quite still, looking up at the pale house as one looks at a church.
+:the_stair
+* Have the family hold the stair, and let the bloodline's strength be seen ?if b6.circle == "all" and coven_size() > 0
+  $ b6.stair = "family"
+  $ standing += 3
+  $ cunning_brutal += 1
+  ?if _lead != ""
+    {_reader_name} sets the lantern on the top step, and steps in front of it. The family comes up out of the cellar behind, and lines the steps one on each, with their hands at their sides. They do not threaten anybody. They merely stand, and are what they are, and the street gets very quiet.
+  ?else
+    The family comes up out of the cellar and lines the steps one on each, hands at their sides, and stands.
+  ?end
+  ?if gift_holder("strength") != ""
+    {name(gift_holder("strength"))} takes the iron railing in one hand, and the iron gives, and is made quite straight again by the other hand, and put back. Nobody in the street says anything at all.
+  ?end
+  Ruth Calloway takes off her hat. It is not a surrender. It is the sort of courtesy one pays to a thing one has not understood, and has decided not to try to.
+* Go out alone, and speak to the street
+  $ b6.stair = "alone"
+  $ cunning_brutal += 1
+  $ standing += 1
+  You go up the cellar steps and out onto the pale house's porch, in the full light of its fanlight, and look at them all. You are not much to look at. It does not matter. The blood in you has been sung to, and it shows. Ruth Calloway looks at the width of your shoulders, and at the cellar door behind you, and does not take the step she had been about to take.
+* Ask Mr. Rudek to hold the stair, as a man of the table ?if b6.respect == "sworn"
+  $ b6.stair = "yards"
+  $ standing += 2
+  $ humanity += 1
+  Mr. Rudek puts his hat back on. He says nothing at all. He walks up the steps like a very large and very slow tide, and plants himself at the top with his back to the door, and folds his arms. His eleven hundred men get out of the motor cars, in order, without hurry, and come and stand behind him. He says, to nobody, that it is a thing the Yards have been wanting to do for forty years. Nobody has asked.
+* Let Ruth Calloway see the first chair for herself, and offer her the same table you offered the others
+  $ b6.stair = "table"
+  $ humanity += 1
+  $ standing += 1
+  $ secrecy -= 1
+  She says that it is the most extraordinary offer she has ever heard, and that she will think it over. She says it as though it were a sentence she had been looking for for a hundred years. Behind her, the men of the Loop have stopped pretending to be an army and become a crowd.
+<~
+
+# dawn
+## What answered
+You come up out of the pale house in the first light with the child asleep on your arm, or on someone's, and Josiah Pell in a chair that two of the strongest have carried up between them, because he said that he wished very much to see the lake. He has his face turned to it. He is not smiling now. He looks like a man who is looking at a thing he has been told about and had not thought was real.
+?if b6.sleeper == "kindly"
+  Mrs. Pell has brought him a cup of tea. He holds it in both hands, and does not drink it, and does not need to.
+?end
+?if b6.hall == "lit"
+  The lamp under the lake has burned all night, and the whole shoreline has a faint, steady shine, like a coin held up to the light.
+?end
+Far out on the water, where the little light has always burned, there is a second light. It is not near. It is a long way beyond the first, and a great deal further than the horizon, and it is the colour of a very cold morning, and it is answering.
+Dr. Whitcombe has a wire in her hand, and has been trying to find a way to say what it says. It is from Rome, and it has no name, and it is only a line. It says: "The seventh has been sung. Come east. I am keeping the chair."
+$ do rest()
+=> next
