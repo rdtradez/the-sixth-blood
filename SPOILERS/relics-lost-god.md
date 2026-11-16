@@ -53,3 +53,32 @@ Ch 12, "The First Chair", Friday. Fixed: the cellar and the child at the door (`
 Lore added: Josiah says the lamps are hinges and the first lamp is a door left open for the sixth chair's kin, not the god; Cassian asked the house in 1916 to keep the sixth chair empty until the song was whole, saying he was keeping something safe; Tilly can hold the door for the seventh but the seventh is the sixth blood's.
 
 Hooks left: who Cassian is keeping the chair for and what came through the first lamp; Josiah awake and what is left of him; Tilly's place; Calloway's table; Rudek's stand; Crane and the lit lamp; the Institute's door; the family's haven under the lake; the go east summons.
+
+## Chapters 13 and 14 (session 68)
+
+Ch 13, "The Table", September 1924. Opening: the lead's report (eleven cards from the houses), Josiah awake at the pale house. Night, three of four: Ruth Calloway's table (`b6.table`: a seat, terms, refuse); the lamp under the lake with Crane (`b6.latch`: Crane lights it, the hero lights it, leave it dark and mind it); Tilly's place (`b6.place`: family, Sorrel's school, the pale house); the Institute's crypt door (`b6.crypt`: open and go down, watch, close with the family's mark). Dawn: a second wire from Rome, "Open the first lamp. She is cold."
+
+Ch 14, "The Door Left Open", late September. Fixed: the hall and the lamp opening; Veda, of the sixth house, kept in the first lamp by Cassian since Rome burned, to be woken by a hand she would know (`b6.kept`: tell all, ask first, tell gently); where she is housed (`b6.warm`: family, pale house, Exchange); the other houses at the door (`b6.callers`: receive, family, show Veda, shut). Dawn: she says a ship sails Thursday from New York, the chair in the east is cold and its keeper has little time; Crane will come.
+
+LORE ADDITION TO APPROVE: Veda, a woman of the hero's own (sixth) house, put into the first lamp by Cassian "the year Rome burned". She answers "the sixth chair's kin" from chapter 12's hooks. If this clashes with the planned Book Seven reveal, change her origin, not the chapter flow.
+
+Hooks left: the east and the ship from New York; Crane going; what Veda is wanted for; the Institute stair (twelve more steps); Ruth Calloway's table; Tilly's place; the second light on the lake.
+
+
+## Chapters 15 and 16 (session 69)
+
+Ch 15, "The Ship on Thursday", October 1924. Opening: the lead's report (trunks, the houses' civility by `b6.callers`), a morning with Veda (housing by `b6.warm`). Night, three of four: who keeps the house (`b6.regent`: the lead with the seal, Mr. Ames, Dora Valer); Veda's memory of the sixth house, a white table in a garden by the sea and a seventh chair set apart (`b6.memory`: write it down, the lamp hall, let her be); the family's trades before sailing, a loop (`b6.leave`: school, tithes, guard; most committed wins guard over exchange over school); who sails (`b6.east`: all, few, alone). Dawn: the car to the train.
+
+Ch 16, "The Twentieth Century", Thursday. Fixed: LaSalle Street platform with the houses seeing him off (`b6.farewell`: words, the seal left with Mrs. Pell, none); pier fifty-nine; a hunger scene if needed; Tallis aboard in second class, saying his master is the thing the god keeps for a lamp, not dead, only not woken, and that the east chair is its last (`b6.gray`: hear, press, turn out, watch); the stern at three, Veda wanting something true (`b6.vow`: promise to bring her back, ask what she wants, say you do not know). Dawn: the purser's list has a Mr. C. Hale, first class, booked by wire from London and paid in advance.
+
+Hooks left: who Mr. C. Hale is (Cassian's alias "C." from the 1916 ledger); what the east chair holds and its keeper's little time; the white table; the tenants, six, the sixth unfound; Josiah and Mrs. Pell holding Chicago; Whitcombe's twelve more steps; the family's hold on the house.
+
+## Chapters 17 and 18 (session 70)
+
+Ch 17, "First Class", late October 1924, the third day out. Opening: the lead's report (or Crane's book of the voyage if he sails alone), a morning with Veda and the sea. Night, three of four: Mr. C. Hale's door, B 31 (`b6.hale`: with the family at the corner, alone, a card under the door; Hale is a hand and a pen of "C.", not a tenant or a lord, and holds a letter to be given at Cherbourg only); the wireless room (`b6.wire`: answer everyone, short by the lead's code, silent; wires from the house, Mrs. Pell, Cordelia, and four unsigned Latin words from Rome); the family's watch (`b6.ship`, a loop: cabins, hold, wireless; hold wins; four unlisted crates with the gold stamp already put off at Cherbourg); the gold light on the water that answers the six notes (`b6.light`: sing the seventh, silent, bar the door). Dawn: land, and a card under Crane's door, "Cherbourg. Do not land without the letter."
+
+Ch 18, "The Letter at Cherbourg". Fixed: the tender and quay (`b6.landing`: family first, hero first, watch from the rail; Hale holds the long envelope; a woman in a fur, a man with glasses and a false priest watch the liner); the thirst if needed; the letter from C. (`b6.letter`: aloud, alone, burn; it says he kept two chairs, she has little time, take the seventh coach of the Friday night train from Paris to the end of the line, and a pencilled line, "Do not let her see this first"); the hotel window (`b6.stay`: Crane stays as the telephone, goes on, or chooses); dawn, the road (`b6.road`: boat train, motor by back roads, own arrangements).
+
+Lore note: Hale is a servant of "C." and is not Cassian himself. If the Book Seven plan wants "C. Hale" to be Cassian in person, change the dialogue in chapter 17, not the flow.
+
+Hooks left: the seventh coach and the end of the line; who the "she" with little time is and the chair kept; the pencilled line and whoever wrote it; the woman in the fur at Cherbourg; the four crates; the light that answered; Crane's decision; Josiah and Mrs. Pell holding Chicago; Tallis aboard.

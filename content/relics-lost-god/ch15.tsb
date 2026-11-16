@@ -1,0 +1,246 @@
+// Book Six, Chapter 15 (session 69). October 1924: the house is put in order before the ship sails east.
+// Opens with the business lead's report and a short morning with Veda, then one night phase of three actions out of four, then a dawn.
+// The coven fronts it: the lead holds the house, the family is the hero's arm while he is away, and the family decides who sails. Names are always checked with in_circle().
+// Reads b6.circle, b6.warm, b6.kept, b6.callers, b6.table, b6.latch, b6.crypt, b6.place. Sets b6.regent, b6.memory, b6.leave and b6.east.
+// Uses meet(), discover(), chart(), has_gift(), gift_holder(), coven_task(). Ends with rest() and => next.
+@chapter b6c15
+@title The Ship on Thursday
+@book relics-lost-god
+@version 1
+
+# start
+## The first week of October
+$ b6.regent = "lead"
+$ b6.memory = "rest"
+$ b6.leave = "none"
+$ b6.east = "alone"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> report
+---
+~> veda
+---
+$ do phase("night", 3)
+The ship sails in six nights. {cap(voice("hunger"))}. Four things want doing, and strength for three.
+-> night
+
+# report
+?if _lead != ""
+  {_reader_name} has put a trunk, a ticket folder and a list on the desk, in that order, and says that the house has been quietly packing itself for a week, as a house does when it suspects it is about to be left.
+?else
+  Dora has put a ticket folder and a list on the desk and says that the Exchange has been quietly packing itself for a week.
+?end
+?if b6.callers == "family"
+  The houses of the city have been very civil. A hamper came from the Loop, and nobody will say who ate the sandwiches.
+?elif b6.callers == "show"
+  The city has stopped talking about a lamp and started talking about a woman. There is a boy on the corner who sells a newspaper with a drawing of her in it, which is nothing like.
+?elif b6.callers == "shut"
+  The houses of the city have not called again. A door shut civilly is remembered for a good many years.
+?end
+?if b6.crypt == "open"
+  Dr. Whitcombe has sent word that she has gone down eleven steps and no further, on principle, and that the stair has not moved.
+?end
+Mr. Crane has booked his passage, and a second cabin, and a third, in case. He says that it is the first time in eight years that he has had a use for a ledger.
+<~
+
+# veda
+## Seven nights awake
+$ do chart("chicago.goldcoast")
+She has learned the telephone, the electric kettle and the gramophone, in that order, and has lost patience with the gramophone. She has been given clothes that are not hers, and wears them with a sort of grave good manners, like a visitor in someone else's church.
+?if b6.warm == "family" and coven_size() > 0
+  She has been taught to play a card game at the family's table, and has already won three times and will not say how.
+?elif b6.warm == "pale"
+  Josiah has been teaching her, in the garden of the pale house, the names of every street in the city. She has asked, twice, why none of them is a sensible one.
+?else
+  Mr. Ames has given her a desk in the east gallery and a ledger to read, and she has read it, all of it, and asked him why a man would keep two sets.
+?end
+She says that she remembers the lamp as a cold, and not as a dark. She says that she has begun to think of Cassian as a person, and not as a weather, and that she is not sure whether this is progress.
+Mrs. Pell has made her a gray cardigan, which is now the third.
+<~
+
+# night
+## Six nights
+:night
+?if actions_left() == 3
+  October has come in off the lake with a smell of coal smoke and wet leaves. There are trunks in the hall and a list on every table.
+?elif actions_left() == 2
+  The rain has stopped and the street is polished. A taxi stands at the kerb with its engine running and nobody in it, which is a thing a city does when it is thinking.
+?else
+  It is the last hour before the dawn. You have strength for one more.
+?end
+* Choose who keeps the house while you are away [once] ?if actions_left() > 0
+  ~> regent
+  $ do act()
+* Sit with Veda, and ask what she remembers [once] ?if actions_left() > 0
+  ~> memory
+  $ do act()
+* Set the family's trades in order before you sail [once] ?if actions_left() > 0
+  ~> leave
+  $ do act()
+* Settle who sails with you [once] ?if actions_left() > 0
+  ~> east
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# regent
+## Who holds the lantern
+$ do chart("chicago.exchange")
+It is, in the end, a question of a lantern. The Exchange has a charter, a gallery, forty keepers, and an enemy or two it has not yet made, and there is a night in the year when somebody has to sit at the long desk and say no. You will not be there for it. Somebody must say it for you.
+?if _lead != ""
+  {_reader_name} has not offered. She is standing very straight, with the ledger shut on her arm, and the whole of her is not offering.
+?end
+:the_regent
+* Give the house to {_reader_name}, with the lantern and the seal, and the family at her back ?if _lead != "" and coven_size() > 0
+  $ b6.regent = "lead"
+  $ humanity += 1
+  $ standing += 2
+  She takes the seal as though it were a baby bird. She says that she will not need it, and then that she will probably need it a great deal, and then that she would be obliged if you came back, because she has a list of things she does not intend to decide. The family, round the long table, gives her a small, ragged, genuinely heartfelt cheer.
+* Leave Mr. Ames in the long chair, with a letter from Crane and the lead's key [once] ?if b6.ames == "partner" or b6.ames == "bargain"
+  $ b6.regent = "ames"
+  $ cunning_brutal += 1
+  $ standing += 1
+  $ do meet("ames")
+  Mr. Ames says that he would be honoured, in the tone of a man who has been waiting years to be insulted by an offer. He sets down a short list of rules, which are the same as yours and a little stricter. He says that Mr. Crane will approve of it, and that he does not require him to.
+* Leave Dora Valer to keep the books, and the keepers to keep Dora
+  $ b6.regent = "dora"
+  $ humanity += 2
+  $ secrecy += 1
+  Dora says, with the extreme calm of the very frightened, that she kept her grandfather's ledger for nine years, and that this is not so very different. Then she sits down rather quickly. A keeper brings her tea. Nobody mentions the tea.
+$ do discover("the_regent")
+<~
+
+# memory
+## What she remembers
+$ do chart("chicago.velati")
+She sits by the window of the room over the garden, with her hands round a cup that she does not drink from, and the lake very flat behind her. She says that she is not sure how to begin, since she has never had to explain a thing that nobody else could possibly know.
+?if b6.kept == "ask"
+  "You asked me what he told me," says Veda. "I have been thinking about what he did not."
+?elif b6.kept == "plain"
+  "You told me the whole of it," says Veda. "It is a great gift. I find I should like to return it."
+?else
+  "You were gentle," says Veda. "I have been rather ashamed of how much I liked it."
+?end
+She says that she remembers the sixth house as a long white table in a garden, with the doors open to the sea, and a woman at the head of it who laughed. She says that she does not remember the woman's name. She says that she remembers the day Cassian came to the table and sat on the floor.
+:the_memory
+* Ask her to tell it slowly, and write it down
+  $ b6.memory = "ask"
+  $ cunning_brutal += 1
+  $ do discover("veda_table")
+  It takes the whole night. It is a very odd sort of memory, bright at the edges and blank in the middle, like a photograph that has been held too near a fire. She remembers the white table, and the garden, and the sea. She remembers six chairs and a seventh set a little apart. She remembers that on the day he came she was told to go and fetch the lamp.
+* Take her down to the lamp, and see what the hall will give her
+  $ b6.memory = "lamp"
+  $ humanity += 1
+  $ do discover("veda_table")
+  The hall is cold and very quiet. She walks round the plinth twice, and lays her palm on the stone, and says that it is the first thing in this city that has felt like a hand. A faint gold runs up the wall, under her fingers, and stops. She says that she was not afraid of the lamp. She says that she was afraid for it.
+  ?if has_gift("old_blood")
+    Your own blood turns over in you, like a sleeper, and settles.
+  ?end
+* Let her be, and keep her company without asking
+  $ b6.memory = "rest"
+  $ humanity += 2
+  $ secrecy += 1
+  You sit with her by the window until the sky goes gray, and she tells you nothing at all that is of the least importance, and a good deal that is not. She says that she liked the smell of the coal smoke, which nobody does. She falls asleep in the chair at last, with her cardigan over her knees.
+<~
+
+# leave
+## The family's trades
+$ do chart("chicago.valere")
+It is, at bottom, a matter of leaving. There is a school in Bronzeville that wants a patron, a ledger of tithes the Loop owes the Exchange, and a street of clubs that has not yet been made quite safe. If you go, none of it will keep itself.
+?if coven_size() > 0
+  The family has come into the keeper house in the rain, with their coats half on, and settled round the long table to be told. They look, all of them, as though they had been told it already and were being polite.
+?else
+  Dora sets it out on the long table, and has a great many opinions, and stands very straight.
+?end
+:the_leave
+* Back Cordelia's school for the winter, with the Exchange's money and a keeper at the door [once]
+  ?if b6.leave == "none"
+    $ b6.leave = "school"
+  ?end
+  $ humanity += 1
+  $ do earn(-2)
+  $ do meet("cordelia")
+  Cordelia says that she was going to ask, and that she is very much obliged to be spared it. She says that the roof will be mended before the first frost, and that there will be a coat for every child in the building. She does not weep. She asks for the receipt.
+  -> :the_leave
+* Set the Exchange's tithes to run themselves, on a calendar the family will keep [once]
+  ?if b6.leave != "guard"
+    $ b6.leave = "exchange"
+  ?end
+  $ cunning_brutal += 1
+  $ standing += 1
+  ?if _lead != ""
+    {_reader_name} makes a calendar on a sheet of brown paper and pins it to the wall, and there is something so solid about it that the whole room feels, quite suddenly, that it will be all right.
+  ?else
+    Dora makes a calendar on a sheet of brown paper, and pins it to the wall.
+  ?end
+  -> :the_leave
+* Set a standing guard on the clubs, the school and the stair, and let the city see it [once]
+  $ b6.leave = "guard"
+  $ standing += 1
+  $ secrecy -= 1
+  ?if coven_size() > 0
+    $ do coven_task(_lead, "guard")
+    The family is given the three places and takes them without a word, and one of them is heard to remark that the city has no idea what it has let in.
+  ?else
+    Dora hires men from the keepers' lodge, and they stand where they are put.
+  ?end
+  ?if can_acquire("informants")
+    $ do acquire("informants")
+  ?end
+  -> :the_leave
+* That will do for the family tonight ?if b6.leave != "none"
+  <~
+-> :the_leave
+
+# east
+## Who sails
+$ do chart("chicago.depot")
+There are four berths on the best liner of the week, and a fifth in a cabin that Mr. Crane has not so far explained. The ship sails from New York at noon on Thursday. Nobody knows what is on the far side of it, and the ticket agent in LaSalle Street has put it plainly: if a person is going, a person should have a coat.
+?if b6.circle == "stay"
+  The family stayed at home when you went west, and has made its life there, and you will not ask it to leave it again.
+?end
+:the_east
+* Take the family, all of them, as a house goes out when it goes at all ?if b6.circle != "stay" and coven_size() > 1
+  $ b6.east = "all"
+  $ humanity += 1
+  $ standing += 2
+  It is a very great deal of luggage. It is also, you find, a very great comfort. They stand on the platform in the early dark, on a Chicago October, all of them with the identical anxious look of people who have been told to be calm, and not one of them has asked where they are going.
+* Take two or three of the family, the ones the road wants, and leave the rest to hold the house ?if b6.circle != "stay" and coven_size() > 0
+  $ b6.east = "few"
+  $ cunning_brutal += 1
+  $ standing += 1
+  ?if gift_holder("shadows") != ""
+    {name(gift_holder("shadows"))} is among them, and carries nothing at all, and is already somehow at the foot of the stair.
+  ?end
+  You choose by the road and not by the heart, which is a thing that is not forgiven at once, and is understood at last.
+* Go with Veda and Crane, and no one else
+  $ b6.east = "alone"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  It is a smaller party than the occasion ought to have had. Crane says that it will be like the old days, which, as he is aware, were not at all like this.
+$ do discover("the_east_ship")
+<~
+
+# dawn
+## To the train
+The last night is the quietest. The lamp in the hall is lit, and the keepers are at their posts, and a car stands at the door with a hamper of Mrs. Pell's in the back of it.
+?if b6.regent == "lead"
+  {_reader_name} is on the step with the seal in her hand, and she says nothing at all, and that is the whole farewell.
+?elif b6.regent == "ames"
+  Mr. Ames lifts his hat, and says that he will see to the clocks.
+?else
+  Dora Valer stands in the lighted door with her ledger to her chest.
+?end
+Veda is at the window of the car with her cheek against the glass. She says that she has never seen a train. She says that she would like to be told, if it is not too much trouble, what is going to happen to her on the other side.
+She says that she is not at all afraid, and says it twice.
+$ do rest()
+=> next

@@ -1207,6 +1207,126 @@
       "title": "The first chair",
       "book": "relics-lost-god",
       "text": "Under the pale house on the lake shore, a man sits in a plain oak chair with an open door cut in its arm, the last and quietest of the five houses."
+    },
+    "the_loop_table": {
+      "category": "lore",
+      "title": "The Loop table",
+      "book": "relics-lost-god",
+      "text": "Ruth Calloway's house and the lake shore house settled, after the seventh note, what a table is for and who sits at it."
+    },
+    "the_first_lamp": {
+      "category": "lore",
+      "title": "The first lamp",
+      "book": "relics-lost-god",
+      "text": "The bronze lamp that came to Chicago is a latch meant to be lifted from the inside, and something was kept within it."
+    },
+    "the_lamp_under_the_lake": {
+      "category": "lore",
+      "title": "The lamp under the lake",
+      "book": "relics-lost-god",
+      "text": "Under the lake shore lies a long cold hall with a plinth of dark stone, where the first lamp stands and the family keeps its watch."
+    },
+    "the_institute_stair": {
+      "category": "lore",
+      "title": "The Institute stair",
+      "book": "relics-lost-god",
+      "text": "Beneath the Oriental Institute a carved door gives onto a stair that has not been dug, warm, and smelling of resin and old sun."
+    },
+    "veda_kept": {
+      "category": "lore",
+      "title": "Veda, kept",
+      "book": "relics-lost-god",
+      "text": "Veda says that Cassian told her little and told it kindly: she was to be woken by a hand she would know, and go east."
+    },
+    "the_sixth_kin": {
+      "category": "lore",
+      "title": "The sixth chair's kin",
+      "book": "relics-lost-god",
+      "text": "Veda is of the sixth house, and so of the hero's own line. No one has sat in the sixth chair in Chicago for two thousand years."
+    },
+    "the_regent": {
+      "category": "lore",
+      "title": "The house kept",
+      "book": "relics-lost-god",
+      "text": "Someone holds the lantern, the seal and the long desk at the Exchange while the hero is across the sea."
+    },
+    "veda_table": {
+      "category": "lore",
+      "title": "The white table",
+      "book": "relics-lost-god",
+      "text": "Veda remembers a long white table in a garden open to the sea, six chairs and a seventh set a little apart."
+    },
+    "the_east_ship": {
+      "category": "lore",
+      "title": "The ship east",
+      "book": "relics-lost-god",
+      "text": "A liner sails from New York on a Thursday in October 1924, carrying the hero, Veda, Crane and whoever the family sends."
+    },
+    "the_limited": {
+      "category": "lore",
+      "title": "The Limited",
+      "book": "relics-lost-god",
+      "text": "The Twentieth Century Limited carried the hero out of LaSalle Street, watched by the houses of the city."
+    },
+    "tallis_master": {
+      "category": "lore",
+      "title": "Tallis's master",
+      "book": "relics-lost-god",
+      "text": "The tenants are lent by the god, and Tallis serves the thing the god keeps for a lamp, which is not dead and has only not been woken."
+    },
+    "the_stern_vow": {
+      "category": "lore",
+      "title": "The stern deck",
+      "book": "relics-lost-god",
+      "text": "On the half deck at the stern of the liner Veda was told something true before the east."
+    },
+    "mr_hale": {
+      "category": "people",
+      "title": "Mr. C. Hale",
+      "book": "relics-lost-god",
+      "text": "A mild clerk in a dark suit with a pen behind his ear, a hand and a pair of eyes in the service of \"C.\", who is not a tenant or a lord."
+    },
+    "the_marconi_room": {
+      "category": "places",
+      "title": "The wireless room",
+      "book": "relics-lost-god",
+      "text": "The hot closet at the top of the liner where the wires from Chicago and an unsigned one from Rome came in."
+    },
+    "the_family_watch": {
+      "category": "lore",
+      "title": "The family's watch",
+      "book": "relics-lost-god",
+      "text": "The family kept the doors, the hold and the wireless room of the liner, and found four unlisted crates with a gold stamp."
+    },
+    "the_light_at_sea": {
+      "category": "lore",
+      "title": "The light on the water",
+      "book": "relics-lost-god",
+      "text": "Mid ocean a gold light with no ship under it answered the song of six notes."
+    },
+    "cherbourg_quay": {
+      "category": "places",
+      "title": "The Quai de France",
+      "book": "relics-lost-god",
+      "text": "Where the tender landed in the rain, and where more than one person was watching the liner."
+    },
+    "the_letter_c": {
+      "category": "lore",
+      "title": "The letter at Cherbourg",
+      "book": "relics-lost-god",
+      "text": "C. wrote that he kept two chairs, that she has little time, and that the seventh coach of the Friday night train from Paris goes to the end of the line."
+    },
+    "the_harbour_window": {
+      "category": "lore",
+      "title": "The harbour window",
+      "book": "relics-lost-god",
+      "text": "The night in the hotel when the party decided who would go on east."
+    },
+    "the_road_east": {
+      "category": "lore",
+      "title": "The road east",
+      "book": "relics-lost-god",
+      "text": "The way the party left Cherbourg for the night train and its seventh coach."
     }
   }
 }

@@ -1,0 +1,207 @@
+// Book Six, Chapter 18 (session 70). Cherbourg, the night the liner lands: the tender, the quay, the letter and the choice of road.
+// One fixed night in four scenes (the quay, the thirst if needed, the letter, the hotel by the harbour) and a short dawn. No night phase.
+// The coven fronts it: the family goes ashore as the hero's arm, hungry or fed, and sets the rooms, the trunks and the stair. Names are always checked with in_circle().
+// Reads b6.circle, b6.east, b6.hale, b6.wire, b6.ship, b6.light, b6.vow, b6.gray, b6.regent. Sets b6.landing, b6.letter, b6.stay and b6.road.
+// Uses meet(), discover(), has_gift(), gift_holder(), must_feed(), feed(). Ends with rest() and => next.
+@chapter b6c18
+@title The Letter at Cherbourg
+@book relics-lost-god
+@version 1
+
+# start
+## The tender
+$ b6.landing = "family"
+$ b6.letter = "aloud"
+$ b6.stay = "go"
+$ b6.road = "train"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> quay
+---
+?if must_feed()
+  ~> thirst
+  ---
+?end
+~> letter
+---
+~> hotel
+---
+-> dawn
+
+# quay
+## The Quai de France
+The liner does not come in. She lies off in the roads, with all her lights burning, and the tender goes out to her in the dusk with a flat white lamp and a smell of tar. It takes an hour to unload three hundred people and their trunks, and the French customs, who are not in a hurry, put every passenger through a long low shed with a stove in it.
+There is a fine rain. The quay is wet and gold under the lamps, and a hundred porters in blue smocks are shouting at the same instant, in four languages, none of which has a word for orderly.
+?if b6.hale == "family" or b6.hale == "card"
+  Mr. Hale is already on the quay when you land, in a dark overcoat with his collar turned up, standing where the lamp is dimmest, with a long envelope held very exactly at his chest, like a man holding a candle in a draught.
+?else
+  Mr. Hale is on the quay, in a dark overcoat, with a long envelope, and he is looking at the tender, and not at you.
+?end
+?if b6.ship == "hold"
+  The four crates with the gold stamp stand under a tarpaulin at the end of the shed, with a customs man sitting on one of them, eating an apple. Nobody has asked what they are.
+?end
+:the_landing
+* Send the family ashore first, to take the shed and the porters and the rooms
+  $ b6.landing = "family"
+  $ standing += 1
+  $ cunning_brutal += 1
+  ?if b6.east != "alone" and coven_size() > 0
+    $ do coven_task(_lead, "guard")
+    {_reader_name} goes down the ladder first, in a gray hat, with a list. Within a quarter of an hour the shed has been persuaded that the first class luggage is a different species from the others, the porters have been paid in advance, and a motor is waiting at the end of the quay with a rug in it.
+    ?if gift_holder("charm") != ""
+      {name(gift_holder("charm"))} says three sentences to the customs officer, and the customs officer is not seen to stamp anything again for the rest of the evening.
+    ?end
+  ?else
+    Crane, who has been a sort of family for nine years, goes first, and says in perfect, wretched school French that he is a shipping agent and that nothing in the world could interest less. He is waved through with disgust.
+  ?end
+* Go ashore yourself, first, with Veda on your arm, and let the others follow
+  $ b6.landing = "first"
+  $ humanity += 1
+  $ secrecy -= 1
+  Veda goes down the ladder with her chin up and her hat on very straight, and stands on the stones of Europe with an expression like a person visiting an old cousin's grave. She says, in a voice that carries, that the stones are the right shape.
+* Hang back on the tender, and watch the quay from the dark of the rail
+  $ b6.landing = "watch"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  From the rail you see what the quay does when it thinks nobody is watching it. A man in a long coat is looking at the liner through a pair of glasses. A woman in a good fur is not meeting anyone. A priest, who is not a priest, is talking to Mr. Hale, and then is not.
+$ do discover("cherbourg_quay")
+<~
+
+# thirst
+## The first night on land
+Land is a bad thing for the hunger. It is full of the smell of living bodies, packed in a shed, warm and wet and frightened of the customs. It comes up in you before you have taken off your gloves.
+?if b6.east == "all" and coven_size() > 0
+  The family has a flask. It is in the second trunk, in the hatbox, wrapped in a silk scarf, and {_reader_name} has put it where your hand will go without your having to ask.
+?end
+* Take the flask the family brought ?if b6.east != "alone" and coven_size() > 0
+  $ do feed("donor")
+  $ humanity += 1
+  It is cold, and it tastes of home. You drink it behind the stove in the shed, and nobody sees, and nobody remarks on it.
+* Take a porter in an empty shed behind the wharf, who will think he fell
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  $ secrecy -= 1
+  He is a big, tired Breton with a barrow of other people's luggage, and he sits down on it, and does not remember. You leave him a hundred francs in his cap, which is more than he has earned in a week.
+* Find the dockside stables and take what is there
+  $ do feed("animal")
+  $ secrecy += 1
+  There is a gray cart horse at the end of the line who stands as if he had been waiting for you. It is a poor, patient meal. It is enough.
+* Hold it, and keep your hands in your coat
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  You hold it. It is a very long hour. It does not improve.
+<~
+
+# letter
+## The long envelope
+$ do meet("chale")
+The hotel is a tall pale building on the harbour front, with a glass canopy and a doorman who has seen it all, and Mr. Hale has taken the whole of the second floor. He stands in the sitting room, under the lamp, with the envelope in his hands. It is cream laid paper, and the seal is a plain disc of black wax, with six rays, and one of the rays is a smear.
+He says that he has been told to give it into your hand, and to say a few words that are not his own, and then to go.
+?if b6.wire == "short" or b6.wire == "silent"
+  He says that the wireless in the ship was kept silent by someone with the gift of silence, and that "C." was pleased to hear it.
+?end
+?if b6.light == "sing"
+  He says, without being asked, that "C." has been told of a light, and a note, and that he said a word under his breath that Mr. Hale will not repeat.
+?end
+He lays it on the table between you. You break the seal.
+The hand is square and heavy. It is written, as you can see, in a great hurry, by a man who writes slowly, and who has been writing the same thing in his head for a very long time. It is not long.
+"You have come further than I thought you could. I did not know how. I knew only that it would be done, and I went on with what I had to do. I kept her chair. I kept the other. I am sorry that it has taken so long, and I am not sorry for what it cost. The night train from Paris on Friday has a seventh coach. Take it to the end of the line. I will be there, and so will the one I have kept. She has little time, and I have less. C."
+There is, under it, a line in another hand, small and in pencil, that has been rubbed with a thumb: "Do not let her see this first."
+:the_letter
+* Read it aloud, to Veda and to the family, all of it
+  $ b6.letter = "aloud"
+  $ humanity += 1
+  $ standing += 1
+  You read it in the sitting room, with the doors shut, and when you come to the pencilled line you read that too. Nobody says anything for a moment. Veda says, quite steadily, that she thought there would be one. She says that she would rather have it spoken than hidden, since she has been hidden once already.
+  ?if b6.east == "all" and coven_size() > 0
+    The family keeps very still. It is, you notice, a very particular stillness, and it is not hostile. {_reader_name} takes the letter from your hand, with permission, and reads it herself, and gives it back.
+  ?end
+* Read it to yourself, and tell Veda only what you judge she can bear
+  $ b6.letter = "alone"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  You read it twice, and fold it, and tell her that the chair is in the east, and that Cassian is waiting, and that there is a train. It is true, and it is not the whole. She looks at you for a moment longer than is comfortable, and says that she hopes you know what you are doing.
+* Put it in the grate unread beyond the first line, and let the fire have it
+  $ b6.letter = "burn"
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  You hold it over the coals. It catches at the corner, and goes quickly, with a sharp smell of resin. Mr. Hale watches it burn with the expression of a man who has been told that this might happen and had hoped it would not. He says that he has the whole of it by heart, if you should want it. He does not offer to recite.
+$ do discover("the_letter_c")
+?if b6.hale == "family"
+  Mr. Hale bows, and says that he has done what he was told, and goes out into the corridor. He does not go down the stairs.
+?else
+  Mr. Hale bows, and says that he has done what he was told, and goes. He is not seen on the stairs.
+?end
+<~
+
+# hotel
+## The window on the harbour
+$ do meet("veda")
+$ do meet("crane")
+It is two in the morning. The rain has stopped, and the harbour has gone black and still, with a few lights wavering on it. Veda stands at the long window with her forehead against the glass. Crane is in a chair by the fireplace, with a glass of brandy on the arm and his ledger on his knee.
+?if b6.vow == "ask"
+  She says that she wanted to see the sea in the morning, and that she has seen it, and that it was even bigger than she remembered. She says that she thinks that she wanted the white table next, and that she is a little afraid of it.
+?elif b6.vow == "promise"
+  She says that she has been counting, and that it is eleven days since you promised that she should go back to Chicago. She says that she does not mean it as a reproach.
+?else
+  She says that she has not asked what will happen, and that she is rather pleased with herself.
+?end
+Crane says that he is, as a matter of plain commercial prudence, in doubt. He says that a man of his habits has gone a good deal further than a man of his habits ought, and that the next stage is not on any timetable.
+:the_hotel
+* Ask Crane to stay at the hotel, and keep the line open to the house, and be what you will need at the other end of a wire ?if b6.east != "all" or coven_size() == 0
+  $ b6.stay = "stay"
+  $ cunning_brutal += 1
+  $ standing += 1
+  He is silent a long time. He says that he is not sure that anybody has ever asked him to be a telephone. Then he says, with a rather dreadful dignity, that he will be the best telephone in France.
+* Ask Crane to come on, as far as the end of the line
+  $ b6.stay = "go"
+  $ humanity += 1
+  $ do meet("crane")
+  He lets out a breath that is very nearly a laugh. He says that he had been afraid you would not. He says that the seventh coach has a bar, and that he was told so in the first class lounge by a man who had no reason to lie.
+* Tell him it is his choice, and that you will not think the less of him
+  $ b6.stay = "choice"
+  $ humanity += 2
+  He looks at the fire. He says that nobody has ever told him it was his choice, and that he finds it extremely unfair. After a time he says that he has packed already.
+$ do discover("the_harbour_window")
+?if b6.east == "all" and _lead != "" and in_circle(_lead)
+  {_reader_name} comes to the door with a list, and a pencil, and two kinds of tea, and says that the family has taken the whole of the second floor. She says that the trunks are in. She says that the stair is guarded, from above and from below, and that nobody in the building is aware of it.
+?end
+<~
+
+# dawn
+## The road
+At first light the train from Paris is a plume of smoke far down the line, and the whole of the harbour smells of coal and fish and wet stone. The hotel has put out a breakfast on a white cloth, with a bowl of bright red cherries that cannot possibly be in season.
+There are three roads east. The boat train goes to Paris by noon, and the family can take it, with the trunks, and a place in the seventh coach of Friday's night train has been held for you at the Gare de l'Est. A motor can be hired, with a driver, to go by the back roads, and be at the Gare in the evening, unseen. Or you can ask that the arrangements be made over again by your own people, and refuse Cassian's.
+:the_road
+* Take the boat train, with the family and the trunks, as the ticket says
+  $ b6.road = "train"
+  $ standing += 1
+  The porters load the trunks with a sort of resigned ferocity. The family goes down to the platform in a body, and the stationmaster, who has seen kings, stands aside.
+* Hire the motor, and go by the back roads, with Veda and as few as you can
+  $ b6.road = "car"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  The driver is a Norman with a drooping moustache who says that the road is bad, and that he knows the road. He is right on both counts.
+* Refuse the arrangements, and have your own people make others
+  $ b6.road = "own"
+  $ cunning_brutal += 2
+  $ standing += 1
+  ?if _lead != "" and b6.east != "alone"
+    {_reader_name} takes a notebook and a telephone and a second pot of tea, and in twenty minutes the family has a different train, a different compartment and a different arrival, and has booked the seventh coach on Friday under a name that is not yours.
+  ?else
+    Crane takes a telephone and a notebook and says, with a kind of ghastly cheerfulness, that this is what he is for. In twenty minutes there is a different train, and a different arrival, and a seventh coach on Friday booked under a name that is not yours.
+  ?end
+$ do discover("the_road_east")
+?if b6.landing == "watch"
+  Veda says she saw somebody on the quay last night who was looking at you. She says it was a woman in a fur, and that she has seen her somewhere before, and cannot say where.
+?end
+She takes your arm on the step. She says, quite low, that it is the first time in two thousand years that she has been on the side of a journey and not at the bottom of it.
+$ do rest()
+=> next

@@ -91,6 +91,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 62: Book Six chapters 1 and 2
 - [x] Session 63: Book Six chapters 3 and 4
 - [x] Session 64: Book Six chapters 5 and 6
+- [x] Session 70: Book Six chapters 17 and 18
 - [x] Session 65: Book Six chapters 7 and 8
 - [x] Session 66: Book Six chapters 9 and 10
 - [x] Session 67: Book Six chapters 11 and 12
@@ -787,3 +788,33 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The coven fronts both chapters: the lead's report, the family housing the guest and taking in the child, standing in the room against a rival house, building the haven and holdings, singing together and holding the stair. Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
 - Tests: `tests/book6.test.js` now covers chapters 11 and 12.
 - This branch is stacked on session 66 (PR #73), which is stacked on session 65. Plans are in `SPOILERS/relics-lost-god.md`.
+
+### Session 68 notes (Book Six, chapters 13 and 14)
+
+- Chapters `b6c13` and `b6c14` are in `content/relics-lost-god/` (`ch13.tsb`, `ch14.tsb`), about 5,000 words together. The manifest entry lists fourteen chapters and stays `"incomplete": true`.
+- Chapter 13 opens with the business lead's report and a short morning scene, plays one night phase of three actions out of four, then a dawn. Chapter 14 is one fixed night in four scenes and a dawn. Both end with `rest()` and `=> next`.
+- New decision flags (`b6.` prefix, registered): `b6.table`, `b6.latch`, `b6.place`, `b6.crypt` (chapter 13) and `b6.kept`, `b6.warm`, `b6.callers` (chapter 14). `b6.table`, `b6.latch`, `b6.warm` and `b6.callers` are major. (`b6.lamp` and `b6.door` were already taken by chapters 4 and 8.)
+- Content: one new person (`veda`), six codex entries. No engine change, schema or migration.
+- The coven fronts both chapters (the lead's report, the family as the room at the table, minding the lamp, taking the new arrival in, receiving the other houses). Names are always checked with `in_circle()`; the coven-names check is clean for Book Six.
+- Tests: `tests/book6.test.js` now covers chapters 13 and 14.
+- This branch is stacked on session 67. Plans are in `SPOILERS/relics-lost-god.md`. One small lore addition is flagged for the owner (see that file).
+
+### Session 69 notes (Book Six, chapters 15 and 16)
+
+- Chapters `b6c15` and `b6c16` are in `content/relics-lost-god/` (`ch15.tsb`, `ch16.tsb`), about 5,000 words together. The manifest entry lists sixteen chapters and stays `"incomplete": true`.
+- Chapter 15 opens with the business lead's report and a short morning with Veda, plays one night phase of three actions out of four, then a dawn. Chapter 16 is one fixed night in four scenes (the hunger scene only runs if `must_feed()`) and a dawn. Both end with `rest()` and `=> next`.
+- New decision flags (`b6.` prefix, registered): `b6.regent`, `b6.memory`, `b6.leave`, `b6.east` (chapter 15) and `b6.farewell`, `b6.gray`, `b6.vow` (chapter 16). `b6.regent`, `b6.east` and `b6.gray` are major. `b6.leave` is a multi pick loop where the most committed pick wins (guard over exchange over school).
+- Content: six codex entries. No engine change, schema or migration.
+- The coven fronts both chapters: the lead keeps the house, the family's trades and guard are set before sailing, the family decides who sails and holds the ship. Names are always checked with `in_circle()`; the coven-names check is clean for the new files.
+- Tests: `tests/book6.test.js` now covers chapters 15 and 16.
+- This branch is stacked on session 68 (PR #75). Plans are in `SPOILERS/relics-lost-god.md`.
+
+### Session 70 notes (Book Six, chapters 17 and 18)
+
+- Chapters `b6c17` and `b6c18` are in `content/relics-lost-god/` (`ch17.tsb`, `ch18.tsb`), about 5,000 words together. The manifest entry lists eighteen chapters and stays `"incomplete": true`.
+- Chapter 17 opens with the business lead's report and a short morning with Veda, plays one night phase of three actions out of four, then a dawn. Chapter 18 is one fixed night in four scenes (the thirst scene only runs if `must_feed()`) and a dawn. Both end with `rest()` and `=> next`.
+- New decision flags (`b6.` prefix, registered): `b6.hale`, `b6.wire`, `b6.ship`, `b6.light` (chapter 17) and `b6.landing`, `b6.letter`, `b6.stay`, `b6.road` (chapter 18). `b6.light` and `b6.letter` are major. `b6.ship` is a multi pick loop where the most committed pick wins (hold over wire over cabins).
+- Content: one new person (`chale`, the person id `hale` already belongs to the London solicitor), eight codex entries. No engine change, schema or migration.
+- The coven fronts both chapters: the lead's report, the family keeping the ship's doors, hold and wireless room, going ashore first and setting the rooms and the road. Names are always checked with `in_circle()`; the coven-names check is clean for Book Six.
+- Tests: `tests/book6.test.js` now covers chapters 17 and 18 (and the chapter count).
+- This branch is stacked on session 69. Plans are in `SPOILERS/relics-lost-god.md`.

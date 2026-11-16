@@ -1,0 +1,246 @@
+// Book Six, Chapter 13 (session 68). September 1924: Calloway's table, the lamp under the lake, Tilly's place, the Institute's door.
+// Opens with the business lead's report and a short morning with Josiah Pell, then one night phase of three actions out of four, then a dawn.
+// The coven fronts it: the lead reports, the family is the room Calloway sits in, minds the lamp and takes the child in. Names are always checked with in_circle().
+// Reads b6.circle, b6.hall, b6.stair, b6.note, b6.singer, b6.rival, b6.sleeper. Sets b6.table, b6.latch, b6.place and b6.crypt.
+// Uses meet(), discover(), chart(), has_gift(), gift_holder(). Ends with rest() and => next.
+@chapter b6c13
+@title The Table
+@book relics-lost-god
+@version 1
+
+# start
+## The first week of September
+$ b6.table = "terms"
+$ b6.latch = "wait"
+$ b6.place = "family"
+$ b6.crypt = "watch"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> report
+---
+~> josiah
+---
+$ do phase("night", 3)
+The city has gone quiet in the particular way of a city that has heard something. {cap(voice("hunger"))}. Four things want you, and strength for three.
+-> night
+
+# report
+?if _lead != ""
+  {_reader_name} has set the lantern on the desk and the desk in order, and says that the house has had eleven cards in nine days, from houses that never wrote before, and that nine of them say the same thing in different hands: that they would be obliged to be told what was sung.
+?else
+  Dora has set the ledger on the desk and says that the Exchange has had eleven cards in nine days, from houses that never wrote before, and that nine of them say the same thing in different hands.
+?end
+?if b6.stair == "family"
+  The street has not forgotten the steps of the pale house. A shopkeeper in Bronzeville crossed to the other pavement yesterday, for a woman of the family who had done nothing at all but carry a parcel.
+?elif b6.stair == "yards"
+  Mr. Rudek has been seen walking in the Loop with his hat on, which the Loop is still discussing.
+?elif b6.stair == "table"
+  Ruth Calloway has said to three people, in your hearing, that she will think it over. It is understood to be a great deal of thinking for her.
+?end
+The wire from Rome has not been answered, because nobody can say where to send it. It sits under the paperweight.
+<~
+
+# josiah
+## A man who sat forty years
+$ do chart("chicago.goldcoast")
+He has been moved to the room over the pale house's garden, and has been given a rug, and has refused the rug. He is at the window in his frock coat of the eighties with his hands behind him, looking at the lake as though it had something to explain. Mrs. Pell is knitting something small and gray in the corner and pretending that she is not.
+He says that he slept very ill, which he understands to be the proper thing, since he has not slept at all for a good many years and has lost the knack. He says that he can feel the other four houses as a man feels weather in an old break. He says that two of them are awake, and that one of those is not pleased.
+?if b6.sleeper == "lamps"
+  "You asked me about hinges," says Josiah. "I have been thinking of a better word. A latch. A latch is a thing that is meant to be lifted from the inside."
+?elif b6.sleeper == "cassian"
+  "Your Mr. Cassian was very civil," says Josiah. "I find that I am less sure than I was that civility is a virtue in a man who sits on floors."
+?else
+  He turns from the window and asks, with great delicacy, whether it is the custom now for the young to ask an old man what he would like. He says he finds it extremely agreeable and does not intend to get used to it.
+?end
+?if b6.note == "family" and coven_size() > 0
+  He says that he heard the family sing, down there, in the dark, before he had properly opened his eyes, and that it is the first time in his life that he has been woken by a congregation.
+?end
+He says that he will keep his house, and that he would be obliged for a little help with the keeping, and that it is not a thing a man of his age likes to say.
+<~
+
+# night
+## A city that has heard something
+:night
+?if actions_left() == 3
+  Autumn comes in off the lake like a thing delivered. There are cards on the hall table in a pile, and every one of them is addressed to someone slightly more important than you.
+?elif actions_left() == 2
+  The arc lamps are on in the rain, and the streets shine like the backs of beetles. Somewhere a dance band is playing something with six notes in it, quite badly, and being told to stop.
+?else
+  It is the small hours, when the speakeasies have shut and the milk carts have not yet begun. You have strength for one thing more.
+?end
+* Sit down at the table with Ruth Calloway, and settle what she is to be [once] ?if actions_left() > 0
+  ~> table
+  $ do act()
+* Go down to the lamp under the lake, with Mr. Crane [once] ?if actions_left() > 0
+  ~> lamp
+  $ do act()
+* Find Tilly Marsh a place, and a name for it [once] ?if actions_left() > 0
+  ~> place
+  $ do act()
+* Answer the Institute, whose door has been left on the latch [once] ?if actions_left() > 0
+  ~> door
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# table
+## The Loop's chair
+$ do chart("chicago.club")
+$ do meet("ruth")
+She has taken a room at the Palmer House with a long table and three men she does not trust, and she receives you at the head of it in a gown the colour of old brandy. She has plainly rehearsed. She says it all in a single breath: the brewery lease, the cold storage, the dock paper, the three hundred men of the Loop who have not eaten properly since the song. She says that she did not know what she was buying, and that she has not forgiven it for being worth more than she thought.
+?if b6.stair == "table"
+  "You offered me a seat," says Ruth Calloway, "on a staircase, in front of the whole city. I have never been so insulted. I should like to know what it is a seat at."
+?elif b6.rival == "bought"
+  "You bought it back from under me," says Ruth Calloway. "It was well done. I should like to know what you intend to do for an encore."
+?else
+  "I have come," says Ruth Calloway, "to be told what a table is for, by somebody who has one."
+?end
+?if b6.circle == "all" and coven_size() > 0
+  ?if _lead != ""
+    {_reader_name} has come with you, and sits at your elbow without a word, with the ledger shut on the knee. The three men of the Loop look at the ledger, and then at {_reader_name}'s hands, and decide to be very comfortable.
+  ?end
+  ?if gift_holder("charm") != ""
+    {name(gift_holder("charm"))} has taken the chair beside her, and is saying something very low about the dress, and Ruth Calloway, who came to be formidable, is laughing in spite of it.
+  ?end
+?end
+:the_table
+* Give her a chair at the table, with a share in the lake's trade and a voice in the house
+  $ b6.table = "seat"
+  $ humanity += 1
+  $ standing += 2
+  She does not accept at once. She says that nobody has given her anything in sixty years that did not come with a hook. Then she asks what the hook is, and you tell her that it is that she will have to come to dinner, and she puts her glove to her mouth and sits back. It is a long time before she says yes.
+* Settle terms: she keeps the brewery and the cold storage, and swears to keep clear of the family
+  $ b6.table = "terms"
+  $ cunning_brutal += 1
+  $ standing += 1
+  It is done over coffee, like a duel with the pistols left at home. She keeps what she has. She pays a tithe of it to the Exchange, and a Loop man is sent to the Yards to say a civil word to Mr. Rudek. She calls it a peace. You think it is closer to a ceasefire, and that she knows.
+* Refuse her, and let the Loop learn what the family is without it
+  $ b6.table = "refuse"
+  $ cunning_brutal += 2
+  $ standing += 1
+  $ secrecy -= 1
+  She rises very slowly. She says that she hoped to be met with courtesy, and that she has been met with something older. She says it is not a threat but an observation. The three men get up after her, a little late, like stage hands who have missed the curtain.
+$ do discover("the_loop_table")
+<~
+
+# lamp
+## Under the lake
+$ do chart("chicago.haven")
+$ do meet("crane")
+The hall under the lake is cold and very still, with a long low roof and a pale light that moves on the wall without any source. In the centre, on a plinth of dark stone, stands the lamp that has moved from Rome and London and across an ocean to wait for you here: a small bronze thing like a lantern, with a flame that is not burning. Mr. Crane stands before it with his hat in his hands.
+He says that in 1916 the man in the hat told him that the lamp would not be lit by the song, but by the one who was kept for it. He says that he has begun to think the song was merely a knock.
+:the_lamp
+* Let Mr. Crane light it, since he was told to bring a ledger and has kept it eight years
+  $ b6.latch = "crane"
+  $ humanity += 1
+  $ standing += 1
+  $ do discover("the_first_lamp")
+  He takes a match from his waistcoat, with a hand that is not entirely steady, and says that he has been the most useless sort of prophet and had hoped for a more dignified moment. The flame takes. It is white, and then blue, and then, very briefly, a warm gold, like the inside of a loaf.
+* Light it yourself, and take what comes
+  $ b6.latch = "you"
+  $ cunning_brutal += 1
+  $ standing += 2
+  $ do discover("the_first_lamp")
+  The flame is not hot. It goes up into your hand like a note into a throat, and the whole hall hums once, and the light on the wall comes to rest. Crane takes a step back. He says that he had thought it would be rather quieter.
+  ?if has_gift("old_blood")
+    Your blood answers it, in the old way, like a dog that has heard its own name at the gate.
+  ?end
+* Leave it dark, and set the family to mind it ?if coven_size() > 0
+  $ b6.latch = "wait"
+  $ humanity += 1
+  $ secrecy += 1
+  ?if _lead != ""
+    {_reader_name} takes the lantern from you without a word, and sets it on the plinth beside the bronze one, so that two small lights are burning in the cold hall, and says that someone will sit up with it every night. It is exactly what she would do for a sick child.
+  ?else
+    You set a watch on it, and it is a family sort of watch, with a kettle and a chair.
+  ?end
+$ do discover("the_lamp_under_the_lake")
+<~
+
+# place
+## Where a child goes
+$ do chart("chicago.velati")
+Tilly Marsh sits on the back steps of the pale house in a borrowed cardigan with her chin on her knees. She says that nobody has asked her for anything since the night of the song, and that she does not know what to do with her hands.
+?if b6.note == "child"
+  She says, very quietly, that she had thought of it for eight years and had not expected it to be so ordinary.
+?end
+She says that there are three places she has heard of, and that she does not think any of them is wrong.
+:the_place
+* Make her one of the family's own, with a room, a tutor and a seat at the table ?if coven_size() > 0
+  $ b6.place = "family"
+  $ humanity += 2
+  $ standing += 1
+  ?if _lead != ""
+    {_reader_name} has already put a hair ribbon on the pillow, and says, in an offhand voice, that it was lying about. Tilly looks at it for a long time. Then she asks, very small, whether anyone minds that she is not a Valer, and the whole house, at once, from several rooms, says no.
+  ?else
+    A room is made, and a ribbon is found, and she is asked whether she minds sharing the table with people who forget to eat.
+  ?end
+* Let Mr. Sorrel teach her the figure, in the school he is starting on the Bronzeville side ?if b6.singer == "cantor"
+  $ b6.place = "sorrel"
+  $ cunning_brutal += 1
+  $ standing += 1
+  $ do meet("sorrel")
+  Mr. Sorrel is delighted, and tries to hide it by saying that he will need a piano. Tilly says that she can sing without one. He says that this is exactly why he will need it.
+* Place her with the pale house, under Josiah's eye, and Mrs. Pell's
+  $ b6.place = "pale"
+  $ humanity += 1
+  $ secrecy += 1
+  Mrs. Pell takes her hand and says that she has been thinking, lately, that a house with no child in it is a house in the wrong key. Josiah, from the window, says nothing at all, and puts his own hand over his mouth, and is very careful about the way he looks at the lake.
+<~
+
+# door
+## The Institute
+$ do chart("chicago.exchange")
+$ do meet("whitcombe")
+The Oriental Institute keeps late hours in the autumn. There is a lit window on the third floor and a woman in it, in a sensible hat, with a trowel in one hand and a pencil in the other, and she has been waiting for you for rather a while. She says, without preamble, that the door in the crypt on the east side of the building has not been locked since the night of the song. She says that she did not leave it open.
+?if b6.hall == "institute"
+  She says that she is quite prepared to be told that you are in her debt, and that she would sooner have it settled now.
+?elif b6.hall == "sealed"
+  She says that she had a great deal of respect for the way you sealed the first room, and that she is now rather afraid it was a mistake.
+?end
+She says that the door is carved with an open hand, and that on the other side of it there is a stair that has not been dug, and that she has been down eleven steps, and had to stop.
+:the_door
+* Open it properly, and go down with her
+  $ b6.crypt = "open"
+  $ cunning_brutal += 1
+  $ do discover("the_institute_stair")
+  You go down with a lantern and a trowel and a good deal of quiet, and at the eleventh step, where she stopped, the air changes. It is warm, and smells of resin and old sun, and under it is a sound like somebody breathing in a very large room. At the thirteenth you turn back, by agreement. There are twelve more.
+* Keep a watch on it, and let no one down who is not asked
+  $ b6.crypt = "watch"
+  $ secrecy += 1
+  $ standing += 1
+  A keeper is set at the head of the crypt stair, and a second at the street, and a third who is merely an old man with a pipe on a bench. Dr. Whitcombe says that it is a very good arrangement, and looks at the door as though it had been rude to her.
+* Close it, and set the family's mark on the frame ?if coven_size() > 0
+  $ b6.crypt = "mark"
+  $ humanity += 1
+  $ secrecy += 2
+  ?if _lead != ""
+    {_reader_name} lays two fingers on the lintel, and says a word of the family's own that is not Latin and not Greek, and the open hand carved there closes, very slowly, with a sound like a page turned.
+  ?else
+    The family's mark is cut into the frame, and the open hand closes.
+  ?end
+<~
+
+# dawn
+## The second light
+You come in at dawn with rain on your coat, and the lantern in the hall is lit, and somebody has left a cup of something hot at your place.
+?if b6.table == "seat"
+  Ruth Calloway has sent a bunch of white chrysanthemums, with a card that says only: "I am coming to dinner. I shall bring my own knife."
+?elif b6.table == "refuse"
+  Ruth Calloway has sent nothing, which is itself a message, and the Loop's windows are lit all night.
+?end
+?if b6.latch == "you" or b6.latch == "crane"
+  The lamp under the lake burns white, and a faint steady shine lies on the whole shoreline.
+?end
+The wire from Rome is where you left it, under the paperweight. A second one lies beside it, and it is in the same hand, and it is quite as short. It says: "Open the first lamp. She is cold."
+$ do rest()
+=> next
