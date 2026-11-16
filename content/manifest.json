@@ -1265,6 +1265,39 @@
           ],
           "journal": "journal/lw-1960s.tsb",
           "journalTitle": "Entry in the great book"
+        },
+        {
+          "id": "lw04",
+          "interlude": true,
+          "file": "long-watch/lw04.tsb",
+          "title": "The Floor",
+          "notes": [
+            "blood"
+          ],
+          "journal": "journal/lw-1987.tsb",
+          "journalTitle": "From the daybook of a market clerk"
+        },
+        {
+          "id": "lw05",
+          "interlude": true,
+          "file": "long-watch/lw05.tsb",
+          "title": "The Answer",
+          "notes": [
+            "blood"
+          ],
+          "journal": "journal/lw-1990s.tsb",
+          "journalTitle": "Entry in the great book"
+        },
+        {
+          "id": "lw06",
+          "interlude": true,
+          "file": "long-watch/lw06.tsb",
+          "title": "The Last Ordinary Year",
+          "notes": [
+            "blood"
+          ],
+          "journal": "journal/lw-2000s.tsb",
+          "journalTitle": "Entry in the great book"
         }
       ],
       "incomplete": true

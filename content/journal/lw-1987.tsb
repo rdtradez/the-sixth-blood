@@ -1,0 +1,24 @@
+// Velati journal for the Long Watch (session 73). Written when the chapter ends, on a copy of the state. No choices.
+@chapter lw_journal_1987
+@title Velati Journal: The Floor, New York
+@book unchained
+@version 1
+
+# start
+## From the daybook of a market clerk
+> Entered by a clerk of the Order who keeps a desk on the floor, in the ordinary way, as a broker.
+?if lw.crash == "sold"
+  On the day of the crash, one house of long standing was out of the market before the bell. I have noted it, and underlined it twice.
+?elif lw.crash == "bought"
+  On the day of the crash, one house of long standing bought everything that the street was throwing away. I have never seen so calm a purchase.
+?else
+  On the day of the crash, one house of long standing lent to those who were drowning, and took, I am told, a fair rate. It is the oldest kindness in the trade.
+?end
+?if lw.rival == "warned"
+  I am told that two covens have met in the city and that one of them has been told what the other is. It will not be quiet for long.
+?elif lw.rival == "pact"
+  I am told that two covens have made a pact over the soup. I have seen pacts of that kind last a century, and end in a morning.
+?else
+  I am told that two covens have dined, and that neither has promised anything. It is the most dangerous kind of dinner.
+?end
+=> endbook

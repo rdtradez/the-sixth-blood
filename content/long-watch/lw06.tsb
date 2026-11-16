@@ -1,0 +1,194 @@
+// The Long Watch, chapter 6 (session 73). The 2000s: a world with cameras, the Hollis house and the last quiet year before Unchained.
+// The coven is the hero's arm: the business lead holds the books, the family holds the havens. Names come from business_lead() and gift_holder().
+// Reads lw.haven, lw.rival, lw.card, lw.order and lw.crash. Sets lw.bailout, lw.fall and lw.ready. One night phase of two actions out of three places, then dawn.
+// Ends with rest() and => next, which leaves the Long Watch and opens Unchained proper.
+@chapter lw06
+@title The Last Ordinary Year
+@book unchained
+@version 1
+
+# start
+## The books
+$ lw.bailout = "stood"
+$ lw.fall = "left"
+$ lw.ready = "quiet"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+$ _fed = 0
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> books
+---
+?if must_feed()
+  ~> hunger
+  ---
+?end
+$ do phase("night", 2)
+It is an autumn night in the late 2000s, and the wire says three places. {cap(voice("hunger"))}. You have strength for two.
+-> night
+
+# books
+## The long table
+There is a long table in the house, and a screen at one end of it, and a pot of tea at the other. {_reader_name} is at the middle, with the books, and a pencil, and the look of a person who has been watching a flood come up the street for a year.
+?if lw.haven == "brownstone"
+  The family is in the kitchen of the brownstone, all of them, with the garden dark behind them. Nobody has wanted to be in a different room.
+?elif lw.haven == "warehouse"
+  The family has gathered in the warehouse, by the river, with the lamps down low. It is a very ugly room, and a very safe one.
+?elif lw.haven == "tower"
+  The family has come up to the high floor, to see what the city looks like when it is afraid. From here it looks like a field of fireflies.
+?else
+  The family has gathered where it can, in the back rooms of the firm, and in the flat on Park Avenue that the keepers have kept for it. It is not enough room, and no one has said so.
+?end
+It has been a hard autumn. The banks are failing. The great houses of the street are going down one at a time, and every night the sound of it comes up from the towers like a tree falling in a forest. {_reader_name} says that the house has never in its history been so rich, or so exposed.
+<~
+
+# hunger
+## The long supper
+$ _fed = 1
+* Draw from the cold store in the cellar
+  $ do feed("bank")
+  $ humanity += 1
+  It is as dull as it ought to be. The world has gone electronic, and the bag has a bar code.
+* Find someone on the late train who is willing
+  $ do feed("donor")
+  $ do earn(-2)
+  She is a nurse on her way home, and she is so tired that she does not ask a single question, and it is a kindness, in the end, to leave her better rested than you found her.
+* Take what the night offers
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  Every street has a camera. You are careful, and quick, and not a bit proud of either.
+<~
+
+# night
+## Three problems
+:night
+?if actions_left() == 2
+  There are three things on the long table, and a fourth, which nobody has mentioned. A ledger, a map of the city with a red ring in it, and a telephone that has been ringing for an hour.
+?else
+  The tea is cold, and nobody has had the heart to make more.
+?end
+* The ledger: the banks, and what the house can do for them [once] ?if actions_left() > 0
+  ~> bank
+  $ do act()
+* The map: a ring around the Hollis house, drawn in a hand that is not yours [once] ?if actions_left() > 0
+  ~> hollis
+  $ do act()
+* The telephone: it has been ringing since six, from a number in Geneva [once] ?if actions_left() > 0
+  ~> call
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> dawn
+?end
+-> :night
+
+# bank
+## The run
+There is a bank on Hudson Street that has been a client of Collis since 1931. It has been a good client. It has a very polite chairman. It has until Friday.
+?if lw.crash == "sold"
+  You were out of the market in 1987, and you have been out of it since, which is why you have, this autumn, what everyone else wants: cash.
+?elif lw.crash == "bought"
+  You bought, in 1987, what the city threw away. It has grown, since, into a good deal of what the city needs.
+?else
+  You lent, in 1987, to four houses that were drowning. Three of them have been the house's friends ever since. The fourth is the bank on Hudson Street.
+?end
+$ _gh = gift_holder("charm")
+?if _gh != ""
+  {name(_gh)} sits with the chairman in the evening, in the bank's quiet room, and says the things that an old friend would say. It is not compulsion. It is closer to company.
+?end
+* Lend the money, and take the bank's name as the price
+  $ lw.bailout = "lent"
+  $ do earn(-5)
+  $ standing += 2
+  $ secrecy -= 1
+  The chairman cries, a little, which is not a thing that bankers do. In the morning the bank is Collis's in everything but the brass plate, and the street, which is full of rumors, knows it.
+* Stand behind it quietly, with a guarantee that nobody sees
+  $ lw.bailout = "stood"
+  $ do earn(-2)
+  $ secrecy += 1
+  $ humanity += 1
+  It is a thing an old house can do, at the end of a bad week: say that it will see a friend through, and mean it. On Monday the bank is open. Nobody asks why.
+* Let it fall, and buy what is left when the dust has settled
+  $ lw.bailout = "let_fall"
+  $ do earn(4)
+  $ humanity -= 2
+  $ cunning_brutal += 1
+  It is cold, and it is correct, and it is exactly what a Roman moneylender would have done. You sleep, afterward, as well as ever, and that is the part of it that is hardest to forgive.
+<~
+
+# hollis
+## The ring
+The Hollis house has been a coven in this city for a hundred and forty years. This autumn it has been a coven in difficulty. Its human front, the bank that kept it, is bust. Its rooms are being sold. Its four, or eleven, are scattered.
+?if lw.rival == "pact"
+  Maude Hollis sends a note, in a firm old hand, to say that the pact is still in force, and that she would be grateful if it could be tested.
+?elif lw.rival == "warned"
+  Maude Hollis sends no note. There is a car at the end of the street, with its lights off, and the engine running, and it has been there for two nights.
+?else
+  Maude Hollis sends a note, three lines long, which does not ask for anything. It is the most dangerous kind.
+?end
+You find her at the last of the house's rooms, with a suitcase, and a cat, and an expression of tremendous composure.
+* Take the house in, and give it a floor of the haven, and a seat at the table
+  $ lw.fall = "took"
+  $ standing += 2
+  $ humanity += 1
+  $ secrecy -= 1
+  She does not thank you. She says that she will remember. It is the most useful thing that a rival can say, and you have been lucky to hear it.
+* Buy what is left of the house, and let the family go where it will
+  $ lw.fall = "bought"
+  $ do earn(-3)
+  $ standing += 1
+  $ cunning_brutal += 1
+  It is neither kind nor unkind. You have the building, and the contents, and a very large painting of a lady in blue, and the Hollis house is a rumor in four cities within the month.
+* Let it go, and watch from the window
+  $ lw.fall = "left"
+  $ cunning_brutal += 1
+  $ velati_regard -= 1
+  You do not do anything. It is a decision, and you will make it again, and the city will be a little more yours, and a good deal colder.
+<~
+
+# call
+## The number in Geneva
+The telephone has been ringing since six, and nobody has picked it up, because {_reader_name} said that it would be the one thing that you would not forgive.
+?if lw.card == "alone"
+  You have been to the flat with the green door. You know the hand. You know what the cups were for.
+?elif lw.card == "family"
+  The family has watched the flat with the green door. The light went on once, and off, and somebody waved.
+?else
+  You wrote back a polite refusal, and had a polite reply. You have been waiting for this telephone for fifteen years.
+?end
+You pick it up. There is a long silence, and the sound of a clock somewhere, and then a voice that is older than the telephone, and the century, and very nearly the language.
+"It is time," says the voice. "I am sorry. It is time. I will send for you, and I will not send twice."
+The line goes dead. {_reader_name} puts the tea down, and says nothing at all.
+* Tell the family, all of it, tonight
+  $ lw.ready = "told"
+  $ standing += 1
+  $ humanity += 1
+  It takes until dawn. There is no one in the house who is not afraid, and no one who says so, and by the end of the night the long table has a plan on it, in five hands, in a kind of spidery shorthand that nobody there has ever used before.
+* Tell no one, and get on with what has to be done
+  $ lw.ready = "alone"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  It is the oldest vice of a very old man. You will tell them, when you must. You tell yourself that it is kindness.
+* Call the number back, and wait for someone to answer
+  $ lw.ready = "called"
+  $ cunning_brutal -= 1
+  $ velati_regard += 1
+  Nobody answers. You let it ring for an hour. Somewhere in the second hour you begin to understand that the call was a gift, and the silence is the rest of it.
+<~
+
+# dawn
+## The gray hour
+It is dawn on the river, and the towers are going pale, and the first of the trains is crossing the bridge.
+?if lw.fall == "took"
+  Upstairs, in a room that was never used, a woman in a good coat is arranging a cat on a cushion.
+?end
+The long watch is over. You have kept it since the Depression, and the war, and the bomb, and the wire. You have kept it through twenty five thousand nights. It has made you, you think, a good deal wiser, and a good deal sadder, and not at all ready.
+{_reader_name} stands with you at the window, and says that, whatever comes, the family is in the house.
+It is a plain, true sentence. It is the best one that you have heard in a thousand years.
+$ do rest()
+=> next
