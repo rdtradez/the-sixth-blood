@@ -1,0 +1,161 @@
+// Book Six, Chapter 14 (session 68). A night in late September 1924: the first lamp is opened and what was kept inside it comes out.
+// One long night in four scenes (the hall, the one who was kept, the family's welcome, the visitors at the door) and a short dawn. No night phase.
+// The coven fronts it: the family is in the hall, takes the kept one in and meets the other houses at the door. Names are always checked with in_circle().
+// Reads b6.circle, b6.latch, b6.table, b6.place, b6.crypt, b6.sleeper, b6.hall. Sets b6.warm, b6.kept and b6.callers.
+// Uses meet(), discover(), chart(), has_gift(), gift_holder(). Ends with rest() and => next.
+@chapter b6c14
+@title The Door Left Open
+@book relics-lost-god
+@version 1
+
+# start
+## The hall at midnight
+$ b6.warm = "blanket"
+$ b6.kept = "ask"
+$ b6.callers = "receive"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+$ do chart("chicago.haven")
+$ do meet("veda")
+~> hall
+---
+~> kept
+---
+~> welcome
+---
+~> callers
+---
+-> dawn
+
+# hall
+## The first lamp
+The hall under the lake is full of people who have been told to be quiet. Crane is by the plinth with his hat held to his chest. Josiah Pell has been carried down in his chair, and Mrs. Pell stands behind it with her hand on his shoulder. Dr. Whitcombe has a notebook that she is forgetting to write in.
+?if b6.circle == "all" and coven_size() > 0
+  The family is there, in a long line along the wall, with the lantern at the end of it. {_reader_name} has put a stack of blankets on a bench, quite without comment.
+?end
+?if b6.latch == "wait"
+  The lamp is cold and dark on its plinth, and it has been tended every night for a month. It is the first time anyone has asked anything of it.
+?else
+  The flame has stood white in the lamp for a month. Tonight it leans, as if a door had opened somewhere in the hall.
+?end
+?if b6.crypt == "open"
+  Whitcombe says, under her breath, that the stair beneath the Institute and this hall are one, and that she has been walking in her sleep.
+?end
+The lamp opens. It does not do so like a lid. It opens like a held breath let go, a slow gold light going up the walls, and in the middle of it, on the dark stone of the plinth, there is a shape. It is a woman. She lies on her side, with her knees drawn up, in a gown that has not been worn in two thousand years, and her hair is the colour of ash, and she is quite certainly alive.
+<~
+
+# kept
+## The one who was kept
+$ do chart("chicago.velati")
+She wakes the way a candle does, all at once and in a draught. She sits, with one hand flat on the stone, and looks about her. She has the face of a girl of twenty and the eyes of someone who has had a great many years to think what she would say. She says something in a language that Dr. Whitcombe makes a small noise at, and then, taking in the faces, in Latin that you last heard in the Subura, she asks whether it is yet the morning.
+"I am Veda," she says. "Of the sixth house. Cassian put me here, in the year that your Rome burned, and said that I should be wanted, and that I was to be cold until I was. I have been very cold. I should like to know what year it is, and who is to be trusted, and if there is anybody here who is of my blood."
+?if has_gift("old_blood")
+  She looks at you, and it is the look of one who has been given back a word. "Ah," says Veda. "There you are."
+?end
+Josiah says, very quietly, that she is the sixth chair's kin. Nobody has been of that chair, in this city, for two thousand years.
+:the_kept
+* Tell her the whole of it, plainly: the year, the houses, the song, the lamps
+  $ b6.kept = "plain"
+  $ humanity += 1
+  $ cunning_brutal += 1
+  She listens with her head on one side. When you have done she is silent for a time, and then says that it is considerably worse than she had hoped, and a little better than she had feared. She says that she would like to sit down, and does so, upon the plinth.
+* Ask her first what Cassian told her, and what she is to be wanted for
+  $ b6.kept = "ask"
+  $ cunning_brutal += 2
+  $ do discover("veda_kept")
+  She says that he told her very little, and that he told it very kindly. She says that she was to be woken when the seventh was sung and the lamp was opened by a hand she would know. She says that she was to go east, with that hand, and that something very old waits there with a chair that has been kept for it. She says that she is not sure that she was told all of it.
+* Tell her only what she needs tonight, and let the rest come at her own pace
+  $ b6.kept = "gentle"
+  $ humanity += 2
+  She takes it with a grave sort of gratitude. She says that nobody has been gentle with her since the year of the fire, and that she had forgotten it was possible.
+<~
+
+# welcome
+## The first warm room
+$ do chart("chicago.goldcoast")
+There is nobody in the whole hall who knows what to do with her, and so, in the end, it is done as such things are always done, by someone fetching a cup. {_reader_name} has gone for something hot, and others have gone for coats, and Mrs. Pell has found a gray cardigan in the dark. She is taken up through the hall's one narrow stair to the room over the pale house's garden, which has been aired and has a rug that Josiah refused.
+?if b6.circle == "all" and coven_size() > 0
+  ?if gift_holder("healing") != ""
+    {name(gift_holder("healing"))} sits on the edge of the bed and takes her cold hands in both of her own, and holds them until they are warm. Veda looks at the two hands as at a kind of miracle. She says that she had forgotten that a person could do that.
+  ?end
+  ?if gift_holder("charm") != ""
+    {name(gift_holder("charm"))} makes her laugh, once, which she seems to find alarming.
+  ?end
+?end
+She says, from the pillow, that she wishes to be told who she is to thank.
+:the_warm
+* Give her the family's own house, the back room and the garden ?if coven_size() > 0
+  $ b6.warm = "family"
+  $ humanity += 2
+  $ standing += 1
+  ?if _lead != ""
+    {_reader_name} says that it is no trouble at all, and that the family has a good many rooms, and that it is a good deal pleasanter than being warm in a lamp. Veda says that she is not at all sure that the family knows what it has taken on. {_reader_name} says that it is never at all sure of that.
+  ?else
+    The back room is hers, and the garden, and the bell.
+  ?end
+* Keep her at the pale house, with Josiah, who has been waiting for her
+  $ b6.warm = "pale"
+  $ secrecy += 1
+  $ standing += 1
+  Josiah says that he has been waiting for two thousand years for this particular conversation, and that he is fairly sure he had a speech. He has not got it. He says it will have to be improvised.
+* Take her to the Exchange, and the long gray room, where it is warm and nobody will ask
+  $ b6.warm = "blanket"
+  $ cunning_brutal += 1
+  Mr. Ames lights the gas fire in the east gallery and brings her a tray, and says that he will be at his desk. Veda looks round the long gray room at its ledgers and its clocks and says that it is the first place she has felt quite at home.
+<~
+
+# callers
+## The visitors at the door
+$ do chart("chicago.exchange")
+By two o'clock the house has callers. Ruth Calloway has come, in her brandy gown, with an escort of two. Mr. Rudek has come, with eleven hundred men outside in the street, all of them very quiet. Dr. Whitcombe has come up from the Institute with her hat on crooked, and says that she has come as a friend. They have all heard the lamp. Not one of them has been told what it was.
+?if b6.table == "seat"
+  Ruth Calloway comes first, and sits down in the chair that was given her, and says that she supposes she should like to be told. She says that she would, on the whole, sooner be told than guess.
+?elif b6.table == "refuse"
+  Ruth Calloway stands in the doorway and does not sit, and says that she has come as an interested party, which is not at all the same thing.
+?else
+  Ruth Calloway sits where she is put, and says that the terms said nothing at all about lamps.
+?end
+:the_callers
+* Receive them in the hall, and tell them only what they must know
+  $ b6.callers = "receive"
+  $ secrecy += 1
+  $ standing += 1
+  Nothing is said that has not been said already. They go away with the impression of having been told a great deal, which is, as it happens, the best sort of impression.
+* Have the family receive them, and let it be seen that the house is whole ?if b6.circle == "all" and coven_size() > 0
+  $ b6.callers = "family"
+  $ standing += 3
+  $ humanity += 1
+  ?if _lead != ""
+    {_reader_name} takes the door, and the family fills the hall behind, and the callers are given tea by a house that has got used to it. Ruth Calloway, with a cup in her glove, says that she has never been so thoroughly outmanoeuvred by a ham sandwich.
+  ?end
+  ?if gift_holder("strength") != ""
+    {name(gift_holder("strength"))} stands at the foot of the stair with folded arms. Nobody asks to go up it.
+  ?end
+* Bring Veda down to them, and let the city see the sixth chair's kin
+  $ b6.callers = "show"
+  $ standing += 2
+  $ secrecy -= 2
+  $ do discover("the_sixth_kin")
+  She comes down in the cardigan with her ash hair loose, and stands on the last step with one hand on the rail. She says nothing. Mr. Rudek takes off his hat. Ruth Calloway sits slowly down in a chair that was not there a moment ago. It is not that she is afraid. It is that something has become clear to her.
+* Send them away, politely, and keep the door shut
+  $ b6.callers = "shut"
+  $ cunning_brutal += 1
+  $ secrecy += 2
+  $ standing -= 1
+  The door is closed on the street, very civilly, and the street takes it as a door closed in a church would be taken: as a thing that tells a person nothing at all, and everything.
+<~
+
+# dawn
+## East
+Veda is at the window of the room over the garden, with the grey light on her hair, looking at the lake. She says that it is smaller than she remembered. She says that there was not a lake at all, in her time. She says that there was only a very large dark, and a flame in it.
+She says that Cassian called her Veda, and that she is not at all sure it was the name she was born to.
+She says, without turning, that there is a ship in the harbour of New York that sails on Thursday, and that she does not think it is a coincidence. She says that the chair in the east is cold, and that the one who keeps it does not have very long.
+Crane is at the door with his hat. He says that he has a ledger and a great deal of money and no particular objection to the sea.
+$ do rest()
+=> next
