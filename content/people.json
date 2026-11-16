@@ -40,7 +40,9 @@
     },
     "cassian": {
       "gender": "m",
-      "name": "Cassian"
+      "name": "Cassian",
+      "title": "Keeper of the east",
+      "bio": "A heavy, tired, clever man in a linen suit with a pen behind his ear, who put a woman in a lamp at Rome and has kept two chairs ever since."
     },
     "prisca": {
       "gender": "f",
@@ -650,6 +652,18 @@
       "name": "Mr. C. Hale",
       "title": "First class, cabin B 31",
       "bio": "A mild, precise man in a good dark suit with a pen behind one ear, who says he is a hand and a pair of eyes sent to give one letter and nothing more."
+    },
+    "isaura": {
+      "gender": "f",
+      "name": "Isaura",
+      "title": "Last keeper of the seventh chair",
+      "bio": "A very small, very old, very straight woman in an oatmeal gown, who kept the seventh chair a hundred and eleven years."
+    },
+    "roth": {
+      "gender": "f",
+      "name": "Anneliese Roth",
+      "title": "Keeper of the door of the east",
+      "bio": "A woman in a good gray fur, who keeps the door of the east and has kept it thirty one years."
     }
   }
 }

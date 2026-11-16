@@ -81,11 +81,11 @@ const coven = (g) => {
   }
 };
 
-test('Book Six lists chapters one to eighteen and is still incomplete', async () => {
+test('Book Six lists twenty chapters and is complete', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'relics-lost-god');
-  assert.ok(book.incomplete);
-  assert.equal(book.chapterCount, 18);
+  assert.ok(!book.incomplete);
+  assert.equal(book.chapterCount, 20);
 });
 
 test('chapters 1 and 2 play through every kind of waking, hungry or not, with and without a coven', async () => {
@@ -619,6 +619,81 @@ test('chapters 17 and 18 play each way the earlier chapters went', async () => {
 test('chapters 17 and 18 never name a coven member who is not in the circle', async () => {
   for (const chapter of ['b6c17', 'b6c18']) {
     const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' }, stopAt: 'b6c19' });
+    assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
+    clean(run);
+  }
+});
+
+test('chapter 19 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.coach', [['family', /Sit down to the laid table/], ['alone', /Go through the coach alone/], ['veda', /Let Veda go first/]], /Go through the seventh coach/],
+    ['b6.fur', [['family', /Sit down opposite/], ['ask', /Ask her, as one who keeps a door/], ['refuse', /take the train and the table/]], /woman in the fur/],
+    ['b6.wires', [['house', /Wire the house in Chicago/], ['watch', /Send the family's people/], ['rome', /Wire Rome/]], /train's telephone/],
+    ['b6.window', [['tell', /Tell her everything/], ['ask', /Ask what she remembers/], ['sleep', /Let her sleep/]], /Sit with Veda at the window/],
+  ];
+  for (const [flag, branches, pick] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b6c19', {}, { hunger: 10, wealth: 900000 }, [re, /That will do/, pick], { sys: coven, flags: { 'b6.circle': 'all', 'b6.east': 'all' }, stopAt: 'b6c20' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+  for (const [value, re] of [['hold', /Meet him on the platform/], ['talk', /Let him in to the corridor/], ['shut', /not an inn/]]) {
+    const run = await play('b6c19', {}, { hunger: 10, wealth: 900000 }, [re], { sys: coven, flags: { 'b6.circle': 'all', 'b6.east': 'all' }, stopAt: 'b6c20' });
+    assert.equal(run.vars['b6.border'], value, `b6.border ${value}`);
+  }
+});
+
+test('chapter 20 takes each choice, records it and ends Book Six', async () => {
+  const sets = [
+    ['b6.gate', [['family', /Go through the gate with the family/], ['veda', /Let Veda go first, and follow/], ['alone', /Go through alone/]]],
+    ['b6.cassian', [['trust', /Trust him/], ['bargain', /Bargain with him/], ['challenge', /Challenge him/]]],
+    ['b6.chair', [['veda', /Let Veda take the sixth chair/], ['hero', /Take the sixth chair yourself/], ['empty', /Leave it empty/]]],
+    ['b6.isaura', [['ask', /Ask her what she wants/], ['family', /Bring her into the family's keeping/], ['name', /say her name aloud/]]],
+    ['b6.charge', [['take', /Take it: say that the sixth blood/], ['refuse', /Refuse it/], ['later', /Ask for time/]]],
+    ['b6.longwatch', [['house', /Keep it here/], ['chicago', /Keep it in Chicago/], ['newyork', /Keep it in New York/]]],
+  ];
+  for (const [flag, branches] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b6c20', {}, { hunger: 10, wealth: 900000 }, [re], { sys: coven, flags: { 'b6.circle': 'all', 'b6.east': 'all' } });
+      assert.equal(run.frame.wait, 'book_end');
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+  const run = await play('b6c20', {}, { hunger: 10, wealth: 900000 }, [], { sys: coven, flags: { 'b6.circle': 'all', 'b6.east': 'all' } });
+  assert.equal(run.game.state.booksDone.includes('relics-lost-god'), true);
+  assert.ok(run.game.state.journal.some((e) => e.kind === 'velati' && e.book === 'relics-lost-god'), 'the journal entry is written');
+});
+
+test('the white house loop allows several picks', async () => {
+  const run = await play('b6c20', {}, { hunger: 10, wealth: 900000 }, [/Make it a haven/, /Give the library to Veda/, /Set a standing guard/, /That is enough for the house/], { sys: coven, flags: { 'b6.circle': 'all', 'b6.east': 'all' } });
+  assert.equal(run.vars['b6.house'], 'haven');
+  const guard = await play('b6c20', {}, { hunger: 10, wealth: 900000 }, [/Set a standing guard/, /That is enough for the house/], { sys: coven, flags: { 'b6.circle': 'all', 'b6.east': 'all' } });
+  assert.equal(guard.vars['b6.house'], 'none');
+  clean(guard);
+});
+
+test('chapters 19 and 20 play each way the earlier chapters went', async () => {
+  for (const chapter of ['b6c19', 'b6c20']) {
+    for (const east of ['all', 'few', 'alone']) {
+      for (const stay of ['go', 'stay', 'choice']) {
+        for (const fur of ['family', 'ask', 'refuse']) {
+          for (const hunger of [10, 90]) {
+            for (const [sys, circle] of [[coven, 'all'], [null, 'stay']]) {
+              const run = await play(chapter, {}, { hunger, wealth: 900000 }, [], { sys, flags: { 'b6.circle': circle, 'b6.east': east, 'b6.stay': stay, 'b6.fur': fur, 'b6.border': 'talk' }, stopAt: 'b6c20' });
+              clean(run);
+            }
+          }
+        }
+      }
+    }
+  }
+});
+
+test('chapters 19 and 20 never name a coven member who is not in the circle', async () => {
+  for (const chapter of ['b6c19', 'b6c20']) {
+    const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' }, stopAt: 'b6c20' });
     assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
     clean(run);
   }

@@ -1327,6 +1327,66 @@
       "title": "The road east",
       "book": "relics-lost-god",
       "text": "The way the party left Cherbourg for the night train and its seventh coach."
+    },
+    "the_seventh_coach": {
+      "category": "places",
+      "title": "The Seventh Coach",
+      "book": "relics-lost-god",
+      "text": "A single coach on the night train east, with seven compartments, seven lamps, and five gray books about five houses that fell silent."
+    },
+    "anneliese_roth": {
+      "category": "people",
+      "title": "Anneliese Roth",
+      "book": "relics-lost-god",
+      "text": "The woman in the gray fur, who has kept the door of the east for thirty one years and warned that the Order was on the train."
+    },
+    "the_night_wires": {
+      "category": "lore",
+      "title": "The Night Wires",
+      "book": "relics-lost-god",
+      "text": "What went out over the telegraph offices of the night train, and who answered."
+    },
+    "the_window_seat": {
+      "category": "lore",
+      "title": "The Window Seat",
+      "book": "relics-lost-god",
+      "text": "What was said to Veda in the corridor of the seventh coach."
+    },
+    "the_frontier": {
+      "category": "places",
+      "title": "The Frontier",
+      "book": "relics-lost-god",
+      "text": "A gray station in a fog, where the Order's man in glasses came to the step of the coach."
+    },
+    "the_end_of_the_line": {
+      "category": "places",
+      "title": "The End of the Line",
+      "book": "relics-lost-god",
+      "text": "A stone halt with no name board, a gate in a wall, and a white road down to a milk colored sea."
+    },
+    "cassian_at_the_table": {
+      "category": "lore",
+      "title": "Cassian at the Table",
+      "book": "relics-lost-god",
+      "text": "What Cassian said about the lamps, the hinges, the six chairs and the seventh."
+    },
+    "the_sixth_chair": {
+      "category": "lore",
+      "title": "The Sixth Chair",
+      "book": "relics-lost-god",
+      "text": "The plainest of the six, kept at the right hand of the seventh, waiting for the sixth house."
+    },
+    "isaura": {
+      "category": "people",
+      "title": "Isaura",
+      "book": "relics-lost-god",
+      "text": "The last keeper of the seventh chair, who kept it a hundred and eleven years."
+    },
+    "the_white_house": {
+      "category": "places",
+      "title": "The White House",
+      "book": "relics-lost-god",
+      "text": "A long low house of whitewashed stone above the white garden, with a library of gray books and a cellar dug in the rock."
     }
   }
 }

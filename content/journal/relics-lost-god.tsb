@@ -1,0 +1,65 @@
+// The Velati journal for Book Six, Relics of the Lost God (session 71). Runs at the end of the book on a copy of the state; its paragraphs become one journal entry.
+// Written in the voice of the Senate's watchman in Chicago, from a room over a pharmacy on Wabash Avenue. No choices allowed. Reads decisions, never recomputes them.
+@chapter b6_journal
+@title Velati Journal: Relics of the Lost God
+@book relics-lost-god
+@version 1
+
+# start
+## From the report of the Senate's watchman in Chicago
+> Set down in Chicago, in the Aventine shorthand, in a room over a pharmacy on Wabash Avenue. For the Senate, and for no one else.
+I have been in this city eleven years, with instructions to observe five houses and to be seen by none. I am obliged to report that there are, since the spring of 1924, six, and that the sixth is the only one of them whose accounts I have been unable to read.
+?if b6.claim == "house"
+  At the Calloway table in May the new house took a chair and made no apology. I have it from a waiter, who is paid by two of us, that the other five did not speak for a full minute.
+?elif b6.claim == "peace"
+  At the Calloway table in May the new house asked for peace. I have noted that this is the first time in my service that anyone has done so, and that it was granted.
+?else
+  At the Calloway table in May the new house denied everything, with great courtesy, and was believed by nobody, and was let alone.
+?end
+?if b6.hall == "lit"
+  The lamp under the lake was lit. I am told it can be seen from the roof of the Wrigley building by anyone who knows where to look. I know where to look. I have not slept well since.
+?elif b6.hall == "house"
+  The round hall under the lake was made a haven for the family, who keep it, I am told, like a church. I have seen the cook go down with a lantern.
+?elif b6.hall == "institute"
+  The round hall under the lake was given to the Institute, and Dr. Whitcombe is writing it up. He has asked me twice for a reference.
+?else
+  The round hall under the lake was sealed, and I have been assured that it will stay so. I note that the person who assured me was not the one who sealed it.
+?end
+?if b6.table == "seat"
+  Mrs. Calloway has a seat at the Exchange table now, and the Exchange has a seat at hers. I should not like to bet which of them has the better manners.
+?elif b6.table == "terms"
+  Mrs. Calloway and the Exchange have a written agreement, which I have not seen, and which is said to be the shortest contract in the Loop.
+?else
+  Mrs. Calloway has no seat at the Exchange table. It is a considerable thing to have said no to her, and the city has been looking, since, at its shoes.
+?end
+?if b6.note == "you"
+  The seventh note was sung in a cellar in the Loop, by the hero's own throat, and I am told that a child opened the door to hear it. I did not hear it. I wish to put on record that I was on the stair.
+?elif b6.note == "family"
+  The seventh note was sung in a cellar in the Loop, by the family together, in a chord I have not been able to write down.
+?else
+  The seventh note was sung in a cellar in the Loop, by a child of the choir, with the whole house at her back. I have asked after her. She has been promoted to a better school.
+?end
+I have to enter, for the Senate's information, that on the twenty third of October 1924 the hero left Chicago for the east, on the Twentieth Century, in the company of a woman of the old blood that nobody in this office had known existed. I have the passenger list. I have not been able to find out where it ends.
+?if b6.chair == "veda"
+  I have it from a source in Marseilles that a woman of the sixth house sat in her own chair at the end of the line, at a white table, in November. I can say only that the source is a fisherman, and has never in his life told me a lie.
+?elif b6.chair == "hero"
+  I have it from a source in Marseilles that the hero took the sixth chair at a white table, in November, and that six lamps came up. I put it in the report. I do not offer an opinion.
+?else
+  I have it from a source in Marseilles that the sixth chair was left empty at a white table, in November, by choice. I find that I respect this very much.
+?end
+?if b6.charge == "take"
+  He has taken the keeping of the seventh chair. I am instructed to say that the Senate has noted it, and that the Senate does not, as yet, know what it has noted.
+?elif b6.charge == "refuse"
+  He refused the keeping of the seventh chair. I am told Cassian was not displeased.
+?else
+  He has not yet answered, as to the seventh chair. I am told that Cassian has been seen, since, writing.
+?end
+?if b6.longwatch == "chicago"
+  The hero's wire came on the second of December. It says that the long watch will be kept in Chicago, on the lake, in the house with the lamp under it. I have been moved to a better room, with a window.
+?elif b6.longwatch == "newyork"
+  The hero's wire came on the second of December. It says that the long watch will be kept in New York, in a house on Pearl Street. I am to forward his letters, and say nothing.
+?else
+  The hero's wire came on the second of December. It says that the long watch will be kept in the east, in a white house above a sea. I have no idea where. I have been given a post office box.
+?end
+I have signed this, and sealed it, and I shall keep the lamp in the window lit until somebody tells me to stop.
+=> endbook

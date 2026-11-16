@@ -91,6 +91,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 62: Book Six chapters 1 and 2
 - [x] Session 63: Book Six chapters 3 and 4
 - [x] Session 64: Book Six chapters 5 and 6
+- [x] Session 71: Book Six chapters 19 and 20; Book Six is complete (journal and recap, no long sleep)
 - [x] Session 70: Book Six chapters 17 and 18
 - [x] Session 65: Book Six chapters 7 and 8
 - [x] Session 66: Book Six chapters 9 and 10
@@ -818,3 +819,13 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The coven fronts both chapters: the lead's report, the family keeping the ship's doors, hold and wireless room, going ashore first and setting the rooms and the road. Names are always checked with `in_circle()`; the coven-names check is clean for Book Six.
 - Tests: `tests/book6.test.js` now covers chapters 17 and 18 (and the chapter count).
 - This branch is stacked on session 69. Plans are in `SPOILERS/relics-lost-god.md`.
+
+### Session 71 notes (Book Six, chapters 19 and 20)
+
+- Chapters `b6c19` and `b6c20` are in `content/relics-lost-god/` (`ch19.tsb`, `ch20.tsb`), about 7,500 words together. **Book Six is finished at twenty chapters**: `"incomplete"` is removed from the manifest, so the book now ends, writes its journal (`journal/relics-lost-god.tsb`, in the voice of the Senate's watchman in Chicago) and unlocks the next book. The manifest entry has a spoiler light `recap` for quick starts into Book Seven. There is no long sleep between Chicago and New York, so chapter 20 calls `rest()` and `=> next` with no `sleep()`.
+- Chapter 19 opens with the platform, a hunger scene that only runs if `must_feed()`, one night phase of three actions out of four, a fixed frontier scene and a dawn. Chapter 20 has no phases: one fixed night in six scenes and a dawn,.
+- New decision flags (`b6.` prefix, registered): `b6.coach`, `b6.fur`, `b6.wires`, `b6.window`, `b6.border` (chapter 19) and `b6.gate`, `b6.cassian`, `b6.chair`, `b6.isaura`, `b6.charge`, `b6.house`, `b6.longwatch` (chapter 20). `b6.cassian`, `b6.chair`, `b6.isaura`, `b6.charge` and `b6.longwatch` are major. `b6.wires` and `b6.house` are multi pick loops where the most committed pick wins.
+- Content: three new people (`roth`, `isaura`, and a bio for `cassian`), ten codex entries. No engine change, schema or migration.
+- The coven fronts both chapters: the lead keeps the account of the trip, the family holds the doors, the wires and the frontier, sits at the edge of the white table, and takes the white house if the hero says so. Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
+- Tests: `tests/book6.test.js` now covers chapters 19 and 20, the end of the book and the journal.
+- This branch is stacked on session 70 (and so on 65 to 69). Plans are in `SPOILERS/relics-lost-god.md`.

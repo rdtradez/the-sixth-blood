@@ -1,0 +1,284 @@
+// Book Six, Chapter 19 (session 71). The Friday night train from Paris and the seventh coach, to the end of the line.
+// An opening with no phase, a short hunger scene (only if must_feed()), one night phase of three actions out of four, a fixed border scene, and a dawn in the shuttered coach.
+// The coven fronts it: the family is the hero's arm on the train, holds the doors, the telephone and the frontier, and the lead keeps the account of the trip. Names are always checked with in_circle().
+// Reads b6.circle, b6.east, b6.road, b6.letter, b6.stay, b6.landing, b6.vow, b6.gray, b6.regent. Sets b6.coach, b6.fur, b6.wires, b6.window and b6.border.
+// Uses meet(), discover(), has_gift(), gift_holder(), must_feed(), feed(), coven_task(). Ends with rest() and => next.
+@chapter b6c19
+@title The Seventh Coach
+@book relics-lost-god
+@version 1
+
+# start
+## The Gare de l'Est
+$ b6.coach = "family"
+$ b6.fur = "family"
+$ b6.wires = "none"
+$ b6.window = "tell"
+$ b6.border = "hold"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> platform
+---
+?if must_feed()
+  ~> thirst
+  ---
+?end
+$ do phase("night", 3)
+The wheels are turning under you, and the lamps of Paris are going by in long wet streaks. {cap(voice("hunger"))}. Four things want doing, and strength for three.
+-> night
+
+# platform
+The Gare de l'Est on a Friday in November is a cathedral of steam and iron, with a clock the size of a cartwheel, and a smell of coal, wet wool and chicory. The night train to the east is a long dark thing with a restaurant car lit up like a lantern in the middle of it, and at the far end, after the sleeping cars and the baggage van, a single coach with its blinds drawn and its brass polished.
+?if b6.road == "car"
+  You come to the platform from the street side, at the last minute, with Veda on your arm and a rug over the other, and nobody in the whole station has the least notion that you have arrived.
+?elif b6.road == "own"
+  The tickets are in a name that is not yours, in a compartment that was never on Cassian's list, and the conductor, who has been told by someone with a good deal of money that nothing is to be mentioned, mentions nothing.
+?else
+  The boat train has come in ahead of you, and the trunks have gone down the platform on four porters' backs, and the family has taken the last quarter of the train as a man takes a chair.
+?end
+The seventh coach has a brass plate by its step that has been rubbed, very lightly, with a cloth, until the letters are almost gone. There are seven compartments, and seven lamps, and the door of each stands open.
+?if b6.east == "all" and _lead != "" and in_circle(_lead)
+  {_reader_name} has the tickets, and the baggage tags, and a notebook with two columns, and she says that she has put the family in the coach before and behind, so that the seventh is the middle of a small, well mannered army.
+?end
+?if b6.stay == "stay"
+  Crane is not on the platform. He is at a telephone in the hotel at Cherbourg, and he has promised to be, for as long as it takes, the best telephone in France.
+?else
+  Crane stands at the step with his bag, and looks at the brass plate for some time, and says that he has never in his life boarded a thing on the strength of a letter.
+?end
+Veda looks at the coach as at a house in which she once lived, and says nothing at all.
+<~
+
+# thirst
+## Before the train moves
+The hunger comes up in the station like the smell of a bakery. Steam, and warm bodies, and a crowd going east.
+* Take the flask the family brought in the baggage ?if b6.east != "alone" and coven_size() > 0
+  $ do feed("donor")
+  $ humanity += 1
+  It is waiting in a hatbox in the first compartment, wrapped in a gray scarf. You drink it in the dark of the corridor, with the blind down, and the train does not notice.
+* Take a sleeper from the sleeping car, one who will wake with a headache and a good story
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  $ secrecy -= 1
+  He is a commercial traveller in hats, and he sleeps through it with a little frown. You leave a banknote under his pillow, folded very small.
+* Find the horses in the baggage van, and make do
+  $ do feed("animal")
+  $ secrecy += 1
+  There are two carriage horses in the van, bound for a count in Hungary, who stand with their heads together. It is a poor meal, and quiet, and the grooms do not stir.
+* Hold it, and go aboard
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  You hold it. The whistle goes before the hour is over.
+<~
+
+# night
+## The night to the east
+:night
+?if actions_left() == 3
+  Paris falls behind. The plain goes by under a low moon, black fields and white farmhouses and a single light in the window of every fourth. The seventh coach sways very little, as though somebody had paid it to.
+?elif actions_left() == 2
+  A river goes under the train, wide and dark, and a bridge rings like a tuning fork. There is a station with a name nobody pronounces the same way twice.
+?else
+  The windows have the hard black polish of the small hours. It is the last quiet hour before the frontier. You have strength for one more.
+?end
+* Go through the seventh coach, compartment by compartment [once] ?if actions_left() > 0
+  ~> coach
+  $ do act()
+* Find the woman in the fur, who is in the restaurant car and is not eating [once] ?if actions_left() > 0
+  ~> fur
+  $ do act()
+* Use the train's telephone and the stations' wires, for the family and the houses [once] ?if actions_left() > 0
+  ~> wires
+  $ do act()
+* Sit with Veda at the window, and say what there is to say [once] ?if actions_left() > 0
+  ~> window
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  ~> border
+  ---
+  -> dawn
+?end
+-> :night
+
+# coach
+## The seven compartments
+$ do meet("veda")
+Each compartment has a name card on its door, in a small, upright, ancient hand, and each has been laid with a lamp, a rug, a book and a vase with one flower in it that has no business being alive in November.
+Five of the cards are in Greek, and the signs on them are the five signs that Whitcombe copied from the arms of the worn chairs. In each compartment is a small book, bound in gray cloth, with the name of a house on its spine and the year that it fell silent. Two of them stop in the middle of a line. One stops in the middle of a word.
+The sixth card is in the hand of the first, and has been written over twice, as by a man who changed his mind about it. It says only: for the one who comes.
+The seventh compartment has no card. The lamp in it is lit, and the bed is made, and the rug is white. It smells, quite strongly, of the sea.
+:the_coach
+* Sit down to the laid table at the end of the coach, with the family, and read the five books aloud together ?if b6.east != "alone" and coven_size() > 0
+  $ b6.coach = "family"
+  $ standing += 1
+  $ humanity += 1
+  ?if gift_holder("memory") != ""
+    {name(gift_holder("memory"))} reads each of the five histories once, and then, without being asked, repeats them, word for word, and says that the third has been mended in a different ink.
+  ?end
+  It is a very strange supper. The family is, for once, not the arm and not the staff, but five or six people at a table, reading a thing nobody ever meant them to see, and learning from it what their own house might one day look like in a gray cloth binding. Nobody wants to be the first to say so. {_reader_name} says it.
+* Go through the coach alone, and read the books by yourself, as quickly as you can
+  $ b6.coach = "alone"
+  $ cunning_brutal += 1
+  $ secrecy += 1
+  You read them standing up, in the corridor, one lamp after another. The five houses were not destroyed. They were, one after another, gathered into the east, and kept, and each of them said at the last that the chair was too heavy to leave and too heavy to carry. The last page of the last book is blank, and it is dated.
+* Let Veda go first, and follow her at the distance of a door
+  $ b6.coach = "veda"
+  $ humanity += 2
+  She goes from compartment to compartment without touching a thing. In the fourth she stops, and puts her hand flat on the cloth of the seat, and says that this was the house of a woman called Thessaly, who laughed. In the sixth she does not go in. She stands on the threshold with her hands at her sides, and says that it has been kept, and that she can feel that it has been kept, and she would like it very much if you would not say anything for a minute.
+$ do discover("the_seventh_coach")
+?if has_gift("old_blood")
+  The old blood in you knows the smell of the seventh compartment. It is not a house. It is a tide.
+?end
+<~
+
+# fur
+## The woman in the restaurant car
+$ do meet("roth")
+The restaurant car is nearly empty, and lit like a stage. The woman from the quay sits alone at a table for four, in a good gray fur, with a glass of water in front of her and her gloves laid very exactly across her handbag. She has the stillness of someone who has been trained to keep it.
+She does not look up when you come in. She says, to the window, that she had been told that the sixth would come with a large retinue, and that she is relieved to find the report was exaggerated.
+Her name is Anneliese Roth, and she says it as a woman gives a password. She says that she has kept the door of the east for thirty one years, and that she was sent to find out whether the sixth was a person, or a story told to frighten children.
+She says that the man in glasses, and the priest who is not a priest, are not hers. They are the Order's, and they were sent from Rome, and they have been on the train since Paris, in the second sleeping car.
+:the_fur
+* Sit down opposite, with the family at the next table, and ask what the east wants of the sixth ?if b6.east != "alone" and coven_size() > 0
+  $ b6.fur = "family"
+  $ standing += 1
+  $ do coven_task(_lead, "watch")
+  ?if gift_holder("charm") != ""
+    {name(gift_holder("charm"))} orders a pot of tea at the next table with such grace that two stewards fetch it, and the woman allows herself the smallest of smiles.
+  ?end
+  She says that the east wants nothing. She says that the east has had a chair empty for two thousand years, and a woman in it for a hundred, and that the woman is dying, and wishes to see the sixth before she does. It is a request, not a demand. She says that she wants it understood.
+* Ask her, as one who keeps a door, what is behind it, and what it costs to open
+  $ b6.fur = "ask"
+  $ cunning_brutal += 1
+  $ standing += 1
+  She considers you a long moment. She says that what is behind it is a garden, and a house, and a table, and that it costs no more than a person is willing to be asked. She says that this is, in her experience, quite a lot.
+* Say that you will take the train and the table, and her warning, and nothing else
+  $ b6.fur = "refuse"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  She says that it is a very proper answer. She says that she will see you at the end of the line, and that it is the first time in thirty one years she has said so to anyone and meant it.
+$ do discover("anneliese_roth")
+She leaves a card on the white cloth, with the name of a station on it, and a time, and a line in a small precise hand: "The man in glasses is called Doktor Lenz. He is not as stupid as he looks."
+<~
+
+# wires
+## The telephone and the stations
+Over the course of a night a train goes by a great many telegraph offices, and a great many stationmasters, and the Wagons Lits company, which is not above being obliging if it is asked in the right language. By the time Strasbourg is behind you, you have a clerk on every platform with a pencil.
+:the_wires
+* Wire the house in Chicago, and Mrs. Pell, and Cordelia, that the party is well and the road is open [once]
+  ?if b6.wires == "none"
+    $ b6.wires = "house"
+  ?end
+  $ standing += 1
+  $ humanity += 1
+  ?if b6.regent == "lead" and _lead != ""
+    Back at the house on the lake, {_reader_name}'s own seal sits on the answer inside the hour: the Exchange is open, the lamp under the lake is quiet, and Mrs. Pell sends her love in six words.
+  ?elif b6.regent == "ames"
+    Ames answers in three lines, as dry as a ledger, and adds that the Exchange has not so much as sneezed.
+  ?else
+    Dora Valer answers in a clear plain hand, with a postscript from Cordelia that is nine tenths a recipe.
+  ?end
+  -> :the_wires
+* Send the family's people to the stations ahead, to see who else has been told that the train is coming [once]
+  $ b6.wires = "watch"
+  $ secrecy += 1
+  $ cunning_brutal += 1
+  ?if coven_size() > 0 and b6.east != "alone"
+    $ do coven_task(_lead, "guard")
+    The family does what it is best at. At the next three stations there is, by midnight, a quiet person on the platform who is looking at nothing in particular, and a wire in the family's code back to the train. Two of the wires say that Doktor Lenz has been sending wires of his own.
+  ?else
+    Crane takes a seat in the telegraph car, and reads every flimsy that goes by with the expression of a man reading other people's letters, which he is.
+  ?end
+  -> :the_wires
+* Wire Rome, in four Latin words of your own, and leave the answer to chance [once]
+  $ b6.wires = "rome"
+  $ cunning_brutal += 1
+  $ humanity += 1
+  You send them the four words they sent you, in the same order, with one added. It is the first time in two thousand years that a Latin word of yours has gone to the Order on a wire. You are told that the clerk dropped his pencil.
+  -> :the_wires
+* That will do for the wires ?if b6.wires != "none"
+  $ do discover("the_night_wires")
+  <~
+-> :the_wires
+
+# window
+## Veda at the glass
+$ do meet("veda")
+She has taken the corner of the corridor, by the window, in the gray cardigan, with her ash colored hair coming down and her forehead against the cold glass. The country goes by in the dark. She says she has begun to recognise it, which is absurd, because she has never seen it from a train.
+?if b6.letter == "burn"
+  She says that she smelled the smoke on you at Cherbourg, and that she has not asked, and that she will not. She says that she would like it noted that she has not.
+?elif b6.letter == "alone"
+  She says that she has been trying all day not to wonder what the part you left out would have said.
+?else
+  She says that she has been through the letter in her mind three times, and that the pencilled line is the part she believes.
+?end
+:the_window
+* Tell her everything you know, plainly, including the parts you do not like
+  $ b6.window = "tell"
+  $ humanity += 2
+  $ standing += 1
+  You tell her all of it: the chair, the eight years, the second chair in the east, and the dying one. She listens without a word, with her face turned to the glass, and when you have done she says that it is exactly the right size for her to carry, and that nobody has given her anything that size in two thousand years.
+* Ask what she remembers of the white table, and of the seventh chair set apart
+  $ b6.window = "ask"
+  $ cunning_brutal += 1
+  $ humanity += 1
+  She says it is the strangest thing. She remembers the table very well, and the sea, and the white cloth, and she remembers the seventh chair, set a little apart, with a very old woman's hand on the back of it. She says that she remembers her own chair, and a laugh, and nothing at all between that laugh and the lamp.
+* Let her sleep, with her head on your shoulder, and keep the blind drawn
+  $ b6.window = "sleep"
+  $ humanity += 2
+  $ secrecy += 1
+  She is asleep before the next station. She sleeps like a child, with one fist against her cheek. It is very quiet in the corridor, and for an hour you do nothing at all but keep the train from waking her.
+$ do discover("the_window_seat")
+?if b6.vow == "promise"
+  She says, a little later, in her sleep or out of it, that she hasn't forgotten what you promised on the stern.
+?end
+<~
+
+# border
+## The frontier
+The train stops, at three in the morning, at a long gray station in a fog, with a frontier on the platform and a lamp every fifty yards. It is a place where there are customs officers, and soldiers, and a smell of oil and cabbage, and a great many people with papers in their hands.
+Doktor Lenz comes down the platform with a priest on one side of him, and a long black case in his hand, and he walks as a man walks who has bribed three officials and is anxious to be seen to have done nothing of the kind. His glasses reflect the lamps. He stops at the step of the seventh coach.
+He says, in a very good Latin, that he has been sent by the Order, that he bears the greetings of the Council, and that he will be glad to have a few words with Mr. Collins, in private, or in company, as Mr. Collins prefers.
+:the_border
+* Meet him on the platform, with the family at your back, and let him see the shape of what stands behind you ?if b6.east != "alone" and coven_size() > 0
+  $ b6.border = "hold"
+  $ standing += 2
+  $ cunning_brutal += 1
+  ?if gift_holder("strength") != ""
+    {name(gift_holder("strength"))} steps down from the coach, and does not do anything at all, and the priest who is not a priest forgets what he came to say.
+  ?end
+  ?if gift_holder("shadows") != ""
+    {name(gift_holder("shadows"))} is somewhere in the fog behind Lenz, and when he turns round to look he finds that his case has been opened and shut again.
+  ?end
+  He is shown, quite gently, that the sixth blood is not a story told to children. It is a strength, and it has a family, and its family is at the door. He bows, with real feeling, and says that Rome will be informed.
+* Let him in to the corridor, alone, and talk with him by the lamp
+  $ b6.border = "talk"
+  $ humanity += 1
+  $ secrecy += 1
+  He is a small precise man with a bad chest, and he drinks a little of the tea. He says that the Order has a quarrel with the east, and no quarrel with you. He says that the Order has kept what it kept for two thousand years, and that it would be a pity if the sixth were to be the one to lose it. He asks, very politely, what you will do with the chair.
+* Shut the coach, and say that the seventh coach is not an inn
+  $ b6.border = "shut"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  The door closes with the soft authority of good brass. Lenz stands a moment on the platform with his case, and the priest steps back. A whistle goes. The train goes on.
+$ do discover("the_frontier")
+<~
+
+# dawn
+## The shuttered coach
+It is day, and the blinds are down in all seven compartments, and the wheels are the only sound in the world. The coach is cool and dim and smells of the sea. Somewhere in the long hours, in the middle of the sleep, the sea has become much stronger.
+?if b6.east == "all" and coven_size() > 0
+  The family sleeps in the coaches before and behind, in the shuttered berths, in a line, like a company of soldiers in a hospital train. {_reader_name} has set a note on the shelf beside you, in her small hand: the doors are locked, the flasks are in the hatbox, and the line has been paid.
+?end
+Crane is awake, in the next compartment, with the blind a quarter inch up, reading a timetable in a very small light. He says that he has not been able to find the station in any list, and that this is the single most alarming fact he has learned in nine years.
+At dusk the train slows. The hiss of steam fades to a sigh. The sea is very loud now.
+Veda is standing at the door of the seventh compartment, with the white rug in her hands, and her face turned to the coast. She says, very quietly, that they are here.
+$ do rest()
+=> next
