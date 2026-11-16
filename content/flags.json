@@ -6355,6 +6355,98 @@
       "default": "sealed",
       "note": "Chapter 8: what became of the room kept empty",
       "major": true
+    },
+    "b6.chairs": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "family",
+        "cantor"
+      ],
+      "book": "relics-lost-god",
+      "default": "kept",
+      "note": "Chapter 9: what he did with the five signs from the chair arms"
+    },
+    "b6.respect": {
+      "kind": "enum",
+      "values": [
+        "declined",
+        "paid",
+        "sworn"
+      ],
+      "book": "relics-lost-god",
+      "default": "declined",
+      "note": "Chapter 9: how he answered the Yards' asking for respect",
+      "major": true
+    },
+    "b6.pellsecret": {
+      "kind": "enum",
+      "values": [
+        "kept",
+        "shared",
+        "pressed"
+      ],
+      "book": "relics-lost-god",
+      "default": "kept",
+      "note": "Chapter 9: what he did with Mrs. Pell's secret",
+      "major": true
+    },
+    "b6.work": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "school",
+        "dig",
+        "ledgers"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 9: the family's work (most committed wins)"
+    },
+    "b6.depot": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "lead",
+        "alone"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 10: how he met Mr. Crane at the depot"
+    },
+    "b6.half": {
+      "kind": "enum",
+      "values": [
+        "asked",
+        "share",
+        "refused"
+      ],
+      "book": "relics-lost-god",
+      "default": "asked",
+      "note": "Chapter 10: his answer to Mr. Crane's offer of a share of the Loop",
+      "major": true
+    },
+    "b6.ledger": {
+      "kind": "enum",
+      "values": [
+        "half",
+        "told",
+        "nothing"
+      ],
+      "book": "relics-lost-god",
+      "default": "half",
+      "note": "Chapter 10: how much he told Mr. Crane of the hall",
+      "major": true
+    },
+    "b6.lake": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "alone"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 10: who walked the lake front with Mr. Crane"
     }
   }
 }

@@ -1183,6 +1183,18 @@
       "title": "The room kept empty",
       "book": "relics-lost-god",
       "text": "A round hall under the lake, with six stone chairs, five worn and the sixth never sat in."
+    },
+    "the_five_signs": {
+      "category": "lore",
+      "title": "The five signs",
+      "book": "relics-lost-god",
+      "text": "Five signs cut into the arms of the worn chairs: a wheel with a missing spoke, a hand holding a branch, a ship with no mast, a sun with a face, and a door left a little open."
+    },
+    "crane_ledger": {
+      "category": "lore",
+      "title": "Crane's ledger",
+      "book": "relics-lost-god",
+      "text": "A flat black ledger with a ribbon at nineteen sixteen: a hundred dollars to the crib keeper, a mason's afternoon, and a closed eye over a coin."
     }
   }
 }
