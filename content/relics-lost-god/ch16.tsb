@@ -1,0 +1,200 @@
+// Book Six, Chapter 16 (session 69). Thursday: the train east, the pier at New York and the first night at sea.
+// One fixed night in four scenes (the platform, the pier, the stateroom and the grey passenger, the stern) and a short dawn. No night phase.
+// The coven fronts it: the family sails as the hero's arm, hungry or fed, and holds the cabins against the grey passenger. Names are always checked with in_circle().
+// Reads b6.circle, b6.east, b6.regent, b6.callers, b6.table, b6.tallis, b6.kept, b6.memory. Sets b6.farewell, b6.gray and b6.vow.
+// Uses meet(), discover(), chart(), has_gift(), gift_holder(), must_feed(), feed(). Ends with rest() and => next.
+@chapter b6c16
+@title The Twentieth Century
+@book relics-lost-god
+@version 1
+
+# start
+## The Limited
+$ b6.farewell = "words"
+$ b6.gray = "hear"
+$ b6.vow = "ask"
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+$ do chart("chicago.depot")
+~> platform
+---
+~> pier
+---
+?if must_feed()
+  ~> thirst
+  ---
+?end
+~> gray
+---
+~> stern
+---
+-> dawn
+
+# platform
+## LaSalle Street
+The Twentieth Century Limited stands under its lights with a red carpet at its door, and the whole of the platform is full of people who have come to see somebody else off. There is a man selling violets. There is a woman crying into a fur. There is, at the far end, under a lamp, a small party that has come for you.
+?if b6.callers == "show"
+  Ruth Calloway has come with her escort, and wears the brandy gown, and carries a bunch of white chrysanthemums that she holds like a weapon. She does not look at Veda. It is the most intense non-looking you have ever seen.
+?elif b6.table == "seat"
+  Ruth Calloway has come alone, in a very plain coat, which in her is a declaration.
+?else
+  Ruth Calloway has not come. A boy has come in her place, with a card, and the card says "Safe passage," in a hand that was taught to forge.
+?end
+Mr. Rudek is by the engine, speaking to the driver, who is nodding nervously. He is not seeing anybody off. He is, as nearly as you can tell, inspecting the train.
+Mrs. Pell has come with a hamper.
+?if b6.circle == "all" and coven_size() > 0 and b6.east != "alone"
+  The family is on the platform with its trunks, and it is the sort of party that makes porters apologise in advance.
+?end
+:the_farewell
+* Say a word to each of them, and mean it
+  $ b6.farewell = "words"
+  $ humanity += 2
+  $ standing += 1
+  It is brief, and it is a little clumsy, and every one of them takes it as exactly what it is. Mrs. Pell says that the hamper has no ham in it. Mr. Rudek says that he will be at the Yards, and not at all anxious. Ruth Calloway gives you the chrysanthemums, and says that they are for the grave, and that she would be sorry to see them used.
+* Leave the family's seal with Mrs. Pell, to keep the house's word while you are gone
+  $ b6.farewell = "seal"
+  $ cunning_brutal += 1
+  $ standing += 2
+  She takes it as one takes a very small, very heavy bird. She says that it is a thing that has not been entrusted to the house on the lake in two hundred years. She says that she will not lose it. She says it with the particular bleakness of someone who never has.
+* Board without a word, and let the city wonder
+  $ b6.farewell = "none"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  $ standing -= 1
+  You hand up the cases and go up the step. Nobody says anything. The porter says, afterwards, that it was the only party he ever saw off in the whole of his life without a single remark.
+$ do discover("the_limited")
+<~
+
+# pier
+## Pier fifty-nine
+$ do chart("chicago.club")
+Thursday noon, on the North River, under a high grey sky. The great liner stands at the pier with her funnels breathing, and every person in the world is going up her gangway. It is a wet, loud, hopeful, fussing crowd. The ship's band plays something with six notes in it, quite badly, and is told to stop.
+Crane goes up first, with a ledger under his arm that is not in the luggage. Veda goes up on your arm, in the gray cardigan, with her chin lifted, like a girl going up to be confirmed.
+?if b6.east == "all" and coven_size() > 0
+  The family goes up behind, in the proper order, with the porters, and is distributed through the first class cabins like a sudden shower of rice. {_reader_name} is counting heads on the gangway and is, you notice, one short, and is at the same time calm about it, and the one is found at the top, looking at a lifeboat.
+?elif b6.east == "few" and coven_size() > 0
+  The small party goes up behind you as though it had never been anything else.
+?end
+She casts off at noon, with three long blasts, and the whole of New York slides slowly away, a gray wall full of lit windows, with a smoke on it. Veda takes your arm very tightly. She says that she did not know that a city could be so large and so brief.
+<~
+
+# thirst
+## The first night's hunger
+The ship is warm and smells of hot oil and roses, and there are eleven hundred people on it, all of them within reach. The hunger arrives in the second hour and does not go away.
+?if b6.east == "all" and coven_size() > 0
+  The family has put it in a cabin, in a locked case, among the hatboxes: the thing the house keeps for a long road. {_reader_name} sets it on the table without comment.
+?end
+* Take what the house brought, a cold sealed flask from the family's own keepers ?if b6.east != "alone" and coven_size() > 0
+  $ do feed("donor")
+  $ humanity += 1
+  It is cold, and tastes of iron and of someone you know. It will do for the crossing. You do not look at the flask when it is empty.
+* Take a stoker below, who will not remember a thing about it
+  $ do feed("human")
+  $ humanity -= 2
+  $ cunning_brutal += 2
+  He is a big Welshman on the late watch with a cut across his knuckles, and he does not so much as turn from the furnace. It is quick, and quiet. It leaves a taste of coal.
+* Find the ship's kitchen at midnight, and a bucket meant for the pigs
+  $ do feed("animal")
+  $ secrecy += 1
+  The cook is a Neapolitan in a vest, and says nothing at all, and takes the half dollar like a man who has been bribed before. It is a shabby supper in a great ship, and it is enough.
+* Do without, and keep the rest of the night for what is coming
+  $ humanity += 1
+  $ cunning_brutal -= 1
+  It gnaws. It will gnaw for some days. You find that there is a certain clarity in it, like a cold bath.
+<~
+
+# gray
+## The gray passenger
+$ do chart("chicago.tower")
+$ do meet("tallis")
+You are on the promenade deck in the dark, with the wind in your coat and the wake a long white road behind, when a man in a gray overcoat comes out of the smoking room, with a gold coin turning in his fingers. He leans on the rail at a civil distance. He says that he took a second class cabin and was very comfortable.
+?if b6.tallis == "listened"
+  He says that you were courteous in the gallery, and that he has been thinking of the terms, and that they were rather better than he had hoped.
+?elif b6.tallis == "held"
+  He says that he bears no ill will for the cellar, and that he has had a good deal of time to think about doors.
+?else
+  He says that you did not give him his terms, and that he has taken the liberty of arriving on his own.
+?end
+He says that the master he has served is not the god, and has never claimed to be. He says that it is the thing the god keeps for a lamp, which is the thing that kept the lamps, and that it grows tired. He says the chair in the east is its last one, and that Cassian has been holding it for a very long time, for a person who would rather not be found.
+?if coven_size() > 0 and b6.east != "alone" and in_circle(_lead)
+  {_reader_name} has come out on deck behind you without being asked, with a rug over her arm. She stands a half pace behind your shoulder. Tallis looks at her for a long moment, and then at you, and says nothing about it.
+?end
+He says he has come, not to prevent, but to see that it is done properly.
+:the_gray
+* Hear him out, all the way, and take what he is willing to say
+  $ b6.gray = "hear"
+  $ cunning_brutal += 1
+  $ do discover("tallis_master")
+  He says it plainly, as one who has said it to a mirror. The tenants are the god's, lent, and not quite men. There are six of them in the world, and five serve the houses of the old chairs. The sixth has never been found. He says that he has not told you the name of his master, because it does not have one that the language can bear, but that it has a habit, and the habit is to wait.
+* Press him for the name of the thing he serves, and the thing in the east
+  $ b6.gray = "press"
+  $ cunning_brutal += 2
+  $ do discover("tallis_master")
+  He goes very still. The coin stops turning. He says, in the voice of a man reading from a wall, that it is a thing that was before the Republic, and before the first of the lamps, and that it is not a dead god. It is only that it has not been woken. Then his face goes out like a lamp, and he is a courteous gray man with a coin again, and he says that he is sorry, he is not permitted to go on.
+* Send the family to turn him out of the second class cabin ?if b6.east != "alone" and coven_size() > 0
+  $ b6.gray = "turn"
+  $ standing += 1
+  $ secrecy -= 1
+  ?if gift_holder("strength") != ""
+    {name(gift_holder("strength"))} opens the cabin door, and the gentleman is, with the greatest civility, carried to the rail, and given his choice of the deck or the sea. He chooses the deck. It does not seem to hurt his dignity.
+  ?else
+    The ship's officers are very understanding, and the gentleman is moved to the end of the deck.
+  ?end
+* Let him stay, and tell no one, and watch him at breakfast
+  $ b6.gray = "watch"
+  $ secrecy += 2
+  $ cunning_brutal += 1
+  He raises his hat, and goes in, and you go on watching the wake until the cold comes into your hands.
+<~
+
+# stern
+## The stern
+$ do chart("chicago.haven")
+There is a little half deck at the stern, where the third class are allowed on a fine day, and it is empty at three in the morning. Crane is there with his collar up and a flask in his pocket. Veda is sitting on a coil of rope with her knees drawn up, looking at the white road behind.
+?if b6.memory == "lamp"
+  She has her palm against the deck rail, as she had it against the plinth. She says that the ship is humming, a very little, and that it is not the engines.
+?elif b6.memory == "ask"
+  She says that she remembered another thing, at supper, and was too shy to write it down. It was that the sixth chair was not empty. She says that it was only that the one who sat in it did not like to be looked at.
+?else
+  She says nothing for a time, and then that she is glad you did not ask her anything, because she is still deciding what she remembers.
+?end
+Crane says, gravely, that a man in his position has no business being sentimental, and that he has decided to make an exception.
+She says that she should like to be told something that is true, about the thing that is to happen, before they come to it, and that she knows it is a great deal to ask.
+:the_vow
+* Promise her that she will be brought back to Chicago, whatever the east wants
+  $ b6.vow = "promise"
+  $ humanity += 2
+  $ standing += 1
+  She takes it with both hands, quite seriously. She says that it was exactly what she hoped for and had not dared to ask, and that she will hold you to it in a good many centuries. Crane says that he will witness it, and does, with a ledger.
+* Ask her what she wants, and let that decide
+  $ b6.vow = "ask"
+  $ cunning_brutal += 1
+  $ humanity += 1
+  She says that nobody has asked her in two thousand years, and thinks. She says that she wants to see the sea in the morning. She says that she wants to see the white table again, even if it is gone. She says that after that she will need to think.
+* Tell her only that you do not know, and will not lie to her
+  $ b6.vow = "plain"
+  $ cunning_brutal += 2
+  $ secrecy += 1
+  She looks at you for some time, and then nods, as one who has been given the first straight answer of a long day. She says that it is the best thing that she has heard in the whole of her new life.
+$ do discover("the_stern_vow")
+<~
+
+# dawn
+## The open sea
+There is a pale line in the east, and a long gray swell, and the ship goes up it and down. Veda is on the deck at the rail, with the wind pulling at her ash coloured hair, and she is looking at the sea as at something she has been told of and never believed.
+She says that it is bigger than it was.
+?if b6.gray == "turn"
+  The gentleman in the gray overcoat is at the end of the deck, with his hat in his hand, at a respectful distance. He bows.
+?elif b6.gray == "watch"
+  The gentleman in the gray overcoat is at breakfast, and is eating nothing, and is very civil about it.
+?end
+Crane comes up the companion with his hat on the back of his head and a ledger under his arm. He says that the purser has given him the passenger list, and that it has one name on it he cannot account for, and that it is not Tallis.
+He says it is a Mr. C. Hale, travelling alone, first class, booked by wire from London three weeks ago and paid for in advance. He says that he has not seen him, and that he is rather afraid it is not a joke.
+$ do rest()
+=> next

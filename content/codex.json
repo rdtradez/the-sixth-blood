@@ -1243,6 +1243,42 @@
       "title": "The sixth chair's kin",
       "book": "relics-lost-god",
       "text": "Veda is of the sixth house, and so of the hero's own line. No one has sat in the sixth chair in Chicago for two thousand years."
+    },
+    "the_regent": {
+      "category": "lore",
+      "title": "The house kept",
+      "book": "relics-lost-god",
+      "text": "Someone holds the lantern, the seal and the long desk at the Exchange while the hero is across the sea."
+    },
+    "veda_table": {
+      "category": "lore",
+      "title": "The white table",
+      "book": "relics-lost-god",
+      "text": "Veda remembers a long white table in a garden open to the sea, six chairs and a seventh set a little apart."
+    },
+    "the_east_ship": {
+      "category": "lore",
+      "title": "The ship east",
+      "book": "relics-lost-god",
+      "text": "A liner sails from New York on a Thursday in October 1924, carrying the hero, Veda, Crane and whoever the family sends."
+    },
+    "the_limited": {
+      "category": "lore",
+      "title": "The Limited",
+      "book": "relics-lost-god",
+      "text": "The Twentieth Century Limited carried the hero out of LaSalle Street, watched by the houses of the city."
+    },
+    "tallis_master": {
+      "category": "lore",
+      "title": "Tallis's master",
+      "book": "relics-lost-god",
+      "text": "The tenants are lent by the god, and Tallis serves the thing the god keeps for a lamp, which is not dead and has only not been woken."
+    },
+    "the_stern_vow": {
+      "category": "lore",
+      "title": "The stern deck",
+      "book": "relics-lost-god",
+      "text": "On the half deck at the stern of the liner Veda was told something true before the east."
     }
   }
 }
