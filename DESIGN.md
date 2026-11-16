@@ -91,6 +91,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 62: Book Six chapters 1 and 2
 - [x] Session 63: Book Six chapters 3 and 4
 - [x] Session 64: Book Six chapters 5 and 6
+- [x] Session 65: Book Six chapters 7 and 8
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -754,3 +755,13 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The coven fronts both chapters (the lead's report, a member guarding the Institute, the family at the lake shore table and in the clinic, counsel before the gathering, the strong standing behind the chair). Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
 - Tests: `tests/book6.test.js` now covers chapters 5 and 6.
 - Plans are in `SPOILERS/relics-lost-god.md`. The design doc has no list for these chapters beyond the book outline, so they were planned from the hooks chapter 4 left.
+
+### Session 65 notes (Book Six, chapters 7 and 8)
+
+- Chapters `b6c07` and `b6c08` are in `content/relics-lost-god/` (`ch07.tsb`, `ch08.tsb`), about 6,500 words together. The manifest entry lists eight chapters and stays `"incomplete": true`.
+- Chapter 7 opens with the business lead's report, plays one night phase of three actions out of four, then a dawn. Chapter 8 is one fixed night in four scenes (the shore, the crib, the door, the hall) and a dawn. Both end with `rest()` and `=> next`.
+- New decision flags (`b6.` prefix, registered): `b6.map`, `b6.houses`, `b6.heir`, `b6.tuesday` (chapter 7) and `b6.party`, `b6.watchers`, `b6.door`, `b6.hall` (chapter 8). `b6.map`, `b6.heir` and `b6.hall` are major. `b6.houses` is a multi pick loop where the most committed pick wins (brewery over works over lodge).
+- Content: two codex entries. No engine change, schema or migration.
+- The coven fronts both chapters: the lead's report, second havens and trades for the family (guard and business standing tasks), a member lent to the lake shore house as a guest, the family going down with him or holding the shore, and the final room offered to the family as a haven. Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
+- Tests: `tests/book6.test.js` now covers chapters 7 and 8.
+- Plans are in `SPOILERS/relics-lost-god.md`.

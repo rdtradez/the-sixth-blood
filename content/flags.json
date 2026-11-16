@@ -6263,6 +6263,98 @@
       "default": "asked",
       "note": "Chapter 6: the cantor's seventh note",
       "major": true
+    },
+    "b6.map": {
+      "kind": "enum",
+      "values": [
+        "family",
+        "alone",
+        "gave"
+      ],
+      "book": "relics-lost-god",
+      "default": "family",
+      "note": "Chapter 7: what he did with the tracings of the box rim",
+      "major": true
+    },
+    "b6.houses": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "lodge",
+        "works",
+        "brewery"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 7: the family's second roofs and trades (most committed wins)"
+    },
+    "b6.heir": {
+      "kind": "enum",
+      "values": [
+        "declined",
+        "kept",
+        "lent"
+      ],
+      "book": "relics-lost-god",
+      "default": "declined",
+      "note": "Chapter 7: what he answered when the lake shore house asked for a guest",
+      "major": true
+    },
+    "b6.tuesday": {
+      "kind": "enum",
+      "values": [
+        "listened",
+        "sang",
+        "asked"
+      ],
+      "book": "relics-lost-god",
+      "default": "listened",
+      "note": "Chapter 7: how he met the Tuesday song"
+    },
+    "b6.party": {
+      "kind": "enum",
+      "values": [
+        "alone",
+        "doctor",
+        "family"
+      ],
+      "book": "relics-lost-god",
+      "default": "alone",
+      "note": "Chapter 8: who went down to the crib"
+    },
+    "b6.watchers": {
+      "kind": "enum",
+      "values": [
+        "followed",
+        "held",
+        "turned"
+      ],
+      "book": "relics-lost-god",
+      "default": "followed",
+      "note": "Chapter 8: what he did about the houses watching the shore"
+    },
+    "b6.door": {
+      "kind": "enum",
+      "values": [
+        "opened",
+        "bloodline"
+      ],
+      "book": "relics-lost-god",
+      "default": "opened",
+      "note": "Chapter 8: how the door was opened"
+    },
+    "b6.hall": {
+      "kind": "enum",
+      "values": [
+        "sealed",
+        "lit",
+        "house",
+        "institute"
+      ],
+      "book": "relics-lost-god",
+      "default": "sealed",
+      "note": "Chapter 8: what became of the room kept empty",
+      "major": true
     }
   }
 }

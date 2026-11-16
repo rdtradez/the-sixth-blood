@@ -1115,6 +1115,22 @@
             "blood",
             "violence"
           ]
+        },
+        {
+          "id": "b6c07",
+          "file": "relics-lost-god/ch07.tsb",
+          "title": "The Door on the Box",
+          "notes": [
+            "blood"
+          ]
+        },
+        {
+          "id": "b6c08",
+          "file": "relics-lost-god/ch08.tsb",
+          "title": "The Room Kept Empty",
+          "notes": [
+            "blood"
+          ]
         }
       ],
       "incomplete": true

@@ -1171,6 +1171,18 @@
       "title": "The Cantor",
       "book": "relics-lost-god",
       "text": "A man with a gold hand who sings a six note figure and a seventh that nobody has sung, to keep a lamp lit."
+    },
+    "the_crib": {
+      "category": "places",
+      "title": "The two mile crib",
+      "book": "relics-lost-god",
+      "text": "A granite fort in the lake off Chicago, over the water tunnel, with a sealed door in its lowest chamber."
+    },
+    "the_lamp_hall": {
+      "category": "places",
+      "title": "The room kept empty",
+      "book": "relics-lost-god",
+      "text": "A round hall under the lake, with six stone chairs, five worn and the sixth never sat in."
     }
   }
 }
