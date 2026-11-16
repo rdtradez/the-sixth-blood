@@ -626,6 +626,18 @@
       "name": "Mr. Sorrel",
       "title": "The cantor",
       "bio": "A mild, courteous man in a long black coat who sings one old song every Tuesday and wears gloves on a hand that is not flesh."
+    },
+    "tilly": {
+      "gender": "f",
+      "name": "Tilly Marsh",
+      "title": "The child at the viaduct",
+      "bio": "A girl of twelve in a gray school dress, from the choir of St. Anne's, who has been twelve since nineteen sixteen and can hold the door for the seventh note."
+    },
+    "josiah": {
+      "gender": "m",
+      "name": "Josiah Pell",
+      "title": "The first chair of the lake shore house",
+      "bio": "A dry, slow Yankee in a frock coat of the eighties who has sat in a plain oak chair under the pale house since eighteen eighty six, listening."
     }
   }
 }

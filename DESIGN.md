@@ -93,6 +93,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 64: Book Six chapters 5 and 6
 - [x] Session 65: Book Six chapters 7 and 8
 - [x] Session 66: Book Six chapters 9 and 10
+- [x] Session 67: Book Six chapters 11 and 12
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -776,3 +777,13 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - The coven fronts both chapters: the lead's report, the family's guest or keeper at the lake shore house, the family sent to the dig, the ledgers and the school, and the family receiving Mr. Crane at the depot and the table. Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
 - Tests: `tests/book6.test.js` now covers chapters 9 and 10.
 - This branch is stacked on session 65 (PR #72, not yet merged at the time). Plans are in `SPOILERS/relics-lost-god.md`.
+
+### Session 67 notes (Book Six, chapters 11 and 12)
+
+- Chapters `b6c11` and `b6c12` are in `content/relics-lost-god/` (`ch11.tsb`, `ch12.tsb`), about 6,000 words together. The manifest entry lists twelve chapters and stays `"incomplete": true`.
+- Chapter 11 opens with the business lead's report and a short morning with Mr. Crane, plays one night phase of three actions out of four, then a dawn. Chapter 12 is one fixed night in four scenes and a dawn. Both end with `rest()` and `=> next`.
+- New decision flags (`b6.` prefix, registered): `b6.guest`, `b6.singer`, `b6.rival`, `b6.holdings`, `b6.watch` (chapter 11) and `b6.child`, `b6.sleeper`, `b6.note`, `b6.stair` (chapter 12). `b6.singer`, `b6.rival`, `b6.note` and `b6.stair` are major. `b6.holdings` is a multi pick loop where the most committed pick wins (haven over elevator over keepers).
+- Content: two new people (`tilly`, `josiah`), two codex entries. No engine change, schema or migration.
+- The coven fronts both chapters: the lead's report, the family housing the guest and taking in the child, standing in the room against a rival house, building the haven and holdings, singing together and holding the stair. Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
+- Tests: `tests/book6.test.js` now covers chapters 11 and 12.
+- This branch is stacked on session 66 (PR #73), which is stacked on session 65. Plans are in `SPOILERS/relics-lost-god.md`.

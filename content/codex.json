@@ -1195,6 +1195,18 @@
       "title": "Crane's ledger",
       "book": "relics-lost-god",
       "text": "A flat black ledger with a ribbon at nineteen sixteen: a hundred dollars to the crib keeper, a mason's afternoon, and a closed eye over a coin."
+    },
+    "the_seventh_note": {
+      "category": "lore",
+      "title": "The seventh note",
+      "book": "relics-lost-god",
+      "text": "The figure has six notes. The seventh is a door held open, and only the sixth blood, or one who holds the door for it, can sing it."
+    },
+    "the_first_chair": {
+      "category": "lore",
+      "title": "The first chair",
+      "book": "relics-lost-god",
+      "text": "Under the pale house on the lake shore, a man sits in a plain oak chair with an open door cut in its arm, the last and quietest of the five houses."
     }
   }
 }
