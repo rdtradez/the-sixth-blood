@@ -90,6 +90,7 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - [x] Session 61: the Chicago and Collesanto (1923) maps for Book Six
 - [x] Session 62: Book Six chapters 1 and 2
 - [x] Session 63: Book Six chapters 3 and 4
+- [x] Session 64: Book Six chapters 5 and 6
 - [x] Session 48: Book Four chapters 17 and 18
 - [x] Session 38: Book Three chapters 19 and 20; Book Three is complete (journal, recap and sleep to New Orleans)
 - [x] Sessions 10 to 16: Book One chapters 7 to 20; Book One is complete (journal, recap and first sleep in session 16)
@@ -744,3 +745,12 @@ Engine, 4 sessions, then books. The full 85 session checklist with commands is i
 - Sessions 60 to 62 (pull requests #67 to #69) were not merged when this session started, so the session 63 branch is stacked on session 62. Merge them in order.
 - Plans are in `SPOILERS/relics-lost-god.md`.
 
+### Session 64 notes (Book Six, chapters 5 and 6)
+
+- Chapters `b6c05` and `b6c06` are in `content/relics-lost-god/` (`ch05.tsb`, `ch06.tsb`), about 6,500 words together. The manifest entry lists six chapters and stays `"incomplete": true`.
+- Chapter 5 opens with the business lead's report, plays one night phase of three actions out of four, then a dawn. Chapter 6 plays a short preparation phase (two actions out of three), a fixed gathering of the city's houses in four scenes, and a dawn. Both end with `rest()` and `=> next`.
+- New decision flags (`b6.` prefix, registered): `b6.crates`, `b6.yards`, `b6.pell`, `b6.bronzeville`, `b6.invite` (chapter 5) and `b6.claim`, `b6.test`, `b6.cantor` (chapter 6). `b6.crates`, `b6.yards`, `b6.pell`, `b6.claim` and `b6.cantor` are major. `b6.bronzeville` is a multi pick loop where the most committed pick wins (school over clinic over hall).
+- Content: one new person (Sorrel, id `sorrel`), three codex entries, one collection piece (`disc_of_rays`, obtained in chapter 5 on one branch). No engine change, schema or migration.
+- The coven fronts both chapters (the lead's report, a member guarding the Institute, the family at the lake shore table and in the clinic, counsel before the gathering, the strong standing behind the chair). Names are always checked with `in_circle()`; `npm run coven-names content/relics-lost-god` is clean.
+- Tests: `tests/book6.test.js` now covers chapters 5 and 6.
+- Plans are in `SPOILERS/relics-lost-god.md`. The design doc has no list for these chapters beyond the book outline, so they were planned from the hooks chapter 4 left.

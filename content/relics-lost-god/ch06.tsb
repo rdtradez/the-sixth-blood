@@ -1,0 +1,291 @@
+// Book Six, Chapter 6 (session 64). Thursday in May 1924: the Parley of the houses at the Calloway Room.
+// Opens with the day of preparation (one night phase of two actions out of three: the family's counsel, Marcel and the figure, the sheet of music), then a fixed Parley: the arrival, the five seats, the claim, the test of strength, the man in gloves, then a short dawn.
+// The coven fronts it: the family dresses and stands behind the chair, and the sired and the hero show their strength. Names are always checked with in_circle().
+// Reads b6.invite, b6.circle, b6.crates, b6.yards, b6.pell, b6.ames, b6.rivals, b6.song, b6.rudek, b6.tallis, b6.benefit. Sets b6.claim, b6.test and b6.cantor.
+// Uses meet(), discover(), chart(), has_gift(), gift_holder(), power(). Ends with rest() and => next.
+@chapter b6c06
+@title The Calloway Room
+@book relics-lost-god
+@version 1
+
+# start
+## The Thursday
+$ b6.claim = "peace"
+$ b6.test = "answered"
+$ b6.cantor = "asked"
+$ _figure = 0
+$ _lead = ""
+$ _reader_name = "Dora Valer"
+?if coven_size() > 0
+  $ _lead = business_lead()
+?end
+?if _lead != ""
+  $ _reader_name = name(_lead)
+?end
+~> thursday
+---
+$ do phase("night", 2)
+It is Thursday, and the sun is going down behind the stockyards like a coin into a slot. There are three things that could be done before eleven, and time for two. {cap(voice("hunger"))}.
+-> prep
+
+# thursday
+?if b6.invite == "declined"
+  The Loop did not take the refusal as an insult. It took it as information. By Wednesday noon the whole city had heard that Mr. Collins would not come, and by Wednesday night a second card had arrived, much shorter, saying that the Parley would sit on Thursday regardless, and that his chair would remain empty, in case.
+?elif b6.invite == "family"
+  The word has gone round that the Exchange will come with its family. It has gone round very quickly. It has produced, from every house in the city, a stiff little silence, and one telephone call, from Mr. Ames, to ask how many.
+?else
+  The word has gone round that Mr. Collins will come. Mr. Ames has called, to ask whether he can be of use. Mrs. Pell has sent a note, to say that she will be present, and that she hopes it will not be tiresome.
+?end
+?if _lead != ""
+  {_reader_name} has had the carriage brought round, and the coats brushed, and a long table of sandwiches laid for people who will not eat them, because it is a thing that one does. {pg(_lead, "He", "She", "They")} {pg(_lead, "says", "says", "say")} that a house is never so well governed as on the eve of a great trouble, and that it is an excellent night for it.
+?else
+  Dora has had the cab brought round, and your coat brushed, and has said, quite flatly, that she will wait in the street all night if she has to.
+?end
+<~
+
+# prep
+:prep
+?if actions_left() == 2
+  There is an hour or two before the sun is quite gone, and the whole house has the hushed look of a ship before a gale.
+?else
+  The streetlamps have come on. It is nearly time.
+?end
+* Sit with the family, and ask what each would say [once] ?if actions_left() > 0
+  ~> family
+  $ do act()
+* Go down to the club, and have Marcel play the figure [once] ?if actions_left() > 0
+  ~> marcel
+  $ do act()
+* Study the sheet of music, alone, with a lamp [once] ?if actions_left() > 0
+  ~> sheet
+  $ do act()
+?if actions_left() <= 0
+  $ do end_phase()
+  -> go
+?end
+-> :prep
+
+# family
+## The counsel
+?if coven_size() > 0
+  They are in the long front room, with the shutters closed and a lamp lit, because it is the thing that one does, and because none of them has ever been in a room like it. {_reader_name} has put a chair for you. Nobody sits in it.
+  ?if in_circle("fiammetta") and member("fiammetta", "status") == "active"
+    Fiammetta has been to the Loop already, in a man's cap, and has drawn the street door and the two back ones, and the fire escape on a menu card. She says that the room has no windows. She says that this is either very safe or very foolish.
+  ?end
+  ?if in_circle("thibault") and member("thibault", "status") == "active"
+    Thibault has found the telephone man, who is paid by three houses, and has found that he will take a fourth. He says that tonight, for the first time in the history of Chicago, there will be a line from the Calloway Room to this front room, and that Miss Calloway will never know.
+  ?end
+  ?if in_circle("hanno") and member("hanno", "status") == "active"
+    Hanno has made a list, in his small square hand, of what each house owes, and to whom, and has found that there is not one of the four that is not in debt to another. It is, he says, a very well balanced city.
+  ?end
+  ?if gift_holder("memory") != ""
+    {name(gift_holder("memory"))} recites the names of everyone who has ever sat at the Calloway Room's long table, with the dates, and who sat on whose right, and who has been moved. It takes twenty minutes. At the end you know, without having been told, where to put your feet.
+  ?end
+  They do not tell you what to do. It is the thing that you are, rather slowly, coming to love in them. They tell you what they have seen, and what they are afraid of, and what they would not have you leave out. It is a family's counsel, and it is a very quiet thing, and it is, you notice, a great deal heavier than an order.
+  $ standing += 1
+  $ humanity += 1
+?else
+  Dora sits across the long table with a pencil, and goes through the room in order, as she has had it from her grandmother's cousin, who was once a waitress at the Calloway. She says that the chairs are in a half circle. She says that the whole of the thing will turn on who sits, and who does not, and who is made to wait.
+  $ standing += 1
+?end
+<~
+
+# marcel
+## The figure
+$ do chart("chicago.club")
+$ do meet("marcel")
+Prosper's is closed to the public on a Thursday, and the chairs are on the tables. Marcel is sitting alone on the bandstand in his shirt sleeves, with the clarinet across his knee, and he has been waiting an hour.
+He plays it for you. It is, after all, the most that he can do. The six notes rise, and rise, and the seventh does not come where it should. It lies, a half step flat, like a shadow thrown by something that is not in the room. He plays it again. Then he lowers the clarinet, and says that the song has a place for a voice. He says that his grandfather's grandfather said it was a part that could not be played, and could not be taught. It had to be *given*, he said, by someone who was owed it.
+$ _figure = 1
+?if b6.song == "spoke"
+  He says that the man in gloves is the only person who ever listened to the seventh, instead of covering it.
+?end
+$ standing += 1
+<~
+
+# sheet
+## The seventh note
+You sit with the sheet in the lamplight, at the kitchen table, for an hour. It is in a small, neat, accurate hand. It has six notes, a seventh, and a mark beside the seventh that is not a clef or a rest or a fermata. It is, you slowly realise, the red ray. It is a very small drawing of it.
+$ do discover("the_six_rays")
+?if has_gift("old_blood")
+  The old blood in you hears it before you read it. It is a held breath, rather than a song. It is the shape of a gap that something is going to fit into.
+?else
+  You do not know what it is. But you have the oddest feeling that you have been humming it, without knowing, for some weeks.
+?end
+$ _figure = 1
+<~
+
+# go
+## The Calloway Room
+$ do chart("chicago.goldcoast")
+~> arrive
+---
+~> seats
+---
+~> claim
+---
+~> test
+---
+~> cantor
+---
+-> dawn
+
+# arrive
+## Under the lamp
+It is the plain steel door between a hotel and a hat shop, with the small gilt sign. The doorman touches his cap. It is a quarter to eleven.
+?if b6.invite == "declined"
+  The doorman does not stop you, but he does not step aside either. He looks at you, with his old, polite face, and says that Miss Calloway has not been told that you were coming. Then he steps aside.
+?elif b6.invite == "family" and coven_size() > 0
+  The family comes in behind you, in a long dark line, each one in a good coat, with a face carefully arranged. The doorman, who has not been surprised by anything since 1911, is a little surprised.
+?elif b6.invite == "family"
+  The keepers come in behind you, large and slow and in their best black. The doorman looks at them, and then at you, and, with a small, courteous smile, takes their hats.
+?else
+  You go in alone. The doorman touches his cap, for the second time, and shuts the steel door behind you with a very soft click.
+?end
+It is a plain room, for a court. It is long, and low, and warm, with a thick carpet and a very old, very clean fireplace. There is a round table, though not a round one. It has five sides, and a sixth, which is missing. It is, you think, a gap in the wood. There is a chair at the gap.
+<~
+
+# seats
+## The five seats
+Miss Ruth Calloway sits at the head of the table in a green dress, with her hair in a bob, and a long cigarette holder that she does not use. She is brisk and bright and easy, and she has, under it, a stillness like a good safe.
+At her right is Mrs. Pell, in gray silk, with a footman at her back.
+?if b6.pell == "allied"
+  She nods to you, quite openly, the width of a hand. It is the first time she has been seen to do so in public.
+?elif b6.pell == "refused"
+  She does not look at you. It is, in its way, a great deal more eloquent than looking.
+?end
+At her left is Mr. Rudek, in his butcher's apron, with his great fists on the wood.
+?if b6.yards == "stood"
+  He looks at you across the table with the face of a man who has met something he does not understand and finds that he is delighted.
+?elif b6.yards == "settled"
+  He inclines his head, the width of a hat brim. It is the Yards' bow.
+?else
+  He nods. It is a little short. It is a great deal warmer than it was.
+?end
+Next to him Mr. Ames, in gray, with a pad and a silver pencil. He is Mr. Crane's voice, and Mr. Crane's seat. It is, as everyone knows, an empty chair that speaks.
+?if b6.ames == "partner"
+  He smiles at you, as one smiles at a partner.
+?elif b6.ames == "refuse"
+  He does not smile at all.
+?end
+At the end of the room, by the fire, with a glass he does not drink, and his gloves on the mantel, a man is standing in a long black coat. He turns, as you come in. He has mild eyes. He does not say a word.
+$ do meet("sorrel")
+<~
+
+# claim
+## The sixth chair
+Miss Calloway rises. She says, in the pleasant, easy voice of a hostess, that the houses of Chicago are met in the usual way, to settle a matter that touches all of them. She says there are rumours, which she dislikes, and a disc, which she dislikes more, and a coin, which has been seen in four pockets and has cost two men their sleep. She says that there is, in her opinion, a sixth line, and that it has come to her city, and that the city would like to know what it is.
+She indicates the sixth chair.
+:the_claim
+* Take the chair, and say that the Sixth has come to Chicago to be a house
+  $ b6.claim = "house"
+  $ standing += 3
+  $ secrecy -= 2
+  $ cunning_brutal += 1
+  $ do power("major")
+  There is a long silence. It is the silence of a room in which several people have each decided not to be the first to speak. At last Miss Calloway sits, and for the first time that night, her cigarette holder goes into her mouth.
+  ?if b6.circle == "all" and coven_size() > 0
+    The family comes to stand behind the chair, in a line, without being asked. It is not planned. They simply take their places, like a family at a funeral, or a wedding, and the houses of Chicago see for the first time in a thousand years a sixth house with its people at its back.
+  ?end
+* Take the chair, and say only that the Sixth wants peace, and a door that is open
+  $ b6.claim = "peace"
+  $ standing += 2
+  $ humanity += 1
+  Mrs. Pell lays her hand flat on the table. Mr. Rudek grunts, in a way that sounds uncomfortably like approval. It is the plainest speech that has been made in that room in forty years, and it goes round the table like a draught.
+* Stand behind the chair, and say that Chicago has been misinformed
+  $ b6.claim = "hidden"
+  $ cunning_brutal += 2
+  $ secrecy += 2
+  $ standing -= 1
+  It is a good lie. You tell it well. And it is, for a quarter of an hour, believed, or at any rate not contradicted. But you notice that nobody in the room has sat down.
+<~
+
+# test
+## What it weighs
+Mr. Rudek does not wait. He pushes back his chair, with a scrape, and says that he has heard a great many fairy tales, and has told a few, and that there is a thing the old houses do, with a stranger who comes to a table, which is to put a hand on him. He says it is not an insult. It is a measure.
+He rises. He is very large. He says that he will have it done.
+:the_test
+* Rise to meet him, and let him take the measure
+  $ b6.test = "answered"
+  $ standing += 1
+  $ cunning_brutal += 1
+  ?if b6.yards == "stood"
+    He does not take your wrist. He remembers the dining room. He puts his hand flat on the table instead, and leaves it there, which is the old houses' way of saying *I have already had my answer*. He sits.
+  ?elif has_gift("old_blood")
+    His great hand closes on your shoulder, and you do not move. The old blood is up in you like a tide in a river mouth, and it goes through the bones of your arm and down into the floor, and the floor, quite audibly, takes it. A crack runs under the carpet, from his boots to yours. He takes his hand away. He looks at it.
+  ?else
+    You hold. It costs you more than it ought. But the strength in you is not a thing that is made in a year, and it holds as an old beam holds, silently, until the other man tires.
+  ?end
+* Let the family answer for you
+  ?if gift_holder("strength") != "" and b6.circle == "all"
+    $ b6.test = "family"
+    $ standing += 2
+    {name(gift_holder("strength"))} steps out from behind the chair, quite lightly, and puts a hand against Mr. Rudek's chest. It is a courteous hand. The big man goes back one step, which he has not done in his life. Then another, because he cannot help it, and then he sits down, and the chair complains. {name(gift_holder("strength"))} says, in an even voice, that the sixth line is strong, and that its children are stronger than it is, and that this is, as a rule, the point.
+  ?else
+    $ b6.test = "answered"
+    $ standing += 1
+    Nobody steps out from behind the chair, because there is nobody there who can. You rise, and meet him yourself, after all.
+  ?end
+* Do not rise. Say that you will not be weighed like a side of beef
+  $ b6.test = "yielded"
+  $ standing -= 1
+  $ humanity += 1
+  He stops, at the middle of the room. For a moment, nothing happens. Then Mrs. Pell, to the astonishment of the table, begins to laugh, behind a gloved hand. "He is right, Stanislaw," she says. "It is rather vulgar. Sit down." And the great man, after a pause, sits.
+<~
+
+# cantor
+## The man in gloves
+It is then that the man by the fire speaks. He has a pleasant, dry, courteous voice, with a trace of something old in it, and he says that he hopes he is not out of order. He says that his name is Sorrel. He says that he has no house. He says that he is, as it happens, rather in the position of the sixth chair, in that he has been kept waiting for a long time, and is not sure he would know how to sit.
+He takes up his gloves from the mantel, and draws off the right one, slowly, a finger at a time.
+His hand is gold. It is not painted, and it is not gilt. It is a living hand, with a pulse in the wrist, and the whole of it, from the wrist to the nails, is the dull rich gold of a very old coin. It is cracked, along the palm, in a long fine line, and a little light comes out of the crack.
+$ do discover("the_cantor")
+"I am a cantor," he says. "It is not a very great office. I sing a thing, every Tuesday, to keep a lamp lit, which has been on a hill, and in a city, and by a lake. It is, I have found, rather a long job, for one man. There is a seventh note in it. I have never been able to sing it. It was written for another voice."
+He looks at you. His mild eyes are very tired.
+"It is the lamp that is going out," he says. "It has gone onto the lake because it is trying to get to you."
+:the_cantor
+* Take the note, and sing it, with Marcel's figure in your head
+  ?if _figure == 1
+    $ b6.cantor = "sang"
+    $ humanity += 1
+    $ standing += 2
+    $ do power("major")
+    You do not know where it comes from. It is a half step flat, and it is wrong, and it is perfectly, absolutely right. It is not so much a note as a place that the other six had been leaving for you. The cracked gold hand closes, slowly, on nothing, and the little light from the crack goes up, and up, and for the length of one breath the whole low room is as bright as a cathedral. Then it is a plain room again, with a fire. There are tears on Mr. Sorrel's face. He has not wept, you think, since the Armistice that was not the Armistice.
+  ?else
+    $ b6.cantor = "asked"
+    $ standing += 1
+    You open your mouth to try, and find that you do not know it. You have never heard the seventh. You have heard the shape of the gap. Mr. Sorrel, gently, says that it does not matter. He says that it was, perhaps, too soon, and that he is glad you tried.
+  ?end
+* Refuse, and say that you will not be a lamp for anyone's god
+  $ b6.cantor = "refused"
+  $ cunning_brutal += 1
+  $ humanity -= 1
+  $ secrecy += 1
+  He puts the glove back on, a finger at a time. He says that he quite understands. He says that it is what he told them you would say, and that he was, as usual, half hoping that he was wrong. The fire sinks, a little, and the room is cold.
+* Ask what the seventh is, and who it was written for, before anything is sung
+  $ b6.cantor = "asked"
+  $ cunning_brutal += 1
+  $ standing += 1
+  He says that it was written for the one who is not afraid of the dark. He says that it is the only part of the song that is not a prayer. He says that nobody who has ever sung it has lived to know what it was for, and that he is rather afraid of the answer, and that he thinks, now, that you may be too.
+<~
+
+# dawn
+## What the Parley decided
+$ do discover("the_parley")
+They let you go, at last, at four. It is a very polite dismissal. It is done with a cup of coffee that nobody drinks and a series of bows. Miss Calloway sees you to the steel door herself, with her cigarette holder, and says, quite lightly, that the houses will not trouble the Exchange, for a season, which is the best that anyone has said in that room for a century. She says it is a good deal less than a peace. She says that it is, however, more than a truce.
+?if b6.claim == "house"
+  The city will call it the sixth house by Sunday. You have, at a stroke, made yourself a thing that other houses must reckon with, and you have, at the same stroke, made yourself a thing that they can see.
+?elif b6.claim == "peace"
+  They have not made you a house. They have made you something much rarer: a friend, at a distance, who has not asked for a thing.
+?else
+  They did not quite believe you. They will remember that you tried.
+?end
+?if b6.cantor == "sang"
+  Out on the lake, when you walk to the foot of the street at five, the lamp is not a mile out any more. It is nearer. It is lying close to the end of the breakwater, like a boat come in, and it is brighter than it has been. It is waiting.
+?elif b6.cantor == "refused"
+  When you walk to the foot of the street, the lake is dark. It is a plain dark, such as any lake has at five in the morning. You are surprised to find that you miss the lamp.
+?else
+  The lamp is on the lake, a mile out, unchanged. It is, you think, a thing that is keeping its distance until it has been asked.
+?end
+There is a note at the house when you get in, from the Midway, brought by a University porter who has been waiting on the step since midnight. It is from Dr. Whitcombe, in pencil, and the pencil has gone through the paper twice. It says that the disc is a key, and that the rim of the cedar box is a map. It says *WE HAVE FOUND THE DOOR*.
+$ do rest()
+=> next

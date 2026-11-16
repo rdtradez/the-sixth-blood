@@ -81,11 +81,11 @@ const coven = (g) => {
   }
 };
 
-test('Book Six lists chapters one to four and is still incomplete', async () => {
+test('Book Six lists chapters one to six and is still incomplete', async () => {
   const game = await newGame();
   const book = game.library().find((b) => b.id === 'relics-lost-god');
   assert.ok(book.incomplete);
-  assert.equal(book.chapterCount, 4);
+  assert.equal(book.chapterCount, 6);
 });
 
 test('chapters 1 and 2 play through every kind of waking, hungry or not, with and without a coven', async () => {
@@ -240,6 +240,65 @@ test('chapter 4 lets the family do several things about the rival houses and the
 
 test('chapters 3 and 4 never name a coven member who is not in the circle', async () => {
   for (const chapter of ['b6c03', 'b6c04']) {
+    const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' } });
+    assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
+  }
+});
+
+test('chapters 5 and 6 play through every kind of waking, with and without a coven', async () => {
+  for (const wake of WAKES.slice(0, 4)) {
+    for (const circle of [0, 1]) {
+      for (const [chapter, re] of [['b6c05', /crates|Midway/], ['b6c06', /Thursday|Calloway/]]) {
+        const run = await play(chapter, wake, { ...START, hunger: 20 }, [], { sys: circle ? coven : null, flags: { 'b6.circle': circle ? 'all' : 'stay' } });
+        assert.match(run.text, re);
+        assert.equal(run.frame.wait, 'book_end');
+        clean(run);
+      }
+    }
+  }
+});
+
+test('chapter 5 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.crates', [['opened', /Help her open it/], ['taken', /Take it, quietly/], ['guarded', /set a guard on the room/]], /Midway/],
+    ['b6.yards', [['settled', /Settle it/], ['stood', /Stand, and let him/], ['traded', /Trade him/]], /supper at the Yards/],
+    ['b6.pell', [['allied', /bring the family to her table/], ['civil', /Be civil/], ['refused', /nobody's heir/]], /Dine with Mrs. Pell/],
+    ['b6.invite', [['accepted', /Mr. Collins will come/], ['family', /the family will come/], ['declined', /when the Loop has come/]], null],
+  ];
+  for (const [flag, branches, night] of sets) {
+    for (const [value, re] of branches) {
+      const run = await play('b6c05', {}, { hunger: 10, wealth: 900000 }, night ? [re, night] : [re], { sys: coven, flags: { 'b6.circle': 'all' }, stopAt: 'b6c06' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapter 5 lets the family do several things in Bronzeville and the most committed wins', async () => {
+  const picks = [/Go to Bronzeville/, /Pay for the hall/, /Set up a clinic/, /Endow the school/, /That is enough for tonight/];
+  const run = await play('b6c05', {}, { hunger: 10, wealth: 900000 }, picks, { sys: coven });
+  assert.equal(run.vars['b6.bronzeville'], 'school');
+  clean(run);
+});
+
+test('chapter 6 takes each choice and records it', async () => {
+  const sets = [
+    ['b6.claim', [['house', /say that the Sixth has come/], ['peace', /wants peace/], ['hidden', /Chicago has been misinformed/]]],
+    ['b6.test', [['answered', /Rise to meet him/], ['family', /Let the family answer/], ['yielded', /weighed like a side of beef/]]],
+    ['b6.cantor', [['sang', /Take the note, and sing it/], ['refused', /lamp for anyone's god/], ['asked', /Ask what the seventh is/]]],
+  ];
+  for (const [flag, branches] of sets) {
+    for (const [value, re] of branches) {
+      const strong = (g) => { coven(g); g.state.sys.circle.fiammetta.gifts = ['strength']; };
+      const run = await play('b6c06', {}, { hunger: 10, wealth: 900000 }, [/Go down to the club/, re], { sys: strong, flags: { 'b6.circle': 'all', 'b6.invite': 'family' }, stopAt: 'b6c07' });
+      assert.equal(run.vars[flag], value, `${flag} ${value}`);
+      clean(run);
+    }
+  }
+});
+
+test('chapters 5 and 6 never name a coven member who is not in the circle', async () => {
+  for (const chapter of ['b6c05', 'b6c06']) {
     const run = await play(chapter, {}, START, [], { sys: null, flags: { 'b6.circle': 'stay' } });
     assert.doesNotMatch(run.text, /Fiammetta|Prisca|Hanno|Thibault/);
   }

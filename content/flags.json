@@ -6169,6 +6169,100 @@
       "book": "relics-lost-god",
       "default": "left",
       "note": "Chapter 4: the light on the lake"
+    },
+    "b6.crates": {
+      "kind": "enum",
+      "values": [
+        "guarded",
+        "opened",
+        "taken"
+      ],
+      "book": "relics-lost-god",
+      "default": "guarded",
+      "note": "Chapter 5: the disc in the ninth crate",
+      "major": true
+    },
+    "b6.yards": {
+      "kind": "enum",
+      "values": [
+        "settled",
+        "stood",
+        "traded"
+      ],
+      "book": "relics-lost-god",
+      "default": "settled",
+      "note": "Chapter 5: supper at the Yards",
+      "major": true
+    },
+    "b6.pell": {
+      "kind": "enum",
+      "values": [
+        "civil",
+        "allied",
+        "refused"
+      ],
+      "book": "relics-lost-god",
+      "default": "civil",
+      "note": "Chapter 5: dinner with Mrs. Pell",
+      "major": true
+    },
+    "b6.bronzeville": {
+      "kind": "enum",
+      "values": [
+        "none",
+        "hall",
+        "clinic",
+        "school"
+      ],
+      "book": "relics-lost-god",
+      "default": "none",
+      "note": "Chapter 5: what the family did for Cordelia's church (most committed pick wins)"
+    },
+    "b6.invite": {
+      "kind": "enum",
+      "values": [
+        "accepted",
+        "family",
+        "declined"
+      ],
+      "book": "relics-lost-god",
+      "default": "accepted",
+      "note": "Chapter 5: the answer to the card from the Loop"
+    },
+    "b6.claim": {
+      "kind": "enum",
+      "values": [
+        "peace",
+        "house",
+        "hidden"
+      ],
+      "book": "relics-lost-god",
+      "default": "peace",
+      "note": "Chapter 6: what he claimed at the Parley",
+      "major": true
+    },
+    "b6.test": {
+      "kind": "enum",
+      "values": [
+        "answered",
+        "family",
+        "yielded"
+      ],
+      "book": "relics-lost-god",
+      "default": "answered",
+      "note": "Chapter 6: how the Yards' measure was met"
+    },
+    "b6.cantor": {
+      "kind": "enum",
+      "values": [
+        "asked",
+        "sang",
+        "refused"
+      ],
+      "book": "relics-lost-god",
+      "default": "asked",
+      "note": "Chapter 6: the cantor's seventh note",
+      "major": true
     }
   }
 }
